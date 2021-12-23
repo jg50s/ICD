@@ -1,0 +1,84 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__UPPER_ATM_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT			                    OPR__ATM_ROBOT
+#DEFINE_CONSTANT    OBJ__AL1                            OPR__AL1
+#DEFINE_CONSTANT    OBJ__VIS1                           OPR__VIS1
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ__LL1	                          OPR__LBA
+#DEFINE_CONSTANT    OBJ__LL2	                          OPR__LBB
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__ATM_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT     	                    OPR__ATM_ROBOT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__ATM_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT        		              FNC__ATM_ROBOT
+#DEFINE_CONSTANT    dHYPER_TERMINAL_LOCK	              PHY_IO__ATM_ROBOT+dHYPER.TERMINAL.LOCK.FLAG
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__ATM_ROBOT
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+#DEFINE_CONSTANT    OBJ__ROBOT           	              PHY__ATM_ROBOT
+#DEFINE_CONSTANT    OBJ__AL1                            PHY__AL1
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ__LL1           		              FNC__LBA
+#DEFINE_CONSTANT    OBJ__LL2           		              FNC__LBB
+
+#DEFINE_CONSTANT    LP_SIZE                             ##LP_LIMIT
+#DEFINE_CONSTANT    OBJ__LP1                            PHY__LP1
+#DEFINE_CONSTANT    OBJ__LP2                            PHY__LP2
+#DEFINE_CONSTANT    OBJ__LP3                            PHY__LP3
+#DEFINE_CONSTANT    OBJ__LP4                            PHY__LP4
+#DEFINE_CONSTANT    OBJ__LP5                            PHY__LP5
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__ATM_ROBOT
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    IO_CH__EFEM_DOOR			              IO+di.EFEM.DOOR.SWITCH
+
+#DEFINE_CONSTANT    OBJ__ROBOT           	              PHY_IO__ATM_ROBOT
+#DEFINE_CONSTANT    ROBOT.ARM_RNE_SNS                   IO+di.ATM.Robot.RNE
+
+#DEFINE_CONSTANT    OBJ__AL1                            PHY__AL1
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ__LL1           		              PHY__LBA
+#DEFINE_CONSTANT    LL1.ARM_RNE_SNS				              IO+di.ATMRB.RNE.LBA
+#DEFINE_CONSTANT    LL1.LOAD_ENABLE		                  IO+do.LBA.ATMRB.LOAD.ENABLE
+#DEFINE_CONSTANT    OBJ__LL2           		              PHY__LBB
+#DEFINE_CONSTANT    LL2.ARM_RNE_SNS				              IO+di.ATMRB.RNE.LBB
+#DEFINE_CONSTANT    LL2.LOAD_ENABLE		                  IO+do.LBB.ATMRB.LOAD.ENABLE
+
+#DEFINE_CONSTANT    LP_SIZE                             ##LP_LIMIT
+#DEFINE_CONSTANT    OBJ__LP1                            PHY__LP1
+#DEFINE_CONSTANT    LP1.WAFER_SLIDE_OUT_SNS		          IO+di.LP1.WfrSlide.Out
+#DEFINE_CONSTANT    OBJ__LP2                            PHY__LP2
+#DEFINE_CONSTANT    LP2.WAFER_SLIDE_OUT_SNS		          IO+di.LP2.WfrSlide.Out
+#DEFINE_CONSTANT    OBJ__LP3                            PHY__LP3
+#DEFINE_CONSTANT    LP3.WAFER_SLIDE_OUT_SNS		          IO+di.LP3.WfrSlide.Out
+
+#DEFINE_CONSTANT    OBJ__SIDE_STORAGE1                  PHY__BUFF1
+#DEFINE_CONSTANT    OBJ__SIDE_STORAGE2                  PHY__BUFF2
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__ATM_ROBOT
+
+#OBJECT_IO_PARA     COM_PORT                            6
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    OBJ__AL1           		              PHY__AL1

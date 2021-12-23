@@ -1,0 +1,1458 @@
+#DEFINE_CHANNEL_NAME
+
+
+//--------------------------------------------------------------------------------------------
+// PM1  :  10000000 ~ 19999999
+// PM2  :  20000000 ~ 29999999
+// PM3  :  30000000 ~ 39999999
+// PM4  :  40000000 ~ 49999999
+
+
+#SVID   ##PM    1800000		##PHY_PM+LPx.CID									A	32	  __    CID
+// 1800000	PMx CassetteID	CassetteID			A
+// 1800002	PMx CurrentEnvironment	CurrentEnvironment			B
+#SVID   ##PM    1800003     ##PHY_PM+STEP.START							A  7	  __    STEP_NUM	      //
+// 1800003	PMx CurrentStepNumber	CurrentStepNumber			U4
+#SVID   ##PM    1800006	    ##PHY_PM+PROCESS.ASYNC_TIME			A	7	  __    PROCESS_TIME	
+// 1800006	PMx ElapsedProcessTime	ElapsedProcessTime	s		F4
+#SVID   ##PM    1800008     ##PHY_PM+FDC.RECIPE				          A  32	  __	RECIPE_NAME	      //
+// 1800008	PMx JobID	JobID			A
+#SVID   ##PM    1800010     ##PHY_PM+FDC.LOTID				              A	32	  __    LOT_ID		      //
+// 1800010	PMx LotID	LotID			A
+#SVID   ##PM    1800014     ##PHY_PM+MATERIALID						   A	32	  __    WAFER_ID	      //
+// 1800014	PMx MaterialID	MaterialID			A
+
+// 1800020	PMx Mode	mode			A
+// 1800021	PMx CurrentWaferCountVariable	CurrentWaferCount			I8
+// 1800022	PMx TotalWaferCountVariable	TotalWaferCount			I8
+// 1800023	PMx WaferPresentVariable	WaferPresent		true  false  	Bool
+
+
+
+// 1800024	PMx OESElapsedTime	OESElapsedTime	ms		U4
+// 1800025	PMx OESStepNumber	OESStepNumber			U4
+
+#SVID   ##PM    1800026     ##CTC_DCOP+RCP.OVERETCH              U  4    %    OverEtch
+// 1800026	PMx OverEtch	overEtch	%		U4
+
+// 1800028	PMx ProcessSequenceName	currentOperationSet			A
+// 1800029	PMx ProcessStepName	currentRecipe			A
+// 1800030	PMx ProcessTime	processTimes		F4
+// 1800031	PMx RecipeName	RecipeName			A
+
+#SVID   ##PM    1800032     ##PHY_PM+LPx.SLOT_ID				A	7	  __    SLOT_ID	
+// 1800032	PMx SlotID	SlotID			A
+// 1800033	PMx State	state			A
+
+/*
+1800034	PMx StepType	stepType		Chuck  End  OverEtch  DC2EndPt  DeChuck  Time  EndPT  Stab  	A
+1800101	PMx OESAlgorithm	Algorithm		PercentSlope  FringesCounter  TwinPeaks  ValueSlope  PercentSlopeChange  Interferometer  AbsoluteValue  FilmThickness  PeakAndValley  AdvancedCopperThickness  STI  PercentChange  ValueChange  Recess  DirectionDetection  WACDetection  LogicGate  SDSiRecess  	A
+1800102	PMx OESAlgorithmDelayTime	AlgorithmDelayTime	s		F4
+1800103	PMx OESAlgorithmNormalizationTime	AlgorithmNormalizationTime	s		F4
+1800104	PMx OESAlgorithmPercentToChange	AlgorithmPercentToChange			F4
+1800105	PMx OESAlgorithmSlopeDirection	AlgorithmSlopeDirection		Valley  DownToFlat  UpToFlat  Up  Down  Peak  Flat  	A
+1800106	PMx OESAlgorithmSlopeValue	AlgorithmSlopeValue			F4
+1800107	PMx OESAlgorithmThresholdPercent	AlgorithmThresholdPercent			F4
+1800108	PMx OESAlgorithmValidationTime	AlgorithmValidationTime	s		F4
+1800109	PMx OESAlgorithmValueToChange	AlgorithmValueToChange			F4
+1800110	PMx OESAlgorithmYMax	AlgorithmYMax			F4
+1800112	PMx OESBasisFunction1Value	BasisFunction1Value			F4
+1800113	PMx OESBasisFunction2Value	BasisFunction2Value			F4
+1800114	PMx OESBasisFunction3Value	BasisFunction3Value			F4
+1800115	PMx OESBasisFunction4Value	BasisFunction4Value			F4
+1800119	PMx OESCCDGain	CCDGain			I1
+
+1800127	PMx OESIB1Filter	IB1Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800128	PMx OESIB1FilterCoefficient	IB1FilterCoefficient			F4
+1800129	PMx OESIB1FilterNumOfSamples	IB1FilterNumOfSamples			U4
+1800130	PMx OESIB1Value	IB1Value			F4
+1800131	PMx OESIB1WaveLength	IB1WaveLength	nm		U2
+1800133	PMx OESIB1Width	IB1Width	nm		U1
+1800134	PMx OESIB2Filter	IB2Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800135	PMx OESIB2FilterCoefficient	IB2FilterCoefficient			F4
+1800136	PMx OESIB2FilterNumOfSamples	IB2FilterNumOfSamples			U4
+1800137	PMx OESIB2Value	IB2Value			F4
+1800138	PMx OESIB2WaveLength	IB2WaveLength	nm		U2
+1800140	PMx OESIB2Width	IB2Width	nm		U1
+1800141	PMx OESIB3Value	IB3Value			F4
+1800142	PMx OESIB4Value	IB4Value			F4
+1800143	PMx OESIB5Value	IB5Value			F4
+1800144	PMx OESIB6Value	IB6Value			F4
+1800145	PMx OESIB7Value	IB7Value			F4
+1800146	PMx OESIB8Value	IB8Value			F4
+
+1800219	PMx ChuckChuckStatus	ESCChuckStatus		ChangingToHeliumOnly  Dechucking  DechuckTest  NotChucked  Chucking  Chucked  HeliumOnly  ChangingToNotChucked  NotChuckedChangingToHeliumOnly  	A
+1800224	PMx ChuckESCPowerOnSetpoint	ESCPowerOn_DO	binary	nil  true  false  	Bool
+1800225	PMx ChuckESCSetPointSetpoint	ESCVoltageSetpoint_AO	V		F4
+1800229	PMx ChuckESCTotalVoltageReading	ESCClampVoltage_AI	V		F4
+1800230	PMx ChuckLowerElectrodeClosedSwitchReading	LowerElectrodeClosedSwitch_DI	binary	nil  true  false  	Bool
+1800232	PMx ChuckESCHeIsolationValveSetpoint	HeIsolationValve_DO	binary	nil  true  false  	Bool
+1800233	PMx ChuckESCHeSupplyValveSetpoint	HeSupplyValve_DO	binary	nil  true  false  	Bool
+1800234	PMx ChuckHeForelineServiceValveSetpoint	HeForelineServiceValve_DO	binary	nil  true  false  	Bool
+1800235	PMx ChuckHePressControllerSetPointSetpoint	HePressureSetpoint_AO	torr		F4
+1800236	PMx ChuckHeBacksideFlowReading	HeBacksideFlow_AI	sccm		F4
+1800237	PMx ChuckHeBacksidePressureReading	HeBacksidePressure_AI	torr		F4
+1800239	PMx ChuckHeRFEnclosureCoverSwitchReading	HeRFEnclosureCoverSwitch_DI	binary	nil  true  false  	Bool
+1800240	PMx ChuckHePressureToleranceStatus	HePressureToleranceStatus		Normal  Error  Warning  	A
+1800241	PMx ChuckHelium	Helium	Torr		F4
+1800242	PMx ChuckHeliumCommand	HeliumCommand	Torr		F4
+1800243	PMx PGCGasState	GasState			A
+1800244	PMx PGCLeakbackRate	LeakbackRate	mtorrPerMin		F4
+1800249	PMx PGCNumericPressureReading	NumericPressureReading	mtorr		F4
+1800250	PMx PGCPressureControlMacroSetpoint	PressureControlMacroSetpoint	mtorr		F4
+1800251	PMx PGCPressureReading	PressureReading	mtorr		A
+1800252	PMx PGCPressureSetpoint	pressure	mtorr		F4
+1800256	PMx PGCValveActualPosition	ValveActualPosition			U2
+1800257	PMx PGCValveHoldDelay	ValveHoldDelay	s		U2
+1800258	PMx PGCValvePositionPreset	ValvePositionPreset			U2
+1800260	PMx V2Position	V2Position			A
+1800261	PMx V2ActuatorSetpoint	BackwardPumpValveV2_DO	binary	nil  true  false  	Bool
+1800263	PMx V3Position	V3Position			A
+1800264	PMx V3ActuatorSetpoint	BackwardPurgeValveV3_DO	binary	nil  true  false  	Bool
+1800266	PMx V5Position	V5Position			A
+1800267	PMx V5ActuatorSetpoint	ChamberDeliveryValveV5_DO	binary	nil  true  false  	Bool
+1800269	PMx V4Position	V4Position			A
+1800270	PMx V4ActuatorSetpoint	ForwardPumpValveV4_DO	binary	nil  true  false  	Bool
+1800272	PMx V1Position	V1Position			A
+1800273	PMx V1ActuatorSetpoint	ForwardPurgeValveV1_DO	binary	nil  true  false  	Bool
+1800275	PMx GasLineShutoffValvePosition	GasLineShutoffValvePosition			A
+1800276	PMx GasLineShutoffValveActuatorSetpoint	GasLineShutoffValve_DO	binary	nil  true  false  	Bool
+1800357	PMx CDAPressureSwitchSensorReading	CDAPressureSwitch_DI	binary	nil  true  false  	Bool
+1800358	PMx chamberDeliveryPSH3sensorReading	ChamberDeliveryVacPSH3_DI	binary	nil  true  false  	Bool
+1800359	PMx customerGasDetectIS20sensorReading	CustomerGasDetectIS20_DI	binary	nil  true  false  	Bool
+1800360	PMx customerIntlkIS21sensorReading	CustomerIntlkIS21_DI	binary	nil  true  false  	Bool
+1800362	PMx V9Position	V9Position			A
+1800363	PMx V9ActuatorSetpoint	ChamberFastVentValveV9_DO	binary	nil  true  false  	Bool
+1800366	PMx V8Position	V8Position			A
+1800367	PMx V8ActuatorSetpoint	ChamberN2BallastValveV8_DO	binary	nil  true  false  	Bool
+1800368	PMx n2PurgeSupplyPSH9sensorReading	N2PurgeSupplyPSH9_DI	binary	nil  true  false  	Bool
+1800369	PMx prechargeManPSH2sensorReading	GasPrechgManVacPSH2_DI	binary	nil  true  false  	Bool
+1800370	PMx scrubberPSH8sensorReading	ScrubberSwitchPSH8_DI	binary	nil  true  false  	Bool
+1800374	PMx PressureToleranceObjectStatus	PressureToleranceStatus		Normal  Error  Warning  	A
+1800380	PMx ChamberRoughValveMPMObservedPosition	ChamberRoughValveObservedPosition			A
+1800381	PMx ChamberRoughValveMPMPositionSetpoint	ChamberRoughValvePosition			A
+1800382	PMx ChamberRoughValveActuatorSetpoint	ChamberRoughValve_DO	binary	nil  true  false  	Bool
+1800394	PMx SoftRoughValveMPMObservedPosition	SoftRoughValveObservedPosition			A
+1800395	PMx SoftRoughValveMPMPositionSetpoint	SoftRoughValvePosition			A
+1800396	PMx SoftRoughValveActuatorSetpoint	SoftRoughValve_DO	binary	nil  true  false  	Bool
+1800397	PMx TurboExhaustValveMPMObservedPosition	TurboExhaustValveObservedPosition			A
+1800398	PMx TurboExhaustValveMPMPositionSetpoint	TurboExhaustValvePosition			A
+1800399	PMx TurboExhaustValveActuatorSetpoint	TMPExhaustValve_DO	binary	nil  true  false  	Bool
+1800400	PMx TurboPumpTurboPumpSpeed	TurboPumpSpeed	rpm		A
+1800401	PMx TurboPumpTurboPumpStatus	TurboPumpStatus			A
+1800402	PMx TurboPumpN2PurgeValveSetpoint	TMPN2PurgeValve_DO	binary	nil  true  false  	Bool
+1800403	PMx ThrottleValveThrottleValveState	ThrottleValveState			A
+1800404	PMx ThrottleValveControllerCLPCMTimer	ClosedLoopPressureControlModuleTimer	s		U1
+1800405	PMx ThrottleValveControllerEnhancedIgnitionPressureControlSelection	EnhancedIgnitionPressureControlSelection			U1
+1800406	PMx ThrottleValveControllerEnhancedIgnitionPressureMinimum	EnhancedIgnitionPressureMinimum	mtorr		U1
+1800407	PMx ThrottleValveControllerThrottleValveCloseCommand	ThrottleValveCloseCommand		Off  On  	U1
+1800408	PMx ThrottleValveControllerThrottleValveControlMode	ThrottleValveControlMode		PositionMode  PressureMode  	U1
+1800409	PMx ThrottleValveControllerThrottleValveDerivativeError	ThrottleValveDerivativeError			F4
+1800410	PMx ThrottleValveControllerThrottleValveHoldCommand	ThrottleValveHoldCommand		Off  On  	U1
+1800411	PMx ThrottleValveControllerThrottleValveIntegratedError	ThrottleValveIntegratedError			F4
+1800412	PMx ThrottleValveControllerThrottleValveOpenCommand	ThrottleValveOpenCommand		Off  On  	U1
+1800413	PMx ThrottleValveControllerThrottleValvePositionSetpoint	ThrottleValvePositionSetpoint			F4
+1800414	PMx ThrottleValveControllerThrottleValvePressureSetpoint	ThrottleValvePressureSetpoint	mtorr		F4
+1800415	PMx ThrottleValveControllerThrottleValveProportionalError	ThrottleValveProportionalError			F4
+1800416	PMx ThrottleValveControllerThrottleValveRecipeDelayCommand	ThrottleValveRecipeDelayCommand		Off  On  	U1
+1800417	PMx ThrottleValveControllerValveAutoIgnitionSubmode	ThrottleValveAutoIgnitionSubmode			U1
+1800418	PMx ThrottleValveControllerValveAutoPIDSubmode	ThrottleValveAutoPIDSubmode			U1
+1800419	PMx ThrottleValveControllerValveAutoPositionHoldSubmode	ThrottleValveAutoPositionHoldSubmode			U1
+1800420	PMx ThrottleValveControllerValvePositionMode	ThrottleValvePositionMode			U1
+1800421	PMx ThrottleValveControllerAnalogSerialSelectActuatorSetpoint	ThrottleValveAnalogOrRS232Communication_DO	binary	nil  true  false  	Bool
+1800422	PMx ThrottleValveControllerAutoLearnActuatorSetpoint	ThrottleValveAutoLearn_DO	binary	nil  true  false  	Bool
+1800423	PMx ThrottleValveControllerAutoZeroActuatorSetpoint	ThrottleValveAutoZeroAdjust_DO	binary	nil  true  false  	Bool
+1800424	PMx ThrottleValveControllerCloseActuatorSetpoint	ThrottleValveClose_DO	binary	nil  true  false  	Bool
+1800425	PMx ThrottleValveControllerDisableLocalActuatorSetpoint	ThrottleValveDisableLocal_DO	binary	nil  true  false  	Bool
+1800426	PMx ThrottleValveControllerEnhancedIgnitionControlActuatorSetpoint	EnableEnhancedIgnitionPressureControl_DO	binary	nil  true  false  	Bool
+1800427	PMx ThrottleValveControllerGasFlowSetpointActuatorSetpoint	ThrottleValveGasFlowSetpoint_AO	sccm		F4
+1800428	PMx ThrottleValveControllerHoldActuatorSetpoint	ThrottleValveHold_DO	binary	nil  true  false  	Bool
+1800429	PMx ThrottleValveControllerModeActuatorSetpoint	ThrottleValveControlMode_DO	binary	nil  true  false  	Bool
+1800430	PMx ThrottleValveControllerOpenActuatorSetpoint	ThrottleValveOpen_DO	binary	nil  true  false  	Bool
+1800431	PMx ThrottleValveControllerPositionSetpointActuatorSetpoint	ThrottleValvePositionSetpoint_AO			F4
+1800432	PMx ThrottleValveControllerSetpointActuatorSetpoint	ThrottleValvePressureSetpoint_AO	mtorr		F4
+1800433	PMx ThrottleValveControllerRecipeDelayActuatorSetpoint	ThrottleValveRecipeDelay_DO	binary	nil  true  false  	Bool
+1800434	PMx ThrottleValveControllerCloseSensorReading	ThrottleValveClosedSwitch_DI	binary	nil  true  false  	Bool
+1800435	PMx ThrottleValveControllerLocalRemoteSensorReading	ThrottleValveLocalRemoteFeedback_DI	binary	nil  true  false  	Bool
+1800436	PMx ThrottleValveControllerOpenSensorReading	ThrottleValveOpenSwitch_DI	binary	nil  true  false  	Bool
+1800437	PMx ThrottleValveControllerPositionSensorReading	ThrottleValvePosition_AI	count		F4
+
+1800445	PMx TemperatureControlFaultResetActuatorSetpoint	LTControllerFaultReset_DO	binary	nil  true  false  	Bool
+1800446	PMx TemperatureControlHeaterPowerEnableActuatorSetpoint	LTControllerHeaterPowerEnable_DO	binary	nil  true  false  	Bool
+1800447	PMx TemperatureControlOverTempResetActuatorSetpoint	LTControllerOverTempReset_DO	binary	nil  true  false  	Bool
+1800523	PMx TemperatureControlAnafazeFaultDIReading	LTControllerFault_DI	binary	nil  true  false  	Bool
+1800524	PMx TemperatureControlGroundFaultDIReading	LTControllerGroundFault_DI	binary	nil  true  false  	Bool
+1800525	PMx TemperatureControlHeaterContactorOnDIReading	LTControllerHeaterPowerEnabled_DI	binary	nil  true  false  	Bool
+1800526	PMx TemperatureControlOverTempFaultDIReading	LTControllerOverTempFault_DI	binary	nil  true  false  	Bool
+
+1800535	PMx OESAlgorithmEtchDepth	AlgorithmEtchDepth			U4
+1800536	PMx OESAlgorithmEtchRateMethod	AlgorithmEtchRateMethod		Averaging  ProgressiveDetection  LastEtchRate  	A
+1800537	PMx OESAlgorithmRefractionIndex	AlgorithmRefractionIndex			F4
+1800538	PMx OESBasisFunction1	BasisFunction1			A
+1800539	PMx OESBasisFunction1Filter	BasisFunction1Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800540	PMx OESBasisFunction1FilterCoefficient	BasisFunction1FilterCoefficient			F4
+1800541	PMx OESBasisFunction1FilterNumOfSamples	BasisFunction1FilterNumOfSamples			U4
+1800542	PMx OESBasisFunction2	BasisFunction2			A
+1800543	PMx OESBasisFunction2Filter	BasisFunction2Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800544	PMx OESBasisFunction2FilterCoefficient	BasisFunction2FilterCoefficient			F4
+1800545	PMx OESBasisFunction2FilterNumOfSamples	BasisFunction2FilterNumOfSamples			U4
+1800546	PMx OESBasisFunction3	BasisFunction3			A
+1800547	PMx OESBasisFunction3Filter	BasisFunction3Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800548	PMx OESBasisFunction3FilterCoefficient	BasisFunction3FilterCoefficient			F4
+1800549	PMx OESBasisFunction3FilterNumOfSamples	BasisFunction3FilterNumOfSamples			U4
+1800550	PMx OESBasisFunction4	BasisFunction4			A
+1800551	PMx OESBasisFunction4Filter	BasisFunction4Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800552	PMx OESBasisFunction4FilterCoefficient	BasisFunction4FilterCoefficient			F4
+1800553	PMx OESBasisFunction4FilterNumOfSamples	BasisFunction4FilterNumOfSamples			U4
+1800554	PMx OESIB3Filter	IB3Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800555	PMx OESIB3FilterCoefficient	IB3FilterCoefficient			F4
+1800556	PMx OESIB3FilterNumOfSamples	IB3FilterNumOfSamples			U4
+1800557	PMx OESIB3WaveLength	IB3WaveLength	nm		U2
+1800558	PMx OESIB3Width	IB3Width	nm		U1
+1800559	PMx OESIB4Filter	IB4Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800560	PMx OESIB4FilterCoefficient	IB4FilterCoefficient			F4
+1800561	PMx OESIB4FilterNumOfSamples	IB4FilterNumOfSamples			U4
+1800562	PMx OESIB4WaveLength	IB4WaveLength	nm		U2
+1800563	PMx OESIB4Width	IB4Width	nm		U1
+1800564	PMx OESIB5Filter	IB5Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800565	PMx OESIB5FilterCoefficient	IB5FilterCoefficient			F4
+1800566	PMx OESIB5FilterNumOfSamples	IB5FilterNumOfSamples			U4
+1800567	PMx OESIB5WaveLength	IB5WaveLength	nm		U2
+1800568	PMx OESIB5Width	IB5Width	nm		U1
+1800569	PMx OESIB6Filter	IB6Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800570	PMx OESIB6FilterCoefficient	IB6FilterCoefficient			F4
+1800571	PMx OESIB6FilterNumOfSamples	IB6FilterNumOfSamples			U4
+1800572	PMx OESIB6WaveLength	IB6WaveLength	nm		U2
+1800573	PMx OESIB6Width	IB6Width	nm		U1
+1800574	PMx OESIB7Filter	IB7Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800575	PMx OESIB7FilterCoefficient	IB7FilterCoefficient			F4
+1800576	PMx OESIB7FilterNumOfSamples	IB7FilterNumOfSamples			U4
+1800577	PMx OESIB7WaveLength	IB7WaveLength	nm		U2
+1800578	PMx OESIB7Width	IB7Width	nm		U1
+1800579	PMx OESIB8Filter	IB8Filter		Slope  Band1stOrder  LoPass2ndOrder  IIRNormalized  LoPass1stOrder  FIR  Normalized  Null  HiPass2ndOrder  IIR  HiPass1stOrder  Band2ndOrder  FIRNormalized  	A
+1800580	PMx OESIB8FilterCoefficient	IB8FilterCoefficient			F4
+1800581	PMx OESIB8FilterNumOfSamples	IB8FilterNumOfSamples			U4
+1800582	PMx OESIB8WaveLength	IB8WaveLength	nm		U2
+1800583	PMx OESIB8Width	IB8Width	nm		U1
+1800584	PMx OESOESComment	OESComment			A
+*/
+
+/*
+1800596	PMx StepName	RecipeStepName			A
+1800625	PMx PMDoorSlotValveClosed_DIReading	SlotValveClosed_DI	binary	nil  true  false  	Bool
+1800626	PMx WaferLifterUpActuatorSetpoint	WaferLifterUpActuator_DO	binary	nil  true  false  	Bool
+1800627	PMx WaferLifterDownActuatorSetpoint	WaferLifterDownActuator_DO	binary	nil  true  false  	Bool
+1800628	PMx WaferLifterDownSensorReading	WaferLifterDownSensor_DI	binary	nil  true  false  	Bool
+1800629	PMx WaferLifterUpSensorReading	WaferLifterUpSensor_DI	binary	nil  true  false  	Bool
+1800646	PMx WaferLifterPositionSetpoint	WaferLifterPosition		down  up  middle  	A
+1800647	PMx WaferLifterObservedPosition	WaferLifterObservedPosition			A
+1800658	PMx HardwareInterlockBypassActuatorSetpoint	HardwareInterlockBypass_DO	binary	nil  true  false  	Bool
+1800661	PMx ElapsedRFTimeToCleanVariable	ElapsedRFTimeToClean	minute		F4
+1800662	PMx ElapsedWaferCountToCleanVariable	ElapsedWaferCountToClean	wafer		I8
+1800663	PMx OCRWaferIDCurrent	OCRWaferIDCurrent			A
+1800664	PMx OCRWaferIDPrevious	OCRWaferIDPrevious			A
+1800665	PMx OperationMode	OperationMode			A
+1800667	PMx ProcessedMaterialCount	ProcessedMaterialCount			I8
+1800668	PMx ProcessStepNumber	ProcessStepNumber			A
+1800683	PMx OESCalculatedEtchRate	CalculatedEtchRate	A/min		F4
+1800684	PMx OESSnapShotDuration	SnapShotDuration	s		F4
+1800685	PMx OESStartSnapShotTime	StartSnapShotTime	s		F4
+*/
+
+#SVID   ##PM    1800686     ##CTC_DCOP+MFC1.PARA.SET.FLOW              F  4    sccm   Gas_1_Setpoint_AO
+// 1800686	PMx mfc1ActuatorSetpoint	Gas_1_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800691     ##CTC_DCOP+MFC1.MON.MFC.READ.FLOW    F  4     sccm   Gas_1_Flow_AI  
+// 1800691	PMx mfc1SensorReading	Gas_1_Flow_AI	sccm		F4
+// 1800692	PMx mfc1MFCToleranceStatus	MFC1ToleranceStatus		Normal  Error  Warning  	A
+// 1800693	PMx mfc1PrimaryValSetpoint	Gas_1_PrimaryValveV10_DO	binary	nil  true  false  	Bool
+// 1800694	PMx mfc1PurgeValSetpoint	Gas_1_PurgeValveV11_DO	binary	nil  true  false  	Bool
+// 1800695	PMx mfc1SecondaryValSetpoint	Gas_1_SecondaryValveV12_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800696     ##CTC_DCOP+MFC2.PARA.SET.FLOW              F  4    sccm   Gas_2_Setpoint_AO
+// 1800696	PMx mfc2ActuatorSetpoint	Gas_2_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800701     ##CTC_DCOP+MFC2.MON.MFC.READ.FLOW    F  4     sccm   Gas_2_Flow_AI  
+// 1800701	PMx mfc2SensorReading	Gas_2_Flow_AI	sccm		F4
+// 1800702	PMx mfc2MFCToleranceStatus	MFC2ToleranceStatus		Normal  Error  Warning  	A
+// 1800703	PMx mfc2PrimaryValSetpoint	Gas_2_PrimaryValveV20_DO	binary	nil  true  false  	Bool
+// 1800704	PMx mfc2PurgeValSetpoint	Gas_2_PurgeValveV21_DO	binary	nil  true  false  	Bool
+// 1800705	PMx mfc2SecondaryValSetpoint	Gas_2_SecondaryValveV22_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800706     ##CTC_DCOP+MFC3.PARA.SET.FLOW              F  4    sccm   Gas_3_Setpoint_AO
+// 1800706	PMx mfc3ActuatorSetpoint	Gas_3_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800711     ##CTC_DCOP+MFC3.MON.MFC.READ.FLOW    F  4     sccm   Gas_3_Flow_AI  
+// 1800711	PMx mfc3SensorReading	Gas_3_Flow_AI	sccm		F4
+// 1800712	PMx mfc3MFCToleranceStatus	MFC3ToleranceStatus		Normal  Error  Warning  	A
+// 1800713	PMx mfc3PrimaryValSetpoint	Gas_3_PrimaryValveV30_DO	binary	nil  true  false  	Bool
+// 1800714	PMx mfc3PurgeValSetpoint	Gas_3_PurgeValveV31_DO	binary	nil  true  false  	Bool
+// 1800715	PMx mfc3SecondaryValSetpoint	Gas_3_SecondaryValveV32_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800716     ##CTC_DCOP+MFC4.PARA.SET.FLOW              F  4    sccm   Gas_4_Setpoint_AO
+// 1800716	PMx mfc4ActuatorSetpoint	Gas_4_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800721     ##CTC_DCOP+MFC4.MON.MFC.READ.FLOW    F  4     sccm   Gas_4_Flow_AI  
+// 1800721	PMx mfc4SensorReading	Gas_4_Flow_AI	sccm		F4
+// 1800722	PMx mfc4MFCToleranceStatus	MFC4ToleranceStatus		Normal  Error  Warning  	A
+// 1800723	PMx mfc4PrimaryValSetpoint	Gas_4_PrimaryValveV40_DO	binary	nil  true  false  	Bool
+// 1800724	PMx mfc4PurgeValSetpoint	Gas_4_PurgeValveV41_DO	binary	nil  true  false  	Bool
+// 1800725	PMx mfc4SecondaryValSetpoint	Gas_4_SecondaryValveV42_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800726     ##CTC_DCOP+MFC5.PARA.SET.FLOW              F  4    sccm   Gas_5_Setpoint_AO
+// 1800726	PMx mfc5ActuatorSetpoint	Gas_5_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800731     ##CTC_DCOP+MFC5.MON.MFC.READ.FLOW    F  4     sccm   Gas_5_Flow_AI  
+// 1800731	PMx mfc5SensorReading	Gas_5_Flow_AI	sccm		F4
+// 1800732	PMx mfc5MFCToleranceStatus	MFC5ToleranceStatus		Normal  Error  Warning  	A
+// 1800733	PMx mfc5PrimaryValSetpoint	Gas_5_PrimaryValveV50_DO	binary	nil  true  false  	Bool
+// 1800734	PMx mfc5PurgeValSetpoint	Gas_5_PurgeValveV51_DO	binary	nil  true  false  	Bool
+// 1800735	PMx mfc5SecondaryValSetpoint	Gas_5_SecondaryValveV52_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800736     ##CTC_DCOP+MFC6.PARA.SET.FLOW              F  4    sccm   Gas_6_Setpoint_AO
+// 1800736	PMx mfc6ActuatorSetpoint	Gas_6_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800741     ##CTC_DCOP+MFC6.MON.MFC.READ.FLOW    F  4     sccm   Gas_6_Flow_AI  
+// 1800741	PMx mfc6SensorReading	Gas_6_Flow_AI	sccm		F4
+// 1800742	PMx mfc6MFCToleranceStatus	MFC6ToleranceStatus		Normal  Error  Warning  	A
+// 1800743	PMx mfc6PrimaryValSetpoint	Gas_6_PrimaryValveV60_DO	binary	nil  true  false  	Bool
+// 1800744	PMx mfc6PurgeValSetpoint	Gas_6_PurgeValveV61_DO	binary	nil  true  false  	Bool
+// 1800745	PMx mfc6SecondaryValSetpoint	Gas_6_SecondaryValveV62_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800746     ##CTC_DCOP+MFC7.PARA.SET.FLOW              F  4    sccm   Gas_7_Setpoint_AO
+// 1800746	PMx mfc7ActuatorSetpoint	Gas_7_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800751     ##CTC_DCOP+MFC7.MON.MFC.READ.FLOW    F  4     sccm   Gas_7_Flow_AI  
+// 1800751	PMx mfc7SensorReading	Gas_7_Flow_AI	sccm		F4
+// 1800752	PMx mfc7MFCToleranceStatus	MFC7ToleranceStatus		Normal  Error  Warning  	A
+// 1800753	PMx mfc7PrimaryValSetpoint	Gas_7_PrimaryValveV70_DO	binary	nil  true  false  	Bool
+// 1800754	PMx mfc7PurgeValSetpoint	Gas_7_PurgeValveV71_DO	binary	nil  true  false  	Bool
+// 1800755	PMx mfc7SecondaryValSetpoint	Gas_7_SecondaryValveV72_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1800756     ##CTC_DCOP+MFC8.PARA.SET.FLOW              F  4    sccm   Gas_8_Setpoint_AO
+// 1800756	PMx mfc8ActuatorSetpoint	Gas_8_Setpoint_AO	sccm		F4
+#SVID   ##PM    1800761     ##CTC_DCOP+MFC8.MON.MFC.READ.FLOW    F  4     sccm   Gas_8_Flow_AI  
+// 1800761	PMx mfc8SensorReading	Gas_8_Flow_AI	sccm		F4
+// 1800762	PMx mfc8MFCToleranceStatus	MFC8ToleranceStatus		Normal  Error  Warning  	A
+// 1800763	PMx mfc8PrimaryValSetpoint	Gas_8_PrimaryValveV80_DO	binary	nil  true  false  	Bool
+// 1800764	PMx mfc8PurgeValSetpoint	Gas_8_PurgeValveV81_DO	binary	nil  true  false  	Bool
+// 1800765	PMx mfc8SecondaryValSetpoint	Gas_8_SecondaryValveV82_DO	binary	nil  true  false  	Bool
+
+// 1800766	PMx ThrottleValveControllerControlAOSetpoint	ThrottleValveControl_AO			F4
+// 1800767	PMx ThrottleValveControllerCounterResetAOSetpoint	ThrottleValveCounterReset_AO	count		F4
+// 1800768	PMx ThrottleValveControllerHomeRequestDOSetpoint	ThrottleValveHomeRequest_DO	binary	nil  true  false  	Bool
+// 1800769	PMx ThrottleValveControllerLockDOSetpoint	ThrottleValveLock_DO	binary	nil  true  false  	Bool
+// 1800770	PMx ThrottleValveControllerResetDOSetpoint	ThrottleValveStepperReset_DO	binary	nil  true  false  	Bool
+// 1800771	PMx ThrottleValveControllerCounterResetRequest	ThrottleValveCounterResetRequest		Idle  Active  	U1
+// 1800772	PMx ThrottleValveControllerChamberManometer_RawAIReading	ChamberManometer_RawAI	mV		F4
+// 1800773	PMx ThrottleValveControllerDirectionDIReading	ThrottleValveStepperDirection_DI	binary	nil  true  false  	Bool
+// 1800774	PMx ThrottleValveControllerForelineManometer_RawAIReading	ForelineManometer_RawAI	mV		F4
+// 1800775	PMx ThrottleValveControllerHomeAckDIReading	ThrottleValveHomeAck_DI	binary	nil  true  false  	Bool
+// 1800776	PMx ThrottleValveControllerLockDIReading	ThrottleValveLock_DI	binary	nil  true  false  	Bool
+// 1800777	PMx ThrottleValveControllerProcessManometer_RawAIReading	ProcessManometer_RawAI	mV		F4
+// 1800778	PMx ThrottleValveControllerSpeedAIReading	ThrottleValveStepperSpeed_AI			F4
+// 1800779	PMx ThrottleValveControllerThrottleValveDigitalControlMode	ThrottleValveDigitalControlMode			U1
+// 1800780	PMx ThrottleValveControllerThrottleValveHomeCommand	ThrottleValveHomeCommand		Idle  Active  	U1
+// 1800781	PMx ThrottleValveControllerThrottleValveHomingStatus	ThrottleValveHomingStatus			F4
+
+#SVID   ##PM    1800819     ##CTC_DCOP+MFC9.MON.MFC.READ.FLOW    F  4     sccm   Gas_9_Flow_AI  
+// 1800819	PMx mfc9SensorReading	Gas_9_Flow_AI	sccm		F4
+#SVID   ##PM    1800820     ##CTC_DCOP+MFC9.PARA.SET.FLOW             F  4     sccm   Gas_9_Setpoint_AO
+// 1800820	PMx mfc9ActuatorSetpoint	Gas_9_Setpoint_AO	sccm		F4
+// 1800821	PMx mfc9PurgeValSetpoint	Gas_9_PurgeValveV91_DO	binary	nil  true  false  	Bool
+// 1800822	PMx mfc9PrimaryValSetpoint	Gas_9_PrimaryValveV90_DO	binary	nil  true  false  	Bool
+// 1800823	PMx mfc9SecondaryValSetpoint	Gas_9_SecondaryValveV92_DO	binary	nil  true  false  	Bool
+// 1800824	PMx mfc9MFCToleranceStatus	MFC9ToleranceStatus		Normal  Error  Warning  	A
+
+#SVID   ##PM    1800829     ##CTC_DCOP+MFC10.MON.MFC.READ.FLOW    F  4     sccm   Gas_10_Flow_AI  
+// 1800829	PMx mfc10SensorReading	Gas_10_Flow_AI	sccm		F4
+#SVID   ##PM    1800830     ##CTC_DCOP+MFC10.PARA.SET.FLOW             F  4     sccm   Gas_10_Setpoint_AO
+// 1800830	PMx mfc10ActuatorSetpoint	Gas_10_Setpoint_AO	sccm		F4
+// 1800831	PMx mfc10PurgeValSetpoint	Gas_10_PurgeValveV101_DO	binary	nil  true  false  	Bool
+// 1800832	PMx mfc10PrimaryValSetpoint	Gas_10_PrimaryValveV100_DO	binary	nil  true  false  	Bool
+// 1800833	PMx mfc10SecondaryValSetpoint	Gas_10_SecondaryValveV102_DO	binary	nil  true  false  	Bool
+// 1800834	PMx mfc10MFCToleranceStatus	MFC10ToleranceStatus		Normal  Error  Warning  	A
+
+#SVID   ##PM    1800839     ##CTC_DCOP+MFC11.MON.MFC.READ.FLOW    F  4     sccm   Gas_11_Flow_AI  
+// 1800839	PMx mfc11SensorReading	Gas_11_Flow_AI	sccm		F4
+#SVID   ##PM    1800840     ##CTC_DCOP+MFC11.PARA.SET.FLOW             F  4     sccm   Gas_11_Setpoint_AO
+// 1800840	PMx mfc11ActuatorSetpoint	Gas_11_Setpoint_AO	sccm		F4
+// 1800841	PMx mfc11PurgeValSetpoint	Gas_11_PurgeValveV111_DO	binary	nil  true  false  	Bool
+// 1800842	PMx mfc11PrimaryValSetpoint	Gas_11_PrimaryValveV110_DO	binary	nil  true  false  	Bool
+// 1800843	PMx mfc11SecondaryValSetpoint	Gas_11_SecondaryValveV112_DO	binary	nil  true  false  	Bool
+// 1800844	PMx mfc11MFCToleranceStatus	MFC11ToleranceStatus		Normal  Error  Warning  	A
+
+#SVID   ##PM    1800849     ##CTC_DCOP+MFC12.MON.MFC.READ.FLOW    F  4     sccm   Gas_12_Flow_AI  
+// 1800849	PMx mfc12SensorReading	Gas_12_Flow_AI	sccm		F4
+#SVID   ##PM    1800850     ##CTC_DCOP+MFC12.PARA.SET.FLOW             F  4     sccm   Gas_12_Setpoint_AO
+// 1800850	PMx mfc12ActuatorSetpoint	Gas_12_Setpoint_AO	sccm		F4
+// 1800851	PMx mfc12PurgeValSetpoint	Gas_12_PurgeValveV121_DO	binary	nil  true  false  	Bool
+// 1800852	PMx mfc12PrimaryValSetpoint	Gas_12_PrimaryValveV120_DO	binary	nil  true  false  	Bool
+// 1800853	PMx mfc12SecondaryValSetpoint	Gas_12_SecondaryValveV122_DO	binary	nil  true  false  	Bool
+// 1800854	PMx mfc12MFCToleranceStatus	MFC12ToleranceStatus		Normal  Error  Warning  	A
+
+
+1800859	PMx OESAlgorithmYMin	AlgorithmYMin			F4
+1800860	PMx OESOESChannel	OESChannel			A
+1800861	PMx OESOES_IEP_CCDSelectSetpoint	OES_IEP_CCDSelect_DO	binary	nil  true  false  	Bool
+1800864	PMx FacilityMainWaterValveDOSetpoint	MainWaterControlValve_DO	binary	nil  true  false  	Bool
+1800865	PMx FacilityLeakingDetectedDIReading	WaterLeakDetection_DI	binary	nil  true  false  	Bool
+1800866	PMx chamberClosedSwitchsensorReading	ChamberClosedSwitch_DI	binary	nil  true  false  	Bool
+1800867	PMx chamberScrubberSwitchsensorReading	ChamberScrubberSwitch_DI	binary	nil  true  false  	Bool
+1800868	PMx AtmosphereSwitchSensorReading	AtmosphereSwitch_DI	binary	nil  true  false  	Bool
+
+// 1800869	PMx ChamberPressureHighManometerIsoValveSetpoint	ProcessManometerIsoValve_DO	binary	nil  true  false  	Bool
+// 1800870	PMx ChamberPressureHighManometerAdjustedPressure	ProcessManometerAdjustedPressure	mtorr		F8
+// 1800871	PMx ChamberPressureHighManometerZeroOffsetVariable	ProcessManometerZeroOffset	mtorr		F4
+
+#SVID   ##PM    1800873     ##CTC_DCOP+ai.Process.Manometer         F  4     mtorr   ProcessManometer_AI
+// 1800873	PMx ChamberPressureHighManometerSensorReading	ProcessManometer_AI	mtorr		F4
+// 1800875	PMx ChamberPressureLowManometerAdjustedPressure	ChamberManometerAdjustedPressure	mtorr		F8
+// 1800876	PMx ChamberPressureLowManometerSensorReadingInTorr	ChamberManometerReadingInTorr	Torr		F8
+
+#SVID   ##PM    1800877     ##CTC_DCOP+ai.ChamPress.Manometer    F  4     mtorr   ChamberPressureManometer_AI
+// 1800877	PMx ChamberPressureLowManometerSensorReading	ChamberPressureManometer_AI	mtorr		F4
+// 1800878	PMx ChamberPressureLowManometerPressureSwitch1Reading	ThrottleValveInterlockSwitch_DI	binary	nil  true  false  	Bool
+// 1800879	PMx ChamberPressureLowManometerPressureSwitch2Reading	TMPXoverInterlockSwitch_DI	binary	nil  true  false  	Bool
+
+// 1800881	PMx ForelineManometerLowManometerAdjustedPressure	ForelineManometerAdjustedPressure	mtorr		F8
+// 1800882	PMx ForelineManometerLowManometerSensorReadingInTorr	ForelineManometerReadingInTorr	Torr		F8
+#SVID   ##PM    1800883     ##CTC_DCOP+ai.ForelinePress.Manometer      F  4     mtorr   ForelinePressureManometer_AI	mtor
+// 1800883	PMx ForelineManometerLowManometerSensorReading		ForelinePressureManometer_AI	mtorr		F4
+// 1800884	PMx ForelineManometerLowManometerPressureSwitch1Reading	TMPExhaustValveInterlockSwitch_DI	binary	nil  true  false  	Bool
+
+// 1800886	PMx VacuumSwitchSensorReading	VacuumSwitch_DI	binary	nil  true  false  	Bool
+// 1800893	PMx TemperatureControlESCTargetFlowDIReading	ESCCoolantFlow_DI	binary	nil  true  false  	Bool
+// 1800894	PMx TemperatureControlESCTargetFlowSensorReading	ESCCoolantFlow_AI	GPM		F4
+// 1800895	PMx TemperatureControlESCTargetOverTempDIReading	ESCOverTemp_DI	binary	nil  true  false  	Bool
+// 1800907	PMx TemperatureControlESCTargetCurrentSetpoint	EscCurrentTemperatureSetpoint	degC		I1
+// 1800908	PMx TemperatureControlESCTargetToleranceStatus	EscTempToleranceStatus		Normal  Error  Warning  	A
+// 1800909	PMx ProcessDataSummaryStepPDS	StepProcessDataSummary		Disable  Enable  	A
+
+// 1800910	PMx OESAlgorithmThresholdValue1	AlgorithmThresholdValue1			F4
+// 1800911	PMx OESAlgorithmThresholdValue2	AlgorithmThresholdValue2			F4
+// 1800912	PMx OESAlgorithmThresholdValue3	AlgorithmThresholdValue3			F4
+// 1800913	PMx OESAverageIBValue	AverageIBValue		False  True  	A
+// 1800914	PMx OESBasisFunction1HighCutOffFreq	BasisFunction1HighCutOffFreq			F4
+// 1800915	PMx OESBasisFunction1LowCutOffFreq	BasisFunction1LowCutOffFreq			F4
+// 1800916	PMx OESBasisFunction2HighCutOffFreq	BasisFunction2HighCutOffFreq			F4
+// 1800917	PMx OESBasisFunction2LowCutOffFreq	BasisFunction2LowCutOffFreq			F4
+// 1800918	PMx OESBasisFunction3HighCutOffFreq	BasisFunction3HighCutOffFreq			F4
+// 1800919	PMx OESBasisFunction3LowCutOffFreq	BasisFunction3LowCutOffFreq			F4
+// 1800920	PMx OESBasisFunction4HighCutOffFreq	BasisFunction4HighCutOffFreq			F4
+// 1800921	PMx OESBasisFunction4LowCutOffFreq	BasisFunction4LowCutOffFreq			F4
+// 1800922	PMx OESCCDAutoGain	CCDAutoGain		False  True  	A
+// 1800923	PMx OESIB1HighCutOffFreq	IB1HighCutOffFreq			F4
+// 1800924	PMx OESIB1LowCutOffFreq	IB1LowCutOffFreq			F4
+// 1800925	PMx OESIB2HighCutOffFreq	IB2HighCutOffFreq			F4
+// 1800926	PMx OESIB2LowCutOffFreq	IB2LowCutOffFreq			F4
+// 1800927	PMx OESIB3HighCutOffFreq	IB3HighCutOffFreq			F4
+// 1800928	PMx OESIB3LowCutOffFreq	IB3LowCutOffFreq			F4
+// 1800929	PMx OESIB4HighCutOffFreq	IB4HighCutOffFreq			F4
+// 1800930	PMx OESIB4LowCutOffFreq	IB4LowCutOffFreq			F4
+// 1800931	PMx OESIB5HighCutOffFreq	IB5HighCutOffFreq			F4
+// 1800932	PMx OESIB5LowCutOffFreq	IB5LowCutOffFreq			F4
+// 1800933	PMx OESIB6HighCutOffFreq	IB6HighCutOffFreq			F4
+// 1800934	PMx OESIB6LowCutOffFreq	IB6LowCutOffFreq			F4
+// 1800935	PMx OESIB7HighCutOffFreq	IB7HighCutOffFreq			F4
+// 1800936	PMx OESIB7LowCutOffFreq	IB7LowCutOffFreq			F4
+// 1800937	PMx OESIB8HighCutOffFreq	IB8HighCutOffFreq			F4
+// 1800938	PMx OESIB8LowCutOffFreq	IB8LowCutOffFreq			F4
+// 1800939	PMx OESMultiSamplingNumber	MultiSamplingNumber			U1
+// 1800940	PMx OESOESBroadbandAvgSignal	OESBroadbandAvgSignal			F4
+// 1800941	PMx OESOESMaximalSignal	OESMaximalSignal			F4
+
+// 1800942	PMx h2InstalledsensorReading	H2InterlockSwitchInstalled_DI	binary	nil  true  false  	Bool
+// 1800943	PMx h2InterlockPSHsensorReading	H2InterlockSwitch_DI	binary	nil  true  false  	Bool
+
+// 1800944	PMx EMSRoughPumpIsControllable	RoughPumpIsRemotelyControllable		true  false  	Bool
+// 1800951	PMx EMSRoughPumpPumpStatus	RoughPumpStatus			A
+// 1800952	PMx EMSRoughPumpStartPumpCommand	StartRoughPumpCommand		true  false  	Bool
+
+// 1800959	PMx ChuckESCNegativePolaritySetpoint	ESCReversePolarity_DO	binary	nil  true  false  	Bool
+#SVID   ##PM    1800959     ##CTC_DCOP+ai.ESC.Bias.Ne.Volt           F  4     mtorr   ProcessManometer_AI
+// 1800960	PMx ChuckESCBiasVoltageReading	ESCBiasVoltage_AI		V		F4
+#SVID   ##PM    1800961		##CTC_DCOP+ai.ESC.Bias.Po.Volt
+// 1800961	PMx ChuckRFVoltageProbeAIReading	ESCPeakRFVoltage_AI	V		F4
+// 1800962	PMx ChuckHeFlowMaxThreshold	HeFlowMaxThreshold	sccm		F4
+// 1800963	PMx ChuckHeFlowMinThreshold	HeFlowMinThreshold	sccm		F4
+
+/*
+1800964	PMx ChuckHePressureChangeRate	HePressureChangeRate	torr/sec		A
+1800975	PMx ConfinementRingConfinementRingState	ConfinementRingState			A
+1800976	PMx ConfinementRingControllerControlAOSetpoint	ConfinementRingControl_AO			F4
+1800977	PMx ConfinementRingControllerCounterResetAOSetpoint	ConfinementRingCounterReset_AO	count		F4
+1800978	PMx ConfinementRingControllerHomeRequestDOSetpoint	ConfinementRingHomeRequest_DO	binary	nil  true  false  	Bool
+1800979	PMx ConfinementRingControllerResetDOSetpoint	ConfinementRingStepperReset_DO	binary	nil  true  false  	Bool
+1800980	PMx ConfinementRingControllerAutoHoldSubmode	ConfinementRingAutoHoldSubmode			U1
+1800981	PMx ConfinementRingControllerAutoPIDSubmode	ConfinementRingAutoPIDSubmode			U1
+1800982	PMx ConfinementRingControllerCLPCMTimer	ConfinementRingCM_PID_Timer			F4
+1800983	PMx ConfinementRingControllerControlMode	ConfinementRingControlMode		PositionMode  PressureMode  	U1
+1800984	PMx ConfinementRingControllerCounterResetRequest	ConfinementRingCounterResetRequest	counts	Idle  Active  	U1
+1800985	PMx ConfinementRingControllerDerivativeError	ConfinementRingDerivativeError			F4
+1800986	PMx ConfinementRingControllerDigitalControlMode	ConfinementRingDigitalControlMode			U1
+1800987	PMx ConfinementRingControllerDownCommand	ConfinementRingDownCommand		Off  On  	U1
+1800988	PMx ConfinementRingControllerHoldCommand	ConfinementRingHoldCommand		Off  On  	U1
+1800989	PMx ConfinementRingControllerHomingCommand	ConfinementRingHomingCommand			U1
+1800990	PMx ConfinementRingControllerHomingComplete	ConfinementRingHomingComplete			U1
+1800991	PMx ConfinementRingControllerInitCommand	ConfinementRingInitCommand			U1
+1800992	PMx ConfinementRingControllerIntegralError	ConfinementRingIntegralError			F4
+1800993	PMx ConfinementRingControllerPositionMode	ConfinementRingPositionMode			U1
+1800994	PMx ConfinementRingControllerPositionSetpt	ConfinementRingPositionSetpt			U2
+1800995	PMx ConfinementRingControllerPressureSetpt	ConfinementRingPressureSetpt	mtorr		F4
+1800996	PMx ConfinementRingControllerProportionalError	ConfinementRingProportionalError			F4
+1800997	PMx ConfinementRingControllerRecipeDelay	ConfinementRingRecipeDelay		Off  On  	U1
+1800998	PMx ConfinementRingControllerDirectionDIReading	ConfinementRingStepperDirection_DI	binary	nil  true  false  	Bool
+1800999	PMx ConfinementRingControllerDownSwitchDIReading	ConfinementRingDown_DI	binary	nil  true  false  	Bool
+1801000	PMx ConfinementRingControllerHomeAckDIReading	ConfinementRingHomeAck_DI	binary	nil  true  false  	Bool
+1801001	PMx ConfinementRingControllerPositionSensorReading	ConfinementRingPosition_AI	count		F4
+1801002	PMx ConfinementRingControllerSpeedAIReading	ConfinementRingStepperSpeed_AI			F4
+1801003	PMx ConfinementRingControllerUpSwitchDIReading	ConfinementRingUp_DI	binary	nil  true  false  	Bool
+1801004	PMx ConfinementRingControllerUpCommand	ConfinementRingUpCommand		Off  On  	U1
+*/
+
+/*
+1801005	PMx PGCWAPActualPosition	WAPActualPosition			U2
+1801006	PMx PGCWAPHoldDelay	WAPHoldDelay	s		U2
+1801007	PMx PGCWAPModeCommand	WAPModeCommand		Pressure  Transfer  Throttle  Position  	U1
+1801008	PMx PGCWAPPositionPreset	WAPPositionPreset			U2
+1801009	PMx PGCWAPPressureControlMacroSetpoint	WAPPressureControlMacroSetpoint	mtorr		U2
+1801010	PMx PGCWAPPressureSetpoint	WAPPressure	mtorr		F4
+*/
+
+// 1801011	PMx RF27MHzRFFrequencyAOSetpoint	RF27MHzFrequency_AO		kHz		F4
+// 1801012	PMx RF27MHzRFFrequencyTuneDelayAOSetpoint	RF27MHzFrequencyTuneDelay_AO	mSec		F4
+// 1801013	PMx RF27MHzRFFrequencyTuneEnableDOSetpoint	RF27MHzFrequencyTuneEnable_DO	binary	nil  true  false  	Bool
+// 1801014	PMx RF27MHzRFFrequencyTuneReflectionCoefficientAOSetpoint	RF27MHzFrequencyTuneReflectionCoefficient_AO			F4
+// 1801015	PMx RF27MHzRFGenForwardPowerAOSetpoint	RF27MHzGenForwardPowerSetpoint_AO	watt		F4
+// 1801016	PMx RF27MHzRFNonTuneFrequencyAOSetpoint	RF27MHzTuningDisabledFrequency_AO	kHz		F4
+// 1801017	PMx RF27MHzRFOnDOSetpoint	RF27MHzPowerOn_DO	binary	nil  true  false  	Bool
+// 1801018	PMx RF27MHzRFRampTimeAOSetpoint	RF27MHzRampTime_AO	mSec		F4
+// 1801020	PMx RF27MHzCurrentRFOnTimeVariable	RF27MHzCurrentRFOnTime	minute		F4
+// 1801021	PMx RF27MHzTotalRFOnTimeVariable	RF27MHzTotalRFOnTime	minute		F4
+// 1801022	PMx RF27MHzRFFrequencyPresetSetpoint	RF27MHzFrequencyPreset	kHz		U2
+// 1801023	PMx RF27MHzRFFrequencyTuneDelaySetpoint	RF27MHzFrequencyTuneDelay	mSec		U2
+// 1801024	PMx RF27MHzRFFrequencyTuneEnableSetpoint	RF27MHzFrequencyTuneEnable		Disable  Enable  	U1
+// 1801025	PMx RF27MHzRFHoldTimeSetpoint	RF27MHzHoldTime	second		F4
+// 1801026	PMx RF27MHzRFLearnedFrequency	RF27MHzLearnedFrequency	kHz		U2
+// 1801027	PMx RF27MHzRFMacroCommand	RF27MHzMacroCommand	watt		U2
+// 1801028	PMx RF27MHzRFMaxReflectedPowerSetpoint	RF27MHzMaxReflectedPowerSetpoint	watt		U2
+// 1801029	PMx RF27MHzRFPowerSetpoint	RF27MHzPower	watt		U2
+// 1801030	PMx RF27MHzRFRampTimeSetpoint	RF27MHzRampTime	mSec		U4
+// 1801032	PMx RF27MHzRFDissipationPowerLimitFaultDIReading	RF27MHzDissipationPowerLimitFault_DI	binary	nil  true  false  	Bool
+// 1801033	PMx RF27MHzRFDriverFaultDIReading	RF27MHzDriverFault_DI	binary	nil  true  false  	Bool
+// 1801034	PMx RF27MHzRFDriverOvercurrentFaultDIReading	RF27MHzDriverOvercurrentFault_DI	binary	nil  true  false  	Bool
+// 1801035	PMx RF27MHzRFFastOvercurrentProtectFaultDIReading	RF27MHzFastOvercurrentProtectFault_DI	binary	nil  true  false  	Bool
+#SVID   ##PM    1801036		##CTC_DCOP+RF27MHz.FREQ.VALUE     F  4    kHz   RF27MHzFrequency_AI
+// 1801036	PMx RF27MHzRFFrequencyAIReading	RF27MHzFrequency_AI	kHz		F4
+// 1801037	PMx RF27MHzRFGeneralFaultDIReading	RF27MHzGeneralFault_DI	binary	nil  true  false  	Bool
+#SVID   ##PM    1801038		##CTC_DCOP+RF27MHz+FWD.POWER   F  4    watt   RF27MHzGenForwardPower_AI
+// 1801038	PMx RF27MHzRFGenForwardPowerAIReading	RF27MHzGenForwardPower_AI	watt		F4
+// 1801039	PMx RF27MHzRFGenMaxPowerDIReading	RF27MHzGenMaxPower_DI	binary	nil  true  false  	Bool
+// 1801040	PMx RF27MHzRFGenOvertempDIReading	RF27MHzGenOvertemp_DI	binary	nil  true  false  	Bool
+#SVID   ##PM    1801041		##CTC_DCOP+RF27MHz+REFL.POWER   U  2    watt   RF27MHzGenReflectedPower_AI
+// 1801041	PMx RF27MHzRFGenReflectedPowerAIReading	RF27MHzGenReflectedPower_AI	watt		F4
+// 1801042	PMx RF27MHzRFGenRFOnDIReading	RF27MHzGenRFOn_DI	binary	nil  true  false  	Bool
+// 1801044	PMx RF27MHzRFPACurrentAIReading	RF27MHzPACurrent_AI	A		F4
+// 1801045	PMx RF27MHzRFPADissipationAIReading	RF27MHzPADissipation_AI	watt		F4
+// 1801046	PMx RF27MHzRFPATemperatureAIReading	RF27MHzPATemperature_AI	degC		F4
+// 1801047	PMx RF27MHzRFPAVoltageAIReading	RF27MHzPAVoltage_AI	volt		F4
+// 1801048	PMx RF27MHzRFPSUCurrentLimitFaultDIReading	RF27MHzPSUCurrentLimitFault_DI	binary	nil  true  false  	Bool
+// 1801049	PMx RF27MHzRFPSUVoltageLimitFaultDIReading	RF27MHzPSUVoltageLimitFault_DI	binary	nil  true  false  	Bool
+// 1801050	PMx RF27MHzRFReversePowerLimitDIReading	RF27MHzReversePowerLimit_DI	binary	nil  true  false  	Bool
+// 1801051	PMx RF27MHzRFSetpointAIReading	RF27MHzSetpoint_AI	watt		F4
+// 1801063	PMx RF27MHzRFPowerToleranceStatus	RF27MHzToleranceStatus		Normal  Error  Warning  	A
+
+
+// 1801064	PMx RF2MHzRFFrequencyAOSetpoint	RF2MHzFrequency_AO	kHz		F4
+// 1801065	PMx RF2MHzRFFrequencyTuneDelayAOSetpoint	RF2MHzFrequencyTuneDelay_AO	mSec		F4
+// 1801066	PMx RF2MHzRFFrequencyTuneEnableDOSetpoint	RF2MHzFrequencyTuneEnable_DO	binary	nil  true  false  	Bool
+// 1801067	PMx RF2MHzRFFrequencyTuneReflectionCoefficientAOSetpoint	RF2MHzFrequencyTuneReflectionCoefficient_AO			F4
+// 1801068	PMx RF2MHzRFGenForwardPowerAOSetpoint	RF2MHzGenForwardPowerSetpoint_AO	watt		F4
+// 1801069	PMx RF2MHzRFNonTuneFrequencyAOSetpoint	RF2MHzTuningDisabledFrequency_AO	kHz		F4
+// 1801070	PMx RF2MHzRFOnDOSetpoint	RF2MHzPowerOn_DO	binary	nil  true  false  	Bool
+// 1801071	PMx RF2MHzRFRampTimeAOSetpoint	RF2MHzRampTime_AO	mSec		F4
+// 1801073	PMx RF2MHzCurrentRFOnTimeVariable	RF2MHzCurrentRFOnTime	minute		F4
+// 1801074	PMx RF2MHzTotalRFOnTimeVariable	RF2MHzTotalRFOnTime	minute		F4
+// 1801075	PMx RF2MHzRFFrequencyPresetSetpoint	RF2MHzFrequencyPreset	kHz		U2
+// 1801076	PMx RF2MHzRFFrequencyTuneDelaySetpoint	RF2MHzFrequencyTuneDelay	mSec		U2
+// 1801077	PMx RF2MHzRFFrequencyTuneEnableSetpoint	RF2MHzFrequencyTuneEnable		Disable  Enable  	U1
+// 1801078	PMx RF2MHzRFHoldTimeSetpoint	RF2MHzHoldTime	second		F4
+// 1801079	PMx RF2MHzRFLearnedFrequency	RF2MHzLearnedFrequency	kHz		U2
+// 1801080	PMx RF2MHzRFMacroCommand	RF2MHzMacroCommand	watt		U2
+// 1801081	PMx RF2MHzRFMaxReflectedPowerSetpoint	RF2MHzMaxReflectedPowerSetpoint	watt		U2
+// 1801082	PMx RF2MHzRFPowerSetpoint	RF2MHzPower	watt		U2
+// 1801083	PMx RF2MHzRFRampTimeSetpoint	RF2MHzRampTime	mSec		U4
+// 1801085	PMx RF2MHzRFDissipationPowerLimitFaultDIReading	RF2MHzDissipationPowerLimitFault_DI	binary	nil  true  false  	Bool
+// 1801086	PMx RF2MHzRFDriverFaultDIReading	RF2MHzDriverFault_DI	binary	nil  true  false  	Bool
+// 1801087	PMx RF2MHzRFDriverOvercurrentFaultDIReading	RF2MHzDriverOvercurrentFault_DI	binary	nil  true  false  	Bool
+// 1801088	PMx RF2MHzRFFastOvercurrentProtectFaultDIReading	RF2MHzFastOvercurrentProtectFault_DI	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1801089		##CTC_DCOP+RF2MHz.FREQ.VALUE     F  4    kHz   RF27MHzFrequency_AI
+// 1801089	PMx RF2MHzRFFrequencyAIReading	RF2MHzFrequency_AI	kHz		F4
+// 1801090	PMx RF2MHzRFGeneralFaultDIReading	RF2MHzGeneralFault_DI	binary	nil  true  false  	Bool
+#SVID   ##PM    1801091		##CTC_DCOP+RF2MHz+FWD.POWER   F  4    watt   RF27MHzGenForwardPower_AI
+// 1801091	PMx RF2MHzRFGenForwardPowerAIReading	RF2MHzGenForwardPower_AI	watt		F4
+// 1801092	PMx RF2MHzRFGenMaxPowerDIReading	RF2MHzGenMaxPower_DI	binary	nil  true  false  	Bool
+// 1801093	PMx RF2MHzRFGenOvertempDIReading	RF2MHzGenOvertemp_DI	binary	nil  true  false  	Bool
+#SVID   ##PM    1801094		##CTC_DCOP+RF2MHz+REFL.POWER   U  2    watt   RF27MHzGenReflectedPower_AI
+// 1801094	PMx RF2MHzRFGenReflectedPowerAIReading	RF2MHzGenReflectedPower_AI	watt		F4
+// 1801095	PMx RF2MHzRFGenRFOnDIReading	RF2MHzGenRFOn_DI	binary	nil  true  false  	Bool
+// 1801097	PMx RF2MHzRFPACurrentAIReading	RF2MHzPACurrent_AI	A		F4
+// 1801098	PMx RF2MHzRFPADissipationAIReading	RF2MHzPADissipation_AI	watt		F4
+// 1801099	PMx RF2MHzRFPATemperatureAIReading	RF2MHzPATemperature_AI	degC		F4
+// 1801100	PMx RF2MHzRFPAVoltageAIReading	RF2MHzPAVoltage_AI	volt		F4
+// 1801101	PMx RF2MHzRFPSUCurrentLimitFaultDIReading	RF2MHzPSUCurrentLimitFault_DI	binary	nil  true  false  	Bool
+// 1801102	PMx RF2MHzRFPSUVoltageLimitFaultDIReading	RF2MHzPSUVoltageLimitFault_DI	binary	nil  true  false  	Bool
+// 1801103	PMx RF2MHzRFReversePowerLimitDIReading	RF2MHzReversePowerLimit_DI	binary	nil  true  false  	Bool
+// 1801104	PMx RF2MHzRFSetpointAIReading	RF2MHzSetpoint_AI	watt		F4
+// 1801116	PMx RF2MHzRFPowerToleranceStatus	RF2MHzToleranceStatus		Normal  Error  Warning  	A
+
+1801125	PMx OnlineStateVariable	OnlineState		true  false  	Bool
+1801128	PMx PMDoorSlotValveBodyStatus_DIReading	SlotValveBodyStatus_DI	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1801123     ##CTC_DCOP+ai.BICEP.Volt    F  4     V   BICEPVoltage_AI
+// 1801132	PMx ChuckBICEPVoltageAIReading	BICEPVoltage_AI	V		F4
+
+// 1801133	PMx RF27MHzCurrentRFOnInHours	RF27MHzCurrentRFOnInHours	hour		F4
+// 1801133	PMx RF27MHzCurrentRFOnInHours	RF27MHzCurrentRFOnInHours	hour		F4
+// 1801134	PMx RF27MHzTotalRFOnInHours	RF27MHzTotalRFOnInHours	hour		F4
+// 1801135	PMx RF2MHzCurrentRFOnInHours	RF2MHzCurrentRFOnInHours	hour		F4
+// 1801136	PMx RF2MHzTotalRFOnInHours	RF2MHzTotalRFOnInHours	hour		F4
+// 1801137	PMx MinEndpointTime	minEndpointTime	s		F4
+// 1801138	PMx OESIEP_FlashLamp	IEP_FlashLamp		Off  On  Strobe  	A
+// 1801139	PMx LamPnPSensorServerFloat10Value	PnPFloat10Value			F8
+// 1801140	PMx LamPnPSensorServerFloat11Value	PnPFloat11Value			F8
+// 1801141	PMx LamPnPSensorServerFloat12Value	PnPFloat12Value			F8
+// 1801142	PMx LamPnPSensorServerFloat13Value	PnPFloat13Value			F8
+// 1801143	PMx LamPnPSensorServerFloat14Value	PnPFloat14Value			F8
+// 1801144	PMx LamPnPSensorServerFloat15Value	PnPFloat15Value			F8
+// 1801145	PMx LamPnPSensorServerFloat16Value	PnPFloat16Value			F8
+// 1801146	PMx LamPnPSensorServerFloat17Value	PnPFloat17Value			F8
+// 1801147	PMx LamPnPSensorServerFloat18Value	PnPFloat18Value			F8
+// 1801148	PMx LamPnPSensorServerFloat19Value	PnPFloat19Value			F8
+// 1801149	PMx LamPnPSensorServerFloat1Value	PnPFloat1Value			F8
+// 1801150	PMx LamPnPSensorServerFloat20Value	PnPFloat20Value			F8
+// 1801151	PMx LamPnPSensorServerFloat2Value	PnPFloat2Value			F8
+// 1801152	PMx LamPnPSensorServerFloat3Value	PnPFloat3Value			F8
+// 1801153	PMx LamPnPSensorServerFloat4Value	PnPFloat4Value			F8
+// 1801154	PMx LamPnPSensorServerFloat5Value	PnPFloat5Value			F8
+// 1801155	PMx LamPnPSensorServerFloat6Value	PnPFloat6Value			F8
+// 1801156	PMx LamPnPSensorServerFloat7Value	PnPFloat7Value			F8
+// 1801157	PMx LamPnPSensorServerFloat8Value	PnPFloat8Value			F8
+// 1801158	PMx LamPnPSensorServerFloat9Value	PnPFloat9Value			F8
+// 1801159	PMx InputPortID	InputPortID			U1
+// 1801160	PMx PreviousInputPortID	PreviousInputPortID			U1
+// 1801169	PMx ChuckESCCurrentMonitor1Reading	ESCCurrentMonitor1_AI	uAmp		F4
+// 1801170	PMx ChuckESCCurrentMonitor2Reading	ESCCurrentMonitor2_AI	uAmp		F4
+
+// 1801172	PMx ChuckESCBiasVoltageThreshold	ESCBiasVoltageThreshold	V		F4
+
+
+#SVID   ##PM    1801238     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB1SignalChannel
+// 1801238	PMx OESIB1SignalChannel	IB1SignalChannel			A
+#SVID   ##PM    1801239     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB2SignalChannel
+// 1801239	PMx OESIB2SignalChannel	IB2SignalChannel			A
+#SVID   ##PM    1801240     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB3SignalChannel
+// 1801240	PMx OESIB3SignalChannel	IB3SignalChannel			A
+#SVID   ##PM    1801241     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB4SignalChannel
+// 1801241	PMx OESIB4SignalChannel	IB4SignalChannel			A
+#SVID   ##PM    1801242     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB5SignalChannel
+// 1801242	PMx OESIB5SignalChannel	IB5SignalChannel			A
+#SVID   ##PM    1801243     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB6SignalChannel
+// 1801243	PMx OESIB6SignalChannel	IB6SignalChannel			A
+#SVID   ##PM    1801244     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB7SignalChannel
+// 1801244	PMx OESIB7SignalChannel	IB7SignalChannel			A
+#SVID   ##PM    1801245     ##CTC_DCOP+SPEC.IB1.FILTERED.DATA    AV  6     V   IB8SignalChannel
+// 1801245	PMx OESIB8SignalChannel	IB8SignalChannel			A
+
+
+// 1801250	PMx TemperatureControlChillerRemoteDOSetpoint	TCURemote_DO	binary	nil  true  false  	Bool
+#SVID   ##PM    1801251     ##CTC_DCOP+ao.TCU.ESC.SetTemp     F  4     degC   TCUSetpoint_AO
+// 1801251	PMx TemperatureControlChillerSetpoint1AOSetpoint	TCUSetpoint_AO	degC		F4
+// 1801252	PMx TemperatureControlChillerSetpoint2AOSetpoint	TCUSetpoint2_AO	degC		F4
+
+// 1801253	PMx TemperatureControlChillerStartDOSetpoint	TCUStart_DO	binary	nil  true  false  	Bool
+// 1801254	PMx TemperatureControlChillerFailDIReading	TCUFail_DI	binary	nil  true  false  	Bool
+// 1801255	PMx TemperatureControlChillerNotificationDIReading	TCUNofitication_DI	binary	nil  true  false  	Bool
+// 1801256	PMx TemperatureControlChillerRemoteDIReading	TCUInRemoteMode_DI	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1801257     ##CTC_DCOP+ai.TCU.ESC.Temp     F  4     degC   TCUSetpoint_AI	
+// 1801257	PMx TemperatureControlChillerSetpoint1AIReading	TCUSetpoint_AI	degC		F4
+// 1801258	PMx TemperatureControlChillerSetpoint2AIReading	TCUSetpoint2_AI	degC		F4
+
+// 1801259	PMx TemperatureControlChillerStartDIReading	TCUStarted_DI	binary	nil  true  false  	Bool
+// 1801260	PMx TemperatureControlChillerTemperature1AIReading	TCUMonitor_AI	degC		F4
+// 1801261	PMx TemperatureControlChillerTemperature2AIReading	TCUMonitor2_AI	degC		F4
+
+// 1801262	PMx TemperatureControlChillerWarningDIReading	TCUWarning_DI	binary	nil  true  false  	Bool
+// 1801263	PMx TemperatureControlESCTargetCoolantReturnTemperatureSensorReading	ESCCoolantReturnTemperatureMonitor_AI	degC		F4
+
+// 1801264	PMx WaferflowName	WaferflowName			A
+// 1801265	PMx AllowWaferCyclingDuringChamberMaintenance	AllowWaferCyclingDuringChamberMaintenance		true  false  	Bool
+// 1801268	PMx DownloadedWACRecipeName	DownloadedWACRecipeName			A
+// 1801270	PMx waferSize	WaferSize		300MM  200MM  	A
+// 1801271	PMx IgnitionMonitorPlasmaOnThresholdSetpoint	PlasmaOnThresholdSetpoint			F4
+// 1801272	PMx IgnitionMonitorPlasmaSensed	PlasmaSensed		true  false  	Bool
+// 1801273	PMx IgnitionMonitorIgnitionSensedDOSetpoint	TCPMatchIgnitionSensed_DO	binary	nil  true  false  	Bool
+
+
+/*
+1801274	PMx LamPnPSensorServerFloat21Value	PnPFloat21Value			F8
+1801275	PMx LamPnPSensorServerFloat22Value	PnPFloat22Value			F8
+1801276	PMx LamPnPSensorServerFloat23Value	PnPFloat23Value			F8
+1801277	PMx LamPnPSensorServerFloat24Value	PnPFloat24Value			F8
+1801278	PMx LamPnPSensorServerFloat25Value	PnPFloat25Value			F8
+1801279	PMx LamPnPSensorServerFloat26Value	PnPFloat26Value			F8
+1801280	PMx LamPnPSensorServerFloat27Value	PnPFloat27Value			F8
+1801281	PMx LamPnPSensorServerFloat28Value	PnPFloat28Value			F8
+1801282	PMx LamPnPSensorServerFloat29Value	PnPFloat29Value			F8
+1801283	PMx LamPnPSensorServerFloat30Value	PnPFloat30Value			F8
+
+1801311	PMx ChuckExternalBiasCompensationSetpoint	ExternalBiasCompensation_DO	binary	nil  true  false  	Bool
+1801342	PMx ENIRF27MHzGenVersionNumber	ENIRFGen27MHzVersionNumber			B
+1801343	PMx ENIRF2MHzGenVersionNumber	ENIRFGen2MHzVersionNumber			B
+1801356	PMx ENIOneBoxContactorEnableDOSetpoint	RFSystemACContactorEnable_DO	binary	nil  true  false  	Bool
+1801357	PMx ENIOneBoxRFSystemFaultReset	RFSystemFaultResetCommand		true  false  	Bool
+1801358	PMx ENIOneBoxRFSystemReset	RFSystemResetCommand		true  false  	Bool
+1801360	PMx ENIOneBoxTotalRFPowerSetpoint	TotalRFPowerSetpoint	watt		F8
+1801365	PMx ConfinementRingControllerConfRingPosDelta	ConfinementRingPosDelta			F4
+1801366	PMx ConfinementRingControllerCounterResetAck	ConfinementRingCounterResetAck			U1
+1801367	PMx ConfinementRingControllerDownSensorSimulated	ConfinementRingDownSensorSimulated			U1
+1801368	PMx PGCWAPHoldCurrentDelay	WAPHoldCurrentDelay	s		U2
+
+1801369	PMx RF27MHzRFFaultResetDOSetpoint	RF27MHzFaultReset_DO	binary	nil  true  false  	Bool
+1801370	PMx RF27MHzRFGenEnableDOSetpoint	RF27MHzGenEnable_DO	binary	nil  true  false  	Bool
+1801371	PMx RF27MHzRFGenResetDOSetpoint	RF27MHzGenReset_DO	binary	nil  true  false  	Bool
+1801372	PMx RF27MHzRFGenWaterValveDOSetpoint	RF27MHzGenWaterValve_DO	binary	nil  true  false  	Bool
+
+1801373	PMx RF27MHzMatchControlAOSetpoint	RF27MHzCapAnalogVelocity_AO			F4
+1801374	PMx RF27MHzMatchCounterResetAOSetpoint	RF27MHzCapCounterReset_AO	count		F4
+1801375	PMx RF27MHzMatchHomeRequestDOSetpoint	RF27MHzCapHomeRequest_DO	binary	nil  true  false  	Bool
+1801376	PMx RF27MHzMatchResetDOSetpoint	RF27MHzCapStepperReset_DO	binary	nil  true  false  	Bool
+1801377	PMx RF27MHzMatchCalibrateCommand	RF27MHzCapCalibrateCommand		Idle  Active  Accept  	U1
+1801378	PMx RF27MHzMatchCalibrationMode	RF27MHzCapDebugMode		Idle  Manual Counter Reset  Set Home Complete  Manual Cap Control  Calibrating  	U1
+1801379	PMx RF27MHzMatchCalibrationOffset	RF27MHzCapCalibrationOffset			F8
+1801380	PMx RF27MHzMatchCalibrationOffsetSetpoint	RF27MHzCapCalibrationOffsetSetpoint			U2
+1801381	PMx RF27MHzMatchCalibrationPositionSetpoint	RF27MHzCapCalibratePositionSetpoint	step		U2
+1801382	PMx RF27MHzMatchCounterResetRequest	RF27MHzCapPosCounterResetRequest		Idle  Active  	U1
+1801383	PMx RF27MHzMatchCounterResetRequestAck	RF27MHzCapPosCounterResetRequestAck		Idle  Active  	U1
+1801384	PMx RF27MHzMatchHomeCompleted	RF27MHzCapHomeComplete		NotCompleted  Completed  	U1
+1801385	PMx RF27MHzMatchHomeRequestCommand	RF27MHzCapHomeRequest		Idle  Active  	U1
+1801386	PMx RF27MHzMatchRFTapSetpoint	RF27MHzTap			U1
+1801387	PMx RF27MHzMatchRFTapSetpointClosedLoop	RF27MHzTapClosedLoop			U1
+1801388	PMx RF27MHzMatchDirectionDIReading	RF27MHzCapDirection_DI	binary	nil  true  false  	Bool
+1801389	PMx RF27MHzMatchHomeAckDIReading	RF27MHzCapHomeAck_DI	binary	nil  true  false  	Bool
+1801390	PMx RF27MHzMatchHomeLimitDIReading	RF27MHzCapHomeLimit_DI	binary	nil  true  false  	Bool
+
+1801391	PMx RF27MHzMatchPositionAIReading	RF27MHzCapPosition_AI	count		F4
+1801392	PMx RF27MHzMatchPositionInStepAIReading	RF27MHzCapPositionInSteps_AI	step		F4
+1801393	PMx RF27MHzMatchSpeedAIReading	RF27MHzCapSpeed_AI			F4
+1801394	PMx RF27MHzRFGenDeliveredPower	RF27MHzGenDeliveredPower	watt		F8
+1801395	PMx RF27MHzRFGenMaxReflectionCoefficientSetpoint	RF27MHzGenMaxReflectionCoefficientSetpoint			F4
+1801396	PMx RF27MHzRFGenReflectionCoefficient	RF27MHzGenReflectionCoefficient			F4
+1801399	PMx RF27MHzRFBreakerVoltageOKDIReading	RF27MHzBreakerVoltageOK_DI	binary	nil  true  false  	Bool
+
+1801402	PMx RF2MHzRFFaultResetDOSetpoint	RF2MHzFaultReset_DO	binary	nil  true  false  	Bool
+1801403	PMx RF2MHzRFGenEnableDOSetpoint	RF2MHzGenEnable_DO	binary	nil  true  false  	Bool
+1801404	PMx RF2MHzRFGenResetDOSetpoint	RF2MHzGenReset_DO	binary	nil  true  false  	Bool
+1801405	PMx RF2MHzRFGenWaterValveDOSetpoint	RF2MHzGenWaterValve_DO	binary	nil  true  false  	Bool
+1801409	PMx RF2MHzMatchCalibrateCommand	RF2MHzCapCalibrateCommand		Idle  Active  Accept  	U1
+1801410	PMx RF2MHzMatchCalibrationMode	RF2MHzCapDebugMode		Idle  Manual Counter Reset  Set Home Complete  Manual Cap Control  Calibrating  	U1
+1801411	PMx RF2MHzMatchCalibrationOffset	RF2MHzCapCalibrationOffset			F8
+1801412	PMx RF2MHzMatchCalibrationOffsetSetpoint	RF2MHzCapCalibrationOffsetSetpoint			U2
+1801413	PMx RF2MHzMatchCalibrationPositionSetpoint	RF2MHzCapCalibratePositionSetpoint	step		U2
+1801414	PMx RF2MHzMatchCounterResetRequest	RF2MHzCapPosCounterResetRequest		Idle  Active  	U1
+1801415	PMx RF2MHzMatchCounterResetRequestAck	RF2MHzCapPosCounterResetRequestAck		Idle  Active  	U1
+1801416	PMx RF2MHzMatchHomeCompleted	RF2MHzCapHomeComplete		NotCompleted  Completed  	U1
+1801417	PMx RF2MHzMatchHomeRequestCommand	RF2MHzCapHomeRequest		Idle  Active  	U1
+1801418	PMx RF2MHzMatchRFTapSetpoint	RF2MHzTap			U1
+1801419	PMx RF2MHzMatchRFTapSetpointClosedLoop	RF2MHzTapClosedLoop			U1
+1801420	PMx RF2MHzRFGenDeliveredPower	RF2MHzGenDeliveredPower	watt		F8
+1801421	PMx RF2MHzRFGenMaxReflectionCoefficientSetpoint	RF2MHzGenMaxReflectionCoefficientSetpoint			F4
+1801422	PMx RF2MHzRFGenReflectionCoefficient	RF2MHzGenReflectionCoefficient			F4
+1801423	PMx RF2MHzRFBreakerVoltageOKDIReading	RF2MHzBreakerVoltageOK_DI	binary	nil  true  false  	Bool
+
+1801426	PMx TemperatureControlTopPlateTargetCoolantReturnTemperatureSensorReading	TopPlateCoolantReturnTemperatureMonitor_AI	degC		F4
+1801427	PMx TemperatureControlTopPlateTargetCurrentSetpoint	TopPlateCurrentTemperatureSetpoint	degC		I1
+1801429	PMx TemperatureControlTopPlateTargetToleranceStatus	TopPlateTempToleranceStatus		Normal  Error  Warning  	A
+1801432	PMx TemperatureControlTopPlateHeaterTemperatureSetpointSetpoint	TopPlateHeaterSetpoint_AO	degC		F4
+1801433	PMx TemperatureControlTopPlateHeaterOverTempDIReading	TopPlateHeaterOverTemp_DI	binary	nil  true  false  	Bool
+1801434	PMx TemperatureControlTopPlateHeaterTemperatureSensorReading	TopPlateHeaterTemperatureMonitor_AI	degC		F4
+1801435	PMx TemperatureControlTopPlateHeaterUpperChamberFlowSwitchDIReading	UpperChamberFlowSwitch_DI	binary	nil  true  false  	Bool
+1801436	PMx TemperatureControlTopPlateHeaterToleranceState	TopPlateHeaterTempToleranceState		Normal  Error  Warning  	A
+1801489	PMx OESIEPBand1Value	IEPBand1Value			F4
+1801490	PMx OESIEPBand2Value	IEPBand2Value			F4
+1801493	PMx TemperatureControlTopPlateHeaterOutputValueSensorReading	TopPlateHeaterTemperatureOutputValue_AI	%		F4
+1801499	PMx ProcessModuleType	ProcessModuleType			A
+1801500	PMx ChuckESCBiasCompensation	ESCBiasCompensationModeSetpoint		FixedSetup  DCProbe  Fixed  	A
+
+1801511	PMx RF27MHzRFGenComFailedDIReading	RF27MHzGenComFailed_DI	binary	nil  true  false  	Bool
+1801512	PMx RF27MHzRFLinkIntegrityFaultDIReading	RF27MHzLinkIntegrityFault_DI	binary	nil  true  false  	Bool
+1801513	PMx RF27MHzRFLinkIntegrityStatusDIReading	RF27MHzLinkIntegrityStatus_DI	binary	nil  true  false  	Bool
+1801514	PMx RF2MHzRFGenComFailedDIReading	RF2MHzGenComFailed_DI	binary	nil  true  false  	Bool
+1801515	PMx RF2MHzRFLinkIntegrityFaultDIReading	RF2MHzLinkIntegrityFault_DI	binary	nil  true  false  	Bool
+1801516	PMx RF2MHzRFLinkIntegrityStatusDIReading	RF2MHzLinkIntegrityStatus_DI	binary	nil  true  false  	Bool
+
+1801517	PMx ChamberPressureLowManometerZeroOffsetVariable	ChamberManometerZeroOffset	mtorr		F4
+1801518	PMx ChamberPressureZeroManometer	ZeroChamberPressureReadersCommand		true  false  	Bool
+1801564	PMx StripperType	StripperType		Phase2  Phase1  	A
+1801565	PMx DechuckMacroCommand	ExecuteDechuckMacroCommand		true  false  	Bool
+1801583	PMx OESIB1ValueExpected	IB1ValueExpected			F4
+1801584	PMx OESIB1ToleranceStatus	IB1ToleranceStatus		Normal  Error  Warning  	A
+1801585	PMx ChuckESCBiasCompensationVoltage	ESCBiasCompensationVoltageSetpoint	V		F4
+1801586	PMx OESIB1ScaleFactor	IB1ScaleFactor			F4
+1801587	PMx OESIB2ScaleFactor	IB2ScaleFactor			F4
+1801588	PMx OESIB3ScaleFactor	IB3ScaleFactor			F4
+1801589	PMx OESIB4ScaleFactor	IB4ScaleFactor			F4
+1801590	PMx OESIB5ScaleFactor	IB5ScaleFactor			F4
+1801591	PMx OESIB6ScaleFactor	IB6ScaleFactor			F4
+1801592	PMx OESIB7ScaleFactor	IB7ScaleFactor			F4
+1801593	PMx OESIB8ScaleFactor	IB8ScaleFactor			F4
+1801599	PMx QualificationModeVariable	QualificationMode		true  false  	Bool
+1801601	PMx dilutingMFCActuatorSetpoint	TuningGas_Setpoint_AO	sccm		F4
+1801603	PMx dilutingMFCDilutingZone	TuningZoneSelection		Center  Edge  None  	A
+1801604	PMx dilutingMFCDilutingZoneMacroCommand	TuningZoneMacroCommand		Center  Edge  None  	A
+1801607	PMx dilutingMFCGasFlowMacroSetpoint	TuningGasFlowMacroSetpoint	sccm		F4
+1801608	PMx dilutingMFCSensorReading	TuningGas_Flow_AI	sccm		F4
+1801609	PMx dilutingMFCMFCToleranceStatus	TuningGasToleranceStatus		Normal  Error  Warning  	A
+1801610	PMx dilutingMFCCenterValSetpoint	TuningGas_Center_DO	binary	nil  true  false  	Bool
+1801611	PMx dilutingMFCEdgeValSetpoint	TuningGas_Edge_DO	binary	nil  true  false  	Bool
+1801612	PMx dilutingMFCPrimaryValSetpoint	TuningGas_PrimaryValve_DO	binary	nil  true  false  	Bool
+*/
+
+
+#SVID   ##PM    1801616     ##CTC_DCOP+MFC13.PARA.SET.FLOW             F  4     sccm   Gas_13_Setpoint_AO
+// 1801616	PMx mfc13ActuatorSetpoint	Gas_13_Setpoint_AO	sccm		F4
+#SVID   ##PM    1801621     ##CTC_DCOP+MFC13.MON.MFC.READ.FLOW    F  4     sccm   Gas_13_Flow_AI  
+// 1801621	PMx mfc13SensorReading	Gas_13_Flow_AI	sccm		F4
+// 1801622	PMx mfc13MFCToleranceStatus	MFC13ToleranceStatus		Normal  Error  Warning  	A
+// 1801623	PMx mfc13PrimaryValSetpoint	Gas_13_PrimaryValveV130_DO	binary	nil  true  false  	Bool
+// 1801624	PMx mfc13PurgeValSetpoint	Gas_13_PurgeValveV131_DO	binary	nil  true  false  	Bool
+// 1801625	PMx mfc13SecondaryValSetpoint	Gas_13_SecondaryValveV132_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1801626     ##CTC_DCOP+MFC14.MON.MFC.READ.FLOW    F  4     sccm   Gas_14_Flow_AI  
+// 1801626	PMx mfc14ActuatorSetpoint	Gas_14_Setpoint_AO	sccm		F4
+#SVID   ##PM    1801631     ##CTC_DCOP+MFC14.PARA.SET.FLOW             F  4     sccm   Gas_14_Setpoint_AO
+// 1801631	PMx mfc14SensorReading	Gas_14_Flow_AI	sccm		F4
+// 1801632	PMx mfc14MFCToleranceStatus	MFC14ToleranceStatus		Normal  Error  Warning  	A
+// 1801633	PMx mfc14PrimaryValSetpoint	Gas_14_PrimaryValveV140_DO	binary	nil  true  false  	Bool
+// 1801634	PMx mfc14PurgeValSetpoint	Gas_14_PurgeValveV141_DO	binary	nil  true  false  	Bool
+// 1801635	PMx mfc14SecondaryValSetpoint	Gas_14_SecondaryValveV142_DO	binary	nil  true  false  	Bool
+
+#SVID   ##PM    1801636     ##CTC_DCOP+MFC15.PARA.SET.FLOW             F  4     sccm   Gas_15_Setpoint_AO
+// 1801636	PMx mfc15ActuatorSetpoint	Gas_15_Setpoint_AO	sccm		F4
+#SVID   ##PM    1801641     ##CTC_DCOP+MFC12.MON.MFC.READ.FLOW    F  4     sccm   Gas_15_Flow_AI  
+// 1801641	PMx mfc15SensorReading	Gas_15_Flow_AI	sccm		F4
+// 1801642	PMx mfc15MFCToleranceStatus	MFC15ToleranceStatus		Normal  Error  Warning  	A
+// 1801643	PMx mfc15PrimaryValSetpoint	Gas_15_PrimaryValveV150_DO	binary	nil  true  false  	Bool
+// 1801644	PMx mfc15PurgeValSetpoint	Gas_15_PurgeValveV151_DO	binary	nil  true  false  	Bool
+// 1801645	PMx mfc15SecondaryValSetpoint	Gas_15_SecondaryValveV152_DO	binary	nil  true  false  	Bool
+
+
+/*
+1801698	PMx OESAdvancedAlgParams	AdvancedAlgParams			A
+1801699	PMx ConfinementRingControllerAdjustedPosition	ConfinementRingAdjustedPosition	counts		F4
+1801700	PMx ValveLearnToleranceStatus	ValveLearnToleranceStatus		Normal  Error  Warning  	A
+1801701	PMx PGCWAPPrepositionRampTime	WAPPrepositionRampTime	s		F4
+1801725	PMx TemperatureControlChillerTCUCommandStatusVariable	TCUCommandStatus		true  false  	Bool
+1801726	PMx ProcessingState	ProcessingState		true  false  	Bool
+1801727	PMx PGCLeakbackDate	LeakbackDate			A
+1801728	PMx StandbyState	StandbyState		true  false  	Bool
+1801730	PMx OESSaveStepHistory	SaveStepHistory		False  True  	A
+1801738	PMx ChuckESCBiasCompensationPolaritySetpoint	ESCBiasCompensationPolarity_DO	binary	nil  true  false  	Bool
+1801739	PMx ChuckESCBiasCompensationVoltageAOSetpoint	ESCBiasCompensationVoltage_AO	V		F4
+1801793	PMx ENIRF60MHzGenVersionNumber	ENIRFGen60MHzVersionNumber			B
+1801798	PMx DualGasFeedPressureLowManometerAdjustedPressure	DualGasFeedManometerAdjustedPressure	torr		F8
+1801799	PMx DualGasFeedPressureLowManometerZeroOffsetVariable	DualGasFeedManometerZeroOffset	torr		F4
+1801801	PMx DualGasFeedPressureLowManometerSensorReading	DualGasFeedManometer_AI	torr		F4
+1801802	PMx DualGasFeedPressureZeroManometer	ZeroDualGasFeedPressureReadersCommand		true  false  	Bool
+
+1801803	PMx RF27MHzWaferlessRFOnTimeVariable	RF27MHzWaferlessRFOnTime	minute		F4
+1801805	PMx RF27MHzWaferlessRFOnInHours	RF27MHzWaferlessRFOnInHours	hour		F4
+
+1801806	PMx RF2MHzWaferlessRFOnTimeVariable	RF2MHzWaferlessRFOnTime	minute		F4
+1801807	PMx RF2MHzMatchControlAOSetpoint	RF2MHzCapAnalogVelocity_AO			F4
+1801808	PMx RF2MHzMatchCounterResetAOSetpoint	RF2MHzCapCounterReset_AO	count		F4
+1801809	PMx RF2MHzMatchHomeRequestDOSetpoint	RF2MHzCapHomeRequest_DO	binary	nil  true  false  	Bool
+1801810	PMx RF2MHzMatchResetDOSetpoint	RF2MHzCapStepperReset_DO	binary	nil  true  false  	Bool
+1801811	PMx RF2MHzMatchDirectionDIReading	RF2MHzCapDirection_DI	binary	nil  true  false  	Bool
+1801812	PMx RF2MHzMatchHomeAckDIReading	RF2MHzCapHomeAck_DI	binary	nil  true  false  	Bool
+1801813	PMx RF2MHzMatchHomeLimitDIReading	RF2MHzCapHomeLimit_DI	binary	nil  true  false  	Bool
+1801814	PMx RF2MHzMatchPositionAIReading	RF2MHzCapPosition_AI	count		F4
+1801815	PMx RF2MHzMatchPositionInStepAIReading	RF2MHzCapPositionInSteps_AI	step		F4
+1801816	PMx RF2MHzMatchSpeedAIReading	RF2MHzCapSpeed_AI			F4
+1801818	PMx RF2MHzWaferlessRFOnInHours	RF2MHzWaferlessRFOnInHours	hour		F4
+
+1801819	PMx RF60MHzRFFaultResetDOSetpoint	RF60MHzFaultReset_DO	binary	nil  true  false  	Bool
+1801820	PMx RF60MHzRFFrequencyAOSetpoint	RF60MHzFrequency_AO	kHz		F4
+1801821	PMx RF60MHzRFFrequencyTuneDelayAOSetpoint	RF60MHzFrequencyTuneDelay_AO	mSec		F4
+1801822	PMx RF60MHzRFFrequencyTuneEnableDOSetpoint	RF60MHzFrequencyTuneEnable_DO	binary	nil  true  false  	Bool
+1801823	PMx RF60MHzRFFrequencyTuneReflectionCoefficientAOSetpoint	RF60MHzFrequencyTuneReflectionCoefficient_AO			F4
+1801824	PMx RF60MHzRFGenEnableDOSetpoint	RF60MHzGenEnable_DO	binary	nil  true  false  	Bool
+1801825	PMx RF60MHzRFGenForwardPowerAOSetpoint	RF60MHzGenForwardPowerSetpoint_AO	watt		F4
+1801827	PMx RF60MHzRFGenResetDOSetpoint	RF60MHzGenReset_DO	binary	nil  true  false  	Bool
+1801828	PMx RF60MHzRFGenWaterValveDOSetpoint	RF60MHzGenWaterValve_DO	binary	nil  true  false  	Bool
+1801829	PMx RF60MHzRFNonTuneFrequencyAOSetpoint	RF60MHzTuningDisabledFrequency_AO	kHz		F4
+1801830	PMx RF60MHzRFOnDOSetpoint	RF60MHzPowerOn_DO	binary	nil  true  false  	Bool
+1801831	PMx RF60MHzRFRampTimeAOSetpoint	RF60MHzRampTime_AO	mSec		F4
+1801833	PMx RF60MHzCurrentRFOnInHours	RF60MHzCurrentRFOnInHours	hour		F4
+1801834	PMx RF60MHzCurrentRFOnTimeVariable	RF60MHzCurrentRFOnTime	minute		F4
+1801835	PMx RF60MHzTotalRFOnTimeVariable	RF60MHzTotalRFOnTime	minute		F4
+1801836	PMx RF60MHzWaferlessRFOnTimeVariable	RF60MHzWaferlessRFOnTime	minute		F4
+1801837	PMx RF60MHzMatchControlAOSetpoint	RF60MHzCapAnalogVelocity_AO			F4
+1801838	PMx RF60MHzMatchCounterResetAOSetpoint	RF60MHzCapCounterReset_AO	count		F4
+1801839	PMx RF60MHzMatchHomeRequestDOSetpoint	RF60MHzCapHomeRequest_DO	binary	nil  true  false  	Bool
+1801840	PMx RF60MHzMatchResetDOSetpoint	RF60MHzCapStepperReset_DO	binary	nil  true  false  	Bool
+1801841	PMx RF60MHzMatchCalibrateCommand	RF60MHzCapCalibrateCommand		Idle  Active  Accept  	U1
+1801842	PMx RF60MHzMatchCalibrationMode	RF60MHzCapDebugMode		Idle  Manual Counter Reset  Set Home Complete  Manual Cap Control  Calibrating  	U1
+1801843	PMx RF60MHzMatchCalibrationOffset	RF60MHzCapCalibrationOffset			F8
+1801844	PMx RF60MHzMatchCalibrationOffsetSetpoint	RF60MHzCapCalibrationOffsetSetpoint			U2
+1801845	PMx RF60MHzMatchCalibrationPositionSetpoint	RF60MHzCapCalibratePositionSetpoint	step		U2
+1801846	PMx RF60MHzMatchCounterResetRequest	RF60MHzCapPosCounterResetRequest		Idle  Active  	U1
+1801847	PMx RF60MHzMatchCounterResetRequestAck	RF60MHzCapPosCounterResetRequestAck		Idle  Active  	U1
+1801848	PMx RF60MHzMatchHomeCompleted	RF60MHzCapHomeComplete		NotCompleted  Completed  	U1
+1801849	PMx RF60MHzMatchHomeRequestCommand	RF60MHzCapHomeRequest		Idle  Active  	U1
+1801850	PMx RF60MHzMatchRFTapSetpoint	RF60MHzTap			U1
+1801851	PMx RF60MHzMatchRFTapSetpointClosedLoop	RF60MHzTapClosedLoop			U1
+1801852	PMx RF60MHzMatchDirectionDIReading	RF60MHzCapDirection_DI	binary	nil  true  false  	Bool
+1801853	PMx RF60MHzMatchHomeAckDIReading	RF60MHzCapHomeAck_DI	binary	nil  true  false  	Bool
+1801854	PMx RF60MHzMatchHomeLimitDIReading	RF60MHzCapHomeLimit_DI	binary	nil  true  false  	Bool
+1801855	PMx RF60MHzMatchPositionAIReading	RF60MHzCapPosition_AI	count		F4
+1801856	PMx RF60MHzMatchPositionInStepAIReading	RF60MHzCapPositionInSteps_AI	step		F4
+1801857	PMx RF60MHzMatchSpeedAIReading	RF60MHzCapSpeed_AI			F4
+1801879	PMx RF60MHzRFFrequencyPresetSetpoint	RF60MHzFrequencyPreset	kHz		U2
+1801880	PMx RF60MHzRFFrequencyTuneDelaySetpoint	RF60MHzFrequencyTuneDelay	mSec		U2
+1801881	PMx RF60MHzRFFrequencyTuneEnableSetpoint	RF60MHzFrequencyTuneEnable		Disable  Enable  	U1
+1801883	PMx RF60MHzRFGenMaxReflectionCoefficientSetpoint	RF60MHzGenMaxReflectionCoefficientSetpoint			F4
+1801884	PMx RF60MHzRFGenReflectionCoefficient	RF60MHzGenReflectionCoefficient			F4
+1801885	PMx RF60MHzRFHoldTimeSetpoint	RF60MHzHoldTime	second		F4
+1801886	PMx RF60MHzRFLearnedFrequency	RF60MHzLearnedFrequency	kHz		U2
+1801887	PMx RF60MHzRFMacroCommand	RF60MHzMacroCommand	watt		U2
+1801888	PMx RF60MHzRFMaxReflectedPowerSetpoint	RF60MHzMaxReflectedPowerSetpoint	watt		U2
+1801890	PMx RF60MHzRFPowerSetpoint	RF60MHzPower	watt		U2
+1801891	PMx RF60MHzRFRampTimeSetpoint	RF60MHzRampTime	mSec		U4
+1801892	PMx RF60MHzRFBreakerVoltageOKDIReading	RF60MHzBreakerVoltageOK_DI	binary	nil  true  false  	Bool
+1801893	PMx RF60MHzRFDissipationPowerLimitFaultDIReading	RF60MHzDissipationPowerLimitFault_DI	binary	nil  true  false  	Bool
+1801894	PMx RF60MHzRFDriverFaultDIReading	RF60MHzDriverFault_DI	binary	nil  true  false  	Bool
+1801895	PMx RF60MHzRFDriverOvercurrentFaultDIReading	RF60MHzDriverOvercurrentFault_DI	binary	nil  true  false  	Bool
+1801896	PMx RF60MHzRFFastOvercurrentProtectFaultDIReading	RF60MHzFastOvercurrentProtectFault_DI	binary	nil  true  false  	Bool
+1801897	PMx RF60MHzRFFrequencyAIReading	RF60MHzFrequency_AI	kHz		F4
+1801898	PMx RF60MHzRFGenComFailedDIReading	RF60MHzGenComFailed_DI	binary	nil  true  false  	Bool
+1801900	PMx RF60MHzRFGeneralFaultDIReading	RF60MHzGeneralFault_DI	binary	nil  true  false  	Bool
+1801901	PMx RF60MHzRFGenFanOnDIReading	RF60MHzGenFanOn_DI	binary	nil  true  false  	Bool
+1801902	PMx RF60MHzRFGenForwardPowerAIReading	RF60MHzGenForwardPower_AI	watt		F4
+1801903	PMx RF60MHzRFGenMaxPowerDIReading	RF60MHzGenMaxPower_DI	binary	nil  true  false  	Bool
+1801904	PMx RF60MHzRFGenOvertempDIReading	RF60MHzGenOvertemp_DI	binary	nil  true  false  	Bool
+1801905	PMx RF60MHzRFGenReflectedPowerAIReading	RF60MHzGenReflectedPower_AI	watt		F4
+1801906	PMx RF60MHzRFGenRFOnDIReading	RF60MHzGenRFOn_DI	binary	nil  true  false  	Bool
+1801907	PMx RF60MHzRFLinkIntegrityFaultDIReading	RF60MHzLinkIntegrityFault_DI	binary	nil  true  false  	Bool
+1801908	PMx RF60MHzRFLinkIntegrityStatusDIReading	RF60MHzLinkIntegrityStatus_DI	binary	nil  true  false  	Bool
+1801909	PMx RF60MHzRFPACurrentAIReading	RF60MHzPACurrent_AI	A		F4
+1801910	PMx RF60MHzRFPADissipationAIReading	RF60MHzPADissipation_AI	watt		F4
+1801911	PMx RF60MHzRFPATemperatureAIReading	RF60MHzPATemperature_AI	degC		F4
+1801912	PMx RF60MHzRFPAVoltageAIReading	RF60MHzPAVoltage_AI	volt		F4
+1801913	PMx RF60MHzRFPSUCurrentLimitFaultDIReading	RF60MHzPSUCurrentLimitFault_DI	binary	nil  true  false  	Bool
+1801914	PMx RF60MHzRFPSUVoltageLimitFaultDIReading	RF60MHzPSUVoltageLimitFault_DI	binary	nil  true  false  	Bool
+1801915	PMx RF60MHzRFReversePowerLimitDIReading	RF60MHzReversePowerLimit_DI	binary	nil  true  false  	Bool
+1801916	PMx RF60MHzRFSetpointAIReading	RF60MHzSetpoint_AI	watt		F4
+1801917	PMx RF60MHzRFPowerToleranceStatus	RF60MHzToleranceStatus		Normal  Error  Warning  	A
+1801918	PMx RF60MHzTotalRFOnInHours	RF60MHzTotalRFOnInHours	hour		F4
+1801919	PMx RF60MHzWaferlessRFOnInHours	RF60MHzWaferlessRFOnInHours	hour		F4
+
+1801920	PMx TotalStepConsumedTime	TotalStepConsumedTime			F4
+
+1801921	PMx RF2MHzRFMaintenanceCommandStatus	RF2MHzMaintenanceCommandStatus			A
+1801922	PMx RF2MHzRFPnPFrequency	RF2MHzPnPFrequency	MHz		F4
+1801923	PMx RF2MHzRFPnPPhase	RF2MHzPnPPhase	Deg		F4
+1801924	PMx RF2MHzRFPnPVoltage	RF2MHzPnPVoltage	Volts		F4
+1801925	PMx RF2MHzRFPnPCurrent	RF2MHzPnPCurrent	Amps		F4
+
+1801926	PMx PGCIGSGasBoxInstalled	IGSGasBoxInstalled		nil  true  false  	Bool
+1801927	PMx PGCVCRToxicGasBoxInstalled	VCRToxicGasBoxInstalled		nil  true  false  	Bool
+1801928	PMx PGCWAPHoldDelayAtProcess	WAPHoldAfterDelay	sec		U4
+1801929	PMx tuningGasDeliveryPSH4sensorReading	TuningGasVacPSH4_DI	binary	nil  true  false  	Bool
+1801930	PMx dilutingMFCPressureTransducerReading	TuningGas_Pressure_Transducer_AI	psi		F4
+1801932	PMx dilutingMFCPurgeValSetpoint	TuningGas_PurgeValve_DO	binary	nil  true  false  	Bool
+1801934	PMx dilutingMFCSeparateMixingValSetpoint	TuningGas_Separation_Mixing_Manifold_DO	binary	nil  true  false  	Bool
+1801935	PMx dilutingMFCSecondaryValSetpoint	TuningGas_SecondaryValve_DO	binary	nil  true  false  	Bool
+*/
+
+#SVID   ##PM    1801936     ##CTC_DCOP+ai.Press.Trans01     F  4   psi     Gas_11_Pressure_Transducer_AI
+// 1801936	PMx mfc11PressureTransducerReading	Gas_11_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801938     ##CTC_DCOP+ai.Press.Trans09     F  4   psi     Gas_09_Pressure_Transducer_AI
+// 1801938	PMx mfc9PressureTransducerReading	Gas_9_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801940     ##CTC_DCOP+ai.Press.Trans10     F  4   psi     Gas_10_Pressure_Transducer_AI
+// 1801940	PMx mfc10PressureTransducerReading	Gas_10_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801942     ##CTC_DCOP+ai.Press.Trans12     F  4   psi     Gas_12_Pressure_Transducer_AI
+// 1801942	PMx mfc12PressureTransducerReading	Gas_12_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801944     ##CTC_DCOP+ai.Press.Trans05     F  4   psi     Gas_15_Pressure_Transducer_AI
+// 1801944	PMx mfc5PressureTransducerReading	Gas_5_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801946     ##CTC_DCOP+ai.Press.Trans01     F  4   psi     Gas_01_Pressure_Transducer_AI
+// 1801946	PMx mfc1PressureTransducerReading	Gas_1_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801948     ##CTC_DCOP+ai.Press.Trans02     F  4   psi     Gas_02_Pressure_Transducer_AI
+// 1801948	PMx mfc2PressureTransducerReading	Gas_2_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801950     ##CTC_DCOP+ai.Press.Trans04     F  4   psi     Gas_04_Pressure_Transducer_AI
+// 1801950	PMx mfc4PressureTransducerReading	Gas_4_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801952     ##CTC_DCOP+ai.Press.Trans03     F  4   psi     Gas_03_Pressure_Transducer_AI
+// 1801952	PMx mfc3PressureTransducerReading	Gas_3_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801954     ##CTC_DCOP+ai.Press.Trans11     F  4   psi     Gas_11_Pressure_Transducer_AI
+// 1801954	PMx mfc7PressureTransducerReading	Gas_11_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801956     ##CTC_DCOP+ai.Press.Trans06     F  4   psi     Gas_06_Pressure_Transducer_AI
+// 1801956	PMx mfc6PressureTransducerReading	Gas_6_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801958     ##CTC_DCOP+ai.Press.Trans08     F  4   psi     Gas_08_Pressure_Transducer_AI
+// 1801958	PMx mfc8PressureTransducerReading	Gas_8_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801970     ##CTC_DCOP+ai.Press.Trans14     F  4   psi     Gas_14_Pressure_Transducer_AI
+// 1801970	PMx mfc14PressureTransducerReading	Gas_14_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801972     ##CTC_DCOP+ai.Press.Trans15     F  4   psi     Gas_15_Pressure_Transducer_AI
+// 1801972	PMx mfc15PressureTransducerReading	Gas_15_Pressure_Transducer_AI	psi		F4
+#SVID   ##PM    1801974     ##CTC_DCOP+ai.Press.Trans13     F  4   psi     Gas_13_Pressure_Transducer_AI
+// 1801974	PMx mfc13PressureTransducerReading	Gas_13_Pressure_Transducer_AI	psi		F4
+
+/*
+1801978	PMx RF27MHzRFMaintenanceCommandStatus	RF27MHzMaintenanceCommandStatus			A
+1801979	PMx RF27MHzRFPnPFrequency	RF27MHzPnPFrequency	MHz		F4
+1801980	PMx RF27MHzRFPnPPhase	RF27MHzPnPPhase	Deg		F4
+1801981	PMx RF27MHzRFPnPVoltage	RF27MHzPnPVoltage	Volts		F4
+1801982	PMx RF27MHzRFPnPCurrent	RF27MHzPnPCurrent	Amps		F4
+1801986	PMx GasLineHeater1sensorReading	GasLineHeater1Status_DI	binary	nil  true  false  	Bool
+1801987	PMx GasLineHeater2sensorReading	GasLineHeater2Status_DI	binary	nil  true  false  	Bool
+1801991	PMx ENIOneBoxAnyRFOnTimeVariable	AnyRFOnTime	minute		F4
+1802143	PMx ENIOneBoxMatchCoverSwitchDIReading	RFMatchCoverSwitch_DI	binary	nil  true  false  	Bool
+1802144	PMx ENIOneBoxMatchFanOnDIReading	RFMatchFanOn_DI	binary	nil  true  false  	Bool
+1802147	PMx ThrottleValveControllerChamberManometerVIOPAIReading	ChamberManometerVIOP_AI	mtorr		F4
+1802148	PMx ThrottleValveControllerVIOPChamberManometer	VIOPChamberManometer			U1
+1802152	PMx ProcessModuleSpec	ProcessModuleSpec			A
+1802153	PMx RecipeVariableList	RecipeVariableList			List
+1802154	PMx ChuckESCFullTimeBiasCompensationSetpt	ESCFullTimeBiasCompensation		Enable  Disable  	A
+1802183	PMx V5DualGasFeedRepresentativeDualGasFeedTestRoutineStatus	DualGasFeedTestRoutineStatus			A
+1802184	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve1_DOSetpoint	DualGasFeedValve1_DO	binary	nil  true  false  	Bool
+1802185	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve10_DOSetpoint	DualGasFeedV512_DO	binary	nil  true  false  	Bool
+1802186	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve2_DOSetpoint	DualGasFeedValve2_DO	binary	nil  true  false  	Bool
+1802187	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve3_DOSetpoint	DualGasFeedValve3_DO	binary	nil  true  false  	Bool
+1802188	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve4_DOSetpoint	DualGasFeedValve4_DO	binary	nil  true  false  	Bool
+1802189	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve5_DOSetpoint	DualGasFeedValve5_DO	binary	nil  true  false  	Bool
+1802190	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve6_DOSetpoint	DualGasFeedValve6_DO	binary	nil  true  false  	Bool
+1802191	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve7_DOSetpoint	DualGasFeedV511_DO	binary	nil  true  false  	Bool
+1802192	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve8_DOSetpoint	DualGasFeedV521_DO	binary	nil  true  false  	Bool
+1802193	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve9_DOSetpoint	DualGasFeedV522_DO	binary	nil  true  false  	Bool
+1802194	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedCenterPercentage	DualGasFeedCenterPercentage	%		F4
+1802195	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedCenterWeighting	DualGasFeedCenterWeighting	%		F4
+1802196	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedCenterWeightingActual	DualGasFeedCenterWeightingActual	%		F4
+1802197	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedEdgeWeightingActual	DualGasFeedEdgeWeightingActual	%		F4
+1802198	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedPressureLearned	DualGasFeedPressureLearned			F4
+1802199	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedTestRoutineBaselineDateTime	DualGasFeedTestRoutineBaselineDateTime			A
+1802200	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedTestRoutineCurrentDateTime	DualGasFeedTestRoutineCurrentDateTime			A
+1802201	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedTestRoutineNewDateTime	DualGasFeedTestRoutineNewDateTime			A
+1802202	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValvesCombination	DualGasFeedValvesCombination			A
+1802203	PMx V5DualGasFeedRepresentativeDualGasFeed1PressureLearnedToleranceStatus	DualGasFeedToleranceStatus		Normal  Error  Warning  	A
+1802294	PMx dilutingMFC2ActuatorSetpoint	TuningGas2_Setpoint_AO	sccm		F4
+1802296	PMx dilutingMFC2DilutingZone	Tuning2ZoneSelection		Center  Edge  None  	A
+1802297	PMx dilutingMFC2DilutingZoneMacroCommand	Tuning2ZoneMacroCommand		Center  Edge  None  	A
+1802302	PMx dilutingMFC2GasFlowMacroSetpoint	TuningGas2FlowMacroSetpoint	sccm		F4
+1802303	PMx dilutingMFC2PressureTransducerReading	TuningGas2_Pressure_Transducer_AI	psi		F4
+1802304	PMx dilutingMFC2SensorReading	TuningGas2_Flow_AI	sccm		F4
+1802305	PMx dilutingMFC2MFCToleranceStatus	TuningGas2ToleranceStatus		Normal  Error  Warning  	A
+1802306	PMx dilutingMFC2CenterValSetpoint	TuningGas2_Center_DO	binary	nil  true  false  	Bool
+1802307	PMx dilutingMFC2EdgeValSetpoint	TuningGas2_Edge_DO	binary	nil  true  false  	Bool
+1802309	PMx dilutingMFC2PrimaryValSetpoint	TuningGas2_PrimaryValve_DO	binary	nil  true  false  	Bool
+1802310	PMx dilutingMFC2PurgeValSetpoint	TuningGas2_PurgeValve_DO	binary	nil  true  false  	Bool
+1802311	PMx dilutingMFC2SeparateMixingValSetpoint	TuningGas2_Separation_Mixing_Manifold_DO	binary	nil  true  false  	Bool
+1802312	PMx tuningGasDeliveryPSH4AsensorReading	TuningGasVacPSH4A_DI	binary	nil  true  false  	Bool
+1802358	PMx ChuckESCMode	ESCMode		Standard  	A
+1802366	PMx LamPnPSensorServerFloat31Value	PnPFloat31Value			F8
+1802367	PMx LamPnPSensorServerFloat32Value	PnPFloat32Value			F8
+1802368	PMx LamPnPSensorServerFloat33Value	PnPFloat33Value			F8
+1802369	PMx LamPnPSensorServerFloat34Value	PnPFloat34Value			F8
+1802370	PMx LamPnPSensorServerFloat35Value	PnPFloat35Value			F8
+1802371	PMx LamPnPSensorServerFloat36Value	PnPFloat36Value			F8
+1802372	PMx LamPnPSensorServerFloat37Value	PnPFloat37Value			F8
+1802373	PMx LamPnPSensorServerFloat38Value	PnPFloat38Value			F8
+1802374	PMx LamPnPSensorServerFloat39Value	PnPFloat39Value			F8
+1802375	PMx LamPnPSensorServerFloat40Value	PnPFloat40Value			F8
+1802376	PMx LamPnPSensorServerFloat41Value	PnPFloat41Value			F8
+1802377	PMx LamPnPSensorServerFloat42Value	PnPFloat42Value			F8
+1802378	PMx LamPnPSensorServerFloat43Value	PnPFloat43Value			F8
+1802379	PMx LamPnPSensorServerFloat44Value	PnPFloat44Value			F8
+1802380	PMx LamPnPSensorServerFloat45Value	PnPFloat45Value			F8
+1802381	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_10Reading	GatewayChillerSensorBox_AI_10			F4
+1802382	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_11Reading	GatewayChillerSensorBox_AI_11			F4
+1802383	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_12Reading	GatewayChillerSensorBox_AI_12			F4
+1802384	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_13Reading	GatewayChillerSensorBox_AI_13			F4
+1802385	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_14Reading	GatewayChillerSensorBox_AI_14			F4
+1802386	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_15Reading	GatewayChillerSensorBox_AI_15			F4
+1802387	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_6Reading	GatewayChillerSensorBox_AI_6			F4
+1802388	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_7Reading	GatewayChillerSensorBox_AI_7			F4
+1802389	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_8Reading	GatewayChillerSensorBox_AI_8			F4
+1802390	PMx TemperatureControlChillerSensorBoxAnalogSensor_AI_9Reading	GatewayChillerSensorBox_AI_9			F4
+1802391	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_10Reading	GatewayChillerSensorBox_DI_10	binary	nil  true  false  	Bool
+1802392	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_11Reading	GatewayChillerSensorBox_DI_11	binary	nil  true  false  	Bool
+1802393	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_12Reading	GatewayChillerSensorBox_DI_12	binary	nil  true  false  	Bool
+1802394	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_13Reading	GatewayChillerSensorBox_DI_13	binary	nil  true  false  	Bool
+1802395	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_14Reading	GatewayChillerSensorBox_DI_14	binary	nil  true  false  	Bool
+1802396	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_15Reading	GatewayChillerSensorBox_DI_15	binary	nil  true  false  	Bool
+1802397	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_16Reading	GatewayChillerSensorBox_DI_16	binary	nil  true  false  	Bool
+1802398	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_17Reading	GatewayChillerSensorBox_DI_17	binary	nil  true  false  	Bool
+1802399	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_18Reading	GatewayChillerSensorBox_DI_18	binary	nil  true  false  	Bool
+1802400	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_19Reading	GatewayChillerSensorBox_DI_19	binary	nil  true  false  	Bool
+1802401	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_20Reading	GatewayChillerSensorBox_DI_20	binary	nil  true  false  	Bool
+1802402	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_21Reading	GatewayChillerSensorBox_DI_21	binary	nil  true  false  	Bool
+1802403	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_22Reading	GatewayChillerSensorBox_DI_22	binary	nil  true  false  	Bool
+1802404	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_23Reading	GatewayChillerSensorBox_DI_23	binary	nil  true  false  	Bool
+1802405	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_8Reading	GatewayChillerSensorBox_DI_8	binary	nil  true  false  	Bool
+1802406	PMx TemperatureControlChillerSensorBoxDigitalSensor_DI_9Reading	GatewayChillerSensorBox_DI_9	binary	nil  true  false  	Bool
+1802407	PMx RF2MHzRFPowerInterpolationEnabledStatus	RF2MHzPowerInterpolationEnabledStatus		true  false  	Bool
+1802408	PMx RF2MHzRFGenReflectedPowerRawAIReading	RF2MHzGenReflectedPower_RawAI	watt		F4
+1802409	PMx RF2MHzRFGenForwardPowerRawAIReading	RF2MHzGenForwardPower_RawAI	watt		F4
+1802410	PMx RF27MHzRFPowerInterpolationEnabledStatus	RF27MHzPowerInterpolationEnabledStatus		true  false  	Bool
+1802411	PMx RF27MHzRFGenReflectedPowerRawAIReading	RF27MHzGenReflectedPower_RawAI	watt		F4
+1802412	PMx RF27MHzRFGenForwardPowerRawAIReading	RF27MHzGenForwardPower_RawAI	watt		F4
+1802414	PMx RF60MHzRFGenInterlockDIReading	RF60MHzGenInterlock_DI	binary	nil  true  false  	Bool
+1802419	PMx ChuckESCFullTimeBiasCompensationSetpoint	ESCFullTimeBiasCompensation_DO	binary	nil  true  false  	Bool
+1802421	PMx ENIOneBoxRFMaintenanceCommandStatus	RFSystemMaintenanceCommandStatus			A
+1802449	PMx FacilityMainWaterValveCommandStatusVariable	MainWaterValveCommandStatus		true  false  	Bool
+1802450	PMx PGCLeakbackAdjustedPressure	BasePressureBeforeLeackCheck	mtorr		F4
+1802451	PMx PGCLeakbackRawPressure	RawPressureReadingBeforeLeackCheck	mtorr		F4
+1802452	PMx ProcessInfoLotIDVariable	ProcessInfoLotID			A
+1802453	PMx ProcessInfoMaterialIDVariable	ProcessInfoMaterialID			A
+1802454	PMx ProcessInfoRecipeNameVariable	ProcessInfoRecipeName			A
+1802455	PMx ProcessInfoSlotIDVariable	ProcessInfoSlotID			I8
+1802456	PMx ProcessInfoStepElapsedTimeVariable	ProcessInfoStepElapsedTime	sec		F4
+1802457	PMx ProcessInfoStepNumberVariable	ProcessInfoStepNumber			I8
+1802458	PMx HostAPCHostAPCTuning	HostAPCTuning		Disable  Enable  	A
+1802475	PMx PreviousStepElapsedProcessTime	PreviousStepElapsedProcessTime	s		F4
+1802476	PMx DownloadedPostConditionRecipeName	DownloadedPostConditionRecipeName			A
+1802477	PMx DownloadedPreConditionRecipeName	DownloadedPreConditionRecipeName			A
+1802481	PMx ElapsedRFTimeToCWACVariable	ElapsedRFTimeToCWAC	minute		F4
+1802490	PMx ENIOneBoxTotalAnyRFOnTimeVariable	TotalAnyRFOnTime	minute		F4
+1802507	PMx ChuckESCBiasVoltageLearnedValue	ESCBiasVoltageLearnedValue	V		F4
+1802508	PMx OESBF4ValueExpected	BF4ValueExpected			F4
+1802509	PMx OESBF4ToleranceStatus	BasisFunction4ToleranceStatus		Normal  Error  Warning  	A
+1802516	PMx OESOesSamplingRate	OesSamplingRate	ms	600  100  800  300  500  1000  700  200  900  400  	A
+1802523	PMx PGCFlowVerifierInstalled	FlowVerifierInstalled		nil  true  false  	Bool
+1802524	PMx PGCFlowVerifierDualGasFeedZoneDisplay	FlowVerifierDualGasFeedZoneDisplay		MNFLD2  MNFLD1  	A
+1802525	PMx PGCFlowVerifierDualGasFeedZone	FlowVerifierDualGasFeedZone		MNFLD2  MNFLD1  	A
+1802526	PMx mfc1FlowVerifierSetpoint	Gas1_FlowVerifierSetpoint	sccm		F4
+1802527	PMx mfc2FlowVerifierSetpoint	Gas2_FlowVerifierSetpoint	sccm		F4
+1802528	PMx mfc3FlowVerifierSetpoint	Gas3_FlowVerifierSetpoint	sccm		F4
+1802529	PMx mfc4FlowVerifierSetpoint	Gas4_FlowVerifierSetpoint	sccm		F4
+1802530	PMx mfc5FlowVerifierSetpoint	Gas5_FlowVerifierSetpoint	sccm		F4
+1802531	PMx mfc6FlowVerifierSetpoint	Gas6_FlowVerifierSetpoint	sccm		F4
+1802532	PMx mfc7FlowVerifierSetpoint	Gas7_FlowVerifierSetpoint	sccm		F4
+1802533	PMx mfc8FlowVerifierSetpoint	Gas8_FlowVerifierSetpoint	sccm		F4
+1802534	PMx mfc9FlowVerifierSetpoint	Gas9_FlowVerifierSetpoint	sccm		F4
+1802535	PMx mfc10FlowVerifierSetpoint	Gas10_FlowVerifierSetpoint	sccm		F4
+1802536	PMx mfc11FlowVerifierSetpoint	Gas11_FlowVerifierSetpoint	sccm		F4
+1802537	PMx mfc12FlowVerifierSetpoint	Gas12_FlowVerifierSetpoint	sccm		F4
+1802538	PMx mfc13FlowVerifierSetpoint	Gas13_FlowVerifierSetpoint	sccm		F4
+1802539	PMx mfc14FlowVerifierSetpoint	Gas14_FlowVerifierSetpoint	sccm		F4
+1802540	PMx mfc15FlowVerifierSetpoint	Gas15_FlowVerifierSetpoint	sccm		F4
+1802541	PMx dilutingMFCFlowVerifierSetpoint	TuningGas_FlowVerifierSetpoint	sccm		F4
+1802542	PMx dilutingMFC2FlowVerifierSetpoint	TuningGas2_FlowVerifierSetpoint	sccm		F4
+1802566	PMx ChuckESCBiasCompensationModeStatus	ESCBiasCompensationModeStatus		DCProbe  Internal  Fixed  	A
+1802567	PMx ChuckESCBiasCompensationDCProbeGainAOSetpoint	ESCBiasCompensationDCProbeGain_AO			F4
+1802568	PMx ChuckESCBiasCompensationDCProbeOffsetAOSetpoint	ESCBiasCompensationDCProbeOffset_AO	V		F4
+1802569	PMx ChuckExternalESCBiasCompensationModeDOSetpoint	ExternalESCBiasCompensationMode_DO	binary	nil  true  false  	Bool
+1802585	PMx ENIOneBoxRFZeroRampSetpoint	RFZeroRampSetpoint		Disable  Enable  	U1
+1802586	PMx ConfinementRingControllerPIDPositionCommand	WAPPIDPositionCommand	counts		F4
+1802587	PMx ConfinementRingControllerPIDPositionPressureEquivalent	WAPCRPositionPressureEquivalent			F4
+1802588	PMx ConfinementRingControllerPIDPositionSetpoint	ConfinementRingPIDPositionSetpoint	counts		F4
+1802589	PMx ConfinementRingControllerPIDSummedPressureError	WAPSummedPressureError			F4
+1802607	PMx RF27MHzRFGenDeliveredPowerRawAIReading	RF27MHzGenDeliveredPower_RawAI	watt		F4
+1802609	PMx RF2MHzRFGenDeliveredPowerRawAIReading	RF2MHzGenDeliveredPower_RawAI	watt		F4
+1802670	PMx RF60MHzRFGenForwardPowerRawAIReading	RF60MHzGenForwardPower_RawAI	watt		F4
+1802671	PMx RF60MHzRFGenReflectedPowerRawAIReading	RF60MHzGenReflectedPower_RawAI	watt		F4
+1802672	PMx RF60MHzRFGenDeliveredPowerRawAIReading	RF60MHzGenDeliveredPower_RawAI	watt		F4
+1802674	PMx PGCConfinementRingExpectedPosition	ConfinementRingExpectedPosition	counts		U2
+1802675	PMx PGCConfinementRingPositionCheck	ConfinementRingPositionCheck		Disable  Enable  	U1
+1802678	PMx TemperatureControlESCTargetCoolantSupplyTemperatureSensorReading	ESCCoolantSupplyTemperatureMonitor_AI	degC		F4
+1802680	PMx TemperatureControlTopPlateTargetCoolantSupplyTemperatureSensorReading	TopPlateCoolantSupplyTemperatureMonitor_AI	degC		F4
+1802683	PMx EmbeddedToHostServicesCWContiguousMemoryAvailable	EmbeddedToHostServicesCWContiguousMemoryAvailable	K		F4
+1802684	PMx EmbeddedToHostServicesCWFreeMemoryAvailable	EmbeddedToHostServicesCWFreeMemoryAvailable	K		F4
+1802685	PMx EmbeddedToHostServicesVXContiguousMemoryAvailable	EmbeddedToHostServicesVXContiguousMemoryAvailable	K		F4
+1802686	PMx EmbeddedToHostServicesVXFreeMemoryAvailable	EmbeddedToHostServicesVXFreeMemoryAvailable	K		F4
+1802687	PMx OESEndpointMonitoringTime	EndpointMonitoringTime	msec		U4
+1802688	PMx TotalQualModeWaferCountVariable	TotalQualModeWaferCount			I8
+1802689	PMx EmbeddedToHostServicesCWMemoryUsed	EmbeddedToHostServicesCWMemoryUsed	K		F4
+1802691	PMx OnLineState	OnLineState			A
+// 1802699	PMx PGCDSOGasBoxType	DSOGasBoxType		DSO  CDSOWithDualDGF  CDSOWithSingleDGF  None  	A
+1802700	PMx mfc1ZeroResetCounterVariable	Gas1ZeroResetCounter			I8
+1802701	PMx mfc2ZeroResetCounterVariable	Gas2ZeroResetCounter			I8
+1802702	PMx mfc3ZeroResetCounterVariable	Gas3ZeroResetCounter			I8
+1802703	PMx mfc4ZeroResetCounterVariable	Gas4ZeroResetCounter			I8
+1802704	PMx mfc5ZeroResetCounterVariable	Gas5ZeroResetCounter			I8
+1802705	PMx mfc6ZeroResetCounterVariable	Gas6ZeroResetCounter			I8
+1802706	PMx mfc7ZeroResetCounterVariable	Gas7ZeroResetCounter			I8
+1802707	PMx mfc8ZeroResetCounterVariable	Gas8ZeroResetCounter			I8
+1802708	PMx mfc13ZeroResetCounterVariable	Gas13ZeroResetCounter			I8
+1802709	PMx mfc14ZeroResetCounterVariable	Gas14ZeroResetCounter			I8
+1802710	PMx mfc15ZeroResetCounterVariable	Gas15ZeroResetCounter			I8
+1802712	PMx mfc10ZeroResetCounterVariable	Gas10ZeroResetCounter			I8
+1802713	PMx mfc11ZeroResetCounterVariable	Gas11ZeroResetCounter			I8
+1802714	PMx mfc12ZeroResetCounterVariable	Gas12ZeroResetCounter			I8
+1802715	PMx mfc9ZeroResetCounterVariable	Gas9ZeroResetCounter			I8
+1802720	PMx PGCRequestZeroCommand	RequestZeroCommand		Zero  Check and Zero  Check  	A
+1802724	PMx dilutingMFCZeroResetCounterVariable	TuningGasZeroResetCounter			I8
+1802725	PMx stepGenerated	stepGenerated			A
+1802726	PMx OESSamplingIntervalBasedOnBFsFIREnabled	SamplingIntervalBasedOnBFsFIREnabled		Disable  Enable  	A
+1802842	PMx ImageMemoryMonitorCompactions	Compactions			I8
+1802843	PMx ImageMemoryMonitorFootprint	Footprint			I8
+1802844	PMx ImageMemoryMonitorFragmentation	Fragmentation			F4
+1802845	PMx ImageMemoryMonitorGCs	GCs			I8
+1802846	PMx ImageMemoryMonitorGGCs	GGCs			I8
+1802847	PMx ImageMemoryMonitorGrowth	Growth			I8
+1802848	PMx ImageMemoryMonitorLargeSpace	LargeSpace			F4
+1802849	PMx ImageMemoryMonitorOldSpace	OldSpace			F4
+1802850	PMx ImageMemoryMonitorTotalSpace	TotalSpace			F4
+1802933	PMx mfc1AbsoluteFlowVerifierSetpoint	mfc1AbsoluteFlowVerifierSetpoint	sccm		F4
+1802934	PMx mfc2AbsoluteFlowVerifierSetpoint	mfc2AbsoluteFlowVerifierSetpoint	sccm		F4
+1802935	PMx mfc3AbsoluteFlowVerifierSetpoint	mfc3AbsoluteFlowVerifierSetpoint	sccm		F4
+1802936	PMx mfc4AbsoluteFlowVerifierSetpoint	mfc4AbsoluteFlowVerifierSetpoint	sccm		F4
+1802937	PMx mfc5AbsoluteFlowVerifierSetpoint	mfc5AbsoluteFlowVerifierSetpoint	sccm		F4
+1802938	PMx mfc6AbsoluteFlowVerifierSetpoint	mfc6AbsoluteFlowVerifierSetpoint	sccm		F4
+1802939	PMx mfc7AbsoluteFlowVerifierSetpoint	mfc7AbsoluteFlowVerifierSetpoint	sccm		F4
+1802940	PMx mfc8AbsoluteFlowVerifierSetpoint	mfc8AbsoluteFlowVerifierSetpoint	sccm		F4
+1802941	PMx mfc13AbsoluteFlowVerifierSetpoint	mfc13AbsoluteFlowVerifierSetpoint	sccm		F4
+1802942	PMx mfc14AbsoluteFlowVerifierSetpoint	mfc14AbsoluteFlowVerifierSetpoint	sccm		F4
+1802943	PMx mfc15AbsoluteFlowVerifierSetpoint	mfc15AbsoluteFlowVerifierSetpoint	sccm		F4
+1802944	PMx mfc10AbsoluteFlowVerifierSetpoint	mfc10AbsoluteFlowVerifierSetpoint	sccm		F4
+1802945	PMx mfc11AbsoluteFlowVerifierSetpoint	mfc11AbsoluteFlowVerifierSetpoint	sccm		F4
+1802946	PMx mfc12AbsoluteFlowVerifierSetpoint	mfc12AbsoluteFlowVerifierSetpoint	sccm		F4
+1802947	PMx mfc9AbsoluteFlowVerifierSetpoint	mfc9AbsoluteFlowVerifierSetpoint	sccm		F4
+1802948	PMx dilutingMFCAbsoluteFlowVerifierSetpoint	dilutingMFCAbsoluteFlowVerifierSetpoint	sccm		F4
+1802949	PMx dilutingMFC2AbsoluteFlowVerifierSetpoint	dilutingMFC2AbsoluteFlowVerifierSetpoint	sccm		F4
+1802950	PMx dilutingMFC2ZeroResetCounterVariable	TuningGas2ZeroResetCounter			I8
+1802955	PMx ElapsedTimeSinceLastProcess	ElapsedTimeSinceLastProcess	minutes		F4
+1802956	PMx ChuckESCCurrentPinsUpAlarmSetpt	ChuckESCCurrentPinsUpAlarmSetpt	uA		F4
+1802957	PMx ChuckESCCurrentPinsUpWarningSetpt	ChuckESCCurrentPinsUpWarningSetpt	uA		F4
+1802959	PMx stepTransitionBKM	stepTransitionBKM			A
+1802977	PMx PreviousState	PreviousState			A
+1802979	PMx ChuckESCClampVoltageEdgePolarity	ChuckESCClampVoltageEdgePolarity		Production  Condition  	A
+1802980	PMx PGCFlowUsedForWAPConductanceCurve	FlowUsedForWAPConductanceCurve	sccm		F4
+1802981	PMx ConfinementRingControllerOffsetMovableGapSlope	ConfinementRingOffsetSlopeForMovableGap			F4
+1802982	PMx ConfinementRingControllerReferenceGap	WAPReferenceGap			F4
+1802983	PMx PGCValvePositionRampTime	ThrottleValvePositionRampTime	s		U1
+1802984	PMx stepBKM	StepBKM			A
+1802985	PMx ConfinementRingControllerPIDRevision	ConfinementRingPIDRevision		Rev 1  Rev 0  	U1
+1803001	PMx OESOesType	OESType		OES2  OesPlus2CPU  Standard  None  	A
+1803018	PMx ConfinementRingControllerPositionOffsetHCROpen	ConfinementRingControllerPositionOffsetHCROpen	counts		F4
+1803090	PMx PGCValveHoldCurrentDelay	ValveHoldCurrentDelay	s		U2
+1803095	PMx OESOESEndpointValue	OESEndpointValue			F4
+1803096	PMx OESOESThresholdValue	OESThresholdValue			F4
+1803097	PMx ENIOneBoxAnyRFOnTimeInHours	AnyRFOnTimeInHours	hour		F4
+1803098	PMx ENIOneBoxTotalAnyRFOnTimeInHours	TotalAnyRFOnTimeInHours	hour		F4
+1803099	PMx UseNextStepLearnedValue	UseNextStepLearnedValue		Disable  Enable  	A
+1803375	PMx ProcessFineTuneInfo	ProcessFineTuneInfo			A
+1803384	PMx RF27MHzRFPAVRailFaultDIReading	RF27MHzPAVRailFault_DI	binary	nil  true  false  	Bool
+1803385	PMx RF2MHzRFPAVRailFaultDIReading	RF2MHzPAVRailFault_DI	binary	nil  true  false  	Bool
+1803386	PMx LTCBoardAnafazeFirmwareVersion	AnafazeFirmwareVersion			A
+1803391	PMx OESLSR_PhotoDiodeDetectorValue	LSR_PhotoDiodeDetectorValue	counts		F4
+1803392	PMx mfc1CalibrationPercentError	MFC1CalibrationPercentError	%		F4
+1803393	PMx mfc2CalibrationPercentError	MFC2CalibrationPercentError	%		F4
+1803394	PMx mfc3CalibrationPercentError	MFC3CalibrationPercentError	%		F4
+1803395	PMx mfc4CalibrationPercentError	MFC4CalibrationPercentError	%		F4
+1803396	PMx mfc5CalibrationPercentError	MFC5CalibrationPercentError	%		F4
+1803397	PMx mfc6CalibrationPercentError	MFC6CalibrationPercentError	%		F4
+1803398	PMx mfc7CalibrationPercentError	MFC7CalibrationPercentError	%		F4
+1803399	PMx mfc8CalibrationPercentError	MFC8CalibrationPercentError	%		F4
+1803404	PMx ThrottleValveControllerPIDRevision	ThrottleValvePIDRevision		Rev 1  Rev 0  	U1
+1803411	PMx EncodedStepNumber	EncodedStepNumber			U4
+1803412	PMx mfc1TransducerToleranceStatus	MFC1TransducerToleranceStatus		Normal  Error  Warning  	A
+1803413	PMx mfc2TransducerToleranceStatus	MFC2TransducerToleranceStatus		Normal  Error  Warning  	A
+1803414	PMx mfc3TransducerToleranceStatus	MFC3TransducerToleranceStatus		Normal  Error  Warning  	A
+1803415	PMx mfc4TransducerToleranceStatus	MFC4TransducerToleranceStatus		Normal  Error  Warning  	A
+1803416	PMx mfc5TransducerToleranceStatus	MFC5TransducerToleranceStatus		Normal  Error  Warning  	A
+1803417	PMx mfc6TransducerToleranceStatus	MFC6TransducerToleranceStatus		Normal  Error  Warning  	A
+1803418	PMx mfc7TransducerToleranceStatus	MFC7TransducerToleranceStatus		Normal  Error  Warning  	A
+1803419	PMx mfc8TransducerToleranceStatus	MFC8TransducerToleranceStatus		Normal  Error  Warning  	A
+1803420	PMx mfc13CalibrationPercentError	MFC13CalibrationPercentError	%		F4
+1803421	PMx mfc13TransducerToleranceStatus	MFC13TransducerToleranceStatus		Normal  Error  Warning  	A
+1803422	PMx mfc14CalibrationPercentError	MFC14CalibrationPercentError	%		F4
+1803423	PMx mfc14TransducerToleranceStatus	MFC14TransducerToleranceStatus		Normal  Error  Warning  	A
+1803424	PMx mfc15CalibrationPercentError	MFC15CalibrationPercentError	%		F4
+1803425	PMx mfc15TransducerToleranceStatus	MFC15TransducerToleranceStatus		Normal  Error  Warning  	A
+1803428	PMx mfc10CalibrationPercentError	MFC10CalibrationPercentError	%		F4
+1803429	PMx mfc10TransducerToleranceStatus	MFC10TransducerToleranceStatus		Normal  Error  Warning  	A
+1803430	PMx mfc11CalibrationPercentError	MFC11CalibrationPercentError	%		F4
+1803431	PMx mfc11TransducerToleranceStatus	MFC11TransducerToleranceStatus		Normal  Error  Warning  	A
+1803432	PMx mfc12CalibrationPercentError	MFC12CalibrationPercentError	%		F4
+1803433	PMx mfc12TransducerToleranceStatus	MFC12TransducerToleranceStatus		Normal  Error  Warning  	A
+1803434	PMx mfc9CalibrationPercentError	MFC9CalibrationPercentError	%		F4
+1803435	PMx mfc9TransducerToleranceStatus	MFC9TransducerToleranceStatus		Normal  Error  Warning  	A
+1803436	PMx ChuckESCDeclampVoltageSetpt	ChuckESCDeclampVoltageSetpt	V		F4
+1803437	PMx ChuckESCDeclampVoltageTimeSetpt	ChuckESCDeclampVoltageTimeSetpt	sec		F4
+1803444	PMx ChuckESCAdditionalDechuckTime	ESCAdditionalDechuckTime	sec		F4
+1803503	PMx dilutingMFCCalibrationPercentError	TuningGasCalibrationPercentError	%		F4
+1803504	PMx dilutingMFCTransducerToleranceStatus	TuningMFCTransducerToleranceStatus		Normal  Error  Warning  	A
+1803505	PMx dilutingMFC2CalibrationPercentError	TuningGas2CalibrationPercentError	%		F4
+1803506	PMx dilutingMFC2TransducerToleranceStatus	Tuning2MFCTransducerToleranceStatus		Normal  Error  Warning  	A
+1803510	PMx ConfinementRingControllerBypassChamberOpenInterlock	ConfinementRingBypassInterlock		nil  true  false  	Bool
+1803534	PMx PGCCurrentGasPumpPurgeCycle	CurrentGasPumpPurgeCycle			U2
+1803537	PMx ENIRF27MHzGenManufactureDate	ENIRFGen27MHzManufactureDate			A
+1803538	PMx ENIRF27MHzGenSerialNumber	ENIRFGen27MHzSerialNumber			A
+1803539	PMx ENIRF2MHzGenManufactureDate	ENIRFGen2MHzManufactureDate			A
+1803540	PMx ENIRF2MHzGenSerialNumber	ENIRFGen2MHzSerialNumber			A
+1803541	PMx ATMSwitchLastSetTimeVariable	ATMSwitchLastSetTime	seconds		A
+1803554	PMx OESPnPEndpointRecipeName	OESPnPEndpointRecipeName			A
+1803560	PMx LastProcessEndTime	LastProcessEndTime			A
+1803582	PMx mfc15PrimaryValDIReading	Gas_15_PrimaryValveV150_DI	binary	nil  true  false  	Bool
+1803583	PMx mfc15SecondaryValDIReading	Gas_15_SecondaryValveV152_DI	binary	nil  true  false  	Bool
+1803584	PMx mfc15temperatureAIReading	Gas_15_Temperature_AI	degC		F4
+1803585	PMx mfc15VoltageCurrentAIReading	Gas_15_VoltageCurrent_AI	%		F4
+1803586	PMx mfc14PrimaryValDIReading	Gas_14_PrimaryValveV140_DI	binary	nil  true  false  	Bool
+1803587	PMx mfc14SecondaryValDIReading	Gas_14_SecondaryValveV142_DI	binary	nil  true  false  	Bool
+1803588	PMx mfc14temperatureAIReading	Gas_14_Temperature_AI	degC		F4
+1803589	PMx mfc14VoltageCurrentAIReading	Gas_14_VoltageCurrent_AI	%		F4
+1803590	PMx mfc13PrimaryValDIReading	Gas_13_PrimaryValveV130_DI	binary	nil  true  false  	Bool
+1803591	PMx mfc13SecondaryValDIReading	Gas_13_SecondaryValveV132_DI	binary	nil  true  false  	Bool
+1803592	PMx mfc13temperatureAIReading	Gas_13_Temperature_AI	degC		F4
+1803593	PMx mfc13VoltageCurrentAIReading	Gas_13_VoltageCurrent_AI	%		F4
+1803594	PMx mfc12PrimaryValDIReading	Gas_12_PrimaryValveV120_DI	binary	nil  true  false  	Bool
+1803595	PMx mfc12SecondaryValDIReading	Gas_12_SecondaryValveV122_DI	binary	nil  true  false  	Bool
+1803596	PMx mfc12temperatureAIReading	Gas_12_Temperature_AI	degC		F4
+1803597	PMx mfc12VoltageCurrentAIReading	Gas_12_VoltageCurrent_AI	%		F4
+1803598	PMx mfc11PrimaryValDIReading	Gas_11_PrimaryValveV110_DI	binary	nil  true  false  	Bool
+1803599	PMx mfc11SecondaryValDIReading	Gas_11_SecondaryValveV112_DI	binary	nil  true  false  	Bool
+1803600	PMx mfc11temperatureAIReading	Gas_11_Temperature_AI	degC		F4
+1803601	PMx mfc11VoltageCurrentAIReading	Gas_11_VoltageCurrent_AI	%		F4
+1803602	PMx mfc10PrimaryValDIReading	Gas_10_PrimaryValveV100_DI	binary	nil  true  false  	Bool
+1803603	PMx mfc10SecondaryValDIReading	Gas_10_SecondaryValveV102_DI	binary	nil  true  false  	Bool
+1803604	PMx mfc10temperatureAIReading	Gas_10_Temperature_AI	degC		F4
+1803605	PMx mfc10VoltageCurrentAIReading	Gas_10_VoltageCurrent_AI	%		F4
+1803606	PMx mfc9PrimaryValDIReading	Gas_9_PrimaryValveV90_DI	binary	nil  true  false  	Bool
+1803607	PMx mfc9SecondaryValDIReading	Gas_9_SecondaryValveV92_DI	binary	nil  true  false  	Bool
+1803608	PMx mfc9temperatureAIReading	Gas_9_Temperature_AI	degC		F4
+1803609	PMx mfc9VoltageCurrentAIReading	Gas_9_VoltageCurrent_AI	%		F4
+1803610	PMx mfc8PrimaryValDIReading	Gas_8_PrimaryValveV80_DI	binary	nil  true  false  	Bool
+1803611	PMx mfc8SecondaryValDIReading	Gas_8_SecondaryValveV82_DI	binary	nil  true  false  	Bool
+1803612	PMx mfc8temperatureAIReading	Gas_8_Temperature_AI	degC		F4
+1803613	PMx mfc8VoltageCurrentAIReading	Gas_8_VoltageCurrent_AI	%		F4
+1803614	PMx mfc7PrimaryValDIReading	Gas_7_PrimaryValveV70_DI	binary	nil  true  false  	Bool
+1803615	PMx mfc7SecondaryValDIReading	Gas_7_SecondaryValveV72_DI	binary	nil  true  false  	Bool
+1803616	PMx mfc7temperatureAIReading	Gas_7_Temperature_AI	degC		F4
+1803617	PMx mfc7VoltageCurrentAIReading	Gas_7_VoltageCurrent_AI	%		F4
+1803618	PMx mfc6PrimaryValDIReading	Gas_6_PrimaryValveV60_DI	binary	nil  true  false  	Bool
+1803619	PMx mfc6SecondaryValDIReading	Gas_6_SecondaryValveV62_DI	binary	nil  true  false  	Bool
+1803620	PMx mfc6temperatureAIReading	Gas_6_Temperature_AI	degC		F4
+1803621	PMx mfc6VoltageCurrentAIReading	Gas_6_VoltageCurrent_AI	%		F4
+1803622	PMx mfc5PrimaryValDIReading	Gas_5_PrimaryValveV50_DI	binary	nil  true  false  	Bool
+1803623	PMx mfc5SecondaryValDIReading	Gas_5_SecondaryValveV52_DI	binary	nil  true  false  	Bool
+1803624	PMx mfc5temperatureAIReading	Gas_5_Temperature_AI	degC		F4
+1803625	PMx mfc5VoltageCurrentAIReading	Gas_5_VoltageCurrent_AI	%		F4
+1803626	PMx mfc4PrimaryValDIReading	Gas_4_PrimaryValveV40_DI	binary	nil  true  false  	Bool
+1803627	PMx mfc4SecondaryValDIReading	Gas_4_SecondaryValveV42_DI	binary	nil  true  false  	Bool
+1803628	PMx mfc4temperatureAIReading	Gas_4_Temperature_AI	degC		F4
+1803629	PMx mfc4VoltageCurrentAIReading	Gas_4_VoltageCurrent_AI	%		F4
+1803630	PMx mfc3PrimaryValDIReading	Gas_3_PrimaryValveV30_DI	binary	nil  true  false  	Bool
+1803631	PMx mfc3SecondaryValDIReading	Gas_3_SecondaryValveV32_DI	binary	nil  true  false  	Bool
+1803632	PMx mfc3temperatureAIReading	Gas_3_Temperature_AI	degC		F4
+1803633	PMx mfc3VoltageCurrentAIReading	Gas_3_VoltageCurrent_AI	%		F4
+1803634	PMx mfc2PrimaryValDIReading	Gas_2_PrimaryValveV20_DI	binary	nil  true  false  	Bool
+1803635	PMx mfc2SecondaryValDIReading	Gas_2_SecondaryValveV22_DI	binary	nil  true  false  	Bool
+1803636	PMx mfc2temperatureAIReading	Gas_2_Temperature_AI	degC		F4
+1803637	PMx mfc2VoltageCurrentAIReading	Gas_2_VoltageCurrent_AI	%		F4
+1803638	PMx mfc1PrimaryValDIReading	Gas_1_PrimaryValveV10_DI	binary	nil  true  false  	Bool
+1803639	PMx mfc1SecondaryValDIReading	Gas_1_SecondaryValveV12_DI	binary	nil  true  false  	Bool
+1803640	PMx mfc1temperatureAIReading	Gas_1_Temperature_AI	degC		F4
+1803641	PMx mfc1VoltageCurrentAIReading	Gas_1_VoltageCurrent_AI	%		F4
+1803642	PMx GasLineHeater3sensorReading	GasLineHeater3Status_DI	binary	nil  true  false  	Bool
+1803643	PMx GasLineHeater4sensorReading	GasLineHeater4Status_DI	binary	nil  true  false  	Bool
+1803644	PMx GasLineHeater5sensorReading	GasLineHeater5Status_DI	binary	nil  true  false  	Bool
+1803645	PMx GasLineHeater6sensorReading	GasLineHeater6Status_DI	binary	nil  true  false  	Bool
+1803646	PMx GasLineHeater1TemperatureActuatorSetpoint	GasLineHeater1Temperature_AO	degC		F4
+1803647	PMx GasLineHeater1TemperaturesensorReading	GasLineHeater1Temperature_AI	degC		F4
+1803648	PMx GasLineHeater1TemperatureToleranceState	GasLineHeater1TempToleranceState		Normal  Error  Warning  	A
+1803649	PMx GasLineHeater2TemperatureActuatorSetpoint	GasLineHeater2Temperature_AO	degC		F4
+1803650	PMx GasLineHeater2TemperaturesensorReading	GasLineHeater2Temperature_AI	degC		F4
+1803651	PMx GasLineHeater2TemperatureToleranceState	GasLineHeater2TempToleranceState		Normal  Error  Warning  	A
+1803652	PMx GasLineHeater3TemperatureActuatorSetpoint	GasLineHeater3Temperature_AO	degC		F4
+1803653	PMx GasLineHeater3TemperaturesensorReading	GasLineHeater3Temperature_AI	degC		F4
+1803654	PMx GasLineHeater3TemperatureToleranceState	GasLineHeater3TempToleranceState		Normal  Error  Warning  	A
+1803655	PMx GasLineHeater4TemperatureActuatorSetpoint	GasLineHeater4Temperature_AO	degC		F4
+1803656	PMx GasLineHeater4TemperaturesensorReading	GasLineHeater4Temperature_AI	degC		F4
+1803657	PMx GasLineHeater4TemperatureToleranceState	GasLineHeater4TempToleranceState		Normal  Error  Warning  	A
+1803658	PMx GasLineHeater5TemperatureActuatorSetpoint	GasLineHeater5Temperature_AO	degC		F4
+1803659	PMx GasLineHeater5TemperaturesensorReading	GasLineHeater5Temperature_AI	degC		F4
+1803660	PMx GasLineHeater5TemperatureToleranceState	GasLineHeater5TempToleranceState		Normal  Error  Warning  	A
+1803661	PMx GasLineHeater6TemperatureActuatorSetpoint	GasLineHeater6Temperature_AO	degC		F4
+1803662	PMx GasLineHeater6TemperaturesensorReading	GasLineHeater6Temperature_AI	degC		F4
+1803663	PMx GasLineHeater6TemperatureToleranceState	GasLineHeater6TempToleranceState		Normal  Error  Warning  	A
+1803671	PMx ENIRF60MHzGenManufactureDate	ENIRFGen60MHzManufactureDate			A
+1803672	PMx ENIRF60MHzGenSerialNumber	ENIRFGen60MHzSerialNumber			A
+1803673	PMx DCPowerMonitorDCPower15V_AIReading	DCPower15V_AI	volt		F4
+1803674	PMx DCPowerMonitorDCPower24V_1_AIReading	DCPower24V_1_AI	volt		F4
+1803675	PMx DCPowerMonitorDCPower24V_2_AIReading	DCPower24V_2_AI	volt		F4
+1803676	PMx FacilityMainWaterBypassValveDOSetpoint	MainWaterBypassValve_DO	binary	nil  true  false  	Bool
+1803681	PMx ENIOneBoxRFSystemReady	RFSystemReady		nil  true  false  	Bool
+1803682	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve1_DIReading	DualGasFeedValve1_DI	binary	nil  true  false  	Bool
+1803683	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve2_DIReading	DualGasFeedValve2_DI	binary	nil  true  false  	Bool
+1803684	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve3_DIReading	DualGasFeedValve3_DI	binary	nil  true  false  	Bool
+1803685	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve4_DIReading	DualGasFeedValve4_DI	binary	nil  true  false  	Bool
+1803686	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve5_DIReading	DualGasFeedValve5_DI	binary	nil  true  false  	Bool
+1803687	PMx V5DualGasFeedRepresentativeDualGasFeed1DualGasFeedValve6_DIReading	DualGasFeedValve6_DI	binary	nil  true  false  	Bool
+1803688	PMx V5DualGasFeedRepresentativeDualGasFeed1GasBoxV511V512Monitor_DIReading	GasBoxV511V512Monitor_DI	binary	nil  true  false  	Bool
+1803689	PMx V5DualGasFeedRepresentativeDualGasFeed1GasBoxV521V522Monitor_DIReading	GasBoxV521V522Monitor_DI	binary	nil  true  false  	Bool
+1803690	PMx DualGasFeedPressureLowManometerIsoValveSetpoint	DualGasFeedManometerIsoValve_DO	binary	nil  true  false  	Bool
+1803691	PMx CDAPressureCDA PressureReading	CDAPressure_AI	psi		F4
+1803692	PMx dilutingMFCPrimaryValDIReading	TuningGas_PrimaryValve_DI	binary	nil  true  false  	Bool
+1803693	PMx dilutingMFCSecondaryValDIReading	TuningGas_SecondaryValve_DI	binary	nil  true  false  	Bool
+1803694	PMx dilutingMFCtemperatureAIReading	TuningGas_Temperature_AI	degC		F4
+1803695	PMx dilutingMFCVoltageCurrentAIReading	TuningGas_VoltageCurrent_AI	%		F4
+1803696	PMx dilutingMFC2PrimaryValDIReading	TuningGas2_PrimaryValve_DI	binary	nil  true  false  	Bool
+1803697	PMx dilutingMFC2SecondaryValDIReading	TuningGas2_SecondaryValve_DI	binary	nil  true  false  	Bool
+1803698	PMx dilutingMFC2temperatureAIReading	TuningGas2_Temperature_AI	degC		F4
+1803699	PMx dilutingMFC2VoltageCurrentAIReading	TuningGas2_VoltageCurrent_AI	%		F4
+1803700	PMx dilutingMFC2SecondaryValSetpoint	TuningGas2_SecondaryValve_DO	binary	nil  true  false  	Bool
+1803701	PMx ConfinementRingControllerStepperBoardCounterResetDOSetpoint	ConfinementRingStepperBoardCounterReset_DO	binary	nil  true  false  	Bool
+1803702	PMx ConfinementRingControllerMotor1PositionAIReading	ConfinementRingMotor1Position_AI	steps		F4
+1803703	PMx ConfinementRingControllerMotor2PositionAIReading	ConfinementRingMotor2Position_AI	steps		F4
+1803704	PMx ConfinementRingControllerMotor3PositionAIReading	ConfinementRingMotor3Position_AI	steps		F4
+1803705	PMx ConfinementRingControllerStepperBoardAlarm1DIReading	ConfinementRingStepperBoardAlarm1_DI	binary	nil  true  false  	Bool
+1803706	PMx ConfinementRingControllerStepperBoardAlarm2DIReading	ConfinementRingStepperBoardAlarm2_DI	binary	nil  true  false  	Bool
+1803707	PMx ConfinementRingControllerStepperBoardControlModeDIReading	ConfinementRingStepperBoardControlMode_DI	binary	nil  true  false  	Bool
+1803708	PMx ConfinementRingControllerStepperBoardAlarmStatus	ConfinementRingStepperBoardAlarmStatus		Encoder Error  Motor Error  Sensor Error (Disconnected)  OK  	U1
+1803709	PMx RF27MHzRFGenLevelingModeDOSetpoint	RF27MHzGenPowerLevelingMode_DO	binary	nil  true  false  	Bool
+1803710	PMx RF27MHzRFGenMaxOnTimeAOSetpoint	RF27MHzGenMaxOnTime_AO	Sec		F4
+1803711	PMx RF27MHzRFGenInterlockDIReading	RF27MHzGenInterlock_DI	binary	nil  true  false  	Bool
+1803712	PMx RF2MHzRFGenLevelingModeDOSetpoint	RF2MHzGenPowerLevelingMode_DO	binary	nil  true  false  	Bool
+1803713	PMx RF2MHzRFGenMaxOnTimeAOSetpoint	RF2MHzGenMaxOnTime_AO	Sec		F4
+1803714	PMx RF2MHzPAVRailFaultIDVariable	RF2MHzPAVRailFaultID			A
+1803715	PMx RF2MHzRFGenInterlockDIReading	RF2MHzGenInterlock_DI	binary	nil  true  false  	Bool
+1803716	PMx RF60MHzRFGenLevelingModeDOSetpoint	RF60MHzGenPowerLevelingMode_DO	binary	nil  true  false  	Bool
+1803717	PMx RF60MHzRFGenMaxOnTimeAOSetpoint	RF60MHzGenMaxOnTime_AO	Sec		F4
+1803719	PMx RF60MHzRFPAVRailFaultDIReading	RF60MHzPAVRailFault_DI	binary	nil  true  false  	Bool
+1803720	PMx TemperatureControlTopPlateHeaterACLineLevelPhase1VoltageSensorReading	TopPlateHeaterACLineLevelPhase1Voltage_AI	V		F4
+1803721	PMx TemperatureControlTopPlateHeaterACSyncInputOKDIReading	TopPlateHeaterACSyncInputOK_DI	binary	nil  true  false  	Bool
+1803722	PMx TemperatureControlTopPlateHeaterTopPlateOverTempDIReading	TopPlateOverTemp_DI	binary	nil  true  false  	Bool
+1803767	PMx ImageBatteryCheckBatteryLowVariable	BatteryLow		true  false  	Bool
+1803818	PMx ChuckESCClampVoltagePolarity	ESCClampVoltagePolarity		Forward  Reverse  	A
+1803857	PMx RF27MHzPAVRailFaultIDVariable	RF27MHzPAVRailFaultID			A
+1803858	PMx RF27MHzRFMaxReflectedPowerSpikeSetpoint	RF27MHzMaxReflectedPowerSpikeSetpoint	%		F4
+1803859	PMx RF2MHzRFMaxReflectedPowerSpikeSetpoint	RF2MHzMaxReflectedPowerSpikeSetpoint	%		F4
+1803860	PMx RF60MHzRFMaxReflectedPowerSpikeSetpoint	RF60MHzMaxReflectedPowerSpikeSetpoint	%		F4
+1803861	PMx RF60MHzRFGenDeliveredPower	RF60MHzGenDeliveredPower	watt		F8
+1803874	PMx mfc1MFCSelfCheckStatus	MFC1SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803875	PMx mfc2MFCSelfCheckStatus	MFC2SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803876	PMx mfc3MFCSelfCheckStatus	MFC3SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803877	PMx mfc4MFCSelfCheckStatus	MFC4SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803878	PMx mfc5MFCSelfCheckStatus	MFC5SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803879	PMx mfc6MFCSelfCheckStatus	MFC6SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803880	PMx mfc7MFCSelfCheckStatus	MFC7SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803881	PMx mfc8MFCSelfCheckStatus	MFC8SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803882	PMx mfc13MFCSelfCheckStatus	MFC13SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803884	PMx mfc15MFCSelfCheckStatus	MFC15SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803885	PMx mfc10MFCSelfCheckStatus	MFC10SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803886	PMx mfc11MFCSelfCheckStatus	MFC11SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803887	PMx mfc12MFCSelfCheckStatus	MFC12SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803888	PMx mfc9MFCSelfCheckStatus	MFC9SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803889	PMx dilutingMFCMFCSelfCheckStatus	TuningGasSelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1803890	PMx dilutingMFC2MFCSelfCheckStatus	TuningGas2SelfCheckStatus		Normal  Unknown  Error  Warning  	A
+1804063	PMx ConfinementRingControllerAdjustedPositionCL	ConfinementRingAdjustedPositionCL	counts		F4
+1804064	PMx ConfinementRingControllerPositionSetpointCL	ConfinementRingPositionSetpointCL			F4
+1804065	PMx RF27MHzRFACOffRequiredFaultDIReading	RF27MHzACOffRequiredFault_DI	binary	nil  true  false  	Bool
+1804066	PMx RF27MHzRFGenFanFaultDIReading	RF27MHzGenFanFault_DI	binary	nil  true  false  	Bool
+1804067	PMx RF2MHzRFACOffRequiredFaultDIReading	RF2MHzACOffRequiredFault_DI	binary	nil  true  false  	Bool
+1804068	PMx RF2MHzRFGenFanFaultDIReading	RF2MHzGenFanFault_DI	binary	nil  true  false  	Bool
+1804101	PMx ConfinementRingControllerStepperBoardCoolingFanDIReading	ConfinementRingStepperBoardCoolingFan_DI	binary	nil  true  false  	Bool
+1804102	PMx RF60MHzRFACOffRequiredFaultDIReading	RF60MHzACOffRequiredFault_DI	binary	nil  true  false  	Bool
+1804108	PMx WaferLifterMiddleActuatorSetpoint	WaferLifterMiddleActuator_DO	binary	nil  true  false  	Bool
+1804109	PMx WaferLifterMiddleSensorReading	WaferLifterMiddleSensor_DI	binary	nil  true  false  	Bool
+1905765	PMx ConfinementRingControllerPositionOffset	ConfinementRingPositionOffset	counts		F4
+1908122	PMx ChuckESCBiasVoltageTolCheckDelay	ESCBiasVoltageToleranceCheckDelay	s		F4
+1908124	PMx ChuckESCBiasVoltageToleranceChecking	ESCBiasVoltageToleranceChecking		Disable  Enable  	A
+*/
+
+

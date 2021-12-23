@@ -1,0 +1,152 @@
+
+
+// MFC ITEM -------------------------------------
+#DEFINE_CONSTANT    ##CHMx.DATA.MFC.SIZE                    10
+
+#DEFINE_CONSTANT    ##CHMx.CH.MFC1.NAME                     ##PMx+MFC01.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC1.FLOW_GET                 ##PMx+MFC01.C4F8		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC1.FLOW_SET                 ##PMx+MFC01.C4F8.SET	
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC2.NAME                     ##PMx+MFC02.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC2.FLOW_GET                 ##PMx+MFC02.N2		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC2.FLOW_SET                 ##PMx+MFC02.N2.SET		
+                              
+#DEFINE_CONSTANT    ##CHMx.CH.MFC3.NAME                     ##PMx+MFC03.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC3.FLOW_GET                 ##PMx+MFC03.O2.50		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC3.FLOW_SET                 ##PMx+MFC03.O2.50.SET	
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC4.NAME                     ##PMx+MFC04.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC4.FLOW_GET                 ##PMx+MFC04.CF4		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC4.FLOW_SET                 ##PMx+MFC04.CF4.SET	
+                    
+#DEFINE_CONSTANT    ##CHMx.CH.MFC5.NAME                     ##PMx+MFC05.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC5.FLOW_GET                 ##PMx+MFC05.O2.3000	
+#DEFINE_CONSTANT    ##CHMx.CH.MFC5.FLOW_SET                 ##PMx+MFC05.O2.3000.SET	
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC6.NAME                     ##PMx+MFC06.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC6.FLOW_GET                 ##PMx+MFC06.CHF3		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC6.FLOW_SET                 ##PMx+MFC06.CHF3.SET	
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC7.NAME                     ##PMx+MFC07.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC7.FLOW_GET                 ##PMx+MFC07.AR		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC7.FLOW_SET                 ##PMx+MFC07.AR.SET		
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC8.NAME                     ##PMx+MFC08.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC8.FLOW_GET                 ##PMx+MFC08.XE		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC8.FLOW_SET                 ##PMx+MFC08.XE.SET		
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC9.NAME                     ##PMx+MFC09.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC9.FLOW_GET                 ##PMx+MFC09.CH2F2		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC9.FLOW_SET                 ##PMx+MFC09.CH2F2.SET	
+                                                            
+#DEFINE_CONSTANT    ##CHMx.CH.MFC10.NAME                    ##PMx+MFC10.NAME         
+#DEFINE_CONSTANT    ##CHMx.CH.MFC10.FLOW_GET                ##PMx+MFC10.C4F6		
+#DEFINE_CONSTANT    ##CHMx.CH.MFC10.FLOW_SET                ##PMx+MFC10.C4F6.Set	
+                                                                        
+
+// RFx ITEM --------------------------------------
+// RF1 ...
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.ON_STATUS_SET             ##PMx+RF.2MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.ON_STATUS_GET             ##PMx+RF.2MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.POWER_SET                 ##PMx+RF.2MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.RAMP_SET                  ##PMx+RF.2MHz.RAMP_TIME            
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.FORWARD_POWER_GET         ##PMx+RF.2MHz.FORWARD.PWR
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.REFLECT_POWER_GET         ##PMx+RF.2MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.MONITORING_STATUS         ##PMx+RF.2MHz.MON_FLAG             
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.FREQUENCY_START_SET       ##PMx+RF.2MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.FREQUENCY_POWER_SET       ##PMx+RF.2MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    ##CHMx.CH.RF1.FREQUENCY_POWER_GET       ##PMx+RF.2MHz.FREQUENCY
+
+// RF2 ...
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.ON_STATUS_SET             ##PMx+RF.27MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.ON_STATUS_GET             ##PMx+RF.27MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.POWER_SET                 ##PMx+RF.27MHz.FWD.PWR.SET
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.RAMP_SET                  ##PMx+RF.27MHz.RAMP_TIME            
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.FORWARD_POWER_GET         ##PMx+RF.27MHz.FWD.PWR
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.REFLECT_POWER_GET         ##PMx+RF.27MHz.REFLECT.PWR
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.MONITORING_STATUS         ##PMx+RF.27MHz.MON_FLAG             
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.FREQUENCY_START_SET       ##PMx+RF.27MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.FREQUENCY_POWER_SET       ##PMx+RF.27MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    ##CHMx.CH.RF2.FREQUENCY_POWER_GET       ##PMx+RF.27MHz.FREQUENCY
+
+// RF3 ...
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.ON_STATUS_SET             ##PMx+RF.60MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.ON_STATUS_GET             ##PMx+RF.60MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.POWER_SET                 ##PMx+RF.60MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.RAMP_SET                  ##PMx+RF.60MHz.RAMP_TIME            
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.FORWARD_POWER_GET         ##PMx+RF.60MHz.FORWARD.PWR
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.REFLECT_POWER_GET         ##PMx+RF.60MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.MONITORING_STATUS         ##PMx+RF.60MHz.MON_FLAG             
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.FREQUENCY_START_SET       ##PMx+RF.60MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.FREQUENCY_POWER_SET       ##PMx+RF.60MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    ##CHMx.CH.RF3.FREQUENCY_POWER_GET       ##PMx+RF.60MHz.FREQUENCY
+
+								
+// MATCHER ITEM ---------------------------------
+// MAT1 ...
+#DEFINE_CONSTANT    ##CHMx.CH.MAT1.ON_STATUS				        ##PMx+2MHz.ON_STATUS       
+#DEFINE_CONSTANT    ##CHMx.CH.MAT1.TUNE_STATUS				      ##PMx+2MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    ##CHMx.CH.MAT1.CONTROL_MODE				      ##PMx+2MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    ##CHMx.CH.MAT1.CUR_LOAD_POS				      ##PMx+2MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    ##CHMx.CH.MAT1.CUR_TUNE_POS				      ##PMx+2MHz.TUNE_CUR_POS    
+
+// MAT2 ...
+#DEFINE_CONSTANT    ##CHMx.CH.MAT2.ON_STATUS				        ##PMx+27MHz.ON_STATUS       
+#DEFINE_CONSTANT    ##CHMx.CH.MAT2.TUNE_STATUS				      ##PMx+27MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    ##CHMx.CH.MAT2.CONTROL_MODE				      ##PMx+27MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    ##CHMx.CH.MAT2.CUR_LOAD_POS				      ##PMx+27MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    ##CHMx.CH.MAT2.CUR_TUNE_POS				      ##PMx+27MHz.TUNE_CUR_POS    
+
+// MAT3 ...
+#DEFINE_CONSTANT    ##CHMx.CH.MAT3.ON_STATUS				        ##PMx+60MHz.ON_STATUS       
+#DEFINE_CONSTANT    ##CHMx.CH.MAT3.TUNE_STATUS				      ##PMx+60MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    ##CHMx.CH.MAT3.CONTROL_MODE				      ##PMx+60MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    ##CHMx.CH.MAT3.CUR_LOAD_POS				      ##PMx+60MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    ##CHMx.CH.MAT3.CUR_TUNE_POS				      ##PMx+60MHz.TUNE_CUR_POS    
+
+
+// TEMPERATURE ITEM  ----------------------------
+
+#DEFINE_CONSTANT    ##CHMx.DATA.HEATER.SIZE         				4
+
+#DEFINE_CONSTANT    ##CHMx.CH.HTR1.TEMP_SET				          ##PMx+TOP.TEMP.SET
+#DEFINE_CONSTANT    ##CHMx.CH.HTR1.TEMP_GET				          ##PMx+TOP.TEMP	
+
+#DEFINE_CONSTANT    ##CHMx.CH.HTR2.TEMP_SET					        ##PMx+ESC.TEMP.SET
+#DEFINE_CONSTANT    ##CHMx.CH.HTR2.TEMP_GET					        ##PMx+BTM.TEMPERATURE
+
+#DEFINE_CONSTANT    ##CHMx.CH.HTR3.TEMP_SET				          ##PMx+TOP.PLATE.TEMP.SET
+#DEFINE_CONSTANT    ##CHMx.CH.HTR3.TEMP_GET				          ##PMx+TOP.PLATE.TEMP	
+                    
+#DEFINE_CONSTANT    ##CHMx.CH.HTR4.TEMP_SET				          ##PMx+ANAFAZER.TOP.TEMP.GET
+#DEFINE_CONSTANT    ##CHMx.CH.HTR4.TEMP_GET			            ##PMx+BTM.TEMP
+
+
+// ESC ITEM  ------------------------------------
+
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.TOTAL_VOLT_SET				    ##PMx+ESC.VOLTAGE.SET	
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.TOTAL_VOLT_GET				    ##PMx+ESC.VOLTAGE		
+	
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.BIAS_VOLT_SET				      ##PMx+ESC.COOLANT_FLOW_GET
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.BIAS_VOLT_GET				      ##PMx+DCBIAS.VOLTAGE
+
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.COOLANT_GET			 	        ##PMx+CHAMBER.FLOW
+
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.POWER_ON_STATUS				    ##PMx+ESC.POWER_ON_STATUS		
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.REVERSE_POLARITY_STATUS		##PMx+ESC.REVERSE_POWER_STATUS	
+#DEFINE_CONSTANT    ##CHMx.CH.ESC.COOLANT_FLOW_STATUS			  ##PMx+ESC.COOLANT_FLOW_STATUS	
+
+
+// He Inner / Outer ITEM  -----------------------
+
+#DEFINE_CONSTANT    ##CHMx.CH.He_1.PRESSURE_SET             ##PMx+HE.INNER.PRESS.SET	
+#DEFINE_CONSTANT    ##CHMx.CH.He_1.PRESSURE_GET             ##PMx+HE.INNER.PRESS	
+#DEFINE_CONSTANT    ##CHMx.CH.He_1.FLOW_GET                 ##PMx+HE.INNER.FLOW	
+
+#DEFINE_CONSTANT    ##CHMx.CH.He_2.PRESSURE_SET             ##PMx+HE.OUTER.PRESS.SET	
+#DEFINE_CONSTANT    ##CHMx.CH.He_2.PRESSURE_GET             ##PMx+HE.OUTER.PRESS	
+#DEFINE_CONSTANT    ##CHMx.CH.He_2.FLOW_GET                 ##PMx+HE.OUTER.FLOW	
+

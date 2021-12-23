@@ -1,0 +1,17 @@
+
+
+//-------------------------------Platen------------------------------------
+//11~20
+//:
+//21~30
+//:
+
+#SVID   ##MODULE     1    ##SVID+FNC_P_ROT.CURR.POL.TIME                  	A      10    RPM     ##SVID+Polish_Time         
+#SVID   ##MODULE     2    ##SVID+FNC_P_ROT.CURR.USE.TIME               A      10    __      ##SVID+Use_Time            
+#SVID   ##MODULE     3    ##SVID+DRV_P_ROT.TOTAL.WAFER.COUNT                    A      10    __      ##SVID+Wafer_Count                     
+//step no.
+
+//---------------------------------Conditioner-----------------------------     
+#SVID   ##MODULE     701    ##SVID+FNC_C_SWP.WAFER.COUNT                A      10    __      ##SVID_C+Disk_Wafer_Count                  
+#SVID   ##MODULE     702    ##SVID+FNC_C_SWP.CURR.DISK.USE.TIME             A      10    __      ##SVID_C+Disk_Use_Time      
+//speed mean

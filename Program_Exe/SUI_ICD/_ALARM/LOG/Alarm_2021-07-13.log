@@ -1,0 +1,1209 @@
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.13 16:45:31:129	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 16:45:00:916	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 16:45:03:730	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 16:48:44:587	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 16:48:47:497	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 16:48:49:147	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 16:48:49:221	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.13 16:48:49:226	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.13 16:49:08:884	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 16:49:08:922	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 16:49:08:977	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 16:49:09:016	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 16:49:09:068	
+#RESULT=CHECK	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.13 16:50:24:961	
+#RESULT=POST	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.13 16:50:30:482	
+#RESULT=ABORT	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.13 16:50:30:484	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.13 16:50:41:353	
+#RESULT=CHECK	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 17:13:55:775	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 17:13:58:637	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 17:14:00:303	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 17:14:00:375	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 17:14:35:424	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 17:14:35:471	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 17:14:35:512	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 17:14:35:559	
+#RESULT=CHECK	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 17:17:41:869	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 17:17:44:870	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 17:17:46:398	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 17:17:46:471	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=13	
+#TIME=2021.07.13 17:17:51:186	
+#RESULT=POST	
+#TITLE=FNC_CHM - PMC's slit valve is not closed !	
+#MSG=START	
+Cann't execute the "HIGH_VAC_PUMP" mode.
+
+Please, check the pmc's slit valve.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 17:17:53:217	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 17:17:53:277	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 17:17:53:322	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 17:17:53:355	
+#RESULT=CHECK	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=13	
+#TIME=2021.07.13 17:17:57:488	
+#RESULT=RETRY	
+#TITLE=FNC_CHM - PMC's slit valve is not closed !	
+#MSG=START	
+Cann't execute the "HIGH_VAC_PUMP" mode.
+
+Please, check the pmc's slit valve.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 17:18:11:155	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.13 17:19:10:825	
+#RESULT=POST	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.13 17:19:15:746	
+#RESULT=ABORT	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.13 17:19:15:750	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.13 17:19:53:549	
+#RESULT=CHECK	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 17:19:54:673	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.13 17:20:20:920	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.13 18:36:05:711	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 18:35:21:713	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 18:35:24:512	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 18:38:11:093	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 18:38:11:137	
+#RESULT=CHECK	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:01:04:603	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:01:07:513	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:11:02:369	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:11:05:294	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:14:13:010	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:14:15:794	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:18:49:696	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:18:52:481	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:22:41:103	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:22:44:294	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:29:24:744	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:29:27:810	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:31:47:463	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:31:50:450	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 19:31:52:009	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 19:31:52:041	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.13 19:31:52:047	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.13 19:32:34:817	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.13 19:32:34:871	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.13 19:32:34:914	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.13 19:32:34:970	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.13 19:32:35:014	
+#RESULT=CHECK	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.13 19:33:46:056	
+#RESULT=POST	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.13 19:33:49:409	
+#RESULT=ABORT	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.13 19:33:49:411	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.13 19:33:58:102	
+#RESULT=CHECK	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.13 19:37:36:749	
+POST	
+STOP	
+	

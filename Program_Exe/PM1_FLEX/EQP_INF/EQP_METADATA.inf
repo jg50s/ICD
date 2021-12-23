@@ -1,0 +1,1310 @@
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#include  RANGE_CTRL\Object_Range.inf
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY		PAGE_CHM
+
+#FNC_MODE		  LOW_VAC_PUMP			       FNC_CHM		LOW_VAC_PUMP
+#FNC_MODE		  HIGH_VAC_PUMP			       FNC_CHM		HIGH_VAC_PUMP
+#FNC_MODE		  VENT							       FNC_CHM		VENTING
+#FNC_MODE		  LEAK_CHECK				       FNC_CHM		LEAK_CHECK
+#FNC_MODE		  PURGE							       FNC_CHM		PURGE
+
+#DEFINE_CONSTANT    CH.FNC.LOCK         		      DB_ETCHER+SYS.FNC.LOCK
+#DEFINE_CONSTANT    DATA.FNC.LOCK     		        CHM
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		PAGE_SYSTEM_INIT
+
+#FNC_MODE		  SYSTEM_INIT      			   OPR_PMC    SYSTEM_INIT
+
+#DEFINE_CONSTANT    CH.FNC.LOCK         		      DB_ETCHER+SYS.CTRL.LOCK
+#DEFINE_CONSTANT    DATA.FNC.LOCK     		        INIT
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		PAGE_SYSTEM_MAINT
+
+#FNC_MODE		  SYSTEM_MAINT             OPR_PMC    SYSTEM_MAINT
+
+#DEFINE_CONSTANT    CH.FNC.LOCK         		      DB_ETCHER+SYS.CTRL.LOCK
+#DEFINE_CONSTANT    DATA.FNC.LOCK     		        MAINT
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		PAGE_TRANSFER_INIT
+
+#FNC_MODE		TRANSFER_MAINT             OPR_PMC    TRANSFER_INIT
+
+#DEFINE_CONSTANT    CH.FNC.LOCK         		      DB_ETCHER+SYS.CTRL.LOCK
+#DEFINE_CONSTANT    DATA.FNC.LOCK     		        TRANSFER
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY    INF_PMC
+
+#FNC_MODE   OBJ_MODE__SYSTEM_INIT	    			OPR_PMC  		SYSTEM_INIT
+#FNC_MODE   OBJ_MODE__SYSTEM_MAINT				  OPR_PMC  		SYSTEM_MAINT
+#FNC_MODE   OBJ_MODE__PUMP								  OPR_PMC  		PUMP
+#FNC_MODE   OBJ_MODE__VENT								  OPR_PMC  		VENT
+#FNC_MODE   OBJ_MODE__LEAK_CHECK					  OPR_PMC  		LEAK_CHECK
+#FNC_MODE   OBJ_MODE__PURGE           			OPR_PMC  		PURGE
+#FNC_MODE   OBJ_MODE__PICK_READY						OPR_PMC  		PICK_READY
+#FNC_MODE   OBJ_MODE__XPICK_READY					  OPR_PMC  		PICK_X_READY
+#FNC_MODE   OBJ_MODE__PICK_COMPLETE				  OPR_PMC  		PICK_COMPLETE
+#FNC_MODE   OBJ_MODE__XPICK_COMPLETE			  OPR_PMC  		PICK_X_COMPLETE
+#FNC_MODE   OBJ_MODE__PLACE_READY					  OPR_PMC  		PLACE_READY
+#FNC_MODE   OBJ_MODE__XPLACE_READY				  OPR_PMC  		PLACE_X_READY
+#FNC_MODE   OBJ_MODE__PLACE_COMPLETE			  OPR_PMC  		PLACE_COMPLETE
+#FNC_MODE   OBJ_MODE__XPLACE_COMPLETE			  OPR_PMC  		PLACE_X_COMPLETE
+#FNC_MODE   OBJ_MODE__PRO_READY						  OPR_PMC  		PRO_READY
+#FNC_MODE   OBJ_MODE__PRO_START						  OPR_PMC  		PRO_START
+#FNC_MODE   OBJ_MODE__CLN_READY						  OPR_PMC  		CLN_READY
+#FNC_MODE   OBJ_MODE__CLN_START						  OPR_PMC  		PRO_START
+#FNC_MODE   OBJ_MODE__MNT_READY						  OPR_PMC  		MNT_READY
+#FNC_MODE   OBJ_MODE__MNT_START						  OPR_PMC  		PRO_START
+#FNC_MODE   OBJ_MODE__JOB_START_READY			  OPR_PMC  		JOB_START_READY
+#FNC_MODE   OBJ_MODE__JOB_END_READY				  OPR_PMC  		JOB_END_READY
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  INF_ACTIVE_HANDOFF
+
+#DEFINE_CONSTANT	  OBJ__LIFT_PIN			   		PHY_LIFT
+#DEFINE_CONSTANT	  OBJ__WAP			          PHY_WAP_CONTROL
+#DEFINE_CONSTANT	  PHY_IO_MOTION_OBJ		    PHY_IO__MOTION
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    OPR_PMC
+
+#DEFINE_CONSTANT    OBJ__DB_SYS							      DB_SYS
+#DEFINE_CONSTANT    OBJ__DB_INF							      DB_INF
+
+#FNC_MODE   OBJ_MODE__INIT							   FNC_SYSTEM		SYSTEM_INIT
+#FNC_MODE   OBJ_MODE__MAINT							   FNC_SYSTEM		SYSTEM_MAINT
+#FNC_MODE   OBJ_MODE__TRANSFER_INIT			   FNC_SYSTEM		TRANSFER_INIT
+
+#FNC_MODE   OBJ_MODE__PUMP							   FNC_CHM			HIGH_VAC_PUMP
+#FNC_MODE   OBJ_MODE__VENT							   FNC_CHM			VENTING
+#FNC_MODE   OBJ_MODE__LEAK_CHECK				   FNC_CHM			LEAK_CHECK
+#FNC_MODE   OBJ_MODE__PURGE							   FNC_CHM			PURGE
+#FNC_MODE   OBJ_MODE__PICK_READY				   FNC_CHM			PICK_READY			
+#FNC_MODE   OBJ_MODE__PICK_X_READY			   FNC_CHM			PICK_X_READY
+#FNC_MODE   OBJ_MODE__PICK_COMPLETE			   FNC_CHM			PICK_COMPLETE
+#FNC_MODE   OBJ_MODE__PICK_X_COMPLETE		   FNC_CHM			PICK_X_COMPLETE
+#FNC_MODE   OBJ_MODE__PLACE_READY				   FNC_CHM			PLACE_READY
+#FNC_MODE   OBJ_MODE__PLACE_X_READY			   FNC_CHM			PLACE_X_READY
+#FNC_MODE   OBJ_MODE__PLACE_COMPLETE		   FNC_CHM			PLACE_COMPLETE
+#FNC_MODE   OBJ_MODE__PLACE_X_COMPLETE	   FNC_CHM			PLACE_X_COMPLETE
+
+#FNC_MODE   OBJ_MODE__PRO_READY					   FNC_PROC			PROC_READY
+#FNC_MODE   OBJ_MODE__PRO_START					   FNC_PROC			PROC_START
+#FNC_MODE   OBJ_MODE__CLN_READY					   FNC_PROC			CLN_READY
+#FNC_MODE   OBJ_MODE__CLN_START					   FNC_PROC			CLN_START
+#FNC_MODE   OBJ_MODE__MNT_READY					   FNC_PROC			MNT_READY
+#FNC_MODE   OBJ_MODE__MNT_START					   FNC_PROC			MNT_START
+#FNC_MODE   OBJ_MODE__JOB_START_READY		   FNC_PROC			JOB_START_READY
+#FNC_MODE   OBJ_MODE__JOB_END_READY			   FNC_PROC			JOB_END_READY
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY		MNT_PROCESS
+
+#DEFINE_CONSTANT    OBJ__DB_SYS						        DB_SYS
+
+#DEFINE_CONSTANT	  CH__SYSTEM_LOCK         	    DB_SYS+SYSTEM.LOCK
+#DEFINE_CONSTANT	  CH__RCP_NAME            	    DB_INF+SLOT01.RECIPE
+
+#DEFINE_CONSTANT	  OBJ__PROC               		  FNC_PROC
+#DEFINE_CONSTANT    OBJ__CHM                		  FNC_CHM
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	 	Mng_AUTO_PM
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	            DB_ETCHER+SYS.FNC.NAME
+                                            
+#DEFINE_CONSTANT   	OBJ.CHM_CTRL                  PAGE_CHM     
+#DEFINE_CONSTANT   	OBJ.LEAK_CHECK                PAGE_CHM
+#DEFINE_CONSTANT   	OBJ.WAP_CHECK                 Mng_WAP_CONDUCTANCE
+#DEFINE_CONSTANT   	OBJ.MFC_CHECK                 Mng_MFC_FLOW
+                                            
+#DEFINE_CONSTANT   	OBJ.VAT_CHECK                 Mng_VAT_CONDUCTANCE
+#DEFINE_CONSTANT   	OBJ.ORIFICE_CHECK             Mng_DGF_CHECK           
+#DEFINE_CONSTANT   	OBJ.RF_CHECK                  Mng_RF_CHECK
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	 	Mng_MFC_FLOW
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+#DEFINE_CONSTANT		OBJ.DB_ETCHER                 DB_ETCHER
+                                             
+#DEFINE_CONSTANT		OBJ.CHM_CTRL                  FNC_CHM
+#DEFINE_CONSTANT   	OBJ.VAT_CTRL                  PHY_APC_VLV
+#DEFINE_CONSTANT		OBJ.FNC_MFC		 		            FNC_GAS_VLV_CTRL
+#DEFINE_CONSTANT    OBJ.DGF_CTRL				          PHY_DGF
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                  17
+#DEFINE_CONSTANT		OBJ.MFC1                      PHY_MFC1
+#DEFINE_CONSTANT		OBJ.MFC2                      PHY_MFC2
+#DEFINE_CONSTANT		OBJ.MFC3                      PHY_MFC3
+#DEFINE_CONSTANT		OBJ.MFC4                      PHY_MFC4
+#DEFINE_CONSTANT		OBJ.MFC5                      PHY_MFC5
+#DEFINE_CONSTANT		OBJ.MFC6                      PHY_MFC6
+#DEFINE_CONSTANT		OBJ.MFC7                      PHY_MFC7
+#DEFINE_CONSTANT		OBJ.MFC8                      PHY_MFC8
+#DEFINE_CONSTANT		OBJ.MFC9                      PHY_MFC9
+#DEFINE_CONSTANT		OBJ.MFC10                     PHY_MFC10
+#DEFINE_CONSTANT		OBJ.MFC11                     PHY_MFC11
+#DEFINE_CONSTANT		OBJ.MFC12                     PHY_MFC12
+#DEFINE_CONSTANT		OBJ.MFC13                     PHY_MFC13
+#DEFINE_CONSTANT		OBJ.MFC14                     PHY_MFC14
+#DEFINE_CONSTANT		OBJ.MFC15                     PHY_MFC15
+#DEFINE_CONSTANT		OBJ.MFC16                     PHY_MFC16
+#DEFINE_CONSTANT		OBJ.MFC17                     PHY_MFC17
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE.TORR  	      PHY_CHM_INFO+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE.mTORR         IO+ai.ChamPress.Manometer
+#DEFINE_CONSTANT   	CH.ISO_VLV		                IO+do.ProcessManometer.IsoValve
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	            DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	              DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	            DB_ETCHER+SYS.FNC.LOCK
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		Mng_VAT_CONDUCTANCE
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+
+#DEFINE_CONSTANT		OBJ.CHM_CTRL           	      FNC_CHM
+#DEFINE_CONSTANT   	OBJ.VAT_CTRL                  PHY_APC_VLV
+#DEFINE_CONSTANT  	OBJ.FNC_MFC		 		            FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE     	        PHY_CHM_INFO+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT   	CH.DGF_CENTER_WT_SP  	        PHY_DGF+CENTER.Wt.SETPOINT
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                  17
+#DEFINE_CONSTANT		OBJ.MFC1                      PHY_MFC1
+#DEFINE_CONSTANT		OBJ.MFC2                      PHY_MFC2
+#DEFINE_CONSTANT		OBJ.MFC3                      PHY_MFC3
+#DEFINE_CONSTANT		OBJ.MFC4                      PHY_MFC4
+#DEFINE_CONSTANT		OBJ.MFC5                      PHY_MFC5
+#DEFINE_CONSTANT		OBJ.MFC6                      PHY_MFC6
+#DEFINE_CONSTANT		OBJ.MFC7                      PHY_MFC7
+#DEFINE_CONSTANT		OBJ.MFC8                      PHY_MFC8
+#DEFINE_CONSTANT		OBJ.MFC9                      PHY_MFC9
+#DEFINE_CONSTANT		OBJ.MFC10                     PHY_MFC10
+#DEFINE_CONSTANT		OBJ.MFC11                     PHY_MFC11
+#DEFINE_CONSTANT		OBJ.MFC12                     PHY_MFC12
+#DEFINE_CONSTANT		OBJ.MFC13                     PHY_MFC13
+#DEFINE_CONSTANT		OBJ.MFC14                     PHY_MFC14
+#DEFINE_CONSTANT		OBJ.MFC15                     PHY_MFC15
+#DEFINE_CONSTANT		OBJ.MFC16                     PHY_MFC16
+#DEFINE_CONSTANT		OBJ.MFC17                     PHY_MFC17
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		Mng_VAT_UTILITY
+
+#DEFINE_CONSTANT    OBJ.DB_SYS							      DB_SYS
+
+#DEFINE_CONSTANT		OBJ.CHM_CTRL           	      FNC_CHM
+#DEFINE_CONSTANT   	OBJ.WAP_CTRL                  PHY_WAP_CONTROL
+#DEFINE_CONSTANT   	OBJ.VAT_CTRL                  PHY_APC_VLV
+#DEFINE_CONSTANT  	OBJ.FNC_MFC		 				        FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+//-------------------------------------------------
+#OBJECT_PROPERTY   	Mng_WAP_CONDUCTANCE
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+
+#DEFINE_CONSTANT		OBJ.CHM_CTRL				          FNC_CHM
+#DEFINE_CONSTANT   	OBJ.WAP_CTRL                  PHY_WAP_CONTROL
+#DEFINE_CONSTANT		OBJ.FNC_MFC		 		            FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE		            PHY_CHM_INFO+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT   	CH.DGF_CENTER_WT_SP  	        PHY_DGF+CENTER.Wt.SETPOINT
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                  17
+#DEFINE_CONSTANT		OBJ.MFC1                      PHY_MFC1
+#DEFINE_CONSTANT		OBJ.MFC2                      PHY_MFC2
+#DEFINE_CONSTANT		OBJ.MFC3                      PHY_MFC3
+#DEFINE_CONSTANT		OBJ.MFC4                      PHY_MFC4
+#DEFINE_CONSTANT		OBJ.MFC5                      PHY_MFC5
+#DEFINE_CONSTANT		OBJ.MFC6                      PHY_MFC6
+#DEFINE_CONSTANT		OBJ.MFC7                      PHY_MFC7
+#DEFINE_CONSTANT		OBJ.MFC8                      PHY_MFC8
+#DEFINE_CONSTANT		OBJ.MFC9                      PHY_MFC9
+#DEFINE_CONSTANT		OBJ.MFC10                     PHY_MFC10
+#DEFINE_CONSTANT		OBJ.MFC11                     PHY_MFC11
+#DEFINE_CONSTANT		OBJ.MFC12                     PHY_MFC12
+#DEFINE_CONSTANT		OBJ.MFC13                     PHY_MFC13
+#DEFINE_CONSTANT		OBJ.MFC14                     PHY_MFC14
+#DEFINE_CONSTANT		OBJ.MFC15                     PHY_MFC15
+#DEFINE_CONSTANT		OBJ.MFC16                     PHY_MFC16
+#DEFINE_CONSTANT		OBJ.MFC17                     PHY_MFC17
+
+//-------------------------------------------------
+#OBJECT_PROPERTY   	Mng_RF_CHECK
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+
+#DEFINE_CONSTANT   	OBJ.RF2_CTRL                  PHY_RF2MHz
+#DEFINE_CONSTANT   	CH.RF2.GET_PWR   		          PHY_IO__RF_2MHz+FWD.POWER
+
+#DEFINE_CONSTANT   	OBJ.RF27_CTRL                 PHY_RF27MHz
+#DEFINE_CONSTANT   	CH.RF27.GET_PWR   	          PHY_IO__RF_27MHz+FWD.POWER
+
+#DEFINE_CONSTANT   	OBJ.RF60_CTRL                 PHY_RF60MHz
+#DEFINE_CONSTANT   	CH.RF60.GET_PWR   	          PHY_IO__RF_60MHz+FWD.POWER
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 	          DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 	          DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT	  CH.VAC_IO_SENSOR		          IO+di.Vacuum.Switch.Sts
+
+//-------------------------------------------------
+#OBJECT_PROPERTY   	Mng_DGF_CHECK
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+
+#DEFINE_CONSTANT  	OBJ.CHM_CTRL           	      FNC_CHM
+#DEFINE_CONSTANT  	OBJ.FNC_MFC		      	        FNC_GAS_VLV_CTRL
+#DEFINE_CONSTANT    OBJ.DGF_CTRL           	      PHY_DGF
+
+#DEFINE_CONSTANT   	CH.PRESSURE            	      IO+ai.DGF.Manometer
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY		FNC_SYSTEM
+
+#DEFINE_CONSTANT    OBJ__DB_SYS						        DB_SYS
+
+#DEFINE_CONSTANT		MAX_OBJECT				            12
+
+#DEFINE_CONSTANT		INDEX_NAME01			            APC
+#DEFINE_CONSTANT		OBJECT_NAME01			            PHY_APC_VLV
+
+#DEFINE_CONSTANT		INDEX_NAME02			            WAP
+#DEFINE_CONSTANT		OBJECT_NAME02			            PHY_WAP_CONTROL
+
+#DEFINE_CONSTANT		INDEX_NAME03			            TEMP
+#DEFINE_CONSTANT		OBJECT_NAME03			            PHY_HEATER
+
+#DEFINE_CONSTANT		INDEX_NAME04			            ESC
+#DEFINE_CONSTANT		OBJECT_NAME04			            PHY_ESC
+
+#DEFINE_CONSTANT		INDEX_NAME05			            RF_2MHz
+#DEFINE_CONSTANT		OBJECT_NAME05			            PHY_RF2MHz
+
+#DEFINE_CONSTANT		INDEX_NAME06			            RF_27MHz
+#DEFINE_CONSTANT		OBJECT_NAME06			            PHY_RF27MHz
+
+#DEFINE_CONSTANT		INDEX_NAME07			            RF_60MHz
+#DEFINE_CONSTANT		OBJECT_NAME07			            PHY_RF60MHz
+
+#DEFINE_CONSTANT		INDEX_NAME08			            MATCHER
+#DEFINE_CONSTANT		OBJECT_NAME08			            PHY_MATCH
+
+#DEFINE_CONSTANT		INDEX_NAME09			            LIFT_PIN
+#DEFINE_CONSTANT		OBJECT_NAME09			            PHY_LIFT
+
+#DEFINE_CONSTANT		INDEX_NAME10			            ACTIVE_HANDOFF
+#DEFINE_CONSTANT		OBJECT_NAME10			            INF_ACTIVE_HANDOFF
+
+#DEFINE_CONSTANT		INDEX_NAME11			            EPD
+#DEFINE_CONSTANT		OBJECT_NAME11			            PHY_EPD
+
+#DEFINE_CONSTANT		INDEX_NAME12			            He_DECHUCK
+#DEFINE_CONSTANT		OBJECT_NAME12			            FNC_STEP
+
+#DEFINE_CONSTANT		OBJ__LIFT_PIN			            PHY_LIFT
+#DEFINE_CONSTANT		OBJ__WAP_CONTROL		          PHY_WAP_CONTROL
+#DEFINE_CONSTANT		OBJ__ACT_HANDOFF		          INF_ACTIVE_HANDOFF
+#DEFINE_CONSTANT		OB__ESC			   	              PHY_ESC
+
+//-------------------------------------------------
+#OBJECT_PROPERTY   	FNC_TRANSFER
+
+#DEFINE_CONSTANT	  TRANSFER_VALVE_OBJ		        PHY_TRANSFER_VLV
+
+#DEFINE_CONSTANT	  IO__OBJ				                IO
+#DEFINE_CONSTANT	  VAR_ESC_POWER_STS			        do.ESCPower.On
+#DEFINE_CONSTANT	  VAR_RF60MHz_POWER_STS			    di.60MHz.RF.On.Sts
+
+#DEFINE_CONSTANT	  RF_2MHZ__OBJ			            PHY_IO__RF_2MHz
+#DEFINE_CONSTANT	  VAR_RF2MHz_POWER_STS			    RF.ON.STAUTS
+
+#DEFINE_CONSTANT	  RF_27MHZ__OBJ			            PHY_IO__RF_27MHz
+#DEFINE_CONSTANT	  VAR_RF27MHz_POWER_STS			    RF.ON.STAUTS
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY   	FNC_PROC
+
+#DEFINE_CONSTANT   	DB__SYS                 	    DB_SYS
+#DEFINE_CONSTANT   	DB__INF                 	    DB_INF
+
+#FNC_MODE          	MODE__LOG_ENABLE        		  FNC_PM_DATALOG    ENABLE
+#FNC_MODE          	MODE__LOG_DISABLE       		  FNC_PM_DATALOG    DISABLE
+#FNC_MODE          	MODE__LOG_PAUSE        			  FNC_PM_DATALOG    PAUSE
+#FNC_MODE          	MODE__LOG_RESUME	       		  FNC_PM_DATALOG    RESUME
+#FNC_MODE          	MODE__LOG_STEP_START    		  FNC_PM_DATALOG    STEP_START
+#FNC_MODE          	MODE__LOG_STEP_END      		  FNC_PM_DATALOG    STEP_END
+#FNC_MODE          	MODE__LOG_STEP_ABORT    	    FNC_PM_DATALOG    STEP_ABORT
+
+#FNC_MODE          	MODE__STEP_READY        		  FNC_STEP   		    READY
+#FNC_MODE          	MODE__STEP_START        			FNC_STEP   		    START
+#FNC_MODE          	MODE__STEP_PROC         		  FNC_STEP   		    PROC
+#FNC_MODE          	MODE__STEP_ABORT        		  FNC_STEP   		    ABORT
+#FNC_MODE          	MODE__STEP_END          	   	FNC_STEP   		    END
+
+#DEFINE_CONSTANT   	CH__STEP_TIME			           	FNC_STEP+RCP.STEP.TIME
+#DEFINE_CONSTANT   	CH__STEP_EXCEPTION_COMMAND    FNC_STEP+EXCEPTION.COMMAND
+
+#DEFINE_CONSTANT   	CH__SLOT_TITLE			          DB_INF+SLOT01.TITLE
+#DEFINE_CONSTANT   	CH__SLOT_LOTID			          DB_INF+SLOT01.LOTID
+#DEFINE_CONSTANT	  VAR_SPEC_IB1			            PHY_IO__SPECTROMETER+SPEC.IB1.FILTERED.DATA
+#DEFINE_CONSTANT	  VAR_SPEC_IB2			            PHY_IO__SPECTROMETER+SPEC.IB2.FILTERED.DATA
+
+#DEFINE_CONSTANT    CH__SYS_CTRL_LOCK         		DB_ETCHER+SYS.CTRL.LOCK
+#DEFINE_CONSTANT    CH__SYS_FNC_LOCK         		  DB_ETCHER+SYS.FNC.LOCK
+#DEFINE_CONSTANT    CH__SYS_STATUS             		OPR_PMC+OBJ.STATUS
+#DEFINE_CONSTANT    CH__STEP_STABLE_REQ        		FNC_STEP+STEP.STABLE.REQ
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		FNC_STEP
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                   DB_SYS
+#DEFINE_CONSTANT   	OBJ__DB_INF                   DB_INF
+
+#DEFINE_CONSTANT		OBJ__FNC_PROC			            FNC_PROC
+#DEFINE_CONSTANT		OBJ__FNC_CHM			            FNC_CHM
+
+#DEFINE_CONSTANT		OBJ__APC			                PHY_APC_VLV
+#DEFINE_CONSTANT		OBJ__DGF			                PHY_DGF
+
+#DEFINE_CONSTANT		OBJ_MFC__SIZE		              17
+#DEFINE_CONSTANT		OBJ__MFC1			                PHY_MFC1
+#DEFINE_CONSTANT		OBJ__MFC2			                PHY_MFC2
+#DEFINE_CONSTANT		OBJ__MFC3			                PHY_MFC3
+#DEFINE_CONSTANT		OBJ__MFC4			                PHY_MFC4
+#DEFINE_CONSTANT		OBJ__MFC5			                PHY_MFC5
+#DEFINE_CONSTANT		OBJ__MFC6			                PHY_MFC6
+#DEFINE_CONSTANT		OBJ__MFC7			                PHY_MFC7
+#DEFINE_CONSTANT		OBJ__MFC8			                PHY_MFC8
+#DEFINE_CONSTANT		OBJ__MFC9			                PHY_MFC9
+#DEFINE_CONSTANT		OBJ__MFC10		                PHY_MFC10
+#DEFINE_CONSTANT		OBJ__MFC11			              PHY_MFC11
+#DEFINE_CONSTANT		OBJ__MFC12			              PHY_MFC12
+#DEFINE_CONSTANT		OBJ__MFC13			              PHY_MFC13
+#DEFINE_CONSTANT		OBJ__MFC14			              PHY_MFC14
+#DEFINE_CONSTANT		OBJ__MFC15			              PHY_MFC15
+#DEFINE_CONSTANT		OBJ__MFC16			              PHY_MFC16
+#DEFINE_CONSTANT		OBJ__MFC17			              PHY_MFC17
+
+#DEFINE_CONSTANT		OBJ__RF_GEN_2MHz		          PHY_RF2MHz
+#DEFINE_CONSTANT		OBJ__RF_GEN_27MHz		          PHY_RF27MHz
+#DEFINE_CONSTANT		OBJ__RF_GEN_60MHz		          PHY_RF60MHz
+
+#DEFINE_CONSTANT		OBJ__RF_MATCH			            PHY_MATCH
+#DEFINE_CONSTANT	  OBJ__RF_IO_MATCH   			      PHY_IO__MATCHER
+
+#DEFINE_CONSTANT		OBJ__ESC			                PHY_ESC
+#DEFINE_CONSTANT    OBJ__EPD			                PHY_EPD
+#DEFINE_CONSTANT		OBJ__WAP			                PHY_WAP_CONTROL
+#DEFINE_CONSTANT		OBJ__LIFT_PIN			            PHY_LIFT
+#DEFINE_CONSTANT		OBJ__OES			                PHY_IO__SPECTROMETER
+
+#DEFINE_CONSTANT		OBJ__HEATER			              PHY_HEATER
+#DEFINE_CONSTANT		OBJ__CHILLER			            PHY_IO__CHILLER
+#DEFINE_CONSTANT		OBJ__TCU			                PHY_TCU
+
+#DEFINE_CONSTANT		OBJ__RF_GEN_IO_2MHz		        PHY_IO__RF_2MHz
+#DEFINE_CONSTANT		OBJ__RF_GEN_IO_27MHz		      PHY_IO__RF_27MHz
+#DEFINE_CONSTANT		OBJ__RF_GEN_IO_60MHz		      PHY_IO__RF_60MHz
+
+#DEFINE_CONSTANT    OBJ__IO				                IO
+
+#DEFINE_CONSTANT		OBJ_IO__APC			              PHY_IO__APC_VLV
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		FNC_CHM
+
+#DEFINE_CONSTANT		OBJ__DB_SYS			                  DB_SYS
+
+#DEFINE_CONSTANT		OBJ__PMC_LOG                      FNC_PM_DATALOG
+
+#DEFINE_CONSTANT		OBJ__FNC_GAS_VLV		              FNC_GAS_VLV_CTRL
+#DEFINE_CONSTANT		OBJ__PHY_APC    		              PHY_APC_VLV
+#DEFINE_CONSTANT		OBJ__PHY_WAP  	                  PHY_WAP_CONTROL
+#DEFINE_CONSTANT		OBJ__CHM_INFO			                PHY_CHM_INFO
+#DEFINE_CONSTANT		OBJ__VAC_VALVE			              FNC_VAC_VLV_CTRL
+#DEFINE_CONSTANT		OBJ__GAS_VALVE  		              PHY_GAS_VLV
+#DEFINE_CONSTANT		OBJ__DRY_PUMP       		          PHY_DRY_PUMP
+#DEFINE_CONSTANT		OBJ__TURBO_PUMP			              PHY_TURBO_PUMP
+
+#DEFINE_CONSTANT   	OBJ__TRANSFER           	        FNC_TRANSFER
+#DEFINE_CONSTANT		OBJ__ESC			                    PHY_ESC
+#DEFINE_CONSTANT		OBJ__DGF_VLV    		              PHY_DGF
+#DEFINE_CONSTANT		OBJ__MFC_CAL_OBJ    		          Mng_MFC_FLOW
+#DEFINE_CONSTANT		OBJ__VAT_CONDUCTANCE_OBJ	        Mng_VAT_CONDUCTANCE
+#DEFINE_CONSTANT		OBJ__IO_HEATER                    PHY_IO__HEATER
+
+#DEFINE_CONSTANT    OBJ__IO				                    IO
+#DEFINE_CONSTANT		VAR__CM2S1_SNS			              di.Throttle.Valve.Intlk.Switch.Sts
+#DEFINE_CONSTANT		VAR__CM2S2_SNS			              di.TMPXover.Intlk.Switch.Sts
+#DEFINE_CONSTANT		VAR__CM3S1_SNS			              di.TMPExhaustValve.Intlk.Switch.Sts
+#DEFINE_CONSTANT		VAR__VACUUM_SNS			              di.Vacuum.Switch.Sts
+#DEFINE_CONSTANT		VAR__ATM_SNS				              di.ATM.Switch.Sts
+#DEFINE_CONSTANT		VAR__TMP_N2_VALVE			            do.TMPN2.Purge.Valve
+#DEFINE_CONSTANT		VAR__PROCESS_ISO_VALVE		        do.ProcessManometer.IsoValve
+#DEFINE_CONSTANT		VAR__RF_CONTACT			              do.RF.AC.Contactor
+#DEFINE_CONSTANT		VAR__RF_CONTACT_STS			          di.RF.AC.Contactor
+#DEFINE_CONSTANT		VAR__PM_SIDE_SLIT_VLV_STS		      di.SlotValve.Closed.Sts
+#DEFINE_CONSTANT		VAR__TM_SIDE_SLIT_VLV_STS		      di.SlotValve.Sts
+#DEFINE_CONSTANT		VAR__MAIN_WATER_LEAK_DETECT_SNS	  di.WaterLeak.Detection.Sts
+
+#DEFINE_CONSTANT		CH__SYSTEM_TRANSFER_MODE     	    DB_INF+CFG.TRANSFER.MODE
+#DEFINE_CONSTANT		CH__PMC_SLIT_VLV_STS	     	      DB_INF+SLIT.VLV.STS
+
+#DEFINE_CONSTANT  	CH__CHM_MANOMETER_SW1_SETTING     DB_SYS+CFG.aCHM.MANOMETER.PRESS.SW1.SETTING
+#DEFINE_CONSTANT  	CH__CHM_MANOMETER_SW2_SETTING     DB_SYS+CFG.aCHM.MANOMETER.PRESS.SW2.SETTING
+#DEFINE_CONSTANT  	CH__APC_VALVE_POSITION		        PHY_APC_VLV+OTR.IN.sPOSITION.VALUE
+
+#DEFINE_CONSTANT  	CH__RF2MHz_COMM_STS		            PHY_IO__RF_2MHz+di.Comm.Sts
+#DEFINE_CONSTANT  	CH__RF27MHz_COMM_STS		          PHY_IO__RF_27MHz+di.Comm.Sts
+#DEFINE_CONSTANT  	CH__RF60MHz_COMM_STS		          PHY_IO__RF_60MHz+di.Comm.Sts
+#DEFINE_CONSTANT  	CH__RF_MATCHER_COMM_STS		        PHY_IO__MATCHER+di.Comm.Sts
+
+#DEFINE_CONSTANT		CH__IO_DI_PUMP_ON_STS	            PHY_DRY_PUMP+PUMP.POWER.SNS
+
+#DEFINE_CONSTANT		CH__IO_RF_MATCH_2MHz_ALARM_STS		PHY_IO__MATCHER+2MHz.ALARM.STATUS
+#DEFINE_CONSTANT		CH__IO_RF_MATCH_27MHz_ALARM_STS		PHY_IO__MATCHER+27MHz.ALARM.STATUS
+#DEFINE_CONSTANT		CH__IO_RF_MATCH_60MHz_ALARM_STS		PHY_IO__MATCHER+60MHz.ALARM.STATUS
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    FNC_VAC_VLV_CTRL
+
+#DEFINE_CONSTANT	  OBJ__VAC_VLV        		      PHY_VAC_VLV
+#DEFINE_CONSTANT	  OBJ__APC_VLV			            PHY_APC_VLV
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT	  OBJ__GAS_VLV    	            PHY_GAS_VLV
+#DEFINE_CONSTANT	  OBJ__DGF_VLV    	            PHY_DGF
+#DEFINE_CONSTANT	  OBJ__WAP		                  PHY_WAP_CONTROL
+
+#DEFINE_CONSTANT	  OBJ_MFC__SIZE		              17
+#DEFINE_CONSTANT	  OBJ__MFC01		                PHY_MFC1
+#DEFINE_CONSTANT	  OBJ__MFC02		                PHY_MFC2
+#DEFINE_CONSTANT	  OBJ__MFC03		                PHY_MFC3
+#DEFINE_CONSTANT	  OBJ__MFC04		                PHY_MFC4
+#DEFINE_CONSTANT	  OBJ__MFC05		                PHY_MFC5
+#DEFINE_CONSTANT	  OBJ__MFC06		                PHY_MFC6
+#DEFINE_CONSTANT	  OBJ__MFC07		                PHY_MFC7
+#DEFINE_CONSTANT	  OBJ__MFC08		                PHY_MFC8
+#DEFINE_CONSTANT	  OBJ__MFC09		                PHY_MFC9
+#DEFINE_CONSTANT	  OBJ__MFC10		                PHY_MFC10
+#DEFINE_CONSTANT	  OBJ__MFC11		                PHY_MFC11
+#DEFINE_CONSTANT	  OBJ__MFC12		                PHY_MFC12
+#DEFINE_CONSTANT	  OBJ__MFC13		                PHY_MFC13
+#DEFINE_CONSTANT	  OBJ__MFC14		                PHY_MFC14
+#DEFINE_CONSTANT	  OBJ__MFC15		                PHY_MFC15
+#DEFINE_CONSTANT	  OBJ__MFC16		                PHY_MFC16
+#DEFINE_CONSTANT	  OBJ__MFC17		                PHY_MFC17
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_CHM_INFO
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+#DEFINE_CONSTANT	  IO_VAR_CM2S1_SWITCH			      di.Throttle.Valve.Intlk.Switch.Sts
+#DEFINE_CONSTANT	  IO_VAR_CM2S2_SWITCH			      di.TMPXover.Intlk.Switch.Sts
+#DEFINE_CONSTANT	  IO_VAR_CM3S1_SWITCH			      di.TMPExhaustValve.Intlk.Switch.Sts
+#DEFINE_CONSTANT	  IO_VAR_VACUUM_SWITCH			    di.Vacuum.Switch.Sts
+#DEFINE_CONSTANT	  IO_VAR_ATM_SWITCH			        di.ATM.Switch.Sts
+#DEFINE_CONSTANT	  IO_VAR_CHAM_MANOMETER			    ai.ChamPress.Manometer
+#DEFINE_CONSTANT	  IO_VAR_PROC_MANOMETER			    ai.Process.Manometer
+#DEFINE_CONSTANT	  IO_VAR_FORELINE_MANOMETER		  ai.ForelinePress.Manometer
+#DEFINE_CONSTANT	  IO_VAR_PROC_ISO_VALVE			    do.ProcessManometer.IsoValve
+#DEFINE_CONSTANT	  IO_VAR_SLOT_VALVE			        di.SlotValve.Closed.Sts
+
+#DEFINE_CONSTANT	  INF_OBJ				                DB_INF
+#DEFINE_CONSTANT	  INF_VAR_SLOT_VALVE			      SLIT.VLV.STS
+
+//-------------------------------------------------
+#OBJECT_PROPERTY 	  PHY_TRANSFER_VLV
+
+#FNC_VARIABLE		    IO_VALVE			                IO		do.Wafer.Xfr.V8	
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_VAC_VLV
+
+#DEFINE_CONSTANT	  CH__FR_VLV_SET		            IO+do.Cham.Rough.Valve
+#DEFINE_CONSTANT	  CH__SR_VLV_SET		            IO+do.SoftRough.Valve
+#DEFINE_CONSTANT	  CH__EXHAUST_VLV_SET	          IO+do.TMPExhaust.Valve
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_GAS_VLV
+
+#DEFINE_CONSTANT	  CH__VLV_1		                  IO+do.Fwd.Purge.V1
+#DEFINE_CONSTANT	  CH__VLV_2		                  IO+do.Back.Pump.V2
+#DEFINE_CONSTANT	  CH__VLV_3		                  IO+do.Back.Pump.V3
+#DEFINE_CONSTANT	  CH__VLV_4		                  IO+do.Fwd.Pump.V4
+#DEFINE_CONSTANT	  CH__VLV_8		                  IO+do.Wafer.Xfr.V8	
+#DEFINE_CONSTANT	  CH__VLV_9		                  IO+do.N2Purge.V9
+#DEFINE_CONSTANT	  CH__VLV_173		                IO+do.Mixing.Mnfld.V173
+#DEFINE_CONSTANT	  CH__VLV_174		                IO+do.Primary.Mnfld.V174
+#DEFINE_CONSTANT	  CH__VLV_523		                IO+do.Chamber.N2.Split1.V523
+#DEFINE_CONSTANT	  CH__VLV_524		                IO+do.Chamber.N2.Split2.V524
+#DEFINE_CONSTANT	  CH__VLV_525		                IO+do.TunningGas.Center.V525
+#DEFINE_CONSTANT	  CH__VLV_526		                IO+do.TunningGas.Edge.V526
+#DEFINE_CONSTANT	  CH__VLV_551		                IO+do.GasLineShutoff.Valve
+#DEFINE_CONSTANT	  CH__VLV_552		                IO+do.GasLineShutoff.Valve
+#DEFINE_CONSTANT	  CH__VLV_5		                  IO+do.Chamer.Delivery.V5
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_HEATER
+
+#DEFINE_CONSTANT	  PHY_IO_HEATER_OBJ			        PHY_IO__HEATER
+#DEFINE_CONSTANT	  PHY_RF2MHz_OBJ				        PHY_IO__RF_2MHz
+#DEFINE_CONSTANT	  PHY_RF27MHz_OBJ				        PHY_IO__RF_27MHz
+#DEFINE_CONSTANT	  PHY_RF60MHz_OBJ				        PHY_IO__RF_60MHz
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_RF2MHz
+
+#DEFINE_CONSTANT	  PHY_IO_RF_OBJ				          PHY_IO__RF_2MHz
+#DEFINE_CONSTANT	  PHY_RF_NAME				            RF2MHz
+#DEFINE_CONSTANT	  IO_OBJ					              IO
+#DEFINE_CONSTANT	  DB_INF				 	              DB_INF
+#DEFINE_CONSTANT	  OBJ__OES				              PHY_IO__SPECTROMETER
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_RF27MHz
+
+#DEFINE_CONSTANT	  PHY_IO_RF_OBJ				          PHY_IO__RF_27MHz
+#DEFINE_CONSTANT	  PHY_RF_NAME				            RF27MHz
+#DEFINE_CONSTANT	  IO_OBJ					              IO
+#DEFINE_CONSTANT	  DB_INF					              DB_INF
+#DEFINE_CONSTANT	  OBJ__OES				              PHY_IO__SPECTROMETER
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_RF60MHz
+
+#DEFINE_CONSTANT	  PHY_IO_RF_OBJ				          PHY_IO__RF_60MHz
+#DEFINE_CONSTANT	  PHY_RF_NAME				            RF60MHz
+#DEFINE_CONSTANT	  IO_OBJ					              IO
+#DEFINE_CONSTANT	  DB_INF					              DB_INF
+#DEFINE_CONSTANT	  OBJ__OES				              PHY_IO__SPECTROMETER
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MATCH
+#DEFINE_CONSTANT	  PHY_IO_MATCH_OBJ			        PHY_IO__MATCHER
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_DGF
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+#DEFINE_CONSTANT	  VAR_DGF_ORIFICE01			        do.DGF1.Branch1.V531
+#DEFINE_CONSTANT	  VAR_DGF_ORIFICE02			        do.DGF2.Branch1.V532
+#DEFINE_CONSTANT	  VAR_DGF_ORIFICE03			        do.DGF3.Branch1.V533
+#DEFINE_CONSTANT	  VAR_DGF_ORIFICE04			        do.DGF4.Branch1.V534
+#DEFINE_CONSTANT	  VAR_DGF_ORIFICE05			        do.DGF5.Branch1.V535
+#DEFINE_CONSTANT	  VAR_DGF_ORIFICE06			        do.DGF6.Branch2.V536
+
+#DEFINE_CONSTANT	  VAR_BRANCH1_CENTER			      do.DGF.Branch1.Split1.V511
+#DEFINE_CONSTANT	  VAR_BRANCH1_EDGE			        do.DGF.Branch1.Split2.V521
+#DEFINE_CONSTANT	  VAR_BRANCH2_CENTER			      do.DGF.Branch2.Split1.V522
+#DEFINE_CONSTANT	  VAR_BRANCH2_EDGE			        do.DGF.Branch2.Split2.V512
+#DEFINE_CONSTANT	  VAR_CHAMBER_CENTER			      do.GasLineShutoff.Valve
+#DEFINE_CONSTANT	  VAR_CHAMBER_EDGE			        do.GasLineShutoff.Valve
+
+#DEFINE_CONSTANT	  CH__VLV_2				              IO+do.Back.Pump.V2
+#DEFINE_CONSTANT	  CH__VLV_4				              IO+do.Fwd.Pump.V4
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_APC_VLV
+
+#DEFINE_CONSTANT    APC_VALVE_NAME      			    PHY_IO__APC_VLV 
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_WAP_CONTROL
+
+#DEFINE_CONSTANT	  VAR_REPORT_CR_POS_STATUS      DB_INF+CR.POS.STATUS
+
+#DEFINE_CONSTANT	  PHY_IO_MOTION_OBJ			        PHY_IO__MOTION
+#DEFINE_CONSTANT	  VAR_NEGLIMIT_SENSOR				    di.NEG.Limit.Sensor
+#DEFINE_CONSTANT	  IO_OBJ					              IO
+#DEFINE_CONSTANT	  VAR_PROCESS_MANOMETER			    ai.Process.Manometer
+#DEFINE_CONSTANT	  VAR_CHAMBER_MANOMETER			    ai.ChamPress.Manometer
+#DEFINE_CONSTANT	  VAR_PROCESS_ISO_VALVE			    do.ProcessManometer.IsoValve
+#DEFINE_CONSTANT	  VAR_CHAMBER_SLOT_VALVE		    di.SlotValve.Closed.Sts
+#DEFINE_CONSTANT	  VAR_CHAMBER_CLOSED_SWITCH	    di.Cham.Closed.Switch.Sts
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_LIFT
+
+#DEFINE_CONSTANT	  VAR_REPORT_LIFT_PIN_STATUS    DB_INF+LIFT_PIN.STATUS
+
+#DEFINE_CONSTANT	  VAR_CHUCK_STATUS		          PHY_ESC+CHUCK.STATUS
+#DEFINE_CONSTANT	  VAR_ESC_VOLTAGE			          PHY_IO_ESC+CUR.TOTAL.VOLT
+
+#DEFINE_CONSTANT	  VAR_LIFTER_UP			            IO+do.WaferLifter.Up
+#DEFINE_CONSTANT	  VAR_LIFTER_UP_SNS		          IO+di.WaferLifterUp.Sns
+
+#DEFINE_CONSTANT	  VAR_LIFTER_DOWN			          IO+do.WaferLifter.Down
+#DEFINE_CONSTANT	  VAR_LIFTER_DOWN_SNS		        IO+di.WaferLifterDown.Sns
+
+#DEFINE_CONSTANT	  VAR_LIFTER_MIDDLE_DOWN		    IO+do.Pin.Middle.Down
+#DEFINE_CONSTANT	  VAR_LIFTER_MIDDLE_UP		      IO+do.Pin.Middle.Up
+#DEFINE_CONSTANT	  VAR_LIFTER_MIDDLE_SNS		      IO+di.Pin.Middle.Pos.Sns
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_ESC
+
+#DEFINE_CONSTANT  	DB_CFG      			            DB_CFG
+#DEFINE_CONSTANT  	OBJ__ESC			                PHY_IO_ESC
+#DEFINE_CONSTANT  	OBJ__INNER			              PHY_IO_UPC_INNER
+#DEFINE_CONSTANT  	OBJ__OUTER			              PHY_IO_UPC_OUTER
+#DEFINE_CONSTANT	  CH__WAFER_STATUS		          DB_INF+SLOT01.STATUS
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO_ESC
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO_UPC_INNER
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+#DEFINE_CONSTANT	  VAR_HE_PRESS_SETPOINT			    ao.HePress.Setpoint.Inner
+#DEFINE_CONSTANT	  VAR_HE_BACK_PRESS			        ai.HeBack.Press.Inner
+#DEFINE_CONSTANT	  VAR_HE_BACK_FLOW			        ai.HeBack.Flow.Inner
+#DEFINE_CONSTANT	  VAR_HE_SUPPLY_VALVE			      do.HeSupply.Valve
+#DEFINE_CONSTANT	  VAR_HE_ISO_VALVE			        do.HeIso.Valve.Inner
+#DEFINE_CONSTANT	  VAR_HE_BALLAST_VALVE			    do.HeBallast.Valve.Inner
+#DEFINE_CONSTANT	  VAR_HE_EVAC_VALVE			        do.HeZone.Evac.Valve.Inner
+#DEFINE_CONSTANT	  VAR_HE_FORELINE_VALVE			    do.HeForeline.Valve
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO_UPC_OUTER
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+#DEFINE_CONSTANT	  VAR_HE_PRESS_SETPOINT			    ao.HePress.Setpoint.Outer
+#DEFINE_CONSTANT	  VAR_HE_BACK_PRESS			        ai.HeBack.Press.Outer
+#DEFINE_CONSTANT	  VAR_HE_BACK_FLOW			        ai.HeBack.Flow.Outer
+#DEFINE_CONSTANT	  VAR_HE_SUPPLY_VALVE			      do.HeSupply.Valve
+#DEFINE_CONSTANT	  VAR_HE_ISO_VALVE			        do.HeIso.Valve.Outer
+#DEFINE_CONSTANT	  VAR_HE_BALLAST_VALVE			    do.HeBallast.Valve.Outer
+#DEFINE_CONSTANT	  VAR_HE_EVAC_VALVE			        do.HeZone.Evac.Valve.Outer
+#DEFINE_CONSTANT	  VAR_HE_FORELINE_VALVE			    do.HeForeline.Valve
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_EPD
+
+#DEFINE_CONSTANT		OBJ__OES						          PHY_IO__SPECTROMETER
+#DEFINE_CONSTANT		VAR__EPD_SIGNAL		            EPD.SIGNAL
+#DEFINE_CONSTANT		VAR_SPEC_IB1				          SPEC.IB1.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB2				          SPEC.IB2.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB3				          SPEC.IB3.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB4				          SPEC.IB4.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB5				          SPEC.IB5.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB6			 	          SPEC.IB6.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB7				          SPEC.IB7.FILTERED.DATA
+#DEFINE_CONSTANT		VAR_SPEC_IB8				          SPEC.IB8.FILTERED.DATA
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_TCU
+
+#DEFINE_CONSTANT	  IO_OBJ				                IO
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_TURBO_PUMP
+
+#DEFINE_CONSTANT	  VAR__IO_DI_TMPEXHAUST_VALVE_INTLK_SW_STS	IO+di.TMPExhaustValve.Intlk.Switch.Sts	
+#DEFINE_CONSTANT	  VAR__PHY_IO_DI_PUMP_ON_STS			          PHY_DRY_PUMP+PUMP.POWER.SNS								
+#DEFINE_CONSTANT	  IO_TURBO_PUMP_OBJ				                  PHY_IO__TMP
+#DEFINE_CONSTANT	  VAR__IO_DO_PUMP_RUN_STOP	                PHY_IO__TMP+do.RUN.STOP
+#DEFINE_CONSTANT	  VAR_PUMP_ON_STATUS				                di.PUMP.STS
+#DEFINE_CONSTANT	  VAR_PUMP_STATUS						                di.RUN.STS
+#DEFINE_CONSTANT	  VAR_PUMP_SPEED						                ai.SPEED.STS
+#DEFINE_CONSTANT	  OBJ__IO						                        IO
+#DEFINE_CONSTANT	  EXHAUST_VALVE						                  do.TMPExhaust.Valve
+#DEFINE_CONSTANT	  TMP_N2_VALVE						                  do.TMPN2.Purge.Valve
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_DRY_PUMP
+
+#DEFINE_CONSTANT	  PUMP_IO_OBJ			              PHY_IO__DRY_PMP	
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC1
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC01.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC01.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC01.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC01.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC01.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC01.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC01.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC01.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC01.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC01.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS1.Primary.V10					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS1.Secondary.V12					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS1.Purge.V11					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans01
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC2
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC02.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC02.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC02.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC02.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC02.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC02.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC02.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC02.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC02.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC02.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS2.Primary.V20					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS2.Secondary.V22					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS2.Purge.V21					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans02
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC3
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC03.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC03.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC03.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC03.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC03.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC03.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC03.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC03.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC03.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC03.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS3.Primary.V30					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS3.Secondary.V32					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS3.Purge.V31					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans03
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC4
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC04.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC04.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC04.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC04.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC04.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC04.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC04.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC04.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC04.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC04.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS4.Primary.V40					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS4.Secondary.V42					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS4.Purge.V41					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans04
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC5
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC05.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC05.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC05.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC05.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC05.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC05.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC05.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC05.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC05.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC05.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS5.Primary.V50					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS5.Secondary.V52					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS5.Purge.V51					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans05
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC6
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC06.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC06.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC06.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC06.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC06.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC06.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC06.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC06.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC06.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC06.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS6.Primary.V60					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS6.Secondary.V62					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS6.Purge.V61					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans06
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC7
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC07.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC07.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC07.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC07.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC07.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC07.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC07.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC07.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC07.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC07.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS7.Primary.V70					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS7.Secondary.V72					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS7.Purge.V71					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans07
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC8
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART01
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC08.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC08.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC08.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC08.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC08.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC08.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC08.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC08.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC08.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC08.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS8.Primary.V80					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS8.Secondary.V82					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS8.Purge.V81					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans08
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC9
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC09.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC09.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC09.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC09.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC09.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC09.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC09.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC09.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC09.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC09.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS9.Primary.V90					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS9.Secondary.V92					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS9.Purge.V91					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans09
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC10
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC10.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC10.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC10.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC10.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC10.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC10.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC10.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC10.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC10.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC10.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS10.Primary.V100					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS10.Secondary.V102					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS10.Purge.V101					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans10
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC11
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC11.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC11.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC11.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC11.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC11.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC11.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC11.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC11.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC11.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC11.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS11.Primary.V110					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS11.Secondary.V112					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS11.Purge.V111					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans11
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC12
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC12.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC12.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC12.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC12.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC12.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC12.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC12.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC12.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC12.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC12.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS12.Primary.V120					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS12.Secondary.V122					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS12.Purge.V121					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans12
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC13
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC13.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC13.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC13.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC13.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC13.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC13.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC13.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC13.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC13.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC13.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS13.Primary.V130					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS13.Secondary.V132					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS13.Purge.V131					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans13
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC14
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC14.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC14.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC14.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC14.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC14.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC14.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC14.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC14.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC14.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC14.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS14.Primary.V140					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS14.Secondary.V142					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS14.Purge.V141					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans14
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC15
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC15.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC15.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC15.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC15.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC15.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC15.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC15.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC15.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC15.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC15.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS15.Primary.V150					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS15.Secondary.V152					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS15.Purge.V151					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans15
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC16
+
+#DEFINE_CONSTANT	  OBJ__MFC				              PHY_IO__MFC_PART02
+#DEFINE_CONSTANT    VAR_MFC_FLOW					        ai.MFC16.FLOW
+#DEFINE_CONSTANT    VAR_MFC_SETPOINT				      ao.MFC16.SETPOINT
+#DEFINE_CONSTANT  	VAR_MFC_CUR_SETPOINT				  ai.MFC16.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				      do.MFC16.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			do.MFC16.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			do.MFC16.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			do.MFC16.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			do.MFC16.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				    di.MFC16.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				  di.MFC16.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					              IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				      do.GAS16.Primary.V160					
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				    do.GAS16.Secondary.V162					
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					      do.GAS16.Purge.V161					
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					      ai.Press.Trans16
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				  CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT  	VAR_SECONDARY_VLV_DELAY				CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_MFC17
+
+#DEFINE_CONSTANT	  OBJ__MFC				                   PHY_IO__MFC_PART02
+#DEFINE_CONSTANT	  VAR_MFC_FLOW					             ai.MFC17.FLOW
+#DEFINE_CONSTANT	  VAR_MFC_SETPOINT				           ao.MFC17.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_CUR_SETPOINT				       ai.MFC17.SETPOINT
+#DEFINE_CONSTANT	  VAR_MFC_INIT_CMD				           do.MFC17.INIT
+#DEFINE_CONSTANT	  VAR_MFC_SET_FREEZE_FOLLOW			     do.MFC17.FREEZE.FOLLOW
+#DEFINE_CONSTANT	  VAR_MFC_SET_OVERRIDE_MODE			     do.MFC17.OVERRIDE.MODE
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_CONTROL_CMD			     do.MFC17.VALVE.SET
+#DEFINE_CONSTANT	  VAR_MFC_SET_CONTROL_MODE			     do.MFC17.CTRL.MODE
+#DEFINE_CONSTANT	  VAR_MFC_COMM_STATUS				         di.MFC17.COMM.STS
+#DEFINE_CONSTANT	  VAR_MFC_VALVE_STATUS				       di.MFC17.VALVE.STS
+
+#DEFINE_CONSTANT	  OBJ__IO					                   IO
+#DEFINE_CONSTANT	  VAR_PRIMARY_VALVE				           do.GAS17.Primary.V170
+#DEFINE_CONSTANT	  VAR_SECONDARY_VALVE				         do.GAS17.Secondary.V172
+#DEFINE_CONSTANT	  VAR_PURGE_VALVE					           do.GAS17.Purge.V171
+#DEFINE_CONSTANT	  VAR_PRIMARY_TUNING_PURGE_VALVE		 do.Primary.Mnfld.V174
+#DEFINE_CONSTANT	  VAR_SECONDARY_TUNING_PURGE_VALVE	 do.Mixing.Mnfld.V173
+#DEFINE_CONSTANT	  VAR_CENTER_TUNING_VALVE				     do.TunningGas.Center.V525
+#DEFINE_CONSTANT	  VAR_EDGE_TUNING_VALVE				       do.TunningGas.Edge.V526
+#DEFINE_CONSTANT	  VAR_TRANSDUCER					           ai.Press.Trans17
+
+#DEFINE_CONSTANT   	OBJ__DB_SYS                 	     DB_SYS
+#DEFINE_CONSTANT	  VAR_PRIMARY_VLV_DELAY				       CFG.GAS.BOX.PRIMARY.VALVE.DELAY.TIME
+#DEFINE_CONSTANT	  VAR_SECONDARY_VLV_DELAY				     CFG.GAS.BOX.SECONDARY.VALVE.DELAY.TIME
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_2MHz
+
+#OBJECT_IO_PARA     COM_PORT                  1
+
+#DEFINE_CONSTANT	  IO_OBJ					          IO
+#DEFINE_CONSTANT	  VAR__RF_CONTACTOR				  di.RF.AC.Contactor
+#DEFINE_CONSTANT	  VAR__WATER_VALVE				  do.2MHz.RF.WaterValve
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_27MHz
+
+#OBJECT_IO_PARA     COM_PORT                  2
+
+#DEFINE_CONSTANT	  IO_OBJ					          IO
+#DEFINE_CONSTANT	  VAR__RF_CONTACTOR				  di.RF.AC.Contactor
+#DEFINE_CONSTANT	  VAR__WATER_VALVE				  do.27MHz.RF.WaterValve
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_60MHz
+
+#OBJECT_IO_PARA     COM_PORT                  3
+
+#DEFINE_CONSTANT	  IO_OBJ					          IO
+#DEFINE_CONSTANT	  VAR__RF_CONTACTOR				  di.RF.AC.Contactor
+#DEFINE_CONSTANT	  VAR__RF_ON_SENSOR				  di.60MHz.RF.On.Sts
+#DEFINE_CONSTANT	  VAR__RF_INTLK_SNS				  di.60MHz.RF.Interlock.Sts
+#DEFINE_CONSTANT	  VAR__RF_WATER_SNS				  di.60MHz.Water.On.Sts
+#DEFINE_CONSTANT	  VAR__RF_WATER_SET				  do.60MHz.RF.WaterValve
+#DEFINE_CONSTANT	  VAR__RF_OVERTEMP_SNS			di.60MHz.RF.OverTemp.Sts
+#DEFINE_CONSTANT    VAR__RF_LOAD_SET          do.60MHz.RF.Load.Set
+
+#DEFINE_CONSTANT	  PHY_RF_OBJ					      PHY_RF60MHz
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__MATCHER
+
+#OBJECT_IO_PARA     COM_PORT                  4
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__APC_VLV
+
+#OBJECT_IO_PARA     COM_PORT                  5
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__TMP
+
+#OBJECT_IO_PARA     COM_PORT                  6
+#OBJECT_IO_PARA     DEVICE_ID									0
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__DRY_PMP
+
+#OBJECT_IO_PARA     COM_PORT                  7
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__HEATER
+
+#OBJECT_IO_PARA     COM_PORT                  8
+
+#DEFINE_CONSTANT    CH.IO_CHM_CLOSE_SNS       IO+di.Cham.Closed.Switch.Sts
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__CHILLER
+
+#OBJECT_IO_PARA     COM_PORT                  9
+#OBJECT_IO_PARA     COMM_ADDRESSNO            0
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO__MFC_PART01        // MFC1~8		
+
+#OBJECT_IO_PARA     COM_PORT                  10
+
+#DEFINE_CONSTANT	  MFC_BOARD_NUMBER		      33
+#DEFINE_CONSTANT	  MFC_START_NUM			        1
+#DEFINE_CONSTANT	  MFC_MAX_NUM			          8
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO__MFC_PART02        // MFC9~17		
+
+#OBJECT_IO_PARA     COM_PORT                  11
+
+#DEFINE_CONSTANT	  MFC_BOARD_NUMBER		      41
+#DEFINE_CONSTANT	  MFC_START_NUM			        9
+#DEFINE_CONSTANT	  MFC_MAX_NUM			          17
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO
+
+#DEFINE_CONSTANT    CH__DO_DNET_HEARTBEAT               IO+do.PC.Alive.Toggle
+
+#OBJECT_IO_FILE     DNET_IO__PMC-FLEX.cfg  
+
+//----------------------
+#OBJECT_IO_PARA     NODE.SIZE                           0
+
+#OBJECT_IO_PARA     NODE.1.MACID                        1
+#OBJECT_IO_PARA     NODE.1.NAME                         NA9112
+#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.1.IN_BYTE                      24
+#OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     10
+

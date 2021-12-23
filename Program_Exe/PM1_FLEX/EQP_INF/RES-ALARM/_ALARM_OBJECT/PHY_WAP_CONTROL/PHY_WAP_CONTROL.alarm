@@ -1,0 +1,6 @@
+#ID=1	1	LIGHT	PHY_WAP_CONTROL :  - Process Manometer Isolation Valve is Close.
+#ID=2	2	LIGHT	PHY_WAP_CONTROL :  - WAP PID Control Timeout.
+#ID=3	3	LIGHT	PHY_WAP_CONTROL :  - Chamber Slot Valve is Open.
+#ID=4	4	LIGHT	PHY_WAP_CONTROL :  - Chamber TopLid is Open.
+#ID=5	5	LIGHT	PHY_WAP_CONTROL :  - Encoder's status is not "OK".
+#ID=6	6	LIGHT	PHY_WAP_CONTROL :  - Moving timeout !

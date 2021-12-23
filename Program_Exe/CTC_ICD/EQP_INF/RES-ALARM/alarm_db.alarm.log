@@ -1,0 +1,4654 @@
+//==================================================================================== 
+// Command Info ... 
+/* 
+#EQP0__ALARM_OFFSET   ??? 
+#EQP0__ALARM_RANGE   ??? 
+
+#INCLUDE   ??? 
+
+#DEFINE   ?[Name)  ?[Data) 
+
+#OBJECT   ?[Name)  ?[OffsetID)  ?[ToolID)  ?[UnitID)  
+... 
+
+#OBJECT_START   ?[Name) 
+#ALID   ??? 
+#LEVEL     // HEAVY(Default)  LIGHT  WARNING  
+#HOST_REPORT_DISABLE
+#HOST_REPORT_ENABLE     // Default 
+#TITLE   " ... " 
+#MESSAGE   " ... " 
+#OPTION1   " ... " 
+#OPTION2   " ... " 
+#OPTION3   " ... " 
+#ACTION
+{ 
+   " ... " 
+} 
+#OBJECT_END
+*/ 
+
+//==================================================================================== 
+// Define List ... 
+
+
+
+//==================================================================================== 
+// Object Define Info ... 
+
+"__EQP" Object not defined ! 
+"LINK_PM2_LOG" Object not defined ! 
+"LINK_PM3_LOG" Object not defined ! 
+"LINK_PM4_LOG" Object not defined ! 
+
+
+//==================================================================================== 
+// Alarm Info ... 
+//------------------------------------------------------------
+OBJECT_NAME : DB_CFG   (OffsetID:100) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   101 
+#LEVEL   HEAVY 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - Simulation mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   102 
+#LEVEL   WARNING 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - TMC-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   111 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM1-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   112 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM2-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   113 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM3-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   114 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM4-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   115 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM5-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   116 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM6-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   117 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM7-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   118 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM8-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   119 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM9-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   120 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_CFG - PM10-Dummy mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : DB_GUI   (OffsetID:200) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : OPR_TIMER   (OffsetID:300) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   311 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_TIMER - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : OPR_PART   (OffsetID:400) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   411 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_PART - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : OPR_CTC_MODE   (OffsetID:600) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   611 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   612 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : SYSTEM IN PROCESS"
+#MESSAGE 
+"Can't convert system status when job is running !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   613 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : SYSTEM IN MAINT MODE"
+#MESSAGE 
+"Can't run job in maint mode !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   614 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (100)"
+#MESSAGE 
+"Old type의 route recipe는 시용할 수 없습니다."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   615 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (101)"
+#MESSAGE 
+"Route recipe is different !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   616 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (102)"
+#MESSAGE 
+"Route recipe has no slot list !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   621 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (1)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   622 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (2)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   623 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (3)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   624 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (4)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   625 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (5)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   631 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (6)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   632 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (6)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   633 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (6)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   634 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (6)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   635 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (6)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   626 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (7)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   641 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (8)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   642 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (9)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   51 
+#EXTERNAL_ID   651 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (10)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   52 
+#EXTERNAL_ID   652 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (10)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   53 
+#EXTERNAL_ID   653 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : JOB START ERROR (11)"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   61 
+#EXTERNAL_ID   661 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : There is no dummy port !"
+#MESSAGE 
+"Please, check dummy port on config page.
+To run dummy clean recipe, dummy port must exist.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   62 
+#EXTERNAL_ID   662 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : There is no dummy empty slot !"
+#MESSAGE 
+"Please, check material in dummy port.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   63 
+#EXTERNAL_ID   663 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Any job at dummy port can not be executed !"
+#MESSAGE 
+"Please, check configuration about LPx.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   64 
+#EXTERNAL_ID   664 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : All job were ended by user !"
+#MESSAGE 
+"All job were ended by user.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   65 
+#EXTERNAL_ID   665 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : New job can not use buffer. !"
+#MESSAGE 
+"Please, check buffer paramter in config page. 
+At least, one buffer's use status must be "ENABLE". 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   66 
+#EXTERNAL_ID   666 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Manual Job Start Error !"
+#MESSAGE 
+"Please, check manual job start's parameter. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   67 
+#EXTERNAL_ID   667 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Manual Job Start Error !"
+#MESSAGE 
+"Please, check cycle job start's parameter. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   71 
+#EXTERNAL_ID   671 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Job Start Error - There is no PMC with "NORMAL" process type. "
+#MESSAGE 
+"Please, check the process type of LPx or PMx. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   72 
+#EXTERNAL_ID   672 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Job Start Error - There is no PMC with "TEST" process type. "
+#MESSAGE 
+"Please, check the process type of LPx or PMx. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   73 
+#EXTERNAL_ID   673 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Job Start Error - Scheduler deadlock occurred !"
+#MESSAGE 
+"Job 수행중 Scheduler에서 Deadlock이 발생하여 
+ 설비 전체가 멈춘 것으로 판단됩니다. 
+설비 상태를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   81 
+#EXTERNAL_ID   681 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Dummy Port Count Warning !"
+#MESSAGE 
+"Dummy Port 의 평균 사용 횟수가 최대 사용 횟수에 근접했습니다.! 
+확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   82 
+#EXTERNAL_ID   682 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Resync Edit Enable !"
+#MESSAGE 
+"Resync Edit Mode가 ENABLE로 전환되었습니다."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   83 
+#EXTERNAL_ID   683 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Resync Edit Disable !"
+#MESSAGE 
+"Resync Edit Mode가 DISABLE로 전환되었습니다."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   84 
+#EXTERNAL_ID   684 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Resync Edit Wafer 중복 !"
+#MESSAGE 
+"Resync Edit시 Wafer 정보가 중복되는 문제가 발생했습니다. 
+중보된 Wafer를 확인 바랍니다."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   85 
+#EXTERNAL_ID   685 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_CTC_MODE : Resync Edit : UI & Scheduler 정보 불일치 !"
+#MESSAGE 
+"Resync Edit시 UI 정보와 Scheduler 정보가 일치하지 않습니다. 
+UI 정보를 확인 바랍니다.
+만약 "ABORT"를 선택하면, JOB이 Abort 됩니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+     Abort   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : OPR_MAINT   (OffsetID:700) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   711 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_MAINT [CObj_Opr__MAINT_MODE] : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_SIGNAL_TOWER   (OffsetID:800) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   811 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_SIGNAL_TOWER [CObj_Mng__SIGNAL_TOWER_EX] : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_ALARM_CTRL   (OffsetID:900) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   911 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_ALARM_CTRL - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_SYSTEM_INFO   (OffsetID:1000) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_ATM_ROBOT   (OffsetID:1100) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   1111 
+#LEVEL   HEAVY 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - OBJECT UNKNOWN MODE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   1112 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"ATM-Robot status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   1113 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"AL1 status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   1115 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"LBA status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   1116 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"LBB status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   1117 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"Please, check LBA's atm pressure."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   1118 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"Please, check LBB's atm pressure."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   1119 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - JOB ERROR"
+#MESSAGE 
+"Please, check wafer title on the arm of atm robot.
+I recommend that you will abort all job.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   1121 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Module Move - Module Status Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   1122 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Tool Clear - Module Status Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   1125 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Wafer Moving Error !"
+#MESSAGE 
+"Wafer 위치를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     YES   ""
+     NO   ""
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   1126 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - GUI상의 Wafer 정보와 설비내의 실제 Wafer 정보가 일치하는지 확인바랍니다."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   1127 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Pick 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   28 
+#EXTERNAL_ID   1128 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Place 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   1131 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - LBx Configuration Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   1132 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - BUFFERx Configuration Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   1135 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - ATM-ROBOT - SWAP ERROR !"
+#MESSAGE 
+"Job will be aborted !
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   1136 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - ATM-Robot - Manual Move Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   1137 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - ATM-Robot - Tool Clear Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   1141 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - LLx Status is not available !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   43 
+#EXTERNAL_ID   1143 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - LPx Status is not available !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   44 
+#EXTERNAL_ID   1144 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - LPx material-pick error occurred in job running !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   45 
+#EXTERNAL_ID   1145 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - LPx material-place error occurred in job running !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   46 
+#EXTERNAL_ID   1146 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - LPx's mapping request is rejected !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   47 
+#EXTERNAL_ID   1147 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - AL's L/L target name error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   48 
+#EXTERNAL_ID   1148 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - ATM Robot's moving is paused by user."
+#MESSAGE 
+"Please, check the "ATM Robot - PAUSE" button on the operate page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   49 
+#EXTERNAL_ID   1149 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Maint Pick Error : ATM Robot Paused !"
+#MESSAGE 
+"Please, check "ATM Robot - PAUSE"'s button on CTC operate page. 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   50 
+#EXTERNAL_ID   1150 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_ATM_ROBOT - Maint Place Error : ATM Robot Paused !"
+#MESSAGE 
+"Please, check "ATM Robot - PAUSE"'s button on CTC operate page. 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_VAC_ROBOT   (OffsetID:1200) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   1211 
+#LEVEL   HEAVY 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   1212 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : JOB ERROR"
+#MESSAGE 
+"VAC-Robot status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   1213 
+#LEVEL   HEAVY 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : JOB ERROR"
+#MESSAGE 
+"TMC Chamber status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   1214 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : CLEAN ERROR"
+#MESSAGE 
+"There is no dummy port in system.Please, check config page or foup status.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   1215 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-Robot's A Arm : Config Error"
+#MESSAGE 
+"Please, check config ctc scheduler page's "vac-robot parameter". 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   1216 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-Robot's B Arm : Config Error"
+#MESSAGE 
+"Please, check config ctc scheduler page's "vac-robot parameter". 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   1217 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-Robot's any arm is not used : Config Error !"
+#MESSAGE 
+"Please, check config ctc scheduler page's "vac-robot parameter". 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   1218 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-Robot's PICK ARM CONFIG ERROR !"
+#MESSAGE 
+"Please, check config ctc scheduler page's "vac-robot parameter". 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   1221 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : JOB ERROR"
+#MESSAGE 
+"Please, check LLx's vacuum pressure."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   1223 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : JOB ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   1225 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Wafer Moving Error !"
+#MESSAGE 
+"Wafer 위치를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     YES   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   1226 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : GUI상의 Wafer 정보와 설비내의 실제 Wafer 정보가 일치하는지 확인바랍니다."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   1227 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Pick 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   28 
+#EXTERNAL_ID   1228 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Place 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   1231 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC_ROBOT STATUS ERROR"
+#MESSAGE 
+"VAC_ROBOT's status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   1232 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC_TMC STATUS ERROR"
+#MESSAGE 
+"VAC_TMC's status is not standby !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   1233 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : PMC STATUS ERROR"
+#MESSAGE 
+"PMC is not available !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   1234 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : LLx STATUS ERROR"
+#MESSAGE 
+"LLx is not available !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   1235 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-ROBOT - SWAP ERROR !"
+#MESSAGE 
+"Job will be aborted !
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   1237 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-Robot - Manual Move Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   38 
+#EXTERNAL_ID   1238 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC-Robot - Tool Clear Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   40 
+#EXTERNAL_ID   1240 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC_Robot - Not Used Arm Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   1241 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC_Robot - Not Used Arm Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   1242 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : PMx Status is not available !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   43 
+#EXTERNAL_ID   1243 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : LLx Status is not available !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   45 
+#EXTERNAL_ID   1245 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : VAC Robot's moving is paused by user."
+#MESSAGE 
+"Please, check the "VAC Robot - PAUSE" button on the operate page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   47 
+#EXTERNAL_ID   1247 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : JOB Error : Material and PMC's process type is not mismatched."
+#MESSAGE 
+"Please, check LPx's process type on config's page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   48 
+#EXTERNAL_ID   1248 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Maint Pick Error : Vacuum Robot Paused !"
+#MESSAGE 
+"Please, check "VAC Robot - PAUSE"'s button on CTC operate page. 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   49 
+#EXTERNAL_ID   1249 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Maint Place Error : Vacuum Robot Paused !"
+#MESSAGE 
+"Please, check "VAC Robot - PAUSE"'s button on CTC operate page. 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_TMC_SYS   (OffsetID:1300) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_PMC_SYS   (OffsetID:1400) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LP1   (OffsetID:2100) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   2101 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2102 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   2103 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   2104 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   2111 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   2121 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Access Mode Violation !"
+#MESSAGE 
+"LP1 : Access Mode Violation !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   2122 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Carrier Verification Failure !"
+#MESSAGE 
+"LP1 : Carrier Verification Failure !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   2123 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Slot Map Verification Failed !"
+#MESSAGE 
+"LP1 : Slot Map Verification Failed !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   2125 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Port Access Manual To Auto : Error"
+#MESSAGE 
+"LP1's port access mode can not be converted from manual to auto !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   2126 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Port Access Auto To Manual : Error"
+#MESSAGE 
+"LP1's port access mode can not be converted from auto to manual !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   2131 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - The status of LP1's job-end button is not "ON""
+#MESSAGE 
+"Can not execute the "JOB END" command.
+To run the command, the status of LP1 job-end button must be "ON".
+Please, check the status of LP1 job-end button !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   2132 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Unexpectedly, cassette disappeared."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     RETRY_CHECK   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   2133 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's status is out_of_service."
+#MESSAGE 
+"Can not execute any command.
+Currently, the status of LP1 is "OUT_OF_SERVICE".
+Please, convert LP's status to "FULL-AUTO" or "MANUAL".
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   2135 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - Currently, LP1 is in use. So, can't unload."
+#MESSAGE 
+"LP1 is in use. 
+Can not execute "unload" command.
+Please, wait until LP's status is not in use.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   2141 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's job is ended by user."
+#MESSAGE 
+"LP1's job is ended by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   44 
+#EXTERNAL_ID   2144 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's job is aborted by user."
+#MESSAGE 
+"LP1's job is aborted by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   2142 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's job is paused by user."
+#MESSAGE 
+"LP1's job is paused by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   43 
+#EXTERNAL_ID   2143 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's job is resumed by user."
+#MESSAGE 
+"LP1's job is resumed by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   51 
+#EXTERNAL_ID   2151 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's process type is converted to "Normal"."
+#MESSAGE 
+"LP1's process type is converted to "Normal"."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   52 
+#EXTERNAL_ID   2152 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP1 - LP1's process type is converted to "Test"."
+#MESSAGE 
+"LP1's process type is converted to "Test"."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LP2   (OffsetID:2200) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   2201 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2202 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   2203 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   2204 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   2211 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   2221 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Access Mode Violation !"
+#MESSAGE 
+"LP2 : Access Mode Violation !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   2222 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Carrier Verification Failure !"
+#MESSAGE 
+"LP2 : Carrier Verification Failure !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   2223 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Slot Map Verification Failed !"
+#MESSAGE 
+"LP2 : Slot Map Verification Failed !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   2225 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Port Access Manual To Auto : Error"
+#MESSAGE 
+"LP2's port access mode can not be converted from manual to auto !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   2226 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Port Access Auto To Manual : Error"
+#MESSAGE 
+"LP2's port access mode can not be converted from auto to manual !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   2231 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - The status of LP2's job-end button is not "ON""
+#MESSAGE 
+"Can not execute the "JOB END" command.
+To run the command, the status of LP2 job-end button must be "ON".
+Please, check the status of LP2 job-end button !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   2232 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Unexpectedly, cassette disappeared."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     RETRY_CHECK   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   2233 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's status is out_of_service."
+#MESSAGE 
+"Can not execute any command.
+Currently, the status of LP2 is "OUT_OF_SERVICE".
+Please, convert LP's status to "FULL-AUTO" or "MANUAL".
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   2235 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - Currently, LP2 is in use. So, can't unload."
+#MESSAGE 
+"LP2 is in use. 
+Can not execute "unload" command.
+Please, wait until LP's status is not in use.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   2241 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's job is ended by user."
+#MESSAGE 
+"LP2's job is ended by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   44 
+#EXTERNAL_ID   2244 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's job is aborted by user."
+#MESSAGE 
+"LP2's job is aborted by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   2242 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's job is paused by user."
+#MESSAGE 
+"LP2's job is paused by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   43 
+#EXTERNAL_ID   2243 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's job is resumed by user."
+#MESSAGE 
+"LP2's job is resumed by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   51 
+#EXTERNAL_ID   2251 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's process type is converted to "Normal"."
+#MESSAGE 
+"LP2's process type is converted to "Normal"."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   52 
+#EXTERNAL_ID   2252 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP2 - LP2's process type is converted to "Test"."
+#MESSAGE 
+"LP2's process type is converted to "Test"."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LP3   (OffsetID:2300) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   2301 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2302 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   2303 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   2304 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   2311 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   2321 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Access Mode Violation !"
+#MESSAGE 
+"LP3 : Access Mode Violation !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   2322 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Carrier Verification Failure !"
+#MESSAGE 
+"LP3 : Carrier Verification Failure !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   2323 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Slot Map Verification Failed !"
+#MESSAGE 
+"LP3 : Slot Map Verification Failed !"
+#RECOVERY_ACTION 
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   2325 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Port Access Manual To Auto : Error"
+#MESSAGE 
+"LP3's port access mode can not be converted from manual to auto !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   2326 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Port Access Auto To Manual : Error"
+#MESSAGE 
+"LP3's port access mode can not be converted from auto to manual !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   2331 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - The status of LP3's job-end button is not "ON""
+#MESSAGE 
+"Can not execute the "JOB END" command.
+To run the command, the status of LP3 job-end button must be "ON".
+Please, check the status of LP3 job-end button !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   2332 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Unexpectedly, cassette disappeared."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     RETRY_CHECK   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   2333 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's status is out_of_service."
+#MESSAGE 
+"Can not execute any command.
+Currently, the status of LP3 is "OUT_OF_SERVICE".
+Please, convert LP's status to "FULL-AUTO" or "MANUAL".
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   2335 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - Currently, LP3 is in use. So, can't unload."
+#MESSAGE 
+"LP3 is in use. 
+Can not execute "unload" command.
+Please, wait until LP's status is not in use.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   2341 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's job is ended by user."
+#MESSAGE 
+"LP3's job is ended by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   44 
+#EXTERNAL_ID   2344 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's job is aborted by user."
+#MESSAGE 
+"LP3's job is aborted by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   2342 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's job is paused by user."
+#MESSAGE 
+"LP3's job is paused by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   43 
+#EXTERNAL_ID   2343 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's job is resumed by user."
+#MESSAGE 
+"LP3's job is resumed by user. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   51 
+#EXTERNAL_ID   2351 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's process type is converted to "Normal"."
+#MESSAGE 
+"LP3's process type is converted to "Normal"."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   52 
+#EXTERNAL_ID   2352 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LP3 - LP3's process type is converted to "Test"."
+#MESSAGE 
+"LP3's process type is converted to "Test"."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_ATM_ROBOT   (OffsetID:2500) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   2501 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ATM_ROBOT - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2502 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ATM_ROBOT - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   2503 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ATM_ROBOT - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   2504 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ATM_ROBOT - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   2511 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ATM_ROBOT - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_VAC_ROBOT   (OffsetID:2600) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   2601 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_ROBOT - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2602 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_ROBOT - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   2603 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_ROBOT - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   2604 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_ROBOT - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   2611 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_ROBOT - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_AL1   (OffsetID:3100) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3101 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_AL1 [CObj_Phy__ALx_STD] : MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3102 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_AL1 [CObj_Phy__ALx_STD] : MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3103 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_AL1 [CObj_Phy__ALx_STD] : MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3104 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_AL1 [CObj_Phy__ALx_STD] : MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   3111 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_AL1 [CObj_Phy__ALx_STD] : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LBA   (OffsetID:3200) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3201 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3202 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3203 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3204 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   3211 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   3213 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   3214 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBA - PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LBB   (OffsetID:3300) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3301 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3302 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3303 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3304 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   3311 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   3313 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   3314 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LBB - PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LBC   (OffsetID:3400) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LBD   (OffsetID:3500) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_TMC_SYS   (OffsetID:3600) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3601 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_SYS - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3602 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_SYS - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3603 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_SYS - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3604 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_SYS - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   3611 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_SYS - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_TMC_CHM   (OffsetID:3700) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3701 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3702 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3703 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3704 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   3711 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   3712 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - TMC OFFLINE"
+#MESSAGE 
+"Object Name : PHY_TMC_CHM
+TMC OFFLINE"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   3713 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   3714 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMC_CHM - PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_BFF1   (OffsetID:3800) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3801 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF1 - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3802 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF1 - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3803 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF1 - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3804 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF1 - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_BFF2   (OffsetID:3900) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   3901 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF2 - MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   3902 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF2 - MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3903 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF2 - MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   3904 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_BFF2 - MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PM1   (OffsetID:4100) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   4101 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   4102 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   4103 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4104 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   4111 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   4112 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC OFFLINE"
+#MESSAGE 
+"Object Name : PHY_PM1
+PMC OFFLINE"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   4113 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   4114 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   4115 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : SLIT VALVE NOT CLOSE"
+#MESSAGE 
+"Please, check the status of slit valve."
+#RECOVERY_ACTION 
+     ABORT   ""
+     IGNORE   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   4121 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PROCESS ALARM"
+#MESSAGE 
+"PMC Alarm occured in processing.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   4122 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's 2st slot is not empty."
+#MESSAGE 
+"There is glass on 2st slot. So, cann't process.
+Please, clear glass on 2st slot.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   4123 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's status is converted to "DISABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   4124 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's status is converted to "ENABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   4131 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's process type is converted to "Normal"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   4132 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's process type is converted to "Test"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   4133 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's "Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   4134 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC's "Clean Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   4135 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 LeakCheck 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   4136 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM1 : PMC의 기간 Auto_PM Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 Auto_PM 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PM2   (OffsetID:4200) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   4201 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   4202 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   4203 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4204 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   4211 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   4212 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC OFFLINE"
+#MESSAGE 
+"Object Name : PHY_PM2
+PMC OFFLINE"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   4213 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   4214 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   4215 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : SLIT VALVE NOT CLOSE"
+#MESSAGE 
+"Please, check the status of slit valve."
+#RECOVERY_ACTION 
+     ABORT   ""
+     IGNORE   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   4221 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PROCESS ALARM"
+#MESSAGE 
+"PMC Alarm occured in processing.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   4222 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's 2st slot is not empty."
+#MESSAGE 
+"There is glass on 2st slot. So, cann't process.
+Please, clear glass on 2st slot.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   4223 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's status is converted to "DISABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   4224 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's status is converted to "ENABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   4231 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's process type is converted to "Normal"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   4232 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's process type is converted to "Test"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   4233 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's "Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   4234 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC's "Clean Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   4235 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 LeakCheck 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   4236 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM2 : PMC의 기간 Auto_PM Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 Auto_PM 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PM3   (OffsetID:4300) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   4301 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   4302 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   4303 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4304 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   4311 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   4312 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC OFFLINE"
+#MESSAGE 
+"Object Name : PHY_PM3
+PMC OFFLINE"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   4313 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   4314 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   4315 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : SLIT VALVE NOT CLOSE"
+#MESSAGE 
+"Please, check the status of slit valve."
+#RECOVERY_ACTION 
+     ABORT   ""
+     IGNORE   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   4321 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PROCESS ALARM"
+#MESSAGE 
+"PMC Alarm occured in processing.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   4322 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's 2st slot is not empty."
+#MESSAGE 
+"There is glass on 2st slot. So, cann't process.
+Please, clear glass on 2st slot.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   4323 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's status is converted to "DISABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   4324 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's status is converted to "ENABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   4331 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's process type is converted to "Normal"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   4332 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's process type is converted to "Test"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   4333 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's "Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   4334 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC's "Clean Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   4335 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 LeakCheck 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   4336 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM3 : PMC의 기간 Auto_PM Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 Auto_PM 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PM4   (OffsetID:4400) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   4401 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : MODULE OBJECT - ABORTED"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   4402 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : MODULE OBJECT - OFFLINE"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   4403 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : MODULE OBJECT - NOT STANDBY"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4404 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : MODULE OBJECT - CALL ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   4411 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   4412 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC OFFLINE"
+#MESSAGE 
+"Object Name : PHY_PM4
+PMC OFFLINE"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   4413 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : VENT ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   4414 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PUMP ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   4415 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : SLIT VALVE NOT CLOSE"
+#MESSAGE 
+"Please, check the status of slit valve."
+#RECOVERY_ACTION 
+     ABORT   ""
+     IGNORE   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   4421 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PROCESS ALARM"
+#MESSAGE 
+"PMC Alarm occured in processing.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   4422 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's 2st slot is not empty."
+#MESSAGE 
+"There is glass on 2st slot. So, cann't process.
+Please, clear glass on 2st slot.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   4423 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's status is converted to "DISABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   4424 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's status is converted to "ENABLE"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   4431 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's process type is converted to "Normal"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   4432 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's process type is converted to "Test"."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   4433 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's "Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   4434 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC's "Clean Process Start" command is retried."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   4435 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 LeakCheck 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   4436 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PM4 : PMC의 기간 Auto_PM Time이 경과 되었습니다."
+#MESSAGE 
+"PMC를 Auto_PM 하시기 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PM5   (OffsetID:4500) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PM6   (OffsetID:4600) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : UTILITY__LOG_SIM_CTRL   (OffsetID:5100) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : LINK_CTC   (OffsetID:6100) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : LINK_TMC_LOG   (OffsetID:6200) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : LINK_PM1_LOG   (OffsetID:6300) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FA_APP_CTRL   (OffsetID:7100) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FA_DRV   (OffsetID:7200) (ToolID:) (UnitID:) 
+
+
+//------------------------------------------------------------
+OBJECT_NAME : __SYS   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   0 
+#EXTERNAL_ID   0 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - SYSTEM ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - System Error 11 - Dll Title"
+#MESSAGE 
+"System Error 11 - Dll Message"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - Alarm Clear Test !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - SYSTEM WARNING 12"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - System Error : Async Timer Max Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(1)"
+#MESSAGE 
+"AlarmID(1)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.1   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(2)"
+#MESSAGE 
+"AlarmID(2)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.2   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(3)"
+#MESSAGE 
+"AlarmID(3)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.3   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(4)"
+#MESSAGE 
+"AlarmID(4)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.4   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(5)"
+#MESSAGE 
+"AlarmID(5)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.5   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+

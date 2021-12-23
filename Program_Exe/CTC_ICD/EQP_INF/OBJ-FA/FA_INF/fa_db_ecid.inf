@@ -1,0 +1,344 @@
+/*
+// 	ECID   COMMAND     CHANNEL-NAME   UNIT   FMT-TYPE   FMT-BYTE   DEFAULT   MIN   MAX      NAME  
+
+COMMAND   
+	//---------------------------------------
+	// Device ID    (Analog Channel)
+	// 	Min - 0	
+	// 	Max - 32767
+	
+	#DEVICE_ID
+	//---------------------------------------
+
+	//---------------------------------------
+	// S6F9 REPORT     (Analog Channel)
+	//	<  1 : Diable (Default)
+	//	>= 1 : Enable 
+	
+	#S6F9_REPORT	
+	//---------------------------------------
+
+	//---------------------------------------
+	// INITIAL_CONTROL_STATE     (Analog Channel)
+	//	!= 1 : LOCAL  (Default)
+	//	== 1 : REMOTE 
+	
+	#INITIAL_CONTROL_STATE
+	//---------------------------------------
+	
+	//---------------------------------------
+	// SECS-I     (Analog Channel)
+
+	#T1
+	#T2
+	#T4
+	#RETRY_LIMIT
+	//---------------------------------------
+
+	//---------------------------------------
+	// SECS-I & HSMS     (Analaog Channel)
+	#T3
+	//---------------------------------------
+
+	//---------------------------------------
+	// HSMS     (Analog Channel)
+	
+	#T5
+	#T6
+	#T7
+	#T8
+	#LINK_TEST	
+	//---------------------------------------
+	
+	//---------------------------------------
+	// W-bit set for Stream   (Analog Channel)
+	// 	0 : No reply expected.
+	// 	1 : Reply expected		
+	
+	#S1_REPLY
+	#S2_REPLY
+	#S3_REPLY
+	#S4_REPLY
+	#S5_REPLY
+	#S6_REPLY
+	#S7_REPLY
+	#S8_REPLY
+	#S9_REPLY
+	#S10_REPLY
+	#S11_REPLY
+	#S12_REPLY
+	#S13_REPLY
+	#S14_REPLY
+	#S15_REPLY
+	#S16_REPLY
+	//---------------------------------------
+
+	//---------------------------------------
+	// BypassReadID  (Digital Channel)
+	//	0 : DISABLE 
+	//	1 : ENABLE  
+	
+	#LP1_BYPASS_READ_ID
+	#LP2_BYPASS_READ_ID
+	#LP3_BYPASS_READ_ID
+	#LP4_BYPASS_READ_ID
+	#LP5_BYPASS_READ_ID
+	//---------------------------------------
+	
+	//---------------------------------------
+	#LIST:LIST_NAME
+	
+	/*
+	#LIST_DEFINE  LIST_NAME  DEFAUL_VALUE(0)
+	LIST1   1
+	LIST2   2
+	LIST3   3
+	#LIST_END
+	*/	
+	//---------------------------------------
+*/	
+
+
+//---------------------------------------------------------------------------------------------------------
+// 아래에 등록되지 않은 ECID는 모두 CTC ECID로 인식 됩니다.
+// #TMC_ECID_RANGE     MIN        MAX
+// #PMx_ECID_RANGE     MIN        MAX
+
+#TMC_ECID_RANGE        10001      20000 
+#PM1_ECID_RANGE        20001      30000 
+#PM2_ECID_RANGE        30001      40000 
+#PM3_ECID_RANGE        40001      50000 
+#PM4_ECID_RANGE        50001      60000 
+#PM5_ECID_RANGE        60001      70000 
+
+
+//---------------------------------------------------------------------------------------------------------
+#LIST_DEFINE  FALSE_TRUE       0
+FALSE   0
+TRUE    1
+TRUE    255
+#LIST_END
+
+#LIST_DEFINE  CMMD_MODE        5
+DISABLE  1
+NOT_USE  3
+ENABLE   5
+#LIST_END
+
+#LIST_DEFINE  INITIAL_STATE    4
+EQUIPMENT_OFFLINE    1
+ATTEMPT_ONLINE	     2
+HOST_OFFLINE	     3
+ONLINE_LOCAL	     4
+ONLINE_REMOTE        5
+#LIST_END
+
+#LIST_DEFINE  OFFLINE_STATE    1
+EQUIPMENT_OFFLINE    1
+HOST_OFFLINE	     3
+#LIST_END
+
+#LIST_DEFINE  DISABLE_ENABLE   0
+DISABLE              0
+ENABLE  	     1
+ENABLE  	     255
+#LIST_END
+
+
+//---------------------------------------------------------------------------------------------------------
+// 	ECID   COMMAND      		CHANNEL-NAME      		UNIT   FMT-TYPE   FMT-BYTE   DEFAULT   MIN   MAX      NAME  
+
+#ECID   1      #DEVICE_ID   		FA_E30_CTRL+CFG.DEVICEID   	No.    U          4          0         0     32767	DEVICE-ID	
+#ECID   2      #S6F9_REPORT     	__                		___    U          1          0         0     1		S6F9_REPORT
+
+#ECID   11     #T1          		FA_E30_CTRL+CFG.T1       	sec    F          4          2         1.0   60.0	T1	
+#ECID   12     #T2          		FA_E30_CTRL+CFG.T2         	sec    F          4          2         1.0   60.0	T2	
+#ECID   13     #T3          		FA_E30_CTRL+CFG.T3        	sec    F          4          2         1.0   60.0	T3	
+#ECID   14     #T4          		FA_E30_CTRL+CFG.T4              sec    F          4          2         1.0   60.0	T4	
+#ECID   15     #T5          		FA_E30_CTRL+CFG.T5       	sec    F          4          2         1.0   60.0	T5	
+#ECID   16     #T6          		FA_E30_CTRL+CFG.T6              sec    F          4          2         1.0   60.0	T6	
+#ECID   17     #T7          		FA_E30_CTRL+CFG.T7          	sec    F          4          2         1.0   60.0	T7	
+#ECID   18     #T8          		FA_E30_CTRL+CFG.T8              sec    F          4          2         1.0   60.0	T8	
+#ECID   19     #RETRY_LIMIT		FA_E30_CTRL+CFG.RETRY_LIMIT    	num    U	  1	     1         1.0   10         RETRY_LIMIT
+#ECID   20     #LINK_TEST		FA_E30_CTRL+CFG.LINK_TEST	sec    U	  1	     10	       1.0   30	        LINK_TEST
+
+#ECID   21     #S6_REPLY        	__                		___    U          1          1         0     1		S6_REPLY
+#ECID   22     #S10_REPLY       	__                		___    U          1          1         0     1		S10_REPLY
+
+#ECID   25     #ESTABLISH_COMMUNICATION_TIMEOUT	 FA_E30_CTRL+FA.COMMUNICATION.TIME  ___    U          4          10        10    120	Communication_Timeout
+																	// 0 = 12 digit,  1 = 16 digit
+
+// BypassReadID
+//	0 : Disable
+//	1 : Enable
+
+#ECID   30     #LP_GLOBAL_BYPASS_READ_ID      	__			 	__     BOOL       1          0         0     1		LP_Global_BypassReadID
+#ECID   31     #LP1_BYPASS_READ_ID      	PHY_LP1+FA.LP.BYPASS_ID.FLAG   	__     BOOL       1          0         0     1		LP1_BypassReadID
+#ECID   32     #LP2_BYPASS_READ_ID      	PHY_LP2+FA.LP.BYPASS_ID.FLAG	__     BOOL       1          0         0     1		LP2_BypassReadID
+#ECID   33     #LP3_BYPASS_READ_ID      	PHY_LP3+FA.LP.BYPASS_ID.FLAG 	__     BOOL       1          0         0     1		LP3_BypassReadID
+/*
+#ECID   34     #LP4_BYPASS_READ_ID		PHY_LP4+FA.LP.BYPASS_ID.FLAG 	__     BOOL       1          0         0     1		LP4_BypassReadID
+#ECID   35     #LP5_BYPASS_READ_ID		PHY_LP5+FA.LP.BYPASS_ID.FLAG 	__     BOOL       1          0         0     1		LP5_BypassReadID
+*/
+
+
+#ECID   41        __        FA_E30_CTRL+FA.HEARTBEAT.INTERVAL.SEC        sec      U         2          10         0     60       HeartBeat
+	// 0 = Turn Off	
+	// 0 < TimeOut
+
+#ECID   42    #LIST:CMMD_MODE    FA_E30_CTRL+FA.COMMUNICATION.FLAG       state    U         1          5          1     5        Default_Communication_State
+        // The default state of the GEM communications state machine, where 0 = disabled and 256 = enabled.
+
+#ECID   43    #LIST:INITIAL_STATE   FA_E30_CTRL+DEFAULT.INITIAL.STATE    state	  U         1          4          1     5        Default_Initial_State   
+        // Default Control State at system initialization.
+        //    1 = Equipment Offline
+	//    2 = Attempt Online
+	//    3 = Host Offline
+	//    4 = Online Local 
+	//    5 = Online Remote
+
+#ECID   44    #LIST:OFFLINE_STATE  FA_E30_CTRL+DEFAULT.CONTROL.OFFLINE.STATE  state    U    1          3          1     3        Default_Control_Offline_State
+        // Default offline state after Attempt Online fails State of the Control Stat Machine when going offline.Possible values include
+        //    1 = Equipment Offline
+        //    3 = Host Offline
+
+#ECID   45    #TIME_FORMAT	  FA_E30_CTRL+TIME.FORMAT.TYPE		 ___      U	   1          1          0     1	Time_Format		
+        // The time format is defined as
+        //    0: set 12 digits format
+        //    1: set 16 digits format
+
+#ECID   46      __     FA_E30_CTRL+ECID.MAX.SPOOL.TRANSMIT		 ___     U         2          1          0     100	Max_Spool_Transmit
+        // Maximum number of messages that the machine will transmit from the spool area in response to an S6F23. 
+        // If 0 there is no limit.
+	
+#ECID   47    #LIST:DISABLE_ENABLE   FA_E30_CTRL+ECID.SPOOL.CONTROL      ___   BOOL        1          1          0     1	OverWrite_Spool
+        // Determine whether to overwrite data in the spool area. 
+        //    Possible values include 1 (overwrite) and 0 (discard).
+	
+#ECID   48    #LIST:DISABLE_ENABLE   FA_E30_CTRL+ECID.OVERWRITE.SPOOL    ___   BOOL        1          1          0     1        Spooling_Enable	
+        // Enable or disable the Spooling State Machine. 
+        //    Possible values include 1 (enabled) and 0 (disabled).
+
+#ECID   49     __     FA_E30_CTRL+ECID.MAX.SPOOL.SAVE			 ___     U         2          200        0    9999	Max_Spool_Message
+        // MaxSpoolMessage 설비에서 최대 관리할 수 있는 spool data개수 값이다.  　 
+
+
+
+//---------------------------------------------------------------------------------------------------------
+// Cleaner 
+// S1
+#DEFINE   #DEFINE_NAME#+      CLEANER_S1_ECID.
+#DEFINE   ##OBJ_STAGE         PHY_STAGE1
+#DEFINE   ##OBJ_BRUSH         FNC_BRUSH1
+#DEFINE   ##OBJ_NOZZLE        FNC_BRUSH1_NOZZLE
+#DEFINE   ##OBJ_LFC           FNC_LFC_BRUSH1
+
+#DEFINE_ID_OFFSET             21000
+#INCLUDE  fa_cleaner_s12_ecid_define.inf
+
+// S2
+#DEFINE   #DEFINE_NAME#+      CLEANER_S2_ECID.
+#DEFINE   ##OBJ_STAGE         PHY_STAGE2
+#DEFINE   ##OBJ_BRUSH         FNC_BRUSH2
+#DEFINE   ##OBJ_NOZZLE        FNC_BRUSH2_NOZZLE
+#DEFINE   ##OBJ_LFC           FNC_LFC_BRUSH2
+
+#DEFINE_ID_OFFSET             22000
+#INCLUDE  fa_cleaner_s12_ecid_define.inf
+
+// S3
+#DEFINE   #DEFINE_NAME#+      CLEANER_S3_ECID.
+#DEFINE   OBJ_STAGE         PHY_STAGE3
+#DEFINE   OBJ_SPIN   			  Phy_RS232_MECAPION_WAFER_SPIN_NCC
+#DEFINE   OBJ_NOZZLE   		  FNC_DF_NOZZLE
+#DEFINE   OBJ_LFC           NCC_LFC
+
+#DEFINE_ID_OFFSET             23000
+#INCLUDE  fa_cleaner_s3_ecid_define.inf
+
+// S4
+#DEFINE   #DEFINE_NAME#+      CLEANER_S4_ECID.
+#DEFINE   OBJ_STAGE         PHY_STAGE4
+#DEFINE   OBJ_SPIN   			  Phy_RS232_MECAPION_WAFER_SPIN_IPA
+#DEFINE   OBJ_NOZZLE   		  FNC_IPA_NOZZLE
+
+#DEFINE_ID_OFFSET             24000
+#INCLUDE  fa_cleaner_s4_ecid_define.inf
+
+// ETC
+#DEFINE   #DEFINE_NAME#+      CLEANER_ETC_ECID.
+#DEFINE   ##OBJ_SHUTTLE       FNC_SHUTTLE
+#DEFINE   ##OBJ_INTERLOCK     Cleaner_Interlock
+
+#DEFINE_ID_OFFSET             25000
+#INCLUDE  fa_cleaner_etc_ecid_define.inf
+
+
+//---------------------------------------------------------------------------------------
+// Polisher
+
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+      P1_ECID.
+#DEFINE    OBJ_HEAD_ROTATION        FNC_HEAD_01_ROTATION
+#DEFINE    OBJ_HEAD_SWEEP        		FNC_HEAD_01_SWEEP
+#DEFINE    OBJ_PLATEN        				FNC_PLATEN_01_ROTATION
+#DEFINE    OBJ_COND_ROTATION        FNC_COND_01_ROTATION
+#DEFINE    OBJ_COND_SWEEP        	  FNC_COND_01_SWEEP
+
+#DEFINE_ID_OFFSET             11000
+#INCLUDE  fa_polisher_s1_ecid_define.inf
+
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+     P2_ECID.
+#DEFINE    OBJ_HEAD_ROTATION        FNC_HEAD_02_ROTATION
+#DEFINE    OBJ_HEAD_SWEEP        		FNC_HEAD_02_SWEEP
+#DEFINE    OBJ_PLATEN        				FNC_PLATEN_02_ROTATION
+#DEFINE    OBJ_COND_ROTATION        FNC_COND_02_ROTATION
+#DEFINE    OBJ_COND_SWEEP        	  FNC_COND_02_SWEEP
+
+#DEFINE_ID_OFFSET             12000
+#INCLUDE  fa_polisher_s2_ecid_define.inf
+
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+      P3_ECID.
+#DEFINE    OBJ_HEAD_ROTATION        FNC_HEAD_03_ROTATION
+#DEFINE    OBJ_HEAD_SWEEP        		FNC_HEAD_03_SWEEP
+#DEFINE    OBJ_PLATEN        				FNC_PLATEN_03_ROTATION
+#DEFINE    OBJ_COND_ROTATION        FNC_COND_03_ROTATION
+#DEFINE    OBJ_COND_SWEEP        	  FNC_COND_03_SWEEP
+
+#DEFINE_ID_OFFSET             13000
+#INCLUDE  fa_polisher_s3_ecid_define.inf
+                         
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+      P4_ECID.
+#DEFINE    OBJ_HEAD_ROTATION        FNC_HEAD_03_ROTATION
+#DEFINE    OBJ_HEAD_SWEEP        		FNC_HEAD_03_SWEEP
+
+#DEFINE_ID_OFFSET             14000
+#INCLUDE  fa_polisher_s4_ecid_define.inf  
+
+
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+      CROSS_ECID.
+#DEFINE    OBJ_CORSS       					FNC_CROSS_ROTATION
+#DEFINE    OBJ_EXCHANGER        		FNC_WAFER_X_CHANGER
+
+#DEFINE_ID_OFFSET             15000
+#INCLUDE  fa_polisher_cross_ecid_define.inf
+
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+      EX_ROBOT_ECID.
+#DEFINE    OBJ_EXCHANGER        		FNC_WAFER_X_CHANGER
+
+#DEFINE_ID_OFFSET             16000
+#INCLUDE  fa_polisher_exchanger_ecid_define.inf 
+
+//---------------------------------------------------------
+#DEFINE    #DEFINE_NAME#+      EX_ROBOT_ECID.
+#DEFINE    OBJ_HCLU        					DRV_HCLU
+
+#DEFINE_ID_OFFSET             17000
+#INCLUDE  fa_polisher_hclu_ecid_define.inf 
+
+

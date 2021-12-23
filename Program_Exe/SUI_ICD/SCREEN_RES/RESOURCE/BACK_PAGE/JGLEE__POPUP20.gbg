@@ -1,0 +1,64 @@
+@SCREEN_SIZE 1024 768
+
+#BACKGROUND
+{
+JGLEE__Popup_Gray.bmp
+1024 768
+}
+#BITMAP_EX
+{
+JGLEE__Popup_Middle.bmp
+0
+(1, 0, 1)
+(0, 1, 0)
+(3, 33) (523 496)
+}
+#DYNAMIC
+{
+}
+#BITMAP_EX
+{
+JGLEE__Popup_Top.bmp
+0
+(1, 0, 1)
+(0, 1, 0)
+(3, 1) (523 34)
+}
+#DYNAMIC
+{
+}
+#BITMAP_EX
+{
+JGLEE__Popup_Bottom.bmp
+0
+(1, 0, 1)
+(0, 1, 0)
+(3, 495) (523 517)
+}
+#DYNAMIC
+{
+}
+#RECTANGLE
+{
+RECTANGLE
+1
+255
+(0, 0, 0)
+(255, 255, 255)
+(211, 294) (211, 297) 
+}
+#DYNAMIC
+{
+}
+#RECTANGLE
+{
+RECTANGLE
+1
+255
+(0, 0, 0)
+(255, 255, 255)
+(212, 293) (212, 293) 
+}
+#DYNAMIC
+{
+}

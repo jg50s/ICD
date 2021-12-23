@@ -1,0 +1,897 @@
+#OBJECT_PROPERTY     PAGE__LP1_RF 
+
+   #FNC_MODE     CID_READ                           PHY__LP1     CID_READ 
+   #FNC_MODE     PAGE_READ                          PHY__LP1     PAGE_READ 
+
+#OBJECT_PROPERTY     PAGE__LP2_RF 
+
+   #FNC_MODE     CID_READ                           PHY__LP2     CID_READ 
+   #FNC_MODE     PAGE_READ                          PHY__LP2     PAGE_READ 
+
+#OBJECT_PROPERTY     PAGE__LP3_RF 
+
+   #FNC_MODE     CID_READ                           PHY__LP3     CID_READ 
+   #FNC_MODE     PAGE_READ                          PHY__LP3     PAGE_READ 
+
+#OBJECT_PROPERTY     PAGE__LP4_RF 
+
+   #FNC_MODE     CID_READ                           PHY__LP4     CID_READ 
+   #FNC_MODE     PAGE_READ                          PHY__LP4     PAGE_READ 
+
+#OBJECT_PROPERTY     PAGE__LP5_RF 
+
+   #FNC_MODE     CID_READ                           PHY__LP5     CID_READ 
+   #FNC_MODE     PAGE_READ                          PHY__LP5     PAGE_READ 
+
+#OBJECT_PROPERTY     INF__LP1 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            OPR__LP1 
+
+#OBJECT_PROPERTY     INF__LP2 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            OPR__LP2 
+
+#OBJECT_PROPERTY     INF__LP3 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            OPR__LP3 
+
+#OBJECT_PROPERTY     INF__LP4 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            OPR__LP4 
+
+#OBJECT_PROPERTY     INF__LP5 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            OPR__LP5 
+
+#OBJECT_PROPERTY     OPR__LP1 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP1 
+
+#OBJECT_PROPERTY     OPR__LP2 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP2 
+
+#OBJECT_PROPERTY     OPR__LP3 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP3 
+
+#OBJECT_PROPERTY     OPR__LP4 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP4 
+
+#OBJECT_PROPERTY     OPR__LP5 
+
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP5 
+
+#OBJECT_PROPERTY     FNC__LP1 
+
+   #DEFINE_CONSTANT     LPX.ID                             1 
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP1 
+
+#OBJECT_PROPERTY     FNC__LP2 
+
+   #DEFINE_CONSTANT     LPX.ID                             2 
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP2 
+
+#OBJECT_PROPERTY     FNC__LP3 
+
+   #DEFINE_CONSTANT     LPX.ID                             3 
+   #DEFINE_CONSTANT     OBJ.LPX                            PHY__LP3 
+
+#OBJECT_PROPERTY     PHY__LP1 
+
+   #DEFINE_CONSTANT     CH__OBJ_STATE                      OPR__LP1+OBJ.STATUS 
+   #DEFINE_CONSTANT     OBJ.LP                             PHY_IO__LP1 
+   #DEFINE_CONSTANT     OBJ.RF                             PHY_RFID__LP1 
+
+#OBJECT_PROPERTY     PHY__LP2 
+
+   #DEFINE_CONSTANT     CH__OBJ_STATE                      OPR__LP2+OBJ.STATUS 
+   #DEFINE_CONSTANT     OBJ.LP                             PHY_IO__LP2 
+   #DEFINE_CONSTANT     OBJ.RF                             PHY_RFID__LP2 
+
+#OBJECT_PROPERTY     PHY__LP3 
+
+   #DEFINE_CONSTANT     CH__OBJ_STATE                      OPR__LP3+OBJ.STATUS 
+   #DEFINE_CONSTANT     OBJ.LP                             PHY_IO__LP3 
+   #DEFINE_CONSTANT     OBJ.RF                             PHY_RFID__LP3 
+
+#OBJECT_PROPERTY     PHY_IO__LP1 
+
+   #DEFINE_CONSTANT     OBJ.LPX_PIO                        PHY_OHT__LP1 
+   #DEFINE_CONSTANT     VAR__PIO.RUN_SNS                   INR.dE84.RUN.SNS 
+   #DEFINE_CONSTANT     VAR__PIO.TRANSFER_SNS              OTR.OUT.MON.sTRANSFER.PIO.STATUS 
+   #DEFINE_CONSTANT     CH__IO_DI.COMM_STS                 IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_UP                  IO+do.LP1.Door.Up 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_UP                  IO+di.LP1.Door.Up 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_DN                  IO+do.LP1.Door.Dn 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_DN                  IO+di.LP1.Door.Dn 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_EXT                 IO+do.LP1.Door.Ext 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_EXT                 IO+di.LP1.Door.Ext 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_RET                 IO+do.LP1.Door.Ret 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_RET                 IO+di.LP1.Door.Ret 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_VAC                 IO+do.LP1.Vac 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_VAC                 IO+di.LP1.Vac 
+   #DEFINE_CONSTANT     CH__IO_DI.SLIDE_OUT_SNS            IO+di.LP1.WfrSlide.Out 
+   #DEFINE_CONSTANT     CH__IO_DO.LATCH                    IO+do.LP1.Latch.Horizontal 
+   #DEFINE_CONSTANT     CH__IO_DI.LATCH                    IO+di.LP1.Latch.Horizontal 
+   #DEFINE_CONSTANT     CH__IO_DO.UNLATCH                  IO+do.LP1.Latch.Vertical 
+   #DEFINE_CONSTANT     CH__IO_DI.UNLATCH                  IO+di.LP1.Latch.Vertical 
+   #DEFINE_CONSTANT     CH__IO_DO.SHUTTLE_IN               IO+do.LP1.Shtle.In 
+   #DEFINE_CONSTANT     CH__IO_DI.SHUTTLE_IN               IO+di.LP1.Shtle.In 
+   #DEFINE_CONSTANT     CH__IO_DO.SHUTTLE_OUT              IO+do.LP1.Shtle.Out 
+   #DEFINE_CONSTANT     CH__IO_DI.SHUTTLE_OUT              IO+di.LP1.Shtle.Out 
+   #DEFINE_CONSTANT     CH__IO_DO.CLAMP                    IO+do.LP1.Clamp 
+   #DEFINE_CONSTANT     CH__IO_DI.CLAMP                    IO+di.LP1.Clamp.Sns 
+   #DEFINE_CONSTANT     CH__IO_DI.UNCLAMP                  IO+di.LP1.Unclamp.Sns 
+   #DEFINE_CONSTANT     CH__IO_DO.UNCLAMP                  IO+do.LP1.Unclamp 
+   #DEFINE_CONSTANT     CH__IO_DI.FOUP_PRESENT             IO+di.LP1.PlatForm.Occupied 
+   #DEFINE_CONSTANT     CH__IO_DI.FOUP_PLACED              IO+di.LP1.Foup.Placed 
+   #DEFINE_CONSTANT     CH__IO_DI.LOAD_BUTTON              IO+di.LP1.LD.BTN.Swtich01 
+   #DEFINE_CONSTANT     CH__IO_DI.UNLOAD_BUTTON            IO+di.LP1.UNLD.BTN.Swtich02 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP01                   IO+do.LP1.UNLD.BTN.Lamp01 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP02                   IO+do.LP1.LD.BTN.Lamp02 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP03                   IO+do.LP1.PAUSE.BTN.Lamp03 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP04                   IO+do.LP1.RESUME.BTN.Lamp04 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP05                   IO+do.LP1.AUTO.Lamp05 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP06                   IO+do.LP1.RESERVE.Lamp06 
+
+#OBJECT_PROPERTY     PHY_IO__LP2 
+
+   #DEFINE_CONSTANT     OBJ.LPX_PIO                        PHY_OHT__LP2 
+   #DEFINE_CONSTANT     VAR__PIO.RUN_SNS                   INR.dE84.RUN.SNS 
+   #DEFINE_CONSTANT     VAR__PIO.TRANSFER_SNS              OTR.OUT.MON.sTRANSFER.PIO.STATUS 
+   #DEFINE_CONSTANT     CH__IO_DI.COMM_STS                 IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_UP                  IO+do.LP2.Door.Up 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_UP                  IO+di.LP2.Door.Up 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_DN                  IO+do.LP2.Door.Dn 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_DN                  IO+di.LP2.Door.Dn 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_EXT                 IO+do.LP2.Door.Ext 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_EXT                 IO+di.LP2.Door.Ext 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_RET                 IO+do.LP2.Door.Ret 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_RET                 IO+di.LP2.Door.Ret 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_VAC                 IO+do.LP2.Vac 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_VAC                 IO+di.LP2.Vac 
+   #DEFINE_CONSTANT     CH__IO_DI.SLIDE_OUT_SNS            IO+di.LP2.WfrSlide.Out 
+   #DEFINE_CONSTANT     CH__IO_DO.LATCH                    IO+do.LP2.Latch.Horizontal 
+   #DEFINE_CONSTANT     CH__IO_DI.LATCH                    IO+di.LP2.Latch.Horizontal 
+   #DEFINE_CONSTANT     CH__IO_DO.UNLATCH                  IO+do.LP2.Latch.Vertical 
+   #DEFINE_CONSTANT     CH__IO_DI.UNLATCH                  IO+di.LP2.Latch.Vertical 
+   #DEFINE_CONSTANT     CH__IO_DO.SHUTTLE_IN               IO+do.LP2.Shtle.In 
+   #DEFINE_CONSTANT     CH__IO_DI.SHUTTLE_IN               IO+di.LP2.Shtle.In 
+   #DEFINE_CONSTANT     CH__IO_DO.SHUTTLE_OUT              IO+do.LP2.Shtle.Out 
+   #DEFINE_CONSTANT     CH__IO_DI.SHUTTLE_OUT              IO+di.LP2.Shtle.Out 
+   #DEFINE_CONSTANT     CH__IO_DO.CLAMP                    IO+do.LP2.Clamp 
+   #DEFINE_CONSTANT     CH__IO_DI.CLAMP                    IO+di.LP2.Clamp.Sns 
+   #DEFINE_CONSTANT     CH__IO_DI.UNCLAMP                  IO+di.LP2.Unclamp.Sns 
+   #DEFINE_CONSTANT     CH__IO_DO.UNCLAMP                  IO+do.LP2.Unclamp 
+   #DEFINE_CONSTANT     CH__IO_DI.FOUP_PRESENT             IO+di.LP2.PlatForm.Occupied 
+   #DEFINE_CONSTANT     CH__IO_DI.FOUP_PLACED              IO+di.LP2.Foup.Placed 
+   #DEFINE_CONSTANT     CH__IO_DI.LOAD_BUTTON              IO+di.LP2.LD.BTN.Swtich01 
+   #DEFINE_CONSTANT     CH__IO_DI.UNLOAD_BUTTON            IO+di.LP2.UNLD.BTN.Swtich02 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP01                   IO+do.LP2.UNLD.BTN.Lamp01 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP02                   IO+do.LP2.LD.BTN.Lamp02 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP03                   IO+do.LP2.PAUSE.BTN.Lamp03 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP04                   IO+do.LP2.RESUME.BTN.Lamp04 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP05                   IO+do.LP2.AUTO.Lamp05 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP06                   IO+do.LP2.RESERVE.Lamp06 
+
+#OBJECT_PROPERTY     PHY_IO__LP3 
+
+   #DEFINE_CONSTANT     OBJ.LPX_PIO                        PHY_OHT__LP3 
+   #DEFINE_CONSTANT     VAR__PIO.RUN_SNS                   INR.dE84.RUN.SNS 
+   #DEFINE_CONSTANT     VAR__PIO.TRANSFER_SNS              OTR.OUT.MON.sTRANSFER.PIO.STATUS 
+   #DEFINE_CONSTANT     CH__IO_DI.COMM_STS                 IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_UP                  IO+do.LP3.Door.Up 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_UP                  IO+di.LP3.Door.Up 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_DN                  IO+do.LP3.Door.Dn 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_DN                  IO+di.LP3.Door.Dn 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_EXT                 IO+do.LP3.Door.Ext 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_EXT                 IO+di.LP3.Door.Ext 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_RET                 IO+do.LP3.Door.Ret 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_RET                 IO+di.LP3.Door.Ret 
+   #DEFINE_CONSTANT     CH__IO_DO.DOOR_VAC                 IO+do.LP3.Vac 
+   #DEFINE_CONSTANT     CH__IO_DI.DOOR_VAC                 IO+di.LP3.Vac 
+   #DEFINE_CONSTANT     CH__IO_DI.SLIDE_OUT_SNS            IO+di.LP3.WfrSlide.Out 
+   #DEFINE_CONSTANT     CH__IO_DO.LATCH                    IO+do.LP3.Latch.Horizontal 
+   #DEFINE_CONSTANT     CH__IO_DI.LATCH                    IO+di.LP3.Latch.Horizontal 
+   #DEFINE_CONSTANT     CH__IO_DO.UNLATCH                  IO+do.LP3.Latch.Vertical 
+   #DEFINE_CONSTANT     CH__IO_DI.UNLATCH                  IO+di.LP3.Latch.Vertical 
+   #DEFINE_CONSTANT     CH__IO_DO.SHUTTLE_IN               IO+do.LP3.Shtle.In 
+   #DEFINE_CONSTANT     CH__IO_DI.SHUTTLE_IN               IO+di.LP3.Shtle.In 
+   #DEFINE_CONSTANT     CH__IO_DO.SHUTTLE_OUT              IO+do.LP3.Shtle.Out 
+   #DEFINE_CONSTANT     CH__IO_DI.SHUTTLE_OUT              IO+di.LP3.Shtle.Out 
+   #DEFINE_CONSTANT     CH__IO_DO.CLAMP                    IO+do.LP3.Clamp 
+   #DEFINE_CONSTANT     CH__IO_DI.CLAMP                    IO+di.LP3.Clamp.Sns 
+   #DEFINE_CONSTANT     CH__IO_DI.UNCLAMP                  IO+di.LP3.Unclamp.Sns 
+   #DEFINE_CONSTANT     CH__IO_DO.UNCLAMP                  IO+do.LP3.Unclamp 
+   #DEFINE_CONSTANT     CH__IO_DI.FOUP_PRESENT             IO+di.LP3.PlatForm.Occupied 
+   #DEFINE_CONSTANT     CH__IO_DI.FOUP_PLACED              IO+di.LP3.Foup.Placed 
+   #DEFINE_CONSTANT     CH__IO_DI.LOAD_BUTTON              IO+di.LP3.LD.BTN.Swtich01 
+   #DEFINE_CONSTANT     CH__IO_DI.UNLOAD_BUTTON            IO+di.LP3.UNLD.BTN.Swtich02 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP01                   IO+do.LP3.UNLD.BTN.Lamp01 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP02                   IO+do.LP3.LD.BTN.Lamp02 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP03                   IO+do.LP3.PAUSE.BTN.Lamp03 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP04                   IO+do.LP3.RESUME.BTN.Lamp04 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP05                   IO+do.LP3.AUTO.Lamp05 
+   #DEFINE_CONSTANT     CH__IO_DO.LAMP06                   IO+do.LP3.RESERVE.Lamp06 
+
+#OBJECT_PROPERTY     PHY_RFID__LP1 
+
+#OBJECT_PROPERTY     PHY_RFID__LP2 
+
+#OBJECT_PROPERTY     PHY_RFID__LP3 
+
+#OBJECT_PROPERTY     PHY_OHT__LP1 
+
+   #DEFINE_CONSTANT     PHY.LP                             PHY_IO__LP1 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_LP_MODE               PHY_IO__LP1+OTR.OUT.sLP.MODE 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_LP_STS                PHY_IO__LP1+OTR.OUT.sLP.OBJ.STS 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_DI_CST_EXIST       PHY_IO__LP1+OTR.OUT.MON.dFOUP.EXIST.FLAG 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_DI_CLAMP_STS       PHY_IO__LP1+OTR.OUT.MON.dFOUP.CLAMP.STATUS 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_SIMUL_FLAG         PHY_IO__LP1+OTR.IN.CFG.dSIMUL.FLAG 
+   #DEFINE_CONSTANT     VAR__IO_DI_FOUP_PLACED             IO+di.LP1.Foup.Placed 
+   #DEFINE_CONSTANT     VAR__IO_DI_FOUP_PRESENT            IO+di.LP1.PlatForm.Occupied 
+   #DEFINE_CONSTANT     VAR__IO_DO_CLAMP                   IO+do.LP1.Clamp 
+   #DEFINE_CONSTANT     VAR__IO_DO_UNCLAMP                 IO+do.LP1.Unclamp 
+   #DEFINE_CONSTANT     VAR__IO_DI_CLAMP                   IO+di.LP1.Clamp.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_UNCLAMP                 IO+di.LP1.Unclamp.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_LT_CURTAIN              IO+di.LIGHT.Curtain.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_LREQ                IO+do.E84.1.N.L_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_UREQ                IO+do.E84.1.N.U_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC1                 IO+do.E84.1.N.NC1 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_READY               IO+do.E84.1.N.READY 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC2                 IO+do.E84.1.N.NC2 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC3                 IO+do.E84.1.N.NC3 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_HO_AVBL             IO+do.E84.1.N.HO_AVBL 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_ES                  IO+do.E84.1.N.ES 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_VALID               IO+di.E84.1.N.VALID 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CS_0                IO+di.E84.1.N.CS_0 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CS_1                IO+di.E84.1.N.CS_1 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_NC1                 IO+di.E84.1.N.NC1 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_TR_REQ              IO+di.E84.1.N.TR_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_BUSY                IO+di.E84.1.N.BUSY 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_COMPT               IO+di.E84.1.N.COMPT 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CONT                IO+di.E84.1.N.CONT 
+
+#OBJECT_PROPERTY     PHY_OHT__LP2 
+
+   #DEFINE_CONSTANT     PHY.LP                             PHY_IO__LP2 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_LP_MODE               PHY_IO__LP2+OTR.OUT.sLP.MODE 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_LP_STS                PHY_IO__LP2+OTR.OUT.sLP.OBJ.STS 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_DI_CST_EXIST       PHY_IO__LP2+OTR.OUT.MON.dFOUP.EXIST.FLAG 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_DI_CLAMP_STS       PHY_IO__LP2+OTR.OUT.MON.dFOUP.CLAMP.STATUS 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_SIMUL_FLAG         PHY_IO__LP2+OTR.IN.CFG.dSIMUL.FLAG 
+   #DEFINE_CONSTANT     VAR__IO_DI_FOUP_PLACED             IO+di.LP2.Foup.Placed 
+   #DEFINE_CONSTANT     VAR__IO_DI_FOUP_PRESENT            IO+di.LP2.PlatForm.Occupied 
+   #DEFINE_CONSTANT     VAR__IO_DO_CLAMP                   IO+do.LP2.Clamp 
+   #DEFINE_CONSTANT     VAR__IO_DO_UNCLAMP                 IO+do.LP2.Unclamp 
+   #DEFINE_CONSTANT     VAR__IO_DI_CLAMP                   IO+di.LP2.Clamp.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_UNCLAMP                 IO+di.LP2.Unclamp.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_LT_CURTAIN              IO+di.LIGHT.Curtain.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_LREQ                IO+do.E84.2.N.L_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_UREQ                IO+do.E84.2.N.U_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC1                 IO+do.E84.2.N.NC1 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_READY               IO+do.E84.2.N.READY 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC2                 IO+do.E84.2.N.NC2 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC3                 IO+do.E84.2.N.NC3 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_HO_AVBL             IO+do.E84.2.N.HO_AVBL 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_ES                  IO+do.E84.2.N.ES 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_VALID               IO+di.E84.2.N.VALID 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CS_0                IO+di.E84.2.N.CS_0 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CS_1                IO+di.E84.2.N.CS_1 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_NC1                 IO+di.E84.2.N.NC1 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_TR_REQ              IO+di.E84.2.N.TR_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_BUSY                IO+di.E84.2.N.BUSY 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_COMPT               IO+di.E84.2.N.COMPT 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CONT                IO+di.E84.2.N.CONT 
+
+#OBJECT_PROPERTY     PHY_OHT__LP3 
+
+   #DEFINE_CONSTANT     PHY.LP                             PHY_IO__LP3 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_LP_MODE               PHY_IO__LP3+OTR.OUT.sLP.MODE 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_LP_STS                PHY_IO__LP3+OTR.OUT.sLP.OBJ.STS 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_DI_CST_EXIST       PHY_IO__LP3+OTR.OUT.MON.dFOUP.EXIST.FLAG 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_DI_CLAMP_STS       PHY_IO__LP3+OTR.OUT.MON.dFOUP.CLAMP.STATUS 
+   #DEFINE_CONSTANT     VAR__PHY_OBJ_IO_SIMUL_FLAG         PHY_IO__LP3+OTR.IN.CFG.dSIMUL.FLAG 
+   #DEFINE_CONSTANT     VAR__IO_DI_FOUP_PLACED             IO+di.LP3.Foup.Placed 
+   #DEFINE_CONSTANT     VAR__IO_DI_FOUP_PRESENT            IO+di.LP3.PlatForm.Occupied 
+   #DEFINE_CONSTANT     VAR__IO_DO_CLAMP                   IO+do.LP3.Clamp 
+   #DEFINE_CONSTANT     VAR__IO_DO_UNCLAMP                 IO+do.LP3.Unclamp 
+   #DEFINE_CONSTANT     VAR__IO_DI_CLAMP                   IO+di.LP3.Clamp.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_UNCLAMP                 IO+di.LP3.Unclamp.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_LT_CURTAIN              IO+di.LIGHT.Curtain.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_LREQ                IO+do.E84.3.N.L_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_UREQ                IO+do.E84.3.N.U_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC1                 IO+do.E84.3.N.NC1 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_READY               IO+do.E84.3.N.READY 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC2                 IO+do.E84.3.N.NC2 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_NC3                 IO+do.E84.3.N.NC3 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_HO_AVBL             IO+do.E84.3.N.HO_AVBL 
+   #DEFINE_CONSTANT     VAR__IO_DO_E84_ES                  IO+do.E84.3.N.ES 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_VALID               IO+di.E84.3.N.VALID 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CS_0                IO+di.E84.3.N.CS_0 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CS_1                IO+di.E84.3.N.CS_1 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_NC1                 IO+di.E84.3.N.NC1 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_TR_REQ              IO+di.E84.3.N.TR_REQ 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_BUSY                IO+di.E84.3.N.BUSY 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_COMPT               IO+di.E84.3.N.COMPT 
+   #DEFINE_CONSTANT     VAR__IO_DI_E84_CONT                IO+di.E84.3.N.CONT 
+
+#OBJECT_PROPERTY     INF__UPPER_ATM_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__ROBOT                         OPR__ATM_ROBOT 
+   #DEFINE_CONSTANT     OBJ__AL1                           OPR__AL1 
+   #DEFINE_CONSTANT     OBJ__VIS1                          OPR__VIS1 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ__LL1                           OPR__LBA 
+   #DEFINE_CONSTANT     OBJ__LL2                           OPR__LBB 
+
+#OBJECT_PROPERTY     INF__ATM_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__ROBOT                         OPR__ATM_ROBOT 
+
+#OBJECT_PROPERTY     OPR__ATM_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__ROBOT                         FNC__ATM_ROBOT 
+   #DEFINE_CONSTANT     DHYPER_TERMINAL_LOCK               PHY_IO__ATM_ROBOT+dHYPER.TERMINAL.LOCK.FLAG 
+
+#OBJECT_PROPERTY     FNC__ATM_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__ROBOT                         PHY__ATM_ROBOT 
+   #DEFINE_CONSTANT     OBJ__AL1                           PHY__AL1 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ__LL1                           FNC__LBA 
+   #DEFINE_CONSTANT     OBJ__LL2                           FNC__LBB 
+   #DEFINE_CONSTANT     LP_SIZE                            3 
+   #DEFINE_CONSTANT     OBJ__LP1                           PHY__LP1 
+   #DEFINE_CONSTANT     OBJ__LP2                           PHY__LP2 
+   #DEFINE_CONSTANT     OBJ__LP3                           PHY__LP3 
+   #DEFINE_CONSTANT     OBJ__LP4                           PHY__LP4 
+   #DEFINE_CONSTANT     OBJ__LP5                           PHY__LP5 
+
+#OBJECT_PROPERTY     PHY__ATM_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     IO_CH__EFEM_DOOR                   IO+di.EFEM.DOOR.SWITCH 
+   #DEFINE_CONSTANT     OBJ__ROBOT                         PHY_IO__ATM_ROBOT 
+   #DEFINE_CONSTANT     ROBOT.ARM_RNE_SNS                  IO+di.ATM.Robot.RNE 
+   #DEFINE_CONSTANT     OBJ__AL1                           PHY__AL1 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ__LL1                           PHY__LBA 
+   #DEFINE_CONSTANT     LL1.ARM_RNE_SNS                    IO+di.ATMRB.RNE.LBA 
+   #DEFINE_CONSTANT     LL1.LOAD_ENABLE                    IO+do.LBA.ATMRB.LOAD.ENABLE 
+   #DEFINE_CONSTANT     OBJ__LL2                           PHY__LBB 
+   #DEFINE_CONSTANT     LL2.ARM_RNE_SNS                    IO+di.ATMRB.RNE.LBB 
+   #DEFINE_CONSTANT     LL2.LOAD_ENABLE                    IO+do.LBB.ATMRB.LOAD.ENABLE 
+   #DEFINE_CONSTANT     LP_SIZE                            3 
+   #DEFINE_CONSTANT     OBJ__LP1                           PHY__LP1 
+   #DEFINE_CONSTANT     LP1.WAFER_SLIDE_OUT_SNS            IO+di.LP1.WfrSlide.Out 
+   #DEFINE_CONSTANT     OBJ__LP2                           PHY__LP2 
+   #DEFINE_CONSTANT     LP2.WAFER_SLIDE_OUT_SNS            IO+di.LP2.WfrSlide.Out 
+   #DEFINE_CONSTANT     OBJ__LP3                           PHY__LP3 
+   #DEFINE_CONSTANT     LP3.WAFER_SLIDE_OUT_SNS            IO+di.LP3.WfrSlide.Out 
+   #DEFINE_CONSTANT     OBJ__SIDE_STORAGE1                 PHY__BUFF1 
+   #DEFINE_CONSTANT     OBJ__SIDE_STORAGE2                 PHY__BUFF2 
+
+#OBJECT_PROPERTY     PHY_IO__ATM_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__AL1                           PHY__AL1 
+
+#OBJECT_PROPERTY     INF__UPPER_VAC_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__ROBOT                         OPR__VAC_ROBOT 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ__LL1                           OPR__LBA 
+   #DEFINE_CONSTANT     OBJ__LL2                           OPR__LBB 
+
+#OBJECT_PROPERTY     INF__VAC_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__ROBOT                         OPR__VAC_ROBOT 
+
+#OBJECT_PROPERTY     OPR__VAC_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__ROBOT                         FNC__VAC_ROBOT 
+   #DEFINE_CONSTANT     DHYPER_TERMINAL_LOCK               PHY_IO__VAC_ROBOT+dHYPER.TERMINAL.LOCK.FLAG 
+
+#OBJECT_PROPERTY     FNC__VAC_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__ROBOT                         PHY__VAC_ROBOT 
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     DATA.PMX_HANDOFF.TYPE              SINGLE 
+   #DEFINE_CONSTANT     OBJ__PMX_ACTIVE_HANDOFF            OPR__PMx_HANDOFF 
+   #DEFINE_CONSTANT     OBJ__PMC                           PHY__PMx 
+   #DEFINE_CONSTANT     ACTIVE.MANIFOLD_X                  YES 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ__FNC_LL1                       FNC__LBA 
+   #DEFINE_CONSTANT     OBJ__PHY_LL1                       PHY__LBA 
+   #DEFINE_CONSTANT     OBJ__FNC_LL2                       FNC__LBB 
+   #DEFINE_CONSTANT     OBJ__PHY_LL2                       PHY__LBB 
+   #DEFINE_CONSTANT     OBJ__VAC_CHM                       FNC__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ__TMC_VLV                       FNC__TMC_VLV 
+
+#OBJECT_PROPERTY     OPR__PMx_HANDOFF 
+
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+
+#OBJECT_PROPERTY     PHY__VAC_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__ROBOT                         PHY_IO__VAC_ROBOT 
+   #DEFINE_CONSTANT     ROBOT.ARM_RNE_SNS                  IO+di.VAC.Robot.RNE 
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     OBJ__TMC_CHM                       PHY__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ__PMC                           PHY__PMx 
+   #DEFINE_CONSTANT     LLX.MULTI_DOOR_VALVE               NO 
+   #DEFINE_CONSTANT     LLX.MULTI_SLOT_VALVE               NO 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ__LL1                           PHY__LBA 
+   #DEFINE_CONSTANT     OBJ__LL2                           PHY__LBB 
+
+#OBJECT_PROPERTY     PHY_IO__VAC_ROBOT 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+
+#OBJECT_PROPERTY     FNC__PMx_VLV 
+
+   #DEFINE_CONSTANT     OBJ__PM_VLV                        PHY__PMx 
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+
+#OBJECT_PROPERTY     PHY__PMx 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     VAR__IO_DI_DNET_COMM_STS           IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     VAR__IO_DI_VAC_RB_RNE              IO+di.VAC.Robot.RNE 
+   #DEFINE_CONSTANT     VAR__IO_DI_TM_ATM_SNS              IO+di.CHM1.ATM.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_TM_VAC_SNS              IO+di.CHM1.VAC.Sns 
+   #DEFINE_CONSTANT     VAR__PHY_TM_PRESS_STS              PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS 
+   #DEFINE_CONSTANT     VAR__PHY_TM_PRESS_TORR             PHY__TMC_CHM+OTR.OUT.MON.aPRESSURE.TORR 
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM1_SV_PM_OPEN          IO+do.PM1.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM1_SV_PM_CLOSE         IO+do.PM1.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM1_SV_TM_OPEN          IO+do.PM1.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM1_SV_TM_CLOSE         IO+do.PM1.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM1_SV_UP               IO+do.PM1.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM1_SV_DOWN             IO+do.PM1.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_SV_PM_OPEN          IO+di.PM1.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_SV_PM_CLOSE         IO+di.PM1.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_SV_TM_OPEN          IO+di.PM1.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_SV_TM_CLOSE         IO+di.PM1.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_SV_UP               IO+di.PM1.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_SV_DOWN             IO+di.PM1.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_ATM_SNS             IO+di.PM1.ATM 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM1_VAC_SNS             IO+di.PM1.VAC 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM2_SV_PM_OPEN          IO+do.PM2.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM2_SV_PM_CLOSE         IO+do.PM2.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM2_SV_TM_OPEN          IO+do.PM2.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM2_SV_TM_CLOSE         IO+do.PM2.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM2_SV_UP               IO+do.PM2.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM2_SV_DOWN             IO+do.PM2.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_SV_PM_OPEN          IO+di.PM2.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_SV_PM_CLOSE         IO+di.PM2.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_SV_TM_OPEN          IO+di.PM2.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_SV_TM_CLOSE         IO+di.PM2.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_SV_UP               IO+di.PM2.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_SV_DOWN             IO+di.PM2.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_ATM_SNS             IO+di.PM2.ATM 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM2_VAC_SNS             IO+di.PM2.VAC 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM3_SV_PM_OPEN          IO+do.PM3.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM3_SV_PM_CLOSE         IO+do.PM3.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM3_SV_TM_OPEN          IO+do.PM3.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM3_SV_TM_CLOSE         IO+do.PM3.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM3_SV_UP               IO+do.PM3.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM3_SV_DOWN             IO+do.PM3.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_SV_PM_OPEN          IO+di.PM3.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_SV_PM_CLOSE         IO+di.PM3.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_SV_TM_OPEN          IO+di.PM3.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_SV_TM_CLOSE         IO+di.PM3.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_SV_UP               IO+di.PM3.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_SV_DOWN             IO+di.PM3.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_ATM_SNS             IO+di.PM3.ATM 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM3_VAC_SNS             IO+di.PM3.VAC 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM4_SV_PM_OPEN          IO+do.PM4.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM4_SV_PM_CLOSE         IO+do.PM4.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM4_SV_TM_OPEN          IO+do.PM4.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM4_SV_TM_CLOSE         IO+do.PM4.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM4_SV_UP               IO+do.PM4.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DO_PM4_SV_DOWN             IO+do.PM4.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_SV_PM_OPEN          IO+di.PM4.SV.PM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_SV_PM_CLOSE         IO+di.PM4.SV.PM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_SV_TM_OPEN          IO+di.PM4.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_SV_TM_CLOSE         IO+di.PM4.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_SV_UP               IO+di.PM4.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_SV_DOWN             IO+di.PM4.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_ATM_SNS             IO+di.PM4.ATM 
+   #DEFINE_CONSTANT     VAR__IO_DI_PM4_VAC_SNS             IO+di.PM4.VAC 
+
+#OBJECT_PROPERTY     PAGE__TMC_CHM 
+
+   #FNC_MODE     INIT                               FNC__TMC_CHM   INIT 
+   #FNC_MODE     PUMP                               FNC__TMC_CHM   PUMP 
+   #FNC_MODE     VENT                               FNC__TMC_CHM   VENT 
+   #FNC_MODE     ISOLATE                            FNC__TMC_CHM   ISOLATE 
+   #FNC_MODE     LEAK_CHECK                         FNC__TMC_CHM   LEAK_CHECK 
+   #FNC_MODE     CYCLE_PURGE                        FNC__TMC_CHM   CYCLE_PURGE 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      TMC_CHM.FNC 
+
+#OBJECT_PROPERTY     PAGE__TMC_LEAK 
+
+   #FNC_MODE     LEAK_CHECK                         FNC__TMC_CHM   LEAK_CHECK 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      TMC.LEAK 
+
+#OBJECT_PROPERTY     INF__TMC_SYS 
+
+   #DEFINE_CONSTANT     OBJ__TMC_SYS                       MNG__SYS_CTRL 
+
+#OBJECT_PROPERTY     INF__TMC_CHM 
+
+   #DEFINE_CONSTANT     OBJ__TMC_CHM                       OPR__TMC_CHM 
+
+#OBJECT_PROPERTY     MNG__SYS_CTRL 
+
+   #DEFINE_CONSTANT     DATA.MAX_OBJECT                    10 
+   #DEFINE_CONSTANT     OBJ.MSG.1                          ATM_ROBOT 
+   #DEFINE_CONSTANT     OBJ.LINK.1                         OPR__ATM_ROBOT 
+   #DEFINE_CONSTANT     OBJ.WAIT.1                         NO 
+   #DEFINE_CONSTANT     OBJ.ASYNC.2                        YES 
+   #DEFINE_CONSTANT     OBJ.MSG.2                          VAC_ROBOT 
+   #DEFINE_CONSTANT     OBJ.LINK.2                         OPR__VAC_ROBOT 
+   #DEFINE_CONSTANT     OBJ.WAIT.2                         YES 
+   #DEFINE_CONSTANT     OBJ.MSG.3                          AL1 
+   #DEFINE_CONSTANT     OBJ.LINK.3                         OPR__AL1 
+   #DEFINE_CONSTANT     OBJ.WAITING.3                      NO 
+   #DEFINE_CONSTANT     OBJ.MSG.4                          LP1 
+   #DEFINE_CONSTANT     OBJ.LINK.4                         OPR__LP1 
+   #DEFINE_CONSTANT     OBJ.WAIT.4                         NO 
+   #DEFINE_CONSTANT     OBJ.MSG.5                          LP2 
+   #DEFINE_CONSTANT     OBJ.LINK.5                         OPR__LP2 
+   #DEFINE_CONSTANT     OBJ.WAIT.5                         NO 
+   #DEFINE_CONSTANT     OBJ.MSG.6                          LP3 
+   #DEFINE_CONSTANT     OBJ.LINK.6                         OPR__LP3 
+   #DEFINE_CONSTANT     OBJ.WAIT.6                         NO 
+   #DEFINE_CONSTANT     OBJ.MSG.7                          PUMP 
+   #DEFINE_CONSTANT     OBJ.LINK.7                         PHY__PUMP 
+   #DEFINE_CONSTANT     OBJ.WAIT.7                         YES 
+   #DEFINE_CONSTANT     OBJ.MSG.8                          TM_CHM 
+   #DEFINE_CONSTANT     OBJ.LINK.8                         OPR__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ.WAIT.8                         NO 
+   #DEFINE_CONSTANT     OBJ.MSG.9                          LL1 
+   #DEFINE_CONSTANT     OBJ.LINK.9                         OPR__LBA 
+   #DEFINE_CONSTANT     OBJ.WAIT.9                         NO 
+   #DEFINE_CONSTANT     OBJ.MSG.10                         LL2 
+   #DEFINE_CONSTANT     OBJ.LINK.10                        OPR__LBB 
+   #DEFINE_CONSTANT     OBJ.WAIT.10                        YES 
+
+#OBJECT_PROPERTY     OPR__TMC_CHM 
+
+   #DEFINE_CONSTANT     OBJ__TMC_CHM                       FNC__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ__TMC_VLV                       FNC__TMC_VLV 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_FNC.1                 FNC__LBA 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_FNC.2                 FNC__LBB 
+
+#OBJECT_PROPERTY     FNC__TMC_CHM 
+
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__TMC_CHM                       PHY__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ__PMX                           PHY__PMx 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_FNC.1                 FNC__LBA 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_PHY.1                 PHY__LBA 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_FNC.2                 FNC__LBB 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_PHY.2                 PHY__LBB 
+
+#OBJECT_PROPERTY     PHY__TMC_CHM 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__PUMP                          PHY__PUMP 
+   #DEFINE_CONSTANT     VAR__PRESSURE_TORR                 IO+ai.TM.PRESSURE 
+   #DEFINE_CONSTANT     VAR__EXHAUST_PRESSURE              NO 
+   #DEFINE_CONSTANT     VAR__IO_DO_FAST_VENT_VLV           IO+do.CHM1.FAST.VENT.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_SOFT_VENT_VLV           NO 
+   #DEFINE_CONSTANT     VAR__IO_DO_FAST_PUMP_VLV           IO+do.CHM1.ISO.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_SOFT_PUMP_VLV           NO 
+   #DEFINE_CONSTANT     VAR__IO_DI_LID_CLOSE_SNS           NO 
+   #DEFINE_CONSTANT     DATA.ATM_SNS.VIRTUAL_TYPE          NO 
+   #DEFINE_CONSTANT     VAR__IO_DI_ATM_SNS                 IO+di.CHM1.ATM.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DI_VAC_SNS                 IO+di.CHM1.VAC.Sns 
+   #DEFINE_CONSTANT     VAR__IO_DO_BALLAST_VALVE_SET       IO+do.TM.BALLAST.SET 
+   #DEFINE_CONSTANT     VAR__IO_AO_BALLAST_N2_SET          IO+ao.N2.SETPOINT 
+
+#OBJECT_PROPERTY     FNC__TMC_VLV 
+
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__TMC_CHM                       PHY__TMC_CHM 
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_PHY.1                 PHY__LBA 
+   #DEFINE_CONSTANT     LINK_LLX.OBJ_PHY.2                 PHY__LBB 
+   #DEFINE_CONSTANT     OBJ__PMX                           PHY__PMx 
+
+#OBJECT_PROPERTY     PAGE__LBA 
+
+   #FNC_MODE     INIT                               FNC__LBA     INIT 
+   #FNC_MODE     PUMP                               FNC__LBA     PUMP 
+   #FNC_MODE     VENT                               FNC__LBA     VENT 
+   #FNC_MODE     ISOLATE                            FNC__LBA     ISOLATE 
+   #FNC_MODE     LEAK_CHECK                         FNC__LBA     LEAK_CHECK 
+   #FNC_MODE     CYCLE_PURGE                        FNC__LBA     CYCLE_PURGE 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      LL1.FNC 
+
+#OBJECT_PROPERTY     PAGE__LBB 
+
+   #FNC_MODE     INIT                               FNC__LBB     INIT 
+   #FNC_MODE     PUMP                               FNC__LBB     PUMP 
+   #FNC_MODE     VENT                               FNC__LBB     VENT 
+   #FNC_MODE     ISOLATE                            FNC__LBB     ISOLATE 
+   #FNC_MODE     LEAK_CHECK                         FNC__LBB     LEAK_CHECK 
+   #FNC_MODE     CYCLE_PURGE                        FNC__LBB     CYCLE_PURGE 
+   #FNC_MODE     LIFT_PIN_UP                        FNC__LBB     LIFT_PIN.UP 
+   #FNC_MODE     LIFT_PIN_DOWN                      FNC__LBB     LIFT_PIN.DOWN 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      LL2.FNC 
+
+#OBJECT_PROPERTY     PAGE__LBA_LEAK 
+
+   #FNC_MODE     LEAK_CHECK                         FNC__LBA     LEAK_CHECK 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      LL1.LEAK 
+
+#OBJECT_PROPERTY     PAGE__LBB_LEAK 
+
+   #FNC_MODE     LEAK_CHECK                         FNC__LBB     LEAK_CHECK 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      LL2.LEAK 
+
+#OBJECT_PROPERTY     PAGE__LBx_TEST 
+
+   #FNC_MODE     LL1_SV.CYCLE_TEST                  FNC__LBx_TEST   LBA_SV.CYCLE_TEST 
+   #FNC_MODE     LL1_DV.CYCLE_TEST                  FNC__LBx_TEST   LBA_DV.CYCLE_TEST 
+   #FNC_MODE     LL2_SV.CYCLE_TEST                  FNC__LBx_TEST   LBB_SV.CYCLE_TEST 
+   #FNC_MODE     LL2_DV.CYCLE_TEST                  FNC__LBx_TEST   LBB_DV.CYCLE_TEST 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      LLx.FNC 
+
+#OBJECT_PROPERTY     PAGE__MANIFOLD_TEST 
+
+   #FNC_MODE     PUMPING.CYCLE_TEST                 FNC__MANIFOLD_TEST   PUMPING.CYCLE_TEST 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      MANIFOLD.FNC 
+
+#OBJECT_PROPERTY     INF__LBA 
+
+   #DEFINE_CONSTANT     OBJ__LBX                           OPR__LBA 
+
+#OBJECT_PROPERTY     INF__LBB 
+
+   #DEFINE_CONSTANT     OBJ__LBX                           OPR__LBB 
+
+#OBJECT_PROPERTY     OPR__LBA 
+
+   #DEFINE_CONSTANT     OBJ.LLX_CHM                        FNC__LBA 
+   #DEFINE_CONSTANT     OBJ.LLX_PROC                       NO 
+
+#OBJECT_PROPERTY     OPR__LBB 
+
+   #DEFINE_CONSTANT     OBJ.LLX_CHM                        FNC__LBB 
+   #DEFINE_CONSTANT     OBJ.LLX_PROC                       NO 
+
+#OBJECT_PROPERTY     FNC__LBx_TEST 
+
+   #DEFINE_CONSTANT     DATA.LLX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ.LLX_OPR.1                      OPR__LBA 
+   #DEFINE_CONSTANT     OBJ.LLX_FNC.1                      FNC__LBA 
+   #DEFINE_CONSTANT     OBJ.LLX_OPR.2                      OPR__LBB 
+   #DEFINE_CONSTANT     OBJ.LLX_FNC.2                      FNC__LBB 
+
+#OBJECT_PROPERTY     FNC__MANIFOLD_TEST 
+
+   #DEFINE_CONSTANT     DATA.MDX_SIZE                      3 
+   #DEFINE_CONSTANT     OBJ.MDX_NAME.1                     TMC 
+   #DEFINE_CONSTANT     OBJ.MDX_OPR.1                      OPR__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ.MDX_FNC.1                      FNC__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ.MDX_NAME.2                     LBA 
+   #DEFINE_CONSTANT     OBJ.MDX_OPR.2                      OPR__LBA 
+   #DEFINE_CONSTANT     OBJ.MDX_FNC.2                      FNC__LBA 
+   #DEFINE_CONSTANT     OBJ.MDX_NAME.3                     LBB 
+   #DEFINE_CONSTANT     OBJ.MDX_OPR.3                      OPR__LBB 
+   #DEFINE_CONSTANT     OBJ.MDX_FNC.3                      FNC__LBB 
+
+#OBJECT_PROPERTY     FNC__LBA 
+
+   #DEFINE_CONSTANT     LBX_NAME                           LBA 
+   #DEFINE_CONSTANT     LBX_SLOT.SIZE                      1 
+   #DEFINE_CONSTANT     LINK__OBJ_PHY                      PHY__LBA 
+   #DEFINE_CONSTANT     DATA.OTHER_CHM_SIZE                2 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_FNC.1           FNC__LBB 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_PHY.1           PHY__LBB 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_FNC.2           FNC__TMC_CHM 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_PHY.2           PHY__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+
+#OBJECT_PROPERTY     FNC__LBB 
+
+   #DEFINE_CONSTANT     LBX_NAME                           LBB 
+   #DEFINE_CONSTANT     LBX_SLOT.SIZE                      1 
+   #DEFINE_CONSTANT     LINK__OBJ_PHY                      PHY__LBB 
+   #DEFINE_CONSTANT     DATA.OTHER_CHM_SIZE                2 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_FNC.1           FNC__LBA 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_PHY.1           PHY__LBA 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_FNC.2           FNC__TMC_CHM 
+   #DEFINE_CONSTANT     LINK_OTHER_CHM.OBJ_PHY.2           PHY__TMC_CHM 
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+
+#OBJECT_PROPERTY     PHY__LBA 
+
+   #DEFINE_CONSTANT     LBX_NAME                           LBA 
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__PUMP                          PHY__PUMP 
+   #DEFINE_CONSTANT     VAR__PRESSURE_TORR                 IO+ai.LBA.PRESSURE 
+   #DEFINE_CONSTANT     VAR__LID_CLOSE_SNS                 IO+di.LBA.LID.SW 
+   #DEFINE_CONSTANT     VAR__IO_DO_SOFT_VENT_VLV           IO+do.LBA.SOFT.VENT.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_FAST_VENT_VLV           IO+do.LBA.FAST.VENT.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_EQUAL_VLV               IO+do.LL1.EQULIZATION.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_SOFT_PUMP_VLV           IO+do.LBA.SOFT.PUMP.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_FAST_PUMP_VLV           IO+do.LBA.FAST.PUMP.VLV.SET 
+   #DEFINE_CONSTANT     VAR__PHY_TM_PRESS_STS              PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS 
+   #DEFINE_CONSTANT     VAR__PHY_TM_PRESS_TORR             PHY__TMC_CHM+OTR.OUT.MON.aPRESSURE.TORR 
+   #DEFINE_CONSTANT     VAR__IO_DO_DV_OPEN                 IO+do.LBA.DV.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_DV_CLOSE                IO+do.LBA.DV.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_DV_OPEN                 IO+di.LBA.DV.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_DV_CLOSE                IO+di.LBA.DV.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_TM_OPEN              IO+do.LBA.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_TM_CLOSE             IO+do.LBA.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_TM_OPEN              IO+di.LBA.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_TM_CLOSE             IO+di.LBA.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_UP                   IO+do.LBA.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_DOWN                 IO+do.LBA.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_UP                   IO+di.LBA.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_DOWN                 IO+di.LBA.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_VAC_RB_RNE              IO+di.VAC.Robot.RNE 
+   #DEFINE_CONSTANT     VAR__IO_DI_ATM_RB_RNE              IO+di.ATMRB.RNE.LBA 
+
+#OBJECT_PROPERTY     PHY__LBB 
+
+   #DEFINE_CONSTANT     LBX_NAME                           LBB 
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__PUMP                          PHY__PUMP 
+   #DEFINE_CONSTANT     VAR__PRESSURE_TORR                 IO+ai.LBB.PRESSURE 
+   #DEFINE_CONSTANT     VAR__LID_CLOSE_SNS                 IO+di.LBB.LID.SW 
+   #DEFINE_CONSTANT     VAR__IO_DO_SOFT_VENT_VLV           IO+do.LBB.SOFT.VENT.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_FAST_VENT_VLV           IO+do.LBB.FAST.VENT.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_EQUAL_VLV               IO+do.LL2.EQULIZATION.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_SOFT_PUMP_VLV           IO+do.LBB.SOFT.PUMP.VLV.SET 
+   #DEFINE_CONSTANT     VAR__IO_DO_FAST_PUMP_VLV           IO+do.LBB.FAST.PUMP.VLV.SET 
+   #DEFINE_CONSTANT     VAR__PHY_TM_PRESS_STS              PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS 
+   #DEFINE_CONSTANT     VAR__PHY_TM_PRESS_TORR             PHY__TMC_CHM+OTR.OUT.MON.aPRESSURE.TORR 
+   #DEFINE_CONSTANT     VAR__IO_DO_DV_OPEN                 IO+do.LBB.DV.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_DV_CLOSE                IO+do.LBB.DV.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_DV_OPEN                 IO+di.LBB.DV.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_DV_CLOSE                IO+di.LBB.DV.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_TM_OPEN              IO+do.LBB.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_TM_CLOSE             IO+do.LBB.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_TM_OPEN              IO+di.LBB.SV.TM.OPEN 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_TM_CLOSE             IO+di.LBB.SV.TM.CLOSE 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_UP                   IO+do.LBB.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DO_SV_DOWN                 IO+do.LBB.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_UP                   IO+di.LBB.SV.UP 
+   #DEFINE_CONSTANT     VAR__IO_DI_SV_DOWN                 IO+di.LBB.SV.DOWN 
+   #DEFINE_CONSTANT     VAR__IO_DI_VAC_RB_RNE              IO+di.VAC.Robot.RNE 
+   #DEFINE_CONSTANT     VAR__IO_DI_ATM_RB_RNE              IO+di.ATMRB.RNE.LBA 
+
+#OBJECT_PROPERTY     INF__AL1 
+
+   #DEFINE_CONSTANT     OBJ__AL                            OPR__AL1 
+
+#OBJECT_PROPERTY     OPR__AL1 
+
+   #DEFINE_CONSTANT     OBJ__AL                            PHY__AL1 
+
+#OBJECT_PROPERTY     PHY__AL1 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     CH.AL_OBJ_STATUS                   OPR__AL1+OBJ.STATUS 
+   #DEFINE_CONSTANT     CH.CFG_SLOT_MAX                    DB_CFG+CFG.AL1.SLOT.MAX 
+   #DEFINE_CONSTANT     OBJ__AL                            PHY_IO__ATM_ROBOT 
+
+#OBJECT_PROPERTY     PHY__PUMP 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     OBJ__PUMP                          PHY_IO__PUMP 
+   #DEFINE_CONSTANT     VAR__IO_AI_VACLINE_PRESS           IO+ai.FORELINE.PRESSURE 
+
+#OBJECT_PROPERTY     PHY_IO__PUMP 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG 
+   #DEFINE_CONSTANT     VAR__IO_DI_COMM_STS                IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     VAR__IO_DI_PUMP_RUNNING            IO+di.IPXPUMP.RUNNING 
+   #DEFINE_CONSTANT     VAR__IO_DI_PUMP_WARNING            IO+di.IPXPUMP.WARNING 
+   #DEFINE_CONSTANT     VAR__IO_DI_PUMP_ALARM              IO+di.IPXPUMP.ALARM 
+   #DEFINE_CONSTANT     VAR__IO_DI_PUMP_WATER_FLOW         IO+di.IPXPUMP.WATER.FLOW 
+   #DEFINE_CONSTANT     VAR__IO_DI_PUMP_LEAK_DETECT        IO+di.IPXWATER.LEAK.DETECT 
+   #DEFINE_CONSTANT     VAR__IO_DO_PUMP_ON_OFF             IO+do.IPXPUMP.ON 
+
+#OBJECT_PROPERTY     DB_CFG 
+
+   #DEFINE_CONSTANT     PM_SIZE                            4 
+
+#OBJECT_PROPERTY     PAGE__SYS_CTRL 
+
+   #FNC_MODE     SYSTEM_INIT                        MNG__SYS_CTRL   SYSTEM_INIT 
+   #FNC_MODE     SYSTEM_MAINT                       MNG__SYS_CTRL   SYSTEM_MAINT 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 SYSTEM.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      SYSTEM.FNC 
+
+#OBJECT_PROPERTY     IO 
+   #OBJECT_IO_FILE     DNET_IO__TMC-FLEX.cfg 
+
+   #DEFINE_CONSTANT     FLAG__DRV_LOG                      YES 
+   #DEFINE_CONSTANT     LINK.IO_SIZE                       0 
+
+#OBJECT_PROPERTY     TMC_LINK 
+   #OBJECT_LINK_FILE     LINK__CFG_TMC_To_PMC.cfg 
+
+   #DEFINE_CONSTANT     FLAG__DRV_LOG                      YES 
+
+#OBJECT_PROPERTY     MON__SYSTEM 
+
+   #DEFINE_CONSTANT     OBJ__DB                            DB_CFG+CFG.SIM.MODE 
+   #DEFINE_CONSTANT     IO_CH__DNET_COMM_STS               IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     IO_CH__AIR_SNS                     IO+di.Air.Sns 
+   #DEFINE_CONSTANT     IO_CH__N2_SENSOR                   IO+di.N2.Sns 
+   #DEFINE_CONSTANT     IO_CH__EFEM_DOOR                   IO+di.EFEM.DOOR.SWITCH 
+
+#OBJECT_PROPERTY     PHY__SIGNAL_TOWER 
+
+   #DEFINE_CONSTANT     CH.LIGHT.RED.ON_OFF                IO+do.LIGHT.RED.ON_OFF 
+   #DEFINE_CONSTANT     CH.LIGHT.YELLOW.ON_OFF             IO+do.LIGHT.YELLOW.ON_OFF 
+   #DEFINE_CONSTANT     CH.LIGHT.GREEN.ON_OFF              IO+do.LIGHT.GREEN.ON_OFF 
+   #DEFINE_CONSTANT     CH.LIGHT.BLUE.ON_OFF               IO+do.LIGHT.BLUE.ON_OFF 
+   #DEFINE_CONSTANT     CH.LIGHT.WHITE.ON_OFF              IO+do.LIGHT.WHITE.ON_OFF 
+   #DEFINE_CONSTANT     CH.LIGHT.RED.BLINK                 IO+do.LIGHT.RED.BLINK 
+   #DEFINE_CONSTANT     CH.LIGHT.YELLOW.BLINK              IO+do.LIGHT.YELLOW.BLINK 
+   #DEFINE_CONSTANT     CH.LIGHT.GREEN.BLINK               IO+do.LIGHT.GREEN.BLINK 
+   #DEFINE_CONSTANT     CH.LIGHT.BLUE.BLINK                IO+do.LIGHT.BLUE.BLINK 
+   #DEFINE_CONSTANT     CH.LIGHT.WHITE.BLINK               IO+do.LIGHT.WHITE.BLINK 
+   #DEFINE_CONSTANT     CH.ALARM.BUZZER                    IO+do.ALARM.BUZZER 
+   #DEFINE_CONSTANT     CH.ALARM.BUZZER.RESET              IO+do.ALARM.BUZZER.RESET 
+   #DEFINE_CONSTANT     CH.MELODY1.CTRL                    IO+do.MELODY1.CTRL 
+   #DEFINE_CONSTANT     CH.MELODY2.CTRL                    IO+do.MELODY2.CTRL 
+   #DEFINE_CONSTANT     CH.MELODY3.CTRL                    IO+do.MELODY3.CTRL 
+   #DEFINE_CONSTANT     CH.MELODY4.CTRL                    IO+do.MELODY4.CTRL 
+

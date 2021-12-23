@@ -1,0 +1,730 @@
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// TMC
+
+
+// 151300000	Port1DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300001	Port1DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300002	Port1DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300003	Port1EnableForScheduling		EnableForScheduling		Enable for scheduling purposes %s because of %s.
+// 151300004	Port1EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300005	Port1EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151300006	Port1MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300007	Port1MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300008	Port1MaterialArrivedAtMachine		MaterialArrivedAtMachine	Material %s has arrived at port %s.
+// 151300009	Port1MaterialDepartedFromMachine	MaterialDepartedFromMachine	Material %s has departed from port %s.
+// 151300010	Port1MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300011	Port1NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300012	Port1OperationSetEnded	OperationSetEnded	Trace data ended.
+// 151300013	Port1PreparingForOperationSetStarted	PreparingForOperationSetStarted	Started preparing for trace data.
+// 151300014	Port1ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300015	Port1SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151300021	Port1PDOPodStatusChange	PodStatusChange	Pod Status has been changed 
+// 151300022	Port1PDOStateChange	StateChange	PDO State has been changed 
+
+// 151300039	Port2MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300040	Port2MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300041	Port2MaterialArrivedAtMachine	MaterialArrivedAtMachine	Material %s has arrived at port %s.
+// 151300042	Port2MaterialDepartedFromMachine	MaterialDepartedFromMachine	Material %s has departed from port %s.
+// 151300043	Port2MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300044	Port2NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300045	Port2OperationSetEnded	OperationSetEnded	Trace data ended.
+// 151300046	Port2PreparingForOperationSetStarted	PreparingForOperationSetStarted	Started preparing for trace data.
+// 151300047	Port2ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300048	Port2SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151300054	Port2PDOPodStatusChange	PodStatusChange	Pod Status has been changed 
+// 151300055	Port2PDOStateChange	StateChange	PDO State has been changed 
+
+// 151300066	TransferChamberArmStateChanged	ArmStateChanged	Arm state changed.
+// 151300067	TransferChamberDisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300068	TransferChamberDisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300069	TransferChamberDisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300070	TransferChamberEnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151300071	TransferChamberEnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300072	TransferChamberEnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151300073	TransferChamberMaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300074	TransferChamberMaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300075	TransferChamberMaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300076	TransferChamberNoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300077	TransferChamberOperationSetEnded	OperationSetEnded	Trace data ended.
+// 151300078	TransferChamberPreparingForOperationSetStarted	PreparingForOperationSetStarted	Started preparing for trace data.
+// 151300079	TransferChamberReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300080	TransferChamberSentMaterial	SentMaterial	Sent material %s from location %s.
+
+
+#CEID_E30__LP1_SLOT_MAP_START			151300081     // SLOT MAP START
+// 151300081		Port1WaferMappingStarted	WaferMappingStarted	Wafer mapping started.
+#CEID_E30__LP1_COMPLETE						151300082     // LP COMPLETE
+// 151300082		Port1CarrierCompleted	CarrierCompleted	A carrier completed.
+#CEID_E30__LP1_SLOT_MAP_END			   151300083     // SLOT MAP END
+// 151300083		Port1WaferMappingEnded	WaferMappingEnded	Wafer mapping ended.
+#CEID_E30__LP1_START	 							151300084     // LP START
+// 151300084		Port1CarrierStarted	CarrierStarted	A carrier started.
+
+#CEID_E30__LP2_SLOT_MAP_START			151300085     // SLOT MAP START
+// 151300085		Port2WaferMappingStarted	WaferMappingStarted	Wafer mapping started.
+#CEID_E30__LP2_SLOT_MAP_END			    151300087     // SLOT MAP END
+// 151300087		Port2WaferMappingEnded	WaferMappingEnded	Wafer mapping ended.
+
+// 151300088		Port1SetupFailed	SetupFailed	Setup for wafer transfer failed.
+#CEID_E30__LP1_STATUS_CHANGE	 		151300090     // LP STATUS CHANGE
+// 151300090		Port1StateChanged	StateChanged	State changed from %s to %s.
+#CEID_E30__LP1_WAFER_INTO_FOUP			151300091     // WAFER Into FOUP
+// 151300091		Port1WaferCompleted	WaferCompleted	A wafer completed.
+#CEID_E30__LP1_WAFER_FROM_FOUP		151300092     // WAFER From FOUP
+// 151300092		Port1WaferStarted			WaferStarted			A wafer started.
+
+#CEID_E30__LP2_COMPLETE						151300093     // LP COMPLETE
+// 151300093		Port2CarrierCompleted	CarrierCompleted	A carrier completed.
+#CEID_E30__LP2_START	 							151300094     // LP START
+// 151300094		Port2CarrierStarted	CarrierStarted	A carrier started.
+#CEID_E30__LP2_STATUS_CHANGE	 		151300098     // LP STATUS CHANGE
+// 151300098		Port2StateChanged	StateChanged	State changed from %s to %s.
+#CEID_E30__LP2_WAFER_INTO_FOUP			151300099     // WAFER Into FOUP
+// 151300099		Port2WaferCompleted	WaferCompleted	A wafer completed.
+#CEID_E30__LP2_WAFER_FROM_FOUP		151300100     // WAFER From FOUP
+151300100	Port2WaferStarted	WaferStarted	A wafer started.
+
+// 151300103		Port1tagReaderStateChange	StateChange	TagReader State has been changed 
+// 151300104		Port2tagReaderStateChange	StateChange	TagReader State has been changed 
+// 151300105		Port1tagReaderTagReadWriteStateChange	TagReadWriteStateChange	A Read Operation has occured on the Tag Reader 
+// 151300106		Port2tagReaderTagReadWriteStateChange	TagReadWriteStateChange	A Read Operation has occured on the Tag Reader 
+// 151300108		Port1AGVStateChange	StateChange	AGV State has been changed 
+// 151300110		Port2AGVStateChange	StateChange	AGV State has been changed 
+// 151300111		Port1PDOLoadPortTransferStateChange	LoadPortTransferStateChange	LoadPort Transfer State has been changed 
+// 151300112		Port2PDOLoadPortTransferStateChange	LoadPortTransferStateChange	LoadPort Transfer State has been changed 
+// 151300113		TransferChamberOCRReadEvent	OCRReadEvent	OCR read for LotName:  %s  %s.
+// 151300116		Port1tagReaderTagWriteEvent	TagWriteEvent	A Write Operation followed by a verify read operation has occured on the Tag Reader 
+// 151300117		Port2tagReaderTagWriteEvent	TagWriteEvent	A Write Operation followed by a verify read operation has occured on the Tag Reader 
+
+#CEID_E30__LP1_FOUP_DOOR_CLOSE		151300118     // FOUP DOOR CLOSE
+// 151300118		Port1PDOLoadPortTransferFOUPCloseEvent	LoadPortTransferFOUPCloseEvent	LoadPort  door open sensor detected = CLOSE 
+#CEID_E30__LP2_FOUP_DOOR_CLOSE		151300119     // FOUP DOOR CLOSE
+// 151300119		Port2PDOLoadPortTransferFOUPCloseEvent	LoadPortTransferFOUPCloseEvent	LoadPort  door open sensor detected = CLOSE 
+
+#CEID_E30__LP1_FOUP_DOOR_OPEN			151300120     // FOUP DOOR OPEN
+// 151300120		Port1PDOLoadPortTransferFOUPOpenEvent	LoadPortTransferFOUPOpenEvent	LoadPort  door open sensor detected = OPEN 
+#CEID_E30__LP2_FOUP_DOOR_OPEN			151300121     // FOUP DOOR OPEN
+// 151300121		Port2PDOLoadPortTransferFOUPOpenEvent	LoadPortTransferFOUPOpenEvent	LoadPort  door open sensor detected = OPEN 
+
+#CEID_E30__LP1_FOUP_UNDOCKED			151300122     // FOUP UNDOCKED
+// 151300122		Port1PDOLoadPortTransferUnDockedEvent	LoadPortTransferUnDockedEvent	LoadPort  has been Undocked
+#CEID_E30__LP2_FOUP_UNDOCKED			151300123     // FOUP UNDOCKED
+// 151300123		Port2PDOLoadPortTransferUnDockedEvent	LoadPortTransferUnDockedEvent	LoadPort  has been Undocked
+
+#CEID_E30__LP1_FOUP_UNCLAMPED			151300124     // FOUP UNCLAMPED
+// 151300124		Port1PDOLoadPortTransferUnClampEvent	LoadPortTransferUnClampEvent	LoadPort  has been UnClamped
+#CEID_E30__LP2_FOUP_UNCLAMPED			151300125     // FOUP UNCLAMPED
+// 151300125		Port2PDOLoadPortTransferUnClampEvent	LoadPortTransferUnClampEvent	LoadPort  has been UnClamped
+
+#CEID_E30__LP1_FOUP_DOCKED			    151300126     // FOUP DOCKED
+// 151300126		Port1PDOLoadPortTransferDockedEvent	LoadPortTransferDockedEvent	LoadPort  has been docked
+#CEID_E30__LP2_FOUP_DOCKED			    151300127     // FOUP DOCKED
+// 151300127		Port2PDOLoadPortTransferDockedEvent	LoadPortTransferDockedEvent	LoadPort  has been docked
+
+#CEID_E30__LP1_FOUP_CLAMPED			    151300128     // FOUP CLAMPED
+// 151300128		Port1PDOLoadPortTransferClampEvent	LoadPortTransferClampEvent	LoadPort  has been clamped
+#CEID_E30__LP2_FOUP_CLAMPED			    151300129     // FOUP CLAMPED
+// 151300129		Port2PDOLoadPortTransferClampEvent	LoadPortTransferClampEvent	LoadPort  has been clamped
+
+// 151300130		Port1PDOPodStatusAbsentEvent	PodStatusAbsentEvent	Pod Status has been changed to Absent 
+// 151300131		Port2PDOPodStatusAbsentEvent	PodStatusAbsentEvent	Pod Status has been changed to Absent 
+
+// 151300132		Port1EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300137		Port2EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300138		Port2MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300139		Port2SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300140		Port2SetupFailed	SetupFailed	Setup for wafer transfer failed.
+// 151300142		Port2SetupStarted		SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300143		Port2StandbyEntered	StandbyEntered	Entered stand-by state.
+
+// 151300144		AirLock1DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300145		AirLock1DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300146		AirLock1DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300147		AirLock1EnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151300148		AirLock1EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300149		AirLock1EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151300150		AirLock1EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300151		AirLock1MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300152		AirLock1MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300153		AirLock1MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300154		AirLock1MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300155		AirLock1NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300156		AirLock1ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300157		AirLock1SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151300158		AirLock1SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300159		AirLock1SetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300160		AirLock1StandbyEntered	StandbyEntered	Entered stand-by state.
+// 151300161		AirLock2DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300162		AirLock2DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300163		AirLock2DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300164		AirLock2EnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151300165		AirLock2EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300166		AirLock2EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151300167		AirLock2EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300168		AirLock2MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300169		AirLock2MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300170		AirLock2MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300171		AirLock2MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300172		AirLock2NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300173		AirLock2ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300174		AirLock2SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151300175		AirLock2SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300176		AirLock2SetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300177		AirLock2StandbyEntered	StandbyEntered	Entered stand-by state.
+
+// 151300178		AtmArmArmStateChanged	ArmStateChanged	Arm state changed.
+// 151300179		AtmArmDisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300180		AtmArmDisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300181		AtmArmDisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300182		AtmArmEnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151300183		AtmArmEnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300184		AtmArmEnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151300185		AtmArmEnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300186		AtmArmMaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300187		AtmArmMaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300188		AtmArmMaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300189		AtmArmMaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300190		AtmArmNoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300191		AtmArmReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300192		AtmArmSentMaterial	SentMaterial	Sent material %s from location %s.
+// 151300193		AtmArmSetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300194		AtmArmSetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300195		AtmArmStandbyEntered	StandbyEntered	Entered stand-by state.
+
+// 151300199		TransferChamberEnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300200		TransferChamberMaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300201		TransferChamberSetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300202		TransferChamberSetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300203		TransferChamberStandbyEntered	StandbyEntered	Entered stand-by state.
+
+// 151300205		Port1MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300206		Port1SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300207		Port1SetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300208		Port1StandbyEntered	StandbyEntered	Entered stand-by state.
+// 151300219		Port2DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300220		Port2DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300221		Port2DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300222		Port2EnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151300223		Port2EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300224		Port2EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+
+#CEID_E30__LP1__ACCESS_MODE__AUTO					151300226
+// 151300226		Port1AccessModeChangeToAuto	AccessModeChangeToAuto	The Access Mode has been changed to Auto
+#CEID_E30__LP1__ACCESS_MODE__MANUAL				151300227
+// 151300227		Port1AccessModeChangeToManual	AccessModeChangeToManual	The Access Mode has been changed  to Manual
+
+// 151300228		Port1E87CarrierToNoStateChange	E87CarrierToNoStateChange	Carrier State has changed from CARRIER to No State
+// 151300229		Port1E87IDNotReadChangeToIDVerifyOK_BypassReadIDfalse	E87IDNotReadChangeToIDVerifyOK_BypassReadIDfalse	Carrier State has changed from ID NOT READ to ID VERIFICATION OK
+// 151300230		Port1E87IDNotReadChangeToWaitingForHost_BypassReadIDfalse	E87IDNotReadChangeToWaitingForHost_BypassReadIDfalse	Action: Waiting for Proceed With Carrier - Carrier State has changed from ID NOT READ to WAITING FOR HOST
+#CEID_E30__LP1__CARRIER_ID_STATUS__ID_VERIFICATION_OK			    151300231
+// 151300231		Port1E87IDNotReadToIDVerifyOKChange	E87IDNotReadToIDVerifyOKChange	Carrier State has changed from ID NOT READ to ID VERIFICATION OK
+#CEID_E30__LP1__CARRIER_ID_STATUS__ID_WAITING_FOR_HOST		    151300232
+// 151300232		Port1E87IDNotReadToWaitingForHostChange	E87IDNotReadToWaitingForHostChange	Carrier State has changed from ID NOT READ to WAITING FOR HOST
+
+#CEID_E30__LP1__CARRIER_ACCESS_STATUS__CARRIER_COMPLETE		151300233
+// 151300233		Port1E87InAccessToCarrierCompleteChange	E87InAccessToCarrierCompleteChange	Carrier State has changed from IN ACCESS to CARRIER COMPLETE
+#CEID_E30__LP1__CARRIER_ACCESS_STATUS__CARRIER_STOPPED		    151300234
+// 151300234		Port1E87InAccessToCarrierStopChange	E87InAccessToCarrierStopChange	Carrier State has changed from IN ACCESS to CARRIER STOPPED
+
+// 151300235		Port1E87NoStateToCarrierChange			E87NoStateToCarrierChange			Carrier State has changed from No State to Carrier
+// 151300236		Port1E87NoStateToIDNotReadChange	E87NoStateToIDNotReadChange	Carrier State has changed from No State to ID NOT READ
+// 151300237		Port1E87NoStateToIDVerifyFailChange	E87NoStateToIDVerifyFailChange	Carrier State has changed from No State to ID VERIFICATION FAIL
+// 151300238		Port1E87NoStateToIDVerifyOKChange	E87NoStateToIDVerifyOKChange	Carrier State has changed from No State to ID VERIFICATION OK
+// 151300239		Port1E87NoStateToNotAccessedChange	E87NoStateToNotAccessedChange	Carrier State has changed from No State to NOT ACCESSED
+// 151300240		Port1E87NoStateToslotMapNotReadChange	E87NoStateToslotMapNotReadChange	Carrier State has changed from No State to SLOT MAP NOT READ
+// 151300241		Port1E87NoStateToWaitingForHostChange	E87NoStateToWaitingForHostChange	Carrier State has changed from No State to WAITING FOR HOST
+// 151300242		Port1E87NotAccessedToInAccessChange	E87NotAccessedToInAccessChange	Carrier State has changed from NOT ACCESSED to IN ACCESS
+// 151300243		Port1E87SlotNotReadToSlotMapVerifyOKChange	E87SlotNotReadToSlotMapVerifyOKChange	Carrier State has changed from SLOT MAP NOT READ to SLOT MAP VERIFICATION OK
+// 151300244		Port1E87SlotNotReadToWaitingForHostChange	E87SlotNotReadToWaitingForHostChange	Carrier State has changed from SLOT MAP NOT READ to WAITING FOR HOST
+// 151300245		Port1E87WaitingForHostToIDVerifyFailChange	E87WaitingForHostToIDVerifyFailChange	Carrier State has changed from WAITING FOR HOST to ID VERIFICATION FAIL
+// 151300246		Port1E87WaitingForHostToIDVerifyOKChange	E87WaitingForHostToIDVerifyOKChange	Carrier State has changed from WAITING FOR HOST to ID VERIFICATION OK
+// 151300247		Port1E87WaitingForHostToSlotMapVerifyFailChange	E87WaitingForHostToSlotMapVerifyFailChange	Carrier State has changed from WAITING FOR HOST to SLOT MAP VERIFICATION FAIL
+// 151300248		Port1E87WaitingForHostToSlotMapVerifyOKChange	E87WaitingForHostToSlotMapVerifyOKChange	Carrier State has changed from WAITING FOR HOST to SLOT MAP VERIFICATION OK
+
+#CEID_E30__LP1__ASSOCIATION_STATUS__ASSOCIATED						151300249
+// 151300249		Port1LoadPortAssociationE87ChangeToAssociated	LoadPortAssociationE87ChangeToAssociated	The Association Mode has been changed to Associated
+#CEID_E30__LP1__ASSOCIATION_STATUS__NOT_ASSOCIATED			151300250
+// 151300250		Port1LoadPortAssociationE87ChangeToNotAssociated	LoadPortAssociationE87ChangeToNotAssociated	The Association Mode has been changed to Not Associated
+
+#CEID_E30__LP1__RESERVATION_STATUS__NOT_RESERVED				151300251
+// 151300251		Port1LoadPortReservationE87ChangeToNotReserved	LoadPortReservationE87ChangeToNotReserved	The Load Port Reservation has been changed to Not Reserved
+#CEID_E30__LP1__RESERVATION_STATUS__RESERVED							151300252
+// 151300252		Port1LoadPortReservationE87ChangeToReserved	LoadPortReservationE87ChangeToReserved	The Load Port Reservation has been changed to Reserved
+
+
+// jglee1
+#CEID_E30__LP2__ACCESS_MODE__AUTO					151300254
+// 151300254		Port2AccessModeChangeToAuto	AccessModeChangeToAuto	The Access Mode has been changed to Auto
+#CEID_E30__LP2__ACCESS_MODE__MANUAL				151300255
+// 151300255		Port2AccessModeChangeToManual	AccessModeChangeToManual	The Access Mode has been changed  to Manual
+
+// 151300256		Port2E87CarrierToNoStateChange	E87CarrierToNoStateChange	Carrier State has changed from CARRIER to No State
+// 151300257		Port2E87IDNotReadChangeToIDVerifyOK_BypassReadIDfalse	E87IDNotReadChangeToIDVerifyOK_BypassReadIDfalse	Carrier State has changed from ID NOT READ to ID VERIFICATION OK
+// 151300258		Port2E87IDNotReadChangeToWaitingForHost_BypassReadIDfalse	E87IDNotReadChangeToWaitingForHost_BypassReadIDfalse	Action: Waiting for Proceed With Carrier - Carrier State has changed from ID NOT READ to WAITING FOR HOST
+// 151300259		Port2E87IDNotReadToIDVerifyOKChange	E87IDNotReadToIDVerifyOKChange	Carrier State has changed from ID NOT READ to ID VERIFICATION OK
+// 151300260		Port2E87IDNotReadToWaitingForHostChange	E87IDNotReadToWaitingForHostChange	Carrier State has changed from ID NOT READ to WAITING FOR HOST
+
+#CEID_E30__LP2__CARRIER_ACCESS_STATUS__CARRIER_COMPLETE		151300261
+// 151300261		Port2E87InAccessToCarrierCompleteChange	E87InAccessToCarrierCompleteChange	Carrier State has changed from IN ACCESS to CARRIER COMPLETE
+#CEID_E30__LP2__CARRIER_ACCESS_STATUS__CARRIER_STOPPED		    151300262
+// 151300262		Port2E87InAccessToCarrierStopChange	E87InAccessToCarrierStopChange	Carrier State has changed from IN ACCESS to CARRIER STOPPED
+
+// 151300263		Port2E87NoStateToCarrierChange	E87NoStateToCarrierChange	Carrier State has changed from No State to Carrier
+// 151300264		Port2E87NoStateToIDNotReadChange	E87NoStateToIDNotReadChange	Carrier State has changed from No State to ID NOT READ
+// 151300265		Port2E87NoStateToIDVerifyFailChange	E87NoStateToIDVerifyFailChange	Carrier State has changed from No State to ID VERIFICATION FAIL
+// 151300266		Port2E87NoStateToIDVerifyOKChange	E87NoStateToIDVerifyOKChange	Carrier State has changed from No State to ID VERIFICATION OK
+// 151300267		Port2E87NoStateToNotAccessedChange	E87NoStateToNotAccessedChange	Carrier State has changed from No State to NOT ACCESSED
+// 151300268		Port2E87NoStateToslotMapNotReadChange	E87NoStateToslotMapNotReadChange	Carrier State has changed from No State to SLOT MAP NOT READ
+// 151300269		Port2E87NoStateToWaitingForHostChange	E87NoStateToWaitingForHostChange	Carrier State has changed from No State to WAITING FOR HOST
+
+// 151300270		Port2E87NotAccessedToInAccessChange	E87NotAccessedToInAccessChange	Carrier State has changed from NOT ACCESSED to IN ACCESS
+// 151300271		Port2E87SlotNotReadToSlotMapVerifyOKChange	E87SlotNotReadToSlotMapVerifyOKChange	Carrier State has changed from SLOT MAP NOT READ to SLOT MAP VERIFICATION OK
+// 151300272		Port2E87SlotNotReadToWaitingForHostChange	E87SlotNotReadToWaitingForHostChange	Carrier State has changed from SLOT MAP NOT READ to WAITING FOR HOST
+// 151300273		Port2E87WaitingForHostToIDVerifyFailChange	E87WaitingForHostToIDVerifyFailChange	Carrier State has changed from WAITING FOR HOST to ID VERIFICATION FAIL
+// 151300274		Port2E87WaitingForHostToIDVerifyOKChange	E87WaitingForHostToIDVerifyOKChange	Carrier State has changed from WAITING FOR HOST to ID VERIFICATION OK
+// 151300275		Port2E87WaitingForHostToSlotMapVerifyFailChange	E87WaitingForHostToSlotMapVerifyFailChange	Carrier State has changed from WAITING FOR HOST to SLOT MAP VERIFICATION FAIL
+// 151300276		Port2E87WaitingForHostToSlotMapVerifyOKChange	E87WaitingForHostToSlotMapVerifyOKChange	Carrier State has changed from WAITING FOR HOST to SLOT MAP VERIFICATION OK
+
+// 151300277		Port2PDOE87InServiceToOutOfServiceChange	E87InServiceToOutOfServiceChange	LoadPort Transfer State has been changed from In Service to Out of Service
+// 151300278		Port2PDOE87InServiceToTxferReady_OrTxferBlockedChange	E87InServiceToTxferReady_OrTxferBlockedChange	LoadPort Transfer State has been changed from In Service to TxferReady or Txfer Blocked
+// 151300279		Port2PDOE87OutOfServiceToInServiceChange	E87OutOfServiceToInServiceChange	LoadPort Transfer State has been changed from Out of Service to In Service 
+// 151300280		Port2PDOE87ReadyToLoadToTransferBlockedChange	E87ReadyToLoadToTransferBlockedChange	LoadPort Transfer State has been changed from Ready To Load to Transfer Blocked
+// 151300281		Port2PDOE87ReadyToUnLoadToTransferBlockedChange	E87ReadyToUnLoadToTransferBlockedChange	LoadPort Transfer State has been changed from Ready To UnLoad toTransfer Blocked
+// 151300282		Port2PDOE87TransferBlockedToReadyToLoadChange	E87TransferBlockedToReadyToLoadChange	LoadPort Transfer State has been changed from Transfer Blocked to Ready To Load 
+// 151300283		Port2PDOE87TransferBlockedToReadyToUnLoadChange	E87TransferBlockedToReadyToUnLoadChange	LoadPort Transfer State has been changed from Transfer Blocked to Ready To UnLoad 
+// 151300284		Port2PDOE87TransferBlockedToTransferReadyChange	E87TransferBlockedToTransferReadyChange	LoadPort Transfer State has been changed from Transfer Blocked to TransferBlocked 
+// 151300285		Port2PDOE87TxferReadyToReadyToLoad_orReadyToUnloadChange	E87TxferReadyToReadyToLoad_orReadyToUnloadChange	LoadPort Transfer State has been changed from Txfer Ready to Ready To Load or Ready to Unload
+
+#CEID_E30__LP2__ASSOCIATION_STATUS__ASSOCIATED						151300286
+// 151300286		Port2LoadPortAssociationE87ChangeToAssociated	LoadPortAssociationE87ChangeToAssociated	The Association Mode has been changed to Associated
+#CEID_E30__LP2__ASSOCIATION_STATUS__NOT_ASSOCIATED			151300287
+// 151300287		Port2LoadPortAssociationE87ChangeToNotAssociated	LoadPortAssociationE87ChangeToNotAssociated	The Association Mode has been changed to Not Associated
+
+#CEID_E30__LP2__RESERVATION_STATUS__NOT_RESERVED				151300288
+// 151300288		Port2LoadPortReservationE87ChangeToNotReserved	LoadPortReservationE87ChangeToNotReserved	The Load Port Reservation has been changed to Not Reserved
+#CEID_E30__LP2__RESERVATION_STATUS__RESERVED							151300289
+// 151300289		Port2LoadPortReservationE87ChangeToReserved	LoadPortReservationE87ChangeToReserved	The Load Port Reservation has been changed to Reserved
+
+
+// 151300328		AtmArmOCRReadEvent	OCRReadEvent	OCR read for LotName:  %s  %s.
+#CEID_E30__LP1__TRANSFER_STATUS__OUT_OF_SERVICE					151300329
+// 151300329		Port1PDOE87InServiceToOutOfServiceChange	E87InServiceToOutOfServiceChange	LoadPort Transfer State has been changed from In Service to Out of Service
+// 151300330		Port1PDOE87InServiceToTxferReady_OrTxferBlockedChange	E87InServiceToTxferReady_OrTxferBlockedChange	LoadPort Transfer State has been changed from In Service to TxferReady or Txfer Blocked
+#CEID_E30__LP1__TRANSFER_STATUS__IN_SERVICE								151300331
+// 151300331		Port1PDOE87OutOfServiceToInServiceChange	E87OutOfServiceToInServiceChange	LoadPort Transfer State has been changed from Out of Service to In Service 
+// 151300332		Port1PDOE87ReadyToLoadToTransferBlockedChange	E87ReadyToLoadToTransferBlockedChange	LoadPort Transfer State has been changed from Ready To Load to Transfer Blocked
+// 151300333		Port1PDOE87ReadyToUnLoadToTransferBlockedChange	E87ReadyToUnLoadToTransferBlockedChange	LoadPort Transfer State has been changed from Ready To UnLoad toTransfer Blocked
+// 151300334		Port1PDOE87TransferBlockedToReadyToLoadChange	E87TransferBlockedToReadyToLoadChange	LoadPort Transfer State has been changed from Transfer Blocked to Ready To Load 
+// 151300335		Port1PDOE87TransferBlockedToReadyToUnLoadChange	E87TransferBlockedToReadyToUnLoadChange	LoadPort Transfer State has been changed from Transfer Blocked to Ready To UnLoad 
+// 151300336		Port1PDOE87TransferBlockedToTransferReadyChange	E87TransferBlockedToTransferReadyChange	LoadPort Transfer State has been changed from Transfer Blocked to TransferBlocked 
+// 151300337		Port1PDOE87TxferReadyToReadyToLoad_orReadyToUnloadChange	E87TxferReadyToReadyToLoad_orReadyToUnloadChange	LoadPort Transfer State has been changed from Txfer Ready to Ready To Load or Ready to Unload
+
+// 151300338		Port1AGVCompleteOffForLoadEvent	CompleteOffForLoadEvent	The load transfer operation has been completed - Complete signal = %s  
+// 151300339		Port1AGVCompleteOffForUnLoadEvent	CompleteOffForUnLoadEvent	The Unload transfer operation has been completed - Complete signal = %s  
+
+
+// jglee2
+// 151300340		Port2AGVCompleteOffForLoadEvent	CompleteOffForLoadEvent	The load transfer operation has been completed - Complete signal = %s  
+// 151300341		Port2AGVCompleteOffForUnLoadEvent	CompleteOffForUnLoadEvent	The Unload transfer operation has been completed - Complete signal = %s  
+// 151300345		Port1tagReader1StateChange1	StateChange1	Tag Reader State has been changed 
+// 151300346		Port1tagReader1TagReadWriteStateChange1	TagReadWriteStateChange1	A Read has occured on the Tag Reader
+// 151300347		Port1tagReader1TagWriteEvent1	TagWriteEvent1	A Write Operation followed by a verify read operation has occured on the Tag Reader 
+// 151300349		Port2tagReader1StateChange1	StateChange1	Tag Reader State has been changed 
+// 151300350		Port2tagReader1TagReadWriteStateChange1	TagReadWriteStateChange1	A Read has occured on the Tag Reader
+// 151300351		Port2tagReader1TagWriteEvent1	TagWriteEvent1	A Write Operation followed by a verify read operation has occured on the Tag Reader 
+// 151300352		Port1Ergo200CarrierAbsentEvent	Ergo200CarrierAbsentEvent	A Cassette has been  removed from the Ergo200 Frontend
+// 151300353		Port1Ergo200CarrierPresentEvent	Ergo200CarrierPresentEvent	A Cassette has been detected/placed on the Ergo200 Frontend
+// 151300354		Port2Ergo200CarrierAbsentEvent	Ergo200CarrierAbsentEvent	A Cassette has been  removed from the Ergo200 Frontend
+// 151300355		Port2Ergo200CarrierPresentEvent	Ergo200CarrierPresentEvent	A Cassette has been detected/placed on the Ergo200 Frontend
+// 151300357		Port1TagReaderReadFailEvent	TagReaderReadFailEvent	A Tag Read has failed 
+// 151300358		Port1WaferMappingStartedS3F17	WaferMappingStartedS3F17	Wafer mapping started via S3F17.
+// 151300359		Port1WaferMappingEndedS3F17	WaferMappingEndedS3F17	Wafer mapping ended via S3F17 .
+// 151300360		Port2TagReaderReadFailEvent	TagReaderReadFailEvent	A Tag Read has failed 
+// 151300361		Port2WaferMappingStartedS3F17	WaferMappingStartedS3F17	Wafer mapping started via S3F17.
+// 151300362		Port2WaferMappingEndedS3F17	WaferMappingEndedS3F17	Wafer mapping ended via S3F17 .
+// 151300363		AirLock1PumpStart	PumpStart	Starting to Pump down with materials %s.
+// 151300365		AirLock1VentStart	VentStart	Starting to Vent with material %s.
+// 151300366		AirLock1VentCompleted	VentCompleted	Completed Venting with material %s.
+// 151300367		AirLock2PumpStart	PumpStart	Starting to Pump down with materials %s.
+// 151300369		AirLock2VentStart	VentStart	Starting to Vent with material %s.
+// 151300370		AirLock2VentCompleted	VentCompleted	Completed Venting with material %s.
+// 151300371		TMCImageSEMIE90SubstLocationHandlerE90SubstLocST01	E90SubstLocST01	Location has become occupied.
+// 151300372		TMCImageSEMIE90SubstLocationHandlerE90SubstLocST02	E90SubstLocST02	Location has become unoccupied.
+// 151300373		Port1MaterialArrivalSensed	MaterialArrivalSensed	New material sensed at port %s.
+// 151300374		Port2MaterialArrivalSensed	MaterialArrivalSensed	New material sensed at port %s.
+// 151300375		Port1CarrierCancelCompleted	CarrierCancelCompleted	A Cancel Carrier Operation has Completed.
+// 151300376		Port2CarrierCancelCompleted	CarrierCancelCompleted	A Cancel Carrier Operation has Completed.
+// 151300379		Port3PDOStateChange	StateChange	PDO State has been changed 
+// 151300381		Port3AGVStateChange	StateChange	AGV State has been changed 
+// 151300382		Port3PDOPodStatusChange	PodStatusChange	Pod Status has been changed 
+// 151300383		Port3tagReaderStateChange	StateChange	TagReader State has been changed 
+// 151300384		Port3AGVCompleteOffForLoadEvent	CompleteOffForLoadEvent	The load transfer operation has been completed - Complete signal = %s  
+// 151300385		Port3PDOPodStatusAbsentEvent	PodStatusAbsentEvent	Pod Status has been changed to Absent 
+// 151300386		Port3tagReaderTagReadWriteStateChange	TagReadWriteStateChange	A Read Operation has occured on the Tag Reader 
+// 151300387		Port3AGVCompleteOffForUnLoadEvent	CompleteOffForUnLoadEvent	The Unload transfer operation has been completed - Complete signal = %s  
+// 151300389		Port3tagReaderTagWriteEvent	TagWriteEvent	A Write Operation followed by a verify read operation has occured on the Tag Reader 
+// 151300390		Port3PDOLoadPortTransferStateChange	LoadPortTransferStateChange	LoadPort Transfer State has been changed 
+// 151300392		Port3PDOLoadPortTransferClampEvent	LoadPortTransferClampEvent	LoadPort  has been clamped
+// 151300393		Port3tagReader1StateChange1	StateChange1	Tag Reader State has been changed 
+// 151300394		Port3PDOLoadPortTransferUnClampEvent	LoadPortTransferUnClampEvent	LoadPort  has been UnClamped
+// 151300395		Port3tagReader1TagReadWriteStateChange1	TagReadWriteStateChange1	A Read has occured on the Tag Reader
+// 151300396		Port3PDOLoadPortTransferDockedEvent	LoadPortTransferDockedEvent	LoadPort  has been docked
+// 151300397		Port3tagReader1TagWriteEvent1	TagWriteEvent1	A Write Operation followed by a verify read operation has occured on the Tag Reader 
+// 151300398		Port3PDOLoadPortTransferUnDockedEvent	LoadPortTransferUnDockedEvent	LoadPort  has been Undocked
+// 151300399		Port3PDOLoadPortTransferFOUPOpenEvent	LoadPortTransferFOUPOpenEvent	LoadPort  door open sensor detected = OPEN 
+// 151300400		Port3PDOLoadPortTransferFOUPCloseEvent	LoadPortTransferFOUPCloseEvent	LoadPort  door open sensor detected = CLOSE 
+// 151300401		Port3ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151300402		Port3PDOE87OutOfServiceToInServiceChange	E87OutOfServiceToInServiceChange	LoadPort Transfer State has been changed from Out of Service to In Service 
+// 151300403		Port3SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151300405		Port3PDOE87InServiceToOutOfServiceChange	E87InServiceToOutOfServiceChange	LoadPort Transfer State has been changed from In Service to Out of Service
+// 151300406		Port3MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151300407		Port3PDOE87InServiceToTxferReady_OrTxferBlockedChange	E87InServiceToTxferReady_OrTxferBlockedChange	LoadPort Transfer State has been changed from In Service to TxferReady or Txfer Blocked
+// 151300408		Port3MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151300409		Port3PDOE87TxferReadyToReadyToLoad_orReadyToUnloadChange	E87TxferReadyToReadyToLoad_orReadyToUnloadChange	LoadPort Transfer State has been changed from Txfer Ready to Ready To Load or Ready to Unload
+// 151300410		Port3MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151300411		Port3PDOE87ReadyToLoadToTransferBlockedChange	E87ReadyToLoadToTransferBlockedChange	LoadPort Transfer State has been changed from Ready To Load to Transfer Blocked
+// 151300412		Port3NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151300413		Port3PDOE87ReadyToUnLoadToTransferBlockedChange	E87ReadyToUnLoadToTransferBlockedChange	LoadPort Transfer State has been changed from Ready To UnLoad toTransfer Blocked
+// 151300414		Port3MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151300415		Port3EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151300416		Port3PDOE87TransferBlockedToReadyToLoadChange	E87TransferBlockedToReadyToLoadChange	LoadPort Transfer State has been changed from Transfer Blocked to Ready To Load 
+// 151300417		Port3EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151300418		Port3PDOE87TransferBlockedToReadyToUnLoadChange	E87TransferBlockedToReadyToUnLoadChange	LoadPort Transfer State has been changed from Transfer Blocked to Ready To UnLoad 
+// 151300419		Port3DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151300420		Port3PDOE87TransferBlockedToTransferReadyChange	E87TransferBlockedToTransferReadyChange	LoadPort Transfer State has been changed from Transfer Blocked to TransferBlocked 
+// 151300421		Port3DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151300422		Port3DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151300423		Port3EnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151300424		Port3SetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151300425		Port3SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151300426		Port3EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151300427		Port3StandbyEntered	StandbyEntered	Entered stand-by state.
+// 151300429		Port3MaterialArrivedAtMachine	MaterialArrivedAtMachine	Material %s has arrived at port %s.
+// 151300430		Port3MaterialDepartedFromMachine	MaterialDepartedFromMachine	Material %s has departed from port %s.
+// 151300431		Port3MaterialArrivalSensed	MaterialArrivalSensed	New material sensed at port %s.
+// 151300432		Port3PreparingForOperationSetStarted	PreparingForOperationSetStarted	Started preparing for trace data.
+// 151300433		Port3OperationSetEnded	OperationSetEnded	Trace data ended.
+// 151300434		Port3WaferMappingStarted	WaferMappingStarted	Wafer mapping started.
+// 151300435		Port3WaferMappingEnded	WaferMappingEnded	Wafer mapping ended.
+// 151300436		Port3WaferMappingStartedS3F17	WaferMappingStartedS3F17	Wafer mapping started via S3F17.
+// 151300437		Port3WaferMappingEndedS3F17	WaferMappingEndedS3F17	Wafer mapping ended via S3F17 .
+// 151300438		Port3CarrierStarted	CarrierStarted	A carrier started.
+// 151300439		Port3CarrierCompleted	CarrierCompleted	A carrier completed.
+// 151300440		Port3WaferStarted	WaferStarted	A wafer started.
+// 151300441		Port3WaferCompleted	WaferCompleted	A wafer completed.
+// 151300442		Port3SetupFailed	SetupFailed	Setup for wafer transfer failed.
+// 151300444		Port3AccessModeChangeToManual	AccessModeChangeToManual	The Access Mode has been changed  to Manual
+// 151300445		Port3AccessModeChangeToAuto	AccessModeChangeToAuto	The Access Mode has been changed to Auto
+// 151300446		Port3LoadPortAssociationE87ChangeToAssociated	LoadPortAssociationE87ChangeToAssociated	The Association Mode has been changed to Associated
+// 151300447		Port3LoadPortAssociationE87ChangeToNotAssociated	LoadPortAssociationE87ChangeToNotAssociated	The Association Mode has been changed to Not Associated
+// 151300448		Port3LoadPortReservationE87ChangeToReserved	LoadPortReservationE87ChangeToReserved	The Load Port Reservation has been changed to Reserved
+// 151300449		Port3LoadPortReservationE87ChangeToNotReserved	LoadPortReservationE87ChangeToNotReserved	The Load Port Reservation has been changed to Not Reserved
+// 151300450		Port3Ergo200CarrierPresentEvent	Ergo200CarrierPresentEvent	A Cassette has been detected/placed on the Ergo200 Frontend
+// 151300451		Port3Ergo200CarrierAbsentEvent	Ergo200CarrierAbsentEvent	A Cassette has been  removed from the Ergo200 Frontend
+// 151300452		Port3TagReaderReadFailEvent	TagReaderReadFailEvent	A Tag Read has failed 
+// 151300453		Port3CarrierCancelCompleted	CarrierCancelCompleted	A Cancel Carrier Operation has Completed.
+// 151300454		Port3E87NoStateToCarrierChange	E87NoStateToCarrierChange	Carrier State has changed from No State to Carrier
+// 151300455		Port3E87NoStateToIDNotReadChange	E87NoStateToIDNotReadChange	Carrier State has changed from No State to ID NOT READ
+// 151300456		Port3E87NoStateToWaitingForHostChange	E87NoStateToWaitingForHostChange	Carrier State has changed from No State to WAITING FOR HOST
+// 151300457		Port3E87NoStateToIDVerifyOKChange	E87NoStateToIDVerifyOKChange	Carrier State has changed from No State to ID VERIFICATION OK
+// 151300458		Port3E87NoStateToIDVerifyFailChange	E87NoStateToIDVerifyFailChange	Carrier State has changed from No State to ID VERIFICATION FAIL
+// 151300459		Port3E87IDNotReadToIDVerifyOKChange	E87IDNotReadToIDVerifyOKChange	Carrier State has changed from ID NOT READ to ID VERIFICATION OK
+// 151300460		Port3E87IDNotReadToWaitingForHostChange	E87IDNotReadToWaitingForHostChange	Carrier State has changed from ID NOT READ to WAITING FOR HOST
+// 151300461		Port3E87WaitingForHostToIDVerifyOKChange	E87WaitingForHostToIDVerifyOKChange	Carrier State has changed from WAITING FOR HOST to ID VERIFICATION OK
+// 151300462		Port3E87WaitingForHostToIDVerifyFailChange	E87WaitingForHostToIDVerifyFailChange	Carrier State has changed from WAITING FOR HOST to ID VERIFICATION FAIL
+// 151300463		Port3E87IDNotReadChangeToWaitingForHost_BypassReadIDfalse	E87IDNotReadChangeToWaitingForHost_BypassReadIDfalse	Action: Waiting for Proceed With Carrier - Carrier State has changed from ID NOT READ to WAITING FOR HOST
+// 151300464		Port3E87IDNotReadChangeToIDVerifyOK_BypassReadIDfalse	E87IDNotReadChangeToIDVerifyOK_BypassReadIDfalse	Carrier State has changed from ID NOT READ to ID VERIFICATION OK
+// 151300465		Port3E87NoStateToslotMapNotReadChange	E87NoStateToslotMapNotReadChange	Carrier State has changed from No State to SLOT MAP NOT READ
+// 151300466		Port3E87SlotNotReadToSlotMapVerifyOKChange	E87SlotNotReadToSlotMapVerifyOKChange	Carrier State has changed from SLOT MAP NOT READ to SLOT MAP VERIFICATION OK
+// 151300467		Port3E87SlotNotReadToWaitingForHostChange	E87SlotNotReadToWaitingForHostChange	Carrier State has changed from SLOT MAP NOT READ to WAITING FOR HOST
+// 151300468		Port3E87WaitingForHostToSlotMapVerifyOKChange	E87WaitingForHostToSlotMapVerifyOKChange	Carrier State has changed from WAITING FOR HOST to SLOT MAP VERIFICATION OK
+// 151300469		Port3E87WaitingForHostToSlotMapVerifyFailChange	E87WaitingForHostToSlotMapVerifyFailChange	Carrier State has changed from WAITING FOR HOST to SLOT MAP VERIFICATION FAIL
+// 151300470		Port3E87NoStateToNotAccessedChange	E87NoStateToNotAccessedChange	Carrier State has changed from No State to NOT ACCESSED
+// 151300471		Port3E87NotAccessedToInAccessChange	E87NotAccessedToInAccessChange	Carrier State has changed from NOT ACCESSED to IN ACCESS
+// 151300472		Port3E87InAccessToCarrierCompleteChange	E87InAccessToCarrierCompleteChange	Carrier State has changed from IN ACCESS to CARRIER COMPLETE
+// 151300473		Port3E87InAccessToCarrierStopChange	E87InAccessToCarrierStopChange	Carrier State has changed from IN ACCESS to CARRIER STOPPED
+// 151300474		Port3E87CarrierToNoStateChange	E87CarrierToNoStateChange	Carrier State has changed from CARRIER to No State
+// 151300475		Port3StateChanged	StateChanged	State changed from %s to %s.
+// 151300476		TransferChamberWaferRemovedViaErrorRecovery	WaferRemovedViaErrorRecovery	Wafer removed as a result of error recovery. 
+// 151300477		Port1tagReaderTagReadPage1234	TagReadPage1234	A Multipe Consecutive Reads had occured on the Tag Reader
+// 151300478		TransferChamberDynamicAlignmentWaferCenterOffset	DynamicAlignmentWaferCenterOffset	Dynamic alignment wafer center offset.
+// 151300479		Port2tagReaderTagReadPage1234	TagReadPage1234	A Multipe Consecutive Reads had occured on the Tag Reader
+// 151300481		Port3tagReaderTagReadPage1234	TagReadPage1234	A Multipe Consecutive Reads had occured on the Tag Reader
+// 151300487		AtmArmWaferRemovedViaErrorRecovery	WaferRemovedViaErrorRecovery	Wafer removed as a result of error recovery. 
+// 151300512		Port1BindCommandAtWaferMappingEnd	BindCommandAtWaferMappingEnd	Skipping WAITING FOR HOST state to go straight to SLOT MAP VERIFICATION OK via BIND
+// 151300513		Port2BindCommandAtWaferMappingEnd	BindCommandAtWaferMappingEnd	Skipping WAITING FOR HOST state to go straight to SLOT MAP VERIFICATION OK via BIND
+// 151300514		Port3BindCommandAtWaferMappingEnd	BindCommandAtWaferMappingEnd	Skipping WAITING FOR HOST state to go straight to SLOT MAP VERIFICATION OK via BIND
+// 151300517		AirLock1DoorCloseCompleted	DoorCloseCompleted	Completed closing the door at location %s material %s.
+// 151300518		AirLock1DoorCloseStart	DoorCloseStart	Starting to close the door at location %s material %s.
+// 151300519		AirLock1DoorOpenCompleted	DoorOpenCompleted	Completed opening the door at location %s material %s.
+// 151300520		AirLock1DoorOpenStart	DoorOpenStart	Starting to open the door at location %s material %s.
+// 151300521		AirLock1PumpCompleted	PumpCompleted	Completed Pumping with materials %s.
+// 151300522		AirLock2DoorCloseCompleted	DoorCloseCompleted	Completed closing the door at location %s material %s.
+// 151300523		AirLock2DoorCloseStart	DoorCloseStart	Starting to close the door at location %s material %s.
+// 151300524		AirLock2DoorOpenCompleted	DoorOpenCompleted	Completed opening the door at location %s material %s.
+// 151300525		AirLock2DoorOpenStart	DoorOpenStart	Starting to open the door at location %s material %s.
+// 151300526		AirLock2PumpCompleted	PumpCompleted	Completed Pumping with materials %s.
+// 151300527		TransferChamberPumpCompleted	PumpCompleted	Completed Pumping with materials %s.
+// 151300528		TransferChamberPumpStart	PumpStart	Starting to Pump down with materials %s.
+// 151300529		TransferChamberSlotValveCloseCompleted	SlotValveCloseCompleted	Completed closing the slot valve at location %s.
+// 151300530		TransferChamberSlotValveCloseStart	SlotValveCloseStart	Starting to close the slot valve at location %s.
+// 151300531		TransferChamberSlotValveOpenCompleted	SlotValveOpenCompleted	Completed opening the slot valve at location %s.
+// 151300532		TransferChamberSlotValveOpenStart	SlotValveOpenStart	Starting to open the slot valve at location %s.
+// 151300533		TransferChamberVentCompleted	VentCompleted	Completed Venting with material %s.
+// 151300534		TransferChamberVentStart	VentStart	Starting to Vent with material %s.
+// 151300632		Port1EquipmentBasedSlotMapVerifyFail	EquipmentBasedSlotMapVerifyFail	Host sent mapping vs Equipment mapping result = %s
+// 151300633		Port2EquipmentBasedSlotMapVerifyFail	EquipmentBasedSlotMapVerifyFail	Host sent mapping vs Equipment mapping result = %s
+// 151300634		Port3EquipmentBasedSlotMapVerifyFail	EquipmentBasedSlotMapVerifyFail	Host sent mapping vs Equipment mapping result = %s
+// 151300727		Port1AccessModeChangeToAutoPgv	AccessModeChangeToAutoPgv	The PGV Access Mode has been changed to Auto
+// 151300728		Port1AccessModeChangeToManualPgv	AccessModeChangeToManualPgv	The PGV Access Mode has been changed  to Manual
+// 151300729		Port2AccessModeChangeToAutoPgv	AccessModeChangeToAutoPgv	The PGV Access Mode has been changed to Auto
+// 151300730		Port2AccessModeChangeToManualPgv	AccessModeChangeToManualPgv	The PGV Access Mode has been changed  to Manual
+// 151300731		Port3AccessModeChangeToAutoPgv	AccessModeChangeToAutoPgv	The PGV Access Mode has been changed to Auto
+// 151300732		Port3AccessModeChangeToManualPgv	AccessModeChangeToManualPgv	The PGV Access Mode has been changed  to Manual
+// 151300733		Port1CarrierLocationChanged	CarrierLocationChanged	Carrier Location Has Changed
+// 151300734		Port2CarrierLocationChanged	CarrierLocationChanged	Carrier Location Has Changed
+// 151300735		Port3CarrierLocationChanged	CarrierLocationChanged	Carrier Location Has Changed
+
+// 151300743		Port1LoadPortAssociationChangeFromNoStateToNotAssociated	LoadPortAssociationChangeFromNoStateToNotAssociated	LoadPort Carrier Association State changed From No State To NotAssociated
+// 151300744		Port2LoadPortAssociationChangeFromNoStateToNotAssociated	LoadPortAssociationChangeFromNoStateToNotAssociated	LoadPort Carrier Association State changed From No State To NotAssociated
+// 151300745		Port3LoadPortAssociationChangeFromNoStateToNotAssociated	LoadPortAssociationChangeFromNoStateToNotAssociated	LoadPort Carrier Association State changed From No State To NotAssociated
+// 151300746		Port1LoadPortAssociationChangeFromAssociatedToAssociated	LoadPortAssociationChangeFromAssociatedToAssociated	LoadPort Carrier Association State changed From Associated To Associated
+// 151300747		Port2LoadPortAssociationChangeFromAssociatedToAssociated	LoadPortAssociationChangeFromAssociatedToAssociated	LoadPort Carrier Association State changed From Associated To Associated
+// 151300748		Port3LoadPortAssociationChangeFromAssociatedToAssociated	LoadPortAssociationChangeFromAssociatedToAssociated	LoadPort Carrier Association State changed From Associated To Associated
+// 151300749		AtmArmWaferBufferStationWaferTransferredFromBufferToPort	WaferTransferredFromBufferToPort	Wafer %s is transferred from buffer to %s
+// 151300750		AtmArmWaferBufferStationWaferTransferredFromPortToBuffer	WaferTransferredFromPortToBuffer	Wafer %s is transferred from %s to buffer
+// 151300792		TransferChamberSlotValveLeftLLMultipleDeltaPCheckEvent	MultipleDeltaPCheckEvent	More than 1 check of the DeltaPressureOK_DI was needed to open %s. Check number %s was started.
+// 151300793		TransferChamberSlotValveRightLLMultipleDeltaPCheckEvent	MultipleDeltaPCheckEvent	More than 1 check of the DeltaPressureOK_DI was needed to open %s. Check number %s was started.
+// 151300842		Port1EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151300934		Port2EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151300989		Port3EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301051		AirLock1EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301066		AirLock2EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301102		AtmArmEnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301112		TransferChamberEnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301357		Port2CarrierIDReaderAvailable	CarrierIDReaderAvailable	Carrier ID reader available
+// 151301358		Port1CarrierIDReaderAvailable	CarrierIDReaderAvailable	Carrier ID reader available
+// 151301359		Port3CarrierIDReaderAvailable	CarrierIDReaderAvailable	Carrier ID reader available
+// 151301360		Port2CarrierIDReaderUnavailable	CarrierIDReaderUnavailable	Carrier ID reader unavailable
+// 151301361		Port3CarrierIDReaderUnavailable	CarrierIDReaderUnavailable	Carrier ID reader unavailable
+// 151301362		Port1CarrierIDReaderUnavailable	CarrierIDReaderUnavailable	Carrier ID reader unavailable
+// 151301363		Port1UnknownCarrierID	UnknownCarrierID	CarrierID is unknown
+// 151301364		Port2UnknownCarrierID	UnknownCarrierID	CarrierID is unknown
+// 151301365		Port3UnknownCarrierID	UnknownCarrierID	CarrierID is unknown
+
+
+// 151301366		TransferChamberE87LPTST01	E87LPTST01	New load port created.
+#CEID_E87__LPTSM_02									151301367     // (OUT OF SERVICE --> IN SERVICE)
+// 151301367		TransferChamberE87LPTST02	E87LPTST02	Load port is going In Service.
+#CEID_E87__LPTSM_03									151301368     // (IN SERVICE --> OUT OT SERVICE)
+// 151301368		TransferChamberE87LPTST03	E87LPTST03	Load port going Out of Service.
+// 151301369		TransferChamberE87LPTST04	E87LPTST04	Load port is In Service.
+#CEID_E87__LPTSM_05__READY_TO_LOAD		151301370     // (TRANSFER READY --> READY TO LOAD)
+// 151301370		TransferChamberE87LPTST05	E87LPTST05	Load port is ready to load / unload.
+#CEID_E87__LPTSM_06									151301371     // (READY TO LOAD --> TRANSFER BLOCKED)
+// 151301371		TransferChamberE87LPTST06	E87LPTST06	Load port is loading a carrier.
+#CEID_E87__LPTSM_07									151301372     // (READY TO UNLOAD --> TRANSFER BLOCKED)
+// 151301372		TransferChamberE87LPTST07	E87LPTST07	Load port is unloading a carrier.
+#CEID_E87__LPTSM_08									151301373     // (TRANSFER BLOCKED --> READY TO LOAD)
+// 151301373		TransferChamberE87LPTST08	E87LPTST08	Load port is ready to load a carrier.
+#CEID_E87__LPTSM_09									151301374     // (TRANSFER BLOCKED --> READY TO UNLOAD)
+// 151301374		TransferChamberE87LPTST09	E87LPTST09	Load port is ready to unload a carrier
+#CEID_E87__LPTSM_10									151301375     // (TRANSFER BLOCKED --> TRANSFER READY)
+// 151301375		TransferChamberE87LPTST10	E87LPTST10	Load port is ready to load / unload after a transfer failure.
+
+
+// 151301376		TransferChamberE87LPACST01	E87LPACST01	System reset.  Go to last known access mode.
+#CEID_E87__AMSM_02									151301377     // (MANUAL --> AUTO)
+// 151301377		TransferChamberE87LPACST02	E87LPACST02	Going to Auto access mode.
+#CEID_E87__AMSM_03									151301378     // (AUTO --> MANUAL)
+// 151301378		TransferChamberE87LPACST03	E87LPACST03	Going to Manual access mode.
+
+
+#CEID_E87__LPRSM_01									151301379     // (no state --> NOT RESERVED)
+// 151301379		TransferChamberE87LPRST01	E87LPRST01	System reset.  Load port is not reserved.
+#CEID_E87__LPRSM_02									151301380     // (NOT RESERVED --> RESERVED)
+// 151301380		TransferChamberE87LPRST02	E87LPRST02	Load port is reserved for a carrier.
+#CEID_E87__LPRSM_03									151301381     // (RESERVED --> NOT RESERVED)
+// 151301381		TransferChamberE87LPRST03	E87LPRST03	Load port is not reserved.
+
+
+#CEID_E87__LPCASM_01								151301382     // (no state --> NOT ASSOCIATED)
+// 151301382		TransferChamberE87LPAST01	E87LPAST01	System reset.  Load port is not associated with any carrier.
+#CEID_E87__LPCASM_02								151301383     // (NOT ASSOCIATED --> ASSOCIATED)
+// 151301383		TransferChamberE87LPAST02	E87LPAST02	Load port is associated with a carrier.
+#CEID_E87__LPCASM_03								151301384     // (ASSOCIATED --> NOT ASSOCIATED)
+// 151301384		TransferChamberE87LPAST03	E87LPAST03	Load port is not associated with a carrier.
+#CEID_E87__LPCASM_04								151301385     // (ASSOCIATED --> ASSOCIATED)
+// 151301385		TransferChamberE87LPAST04	E87LPAST04	Load port is associated with a different carrier.
+
+
+// 151301386		TransferChamberCarrierClamped	CarrierClamped	Carrier clamped
+// 151301387		TransferChamberCarrierUnclamped	CarrierUnclamped	Carrier unclamped
+// 151301388		TransferChamberCarrierOpened	CarrierOpened	Carrier opened
+// 151301389		TransferChamberCarrierClosed	CarrierClosed	Carrier closed
+// 151301390		TransferChamberCarrierIDReadFail	CarrierIDReadFail	Carrier ID read fail
+// 151301391		TransferChamberCarrierIDReaderAvailable	CarrierIDReaderAvailable	Carrier ID reader available
+// 151301392		TransferChamberCarrierIDReaderUnavailable	CarrierIDReaderUnavailable	Carrier ID reader unavailable
+// 151301393		TransferChamberCarrierLocationChanged	CarrierLocationChanged	Carrier Location Has Changed
+// 151301394		TransferChamberUnknownCarrierID	UnknownCarrierID	CarrierID is unknown
+
+
+#CEID_E87__COSM_01				151301395		// (no state --> CARRIER)
+// 151301395		TransferChamberE87CST01	E87CST01	New carrier created.
+#CEID_E87__COSM_02				151301396		// (no state --> ID NOT READ)
+// 151301396		TransferChamberE87CST02	E87CST02	New carrier binding or notification occurred.
+#CEID_E87__COSM_03				151301397		// (no state --> ID WAITING FOR HOST)
+// 151301397		TransferChamberE87CST03	E87CST03	New carrier is waiting for host ID verification.
+#CEID_E87__COSM_04				151301398		// (no state --> ID VERIFICATION OK)
+// 151301398		TransferChamberE87CST04	E87CST04	New carrier ID is permitted by host.
+#CEID_E87__COSM_05				151301399		// (no state --> ID VERIFICATION FAIL)
+// 151301399		TransferChamberE87CST05	E87CST05	New carrier ID is not permitted by host.
+#CEID_E87__COSM_06				151301400		// (ID NOT READ --> ID VERIFICATION OK)
+// 151301400		TransferChamberE87CST06	E87CST06	Carrier ID was read and verified.
+#CEID_E87__COSM_07				151301401		// (ID NOT READ --> ID WAITING FOR HOST)
+// 151301401		TransferChamberE87CST07	E87CST07	Carrier ID was read unsuccessfully.
+#CEID_E87__COSM_08				151301402		// (ID WAITING FOR HOST --> ID VERIFICATION OK)
+// 151301402		TransferChamberE87CST08	E87CST08	Proceed with carrier ID.
+#CEID_E87__COSM_09				151301403		// (ID WAITING FOR HOST --> ID VERIFICATION FAIL)
+// 151301403		TransferChamberE87CST09	E87CST09	Cancel carrier ID.
+#CEID_E87__COSM_10				151301404		// (ID NOT READ --> ID WAITING FOR HOST)
+// 151301404		TransferChamberE87CST10	E87CST10	Carrier ID was unread.
+#CEID_E87__COSM_11				151301405		// (ID NOT READ --> ID VERIFICATION OK)
+// 151301405		TransferChamberE87CST11	E87CST11	Carrier ID was unread and verified.
+#CEID_E87__COSM_12				151301406		// (no state --> SLOT MAP NOT READ)
+// 151301406		TransferChamberE87CST12	E87CST12	New carrier slot map not read.
+#CEID_E87__COSM_13				151301407		// (SLOT MAP NOT READ --> SLOT MAP VERIFICATION OK)
+// 151301407		TransferChamberE87CST13	E87CST13	Carrier slot map was read and verified by equipment.
+#CEID_E87__COSM_14				151301408		// (SLOT MAP NOT READ --> MAP WAITING FOR HOST)
+// 151301408		TransferChamberE87CST14	E87CST14	Awaiting host verification of carrier slot map.
+#CEID_E87__COSM_15				151301409		// (WAITING FOR HOST --> SLOT MAP VERIFICATION OK)
+// 151301409		TransferChamberE87CST15	E87CST15	Proceed with carrier slot map.
+#CEID_E87__COSM_16				151301410		// (WAITING FOR HOST --> SLOT MAP VERIFICATION FAIL)
+// 151301410		TransferChamberE87CST16	E87CST16	Cancel carrier slot map.
+#CEID_E87__COSM_17				151301411		// (no state --> NOT ACCESSED)
+// 151301411		TransferChamberE87CST17	E87CST17	New carrier not accessed.
+#CEID_E87__COSM_18				151301412		// (NOT ACCESSED --> IN ACCESS)
+// 151301412		TransferChamberE87CST18	E87CST18	Carrier access has begun.
+#CEID_E87__COSM_19				151301413		// (IN ACCESS --> CARRIER COMPLETE)
+// 151301413		TransferChamberE87CST19	E87CST19	Carrier finished normally.
+#CEID_E87__COSM_20				4151301414		// (IN ACCESS --> CARRIER STOPPED)
+// 151301414		TransferChamberE87CST20	E87CST20	Carrier finished abnormally.
+#CEID_E87__COSM_21				151301415		// (CARRIER --> no state)
+// 151301415		TransferChamberE87CST21	E87CST21	Carrier deleted.
+
+
+// 151301419		Port1PDOOABPressed	OABPressed	LoadPort Operator Access Button has been pressed 
+// 151301420		Port2PDOOABPressed	OABPressed	LoadPort Operator Access Button has been pressed 
+// 151301421		Port3PDOOABPressed	OABPressed	LoadPort Operator Access Button has been pressed 
+// 151301537		AtmArmCoverWaferLoadingCompleted	CoverWaferLoadingCompleted	Cover Wafer Loading from  %s completed
+// 151301538		AtmArmCoverWaferLoadingStarts	CoverWaferLoadingStarts	Cover Wafer Loading from  %s started
+// 151301539		AtmArmCoverWaferUnLoadingCompleted	CoverWaferUnLoadingCompleted	Cover Wafer UnLoading from  %s completed
+// 151301540		AtmArmCoverWaferUnLoadingStarts	CoverWaferUnLoadingStarts	Cover Wafer UnLoading from  %s started
+// 151301543		TransferChamberDynamicAlignmentFileWriteTimes	DynamicAlignmentFileWriteTimes	Time to write(Module)(ms); %s
+// 151301544		AtmArmNotchAngleEvent	NotchAngleEvent	Metrology Notch Angle read for LotName:  %s  %s.
+// 151301557		AtmArmGeneralNotchAngleEvent	GeneralNotchAngleEvent	Notch Angle read for LotName:  %s  %s.
+// 151301590		AtmArmWaferPositionUnknownDueToTransferFailure	WaferPositionUnknownDueToTransferFailure	The wafer position is unknown due to a transfer failure. 
+// 151301591		TransferChamberWaferPositionUnknownDueToTransferFailure	WaferPositionUnknownDueToTransferFailure	The wafer position is unknown due to a transfer failure. 
+// 151301592		WaferBufferStation1DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151301593		WaferBufferStation1DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151301594		WaferBufferStation1EnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151301595		WaferBufferStation1EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151301596		WaferBufferStation1EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151301597		WaferBufferStation1ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151301598		WaferBufferStation1SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151301599		WaferBufferStation1SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151301600		WaferBufferStation1StandbyEntered	StandbyEntered	Entered stand-by state.
+// 151301601		WaferBufferStation2DisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151301602		WaferBufferStation2DisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151301603		WaferBufferStation2EnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151301604		WaferBufferStation2EnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151301605		WaferBufferStation2EnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151301606		WaferBufferStation2ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151301607		WaferBufferStation2SentMaterial	SentMaterial	Sent material %s from location %s.
+// 151301608		WaferBufferStation2SetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151301609		WaferBufferStation2StandbyEntered	StandbyEntered	Entered stand-by state.
+// 151301610		AlignerDisableForScheduling	DisableForScheduling	Disable for scheduling purposes %s because of %s.
+// 151301611		AlignerDisableLocationsForReceive	DisableLocationsForReceive	Disable material locations %s for receive because of %s.
+// 151301612		AlignerDisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151301613		AlignerEnableForScheduling	EnableForScheduling	Enable for scheduling purposes %s because of %s.
+// 151301614		AlignerEnableLocationsForReceive	EnableLocationsForReceive	Enable material locations %s for receive with tag %s.
+// 151301615		AlignerEnableLocationsForSend	EnableLocationsForSend	Enable material locations %s for send with tag %s.
+// 151301616		AlignerEnteringStandby	EnteringStandby	Entering stand-by state.
+// 151301617		AlignerEnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301618		AlignerMaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151301619		AlignerMaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151301620		AlignerMaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151301621		AlignerMaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151301622		AlignerNoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151301623		AlignerReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+// 151301624		AlignerSentMaterial	SentMaterial	Sent material %s from location %s.
+// 151301625		AlignerSetupCompleted	SetupCompleted	Setup completed for role %s- recipe %s- purpose %s.
+// 151301626		AlignerSetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151301627		AlignerStandbyEntered	StandbyEntered	Entered stand-by state.
+// 151301628		AtmArmAbortedAndNotProcessedWaferTransferredBackToBuffer	AbortedAndNotProcessedWaferTransferredBackToBuffer	An aborted and unprocessed wafer %s is transferred back to buffer
+// 151301629		AtmArmAlignmentStarted	AlignmentStarted	Aligner starts align wafer
+// 151301630		AtmArmAlignmentCompleted	AlignmentCompleted	Aligner completes align wafer
+// 151301631		WaferBufferStation1DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151301632		WaferBufferStation1EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151301633		WaferBufferStation1EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301634		WaferBufferStation1MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151301635		WaferBufferStation1MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151301636		WaferBufferStation1MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151301637		WaferBufferStation1MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151301638		WaferBufferStation1NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151301639		WaferBufferStation1SetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151301640		WaferBufferStation2DisableLocationsForSend	DisableLocationsForSend	Disable material locations %s for send because of %s.
+// 151301641		WaferBufferStation2EnteringStandby	EnteringStandby	Entering stand-by state.
+// 151301642		WaferBufferStation2EnvironmentChanged	EnvironmentChanged	Environment changed to %s.
+// 151301643		WaferBufferStation2MaintenanceNeeded	MaintenanceNeeded	Maintenance needed by %s for %s.
+// 151301644		WaferBufferStation2MaintenancePlansChanged	MaintenancePlansChanged	Maintenance plan changed for %s.
+// 151301645		WaferBufferStation2MaterialEndOfContainer	MaterialEndOfContainer	Material end of container for %s at port location %s
+// 151301646		WaferBufferStation2MaterialLostOrFound	MaterialLostOrFound	Material lost or found at %s.
+// 151301647		WaferBufferStation2NoMaintenanceNeeded	NoMaintenanceNeeded	No maintenance needed by %s.
+// 151301648		WaferBufferStation2SetupStarted	SetupStarted	Setup started for role %s- recipe %s- purpose %s.
+// 151301649		TMCImageMemoryMonitorMemoryMonitorUpdate	MemoryMonitorUpdate	Memory Monitor Update
+// 151301650		AtmArmDisplayQMDueToTransferFailure	DisplayQMDueToTransferFailure	Display QM at resource and partner locations due to a transfer failure. 
+// 151301651		TransferChamberDisplayQMDueToTransferFailure	DisplayQMDueToTransferFailure	Display QM at resource and partner locations due to a transfer failure. 
+// 151301660		Port1WaferMapAtCarrierEndCompleted	WaferMapAtCarrierEndCompleted	Wafer mapping at carrier end completed- Carrier ID = %s- Map(before process) = %s (%s) vs. Map(after process) = %s (%s)
+// 151301661		Port1WaferMapAtCarrierEndStarted	WaferMapAtCarrierEndStarted	Wafer mapping at carrier end started- Carrier ID = %s- Map(before process) = %s (%s)
+// 151301662		Port2WaferMapAtCarrierEndCompleted	WaferMapAtCarrierEndCompleted	Wafer mapping at carrier end completed- Carrier ID = %s- Map(before process) = %s (%s) vs. Map(after process) = %s (%s)
+// 151301663		Port2WaferMapAtCarrierEndStarted	WaferMapAtCarrierEndStarted	Wafer mapping at carrier end started- Carrier ID = %s- Map(before process) = %s (%s)
+// 151301664		Port3WaferMapAtCarrierEndCompleted	WaferMapAtCarrierEndCompleted	Wafer mapping at carrier end completed- Carrier ID = %s- Map(before process) = %s (%s) vs. Map(after process) = %s (%s)
+// 151301665		Port3WaferMapAtCarrierEndStarted	WaferMapAtCarrierEndStarted	Wafer mapping at carrier end started- Carrier ID = %s- Map(before process) = %s (%s)
+// 151301666		TransferChamberLightTowerBuzzerStateChange	BuzzerStateChange	Buzzer State has been changed 
+// 151301667		TransferChamberLightTowerLight1StateChange	Light1StateChange	Light1 State has been changed 
+// 151301668		TransferChamberLightTowerLight2StateChange	Light2StateChange	Light2 State has been changed 
+// 151301669		TransferChamberLightTowerLight3StateChange	Light3StateChange	Light3 State has been changed 
+// 151301670		TransferChamberLightTowerLight4StateChange	Light4StateChange	Light4 State has been changed 
+// 151301671		TransferChamberLightTowerLight5StateChange	Light5StateChange	Light5 State has been changed 
+// 151301673		AtmArmDynamicAlignmentFileWriteTimes	DynamicAlignmentFileWriteTimes	Time to write(Module)(ms); %s
+// 151301674		AtmArmDynamicAlignmentWaferCenterOffset	DynamicAlignmentWaferCenterOffset	Dynamic alignment wafer center offset.
+// 151301677		AlignerAbortInitialization	AbortInitialization	Abort System Initialization
+// 151301678		AlignerSetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301681		Port1SetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301682		Port2SetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301683		Port3SetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301684		AirLock1SetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301685		AirLock2SetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301688		AtmArmSetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301689		TransferChamberSetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301703		WaferBufferStation1AbortInitialization	AbortInitialization	Abort System Initialization
+// 151301753		WaferBufferStation1SetupAborted	SetupAborted	Setup aborted for role %s- recipe %s- purpose %s.
+// 151301780		AlignerAlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301783		Port1AlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301784		Port2AlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301785		Port3AlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301786		AirLock1AlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301787		AirLock1DegasProcessingCompleted	DegasProcessingCompleted	Degas Completed for materials %s.
+// 151301788		AirLock1DegasProcessingStarted	DegasProcessingStarted	Degas Started for materials %s.
+// 151301789		AirLock2AlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301790		AirLock2DegasProcessingCompleted	DegasProcessingCompleted	Degas Completed for materials %s.
+// 151301791		AirLock2DegasProcessingStarted	DegasProcessingStarted	Degas Started for materials %s.
+// 151301793		AtmArmAlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301794		TransferChamberAlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+// 151301861		AtmArmWaferTransferred	WaferTransferred	Wafer Transferred - Src and Dest: %s- MaterialNames: %s.
+// 151301862		TransferChamberWaferTransferred	WaferTransferred	Wafer Transferred - Src and Dest: %s- MaterialNames: %s.
+// 151301887		WaferBufferStation1AlarmRecoveredByAutoPM	AlarmRecoveredByAutoPM	Alarm %s recovered by AutoPM with recovery choice %s
+
+

@@ -1,0 +1,189 @@
+
+#GOI.CHANGE=     JGLEE--SYSTEM_MSG_BAR              JGLEE__SYSTEM_MSG_BAR
+#GOI.CHANGE=     JGLEE--ALARM_MSG_BAR               JGLEE__ALARM_MSG_BAR
+#GOI.CHANGE=     JGLEE--SignalTower_LED             JGLEE__SignalTower_LED
+#GOI.CHANGE=     JGLEE--Button_Level                JGLEE__Button_Level
+#GOI.CHANGE=     JGLEE--Channel_Link                JGLEE__Channel_Link
+#GOI.CHANGE=     JGLEE--Exe_Launcher                JGLEE__Exe_Launcher
+#GOI.CHANGE=     HDPN--TOP_ALARM_STATUS             JGLEE__TOP_ALARM_STATUS
+#GOI.CHANGE=     JGLEE--TOP_ALARM_STATUS            JGLEE__TOP_ALARM_STATUS
+#GOI.CHANGE=     JGLEE--TOP_JOB_ABORT               JGLEE__TOP_JOB_ABORT
+#GOI.CHANGE=     JGLEE--TOP_JOB_RESUME              JGLEE__TOP_JOB_RESUME
+#GOI.CHANGE=     JGLEE--TOP_JOB_PAUSE               JGLEE__TOP_JOB_PAUSE
+#GOI.CHANGE=     JGLEE--GoTo_Page                   JGLEE__GoTo_Page
+#GOI.CHANGE=     JGLEE--Back_Page                   JGLEE__Back_Page
+#GOI.CHANGE=     JGLEE--CTC_NAVI_4PM                JGLEE__CTC_NAVI_4PM
+#GOI.CHANGE=     JGLEE--CTC_NAVI_6PM                JGLEE__CTC_NAVI_6PM
+#GOI.CHANGE=     JGLEE--NAVI_STATUS                 JGLEE__NAVI_STATUS
+#GOI.CHANGE=     JGLEE--NAVI_TEXT                   JGLEE__NAVI_TEXT
+#GOI.CHANGE=     JGLEE--BOTTOM_PAGE_BUTTON          JGLEE__BOTTOM_PAGE_BUTTON
+#GOI.CHANGE=     JGLEE--Line_Area_Ctrl              JGLEE__Line_Area_Ctrl
+#GOI.CHANGE=     JGLEE_Percent_Bar                  JGLEE__Percent_Bar
+#GOI.CHANGE=     JGLEE--Macro_Move_File_Ctrl        JGLEE__Macro_Move_File_Ctrl
+#GOI.CHANGE=     JGLEE--Log_Replay_Ctrl             JGLEE__Log_Replay_Ctrl
+#GOI.CHANGE=     JgLee_MFC_Obj_Ctrl                 JGLEE__MFC_Obj_Ctrl
+#GOI.CHANGE=     JGLEE--LeakCheck_Log               JGLEE__LeakCheck_Log
+#GOI.CHANGE=     JGLEE--DirSelect                   JGLEE__DirSelect
+#GOI.CHANGE=     Screen_Capture                     JGLEE__Screen_Capture
+#GOI.CHANGE=     GPRJ__Wafer_Cassette_1Row          JGLEE__Wafer_CST_1Row
+#GOI.CHANGE=     GPRJ__Wafer_Cassette_Table         JGLEE__Wafer_CST_Table
+#GOI.CHANGE=     UI__Std_Loadlock_Status            JGLEE__Loadlock_State
+#GOI.CHANGE=     FA_Log_Ctrl                        JGLEE__FA_Log_Ctrl
+#GOI.CHANGE=     UI__VER_DOWN_VALVE                 JGLEE__VER_DOWN_VALVE
+#GOI.CHANGE=     UI__HORIZONTAL_VALVE               JGLEE__HORIZONTAL_VALVE
+#GOI.CHANGE=     UI__Wafer_Port_RecipeVIS           JGLEE__Wafer_Port_Recipe
+#GOI.CHANGE=     UI__ChannelMESSAGE                 JGLEE__Channel_Message
+#GOI.CHANGE=     IO_Obj_Channel                     JGLEE__IO_Obj_Channel
+#GOI.CHANGE=     Hidden_Channel_Ctrl                JGLEE__Hidden_Channel_Ctrl
+#GOI.CHANGE=     Hyper_Terminal_Ctrl                JGLEE__Hyper_Terminal
+
+
+#GP.CHANGE=      NEW-TOP_MAIN_BT                    JGLEE__TOP_MAIN_BT 
+#GP.CHANGE=      NEW-TOP_BELL_BT                    JGLEE__TOP_BELL_BT 
+#GP.CHANGE=      NEW-TOP_SCREEN_CAPTURE_BT          JGLEE__TOP_SCREEN_CAPTURE_BT 
+#GP.CHANGE=      NEW-TOP_LOGIN_BT                   JGLEE__TOP_LOGIN_BT 
+
+#GP.CHANGE=      NEW-MAIN_BTTM_OPER_BT              JGLEE__MAIN_BTTM_OPER_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_OPER_BT_OFF          JGLEE__MAIN_BTTM_OPER_BT_OFF
+#GP.CHANGE=      NEW-MAIN_BTTM_CFG_BT               JGLEE__MAIN_BTTM_CFG_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_PART_BT              JGLEE__MAIN_BTTM_PART_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_MAINT_BT             JGLEE__MAIN_BTTM_MAINT_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_DATALOG_BT           JGLEE__MAIN_BTTM_DATALOG_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_DATALOG_BT_OFF       JGLEE__MAIN_BTTM_DATALOG_BT_OFF
+#GP.CHANGE=      NEW-MAIN_BTTM_HOST_BT              JGLEE__MAIN_BTTM_HOST_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_HOST_BT_OFF          JGLEE__MAIN_BTTM_HOST_BT_OFF
+#GP.CHANGE=      NEW-MAIN_BTTM_UTILITY_BT           JGLEE__MAIN_BTTM_UTILITY_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_UTILITY_BT_OFF       JGLEE__MAIN_BTTM_UTILITY_BT_OFF
+#GP.CHANGE=      NEW-MAIN_BTTM_RECIPE_BT            JGLEE__MAIN_BTTM_RECIPE_BT 
+#GP.CHANGE=      NEW-MAIN_BTTM_RECIPE_BT_OFF        JGLEE__MAIN_BTTM_RECIPE_BT_OFF
+
+#GP.CHANGE=      ModuleID_Image                     JGLEE__ModuleID_Image 
+#GP.CHANGE=      LED_RECT                           JGLEE__LED_RECT 
+#GP.CHANGE=      DryPump                            JGLEE__DryPump 
+#GP.CHANGE=      LED_RECT1                          JGLEE__LED_RECT1 
+#GP.CHANGE=      LED_RED                            JGLEE__LED_RED 
+#GP.CHANGE=      STD_SV_ClOpUn                      JGLEE__STD_SV_ClOpUn 
+#GP.CHANGE=      AL_down_arrow                      JGLEE__AL_down_arrow
+#GP.CHANGE=      AL_left_arrow                      JGLEE__AL_left_arrow
+#GP.CHANGE=      AL_right_arrow                     JGLEE__AL_right_arrow
+#GP.CHANGE=      AL_up_arrow                        JGLEE__AL_up_arrow
+
+
+#IMG.CHANGE=     NEW-TOP_MAIN_ACTIVE.bmp            JGLEE__TOP_MAIN_ACTIVE.bmp 
+#IMG.CHANGE=     NEW-TOP_MAIN_INACTIVE.bmp          JGLEE__TOP_MAIN_INACTIVE.bmp 
+#IMG.CHANGE=     NEW-TOP_BELLON_INACTIVE.bmp        JGLEE__TOP_BELLON_INACTIVE.bmp 
+#IMG.CHANGE=     NEW-TOP_BELLON_ACTIVE.bmp          JGLEE__TOP_BELLON_ACTIVE.bmp 
+#IMG.CHANGE=     NEW-TOP_SCREEN SHOT_INACTIVE.bmp   JGLEE__TOP_SCREEN SHOT_INACTIVE.bmp
+#IMG.CHANGE=     NEW-TOP_SCREEN SHOT_ON.bmp         JGLEE__TOP_SCREEN SHOT_ON.bmp
+#IMG.CHANGE=     NEW-TOP_LOGIN_INACTIVE.bmp         JGLEE__TOP_LOGIN_INACTIVE.bmp
+#IMG.CHANGE=     NEW-TOP_LOGIN_ACTIVE.bmp           JGLEE__TOP_LOGIN_ACTIVE.bmp
+#IMG.CHANGE=     NEW-TOP_DATE_INACTIVE.bmp          JGLEE__TOP_DATE_INACTIVE.bmp 
+
+#IMG.CHANGE=     NEW-BOTTOM_OPERATE_DISABLE.bmp     JGLEE__BOTTOM_OPERATE_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_OPERATE_ACTIVE.bmp      JGLEE__BOTTOM_OPERATE_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_CONFIG_DISABLE.bmp      JGLEE__BOTTOM_CONFIG_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_CONFIG_ACTIVE.bmp       JGLEE__BOTTOM_CONFIG_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_PART_DISABLE.bmp        JGLEE__BOTTOM_PART_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_PART_ACTIVE.bmp         JGLEE__BOTTOM_PART_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_MAINT_DISABLE.bmp       JGLEE__BOTTOM_MAINT_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_MAINT_ACTIVE.bmp        JGLEE__BOTTOM_MAINT_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_DATALOG_DISABLE.bmp     JGLEE__BOTTOM_DATALOG_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_DATALOG_ACTIVE.bmp      JGLEE__BOTTOM_DATALOG_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_HOST_DISABLE.bmp        JGLEE__BOTTOM_HOST_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_HOST_ACTIVE.bmp         JGLEE__BOTTOM_HOST_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_UTILITY_DISABLE.bmp     JGLEE__BOTTOM_UTILITY_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_UTILITY_ACTIVE.bmp      JGLEE__BOTTOM_UTILITY_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_RECIPE_DISABLE.bmp      JGLEE__BOTTOM_RECIPE_DISABLE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_RECIPE_ACTIVE.bmp       JGLEE__BOTTOM_RECIPE_ACTIVE.bmp
+#IMG.CHANGE=     NEW-BOTTOM_HOST_off.bmp            JGLEE__BOTTOM_HOST_off.bmp
+#IMG.CHANGE=     NEW-BOTTOM_UTILITY_off.bmp         JGLEE__BOTTOM_UTILITY_off.bmp
+#IMG.CHANGE=     NEW-BOTTOM_OPERATE_off.bmp         JGLEE__BOTTOM_OPERATE_off.bmp
+
+#IMG.CHANGE=     CTC_Image.bmp                      JGLEE__CTC_Image.bmp 
+#IMG.CHANGE=     TMC_Image.bmp                      JGLEE__TMC_Image.bmp 
+#IMG.CHANGE=     PM1_Image.bmp                      JGLEE__PM1_Image.bmp 
+#IMG.CHANGE=     PM2_Image.bmp                      JGLEE__PM2_Image.bmp 
+#IMG.CHANGE=     PM3_Image.bmp                      JGLEE__PM3_Image.bmp 
+#IMG.CHANGE=     PM4_Image.bmp                      JGLEE__PM4_Image.bmp 
+#IMG.CHANGE=     PM5_Image.bmp                      JGLEE__PM5_Image.bmp 
+#IMG.CHANGE=     PM6_Image.bmp                      JGLEE__PM6_Image.bmp  
+
+#IMG.CHANGE=     LED_RECT_GREEN.bmp                 JGLEE__LED_RECT_GREEN.bmp 
+#IMG.CHANGE=     LED_RECT_GRAY.bmp                  JGLEE__LED_RECT_GRAY.bmp 
+#IMG.CHANGE=     STD_SIG_RED.bmp                    JGLEE__STD_SIG_RED.bmp 
+#IMG.CHANGE=     STD_SIG_BLACK.bmp                  JGLEE__STD_SIG_BLACK.bmp 
+#IMG.CHANGE=     STD_SIG_YELLOW.bmp                 JGLEE__STD_SIG_YELLOW.bmp 
+#IMG.CHANGE=     LED_RED_ACTIVE.bmp                 JGLEE__LED_RED_ACTIVE.bmp 
+#IMG.CHANGE=     LED_RED_INACTIVE.bmp               JGLEE__LED_RED_INACTIVE.bmp 
+
+#IMG.CHANGE=     Line_Y1.bmp                        JGLEE__Line_Y1.bmp 
+#IMG.CHANGE=     Line_X1.bmp                        JGLEE__Line_X1.bmp 
+#IMG.CHANGE=     Line_Mold.bmp                      JGLEE__Line_Mold.bmp 
+#IMG.CHANGE=     LINE_H2.bmp                        JGLEE__LINE_H2.bmp 
+#IMG.CHANGE=     Line_X.bmp                         JGLEE__Line_X.bmp 
+#IMG.CHANGE=     Line_Y.bmp                         JGLEE__Line_Y.bmp 
+
+#IMG.CHANGE=     AL_arrow_0.bmp                     JGLEE__AL_arrow_0.bmp
+#IMG.CHANGE=     AL_arrow_1.bmp                     JGLEE__AL_arrow_1.bmp
+#IMG.CHANGE=     AL_arrow_2.bmp                     JGLEE__AL_arrow_2.bmp
+#IMG.CHANGE=     AL_arrow_3.bmp                     JGLEE__AL_arrow_3.bmp
+#IMG.CHANGE=     AL_arrow_4.bmp                     JGLEE__AL_arrow_4.bmp
+
+#IMG.CHANGE=     Pump_On.bmp                        JGLEE__Pump_On.bmp
+#IMG.CHANGE=     Pump_Off.bmp                       JGLEE__Pump_Off.bmp 
+#IMG.CHANGE=     Pressure_Display.bmp               JGLEE__Pressure_Display.bmp 
+#IMG.CHANGE=     THV.bmp                            JGLEE__THV.bmp 
+#IMG.CHANGE=     TITLE.bmp                          JGLEE__TITLE.bmp 
+
+#IMG.CHANGE=     Popup_Wafer_Recipe_BgBox.bmp       JGLEE__Popup_Wafer_Recipe_BgBox.bmp 
+#IMG.CHANGE=     Popup_Wafer_Recipe_BgLine.bmp      JGLEE__Popup_Wafer_Recipe_BgLine.bmp 
+#IMG.CHANGE=     Popup_Wafer_Recipe_Bg.bmp          JGLEE__Popup_Wafer_Recipe_Bg.bmp
+#IMG.CHANGE=     Popup_middle.bmp                   JGLEE__Popup_Middle.bmp 
+#IMG.CHANGE=     Popup_top.bmp                      JGLEE__Popup_Top.bmp 
+#IMG.CHANGE=     Popup_bottom-1.bmp                 JGLEE__Popup_Bottom.bmp 
+#IMG.CHANGE=     Popup_Back_big.bmp                 JGLEE__Popup_Back.bmp 
+#IMG.CHANGE=     POPUP_BACK03.bmp                   JGLEE__Popup_Back_Cover.bmp 
+#IMG.CHANGE=     STD_POPUP_BACKGROUND.bmp           JGLEE__Popup_Gray.bmp
+#IMG.CHANGE=     NEW_POPUP_BACKGROUND.bmp           JGLEE__Popup_Gray.bmp
+
+
+#IMG.CHANGE=     NEW-BACK_CLIENT.bmp                JGLEE__BG_CLIENT_COMMON.bmp
+#IMG.CHANGE=     NEW-BACK_CLIENT_CONFIG.bmp         JGLEE__BB_CLIENT_CONFIG.bmp
+#IMG.CHANGE=     NEW-BACK_CLIENT_DATALOG.bmp        JGLEE__BG_CLIENT_DATALOG.bmp
+#IMG.CHANGE=     NEW-BACK_CLIENT_OPERATE.bmp        JGLEE__BG_CLIENT_OPERATE.bmp
+#IMG.CHANGE=     NEW-BACK_CLIENT_RECIPE.bmp         JGLEE__BG_CLIENT_RECIPE.bmp
+#IMG.CHANGE=     NEW-BACK_CLIENT_SUBTAB.bmp         JGLEE__BG_CLIENT_SUBTAB.bmp
+#IMG.CHANGE=     NEW-BACK_CLIENT_UTILITY.bmp        JGLEE__BG_CLIENT_UTILITY.bmp
+#IMG.CHANGE=     NEW-BACK_BOTTOM_MAIN.bmp           JGLEE__BG_BOTTOM_MAIN.bmp
+#IMG.CHANGE=     NEW-BACK_BOTTOM_NAVI.bmp           JGLEE__BG_BOTTOM_NAVI.bmp
+#IMG.CHANGE=     NEW-BACK_BOTTOM_SUB.bmp            JGLEE__BG_BOTTOM_SUB.bmp
+
+
+#GBG.CHANGE=     MUJIN-TOP                          JGLEE__CTC_TOP
+#GBG.CHANGE=     NEW-STD_CLIENT                     JGLEE__STD_CLIENT_COMMON
+#GBG.CHANGE=     NEW-STD_CLIENT_CONFIG              JGLEE__STD_CLIENT_CONFIG
+#GBG.CHANGE=     NEW-STD_CLIENT_DATALOG             JGLEE__STD_CLIENT_DATALOG
+#GBG.CHANGE=     NEW-STD_CLIENT_OPERATE             JGLEE__STD_CLIENT_OPERATE
+#GBG.CHANGE=     NEW-STD_CLIENT_RECIPE              JGLEE__STD_CLIENT_RECIPE
+#GBG.CHANGE=     NEW-STD_CLIENT_UTILITY             JGLEE__STD_CLIENT_UTILITY
+#GBG.CHANGE=     NEW-STD_SUBTAB                     JGLEE__STD_CLIENT_SUBTAB
+#GBG.CHANGE=     NEW-STD_BOTTOM_MAIN                JGLEE__STD_BOTTOM_MAIN
+#GBG.CHANGE=     NEW-STD_BOTTOM_NAVI                JGLEE__STD_BOTTOM_NAVI
+#GBG.CHANGE=     NEW-STD_BOTTOM_SUB                 JGLEE__STD_BOTTOM_SUB
+
+#GBG.CHANGE=     UI__Wafer_Recipe_BG                JGLEE__Wafer_Recipe_BG
+#GBG.CHANGE=     Popup                              JGLEE__Popup_Gray
+#GBG.CHANGE=     INITIAL_POPUP                      JGLEE__INITIAL_POPUP
+#GBG.CHANGE=     STD_POPUP_WIDE                     JGLEE__POPUP_WIDE
+#GBG.CHANGE=     UI__POPUP3                         JGLEE__POPUP3
+#GBG.CHANGE=     UI__POPUP20                        JGLEE__POPUP20
+#GBG.CHANGE=     UI__POPUP_JGLEE                    JGLEE__POPUP_STD
+#GBG.CHANGE=     UI__POPUP6                         JGLEE__POPUP6
+#GBG.CHANGE=     TMC_POPUP_BIG                      JGLEE__POPUP_BIG
+#GBG.CHANGE=     jglee_popup                        JGLEE__Popup_Console
+#GBG.CHANGE=     MAIN_CLIENT_DARKBLUE_TAB           JGLEE__CLIENT_DARKBLUE_TAB
+#GBG.CHANGE=     UI__POPUP30                        JGLEE__POPUP30
+#GBG.CHANGE=     UI__POPUP77                        JGLEE__POPUP77
+#GBG.CHANGE=     UI__POPUP25                        JGLEE__POPUP25
+#GBG.CHANGE=     UI__POPUP7_won                     JGLEE__POPUP7
+#GBG.CHANGE=     POPUP__CHUCK_CHART-ALPHA           JGLEE__POPUP_CHUCK_CHART

@@ -1,0 +1,99 @@
+
+//      MODULE 	VID  	[CHANNEL or COMMAND]	
+//					                       	                                 TYPE	  BYTE   UNIT	           DISPLAY_NAME
+                                                                                    
+                                                                                    
+#SVID   ##PM    1     ##FDC+APC_Valve_Position                       A      10     %               APC_Angle             
+       
+#SVID   ##PM    2     LOG_TMC.TMC_Buffer_Action_Pressure             A      10     torr            Buffer_ACT_Press             
+#SVID   ##PM    3     LOG_TMC.Buffer_Leak_Initial_Pressure           A      10     torr            Buffer_Initial_Pressure      
+#SVID   ##PM    4     LOG_TMC.TMC_Buffer_Leak_Rate                   A      10     mtorr/min       Buffer_Leak_Rate             
+
+#SVID   ##PM    5     LOG_TMC.TMC_Buffer_##PM_CF_X1                  A      10     __              Center_Finder_X1             
+#SVID   ##PM    6     LOG_TMC.TMC_Buffer_##PM_CF_Y1                  A      10     __              Center_Finder_X2             
+#SVID   ##PM    7     LOG_TMC.TMC_Buffer_##PM_CF_X2                  A      10     __              Center_Finder_Y1             
+#SVID   ##PM    8     LOG_TMC.TMC_Buffer_##PM_CF_Y2                  A      10     __              Center_Finder_Y2             
+
+#SVID   ##PM    9     ##FDC+Chmaber_Leak_Rate                        A      10     mtorr/min       Chamber_Leak_Rate            
+#SVID   ##PM    10    ##FDC+Chamber_Pressure_Reading                 A      10     mtorr           Chamber_Press                
+#SVID   ##PM    11    ##FDC+Chamber_Pressure_Setting                 A      10     %               Chamber_Pressure_SET         
+#SVID   ##PM    12    ##FDC+Chiller_Temperature                      A      10     degC            Chiller_temp_DPN             
+#SVID   ##PM    13    ##FDC+RF_Matcher_Current1                      A      10     A               Matcher Current_1                    
+#SVID   ##PM    14    ##FDC+RF_Matcher_Current2                      A      10     A               Matcher Current_2                    
+#SVID   ##PM    15    ##FDC+RF_Matcher_Current_Ratio                 A      10     __              Current_Ratio                
+#SVID   ##PM    16    ##FDC+ESC_Current                              A      10     mA              ESC_Current                  
+#SVID   ##PM    17    ##FDC+ESC_Voltate                              A      10     V               ESC_Voltage                  
+#SVID   ##PM    18    ##FDC+TMC_FFU_Difference_Pressure              A      10     torr            FFU_Difference_Press         
+#SVID   ##PM    19    ##FDC+TMC_FFU_Fan_Speed                        A      10     rpm             FFU_Fan_Speed                
+#SVID   ##PM    20    ##FDC+Pump_Foreline_Pressure                   A      10     torr            Forline_Pressure             
+#SVID   ##PM    21    ##FDC+He_Flow_Leak_Rate                        A      10     sccm            He_Leak_Rate                 
+#SVID   ##PM    22    ##FDC+He_Pressure_Back_Side_Reading            A      10     torr            He_Press_Back_side           
+#SVID   ##PM    23    ##FDC+He_Pressure_Back_Side_Setting            A      10     torr            He_Press_Back_side_Set       
+#SVID   ##PM    24    ##FDC+Heat_Exchanger_Status                    A      10     __              Heat_Exchanger_Status        
+#SVID   ##PM    25    ##FDC+ESC_Heater_Power                         A      10     W               Heater_Power                 
+#SVID   ##PM    26    ##FDC+ESC_Heater_Temperature_Reading           A      10     degC            Heater_Temp                  
+#SVID   ##PM    27    ##FDC+ESC_Over_Temperature                     A      10     degC            Heater_Temp_Over             
+
+#SVID   ##PM    34    ##FDC+OES_1                                    A      10     __              OES_1                        
+#SVID   ##PM    35    ##FDC+OES_10                                   A      10     __              OES_10                       
+#SVID   ##PM    36    ##FDC+OES_2                                    A      10     __              OES_2                        
+#SVID   ##PM    37    ##FDC+OES_3                                    A      10     __              OES_3                        
+#SVID   ##PM    38    ##FDC+OES_4                                    A      10     __              OES_4                        
+#SVID   ##PM    39    ##FDC+OES_5                                    A      10     __              OES_5                        
+#SVID   ##PM    40    ##FDC+OES_6                                    A      10     __              OES_6                        
+#SVID   ##PM    41    ##FDC+OES_7                                    A      10     __              OES_7                        
+#SVID   ##PM    42    ##FDC+OES_8                                    A      10     __              OES_8                        
+#SVID   ##PM    43    ##FDC+OES_9                                    A      10     __              OES_9                        
+#SVID   ##PM    44    ##FDC+RF_Output_Power_Reading                  A      10     W               Output_Power                 
+#SVID   ##PM    45    ##FDC+Matcher_CAP_Position                     A      10     %               Position_Capacitor           
+#SVID   ##PM    46    ##FDC+Matcher_Series_Position                  A      10     %               Position_Series              
+#SVID   ##PM    47    ##FDC+Matcher_Shunt_Position                   A      10     %               Position_Shunt               
+#SVID   ##PM    48    ##FDC+Matcher_Current2                         A      10     A               RF_CURRENT_2                 
+#SVID   ##PM    49    ##FDC+RF_Delivered_Power                       A      10     W               RF_Delivered_Power           
+#SVID   ##PM    50    ##FDC+RF_Duty_Cycle_Offset                     A      10     __              RF_Duty_Cycle_Offset         
+#SVID   ##PM    51    ##FDC+RF_Forward_Power                         A      10     W               RF_Forward_Power             
+#SVID   ##PM    52    ##FDC+RF_Output_Power_Setting                  A      10     W               RF_Power_Direct_Set          
+#SVID   ##PM    53    ##FDC+RF_Reflect_Power                         A      10     W               RF_Reflect_Power             
+#SVID   ##PM    54    ##FDC+Step_Number                              A      10     __              STEP_No                      
+#SVID   ##PM    55    ##FDC+Step_Time                                A      10     sec             Step_Time                    
+#SVID   ##PM    56    ##FDC+ESC_Heater_Temperature_Setting           A      10     degC            Temp_Set                     
+#SVID   ##PM    57    ##FDC+ESC_Heater_Temperature_Difference        A      10     degC            V_Heater_Temp_Difference     
+#SVID   ##PM    58    ##FDC+Chamber_Wall_Temperature_Reading         A      10     degC            Wall_Temp                    
+
+#SVID   ##PM    59    ##PHY_PM+LOTID                                 A      10     __              Z_KEY_LOTID                  
+#SVID   ##PM    60    ##PHY_PM+RECIPE                                A      10     __              Z_KEY_RECIPE_NAME            
+#SVID   ##PM    61    ##FDC+Z_KEY_STATUS                             A      10     __              Z_KEY_STATUS                 
+#SVID   ##PM    62    ##FDC+Z_KEY_STEP_NAME                          A      10     __              Z_KEY_STEP_NAME              
+#SVID   ##PM    63    ##PHY_PM+LPx.SLOT_ID                           A      10     __              Z_KEY_WFR_NO                 
+
+#SVID   ##PM    71    ##FDC+Gas_O2_Flow                              A      10     sccm            Gas_O2_Flow                  
+#SVID   ##PM    72    ##FDC+Gas_O2_Set                               A      10     sccm            Gas_O2_Set                 
+#SVID   ##PM    73    ##FDC+Gas_He_High_Flow                         A      10     sccm            Gas_He_High_Flow           
+#SVID   ##PM    74    ##FDC+Gas_He_High_Set                          A      10     sccm            Gas_He_High_Set            
+#SVID   ##PM    75    ##FDC+Gas_He_Low_Flow                          A      10     sccm            Gas_He_Low_Flow            
+#SVID   ##PM    76    ##FDC+Gas_He_Low_Set                           A      10     sccm            Gas_He_Low_Set             
+#SVID   ##PM    77    ##FDC+Gas_Ar_Flow                              A      10     sccm            Gas_Ar_Flow                
+#SVID   ##PM    78    ##FDC+Gas_Ar_Set                               A      10     sccm            Gas_Ar_Set                 
+#SVID   ##PM    79    ##FDC+Gas_N2_High_Flow                         A      10     sccm            Gas_N2_High_Flow           
+#SVID   ##PM    80    ##FDC+Gas_N2_High_Set                          A      10     sccm            Gas_N2_High_Set            
+#SVID   ##PM    81    ##FDC+Gas_N2_Low_Flow                          A      10     sccm            Gas_N2_Low_Flow            
+#SVID   ##PM    82    ##FDC+Gas_N2_Low_Set                           A      10     sccm            Gas_N2_Low_Set             
+#SVID   ##PM    83    ##FDC+Gas_H2_Flow                              A      10     sccm            Gas_H2_Flow                
+#SVID   ##PM    84    ##FDC+Gas_H2_Set                               A      10     sccm            Gas_H2_Set                 
+#SVID   ##PM    85    ##FDC+Gas_N2_PP2_Flow                          A      10     sccm            Gas_N2_PP2_Flow            
+#SVID   ##PM    86    ##FDC+Gas_N2_PP2_Set                           A      10     sccm            Gas_N2_PP2_Set       
+#SVID   ##PM    87    ##FDC+Gas_NH3_Flow                             A      10     sccm            Gas_NH3_Flow               
+#SVID   ##PM    88    ##FDC+Gas_NH3_Set                              A      10     sccm            Gas_NH3_Set                
+                                                                   
+#SVID   ##PM    89    ##FDC+Gas_O2_Pressure                          A      10     psi             Gas_O2_Pressure            
+#SVID   ##PM    90    ##FDC+Gas_He_High_Pressure                     A      10     psi             Gas_He_High_Pressure 
+#SVID   ##PM    91    ##FDC+Gas_He_Low_Pressure                      A      10     psi             Gas_He_Low_Pressure  
+#SVID   ##PM    92    ##FDC+Gas_Ar_Pressure                          A      10     psi             Gas_Ar_Pressure      
+#SVID   ##PM    93    ##FDC+Gas_N2_High_Pressure                     A      10     psi             Gas_N2_High_Pressure 
+#SVID   ##PM    94    ##FDC+Gas_N2_Low_Pressure                      A      10     psi             Gas_N2_Low_Pressure  
+#SVID   ##PM    95    ##FDC+Gas_H2_Pressure                          A      10     psi             Gas_H2_Pressure      
+#SVID   ##PM    96    ##FDC+Gas_N2_PP2_Pressure                      A      10     psi             Gas_N2_PP2_Pressure  
+#SVID   ##PM    97    ##FDC+Gas_NH3_Pressure                         A      10     psi             Gas_NH3_Pressure     
+                                                                  
+#SVID   ##PM   	98    ##FDC+Chamber_State                            A      10     __                  Chamber_State                 
+

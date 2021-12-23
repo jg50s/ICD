@@ -1,0 +1,16 @@
+#ID=1	1	LIGHT	PHY_MFC2 - MFC Flow Control Warning Range Alarm.
+#ID=2	2	LIGHT	PHY_MFC2 - MFC Flow Control Abort Range Alarm.
+#ID=3	3	LIGHT	PHY_MFC2 - During Idle, MFC Flow Control Warning Range Alarm.
+#ID=4	4	LIGHT	PHY_MFC2 - During Idle, MFC Flow Control Abort Range Alarm.
+#ID=5	5	LIGHT	PHY_MFC2 - Primary/Secondary Gas Valve Open Alarm.
+#ID=6	6	LIGHT	PHY_MFC2 - Primary/Secondary Gas Valve Open Alarm.
+#ID=7	7	LIGHT	PHY_MFC2 - Primary/Secondary Gas Valve Open Alarm.
+#ID=8	8	LIGHT	PHY_MFC2 - Primary/Secondary Gas Valve Open Alarm.
+#ID=9	9	LIGHT	PHY_MFC2 - Primary/Secondary Gas Valve Open Alarm.
+#ID=10	10	LIGHT	PHY_MFC2 - Primary/Secondary Gas Valve Open Alarm.
+#ID=11	11	LIGHT	PHY_MFC2 - Transducer Threshold Warning.
+#ID=12	12	LIGHT	PHY_MFC2 - Transducer Threshold Alarm.
+#ID=13	13	LIGHT	PHY_MFC2 - MFC Flow Control Aborted !.
+#ID=14	14	LIGHT	PHY_MFC2 - In MFC config page, MFC's use is selected to "NOT USE".
+#ID=15	15	LIGHT	PHY_MFC2 - "MFC flow timeout" occurred !
+#ID=16	16	LIGHT	PHY_MFC2 - "MFC close timeout" occurred !

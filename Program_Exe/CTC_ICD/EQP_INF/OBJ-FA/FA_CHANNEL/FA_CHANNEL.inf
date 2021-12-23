@@ -1,0 +1,47 @@
+/*
+	여기에 정의된 채널들은 FA & SCHEDULER가 사용합니다.
+*/
+
+
+//----------------------------------------------------------------------------------
+#JOB_STATUS   OPR_CTC_MODE+JOB.STATUS		// IDLE  PROCESS  END
+#JOB_CTRL     OPR_CTC_MODE+JOB.CTRL		// Control Channel
+
+#PM1_USE      DB_CFG+PM1.USE		// ENABLE ...
+#PM2_USE      DB_CFG+PM2.USE		// ENABLE ...
+#PM3_USE      DB_CFG+PM3.USE		// ENABLE ...
+#PM4_USE      DB_CFG+PM4.USE		// ENABLE ...
+#PM5_USE      DB_CFG+PM5.USE		// ENABLE ...
+#PM6_USE      DB_CFG+PM6.USE		// ENABLE ...
+//----------------------------------------------------------------------------------
+
+
+#DEFINE  ##LP     #LP1
+#DEFINE  ##ID     LP1
+#DEFINE  ##NAME   PHY_LP1
+#DEFINE  ##PORT   PORT1
+#INCLUDE  "FA_DEFINE__LPx.inf"
+
+#DEFINE  ##LP     #LP2
+#DEFINE  ##ID 	  LP2
+#DEFINE  ##NAME   PHY_LP2
+#DEFINE  ##PORT   PORT2	
+#INCLUDE  "FA_DEFINE__LPx.inf"
+
+#DEFINE  ##LP     #LP3
+#DEFINE  ##ID     LP3
+#DEFINE  ##NAME   PHY_LP3
+#DEFINE  ##PORT   PORT3	
+#INCLUDE  "FA_DEFINE__LPx.inf"
+
+#DEFINE  ##LP     #LP4
+#DEFINE  ##ID     LP4
+#DEFINE  ##NAME   PHY_LP4
+#DEFINE  ##PORT   PORT4	
+#INCLUDE  "FA_DEFINE__LPx.inf"
+
+#DEFINE  ##LP     #LP5
+#DEFINE  ##ID     LP5
+#DEFINE  ##NAME   PHY_LP5
+#DEFINE  ##PORT   PORT5	
+#INCLUDE  "FA_DEFINE__LPx.inf"

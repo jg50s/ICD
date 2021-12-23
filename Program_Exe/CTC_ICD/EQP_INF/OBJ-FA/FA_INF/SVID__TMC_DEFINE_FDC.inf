@@ -1,0 +1,67 @@
+#DEFINE_CHANNEL_NAME
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#SVID   ##PM    151801118	##CTC_DCOP+CHAMBER.SLOT.VALVE.ROBOT.RETRACT	A	8	__		Chamber_Slot_Valve_Robot_Retract		
+// 151801118	Chamber_Slot_Valve_Robot_Retract				A	8		
+
+#SVID   ##PM    151802027	##CTC_DCOP+CHAMBER.SLOT.VALVE.STATE		A	8	__		Chamber_Slot_Valve_State	
+// 151802027	Chamber_Slot_Valve_State					A	8		
+
+#SVID   ##PM    151802025	##CTC_DCOP+CHAMBER.SLOT.VALVE.STATE.CLOSE	A	8	__		Chamber_Slot_Valve_State_Close		
+// 151802025	Chamber_Slot_Valve_State_Close					A	8		
+
+#SVID   ##PM    151800853	##CTC_DCOP+AIRLOCK1.PRESS			A	8	__		Airlock1_Press			
+// 151800853	Airlock1_Press							A	8			
+                                                                                                        	
+#SVID   ##PM    151803366	##CTC_DCOP+AIRLOCK1.PUMP.TIME			A	8	__		Airlock1_Pump_Time		
+// 151803366	Airlock1_Pump_Time						A	8			
+                                                                                                        	
+#SVID   ##PM    151800993	##CTC_DCOP+AIRLOCK1.SLOT.STATE			A	4	__		Airlock1_Slot_State			
+// 151800993	Airlock1_Slot_State						A	4			
+                                                                                                        	
+#SVID   ##PM    151803367	##CTC_DCOP+AIRLOCK1.VENT.TIME			A	8	__		Airlock1_Vent_Time		
+// 151803367	Airlock1_Vent_Time						A	8			
+                                                                                                        	
+#SVID   ##PM    151800911	##CTC_DCOP+AIRLOCK2.PRESS			A	8	__		Airlock2_Press		
+// 151800911	Airlock2_Press							A	8			
+                                                                                                        	
+#SVID   ##PM    151803370	##CTC_DCOP+AIRLOCK2.PUMP.TIME			A	8	__		Airlock2_Pump_Time			
+// 151803370	Airlock2_Pump_Time						A	8			
+                                                                                                        	
+#SVID   ##PM    151801000	##CTC_DCOP+AIRLOCK2.SLOT.STATE			A	4	__		Airlock2_Slot_State			
+// 151801000	Airlock2_Slot_State						A	4			
+                                                                                                        	
+#SVID   ##PM    151803371	##CTC_DCOP+AIRLOCK2.VENT.TIME			A	8	__		Airlock2_Vent_Time		
+// 151803371	Airlock2_Vent_Time						A	8			
+                                                                                                        	
+#SVID   ##PM    151804335	##CTC_DCOP+DIFFERENTIAL.PRESS			A	8	__		Differential_Press			
+// 151804335	Differential_Press						A	8			
+                                                                                                        	
+#SVID   ##PM    151802751	##CTC_DCOP+FFU.LEFT.RPM				A	8	__		FFU_Left_RPM			
+// 151802751	FFU_Left_RPM							A	8			
+                                                                                                        	
+#SVID   ##PM    151802752	##CTC_DCOP+FFU.RIGHT.RPM			A	8	__		FFU_Right_RPM		
+// 151802752	FFU_Right_RPM							A	8			
+                                                                                                        	
+#SVID   ##PM    151800848	##CTC_DCOP+NUMERIC.PRESS.READING		A	8	__		NumericPressureReading			
+// 151800848	NumericPressureReading						A	8			
+                                                                                                        	
+#SVID   ##PM    151800906	##CTC_DCOP+NUMERIC.PRESS.READING2		A	8	__		NumericPressureReading2		
+// 151800906	NumericPressureReading2						A	8			
+                                                                                                        	
+#SVID   ##PM    151800520	##CTC_DCOP+TM.PRESS				A	4	__		TM_Press		
+// 151800520	TM_Press							A	4			
+                                                                                                        	
+#SVID   ##PM    151800515	##CTC_DCOP+TM.UPC				A	8	__		TM_UPC		
+// 151800515	TM_UPC								A	8			
+                                                                                                        	
+#SVID   ##PM    800977		##CTC_DCOP+UI.MEMORY.USAGE			A	8	__		UI_Memory_Usage		
+// 800977	UI_Memory_Usage							A	8			
+
+#SVID   ##PM    151802054	 ##CTC_DCOP+DA.RT.OFFSET				A	4	  __		DA_RT_Offset	
+// 151802054	DA_RT_Offset							A	4		
+
+#SVID   ##PM    151800481	##CTC_DCOP+SLOT.STATE				A	4	__		Slot_State	
+// 151800481	Slot_State							A	4		
+

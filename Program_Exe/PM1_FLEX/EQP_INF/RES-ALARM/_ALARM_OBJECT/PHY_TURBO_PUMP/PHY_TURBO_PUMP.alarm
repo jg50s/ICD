@@ -1,0 +1,4 @@
+#ID=1	1	LIGHT	PHY_TURBO_PUMP : Forline Pressure Unstable Alarm.
+#ID=2	2	LIGHT	PHY_TURBO_PUMP : Can't turn TMP-pump on.
+#ID=3	3	LIGHT	PHY_TURBO_PUMP : Can't turn TMP-pump on.
+#ID=4	4	LIGHT	PHY_TURBO_PUMP : Foreline-Valve Interlock For ATM Pressure.

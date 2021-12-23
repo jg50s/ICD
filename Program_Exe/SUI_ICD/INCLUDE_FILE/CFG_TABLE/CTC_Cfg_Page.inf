@@ -1,0 +1,695 @@
+
+//======================================================================================================================
+#PAGE      "SCHEDULER"
+
+#GROUP     "Scheduler"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    OPR_CTC_MODE+CFG.SCH.MODE                       "Scheduler Mode"                              
+#CFG_ITEM    OPR_CTC_MODE+CFG.SCH.REF                        "Scheduler Ref."                               
+
+
+#GROUP     "Cycle.Test"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    OPR_CTC_MODE+CYCLE.LIMIT                        "Cycle Limit"                                  
+#CFG_ITEM    OPR_CTC_MODE+CYCLE.MODE                         "Cycle Mode"                                   
+#CFG_ITEM    DB_CFG+CFG.CYCLE.FOUP.MODE                      "Foup Mode"                                    
+
+
+#GROUP     "WAC"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+SCH.WAC.WAFER.DELAY.SEC                  "Wafer Delay (sec)"                            
+#CFG_ITEM    DB_CFG+SCH.WAC.WAFER.POSITION                   "Wafer Position"                                 
+
+
+#GROUP     "ATM-Robot"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.SCH.LLx_COMPMATER.USE         "LLx Compmater Use"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.SCH.LLx_PREPMATER.USE         "LLx Prepmater Use"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBA.PUMP_TIME             "LL1 Pumping Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBA.VENT_TIME             "LL1 Venting Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBB.PUMP_TIME             "LL2 Pumping Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBB.VENT_TIME             "LL2 Venting Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBC.PUMP_TIME             "LL3 Pumping Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBC.VENT_TIME             "LL3 Venting Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBD.PUMP_TIME             "LL4 Pumping Time"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.PHY.LBD.VENT_TIME             "LL4 Venting Time"
+
+
+#GROUP     "VAC-Robot"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.CONCURRENT.MARGIN_TIME        "Concurrent Margin"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.SCH.LLx_COMPMATER.USE         "LLx Compmater Use"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.SCH.LLx_PREPMATER.USE         "LLx Prepmater Use"
+
+
+#GROUP     "Wafer-Delay"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.PICK_DELAY.FLAG               "Delay Mode"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.PICK_DELAY.FIRST_TIME         "1st Wafer Time"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.PICK_DELAY.SECOND_TIME        "2nd Wafer Time"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.PICK_DELAY.THIRD_TIME         "3rd Wafer Time"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.PICK_DELAY.REMAIN_TIME        "Remaining Wafers"
+
+
+//======================================================================================================================
+#PAGE      "AUTO_PM"
+
+#GROUP     "PMx"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+AUTO_PM.IDLE.REF.COUNT                   "Idle Ref. Count"
+#CFG_ITEM    DB_CFG+AUTO_PM.IDLE.REF.TIME                    "Idle Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+AUTO_PM.IDLE.USE.FLAG                    "Idle Auto_PM Use"
+#CFG_ITEM    DB_CFG+AUTO_PM.TIME.MODE                        "Auto_PM Control Mode"
+
+#GROUP     "PM1"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM1+AUTO_PM.START_TIME.HOUR                 "Start Hour"
+#CFG_ITEM    PHY_PM1+AUTO_PM.START_TIME.MINUTE               "Start Munute"
+#CFG_ITEM    PHY_PM1+AUTO_PM.START_TIME.SECOND               "Start Second"
+#CFG_ITEM    PHY_PM1+AUTO_PM.END_TIME.HOUR                   "End Hour"
+#CFG_ITEM    PHY_PM1+AUTO_PM.END_TIME.MINUTE                 "End Minute"
+#CFG_ITEM    PHY_PM1+AUTO_PM.END_TIME.SECOND                 "End Second"
+#CFG_ITEM    PHY_PM1+AUTO_PM.WARNING.TIMEOUT                 "Warning Timeout (sec)"
+#CFG_ITEM    PHY_PM1+AUTO_PM.WARNING.USE_MODE                "Warning Use"
+#CFG_ITEM    PHY_PM1+CFG.AUTO_PM.MODE                        "Auto_PM Control Mode"
+#CFG_ITEM    PHY_PM1+CFG.AUTO_PM.REF_TIME                    "Auto_PM Ref. Time"
+#CFG_ITEM    PHY_PM1+CFG.AUTO_PM.USE_MODE                    "Auto_PM Use"
+
+#GROUP     "PM2"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM2+AUTO_PM.START_TIME.HOUR                 "Start Hour"
+#CFG_ITEM    PHY_PM2+AUTO_PM.START_TIME.MINUTE               "Start Munute"
+#CFG_ITEM    PHY_PM2+AUTO_PM.START_TIME.SECOND               "Start Second"
+#CFG_ITEM    PHY_PM2+AUTO_PM.END_TIME.HOUR                   "End Hour"
+#CFG_ITEM    PHY_PM2+AUTO_PM.END_TIME.MINUTE                 "End Minute"
+#CFG_ITEM    PHY_PM2+AUTO_PM.END_TIME.SECOND                 "End Second"
+#CFG_ITEM    PHY_PM2+AUTO_PM.WARNING.TIMEOUT                 "Warning Timeout (sec)"
+#CFG_ITEM    PHY_PM2+AUTO_PM.WARNING.USE_MODE                "Warning Use"
+#CFG_ITEM    PHY_PM2+CFG.AUTO_PM.MODE                        "Auto_PM Control Mode"
+#CFG_ITEM    PHY_PM2+CFG.AUTO_PM.REF_TIME                    "Auto_PM Ref. Time"
+#CFG_ITEM    PHY_PM2+CFG.AUTO_PM.USE_MODE                    "Auto_PM Use"
+
+#GROUP     "PM3"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM3+AUTO_PM.START_TIME.HOUR                 "Start Hour"
+#CFG_ITEM    PHY_PM3+AUTO_PM.START_TIME.MINUTE               "Start Munute"
+#CFG_ITEM    PHY_PM3+AUTO_PM.START_TIME.SECOND               "Start Second"
+#CFG_ITEM    PHY_PM3+AUTO_PM.END_TIME.HOUR                   "End Hour"
+#CFG_ITEM    PHY_PM3+AUTO_PM.END_TIME.MINUTE                 "End Minute"
+#CFG_ITEM    PHY_PM3+AUTO_PM.END_TIME.SECOND                 "End Second"
+#CFG_ITEM    PHY_PM3+AUTO_PM.WARNING.TIMEOUT                 "Warning Timeout (sec)"
+#CFG_ITEM    PHY_PM3+AUTO_PM.WARNING.USE_MODE                "Warning Use"
+#CFG_ITEM    PHY_PM3+CFG.AUTO_PM.MODE                        "Auto_PM Control Mode"
+#CFG_ITEM    PHY_PM3+CFG.AUTO_PM.REF_TIME                    "Auto_PM Ref. Time"
+#CFG_ITEM    PHY_PM3+CFG.AUTO_PM.USE_MODE                    "Auto_PM Use"
+
+#GROUP     "PM4"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM4+AUTO_PM.START_TIME.HOUR                 "Start Hour"
+#CFG_ITEM    PHY_PM4+AUTO_PM.START_TIME.MINUTE               "Start Munute"
+#CFG_ITEM    PHY_PM4+AUTO_PM.START_TIME.SECOND               "Start Second"
+#CFG_ITEM    PHY_PM4+AUTO_PM.END_TIME.HOUR                   "End Hour"
+#CFG_ITEM    PHY_PM4+AUTO_PM.END_TIME.MINUTE                 "End Minute"
+#CFG_ITEM    PHY_PM4+AUTO_PM.END_TIME.SECOND                 "End Second"
+#CFG_ITEM    PHY_PM4+AUTO_PM.WARNING.TIMEOUT                 "Warning Timeout (sec)"
+#CFG_ITEM    PHY_PM4+AUTO_PM.WARNING.USE_MODE                "Warning Use"
+#CFG_ITEM    PHY_PM4+CFG.AUTO_PM.MODE                        "Auto_PM Control Mode"
+#CFG_ITEM    PHY_PM4+CFG.AUTO_PM.REF_TIME                    "Auto_PM Ref. Time"
+#CFG_ITEM    PHY_PM4+CFG.AUTO_PM.USE_MODE                    "Auto_PM Use"
+
+#GROUP     "PM5"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM5+AUTO_PM.START_TIME.HOUR                 "Start Hour"
+#CFG_ITEM    PHY_PM5+AUTO_PM.START_TIME.MINUTE               "Start Munute"
+#CFG_ITEM    PHY_PM5+AUTO_PM.START_TIME.SECOND               "Start Second"
+#CFG_ITEM    PHY_PM5+AUTO_PM.END_TIME.HOUR                   "End Hour"
+#CFG_ITEM    PHY_PM5+AUTO_PM.END_TIME.MINUTE                 "End Minute"
+#CFG_ITEM    PHY_PM5+AUTO_PM.END_TIME.SECOND                 "End Second"
+#CFG_ITEM    PHY_PM5+AUTO_PM.WARNING.TIMEOUT                 "Warning Timeout (sec)"
+#CFG_ITEM    PHY_PM5+AUTO_PM.WARNING.USE_MODE                "Warning Use"
+#CFG_ITEM    PHY_PM5+CFG.AUTO_PM.MODE                        "Auto_PM Control Mode"
+#CFG_ITEM    PHY_PM5+CFG.AUTO_PM.REF_TIME                    "Auto_PM Ref. Time"
+#CFG_ITEM    PHY_PM5+CFG.AUTO_PM.USE_MODE                    "Auto_PM Use"
+
+#GROUP     "PM6"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM6+AUTO_PM.START_TIME.HOUR                 "Start Hour"
+#CFG_ITEM    PHY_PM6+AUTO_PM.START_TIME.MINUTE               "Start Munute"
+#CFG_ITEM    PHY_PM6+AUTO_PM.START_TIME.SECOND               "Start Second"
+#CFG_ITEM    PHY_PM6+AUTO_PM.END_TIME.HOUR                   "End Hour"
+#CFG_ITEM    PHY_PM6+AUTO_PM.END_TIME.MINUTE                 "End Minute"
+#CFG_ITEM    PHY_PM6+AUTO_PM.END_TIME.SECOND                 "End Second"
+#CFG_ITEM    PHY_PM6+AUTO_PM.WARNING.TIMEOUT                 "Warning Timeout (sec)"
+#CFG_ITEM    PHY_PM6+AUTO_PM.WARNING.USE_MODE                "Warning Use"
+#CFG_ITEM    PHY_PM6+CFG.AUTO_PM.MODE                        "Auto_PM Control Mode"
+#CFG_ITEM    PHY_PM6+CFG.AUTO_PM.REF_TIME                    "Auto_PM Ref. Time"
+#CFG_ITEM    PHY_PM6+CFG.AUTO_PM.USE_MODE                    "Auto_PM Use"
+
+
+//======================================================================================================================
+#PAGE      "CLEAN_RCP"
+
+#GROUP     "Vacuum_Robot"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.CLEAN_MATERIAL.FLAG           "Clean Material Use"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.MATERIAL_COUNT.FLAG           "Clean Material Count"
+
+#GROUP     "PM1"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM1+CFG.CLEAN.FREQUENCY                     "Clean Frequency"
+#CFG_ITEM    PHY_PM1+CFG.CLEAN.RF.REF_TIME                   "Clean RF Ref. Time (sec)"
+#CFG_ITEM    PHY_PM1+CFG.CLEAN.RF.USE                        "Clean RF Ref. Use"
+#CFG_ITEM    PHY_PM1+CFG.CLEAN.USE                           "Clean Use"
+
+#GROUP     "PM2"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM2+CFG.CLEAN.FREQUENCY                     "Clean Frequency"
+#CFG_ITEM    PHY_PM2+CFG.CLEAN.RF.REF_TIME                   "Clean RF Ref. Time (sec)"
+#CFG_ITEM    PHY_PM2+CFG.CLEAN.RF.USE                        "Clean RF Ref. Use"
+#CFG_ITEM    PHY_PM2+CFG.CLEAN.USE                           "Clean Use"
+
+#GROUP     "PM3"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM3+CFG.CLEAN.FREQUENCY                     "Clean Frequency"
+#CFG_ITEM    PHY_PM3+CFG.CLEAN.RF.REF_TIME                   "Clean RF Ref. Time (sec)"
+#CFG_ITEM    PHY_PM3+CFG.CLEAN.RF.USE                        "Clean RF Ref. Use"
+#CFG_ITEM    PHY_PM3+CFG.CLEAN.USE                           "Clean Use"
+
+#GROUP     "PM4"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM4+CFG.CLEAN.FREQUENCY                     "Clean Frequency"
+#CFG_ITEM    PHY_PM4+CFG.CLEAN.RF.REF_TIME                   "Clean RF Ref. Time (sec)"
+#CFG_ITEM    PHY_PM4+CFG.CLEAN.RF.USE                        "Clean RF Ref. Use"
+#CFG_ITEM    PHY_PM4+CFG.CLEAN.USE                           "Clean Use"
+
+#GROUP     "PM5"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM5+CFG.CLEAN.FREQUENCY                     "Clean Frequency"
+#CFG_ITEM    PHY_PM5+CFG.CLEAN.RF.REF_TIME                   "Clean RF Ref. Time (sec)"
+#CFG_ITEM    PHY_PM5+CFG.CLEAN.RF.USE                        "Clean RF Ref. Use"
+#CFG_ITEM    PHY_PM5+CFG.CLEAN.USE                           "Clean Use"
+
+#GROUP     "PM6"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM6+CFG.CLEAN.FREQUENCY                     "Clean Frequency"
+#CFG_ITEM    PHY_PM6+CFG.CLEAN.RF.REF_TIME                   "Clean RF Ref. Time (sec)"
+#CFG_ITEM    PHY_PM6+CFG.CLEAN.RF.USE                        "Clean RF Ref. Use"
+#CFG_ITEM    PHY_PM6+CFG.CLEAN.USE                           "Clean Use"
+
+
+//======================================================================================================================
+#PAGE      "DUMMY_PORT"
+
+#GROUP     "Vacuum_Robot"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.WAFER_PER_PMC       "Wafer Per PMC"    
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.COUNT.WARNING.ALARM   "Warning Wafer Ref. Count"
+
+#GROUP     "PMx Use"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PMC.IDLE.MODE       "PM7 Idle Mode"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PMC.IDLE.TIME       "PMx Use Time"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PMC.PROC.TYPE       "PMx Process Type"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PM1.IDLE.TIME       "PM1 Idle Time (sec)"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PM2.IDLE.TIME       "PM2 Idle Time (sec)"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PM3.IDLE.TIME       "PM3 Idle Time (sec)"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PM4.IDLE.TIME       "PM4 Idle Time (sec)"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PM5.IDLE.TIME       "PM5 Idle Time (sec)"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.PM6.IDLE.TIME       "PM6 Idle Time (sec)"
+
+#GROUP     "Dummy Port"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT1     "Slot01 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT2     "Slot02 : Max. Count" 
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT3     "Slot03 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT4     "Slot04 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT5     "Slot05 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT6     "Slot06 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT7     "Slot07 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT8     "Slot08 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT9     "Slot09 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT10    "Slot10 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT11    "Slot11 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT12    "Slot12 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT13    "Slot13 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT14    "Slot14 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT15    "Slot15 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT16    "Slot16 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT17    "Slot17 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT18    "Slot18 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT19    "Slot19 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT20    "Slot21 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT21    "Slot21 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT22    "Slot22 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT23    "Slot23 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT24    "Slot24 : Max. Count"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.MAX_COUNT.SLOT25    "Slot25 : Max. Count"
+
+#GROUP     "Dummy Port"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.MODE            "Dummy_Port Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT1           "Slot01 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT2           "Slot02 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT3           "Slot03 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT4           "Slot04 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT5           "Slot05 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT6           "Slot06 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT7           "Slot07 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT8           "Slot08 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT9           "Slot09 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT10          "Slot10 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT11          "Slot11 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT12          "Slot12 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT13          "Slot13 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT14          "Slot14 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT15          "Slot15 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT16          "Slot16 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT17          "Slot17 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT18          "Slot18 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT19          "Slot19 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT20          "Slot20 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT21          "Slot21 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT22          "Slot22 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT23          "Slot23 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT24          "Slot24 : Dummy Use"
+#CFG_ITEM    OPR_CTC_MODE+CFG.DUMMY_PORT.USE.SLOT25          "Slot25 : Dummy Use"
+
+
+//======================================================================================================================
+#PAGE      "LEAK_CHECK"
+
+#GROUP     "Common Parameter"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+LEAK_CHECK.IDLE.USE.FLAG                 "Leak-Check Use"
+#CFG_ITEM    DB_CFG+LEAK_CHECK.IDLE.REF.COUNT                "Leak-Check Ref. Wafer Count"
+#CFG_ITEM    DB_CFG+LEAK_CHECK.IDLE.REF.TIME                 "Leak-Check Ref. Wafer Time"
+#CFG_ITEM    DB_CFG+LEAK_CHECK.TIME.MODE                     "Leak-Check Time Mode"
+#CFG_ITEM    DB_CFG+CTC.LEAK_CHECK.USE.FLAG                  "Leak-Check CTC Control Use"
+
+#GROUP     "PM1"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM1+CFG.AUTO.LEAK_CHECK.USE_MODE            "Auto Leak-Check Use"
+#CFG_ITEM    PHY_PM1+CFG.AUTO.LEAK_CHECK.MODE                "Auto Leak-Check Control Mode"
+#CFG_ITEM    PHY_PM1+CFG.AUTO.LEAK_CHECK.REF_TIME            "Auto Leak-Check Ref. Time (sec)"
+#CFG_ITEM    PHY_PM1+CTC.LEAK_CHECK.OVER_PUMPING.TIME        "Leak-Check Over-Pumping Time (sec)"
+#CFG_ITEM    PHY_PM1+CTC.LEAK_CHECK.STABLE.TIME              "Leak-Check Stable Time (sec)"
+#CFG_ITEM    PHY_PM1+CTC.LEAK_CHECK.TIME.MIN                 "Leak-Check Time (minute)" 
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.START_TIME.HOUR              "Leak-Check Start Time (hour)"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.START_TIME.MINUTE            "Leak-Check Start Time (minute)"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.START_TIME.SECOND            "Leak-Check Start Time (sec)"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.END_TIME.HOUR                "Leak-Check End Time (hour)"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.END_TIME.MINUTE              "Leak-Check End Time (minute)"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.END_TIME.SECOND              "Leak-Check End Time (sec)"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.WARNING.USE_MODE             "Leak-Check Warning Use"
+#CFG_ITEM    PHY_PM1+LEAK_CHECK.WARNING.TIMEOUT              "Leak-Check Warning Timeout (sec)"
+
+#GROUP     "PM2"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM2+CFG.AUTO.LEAK_CHECK.USE_MODE            "Auto Leak-Check Use"
+#CFG_ITEM    PHY_PM2+CFG.AUTO.LEAK_CHECK.MODE                "Auto Leak-Check Control Mode"
+#CFG_ITEM    PHY_PM2+CFG.AUTO.LEAK_CHECK.REF_TIME            "Auto Leak-Check Ref. Time (sec)"
+#CFG_ITEM    PHY_PM2+CTC.LEAK_CHECK.OVER_PUMPING.TIME        "Leak-Check Over-Pumping Time (sec)"
+#CFG_ITEM    PHY_PM2+CTC.LEAK_CHECK.STABLE.TIME              "Leak-Check Stable Time (sec)"
+#CFG_ITEM    PHY_PM2+CTC.LEAK_CHECK.TIME.MIN                 "Leak-Check Time (minute)" 
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.START_TIME.HOUR              "Leak-Check Start Time (hour)"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.START_TIME.MINUTE            "Leak-Check Start Time (minute)"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.START_TIME.SECOND            "Leak-Check Start Time (sec)"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.END_TIME.HOUR                "Leak-Check End Time (hour)"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.END_TIME.MINUTE              "Leak-Check End Time (minute)"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.END_TIME.SECOND              "Leak-Check End Time (sec)"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.WARNING.USE_MODE             "Leak-Check Warning Use"
+#CFG_ITEM    PHY_PM2+LEAK_CHECK.WARNING.TIMEOUT              "Leak-Check Warning Timeout (sec)"
+
+#GROUP     "PM3"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM3+CFG.AUTO.LEAK_CHECK.USE_MODE            "Auto Leak-Check Use"
+#CFG_ITEM    PHY_PM3+CFG.AUTO.LEAK_CHECK.MODE                "Auto Leak-Check Control Mode"
+#CFG_ITEM    PHY_PM3+CFG.AUTO.LEAK_CHECK.REF_TIME            "Auto Leak-Check Ref. Time (sec)"
+#CFG_ITEM    PHY_PM3+CTC.LEAK_CHECK.OVER_PUMPING.TIME        "Leak-Check Over-Pumping Time (sec)"
+#CFG_ITEM    PHY_PM3+CTC.LEAK_CHECK.STABLE.TIME              "Leak-Check Stable Time (sec)"
+#CFG_ITEM    PHY_PM3+CTC.LEAK_CHECK.TIME.MIN                 "Leak-Check Time (minute)" 
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.START_TIME.HOUR              "Leak-Check Start Time (hour)"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.START_TIME.MINUTE            "Leak-Check Start Time (minute)"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.START_TIME.SECOND            "Leak-Check Start Time (sec)"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.END_TIME.HOUR                "Leak-Check End Time (hour)"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.END_TIME.MINUTE              "Leak-Check End Time (minute)"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.END_TIME.SECOND              "Leak-Check End Time (sec)"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.WARNING.USE_MODE             "Leak-Check Warning Use"
+#CFG_ITEM    PHY_PM3+LEAK_CHECK.WARNING.TIMEOUT              "Leak-Check Warning Timeout (sec)"
+
+#GROUP     "PM4"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM4+CFG.AUTO.LEAK_CHECK.USE_MODE            "Auto Leak-Check Use"
+#CFG_ITEM    PHY_PM4+CFG.AUTO.LEAK_CHECK.MODE                "Auto Leak-Check Control Mode"
+#CFG_ITEM    PHY_PM4+CFG.AUTO.LEAK_CHECK.REF_TIME            "Auto Leak-Check Ref. Time (sec)"
+#CFG_ITEM    PHY_PM4+CTC.LEAK_CHECK.OVER_PUMPING.TIME        "Leak-Check Over-Pumping Time (sec)"
+#CFG_ITEM    PHY_PM4+CTC.LEAK_CHECK.STABLE.TIME              "Leak-Check Stable Time (sec)"
+#CFG_ITEM    PHY_PM4+CTC.LEAK_CHECK.TIME.MIN                 "Leak-Check Time (minute)" 
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.START_TIME.HOUR              "Leak-Check Start Time (hour)"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.START_TIME.MINUTE            "Leak-Check Start Time (minute)"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.START_TIME.SECOND            "Leak-Check Start Time (sec)"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.END_TIME.HOUR                "Leak-Check End Time (hour)"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.END_TIME.MINUTE              "Leak-Check End Time (minute)"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.END_TIME.SECOND              "Leak-Check End Time (sec)"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.WARNING.USE_MODE             "Leak-Check Warning Use"
+#CFG_ITEM    PHY_PM4+LEAK_CHECK.WARNING.TIMEOUT              "Leak-Check Warning Timeout (sec)"
+
+#GROUP     "PM5"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM5+CFG.AUTO.LEAK_CHECK.USE_MODE            "Auto Leak-Check Use"
+#CFG_ITEM    PHY_PM5+CFG.AUTO.LEAK_CHECK.MODE                "Auto Leak-Check Control Mode"
+#CFG_ITEM    PHY_PM5+CFG.AUTO.LEAK_CHECK.REF_TIME            "Auto Leak-Check Ref. Time (sec)"
+#CFG_ITEM    PHY_PM5+CTC.LEAK_CHECK.OVER_PUMPING.TIME        "Leak-Check Over-Pumping Time (sec)"
+#CFG_ITEM    PHY_PM5+CTC.LEAK_CHECK.STABLE.TIME              "Leak-Check Stable Time (sec)"
+#CFG_ITEM    PHY_PM5+CTC.LEAK_CHECK.TIME.MIN                 "Leak-Check Time (minute)" 
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.START_TIME.HOUR              "Leak-Check Start Time (hour)"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.START_TIME.MINUTE            "Leak-Check Start Time (minute)"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.START_TIME.SECOND            "Leak-Check Start Time (sec)"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.END_TIME.HOUR                "Leak-Check End Time (hour)"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.END_TIME.MINUTE              "Leak-Check End Time (minute)"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.END_TIME.SECOND              "Leak-Check End Time (sec)"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.WARNING.USE_MODE             "Leak-Check Warning Use"
+#CFG_ITEM    PHY_PM5+LEAK_CHECK.WARNING.TIMEOUT              "Leak-Check Warning Timeout (sec)"
+
+#GROUP     "PM6"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_PM6+CFG.AUTO.LEAK_CHECK.USE_MODE            "Auto Leak-Check Use"
+#CFG_ITEM    PHY_PM6+CFG.AUTO.LEAK_CHECK.MODE                "Auto Leak-Check Control Mode"
+#CFG_ITEM    PHY_PM6+CFG.AUTO.LEAK_CHECK.REF_TIME            "Auto Leak-Check Ref. Time (sec)"
+#CFG_ITEM    PHY_PM6+CTC.LEAK_CHECK.OVER_PUMPING.TIME        "Leak-Check Over-Pumping Time (sec)"
+#CFG_ITEM    PHY_PM6+CTC.LEAK_CHECK.STABLE.TIME              "Leak-Check Stable Time (sec)"
+#CFG_ITEM    PHY_PM6+CTC.LEAK_CHECK.TIME.MIN                 "Leak-Check Time (minute)" 
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.START_TIME.HOUR              "Leak-Check Start Time (hour)"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.START_TIME.MINUTE            "Leak-Check Start Time (minute)"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.START_TIME.SECOND            "Leak-Check Start Time (sec)"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.END_TIME.HOUR                "Leak-Check End Time (hour)"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.END_TIME.MINUTE              "Leak-Check End Time (minute)"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.END_TIME.SECOND              "Leak-Check End Time (sec)"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.WARNING.USE_MODE             "Leak-Check Warning Use"
+#CFG_ITEM    PHY_PM6+LEAK_CHECK.WARNING.TIMEOUT              "Leak-Check Warning Timeout (sec)"
+
+
+//======================================================================================================================
+#PAGE      "SIGNAL_TOWER"
+
+#GROUP     "Red"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.RED.DEFAULT.LIGHT_COLOR    "Default Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.RED.STATUS1.LIGHT_COLOR    "State1 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.RED.STATUS2.LIGHT_COLOR    "State2 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.RED.STATUS3.LIGHT_COLOR    "State3 Mode"
+
+#GROUP     "Yellow"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.AMBER.DEFAULT.LIGHT_COLOR  "Default Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS1.LIGHT_COLOR  "State1 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS2.LIGHT_COLOR  "State2 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS3.LIGHT_COLOR  "State3 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS4.LIGHT_COLOR  "State4 Mode"
+
+#GROUP     "Green"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.GREEN.DEFAULT.LIGHT_COLOR  "Default Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.GREEN.STATUS1.LIGHT_COLOR  "State1 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.GREEN.STATUS2.LIGHT_COLOR  "State2 Mode"
+
+#GROUP     "Blue"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.BLUE.DEFAULT.LIGHT_COLOR   "Default Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.BLUE.STATUS1.LIGHT_COLOR   "State1 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.BLUE.STATUS2.LIGHT_COLOR   "State2 Mode"
+#CFG_ITEM    MNG_SIGNAL_TOWER+CFG.BLUE.STATUS3.LIGHT_COLOR   "State3 Mode"
+
+#GROUP     "etc."
+
+// Command   Channel                                               Name                             Comment
+#CFG_ITEM    MNG_ALARM_CTRL+CFG.ALM_WARNING.LIGHT_RED.APPLY_MODE   "When warning-state, Light Red Control"  
+#CFG_ITEM    MNG_ALARM_CTRL+CFG.MSG.BOX.BUZZER.MODE                "When message-popup, Buzzer Control"
+
+
+//======================================================================================================================
+#PAGE      "SYS_LLx"
+
+#GROUP     "LL1"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+LBA.USE.FLAG                             "Use"
+#CFG_ITEM    DB_CFG+LBA.SLOT_MAX                             "Slot Max."
+#CFG_ITEM    DB_CFG+LBA.SLOT1_MODE                           "Slot01 Control Mode"
+#CFG_ITEM    DB_CFG+LBA.SLOT1_STATUS                         "Slot01 Use"
+#CFG_ITEM    DB_CFG+LBA.SLOT2_MODE                           "Slot02 Control Mode"
+#CFG_ITEM    DB_CFG+LBA.SLOT2_STATUS                         "Slot02 Use"
+#CFG_ITEM    DB_CFG+LBA.FNC_MODE                             "Control Type"
+#CFG_ITEM    DB_CFG+LBA.IDLE.STATUS                          "Idle Pressure State"
+#CFG_ITEM    DB_CFG+LBA.MODE_TYPE                            "Transfer Type"
+#CFG_ITEM    DB_CFG+LBA.CFG.COMPMATER.USE                    "COMPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBA.CFG.PREPMATER.USE                    "PREPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBA.PRE_RCP.CFG.USE                      "Pre-Recipe Use"
+#CFG_ITEM    DB_CFG+LBA.PRE_RCP.CFG.WAFER_COUNT              "Pre-Recipe Wafer Count"
+#CFG_ITEM    DB_CFG+LBA.POST_RCP.CFG.USE                     "Post-Recipe Use"
+#CFG_ITEM    DB_CFG+LBA.POST_RCP.CFG.WAFER_COUNT             "Post-Recipe Wafer Count"
+
+#GROUP     "LL2"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+LBB.USE.FLAG                             "Use"
+#CFG_ITEM    DB_CFG+LBB.SLOT_MAX                             "Slot Max."
+#CFG_ITEM    DB_CFG+LBB.SLOT1_MODE                           "Slot01 Control Mode"
+#CFG_ITEM    DB_CFG+LBB.SLOT1_STATUS                         "Slot01 Use"
+#CFG_ITEM    DB_CFG+LBB.SLOT2_MODE                           "Slot02 Control Mode"
+#CFG_ITEM    DB_CFG+LBB.SLOT2_STATUS                         "Slot02 Use"
+#CFG_ITEM    DB_CFG+LBB.FNC_MODE                             "Control Type"
+#CFG_ITEM    DB_CFG+LBB.IDLE.STATUS                          "Idle Pressure State"
+#CFG_ITEM    DB_CFG+LBB.MODE_TYPE                            "Transfer Type"
+#CFG_ITEM    DB_CFG+LBB.CFG.COMPMATER.USE                    "COMPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBB.CFG.PREPMATER.USE                    "PREPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBB.PRE_RCP.CFG.USE                      "Pre-Recipe Use"
+#CFG_ITEM    DB_CFG+LBB.PRE_RCP.CFG.WAFER_COUNT              "Pre-Recipe Wafer Count"
+#CFG_ITEM    DB_CFG+LBB.POST_RCP.CFG.USE                     "Post-Recipe Use"
+#CFG_ITEM    DB_CFG+LBB.POST_RCP.CFG.WAFER_COUNT             "Post-Recipe Wafer Count"
+
+#GROUP     "LL3"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+LBC.USE.FLAG                             "Use"
+#CFG_ITEM    DB_CFG+LBC.SLOT_MAX                             "Slot Max."
+#CFG_ITEM    DB_CFG+LBC.SLOT1_MODE                           "Slot01 Control Mode"
+#CFG_ITEM    DB_CFG+LBC.SLOT1_STATUS                         "Slot01 Use"
+#CFG_ITEM    DB_CFG+LBC.SLOT2_MODE                           "Slot02 Control Mode"
+#CFG_ITEM    DB_CFG+LBC.SLOT2_STATUS                         "Slot02 Use"
+#CFG_ITEM    DB_CFG+LBC.FNC_MODE                             "Control Type"
+#CFG_ITEM    DB_CFG+LBC.IDLE.STATUS                          "Idle Pressure State"
+#CFG_ITEM    DB_CFG+LBC.MODE_TYPE                            "Transfer Type"
+#CFG_ITEM    DB_CFG+LBC.CFG.COMPMATER.USE                    "COMPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBC.CFG.PREPMATER.USE                    "PREPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBC.PRE_RCP.CFG.USE                      "Pre-Recipe Use"
+#CFG_ITEM    DB_CFG+LBC.PRE_RCP.CFG.WAFER_COUNT              "Pre-Recipe Wafer Count"
+#CFG_ITEM    DB_CFG+LBC.POST_RCP.CFG.USE                     "Post-Recipe Use"
+#CFG_ITEM    DB_CFG+LBC.POST_RCP.CFG.WAFER_COUNT             "Post-Recipe Wafer Count"
+
+#GROUP     "LL4"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+LBD.USE.FLAG                             "Use"
+#CFG_ITEM    DB_CFG+LBD.SLOT_MAX                             "Slot Max."
+#CFG_ITEM    DB_CFG+LBD.SLOT1_MODE                           "Slot01 Control Mode"
+#CFG_ITEM    DB_CFG+LBD.SLOT1_STATUS                         "Slot01 Use"
+#CFG_ITEM    DB_CFG+LBD.SLOT2_MODE                           "Slot02 Control Mode"
+#CFG_ITEM    DB_CFG+LBD.SLOT2_STATUS                         "Slot02 Use"
+#CFG_ITEM    DB_CFG+LBD.FNC_MODE                             "Control Type"
+#CFG_ITEM    DB_CFG+LBD.IDLE.STATUS                          "Idle Pressure State"
+#CFG_ITEM    DB_CFG+LBD.MODE_TYPE                            "Transfer Type"
+#CFG_ITEM    DB_CFG+LBD.CFG.COMPMATER.USE                    "COMPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBD.CFG.PREPMATER.USE                    "PREPMATER Handshake use" 
+#CFG_ITEM    DB_CFG+LBD.PRE_RCP.CFG.USE                      "Pre-Recipe Use"
+#CFG_ITEM    DB_CFG+LBD.PRE_RCP.CFG.WAFER_COUNT              "Pre-Recipe Wafer Count"
+#CFG_ITEM    DB_CFG+LBD.POST_RCP.CFG.USE                     "Post-Recipe Use"
+#CFG_ITEM    DB_CFG+LBD.POST_RCP.CFG.WAFER_COUNT             "Post-Recipe Wafer Count"
+
+#GROUP     "STx Common"
+
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.APPLY.MODE            "STx Shceduler Mode"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.TRANSFER.MODE         "STx Transfer Mode"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.PRE.ALIGN.MODE        "STx Pre-Align Mode"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.WAFER.CLEAN.TIME      "STx Clean Time (sec)"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.WAFER.PICK.MODE       "STx Wafer Pick Mode"
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.USE_DURING_MAINT_MODE    "When maint mode, Stx Use" 
+#CFG_ITEM    FNC_ATM_ROBOT+CFG.BUFFER.OUT_MODE.BUFFER_TO_LPo   "Wafer Pick-Mode In STx" 
+#CFG_ITEM    DB_CFG+CFG.BUFFER.JOB.WAIT.MODULE                 "Wafer Waiting Module"
+#CFG_ITEM    PHY_BFF1+CFG.SLOT.MAX                          "ST1 Slot Max." 
+#CFG_ITEM    PHY_BFF1+CFG.USE.FLAG                          "ST1 Use"
+#CFG_ITEM    PHY_BFF2+CFG.SLOT.MAX                          "ST2 Slot Max."
+#CFG_ITEM    PHY_BFF2+CFG.USE.FLAG                          "ST2 Use"
+
+
+//======================================================================================================================
+#PAGE      "SYS_PMx"
+
+#GROUP     "Job_Start_Ready"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.CTRL.MODE            "Control Mode"
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.PM1.USE              "PM1 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.PM2.USE              "PM2 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.PM3.USE              "PM3 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.PM4.USE              "PM4 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.PM5.USE              "PM5 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_START_READY.PM6.USE              "PM6 Use"
+
+#GROUP     "Job_End_Ready"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+CFG.JOB_END_READY.PM1.USE                "PM1 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_END_READY.PM2.USE                "PM2 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_END_READY.PM3.USE                "PM3 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_END_READY.PM4.USE                "PM4 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_END_READY.PM5.USE                "PM5 Use"
+#CFG_ITEM    DB_CFG+CFG.JOB_END_READY.PM6.USE                "PM6 Use"
+
+#GROUP     "Job_End_Ready"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+PM1.SLOT.MAX                             "PM1 Slot Max."
+#CFG_ITEM    DB_CFG+PM2.SLOT.MAX                             "PM2 Slot Max."
+#CFG_ITEM    DB_CFG+PM3.SLOT.MAX                             "PM3 Slot Max."
+#CFG_ITEM    DB_CFG+PM4.SLOT.MAX                             "PM4 Slot Max."
+#CFG_ITEM    DB_CFG+PM5.SLOT.MAX                             "PM5 Slot Max."
+#CFG_ITEM    DB_CFG+PM6.SLOT.MAX                             "PM6 Slot Max."
+
+#GROUP     "System Idle"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.TIME.SEC                 "Ref. Idle Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM1.SEC                  "PM1 Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM1.USE                  "PM1 Use"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM2.SEC                  "PM2 Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM2.USE                  "PM2 Use"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM3.SEC                  "PM3 Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM3.USE                  "PM3 Use"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM4.SEC                  "PM4 Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM4.USE                  "PM4 Use"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM5.SEC                  "PM5 Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM5.USE                  "PM5 Use"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM6.SEC                  "PM6 Ref. Time (sec)"
+#CFG_ITEM    DB_CFG+SYSTEM_IDLE.CFG.PM6.USE                  "PM6 Use"
+
+#GROUP     "Pre_Recipe"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM1.USE                      "PM1 Use"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM1.WAFER_COUNT              "PM1 Wafer Count"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM2.USE                      "PM2 Use"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM2.WAFER_COUNT              "PM2 Wafer Count"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM3.USE                      "PM3 Use"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM3.WAFER_COUNT              "PM3 Wafer Count"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM4.USE                      "PM4 Use"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM4.WAFER_COUNT              "PM4 Wafer Count"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM5.USE                      "PM5 Use"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM5.WAFER_COUNT              "PM5 Wafer Count"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM6.USE                      "PM6 Use"
+#CFG_ITEM    DB_CFG+PRE_RCP.CFG.PM6.WAFER_COUNT              "PM6 Wafer Count"
+
+#GROUP     "Post_Recipe"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM1.USE                     "PM1 Use"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM1.WAFER_COUNT             "PM1 Wafer Count"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM2.USE                     "PM2 Use"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM2.WAFER_COUNT             "PM2 Wafer Count"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM3.USE                     "PM3 Use"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM3.WAFER_COUNT             "PM3 Wafer Count"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM4.USE                     "PM4 Use"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM4.WAFER_COUNT             "PM4 Wafer Count"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM5.USE                     "PM5 Use"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM5.WAFER_COUNT             "PM5 Wafer Count"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM6.USE                     "PM6 Use"
+#CFG_ITEM    DB_CFG+POST_RCP.CFG.PM6.WAFER_COUNT             "PM6 Wafer Count"
+
+
+//======================================================================================================================
+#PAGE      "SYSTEM"
+
+#GROUP     "Transfer Parameter"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+TRANSFER.MODE                            "Transfer Mode"
+#CFG_ITEM    DB_CFG+REF.ATM.PRESSURE                         "ATM Ref. Pressure (torr)"
+#CFG_ITEM    DB_CFG+REF.VAC.PRESSURE                         "VAC Ref. Pressure (torr)"
+
+#GROUP     "Initial Parameter"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    FNC_PMC_SYS+CFG.INIT_MODE                       "PMC Initial Mode"
+#CFG_ITEM    FNC_TMC_SYS+CFG.INIT_MODE                       "TMC Initial Mode"
+
+#GROUP     "LPx"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_LP1+CFG.USE                                 "LP1 Use"
+#CFG_ITEM    PHY_LP1+CFG.SLOT.MAX                            "LP1 Slot Max."
+#CFG_ITEM    PHY_LP2+CFG.USE                                 "LP2 Use"
+#CFG_ITEM    PHY_LP2+CFG.SLOT.MAX                            "LP2 Slot Max."
+#CFG_ITEM    PHY_LP3+CFG.USE                                 "LP3 Use"
+#CFG_ITEM    PHY_LP3+CFG.SLOT.MAX                            "LP3 Slot Max."
+#CFG_ITEM    OPR_CTC_MODE+CFG.LPx.PICK_MODE                  "LPx Pick Mode"
+
+#GROUP     "AL1"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+CFG.AL1.USE.FLAG                         "Use"
+#CFG_ITEM    DB_CFG+CFG.AL1.SLOT01.USE.FLAG                  "Slot01 Use"
+#CFG_ITEM    DB_CFG+CFG.AL1.SLOT02.USE.FLAG                  "Slot02 Use"
+
+#GROUP     "VAC-Robot Parameter"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    PHY_VAC_ROBOT+CFG.A.ARM.USE.FLAG                "Arm-A Use"
+#CFG_ITEM    PHY_VAC_ROBOT+CFG.B.ARM.USE.FLAG                "Arm-B Use"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.SCH.EXCHANGE.PRIORITY         "Exchange Priority"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.SCH.PMC_RECIPE_TYPE           "PMC Recipe Type"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.ARM_TYPE.PICK_FROM_LBX        "Pick From LLx"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.ARM_TYPE.PICK_FROM_PMC        "Pick From PMC"
+#CFG_ITEM    FNC_VAC_ROBOT+CFG.ROBOT.ARM_DIRECTION_TYPE      "Arm Direction"
+
+#GROUP     "Scheduler Parameter"
+
+// Command   Channel                                         Name                                   Comment
+#CFG_ITEM    DB_CFG+SCH.ALIGN.DEVICE                         "Align Device"
+#CFG_ITEM    DB_CFG+SCH.MAP.DEVICE                           "Mapping Device"
+#CFG_ITEM    PHY_ATM_ROBOT+TARGET.LLx.MODE                   "LLx Target Mode"
+

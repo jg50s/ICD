@@ -1,0 +1,1081 @@
+
+//-------------------------------------------------------------------------------------------------
+// Command List ... 
+// #DEFINE_ID_OFFSET     ??? 
+// #DEFINE     ??? xxx 
+// #DEFINE_EQPID     ??? 
+// #DEFINE_TOOLID     ??? 
+// #DEFINE_UNITID     ??? 
+
+//-------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------
+#TMC_ECID_RANGE     10001   20000
+#PM1_ECID_RANGE     -1   -1
+#PM2_ECID_RANGE     -1   -1
+#PM3_ECID_RANGE     -1   -1
+#PM4_ECID_RANGE     -1   -1
+#PM5_ECID_RANGE     -1   -1
+#PM6_ECID_RANGE     -1   -1
+#PM7_ECID_RANGE     -1   -1
+#PM8_ECID_RANGE     -1   -1
+#PM9_ECID_RANGE     -1   -1
+
+//-------------------------------------------------------------------------------------------------
+
+#LIST_DEFINE   FALSE_TRUE   (0.000)
+     FALSE   0
+     TRUE   1
+     TRUE   255
+#LIST_END
+
+
+#LIST_DEFINE   CMMD_MODE   (5.000)
+     DISABLE   1
+     NOT_USE   3
+     ENABLE   5
+#LIST_END
+
+
+#LIST_DEFINE   INITIAL_STATE   (4.000)
+     EQUIPMENT_OFFLINE   1
+     ATTEMPT_ONLINE   2
+     HOST_OFFLINE   3
+     ONLINE_LOCAL   4
+     ONLINE_REMOTE   5
+#LIST_END
+
+
+#LIST_DEFINE   OFFLINE_STATE   (1.000)
+     EQUIPMENT_OFFLINE   1
+     HOST_OFFLINE   3
+#LIST_END
+
+
+#LIST_DEFINE   DISABLE_ENABLE   (0.000)
+     DISABLE   0
+     ENABLE   1
+     ENABLE   255
+#LIST_END
+
+
+
+//-------------------------------------------------------------------------------------------------
+// DEFINE LIST ...
+1)   "#DEFINE_NAME#+"   "EX_ROBOT_ECID."
+2)   "##OBJ_STAGE"   "PHY_STAGE2"
+3)   "##OBJ_BRUSH"   "FNC_BRUSH2"
+4)   "##OBJ_NOZZLE"   "FNC_BRUSH2_NOZZLE"
+5)   "##OBJ_LFC"   "FNC_LFC_BRUSH2"
+6)   "OBJ_STAGE"   "PHY_STAGE4"
+7)   "OBJ_SPIN"   "Phy_RS232_MECAPION_WAFER_SPIN_IPA"
+8)   "OBJ_NOZZLE"   "FNC_IPA_NOZZLE"
+9)   "OBJ_LFC"   "NCC_LFC"
+10)   "##OBJ_SHUTTLE"   "FNC_SHUTTLE"
+11)   "##OBJ_INTERLOCK"   "Cleaner_Interlock"
+12)   "OBJ_HEAD_ROTATION"   "FNC_HEAD_03_ROTATION"
+13)   "OBJ_HEAD_SWEEP"   "FNC_HEAD_03_SWEEP"
+14)   "OBJ_PLATEN"   "FNC_PLATEN_03_ROTATION"
+15)   "OBJ_COND_ROTATION"   "FNC_COND_03_ROTATION"
+16)   "OBJ_COND_SWEEP"   "FNC_COND_03_SWEEP"
+17)   "OBJ_CORSS"   "FNC_CROSS_ROTATION"
+18)   "OBJ_EXCHANGER"   "FNC_WAFER_X_CHANGER"
+19)   "OBJ_HCLU"   "DRV_HCLU"
+
+
+
+//-------------------------------------------------------------------------------------------------
+INDEX   ECID   COMMAND-STR   CHANNEL-FLAG (CHANNE-NAME)   UNIT   FMT-TYPE   FMT-BYTE   DEFAULT   MIN   MAX   NAME     (EqpID)(ToolID)(UnitID)
+   주의 사항)  FMT-TYPE이 F인 경우 MIN으로 설정된 값의 소수점 자리수를 전체 데이타의 소수점 자리수로 사용한다. 
+               FMT-TYPE으로 설정할 수 있은 값은 A, F, BOOL있다. 
+               일반적으로 Analog 값은 F로 설정하고 Digital 값은 A로 설정한다. 
+
+
+    1)           1           #DEVICE_ID     CHANNEL-NO   (FA_E30_CTRL+CFG.DEVICEID)        No.          U[4]        0.0        0.0    32767.0 "DEVICE-ID"     ()()()
+
+    2)           2         #S6F9_REPORT     CHANNEL-NO   (__)        ___          U[1]        0.0        0.0        1.0 "S6F9_REPORT"     ()()()
+
+    3)          11                  #T1     CHANNEL-NO   (FA_E30_CTRL+CFG.T1)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T1"     ()()()
+
+    4)          12                  #T2     CHANNEL-NO   (FA_E30_CTRL+CFG.T2)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T2"     ()()()
+
+    5)          13                  #T3     CHANNEL-NO   (FA_E30_CTRL+CFG.T3)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T3"     ()()()
+
+    6)          14                  #T4     CHANNEL-NO   (FA_E30_CTRL+CFG.T4)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T4"     ()()()
+
+    7)          15                  #T5     CHANNEL-NO   (FA_E30_CTRL+CFG.T5)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T5"     ()()()
+
+    8)          16                  #T6     CHANNEL-NO   (FA_E30_CTRL+CFG.T6)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T6"     ()()()
+
+    9)          17                  #T7     CHANNEL-NO   (FA_E30_CTRL+CFG.T7)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T7"     ()()()
+
+   10)          18                  #T8     CHANNEL-NO   (FA_E30_CTRL+CFG.T8)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T8"     ()()()
+
+   11)          19         #RETRY_LIMIT     CHANNEL-NO   (FA_E30_CTRL+CFG.RETRY_LIMIT)        num          U[1]        1.0        1.0       10.0 "RETRY_LIMIT"     ()()()
+
+   12)          20           #LINK_TEST     CHANNEL-NO   (FA_E30_CTRL+CFG.LINK_TEST)        sec          U[1]       10.0        1.0       30.0 "LINK_TEST"     ()()()
+
+   13)          21            #S6_REPLY     CHANNEL-NO   (__)        ___          U[1]        1.0        0.0        1.0 "S6_REPLY"     ()()()
+
+   14)          22           #S10_REPLY     CHANNEL-NO   (__)        ___          U[1]        1.0        0.0        1.0 "S10_REPLY"     ()()()
+
+   15)          25 #ESTABLISH_COMMUNICATION_TIMEOUT     CHANNEL-NO   (FA_E30_CTRL+FA.COMMUNICATION.TIME)        ___          U[4]       10.0       10.0      120.0 "Communication_Timeout"     ()()()
+
+   16)          30 #LP_GLOBAL_BYPASS_READ_ID     CHANNEL-NO   (__)         __       BOOL[1]        0.0        0.0        1.0 "LP_Global_BypassReadID"     ()()()
+
+   17)          31  #LP1_BYPASS_READ_ID     CHANNEL-YES  (PHY_LP1+FA.LP.BYPASS_ID.FLAG)         __       BOOL[1]        0.0        0.0        1.0 "LP1_BypassReadID"     ()()()
+
+   18)          32  #LP2_BYPASS_READ_ID     CHANNEL-YES  (PHY_LP2+FA.LP.BYPASS_ID.FLAG)         __       BOOL[1]        0.0        0.0        1.0 "LP2_BypassReadID"     ()()()
+
+   19)          33  #LP3_BYPASS_READ_ID     CHANNEL-YES  (PHY_LP3+FA.LP.BYPASS_ID.FLAG)         __       BOOL[1]        0.0        0.0        1.0 "LP3_BypassReadID"     ()()()
+
+   20)          41      UNKNOWN-COMMAND     CHANNEL-NO   (FA_E30_CTRL+FA.HEARTBEAT.INTERVAL.SEC)        sec          U[2]       10.0        0.0       60.0 "HeartBeat"     ()()()
+
+   21)          42 #LIST(CMMD_MODE : 1)     CHANNEL-NO   (FA_E30_CTRL+FA.COMMUNICATION.FLAG)      state          U[1]        5.0        1.0        5.0 "Default_Communication_State"     ()()()
+
+   22)          43 #LIST(INITIAL_STATE : 2)     CHANNEL-NO   (FA_E30_CTRL+DEFAULT.INITIAL.STATE)      state          U[1]        4.0        1.0        5.0 "Default_Initial_State"     ()()()
+
+   23)          44 #LIST(OFFLINE_STATE : 3)     CHANNEL-NO   (FA_E30_CTRL+DEFAULT.CONTROL.OFFLINE.STATE)      state          U[1]        3.0        1.0        3.0 "Default_Control_Offline_State"     ()()()
+
+   24)          45         #TIME_FORMAT     CHANNEL-NO   (FA_E30_CTRL+TIME.FORMAT.TYPE)        ___          U[1]        1.0        0.0        1.0 "Time_Format"     ()()()
+
+   25)          46      UNKNOWN-COMMAND     CHANNEL-NO   (FA_E30_CTRL+ECID.MAX.SPOOL.TRANSMIT)        ___          U[2]        1.0        0.0      100.0 "Max_Spool_Transmit"     ()()()
+
+   26)          47 #LIST(DISABLE_ENABLE : 4)     CHANNEL-NO   (FA_E30_CTRL+ECID.SPOOL.CONTROL)        ___       BOOL[1]        1.0        0.0        1.0 "OverWrite_Spool"     ()()()
+
+   27)          48 #LIST(DISABLE_ENABLE : 4)     CHANNEL-NO   (FA_E30_CTRL+ECID.OVERWRITE.SPOOL)        ___       BOOL[1]        1.0        0.0        1.0 "Spooling_Enable"     ()()()
+
+   28)          49      UNKNOWN-COMMAND     CHANNEL-NO   (FA_E30_CTRL+ECID.MAX.SPOOL.SAVE)        ___          U[2]      200.0        0.0     9999.0 "Max_Spool_Message"     ()()()
+
+   29)       21001      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.CFG.SHUTTER.MOVE.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Shutter Open/Close Timeout"     ()()()
+
+   30)       21002      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.CFG.CLAMP.MOVE.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Clamp Open/Close Timeout"     ()()()
+
+   31)       21003      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.CFG.WAFER.PROCESS.RPM.TOLERANCE)          %          A[4]        0.0        0.0       10.0 "Wafer Process RPM Limit Range"     ()()()
+
+   32)       21004      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.CFG.WAFER.PROCESS.RPM.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Wafer Process RPM Stable Time"     ()()()
+
+   33)       21005      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.MON.FRONT.BRUSH.TORQUE.LIMIT)          %          A[4]        0.0        0.0      100.0 "Interlock Front Brush Stop Torque"     ()()()
+
+   34)       21006      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.MON.BACK.BRUSH.TORQUE.LIMIT)          %          A[4]        0.0        0.0      100.0 "Interlock Back Brush Stop Torque"     ()()()
+
+   35)       21007      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.HOME.SEARCH.TIMEOUT)        sec          A[4]        0.0        0.0       99.0 "Brush Motor Home Search Timeout"     ()()()
+
+   36)       21008      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.STOP.MODE)         __          A[10]        0.0        0.0        1.0 "Brush Motor Stop Mode [EMERGENCY, SLOWDOWN]"     ()()()
+
+   37)       21009      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.ROLLER.SPIN.STABLE.TIME)        sec          A[4]        0.0        0.0       10.0 "Roller Spin Stable Time"     ()()()
+
+   38)       21010      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.ROLLER.SPIN.RPM.LIMIT)        rpm          A[4]        0.0        0.0       10.0 "Roller Spin Limit rpm"     ()()()
+
+   39)       21011      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.SPIN.STABLE.TIME)        sec          A[4]        0.0        0.0       10.0 "Brush Spin Stable Time"     ()()()
+
+   40)       21012      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.SPIN.RPM.LIMIT)        rpm          A[4]        0.0        0.0       10.0 "Brush Spin Limit rpm"     ()()()
+
+   41)       21013      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.VELOCITY.0)        rpm          A[4]        0.0        0.0     2000.0 "Roller Spin RPM"     ()()()
+
+   42)       21014      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.ACCELERATION.0)        sec          A[4]        0.0        0.0        9.0 "Roller Spin Accel"     ()()()
+
+   43)       21015      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.DECELERATION.0)        sec          A[4]        0.0        0.0        9.0 "Roller Spin Decel"     ()()()
+
+   44)       21016      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.ROLLER.SPIN.DIRECTION)         __          A[10]        0.0        0.0        1.0 "Roller Spin Direction [CW, CCW]"     ()()()
+
+   45)       21017      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.VELOCITY.3)        rpm          A[4]        0.0        0.0      500.0 "Brush Process Spin RPM"     ()()()
+
+   46)       21018      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.IDLE.SPIN.VEL)        rpm          A[4]        0.0        0.0       50.0 "Brush Idle Spin RPM"     ()()()
+
+   47)       21019      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.ACCELERATION.3)        sec          A[4]        0.0        0.0        9.0 "Brush Spin Accel"     ()()()
+
+   48)       21020      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.DECELERATION.3)        sec          A[4]        0.0        0.0        9.0 "Brush Spin Decel"     ()()()
+
+   49)       21021      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.POSITION.5)         mm          A[4]        0.0        0.0       55.0 "Front Updown Brush Position"     ()()()
+
+   50)       21022      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.VELOCITY.5)       mm/s          A[4]        0.0        0.0       40.0 "Front Updown Brush Velocity"     ()()()
+
+   51)       21023      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.ACCELERATION.5)        sec          A[4]        0.0        0.0        9.0 "Front Updown Brush Accel"     ()()()
+
+   52)       21024      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.DECELERATION.5)        sec          A[4]        0.0        0.0        9.0 "Front Updown Brush Decel"     ()()()
+
+   53)       21025      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.POSITION.6)         mm          A[4]        0.0        0.0       55.0 "Back Updown Brush Position"     ()()()
+
+   54)       21026      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.VELOCITY.6)       mm/s          A[4]        0.0        0.0       40.0 "Back Updown Brush Velocity"     ()()()
+
+   55)       21027      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.ACCELERATION.6)        sec          A[4]        0.0        0.0        9.0 "Back Updown Brush Accel"     ()()()
+
+   56)       21028      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.DECELERATION.6)        sec          A[4]        0.0        0.0        9.0 "Back Updown Brush Decel"     ()()()
+
+   57)       21029      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.UPDOWN.ADD.TRANS.POS)         mm          A[4]        0.0        0.0        1.5 "Updown Brush Additional Move Position"     ()()()
+
+   58)       21030      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.POSITION.7)         mm          A[4]        0.0        0.0       60.0 "Oscillation Brush Position"     ()()()
+
+   59)       21031      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.VELOCITY.7)       mm/s          A[4]        0.0        0.0       40.0 "Oscillation Brush Velocity"     ()()()
+
+   60)       21032      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.ACCELERATION.7)        sec          A[4]        0.0        0.0        9.0 "Oscillation Brush Accel"     ()()()
+
+   61)       21033      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.AXIS.DECELERATION.7)        sec          A[4]        0.0        0.0        9.0 "Oscillation Brush Decel"     ()()()
+
+   62)       21034      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.CFG.FRONT.UPDWON.BRUSH.STOP.TORQUE)          %          A[4]        0.0        0.0      100.0 "Auto Cal Front Brush Stop Torque"     ()()()
+
+   63)       21035      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.PHY_STAGE1.CFG.BACK.UPDWON.BRUSH.STOP.TORQUE)          %          A[4]        0.0        0.0      100.0 "Auto Cal Back Brush Stop Torque"     ()()()
+
+   64)       21036      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.FRONT.BRUSH.CAL.POS)         mm          A[4]        0.0        0.0       55.0 "Auto Cal Front Brush Position"     ()()()
+
+   65)       21037      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BACK.BRUSH.CAL.POS)         mm          A[4]        0.0        0.0       25.0 "Auto Cal Back Brush Position"     ()()()
+
+   66)       21038      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.CAL.VEL)       mm/s          A[4]        0.0        0.0       20.0 "Auto Cal Brush Velocity"     ()()()
+
+   67)       21039      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.CAL.ACCEL)        sec          A[4]        0.0        0.0        9.0 "Auto Cal Brush Accel"     ()()()
+
+   68)       21040      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1.CFG.BRUSH.CAL.DECEL)        sec          A[4]        0.0        0.0        9.0 "Auto Cal Brush Decel"     ()()()
+
+   69)       21041      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.UPDOWN.NOZZLE.POSITION)         mm          A[4]        0.0        0.0       35.0 "Updown Nozzle Position"     ()()()
+
+   70)       21042      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.UPDOWN.NOZZLE.VELOCITY)       mm/s          A[4]        0.0        0.0       70.0 "Updown Nozzle Velocity"     ()()()
+
+   71)       21043      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.UPDOWN.NOZZLE.ACCELERATION)        sec          A[4]        0.0        0.0        9.0 "Updown Nozzle Accel"     ()()()
+
+   72)       21044      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.UPDOWN.NOZZLE.DECELERATION)        sec          A[4]        0.0        0.0        9.0 "Updown Nozzle Decel"     ()()()
+
+   73)       21045      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.SWING.NOZZLE.CENTER.POSITION)        deg          A[4]        0.0        0.0       60.0 "Swing Nozzle Center Position"     ()()()
+
+   74)       21046      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.SWING.NOZZLE.EDGE.POSITION)        deg          A[4]        0.0        0.0       60.0 "Swing Nozzle Edge Position"     ()()()
+
+   75)       21047      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.SWING.NOZZLE.VELOCITY)      deg/s          A[4]        0.0        0.0      100.0 "Swing Nozzle Velocity"     ()()()
+
+   76)       21048      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.SWING.NOZZLE.ACCELERATION)        sec          A[4]        0.0        0.0        9.0 "Swing Nozzle Accel"     ()()()
+
+   77)       21049      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.SWING.NOZZLE.DECELERATION)        sec          A[4]        0.0        0.0        9.0 "Swing Nozzle Decel"     ()()()
+
+   78)       21050      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.HOME.SEARCH.TIMEOUT)        sec          A[4]        0.0        0.0       60.0 "Nozzle Motor Home Search Timeout"     ()()()
+
+   79)       21051      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_BRUSH1_NOZZLE.CFG.STOP.MODE)         __          A[10]        0.0        0.0        1.0 "Nozzle Motor Stop Mode [EMERGENCY, SLOWDOWN]"     ()()()
+
+   80)       21052      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.N2.FLOW.STABLE.TIME)        sec          A[4]        0.0        0.0       20.0 "Aerosol N2 Flow Stable Time"     ()()()
+
+   81)       21053      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.N2.FLOW.LIMIT)          %          A[4]        0.0        0.0       20.0 "Aerosol N2 Flow Limit"     ()()()
+
+   82)       21054      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.1)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush R1 Stable Time"     ()()()
+
+   83)       21055      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.2)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush R2 Stable Time"     ()()()
+
+   84)       21056      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.3)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush L1 Stable Time"     ()()()
+
+   85)       21057      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.4)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush L2 Stable Time"     ()()()
+
+   86)       21058      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.5)        sec          A[4]        0.0        0.0       20.0 "LFC Back Brush R,L Stable Time"     ()()()
+
+   87)       21059      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.6)        sec          A[4]        0.0        0.0       20.0 "LFC Aerosol Stable Time"     ()()()
+
+   88)       21060      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.7)        sec          A[4]        0.0        0.0       20.0 "LFC Front Wafer Stable Time"     ()()()
+
+   89)       21061      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.8)        sec          A[4]        0.0        0.0       20.0 "LFC Front Shower Stable Time"     ()()()
+
+   90)       21062      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.9)        sec          A[4]        0.0        0.0       20.0 "LFC Roller Shower Stable Time"     ()()()
+
+   91)       21063      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.10)        sec          A[4]        0.0        0.0       20.0 "LFC Back Wafer Stable Time"     ()()()
+
+   92)       21064      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.11)        sec          A[4]        0.0        0.0       20.0 "LFC Front Core Stable Time"     ()()()
+
+   93)       21065      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.STABLE.TIME.12)        sec          A[4]        0.0        0.0       20.0 "LFC Back Core Stable Time"     ()()()
+
+   94)       21066      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.1)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush R1 Flow Limit"     ()()()
+
+   95)       21067      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.2)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush R2 Flow Limit"     ()()()
+
+   96)       21068      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.3)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush L1 Flow Limit"     ()()()
+
+   97)       21069      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.4)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush L2 Flow Limit"     ()()()
+
+   98)       21070      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.5)          %          A[4]        0.0        0.0       20.0 "LFC Back Brush R,L Flow Limit"     ()()()
+
+   99)       21071      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.6)          %          A[4]        0.0        0.0       20.0 "LFC Aerosol Flow Limit"     ()()()
+
+  100)       21072      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.7)          %          A[4]        0.0        0.0       20.0 "LFC Front Wafer Flow Limit"     ()()()
+
+  101)       21073      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.8)          %          A[4]        0.0        0.0       20.0 "LFC Front Shower Flow Limit"     ()()()
+
+  102)       21074      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.9)          %          A[4]        0.0        0.0       20.0 "LFC Roller Shower Flow Limit"     ()()()
+
+  103)       21075      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.10)          %          A[4]        0.0        0.0       20.0 "LFC Back Wafer Flow Limit"     ()()()
+
+  104)       21076      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.11)          %          A[4]        0.0        0.0       20.0 "LFC Front Core Flow Limit"     ()()()
+
+  105)       21077      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.LFC.FLOW.LIMIT.12)          %          A[4]        0.0        0.0       20.0 "LFC Back Core Flow Limit"     ()()()
+
+  106)       21078      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.MANUAL.LFC.SET.FLOW.7)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Front Wafer Manual Flow Value"     ()()()
+
+  107)       21079      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.MANUAL.LFC.SET.FLOW.8)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Front Shower Manual Flow Value"     ()()()
+
+  108)       21080      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.MANUAL.LFC.SET.FLOW.9)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Roller Shower Manual Flow Value"     ()()()
+
+  109)       21081      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.MANUAL.LFC.SET.FLOW.10)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Back Wafer Manual Flow Value"     ()()()
+
+  110)       21082      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S1_ECID.FNC_LFC_BRUSH1.CFG.MANUAL.LFC.SET.FLOW.11)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Front Core Manual Flow Value"     ()()()
+
+  111)       22001      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.CFG.SHUTTER.MOVE.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Shutter Open/Close Timeout"     ()()()
+
+  112)       22002      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.CFG.CLAMP.MOVE.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Clamp Open/Close Timeout"     ()()()
+
+  113)       22003      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.CFG.WAFER.PROCESS.RPM.TOLERANCE)          %          A[4]        0.0        0.0       10.0 "Wafer Process RPM Limit Range"     ()()()
+
+  114)       22004      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.CFG.WAFER.PROCESS.RPM.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Wafer Process RPM Stable Time"     ()()()
+
+  115)       22005      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.MON.FRONT.BRUSH.TORQUE.LIMIT)          %          A[4]        0.0        0.0      100.0 "Interlock Front Brush Stop Torque"     ()()()
+
+  116)       22006      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.MON.BACK.BRUSH.TORQUE.LIMIT)          %          A[4]        0.0        0.0      100.0 "Interlock Back Brush Stop Torque"     ()()()
+
+  117)       22007      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.HOME.SEARCH.TIMEOUT)        sec          A[4]        0.0        0.0       99.0 "Brush Motor Home Search Timeout"     ()()()
+
+  118)       22008      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.STOP.MODE)         __          A[10]        0.0        0.0        1.0 "Brush Motor Stop Mode [EMERGENCY, SLOWDOWN]"     ()()()
+
+  119)       22009      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.ROLLER.SPIN.STABLE.TIME)        sec          A[4]        0.0        0.0       10.0 "Roller Spin Stable Time"     ()()()
+
+  120)       22010      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.ROLLER.SPIN.RPM.LIMIT)        rpm          A[4]        0.0        0.0       10.0 "Roller Spin Limit rpm"     ()()()
+
+  121)       22011      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.SPIN.STABLE.TIME)        sec          A[4]        0.0        0.0       10.0 "Brush Spin Stable Time"     ()()()
+
+  122)       22012      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.SPIN.RPM.LIMIT)        rpm          A[4]        0.0        0.0       10.0 "Brush Spin Limit rpm"     ()()()
+
+  123)       22013      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.VELOCITY.0)        rpm          A[4]        0.0        0.0     2000.0 "Roller Spin RPM"     ()()()
+
+  124)       22014      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.ACCELERATION.0)        sec          A[4]        0.0        0.0        9.0 "Roller Spin Accel"     ()()()
+
+  125)       22015      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.DECELERATION.0)        sec          A[4]        0.0        0.0        9.0 "Roller Spin Decel"     ()()()
+
+  126)       22016      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.ROLLER.SPIN.DIRECTION)         __          A[10]        0.0        0.0        1.0 "Roller Spin Direction [CW, CCW]"     ()()()
+
+  127)       22017      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.VELOCITY.3)        rpm          A[4]        0.0        0.0      500.0 "Brush Process Spin RPM"     ()()()
+
+  128)       22018      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.IDLE.SPIN.VEL)        rpm          A[4]        0.0        0.0       50.0 "Brush Idle Spin RPM"     ()()()
+
+  129)       22019      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.ACCELERATION.3)        sec          A[4]        0.0        0.0        9.0 "Brush Spin Accel"     ()()()
+
+  130)       22020      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.DECELERATION.3)        sec          A[4]        0.0        0.0        9.0 "Brush Spin Decel"     ()()()
+
+  131)       22021      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.POSITION.5)         mm          A[4]        0.0        0.0       55.0 "Front Updown Brush Position"     ()()()
+
+  132)       22022      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.VELOCITY.5)       mm/s          A[4]        0.0        0.0       40.0 "Front Updown Brush Velocity"     ()()()
+
+  133)       22023      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.ACCELERATION.5)        sec          A[4]        0.0        0.0        9.0 "Front Updown Brush Accel"     ()()()
+
+  134)       22024      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.DECELERATION.5)        sec          A[4]        0.0        0.0        9.0 "Front Updown Brush Decel"     ()()()
+
+  135)       22025      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.POSITION.6)         mm          A[4]        0.0        0.0       55.0 "Back Updown Brush Position"     ()()()
+
+  136)       22026      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.VELOCITY.6)       mm/s          A[4]        0.0        0.0       40.0 "Back Updown Brush Velocity"     ()()()
+
+  137)       22027      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.ACCELERATION.6)        sec          A[4]        0.0        0.0        9.0 "Back Updown Brush Accel"     ()()()
+
+  138)       22028      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.DECELERATION.6)        sec          A[4]        0.0        0.0        9.0 "Back Updown Brush Decel"     ()()()
+
+  139)       22029      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.UPDOWN.ADD.TRANS.POS)         mm          A[4]        0.0        0.0        1.5 "Updown Brush Additional Move Position"     ()()()
+
+  140)       22030      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.POSITION.7)         mm          A[4]        0.0        0.0       60.0 "Oscillation Brush Position"     ()()()
+
+  141)       22031      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.VELOCITY.7)       mm/s          A[4]        0.0        0.0       40.0 "Oscillation Brush Velocity"     ()()()
+
+  142)       22032      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.ACCELERATION.7)        sec          A[4]        0.0        0.0        9.0 "Oscillation Brush Accel"     ()()()
+
+  143)       22033      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.AXIS.DECELERATION.7)        sec          A[4]        0.0        0.0        9.0 "Oscillation Brush Decel"     ()()()
+
+  144)       22034      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.CFG.FRONT.UPDWON.BRUSH.STOP.TORQUE)          %          A[4]        0.0        0.0      100.0 "Auto Cal Front Brush Stop Torque"     ()()()
+
+  145)       22035      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.PHY_STAGE2.CFG.BACK.UPDWON.BRUSH.STOP.TORQUE)          %          A[4]        0.0        0.0      100.0 "Auto Cal Back Brush Stop Torque"     ()()()
+
+  146)       22036      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.FRONT.BRUSH.CAL.POS)         mm          A[4]        0.0        0.0       55.0 "Auto Cal Front Brush Position"     ()()()
+
+  147)       22037      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BACK.BRUSH.CAL.POS)         mm          A[4]        0.0        0.0       25.0 "Auto Cal Back Brush Position"     ()()()
+
+  148)       22038      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.CAL.VEL)       mm/s          A[4]        0.0        0.0       20.0 "Auto Cal Brush Velocity"     ()()()
+
+  149)       22039      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.CAL.ACCEL)        sec          A[4]        0.0        0.0        9.0 "Auto Cal Brush Accel"     ()()()
+
+  150)       22040      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2.CFG.BRUSH.CAL.DECEL)        sec          A[4]        0.0        0.0        9.0 "Auto Cal Brush Decel"     ()()()
+
+  151)       22041      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.UPDOWN.NOZZLE.POSITION)         mm          A[4]        0.0        0.0       35.0 "Updown Nozzle Position"     ()()()
+
+  152)       22042      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.UPDOWN.NOZZLE.VELOCITY)       mm/s          A[4]        0.0        0.0       70.0 "Updown Nozzle Velocity"     ()()()
+
+  153)       22043      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.UPDOWN.NOZZLE.ACCELERATION)        sec          A[4]        0.0        0.0        9.0 "Updown Nozzle Accel"     ()()()
+
+  154)       22044      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.UPDOWN.NOZZLE.DECELERATION)        sec          A[4]        0.0        0.0        9.0 "Updown Nozzle Decel"     ()()()
+
+  155)       22045      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.SWING.NOZZLE.CENTER.POSITION)        deg          A[4]        0.0        0.0       60.0 "Swing Nozzle Center Position"     ()()()
+
+  156)       22046      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.SWING.NOZZLE.EDGE.POSITION)        deg          A[4]        0.0        0.0       60.0 "Swing Nozzle Edge Position"     ()()()
+
+  157)       22047      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.SWING.NOZZLE.VELOCITY)      deg/s          A[4]        0.0        0.0      100.0 "Swing Nozzle Velocity"     ()()()
+
+  158)       22048      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.SWING.NOZZLE.ACCELERATION)        sec          A[4]        0.0        0.0        9.0 "Swing Nozzle Accel"     ()()()
+
+  159)       22049      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.SWING.NOZZLE.DECELERATION)        sec          A[4]        0.0        0.0        9.0 "Swing Nozzle Decel"     ()()()
+
+  160)       22050      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.HOME.SEARCH.TIMEOUT)        sec          A[4]        0.0        0.0       60.0 "Nozzle Motor Home Search Timeout"     ()()()
+
+  161)       22051      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_BRUSH2_NOZZLE.CFG.STOP.MODE)         __          A[10]        0.0        0.0        1.0 "Nozzle Motor Stop Mode [EMERGENCY, SLOWDOWN]"     ()()()
+
+  162)       22052      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.N2.FLOW.STABLE.TIME)        sec          A[4]        0.0        0.0       20.0 "Aerosol N2 Flow Stable Time"     ()()()
+
+  163)       22053      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.N2.FLOW.LIMIT)          %          A[4]        0.0        0.0       20.0 "Aerosol N2 Flow Limit"     ()()()
+
+  164)       22054      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.1)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush R1 Stable Time"     ()()()
+
+  165)       22055      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.2)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush R2 Stable Time"     ()()()
+
+  166)       22056      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.3)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush L1 Stable Time"     ()()()
+
+  167)       22057      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.4)        sec          A[4]        0.0        0.0       20.0 "LFC Front Brush L2 Stable Time"     ()()()
+
+  168)       22058      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.5)        sec          A[4]        0.0        0.0       20.0 "LFC Back Brush R,L Stable Time"     ()()()
+
+  169)       22059      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.6)        sec          A[4]        0.0        0.0       20.0 "LFC Aerosol Stable Time"     ()()()
+
+  170)       22060      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.7)        sec          A[4]        0.0        0.0       20.0 "LFC Front Wafer Stable Time"     ()()()
+
+  171)       22061      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.8)        sec          A[4]        0.0        0.0       20.0 "LFC Front Shower Stable Time"     ()()()
+
+  172)       22062      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.9)        sec          A[4]        0.0        0.0       20.0 "LFC Roller Shower Stable Time"     ()()()
+
+  173)       22063      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.10)        sec          A[4]        0.0        0.0       20.0 "LFC Back Wafer Stable Time"     ()()()
+
+  174)       22064      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.11)        sec          A[4]        0.0        0.0       20.0 "LFC Front Core Stable Time"     ()()()
+
+  175)       22065      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.STABLE.TIME.12)        sec          A[4]        0.0        0.0       20.0 "LFC Back Core Stable Time"     ()()()
+
+  176)       22066      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.1)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush R1 Flow Limit"     ()()()
+
+  177)       22067      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.2)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush R2 Flow Limit"     ()()()
+
+  178)       22068      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.3)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush L1 Flow Limit"     ()()()
+
+  179)       22069      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.4)          %          A[4]        0.0        0.0       20.0 "LFC Front Brush L2 Flow Limit"     ()()()
+
+  180)       22070      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.5)          %          A[4]        0.0        0.0       20.0 "LFC Back Brush R,L Flow Limit"     ()()()
+
+  181)       22071      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.6)          %          A[4]        0.0        0.0       20.0 "LFC Aerosol Flow Limit"     ()()()
+
+  182)       22072      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.7)          %          A[4]        0.0        0.0       20.0 "LFC Front Wafer Flow Limit"     ()()()
+
+  183)       22073      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.8)          %          A[4]        0.0        0.0       20.0 "LFC Front Shower Flow Limit"     ()()()
+
+  184)       22074      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.9)          %          A[4]        0.0        0.0       20.0 "LFC Roller Shower Flow Limit"     ()()()
+
+  185)       22075      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.10)          %          A[4]        0.0        0.0       20.0 "LFC Back Wafer Flow Limit"     ()()()
+
+  186)       22076      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.11)          %          A[4]        0.0        0.0       20.0 "LFC Front Core Flow Limit"     ()()()
+
+  187)       22077      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.LFC.FLOW.LIMIT.12)          %          A[4]        0.0        0.0       20.0 "LFC Back Core Flow Limit"     ()()()
+
+  188)       22078      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.MANUAL.LFC.SET.FLOW.7)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Front Wafer Manual Flow Value"     ()()()
+
+  189)       22079      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.MANUAL.LFC.SET.FLOW.8)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Front Shower Manual Flow Value"     ()()()
+
+  190)       22080      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.MANUAL.LFC.SET.FLOW.9)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Roller Shower Manual Flow Value"     ()()()
+
+  191)       22081      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.MANUAL.LFC.SET.FLOW.10)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Back Wafer Manual Flow Value"     ()()()
+
+  192)       22082      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S2_ECID.FNC_LFC_BRUSH2.CFG.MANUAL.LFC.SET.FLOW.11)     ml/min          A[4]        0.0        0.0     2500.0 "LFC Front Core Manual Flow Value"     ()()()
+
+  193)       23001      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.PHY_STAGE3.NCC.CFG.SPIN.WAFER.DETECT)         __          A[4]        0.0        0.0        1.0 "Spin Wafer Detect Use"     ()()()
+
+  194)       23002      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.Phy_RS232_MECAPION_WAFER_SPIN_NCC.Wafer.Detect.Count)         __          A[4]        0.0        0.0        4.0 "Spin Wafer Detect Count"     ()()()
+
+  195)       23003      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.Phy_RS232_MECAPION_WAFER_SPIN_NCC.Home.Tech.Deg)        deg          A[4]        0.0        0.0     3599.0 "Spin Home Teach"     ()()()
+
+  196)       23004      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CFG.SC1.AEROSOL.RANGE)          %          A[4]        0.0        0.0      100.0 "SC1 Aerosol Alarm Range"     ()()()
+
+  197)       23005      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.NCC.CHEMICAL.STABLE.TIME[7])        sec          A[4]        0.0        0.0       10.0 "SC1 Aerosol Stable Time"     ()()()
+
+  198)       23006      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CFG.SC1.FRONT.RANGE)          %          A[4]        0.0        0.0      100.0 "SC1 Front Nozzle Alarm Range"     ()()()
+
+  199)       23007      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.NCC.CHEMICAL.STABLE.TIME[8])        sec          A[4]        0.0        0.0       10.0 "SC1 Front Nozzle Stable Time"     ()()()
+
+  200)       23008      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CFG.SC1.BACK.RANGE)          %          A[4]        0.0        0.0      100.0 "SC1 Back Alarm Ragne"     ()()()
+
+  201)       23009      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.NCC.CHEMICAL.STABLE.TIME[9])        sec          A[4]        0.0        0.0       10.0 "SC1 Back Stable Time"     ()()()
+
+  202)       23010      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CFG.DIW.FRONT.RANGE)          %          A[4]        0.0        0.0      100.0 "DIW Front Nozzle Alarm Range"     ()()()
+
+  203)       23011      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CHEMICAL.STABLE.TIME[10])        sec          A[4]        0.0        0.0       10.0 "DIW Front Nozzle Stable Time"     ()()()
+
+  204)       23012      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CFG.DIW.BACK.RANGE)          %          A[4]        0.0        0.0      100.0 "DIW Back Alarm Ragne"     ()()()
+
+  205)       23013      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CHEMICAL.STABLE.TIME[11])        sec          A[4]        0.0        0.0       10.0 "DIW Back Stable Time"     ()()()
+
+  206)       23014      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CFG.N2.RANGE)          %          A[4]        0.0        0.0      100.0 "N2 Alarm Range"     ()()()
+
+  207)       23015      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.NCC_LFC.CHEMICAL.STABLE.TIME[12])        sec          A[4]        0.0        0.0       10.0 "N2 Stable Time"     ()()()
+
+  208)       23016      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.SWING.NOZZLE.CENTER.POSITION)        deg          F[4]        0.0          0[Dec:0]       60.0 "Nozzle Swing Center Position"     ()()()
+
+  209)       23017      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.SWING.NOZZLE.EDGE.POSITION)      deg/s          F[4]        0.0          0[Dec:0]       60.0 "Nozzle Swing Edge Position"     ()()()
+
+  210)       23018      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.SWING.NOZZLE.VELOCITY)      deg/s          F[4]        0.0          0[Dec:0]      100.0 "Nozzle Swing Velocity"     ()()()
+
+  211)       23019      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.SWING.NOZZLE.ACCELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle Swing Acceleration"     ()()()
+
+  212)       23020      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.SWING.NOZZLE.DECELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle Swing Deceleration"     ()()()
+
+  213)       23021      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.UPDOWN.NOZZLE.POSITION)         mm          F[4]        0.0          0[Dec:0]       35.0 "Nozzle UpDown Transfer Position"     ()()()
+
+  214)       23022      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.UPDOWN.NOZZLE.VELOCITY)       mm/s          F[4]        0.0          0[Dec:0]       70.0 "Nozzle UpDown Velocity"     ()()()
+
+  215)       23023      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.UPDOWN.NOZZLE.ACCELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle UpDown Acceleration"     ()()()
+
+  216)       23024      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S3_ECID.FNC_DF_NOZZLE.CFG.UPDOWN.NOZZLE.DECELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle UpDown Deceleration"     ()()()
+
+  217)       24001      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.vd.wafer.detect.use)         __          A[4]        0.0        0.0        1.0 "Spin Wafer Detect Use"     ()()()
+
+  218)       24002      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.Phy_RS232_MECAPION_WAFER_SPIN_IPA.Wafer.Detect.Count)         __          A[4]        0.0        0.0        4.0 "Spin Wafer Detect Count"     ()()()
+
+  219)       24003      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.Phy_RS232_MECAPION_WAFER_SPIN_IPA.Home.Tech.Deg)        deg          A[4]        0.0        0.0     3599.0 "Spin Home Teach"     ()()()
+
+  220)       24010      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.swingnozzle.DIW.flow.limit)          %          A[4]        0.0        0.0      100.0 "DIW Front Nozzle Alarm Range"     ()()()
+
+  221)       24011      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.swing.DIW.stable.time)        sec          A[4]        0.0        0.0       10.0 "DIW Front Nozzle Stable Time"     ()()()
+
+  222)       24012      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.backnozzle.DIW.flow.limit)          %          A[4]        0.0        0.0      100.0 "DIW Back Alarm Ragne"     ()()()
+
+  223)       24013      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.back.DIW.stable.time)        sec          A[4]        0.0        0.0       10.0 "DIW Back Stable Time"     ()()()
+
+  224)       24016      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.SWING.NOZZLE.CENTER.POSITION)        deg          F[4]        0.0          0[Dec:0]       60.0 "Nozzle Swing Center Position"     ()()()
+
+  225)       24017      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.SWING.NOZZLE.EDGE.POSITION)      deg/s          F[4]        0.0          0[Dec:0]       60.0 "Nozzle Swing Edge Position"     ()()()
+
+  226)       24018      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.SWING.NOZZLE.VELOCITY)      deg/s          F[4]        0.0          0[Dec:0]      100.0 "Nozzle Swing Velocity"     ()()()
+
+  227)       24019      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.SWING.NOZZLE.ACCELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle Swing Acceleration"     ()()()
+
+  228)       24020      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.SWING.NOZZLE.DECELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle Swing Deceleration"     ()()()
+
+  229)       24021      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.UPDOWN.NOZZLE.POSITION)         mm          F[4]        0.0          0[Dec:0]       35.0 "Nozzle UpDown Transfer Position"     ()()()
+
+  230)       24022      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.UPDOWN.NOZZLE.VELOCITY)       mm/s          F[4]        0.0          0[Dec:0]       70.0 "Nozzle UpDown Velocity"     ()()()
+
+  231)       24023      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.UPDOWN.NOZZLE.ACCELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle UpDown Acceleration"     ()()()
+
+  232)       24024      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.FNC_IPA_NOZZLE.CFG.UPDOWN.NOZZLE.DECELERATION)        sec          F[4]        0.0          0[Dec:0]        9.0 "Nozzle UpDown Deceleration"     ()()()
+
+  233)       24025      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.IPA.flow.limit)          %          A[4]        0.0        0.0      100.0 "IPA Swing Nozzle Alarm Range"     ()()()
+
+  234)       24026      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.LFC.stable.time)        sec          A[4]        0.0        0.0       10.0 "IPA Swing Nozzle Stable Time"     ()()()
+
+  235)       24027      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.fixnozzle.DIW.flow.limit)          %          A[4]        0.0        0.0      100.0 "DIW Fix Nozzle Alarm Range"     ()()()
+
+  236)       24028      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_S4_ECID.PHY_STAGE4.cfg.va.fix.DIW.stable.time)        sec          A[4]        0.0        0.0       10.0 "DIW Fix Nozzle Stable Time"     ()()()
+
+  237)       25001      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.SHUTTLE.PICK.PLACE.READY.WAIT.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Shuttle Pick Ready Timeout"     ()()()
+
+  238)       25002      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.CHM.MOVE.READY.WAIT.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Shuttle Move Ready Timeout"     ()()()
+
+  239)       25003      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.HOME.SEARCH.TIMEOUT)        sec          A[4]        0.0        0.0       10.0 "Shuttle Motor Home Search Timeout"     ()()()
+
+  240)       25004      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.STOP.MODE)         __          A[10]        0.0        0.0        1.0 "Shuttle Motor Stop Mode [EMERGENCY, SLOWDOWN]"     ()()()
+
+  241)       25005      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.POSITION.0)         mm          A[4]        0.0        0.0      150.0 "Shuttle G Axis Position"     ()()()
+
+  242)       25006      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.VELOCITY.0)       mm/s          A[4]        0.0        0.0      300.0 "Shuttle G Axis Velocity"     ()()()
+
+  243)       25007      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.ACCELERATION.0)        sec          A[4]        0.0        0.0        9.0 "Shuttle G Axis Accel"     ()()()
+
+  244)       25008      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.DECELERATION.0)        sec          A[4]        0.0        0.0        9.0 "Shuttle G Axis Decel"     ()()()
+
+  245)       25009      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.POSITION.1)         mm          A[4]        0.0        0.0       15.0 "Shuttle Z Axis Position"     ()()()
+
+  246)       25010      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.VELOCITY.1)       mm/s          A[4]        0.0        0.0       50.0 "Shuttle Z Axis Velocity"     ()()()
+
+  247)       25011      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.ACCELERATION.1)        sec          A[4]        0.0        0.0        9.0 "Shuttle Z Axis Accel"     ()()()
+
+  248)       25012      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.DECELERATION.1)        sec          A[4]        0.0        0.0        9.0 "Shuttle Z Axis Decel"     ()()()
+
+  249)       25013      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.POSITION.2)         mm          A[4]        0.0        0.0      600.0 "Shuttle Y Axis Position"     ()()()
+
+  250)       25014      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.VELOCITY.2)       mm/s          A[4]        0.0        0.0      999.0 "Shuttle Y Axis Velocity"     ()()()
+
+  251)       25015      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.ACCELERATION.2)        sec          A[4]        0.0        0.0        9.0 "Shuttle Y Axis Accel"     ()()()
+
+  252)       25016      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.FNC_SHUTTLE.CFG.AXIS.DECELERATION.2)        sec          A[4]        0.0        0.0        9.0 "Shuttle Y Axis Decel"     ()()()
+
+  253)       25017      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[0])      Press          A[4]        0.0        0.0      500.0 "Gauge 1 - Low Range"     ()()()
+
+  254)       25018      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[0])      Press          A[4]        0.0        0.0      500.0 "Gauge 1 - High Range"     ()()()
+
+  255)       25019      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[1])      Press          A[4]        0.0        0.0      500.0 "Gauge 2 - Low Range"     ()()()
+
+  256)       25020      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[1])      Press          A[4]        0.0        0.0      500.0 "Gauge 2 - High Range"     ()()()
+
+  257)       25021      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[2])      Press          A[4]        0.0        0.0      500.0 "Gauge 3 - Low Range"     ()()()
+
+  258)       25022      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[2])      Press          A[4]        0.0        0.0      500.0 "Gauge 3 - High Range"     ()()()
+
+  259)       25023      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[4])      Press          A[4]        0.0        0.0      500.0 "Gauge 5 - Low Range"     ()()()
+
+  260)       25024      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[4])      Press          A[4]        0.0        0.0      500.0 "Gauge 5 - High Range"     ()()()
+
+  261)       25025      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[5])      Press          A[4]        0.0        0.0      500.0 "Gauge 6 - Low Range"     ()()()
+
+  262)       25026      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[5])      Press          A[4]        0.0        0.0      500.0 "Gauge 6 - High Range"     ()()()
+
+  263)       25027      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[6])      Press          A[4]        0.0        0.0      500.0 "Gauge 7 - Low Range"     ()()()
+
+  264)       25028      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[6])      Press          A[4]        0.0        0.0      500.0 "Gauge 7 - High Range"     ()()()
+
+  265)       25029      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Low.Threshold[8])      Press          A[4]        0.0        0.0      500.0 "Gauge 9 - Low Range"     ()()()
+
+  266)       25030      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Gauge.Gauge.High.Threshold[8])      Press          A[4]        0.0        0.0      500.0 "Gauge 9 - High Range"     ()()()
+
+  267)       25031      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.Brush1.Exhaust.Pressure.Low.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 1 - Low Range"     ()()()
+
+  268)       25032      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.Brush1.Exhaust.Pressure.High.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 1 - High Range"     ()()()
+
+  269)       25033      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.Brush2.Exhaust.Pressure.Low.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 2 - Low Range"     ()()()
+
+  270)       25034      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.Brush2.Exhaust.Pressure.High.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 2 - High Range"     ()()()
+
+  271)       25035      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.NCC.Envi.Exhaust.Pressure.Low.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 3 - Low Range"     ()()()
+
+  272)       25036      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.NCC.Envi.Exhaust.Pressure.High.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 3 - High Range"     ()()()
+
+  273)       25037      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.IPA.Exhaust.Pressure.Low.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 4 - Low Range"     ()()()
+
+  274)       25038      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.IPA.Exhaust.Pressure.High.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 4 - High Range"     ()()()
+
+  275)       25039      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.Main.Exhaust.Pressure1.Low.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 5 - Low Range"     ()()()
+
+  276)       25040      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.CFG.Main.Exhaust.Pressure2.High.Range)      Press          A[4]        0.0        0.0      500.0 "Exhaust 5 - High Range"     ()()()
+
+  277)       25041      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[0])        lpm          A[4]        0.0        0.0      200.0 "Purge 1 - Low Range"     ()()()
+
+  278)       25042      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[0])        lpm          A[4]        0.0        0.0      200.0 "Purge 1 - High Range"     ()()()
+
+  279)       25043      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[1])        lpm          A[4]        0.0        0.0      200.0 "Purge 2 - Low Range"     ()()()
+
+  280)       25044      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[1])        lpm          A[4]        0.0        0.0      200.0 "Purge 2 - High Range"     ()()()
+
+  281)       25045      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[2])        lpm          A[4]        0.0        0.0      200.0 "Purge 3 - Low Range"     ()()()
+
+  282)       25046      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[2])        lpm          A[4]        0.0        0.0      200.0 "Purge 3 - High Range"     ()()()
+
+  283)       25047      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[3])        lpm          A[4]        0.0        0.0      200.0 "Purge 4 - Low Range"     ()()()
+
+  284)       25048      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[3])        lpm          A[4]        0.0        0.0      200.0 "Purge 4 - High Range"     ()()()
+
+  285)       25049      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[4])        lpm          A[4]        0.0        0.0      200.0 "Purge 5 - Low Range"     ()()()
+
+  286)       25050      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[4])        lpm          A[4]        0.0        0.0      200.0 "Purge 5 - High Range"     ()()()
+
+  287)       25051      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[5])        lpm          A[4]        0.0        0.0      200.0 "Purge 6 - Low Range"     ()()()
+
+  288)       25052      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[5])        lpm          A[4]        0.0        0.0      200.0 "Purge 6 - High Range"     ()()()
+
+  289)       25053      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[6])        lpm          A[4]        0.0        0.0      200.0 "Purge 7 - Low Range"     ()()()
+
+  290)       25054      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Gauge.High.Threshold[6])        lpm          A[4]        0.0        0.0      200.0 "Purge 7 - High Range"     ()()()
+
+  291)       25055      UNKNOWN-COMMAND     CHANNEL-NO   (CLEANER_ETC_ECID.Cleaner_Interlock.Purge.Low.Threshold[7])        lpm          A[4]        0.0        0.0      200.0 "Purge 8 - Low Range"     ()()()
+
+  292)       11001      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  293)       11002      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  294)       11003      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  295)       11004      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  296)       11005      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  297)       11006      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  298)       11007      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  299)       11008      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  300)       11009      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  301)       11010      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  302)       11011      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Sweep:Home Pulse"     ()()()
+
+  303)       11012      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Head Sweep:Home High Speed"     ()()()
+
+  304)       11013      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Low Speed"     ()()()
+
+  305)       11014      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Acceleration"     ()()()
+
+  306)       11015      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Velocity"     ()()()
+
+  307)       11016      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Acceleration"     ()()()
+
+  308)       11017      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Head Sweep:Rotate Jerk"     ()()()
+
+  309)       11018      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Home.Pos)       Inch          F[4]        6.0          6[Dec:0]       10.0 "Head Sweep:Home Position"     ()()()
+
+  310)       11019      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.LoadCup.Position)       Inch          F[4]        5.0          5[Dec:0]        7.0 "Head Sweep:LoadCup Position"     ()()()
+
+  311)       11020      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_HEAD_01_SWEEP.CFG.Retract.Position)       Inch          F[4]        5.0          5[Dec:0]       10.0 "Head Sweep:Retract Position"     ()()()
+
+  312)       11021      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_PLATEN_01_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Platen Pulse Per Degree"     ()()()
+
+  313)       11022      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_PLATEN_01_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Position"     ()()()
+
+  314)       11023      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_PLATEN_01_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Velocity"     ()()()
+
+  315)       11024      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_PLATEN_01_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Acceleration"     ()()()
+
+  316)       11025      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_PLATEN_01_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Jerk"     ()()()
+
+  317)       11026      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cond Rotation CFG Pulse.Per Degree"     ()()()
+
+  318)       11027      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Position"     ()()()
+
+  319)       11028      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Velocity"     ()()()
+
+  320)       11029      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Acceleration"     ()()()
+
+  321)       11030      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation:Pulse Per Jerk"     ()()()
+
+  322)       11031      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cond Sweep CFG Pulse Per Degree"     ()()()
+
+  323)       11032      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Position"     ()()()
+
+  324)       11033      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Velocity"     ()()()
+
+  325)       11034      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Acceleration"     ()()()
+
+  326)       11035      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Jerk"     ()()()
+
+  327)       11036      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG HOME PULSE"     ()()()
+
+  328)       11037      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Cond Sweep CFG HOME HIGH SPEED"     ()()()
+
+  329)       11038      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cond Sweep CFG HOME LOW SPEED"     ()()()
+
+  330)       11039      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cond Sweep CFG HOME ACCEL"     ()()()
+
+  331)       11040      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cond Sweep CFG ROTATE VEL"     ()()()
+
+  332)       11041      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cond Sweep CFG ROTATE.ACC"     ()()()
+
+  333)       11042      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Cond Sweep CFG ROTATE.JRK"     ()()()
+
+  334)       11043      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.SWEEP.VEL)      Pulse          F[4]  -400000.0    -400000[Dec:0]   400000.0 "Cond Sweep CFG SWEEP VEL"     ()()()
+
+  335)       11044      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.SWEEP.ACC)      Pulse          F[4]        0.0          0[Dec:0]   400000.0 "Cond Sweep CFG SWEEP ACC"     ()()()
+
+  336)       11045      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.SWEEP.JRK)      Pulse          F[4]        0.0          0[Dec:0]   100000.0 "Cond Sweep CFG SWEEP JRK"     ()()()
+
+  337)       11046      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Clean.Cup.Pos)       Inch          F[4]        0.0          0[Dec:0]       20.0 "Cond Sweep CFG Clean Cup.Pos"     ()()()
+
+  338)       11047      UNKNOWN-COMMAND     CHANNEL-NO   (P1_ECID.FNC_COND_01_SWEEP.CFG.Clean.Cup.Auto.Spray)         __          A[4]        0.0        0.0        1.0 "Cond Sweep CFG Clean Cup.Auto Spray"     ()()()
+
+  339)       12001      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  340)       12002      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  341)       12003      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  342)       12004      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  343)       12005      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  344)       12006      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  345)       12007      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  346)       12008      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  347)       12009      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  348)       12010      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  349)       12011      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Sweep:Home Pulse"     ()()()
+
+  350)       12012      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Head Sweep:Home High Speed"     ()()()
+
+  351)       12013      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Low Speed"     ()()()
+
+  352)       12014      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Acceleration"     ()()()
+
+  353)       12015      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Velocity"     ()()()
+
+  354)       12016      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Acceleration"     ()()()
+
+  355)       12017      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Head Sweep:Rotate Jerk"     ()()()
+
+  356)       12018      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Home.Pos)       Inch          F[4]        6.0          6[Dec:0]       10.0 "Head Sweep:Home Position"     ()()()
+
+  357)       12019      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.LoadCup.Position)       Inch          F[4]        5.0          5[Dec:0]        7.0 "Head Sweep:LoadCup Position"     ()()()
+
+  358)       12020      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_HEAD_02_SWEEP.CFG.Retract.Position)       Inch          F[4]        5.0          5[Dec:0]       10.0 "Head Sweep:Retract Position"     ()()()
+
+  359)       12021      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_PLATEN_02_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Platen Pulse Per Degree"     ()()()
+
+  360)       12022      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_PLATEN_02_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Position"     ()()()
+
+  361)       12023      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_PLATEN_02_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Velocity"     ()()()
+
+  362)       12024      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_PLATEN_02_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Acceleration"     ()()()
+
+  363)       12025      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_PLATEN_02_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Jerk"     ()()()
+
+  364)       12026      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cond Rotation CFG Pulse.Per Degree"     ()()()
+
+  365)       12027      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Position"     ()()()
+
+  366)       12028      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Velocity"     ()()()
+
+  367)       12029      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Acceleration"     ()()()
+
+  368)       12030      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation:Pulse Per Jerk"     ()()()
+
+  369)       12031      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cond Sweep CFG Pulse Per Degree"     ()()()
+
+  370)       12032      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Position"     ()()()
+
+  371)       12033      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Velocity"     ()()()
+
+  372)       12034      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Acceleration"     ()()()
+
+  373)       12035      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Jerk"     ()()()
+
+  374)       12036      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG HOME PULSE"     ()()()
+
+  375)       12037      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Cond Sweep CFG HOME HIGH SPEED"     ()()()
+
+  376)       12038      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cond Sweep CFG HOME LOW SPEED"     ()()()
+
+  377)       12039      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cond Sweep CFG HOME ACCEL"     ()()()
+
+  378)       12040      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cond Sweep CFG ROTATE VEL"     ()()()
+
+  379)       12041      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cond Sweep CFG ROTATE.ACC"     ()()()
+
+  380)       12042      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Cond Sweep CFG ROTATE.JRK"     ()()()
+
+  381)       12043      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.SWEEP.VEL)      Pulse          F[4]  -400000.0    -400000[Dec:0]   400000.0 "Cond Sweep CFG SWEEP VEL"     ()()()
+
+  382)       12044      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.SWEEP.ACC)      Pulse          F[4]        0.0          0[Dec:0]   400000.0 "Cond Sweep CFG SWEEP ACC"     ()()()
+
+  383)       12045      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.SWEEP.JRK)      Pulse          F[4]        0.0          0[Dec:0]   100000.0 "Cond Sweep CFG SWEEP JRK"     ()()()
+
+  384)       12046      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Clean.Cup.Pos)       Inch          F[4]        0.0          0[Dec:0]       20.0 "Cond Sweep CFG Clean Cup.Pos"     ()()()
+
+  385)       12047      UNKNOWN-COMMAND     CHANNEL-NO   (P2_ECID.FNC_COND_02_SWEEP.CFG.Clean.Cup.Auto.Spray)         __          A[4]        0.0        0.0        1.0 "Cond Sweep CFG Clean Cup.Auto Spray"     ()()()
+
+  386)       13001      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  387)       13002      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  388)       13003      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  389)       13004      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  390)       13005      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  391)       13006      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  392)       13007      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  393)       13008      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  394)       13009      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  395)       13010      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  396)       13011      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Sweep:Home Pulse"     ()()()
+
+  397)       13012      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Head Sweep:Home High Speed"     ()()()
+
+  398)       13013      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Low Speed"     ()()()
+
+  399)       13014      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Acceleration"     ()()()
+
+  400)       13015      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Velocity"     ()()()
+
+  401)       13016      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Acceleration"     ()()()
+
+  402)       13017      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Head Sweep:Rotate Jerk"     ()()()
+
+  403)       13018      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Home.Pos)       Inch          F[4]        6.0          6[Dec:0]       10.0 "Head Sweep:Home Position"     ()()()
+
+  404)       13019      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.LoadCup.Position)       Inch          F[4]        5.0          5[Dec:0]        7.0 "Head Sweep:LoadCup Position"     ()()()
+
+  405)       13020      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_HEAD_03_SWEEP.CFG.Retract.Position)       Inch          F[4]        5.0          5[Dec:0]       10.0 "Head Sweep:Retract Position"     ()()()
+
+  406)       13021      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_PLATEN_03_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Platen Pulse Per Degree"     ()()()
+
+  407)       13022      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_PLATEN_03_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Position"     ()()()
+
+  408)       13023      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_PLATEN_03_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Velocity"     ()()()
+
+  409)       13024      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_PLATEN_03_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Acceleration"     ()()()
+
+  410)       13025      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_PLATEN_03_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Platen Pulse Per Jerk"     ()()()
+
+  411)       13026      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cond Rotation CFG Pulse.Per Degree"     ()()()
+
+  412)       13027      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Position"     ()()()
+
+  413)       13028      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Velocity"     ()()()
+
+  414)       13029      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation CFG Pulse.Per Acceleration"     ()()()
+
+  415)       13030      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4] -1000000.0    -100000[Dec:0]   100000.0 "Cond Rotation:Pulse Per Jerk"     ()()()
+
+  416)       13031      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cond Sweep CFG Pulse Per Degree"     ()()()
+
+  417)       13032      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Position"     ()()()
+
+  418)       13033      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Velocity"     ()()()
+
+  419)       13034      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Acceleration"     ()()()
+
+  420)       13035      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG Pulse Per Jerk"     ()()()
+
+  421)       13036      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cond Sweep CFG HOME PULSE"     ()()()
+
+  422)       13037      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Cond Sweep CFG HOME HIGH SPEED"     ()()()
+
+  423)       13038      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cond Sweep CFG HOME LOW SPEED"     ()()()
+
+  424)       13039      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cond Sweep CFG HOME ACCEL"     ()()()
+
+  425)       13040      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cond Sweep CFG ROTATE VEL"     ()()()
+
+  426)       13041      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cond Sweep CFG ROTATE.ACC"     ()()()
+
+  427)       13042      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Cond Sweep CFG ROTATE.JRK"     ()()()
+
+  428)       13043      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.SWEEP.VEL)      Pulse          F[4]  -400000.0    -400000[Dec:0]   400000.0 "Cond Sweep CFG SWEEP VEL"     ()()()
+
+  429)       13044      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.SWEEP.ACC)      Pulse          F[4]        0.0          0[Dec:0]   400000.0 "Cond Sweep CFG SWEEP ACC"     ()()()
+
+  430)       13045      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.SWEEP.JRK)      Pulse          F[4]        0.0          0[Dec:0]   100000.0 "Cond Sweep CFG SWEEP JRK"     ()()()
+
+  431)       13046      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Clean.Cup.Pos)       Inch          F[4]        0.0          0[Dec:0]       20.0 "Cond Sweep CFG Clean Cup.Pos"     ()()()
+
+  432)       13047      UNKNOWN-COMMAND     CHANNEL-NO   (P3_ECID.FNC_COND_03_SWEEP.CFG.Clean.Cup.Auto.Spray)         __          A[4]        0.0        0.0        1.0 "Cond Sweep CFG Clean Cup.Auto Spray"     ()()()
+
+  433)       14001      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  434)       14002      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  435)       14003      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  436)       14004      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  437)       14005      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_ROTATION.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  438)       14006      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Head Rotation Pulse Per Degree"     ()()()
+
+  439)       14007      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Position"     ()()()
+
+  440)       14008      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Velocity"     ()()()
+
+  441)       14009      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Acceleration"     ()()()
+
+  442)       14010      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Rotation Pulse Per Jerk"     ()()()
+
+  443)       14011      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Head Sweep:Home Pulse"     ()()()
+
+  444)       14012      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Head Sweep:Home High Speed"     ()()()
+
+  445)       14013      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Low Speed"     ()()()
+
+  446)       14014      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Head Sweep:Home Acceleration"     ()()()
+
+  447)       14015      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Velocity"     ()()()
+
+  448)       14016      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Head Sweep:Rotate Acceleration"     ()()()
+
+  449)       14017      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Head Sweep:Rotate Jerk"     ()()()
+
+  450)       14018      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Home.Pos)       Inch          F[4]        6.0          6[Dec:0]       10.0 "Head Sweep:Home Position"     ()()()
+
+  451)       14019      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.LoadCup.Position)       Inch          F[4]        5.0          5[Dec:0]        7.0 "Head Sweep:LoadCup Position"     ()()()
+
+  452)       14020      UNKNOWN-COMMAND     CHANNEL-NO   (P4_ECID.FNC_HEAD_03_SWEEP.CFG.Retract.Position)       Inch          F[4]        5.0          5[Dec:0]       10.0 "Head Sweep:Retract Position"     ()()()
+
+  453)       15001      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cross Pulse Per Degree"     ()()()
+
+  454)       15002      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Position"     ()()()
+
+  455)       15003      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Velocity"     ()()()
+
+  456)       15004      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Acceleration"     ()()()
+
+  457)       15005      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Jerk"     ()()()
+
+  458)       15006      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Home Pulse"     ()()()
+
+  459)       15007      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Cross Home High Speed"     ()()()
+
+  460)       15008      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cross Home Low Speed"     ()()()
+
+  461)       15009      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cross Home Acceleration"     ()()()
+
+  462)       15010      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cross Rotate Velocity"     ()()()
+
+  463)       15011      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cross Rotate Acceleration"     ()()()
+
+  464)       15012      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Cross Rotate Jerk"     ()()()
+
+  465)       15013      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Home.Pos)       Inch          F[4]        0.0          6[Dec:0]       10.0 "Cross Home Position"     ()()()
+
+  466)       15014      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.OBJ_CROSS.CFG.Home.Degree)        Deg          F[4]        0.0        -30[Dec:0]      100.0 "Cross Home Degree"     ()()()
+
+  467)       15015      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.FNC_WAFER_X_CHANGER.CFG.Input.Over.HCLU.Degree)        Deg          F[4]     -180.0       -180[Dec:0]      180.0 "Cross Input Over HCLU Degree"     ()()()
+
+  468)       15016      UNKNOWN-COMMAND     CHANNEL-NO   (CROSS_ECID.FNC_WAFER_X_CHANGER.CFG.Output.Over.HCLU.Degree)        Deg          F[4]     -180.0       -180[Dec:0]      180.0 "Cross Output Over HCLU Degree"     ()()()
+
+  469)       16001      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Pulse.Per.Degree)      Pulse          F[4]    -7000.0      -7000[Dec:0]     7000.0 "Cross Pulse Per Degree"     ()()()
+
+  470)       16002      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Pulse.Per.Position)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Position"     ()()()
+
+  471)       16003      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Pulse.Per.Velocity)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Velocity"     ()()()
+
+  472)       16004      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Pulse.Per.Acceleration)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Acceleration"     ()()()
+
+  473)       16005      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Pulse.Per.Jerk)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Pulse Per Jerk"     ()()()
+
+  474)       16006      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.HOME.PULSE)      Pulse          F[4]  -100000.0    -100000[Dec:0]   100000.0 "Cross Home Pulse"     ()()()
+
+  475)       16007      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.HOME.HIGH.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    30000.0 "Cross Home High Speed"     ()()()
+
+  476)       16008      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.HOME.LOW.SPEED)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cross Home Low Speed"     ()()()
+
+  477)       16009      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.HOME.ACCEL)      Pulse          F[4]        0.0          0[Dec:0]    15000.0 "Cross Home Acceleration"     ()()()
+
+  478)       16010      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.ROTATE.VEL)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cross Rotate Velocity"     ()()()
+
+  479)       16011      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.ROTATE.ACC)      Pulse          F[4]        0.0          0[Dec:0]   800000.0 "Cross Rotate Acceleration"     ()()()
+
+  480)       16012      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.ROTATE.JRK)      Pulse          F[4]        0.0          0[Dec:0]   200000.0 "Cross Rotate Jerk"     ()()()
+
+  481)       16013      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Home.Pos)       Inch          F[4]        6.0          6[Dec:0]       10.0 "Cross Home Position"     ()()()
+
+  482)       16014      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Home.Degree)        Deg          F[4]        0.0          0[Dec:0]       60.0 "Cross Home Degree"     ()()()
+
+  483)       16015      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Input.Over.HCLU.Degree)        Deg          F[4]     -180.0       -180[Dec:0]      180.0 "Cross Input Over HCLU Degree"     ()()()
+
+  484)       16016      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.FNC_WAFER_X_CHANGER.CFG.Output.Over.HCLU.Degree)        Deg          F[4]     -180.0       -180[Dec:0]      180.0 "Cross Output Over HCLU Degree"     ()()()
+
+  485)       17001      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Cone.Linear.Position.Low.Min)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Cone Linear Position Low Min"     ()()()
+
+  486)       17002      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Cone.Linear.Position.Mid.Min)       Volt          F[4]        2.1        2.1[Dec:1]       10.0 "Cone Linear Position Mid Min"     ()()()
+
+  487)       17003      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Cone.Linear.Position.Mid.Max)       Volt          F[4]        2.1        2.1[Dec:1]       10.0 "Cone Linear Position Mid Max"     ()()()
+
+  488)       17004      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Cone.Linear.Position.High.Max)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Cone Linear Position High Max"     ()()()
+
+  489)       17005      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Pedestal.Linear.Position.Low.Min)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Cone Linear Position Low Min"     ()()()
+
+  490)       17006      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Pedestal.Linear.Position.Mid.Min)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Pedestal Linear Position Mid Min"     ()()()
+
+  491)       17007      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Pedestal.Linear.Position.Mid.Max)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Pedestal Linear Position Mid Max"     ()()()
+
+  492)       17008      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Pedestal.Linear.Position.High.Max)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Pedestal Linear Position High Max"     ()()()
+
+  493)       17009      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.Coneplate.Wafer.Sense.Range)       Volt          F[4]        0.0          0[Dec:0]       10.0 "Coneplate Wafer Sense Range"     ()()()
+
+  494)       17010      UNKNOWN-COMMAND     CHANNEL-NO   (EX_ROBOT_ECID.DRV_HCLU.cfg.va.HCLU.DIW.Pres.Xducer.Range)       Volt          F[4]        0.0          0[Dec:0]       10.0 "HCLU DIW Pressure Xducer Range"     ()()()
+

@@ -1,0 +1,11 @@
+#BITMAP
+{
+JGLEE__BOTTOM_RECIPE_off.bmp
+0 0 124 73
+0
+}
+#DYNAMIC
+{
+IF_OR: (dCH != dSts)
+VIS 1
+}

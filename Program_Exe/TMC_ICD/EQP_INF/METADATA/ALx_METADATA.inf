@@ -1,0 +1,24 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__AL1
+
+#DEFINE_CONSTANT    OBJ__AL     	                      OPR__AL1
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__AL1
+
+#DEFINE_CONSTANT    OBJ__AL       		                  PHY__AL1
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__AL1
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+#DEFINE_CONSTANT    CH.AL_OBJ_STATUS                    OPR__AL1+OBJ.STATUS
+#DEFINE_CONSTANT    CH.CFG_SLOT_MAX    		              DB_CFG+CFG.AL1.SLOT.MAX
+
+#DEFINE_CONSTANT    OBJ__AL           		              PHY_IO__ATM_ROBOT
+

@@ -1,0 +1,18 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__VIS1
+
+#DEFINE_CONSTANT    OBJ__VIS     	                      OPR__VIS1
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__VIS1
+
+#DEFINE_CONSTANT    OBJ__VIS      		                  PHY__VIS1
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__VIS1
+
+#DEFINE_CONSTANT    OBJ__VIS           		              PHY_DUMMY__VIS1

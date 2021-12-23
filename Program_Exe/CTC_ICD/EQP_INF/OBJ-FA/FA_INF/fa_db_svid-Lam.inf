@@ -1,0 +1,57 @@
+
+//--------------------------------------------------------------------------------------------------------------------------
+//.....
+#INCLUDE  "SVID__CTC_LIST.inf"
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+//.....
+#DEFINE_ID_OFFSET	10000000
+
+#DEFINE   ##PM          PM1
+#DEFINE   ##PHY_PM      PHY_PM1
+#DEFINE   ##CTC_DCOP+   INF.PM1_DCOP.
+
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE_ID_OFFSET	20000000
+
+#DEFINE   ##PM          PM2
+#DEFINE   ##PHY_PM      PHY_PM2
+#DEFINE   ##CTC_DCOP+   INF.PM2_DCOP.
+
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE_ID_OFFSET	30000000
+
+#DEFINE   ##PM          PM3
+#DEFINE   ##PHY_PM      PHY_PM3
+#DEFINE   ##CTC_DCOP+   INF.PM3_DCOP.
+
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE_ID_OFFSET	40000000
+
+#DEFINE   ##PM          PM4
+#DEFINE   ##PHY_PM      PHY_PM4
+#DEFINE   ##CTC_DCOP+   INF.PM4_DCOP.
+
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+//.....
+#DEFINE_ID_OFFSET	0
+
+#DEFINE   ##PM          PM0
+#DEFINE   ##CTC_DCOP+   TMC_DCOP.
+
+#INCLUDE  "SVID__TMC_DEFINE_FDC.inf"
+
+

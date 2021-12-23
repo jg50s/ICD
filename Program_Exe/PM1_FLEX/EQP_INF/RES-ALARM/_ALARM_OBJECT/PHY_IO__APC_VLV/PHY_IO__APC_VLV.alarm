@@ -1,0 +1,11 @@
+#ID=11	11	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : Controller is Offline.
+#ID=12	12	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : CMD [REMOTE] is out of time.
+#ID=13	13	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : CMD [CONTROL] is out of time.
+#ID=14	14	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : POSITION or AIR Error is exist.
+#ID=15	15	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : Communication Error is exist.
+#ID=16	16	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : Device Error is exist.
+#ID=17	17	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : Not Remote Status.
+#ID=18	18	LIGHT	PHY_IO__APC_VLV :  - APC SYSTEM : Auto Learning Command Timeout Error
+#ID=19	19	LIGHT	PHY_IO__APC_VLV :  - APC Position Control Timeout Error !
+#ID=21	21	LIGHT	PHY_IO__APC_VLV :  - APC로부터 통신 Error Code가 수신 되었습니다. 
+

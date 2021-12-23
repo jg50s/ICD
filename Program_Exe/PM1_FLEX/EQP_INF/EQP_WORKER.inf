@@ -1,0 +1,137 @@
+
+
+===========================================================================
+#OBJECT_STD     PMC__DB_OBJ                    DB.INF                    DB_INF
+#OBJECT_STD     PMC__DB_OBJ                    DB.SYS                    DB_SYS
+#OBJECT_STD     PMC__DB_OBJ                    DB.ETCHER                 DB_ETCHER
+
+#OBJECT_STD     PMC__DB_OBJ                    DB.GUI                    DB_GUI
+
+
+===========================================================================
+#OBJECT_STD     EQP__STD_OBJ                   PM_Datalog_Ex             FNC_PM_DATALOG
+#OBJECT_STD     EQP__STD_OBJ                   MNG_RANGE_CTRL            Mng_RANGE_CTRL
+
+
+===========================================================================
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_CHM
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_SYSTEM_INIT
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_SYSTEM_MAINT
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_TRANSFER_INIT
+
+
+===========================================================================
+#OBJECT_STD     PMC__INF_OBJ                   PMC.STD                   INF_PMC
+#OBJECT_STD     PMC__INF_OBJ                   ACTIVE_HANDOFF.STD        INF_ACTIVE_HANDOFF
+
+#OBJECT_STD     PMC__OPR_OBJ                   PMC.STD                   OPR_PMC
+
+
+===========================================================================
+#OBJECT_STD     PMC__MNT_PROC                  PMC.STD                   MNT_PROCESS
+
+#OBJECT_STD     PMC__MNT_UTILITY               AUTO.PM                   MNG_AUTO_PM
+#OBJECT_STD     PMC__MNT_UTILITY               RF.CONDUCT                MNG_RF_CHECK
+#OBJECT_STD     PMC__MNT_UTILITY               DGF.CHECK                 MNG_DGF_CHECK
+#OBJECT_STD     PMC__MNT_UTILITY               MFC.FLOW.CHECK            MNG_MFC_FLOW
+#OBJECT_STD     PMC__MNT_UTILITY               WAP.POS.CONDUCT           MNG_WAP_CONDUCTANCE
+#OBJECT_STD     PMC__MNT_UTILITY               APC.POS.CONDUCT           MNG_VAT_CONDUCTANCE
+#OBJECT_STD     PMC__MNT_UTILITY               APC.UTILITY               MNG_VAT_UTILITY
+
+
+===========================================================================
+#OBJECT_STD     PMC__FNC_SYSTEM                SYSTEM.STD                FNC_SYSTEM
+
+#OBJECT_STD     PMC__FNC_PROC                  PROC.STD                  FNC_PROC
+#OBJECT_STD     PMC__FNC_STEP                  STEP.STD                  FNC_STEP
+
+#OBJECT_STD     PMC__FNC_CHM                   CHM.STD                   FNC_CHM
+#OBJECT_STD     PMC__FNC_TRANSFER              TRANSFER.STD              FNC_TRANSFER
+
+#OBJECT_STD     PMC__FNC_VLV                   VAC_VLV.STD               FNC_VAC_VLV_CTRL
+#OBJECT_STD     PMC__FNC_VLV                   GAS_VLV.STD               FNC_GAS_VLV_CTRL
+
+
+===========================================================================
+#OBJECT_STD     PMC__PHY_CHM                   CHM.STD                   PHY_CHM_INFO
+#OBJECT_STD     PMC__PHY_GAS_VLV               LINE16.DGF                PHY_GAS_VLV
+
+#OBJECT_STD     PMC__PHY_HEATER                HEATER.STD                PHY_HEATER
+
+#OBJECT_STD     PMC__PHY_RF                    RF.FLEX                   PHY_RF2MHz
+#OBJECT_STD     PMC__PHY_RF                    RF.FLEX                   PHY_RF27MHz
+#OBJECT_STD     PMC__PHY_RF                    RF.FLEX                   PHY_RF60MHz
+
+#OBJECT_STD     PMC__PHY_MATCHER               MATCHER.STD               PHY_MATCH
+
+#OBJECT_STD     PMC__PHY_DGF                   DGF.STD                   PHY_DGF
+#OBJECT_STD     PMC__PHY_APC_VLV               APC_VLV.STD               PHY_APC_VLV
+#OBJECT_STD     PMC__PHY_WAP                   WAP.STD                   PHY_WAP_CONTROL
+
+#OBJECT_STD     PMC__PHY_LIFTER                LIFTER.STD                PHY_LIFT
+
+#OBJECT_STD     PMC__PHY_ESC                   ESC.FLEX                  PHY_ESC
+#OBJECT_STD     PMC__IO_ESC                    ESC.FLEX                  PHY_IO_ESC
+
+#OBJECT_STD     PMC__IO_UPC                    UPC.STD                   PHY_IO_UPC_INNER
+#OBJECT_STD     PMC__IO_UPC                    UPC.STD                   PHY_IO_UPC_OUTER
+
+#OBJECT_STD     PMC__PHY_PUMP                  TURBO.STD                 PHY_TURBO_PUMP
+#OBJECT_STD     PMC__PHY_PUMP                  DRY.STD                   PHY_DRY_PUMP
+
+#OBJECT_STD     PMC__PHY_VLV                   TRANSFER.VLV              PHY_TRANSFER_VLV
+#OBJECT_STD     PMC__PHY_VLV                   VAC.VLV                   PHY_VAC_VLV
+
+#OBJECT_STD     PMC__PHY_TCU                   TCU.FLEX                  PHY_TCU
+
+#OBJECT_STD     PMC__PHY_EPD                   EPD.STD                   PHY_EPD
+
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC1
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC2
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC3
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC4
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC5
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC6
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC7
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC8
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC9
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC10
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC11
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC12
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC13
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC14
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC15
+#OBJECT_STD     PMC__PHY_MFCx                  MFC.FLEX                  PHY_MFC16
+#OBJECT_STD     PMC__PHY_MFC_TUNE              MFC.FLEX                  PHY_MFC17
+
+
+===========================================================================
+// #OBJECT_IO     IO_DNET__OMRON  			    			 PMC.TYPE                  IO
+#OBJECT_IO     IO_DNET__HILSCHER-FLEX          TYPE.STD                  IO
+
+#OBJECT_IO     IO_USB__SPECTROMETER            ADC1000                   PHY_IO__SPECTROMETER
+
+// #OBJECT_IO     IO_BOARD__AJINTEK							 MOTION.TYPE               PHY_IO__MOTION
+#OBJECT_IO     IO_BOARD__AJINTEK							 VIRTUAL.TYPE              PHY_IO__MOTION
+
+#OBJECT_IO     IO_RS232__MKS_RF                2MHz.GEN                  PHY_IO__RF_2MHz
+#OBJECT_IO     IO_RS232__MKS_RF                27MHz.GEN                 PHY_IO__RF_27MHz
+#OBJECT_IO     IO_RS232__COMDEL_RF             60MHz.GEN                 PHY_IO__RF_60MHz
+
+#OBJECT_IO     IO_RS232__ASENG_MATCHER         ASENG.STD                 PHY_IO__MATCHER
+
+#OBJECT_IO     IO_RS232__VAT_APC               VAT650.TYPE               PHY_IO__APC_VLV
+
+#OBJECT_IO     IO_RS232__ALCATEL_PUMP          STD.TYPE                  PHY_IO__TMP
+#OBJECT_IO     IO_RS232__EDWARD_PUMP           iTIM.TYPE                 PHY_IO__DRY_PMP
+
+#OBJECT_IO     IO_RS232__ANAFAZER_HEATER       STD.TYPE                  PHY_IO__HEATER
+#OBJECT_IO     IO_RS232__CHILLER               MODBUS.TYPE               PHY_IO__CHILLER
+
+#OBJECT_IO     IO_RS485__MFC                   UNIT.TYPE                 PHY_IO__MFC_PART01
+#OBJECT_IO     IO_RS485__MFC                   UNIT.TYPE                 PHY_IO__MFC_PART02
+
+
+===========================================================================
+#OBJECT_INTERLOCK     PMC__INTERLOCK_LAM 		       MFC.IO                   INTERLOCK_MFC
+#OBJECT_INTERLOCK     PMC__INTERLOCK_LAM 		       SYS.IO                   INTERLOCK_SYS

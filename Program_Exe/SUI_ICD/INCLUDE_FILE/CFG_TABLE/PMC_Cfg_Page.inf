@@ -1,0 +1,8 @@
+
+//======================================================================================================================
+#PAGE      "INTERLOCK_IO"
+
+#GROUP     "SENSOR"
+
+#CFG_ITEM    DB_SYS+CFG.INTERLOCK.USE_FLAG                   "Inlock_Sensor.Use"                              
+

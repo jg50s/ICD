@@ -1,0 +1,408 @@
+
+  //---------------------------------------------------
+  //  S3Fy
+
+/*
+Service Message
+	Bind : This service shall associate a CarrierID to a load port and shall cause the load port to transition to the RESERVED state.
+	CancelBind : This service cancels a CarrierID to load port association and shall cause the load port to transition to the NOT RESERVED state.
+	CancelCarrier : This service shall Cancel the current carrier related action, 
+	               And the production equipment shall return the carrier to the unload position of the load port, 
+	               Or an internal buffer position, depending on the carrier's position in the production equipment.
+	ProceedWithCarrier : This service shall change the transfer status of a specified load port at the production equipment.
+	               
+	CancelAllCarrierOut (X) : This service shall cause all CarrierOut services to be removed from the queue.
+	CancelCarrierAtPort (O) : This service shall Cancel the current carrier related action, 
+				 And the production equipment shall return the carrier to the unload position of the load port.
+	CancelCarrierNotification (O) : This service shall cause the equipment to destroy a carrier object instantiated through a prior CarrierNotification.
+	CancelCarrierOut (X) : This service shall cause a specified CarrierOut service to be removed from the queue by the production equipment.
+	CancelReservationAtPort (O) : This service shall cause the equipment to remove the reservation at the specified Port and to deactivate the visiable signal.
+	CarrierIn (X) : This service shall cause a carrier to be moved from a load port to an internal buffer location.
+		       Used in anomaly situations.
+	CarrierNotification (X) : This service shall cause the equipment instantiate a carrier object.
+	CarrierOut (X) : This service shall cause a carrier to be moved from from the internal buffer to load port.
+	            This service can be queued by the production equipment.
+	ReserveAtPort (O) : This service shall cause the equipment to reserve the specified Port and activate a visible signal.
+			   This service is a Transfer boundary.
+	            
+	CarrierReCreate (X) : This service shall cause the carrier object (and consequently, associated state models of the object) specified by the service to be recreated.
+			 This service shall be accepted only if the load port is in the "Ready to Unload" state.
+	CarrierRelease (O) : Release the carrier from Carrier Hold.
+	
+	CarrierTagReadData : Read data from carrier ID tag.
+		-->> Or use S18F5
+	CarrierTagWriteData : Write data to the carrier ID tag.
+		-->> Or use S18F7
+	ChangeAccess : This service shall change the access mode of the specified Ports at the production equipment.
+		      If the equipment is unable to change one or more of the specified port(s) to the specified Access Mode, 
+		      Then the equipment shall accept the command (with appropriated response acknowledgement),
+		      And shall change only the Access Mode of those Port(s) allowed by the equipment, supplying host with an indication that not all ports were successfully changed.
+		-->> Or use S2F27
+	ChangeServiceStatus : This service shall change the transfer status of a specified load port at the production equipment.
+		-->> Or use S3F25 
+*/
+
+  //------------------------------
+  // 	Carrier Action Request. (EAS)     		H -> E
+
+/*  			
+Bind  -  The service shall associate a CarrierID to a load port and shall cause the load port to transition to the RESERVED state
+      -  PortID		U1
+	 CarrierID	A[16]
+	 PropertiesList	List
+ 
+CarrierNotification  -  This service shall cause the equipment to instantiate a carrier object.
+      -  
+
+ProceedWithCarrier  -  This service shall instruct the equipment to proceed with using the specified carrier.	
+      -  PortID		U1
+         CarrierID	A[16]
+         PropertiesList	List
+*/			
+
+  #MESSAGE    S3F17
+  #REPLY      1
+  #DIRECTION  RECEIVE  	// EQP <- HOST
+  #TYPE       0
+
+  1.<L,  5  $LIST_LIMIT
+         1.<U4[1]  $DATAID
+#UNFIXED         
+         2.<A[1]   $CARRIERACTION    
+#UNFIXED         
+         3.<A[1]   $CARRIERID
+         4.<U1[1]  $PTN >
+#UNFORMATTED
+         5.<L,  5   $ITEM_LIST
+		            1.<L,  2
+#UNFIXED
+          		         1.<A[1]	  "Capacity"
+		                   2.<U1[1]   $CAPACITY 
+		            2.<L,  2
+#UNFIXED		
+		                   1.<A[1]    "SubstrateCount"
+		                   2.<U1[1]   $SUBSTRATE_COUNT
+		            3.<L,  2
+#UNFIXED		
+		                   1.<A[1]    "Usage"
+#UNFIXED		
+		                   2.<A[1]    $USAGE
+                4.<L,  2
+#UNFIXED                
+                       1.<A[1]   "SlotMap" 
+#UNFORMATTED
+                       2.<L,  1  $MAP_LIMIT
+                              1.<U1[1]   $SLOTMAP    // 0 = UNDEFINED, 1 = EMPTY, 2 = NOT EMPTY, 3 = CORRECTLY OCCUPIED, 4 = DOUBLE SLOTTED, 5 = CROSS SLOTTED
+                5.<L,  2
+#UNFIXED                
+                       1.<A[1]    "ContentMap" 
+#UNFORMATTED
+                       2.<L,  1    $CONTENT_LIMIT 
+                              1.<L,  2 
+#UNFIXED                
+                                     1.<A[1]   $LOTID 
+#UNFIXED                
+                                     2.<A[1]   $WAFERID  
+/*                                     
+                6.<L,  2
+#UNFIXED
+                       1.<A[1]   "WID_Angle"
+#UNFORMATTED
+                       2.<L,  1
+                              1.<U2[1]   $ANGLE
+*/
+
+  #END
+  //-----------------------------
+  //------------------------------
+  // 	Carrier Action Request. (EAS)     		H -> E
+
+/*  			
+CancelBind  -  The service cancel a CarrierID to a load port association and shall cause the load port to transition to the NOT RESERVED state	
+      -  PortID		U1
+         CarrierID      A
+
+CancelCarrierNotification  -
+
+CancelCarrier  -  This service shall cancel the current carrier related action, and the production equipment shall return the carrier to the unload.
+      -  PortID		U1
+         CarrierID	A
+
+CancelCarrierAtPort
+      -  PortID
+
+CancelReservationAtPort  -  This service shall cause the equipment to remove the reservation at the specified Port and to deactivate the visiable signal.
+      -  PortID
+      
+ReserveAtPort  -  This service shall cause the equipment to reserve the specified Port and activate a visible signal.
+      -  PortID
+*/			
+
+  #MESSAGE    S3F17
+  #REPLY      1
+  #DIRECTION  RECEIVE  	// EQP <- HOST
+  #TYPE       1
+
+  1.<L,  5  $LIST_LIMIT
+         1.<U4[1]  $DATAID
+#UNFIXED         
+         2.<A[1]   $CARRIERACTION    
+#UNFIXED         
+         3.<A[1]   $CARRIERID
+         4.<U1[1]  $PTN 
+#UNFORMATTED         
+         5.<L,  1  $PARA_LIST
+         	      1.<L,  2
+#UNFIXED         	
+         	             1.<A[1]   $PARA_NAME
+#UNFIXED         	       
+         	             2.<A[1]   $PARA_DATA
+  
+  #END
+  //-----------------------------
+  //------------------------------
+  #MESSAGE    S3F17
+  #REPLY      1
+  #DIRECTION  RECEIVE  	// EQP <- HOST
+  #TYPE       2
+
+  1.<L,  5  $LIST_LIMIT
+         1.<U4[1]  $DATAID
+#UNFIXED         
+         2.<A[1]   $CARRIERACTION    
+#UNFIXED         
+         3.<A[1]   $CARRIERID
+         4.<U1[1]  $PTN 
+         5.<L,  1     $SLOT_LIMIT
+                1.<L,  2
+#UNFIXED                
+                       1.<A[1]    "ContentMap" 
+#UNFORMATTED
+                       2.<L,  1    $CONTENT_LIMIT 
+                              1.<L,  2 
+#UNFIXED                
+                                     1.<A[1]   $LOTID 
+#UNFIXED                
+                                     2.<A[1]   $WAFERID  
+
+  #END
+  //------------------------------
+ 
+  //------------------------------
+  // 	Carrier Action Acknowledge    			 H <- E	
+
+  #MESSAGE    S3F18
+  #DIRECTION  SEND	// EQP -> HOST
+  #TYPE       0
+  
+  1.<L, 2 
+        1.<U1[1]   $ACKA  
+#UNFORMATTED
+        2.<L,  1   $LIST_LIMIT
+               1.<L,  2   
+                      1.<U1[1]   $ERRCODE     
+#UNFIXED                
+                      2.<A[1]    $ERRTEXT 
+  
+  #END
+  //-----------------------------
+
+
+ //------------------------------
+  // 	Port Action Request     			H -> E
+
+  #MESSAGE    S3F25  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+ 
+  1.<L,  3
+#UNFIXED  
+         1.<A[1]    $PORTACTION 		// "IN SERVICE", "OUT OF SERVICE", "ReserveAtPort", "CancelReservationAtPort"
+         2.<U1[1]   $PTN   	        
+         3.<L,  0
+ 
+  #END
+  //-----------------------------
+  //------------------------------
+  // 	Port Action Acknowledge    			H <- E	
+
+  #MESSAGE    S3F26
+  #DIRECTION  SEND	
+
+  1.<L,  2 
+         1.<U1[1]   $CAACK 
+#UNFORMATTED         
+         2.<L,  1   $LIST_LIMIT
+                1.<L,  2
+                       1.<U1[1]   $ERRCODE 
+#UNFIXED                       
+                       2.<A[1]    $ERRTEXT 
+  
+  #END
+
+/*
+CAACK
+	0  :  Acknowledge, command has been performed.
+	1  :  Invalid command.
+	2  :  Can not perform now.
+	3  :  Invalid data or argument.
+	4  :  Acknowledge, request will be performed with completion signaled later by an event.
+	5  :  Rejected. Invalid state.
+	6  :  Command performed with errors.
+	7 ~ 63 : Reserved.
+*/
+  //-----------------------------
+
+
+  //------------------------------
+  // 	Port Access Mode Request     			H -> E
+
+  #MESSAGE    S3F27  
+  #REPLY      1
+  #DIRECTION  RECEIVE  	
+
+  1.<L,  2
+         1.<U1[1]   $ACCESS_MODE 		// 0 : MANUAL, 1 : AUTO
+#UNFORMATTED
+         2.<L,  1   $PORT_LIMIT
+                1.<U1[1]   $PTN 
+ 
+  #END
+  //-----------------------------
+  //------------------------------
+  // 	Port Action Acknowledge     			H <- E	
+
+  #MESSAGE    S3F28
+  #DIRECTION  SEND	// EQP -> HOST
+ 
+  1.<L,  2
+         1.<U1[1]   $CAACK > 
+#UNFORMATTED         
+         2.<L,  1   $ERROR_LIMIT
+                1.<L,  3
+                       1.<U1[1]   $PTN 
+                       2.<U1[1]   $ERRCODE 
+#UNFIXED                       
+                       3.<A[1]    $ERRTEXT 
+  
+  #END
+  
+/* 
+CAACK
+	0  =  Acknowledge, command has been performed.
+	1  =  Invalid command
+	2  =  Can not perform now
+	3  =  Invalid data or argument
+	4  =  Acknowledge, request will be perfomed with completion signaled later by an event.
+	5  =  Rejected. Invalid state.
+	6  =  Command performed with errors.
+	7 ~ 63  =  Reserved.
+*/
+  //-----------------------------
+
+
+  //------------------------------
+  // 	Carrier Tag Read Request     			H -> E
+
+  #MESSAGE    S3F29
+  #REPLY      1
+  #DIRECTION  RECEIVE  	
+
+  1.<L,  4
+#UNFIXED
+         1.<A[1]    $LOCID	 		// LP1 ~ LPn
+#UNFIXED
+         2.<A[1]    $CARRIERSPEC
+#UNFIXED
+         3.<A[1]    $DATASEG
+#UNFIXED
+         4.<U4[1]   $DATALENGTH
+ 
+  #END
+  //-----------------------------
+  //------------------------------
+  // 	Carrier Tag Read Acknowledge   			H <- E	
+
+  #MESSAGE    S3F30
+  #DIRECTION  SEND	// EQP -> HOST
+ 
+  1.<L,  2
+#UNFIXED
+  	 1.<A[1]    $DATA
+  	 2.<L,  2
+  	 	1.<U1[1]   $CAACK
+#UNFORMATTED         
+	        2.<L,  1   $ERROR_LIMIT
+        	       1.<L,  2
+        	              1.<U1[1]   $ERRCODE 
+#UNFIXED                       
+                              2.<A[1]    $ERRTEXT 
+  
+  #END
+  
+/* 
+CAACK
+	0  =  Acknowledge, command has been performed.
+	1  =  Invalid command
+	2  =  Can not perform now
+	3  =  Invalid data or argument
+	4  =  Acknowledge, request will be perfomed with completion signaled later by an event.
+	5  =  Rejected. Invalid state.
+	6  =  Command performed with errors.
+	7 ~ 63  =  Reserved.
+*/
+  //-----------------------------
+
+
+  //------------------------------
+  // 	Carrier Tag Write Request     			H -> E
+
+  #MESSAGE    S3F31
+  #REPLY      1
+  #DIRECTION  RECEIVE  	
+
+  1.<L,  5
+#UNFIXED
+         1.<A[1]    $LOCID	 		// LP1 ~ LPn
+#UNFIXED
+         2.<A[1]    $CARRIERSPEC
+#UNFIXED
+         3.<A[1]    $DATASEG
+#UNFIXED
+         4.<U4[1]   $DATALENGTH
+#UNFIXED
+         5.<A[1]    $DATA
+ 
+  #END
+  //-----------------------------
+  //------------------------------
+  // 	Carrier Tag Write Acknowledge  			H <- E	
+
+  #MESSAGE    S3F32
+  #DIRECTION  SEND	// EQP -> HOST
+ 
+  1.<L,  2
+   	 1.<U1[1]   $CAACK
+#UNFORMATTED         
+	 2.<L,  1   $ERROR_LIMIT
+                1.<L,  2
+                       1.<U1[1]   $ERRCODE 
+#UNFIXED                       
+                       2.<A[1]    $ERRTEXT 
+  
+  #END
+  
+/* 
+CAACK
+	0  =  Acknowledge, command has been performed.
+	1  =  Invalid command
+	2  =  Can not perform now
+	3  =  Invalid data or argument
+	4  =  Acknowledge, request will be perfomed with completion signaled later by an event.
+	5  =  Rejected. Invalid state.
+	6  =  Command performed with errors.
+	7 ~ 63  =  Reserved.
+*/
+  //-----------------------------
+
+

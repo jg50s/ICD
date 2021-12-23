@@ -1,0 +1,10 @@
+
+//======================================================================================================================
+#PM.ID     1  2  3  4  5  6
+
+
+// #PAGE      "PMC_CONFIG_HEATER-SAMPLE"
+// #CFG_ITEM    OPR_CTC_MODE+CFG.SCH.MODE                       "Scheduler Mode"                              
+
+// #PAGE      "PMC_CONFIG_INTERLOCK_MFC-SAMPLE"
+// #CFG_ITEM    OPR_CTC_MODE+CFG.SCH.01                         "Scheduler 01"                              

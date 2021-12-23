@@ -1,0 +1,167 @@
+
+//---------------------------------------------------------------------------------------------------------                                                                                                                                                                                                               
+#DEFINE_ID_OFFSET             0                                                                                                                          
+                                                                                                                                                         
+// 	     ECID   COMMAND      	        CHANNEL-NAME    		            							              UNIT   FMT-TYPE   FMT-BYTE   DEFAULT     MIN     MAX     NAME  
+
+// Page Name : System(CFG)                                                                                                                               
+#ECID    101    __                    DB_CFG+PM1.USE                                               __    A          8          DISABLE     0       1       PM1_CHAMBER_AUTO_RUN_USE_SELECT[ENABLE,DISABLE] 
+#ECID    102    __                    DB_CFG+PM2.USE                                               __    A          8          ENABLE      0       1       PM2_CHAMBER_AUTO_RUN_USE_SELECT[ENABLE,DISABLE] 
+#ECID    103    __                    DB_CFG+PM3.USE                                               __    A          8          ENABLE      0       1       PM3_CHAMBER_AUTO_RUN_USE_SELECT[ENABLE,DISABLE] 
+#ECID    104    __                    DB_CFG+PM4.USE                                               __    A          8          DISABLE     0       1       PM4_CHAMBER_AUTO_RUN_USE_SELECT[ENABLE,DISABLE] 
+#ECID    105    __                    DB_CFG+PM1.SLOT.MAX                                          __    A          2              1       0       2       PM1_MAX_SLOT_COUNT[1,2,3] 
+#ECID    106    __                    DB_CFG+PM2.SLOT.MAX                                          __    A          2              1       0       2       PM2_MAX_SLOT_COUNT[1,2,3] 
+#ECID    107    __                    DB_CFG+PM3.SLOT.MAX                                          __    A          2              1       0       2       PM3_MAX_SLOT_COUNT[1,2,3] 
+#ECID    108    __                    DB_CFG+PM4.SLOT.MAX                                          __    A          2              1       0       2       PM4_MAX_SLOT_COUNT[1,2,3] 
+#ECID    109    __                    PHY_LP1+CFG.USE                                              __    A          8          PROCESS     0       2       LP1_AUTO_RUN_USE_SELECT[DISABLE,PROCESS,DUMMY] 
+#ECID    110    __                    PHY_LP2+CFG.USE                                              __    A          8          PROCESS     0       2       LP2_AUTO_RUN_USE_SELECT[DISABLE,PROCESS,DUMMY] 
+#ECID    111    __                    PHY_LP3+CFG.USE                                              __    A          8          PROCESS     0       2       LP3_AUTO_RUN_USE_SELECT[DISABLE,PROCESS,DUMMY] 
+#ECID    112    __                    PHY_LP1+CFG.SLOT.MAX                                         __    A          3             25       0       1       LP1_MAX_SLOT_COUNT[25,26] 
+#ECID    113    __                    PHY_LP2+CFG.SLOT.MAX                                         __    A          3             25       0       1       LP2_MAX_SLOT_COUNT[25,26] 
+#ECID    114    __                    PHY_LP3+CFG.SLOT.MAX                                         __    A          3             25       0       1       LP3_MAX_SLOT_COUNT[25,26] 
+#ECID    115    __                    OPR_CTC_MODE+CFG.LPx.PICK_MODE                               __    A         10          BOTTOM_UP   0       1       LPx_PICK_TYPE_SELECT[BOTTOM_UP,TOP_DOWN] 
+#ECID    116    __                    FNC_ATM_ROBOT+CFG.ALx_SWAP.FLAG                              __    A          8          DISABLE     0       1       ATM_ROBOT_ALIGNER_SWAP[DISABLE,ENABLE] 
+#ECID    117    __                    FNC_ATM_ROBOT+CFG.LBx_SWAP.FLAG                              __    A          8          DISABLE     0       1       ATM_ROBOT_LBx_SWAP[DISABLE,ENABLE] 
+#ECID    118    __                    PHY_ATM_ROBOT+TARGET.LLx.MODE                                __    A          8          ENABLE      0       1       ATM_ROBOT_[DISABLE,ENABLE] 
+#ECID    119    __                    FNC_VAC_ROBOT+CFG.PMx_SWAP.FLAG                              __    A          8          DISABLE     0       1       VAC_ROBOT_PMx_SWAP[DISABLE,ENABLE] 
+#ECID    120    __                    FNC_VAC_ROBOT+CFG.LBx_SWAP.FLAG                              __    A          8          DISABLE     0       1       VAC_ROBOT_LBx_SWAP[DISABLE,ENABLE] 
+#ECID    121    __                    DB_CFG+LBB.SLOT_MAX                                          __    A          2              2       0       2       LBB_MAX_SLOT_COUNT[2,3,1] 
+#ECID    122    __                    DB_CFG+LBA.SLOT_MAX                                          __    A          2              2       0       2       LBA_MAX_SLOT_COUNT[2,3,1] 
+#ECID    123    __                    DB_CFG+LBB.SLOT2_STATUS                                      __    A          8          ENABLE      0       1       LBB_2ND_SLOT_USE_SELECT[DISABLE,ENABLE] 
+#ECID    124    __                    DB_CFG+LBA.SLOT2_STATUS                                      __    A          8          ENABLE      0       1       LBA_2ND_SLOT_USE_SELECT[DISABLE,ENABLE] 
+#ECID    125    __                    DB_CFG+LBB.FNC_MODE                                          __    A          8           IDLE       0       2       LBB_TEMP_SELECT[IDLE,COOLING,PREHEAT] 
+#ECID    126    __                    DB_CFG+LBA.FNC_MODE                                          __    A          8           IDLE       0       2       LBA_TEMP_SELECT[IDLE,COOLING,PREHEAT] 
+#ECID    127    __                    DB_CFG+LBB.SLOT2_MODE                                        __    A          7          INPUT       0       2       LBB_2ND_SLOT_IS_ALLWAYS_INPUT_or_OUTPUT_MODULE_(CHOOSE_ONE)[INPUT,OUTPUT,ALL] 
+#ECID    128    __                    DB_CFG+LBA.SLOT2_MODE                                        __    A          7          INPUT       0       2       LBA_2ND_SLOT_IS_ALLWAYS_INPUT_or_OUTPUT_MODULE_(CHOOSE_ONE)[INPUT,OUTPUT,ALL] 
+#ECID    129    __                    DB_CFG+LBB.SLOT1_MODE                                        __    A          7          OUTPUT      0       2       LBB_1ST_SLOT_IS_ALLWAYS_INPUT_or_OUTPUT_MODULE_(CHOOSE_ONE)[INPUT,OUTPUT,ALL] 
+#ECID    130    __                    DB_CFG+LBA.SLOT1_MODE                                        __    A          7          OUTPUT      0       2       LBA_1ST_SLOT_IS_ALLWAYS_INPUT_or_OUTPUT_MODULE_(CHOOSE_ONE)[INPUT,OUTPUT,ALL] 
+#ECID    131    __                    DB_CFG+LBB.USE.FLAG                                          __    A          8          ENABLE      0       1       LBB_USE_SELECT[ENABLE,DISABLE] 
+#ECID    132    __                    DB_CFG+LBA.USE.FLAG                                          __    A          8          ENABLE      0       1       LBA_USE_SELECT[ENABLE,DISABLE] 
+#ECID    133    __                    DB_CFG+LBB.SLOT3_STATUS                                      __    A          8          DISABLE     0       1       LBB_3RD_SLOT_USE_SELECT[DISABLE,ENABLE] 
+#ECID    134    __                    DB_CFG+LBA.SLOT3_STATUS                                      __    A          8          DISABLE     0       1       LBA_3RD_SLOT_USE_SELECT[DISABLE,ENABLE] 
+#ECID    135    __                    DB_CFG+LBB.SLOT1_STATUS                                      __    A          8          ENABLE      0       1       LBB_1ST_SLOT_USE_SELECT[DISABLE,ENABLE] 
+#ECID    136    __                    DB_CFG+LBA.SLOT1_STATUS                                      __    A          8          ENABLE      0       1       LBA_1ST_SLOT_USE_SELECT[DISABLE,ENABLE] 
+#ECID    137    __                    DB_CFG+LBB.MODE_TYPE                                         __    A         12            ALL       0       2       LBB_ALL_SLOT_IS_ALLWAYS_INPUT_or_OUTPUT_MODULE_(CHOOSE_ONE)[ALL,ONLY_INPUT,ONLY_OUTPUT] 
+#ECID    138    __                    DB_CFG+LBA.MODE_TYPE                                         __    A         12            ALL       0       2       LBA_ALL_SLOT_IS_ALLWAYS_INPUT_or_OUTPUT_MODULE_(CHOOSE_ONE)[ALL,ONLY_INPUT,ONLY_OUTPUT] 
+#ECID    139    __                    DB_CFG+LBB.IDLE.STATUS                                       __    A          5            ATM       0       2       LBB_MODULE_IDLE_PRESSURE_SELECT[NONE,ATM,VAC] 
+#ECID    140    __                    DB_CFG+LBA.IDLE.STATUS                                       __    A          5            ATM       0       2       LBA_MODULE_IDLE_PRESSURE_SELECT[NONE,ATM,VAC] 
+#ECID    141    __                    DB_CFG+PRESSURE_CHECK.MODE                                   __    A         14          RECOVERY    0       3       AUTO_RUNNING_PRESSURE_CHECK_[DISABLE,ALARM,RECOVERY,ONLY_RECOVERY] 
+#ECID    142    __                    DB_CFG+TRANSFER.MODE                                         __    A          4            VAC       0       1       AUTO_RUNNING_PRESSURE_MODE_SELECT_[ATM,VAC] 
+#ECID    143    __                    DB_CFG+REF.ATM.PRESSURE                                    torr    U          2          735.0     600.0   1000.0    ATM_MODE_PRESSURE_STANDARD 
+#ECID    144    __                    DB_CFG+REF.VAC.PRESSURE                                    torr    U          2          1.000     0.000   100.000   VAC_MODE_PRESSURE_STANDARD 
+#ECID    145    __                    FNC_TMC_SYS+CFG.INIT_MODE                                    __    A         12           AUTO       0       2       TRANSFER_MODULE_INIT_MODE_SELECT[ONLY_SYSTEM,TIME_SYSTEM,AUTO] 
+#ECID    146    __                    FNC_PMC_SYS+CFG.INIT_MODE                                    __    A         12           AUTO       0       2       PROCESS_MODULE_INIT_MODE_SELECT[ONLY_SYSTEM,TIME_SYSTEM,AUTO] 
+#ECID    147    __                    OPR_TIMER+CFG.SYNC.USE                                       __    A          8          DISABLE     0       1       TIMER_PROPERTY_USE[DISABLE,ENABLE] 
+#ECID    148    __                    OPR_TIMER+CFG.SYNC.REF_TYPE                                  __    A          5           HOUR       0       1       TIMER_PROPERTY_TYPE[HOUR,MIN] 
+#ECID    149    __                    OPR_TIMER+CFG.SYNC.REF_TIME                            Hour/Min    U          2              1       1      60       TIMER_PROPERTY_TIME 
+#ECID    150    __                    DB_CFG+SCH.MAP.DEVICE                                        __    A         13          ATM_RB      0       2       MAPPING_DEVICE_SELECT[LP,ATM_RB,ROBOT.MANUAL] 
+#ECID    151    __                    DB_CFG+SCH.ALIGN.DEVICE                                      __    A          7          ATM_RB      0       1       ALIGN_DEVICE_SELECT[AL,ATM_RB] 
+#ECID    152    __                    DB_CFG+CFG.HEADER_RCP_BEFORE_PMC_PLACE.APPLY_MODE            __    A          8          DISABLE     0       1       PMC_PLACE_APPLY[DISABLE,ENABLE] 
+#ECID    153    __                    DB_CFG+PM4.PROCESS.TYPE                                      __    A          7          NORMAL      0       1       PM4_RUN_TYPE_SELECT[NORMAL,TEST] 
+#ECID    154    __                    DB_CFG+PM3.PROCESS.TYPE                                      __    A          7          NORMAL      0       1       PM3_RUN_TYPE_SELECT[NORMAL,TEST] 
+#ECID    155    __                    DB_CFG+PM2.PROCESS.TYPE                                      __    A          7          NORMAL      0       1       PM2_RUN_TYPE_SELECT[NORMAL,TEST] 
+#ECID    156    __                    DB_CFG+PM1.PROCESS.TYPE                                      __    A          7          NORMAL      0       1       PM1_RUN_TYPE_SELECT[NORMAL,TEST] 
+
+
+// Page Name : Scheduler(CFG)
+#ECID    201    __                    OPR_CTC_MODE+CFG.SCH.MODE                                    __    A         11          CONCURRENT  0       2       SCHEDULER_RUN_MODE_SELECT[SEQUENTIAL,PIPELINE,CONCURRENT] 
+#ECID    202    __                    FNC_VAC_ROBOT+CFG.PICK_DELAY.REMAIN_TIME                    sec    U          2            0.0     0.0      100.0    TM_ROBOT_PICK_REMAIN_TIME(FIRST) 
+#ECID    203    __                    FNC_VAC_ROBOT+CFG.PICK_DELAY.SECOND_TIME                    sec    U          2           30.0     0.0      100.0    TM_ROBOT_PICK_REMAIN_TIME(SECOND) 
+#ECID    204    __                    FNC_VAC_ROBOT+CFG.PICK_DELAY.THIRD_TIME                     sec    U          2            0.0     0.0      100.0    TM_ROBOT_PICK_REMAIN_TIME(THIRD) 
+#ECID    205    __                    FNC_VAC_ROBOT+CFG.PICK_DELAY.FIRST_TIME                     sec    U          2           30.0     0.0      100.0    TM_ROBOT_PICK_DELAY_TIME(FIRST) 
+#ECID    206    __                    FNC_VAC_ROBOT+CFG.PICK_DELAY.FLAG                            __    A          8          ENABLE      0       1       TM_ROBOT_PICK_DELAY_OPTION_USE_SELECT[DISABLE,ENABLE] 
+#ECID    207    __                    FNC_VAC_ROBOT+CFG.CONCURRENT.MARGIN_TIME                    sec    U          2           20.0     0.0       60.0    CONCURRENT_MODE_MARGIN_TIME_SET 
+#ECID    208    __                    OPR_CTC_MODE+CYCLE.MODE                                      __    A          8          DISABLE     0       2       CYCLE_MODE_SELECT[DISABLE,ENABLE,FOREVER] 
+#ECID    209    __                    OPR_CTC_MODE+CYCLE.LIMIT                                    num    U          4            500       0      100000   RE_CYCLE_COUNT_SET 
+#ECID    210    __                    FNC_VAC_ROBOT+CFG.ARM_TYPE.PICK_FROM_PMC                     __    A          4            ALL       0       2       PM_CHAMBER_PICK_ARM_SELECT[ALL,A,B] 
+#ECID    211    __                    FNC_VAC_ROBOT+CFG.ARM_TYPE.PICK_FROM_LBX                     __    A          4              A       0       2       BUFFER_MODULE_PICK_ARM_SELECT[ALL,A,B] 
+#ECID    212    __                    FNC_ATM_ROBOT+CFG.PHY.LBB.VENT_TIME                         sec    U          2            5.0     0.0       60.0    LBB_VENT_TIME_SET 
+#ECID    213    __                    FNC_ATM_ROBOT+CFG.PHY.LBB.PUMP_TIME                         sec    U          2            5.0     0.0       60.0    LBB_PUMP_TIME_SET 
+#ECID    214    __                    FNC_ATM_ROBOT+CFG.PHY.LBA.VENT_TIME                         sec    U          2            5.0     0.0       60.0    LBA_VENT_TIME_SET 
+#ECID    215    __                    FNC_ATM_ROBOT+CFG.PHY.LBA.PUMP_TIME                         sec    U          2            5.0     0.0       60.0    LBA_PUMP_TIME_SET 
+#ECID    216    __                    FNC_VAC_ROBOT+CFG.ROBOT.ARM_DIRECTION_TYPE                   __    A         14          BI_DIRECTION   0    1       TM_ROBOT_DIRECTION_TYPE_SET[UNI_DIRECTION,BI_DIRECTION] 
+#ECID    217    __                    DB_CFG+SCH.WAC.WAFER.POSITION                                __    A          7            LLx       0       2       WAC_WAFER_POSITION_SET[PMx,LLx,CENTER] 
+#ECID    218    __                    DB_CFG+SCH.WAC.WAFER.DELAY.SEC                              sec    U          2            1.0     0.0       3.0     WAC_WAFER_DELAY_TIME 
+#ECID    219    __                    PHY_BFF2+CFG.USE.FLAG                                        __    A          8          DISABLE     0       1       BUFFER2_MODULE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    220    __                    PHY_BFF1+CFG.USE.FLAG                                        __    A          8          DISABLE     0       1       BUFFER1_MODULE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    221    __                    PHY_BFF2+CFG.SLOT.MAX                                      slot    U          2             25       1       26      BUFFER2_MODULE_SLOT_MAX_COUNT 
+#ECID    222    __                    PHY_BFF1+CFG.SLOT.MAX                                      slot    U          2             25       1       26      BUFFER1_MODULE_SLOT_MAX_COUNT 
+#ECID    223    __                    FNC_ATM_ROBOT+CFG.BUFFER.TRANSFER.MODE                       __    A         15          After_Process   0   1       BUFFER_MODULE_USE_MODE_SELECT[Before_Process,After_Process] 
+#ECID    224    __                    FNC_ATM_ROBOT+CFG.BUFFER.PRE.ALIGN.MODE                      __    A          8          DISABLE     0       1       ALIGNER_USE_MODE_SELECT[ENABLE,DISABLE] 
+#ECID    225    __                    FNC_ATM_ROBOT+CFG.BUFFER.WAFER.CLEAN.TIME                   sec    U          2             10       0       1000    WAFER_CLEAN_TIME_SET 
+#ECID    226    __                    FNC_ATM_ROBOT+CFG.BUFFER.APPLY.MODE                          __    A          8          ROUTE       0       2       BUFFER_APPLY_MODE_SELECT[DISABLE,ENABLE,ROUTE] 
+#ECID    227    __                    FNC_ATM_ROBOT+CFG.BUFFER.WAFER.PICK.MODE                     __    A         13          BOTTOM_TO_UP   0    1       BUFFER_WAFER_PICK_MODE_SELECT[BOTTOM_TO_UP,UP_TO_BOTTOM] 
+#ECID    228    __                    DB_CFG+CFG.CYCLE.FOUP.MODE                                   __    A         14          UNLOAD_RELOAD  0    1       CYCLE_MODE_FOUP_LOAD/UNLOAD_ACTION_SELECT[NO_MOVE,UNLOAD_RELOAD] 
+#ECID    229    __                    FNC_VAC_ROBOT+CFG.SCH.EXCHANGE.PRIORITY                      __    A          6            PMC       0       1       WAFER_EXCHANGE_PRIORITY_[PMC,WAFER] 
+#ECID    230    __                    FNC_VAC_ROBOT+CFG.SCH.PMC_RECIPE_TYPE                        __    A          8          PRC_CLN     0       1       PM_RECIPE_TYPE[PRC_CLN,ALL] 
+#ECID    231    __                    OPR_CTC_MODE+SCH.TEST.PORT.CURRENT.APPLY                     __    A          8          ENABLE      0       1       Concurrent Job Apply Mode For LP with Test Mode[DISABLE,ENABLE] 
+
+
+// Page Name : Clean_Recipe(CFG)
+#ECID    301    __                    PHY_PM1+CFG.CLEAN.FREQUENCY                                 num    U          4              1       0   10000000    PM1_CLEAN_RECIPE_RUN_COUNT 
+#ECID    302    __                    PHY_PM1+CFG.CLEAN.COUNT                                     num    U          4              0       0   10000000    PM1_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    303    __                    PHY_PM1+CFG.CLEAN.USE                                        __    A          8          DISABLE     0       1       PM1_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    304    __                    PHY_PM2+CFG.CLEAN.FREQUENCY                                 num    U          4              1       0   10000000    PM2_CLEAN_RECIPE_RUN_COUNT 
+#ECID    305    __                    PHY_PM3+CFG.CLEAN.FREQUENCY                                 num    U          4              0       0   10000000    PM3_CLEAN_RECIPE_RUN_COUNT 
+#ECID    306    __                    PHY_PM4+CFG.CLEAN.FREQUENCY                                 num    U          4              1       0   10000000    PM4_CLEAN_RECIPE_RUN_COUNT 
+#ECID    307    __                    PHY_PM2+CFG.CLEAN.COUNT                                     num    U          4           5862       0   10000000    PM2_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    308    __                    PHY_PM3+CFG.CLEAN.COUNT                                     num    U          4           3877       0   10000000    PM3_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    309    __                    PHY_PM4+CFG.CLEAN.COUNT                                     num    U          4           5821       0   10000000    PM4_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    310    __                    PHY_PM2+CFG.CLEAN.USE                                        __    A          8          DISABLE     0       1       PM2_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    311    __                    PHY_PM3+CFG.CLEAN.USE                                        __    A          8          DISABLE     0       1       PM3_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    312    __                    PHY_PM4+CFG.CLEAN.USE                                        __    A          8          DISABLE     0       1       PM4_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    313    __                    PHY_PM1+CFG.CLEAN.RF.REF_TIME                              hour    U          2            100       0   10000       PM1_CLEAN_RECIPE_RF_USED_TIME 
+#ECID    314    __                    PHY_PM1+CFG.CLEAN.RF.CUR_TIME                              hour    U          2              0       0   10000       PM1_RF_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    315    __                    PHY_PM1+CFG.CLEAN.RF.USE                                     __    A          8          DISABLE     0       1       PM1_RF_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    316    __                    PHY_PM2+CFG.CLEAN.RF.REF_TIME                              hour    U          2            100       0   10000       PM2_CLEAN_RECIPE_RF_USED_TIME 
+#ECID    317    __                    PHY_PM3+CFG.CLEAN.RF.REF_TIME                              hour    U          2              0       0   10000       PM3_CLEAN_RECIPE_RF_USED_TIME 
+#ECID    318    __                    PHY_PM4+CFG.CLEAN.RF.REF_TIME                              hour    U          2              0       0   10000       PM4_CLEAN_RECIPE_RF_USED_TIME 
+#ECID    319    __                    PHY_PM2+CFG.CLEAN.RF.CUR_TIME                              hour    U          2              0       0   10000       PM2_RF_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    320    __                    PHY_PM3+CFG.CLEAN.RF.CUR_TIME                              hour    U          2              0       0   10000       PM3_RF_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    321    __                    PHY_PM4+CFG.CLEAN.RF.CUR_TIME                              hour    U          2              0       0   10000       PM4_RF_CLEAN_RECIPE_TOTAL_COUNT 
+#ECID    322    __                    PHY_PM2+CFG.CLEAN.RF.USE                                     __    A          8          DISABLE     0       1       PM2_RF_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    323    __                    PHY_PM3+CFG.CLEAN.RF.USE                                     __    A          8          DISABLE     0       1       PM3_RF_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    324    __                    PHY_PM4+CFG.CLEAN.RF.USE                                     __    A          8          DISABLE     0       1       PM4_RF_CLEAN_RECIPE_USE_SELECT[DISABLE,ENABLE] 
+#ECID    325    __                    FNC_VAC_ROBOT+CFG.MATERIAL_COUNT.FLAG                        __    A          8          ENABLE      0       1       MATERIAL_COUNT[DISABLE,ENABLE] 
+#ECID    326    __                    FNC_VAC_ROBOT+CFG.CLEAN_MATERIAL.FLAG                        __    A          6           NONE       0       1       CLEAN_METERIAL[NONE,EXIST] 
+
+
+// Page Name : Signal_Tower(CFG)
+#ECID    401    __                    MNG_ALARM_CTRL+CFG.MSG.BOX.BUZZER.MODE                       __    A          8          ENABLE      0       1       ALARM_MESSAGE_BOX_POPUP_WITH_BUZZER_USE_SELECT[ENABLE,DISABLE] 
+#ECID    402    __                    MNG_SIGNAL_TOWER+CFG.RED.STATUS1.LIGHT_COLOR                 __    A         10          RED_FLASH   0       3       EQUIPMENT_IS_ERROR_STATUS[RED_ON,RED_OFF,RED_FLASH,NONE] 
+#ECID    403    __                    MNG_SIGNAL_TOWER+CFG.RED.STATUS2.LIGHT_COLOR                 __    A         10          RED_OFF     0       3       EQUIPMENT_IS_MAINTRANCE_STATUS[RED_ON,RED_OFF,RED_FLASH,NONE] 
+#ECID    404    __                    MNG_SIGNAL_TOWER+CFG.RED.STATUS3.LIGHT_COLOR                 __    A         10          RED_FLASH   0       3       EQUIPMENT_IS_ERROR_STATUS_WITH_MAINT_MODE[RED_ON,RED_OFF,RED_FLASH,NONE] 
+#ECID    405    __                    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS1.LIGHT_COLOR               __    A         13          YELLOW_ON   0       3       NEW_CARRIER_ON[YELLOW_ON,YELLOW_OFF,YELLOW_FLASH,NONE] 
+#ECID    406    __                    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS2.LIGHT_COLOR               __    A         13          YELLOW_FLASH  0     3       NEW_CARRIER_OFF[YELLOW_ON,YELLOW_OFF,YELLOW_FLASH,NONE] 
+#ECID    407    __                    MNG_SIGNAL_TOWER+CFG.AMBER.STATUS3.LIGHT_COLOR               __    A         13          YELLOW_OFF    0     3       PROCESS_COMPLETE_[YELLOW_ON,YELLOW_OFF,YELLOW_FLASH,NONE] 
+#ECID    408    __                    MNG_SIGNAL_TOWER+CFG.GREEN.STATUS1.LIGHT_COLOR               __    A         12          GREEN_ON      0     3       EQUIPMENT_IS_PROCESSING_STATUS[GREEN_ON,GREEN_OFF,GREEN_FLASH,NONE] 
+#ECID    409    __                    MNG_SIGNAL_TOWER+CFG.GREEN.STATUS2.LIGHT_COLOR               __    A         12          GREEN_FLASH   0     3       EQUIPMENT_IS_IDLE_STATUS[GREEN_ON,GREEN_OFF,GREEN_FLASH,NONE] 
+#ECID    410    __                    MNG_SIGNAL_TOWER+CFG.GREEN.STATUS3.LIGHT_COLOR               __    A         12          NONE        0       3       NOT_USED[GREEN_ON,GREEN_OFF,GREEN_FLASH,NONE] 
+#ECID    411    __                    MNG_SIGNAL_TOWER+CFG.BLUE.STATUS1.LIGHT_COLOR                __    A         11          BLUE_ON     0       3       EQUIPMENT_IS_ONLINE_STATUS,_AUTO_MODE(OHT_USE)[BLUE_ON,BLUE_OFF,BLUE_FLASH,NONE] 
+#ECID    412    __                    MNG_SIGNAL_TOWER+CFG.BLUE.STATUS2.LIGHT_COLOR                __    A         11          BLUE_FLASH  0       3       EQUIPMENT_IS_ONLINE_STATUS,_MANUAL_MODE(OHT_NOTUSE)[BLUE_ON,BLUE_OFF,BLUE_FLASH,NONE] 
+#ECID    413    __                    MNG_SIGNAL_TOWER+CFG.BLUE.STATUS3.LIGHT_COLOR                __    A         11          BLUE_OFF    0       3       EQUIPMENT_IS_ONLINE_STATUS,_LOCAL_MODE[BLUE_ON,BLUE_OFF,BLUE_FLASH,NONE] 
+#ECID    414    __                    MNG_SIGNAL_TOWER+CFG.RED.DEFAULT.LIGHT_COLOR                 __    A         10          RED_OFF     0       3       DEFAULT_(NOT_USED)[RED_ON,RED_OFF,RED_FLASH,NONE] 
+#ECID    415    __                    MNG_SIGNAL_TOWER+CFG.BLUE.DEFAULT.LIGHT_COLOR                __    A         11          BLUE_OFF    0       3       DEFAULT_(NOT_USED)[BLUE_ON,BLUE_OFF,BLUE_FLASH,NONE] 
+
+
+// Page Name : Leak_Check(CFG)
+#ECID    501    __                    PHY_PM1+CFG.AUTO.LEAK_CHECK.REF_TIME                        sec    U          4           3600       0    10000000   PM1_LEAK_CHECK_CYCLE_TIME 
+#ECID    502    __                    PHY_PM2+CFG.AUTO.LEAK_CHECK.REF_TIME                        sec    U          4           3600       0    10000000   PM2_LEAK_CHECK_CYCLE_TIME 
+#ECID    503    __                    PHY_PM2+CFG.AUTO.LEAK_CHECK.CUR_TIME                        sec    U          4              0       0    10000000   PM2_NEXT_LEAK_CHECK_TIME_COUNT 
+#ECID    504    __                    PHY_PM1+CFG.AUTO.LEAK_CHECK.CUR_TIME                        sec    U          4              9       0    10000000   PM1_NEXT_LEAK_CHECK_TIME_COUNT 
+#ECID    505    __                    PHY_PM1+CFG.AUTO.LEAK_CHECK.MODE                             __    A          4            JOB       0       0       PM1_LEAK_CHECK_PRIORITY_SELECT[JOB] 
+#ECID    506    __                    PHY_PM2+CFG.AUTO.LEAK_CHECK.MODE                             __    A          4            JOB       0       0       PM2_LEAK_CHECK_PRIORITY_SELECT[JOB] 
+#ECID    507    __                    DB_CFG+LEAK_CHECK.TIME.MODE                                  __    A         10          DATE_TIME   0       1       LEAK_CHECK_ROOT_SELECT:_1._INTERVAL:_TIME_COUNT_/_2._DATA_TIME:_DATA_TIME[DATE_TIME,INTERVAL] 
+#ECID    508    __                    DB_CFG+LEAK_CHECK.IDLE.USE.FLAG                              __    A          8          DISABLE     0       1       LEAK_CHECK_USE_SELECT[DISABLE,ENABLE] 
+#ECID    509    __                    DB_CFG+LEAK_CHECK.IDLE.REF.TIME                             sec    U          2             10       0    36000      LEAK_CHECK_BEFORE_PUMPING_TIME 
+#ECID    510    __                    DB_CFG+LEAK_CHECK.IDLE.REF.COUNT                            num    U          2              6       0      100      LEAK_CHECK_BEFORE_PUMPING_TOTAL_TIME 
+#ECID    511    __                    DB_CFG+LEAK_CHECK.IDLE.CUR.TIME                             sec    U          2              0       0    36000      LEAK_CHECKING_TIME 
+#ECID    512    __                    DB_CFG+LEAK_CHECK.IDLE.CUR.COUNT                            num    U          2              6       0      100      LEAK_CHECKING_TOTAL_TIME 
+#ECID    513    __                    PHY_PM3+CFG.AUTO.LEAK_CHECK.CUR_TIME                        sec    U          4              0       0    10000000   PM3_NEXT_LEAK_CHECK_TIME_COUNT 
+#ECID    514    __                    PHY_PM3+CFG.AUTO.LEAK_CHECK.REF_TIME                        sec    U          4           3600       0    10000000   PM3_LEAK_CHECK_CYCLE_TIME 
+#ECID    515    __                    PHY_PM3+CFG.AUTO.LEAK_CHECK.MODE                             __    A          4            JOB       0       0       PM3_LEAK_CHECK_PRIORITY_SELECT[JOB] 
+#ECID    516    __                    PHY_PM4+CFG.AUTO.LEAK_CHECK.MODE                             __    A          4            JOB       0       0       PM4_LEAK_CHECK_PRIORITY_SELECT[JOB] 
+#ECID    517    __                    PHY_PM4+CFG.AUTO.LEAK_CHECK.CUR_TIME                        sec    U          4              0       0    10000000   PM4_NEXT_LEAK_CHECK_TIME_COUNT 
+#ECID    518    __                    PHY_PM4+CFG.AUTO.LEAK_CHECK.REF_TIME                        sec    U          4           3600       0    10000000   PM4_LEAK_CHECK_CYCLE_TIME 
+
+

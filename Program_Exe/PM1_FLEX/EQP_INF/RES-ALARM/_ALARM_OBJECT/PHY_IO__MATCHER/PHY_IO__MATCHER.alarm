@@ -1,0 +1,5 @@
+#ID=1	1	LIGHT	PHY_IO__MATCHER :  - MATCH SYSTEM : ASEng RF Match Offline.
+#ID=2	2	LIGHT	PHY_IO__MATCHER :  - MATCH SYSTEM : Auto Matching Timeout
+#ID=3	3	LIGHT	PHY_IO__MATCHER :  - MATCH SYSTEM : Manual Position Timeout
+#ID=4	4	LIGHT	PHY_IO__MATCHER :  - MATCH SYSTEM : Preset Position Timeout
+#ID=5	5	LIGHT	PHY_IO__MATCHER :  - MATCH SYSTEM : ASEng Matching box Alarm Status

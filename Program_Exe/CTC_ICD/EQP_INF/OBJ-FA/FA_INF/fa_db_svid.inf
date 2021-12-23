@@ -1,0 +1,340 @@
+//--------------------------------------------------------------------------------------------------------------------------
+//     MODULE 	VID  	[CHANNEL or COMMAND]	TYPE	BYTE	UNIT	DISPLAY_NAME
+//
+// MODULE  :  CTC  PM0  PM1  ~ PM6
+// TYPE  :  A U I BOOL F L B
+//--------------------------------------------------------------------------------------------------------------------------
+
+/*
+COMMAND
+
+	// E30
+	#DATE_TIME			                    //  Date and Time(yyyymmddhhmmsscc)
+	                                    
+	// E40                              
+	#PJOBID				                      //  PRJobJID		
+	#PJOB_STATUS			                  //  PRJobState 
+	#PJOB_RECIPE			                  //  PRJobRecipe		
+                                      
+	// E87	                            
+	#PORTID         		                //  PortID
+	#CSTID          		                //  CSTID
+	                                    
+	#LP_ACCESS_MODE_STATUS		          //  Load Post Access Mode
+	#LP_CARRIERID_STATUS		            //  Load Port CarrierIDStatus
+	#LP_SLOTMAP_STATUS		              //  Load Port SlotMapStatus
+	#LP_CARRIER_ACCESS_STATUS	          //  Load Port CarrierAccessStatus
+	#LP_RESERVATION_STATUS		          //  Load Port ReservationStatus
+	#LP_ASSOCIATION_STATUS		          //  Load Port AssociationStatus
+	#LP_TRANSFER_STATUS		              //  Load Port TransferStatus
+
+	#LP_REASON			
+	#LP_SLOTMAP_INFO		
+*/
+
+#DEFINE_CHANNEL_NAME
+
+
+// SYSTEM SVID
+#DEFINE_ID_OFFSET   0
+
+//     MODULE 	VID  	[CHANNEL or COMMAND]	
+//							TYPE	BYTE	UNIT	DISPLAY_NAME
+
+#SVID	  CTC	    1	      #DATE_TIME			                AV      1	      __	      Date_And_Time		//  Date and Time(yyyymmddhhmmsscc)
+#SVID	  CTC	    2	      FA_E30_CTRL+FA.STATUS		        A       10      __	      Online_Mode		  //  Online Status : "OFFLINE"  "LOCAL"  "REMOTE"
+#SVID	  CTC	    3	      DB_CFG+SYS.USER.LEVEL  		      A       10      __	      User_Level		  //  User Level   :  "Unknown" "Operator" "Maint" "Process" "Manager" "OEM"
+#SVID	  CTC	    4	      DB_CFG+SYS.USER.ID     		      A       18	    __	      User_ID			    //  User Id
+                                                        
+#SVID	  CTC	    11	    #ALARMS_ENABLED    		          L       1	      __				List_of_Alarms_Enabled          //  List of Alarms Enabled
+#SVID	  CTC	    12	    #ALARMS_SET	    		            L       1	      __				List_of_Alarms_Posted           //  List of Alarms Posted
+#SVID	  CTC	    13	    #EVENTS_ENABLED			            L       1	      __				List_of_Events_Enabled          //  List of Events Enabled
+#SVID	  CTC	    14	    #PP_EXEC_NAME			              L       1	      __				List_of_Process_Name_Executed   //  List of Process Name Executed
+#SVID	  CTC	    15	    #PREVIOUS_PROCESS_STATE		      A       10	    __				Previous_Process_State          //  
+#SVID	  CTC	    16	    #PROCESS_STATE			            A       10	    __				Process_State                   //  "Available" "Run" "Abort" "Stop" "AlmPause"   
+                                                                                                  
+#SVID   CTC     21      #SPOOL_COUNT_ACTUAL             U       4       __				Spool_Count_Actual              //  Spool Count Actual
+#SVID   CTC     22      #SPOOL_COUNT_TOTAL              U       4       __				Max_Spool_Transmit              //  Max Spool Transmit
+#SVID   CTC     23      #SPOOL_FULL_TIME                AV      1       __				Spool_Full_Time                 //  Spool Full Time   :  yyyymmddhhmmss
+#SVID   CTC     24      #SPOOL_START_TIME               AV      1       __				Spool_Start_Time                //  Spool Start Time  :  yyyymmddhhmmss
+                                                                                                  
+#SVID   CTC     31      #ALARM_ID                       I       4       __				Alarm_ID                        //  
+#SVID   CTC     32      #EVENT_LIMIT                    U       4       __				Event_Limit                     //  
+#SVID   CTC     33      #LIMIT_VARIABLE                 U       4       __				Limit_Variable                  //  
+#SVID   CTC     34      #PP_CHANGE_NAME           	    AV      1       __				PP_Change_Name                  //  
+#SVID   CTC     35      #PP_CHANGE_STATUS           	  U       1       __				PP_Change_Status                //  1 = Created, 2 = Edited/Updated, 3 = Deleted
+                                                                                                  
+#SVID   CTC     41      #ENG_CALL_TEXT_MESSAGE         	AV      1       __				Engineer_Call_Message           //  
+
+#SVID   CTC     42      #ONLINE_INT_STATUS         	    U       1       __				Online_Status_Int_Type          //  0 : Offline
+                                                                                                                  //  1 : Local
+                                                                                                                  //  2 : Remote
+
+//------------------------------------------------------------------------------------------------------------------
+//  DVID LIST
+
+// COMMON   
+#DEFINE_ID_OFFSET   100
+
+// CONDITION : PTN
+#SVID   CTC     0	      #PORTID         		            U       1       __        PortID                          //  PORT ID
+                                                                                                  
+#SVID   CTC     1	      #LP_CSTID          		          A       20      __        LoadPort_CSTID                  //  Load Port - CSTID
+#SVID   CTC     2	      #LP_LOTID			                  A	      20	    __		    LoadPort_LOTID                  //  Load Port - LOTID
+#SVID   CTC     3	      #LP_PPID			                  A	      20	    __		    LoadPort_PPID                   //  Load Port - PPID 
+#SVID   CTC     4	      #LP_CST_STATUS			            U	      1	      __		    LoadPort_Cassette_Status        //  0:NONE	1:EXIST
+#SVID   CTC     5	      #LP_CLAMP_STATUS		            U	      1	      __		    LoadPort_Clamp_Status           //  0:UNCLAMPED	1:CLAMPED
+#SVID	  CTC	    6	      #LP_FOUP_POS_STATUS		          U	      1	      __		    LoadPort_Foup_Position_Status   //  0:UNLOAD	1:LOAD
+#SVID	  CTC	    7	      #LP_FOUP_DOOR_STATUS		        U	      1	      __		    LoadPort_Foup_Door_Status       //  0:CLOSE	1:OPEN
+#SVID	  CTC	    8	      #LP_SLOT_ASSIGNED		            U	      1	      __		    LoadPort_Slot_Assigned          //  Load Port  -  Material Number Assigned
+#SVID	  CTC	    9	      #LP_SLOT_PROCESSED		          U	      1	      __		    LoadPort_Slot_Processed         //  Load Port  -  Material Number Processed
+#SVID	  CTC	    10	    #LP_SLOT_MAP_INFO		            A	      30	    __		    LoadPort_Slot_Map_Info          //  Load Port  -  Material Map Info  (0:Not Exist, 1:Exist)
+#SVID	  CTC	    11	    #LP_SLOT_MAPPED			            U	      1	      __		    LoadPort_Slot_Mapped            //  Load Port  -  Material Number Mapped
+#SVID	  CTC	    12	    #LP_SLOT_INFO_LIST		          L	      0	      __		    LoadPort_Slot_Info_List         //  Load Port  -  Slot Info		
+			  		    		    					                                                                                //  List of SlotNo & MaterialID
+#SVID	  CTC	    13	    #LP_LOCATION_ID			            A	      10	    __		    LoadPort_Location_ID            //  Load Port  -  Location ID (LPn)
+                                                                                                  
+#SVID   CTC     14      #LP_LOT_START_TIME	            A       14      __        LoadPort_Lot_Start_Time         //  Load Port  -  Lot Start Time
+#SVID   CTC     15      #LP_LOT_END_TIME		            A	      14	    __		    LoadPort_Lot_End_Time           //  Load Port  -  Lot End Time
+                                                                                                  
+#SVID   CTC     16      #LP_SLOT_MODULE_HISTORY		      L       0       __        LoadPort_Slot_Module_History    //  Load Potr  -  All Slot Histroy
+												                                                                                          //  List of SlotNo & ModuleID
+#SVID	  CTC	    17	    #LP_STATUS	   		              A	      10	    __		    LoadPort_Status                 //  Load Port  -  Status	
+                                                                                                  
+#SVID   CTC     18      #LP_CST_MAP_LIST          	    L       0       __        LoadPort_Cassette_Map_List      //  0 = None
+                                                                          												                //  1 = Exist
+                                                                          												                //  2 = Double
+                                                                          												                //  3 = Cross
+
+#SVID	  CTC	    19	    #LP_SLOT_SKIPPED		            U	      1	      __		    LoadPort_Slot_Skipped           //  Load Port  -  Material Number Skipped
+
+#SVID   CTC     20      #LP_HEAD_NAME_LIST          	  L       0       __        LoadPort_Head_Name_List         //  Head Name of Load Port
+                                                                          
+
+// CONDITION : PTN & SLOT
+#SVID   CTC     21	    #SLOTID         		            U       1       __        SlotID                          //  SLOT ID
+                                                                                                  
+#SVID   CTC     22	    #LOCATION_ID                    A       20      __        Location_ID                     //  LOCATION ID
+#SVID   CTC     23	    #MATERIAL_ID                    A       10      __        Material_ID                     //  MATERIAL ID
+#SVID   CTC     24	    #MATERIAL_TYPE                  A       10      __        Material_Type                   //  MATERIAL TYPE
+#SVID   CTC     25	    #LOTID          		            A       20      __        LotID                           //  LOT ID
+#SVID	  CTC	    26	    #PPID		     		                A	      12	    __		    PPID                            //  MATERIAL PPID		
+#SVID	  CTC	    27	    #SLOT_MODULE_HISTORY		        L	      0	      __		    Slot_Module_History             //  Material module history data
+			  		    		    					                                                                                //  List of process module
+#SVID	  CTC	    28	    #SLOT_PROCESS_HISTORY		        L	      0	      __		    Slot_Process_History            //  Material process history data
+			  		    		    					                                                                                //  List of process recipe
+#SVID	  CTC	    29	    #SLOT_MODULE_PROCESS_HISTORY	  L	      0	      __		    Slot_Module_Process_History     //  Material module & process history data
+										    		                                                                                      //  List of process moudle & process recipe 
+#SVID   CTC     30	    #SLOT_START_TIME		            A	      14	    __		    Slot_Start_Time                 //  Material Start Time
+#SVID   CTC     31      #SLOT_END_TIME			            A	      14	    __		    Slot_End_Time                   //  Material End Time 
+
+#SVID   CTC     32      #SLOT_HEAD_NAME		              AV	    1 	    __		    Slot_Head_Name                  //  Material Head Name
+#SVID   CTC     33      #SLOT_HEAD_NAME_01_25           AV	    1 	    __		    Slot_Head_Name_01_25            //  Material Head Name Array (01 ~ 25)
+#SVID   CTC     34      #SLOT_HEAD_NAME_01_15           AV	    1 	    __		    Slot_Head_Name_01_15            //  Material Head Name Array (01 ~ 15)
+#SVID   CTC     35      #SLOT_HEAD_NAME_16_25           AV	    1 	    __		    Slot_Head_Name_16_25            //  Material Head Name Array (16 ~ 25)
+
+/*
+#SVID	  CTC     41      #LP_SOURCE_PORTID               U       1       __        LPn_Source_PORTID		            //  LPn Source PortID
+#SVID   CTC     42      #LP_SOURCE_CSTID                A       20      __        LPn_Source_CSTID		            //  LPn Source CSTID
+#SVID	  CTC     43      #LP_SOURCE_SLOT_INFO            L       0       __        LPn_Source_SLOT_INFO	          //  LPn Source SLOT List
+#SVID  	CTC     44      #LP_SOURCE_LOTID                A       20      __        LPn_Source_LOTID		            //  LPn Source LOTID
+#SVID   CTC     45      #SLOT_SOURCE_SLOTID             U       1       __        LPn_Source_SLOTID		            //  LPn Source SLOTID
+#SVID  	CTC     46      #SLOT_SOURCE_MATERIALID_INFO    L       0       __        LPn_Source_MATERIAL_ID	        //  LPn Source MATERIALID List
+                                                                                                                  
+#SVID  	CTC     51      #LP_TARGET_PORTID               U       1       __        LPn_Target_PORTID		            //  LPn Target PORTID
+#SVID	  CTC     52      #LP_TARGET_CSTID                A       20      __        LPn_Target_CSTID		            //  LPn Target CSTID
+#SVID	  CTC     53      #LP_TARGET_SLOT_INFO            L       0       __        LPn_Target_SLOT_INFO	          //  LPn Target SLOT List
+#SVID	  CTC     54      #LP_TARGET_LOTID                A       20      __        LPn_Target_LOTID		            //  LPn Target LOTID
+#SVID  	CTC     55      #SLOT_TARGET_SLOTID             U       1       __        LPn_Target_SLOTID		            //  LPn Target SLOTID
+#SVID   CTC     56      #SLOT_TARGET_MATERIALID_INFO    L       0       __        LPn_Target_MATERIAL_ID	        //  LPn Target MATERIALID
+*/
+
+
+// E40 
+#DEFINE_ID_OFFSET   200
+
+#SVID	  CTC	    0	      #E40_PJOBID		                  A	      20	    __		    E40_PJOBID                      //  PRJobJID		
+#SVID	  CTC	    1	      #E40_PJOB_STATUS	              U	      1	      __		    E40_PJOB_STATUS                 //  PRJobState 
+                        									              	      	                                                //  0 = QUEUED/POOLED 
+                        									              	      	                                                //  1 = SETTING UP 
+                        									              	      	                                                //  2 = WAITING FOR START 
+                        									              	      	                                                //  3 = PROCESSING 
+                        									              	      	                                                //  4 = PROCESS COMPLETE 
+                        									              	      	                                                //  5 = (RESERVED) 
+                        									              	      	                                                //  6 = PAUSING 
+                        									              	      	                                                //  7 = PAUSED 
+                        									              	      	                                                //  8 = STOPPING 
+                        									              	      	                                                //  9 = ABORTING											
+
+#SVID	  CTC	    2	      #E40_PJOB_RECIPE	              A	      20	    __		    E40_PJOB_RECIPE                 //  PRJobRecipe		
+
+
+// E87
+#DEFINE_ID_OFFSET   250
+
+#SVID	  CTC	    0	      #E87_CARRIERID			            AV	    1	      __		    E87_CARRIERID                   //  E87 CarrierID
+                                                                                                         
+#SVID	  CTC	    1	      #E87_ACCESS_MODE_STATUS		      U	      1	      __		    E87_ACCESS_MODE_STATUS          //  Load Post Access Mode
+                                          			  		    	      						                                    //  0 = Manual Mode	
+                                          			  		    	      						                                    //  1 = Auto Mode
+#SVID	  CTC	    2	      #E87_CARRIERID_STATUS		        U	      1	      __		    E87_CARRIERID_STATUS            //  Load Port CarrierIDStatus
+			  		    	      						                                                                              //  0 = ID NOT READ
+			  		    	      						                                                                              //  1 = WAITING FOR HOST
+			  		    	      						                                                                              //  2 = ID VERIFICATION OK 
+			  		    	      						                                                                              //  3 = ID VERIFICATION FAILED		
+#SVID	  CTC	    3	      #E87_SLOTMAP_STATUS		          U	      1	      __		    E87_SLOTMAP_STATUS              //  Load Port SlotMapStatus
+			  		    	      						                                                                              //  0 = SLOT MAP NOT READ 
+			  		    	      						                                                                              //  1 = WAITING FOR HOST 
+			  		    	      						                                                                              //  2 = SLOT MAP VERIFICATION OK 
+			  		    	      						                                                                              //  3 = SLOT MAP VERIFICATION FAILED		
+#SVID	  CTC	    4	      #E87_CARRIER_ACCESS_STATUS	    U	      1	      __		    E87_CARRIER_ACCESS_STATUS       //  Load Port CarrierAccessStatus
+			  		    	      						                                                                              //  0 = NOT ACCESSED 
+			  		    	      						                                                                              //  1 = IN ACCESS 
+			  		    	      						                                                                              //  2 = CARRIER COMPLETE 
+			  		    	      						                                                                              //  3 = CARRIER STOPPED		
+#SVID	  CTC	    5	      #E87_RESERVATION_STATUS 	      U	      1	      __		    E87_RESERVATION_STATUS          //  Load Port ReservationStatus
+			  		    	      						                                                                              //  0 = NOT RESERVED 
+			  		    	      						                                                                              //  1 = RESERVED		
+#SVID	  CTC	    6	      #E87_ASSOCIATION_STATUS		      U	      1	      __		    E87_ASSOCIATION_STATUS          //  Load Port AssociationStatus
+			  		    	      						                                                                              //  0 = NOT ASSOCIATED 
+			  		    	      						                                                                              //  1 = ASSOCIATED		
+#SVID	  CTC	    7	      #E87_TRANSFER_STATUS		        U	      1	      __		    E87_TRANSFER_STATUS             //  Load Port TransferStatus
+						    	      					                                                                                //  0 = OUT OF SERVICE
+						    	      					                                                                                //  1 = IN SERVICE
+						    	      					                                                                                //  2 = TRANSFER_READY
+						    	      					                                                                                //  3 = READY TO LOAD
+						    	      					                                                                                //  4 = READY TO UNLOAD
+						    	      					                                                                                //  5 = TRANSFER BLOCKED
+#SVID   CTC     8	      #E87_REASON			                U       1      __		      E87_REASON                      //  SLOT_MAP_NOT_READ --> WAITING_FOR_HOST
+									      			                                                                                    //  0 = VERIFICATION_NEEDED
+									      			                                                                                    //  1 = VERIFICATION_BY_EQUIPMENT_UNSUCCESSFUL
+									      			                                                                                    //  2 = READ_FAIL
+									      			                                                                                    //  3 = IMPROPER_SUBSTRATE_POSITION
+#SVID   CTC     9	      #E87_SLOTMAP_INFO		            L       1       __		    E87_SLOTMAP_INFO                //  Load Port Slot Map Info
+									      			                                                                                    //  0 = UNDEFINED
+									      			                                                                                    //  1 = EMPTY
+									      			                                                                                    //  2 = NOT EMPTY
+									      			                                                                                    //  3 = CORRECTLY OCCUPIED
+#SVID   CTC     10      #E87_PORT_STATE_INFO            L       1       __        E87_PORT_STATE_INFO             //  All Load Port Transfer State List
+
+
+#SVID   CTC     21	    #E87_CARRIER_LOCATION_MATRIX 		   L    1       __		    E87_CARRIER_LOCATION_MATRIX     //  All Load Port Placement/Dock LocationID List
+#SVID   CTC     22      #E87_PORT_ASSOCIATION_STATE_LIST   L    1       __        E87_PORT_ASSOCIATION_STATE      //  All Load Port Association State List
+#SVID   CTC     23      #E87_PORT_STATE_INFO_LIST          L    1       __        E87_PORT_STATE_INFO_LIST        //  All Load Port State Info List
+#SVID   CTC     24      #E87_PORT_TRANSFER_STATE_LIST      L    1       __        E87_PORT_TRANSFER_STATE_LIST    //  All Load Port Transfer State List
+
+
+
+// E90
+#DEFINE_ID_OFFSET   300
+
+
+#SVID   CTC     11	    #E90__SUBSTRATE_MATERIAL_STATUS		 AV	  1	      __	      E90_SUBSTRATE_MATERIAL_STATUS   //  Enumerated (equipment specific). Processing state of the substrate associated with the last event.
+#SVID	  CTC	    12	    #E90__SUBSTRATE_DESTINATION		     AV	  1	      __	      E90_SUBSTRATE_DESTINATION       //  If empty string, then same as source carrier position. Destination Carrier Substrate associated with the last event.
+#SVID	  CTC	    13	    #E90__SUBSTRATE_HISTORY			       L	  0	      __	      E90_SUBSTRATE_HISTORY           //  List of structures consisting of LocationID, TimeIn, and TimeOut.
+#SVID	  CTC	    14	    #E90__SUBSTRATE_ID			           AV	  1	      __	      E90_SUBSTRATE_ID                //  Identifier of substrate associated with last event.
+#SVID   CTC	    15	    #E90__SUBSTRATE_ID_LIST			       L	  0	      __	      E90_SUBSTRATE_ID_LIST           //  Ordered list of SubstID
+#SVID	  CTC	    16	    #E90__SUBSTRATE_LOCID			         AV	  1	      __	      E90_SUBSTRATE_LOCID             //  Identifier for equipment substrate location associated with the last event.
+#SVID	  CTC	    17	    #E90__SUBSTRATE_LOCID_LIST		     L	  0	      __	      E90_SUBSTRATE_LOCID_LIST        //  Ordered list of SubstLocID
+#SVID	  CTC	    18	    #E90__SUBSTRATE_LOC_STATE		       U	  1	      __	      E90_SUBSTRATE_LOC_STATE         //  State of substrate location associated with the last event.
+												                                                                                          //  0 = OCCUPIED
+												                                                                                          //  1 = UNOCCUPIED
+#SVID	  CTC	    19	    #E90__SUBSTRATE_LOC_STATE_LIST		 L	  0	      __	      E90_SUBSTRATE_LOC_STATE_LIST    //  Ordered list of SubstLocState
+#SVID	  CTC	    20	    #E90__SUBSTRATE_LOC_SUBSTRATE_ID	 AV	  1	      __	      E90_SUBSTRATE_ID                //  Substrate ID of the substrate at the ith equipment substrate location, when occupied.
+#SVID	  CTC	    21	    #E90__SUBSTRATE_PROC_STATE		     U	  1	      __	      E90_SUBSTRATE_PROC_STATE        //  Processing state of the substrate associated with the last event.
+												                                                                                          //  0 = NEEDS PROCESSING
+												                                                                                          //  1 = IN PROCESS
+												                                                                                          //  2 = PROCESSED
+												                                                                                          //  3 = ABORTED
+												                                                                                          //  4 = STOPPED
+												                                                                                          //  5 = REJECTED
+#SVID	  CTC	    22	    #E90__SUBSTRATE_PROC_STATE_LIST		 L	  0	      __	      E90_SUBSTRATE_PROC_STS_LIST     //  Ordered list of SubstProcState
+#SVID	  CTC	    23	    #E90__SUBSTRATE_SOURCE			       AV	  1	      __	      E90_SUBSTRATE_SOURCE            //  
+#SVID   CTC	    24	    #E90__SUBSTRATE_STATE			         U	  1	      __	      E90_SUBSTRATE_STATE             //  The current state of the substrate associated with the last event.
+						    		    				                                                                                  //  0 = AT SOURCE
+						    		    				                                                                                  //  1 = AT WORK
+						    		    				                                                                                  //  2 = AT DESTINATION
+#SVID	  CTC	    25	    #E90__SUBSTRATE_STATE_LIST		     L	  0	      __	      E90_SUBSTRATE_STATE_LIST        //  Ordered list of SubstState
+#SVID	  CTC	    26	    #E90__SUBSTRATE_TYPE			         AV	  1	      __	      E90_SUBSTRATE_TYPE              //  Substrate subtype for the substrate associated with the last event.
+			  		    		    					                                                                                //  0 = WAFER
+			  		    		    					                                                                                //  1 = FLAT PANEL
+			  		    		    					                                                                                //  2 = CD
+			  		    		    					                                                                                //  3 = MASK
+#SVID	  CTC	    27	    #E90__SUBSTRATE_USAGE			         U	  1	      __	      E90_SUBSTRATE_USAGE             //  Description of the substrate associated with the last event.
+										    		                                                                                      //  0 = PRODUCT
+										    		                                                                                      //  1 = TEST
+										    		                                                                                      //  2 = FILLER
+
+
+// E94
+#DEFINE_ID_OFFSET   350
+
+#SVID	  CTC	    1	      #E94__CJOBID			                 A	  20	    __		    E94_CJOBID                      //  ControlJobID		
+#SVID	  CTC	    2	      #E94__CJOB_STATE		               U	  1	      __		    E94_CJOB_STATE                  //  CjobState 
+			  		    	      						                                                                              //  0 = QUEUED 
+			  		    	      						                                                                              //  1 = SELECTED 
+			  		    	      						                                                                              //  2 = WAITING FOR START 
+			  		    	      						                                                                              //  3 = EXECUTING 
+			  		    	      						                                                                              //  4 = PAUSED 
+			  		    	      						                                                                              //  5 = COMPLETED		
+#SVID	  CTC	    3	      #E94__CJOB_QUEUE_AVAILABLE_SPACE   U	  4	      __		    E94_CJOB_QUEUE_AVAILABLE_SPACE  //  CJQueueAvailableSpace		
+                                                                                                         
+#SVID	  CTC	    4	      #E94__QUEUED_CJOBS		             L	  0	      __		    E94_QUEUED_CJOBS                //  QueuedCJobs		
+			  		    	      						                                                                              //  List of cjob queued
+                                                                                                         
+#SVID	  CTC	    5	      #E94__WAFERID_LIST		             L	  0	      __		    E94_WAFERID_LIST                //  Wafer List		
+						    	      					                                                                                //  List of WaferID
+                                                                
+
+//------------------------------------------------------------------------------------------------------------------
+// LP1 ~ LP3 SVID
+
+//.....
+#DEFINE_ID_OFFSET   	500
+#DEFINE   ##LP   	LP1
+
+#INCLUDE  "fa_db_svid_lp_define.inf"
+
+
+//.....
+#DEFINE_ID_OFFSET   	600
+#DEFINE   ##LP   	LP2
+
+#INCLUDE  "fa_db_svid_lp_define.inf"
+
+
+//.....
+#DEFINE_ID_OFFSET   	700
+#DEFINE   ##LP   	LP3
+
+#INCLUDE  "fa_db_svid_lp_define.inf"
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+//.....
+#DEFINE   ##PM          PM1
+#DEFINE   ##PHY_PM      PHY_PM1
+#DEFINE   ##CTC_DCOP+   INF.PM1_DCOP.
+#DEFINE   ##NAME_DCOP+  PM1_
+#DEFINE   ##SVID_PMx+   PM1_SVID.
+#DEFINE   ##FDC+        PM1_FDC.
+#DEFINE   ##DCOP+       A_
+#DEFINE   ##CHM         CHM1
+
+#INCLUDE  "fa_db_svid_polisher_chamber.inf"
+
+
+//.....
+#DEFINE   ##PM          PM2
+#DEFINE   ##PHY_PM      PHY_PM2
+#DEFINE   ##CTC_DCOP+   INF.PM2_DCOP.
+#DEFINE   ##NAME_DCOP+  PM2_
+#DEFINE   ##SVID_PMx+   PM2_SVID.
+#DEFINE   ##FDC+        PM2_FDC.
+#DEFINE   ##DCOP+       B_
+#DEFINE   ##CHM         CHM2
+
+#INCLUDE  "fa_db_svid_Cleaner_chamber.inf"
+
+

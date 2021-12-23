@@ -1,0 +1,811 @@
+
+
+//======================================================================================================================
+#PAGE      "ACTIVE_HANDOFF"
+
+#GROUP     "PM1"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__PMx+CFG.PM1.HANDSHAKE.MODE                   "HANDSHAKE MODE"
+#CFG_ITEM    DB_CFG+CFG.PM1.CHM.TYPE                           "CHAMBER TYPE"
+#CFG_ITEM    DB_CFG+CFG.PM1.SV.USE                             "SV USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.CR.POSITION.1                    "CR_POSITION USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.LIFT.PIN.1                       "LIFT-PIN USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.SHUTTER.1                        "SHUTTER USE"
+
+#GROUP     "PM2"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__PMx+CFG.PM2.HANDSHAKE.MODE                   "HANDSHAKE MODE"
+#CFG_ITEM    DB_CFG+CFG.PM2.CHM.TYPE                           "CHAMBER TYPE"
+#CFG_ITEM    DB_CFG+CFG.PM2.SV.USE                             "SV USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.CR.POSITION.2                    "CR_POSITION USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.LIFT.PIN.2                       "LIFT-PIN USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.SHUTTER.2                        "SHUTTER USE"
+
+#GROUP     "PM3"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__PMx+CFG.PM3.HANDSHAKE.MODE                   "HANDSHAKE MODE"
+#CFG_ITEM    DB_CFG+CFG.PM3.CHM.TYPE                           "CHAMBER TYPE"
+#CFG_ITEM    DB_CFG+CFG.PM3.SV.USE                             "SV USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.CR.POSITION.3                    "CR_POSITION USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.LIFT.PIN.3                       "LIFT-PIN USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.SHUTTER.3                        "SHUTTER USE"
+
+#GROUP     "PM4"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__PMx+CFG.PM4.HANDSHAKE.MODE                   "HANDSHAKE MODE"
+#CFG_ITEM    DB_CFG+CFG.PM4.CHM.TYPE                           "CHAMBER TYPE"
+#CFG_ITEM    DB_CFG+CFG.PM4.SV.USE                             "SV USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.CR.POSITION.4                    "CR_POSITION USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.LIFT.PIN.4                       "LIFT-PIN USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.SHUTTER.4                        "SHUTTER USE"
+
+#GROUP     "PM5"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__PMx+CFG.PM5.HANDSHAKE.MODE                   "HANDSHAKE MODE"
+#CFG_ITEM    DB_CFG+CFG.PM5.CHM.TYPE                           "CHAMBER TYPE"
+#CFG_ITEM    DB_CFG+CFG.PM5.SV.USE                             "SV USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.CR.POSITION.5                    "CR_POSITION USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.LIFT.PIN.5                       "LIFT-PIN USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.SHUTTER.5                        "SHUTTER USE"
+
+#GROUP     "PM6"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__PMx+CFG.PM6.HANDSHAKE.MODE                   "HANDSHAKE MODE"
+#CFG_ITEM    DB_CFG+CFG.PM6.CHM.TYPE                           "CHAMBER TYPE"
+#CFG_ITEM    DB_CFG+CFG.PM6.SV.USE                             "SV USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.CR.POSITION.6                    "CR_POSITION USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.LIFT.PIN.6                       "LIFT-PIN USE"
+#CFG_ITEM    PHY__PMx+CFG.USE.SHUTTER.6                        "SHUTTER USE"
+
+#GROUP     "LL1"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL1.HANDSHAKE.MODE             "HANDSHAKE MODE"
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL1.ROBOT_Z_MOVE               "ROBOT Z-MOVE"
+
+#GROUP     "LL2"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL2.HANDSHAKE.MODE             "HANDSHAKE MODE"
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL2.ROBOT_Z_MOVE               "ROBOT Z-MOVE"
+
+#GROUP     "LL3"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL3.HANDSHAKE.MODE             "HANDSHAKE MODE"
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL3.ROBOT_Z_MOVE               "ROBOT Z-MOVE"
+
+#GROUP     "LL4"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL4.HANDSHAKE.MODE             "HANDSHAKE MODE"
+#CFG_ITEM    FNC__VAC_ROBOT+CFG.LL4.ROBOT_Z_MOVE               "ROBOT Z-MOVE"
+
+#GROUP     "TMC Ballast"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__TMC_CHM+CFG.dTM.BALLAST.CTRL                 "Control Use"
+#CFG_ITEM    PHY__TMC_CHM+CFG.dTM.BALLAST.MODE                 "Control Mode"
+#CFG_ITEM    PHY__TMC_CHM+CFG.aTM.BALLAST.N2.VALUE             "N2 Value"
+#CFG_ITEM    PHY__TMC_CHM+CFG.aTM.BALLAST.N2.P.GAIN            "N2 P.Gain"
+#CFG_ITEM    PHY__TMC_CHM+CFG.aTM.BALLAST.N2.I.GAIN            "N2 I.Gain"
+#CFG_ITEM    PHY__TMC_CHM+CFG.aTM.BALLAST.N2.D.GAIN            "N2 D.Gain"
+
+
+//======================================================================================================================
+#PAGE      "FA_INTERFACE"
+
+#GROUP     "LP1"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY_OHT__LP1+CFG.aPIO.FOUP.LOGIC.ERROR.TIME       "PIO Foup Logic Error Time (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.aPIO.FOUP.VIOLATION.TIME         "PIO Foup Violation Time (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.aPIO.SIGNAL.CHATTERING.TIME      "PIO Signal Chattering Time (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.LT.CURTN.USE                     "Light Curtain Use"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TD1                          "PIO TD1 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TP1                          "PIO TP1 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TP2                          "PIO TP2 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TP3                          "PIO TP3 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TP4                          "PIO TP4 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TP5                          "PIO TP5 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+CFG.PIO.TP6                          "PIO TP6 (sec)"
+#CFG_ITEM    PHY_OHT__LP1+INR.dCFG.DYNAMIC.USE                 "Dynamic Use"
+
+#GROUP     "LP2"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY_OHT__LP2+CFG.aPIO.FOUP.LOGIC.ERROR.TIME       "PIO Foup Logic Error Time (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.aPIO.FOUP.VIOLATION.TIME         "PIO Foup Violation Time (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.aPIO.SIGNAL.CHATTERING.TIME      "PIO Signal Chattering Time (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.LT.CURTN.USE                     "Light Curtain Use"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TD1                          "PIO TD1 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TP1                          "PIO TP1 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TP2                          "PIO TP2 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TP3                          "PIO TP3 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TP4                          "PIO TP4 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TP5                          "PIO TP5 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+CFG.PIO.TP6                          "PIO TP6 (sec)"
+#CFG_ITEM    PHY_OHT__LP2+INR.dCFG.DYNAMIC.USE                 "Dynamic Use"
+
+#GROUP     "LP3"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY_OHT__LP3+CFG.aPIO.FOUP.LOGIC.ERROR.TIME       "PIO Foup Logic Error Time (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.aPIO.FOUP.VIOLATION.TIME         "PIO Foup Violation Time (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.aPIO.SIGNAL.CHATTERING.TIME      "PIO Signal Chattering Time (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.LT.CURTN.USE                     "Light Curtain Use"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TD1                          "PIO TD1 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TP1                          "PIO TP1 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TP2                          "PIO TP2 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TP3                          "PIO TP3 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TP4                          "PIO TP4 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TP5                          "PIO TP5 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+CFG.PIO.TP6                          "PIO TP6 (sec)"
+#CFG_ITEM    PHY_OHT__LP3+INR.dCFG.DYNAMIC.USE                 "Dynamic Use"
+
+
+//======================================================================================================================
+#PAGE      "LLx"
+
+#GROUP     "LL1"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    DB_CFG+CFG.LBA.LIFT_PIN.EXIST.FLAG                   "Lift-Pin Use"
+#CFG_ITEM    DB_CFG+CFG.LBA.LIFT_PIN.DOWN.MODE.AFTER_DOOR_CLOSE   "Lift-Pin Down After SV Door Close"
+#CFG_ITEM    DB_CFG+CFG.LBA.LIFT_PIN.DOWN.TIMEOUT                 "Lift-Pin Down Timeout (sec)"
+#CFG_ITEM    DB_CFG+CFG.LBA.LIFT_PIN.UP.TIMEOUT                   "Lift-Pin Up Timeout (sec)"
+#CFG_ITEM    PHY__LBA+CFG.HEATER.USE                              "Heater Use"
+#CFG_ITEM    PHY__LBA+CFG.HEATING.TIME                            "Heating Time (sec)"
+#CFG_ITEM    PHY__LBA+CFG.HEATING.SOFT_VENT.APPLY                 "Heating Soft_Vent Apply"
+#CFG_ITEM    DB_CFG+CFG.LBA.LIFT_PIN.UP.MODE.AFTER_HEATING        "Lift-Pin Mode After Heating"
+
+#GROUP     "LL2"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    DB_CFG+CFG.LBB.LIFT_PIN.EXIST.FLAG                   "Lift-Pin Use"
+#CFG_ITEM    DB_CFG+CFG.LBB.LIFT_PIN.DOWN.MODE.AFTER_DOOR_CLOSE   "Lift-Pin Down After SV Door Close"
+#CFG_ITEM    DB_CFG+CFG.LBB.LIFT_PIN.DOWN.TIMEOUT                 "Lift-Pin Down Timeout (sec)"
+#CFG_ITEM    DB_CFG+CFG.LBB.LIFT_PIN.UP.TIMEOUT                   "Lift-Pin Up Timeout (sec)"
+#CFG_ITEM    PHY__LBB+CFG.HEATER.USE                              "Heater Use"
+#CFG_ITEM    PHY__LBB+CFG.HEATING.TIME                            "Heating Time (sec)"
+#CFG_ITEM    PHY__LBB+CFG.HEATING.SOFT_VENT.APPLY                 "Heating Soft_Vent Apply"
+#CFG_ITEM    DB_CFG+CFG.LBB.LIFT_PIN.UP.MODE.AFTER_HEATING        "Lift-Pin Mode After Heating"
+
+#GROUP     "LL3"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    DB_CFG+CFG.LBC.LIFT_PIN.EXIST.FLAG                   "Lift-Pin Use"
+#CFG_ITEM    DB_CFG+CFG.LBC.LIFT_PIN.DOWN.MODE.AFTER_DOOR_CLOSE   "Lift-Pin Down After SV Door Close"
+#CFG_ITEM    DB_CFG+CFG.LBC.LIFT_PIN.DOWN.TIMEOUT                 "Lift-Pin Down Timeout (sec)"
+#CFG_ITEM    DB_CFG+CFG.LBC.LIFT_PIN.UP.TIMEOUT                   "Lift-Pin Up Timeout (sec)"
+#CFG_ITEM    PHY__LBC+CFG.HEATER.USE                              "Heater Use"
+#CFG_ITEM    PHY__LBC+CFG.HEATING.TIME                            "Heating Time (sec)"
+#CFG_ITEM    PHY__LBC+CFG.HEATING.SOFT_VENT.APPLY                 "Heating Soft_Vent Apply"
+#CFG_ITEM    DB_CFG+CFG.LBC.LIFT_PIN.UP.MODE.AFTER_HEATING        "Lift-Pin Mode After Heating"
+
+#GROUP     "LL4"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    DB_CFG+CFG.LBD.LIFT_PIN.EXIST.FLAG                   "Lift-Pin Use"
+#CFG_ITEM    DB_CFG+CFG.LBD.LIFT_PIN.DOWN.MODE.AFTER_DOOR_CLOSE   "Lift-Pin Down After SV Door Close"
+#CFG_ITEM    DB_CFG+CFG.LBD.LIFT_PIN.DOWN.TIMEOUT                 "Lift-Pin Down Timeout (sec)"
+#CFG_ITEM    DB_CFG+CFG.LBD.LIFT_PIN.UP.TIMEOUT                   "Lift-Pin Up Timeout (sec)"
+#CFG_ITEM    PHY__LBD+CFG.HEATER.USE                              "Heater Use"
+#CFG_ITEM    PHY__LBD+CFG.HEATING.TIME                            "Heating Time (sec)"
+#CFG_ITEM    PHY__LBD+CFG.HEATING.SOFT_VENT.APPLY                 "Heating Soft_Vent Apply"
+#CFG_ITEM    DB_CFG+CFG.LBD.LIFT_PIN.UP.MODE.AFTER_HEATING        "Lift-Pin Mode After Heating"
+
+
+//======================================================================================================================
+#PAGE      "LPx"
+
+#GROUP     "LP1"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_IO__LP1+OTR.IN.CFG.aLOAD.COMPLETE.DELAY.TIME     "Load Delay Time (sec)"
+#CFG_ITEM    PHY_IO__LP1+INR.dCFG.UNLOADCLAMP.OPT                 "Unload Clamp Method"
+#CFG_ITEM    PHY_IO__LP1+CFG.dBEFORE.LOAD.CST.CHECK               "CST Pressent Check Disable"
+#CFG_ITEM    PHY_IO__LP1+CFG.dWAFER.SLIDE.SNS.CHECK               "Wafer Slide Check Enable"
+#CFG_ITEM    PHY__LP1+CFG.LOAD.MAP.MODE                           "Load Mapping Mode"
+#CFG_ITEM    PHY_IO__LP1+CFG.aACCESS.SW.TIMEOUT                   "Access Switch Timeout (sec)"
+#CFG_ITEM    PHY_IO__LP1+CFG.aCST.PROPERLY.EXIST.TIME             "Foup Present Sensor"
+#CFG_ITEM    PHY_IO__LP1+CFG.dPOST.CARRIER.ALARM                  "Carrier Alarm"
+#CFG_ITEM    FNC__LP1+CFG.dUNDOCK.POSITION.TAG.READ               "Tag Read At Unlock Position"
+#CFG_ITEM    PHY_IO__LP1+CFG.dDOOR.CLOSE.VAC.ON.RECHECK           "Vacuum-On Recheck When Door Closing"
+#CFG_ITEM    DB_CFG+CFG.dLP1.DOOR_CLOSE_MODE.AFTER_MAPPING        "Wait For Door-Down Before Start Mapping"
+#CFG_ITEM    DB_CFG+CFG.dLP1.DOOR_CLOSE_MODE.AFTER_MAPPING        "Close Door After Mapping"
+#CFG_ITEM    PHY_IO__LP1+CFG.MAPPING.SENSOR.USE                   "Mapping Sensor Use"
+#CFG_ITEM    PHY_IO__LP1+CFG.CID.TAG.SENSOR.USE                   "CID Tag Sensor USe"
+#CFG_ITEM    PHY_HW__LP1+CFG.PAGE_ID_OF_CID                       "CID Page ID"
+#CFG_ITEM    PHY__LP1+CFG.PREPLOAD.CID.MODE                       "Preload CID Mode"
+#CFG_ITEM    PHY_IO__LP1+CFG.dLOAD.MODE                           "Load Map Mode"
+#CFG_ITEM    PHY_IO__LP1+CFG.INIT.SLOT.STATE.UNKNOWN              "Init Slot State -> Unknown"
+
+#GROUP     "LP2"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_IO__LP2+OTR.IN.CFG.aLOAD.COMPLETE.DELAY.TIME     "Load Delay Time (sec)"
+#CFG_ITEM    PHY_IO__LP2+INR.dCFG.UNLOADCLAMP.OPT                 "Unload Clamp Method"
+#CFG_ITEM    PHY_IO__LP2+CFG.dBEFORE.LOAD.CST.CHECK               "CST Pressent Check Disable"
+#CFG_ITEM    PHY_IO__LP2+CFG.dWAFER.SLIDE.SNS.CHECK               "Wafer Slide Check Enable"
+#CFG_ITEM    PHY__LP2+CFG.LOAD.MAP.MODE                           "Load Mapping Mode"
+#CFG_ITEM    PHY_IO__LP2+CFG.aACCESS.SW.TIMEOUT                   "Access Switch Timeout (sec)"
+#CFG_ITEM    PHY_IO__LP2+CFG.aCST.PROPERLY.EXIST.TIME             "Foup Present Sensor"
+#CFG_ITEM    PHY_IO__LP2+CFG.dPOST.CARRIER.ALARM                  "Carrier Alarm"
+#CFG_ITEM    FNC__LP2+CFG.dUNDOCK.POSITION.TAG.READ               "Tag Read At Unlock Position"
+#CFG_ITEM    PHY_IO__LP2+CFG.dDOOR.CLOSE.VAC.ON.RECHECK           "Vacuum-On Recheck When Door Closing"
+#CFG_ITEM    DB_CFG+CFG.dLP2.DOOR_CLOSE_MODE.AFTER_MAPPING        "Wait For Door-Down Before Start Mapping"
+#CFG_ITEM    DB_CFG+CFG.dLP2.DOOR_CLOSE_MODE.AFTER_MAPPING        "Close Door After Mapping"
+#CFG_ITEM    PHY_IO__LP2+CFG.MAPPING.SENSOR.USE                   "Mapping Sensor Use"
+#CFG_ITEM    PHY_IO__LP2+CFG.CID.TAG.SENSOR.USE                   "CID Tag Sensor USe"
+#CFG_ITEM    PHY_HW__LP2+CFG.PAGE_ID_OF_CID                       "CID Page ID"
+#CFG_ITEM    PHY__LP2+CFG.PREPLOAD.CID.MODE                       "Preload CID Mode"
+#CFG_ITEM    PHY_IO__LP2+CFG.dLOAD.MODE                           "Load Map Mode"
+#CFG_ITEM    PHY_IO__LP2+CFG.INIT.SLOT.STATE.UNKNOWN              "Init Slot State -> Unknown"
+
+#GROUP     "LP3"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_IO__LP3+OTR.IN.CFG.aLOAD.COMPLETE.DELAY.TIME     "Load Delay Time (sec)"
+#CFG_ITEM    PHY_IO__LP3+INR.dCFG.UNLOADCLAMP.OPT                 "Unload Clamp Method"
+#CFG_ITEM    PHY_IO__LP3+CFG.dBEFORE.LOAD.CST.CHECK               "CST Pressent Check Disable"
+#CFG_ITEM    PHY_IO__LP3+CFG.dWAFER.SLIDE.SNS.CHECK               "Wafer Slide Check Enable"
+#CFG_ITEM    PHY__LP3+CFG.LOAD.MAP.MODE                           "Load Mapping Mode"
+#CFG_ITEM    PHY_IO__LP3+CFG.aACCESS.SW.TIMEOUT                   "Access Switch Timeout (sec)"
+#CFG_ITEM    PHY_IO__LP3+CFG.aCST.PROPERLY.EXIST.TIME             "Foup Present Sensor"
+#CFG_ITEM    PHY_IO__LP3+CFG.dPOST.CARRIER.ALARM                  "Carrier Alarm"
+#CFG_ITEM    FNC__LP3+CFG.dUNDOCK.POSITION.TAG.READ               "Tag Read At Unlock Position"
+#CFG_ITEM    PHY_IO__LP3+CFG.dDOOR.CLOSE.VAC.ON.RECHECK           "Vacuum-On Recheck When Door Closing"
+#CFG_ITEM    DB_CFG+CFG.dLP3.DOOR_CLOSE_MODE.AFTER_MAPPING        "Wait For Door-Down Before Start Mapping"
+#CFG_ITEM    DB_CFG+CFG.dLP3.DOOR_CLOSE_MODE.AFTER_MAPPING        "Close Door After Mapping"
+#CFG_ITEM    PHY_IO__LP3+CFG.MAPPING.SENSOR.USE                   "Mapping Sensor Use"
+#CFG_ITEM    PHY_IO__LP3+CFG.CID.TAG.SENSOR.USE                   "CID Tag Sensor USe"
+#CFG_ITEM    PHY_HW__LP3+CFG.PAGE_ID_OF_CID                       "CID Page ID"
+#CFG_ITEM    PHY__LP3+CFG.PREPLOAD.CID.MODE                       "Preload CID Mode"
+#CFG_ITEM    PHY_IO__LP3+CFG.dLOAD.MODE                           "Load Map Mode"
+#CFG_ITEM    PHY_IO__LP3+CFG.INIT.SLOT.STATE.UNKNOWN              "Init Slot State -> Unknown"
+
+
+//======================================================================================================================
+#PAGE      "PRESSURE"
+
+#GROUP     "LL1"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aEXHAUST.PUMP.PRESSURE.TORR      "Exhaust Ppressure (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aEXHAUST.PUMP.TIMEOUT            "Exhaust Timeout (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aFAST.PUMP.PRESSURE.TORR         "Slow Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aSOFT.PUMP.TIMEOUT               "Slow Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aSOFT.PUMP.COMPLETE.STABLE.TIME  "Slow Pumping Stable Time (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aVAC.PRESSURE.TORR               "Fast Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aFAST.PUMP.TIMEOUT               "Fast Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBA+CFG.aVAC.UPPER.TOLERANCE                    "Vacuum High-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aFAST.VENT.PRESSURE.TORR         "Slow Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aSOFT.VENT.TIMEOUT               "Slow Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aATM.PRESSURE.TORR               "Fast Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aFAST.VENT.TIMEOUT               "Fast Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBA+CFG.aATM.PRESS.STS.TOLERANCE                "ATM Low-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aOVER.VENT.TIME                  "Over-Vent Delay Time (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.EQUALIZE.VENT.TIME               "Equalize Delay Time (sec)"
+#CFG_ITEM    PHY__LBA+CFG.dINIT.PUMP.DOWN                         "Gauge Valve - Limit Pressure (torr)"
+#CFG_ITEM    PHY__LBA+CFG.GAUGE.LIMIT_PRESSURE                    "Initial Pumping"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME            "Soft Pumping Delay Time (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aSOFT.VENT.DELAY.TIME            "Soft Venting Delay Time (sec)"
+#CFG_ITEM    PHY__LBA+OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME          "Close Wait Time (sec)"
+
+#GROUP     "LL2"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aEXHAUST.PUMP.PRESSURE.TORR      "Exhaust Ppressure (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aEXHAUST.PUMP.TIMEOUT            "Exhaust Timeout (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aFAST.PUMP.PRESSURE.TORR         "Slow Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aSOFT.PUMP.TIMEOUT               "Slow Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aSOFT.PUMP.COMPLETE.STABLE.TIME  "Slow Pumping Stable Time (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aVAC.PRESSURE.TORR               "Fast Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aFAST.PUMP.TIMEOUT               "Fast Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBB+CFG.aVAC.UPPER.TOLERANCE                    "Vacuum High-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aFAST.VENT.PRESSURE.TORR         "Slow Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aSOFT.VENT.TIMEOUT               "Slow Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aATM.PRESSURE.TORR               "Fast Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aFAST.VENT.TIMEOUT               "Fast Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBB+CFG.aATM.PRESS.STS.TOLERANCE                "ATM Low-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aOVER.VENT.TIME                  "Over-Vent Delay Time (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.EQUALIZE.VENT.TIME               "Equalize Delay Time (sec)"
+#CFG_ITEM    PHY__LBB+CFG.dINIT.PUMP.DOWN                         "Gauge Valve - Limit Pressure (torr)"
+#CFG_ITEM    PHY__LBB+CFG.GAUGE.LIMIT_PRESSURE                    "Initial Pumping"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME            "Soft Pumping Delay Time (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aSOFT.VENT.DELAY.TIME            "Soft Venting Delay Time (sec)"
+#CFG_ITEM    PHY__LBB+OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME          "Close Wait Time (sec)"
+
+#GROUP     "LL3"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aEXHAUST.PUMP.PRESSURE.TORR      "Exhaust Ppressure (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aEXHAUST.PUMP.TIMEOUT            "Exhaust Timeout (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aFAST.PUMP.PRESSURE.TORR         "Slow Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aSOFT.PUMP.TIMEOUT               "Slow Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aSOFT.PUMP.COMPLETE.STABLE.TIME  "Slow Pumping Stable Time (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aVAC.PRESSURE.TORR               "Fast Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aFAST.PUMP.TIMEOUT               "Fast Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBC+CFG.aVAC.UPPER.TOLERANCE                    "Vacuum High-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aFAST.VENT.PRESSURE.TORR         "Slow Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aSOFT.VENT.TIMEOUT               "Slow Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aATM.PRESSURE.TORR               "Fast Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aFAST.VENT.TIMEOUT               "Fast Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBC+CFG.aATM.PRESS.STS.TOLERANCE                "ATM Low-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aOVER.VENT.TIME                  "Over-Vent Delay Time (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.EQUALIZE.VENT.TIME               "Equalize Delay Time (sec)"
+#CFG_ITEM    PHY__LBC+CFG.dINIT.PUMP.DOWN                         "Gauge Valve - Limit Pressure (torr)"
+#CFG_ITEM    PHY__LBC+CFG.GAUGE.LIMIT_PRESSURE                    "Initial Pumping"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME            "Soft Pumping Delay Time (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aSOFT.VENT.DELAY.TIME            "Soft Venting Delay Time (sec)"
+#CFG_ITEM    PHY__LBC+OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME          "Close Wait Time (sec)"
+
+#GROUP     "LL4"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aEXHAUST.PUMP.PRESSURE.TORR      "Exhaust Ppressure (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aEXHAUST.PUMP.TIMEOUT            "Exhaust Timeout (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aFAST.PUMP.PRESSURE.TORR         "Slow Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aSOFT.PUMP.TIMEOUT               "Slow Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aSOFT.PUMP.COMPLETE.STABLE.TIME  "Slow Pumping Stable Time (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aVAC.PRESSURE.TORR               "Fast Pumping Pressure (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aFAST.PUMP.TIMEOUT               "Fast Pumping Timeout (sec)"
+#CFG_ITEM    PHY__LBD+CFG.aVAC.UPPER.TOLERANCE                    "Vacuum High-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aFAST.VENT.PRESSURE.TORR         "Slow Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aSOFT.VENT.TIMEOUT               "Slow Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aATM.PRESSURE.TORR               "Fast Venting Pressure (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aFAST.VENT.TIMEOUT               "Fast Venting Timeout (sec)"
+#CFG_ITEM    PHY__LBD+CFG.aATM.PRESS.STS.TOLERANCE                "ATM Low-Limit Tolerrance (torr)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aOVER.VENT.TIME                  "Over-Vent Delay Time (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.EQUALIZE.VENT.TIME               "Equalize Delay Time (sec)"
+#CFG_ITEM    PHY__LBD+CFG.dINIT.PUMP.DOWN                         "Gauge Valve - Limit Pressure (torr)"
+#CFG_ITEM    PHY__LBD+CFG.GAUGE.LIMIT_PRESSURE                    "Initial Pumping"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME            "Soft Pumping Delay Time (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aSOFT.VENT.DELAY.TIME            "Soft Venting Delay Time (sec)"
+#CFG_ITEM    PHY__LBD+OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME          "Close Wait Time (sec)"
+
+
+//======================================================================================================================
+#PAGE      "HEATER"
+
+#GROUP     "LL1 (Chuck)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.USE                           "Use"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.RANGE.MIN                     "Range Min"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.RANGE.MAX                     "Range Max"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.RANGE.DEC                     "Range Dec"
+
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.CHECKING_TIME.FOR.STABLE      "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.CHECK_TIMEOUT.FOR.ERROR       "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.HEATING.TIMEOUT               "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.WARNING.LIMIT                 "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.FAULT.LIMIT                   "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.HIGH.LIMIT                    "High Limit (C)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.MAX.DEVIATION                 "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.RAMPING.RATE                  "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.RAMPING.RANGE                 "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.RAMPING.STABLE.TIME           "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.SP.RANGE.INTERLOCK.USE        "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.SP.RANGE.INTERLOCK.VALUE      "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.ALARM.RESET.ON.TIME           "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.HW_ALARM.MC_OFF               "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.INITIAL.MODE                  "Initial Mode"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.INITIAL.TEMP                  "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__LL1_CHUCK+CFG.INITIAL.TIMEOUT               "Initial Timeout (sec)"
+
+#GROUP     "LL1 (Pumping Pipe)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__LL1_PUMP+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "LL2 (Chuck)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.USE                           "Use"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.RANGE.MIN                     "Range Min"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.RANGE.MAX                     "Range Max"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.RANGE.DEC                     "Range Dec"
+
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.CHECKING_TIME.FOR.STABLE      "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.CHECK_TIMEOUT.FOR.ERROR       "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.HEATING.TIMEOUT               "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.WARNING.LIMIT                 "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.FAULT.LIMIT                   "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.HIGH.LIMIT                    "High Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.MAX.DEVIATION                 "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.RAMPING.RATE                  "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.RAMPING.RANGE                 "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.RAMPING.STABLE.TIME           "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.SP.RANGE.INTERLOCK.USE        "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.SP.RANGE.INTERLOCK.VALUE      "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.ALARM.RESET.ON.TIME           "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.HW_ALARM.MC_OFF               "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.INITIAL.MODE                  "Initial Mode"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.INITIAL.TEMP                  "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__LL2_CHUCK+CFG.INITIAL.TIMEOUT               "Initial Timeout (sec)"
+
+#GROUP     "LL2 (Pumping Pipe)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__LL2_PUMP+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "LL1 & LL3 (Wall)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.USE                           "Use"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.RANGE.MIN                     "Range Min"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.RANGE.MAX                     "Range Max"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.RANGE.DEC                     "Range Dec"
+
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.CHECKING_TIME.FOR.STABLE      "Checking Stable Time (sec)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.CHECK_TIMEOUT.FOR.ERROR       "Checking Error Timeout (sec)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.HEATING.TIMEOUT               "Heating Timeout (sec)"
+
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.WARNING.LIMIT                 "Warning Limit (C)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.FAULT.LIMIT                   "Fault Limit (C)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.HIGH.LIMIT                    "High Limit (C)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.MAX.DEVIATION                 "Max Deviation (C)"
+
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.RAMPING.RATE                  "Ramping Rate (C/min)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.RAMPING.RANGE                 "Ramping Range (C)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.RAMPING.STABLE.TIME           "Ramping Stable Time (sec)"
+
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.SP.RANGE.INTERLOCK.USE        "SP Range Interlock Use"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.SP.RANGE.INTERLOCK.VALUE      "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.ALARM.RESET.ON.TIME           "Alarm Reset On Time (sec)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.HW_ALARM.MC_OFF               "Alarm MC Off Use"
+
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.INITIAL.MODE                  "Initial Mode"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.INITIAL.TEMP                  "Initial Temperature (C)"
+#CFG_ITEM    HY_HTR__LL1_3_WALL+CFG.INITIAL.TIMEOUT               "Initial Timeout (sec)"
+
+#GROUP     "LL2 & LL4 (Wall)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.USE                          "Use"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.RANGE.MIN                    "Range Min"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.RANGE.MAX                    "Range Max"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.RANGE.DEC                    "Range Dec"
+
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.CHECKING_TIME.FOR.STABLE     "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.CHECK_TIMEOUT.FOR.ERROR      "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.HEATING.TIMEOUT              "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.WARNING.LIMIT                "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.FAULT.LIMIT                  "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.HIGH.LIMIT                   "High Limit (C)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.MAX.DEVIATION                "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.RAMPING.RATE                 "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.RAMPING.RANGE                "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.RAMPING.STABLE.TIME          "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.SP.RANGE.INTERLOCK.USE       "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.SP.RANGE.INTERLOCK.VALUE     "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.ALARM.RESET.ON.TIME          "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.HW_ALARM.MC_OFF              "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.INITIAL.MODE                 "Initial Mode"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.INITIAL.TEMP                 "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__LL2_4_WALL+CFG.INITIAL.TIMEOUT              "Initial Timeout (sec)"
+
+#GROUP     "LL3 & LL4 (Pumping Pipe)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.USE                          "Use"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.RANGE.MIN                    "Range Min"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.RANGE.MAX                    "Range Max"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.RANGE.DEC                    "Range Dec"
+
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.CHECKING_TIME.FOR.STABLE     "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.CHECK_TIMEOUT.FOR.ERROR      "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.HEATING.TIMEOUT              "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.WARNING.LIMIT                "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.FAULT.LIMIT                  "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.HIGH.LIMIT                   "High Limit (C)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.MAX.DEVIATION                "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.RAMPING.RATE                 "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.RAMPING.RANGE                "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.RAMPING.STABLE.TIME          "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.SP.RANGE.INTERLOCK.USE       "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.SP.RANGE.INTERLOCK.VALUE     "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.ALARM.RESET.ON.TIME          "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.HW_ALARM.MC_OFF              "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.INITIAL.MODE                 "Initial Mode"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.INITIAL.TEMP                 "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__LL3_4_PUMP+CFG.INITIAL.TIMEOUT              "Initial Timeout (sec)"
+
+#GROUP     "LL2 & LL4 (Wall)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.USE                             "Use"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.RANGE.MIN                       "Range Min"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.RANGE.MAX                       "Range Max"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.RANGE.DEC                       "Range Dec"
+
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.CHECKING_TIME.FOR.STABLE        "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.CHECK_TIMEOUT.FOR.ERROR         "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.HEATING.TIMEOUT                 "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.WARNING.LIMIT                   "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.FAULT.LIMIT                     "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.HIGH.LIMIT                      "High Limit (C)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.MAX.DEVIATION                   "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.RAMPING.RATE                    "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.RAMPING.RANGE                   "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.RAMPING.STABLE.TIME             "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.SP.RANGE.INTERLOCK.USE          "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.SP.RANGE.INTERLOCK.VALUE        "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.ALARM.RESET.ON.TIME             "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.HW_ALARM.MC_OFF                 "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.INITIAL.MODE                    "Initial Mode"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.INITIAL.TEMP                    "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__TM_PUMP+CFG.INITIAL.TIMEOUT                 "Initial Timeout (sec)"
+
+#GROUP     "PM1 (Gate Valve)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__PM1_GATE+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "PM2 (Gate Valve)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__PM2_GATE+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "PM3 (Gate Valve)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__PM3_GATE+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "PM4 (Gate Valve)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__PM4_GATE+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "PM5 (Gate Valve)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__PM5_GATE+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+
+#GROUP     "PM6 (Gate Valve)"
+
+// Command   Channel                                              Name                             Comment
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.USE                            "Use"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.RANGE.MIN                      "Range Min"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.RANGE.MAX                      "Range Max"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.RANGE.DEC                      "Range Dec"
+
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.CHECKING_TIME.FOR.STABLE       "Checking Stable Time (sec)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.CHECK_TIMEOUT.FOR.ERROR        "Checking Error Timeout (sec)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.HEATING.TIMEOUT                "Heating Timeout (sec)"
+
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.WARNING.LIMIT                  "Warning Limit (C)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.FAULT.LIMIT                    "Fault Limit (C)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.HIGH.LIMIT                     "High Limit (C)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.MAX.DEVIATION                  "Max Deviation (C)"
+
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.RAMPING.RATE                   "Ramping Rate (C/min)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.RAMPING.RANGE                  "Ramping Range (C)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.RAMPING.STABLE.TIME            "Ramping Stable Time (sec)"
+
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.SP.RANGE.INTERLOCK.USE         "SP Range Interlock Use"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.SP.RANGE.INTERLOCK.VALUE       "SP Range Interlock Value (C)"
+ 
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.ALARM.RESET.ON.TIME            "Alarm Reset On Time (sec)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.HW_ALARM.MC_OFF                "Alarm MC Off Use"
+
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.INITIAL.MODE                   "Initial Mode"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.INITIAL.TEMP                   "Initial Temperature (C)"
+#CFG_ITEM    PHY_HTR__PM6_GATE+CFG.INITIAL.TIMEOUT                "Initial Timeout (sec)"
+

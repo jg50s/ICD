@@ -1,0 +1,10 @@
+#ID=1	1	LIGHT	PHY_IO_ESC - ESC Offline Alarm.
+#ID=2	2	LIGHT	PHY_IO_ESC - ESC Voltage Control Timeout Alarm.
+#ID=3	3	LIGHT	PHY_IO_ESC - ESC COOLANT is Not Flow Alarm.
+#ID=4	4	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.
+#ID=5	5	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.
+#ID=6	6	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.
+#ID=7	7	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.
+#ID=8	8	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.
+#ID=9	9	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.
+#ID=10	10	LIGHT	PHY_IO_ESC - ESC Power Control Alarm.

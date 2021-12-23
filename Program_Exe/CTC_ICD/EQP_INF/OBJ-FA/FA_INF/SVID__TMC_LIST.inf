@@ -1,0 +1,1557 @@
+#DEFINE_CHANNEL_NAME
+
+
+//--------------------------------------------------------------------------------------------
+#DEFINE_ID_OFFSET   0
+
+
+// 151800003		Port1CurrentEnvironment	CurrentEnvironment			B
+// 151800018		Port1Mode	mode		Engineering  Production  Maintenance  offline  	A
+#SVID   CTC   151800019   #STATUS__LP1         A	     10     __			//  Load Port  -  Status	
+// 151800019		Port1State	state			A
+#SVID	CTC	  151800021   #SLOT_INFO__LP1     A     25     __			//  Load Port  -  Wafer Map  (0 = Wafer not Exist, 1 = Wafer Exist)
+// 151800021		Port1WaferMappingResult	WaferMappingResult			A
+// 151800045		Port1PDOCommandResponse	PDOCommandResponse			A
+// 151800052		Port1PDOCurrentPodStatus	PDOCurrentPodStatus		Unknown  Absent  Present  	A
+// 151800053		Port1PDOCurrentState	PDOCurrentState		Closing  Unclamped  Homing  Docking  Undocking  Clamped  Error  Idle  Open  Opening  Not Initialized  Closed  UnClamping  Clamping  Homed  Docked  Undocked  	A
+// 151800079		Port1PDONumberOfCurrentMappingCycles	PDONumberOfCurrentMappingCycles			U4
+// 151800090		Port1PDOPDOWorkingState	PDOPDOWorkingState		Idle  Not Initialized  Working  Error  Pause  	A
+// 151800095		Port1PDOPreviousPodStatus	PDOPreviousPodStatus		Unknown  Absent  Present  	A
+// 151800096		Port1PDOPreviousState	PDOPreviousState		Closing  Unclamped  Homing  Docking  Undocking  Clamped  Error  Idle  Open  Opening  Not Initialized  Closed  UnClamping  Clamping  Homed  Docked  Undocked  	A
+// 151800100		Port1Slot1		Slot1				A
+// 151800101		Port1Slot10	Slot10			A
+// 151800102		Port1Slot11	Slot11			A
+// 151800103		Port1Slot12	Slot12			A
+// 151800104		Port1Slot13	Slot13			A
+// 151800105		Port1Slot14	Slot14			A
+// 151800106		Port1Slot15	Slot15			A
+// 151800107		Port1Slot16	Slot16			A
+// 151800108		Port1Slot17	Slot17			A
+// 151800109		Port1Slot18	Slot18			A
+// 151800110		Port1Slot19	Slot19			A
+// 151800111		Port1Slot2		Slot2				A
+// 151800112		Port1Slot20	Slot20			A
+// 151800113		Port1Slot21	Slot21			A
+// 151800114		Port1Slot22	Slot22			A
+// 151800115		Port1Slot23	Slot23			A
+// 151800116		Port1Slot24	Slot24			A
+// 151800117		Port1Slot25	Slot25			A
+// 151800118		Port1Slot26	Slot26			A
+// 151800119		Port1Slot3		Slot3				A
+// 151800120		Port1Slot4		Slot4				A
+// 151800121		Port1Slot5		Slot5				A
+// 151800122		Port1Slot6		Slot6				A
+// 151800123		Port1Slot7		Slot7				A
+// 151800124		Port1Slot8		Slot8				A
+// 151800125		Port1Slot9		Slot9				A
+
+
+// 151800202		Port2CurrentEnvironment	CurrentEnvironment			B
+// 151800217		Port2Mode	mode		Engineering  Production  Maintenance  offline  	A
+#SVID   CTC   151800218   #STATUS__LP2         A	     10     __			//  Load Port  -  Status	
+// 151800218		Port2State	state			A
+#SVID	CTC	  151800220   #SLOT_INFO__LP2     A     25     __			//  Load Port  -  Wafer Map  (0 = Wafer not Exist, 1 = Wafer Exist)
+// 151800220		Port2WaferMappingResult	WaferMappingResult			A
+// 151800244		Port2PDOCommandResponse	PDOCommandResponse			A
+// 151800251		Port2PDOCurrentPodStatus	PDOCurrentPodStatus		Unknown  Absent  Present  	A
+// 151800252		Port2PDOCurrentState	PDOCurrentState		Closing  Unclamped  Homing  Docking  Undocking  Clamped  Error  Idle  Open  Opening  Not Initialized  Closed  UnClamping  Clamping  Homed  Docked  Undocked  	A
+// 151800278		Port2PDONumberOfCurrentMappingCycles	PDONumberOfCurrentMappingCycles			U4
+// 151800289		Port2PDOPDOWorkingState	PDOPDOWorkingState		Idle  Not Initialized  Working  Error  Pause  	A
+// 151800294		Port2PDOPreviousPodStatus	PDOPreviousPodStatus		Unknown  Absent  Present  	A
+// 151800295		Port2PDOPreviousState	PDOPreviousState		Closing  Unclamped  Homing  Docking  Undocking  Clamped  Error  Idle  Open  Opening  Not Initialized  Closed  UnClamping  Clamping  Homed  Docked  Undocked  	A
+// 151800299		Port2Slot1	Slot1					A
+// 151800300		Port2Slot10	Slot10			A
+// 151800301		Port2Slot11	Slot11			A
+// 151800302		Port2Slot12	Slot12			A
+// 151800303		Port2Slot13	Slot13			A
+// 151800304		Port2Slot14	Slot14			A
+// 151800305		Port2Slot15	Slot15			A
+// 151800306		Port2Slot16	Slot16			A
+// 151800307		Port2Slot17	Slot17			A
+// 151800308		Port2Slot18	Slot18			A
+// 151800309		Port2Slot19	Slot19			A
+// 151800310		Port2Slot2	Slot2					A
+// 151800311		Port2Slot20	Slot20			A
+// 151800312		Port2Slot21	Slot21			A
+// 151800313		Port2Slot22	Slot22			A
+// 151800314		Port2Slot23	Slot23			A
+// 151800315		Port2Slot24	Slot24			A
+// 151800316		Port2Slot25	Slot25			A
+// 151800317		Port2Slot26	Slot26			A
+// 151800318		Port2Slot3	Slot3					A
+// 151800319		Port2Slot4	Slot4					A
+// 151800320		Port2Slot5	Slot5					A
+// 151800321		Port2Slot6	Slot6					A
+// 151800322		Port2Slot7	Slot7					A
+// 151800323		Port2Slot8	Slot8					A
+// 151800324		Port2Slot9	Slot9					A
+
+
+// 151800431		TransferChamberArmNumber	ArmNumber			F8
+// 151800432		TransferChamberCurrentEnvironment	CurrentEnvironment			B
+// 151800434		TransferChamberEndEffector1Status	EndEffector1Status			A
+// 151800435		TransferChamberEndEffector2Status	EndEffector2Status			A
+// 151800436		TransferChamberExtension	Extension			A
+// 151800437		TransferChamberFacing	Facing			A
+// 151800447		TransferChamberMode	mode			A
+// 151800448		TransferChamberPM1WaferCounter	PM1WaferCounter			I8
+// 151800449		TransferChamberPM2WaferCounter	PM2WaferCounter			I8
+// 151800450		TransferChamberPM3WaferCounter	PM3WaferCounter			I8
+// 151800451		TransferChamberPM4WaferCounter	PM4WaferCounter			I8
+// 151800452		TransferChamberPortAWaferCounter	PortAWaferCounter			I8
+// 151800453		TransferChamberPortBWaferCounter	PortBWaferCounter			I8
+// 151800454		TransferChamberState	state			A
+// 151800455		TransferChamberTraceDataEnable	TraceDataEnable		true  false  	Bool
+// 151800456		TransferChamberWafer	Wafer			A
+// 151800457		TransferChamberSlotValvePM1ObservedPosition	SlotValvePM1ObservedPosition			A
+// 151800458		TransferChamberSlotValvePM1PositionSetpoint	SlotValvePM1Position			A
+// 151800459		TransferChamberSlotValvePM1CloseActuatorSetpoint	SlotValvePM1Close_DO	binary	nil  true  false  	Bool
+// 151800460		TransferChamberSlotValvePM1OpenActuatorSetpoint	SlotValvePM1Open_DO	binary	nil  true  false  	Bool
+// 151800461		TransferChamberSlotValvePM1ClosedSensorReading	SlotValvePM1Closed_DI	binary	nil  true  false  	Bool
+// 151800462		TransferChamberSlotValvePM1OpenSensorReading	SlotValvePM1Open_DI	binary	nil  true  false  	Bool
+// 151800463		TransferChamberPM1WaferSensorReading	WaferPresentPM1_DI	binary	nil  true  false  	Bool
+// 151800464		TransferChamberSlotValvePM2ObservedPosition	SlotValvePM2ObservedPosition			A
+// 151800465		TransferChamberSlotValvePM2PositionSetpoint	SlotValvePM2Position			A
+// 151800467		TransferChamberSlotValvePM2OpenActuatorSetpoint	SlotValvePM2Open_DO	binary	nil  true  false  	Bool
+// 151800470		TransferChamberPM2WaferSensorReading	WaferPresentPM2_DI	binary	nil  true  false  	Bool
+// 151800471		TransferChamberSlotValvePM3ObservedPosition	SlotValvePM3ObservedPosition			A
+// 151800472		TransferChamberSlotValvePM3PositionSetpoint	SlotValvePM3Position			A
+// 151800474		TransferChamberSlotValvePM3OpenActuatorSetpoint	SlotValvePM3Open_DO	binary	nil  true  false  	Bool
+// 151800477		TransferChamberPM3WaferSensorReading	WaferPresentPM3_DI	binary	nil  true  false  	Bool
+// 151800478		TransferChamberSlotValvePM4ObservedPosition	SlotValvePM4ObservedPosition			A
+// 151800479		TransferChamberSlotValvePM4PositionSetpoint	SlotValvePM4Position			A
+// 151800481		TransferChamberSlotValvePM4OpenActuatorSetpoint	SlotValvePM4Open_DO	binary	nil  true  false  	Bool
+// 151800484		TransferChamberPM4WaferSensorReading	WaferPresentPM4_DI	binary	nil  true  false  	Bool
+// 151800499		TransferChamberPGCExecutionState	PGCCommandExecutionState			A
+// 151800500		TransferChamberPGCLastMaxLeakRate	LastChamberLeakRate			F4
+// 151800501		TransferChamberPGCLastMaxLeakRateDateAndTime	LastChamberLeakRateDateAndTime			A
+// 151800505		TransferChamberPGCMaxLeakRate	ChamberLeakRate			F4
+// 151800506		TransferChamberPGCMaxLeakRateDateAndTime	ChamberLeakRateDateAndTime			A
+// 151800507		TransferChamberPGCNumericPressureReading	NumericPressureReading	mtorr		F4
+// 151800512		TransferChamberPurgeValvePosition	PurgeValvePosition			A
+// 151800513		TransferChamberPurgeValveActuatorSetpoint	TC_PurgeValve_DO	binary	nil  true  false  	Bool
+// 151800514		TransferChamberPressureControllerPressureSetpoint	NitrogenPurge	mTorr		F4
+// 151800515		TransferChamberPressureControllerActuatorSetpoint	TC_UPC_AO	mTorr		F4
+// 151800517		TransferChamberVentValvePosition	VentValvePosition			A
+// 151800518		TransferChamberVentValveActuatorSetpoint	TC_VentValve_DO	binary	nil  true  false  	Bool
+// 151800519		TransferChamberConvectron1TMATMSwitchReading	TC_ATM_DI	binary	nil  true  false  	Bool
+// 151800520		TransferChamberConvectron1SensorReading	TC_Pressure_AI	mtorr		F4
+// 151800521		TransferChamberConvectron1TMVacuumSwitchReading	TC_VAC_DI	binary	nil  true  false  	Bool
+// 151800522		TransferChamberConvectron3ForeLineAtmSwitchReading	Foreline_ATM_DI	binary	nil  true  false  	Bool
+// 151800523		TransferChamberConvectron3SensorReading	Foreline_Pressure_AI	mtorr		F4
+// 151800524		TransferChamberConvectron3TMVacuumSwitchReading	Foreline_VAC_DI	binary	nil  true  false  	Bool
+// 151800525		TransferChamberFastRoughMPMObservedPosition	FastRoughPosition			A
+// 151800526		TransferChamberFastRoughMPMPositionSetpoint	FastRoughPosition			A
+// 151800527		TransferChamberFastRoughActuatorSetpoint	TC_IsoValve_DO	binary	nil  true  false  	Bool
+// 151800528		TransferChamberRoughPumpBallastActuatorSetpoint	RoughPumpBallastActuator	binary	nil  true  false  	Bool
+// 151800529		TransferChamberRoughPumpOnActuatorSetpoint	TC_IPXPump_DO	binary	nil  true  false  	Bool
+// 151800531		TransferChamberSlowRoughMPMObservedPosition	SlowRoughPosition			A
+// 151800532		TransferChamberSlowRoughMPMPositionSetpoint	SlowRoughPosition			A
+// 151800533		TransferChamberSlowRoughActuatorSetpoint	TC_SlowPumpValve_DO	binary	nil  true  false  	Bool
+// 151800561		TransferChamberWaterDetect1SensorReading	LiquidDetect1_DI	binary	nil  true  false  	Bool
+// 151800562		TransferChamberWaterDetect2SensorReading	LiquidDetect2_DI	binary	nil  true  false  	Bool
+// 151800563		TransferChamberArmCurrentPosition	ArmCurrentPosition			A
+// 151800564		TransferChamberArmHomedState	ArmHomedState		WaitingForHoming  Fault  Homed  	A
+// 151800565		TransferChamberArmIsCalibrated	ArmIsCalibrated		true  false  	Bool
+// 151800566		TransferChamberArmIsMoving	ArmIsMoving		true  false  	Bool
+// 151800567		TransferChamberArmRobotEnableActuatorSetpoint	RobotEnable_DO	binary	nil  true  false  	Bool
+// 151800568		TransferChamberArmRobotHoldActuatorSetpoint	RobotHold_DO	binary	nil  true  false  	Bool
+// 151800569		TransferChamberArmRobotResetActuatorSetpoint	RobotReset_DO	binary	nil  true  false  	Bool
+
+
+// 151800573		Port1PreviousState	PreviousState			A
+// 151800577		Port2PreviousState	PreviousState			A
+#SVID	CTC	151800578	#CSTID__LP1			AV	16     __			//  Load Port  -  CarrierId
+// 151800578		Port1ExecutionCarrierID	ExecutionCarrierID			A
+#SVID	CTC	151800579	#CSTID__LP2			AV	16 	 __			//  Load Port  -  CarrierId
+// 151800579		Port2ExecutionCarrierID	ExecutionCarrierID			A
+#SVID	CTC	151800580	#LOTID__LP1    		A		16 	 __			//  Load Port  -  Lot ID 		
+// 151800580		Port1ExecutionLotID	ExecutionLotID			A
+#SVID	CTC	151800581	#LOTID__LP2    		A		16	    __			//  Load Port  -  Lot ID 		
+// 151800581		Port2ExecutionLotID	ExecutionLotID			A
+#SVID	CTC	151800582	#PPID__LP1    		A		12 	__			//  Load Port  -  PPID		
+// 151800582		Port1ExecutionFlowName	ExecutionFlowName			A
+#SVID	CTC	151800583	#PPID__LP2    		A		12 	__			//  Load Port  -  PPID		
+// 151800583		Port2ExecutionFlowName	ExecutionFlowName			A
+// 151800587		Port2tagReaderWriteTagValue	tagReaderWriteTagValue			A
+// 151800588		Port1tagReaderWriteTagValue	tagReaderWriteTagValue			A
+// 151800589		Port2tagReaderReadTagValue	tagReaderReadTagValue			A
+// 151800590		Port1tagReaderReadTagValue	tagReaderReadTagValue			A
+// 151800591		Port2tagReaderWriteTagPreviousValue	tagReaderWriteTagPreviousValue			A
+// 151800592		Port1tagReaderWriteTagPreviousValue	tagReaderWriteTagPreviousValue			A
+// 151800593		Port2tagReaderReadTagPreviousValue	tagReaderReadTagPreviousValue			A
+// 151800594		Port1tagReaderReadTagPreviousValue	tagReaderReadTagPreviousValue			A
+// 151800595		Port2tagReaderUIInputWriteTagString	tagReaderUIInputWriteTagString			A
+// 151800596		Port1tagReaderUIInputWriteTagString	tagReaderUIInputWriteTagString			A
+// 151800597		Port2tagReaderTagState	tagReaderTagState		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151800598		Port1tagReaderTagState	tagReaderTagState		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151800599		Port2tagReaderPreviousTagState	tagReaderPreviousTagState		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151800600		Port1tagReaderPreviousTagState	tagReaderPreviousTagState		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151800603		Port2tagReaderReadTagString	tagReaderReadTagString			A
+// 151800604		Port1tagReaderReadTagString	tagReaderReadTagString			A
+// 151800605		Port2tagReaderCurrentPageNumber	tagReaderCurrentPageNumber			U1
+// 151800606		Port1tagReaderCurrentPageNumber	tagReaderCurrentPageNumber			U1
+// 151800607		Port2tagReaderPortNumber	tagReaderPortNumber			U1
+// 151800608		Port1tagReaderPortNumber	tagReaderPortNumber			U1
+// 151800609		Port1AGVLoadReqActuatorSetpoint	LoadReqActuator_DO	binary	nil  true  false  	Bool
+// 151800610		Port1AGVModeActuatorSetpoint	ModeActuator_DO	binary	nil  true  false  	Bool
+// 151800611		Port1AGVReadyActuatorSetpoint	ReadyActuator_DO	binary	nil  true  false  	Bool
+// 151800613		Port1AGVUnloadReqActuatorSetpoint	UnloadReqActuator_DO	binary	nil  true  false  	Bool
+// 151800614		Port1AGVCommandResponse	AGVCommandResponse			A
+// 151800617		Port1AGVPreviousState	AGVPreviousState		Idle  Multi_Loading  Loading  Multi_Unloading  Not Initialized  Waiting  Error  Unloading  Con_Unloading  Con_Loading  	A
+// 151800618		Port1AGVBusySensorReading	BusySensor_DI	binary	nil  true  false  	Bool
+// 151800619		Port1AGVCompSensorReading	CompSensor_DI	binary	nil  true  false  	Bool
+// 151800620		Port1AGVCs0SensorReading	Cs0Sensor_DI	binary	nil  true  false  	Bool
+// 151800621		Port1AGVCs1SensorReading	Cs1Sensor_DI	binary	nil  true  false  	Bool
+// 151800622		Port1AGVCs2SensorReading	Cs2Sensor_DI	binary	nil  true  false  	Bool
+// 151800623		Port1AGVGoSensorReading	GoSensor_DI	binary	nil  true  false  	Bool
+// 151800624		Port1AGVTrReqSensorReading	TrReqSensor_DI	binary	nil  true  false  	Bool
+// 151800625		Port1AGVValidSensorReading	ValidSensor_DI	binary	nil  true  false  	Bool
+// 151800626		Port1AGVState	AGVState		Idle  Multi_Loading  Loading  Multi_Unloading  Not Initialized  Waiting  Error  Unloading  Con_Unloading  Con_Loading  	A
+// 151800627		Port1AGVUIAbort	AGVUIAbort		Ready  Abort  	U1
+// 151800629		Port2AGVLoadReqActuatorSetpoint	LoadReqActuator_DO	binary	nil  true  false  	Bool
+// 151800630		Port2AGVModeActuatorSetpoint	ModeActuator_DO	binary	nil  true  false  	Bool
+// 151800631		Port2AGVReadyActuatorSetpoint	ReadyActuator_DO	binary	nil  true  false  	Bool
+// 151800633		Port2AGVUnloadReqActuatorSetpoint	UnloadReqActuator_DO	binary	nil  true  false  	Bool
+// 151800634		Port2AGVCommandResponse	AGVCommandResponse			A
+// 151800637		Port2AGVPreviousState	AGVPreviousState		Idle  Multi_Loading  Loading  Multi_Unloading  Not Initialized  Waiting  Error  Unloading  Con_Unloading  Con_Loading  	A
+// 151800638		Port2AGVBusySensorReading	BusySensor_DI	binary	nil  true  false  	Bool
+// 151800639		Port2AGVCompSensorReading	CompSensor_DI	binary	nil  true  false  	Bool
+// 151800640		Port2AGVCs0SensorReading	Cs0Sensor_DI	binary	nil  true  false  	Bool
+// 151800641		Port2AGVCs1SensorReading	Cs1Sensor_DI	binary	nil  true  false  	Bool
+// 151800642		Port2AGVCs2SensorReading	ACs2Sensor_DI	binary	nil  true  false  	Bool
+// 151800643		Port2AGVGoSensorReading	GoSensor_DI	binary	nil  true  false  	Bool
+// 151800644		Port2AGVTrReqSensorReading	TrReqSensor_DI	binary	nil  true  false  	Bool
+// 151800645		Port2AGVValidSensorReading	ValidSensor_DI	binary	nil  true  false  	Bool
+// 151800646		Port2AGVState	AGVState		Idle  Multi_Loading  Loading  Multi_Unloading  Not Initialized  Waiting  Error  Unloading  Con_Unloading  Con_Loading  	A
+// 151800647		Port2AGVUIAbort	AGVUIAbort		Ready  Abort  	U1
+
+
+// 151800649		TransferChamberLightTowerActuator10Setpoint	LightTowerActuator10_DO	binary	nil  true  false  	Bool
+// 151800650		TransferChamberLightTowerActuator11Setpoint	LightTowerActuator11_DO	binary	nil  true  false  	Bool
+// 151800651		TransferChamberLightTowerActuator12Setpoint	LightTowerActuator12_DO	binary	nil  true  false  	Bool
+// 151800652		TransferChamberLightTowerActuator13Setpoint	LightTowerActuator13_DO	binary	nil  true  false  	Bool
+// 151800653		TransferChamberLightTowerActuator14Setpoint	LightTowerActuator14_DO	binary	nil  true  false  	Bool
+// 151800654		TransferChamberLightTowerActuator15Setpoint	LightTowerActuator15_DO	binary	nil  true  false  	Bool
+// 151800655		TransferChamberLightTowerActuator4Setpoint	LightTowerActuator4_DO	binary	nil  true  false  	Bool
+// 151800656		TransferChamberLightTowerActuator5Setpoint	LightTowerActuator5_DO	binary	nil  true  false  	Bool
+// 151800657		TransferChamberLightTowerActuator6Setpoint	LightTowerActuator6_DO	binary	nil  true  false  	Bool
+// 151800658		TransferChamberLightTowerActuator7Setpoint	LightTowerActuator7_DO	binary	nil  true  false  	Bool
+// 151800659		TransferChamberLightTowerActuator8Setpoint	LightTowerActuator8_DO	binary	nil  true  false  	Bool
+// 151800660		TransferChamberLightTowerActuator9Setpoint	LightTowerActuator9_DO	binary	nil  true  false  	Bool
+
+
+// 151800661		Port1PDOCurrentLoadPortTransferState	PDOCurrentLoadPortTransferState		InService  Load  Not Initialized  OutOfService  TransferReady  ReadyToLoad  TransferBlocked  ReadyToUnload  ReservedForLoad  ReservedForUnload  Unload  	A
+// 151800662		Port1PDOPreviousLoadPortTransferState	PDOPreviousLoadPortTransferState		InService  Load  Not Initialized  OutOfService  TransferReady  ReadyToLoad  TransferBlocked  ReadyToUnload  ReservedForLoad  ReservedForUnload  Unload  	A
+// 151800664		Port2PDOCurrentLoadPortTransferState	PDOCurrentLoadPortTransferState		InService  Load  Not Initialized  OutOfService  TransferReady  ReadyToLoad  TransferBlocked  ReadyToUnload  ReservedForLoad  ReservedForUnload  Unload  	A
+// 151800681		Port2PDOPreviousLoadPortTransferState	PDOPreviousLoadPortTransferState		InService  Load  Not Initialized  OutOfService  TransferReady  ReadyToLoad  TransferBlocked  ReadyToUnload  ReservedForLoad  ReservedForUnload  Unload  	A
+// 151800686		Port1ReadTagBinaryValue	ReadTagBinaryValue			B
+// 151800687		Port2ReadTagBinaryValue	ReadTagBinaryValue			B
+
+#SVID	CTC	151800688	#PORTID__LP1			U	1	__			//  Load Port  -  Port No		
+// 151800688		Port1PortNumber	PortNumber			U1
+#SVID	CTC	151800689	#PORTID__LP2			U	1	__			//  Load Port  -  Port No		
+// 151800689		Port2PortNumber	PortNumber			U1
+
+// 151800690		TransferChamberOCRStringValue	OCRStringValue			A
+// 151800691		Port1AGVEsActuatorSetpoint	EsActuator_DO	binary	nil  true  false  	Bool
+// 151800692		Port1AGVHo_avblActuatorSetpoint	Ho_avblActuator_DO	binary	nil  true  false  	Bool
+// 151800693		Port1AGVBusyOffTimeoutString	AGVBusyOffTimeoutString			A
+// 151800694		Port1AGVBusyTimeoutString	AGVBusyTimeoutString			A
+// 151800695		Port1AGVCarrierPlacementTimeoutString	AGVCarrierPlacementTimeoutString			A
+// 151800696		Port1AGVCompOffTimeoutString	AGVCompOffTimeoutString			A
+// 151800697		Port1AGVCompOnTimeoutString	AGVCompOnTimeoutString			A
+// 151800698		Port1AGVReadyOffToValidOffTimeoutString	AGVReadyOffToValidOffTimeoutString			A
+// 151800699		Port1AGVContSensorReading	ContSensor_DI	binary	nil  true  false  	Bool
+// 151800700		Port1AGVTimeoutString	AGVTimeoutString			A
+// 151800701		Port1AGVTrReqTimeoutString	AGVTrReqTimeoutString			A
+// 151800702		Port1AGVValidOffToOnTimeoutString	AGVValidOffToOnTimeoutString			A
+// 151800703		Port2AGVEsActuatorSetpoint	EsActuator_DO	binary	nil  true  false  	Bool
+// 151800704		Port2AGVHo_avblActuatorSetpoint	Ho_avblActuator_DO	binary	nil  true  false  	Bool
+// 151800705		Port2AGVBusyOffTimeoutString	AGVBusyOffTimeoutString			A
+// 151800706		Port2AGVBusyTimeoutString	AGVBusyTimeoutString			A
+// 151800707		Port2AGVCarrierPlacementTimeoutString	AGVCarrierPlacementTimeoutString			A
+// 151800708		Port2AGVCompOffTimeoutString	AGVCompOffTimeoutString			A
+// 151800709		Port2AGVCompOnTimeoutString	AGVCompOnTimeoutString			A
+// 151800710		Port2AGVReadyOffToValidOffTimeoutString	AGVReadyOffToValidOffTimeoutString			A
+// 151800711		Port2AGVContSensorReading	ContSensor_DI	binary	nil  true  false  	Bool
+// 151800712		Port2AGVTimeoutString	AGVTimeoutString			A
+// 151800713		Port2AGVTrReqTimeoutString	AGVTrReqTimeoutString			A
+// 151800714		Port2AGVValidOffToOnTimeoutString	AGVValidOffToOnTimeoutString			A
+// 151800715		TransferChamberPortsAvailable	PortsAvailable			U1
+// 151800716		Port1AgvMode	AgvMode		AUTO  Not Initialized  MANUAL  	A
+// 151800717		Port2AgvMode	AgvMode		AUTO  Not Initialized  MANUAL  	A
+// 151800718		TransferChamberOCRStringPreviousValue	OCRStringPreviousValue			A
+// 151800719		Port1tagReaderReadTagPreviousRawValue	tagReaderReadTagPreviousRawValue			A
+// 151800720		Port1tagReaderReadTagRawValue	tagReaderReadTagRawValue			A
+// 151800721		Port2tagReaderReadTagRawValue	tagReaderReadTagRawValue			A
+// 151800722		Port2tagReaderReadTagPreviousRawValue	tagReaderReadTagPreviousRawValue			A
+
+// 151800723		Port1ExecutionStatus	ExecutionStatus			A
+// 151800724		Port1PDODoorDownDOSetpoint	PDODoorDownDO	binary	nil  true  false  	Bool
+// 151800725		Port1PDODoorUpDOSetpoint	PDODoorUpDO	binary	nil  true  false  	Bool
+// 151800726		Port1PDOLampDrive1DOSetpoint	PDOLampDrive1DO	binary	nil  true  false  	Bool
+// 151800727		Port1PDOLampDrive2DOSetpoint	PDOLampDrive2DO	binary	nil  true  false  	Bool
+// 151800728		Port1PDOLampDrive3DOSetpoint	PDOLampDrive3DO	binary	nil  true  false  	Bool
+// 151800729		Port1PDOLampDrive4DOSetpoint	PDOLampDrive4DO	binary	nil  true  false  	Bool
+// 151800730		Port1PDOLampDrive5DOSetpoint	PDOLampDrive5DO	binary	nil  true  false  	Bool
+// 151800731		Port1PDOLampDrive6DOSetpoint	PDOLampDrive6DO	binary	nil  true  false  	Bool
+// 151800732		Port1PDOLatchCloseDOSetpoint	PDOLatchCloseDO	binary	nil  true  false  	Bool
+// 151800733		Port1PDOLatchOpenDOSetpoint	PDOLatchOpenDO	binary	nil  true  false  	Bool
+// 151800734		Port1PDOOpenerExtendDOSetpoint	PDOOpenerExtendDO	binary	nil  true  false  	Bool
+// 151800735		Port1PDOOpenerRetractDOSetpoint	PDOOpenerRetractDO	binary	nil  true  false  	Bool
+// 151800736		Port1PDOShuttleInDOSetpoint	PDOShuttleInDO	binary	nil  true  false  	Bool
+// 151800737		Port1PDOShuttleOutDOSetpoint	PDOShuttleOutDO	binary	nil  true  false  	Bool
+// 151800738		Port1PDOVacuumOnDOSetpoint	PDOVacuumOnDO	binary	nil  true  false  	Bool
+// 151800739		Port1PDOCassette200PlacedDIReading	PDOCassette200PlacedDI	binary	nil  true  false  	Bool
+// 151800740		Port1PDODoorDownDIReading	PDODoorDownDI	binary	nil  true  false  	Bool
+// 151800741		Port1PDODoorUpDIReading	PDODoorUpDI	binary	nil  true  false  	Bool
+// 151800742		Port1PDOFoupCassetteSwitchDIReading	PDOFoupCassetteSwitchDI	binary	nil  true  false  	Bool
+// 151800743		Port1PDOFoupPlacedReading	PDOFoupPlaced	binary	nil  true  false  	Bool
+// 151800744		Port1PDOInterlockActiveDIReading	PDOInterlockActiveDI	binary	nil  true  false  	Bool
+// 151800745		Port1PDOLatchClosedDIReading	PDOLatchClosedDI	binary	nil  true  false  	Bool
+// 151800746		Port1PDOLatchOpenedDIReading	PDOLatchOpenedDI	binary	nil  true  false  	Bool
+// 151800747		Port1PDOOpenerExtendedDIReading	PDOOpenerExtendedDI	binary	nil  true  false  	Bool
+// 151800748		Port1PDOOpenerRetractedDIReading	PDOOpenerRetractedDI	binary	nil  true  false  	Bool
+// 151800749		Port1PDOPlatformOccupiedDIReading	PDOPlatformOccupiedDI	binary	nil  true  false  	Bool
+// 151800750		Port1PDOShuttleInDIReading	PDOShuttleInDI	binary	nil  true  false  	Bool
+// 151800751		Port1PDOShuttleOutDIReading	PDOShuttleOutDI	binary	nil  true  false  	Bool
+// 151800752		Port1PDOSwitch1DIReading	PDOSwitch1DI	binary	nil  true  false  	Bool
+// 151800753		Port1PDOSwitch2DIReading	PDOSwitch2DI	binary	nil  true  false  	Bool
+// 151800754		Port1PDOSwitch3DIReading	PDOSwitch3DI	binary	nil  true  false  	Bool
+// 151800755		Port1PDOSwitch4DIReading	PDOSwitch4DI	binary	nil  true  false  	Bool
+// 151800756		Port1PDOVacuumOkDIReading	PDOVacuumOkDI	binary	nil  true  false  	Bool
+// 151800757		Port1PDOWafer25DIReading	PDOWafer25DI	binary	nil  true  false  	Bool
+// 151800758		Port1PDOWaferSlideOutDIReading	PDOWaferSlideOutDI	binary	nil  true  false  	Bool
+// 151800764		Port1CassettePresent_DIReading	CassettePresent_DI	binary	nil  true  false  	Bool
+// 151800765		Port1WaferProtrusion_DIReading	WaferProtrusion_DI	binary	nil  true  false  	Bool
+
+// 151800766		Port2ExecutionStatus	ExecutionStatus			A
+// 151800767		Port2PDODoorDownDOSetpoint	PDODoorDownDO	binary	nil  true  false  	Bool
+// 151800768		Port2PDODoorUpDOSetpoint	PDODoorUpDO	binary	nil  true  false  	Bool
+// 151800769		Port2PDOLampDrive1DOSetpoint	PDOLampDrive1DO	binary	nil  true  false  	Bool
+// 151800770		Port2PDOLampDrive2DOSetpoint	PDOLampDrive2DO	binary	nil  true  false  	Bool
+// 151800771		Port2PDOLampDrive3DOSetpoint	PDOLampDrive3DO	binary	nil  true  false  	Bool
+// 151800772		Port2PDOLampDrive4DOSetpoint	PDOLampDrive4DO	binary	nil  true  false  	Bool
+// 151800773		Port2PDOLampDrive5DOSetpoint	PDOLampDrive5DO	binary	nil  true  false  	Bool
+// 151800774		Port2PDOLampDrive6DOSetpoint	PDOLampDrive6DO	binary	nil  true  false  	Bool
+// 151800775		Port2PDOLatchCloseDOSetpoint	PDOLatchCloseDO	binary	nil  true  false  	Bool
+// 151800776		Port2PDOLatchOpenDOSetpoint	PDOLatchOpenDO	binary	nil  true  false  	Bool
+// 151800777		Port2PDOOpenerExtendDOSetpoint	PDOOpenerExtendDO	binary	nil  true  false  	Bool
+// 151800778		Port2PDOOpenerRetractDOSetpoint	PDOOpenerRetractDO	binary	nil  true  false  	Bool
+// 151800779		Port2PDOShuttleInDOSetpoint	PDOShuttleInDO	binary	nil  true  false  	Bool
+// 151800780		Port2PDOShuttleOutDOSetpoint	PDOShuttleOutDO	binary	nil  true  false  	Bool
+// 151800781		Port2PDOVacuumOnDOSetpoint	PDOVacuumOnDO	binary	nil  true  false  	Bool
+// 151800782		Port2PDOCassette200PlacedDIReading	PDOCassette200PlacedDI	binary	nil  true  false  	Bool
+// 151800783		Port2PDODoorDownDIReading	PDODoorDownDI	binary	nil  true  false  	Bool
+// 151800784		Port2PDODoorUpDIReading	PDODoorUpDI	binary	nil  true  false  	Bool
+// 151800785		Port2PDOFoupCassetteSwitchDIReading	PDOFoupCassetteSwitchDI	binary	nil  true  false  	Bool
+// 151800786		Port2PDOFoupPlacedReading	PDOFoupPlaced	binary	nil  true  false  	Bool
+// 151800787		Port2PDOInterlockActiveDIReading	PDOInterlockActiveDI	binary	nil  true  false  	Bool
+// 151800788		Port2PDOLatchClosedDIReading	PDOLatchClosedDI	binary	nil  true  false  	Bool
+// 151800789		Port2PDOLatchOpenedDIReading	PDOLatchOpenedDI	binary	nil  true  false  	Bool
+// 151800790		Port2PDOOpenerExtendedDIReading	PDOOpenerExtendedDI	binary	nil  true  false  	Bool
+// 151800791		Port2PDOOpenerRetractedDIReading	PDOOpenerRetractedDI	binary	nil  true  false  	Bool
+// 151800792		Port2PDOPlatformOccupiedDIReading	PDOPlatformOccupiedDI	binary	nil  true  false  	Bool
+// 151800793		Port2PDOShuttleInDIReading	PDOShuttleInDI	binary	nil  true  false  	Bool
+// 151800794		Port2PDOShuttleOutDIReading	PDOShuttleOutDI	binary	nil  true  false  	Bool
+// 151800795		Port2PDOSwitch1DIReading	PDOSwitch1DI	binary	nil  true  false  	Bool
+// 151800796		Port2PDOSwitch2DIReading	PDOSwitch2DI	binary	nil  true  false  	Bool
+// 151800797		Port2PDOSwitch3DIReading	PDOSwitch3DI	binary	nil  true  false  	Bool
+// 151800798		Port2PDOSwitch4DIReading	PDOSwitch4DI	binary	nil  true  false  	Bool
+// 151800799		Port2PDOVacuumOkDIReading	PDOVacuumOkDI	binary	nil  true  false  	Bool
+// 151800800		Port2PDOWafer25DIReading	PDOWafer25DI	binary	nil  true  false  	Bool
+// 151800801		Port2PDOWaferSlideOutDIReading	PDOWaferSlideOutDI	binary	nil  true  false  	Bool
+// 151800807		Port2CassettePresent_DIReading	CassettePresent_DI	binary	nil  true  false  	Bool
+// 151800808		Port2WaferProtrusion_DIReading	WaferProtrusion_DI	binary	nil  true  false  	Bool
+
+
+// 151800809		AirLock1CurrentEnvironment	CurrentEnvironment			B
+// 151800821		AirLock1Mode	mode			A
+// 151800825		AirLock1DoorCloseActuatorSetpoint	AL1_DoorUp_DO	binary	nil  true  false  	Bool
+// 151800826		AirLock1DoorOpenActuatorSetpoint	AL1_DoorDown_DO	binary	nil  true  false  	Bool
+// 151800827		AirLock1DoorObservedPosition	AL1_DoorUpDownObservedPosition			A
+// 151800828		AirLock1DoorPositionSetpoint	DoorPosition			A
+// 151800829		AirLock1DoorClosedSensorReading	AL1_DoorUp_DI	binary	nil  true  false  	Bool
+// 151800830		AirLock1DoorOpenSensorReading	AL1_DoorDown_DI	binary	nil  true  false  	Bool
+// 151800831		AirLock1PGCExecutionState	PGCCommandExecutionState			A
+// 151800832		AirLock1PurgeValveActuatorSetpoint	AL1_PurgeValve_DO	binary	nil  true  false  	Bool
+// 151800834		AirLock1PurgeValvePosition	PurgeValvePosition			A
+// 151800835		AirLock1SlowVentActuatorSetpoint	AL1_SlowVentValve_DO	binary	nil  true  false  	Bool
+// 151800837		AirLock1SlowVentPosition	SlowVentPosition			A
+// 151800838		AirLock1VentValveActuatorSetpoint	AL1_VentValve_DO	binary	nil  true  false  	Bool
+// 151800840		AirLock1VentValvePosition	VentValvePosition			A
+// 151800841		AirLock1PGCLastMaxLeakRate	LastChamberLeakRate			F4
+// 151800842		AirLock1PGCLastMaxLeakRateDateAndTime	LastChamberLeakRateDateAndTime			A
+// 151800845		AirLock1PGCMaxLeakRate	ChamberLeakRate			F4
+// 151800846		AirLock1PGCMaxLeakRateDateAndTime	ChamberLeakRateDateAndTime			A
+// 151800848		AirLock1PGCNumericPressureReading	NumericPressureReading	mtorr		F4
+// 151800852		AirLock1Convectron1AtmosphereSwitchReading	AL1_ATM_DI	binary	nil  true  false  	Bool
+// 151800853		AirLock1Convectron1SensorReading	AL1_Pressure_AI	nil		F4
+// 151800854		AirLock1Convectron1VacuumSwitchReading	AL1_VAC_DI	binary	nil  true  false  	Bool
+// 151800856		AirLock1FastRoughActuatorSetpoint	AL1_IsoValve_DO	binary	nil  true  false  	Bool
+// 151800857		AirLock1FastRoughMPMObservedPosition	FastRoughPosition			A
+// 151800858		AirLock1FastRoughMPMPositionSetpoint	FastRoughPosition			A
+// 151800861		AirLock1SlowRoughActuatorSetpoint	AL1_SlowPumpValve_DO	binary	nil  true  false  	Bool
+// 151800862		AirLock1SlowRoughMPMObservedPosition	SlowRoughPosition			A
+// 151800863		AirLock1SlowRoughMPMPositionSetpoint	SlowRoughPosition			A
+// 151800865		AirLock1State	state			A
+// 151800866		AirLock1TraceDataEnable	TraceDataEnable		true  false  	Bool
+// 151800867		AirLock2CurrentEnvironment	CurrentEnvironment			B
+// 151800879		AirLock2Mode	mode			A
+// 151800883		AirLock2DoorCloseActuatorSetpoint	AL2_DoorUp_DO	binary	nil  true  false  	Bool
+// 151800884		AirLock2DoorOpenActuatorSetpoint	AL2_DoorDown_DO	binary	nil  true  false  	Bool
+// 151800885		AirLock2DoorObservedPosition	AL2_DoorUpDownObservedPosition			A
+// 151800886		AirLock2DoorPositionSetpoint	DoorPosition			A
+// 151800887		AirLock2DoorClosedSensorReading	AL2_DoorUp_DI	binary	nil  true  false  	Bool
+// 151800888		AirLock2DoorOpenSensorReading	AL2_DoorDown_DI	binary	nil  true  false  	Bool
+// 151800889		AirLock2PGCExecutionState	PGCCommandExecutionState			A
+// 151800890		AirLock2PurgeValveActuatorSetpoint	AL2_PurgeValve_DO	binary	nil  true  false  	Bool
+// 151800892		AirLock2PurgeValvePosition	PurgeValvePosition			A
+// 151800893		AirLock2SlowVentActuatorSetpoint	AL2_SlowVentValve_DO	binary	nil  true  false  	Bool
+// 151800895		AirLock2SlowVentPosition	SlowVentPosition			A
+// 151800896		AirLock2VentValveActuatorSetpoint	AL2_VentValve_DO	binary	nil  true  false  	Bool
+// 151800898		AirLock2VentValvePosition	VentValvePosition			A
+// 151800899		AirLock2PGCLastMaxLeakRate	LastChamberLeakRate			F4
+// 151800900		AirLock2PGCLastMaxLeakRateDateAndTime	LastChamberLeakRateDateAndTime			A
+// 151800903		AirLock2PGCMaxLeakRate	ChamberLeakRate			F4
+// 151800904		AirLock2PGCMaxLeakRateDateAndTime	ChamberLeakRateDateAndTime			A
+// 151800906		AirLock2PGCNumericPressureReading	NumericPressureReading	mtorr		F4
+// 151800910		AirLock2Convectron1AtmosphereSwitchReading	AL2_ATM_DI	binary	nil  true  false  	Bool
+// 151800911		AirLock2Convectron1SensorReading	AL2_Pressure_AI	nil		F4
+// 151800912		AirLock2Convectron1VacuumSwitchReading	AL2_VAC_DI	binary	nil  true  false  	Bool
+// 151800914		AirLock2FastRoughActuatorSetpoint	AL2_IsoValve_DO	binary	nil  true  false  	Bool
+// 151800915		AirLock2FastRoughMPMObservedPosition	FastRoughPosition			A
+// 151800916		AirLock2FastRoughMPMPositionSetpoint	FastRoughPosition			A
+// 151800919		AirLock2SlowRoughActuatorSetpoint	AL2_SlowPumpValve_DO	binary	nil  true  false  	Bool
+// 151800920		AirLock2SlowRoughMPMObservedPosition	SlowRoughPosition			A
+// 151800921		AirLock2SlowRoughMPMPositionSetpoint	SlowRoughPosition			A
+// 151800923		AirLock2State	state			A
+// 151800924		AirLock2TraceDataEnable	TraceDataEnable		true  false  	Bool
+// 151800925		AtmArmAlignerResponse	AlignerResponse			A
+// 151800926		AtmArmAquaTranAlign	AquaTranAlign			A
+// 151800927		AtmArmCurrentEnvironment	CurrentEnvironment			B
+// 151800931		AtmArmExtension	Extension			A
+// 151800932		AtmArmFacing	Facing			A
+// 151800943		AtmArmMode	mode			A
+// 151800948		AtmArmState	state			A
+// 151800949		AtmArmTXCurrentPosition	TXCurrentPosition			A
+// 151800950		AtmArmTXHomedState	TXHomedState		WaitingForHoming  Fault  Homed  	A
+// 151800951		AtmArmTXIsCalibrated	TXIsCalibrated		true  false  	Bool
+// 151800952		AtmArmTXIsMoving	TXIsMoving		true  false  	Bool
+// 151800953		AtmArmTXRelianceRobotCommandResponse	TXRelianceRobotCommandResponse			A
+// 151800954		AtmArmWafer	Wafer			A
+
+// 151800984		TransferChamberAgvMode	AgvMode		AUTO  Not Initialized  MANUAL  	A
+// 151800985		TransferChamberAirLock1WaferCounter	AirLock1WaferCounter			I8
+// 151800986		TransferChamberAirLock2WaferCounter	AirLock2WaferCounter			I8
+// 151800988		TransferChamberSlotValveLeftLLCloseActuatorSetpoint	SlotValveLeftLLClose_DO	binary	nil  true  false  	Bool
+// 151800989		TransferChamberSlotValveLeftLLOpenActuatorSetpoint	SlotValveLeftLLOpen_DO	binary	nil  true  false  	Bool
+// 151800990		TransferChamberSlotValveLeftLLObservedPosition	SlotValveLeftLLObservedPosition			A
+// 151800991		TransferChamberSlotValveLeftLLPositionSetpoint	SlotValveLeftLLPosition			A
+// 151800992		TransferChamberSlotValveLeftLLClosedSensorReading	SlotValveLeftLLClosed_DI	binary	nil  true  false  	Bool
+// 151800993		TransferChamberSlotValveLeftLLOpenSensorReading	SlotValveLeftLLOpen_DI	binary	nil  true  false  	Bool
+// 151800994		TransferChamberAirLock1WaferSensorReading	WaferPresentLeftLL_DI	binary	nil  true  false  	Bool
+// 151800995		TransferChamberSlotValveRightLLCloseActuatorSetpoint	SlotValveRightLLClose_DO	binary	nil  true  false  	Bool
+// 151800996		TransferChamberSlotValveRightLLOpenActuatorSetpoint	SlotValveRightLLOpen_DO	binary	nil  true  false  	Bool
+// 151800997		TransferChamberSlotValveRightLLObservedPosition	SlotValveRightLLObservedPosition			A
+// 151800998		TransferChamberSlotValveRightLLPositionSetpoint	SlotValveRightLLPosition			A
+// 151800999		TransferChamberSlotValveRightLLClosedSensorReading	SlotValveRightLLClosed_DI	binary	nil  true  false  	Bool
+// 151801000		TransferChamberSlotValveRightLLOpenSensorReading	SlotValveRightLLOpen_DI	binary	nil  true  false  	Bool
+// 151801001		TransferChamberAirLock2WaferSensorReading	WaferPresentRightLL_DI	binary	nil  true  false  	Bool
+// 151801007		TransferChamberRoughPumpIPXPumpAlarm_DIReading	IPXPumpAlarm_DI	binary	nil  true  false  	Bool
+// 151801008		TransferChamberRoughPumpIPXPumpRunning_DIReading	IPXPumpRunning_DI	binary	nil  true  false  	Bool
+// 151801009		TransferChamberRoughPumpIPXPumpWarning_DIReading	IPXPumpWarning_DI	binary	nil  true  false  	Bool
+// 151801010		TransferChamberRoughPumpIPXPumpWaterFlow_DIReading	IPXWaterFlow_DI	binary	nil  true  false  	Bool
+// 151801020		TransferChamberArmMagRobotCommandResponse	ArmMagRobotCommandResponse			A
+
+
+// 151801021	Port1CassetteType	CassetteType		SMIF  Unknown  ERGO200  PDO  	A
+// 151801022	Port2CassetteType	CassetteType		SMIF  Unknown  ERGO200  PDO  	A
+// 151801025	TransferChamberSlotValvePM1TMValveClosedSensorReading	SlotValvePM1TMValveClosed_DI	binary	nil  true  false  	Bool
+#SVID	CTC	151801041	#SLOT_ASSIGNED__LP1		U	1	__			//  Load Port  -  Wafer Number Assigned
+// 151801041		Port1WaferCounter	WaferCounter			I8
+#SVID	CTC	151801042	#SLOT_ASSIGNED__LP2		U	1	__			//  Load Port  -  Wafer Number Assigned
+// 151801042		Port2WaferCounter	WaferCounter			I8
+
+// 151801043		AtmArmRobotStatus	RobotStatus			A
+// 151801044		TransferChamberExtendAvgTheta	ExtendAvgTheta			I8
+// 151801045		TransferChamberExtendLeftSensorRadial	ExtendLeftSensorRadial			I8
+// 151801046		TransferChamberExtendLeftSensorTheta	ExtendLeftSensorTheta			I8
+// 151801047		TransferChamberExtendRightSensorRadial	ExtendRightSensorRadial			I8
+// 151801048		TransferChamberExtendRightSensorTheta	ExtendRightSensorTheta			I8
+// 151801068		TransferChamberSlotValvePM2InterlockOverrideActuatorSetpoint	SlotValvePM2InterlockOverride_DO	binary	nil  true  false  	Bool
+// 151801073		TransferChamberSlotValvePM2LidOpenSensorReading	SlotValvePM2LidOpen_DI	binary	nil  true  false  	Bool
+// 151801074		TransferChamberSlotValvePM2PMDeltaPressureOKSensorReading	SlotValvePM2PMDeltaPressureOK_DI	binary	nil  true  false  	Bool
+// 151801075		TransferChamberSlotValvePM2PMPressureSensorReading	SlotValvePM2PMPressure_AI	Torr		F4
+// 151801080		TransferChamberSlotValvePM2RobotRetractSensorReading	SlotValvePM2RobotRetract_DI	binary	nil  true  false  	Bool
+// 151801086		TransferChamberSlotValvePM2SlotValvePositionSetPoint	SlotValvePM2_SlotValvePositionSetPoint		CloseTM  Open  ClosePM  Close  	U1
+// 151801087		TransferChamberSlotValvePM3InterlockOverrideActuatorSetpoint	SlotValvePM3InterlockOverride_DO	binary	nil  true  false  	Bool
+// 151801092		TransferChamberSlotValvePM3LidOpenSensorReading	SlotValvePM3LidOpen_DI	binary	nil  true  false  	Bool
+// 151801093		TransferChamberSlotValvePM3PMDeltaPressureOKSensorReading	SlotValvePM3PMDeltaPressureOK_DI	binary	nil  true  false  	Bool
+// 151801094		TransferChamberSlotValvePM3PMPressureSensorReading	SlotValvePM3PMPressure_AI	Torr		F4
+// 151801099		TransferChamberSlotValvePM3RobotRetractSensorReading	SlotValvePM3RobotRetract_DI	binary	nil  true  false  	Bool
+// 151801105		TransferChamberSlotValvePM3SlotValvePositionSetPoint	SlotValvePM3_SlotValvePositionSetPoint		CloseTM  Open  ClosePM  Close  	U1
+// 151801106		TransferChamberSlotValvePM4InterlockOverrideActuatorSetpoint	SlotValvePM4InterlockOverride_DO	binary	nil  true  false  	Bool
+// 151801111		TransferChamberSlotValvePM4LidOpenSensorReading	SlotValvePM4LidOpen_DI	binary	nil  true  false  	Bool
+// 151801112		TransferChamberSlotValvePM4PMDeltaPressureOKSensorReading	SlotValvePM4PMDeltaPressureOK_DI	binary	nil  true  false  	Bool
+// 151801113		TransferChamberSlotValvePM4PMPressureSensorReading	SlotValvePM4PMPressure_AI	Torr		F4
+// 151801118		TransferChamberSlotValvePM4RobotRetractSensorReading	SlotValvePM4RobotRetract_DI	binary	nil  true  false  	Bool
+// 151801124		TransferChamberSlotValvePM4SlotValvePositionSetPoint	SlotValvePM4_SlotValvePositionSetPoint		CloseTM  Open  ClosePM  Close  	U1
+// 151801125		TransferChamberRetractAvgTheta	RetractAvgTheta			I8
+// 151801126		TransferChamberRetractLeftSensorRadial	RetractLeftSensorRadial			I8
+// 151801127		TransferChamberRetractLeftSensorTheta	RetractLeftSensorTheta			I8
+// 151801128		TransferChamberRetractRightSensorRadial	RetractRightSensorRadial			I8
+// 151801129		TransferChamberRetractRightSensorTheta	RetractRightSensorTheta			I8
+// 151801130		TransferChamberRobotStatus	RobotStatus			A
+// 151801131		TransferChamberCDAPressure_DIReading	CDAPressure_DI	binary	nil  true  false  	Bool
+// 151801132		TransferChamberCoverSwitches_DIReading	CoverSwitch_DI	binary	nil  true  false  	Bool
+// 151801133		TransferChamberN2Pressure_DIReading	N2Pressure_DI	binary	nil  true  false  	Bool
+
+
+// 151801134		Port2CarrierStateTagIDE87	CarrierStateTagIDE87		ID VERIFICATION FAIL  ID NOT READ  WAITING FOR HOST  No State  ID VERIFICATION OK  	A
+// 151801135		Port1LoadPortAssociationE87	LoadPortAssociationE87		Not Associated  Associated  No State  	A
+// 151801136		Port1LoadPortReservationE87	LoadPortReservationE87		Reserved  No State  Not Reserved  	A
+// 151801138		Port1CarrierStateTagIDE87	CarrierStateTagIDE87		ID VERIFICATION FAIL  ID NOT READ  WAITING FOR HOST  No State  ID VERIFICATION OK  	A
+// 151801139		Port2PDOClampDOSetpoint	PDOClampDO	binary	nil  true  false  	Bool
+// 151801140		Port2PDOUnClampDOSetpoint	PDOUnClampDO	binary	nil  true  false  	Bool
+// 151801141		Port2PDOClampedDIReading	PDOClampedDI	binary	nil  true  false  	Bool
+// 151801142		Port2PDOUnclampedDIReading	PDOUnclampedDI	binary	nil  true  false  	Bool
+// 151801143		Port2LoadPortAssociationE87	LoadPortAssociationE87		Not Associated  Associated  No State  	A
+// 151801144		Port2LoadPortReservationE87	LoadPortReservationE87		Reserved  No State  Not Reserved  	A
+
+
+// 151801146		AirLock1PGCATMPressure	ATMPressure	mTorr		F4
+// 151801147		AirLock1EqualizationValveActuatorSetpoint	AL1_EqualizationValve_DO	binary	nil  true  false  	Bool
+// 151801149		AirLock1EqualizationValvePosition	EqualizationValvePosition			A
+// 151801150		AirLock2PGCATMPressure	ATMPressure	mTorr		F4
+// 151801151		AirLock2EqualizationValveActuatorSetpoint	AL2_EqualizationValve_DO	binary	nil  true  false  	Bool
+// 151801153		AirLock2EqualizationValvePosition	EqualizationValvePosition			A
+// 151801194		AtmArmOCRStringPreviousValue	OCRStringPreviousValue			A
+// 151801195		AtmArmOCRStringValue	OCRStringValue			A
+
+
+// 151801196		Port1AGVAgv_OHT_Test	CancelCarrier		true  false  	Bool
+// 151801197		Port1CarrierStateAccessE87	CarrierStateAccessE87		No State  CARRIER  CARRIER COMPLETE  IN ACCESS  CARRIER STOPPED  NOT ACCESSED  	A
+// 151801198		Port1CarrierStateSlotMapE87	CarrierStateSlotMapE87		SLOT MAP VERIFICATION FAIL  SLOT MAP VERIFICATION OK  SLOT MAP NOT READ  No State  WAITING FOR HOST  	A
+// 151801200		Port1PDOOABPreviousState	PDOOABPreviousState		Idle  No State  IdleUnload  IdleClamp  Blinking  Error  	A
+// 151801201		Port1PDOOABState	PDOOABState		Idle  No State  IdleUnload  IdleClamp  Blinking  Error  	A
+// 151801202		Port1OperatorApprovedCarrierID	OperatorApproveCarrierID		true  false  	Bool
+// 151801203		Port1OperatorApprovedSlotMap	OperatorApproveSlotMap		true  false  	Bool
+// 151801204		Port1PreviousCarrierStateAccessE87	PreviousCarrierStateAccessE87		No State  CARRIER  CARRIER COMPLETE  IN ACCESS  CARRIER STOPPED  NOT ACCESSED  	A
+// 151801205		Port1PreviousCarrierStateSlotMapE87	PreviousCarrierStateSlotMapE87		SLOT MAP VERIFICATION FAIL  SLOT MAP VERIFICATION OK  SLOT MAP NOT READ  No State  WAITING FOR HOST  	A
+// 151801206		Port1PreviousCarrierStateTagIDE87	PreviousCarrierStateTagIDE87		ID VERIFICATION FAIL  ID NOT READ  WAITING FOR HOST  No State  ID VERIFICATION OK  	A
+// 151801207		Port1PreviousWaferMappingResultString	PreviousWaferMappingResultString			A
+// 151801208		Port1PreviousWaferMappingStringFromHost	PreviousWaferMappingStringFromHost			A
+// 151801209		Port1WaferMappingResultString	WaferMappingResultString			A
+// 151801210		Port1WaferMappingStringFromHost	WaferMappingStringFromHost			A
+
+// 151801211		Port2AGVAgv_OHT_Test	CancelCarrier		true  false  	Bool
+// 151801212		Port2CarrierStateAccessE87	CarrierStateAccessE87		No State  CARRIER  CARRIER COMPLETE  IN ACCESS  CARRIER STOPPED  NOT ACCESSED  	A
+// 151801213		Port2CarrierStateSlotMapE87	CarrierStateSlotMapE87		SLOT MAP VERIFICATION FAIL  SLOT MAP VERIFICATION OK  SLOT MAP NOT READ  No State  WAITING FOR HOST  	A
+// 151801215		Port2PDOOABPreviousState	PDOOABPreviousState		Idle  No State  IdleUnload  IdleClamp  Blinking  Error  	A
+// 151801216		Port2PDOOABState	PDOOABState		Idle  No State  IdleUnload  IdleClamp  Blinking  Error  	A
+// 151801217		Port2OperatorApprovedCarrierID	OperatorApproveCarrierID		true  false  	Bool
+// 151801218		Port2OperatorApprovedSlotMap	OperatorApproveSlotMap		true  false  	Bool
+// 151801219		Port2PreviousCarrierStateAccessE87	PreviousCarrierStateAccessE87		No State  CARRIER  CARRIER COMPLETE  IN ACCESS  CARRIER STOPPED  NOT ACCESSED  	A
+// 151801220		Port2PreviousCarrierStateSlotMapE87	PreviousCarrierStateSlotMapE87		SLOT MAP VERIFICATION FAIL  SLOT MAP VERIFICATION OK  SLOT MAP NOT READ  No State  WAITING FOR HOST  	A
+// 151801221		Port2PreviousCarrierStateTagIDE87	PreviousCarrierStateTagIDE87		ID VERIFICATION FAIL  ID NOT READ  WAITING FOR HOST  No State  ID VERIFICATION OK  	A
+// 151801222		Port2PreviousWaferMappingResultString	PreviousWaferMappingResultString			A
+// 151801223		Port2PreviousWaferMappingStringFromHost	PreviousWaferMappingStringFromHost			A
+// 151801224		Port2WaferMappingResultString	WaferMappingResultString			A
+// 151801225		Port2WaferMappingStringFromHost	WaferMappingStringFromHost			A
+
+// 151801227		Port1AGVLightCurtainExecutionTimeMS	AGVLightCurtainExecutionTimeMS	ms		A
+// 151801228		Port1AGVLightCurtainSensorReading	LightCurtainSensor_DI	binary	nil  true  false  	Bool
+// 151801229		Port1PDOClampDOSetpoint	PDOClampDO	binary	nil  true  false  	Bool
+// 151801230		Port1PDOUnClampDOSetpoint	PDOUnClampDO	binary	nil  true  false  	Bool
+// 151801231		Port1PDOClampedDIReading	PDOClampedDI	binary	nil  true  false  	Bool
+// 151801232		Port1PDOUnclampedDIReading	PDOUnclampedDI	binary	nil  true  false  	Bool
+// 151801233		Port2AGVLightCurtainExecutionTimeMS	AGVLightCurtainExecutionTimeMS	ms		A
+// 151801234		Port2AGVLightCurtainSensorReading	LightCurtainSensor_DI	binary	nil  true  false  	Bool
+// 151801236		Port1CarrierStateModelE87	CarrierStateModelE87		SLOT MAP VERIFICATION OK  ID NOT READ  SLOT MAP VERIFICATION FAIL  IN ACCESS  CARRIER  NOT ACCESSED  No State  SLOT MAP NOT READ  WAITING FOR HOST  CARRIER COMPLETE  ID VERIFICATION OK  ID VERIFICATION FAIL  CARRIER STOPPED  	A
+// 151801237		Port1PreviousCarrierStateModelE87	PreviousCarrierStateModelE87		SLOT MAP VERIFICATION OK  ID NOT READ  SLOT MAP VERIFICATION FAIL  IN ACCESS  CARRIER  NOT ACCESSED  No State  SLOT MAP NOT READ  WAITING FOR HOST  CARRIER COMPLETE  ID VERIFICATION OK  ID VERIFICATION FAIL  CARRIER STOPPED  	A
+// 151801239		Port1tagReader1WriteTagValue1	tagReader1WriteTagValue1			A
+// 151801240		Port1tagReader1ReadTagValue1	tagReader1ReadTagValue1			A
+// 151801241		Port1tagReader1ReadTagPreviousValue1	tagReader1ReadTagPreviousValue1			A
+// 151801243		Port1tagReader1WriteTagPreviousValue1	tagReader1WriteTagPreviousValue1			A
+// 151801244		Port1tagReader1UIInputWriteTagString1	tagReader1UIInputWriteTagString1			A
+// 151801245		Port1tagReader1TagState1	tagReader1TagState1		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151801246		Port1tagReader1PreviousTagState1	tagReader1PreviousTagState1		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151801248		Port1tagReader1CurrentPageNumber1	tagReader1CurrentPageNumber1			U1
+// 151801249		Port1tagReader1ReadTagString1	tagReader1ReadTagString1			A
+// 151801250		Port1tagReader1PortNumber1	tagReader1PortNumber1			U1
+// 151801251		Port2CarrierStateModelE87	CarrierStateModelE87		SLOT MAP VERIFICATION OK  ID NOT READ  SLOT MAP VERIFICATION FAIL  IN ACCESS  CARRIER  NOT ACCESSED  No State  SLOT MAP NOT READ  WAITING FOR HOST  CARRIER COMPLETE  ID VERIFICATION OK  ID VERIFICATION FAIL  CARRIER STOPPED  	A
+// 151801252		Port2PreviousCarrierStateModelE87	PreviousCarrierStateModelE87		SLOT MAP VERIFICATION OK  ID NOT READ  SLOT MAP VERIFICATION FAIL  IN ACCESS  CARRIER  NOT ACCESSED  No State  SLOT MAP NOT READ  WAITING FOR HOST  CARRIER COMPLETE  ID VERIFICATION OK  ID VERIFICATION FAIL  CARRIER STOPPED  	A
+// 151801254		Port2tagReader1WriteTagValue1	tagReader1WriteTagValue1			A
+// 151801255		Port2tagReader1ReadTagValue1	tagReader1ReadTagValue1			A
+// 151801256		Port2tagReader1ReadTagPreviousValue1	tagReader1ReadTagPreviousValue1			A
+// 151801258		Port2tagReader1WriteTagPreviousValue1	tagReader1WriteTagPreviousValue1			A
+// 151801259		Port2tagReader1UIInputWriteTagString1	tagReader1UIInputWriteTagString1			A
+// 151801260		Port2tagReader1TagState1	tagReader1TagState1		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151801261		Port2tagReader1PreviousTagState1	tagReader1PreviousTagState1		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+// 151801263		Port2tagReader1CurrentPageNumber1	tagReader1CurrentPageNumber1			U1
+// 151801264		Port2tagReader1ReadTagString1	tagReader1ReadTagString1			A
+// 151801265		Port2tagReader1PortNumber1	tagReader1PortNumber1			U1
+
+
+/*
+151801266	AtmArmTXExtendEnableAL1Setpoint	ExtendEnableAL1_DO	binary	nil  true  false  	Bool
+151801267	AtmArmTXRobotHoldActuatorSetpoint	RobotHold_DO	binary	nil  true  false  	Bool
+151801268	AtmArmTXExtendEnableAL2Setpoint	ExtendEnableAL2_DO	binary	nil  true  false  	Bool
+151801269	AtmArmTXRobotResetActuatorSetpoint	RobotReset_DO	binary	nil  true  false  	Bool
+
+151801270	Port1tagReader1ReadTagValue	tagReader1ReadTagValue			A
+151801271	Port2tagReader1ReadTagValue	tagReader1ReadTagValue			A
+151801272	Port1tagReader1ReadTagPreviousValue	tagReader1ReadTagPreviousValue			A
+151801273	Port2tagReader1ReadTagPreviousValue	tagReader1ReadTagPreviousValue			A
+151801274	Port1AGVAsyncResetModeReading	AsyncResetMode_DI	binary	nil  true  false  	Bool
+151801275	Port1AGVE84ResetSwitchReading	E84ResetSwitch_DI	binary	nil  true  false  	Bool
+151801276	Port1CassetteSpecificType	CassetteSpecificType			A
+151801287	Port1PDOOABPreviousTimerState	PDOOABPreviousTimerState		TimerStop  TimerInProgress  No State  TimerExpires  	A
+151801288	Port1PDOOABRemainingTime	PDOOABRemainingTime			U4
+151801289	Port1PDOOABTimerState	PDOOABTimerState		TimerStop  TimerInProgress  No State  TimerExpires  	A
+151801290	Port2AGVAmhsStopSetpoint	AmhsStop_DO	binary	nil  true  false  	Bool
+151801291	Port2AGVAutoManualSetpoint	AutoManual_DO	binary	nil  true  false  	Bool
+151801292	Port2AGVAsyncResetModeReading	AsyncResetMode_DI	binary	nil  true  false  	Bool
+151801293	Port2AGVE84ResetSwitchReading	E84ResetSwitch_DI	binary	nil  true  false  	Bool
+151801294	Port2CassetteSpecificType	CassetteSpecificType			A
+151801305	Port2PDOOABPreviousTimerState	PDOOABPreviousTimerState		TimerStop  TimerInProgress  No State  TimerExpires  	A
+151801306	Port2PDOOABRemainingTime	PDOOABRemainingTime			U4
+151801307	Port2PDOOABTimerState	PDOOABTimerState		TimerStop  TimerInProgress  No State  TimerExpires  	A
+151801309	AtmArmRs232OCRPortNumber	Rs232OCRPortNumber			U1
+151801310	AtmArmPressureLowReading	PressureLow	binary	nil  true  false  	Bool
+151801311	AtmArmPressureOKReading	PressureOK	binary	nil  true  false  	Bool
+151801312	Port1AGVAutoManualSetpoint	AutoManual_DO	binary	nil  true  false  	Bool
+151801313	AirLock1DoorRobotNotExtendSensorReading	AL1_ATMRobotNotExtend_DI	binary	nil  true  false  	Bool
+151801314	Port1ExecutionFlowID	ExecutionFlowID			A
+151801315	Port2ExecutionFlowID	ExecutionFlowID			A
+151801316	Port1PortProcState	PortProcState			A
+151801317	Port2PortProcState	PortProcState			A
+151801371	Port1WaferSlotPath1	WaferSlotPath1			A
+151801372	Port1WaferSlotPath10	WaferSlotPath10			A
+151801373	Port1WaferSlotPath11	WaferSlotPath11			A
+151801374	Port1WaferSlotPath12	WaferSlotPath12			A
+151801375	Port1WaferSlotPath13	WaferSlotPath13			A
+151801376	Port1WaferSlotPath14	WaferSlotPath14			A
+151801377	Port1WaferSlotPath15	WaferSlotPath15			A
+151801378	Port1WaferSlotPath16	WaferSlotPath16			A
+151801379	Port1WaferSlotPath17	WaferSlotPath17			A
+151801380	Port1WaferSlotPath18	WaferSlotPath18			A
+151801381	Port1WaferSlotPath19	WaferSlotPath19			A
+151801382	Port1WaferSlotPath2	WaferSlotPath2			A
+151801383	Port1WaferSlotPath20	WaferSlotPath20			A
+151801384	Port1WaferSlotPath21	WaferSlotPath21			A
+151801385	Port1WaferSlotPath22	WaferSlotPath22			A
+151801386	Port1WaferSlotPath23	WaferSlotPath23			A
+151801387	Port1WaferSlotPath24	WaferSlotPath24			A
+151801388	Port1WaferSlotPath25	WaferSlotPath25			A
+151801389	Port1WaferSlotPath26	WaferSlotPath26			A
+151801390	Port1WaferSlotPath3	WaferSlotPath3			A
+151801391	Port1WaferSlotPath4	WaferSlotPath4			A
+151801392	Port1WaferSlotPath5	WaferSlotPath5			A
+151801393	Port1WaferSlotPath6	WaferSlotPath6			A
+151801394	Port1WaferSlotPath7	WaferSlotPath7			A
+151801395	Port1WaferSlotPath8	WaferSlotPath8			A
+151801396	Port1WaferSlotPath9	WaferSlotPath9			A
+151801448	Port2WaferSlotPath1	WaferSlotPath1			A
+151801449	Port2WaferSlotPath10	WaferSlotPath10			A
+151801450	Port2WaferSlotPath11	WaferSlotPath11			A
+151801451	Port2WaferSlotPath12	WaferSlotPath12			A
+151801452	Port2WaferSlotPath13	WaferSlotPath13			A
+151801453	Port2WaferSlotPath14	WaferSlotPath14			A
+151801454	Port2WaferSlotPath15	WaferSlotPath15			A
+151801455	Port2WaferSlotPath16	WaferSlotPath16			A
+151801456	Port2WaferSlotPath17	WaferSlotPath17			A
+151801457	Port2WaferSlotPath18	WaferSlotPath18			A
+151801458	Port2WaferSlotPath19	WaferSlotPath19			A
+151801459	Port2WaferSlotPath2	WaferSlotPath2			A
+151801460	Port2WaferSlotPath20	WaferSlotPath20			A
+151801461	Port2WaferSlotPath21	WaferSlotPath21			A
+151801462	Port2WaferSlotPath22	WaferSlotPath22			A
+151801463	Port2WaferSlotPath23	WaferSlotPath23			A
+151801464	Port2WaferSlotPath24	WaferSlotPath24			A
+151801465	Port2WaferSlotPath25	WaferSlotPath25			A
+151801466	Port2WaferSlotPath26	WaferSlotPath26			A
+151801467	Port2WaferSlotPath3	WaferSlotPath3			A
+151801468	Port2WaferSlotPath4	WaferSlotPath4			A
+151801469	Port2WaferSlotPath5	WaferSlotPath5			A
+151801470	Port2WaferSlotPath6	WaferSlotPath6			A
+151801471	Port2WaferSlotPath7	WaferSlotPath7			A
+151801472	Port2WaferSlotPath8	WaferSlotPath8			A
+151801473	Port2WaferSlotPath9	WaferSlotPath9			A
+151801480	AirLock2DoorRobotNotExtendSensorReading	AL2_ATMRobotNotExtend_DI	binary	nil  true  false  	Bool
+151801493	TransferChamberSlotValvePM1simulationModeSetpoint	SimulationMode	binary	nil  true  false  	Bool
+151801494	TransferChamberSlotValvePM1BodyATMReading	BodyATM	binary	nil  true  false  	Bool
+151801495	TransferChamberSlotValvePM1BodyVACReading	BodyVAC	binary	nil  true  false  	Bool
+151801496	TransferChamberSlotValvePM1LidOpenReading	lidOpen	binary	nil  true  false  	Bool
+151801510	Port1PDOCarrierType	PDOCarrierType		WaferCassette25  Unknown  WaferCassette13  WaferBox25  WaferBox13  	A
+151801511	Port2PDOCarrierType	PDOCarrierType		WaferCassette25  Unknown  WaferCassette13  WaferBox25  WaferBox13  	A
+151801567	AtmArmOCRWaferProcessJobName	OCRWaferProcessJobName			A
+151801568	AtmArmOCRWaferSlotNumber	OCRWaferSlotNumber			U1
+151801569	AtmArmOCRWaferExecutionLotID	OCRWaferExecutionLotID			A
+151801570	AtmArmOCRWaferExecutionFlowName	OCRWaferExecutionFlowName			A
+151801571	AtmArmOCRWaferFromWhichPort	OCRWaferFromWhichPort			U1
+151801572	AtmArmOCRWaferExecutionCID	OCRWaferExecutionCID			A
+151801609	Port2ReadTagIsCalledBy	ReadTagIsCalledBy			A
+151801610	Port1ReadTagIsCalledBy	ReadTagIsCalledBy			A
+151801611	AtmArmExecutionState	ExecutionState			A
+151801612	Port1AGVAmhsStopSetpoint	AmhsStop_DO	binary	nil  true  false  	Bool
+151801617	Port1PDOLampDrive17DOSetpoint	PDOLampDrive17DO	binary	nil  true  false  	Bool
+151801618	Port1PDOLampDrive18DOSetpoint	PDOLampDrive18DO	binary	nil  true  false  	Bool
+151801619	Port1PDOLampDrive19DOSetpoint	PDOLampDrive19DO	binary	nil  true  false  	Bool
+151801620	Port1PDOLampDrive20DOSetpoint	PDOLampDrive20DO	binary	nil  true  false  	Bool
+151801621	Port1PDOLampDrive40DOSetpoint	PDOLampDrive40DO	binary	nil  true  false  	Bool
+151801622	Port1PDOLampDrive41DOSetpoint	PDOLampDrive41DO	binary	nil  true  false  	Bool
+151801623	Port1PDOLampDrive42DOSetpoint	PDOLampDrive42DO	binary	nil  true  false  	Bool
+151801624	Port1PDOLampDrive43DOSetpoint	PDOLampDrive43DO	binary	nil  true  false  	Bool
+151801625	Port1PDOLampDrive44DOSetpoint	PDOLampDrive44DO	binary	nil  true  false  	Bool
+151801626	Port1PDOLampDrive45DOSetpoint	PDOLampDrive45DO	binary	nil  true  false  	Bool
+151801627	Port1PDOLampDrive49DOSetpoint	PDOLampDrive49DO	binary	nil  true  false  	Bool
+151801628	Port1PDOLampDrive50DOSetpoint	PDOLampDrive50DO	binary	nil  true  false  	Bool
+151801629	Port1PDOLampDrive51DOSetpoint	PDOLampDrive51DO	binary	nil  true  false  	Bool
+151801630	Port1PDOLampDrive52DOSetpoint	PDOLampDrive52DO	binary	nil  true  false  	Bool
+151801631	Port1PDOLamp44DIReading	PDOLamp44DI	binary	nil  true  false  	Bool
+151801632	Port1PDOLamp45DIReading	PDOLamp45DI	binary	nil  true  false  	Bool
+151801633	Port1PDOLamp49DIReading	PDOLamp49DI	binary	nil  true  false  	Bool
+151801634	Port1PDOLamp50DIReading	PDOLamp50DI	binary	nil  true  false  	Bool
+151801635	Port1PDOLamp51DIReading	PDOLamp51DI	binary	nil  true  false  	Bool
+151801636	Port1PDOLamp52DIReading	PDOLamp52DI	binary	nil  true  false  	Bool
+151801637	Port2PDOLampDrive17DOSetpoint	PDOLampDrive17DO	binary	nil  true  false  	Bool
+151801638	Port2PDOLampDrive18DOSetpoint	PDOLampDrive18DO	binary	nil  true  false  	Bool
+151801639	Port2PDOLampDrive19DOSetpoint	PDOLampDrive19DO	binary	nil  true  false  	Bool
+151801640	Port2PDOLampDrive20DOSetpoint	PDOLampDrive20DO	binary	nil  true  false  	Bool
+151801641	Port2PDOLampDrive40DOSetpoint	PDOLampDrive40DO	binary	nil  true  false  	Bool
+151801642	Port2PDOLampDrive41DOSetpoint	PDOLampDrive41DO	binary	nil  true  false  	Bool
+151801643	Port2PDOLampDrive42DOSetpoint	PDOLampDrive42DO	binary	nil  true  false  	Bool
+151801644	Port2PDOLampDrive43DOSetpoint	PDOLampDrive43DO	binary	nil  true  false  	Bool
+151801645	Port2PDOLampDrive44DOSetpoint	PDOLampDrive44DO	binary	nil  true  false  	Bool
+151801646	Port2PDOLampDrive45DOSetpoint	PDOLampDrive45DO	binary	nil  true  false  	Bool
+151801647	Port2PDOLampDrive49DOSetpoint	PDOLampDrive49DO	binary	nil  true  false  	Bool
+151801648	Port2PDOLampDrive50DOSetpoint	PDOLampDrive50DO	binary	nil  true  false  	Bool
+151801649	Port2PDOLampDrive51DOSetpoint	PDOLampDrive51DO	binary	nil  true  false  	Bool
+151801650	Port2PDOLampDrive52DOSetpoint	PDOLampDrive52DO	binary	nil  true  false  	Bool
+151801651	Port2PDOLamp44DIReading	PDOLamp44DI	binary	nil  true  false  	Bool
+151801652	Port2PDOLamp45DIReading	PDOLamp45DI	binary	nil  true  false  	Bool
+151801653	Port2PDOLamp49DIReading	PDOLamp49DI	binary	nil  true  false  	Bool
+151801654	Port2PDOLamp50DIReading	PDOLamp50DI	binary	nil  true  false  	Bool
+151801655	Port2PDOLamp51DIReading	PDOLamp51DI	binary	nil  true  false  	Bool
+151801656	Port2PDOLamp52DIReading	PDOLamp52DI	binary	nil  true  false  	Bool
+151801658	Port3AGVAmhsStopSetpoint	AmhsStop_DO	binary	nil  true  false  	Bool
+151801659	Port3AGVAutoManualSetpoint	AutoManual_DO	binary	nil  true  false  	Bool
+151801660	Port3AGVEsActuatorSetpoint	EsActuator_DO	binary	nil  true  false  	Bool
+151801661	Port3AGVHo_avblActuatorSetpoint	Ho_avblActuator_DO	binary	nil  true  false  	Bool
+151801662	Port3AGVLoadReqActuatorSetpoint	LoadReqActuator_DO	binary	nil  true  false  	Bool
+151801663	Port3AGVModeActuatorSetpoint	ModeActuator_DO	binary	nil  true  false  	Bool
+151801664	Port3AGVReadyActuatorSetpoint	ReadyActuator_DO	binary	nil  true  false  	Bool
+151801665	Port3AGVUnloadReqActuatorSetpoint	UnloadReqActuator_DO	binary	nil  true  false  	Bool
+151801666	Port3AGVAgv_OHT_Test	CancelCarrier		true  false  	Bool
+151801667	Port3AGVBusyOffTimeoutString	AGVBusyOffTimeoutString			A
+151801668	Port3AGVBusyTimeoutString	AGVBusyTimeoutString			A
+151801669	Port3AGVCarrierPlacementTimeoutString	AGVCarrierPlacementTimeoutString			A
+151801670	Port3AGVCommandResponse	AGVCommandResponse			A
+151801671	Port3AGVCompOffTimeoutString	AGVCompOffTimeoutString			A
+151801672	Port3AGVCompOnTimeoutString	AGVCompOnTimeoutString			A
+151801673	Port3AGVLightCurtainExecutionTimeMS	AGVLightCurtainExecutionTimeMS	ms		A
+151801674	Port3AGVPreviousState	AGVPreviousState		Idle  Multi_Loading  Loading  Multi_Unloading  Not Initialized  Waiting  Error  Unloading  Con_Unloading  Con_Loading  	A
+151801675	Port3AGVReadyOffToValidOffTimeoutString	AGVReadyOffToValidOffTimeoutString			A
+151801676	Port3AGVAsyncResetModeReading	AsyncResetMode_DI	binary	nil  true  false  	Bool
+151801677	Port3AGVBusySensorReading	BusySensor_DI	binary	nil  true  false  	Bool
+151801678	Port3AGVCompSensorReading	CompSensor_DI	binary	nil  true  false  	Bool
+151801679	Port3AGVContSensorReading	ContSensor_DI	binary	nil  true  false  	Bool
+151801680	Port3AGVCs0SensorReading	Cs0Sensor_DI	binary	nil  true  false  	Bool
+151801681	Port3AGVCs1SensorReading	Cs1Sensor_DI	binary	nil  true  false  	Bool
+151801682	Port3AGVCs2SensorReading	Cs2Sensor_DI	binary	nil  true  false  	Bool
+151801683	Port3AGVE84ResetSwitchReading	E84ResetSwitch_DI	binary	nil  true  false  	Bool
+151801684	Port3AGVGoSensorReading	GoSensor_DI	binary	nil  true  false  	Bool
+151801685	Port3AGVLightCurtainSensorReading	LightCurtainSensor_DI	binary	nil  true  false  	Bool
+151801686	Port3AGVTrReqSensorReading	TrReqSensor_DI	binary	nil  true  false  	Bool
+151801687	Port3AGVValidSensorReading	ValidSensor_DI	binary	nil  true  false  	Bool
+151801688	Port3AGVState	AGVState		Idle  Multi_Loading  Loading  Multi_Unloading  Not Initialized  Waiting  Error  Unloading  Con_Unloading  Con_Loading  	A
+151801689	Port3AGVTimeoutString	AGVTimeoutString			A
+151801690	Port3AGVTrReqTimeoutString	AGVTrReqTimeoutString			A
+151801691	Port3AGVUIAbort	AGVUIAbort		Ready  Abort  	U1
+151801692	Port3AGVValidOffToOnTimeoutString	AGVValidOffToOnTimeoutString			A
+151801693	Port3AgvMode	AgvMode		AUTO  Not Initialized  MANUAL  	A
+151801694	Port3CarrierStateAccessE87	CarrierStateAccessE87		No State  CARRIER  CARRIER COMPLETE  IN ACCESS  CARRIER STOPPED  NOT ACCESSED  	A
+151801695	Port3CarrierStateModelE87	CarrierStateModelE87		SLOT MAP VERIFICATION OK  ID NOT READ  SLOT MAP VERIFICATION FAIL  IN ACCESS  CARRIER  NOT ACCESSED  No State  SLOT MAP NOT READ  WAITING FOR HOST  CARRIER COMPLETE  ID VERIFICATION OK  ID VERIFICATION FAIL  CARRIER STOPPED  	A
+151801696	Port3CarrierStateSlotMapE87	CarrierStateSlotMapE87		SLOT MAP VERIFICATION FAIL  SLOT MAP VERIFICATION OK  SLOT MAP NOT READ  No State  WAITING FOR HOST  	A
+151801697	Port3CarrierStateTagIDE87	CarrierStateTagIDE87		ID VERIFICATION FAIL  ID NOT READ  WAITING FOR HOST  No State  ID VERIFICATION OK  	A
+151801698	Port3CassetteSpecificType	CassetteSpecificType			A
+151801699	Port3CassetteType	CassetteType		SMIF  Unknown  ERGO200  PDO  	A
+151801700	Port3CurrentEnvironment	CurrentEnvironment			B
+151801713	Port3ExecutionCarrierID	ExecutionCarrierID			A
+151801714	Port3ExecutionFlowID	ExecutionFlowID			A
+151801715	Port3ExecutionFlowName	ExecutionFlowName			A
+151801716	Port3ExecutionLotID	ExecutionLotID			A
+151801717	Port3ExecutionStatus	ExecutionStatus			A
+151801718	Port3PDOClampDOSetpoint	PDOClampDO	binary	nil  true  false  	Bool
+151801719	Port3PDODoorDownDOSetpoint	PDODoorDownDO	binary	nil  true  false  	Bool
+151801720	Port3PDODoorUpDOSetpoint	PDODoorUpDO	binary	nil  true  false  	Bool
+151801721	Port3PDOLampDrive1DOSetpoint	PDOLampDrive1DO	binary	nil  true  false  	Bool
+151801722	Port3PDOLampDrive17DOSetpoint	PDOLampDrive17DO	binary	nil  true  false  	Bool
+151801723	Port3PDOLampDrive18DOSetpoint	PDOLampDrive18DO	binary	nil  true  false  	Bool
+151801724	Port3PDOLampDrive19DOSetpoint	PDOLampDrive19DO	binary	nil  true  false  	Bool
+151801725	Port3PDOLampDrive2DOSetpoint	PDOLampDrive2DO	binary	nil  true  false  	Bool
+151801726	Port3PDOLampDrive20DOSetpoint	PDOLampDrive20DO	binary	nil  true  false  	Bool
+151801727	Port3PDOLampDrive3DOSetpoint	PDOLampDrive3DO	binary	nil  true  false  	Bool
+151801728	Port3PDOLampDrive4DOSetpoint	PDOLampDrive4DO	binary	nil  true  false  	Bool
+151801729	Port3PDOLampDrive40DOSetpoint	PDOLampDrive40DO	binary	nil  true  false  	Bool
+151801730	Port3PDOLampDrive41DOSetpoint	PDOLampDrive41DO	binary	nil  true  false  	Bool
+151801731	Port3PDOLampDrive42DOSetpoint	PDOLampDrive42DO	binary	nil  true  false  	Bool
+151801732	Port3PDOLampDrive43DOSetpoint	PDOLampDrive43DO	binary	nil  true  false  	Bool
+151801733	Port3PDOLampDrive44DOSetpoint	PDOLampDrive44DO	binary	nil  true  false  	Bool
+151801734	Port3PDOLampDrive45DOSetpoint	PDOLampDrive45DO	binary	nil  true  false  	Bool
+151801735	Port3PDOLampDrive49DOSetpoint	PDOLampDrive49DO	binary	nil  true  false  	Bool
+151801736	Port3PDOLampDrive5DOSetpoint	PDOLampDrive5DO	binary	nil  true  false  	Bool
+151801737	Port3PDOLampDrive50DOSetpoint	PDOLampDrive50DO	binary	nil  true  false  	Bool
+151801738	Port3PDOLampDrive51DOSetpoint	PDOLampDrive51DO	binary	nil  true  false  	Bool
+151801739	Port3PDOLampDrive52DOSetpoint	PDOLampDrive52DO	binary	nil  true  false  	Bool
+151801740	Port3PDOLampDrive6DOSetpoint	PDOLampDrive6DO	binary	nil  true  false  	Bool
+151801741	Port3PDOLatchCloseDOSetpoint	PDOLatchCloseDO	binary	nil  true  false  	Bool
+151801742	Port3PDOLatchOpenDOSetpoint	PDOLatchOpenDO	binary	nil  true  false  	Bool
+151801743	Port3PDOOpenerExtendDOSetpoint	PDOOpenerExtendDO	binary	nil  true  false  	Bool
+151801744	Port3PDOOpenerRetractDOSetpoint	PDOOpenerRetractDO	binary	nil  true  false  	Bool
+151801745	Port3PDOShuttleInDOSetpoint	PDOShuttleInDO	binary	nil  true  false  	Bool
+151801746	Port3PDOShuttleOutDOSetpoint	PDOShuttleOutDO	binary	nil  true  false  	Bool
+151801747	Port3PDOUnClampDOSetpoint	PDOUnClampDO	binary	nil  true  false  	Bool
+151801748	Port3PDOVacuumOnDOSetpoint	PDOVacuumOnDO	binary	nil  true  false  	Bool
+151801749	Port3PDOCarrierType	PDOCarrierType		WaferCassette25  Unknown  WaferCassette13  WaferBox25  WaferBox13  	A
+151801750	Port3PDOCommandResponse	PDOCommandResponse			A
+151801751	Port3PDOCurrentLoadPortTransferState	PDOCurrentLoadPortTransferState		InService  Load  Not Initialized  OutOfService  TransferReady  ReadyToLoad  TransferBlocked  ReadyToUnload  ReservedForLoad  ReservedForUnload  Unload  	A
+151801752	Port3PDOCurrentPodStatus	PDOCurrentPodStatus		Unknown  Absent  Present  	A
+151801753	Port3PDOCurrentState	PDOCurrentState		Closing  Unclamped  Homing  Docking  Undocking  Clamped  Error  Idle  Open  Opening  Not Initialized  Closed  UnClamping  Clamping  Homed  Docked  Undocked  	A
+151801754	Port3PDONumberOfCurrentMappingCycles	PDONumberOfCurrentMappingCycles			U4
+151801756	Port3PDOOABPreviousState	PDOOABPreviousState		Idle  No State  IdleUnload  IdleClamp  Blinking  Error  	A
+151801757	Port3PDOOABPreviousTimerState	PDOOABPreviousTimerState		TimerStop  TimerInProgress  No State  TimerExpires  	A
+151801758	Port3PDOOABRemainingTime	PDOOABRemainingTime			U4
+151801759	Port3PDOOABState	PDOOABState		Idle  No State  IdleUnload  IdleClamp  Blinking  Error  	A
+151801760	Port3PDOOABTimerState	PDOOABTimerState		TimerStop  TimerInProgress  No State  TimerExpires  	A
+151801761	Port3PDOPDOWorkingState	PDOPDOWorkingState		Idle  Not Initialized  Working  Error  Pause  	A
+151801762	Port3PDOPreviousLoadPortTransferState	PDOPreviousLoadPortTransferState		InService  Load  Not Initialized  OutOfService  TransferReady  ReadyToLoad  TransferBlocked  ReadyToUnload  ReservedForLoad  ReservedForUnload  Unload  	A
+151801763	Port3PDOPreviousPodStatus	PDOPreviousPodStatus		Unknown  Absent  Present  	A
+151801764	Port3PDOPreviousState	PDOPreviousState		Closing  Unclamped  Homing  Docking  Undocking  Clamped  Error  Idle  Open  Opening  Not Initialized  Closed  UnClamping  Clamping  Homed  Docked  Undocked  	A
+151801765	Port3PDOCassette200PlacedDIReading	PDOCassette200PlacedDI	binary	nil  true  false  	Bool
+151801766	Port3PDOClampedDIReading	PDOClampedDI	binary	nil  true  false  	Bool
+151801767	Port3PDODoorDownDIReading	PDODoorDownDI	binary	nil  true  false  	Bool
+151801768	Port3PDODoorUpDIReading	PDODoorUpDI	binary	nil  true  false  	Bool
+151801769	Port3PDOFoupCassetteSwitchDIReading	PDOFoupCassetteSwitchDI	binary	nil  true  false  	Bool
+151801770	Port3PDOFoupPlacedReading	PDOFoupPlaced	binary	nil  true  false  	Bool
+151801771	Port3PDOInterlockActiveDIReading	PDOInterlockActiveDI	binary	nil  true  false  	Bool
+151801772	Port3PDOLamp44DIReading	PDOLamp44DI	binary	nil  true  false  	Bool
+151801773	Port3PDOLamp45DIReading	PDOLamp45DI	binary	nil  true  false  	Bool
+151801774	Port3PDOLamp49DIReading	PDOLamp49DI	binary	nil  true  false  	Bool
+151801775	Port3PDOLamp50DIReading	PDOLamp50DI	binary	nil  true  false  	Bool
+151801776	Port3PDOLamp51DIReading	PDOLamp51DI	binary	nil  true  false  	Bool
+151801777	Port3PDOLamp52DIReading	PDOLamp52DI	binary	nil  true  false  	Bool
+151801778	Port3PDOLatchClosedDIReading	PDOLatchClosedDI	binary	nil  true  false  	Bool
+151801779	Port3PDOLatchOpenedDIReading	PDOLatchOpenedDI	binary	nil  true  false  	Bool
+151801780	Port3PDOOpenerExtendedDIReading	PDOOpenerExtendedDI	binary	nil  true  false  	Bool
+151801781	Port3PDOOpenerRetractedDIReading	PDOOpenerRetractedDI	binary	nil  true  false  	Bool
+151801782	Port3PDOPlatformOccupiedDIReading	PDOPlatformOccupiedDI	binary	nil  true  false  	Bool
+151801783	Port3PDOShuttleInDIReading	PDOShuttleInDI	binary	nil  true  false  	Bool
+151801784	Port3PDOShuttleOutDIReading	PDOShuttleOutDI	binary	nil  true  false  	Bool
+151801785	Port3PDOSwitch1DIReading	PDOSwitch1DI	binary	nil  true  false  	Bool
+151801786	Port3PDOSwitch2DIReading	PDOSwitch2DI	binary	nil  true  false  	Bool
+151801787	Port3PDOSwitch3DIReading	PDOSwitch3DI	binary	nil  true  false  	Bool
+151801788	Port3PDOSwitch4DIReading	PDOSwitch4DI	binary	nil  true  false  	Bool
+151801789	Port3PDOUnclampedDIReading	PDOUnclampedDI	binary	nil  true  false  	Bool
+151801790	Port3PDOVacuumOkDIReading	PDOVacuumOkDI	binary	nil  true  false  	Bool
+151801791	Port3PDOWafer25DIReading	PDOWafer25DI	binary	nil  true  false  	Bool
+151801792	Port3PDOWaferSlideOutDIReading	PDOWaferSlideOutDI	binary	nil  true  false  	Bool
+151801793	Port3LoadPortAssociationE87	LoadPortAssociationE87		Not Associated  Associated  No State  	A
+151801795	Port3LoadPortReservationE87	LoadPortReservationE87		Reserved  No State  Not Reserved  	A
+151801809	Port3Mode	mode		Engineering  Production  Maintenance  offline  	A
+151801810	Port3OperatorApprovedCarrierID	OperatorApproveCarrierID		true  false  	Bool
+151801811	Port3OperatorApprovedSlotMap	OperatorApproveSlotMap		true  false  	Bool
+151801813	Port3PortNumber	PortNumber			U1
+151801814	Port3PortProcState	PortProcState			A
+151801815	Port3PreviousCarrierStateAccessE87	PreviousCarrierStateAccessE87		No State  CARRIER  CARRIER COMPLETE  IN ACCESS  CARRIER STOPPED  NOT ACCESSED  	A
+151801816	Port3PreviousCarrierStateModelE87	PreviousCarrierStateModelE87		SLOT MAP VERIFICATION OK  ID NOT READ  SLOT MAP VERIFICATION FAIL  IN ACCESS  CARRIER  NOT ACCESSED  No State  SLOT MAP NOT READ  WAITING FOR HOST  CARRIER COMPLETE  ID VERIFICATION OK  ID VERIFICATION FAIL  CARRIER STOPPED  	A
+151801817	Port3PreviousCarrierStateSlotMapE87	PreviousCarrierStateSlotMapE87		SLOT MAP VERIFICATION FAIL  SLOT MAP VERIFICATION OK  SLOT MAP NOT READ  No State  WAITING FOR HOST  	A
+151801818	Port3PreviousCarrierStateTagIDE87	PreviousCarrierStateTagIDE87		ID VERIFICATION FAIL  ID NOT READ  WAITING FOR HOST  No State  ID VERIFICATION OK  	A
+151801819	Port3PreviousState	PreviousState			A
+151801820	Port3PreviousWaferMappingResultString	PreviousWaferMappingResultString			A
+151801821	Port3PreviousWaferMappingStringFromHost	PreviousWaferMappingStringFromHost			A
+151801822	Port3ReadTagBinaryValue	ReadTagBinaryValue			B
+151801823	Port3ReadTagIsCalledBy	ReadTagIsCalledBy			A
+151801827	Port3CassettePresent_DIReading	CassettePresent_DI	binary	nil  true  false  	Bool
+151801828	Port3WaferProtrusion_DIReading	WaferProtrusion_DI	binary	nil  true  false  	Bool
+151801829	Port3Slot1	Slot1			A
+151801830	Port3Slot10	Slot10			A
+151801831	Port3Slot11	Slot11			A
+151801832	Port3Slot12	Slot12			A
+151801833	Port3Slot13	Slot13			A
+151801834	Port3Slot14	Slot14			A
+151801835	Port3Slot15	Slot15			A
+151801836	Port3Slot16	Slot16			A
+151801837	Port3Slot17	Slot17			A
+151801838	Port3Slot18	Slot18			A
+151801839	Port3Slot19	Slot19			A
+151801840	Port3Slot2	Slot2			A
+151801841	Port3Slot20	Slot20			A
+151801842	Port3Slot21	Slot21			A
+151801843	Port3Slot22	Slot22			A
+151801844	Port3Slot23	Slot23			A
+151801845	Port3Slot24	Slot24			A
+151801846	Port3Slot25	Slot25			A
+151801847	Port3Slot26	Slot26			A
+151801848	Port3Slot3	Slot3			A
+151801849	Port3Slot4	Slot4			A
+151801850	Port3Slot5	Slot5			A
+151801851	Port3Slot6	Slot6			A
+151801852	Port3Slot7	Slot7			A
+151801853	Port3Slot8	Slot8			A
+151801854	Port3Slot9	Slot9			A
+151801855	Port3State	state			A
+151801857	Port3tagReaderCurrentPageNumber	tagReaderCurrentPageNumber			U1
+151801858	Port3tagReaderPortNumber	tagReaderPortNumber			U1
+151801859	Port3tagReaderPreviousTagState	tagReaderPreviousTagState		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+151801860	Port3tagReaderReadTagPreviousRawValue	tagReaderReadTagPreviousRawValue			A
+151801861	Port3tagReaderReadTagPreviousValue	tagReaderReadTagPreviousValue			A
+151801862	Port3tagReaderReadTagRawValue	tagReaderReadTagRawValue			A
+151801863	Port3tagReaderReadTagString	tagReaderReadTagString			A
+151801864	Port3tagReaderReadTagValue	tagReaderReadTagValue			A
+151801866	Port3tagReaderTagState	tagReaderTagState		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+151801868	Port3tagReaderUIInputWriteTagString	tagReaderUIInputWriteTagString			A
+151801869	Port3tagReaderWriteTagPreviousValue	tagReaderWriteTagPreviousValue			A
+151801870	Port3tagReaderWriteTagValue	tagReaderWriteTagValue			A
+151801872	Port3tagReader1CurrentPageNumber1	tagReader1CurrentPageNumber1			U1
+151801873	Port3tagReader1PortNumber1	tagReader1PortNumber1			U1
+151801874	Port3tagReader1PreviousTagState1	tagReader1PreviousTagState1		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+151801875	Port3tagReader1ReadTagPreviousValue	tagReader1ReadTagPreviousValue			A
+151801876	Port3tagReader1ReadTagPreviousValue1	tagReader1ReadTagPreviousValue1			A
+151801877	Port3tagReader1ReadTagString1	tagReader1ReadTagString1			A
+151801878	Port3tagReader1ReadTagValue	tagReader1ReadTagValue			A
+151801879	Port3tagReader1ReadTagValue1	tagReader1ReadTagValue1			A
+151801881	Port3tagReader1TagState1	tagReader1TagState1		Idle  Not Initialized  Writing  Reading  Reading Error  Error  Initializing  Writing Error  	A
+151801883	Port3tagReader1UIInputWriteTagString1	tagReader1UIInputWriteTagString1			A
+151801884	Port3tagReader1WriteTagPreviousValue1	tagReader1WriteTagPreviousValue1			A
+151801885	Port3tagReader1WriteTagValue1	tagReader1WriteTagValue1			A
+151801886	Port3WaferCounter	WaferCounter			I8
+151801887	Port3WaferMappingResult	WaferMappingResult			A
+151801888	Port3WaferMappingResultString	WaferMappingResultString			A
+151801889	Port3WaferMappingStringFromHost	WaferMappingStringFromHost			A
+151801890	Port3WaferSlotPath1	WaferSlotPath1			A
+151801891	Port3WaferSlotPath10	WaferSlotPath10			A
+151801892	Port3WaferSlotPath11	WaferSlotPath11			A
+151801893	Port3WaferSlotPath12	WaferSlotPath12			A
+151801894	Port3WaferSlotPath13	WaferSlotPath13			A
+151801895	Port3WaferSlotPath14	WaferSlotPath14			A
+151801896	Port3WaferSlotPath15	WaferSlotPath15			A
+151801897	Port3WaferSlotPath16	WaferSlotPath16			A
+151801898	Port3WaferSlotPath17	WaferSlotPath17			A
+151801899	Port3WaferSlotPath18	WaferSlotPath18			A
+151801900	Port3WaferSlotPath19	WaferSlotPath19			A
+151801901	Port3WaferSlotPath2	WaferSlotPath2			A
+151801902	Port3WaferSlotPath20	WaferSlotPath20			A
+151801903	Port3WaferSlotPath21	WaferSlotPath21			A
+151801904	Port3WaferSlotPath22	WaferSlotPath22			A
+151801905	Port3WaferSlotPath23	WaferSlotPath23			A
+151801906	Port3WaferSlotPath24	WaferSlotPath24			A
+151801907	Port3WaferSlotPath25	WaferSlotPath25			A
+151801908	Port3WaferSlotPath26	WaferSlotPath26			A
+151801909	Port3WaferSlotPath3	WaferSlotPath3			A
+151801910	Port3WaferSlotPath4	WaferSlotPath4			A
+151801911	Port3WaferSlotPath5	WaferSlotPath5			A
+151801912	Port3WaferSlotPath6	WaferSlotPath6			A
+151801913	Port3WaferSlotPath7	WaferSlotPath7			A
+151801914	Port3WaferSlotPath8	WaferSlotPath8			A
+151801915	Port3WaferSlotPath9	WaferSlotPath9			A
+151801916	AtmArmTXRelianceRobotPickFromAlignerWithCompensation	TXRelianceRobotPickFromAlignerWithCompensation			A
+151801917	AtmArmWaferBufferStationBufferSlot1	WaferBufferStationBufferSlot1			A
+151801918	AtmArmWaferBufferStationBufferSlot10	WaferBufferStationBufferSlot10			A
+151801919	AtmArmWaferBufferStationBufferSlot11	WaferBufferStationBufferSlot11			A
+151801920	AtmArmWaferBufferStationBufferSlot12	WaferBufferStationBufferSlot12			A
+151801921	AtmArmWaferBufferStationBufferSlot13	WaferBufferStationBufferSlot13			A
+151801922	AtmArmWaferBufferStationBufferSlot14	WaferBufferStationBufferSlot14			A
+151801923	AtmArmWaferBufferStationBufferSlot15	WaferBufferStationBufferSlot15			A
+151801924	AtmArmWaferBufferStationBufferSlot16	WaferBufferStationBufferSlot16			A
+151801925	AtmArmWaferBufferStationBufferSlot17	WaferBufferStationBufferSlot17			A
+151801926	AtmArmWaferBufferStationBufferSlot18	WaferBufferStationBufferSlot18			A
+151801927	AtmArmWaferBufferStationBufferSlot19	WaferBufferStationBufferSlot19			A
+151801928	AtmArmWaferBufferStationBufferSlot2	WaferBufferStationBufferSlot2			A
+151801929	AtmArmWaferBufferStationBufferSlot20	WaferBufferStationBufferSlot20			A
+151801930	AtmArmWaferBufferStationBufferSlot21	WaferBufferStationBufferSlot21			A
+151801931	AtmArmWaferBufferStationBufferSlot22	WaferBufferStationBufferSlot22			A
+151801932	AtmArmWaferBufferStationBufferSlot23	WaferBufferStationBufferSlot23			A
+151801933	AtmArmWaferBufferStationBufferSlot24	WaferBufferStationBufferSlot24			A
+151801934	AtmArmWaferBufferStationBufferSlot25	WaferBufferStationBufferSlot25			A
+151801935	AtmArmWaferBufferStationBufferSlot26	WaferBufferStationBufferSlot26			A
+151801936	AtmArmWaferBufferStationBufferSlot27	WaferBufferStationBufferSlot27			A
+151801937	AtmArmWaferBufferStationBufferSlot28	WaferBufferStationBufferSlot28			A
+151801938	AtmArmWaferBufferStationBufferSlot29	WaferBufferStationBufferSlot29			A
+151801939	AtmArmWaferBufferStationBufferSlot3	WaferBufferStationBufferSlot3			A
+151801940	AtmArmWaferBufferStationBufferSlot30	WaferBufferStationBufferSlot30			A
+151801941	AtmArmWaferBufferStationBufferSlot31	WaferBufferStationBufferSlot31			A
+151801942	AtmArmWaferBufferStationBufferSlot32	WaferBufferStationBufferSlot32			A
+151801943	AtmArmWaferBufferStationBufferSlot33	WaferBufferStationBufferSlot33			A
+151801944	AtmArmWaferBufferStationBufferSlot34	WaferBufferStationBufferSlot34			A
+151801945	AtmArmWaferBufferStationBufferSlot35	WaferBufferStationBufferSlot35			A
+151801946	AtmArmWaferBufferStationBufferSlot36	WaferBufferStationBufferSlot36			A
+151801947	AtmArmWaferBufferStationBufferSlot37	WaferBufferStationBufferSlot37			A
+151801948	AtmArmWaferBufferStationBufferSlot38	WaferBufferStationBufferSlot38			A
+151801949	AtmArmWaferBufferStationBufferSlot39	WaferBufferStationBufferSlot39			A
+151801950	AtmArmWaferBufferStationBufferSlot4	WaferBufferStationBufferSlot4			A
+151801951	AtmArmWaferBufferStationBufferSlot40	WaferBufferStationBufferSlot40			A
+151801952	AtmArmWaferBufferStationBufferSlot41	WaferBufferStationBufferSlot41			A
+151801953	AtmArmWaferBufferStationBufferSlot42	WaferBufferStationBufferSlot42			A
+151801954	AtmArmWaferBufferStationBufferSlot43	WaferBufferStationBufferSlot43			A
+151801955	AtmArmWaferBufferStationBufferSlot44	WaferBufferStationBufferSlot44			A
+151801956	AtmArmWaferBufferStationBufferSlot45	WaferBufferStationBufferSlot45			A
+151801957	AtmArmWaferBufferStationBufferSlot46	WaferBufferStationBufferSlot46			A
+151801958	AtmArmWaferBufferStationBufferSlot47	WaferBufferStationBufferSlot47			A
+151801959	AtmArmWaferBufferStationBufferSlot48	WaferBufferStationBufferSlot48			A
+151801960	AtmArmWaferBufferStationBufferSlot49	WaferBufferStationBufferSlot49			A
+151801961	AtmArmWaferBufferStationBufferSlot5	WaferBufferStationBufferSlot5			A
+151801962	AtmArmWaferBufferStationBufferSlot50	WaferBufferStationBufferSlot50			A
+151801963	AtmArmWaferBufferStationBufferSlot6	WaferBufferStationBufferSlot6			A
+151801964	AtmArmWaferBufferStationBufferSlot7	WaferBufferStationBufferSlot7			A
+151801965	AtmArmWaferBufferStationBufferSlot8	WaferBufferStationBufferSlot8			A
+151801966	AtmArmWaferBufferStationBufferSlot9	WaferBufferStationBufferSlot9			A
+151801988	TransferChamberSlotValveLeftLLDownSensorReading	SlotValveLeftLLDown_DI	binary	nil  true  false  	Bool
+151801989	TransferChamberSlotValveLeftLLUpSensorReading	SlotValveLeftLLUp_DI	binary	nil  true  false  	Bool
+151801990	TransferChamberSlotValveRightLLDownSensorReading	SlotValveRightLLDown_DI	binary	nil  true  false  	Bool
+151801991	TransferChamberSlotValveRightLLUpSensorReading	SlotValveRightLLUp_DI	binary	nil  true  false  	Bool
+151802002	TransferChamberSlotValvePM2ClosePMActuatorSetpoint	SlotValvePM2PMClose_DO	binary	nil  true  false  	Bool
+151802003	TransferChamberSlotValvePM2CloseTMActuatorSetpoint	SlotValvePM2TMClose_DO	binary	nil  true  false  	Bool
+151802004	TransferChamberSlotValvePM2BottomSensorReading	SlotValvePM2Bottom_DI	binary	nil  true  false  	Bool
+151802005	TransferChamberSlotValvePM2ClosedPMSensorReading	SlotValvePM2PMClosed_DI	binary	nil  true  false  	Bool
+151802006	TransferChamberSlotValvePM2ClosedTMSensorReading	SlotValvePM2TMClosed_DI	binary	nil  true  false  	Bool
+151802007	TransferChamberSlotValvePM2OpenPMSensorReading	SlotValvePM2PMOpen_DI	binary	nil  true  false  	Bool
+151802008	TransferChamberSlotValvePM2OpenTMSensorReading	SlotValvePM2TMOpen_DI	binary	nil  true  false  	Bool
+151802009	TransferChamberSlotValvePM2AtmosphereSensorReading	SlotValvePM2PMATM_DI	binary	nil  true  false  	Bool
+151802010	TransferChamberSlotValvePM2VacuumSensorReading	SlotValvePM2PMVAC_DI	binary	nil  true  false  	Bool
+151802011	TransferChamberSlotValvePM2TopSensorReading	SlotValvePM2Top_DI	binary	nil  true  false  	Bool
+151802012	TransferChamberSlotValvePM3ClosePMActuatorSetpoint	SlotValvePM3PMClose_DO	binary	nil  true  false  	Bool
+151802013	TransferChamberSlotValvePM3CloseTMActuatorSetpoint	SlotValvePM3TMClose_DO	binary	nil  true  false  	Bool
+151802014	TransferChamberSlotValvePM3BottomSensorReading	SlotValvePM3Bottom_DI	binary	nil  true  false  	Bool
+151802015	TransferChamberSlotValvePM3ClosedPMSensorReading	SlotValvePM3PMClosed_DI	binary	nil  true  false  	Bool
+151802016	TransferChamberSlotValvePM3ClosedTMSensorReading	SlotValvePM3TMClosed_DI	binary	nil  true  false  	Bool
+151802017	TransferChamberSlotValvePM3OpenPMSensorReading	SlotValvePM3PMOpen_DI	binary	nil  true  false  	Bool
+151802018	TransferChamberSlotValvePM3OpenTMSensorReading	SlotValvePM3TMOpen_DI	binary	nil  true  false  	Bool
+151802019	TransferChamberSlotValvePM3AtmosphereSensorReading	SlotValvePM3PMATM_DI	binary	nil  true  false  	Bool
+151802020	TransferChamberSlotValvePM3VacuumSensorReading	SlotValvePM3PMVAC_DI	binary	nil  true  false  	Bool
+151802021	TransferChamberSlotValvePM3TopSensorReading	SlotValvePM3Top_DI	binary	nil  true  false  	Bool
+151802022	TransferChamberSlotValvePM4ClosePMActuatorSetpoint	SlotValvePM4PMClose_DO	binary	nil  true  false  	Bool
+151802023	TransferChamberSlotValvePM4CloseTMActuatorSetpoint	SlotValvePM4TMClose_DO	binary	nil  true  false  	Bool
+151802024	TransferChamberSlotValvePM4BottomSensorReading	SlotValvePM4Bottom_DI	binary	nil  true  false  	Bool
+151802025	TransferChamberSlotValvePM4ClosedPMSensorReading	SlotValvePM4PMClosed_DI	binary	nil  true  false  	Bool
+151802026	TransferChamberSlotValvePM4ClosedTMSensorReading	SlotValvePM4TMClosed_DI	binary	nil  true  false  	Bool
+151802027	TransferChamberSlotValvePM4OpenPMSensorReading	SlotValvePM4PMOpen_DI	binary	nil  true  false  	Bool
+151802028	TransferChamberSlotValvePM4OpenTMSensorReading	SlotValvePM4TMOpen_DI	binary	nil  true  false  	Bool
+151802029	TransferChamberSlotValvePM4AtmosphereSensorReading	SlotValvePM4PMATM_DI	binary	nil  true  false  	Bool
+151802030	TransferChamberSlotValvePM4VacuumSensorReading	SlotValvePM4PMVAC_DI	binary	nil  true  false  	Bool
+151802031	TransferChamberSlotValvePM4TopSensorReading	SlotValvePM4Top_DI	binary	nil  true  false  	Bool
+151802037	Port1WaferMappingState	WaferMappingState			A
+151802038	Port2WaferMappingState	WaferMappingState			A
+151802039	Port3WaferMappingState	WaferMappingState			A
+151802041	Port1tagReader1ReadTagS18F5PreviousValue	tagReader1ReadTagS18F5PreviousValue			A
+151802042	Port1tagReader1ReadTagS18F5Value	tagReader1ReadTagS18F5Value			A
+151802043	Port2tagReader1ReadTagS18F5PreviousValue	tagReader1ReadTagS18F5PreviousValue			A
+151802044	Port2tagReader1ReadTagS18F5Value	tagReader1ReadTagS18F5Value			A
+151802045	Port3tagReader1ReadTagS18F5PreviousValue	tagReader1ReadTagS18F5PreviousValue			A
+151802046	Port3tagReader1ReadTagS18F5Value	tagReader1ReadTagS18F5Value			A
+151802047	AtmArmAirFilterSystemOKReading	AirFilterSystemOK	binary	nil  true  false  	Bool
+151802048	AtmArmSlot	Slot			U1
+151802049	TransferChamberCurrentRToffsetAirLock1	CurrentRToffsetAirLock1			A
+151802050	TransferChamberCurrentRToffsetAirLock2	CurrentRToffsetAirLock2			A
+151802051	TransferChamberCurrentRToffsetPM1	CurrentRToffsetPM1			A
+151802052	TransferChamberCurrentRToffsetPM2	CurrentRToffsetPM2			A
+151802053	TransferChamberCurrentRToffsetPM3	CurrentRToffsetPM3			A
+151802054	TransferChamberCurrentRToffsetPM4	CurrentRToffsetPM4			A
+151802058	TransferChamberPreviousRToffsetAirLock1	PreviousRToffsetAirLock1			A
+151802059	TransferChamberPreviousRToffsetAirLock2	PreviousRToffsetAirLock2			A
+151802060	TransferChamberPreviousRToffsetPM1	PreviousRToffsetPM1			A
+151802061	TransferChamberPreviousRToffsetPM2	PreviousRToffsetPM2			A
+151802062	TransferChamberPreviousRToffsetPM3	PreviousRToffsetPM3			A
+151802063	TransferChamberPreviousRToffsetPM4	PreviousRToffsetPM4			A
+151802064	TransferChamberSlot	Slot			U1
+151802165	TransferChamberDestination	Destination			A
+151802166	TransferChamberSource	Source			A
+151802167	Port1BindCommandState	BindCommandState			A
+151802168	Port2BindCommandState	BindCommandState			A
+151802169	Port3BindCommandState	BindCommandState			A
+151802170	AtmArmCurrentPostAlignmentPosition	CurrentPostAlignmentPosition	Degree		U4
+151802171	TransferChamberCarrierID	CarrierID			A
+151802172	TransferChamberLotID	LotID			A
+151802173	TransferChamberPortName	PortName			A
+151802174	TransferChamberWaferflowName	WaferflowName			A
+151802175	TransferChamberWaferID	WaferID			A
+*/
+
+
+#SVID   CTC   151802208   #ACCESS_MODE__LP1						U	1	__			//  Load Port  -  Access Mode   :   0 = Manual Mode, 1 = Auto Mode
+// 151802208		Port1AccessModeU1	AccessModeU1			U1
+#SVID	CTC	  151802209	 #CARRIER_ACCESS_STATUS__LP1	    U	1	__			//  Load Port  -  CarrierAccessStatus	  :   0 = NOT ACCESSED, 1 = IN ACCESS, 2 = CARRIER COMPLETE, 3 = CARRIER STOPPED
+// 151802209		Port1CarrierAccessingStatusE87	CarrierAccessingStatusE87			U1
+#SVID	CTC	  151802210	 #CARRIERID_STATUS__LP1				U	1	__			//  Load Port  -  CarrierIDStatus   :   0 = ID NOT READ, 1 = WAITING FOR HOST, 2 = ID VERIFICATION OK, 3 = ID VERIFICATION FAILED
+// 151802210		Port1CarrierIDStatusE87	CarrierIDStatusE87			U1
+// 151802211		Port1PDOCurrentLoadPortTransferStateU1	PDOCurrentLoadPortTransferStateU1			U1
+// 151802212		Port1PDOPreviousLoadPortTransferStateU1	PDOPreviousLoadPortTransferStateU1			U1
+#SVID	CTC	  151802213   #RESERVATION_STATUS__LP1			U	1	__			//  Load Port  -  ReservationStatus   :   0 = NOT RESERVED, 1 = RESERVED
+// 151802213		Port1LoadPortReservationStateE87U1	LoadPortReservationStateE87U1			U1
+#SVID	CTC	  151802214   #ASSOCIATION_STATUS__LP1			U	1	__			//  Load Port  -  AssociationStatus   :   0 = NOT ASSOCIATED, 1 = ASSOCIATED
+// 151802214		Port1PortAssociationStateE87U1	PortAssociationStateE87U1			U1
+// 151802215		Port1PreviousCarrierAccessingStatusE87	PreviousCarrierAccessingStatusE87			U1
+// 151802216		Port1PreviousCarrierIDStatusE87	PreviousCarrierIDStatusE87			U1
+// 151802217		Port1PreviousSlotMapStatusE87	PreviousSlotMapStatusE87			U1
+#SVID	CTC	  151802218   #SLOT_MAP_STATUS__LP1				U	1	__			//  Load Port  -  SlotMapStatus   :   0 = SLOT MAP NOT READ, 1 = WAITING FOR HOST, 2 = SLOT MAP VERIFICATION OK, 3 = SLOT MAP VERIFICATION FAILED	
+// 151802218		Port1SlotMapStatusE87	SlotMapStatusE87			U1
+
+#SVID   CTC   151802219   #ACCESS_MODE__LP2						U	1	__			//  Load Port  -  Access Mode   :   0 = Manual Mode, 1 = Auto Mode
+// 151802219		Port2AccessModeU1	AccessModeU1			U1
+#SVID	CTC	  151802220    #CARRIER_ACCESS_STATUS__LP2	U	1	__			//  Load Port  -  CarrierAccessStatus	  :   0 = NOT ACCESSED, 1 = IN ACCESS, 2 = CARRIER COMPLETE, 3 = CARRIER STOPPED
+// 151802220		Port2CarrierAccessingStatusE87	CarrierAccessingStatusE87			U1
+#SVID	CTC	  151802221	  #CARRIERID_STATUS__LP2				U	1	__			//  Load Port  -  CarrierIDStatus   :   0 = ID NOT READ, 1 = WAITING FOR HOST, 2 = ID VERIFICATION OK, 3 = ID VERIFICATION FAILED
+// 151802221		Port2CarrierIDStatusE87	CarrierIDStatusE87			U1
+// 151802222		Port2PDOCurrentLoadPortTransferStateU1	PDOCurrentLoadPortTransferStateU1			U1
+// 151802223		Port2PDOPreviousLoadPortTransferStateU1	PDOPreviousLoadPortTransferStateU1			U1
+#SVID	CTC	  151802224    #RESERVATION_STATUS__LP2			U	1	__			//  Load Port  -  ReservationStatus   :   0 = NOT RESERVED, 1 = RESERVED
+// 151802224		Port2LoadPortReservationStateE87U1	LoadPortReservationStateE87U1			U1
+#SVID	CTC	  151802225    #ASSOCIATION_STATUS__LP2			U	1	__			//  Load Port  -  AssociationStatus   :   0 = NOT ASSOCIATED, 1 = ASSOCIATED
+// 151802225		Port2PortAssociationStateE87U1	PortAssociationStateE87U1			U1
+// 151802226		Port2PreviousCarrierAccessingStatusE87	PreviousCarrierAccessingStatusE87			U1
+// 151802227		Port2PreviousCarrierIDStatusE87	PreviousCarrierIDStatusE87			U1
+// 151802228		Port2PreviousSlotMapStatusE87	PreviousSlotMapStatusE87			U1
+#SVID	CTC	  151802229    #SLOT_MAP_STATUS__LP2				U	1	__			//  Load Port  -  SlotMapStatus   :   0 = SLOT MAP NOT READ, 1 = WAITING FOR HOST, 2 = SLOT MAP VERIFICATION OK, 3 = SLOT MAP VERIFICATION FAILED	
+// 151802229		Port2SlotMapStatusE87	SlotMapStatusE87			U1
+
+#SVID   CTC   151802230   #ACCESS_MODE__LP3						U	1	__			//  Load Port  -  Access Mode   :   0 = Manual Mode, 1 = Auto Mode
+// 151802230		Port3AccessModeU1	AccessModeU1			U1
+#SVID	CTC	  151802231   #CARRIER_ACCESS_STATUS__LP3		U	1	__			//  Load Port  -  CarrierAccessStatus	  :   0 = NOT ACCESSED, 1 = IN ACCESS, 2 = CARRIER COMPLETE, 3 = CARRIER STOPPED
+// 151802231		Port3CarrierAccessingStatusE87	CarrierAccessingStatusE87			U1
+#SVID	CTC	  151802232	  #CARRIERID_STATUS__LP3				U	1	__			//  Load Port  -  CarrierIDStatus   :   0 = ID NOT READ, 1 = WAITING FOR HOST, 2 = ID VERIFICATION OK, 3 = ID VERIFICATION FAILED
+// 151802232		Port3CarrierIDStatusE87	CarrierIDStatusE87			U1
+// 151802233		Port3PDOCurrentLoadPortTransferStateU1	PDOCurrentLoadPortTransferStateU1			U1
+// 151802234		Port3PDOPreviousLoadPortTransferStateU1	PDOPreviousLoadPortTransferStateU1			U1
+#SVID	CTC	  151802235    #RESERVATION_STATUS__L32			U	1	__			//  Load Port  -  ReservationStatus   :   0 = NOT RESERVED, 1 = RESERVED
+// 151802235		Port3LoadPortReservationStateE87U1	LoadPortReservationStateE87U1			U1
+#SVID	CTC	  151802236    #ASSOCIATION_STATUS__LP3			U	1	__			//  Load Port  -  AssociationStatus   :   0 = NOT ASSOCIATED, 1 = ASSOCIATED
+// 151802236		Port3PortAssociationStateE87U1	PortAssociationStateE87U1			U1
+// 151802237		Port3PreviousCarrierAccessingStatusE87	PreviousCarrierAccessingStatusE87			U1
+// 151802238		Port3PreviousCarrierIDStatusE87	PreviousCarrierIDStatusE87			U1
+// 151802239		Port3PreviousSlotMapStatusE87	PreviousSlotMapStatusE87			U1
+#SVID	CTC	  151802240    #SLOT_MAP_STATUS__LP3				U	1	__			//  Load Port  -  SlotMapStatus   :   0 = SLOT MAP NOT READ, 1 = WAITING FOR HOST, 2 = SLOT MAP VERIFICATION OK, 3 = SLOT MAP VERIFICATION FAILED	
+// 151802240		Port3SlotMapStatusE87	SlotMapStatusE87			U1
+
+
+// 151802241		Port1tagReaderReadTagPreviousValuePg3Onwards	tagReaderReadTagPreviousValuePg3Onwards			A
+// 151802242		Port1tagReaderReadTagValuePg3Onwards	tagReaderReadTagValuePg3Onwards			A
+// 151802243		Port2tagReaderReadTagPreviousValuePg3Onwards	tagReaderReadTagPreviousValuePg3Onwards			A
+// 151802244		Port2tagReaderReadTagValuePg3Onwards	tagReaderReadTagValuePg3Onwards			A
+// 151802245		Port3tagReaderReadTagPreviousValuePg3Onwards	tagReaderReadTagPreviousValuePg3Onwards			A
+// 151802246		Port3tagReaderReadTagValuePg3Onwards	tagReaderReadTagValuePg3Onwards			A
+// 151802247		Port1PDODoorState	PDODoorState		Unknown  Open  Closed  	A
+// 151802248		Port1PDOPreviousDoorState	PDOPreviousDoorState		Unknown  Open  Closed  	A
+// 151802249		Port2PDODoorState	PDODoorState		Unknown  Open  Closed  	A
+// 151802250		Port2PDOPreviousDoorState	PDOPreviousDoorState		Unknown  Open  Closed  	A
+// 151802251		Port3PDODoorState	PDODoorState		Unknown  Open  Closed  	A
+// 151802252		Port3PDOPreviousDoorState	PDOPreviousDoorState		Unknown  Open  Closed  	A
+
+#SVID   CTC     151802255     #CST_MAP_LIST__LP1          	L       0       __                      //  0 = None, 1 = Exist, 2 = Double, 3 = Cross
+// 151802255		Port1WaferMappingResultContentMapE87	WaferMappingResultContentMapE87			List
+#SVID   CTC     151802256     #CST_MAP_LIST__LP2          	L       0       __                      //  0 = None, 1 = Exist, 2 = Double, 3 = Cross
+// 151802256		Port2WaferMappingResultContentMapE87	WaferMappingResultContentMapE87			List
+#SVID   CTC     151802257     #CST_MAP_LIST__LP3          	L       0       __                      //  0 = None, 1 = Exist, 2 = Double, 3 = Cross
+// 151802257		Port3WaferMappingResultContentMapE87	WaferMappingResultContentMapE87			List
+
+// 151802393		AtmArmOCRWaferControlJobName	OCRWaferControlJobName			A
+// 151802394		AtmArmOHTClearAlarmSignal	OHTClearAlarmSignal			A
+// 151802395		TransferChamberAirLock1SlotValveCloseElapsedTime	AirLock1SlotValveCloseElapsedTime	ms		I8
+// 151802396		TransferChamberAirLock1SlotValveOpenElapsedTime	AirLock1SlotValveOpenElapsedTime	ms		I8
+// 151802397		TransferChamberAirLock2SlotValveCloseElapsedTime	AirLock2SlotValveCloseElapsedTime	ms		I8
+// 151802398		TransferChamberAirLock2SlotValveOpenElapsedTime	AirLock2SlotValveOpenElapsedTime	ms		I8
+// 151802399		TransferChamberPM1SlotValveCloseElapsedTime	PM1SlotValveCloseElapsedTime	ms		I8
+// 151802400		TransferChamberPM1SlotValveOpenElapsedTime	PM1SlotValveOpenElapsedTime	ms		I8
+// 151802401		TransferChamberPM2SlotValveCloseElapsedTime	PM2SlotValveCloseElapsedTime	ms		I8
+// 151802402		TransferChamberPM2SlotValveOpenElapsedTime	PM2SlotValveOpenElapsedTime	ms		I8
+// 151802403		TransferChamberPM3SlotValveCloseElapsedTime	PM3SlotValveCloseElapsedTime	ms		I8
+// 151802404		TransferChamberPM3SlotValveOpenElapsedTime	PM3SlotValveOpenElapsedTime	ms		I8
+// 151802405		TransferChamberPM4SlotValveCloseElapsedTime	PM4SlotValveCloseElapsedTime	ms		I8
+// 151802406		TransferChamberPM4SlotValveOpenElapsedTime	PM4SlotValveOpenElapsedTime	ms		I8
+// 151802751		AtmArmMiniEnviromentFan1RPMReading	MEV_Fan1_AI	RPM		F4
+// 151802752		AtmArmMiniEnviromentFan2RPMReading	MEV_Fan2_AI	RPM		F4
+
+
+#SVID   CTC     151802876     #LOCATION_ID__LP1              AV      4      __                       // Load Port  -  Location ID
+// 151802876		Port1LocationID	LocationID			A
+#SVID   CTC     151802877     #PORT_STATE_INFO__LP1         L       1       __                      // Load Port State Info
+// 151802877		Port1PortStateInfo	PortStateInfo			List
+// 151802878		Port1Reason	Reason			U1
+
+#SVID   CTC     151802879     #LOCATION_ID__LP2              AV      4      __                       // Load Port  -  Location ID
+// 151802879		Port2LocationID	LocationID			A
+#SVID   CTC     151802880     #PORT_STATE_INFO__LP2         L       1       __                      // Load Port State Info
+// 151802880		Port2PortStateInfo	PortStateInfo			List
+// 151802881	Port2Reason	Reason			U1
+
+#SVID   CTC     151802882     #LOCATION_ID__LP3              AV      4      __                       // Load Port  -  Location ID
+// 151802882		Port3LocationID	LocationID			A
+#SVID   CTC     151802883     #PORT_STATE_INFO__LP3         L       1       __                      // Load Port State Info
+// 151802883		Port3PortStateInfo	PortStateInfo			List
+// 151802884		Port3Reason	Reason			U1
+
+
+// 151802885	TransferChamberCarrierLocationMatrix	CarrierLocationMatrix			List
+// 151802886	TransferChamberPortAssociationStateList	PortAssociationStateList			List
+// 151802887	TransferChamberPortReservationStatusList	PortReservationStatusList			List
+// 151802888	TransferChamberPortStateInfoList	PortStateInfoList			List
+// 151802889	TransferChamberPortTransferStateList	PortTransferStateList			List
+
+// 151802890		Port1AccessModeU1Pgv	AccessModeU1Pgv			U1
+// 151802891		Port1PgvMode	PgvMode		AUTO  Not Initialized  MANUAL  	A
+// 151802892		Port2AccessModeU1Pgv	AccessModeU1Pgv			U1
+// 151802893		Port2PgvMode	PgvMode		AUTO  Not Initialized  MANUAL  	A
+// 151802894		Port3AccessModeU1Pgv	AccessModeU1Pgv			U1
+// 151802895		Port3PgvMode	PgvMode		AUTO  Not Initialized  MANUAL  	A
+
+
+#SVID	CTC	  151803305    #SLOT_MAX__LP1						U	1	__			//  Load Port  -  Slot No. (Total Slot Size)		
+// 151803305		Port1Capacity	Capacity			U1
+// 151803306		Port1ContentMap	ContentMap			List
+#SVID   CTC   151803307    #CST_MAP_LIST__LP1          	L  0  __        //  0 = None, 1 = Exist, 2 = Double, 3 = Cross
+// 151803307		Port1SlotMap	SlotMap			List
+#SVID	CTC	  151803308	  #SLOT_ASSIGNED__LP1				U	1	__			//  Load Port  -  Wafer Number Assigned
+// 151803308		Port1SubstrateCount	SubstrateCount			U1
+// 151803309		Port1Usage	Usage			U1
+
+#SVID	CTC	  151803310   #SLOT_MAX__LP2						U	1	__			//  Load Port  -  Slot No. (Total Slot Size)		
+// 151803310		Port2Capacity	Capacity			U1
+// 151803311		Port2ContentMap	ContentMap			List
+#SVID   CTC   151803312   #CST_MAP_LIST__LP2	          		L  0  __        //  0 = None, 1 = Exist, 2 = Double, 3 = Cross
+// 151803312		Port2SlotMap	SlotMap			List
+#SVID	CTC	  151803313   #SLOT_ASSIGNED__LP2				U	1	__			//  Load Port  -  Wafer Number Assigned
+// 151803313		Port2SubstrateCount	SubstrateCount			U1
+// 151803314		Port2Usage	Usage			U1
+
+#SVID	CTC	  151803315   #SLOT_MAX__LP3						U	1	__			//  Load Port  -  Slot No. (Total Slot Size)		
+// 151803315		Port3Capacity	Capacity			U1
+// 151803316		Port3ContentMap	ContentMap			List
+#SVID   CTC   151803317   #CST_MAP_LIST__LP3	          		L  0  __        //  0 = None, 1 = Exist, 2 = Double, 3 = Cross
+// 151803317		Port3SlotMap	SlotMap			List
+#SVID	CTC	  151803318   #SLOT_ASSIGNED__LP3				U	1	__			//  Load Port  -  Wafer Number Assigned
+// 151803318		Port3SubstrateCount	SubstrateCount			U1
+// 151803319		Port3Usage	Usage			U1
+
+
+// 151803320		Port1PDOE87ServiceStatusU1	PDOE87ServiceStatusU1			U1
+// 151803321		Port2PDOE87ServiceStatusU1	PDOE87ServiceStatusU1			U1
+// 151803322		Port3PDOE87ServiceStatusU1	PDOE87ServiceStatusU1			U1
+// 151803355		Port1LoadPortPreviousAssociationE87	LoadPortPreviousAssociationE87		Not Associated  Associated  No State  	A
+// 151803356		Port2LoadPortPreviousAssociationE87	LoadPortPreviousAssociationE87		Not Associated  Associated  No State  	A
+// 151803357		Port3LoadPortPreviousAssociationE87	LoadPortPreviousAssociationE87		Not Associated  Associated  No State  	A
+// 151803358		Port1WaferFlowAbort	WaferFlowAbort		Not Abort  Abort  	A
+// 151803359		Port2WaferFlowAbort	WaferFlowAbort		Not Abort  Abort  	A
+// 151803360		Port3WaferFlowAbort	WaferFlowAbort		Not Abort  Abort  	A
+
+
+// 151803364		AirLock1DoorCloseElapsedTime	DoorCloseElapsedTime	ms		I8
+// 151803365		AirLock1DoorOpenElapsedTime	DoorOpenElapsedTime	ms		I8
+// 151803366		AirLock1PumpDownElapsedTime	PumpDownElapsedTime	ms		I8
+// 151803367		AirLock1VentElapsedTime	VentElapsedTime	ms		I8
+// 151803368		AirLock2DoorCloseElapsedTime	DoorCloseElapsedTime	ms		I8
+// 151803369		AirLock2DoorOpenElapsedTime	DoorOpenElapsedTime	ms		I8
+// 151803370		AirLock2PumpDownElapsedTime	PumpDownElapsedTime	ms		I8
+// 151803371		AirLock2VentElapsedTime	VentElapsedTime	ms		I8
+// 151803372		TransferChamberRoughPumpIPXPumpWaterLeakDetect_DIReading	IPXPumpWaterLeakDetect_DI	binary	nil  true  false  	Bool
+// 151803373		Port1DisableWaferBuffering	DisableWaferBuffering		true  false  	Bool
+// 151803374		Port2DisableWaferBuffering	DisableWaferBuffering		true  false  	Bool
+// 151803375		Port3DisableWaferBuffering	DisableWaferBuffering		true  false  	Bool
+// 151803553		TransferChamberSlotValveLeftLLALDeltaPressureOKSensorReading	SlotValveAL1DeltaPressureOK_DI	binary	nil  true  false  	Bool
+// 151803554		TransferChamberSlotValveRightLLALDeltaPressureOKSensorReading	SlotValveAL2DeltaPressureOK_DI	binary	nil  true  false  	Bool
+// 151803559		AirLock1AirLock1-iSlot1SubstLocID	AirLock1-iSlot1SubstLocID			A
+// 151803560		AirLock1AirLock1-iSlot1SubstLocState	AirLock1-iSlot1SubstLocState			U1
+// 151803561		AirLock1AirLock1-iSlot1SubstrLocSubstrID	AirLock1-iSlot1SubstrLocSubstrID			A
+// 151803562		AirLock1AirLock1-oSlot1SubstLocID	AirLock1-oSlot1SubstLocID			A
+// 151803563		AirLock1AirLock1-oSlot1SubstLocState	AirLock1-oSlot1SubstLocState			U1
+// 151803564		AirLock1AirLock1-oSlot1SubstrLocSubstrID	AirLock1-oSlot1SubstrLocSubstrID			A
+// 151803565		AirLock2AirLock2-iSlot1SubstLocID	AirLock2-iSlot1SubstLocID			A
+// 151803566		AirLock2AirLock2-iSlot1SubstLocState	AirLock2-iSlot1SubstLocState			U1
+// 151803567		AirLock2AirLock2-iSlot1SubstrLocSubstrID	AirLock2-iSlot1SubstrLocSubstrID			A
+// 151803568		AirLock2AirLock2-oSlot1SubstLocID	AirLock2-oSlot1SubstLocID			A
+// 151803569		AirLock2AirLock2-oSlot1SubstLocState	AirLock2-oSlot1SubstLocState			U1
+// 151803570		AirLock2AirLock2-oSlot1SubstrLocSubstrID	AirLock2-oSlot1SubstrLocSubstrID			A
+// 151803571		AtmArmAtmArm-EndEffector11SubstLocID	AtmArm-EndEffector11SubstLocID			A
+// 151803572		AtmArmAtmArm-EndEffector11SubstLocState	AtmArm-EndEffector11SubstLocState			U1
+// 151803573		AtmArmAtmArm-EndEffector11SubstrLocSubstrID	AtmArm-EndEffector11SubstrLocSubstrID			A
+// 151803574		AtmArmSensorBoxAnalogSensor_AI_0Reading	AnalogSensor_AI_0			F4
+// 151803575		AtmArmSensorBoxAnalogSensor_AI_1Reading	AnalogSensor_AI_1			F4
+// 151803576		AtmArmSensorBoxAnalogSensor_AI_2Reading	AnalogSensor_AI_2			F4
+// 151803577		AtmArmSensorBoxAnalogSensor_AI_3Reading	AnalogSensor_AI_3			F4
+// 151803578		AtmArmSensorBoxAnalogSensor_AI_4Reading	AnalogSensor_AI_4			F4
+// 151803579		AtmArmSensorBoxAnalogSensor_AI_5Reading	AnalogSensor_AI_5			F4
+// 151803580		AtmArmSensorBoxAnalogSensor_AI_6Reading	AnalogSensor_AI_6			F4
+// 151803581		AtmArmSensorBoxAnalogSensor_AI_7Reading	AnalogSensor_AI_7			F4
+// 151803582		AtmArmSensorBoxAnalogSensor_AI_8Reading	AnalogSensor_AI_8			F4
+// 151803583		AtmArmSensorBoxAnalogSensor_AI_9Reading	AnalogSensor_AI_9			F4
+// 151803584		AtmArmSensorBoxAnalogSensor_AI_10Reading	AnalogSensor_AI_10			F4
+// 151803585		AtmArmSensorBoxAnalogSensor_AI_11Reading	AnalogSensor_AI_11			F4
+// 151803586		AtmArmSensorBoxAnalogSensor_AI_12Reading	AnalogSensor_AI_12			F4
+// 151803587		AtmArmSensorBoxAnalogSensor_AI_13Reading	AnalogSensor_AI_13			F4
+// 151803588		AtmArmSensorBoxAnalogSensor_AI_14Reading	AnalogSensor_AI_14			F4
+// 151803589		AtmArmSensorBoxAnalogSensor_AI_15Reading	AnalogSensor_AI_15			F4
+// 151803598		AtmArmSensorBoxDigitalSensor_DI_0Reading	SensorBox_DI_0	binary	nil  true  false  	Bool
+// 151803599		AtmArmSensorBoxDigitalSensor_DI_1Reading	SensorBox_DI_1	binary	nil  true  false  	Bool
+// 151803600		AtmArmSensorBoxDigitalSensor_DI_2Reading	SensorBox_DI_2	binary	nil  true  false  	Bool
+// 151803601		AtmArmSensorBoxDigitalSensor_DI_3Reading	SensorBox_DI_3	binary	nil  true  false  	Bool
+// 151803602		AtmArmSensorBoxDigitalSensor_DI_4Reading	SensorBox_DI_4	binary	nil  true  false  	Bool
+// 151803603		AtmArmSensorBoxDigitalSensor_DI_5Reading	SensorBox_DI_5	binary	nil  true  false  	Bool
+// 151803604		AtmArmSensorBoxDigitalSensor_DI_6Reading	SensorBox_DI_6	binary	nil  true  false  	Bool
+// 151803605		AtmArmSensorBoxDigitalSensor_DI_7Reading	SensorBox_DI_7	binary	nil  true  false  	Bool
+// 151803606		AtmArmSensorBoxDigitalSensor_DI_8Reading	SensorBox_DI_8	binary	nil  true  false  	Bool
+// 151803607		AtmArmSensorBoxDigitalSensor_DI_9Reading	SensorBox_DI_9	binary	nil  true  false  	Bool
+// 151803608		AtmArmSensorBoxDigitalSensor_DI_10Reading	SensorBox_DI_10	binary	nil  true  false  	Bool
+// 151803609		AtmArmSensorBoxDigitalSensor_DI_11Reading	SensorBox_DI_11	binary	nil  true  false  	Bool
+// 151803610		AtmArmSensorBoxDigitalSensor_DI_12Reading	SensorBox_DI_12	binary	nil  true  false  	Bool
+// 151803611		AtmArmSensorBoxDigitalSensor_DI_13Reading	SensorBox_DI_13	binary	nil  true  false  	Bool
+// 151803612		AtmArmSensorBoxDigitalSensor_DI_14Reading	SensorBox_DI_14	binary	nil  true  false  	Bool
+// 151803613		AtmArmSensorBoxDigitalSensor_DI_15Reading	SensorBox_DI_15	binary	nil  true  false  	Bool
+// 151803614		AtmArmSensorBoxDigitalSensor_DI_16Reading	SensorBox_DI_16	binary	nil  true  false  	Bool
+// 151803615		AtmArmSensorBoxDigitalSensor_DI_17Reading	SensorBox_DI_17	binary	nil  true  false  	Bool
+// 151803616		AtmArmSensorBoxDigitalSensor_DI_18Reading	SensorBox_DI_18	binary	nil  true  false  	Bool
+// 151803617		AtmArmSensorBoxDigitalSensor_DI_19Reading	SensorBox_DI_19	binary	nil  true  false  	Bool
+// 151803618		AtmArmSensorBoxDigitalSensor_DI_20Reading	SensorBox_DI_20	binary	nil  true  false  	Bool
+// 151803619		AtmArmSensorBoxDigitalSensor_DI_21Reading	SensorBox_DI_21	binary	nil  true  false  	Bool
+// 151803620		AtmArmSensorBoxDigitalSensor_DI_22Reading	SensorBox_DI_22	binary	nil  true  false  	Bool
+// 151803621		AtmArmSensorBoxDigitalSensor_DI_23Reading	SensorBox_DI_23	binary	nil  true  false  	Bool
+// 151803622		TransferChamberTransferChamber-EndEffector2SubstLocID	TransferChamber-EndEffector2SubstLocID			A
+// 151803623		TransferChamberTransferChamber-EndEffector1SubstLocState	TransferChamber-EndEffector1SubstLocState			U1
+// 151803624		TransferChamberTransferChamber-EndEffector1SubstrLocSubstrID	TransferChamber-EndEffector1SubstrLocSubstrID			A
+// 151803750		AtmArmArmNumber	ArmNumber			F8
+// 151803754		AtmArmCurrentAirLock1PostAlignmentPosition	CurrentAirLock1PostAlignmentPosition	Degree		U4
+// 151803755		AtmArmCurrentAirLock2PostAlignmentPosition	CurrentAirLock2PostAlignmentPosition	Degree		U4
+
+
+#SVID	CTC   151803761   #CSTID__LP1			AV	16	__			//  Load Port  -  CarrierId
+// 151803761		Port1CarrierID	CarrierID			A
+#SVID	CTC   151803762   #CSTID__LP2			AV	16	__			//  Load Port  -  CarrierId
+// 151803762		Port2CarrierID	CarrierID			A
+#SVID	CTC   151803763   #CSTID__LP3			AV	16	__			//  Load Port  -  CarrierId
+// 151803763		Port3CarrierID	CarrierID			A
+
+// 151803764		Port1Usage_ASCII	Usage_ASCII		TEST  PRODUCT  DUMMY  CLEANING  FILTER  	A
+// 151803765		Port2Usage_ASCII	Usage_ASCII		TEST  PRODUCT  DUMMY  CLEANING  FILTER  	A
+// 151803766		Port3Usage_ASCII	Usage_ASCII		TEST  PRODUCT  DUMMY  CLEANING  FILTER  	A
+
+
+// 151803767		TransferChamberCapacity_E870304	Capacity_E870304			U1
+// 151803768		TransferChamberSubstrateCount_E870304	SubstrateCount_E870304			U1
+// 151803769		TransferChamberContentMap_E870304	ContentMap_E870304			List
+// 151803770		TransferChamberSlotMap_E870304	SlotMap_E870304			List
+// 151803771		TransferChamberUsage_E870304	Usage_E870304		CLEANING  TEST  PRODUCT  QUAL  FILTER  DUMMY  	A
+// 151803772		TransferChamberCarrierAccessingStatus_E870304	CarrierAccessingStatus_E870304			U1
+// 151803773		TransferChamberCarrierIDStatus_E870304	CarrierIDStatus_E870304			U1
+// 151803774		TransferChamberSlotMapStatus_E870304	SlotMapStatus_E870304			U1
+// 151803775		TransferChamberAccessMode_E870304	AccessMode_E870304			U1
+// 151803776		TransferChamberCarrierID_E870304	CarrierID_E870304			A
+// 151803777		TransferChamberLocationID_E870304	LocationID_E870304			A
+// 151803778		TransferChamberPortAssociationState_E870304	PortAssociationState_E870304			U1
+// 151803779		TransferChamberPortID_E870304	PortID_E870304			U1
+// 151803780		TransferChamberPortStateInfo_E870304	PortStateInfo_E870304			List
+// 151803781		TransferChamberPortTransferState_E870304	PortTransferState_E870304			U1
+// 151803782		TransferChamberReason_E870304	Reason_E870304			U1
+// 151803783		TransferChamberTransferState_E870304	TransferState_E870304			U1
+// 151803784		TransferChamberReservationStatus_E870304	ReservationStatus_E870304			U1
+
+
+#SVID   CTC     151803786     #PORT_LOCATION_ID_PLACEMENT__LP1       AV      1       __                      // LPn
+// 151803786		Port1LocationIDPresent	LocationIDPresent			A
+#SVID   CTC     151803787     #PORT_LOCATION_ID_DOCKED__LP1            AV      1       __                      // FIMS
+// 151803787		Port1LocationIDDocked	LocationIDDocked			A
+
+#SVID   CTC     151803788     #PORT_LOCATION_ID_PLACEMENT__LP2       AV      1       __                      // LPn
+// 151803788		Port2LocationIDPresent	LocationIDPresent			A
+#SVID   CTC     151803789     #PORT_LOCATION_ID_DOCKED__LP2            AV      1       __                      // FIMS
+// 151803789		Port2LocationIDDocked	LocationIDDocked			A
+
+#SVID   CTC     151803790     #PORT_LOCATION_ID_PLACEMENT__LP3       AV      1       __                      // LPn
+// 151803790		Port3LocationIDPresent	LocationIDPresent			A
+#SVID   CTC     151803791     #PORT_LOCATION_ID_DOCKED__LP3            AV      1       __                      // FIMS
+// 151803791		Port3LocationIDDocked	LocationIDDocked			A
+
+
+// 151804008 	TransferChamberSlotValveLeftLLLidSwitchSensorReading	SlotValveAL1LidSwitch_DI	binary	nil  true  false  	Bool
+// 151804009 	TransferChamberSlotValveRightLLLidSwitchSensorReading	SlotValveAL2LidSwitch_DI	binary	nil  true  false  	Bool
+// 151804010 	AtmArmCurrentPostAlignmentPositionForMetrology	CurrentPostAlignmentPositionForMetrology	Degree		U4
+// 151804015 	AtmArmWaferBufferStationBufferStationNumber	WaferBufferStationBufferStationNumber			U1
+// 151804016 	AtmArmWaferBufferStationBufferStationSlotNumber	WaferBufferStationBufferStationSlotNumber			U1
+// 151804120 	Port1OnLineState	OnLineState			A
+// 151804121 	Port2OnLineState	OnLineState			A
+// 151804122 	Port3OnLineState	OnLineState			A
+// 151804123 	AirLock1OnLineState	OnLineState			A
+// 151804124 	AirLock2OnLineState	OnLineState			A
+// 151804128 	AtmArmOnLineState	OnLineState			A
+// 151804129 	TransferChamberOnLineState	OnLineState			A
+// 151804311 	TransferChamberRoughPumpIPX2PumpStatus	RoughPumpIPX2PumpStatus			A
+// 151804334 	AtmArmMEV_DifferentialPressure_AIReading	MEV_DifferentialPressure_AI	in		F4
+// 151804335 	AtmArmMEV_DifferentialPressureSIReading	MEV_DifferentialPressureSI_AI	Pa		F4
+// 151804336 	AlignerCurrentEnvironment	CurrentEnvironment			B
+// 151804341 	AlignerAligner-Slot1SubstLocID	Aligner-Slot1SubstLocID			A
+// 151804342 	AlignerAligner-Slot1SubstLocState	Aligner-Slot1SubstLocState			U1
+// 151804343 	AlignerAligner-Slot1SubstrLocSubstrID	Aligner-Slot1SubstrLocSubstrID			A
+// 151804358 	AlignerMode	mode			A
+// 151804360 	AlignerOnLineState	OnLineState			A
+// 151804364 	AlignerState	State			A
+// 151804372 	WaferBufferStation1CurrentEnvironment	CurrentEnvironment			B
+// 151804377 	WaferBufferStation1WaferBufferStation1-Slot14SubstLocID	WaferBufferStation1-Slot14SubstLocID			A
+// 151804378 	WaferBufferStation1WaferBufferStation1-Slot4SubstLocState	WaferBufferStation1-Slot4SubstLocState			U1
+// 151804379 	WaferBufferStation1WaferBufferStation1-Slot24SubstrLocSubstrID	WaferBufferStation1-Slot24SubstrLocSubstrID			A
+// 151804394 	WaferBufferStation1Mode	mode			A
+// 151804396 	WaferBufferStation1OnLineState	OnLineState			A
+// 151804400 	WaferBufferStation1State	State			A
+// 151804408 	WaferBufferStation2CurrentEnvironment	CurrentEnvironment			B
+// 151804413 	WaferBufferStation2WaferBufferStation2-Slot11SubstLocID	WaferBufferStation2-Slot11SubstLocID			A
+// 151804414 	WaferBufferStation2WaferBufferStation2-Slot2SubstLocState	WaferBufferStation2-Slot2SubstLocState			U1
+// 151804415 	WaferBufferStation2WaferBufferStation2-Slot4SubstrLocSubstrID	WaferBufferStation2-Slot4SubstrLocSubstrID			A
+// 151804430 	WaferBufferStation2Mode	mode			A
+// 151804432 	WaferBufferStation2OnLineState	OnLineState			A
+// 151804436 	WaferBufferStation2State	State			A
+// 151804466 	TMCImageMemoryMonitorCompactions	Compactions			I8
+// 151804467 	TMCImageMemoryMonitorFootprint	Footprint			I8
+// 151804468 	TMCImageMemoryMonitorFragmentation	Fragmentation			F4
+// 151804469 	TMCImageMemoryMonitorGCs	GCs			I8
+// 151804470 	TMCImageMemoryMonitorGGCs	GGCs			I8
+// 151804471 	TMCImageMemoryMonitorGrowth	Growth			I8
+// 151804472 	TMCImageMemoryMonitorLargeSpace	LargeSpace			F4
+// 151804473 	TMCImageMemoryMonitorOldSpace	OldSpace			F4
+// 151804474 	TMCImageMemoryMonitorTotalSpace	TotalSpace			F4
+// 151804493 	AtmArmCarrierID	CarrierID			A
+// 151804494 	AtmArmCurrentRToffsetDAAligner	CurrentRToffsetDAAligner			A
+// 151804495 	AtmArmDestination	Destination			A
+// 151804496 	AtmArmExtendAvgTheta	ExtendAvgTheta			I8
+// 151804497 	AtmArmExtendRightSensorTheta	ExtendRightSensorTheta			I8
+// 151804498 	AtmArmLotID	LotID			A
+// 151804499 	AtmArmPortName	PortName			A
+// 151804500 	AtmArmPreviousRToffsetDAAligner	PreviousRToffsetDAAligner			A
+// 151804501 	AtmArmRetractAvgTheta	RetractAvgTheta			I8
+// 151804508 	AtmArmSource	Source			A
+// 151804509 	AtmArmWaferflowName	WaferflowName			A
+// 151804510 	AtmArmWaferID	WaferID			A
+// 151804512 	AtmArmCurrentRToffsetAPM1_MM	CurrentRToffsetAPM1_MM			A
+// 151804513 	AtmArmCurrentRToffsetAPM2_MM	CurrentRToffsetAPM2_MM			A
+// 151804514 	AtmArmCurrentRToffsetAPM3_MM	CurrentRToffsetAPM3_MM			A
+// 151804515 	AtmArmPreviousRToffsetAPM1_MM	PreviousRToffsetAPM1_MM			A
+// 151804516 	AtmArmPreviousRToffsetAPM2_MM	PreviousRToffsetAPM2_MM			A
+// 151804517 	AtmArmPreviousRToffsetAPM3_MM	PreviousRToffsetAPM3_MM			A
+// 151804574 	AlignerPreviousState	PreviousState			A
+// 151804576 	WaferBufferStation1PreviousState	PreviousState			A
+// 151804577 	AirLock1PreviousState	PreviousState			A
+// 151804578 	AirLock2PreviousState	PreviousState			A
+// 151804581 	AtmArmPreviousState	PreviousState			A
+// 151804582 	TransferChamberPreviousState	PreviousState			A
+
+
+// 151804586		Port1WaferMappingResultContentMapE87AfterProcess	WaferMappingResultContentMapE87AfterProcess			List
+#SVID	CTC   151804587   #SLOT_PROCESSED__LP1		U	1	__			//  Load Port  -  Wafer Number Processed
+// 151804587		Port1WaferMappingResultStringAfterProcess	WaferMappingResultStringAfterProcess			A
+
+// 151804588		Port2WaferMappingResultContentMapE87AfterProcess	WaferMappingResultContentMapE87AfterProcess			List
+#SVID	CTC   151804589   #SLOT_PROCESSED__LP2		U	1	__			//  Load Port  -  Wafer Number Processed
+// 151804589		Port2WaferMappingResultStringAfterProcess	WaferMappingResultStringAfterProcess			A
+
+// 151804590		Port3WaferMappingResultContentMapE87AfterProcess	WaferMappingResultContentMapE87AfterProcess			List
+#SVID	CTC   151804591   #SLOT_PROCESSED__LP3		U	1	__			//  Load Port  -  Wafer Number Processed
+// 151804591		Port3WaferMappingResultStringAfterProcess	WaferMappingResultStringAfterProcess			A
+
+
+// 151804593		AtmArmEndEffector1Status	EndEffector1Status			A
+// 151804594		AtmArmEndEffector2Status	EndEffector2Status			A
+// 151804595		TransferChamberLightTowerBuzzerCurrentState	LightTowerBuzzerCurrentState		Blink  Off  On  	A
+// 151804596		TransferChamberLightTowerBuzzerPreviousState	LightTowerBuzzerPreviousState		Blink  Off  On  	A
+// 151804597		TransferChamberLightTowerLight1CurrentState	LightTowerLight1CurrentState		Blink  Off  On  	A
+// 151804598		TransferChamberLightTowerLight1PreviousState	LightTowerLight1PreviousState		Blink  Off  On  	A
+// 151804599		TransferChamberLightTowerLight2CurrentState	LightTowerLight2CurrentState		Blink  Off  On  	A
+// 151804600		TransferChamberLightTowerLight2PreviousState	LightTowerLight2PreviousState		Blink  Off  On  	A
+// 151804601		TransferChamberLightTowerLight3CurrentState	LightTowerLight3CurrentState		Blink  Off  On  	A
+// 151804602		TransferChamberLightTowerLight3PreviousState	LightTowerLight3PreviousState		Blink  Off  On  	A
+// 151804603		TransferChamberLightTowerLight4CurrentState	LightTowerLight4CurrentState		Blink  Off  On  	A
+// 151804604		TransferChamberLightTowerLight4PreviousState	LightTowerLight4PreviousState		Blink  Off  On  	A
+// 151804605		TransferChamberLightTowerLight5CurrentState	LightTowerLight5CurrentState		Blink  Off  On  	A
+// 151804606		TransferChamberLightTowerLight5PreviousState	LightTowerLight5PreviousState		Blink  Off  On  	A
+
+
+// 151804607		Port1WaferSize	WaferSize		300MM  200MM  	A
+// 151804608		Port2WaferSize	WaferSize		300MM  200MM  	A
+// 151804609		Port3WaferSize	WaferSize		300MM  200MM  	A
+
+
+// 151804610		AtmArmCurrentWaferCount	CurrentWaferCount			U4
+// 151804611		AtmArmTotalWaferCount	TotalWaferCount			U4
+// 151804613		AirLock2WaferSize	WaferSize		300MM  200MM  	A
+// 151804617		TransferChamberObjType_E870304	ObjType_E870304			A
+// 151804621		AirLock1WaferSize	WaferSize		300MM  200MM  	A
+// 151804622		TransferChamberCurrentROffset	CurrentROffset			A
+// 151804623		TransferChamberCurrentTOffset	CurrentTOffset			A
+// 151804651		AtmArmMEVDifferentialPressureMonitorRecipeSetpoint	MEVDifferentialPressureMonitorRecipeSetpoint			F4
+// 151804664 	AtmArmAssignAIToAO	AssignAIToAO		On  Off  	A
+// 151804665 	AtmArmPulseRate1	PulseRateM1	rpm		I4
+// 151804666 	AtmArmPulseRate2	PulseRateM2	rpm		I4
+// 151804667 	AtmArmPulseRate3	PulseRateS1	rpm		I4
+// 151804668 	AtmArmPulseRate4	PulseRateS2	rpm		I4
+// 151804669 	AtmArmPulseRate5	PulseRateS3	rpm		I4
+// 151804673		TransferChamberArmLastCommandedArm	ArmLastCommandedArm			A
+// 151804674	 	TransferChamberArmLastCommandedArmStatus	ArmLastCommandedArmStatus			A
+// 151804675	 	TransferChamberArmLastCommandedPosition	ArmLastCommandedPosition			A
+// 151804687 	WaferBufferStation1WaferSize	WaferSize		300MM  200MM  	A
+// 151804751		TransferChamberTMCurrentWaferCount	TMCurrentWaferCount			U4
+// 151804752		TransferChamberTMTotalWaferCount	TMTotalWaferCount			U4
+// 151804817		AtmArmCalibrationState	CalibrationState			A
+// 151804820		AirLock1PGCElapseTimeSeconds	ElapseTimeSeconds	second		F4
+// 151804822		AirLock2PGCElapseTimeSeconds	ElapseTimeSeconds	second		F4
+// 151804824		AtmArmCurrentAirLock3PostAlignmentPosition	CurrentAirLock3PostAlignmentPosition			U4
+// 151804825		AtmArmCurrentAirLock4PostAlignmentPosition	CurrentAirLock4PostAlignmentPosition			U4
+// 151804826		TransferChamberAirLock3SlotValveCloseElapsedTime	AirLock3SlotValveCloseElapsedTime	ms		I8
+// 151804827		TransferChamberAirLock3SlotValveOpenElapsedTime	AirLock3SlotValveOpenElapsedTime	ms		I8
+// 151804828		TransferChamberAirLock3WaferCounter	AirLock3WaferCounter			I8
+// 151804829		TransferChamberAirLock4SlotValveCloseElapsedTime	AirLock4SlotValveCloseElapsedTime	ms		I8
+// 151804830		TransferChamberAirLock4SlotValveOpenElapsedTime	AirLock4SlotValveOpenElapsedTime	ms		I8
+// 151804831		TransferChamberAirLock4WaferCounter	AirLock4WaferCounter			I8
+// 151804832		TransferChamberCurrentRToffsetAirLock3	CurrentRToffsetAirLock3			A
+// 151804833		TransferChamberCurrentRToffsetAirLock4	CurrentRToffsetAirLock4			A
+// 151804834		TransferChamberPreviousRToffsetAirLock3	PreviousRToffsetAirLock3			A
+// 151804835		TransferChamberPreviousRToffsetAirLock4	PreviousRToffsetAirLock4			A
+// 151805034		Port1PDOMappingResultByPort	PDOMappingResultByPort			A
+// 151805035		Port2PDOMappingResultByPort	PDOMappingResultByPort			A
+// 151805036		Port3PDOMappingResultByPort	PDOMappingResultByPort			A
+// 151805066		TransferChamberCurrentRToffsetDegas1	CurrentRToffsetDegas1			A
+// 151805067		TransferChamberCurrentRToffsetDegas2	CurrentRToffsetDegas2			A
+// 151805068		TransferChamberDegas1SlotValveCloseElapsedTime	Degas1SlotValveCloseElapsedTime	ms		I8
+// 151805069		TransferChamberDegas1SlotValveOpenElapsedTime	Degas1SlotValveOpenElapsedTime	ms		I8
+// 151805070		TransferChamberDegas1WaferCounter	Degas1WaferCounter			I8
+// 151805071		TransferChamberDegas2SlotValveCloseElapsedTime	Degas2SlotValveCloseElapsedTime	ms		I8
+// 151805072		TransferChamberDegas2SlotValveOpenElapsedTime	Degas2SlotValveOpenElapsedTime	ms		I8
+// 151805073		TransferChamberDegas2WaferCounter	Degas2WaferCounter			I8
+// 151805074		TransferChamberPreviousRToffsetDegas1	PreviousRToffsetDegas1			A
+// 151805075		TransferChamberPreviousRToffsetDegas2	PreviousRToffsetDegas2			A
+// 151805607		TransferChamberCurrentRTXoffsetAirLock1	CurrentRTXoffsetAirLock1			A
+// 151805608		TransferChamberCurrentRTXoffsetAirLock2	CurrentRTXoffsetAirLock2			A
+// 151805609		TransferChamberCurrentRTXoffsetAirLock3	CurrentRTXoffsetAirLock3			A
+// 151805610		TransferChamberCurrentRTXoffsetAirLock4	CurrentRTXoffsetAirLock4			A
+// 151805611		TransferChamberCurrentRTXoffsetDegas1	CurrentRTXoffsetDegas1			A
+// 151805612		TransferChamberCurrentRTXoffsetDegas2	CurrentRTXoffsetDegas2			A
+// 151805613		TransferChamberCurrentRTXoffsetPass1	CurrentRTXoffsetPass1			A
+// 151805614		TransferChamberCurrentRTXoffsetPM1	CurrentRTXoffsetPM1			A
+// 151805615		TransferChamberCurrentRTXoffsetPM2	CurrentRTXoffsetPM2			A
+// 151805616		TransferChamberCurrentRTXoffsetPM3	CurrentRTXoffsetPM3			A
+// 151805617		TransferChamberCurrentRTXoffsetPM4	CurrentRTXoffsetPM4			A
+// 151805618		TransferChamberCurrentRTXoffsetPM5	CurrentRTXoffsetPM5			A
+// 151805619		TransferChamberCurrentRTXoffsetPM6	CurrentRTXoffsetPM6			A
+// 151805620		TransferChamberCurrentRTXoffsetTransferLock2	CurrentRTXoffsetTransferLock2			A
+// 151805621		TransferChamberCurrentXOffset	CurrentXOffset			A
+// 151805635		TransferChamberPreviousRTXoffsetAirLock1	PreviousRTXoffsetAirLock1			A
+// 151805636		TransferChamberPreviousRTXoffsetAirLock2	PreviousRTXoffsetAirLock2			A
+// 151805637		TransferChamberPreviousRTXoffsetAirLock3	PreviousRTXoffsetAirLock3			A
+// 151805638		TransferChamberPreviousRTXoffsetAirLock4	PreviousRTXoffsetAirLock4			A
+// 151805639		TransferChamberPreviousRTXoffsetDegas1	PreviousRTXoffsetDegas1			A
+// 151805640		TransferChamberPreviousRTXoffsetDegas2	PreviousRTXoffsetDegas2			A
+// 151805641		TransferChamberPreviousRTXoffsetPass1	PreviousRTXoffsetPass1			A
+// 151805642		TransferChamberPreviousRTXoffsetPM1	PreviousRTXoffsetPM1			A
+// 151805643		TransferChamberPreviousRTXoffsetPM2	PreviousRTXoffsetPM2			A
+// 151805644		TransferChamberPreviousRTXoffsetPM3	PreviousRTXoffsetPM3			A
+// 151805645		TransferChamberPreviousRTXoffsetPM4	PreviousRTXoffsetPM4			A
+// 151805646		TransferChamberPreviousRTXoffsetPM5	PreviousRTXoffsetPM5			A
+// 151805647		TransferChamberPreviousRTXoffsetPM6	PreviousRTXoffsetPM6			A
+// 151805648		TransferChamberPreviousRTXoffsetTransferLock2	PreviousRTXoffsetTransferLock2			A
+
+

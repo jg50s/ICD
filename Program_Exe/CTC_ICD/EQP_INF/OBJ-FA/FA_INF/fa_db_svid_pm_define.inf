@@ -1,0 +1,36 @@
+
+//  MODULE 	VID  	[CHANNEL or COMMAND]	
+//					                            							             TYPE	BYTE	UNIT	DISPLAY_NAME
+                                                                   
+#SVID   ##PM    1       ##PHY_PM+FDC.LOTID						             A		 32	   __    LOT_ID		      			  //
+#SVID   ##PM    2       ##PHY_PM+FDC.RECIPE						             A     32	   __		 FDC.RECIPE_NAME	      //
+#SVID   ##PM    3       ##PHY_PM+MATERIALID						             A		 32	   __    WAFER_ID	      			  //
+
+// #SVID   ##PM    4       ##PHY_PM+STEP.START						             A      7	   __    STEP_NUM	      			  //
+#SVID   ##PM    4       ##PHY_PM+PROC_INFO.CUR_STEP_COUNT          A      7	   __    STEP_NUM	      			  //
+
+#SVID   ##PM    5       ##PHY_PM+LPx.PORT_ID					             A			7	   __    PORT_ID		      
+#SVID   ##PM    6       ##PHY_PM+LPx.SLOT_ID					             A			7	   __    SLOT_ID	
+#SVID   ##PM    7	      ##PHY_PM+PROCESS.ASYNC_TIME		             A			7	   __    PROCESS_TIME	
+#SVID   ##PM    8	      ##PHY_PM+LPx.CID				  		             A		 32	   __    CID
+#SVID   ##PM    9       ##PHY_PM+RECIPE				                     A     32	   __		 RECIPE_NAME	      		//
+                                                                   
+#SVID   ##PM    10      ##PHY_PM+FDC.CHM.ID			                   A      3 	 __		 Chamber_ID 	      		//
+#SVID   ##PM    11      ##PHY_PM+FDC.CLN.RECIPE                    A     32    __    Clean_Recipe_Name      //
+#SVID   ##PM    12      ##PHY_PM+CJOBID                            A     32    __    CJobID                 //
+#SVID   ##PM    13      ##PHY_PM+PJOBID                            A     32    __    PJobID                 //
+
+#SVID   ##PM    14      ##PHY_PM+PROC_INFO.TOTAL_PROC_TIME         A     10    sec   Total_Process_Time     //
+#SVID   ##PM    15      ##PHY_PM+PROC_INFO.CUR_PROC_TIME           A     10    sec   Current_Process_Time   //
+#SVID   ##PM    16      ##PHY_PM+PROC_INFO.TOTAL_STEP_COUNT        A     10    id    Total_Step_Count       //        
+
+// #SVID   ##PM    17      ##PHY_PM+PROC_INFO.DVID.CUR_STEP_COUNT     A     10    id    Current_Step_Count     //
+#SVID   ##PM    17      #STEP_NO__##CHM                            A     10    id    Current_Step_Count     //
+
+#SVID   ##PM    18      ##PHY_PM+PROC_INFO.STEP_TOTAL_TIME         A     10    sec   Total_Step_Time        //
+#SVID   ##PM    19      ##PHY_PM+PROC_INFO.STEP_CUR_TIME           A     10    sec   Current_Step_Time      //
+#SVID   ##PM    20      ##PHY_PM+PROC_INFO.STEP_MSG                A     40    __    Step_Message           //
+
+
+  
+

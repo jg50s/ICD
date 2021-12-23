@@ -1,0 +1,200 @@
+
+<<<----  [OUT]
+2020/08/27 17:55:58:967
+
+---------------------------------------------------------------------
+// FA : Start Log ...
+
+
+<<<----  [OUT]
+2020/08/27 17:55:58:971
+
+//-------------------------------------------------------------
+Property Information
+
+   Driver Type [HSMS]
+   Driver Mode [ACTIVE]
+   IP    [192.168.100.113]
+   Port  [5000]
+//-------------------------------------------------------------
+
+
+<<<----  [OUT]
+2020/08/27 17:55:59:573
+
+Auto-Start Started ... (Active)
+
+<<<----  [OUT]
+2020/08/27 17:55:59:664
+
+Auto-Start Started ...  Waiting Stop-Connection.
+
+<<<----  [OUT]
+2020/08/27 17:55:59:664
+
+Auto-Start Started ...  Waiting Open-Socket.
+
+<<<----  [OUT]
+2020/08/27 17:55:59:694
+
+Socket Open Started...
+
+<<<----  [OUT]
+2020/08/27 17:55:59:694
+
+Socket Open Completed...
+
+<<<----  [OUT]
+2020/08/27 17:55:59:694
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:55:59:754
+
+Auto-Start Completed ...  (Active)
+
+<<<----  [OUT]
+2020/08/27 17:56:20:723
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:56:23:201
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:56:44:236
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:56:46:716
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:57:11:864
+
+---------------------------------------------------------------------
+// FA : Start Log ...
+
+
+<<<----  [OUT]
+2020/08/27 17:57:11:867
+
+//-------------------------------------------------------------
+Property Information
+
+   Driver Type [HSMS]
+   Driver Mode [ACTIVE]
+   IP    [192.168.100.113]
+   Port  [5000]
+//-------------------------------------------------------------
+
+
+<<<----  [OUT]
+2020/08/27 17:57:12:469
+
+Auto-Start Started ... (Active)
+
+<<<----  [OUT]
+2020/08/27 17:57:12:560
+
+Auto-Start Started ...  Waiting Stop-Connection.
+
+<<<----  [OUT]
+2020/08/27 17:57:12:560
+
+Auto-Start Started ...  Waiting Open-Socket.
+
+<<<----  [OUT]
+2020/08/27 17:57:12:591
+
+Socket Open Started...
+
+<<<----  [OUT]
+2020/08/27 17:57:12:591
+
+Socket Open Completed...
+
+<<<----  [OUT]
+2020/08/27 17:57:12:591
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:57:12:651
+
+Auto-Start Completed ...  (Active)
+
+<<<----  [OUT]
+2020/08/27 17:57:33:620
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:57:36:107
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:57:57:132
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:57:59:623
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:58:20:663
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:58:23:154
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:58:44:196
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:58:46:684
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:59:07:736
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:59:10:216
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:59:31:251
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:59:33:731
+
+Connecting Started...
+
+<<<----  [OUT]
+2020/08/27 17:59:54:768
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2020/08/27 17:59:57:247
+
+Connecting Started...

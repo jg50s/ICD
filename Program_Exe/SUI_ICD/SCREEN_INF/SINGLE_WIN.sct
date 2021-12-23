@@ -1,0 +1,44 @@
+/*  SCREEN INFOMATION  */
+
+
+#SCREEN_DIR  SCR__SINGLE_PAGE\
+
+
+
+// -----------------------------------------------------------------------
+#DEFINE  DEF__FRAME_TOP
+	POPUP              CTC 
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         0
+	WIDTH              1280 
+	HEIGHT             155
+#END
+
+#DEFINE  DEF__FRAME_ALARM
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         55
+	WIDTH              1280
+	HEIGHT             869
+#END
+
+
+// -----------------------------------------------------------------------
+//  SINGLE-WINDOW
+
+WINDOW_NAME SINGLE_TOP   
+{
+	#CALL_DEFINE                    DEF__FRAME_TOP
+	
+	CTRL_CHANNEL                    SCR.SINGLE_TOP
+	USER_LEVEL                      Unknown 
+}
+
+WINDOW_NAME SINGLE_ALARM__MAIN   
+{
+	#CALL_DEFINE			              DEF__FRAME_ALARM
+	
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+

@@ -1,0 +1,523 @@
+//--------------------------------------------------------------------------------------------
+//   E30 - CEID
+
+#DEFINE_ID_OFFSET   	0
+
+#CEID_E30__OFFLINE				1	
+#CEID_E30__LOCAL  				2
+#CEID_E30__REMOTE 				3
+
+#CEID_E30__OPERATOR_COMMAND_ISSUED		11
+#CEID_E30__PROCESSING_STARTED			12
+#CEID_E30__PROCESSING_COMPLETED			13
+#CEID_E30__PROCESSING_STOPPED			14
+#CEID_E30__PROCESSING_STATUS_CHANGE		15
+#CEID_E30__ALARM_DETECTED			16
+#CEID_E30__ALARM_CLEARED			17
+
+#CEID_E30__PROCESS_PROGRAM_CHANGE		19
+#CEID_E30__PROCESS_PROGRAM_SELECTED		20
+#CEID_E30__MATERIAL_RECEIVED			21
+#CEID_E30__MATERIAL_REMOVED			22
+#CEID_E30__SPOOLING_ACTIVATED			23
+#CEID_E30__SPOOLING_DEACTIVATED			24
+#CEID_E30__SPOOL_TRANSMIT_FAILURE		25
+#CEID_E30__MESSAGE_RECOGNITION			26
+
+#CEID_E30__NEW_EXECUTION_RECIPE			27
+#CEID_E30__EXECUTION_RECIPE_CHANGE		28
+#CEID_E30__SUCCESSFUL_UPLOAD			29
+#CEID_E30__BAD_UPLOAD				30
+#CEID_E30__OPERATOR_ECID_CHANGE			31
+
+#CEID_E30__EQUIPMENT_ENGINEER_CALL		41
+#CEID_E30__PROCESS_ENGINEER_CALL                42
+
+//--------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------
+// LP1 ~ LP5
+
+#DEFINE_ID_OFFSET	1000
+#DEFINE   ##LP   LP1
+
+#INCLUDE  "fa_lp_ceid_define.inf"
+
+#DEFINE_ID_OFFSET	1200
+#DEFINE   ##LP   LP2
+
+#INCLUDE  "fa_lp_ceid_define.inf"
+
+#DEFINE_ID_OFFSET	1400
+#DEFINE   ##LP   LP3
+
+#INCLUDE  "fa_lp_ceid_define.inf"
+
+/*
+#DEFINE_ID_OFFSET	1600
+#DEFINE   ##LP   LP4
+
+#INCLUDE  "fa_lp_ceid_define.inf"
+
+#DEFINE_ID_OFFSET	1800
+#DEFINE   ##LP   LP5
+
+#INCLUDE  "fa_lp_ceid_define.inf"
+*/
+//--------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------
+//   E40 - CEID
+
+#DEFINE_ID_OFFSET	100
+
+#CEID_E40__SCT01				1		// (no state --> QUEUED/POOLED)
+// PJobID
+// PJobStatus
+// PJobRecipe
+#CEID_E40__SCT02				2		// (QUEUED/POOLED --> SETTING UP)
+// PJobID
+// PJobStatus
+// PJobRecipe
+#CEID_E40__SCT03				3		// (SETTING UP --> WAITING FOR START)
+// PJobID
+// PJobStatus
+// PJobRecipe
+#CEID_E40__SCT04				4		// (SETTING UP --> PROCESSING)
+// PJobID
+// PJobStatus
+// PJobRecipe
+#CEID_E40__SCT05				5		// (WAITING FOR START --> PROCESSING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT06				6		// (PROCESSING --> PROCESS COMPLETE)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT07				7		// (PROCESSING COMPLETE --> no state)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT08				8		// (EXECUTING --> PAUSING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT09				9		// (PAUSING --> PAUSED)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT10				10		// (PAUSE --> EXECUTING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT11				11		// (EXECUTING --> STOPPING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT12				12		// (PAUSE --> STOPPING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT13				13		// (EXECUTING --> ABORTING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT14				14		// (STOPPING --> ABORTING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT15				15		// (PAUSE --> ABORTING)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT16				16		// (ABORTING --> no state)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT17				17		// (STOPPING --> no state)
+// PJobID
+// PJobStatus
+#CEID_E40__SCT18				18		// (QUEUED/POOLED --> no state)
+// PJobID
+
+
+#CEID_E40__PRJOB_QUEUED				21		// PR Job Queued
+// PJobID
+#CEID_E40__PRJOB_SETUP				22		// PR Job Setup
+// PJobID
+#CEID_E40__PRJOB_WAITING_FOR_START		23		// PR Job Waiting for Start
+// PJobID
+#CEID_E40__PRJOB_PROCESSING		  	24		// PR Job Processing
+// PJobID
+#CEID_E40__PRJOB_PROCESSING_COMPLETE		25		// PR Job Processing Complete
+// PJobID
+#CEID_E40__PRJOB_PAUSING			26		// PR Job Pausing
+// PJobID
+#CEID_E40__PRJOB_PAUSED				27		// PR Job Paused
+// PJobID
+#CEID_E40__PRJOB_ABORTING			28		// PR Job Aborting
+// PJobID
+#CEID_E40__PRJOB_COMPLETE			29		// PR Job Complete
+// PJobID
+#CEID_E40__PRJOB_WAITING_FOR_MATERIAL  		30		// PR Job Waiting for Material
+// PJobID
+#CEID_E40__PRJOB_STATE_CHANGE			31		// PR Job State Change
+
+#CEID_E40__PRJOB_RESUMED			32		// RP Job Requmed
+#CEID_E40__PRJOB_STOPPING			33		// PR Job Stopping
+#CEID_E40__PRJOB_CANCELED			34		// PR Job Canceled
+//--------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------
+//   E87 - CEID
+
+#DEFINE_ID_OFFSET	200
+
+
+// Load Port Transfer State Model
+#CEID_E87__LPTSM_01__OUT_OF_SERVICE		1	// (no state --> OUT OT SERVICE (History))
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_01__IN_SERVICE			2	// (no state --> IN SERVICE (History))
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_02				3	// (OUT OF SERVICE --> IN SERVICE)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_03				4	// (IN SERVICE --> OUT OT SERVICE)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_04__TRANSFER_READY		5	// (IN SERVICE --> TRANSFER READY)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_04__TRANSFER_BLOCKED		6	// (IN SERVICE --> TRANSFER BLOCKED)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_05__READY_TO_LOAD		7	// (TRANSFER READY --> READY TO LOAD)
+//	PortID
+
+#CEID_E87__LPTSM_05__READY_TO_UNLOAD		8	// (TRANSFER READY --> READY TO UNLOAD)
+// 	PortID
+//	CarrierID
+//	PortTransferState
+
+#CEID_E87__LPTSM_06				9	// (READY TO LOAD --> TRANSFER BLOCKED)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_07				10	// (READY TO UNLOAD --> TRANSFER BLOCKED)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_08				11	// (TRANSFER BLOCKED --> READY TO LOAD)
+//	PortID
+//	PortTransferState
+
+#CEID_E87__LPTSM_09				12	// (TRANSFER BLOCKED --> READY TO UNLOAD)
+//	PortID
+//	CarrierID
+//	PortTransferState
+
+#CEID_E87__LPTSM_10				13	// (TRANSFER BLOCKED --> TRANSFER READY)
+//	PortID
+//	PortTransferState
+
+
+// Carrier Object State Model
+#CEID_E87__COSM_01				21	// (no state --> CARRIER)
+
+#CEID_E87__COSM_02				22	// (no state --> ID NOT READ)
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_03				23	// (no state --> ID WAITING FOR HOST)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_04				24	// (no state --> ID VERIFICATION OK)
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_05				25	// (no state --> ID VERIFICATION FAIL)
+// 	CarrierID
+//	CarrierIDStatus	
+
+#CEID_E87__COSM_06				26	// (ID NOT READ --> ID VERIFICATION OK)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_07				27	// (ID NOT READ --> ID WAITING FOR HOST)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_08				28	// (ID WAITING FOR HOST --> ID VERIFICATION OK)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_09				29	// (ID WAITING FOR HOST --> ID VERIFICATION FAIL)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_10				30	// (ID NOT READ --> ID WAITING FOR HOST)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_11				31	// (ID NOT READ --> ID VERIFICATION OK)
+//	PortID
+//	CarrierID
+//	CarrierIDStatus
+
+#CEID_E87__COSM_12				32	// (no state --> SLOT MAP NOT READ)
+
+#CEID_E87__COSM_13				33	// (SLOT MAP NOT READ --> SLOT MAP VERIFICATION OK)
+//	PortID
+//	CarrierID
+//	LocationID
+//	CarrierAccessingStatus
+//	SlotMapStatus
+
+#CEID_E87__COSM_14				34	// (SLOT MAP NOT READ --> MAP WAITING FOR HOST)
+//	PortID
+//	CarrierID
+//	LocationID
+//	SlotMapStatus
+//	SlotMap
+//	Reason
+
+#CEID_E87__COSM_15				35	// (WAITING FOR HOST --> SLOT MAP VERIFICATION OK)
+//	PortID
+//	CarrierID
+//	LocationID
+//	SlotMapStatus
+
+#CEID_E87__COSM_16				36	// (WAITING FOR HOST --> SLOT MAP VERIFICATION FAIL)
+//	PortID
+//	CarrierID
+//	LocationID
+//	CarrierAccessingStatus
+//	SlotMapStatus
+
+#CEID_E87__COSM_17				37	// (no state --> NOT ACCESSED)
+
+#CEID_E87__COSM_18				38	// (NOT ACCESSED --> IN ACCESS)
+// 	CarrierID
+//	CarrierAccessingStatus
+
+#CEID_E87__COSM_19				39	// (IN ACCESS --> CARRIER COMPLETE)
+//	CarrierID
+//	CarrierAccessingStatus
+
+#CEID_E87__COSM_20				40	// (IN ACCESS --> CARRIER STOPPED)
+//	CarrierID
+//	CarrierAccessingStatus							
+
+#CEID_E87__COSM_21				41	// (CARRIER --> no state)
+//	CarrierID
+
+
+// Access Mode State Model
+#CEID_E87__AMSM_01_MANUAL			51	// (no state --> MANUAL (History))
+//	PortID
+//	AccessMode
+
+#CEID_E87__AMSM_01_AUTO				52	// (no state --> AUTO (History))
+//	PortID
+//	AccessMode
+
+#CEID_E87__AMSM_02				53	// (MANUAL --> AUTO)
+//	PortID
+//	AccessMode
+#CEID_E87__AMSM_03				54	// (AUTO --> MANUAL)
+//	PortID
+//	AccessMode
+
+	
+// Load Port Reservation State Model	
+#CEID_E87__LPRSM_01				61	// (no state --> NOT RESERVED)
+
+#CEID_E87__LPRSM_02				62	// (NOT RESERVED --> RESERVED)
+//	PortID
+//	LoadPortReservationState
+//	CarrierID
+
+#CEID_E87__LPRSM_03				63	// (RESERVED --> NOT RESERVED)
+//	PortID
+//	LoadPortReservationState
+
+
+// Load Port/Carrier Association State Model
+#CEID_E87__LPCASM_01				71	// (no state --> NOT ASSOCIATED)
+
+#CEID_E87__LPCASM_02				72	// (NOT ASSOCIATED --> ASSOCIATED)
+//	PortID
+//	CarrierID
+//	PortAssociationState
+
+#CEID_E87__LPCASM_03				73	// (ASSOCIATED --> NOT ASSOCIATED)
+//	PortID
+//	PortAssociationState
+
+#CEID_E87__LPCASM_04				74	// (ASSOCIATED --> ASSOCIATED)
+//	PortID
+//	CarrierID
+//	PortAssociationState
+
+
+#CEID_E87__UNKNOWN_CARRIERID			80
+#CEID_E87__CARRIER_APPROACHING_COMPLETE		81	
+#CEID_E87__CARRIER_CLOSED			82
+#CEID_E87__CARRIER_UNCLAMPED			83
+#CEID_E87__ID_READER_UNAVAILABLE		84
+#CEID_E87__ID_READER_AVILABLE			85
+#CEID_E87__CARRIERID_READ_FAIL			86
+#CEID_E87__CARRIER_CLAMPED			87
+#CEID_E87__CARRIER_LOCATION_CHANGE		88
+#CEID_E87__CARRIER_OPENED			89
+//--------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------
+// E90
+
+//                      OFFSET_ID        EVENT_FLAG
+#DEFINE_ID_OFFSET	300              
+
+#CEID_E90__SLSM__NoState_To_UNOCCUPIED         			1	// no state --> UNOCCUPIED
+#CEID_E90__SLSM__NoState_To_OCCUPIED				2	// no state --> OCCUPIED
+#CEID_E90__SLSM__UNOCCUPIED_To_OCCUPIED				3	// UNOCCUPIED --> OCCUPIED
+#CEID_E90__SLSM__OCCUPIED_To_UNOCCUPIED				4	// OCCUPIED --> UNOCCUPIED
+#CEID_E90__SLSM__UNOCCUPIED_To_NoState				5	// UNOCCUPIED --> NoState
+#CEID_E90__SLSM__OCCUPIED_To_NoState				6	// OCCUPIED --> NoState
+
+#CEID_E90__SOSM__NoState_To_AT_SOURCE				11	// no state --> AT SOURCE
+#CEID_E90__SOSM__AT_SOURCE_To_AT_WORK				12	// AT SOURCE --> AT WORK
+#CEID_E90__SOSM__AT_WORK_To_AT_SOURCE				13	// AT WORK --> AT SOURCE
+#CEID_E90__SOSM__AT_WORK_To_AT_WORK				14	// AT WORK --> AT WORK
+#CEID_E90__SOSM__AT_WORK_To_AT_DESTINATION			15	// AT WORK --> AT DESTINATION
+#CEID_E90__SOSM__AT_DESTINATION_To_AT_WORK			16	// AT DESTINATION --> AT WORK
+#CEID_E90__SOSM__AT_DESTINATION_To_Extinction			17	// AT DESTINATION --> Extinction
+#CEID_E90__SOSM__AT_DESTINATION_To_AT_SOURCE			18	// AT DESTINATION --> AT SOURCE
+#CEID_E90__SOSM__ANY_SUBSTRATE_To_Extinction			19	// AT SUBSTRATE --> Extinction
+#CEID_E90__SOSM__NoState_To_NEEDS_PROCESSING			20	// No State --> NEEDS PROCESSING
+#CEID_E90__SOSM__NEEDS_PROCESSING_To_IN_PROCESS			21	// NEEDS PROCESSING --> IN PROCESS
+
+#CEID_E90__SOSM__IN_PROCESS_To_PROC_COMP__PROCESSED		22	// IN PROCESS --> PROC_COMP / PROCESSED
+#CEID_E90__SOSM__IN_PROCESS_To_PROC_COMP__ABORTED		23	// IN PROCESS --> PROC_COMP / ABORTED
+#CEID_E90__SOSM__IN_PROCESS_To_PROC_COMP__STOPPED		24	// IN PROCESS --> PROC_COMP / STOPPED
+#CEID_E90__SOSM__IN_PROCESS_To_PROC_COMP__REJECTED		25	// IN PROCESS --> PROC_COMP / REJECTED
+#CEID_E90__SOSM__IN_PROCESS_To_PROC_COMP__LOST			26	// IN PROCESS --> PROC_COMP / LOST
+#CEID_E90__SOSM__IN_PROCESS_To_PROC_COMP__SKIPPED		27	// IN PROCESS --> PROC_COMP / SKIPPED
+
+#CEID_E90__SOSM__IN_PROCESS_To_NEEDS_PROCESSING			28	// IN PROCESS --> NEEDS PROCESSING
+
+#CEID_E90__SOSM__NEEDS_PROCESSING_To_PROC_COMP__LOST		29	// NEEDS PROCESSING --> PROC_COMP / LOST
+#CEID_E90__SOSM__NEEDS_PROCESSING_To_PROC_COMP__SKIPPED		30	// NEEDS PROCESSING --> PROC_COMP / SKIPPED
+
+
+#CEID_E90__SOBJ__AT_SOURCE					41
+#CEID_E90__SOBJ__AT_WORK					42
+#CEID_E90__SOBJ__DESTINATION					43
+#CEID_E90__SOBJ__INPROCESS					44
+#CEID_E90__SOBJ__PROCESSED					45
+#CEID_E90__SOBJ__UNOCCUPIED   		      			46
+#CEID_E90__SOBJ__OCCUPIED					47
+//--------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------
+// E94
+
+#DEFINE_ID_OFFSET	400
+
+#CEID_E94__CJSM_01				1	// (no state --> QUEUED)
+#CEID_E94__CJSM_02				2	// (QUEUED --> no state)
+#CEID_E94__CJSM_03				3	// (QUEUED --> SELECTED)
+#CEID_E94__CJSM_04				4	// (SELECTED --> QUEUED)
+#CEID_E94__CJSM_05				5	// (SELECTED --> EXECUTING)
+#CEID_E94__CJSM_06				6	// (SELECTED --> WAITING FOR START)
+#CEID_E94__CJSM_07				7	// (WAITING FOR START --> EXECUTING)
+#CEID_E94__CJSM_08				8	// (EXECUTING --> PAUSED)
+#CEID_E94__CJSM_09				9	// (PAUSED --> EXECUTING)
+#CEID_E94__CJSM_10				10	// (EXECUTING --> COMPLETED)
+#CEID_E94__CJSM_11				11	// (ACTIVE --> STOP_COMPLETED)
+#CEID_E94__CJSM_12				12	// (ACTIVE --> ABORT_COMPLETED)
+#CEID_E94__CJSM_13				13	// (COMPLETED --> no state)
+
+
+#CEID_E94__CJOB_QUEUED				21
+#CEID_E94__CJOB_SELECTED			22
+#CEID_E94__CJOB_WAITING_FOR_START		23
+#CEID_E94__CJOB_EXECUTING			24
+#CEID_E94__CJOB_PAUSED				25
+#CEID_E94__CJOB_COMPLETE			26
+#CEID_E94__CJOB_STATE_CHANGE			27
+#CEID_E94__CJOB_DEQUEUE				28
+#CEID_E94__CJOB_DESELECT			29
+#CEID_E94__CJOB_EXTINCTION			30
+//--------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------
+// Polisher Event
+
+#DEFINE   ##CHM     CHM1
+
+// P1 Stage
+#DEFINE_ID_OFFSET	  11000
+#DEFINE   ##STAGE   STAGE1
+
+#INCLUDE  "fa_polisher_stage_ceid_define.inf"
+
+// P2 Stage
+#DEFINE_ID_OFFSET	  12000
+#DEFINE   ##STAGE   STAGE2
+
+#INCLUDE  "fa_polisher_stage_ceid_define.inf"
+
+// P3 Stage
+#DEFINE_ID_OFFSET	  13000
+#DEFINE   ##STAGE   STAGE3
+
+#INCLUDE  "fa_polisher_stage_ceid_define.inf"
+
+
+//--------------------------------------------------------------------------------------------
+// Cleaner Event
+
+#DEFINE   ##CHM     CHM2
+
+// S1 Stage
+#DEFINE_ID_OFFSET	  21000
+#DEFINE   ##STAGE   STAGE1
+
+#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
+
+// S2 Stage
+#DEFINE_ID_OFFSET	  22000
+#DEFINE   ##STAGE   STAGE2
+
+#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
+
+// S3 Stage
+#DEFINE_ID_OFFSET	  23000
+#DEFINE   ##STAGE   STAGE3
+
+#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
+
+// S4 Stage
+#DEFINE_ID_OFFSET	  24000
+#DEFINE   ##STAGE   STAGE4
+
+#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
+
+
+//--------------------------------------------------------------------------------------------
+//  °èÃø±â
+
+#DEFINE_ID_OFFSET	  30000
+#DEFINE   ##CHM     CMH4
+
+#INCLUDE  "fa_chm_ceid_define.inf"
+

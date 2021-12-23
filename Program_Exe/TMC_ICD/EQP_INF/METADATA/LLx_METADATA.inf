@@ -1,0 +1,253 @@
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__LBA            
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          LL1.FNC
+
+#FNC_MODE           INIT                   FNC__LBA              INIT 
+#FNC_MODE           PUMP                   FNC__LBA              PUMP 
+#FNC_MODE           VENT                   FNC__LBA              VENT 
+#FNC_MODE           ISOLATE                FNC__LBA              ISOLATE 
+#FNC_MODE           LEAK_CHECK             FNC__LBA              LEAK_CHECK 
+#FNC_MODE           CYCLE_PURGE            FNC__LBA              CYCLE_PURGE 
+                                                                 
+//------------------------------------------------               
+#OBJECT_PROPERTY    PAGE__LBB                                    
+                                                                 
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          LL2.FNC
+
+#FNC_MODE           INIT                   FNC__LBB              INIT 
+#FNC_MODE           PUMP                   FNC__LBB              PUMP 
+#FNC_MODE           VENT                   FNC__LBB              VENT 
+#FNC_MODE           ISOLATE                FNC__LBB              ISOLATE 
+#FNC_MODE           LEAK_CHECK             FNC__LBB              LEAK_CHECK 
+#FNC_MODE           CYCLE_PURGE            FNC__LBB              CYCLE_PURGE 
+#FNC_MODE           LIFT_PIN_UP            FNC__LBB              LIFT_PIN.UP 
+#FNC_MODE           LIFT_PIN_DOWN          FNC__LBB              LIFT_PIN.DOWN
+
+
+//------------------------------------------------               
+#OBJECT_PROPERTY    PAGE__LBA_LEAK                                   
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+                                                                 
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          LL1.LEAK
+
+#FNC_MODE           LEAK_CHECK             FNC__LBA              LEAK_CHECK
+
+//------------------------------------------------               
+#OBJECT_PROPERTY    PAGE__LBB_LEAK                                   
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+                                                                 
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          LL2.LEAK
+
+#FNC_MODE           LEAK_CHECK             FNC__LBB              LEAK_CHECK
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__LBx_TEST
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          LLx.FNC
+
+#FNC_MODE           LL1_SV.CYCLE_TEST      FNC__LBx_TEST         LBA_SV.CYCLE_TEST
+#FNC_MODE           LL1_DV.CYCLE_TEST      FNC__LBx_TEST         LBA_DV.CYCLE_TEST
+#FNC_MODE           LL2_SV.CYCLE_TEST      FNC__LBx_TEST         LBB_SV.CYCLE_TEST
+#FNC_MODE           LL2_DV.CYCLE_TEST      FNC__LBx_TEST         LBB_DV.CYCLE_TEST
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__MANIFOLD_TEST
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          MANIFOLD.FNC
+
+#FNC_MODE           PUMPING.CYCLE_TEST     FNC__MANIFOLD_TEST    PUMPING.CYCLE_TEST 
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LBA
+
+#DEFINE_CONSTANT    OBJ__LBx     	                      OPR__LBA
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LBB
+
+#DEFINE_CONSTANT    OBJ__LBx     	                      OPR__LBB
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LBA
+
+#DEFINE_CONSTANT    OBJ.LLx_CHM      		                FNC__LBA
+#DEFINE_CONSTANT    OBJ.LLx_PROC     		                NO
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LBB
+
+#DEFINE_CONSTANT    OBJ.LLx_CHM      		                FNC__LBB
+#DEFINE_CONSTANT    OBJ.LLx_PROC     		                NO
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__LBx_TEST
+
+#DEFINE_CONSTANT    DATA.LLX_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ.LLX_OPR.1                       OPR__LBA 
+#DEFINE_CONSTANT    OBJ.LLX_FNC.1                       FNC__LBA 
+#DEFINE_CONSTANT    OBJ.LLX_OPR.2                       OPR__LBB 
+#DEFINE_CONSTANT    OBJ.LLX_FNC.2                       FNC__LBB 
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__MANIFOLD_TEST
+
+#DEFINE_CONSTANT    DATA.MDx_SIZE                       3
+#DEFINE_CONSTANT    OBJ.MDx_NAME.1                      TMC
+#DEFINE_CONSTANT    OBJ.MDX_OPR.1                       OPR__TMC_CHM 
+#DEFINE_CONSTANT    OBJ.MDX_FNC.1                       FNC__TMC_CHM 
+#DEFINE_CONSTANT    OBJ.MDx_NAME.2                      LBA
+#DEFINE_CONSTANT    OBJ.MDX_OPR.2                       OPR__LBA
+#DEFINE_CONSTANT    OBJ.MDX_FNC.2                       FNC__LBA 
+#DEFINE_CONSTANT    OBJ.MDx_NAME.3                      LBB
+#DEFINE_CONSTANT    OBJ.MDX_OPR.3                       OPR__LBB
+#DEFINE_CONSTANT    OBJ.MDX_FNC.3                       FNC__LBB 
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__LBA
+
+#DEFINE_CONSTANT    LBx_NAME          		              LBA
+#DEFINE_CONSTANT    LBx_SLOT.SIZE      		              1
+
+#DEFINE_CONSTANT    LINK__OBJ_PHY		      			        PHY__LBA
+
+#DEFINE_CONSTANT    DATA.OTHER_CHM_SIZE                 ##LL_LIMIT
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_FNC.1            FNC__LBB
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_PHY.1            PHY__LBB
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_FNC.2            FNC__TMC_CHM
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_PHY.2            PHY__TMC_CHM
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__LBB
+
+#DEFINE_CONSTANT    LBx_NAME          		              LBB
+#DEFINE_CONSTANT    LBx_SLOT.SIZE      		              1
+
+#DEFINE_CONSTANT    LINK__OBJ_PHY		      			        PHY__LBB
+
+#DEFINE_CONSTANT    DATA.OTHER_CHM_SIZE                 ##LL_LIMIT
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_FNC.1            FNC__LBA
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_PHY.1            PHY__LBA
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_FNC.2            FNC__TMC_CHM
+#DEFINE_CONSTANT    LINK_OTHER_CHM.OBJ_PHY.2            PHY__TMC_CHM
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__LBA
+
+#DEFINE_CONSTANT    LBx_NAME          		              LBA
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    OBJ__PUMP       		                PHY__PUMP
+
+#DEFINE_CONSTANT    VAR__PRESSURE_TORR		              IO+ai.LBA.PRESSURE
+#DEFINE_CONSTANT    VAR__LID_CLOSE_SNS                  IO+di.LBA.LID.SW
+
+// Pump & Vent Valve
+#DEFINE_CONSTANT    VAR__IO_DO_SOFT_VENT_VLV		        IO+do.LBA.SOFT.VENT.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_FAST_VENT_VLV		        IO+do.LBA.FAST.VENT.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_EQUAL_VLV    		        IO+do.LL1.EQULIZATION.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_SOFT_PUMP_VLV	          IO+do.LBA.SOFT.PUMP.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_FAST_PUMP_VLV		        IO+do.LBA.FAST.PUMP.VLV.SET
+
+// TM
+#DEFINE_CONSTANT    VAR__PHY_TM_PRESS_STS  				      PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS
+#DEFINE_CONSTANT    VAR__PHY_TM_PRESS_TORR  				    PHY__TMC_CHM+OTR.OUT.MON.aPRESSURE.TORR
+
+// DV
+#DEFINE_CONSTANT    VAR__IO_DO_DV_OPEN		              IO+do.LBA.DV.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_DV_CLOSE		              IO+do.LBA.DV.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_DV_OPEN		              IO+di.LBA.DV.OPEN
+#DEFINE_CONSTANT    VAR__IO_DI_DV_CLOSE		              IO+di.LBA.DV.CLOSE
+
+// SV OP/CL
+#DEFINE_CONSTANT    VAR__IO_DO_SV_TM_OPEN		            IO+do.LBA.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_SV_TM_CLOSE		          IO+do.LBA.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_SV_TM_OPEN		            IO+di.LBA.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DI_SV_TM_CLOSE		          IO+di.LBA.SV.TM.CLOSE
+
+// SV UP/DN
+#DEFINE_CONSTANT    VAR__IO_DO_SV_UP		      	 	      IO+do.LBA.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DO_SV_DOWN		    		      IO+do.LBA.SV.DOWN
+#DEFINE_CONSTANT    VAR__IO_DI_SV_UP		      		      IO+di.LBA.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DI_SV_DOWN		    		      IO+di.LBA.SV.DOWN
+
+// ROBOT Sns
+#DEFINE_CONSTANT    VAR__IO_DI_VAC_RB_RNE               IO+di.VAC.Robot.RNE
+#DEFINE_CONSTANT    VAR__IO_DI_ATM_RB_RNE               IO+di.ATMRB.RNE.LBA
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__LBB
+
+#DEFINE_CONSTANT    LBx_NAME          		              LBB
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    OBJ__PUMP       		                PHY__PUMP
+
+#DEFINE_CONSTANT    VAR__PRESSURE_TORR		              IO+ai.LBB.PRESSURE
+#DEFINE_CONSTANT    VAR__LID_CLOSE_SNS                  IO+di.LBB.LID.SW
+
+// Pump & Vent Valve
+#DEFINE_CONSTANT    VAR__IO_DO_SOFT_VENT_VLV		        IO+do.LBB.SOFT.VENT.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_FAST_VENT_VLV		        IO+do.LBB.FAST.VENT.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_EQUAL_VLV    		        IO+do.LL2.EQULIZATION.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_SOFT_PUMP_VLV	          IO+do.LBB.SOFT.PUMP.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_FAST_PUMP_VLV		        IO+do.LBB.FAST.PUMP.VLV.SET
+
+// TM
+#DEFINE_CONSTANT    VAR__PHY_TM_PRESS_STS  				      PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS
+#DEFINE_CONSTANT    VAR__PHY_TM_PRESS_TORR  				    PHY__TMC_CHM+OTR.OUT.MON.aPRESSURE.TORR
+
+// DV
+#DEFINE_CONSTANT    VAR__IO_DO_DV_OPEN		              IO+do.LBB.DV.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_DV_CLOSE		              IO+do.LBB.DV.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_DV_OPEN		              IO+di.LBB.DV.OPEN
+#DEFINE_CONSTANT    VAR__IO_DI_DV_CLOSE		              IO+di.LBB.DV.CLOSE
+
+// SV OP/CL
+#DEFINE_CONSTANT    VAR__IO_DO_SV_TM_OPEN		            IO+do.LBB.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_SV_TM_CLOSE		          IO+do.LBB.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_SV_TM_OPEN		            IO+di.LBB.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DI_SV_TM_CLOSE		          IO+di.LBB.SV.TM.CLOSE
+
+// SV UP/DN
+#DEFINE_CONSTANT    VAR__IO_DO_SV_UP		      	 	      IO+do.LBB.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DO_SV_DOWN		    		      IO+do.LBB.SV.DOWN
+#DEFINE_CONSTANT    VAR__IO_DI_SV_UP		      		      IO+di.LBB.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DI_SV_DOWN		    		      IO+di.LBB.SV.DOWN
+
+// ROBOT Sns
+#DEFINE_CONSTANT    VAR__IO_DI_VAC_RB_RNE               IO+di.VAC.Robot.RNE
+#DEFINE_CONSTANT    VAR__IO_DI_ATM_RB_RNE               IO+di.ATMRB.RNE.LBA

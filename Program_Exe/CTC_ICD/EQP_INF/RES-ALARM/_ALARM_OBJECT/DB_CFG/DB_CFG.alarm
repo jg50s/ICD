@@ -1,0 +1,12 @@
+#ID=1	101	HEAVY	DB_CFG - Simulation mode is active !
+#ID=2	102	WARNING	DB_CFG - TMC-Dummy mode is active !
+#ID=11	111	LIGHT	DB_CFG - PM1-Dummy mode is active !
+#ID=12	112	LIGHT	DB_CFG - PM2-Dummy mode is active !
+#ID=13	113	LIGHT	DB_CFG - PM3-Dummy mode is active !
+#ID=14	114	LIGHT	DB_CFG - PM4-Dummy mode is active !
+#ID=15	115	LIGHT	DB_CFG - PM5-Dummy mode is active !
+#ID=16	116	LIGHT	DB_CFG - PM6-Dummy mode is active !
+#ID=17	117	LIGHT	DB_CFG - PM7-Dummy mode is active !
+#ID=18	118	LIGHT	DB_CFG - PM8-Dummy mode is active !
+#ID=19	119	LIGHT	DB_CFG - PM9-Dummy mode is active !
+#ID=20	120	LIGHT	DB_CFG - PM10-Dummy mode is active !

@@ -1,0 +1,5 @@
+#ID=1	1	LIGHT	PHY_HEATER :  - HEATER SYSTEM : Temperature Low Alarm.
+#ID=2	2	LIGHT	PHY_HEATER :  - HEATER SYSTEM : Temperature High Alarm.
+#ID=3	3	LIGHT	PHY_HEATER :  - HEATER SYSTEM : Temperature Low Alarm.
+#ID=4	4	LIGHT	PHY_HEATER :  - HEATER SYSTEM : Temperature High Alarm.
+#ID=5	5	LIGHT	PHY_HEATER :  - HEATER SYSTEM : RF Total Power Threashold Alarm.

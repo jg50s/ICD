@@ -1,0 +1,65 @@
+
+<<<----  [OUT]
+2021/09/03 00:37:21:883
+
+---------------------------------------------------------------------
+// FA : Start Log ...
+
+
+<<<----  [OUT]
+2021/09/03 00:37:21:895
+
+//-------------------------------------------------------------
+Property Information
+
+   Driver Type [HSMS]
+   Driver Mode [ACTIVE]
+   IP    [192.168.100.113]
+   Port  [5000]
+//-------------------------------------------------------------
+
+
+<<<----  [OUT]
+2021/09/03 00:37:22:496
+
+Auto-Start Started ... (Active)
+
+<<<----  [OUT]
+2021/09/03 00:37:22:587
+
+Auto-Start Started ...  Waiting Stop-Connection.
+
+<<<----  [OUT]
+2021/09/03 00:37:22:587
+
+Auto-Start Started ...  Waiting Open-Socket.
+
+<<<----  [OUT]
+2021/09/03 00:37:22:609
+
+Socket Open Started...
+
+<<<----  [OUT]
+2021/09/03 00:37:22:609
+
+Socket Open Completed...
+
+<<<----  [OUT]
+2021/09/03 00:37:22:609
+
+Connecting Started...
+
+<<<----  [OUT]
+2021/09/03 00:37:22:677
+
+Auto-Start Completed ...  (Active)
+
+<<<----  [OUT]
+2021/09/03 00:37:43:652
+
+I can't connect with the passive [192.168.100.113/5000] error_code:10060 !
+
+<<<----  [OUT]
+2021/09/03 00:37:46:133
+
+Connecting Started...

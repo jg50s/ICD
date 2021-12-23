@@ -1,0 +1,43 @@
+#DEFINE_CHANNEL_NAME
+
+
+#SVID   ##PM   151802051     PHY_PM1+FDC.DA.RT.OFFSET        A   20   RT_Offset     PM1_DA_RF_Offset
+#SVID   ##PM   151802052     PHY_PM2+FDC.DA.RT.OFFSET        A   20   RT_Offset     PM2_DA_RF_Offset
+#SVID   ##PM   151802053     PHY_PM3+FDC.DA.RT.OFFSET        A   20   RT_Offset     PM3_DA_RF_Offset
+#SVID   ##PM   151802054     PHY_PM4+FDC.DA.RT.OFFSET        A   20   RT_Offset     PM4_DA_RF_Offset
+	                                                           
+                                                             
+#SVID   ##PM   151800830     PHY_LBA+SVID.SLIT_VLV_STS       A    5   Status        Airlock1_Door_State
+#SVID   ##PM   151800853     PHY_LBA+PRESSURE.VALUE          A   10   Torr          Airlock1_Pressure
+#SVID   ##PM   151800993     PHY_LBA+SVID.SLOT_DATA          A    5   SlotSts       Airlock1_Slot_State
+#SVID   ##PM   151803367     TMC_DCOP.LBA_VENT_TIME          A   10   Sec           Airlock1_Vent_Time
+                                                             
+#SVID   ##PM   151800888     PHY_LBB+SVID.SLIT_VLV_STS       A    5   Status        Airlock2_Door_State
+#SVID   ##PM   151800911     PHY_LBB+PRESSURE.VALUE          A   10   Torr          Airlock2_Pressure
+#SVID   ##PM   151801000     PHY_LBB+SVID.SLOT_DATA          A    5   SlotSts       Airlock2_Slot_State
+#SVID   ##PM   151803371     TMC_DCOP.LBB_VENT_TIME          A   10   Sec           Airlock2_Vent_Time
+
+
+#SVID   ##PM   151802751     TMC_SVID.ai.FFU_LEFT            A   10   rpm           FFU_Left_RPM
+#SVID   ##PM   151802752     TMC_SVID.ai.FFU_RIGHT           A   10   rpm           FFU_Right_RPM
+
+#SVID   ##PM   151800467     PHY_PM2+SVID.SLOT_DATA          A   10   SlotSts       PM2_Slot_State
+#SVID   ##PM   151800474     PHY_PM3+SVID.SLOT_DATA          A   10   SlotSts       PM3_Slot_State
+#SVID   ##PM   151800481     PHY_PM4+SVID.SLOT_DATA          A   10   SlotSts       PM4_Slot_State
+
+#SVID   ##PM   151802405     TMC_DCOP.PM4_SV_CLOSE_TIME			 A   10   Sec           PM4_SlotValve_CloseTime
+#SVID   ##PM   151802401     TMC_DCOP.PM2_SV_CLOSE_TIME      A   10   Sec           PM2_SlotValve_CloseTime
+#SVID   ##PM   151802403     TMC_DCOP.PM3_SV_CLOSE_TIME      A   10   Sec           PM3_SlotValve_CloseTime
+// #SVID   ##PM   151802395     ???                          A   10   Sec           AL1_SlotValve_CloseTime
+// #SVID   ##PM   151802397     ???                          A   10   Sec           AL2_SlotValve_CloseTime
+
+#SVID   ##PM   151802406     TMC_DCOP.PM4_SV_CLOSE_TIME      A   10   Sec           PM4_SlotValve_OpenTime
+#SVID   ##PM   151802402     TMC_DCOP.PM4_SV_CLOSE_TIME      A   10   Sec           PM2_SlotValve_OpenTime
+#SVID   ##PM   151802404     TMC_DCOP.PM3_SV_CLOSE_TIME      A   10   Sec           PM3_SlotValve_OpenTime
+// #SVID   ##PM   151802396     ???                          A   10   Sec           AL1_SlotValve_OpenTime
+// #SVID   ##PM   151802398     ???                          A   10   Sec           AL2_SlotValve_OpenTime
+
+#SVID   ##PM   151800520     PHY_TMC_CHM+PRESSURE.mTORR      A   10   mtorr         TM_Pressure
+#SVID   ##PM   151800515     TMC_SVID.ai.N2.PRESSURE         A   10   mtorr         TM_UPC
+
+

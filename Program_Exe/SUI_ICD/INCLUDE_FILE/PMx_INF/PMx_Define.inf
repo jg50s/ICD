@@ -1,0 +1,29 @@
+
+#CHANNEL  @PM@+LPx.PORT_ID                       "Port ID"
+#CHANNEL  @PM@+LPx.SLOT_ID                       "Slot ID"
+#CHANNEL  @PM@+LOTID                             "LOT ID"
+#CHANNEL  @PM@+MATERIALID                        "Material ID"
+#CHANNEL  @PM@+RECIPE                            "Process Recipe"
+
+#LINE.EMPTY
+
+#CHANNEL  @PM@+PROC_INFO.TOTAL_PROC_TIME         "Total Process Time"
+#CHANNEL  @PM@+PROC_INFO.CUR_PROC_TIME           "Current Process Time"
+#CHANNEL  @PM@+PROC_INFO.TOTAL_STEP_COUNT        "Total Step Count"
+#CHANNEL  @PM@+PROC_INFO.CUR_STEP_COUNT          "Current Step Count"
+#CHANNEL  @PM@+PROC_INFO.STEP_TOTAL_TIME         "Step Total Time"
+#CHANNEL  @PM@+PROC_INFO.STEP_CUR_TIME           "Step Current Time"
+
+#LINE.EMPTY
+
+#CHANNEL  @PM@+PROC_INFO.STEP_MSG                "Step Message"
+#CHANNEL  @PM@+PHY_PMC.STEP.CUR_TYPE             "Step Type"
+#CHANNEL  @PM@+PHY_PMC.STEP.OBJ_MAIN_MSG         "Step Main-Message"
+#CHANNEL  @PM@+PHY_PMC.STEP.OBJ_SUB_MSG          "Step Sub-Message"
+
+#LINE.EMPTY
+
+#CHANNEL  @PM@+FDC.DA.RT.OFFSET                  "R&T Offset"
+#CHANNEL  @PM@+PRESSURE.VALUE                    "Pressure (torr)"
+#CHANNEL  @PM@+PMC.IDLE.TIME                     "Idle Time (sec)"
+

@@ -1,0 +1,22 @@
+#DEFINE_INFO
+	@COMMENT  ""
+#END_INFO
+
+#BITMAP_IMAGE
+	#FILE=JGLEE__TOP_MAIN_ACTIVE.bmp
+	#MASK_COLOR=RGB(?,?,?)
+#CONTROL
+#CHANNEL  Set_Channel1
+#CHANNEL  Set_Channel2
+IF_AND: (Set_Channel1 == Set_Sts1)(Set_Channel2 == Set_Sts2)
+VIS 1
+#END
+
+#BITMAP_IMAGE
+	#FILE=JGLEE__TOP_MAIN_INACTIVE.bmp
+	#MASK_COLOR=RGB(?,?,?)
+#CONTROL
+IF_OR: (Set_Channel1 != Set_Sts1)(Set_Channel2 != Set_Sts2)
+VIS 1
+#END
+

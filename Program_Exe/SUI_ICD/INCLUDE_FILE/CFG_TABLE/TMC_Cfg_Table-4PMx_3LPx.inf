@@ -1,0 +1,84 @@
+
+
+//======================================================================================================================
+#PAGE      "DA"
+
+#GROUP     "LL1"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.R.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm LL1 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.T.OFFSET.HARD.ERR.A_ARM    "DA A-Arm LL1 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.T.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm LL1 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.R.OFFSET.HARD.ERR.A_ARM    "DA A-Arm LL1 T-Offset Hard-Error"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.R.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm LL1 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.T.OFFSET.HARD.ERR.B_ARM    "DA B-Arm LL1 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.T.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm LL1 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL1.R.OFFSET.HARD.ERR.B_ARM    "DA B-Arm LL1 T-Offset Hard-Error" 
+
+#GROUP     "LL2"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.R.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm LL2 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.T.OFFSET.HARD.ERR.A_ARM    "DA A-Arm LL2 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.T.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm LL2 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.R.OFFSET.HARD.ERR.A_ARM    "DA A-Arm LL2 T-Offset Hard-Error"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.R.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm LL2 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.T.OFFSET.HARD.ERR.B_ARM    "DA B-Arm LL2 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.T.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm LL2 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.LL2.R.OFFSET.HARD.ERR.B_ARM    "DA B-Arm LL2 T-Offset Hard-Error" 
+
+#GROUP     "PM1"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.R.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM1 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.T.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM1 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.T.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM1 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.R.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM1 T-Offset Hard-Error"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.R.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM1 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.T.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM1 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.T.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM1 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM1.R.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM1 T-Offset Hard-Error" 
+
+#GROUP     "PM2"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.R.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM2 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.T.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM2 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.T.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM2 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.R.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM2 T-Offset Hard-Error"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.R.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM2 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.T.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM2 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.T.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM2 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM2.R.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM2 T-Offset Hard-Error" 
+
+#GROUP     "PM3"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.R.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM3 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.T.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM3 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.T.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM3 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.R.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM3 T-Offset Hard-Error"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.R.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM3 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.T.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM3 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.T.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM3 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM3.R.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM3 T-Offset Hard-Error" 
+
+#GROUP     "PM4"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.R.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM4 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.T.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM4 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.T.OFFSET.SOFT.ERR.A_ARM    "DA A-Arm PM4 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.R.OFFSET.HARD.ERR.A_ARM    "DA A-Arm PM4 T-Offset Hard-Error"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.R.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM4 R-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.T.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM4 R-Offset Hard-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.T.OFFSET.SOFT.ERR.B_ARM    "DA B-Arm PM4 T-Offset Soft-Error" 
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.PM4.R.OFFSET.HARD.ERR.B_ARM    "DA B-Arm PM4 T-Offset Hard-Error" 
+
+#GROUP     "CHART"
+
+// Command   Channel                                           Name                                   Comment
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.DA.CHART.AXIS_MAX              "DA Chart - Axis Max"
+#CFG_ITEM    PHY__VAC_ROBOT+CFG.DA.CHART.ERR_RANGE             "DA Chart - Error Range"
+
+

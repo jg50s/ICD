@@ -1,0 +1,55 @@
+
+  //-----------------------------------------------
+  //  S1Fy
+
+  //-----------------------------
+  #MESSAGE    S1F1
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       1
+
+  1.<A[3]  "AAA"
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  #MESSAGE    S1F2
+  #DIRECTION  SEND
+  #TYPE       1
+
+#UNFORMATTED
+  1.<L,  1   $ITEM_LIST
+#UNFIXED  
+  	 1.<A[1]   "TEST_OK !!!!"
+
+  #END
+  //-----------------------------
+
+/*
+  //-----------------------------
+  #MESSAGE    S1F1
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       1
+
+#UNFIXED
+  1.<A[1]   $VAR1
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  #MESSAGE    S1F2
+  #DIRECTION  SEND
+  #TYPE       1
+
+#UNFORMATTED
+  1.<L,  1   $ITEM_LIST
+  	 1.<V    $VAR
+  2.<V  $PM2_VID    	// 2001  
+  3.<V  $PM2_ANALOG     // 2011  = MFC_FLOW
+
+  #END
+  //-----------------------------
+*/
+  
+  

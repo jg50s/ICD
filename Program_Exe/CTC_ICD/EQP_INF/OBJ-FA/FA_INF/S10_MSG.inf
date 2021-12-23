@@ -1,0 +1,131 @@
+
+  //---------------------------------------------------
+  //  S10Fy
+
+
+  //------------------------------
+  // 	Terminal Request (TRN)   			H <- E
+
+  #MESSAGE    S10F1
+  #REPLY      1
+  #DIRECTION  SEND
+  #TYPE	      0
+  
+  1.<L,  2
+         1.<B[1]   $TID
+#UNFIXED         
+         2.<A[1]   $TEXT
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Terminal Request Acknowledge(TRA)    		H -> E
+
+  #MESSAGE    S10F2   
+  #DIRECTION  RECEIVE
+  
+  1.<B[1]   $ACKA10
+  
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	Terminal Display, Single (VTN)   		H -> E
+
+  #MESSAGE    S10F3  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<L,  2
+         1.<B[1]   $TID
+#UNFIXED         
+         2.<A[1]   $TEXT
+       
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Terminal Display, Single Acknowledge(VTA)   	H <- E
+
+  #MESSAGE    S10F4   
+  #DIRECTION  SEND
+
+  1.<B[1]   $ACKA10
+
+  #END
+  
+  /*
+  0 = Accepted for display
+  1 = Message will not be displayed
+  2 = Terminal not available
+  3 ~ 63 = Reserved
+  */
+  //------------------------------
+
+
+  //------------------------------
+  // 	Terminal Display, Multi-Block (VTN)  		H -> E
+
+  #MESSAGE    S10F5
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<L,  2
+         1.<B[1]   $TID
+#UNFORMATTED         
+         2.<L,  1  $LIST_LIMIT
+#UNFIXED
+                1.<A[1]   $TEXT 
+                
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Terminal Display, Multi-Block Ack (VMA) 	H <- E
+
+  #MESSAGE    S10F6   
+  #DIRECTION  SEND
+  
+  1.<B[1]   $ACKA10
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	Multi-Block Not Allowed(MMN)  			H <- E
+
+  #MESSAGE    S10F7
+  #DIRECTION  SEND
+  
+  1.<B[1]   $TID
+                      
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	Broadcast(BCN)    				H -> E
+
+  #MESSAGE    S10F9
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+#UNFIXED
+  1.<A[1]   $TEXT 
+       
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Broadcast Acknowledge(BCA)    			H <- E
+
+  #MESSAGE    S10F10   
+  #DIRECTION  SEND
+
+  1.<B[1]   $ACKA10
+  
+  #END
+  //------------------------------
+
+

@@ -1,0 +1,17 @@
+#ID=1	1	LIGHT	PHY_IO__CHILLER - TCU Offline Alarm.
+#ID=2	2	LIGHT	PHY_IO__CHILLER - TCU Controller Error Status Alarm.
+#ID=3	3	LIGHT	PHY_IO__CHILLER - TCU Controller Error Status Warning.
+#ID=4	4	LIGHT	PHY_IO__CHILLER - ESC Coolant Minimum Flow Alarm.
+#ID=6	6	LIGHT	PHY_IO__CHILLER - TCU Remote Control Timeout Alarm.
+#ID=7	7	LIGHT	PHY_IO__CHILLER - TCU Run/Stop Control Timeout Alarm.
+#ID=8	8	LIGHT	PHY_IO__CHILLER - TCU - ESC Temp Abort Range Alarm.
+#ID=9	9	LIGHT	PHY_IO__CHILLER - TCU - ESC Temp Warning Range Alarm.
+#ID=11	11	LIGHT	PHY_IO__CHILLER - Fault Status가 감지 되었습니다.
+#ID=12	12	LIGHT	PHY_IO__CHILLER - Fuse Fault가 감지 되었습니다.
+#ID=13	13	LIGHT	PHY_IO__CHILLER - Warning이 감지 되었습니다.
+#ID=14	14	LIGHT	PHY_IO__CHILLER - Heater Status에 문제가 감지 되었습니다.
+#ID=15	15	LIGHT	PHY_IO__CHILLER - Fluid Level에서 Fault가 감지 되었습니다.
+#ID=16	16	LIGHT	PHY_IO__CHILLER - Fluid Flow에서 Fault가 감지 되었습니다.
+#ID=17	17	LIGHT	PHY_IO__CHILLER - Fluid Resistivity에서 Fault가 감지 되었습니다.
+#ID=18	18	LIGHT	PHY_IO__CHILLER - Facility Water에서 Fault가 감지 되었습니다.
+#ID=19	19	LIGHT	PHY_IO__CHILLER - Cooling Valve에서 문제가 감지 되었습니다.

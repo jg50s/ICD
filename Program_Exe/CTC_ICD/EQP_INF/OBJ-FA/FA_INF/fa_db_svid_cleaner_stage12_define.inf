@@ -1,0 +1,115 @@
+
+//      MODULE 	    VID  	[CHANNEL or ALIAS or COMMAND]	
+//					                            	                                  TYPE	 BYTE	  UNIT	    DISPLAY_NAME
+                                                                           
+#SVID   ##MODULE     31     ##SVID+##OBJ_STAGE.CHAMBER_STATE                 A      10     state    ##Sx+Chamber_State  
+#SVID   ##MODULE     32     ##SVID+##OBJ_STAGE.3WAY_VALVE_STATE              A      10     state    ##Sx+3Way_Valve_State  
+#SVID   ##MODULE     33     ##SVID+##OBJ_STAGE.WAFER_EXIST_STATE             A      10     state    ##Sx+Wafer_Exist_State  
+#SVID   ##MODULE     34     ##SVID+##OBJ_STAGE.CLAMP_STATE                   A      10     state    ##Sx+Clamp_State
+#SVID   ##MODULE     35     ##SVID+##OBJ_STAGE.SHUTTER_STATE                 A      10     state    ##Sx+Shutter_State  
+#SVID   ##MODULE     36     ##SVID+##OBJ_STAGE.WAFER_RPM                     A      10     state    ##Sx+Wafer_RPM  
+                                                                        
+#SVID   ##MODULE     37     ##SVID+##OBJ_AXIS_FRONT.HOME_SENSOR_STATE        A      10     state    ##Sx+Front_Brush_Home_State
+#SVID   ##MODULE     38     ##SVID+##OBJ_AXIS_BACK.HOME_SENSOR_STATE         A      10     state    ##Sx+BAck_Brush_Home_State
+#SVID   ##MODULE     39     ##SVID+##OBJ_AXIS_OSCILL.HOME_SENSOR_STATE       A      10     state    ##Sx+Oscill_Brush_Home_State
+#SVID   ##MODULE     40     ##SVID+##OBJ_AXIS_UPDOWN.HOME_SENSOR_STATE       A      10     state    ##Sx+Updown_Nozzle_Home_State
+#SVID   ##MODULE     41     ##SVID+##OBJ_AXIS_SWING.HOME_SENSOR_STATE        A      10     state    ##Sx+Swing_Nozzle_Home_State
+                                                                        
+#SVID   ##MODULE     42     ##SVID+##OBJ_AXIS_FRONT.POS_LIMIT_STATE          A      10     state    ##Sx+Front_Brush_Pos_Limit_State
+#SVID   ##MODULE     43     ##SVID+##OBJ_AXIS_BACK.POS_LIMIT_STATE           A      10     state    ##Sx+BAck_Brush_Pos_Limit_State
+#SVID   ##MODULE     44     ##SVID+##OBJ_AXIS_OSCILL.POS_LIMIT_STATE         A      10     state    ##Sx+Oscill_Brush_Pos_Limit_State
+#SVID   ##MODULE     45     ##SVID+##OBJ_AXIS_UPDOWN.POS_LIMIT_STATE         A      10     state    ##Sx+Updown_Nozzle_Pos_Limit_State
+#SVID   ##MODULE     46     ##SVID+##OBJ_AXIS_SWING.POS_LIMIT_STATE          A      10     state    ##Sx+Swing_Nozzle_Pos_Limit_State
+                                                                        
+#SVID   ##MODULE     47     ##SVID+##OBJ_AXIS_FRONT.NEG_LIMIT_STATE          A      10     state    ##Sx+Front_Brush_Neg_Limit_State
+#SVID   ##MODULE     48     ##SVID+##OBJ_AXIS_BACK.NEG_LIMIT_STATE           A      10     state    ##Sx+BAck_Brush_Neg_Limit_State
+#SVID   ##MODULE     49     ##SVID+##OBJ_AXIS_OSCILL.NEG_LIMIT_STATE         A      10     state    ##Sx+Oscill_Brush_Neg_Limit_State
+#SVID   ##MODULE     50     ##SVID+##OBJ_AXIS_UPDOWN.NEG_LIMIT_STATE         A      10     state    ##Sx+Updown_Nozzle_Neg_Limit_State
+#SVID   ##MODULE     51     ##SVID+##OBJ_AXIS_SWING.NEG_LIMIT_STATE          A      10     state    ##Sx+Swing_Nozzle_Neg_Limit_State 
+
+#SVID   ##MODULE     52     ##SVID+##OBJ_LFC.LFC1_SET_FLOW                   A      10     ml/min   ##Sx+LFC1_SET_FLOW
+#SVID   ##MODULE     53     ##SVID+##OBJ_LFC.LFC1_GET_FLOW                   A      10     ml/min   ##Sx+LFC1_GET_FLOW
+#SVID   ##MODULE     54     ##SVID+##OBJ_LFC.LFC1_VALVE_STATE                A      10     state    ##Sx+LFC1_VALVE_STATE
+                                
+#SVID   ##MODULE     55     ##SVID+##OBJ_LFC.LFC2_SET_FLOW                   A      10     ml/min   ##Sx+LFC2_SET_FLOW   
+#SVID   ##MODULE     56     ##SVID+##OBJ_LFC.LFC2_GET_FLOW                   A      10     ml/min   ##Sx+LFC2_GET_FLOW   
+#SVID   ##MODULE     57     ##SVID+##OBJ_LFC.LFC2_VALVE_STATE                A      10     state    ##Sx+LFC2_VALVE_STATE
+                                
+#SVID   ##MODULE     58     ##SVID+##OBJ_LFC.LFC3_SET_FLOW                   A      10     ml/min   ##Sx+LFC3_SET_FLOW   
+#SVID   ##MODULE     59     ##SVID+##OBJ_LFC.LFC3_GET_FLOW                   A      10     ml/min   ##Sx+LFC3_GET_FLOW   
+#SVID   ##MODULE     60     ##SVID+##OBJ_LFC.LFC3_VALVE_STATE                A      10     state    ##Sx+LFC3_VALVE_STATE
+                                
+#SVID   ##MODULE     61     ##SVID+##OBJ_LFC.LFC4_SET_FLOW                   A      10     ml/min   ##Sx+LFC4_SET_FLOW   
+#SVID   ##MODULE     62     ##SVID+##OBJ_LFC.LFC4_GET_FLOW                   A      10     ml/min   ##Sx+LFC4_GET_FLOW   
+#SVID   ##MODULE     63     ##SVID+##OBJ_LFC.LFC4_VALVE_STATE                A      10     state    ##Sx+LFC4_VALVE_STATE
+                                
+#SVID   ##MODULE     64     ##SVID+##OBJ_LFC.LFC5_SET_FLOW                   A      10     ml/min   ##Sx+LFC5_SET_FLOW   
+#SVID   ##MODULE     65     ##SVID+##OBJ_LFC.LFC5_GET_FLOW                   A      10     ml/min   ##Sx+LFC5_GET_FLOW   
+#SVID   ##MODULE     66     ##SVID+##OBJ_LFC.LFC5_VALVE_STATE                A      10     state    ##Sx+LFC5_VALVE_STATE
+                                
+#SVID   ##MODULE     67     ##SVID+##OBJ_LFC.LFC6_SET_FLOW                   A      10     ml/min   ##Sx+LFC6_SET_FLOW   
+#SVID   ##MODULE     68     ##SVID+##OBJ_LFC.LFC6_GET_FLOW                   A      10     ml/min   ##Sx+LFC6_GET_FLOW   
+#SVID   ##MODULE     69     ##SVID+##OBJ_LFC.LFC6_VALVE_STATE                A      10     state    ##Sx+LFC6_VALVE_STATE
+                                
+#SVID   ##MODULE     70     ##SVID+##OBJ_LFC.LFC7_SET_FLOW                   A      10     ml/min   ##Sx+LFC7_SET_FLOW   
+#SVID   ##MODULE     71     ##SVID+##OBJ_LFC.LFC7_GET_FLOW                   A      10     ml/min   ##Sx+LFC7_GET_FLOW   
+#SVID   ##MODULE     72     ##SVID+##OBJ_LFC.LFC7_VALVE_STATE                A      10     state    ##Sx+LFC7_VALVE_STATE
+                                
+#SVID   ##MODULE     73     ##SVID+##OBJ_LFC.LFC8_SET_FLOW                   A      10     ml/min   ##Sx+LFC8_SET_FLOW   
+#SVID   ##MODULE     74     ##SVID+##OBJ_LFC.LFC8_GET_FLOW                   A      10     ml/min   ##Sx+LFC8_GET_FLOW   
+#SVID   ##MODULE     75     ##SVID+##OBJ_LFC.LFC8_VALVE_STATE                A      10     state    ##Sx+LFC8_VALVE_STATE
+                                
+#SVID   ##MODULE     76     ##SVID+##OBJ_LFC.LFC9_SET_FLOW                   A      10     ml/min   ##Sx+LFC9_SET_FLOW   
+#SVID   ##MODULE     77     ##SVID+##OBJ_LFC.LFC9_GET_FLOW                   A      10     ml/min   ##Sx+LFC9_GET_FLOW   
+#SVID   ##MODULE     78     ##SVID+##OBJ_LFC.LFC9_VALVE_STATE                A      10     state    ##Sx+LFC9_VALVE_STATE
+                                
+#SVID   ##MODULE     79     ##SVID+##OBJ_LFC.LFC10_SET_FLOW                  A      10     ml/min   ##Sx+LFC10_SET_FLOW   
+#SVID   ##MODULE     80     ##SVID+##OBJ_LFC.LFC10_GET_FLOW                  A      10     ml/min   ##Sx+LFC10_GET_FLOW   
+#SVID   ##MODULE     81     ##SVID+##OBJ_LFC.LFC10_VALVE_STATE               A      10     state    ##Sx+LFC10_VALVE_STATE
+                                
+#SVID   ##MODULE     82     ##SVID+##OBJ_LFC.LFC11_SET_FLOW                  A      10     ml/min   ##Sx+LFC11_SET_FLOW   
+#SVID   ##MODULE     83     ##SVID+##OBJ_LFC.LFC11_GET_FLOW                  A      10     ml/min   ##Sx+LFC11_GET_FLOW   
+#SVID   ##MODULE     84     ##SVID+##OBJ_LFC.LFC11_VALVE_STATE               A      10     state    ##Sx+LFC11_VALVE_STATE
+                                
+#SVID   ##MODULE     85     ##SVID+##OBJ_LFC.LFC12_SET_FLOW                  A      10     ml/min   ##Sx+LFC12_SET_FLOW   
+#SVID   ##MODULE     86     ##SVID+##OBJ_LFC.LFC12_GET_FLOW                  A      10     ml/min   ##Sx+LFC12_GET_FLOW   
+#SVID   ##MODULE     87     ##SVID+##OBJ_LFC.LFC12_VALVE_STATE               A      10     state    ##Sx+LFC12_VALVE_STATE
+
+#SVID   ##MODULE     88     ##SVID+##OBJ_IO.##N2_SET_IO                      A      10     lpm      ##Sx+MFC_N2_SET_FLOW   
+#SVID   ##MODULE     89     ##SVID+##OBJ_IO.##N2_GET_IO                      A      10     lpm      ##Sx+MFC_N2_GET_FLOW   
+#SVID   ##MODULE     90     ##SVID+##OBJ_IO.##N2_VALVE_IO                    A      10     state    ##Sx+MFC_N2_VALVE_STATE
+
+#SVID   ##MODULE     91     ##SVID+##OBJ_AXIS_FRONT.SERVO_STATE              A      10     state    ##Sx+Front_Brush_Servo_State
+#SVID   ##MODULE     92     ##SVID+##OBJ_AXIS_BACK.SERVO_STATE               A      10     state    ##Sx+BAck_Brush_Servo_State
+#SVID   ##MODULE     93     ##SVID+##OBJ_AXIS_OSCILL.SERVO_STATE             A      10     state    ##Sx+Oscill_Brush_Servo_State
+
+#SVID   ##MODULE     94     ##SVID+##OBJ_AXIS_FRONT.MOTION_IDLE_STATE        A      10     state    ##Sx+Front_Brush_Idle_State   
+#SVID   ##MODULE     95     ##SVID+##OBJ_AXIS_BACK.MOTION_IDLE_STATE         A      10     state    ##Sx+BAck_Brush_Idle_State    
+#SVID   ##MODULE     96     ##SVID+##OBJ_AXIS_OSCILL.MOTION_IDLE_STATE       A      10     state    ##Sx+Oscill_Brush_Idle_State  
+#SVID   ##MODULE     97     ##SVID+##OBJ_AXIS_UPDOWN.MOTION_IDLE_STATE       A      10     state    ##Sx+Updown_Nozzle_Idle_State 
+#SVID   ##MODULE     98     ##SVID+##OBJ_AXIS_SWING.MOTION_IDLE_STATE        A      10     state    ##Sx+Swing_Nozzle_Idle_State 
+
+#SVID   ##MODULE     99     ##SVID+##OBJ_BRUSH.STS.ROLLER.SET.SPIN.RPM       A      10     rpm      ##Sx+Roller_L1_Set_RPM
+#SVID   ##MODULE     100    ##SVID+##OBJ_BRUSH.STS.ROLLER.SET.SPIN.RPM       A      10     rpm      ##Sx+Roller_L2_Set_RPM
+#SVID   ##MODULE     101    ##SVID+##OBJ_BRUSH.STS.ROLLER.SET.SPIN.RPM       A      10     rpm      ##Sx+Roller_R1_Set_RPM
+#SVID   ##MODULE     102    ##SVID+##OBJ_BRUSH.STS.ROLLER.SPIN.RPM.1         A      10     rpm      ##Sx+Roller_L1_Get_RPM
+#SVID   ##MODULE     103    ##SVID+##OBJ_BRUSH.STS.ROLLER.SPIN.RPM.2         A      10     rpm      ##Sx+Roller_L2_Get_RPM
+#SVID   ##MODULE     104    ##SVID+##OBJ_BRUSH.STS.ROLLER.SPIN.RPM.3         A      10     rpm      ##Sx+Roller_R1_Get_RPM
+
+#SVID   ##MODULE     105    ##SVID+##OBJ_BRUSH.STS.BRUSH.SET.SPIN.RPM        A      10     rpm      ##Sx+Upper_Brush_Set_RPM
+#SVID   ##MODULE     106    ##SVID+##OBJ_BRUSH.STS.BRUSH.SET.SPIN.RPM        A      10     rpm      ##Sx+Lower_Brush_Set_RPM
+#SVID   ##MODULE     107    ##SVID+##OBJ_BRUSH.STS.BRUSH.SPIN.RPM.1          A      10     rpm      ##Sx+Upper_Brush_Get_RPM
+#SVID   ##MODULE     108    ##SVID+##OBJ_BRUSH.STS.BRUSH.SPIN.RPM.2          A      10     rpm      ##Sx+Lower_Brush_Get_RPM
+
+#SVID   ##MODULE     109    ##SVID+##OBJ_IO.##U_TORQUE                       A      10     %        ##Sx+Upper_Brush_Torque
+#SVID   ##MODULE     110    ##SVID+##OBJ_IO.##L_TORQUE                       A      10     %        ##Sx+Lower_Brush_Torque
+
+// 111 ~ 113 Guide RollerL1,L2,R1 Torque
+
+#SVID   ##MODULE     114    ##SVID+##OBJ_BRUSH.STS.BRUSH.POSITION.1          A      10     mm       ##Sx+Upper_Brush_Position
+#SVID   ##MODULE     115    ##SVID+##OBJ_BRUSH.STS.BRUSH.POSITION.2          A      10     mm       ##Sx+Lower_Brush_Position  
+
+#SVID   ##MODULE     116    ##SVID+##OBJ_NOZZLE.STS.UPDOWN.NOZZLE.POSITION   A      10     mm       ##Sx+Nozzle_Height
+#SVID   ##MODULE     117    ##SVID+##OBJ_NOZZLE.STS.SWING.NOZZLE.POSITION    A      10     mm       ##Sx+Nozzle_Degree
+
+#SVID   ##MODULE     118    ##SVID+##OBJ_IO.##Exhaust_Press                  A      10     psi      ##Sx+Brush1_Exhaust_Press

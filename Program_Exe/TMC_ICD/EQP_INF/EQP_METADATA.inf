@@ -1,0 +1,157 @@
+/*
+	APPLICATION 개발자는 PROC__SEQ()와 CALL__MONITORING() 안에서는 
+	try catch 문을 사용하면 안됩니다.
+*/
+
+
+//------------------------------------------------
+/*
+#SET_SIM_REAL__OBJECT                        PHY_IO__VAC_ROBOT
+#GET_SIM_REAL__OBJECT                        PHY_IO__VAC_ROBOT
+*/
+
+/*
+#SET_SIM_REAL__OBJECT                        PHY_HW__LP1
+#GET_SIM_REAL__OBJECT                        PHY_HW__LP1
+
+#SET_SIM_REAL__OBJECT                        PHY_HW__LP2
+#GET_SIM_REAL__OBJECT                        PHY_HW__LP2
+
+#SET_SIM_REAL__OBJECT                        PHY_HW__LP3
+#GET_SIM_REAL__OBJECT                        PHY_HW__LP3
+*/
+//------------------------------------------------
+
+
+#DEFINE    ##PM_LIMIT               4
+#DEFINE    ##LP_LIMIT               3
+#DEFINE    ##LL_LIMIT               2
+
+
+//------------------------------------------------
+#INCLUDE   METADATA\LPx_METADATA.inf
+
+#INCLUDE   METADATA\ATM_ROBOT_METADATA.inf
+#INCLUDE   METADATA\VAC_ROBOT_METADATA.inf
+
+#INCLUDE   METADATA\TMC_CHM_METADATA.inf
+#INCLUDE   METADATA\LLx_METADATA.inf
+
+#INCLUDE   METADATA\ALx_METADATA.inf
+#INCLUDE   METADATA\PUMP_METADATA.inf
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    DB_CFG
+
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__SYS_CTRL
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     SYSTEM.AREA
+
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          SYSTEM.FNC
+
+#FNC_MODE           SYSTEM_INIT            MNG__SYS_CTRL   SYSTEM_INIT
+#FNC_MODE           SYSTEM_MAINT           MNG__SYS_CTRL   SYSTEM_MAINT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO
+
+#OBJECT_IO_FILE     DNET_IO__TMC-FLEX.cfg  
+
+//----------------------
+#OBJECT_IO_PARA     NODE.SIZE                           5
+
+#OBJECT_IO_PARA     NODE.1.MACID                        1
+#OBJECT_IO_PARA     NODE.1.NAME                         Node_01
+#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.1.IN_BYTE                      4
+#OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     16
+
+#OBJECT_IO_PARA     NODE.2.MACID                        2
+#OBJECT_IO_PARA     NODE.2.NAME                         Node_02
+#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.2.IN_BYTE                      8
+#OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     8 
+
+#OBJECT_IO_PARA     NODE.3.MACID                        3
+#OBJECT_IO_PARA     NODE.3.NAME                         Node_03
+#OBJECT_IO_PARA     NODE.3.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.3.IN_BYTE                      23
+#OBJECT_IO_PARA     NODE.3.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.3.OUT_BYTE                     5
+
+#OBJECT_IO_PARA     NODE.4.MACID                        5
+#OBJECT_IO_PARA     NODE.4.NAME                         Node_04
+#OBJECT_IO_PARA     NODE.4.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.4.IN_BYTE                      8
+#OBJECT_IO_PARA     NODE.4.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.4.OUT_BYTE                     8 
+
+#OBJECT_IO_PARA     NODE.5.MACID                        7
+#OBJECT_IO_PARA     NODE.5.NAME                         Node_05
+#OBJECT_IO_PARA     NODE.5.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.5.IN_BYTE                      8
+#OBJECT_IO_PARA     NODE.5.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.5.OUT_BYTE                     10 
+//----------------------
+
+#DEFINE_CONSTANT    FLAG__DRV_LOG                       YES
+
+#DEFINE_CONSTANT    LINK.IO_SIZE                        0
+/*
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.1                   IO+do.TM.SAFETY.LLA_ON
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.2                   IO+do.TM.SAFETY.LLB_ON
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.3                   IO+do.TM.SAFETY.SLOT_CLOSE
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.4                   IO+do.TM.SAFETY.SLOT_OPEN
+*/
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    TMC_LINK
+
+#OBJECT_LINK_FILE   LINK__CFG_TMC_To_PMC.cfg
+
+#DEFINE_CONSTANT    FLAG__DRV_LOG                       YES
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    MON__SYSTEM
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG+CFG.SIM.MODE
+#DEFINE_CONSTANT    IO_CH__DNET_COMM_STS                IO+di.Comm.Sts
+#DEFINE_CONSTANT    IO_CH__AIR_SNS	                    IO+di.Air.Sns
+#DEFINE_CONSTANT    IO_CH__N2_SENSOR			              IO+di.N2.Sns
+#DEFINE_CONSTANT    IO_CH__EFEM_DOOR						        IO+di.EFEM.DOOR.SWITCH
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__SIGNAL_TOWER
+
+#DEFINE_CONSTANT    CH.LIGHT.RED.ON_OFF                 IO+do.LIGHT.RED.ON_OFF
+#DEFINE_CONSTANT    CH.LIGHT.YELLOW.ON_OFF              IO+do.LIGHT.YELLOW.ON_OFF
+#DEFINE_CONSTANT    CH.LIGHT.GREEN.ON_OFF               IO+do.LIGHT.GREEN.ON_OFF
+#DEFINE_CONSTANT    CH.LIGHT.BLUE.ON_OFF                IO+do.LIGHT.BLUE.ON_OFF
+#DEFINE_CONSTANT    CH.LIGHT.WHITE.ON_OFF               IO+do.LIGHT.WHITE.ON_OFF
+
+#DEFINE_CONSTANT    CH.LIGHT.RED.BLINK                  IO+do.LIGHT.RED.BLINK
+#DEFINE_CONSTANT    CH.LIGHT.YELLOW.BLINK               IO+do.LIGHT.YELLOW.BLINK
+#DEFINE_CONSTANT    CH.LIGHT.GREEN.BLINK                IO+do.LIGHT.GREEN.BLINK
+#DEFINE_CONSTANT    CH.LIGHT.BLUE.BLINK                 IO+do.LIGHT.BLUE.BLINK
+#DEFINE_CONSTANT    CH.LIGHT.WHITE.BLINK                IO+do.LIGHT.WHITE.BLINK
+
+#DEFINE_CONSTANT    CH.ALARM.BUZZER                     IO+do.ALARM.BUZZER
+#DEFINE_CONSTANT    CH.ALARM.BUZZER.RESET               IO+do.ALARM.BUZZER.RESET
+
+#DEFINE_CONSTANT    CH.MELODY1.CTRL                     IO+do.MELODY1.CTRL
+#DEFINE_CONSTANT    CH.MELODY2.CTRL                     IO+do.MELODY2.CTRL
+#DEFINE_CONSTANT    CH.MELODY3.CTRL                     IO+do.MELODY3.CTRL
+#DEFINE_CONSTANT    CH.MELODY4.CTRL                     IO+do.MELODY4.CTRL

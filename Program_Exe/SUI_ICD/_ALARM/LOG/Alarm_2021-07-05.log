@@ -1,0 +1,726 @@
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:30:43:532	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.05 09:54:55:979	
+#RESULT=POST	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.05 09:54:58:873	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.05 09:55:00:509	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.05 09:55:00:595	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.05 09:55:00:602	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=31	
+#TIME=2021.07.05 10:32:53:464	
+#RESULT=POST	
+#TITLE=PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL".	
+#MSG=START	
+Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=0	
+#TIME=2021.07.05 10:33:56:914	
+#RESULT=CHECK	
+#TITLE=__SYS - SYSTEM ERROR	
+#MSG=START	
+Error Type    :  DIGITAL_DESCRIPTOR
+Error Title   :  FNC_GAS_VLV_CTRL+CFG.WAP.AUTO.LEARN.GAS : DIGITAL DESCRIPTOR ERROR !
+Error Message
+The item (GAS07) does not exist.
+	ITEM LIST
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.05 10:35:28:883	
+#RESULT=POST	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=92	
+#TIME=2021.07.05 10:35:33:618	
+#RESULT=ABORT	
+#TITLE=FNC_STEP : "He Dechuck" Initial Error !	
+#MSG=START	
+Please, don't let lift-pin up. 
+If you click [ABORT],  Init sequence will be aborted. 
+If you click [IGNORE], Init sequence will be completed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.05 10:35:33:623	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:43:33:259	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:43:42:591	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.05 09:54:58:873	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.05 09:55:00:509	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.05 09:55:00:595	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.05 09:55:00:602	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=31	
+#TIME=2021.07.05 10:32:53:464	
+#RESULT=POST	
+#TITLE=PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL".	
+#MSG=START	
+Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.05 10:35:33:623	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:46:20:425	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:46:45:793	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.05 09:54:58:873	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.05 09:55:00:509	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.05 09:55:00:595	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.05 09:55:00:602	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=31	
+#TIME=2021.07.05 10:32:53:464	
+#RESULT=POST	
+#TITLE=PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL".	
+#MSG=START	
+Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.05 10:35:33:623	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:52:03:281	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:52:12:365	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.05 09:54:58:873	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.05 09:55:00:509	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.05 09:55:00:595	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.05 09:55:00:602	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=31	
+#TIME=2021.07.05 10:32:53:464	
+#RESULT=POST	
+#TITLE=PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL".	
+#MSG=START	
+Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.05 10:35:33:623	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:58:00:188	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 10:58:13:990	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.05 09:54:58:873	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.05 09:55:00:509	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.05 09:55:00:595	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.05 09:55:00:602	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=31	
+#TIME=2021.07.05 10:32:53:464	
+#RESULT=POST	
+#TITLE=PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL".	
+#MSG=START	
+Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.05 10:35:33:623	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 11:03:48:161	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 11:03:56:978	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.05 09:54:58:873	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.05 09:55:00:509	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.05 09:55:00:595	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.05 09:55:00:602	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=31	
+#TIME=2021.07.05 10:32:53:464	
+#RESULT=POST	
+#TITLE=PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL".	
+#MSG=START	
+Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.05 10:35:33:623	
+#RESULT=POST	
+#TITLE=FNC_SYSTEM : SYSTEM INIT FAILED.	
+#MSG=START	
+OBJECT [He_DECHUCK] INIT Failed [11] Object : Result [-1] 
+System Component Initialize Action Failed.	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.05 11:09:09:260	
+POST	
+STOP	
+	

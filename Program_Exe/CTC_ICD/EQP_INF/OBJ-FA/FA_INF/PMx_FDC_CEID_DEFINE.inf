@@ -1,0 +1,18 @@
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#CEID_E30__##CHM_FDC__WAFER_PROCESS_END	  			1300014		// CHMx - WAFER PROCESSING FINISHED - MAIN STEP
+// 1300014	   PMx ProcessingCompleted	ProcessingCompleted	Processing completed for resource %s.
+#CEID_E30__##CHM_FDC__WAFER_PROCESS_START	  	    	1300016		// CHMx - WAFER PROCESSING START - MAIN STEP
+// 1300016	   PMx ProcessingStarted	ProcessingStarted	Processing started for resource %s.
+
+#CEID_E30__##CHM_FDC__WAFER_IN		  			1300017		// CHMx - WAFER CHAMBER IN
+// 1300017	   PMx ReceivedMaterial	ReceivedMaterial	Received material %s at location %s.
+#CEID_E30__##CHM_FDC__WAFER_OUT		  			1300020		// CHMx - WAFER CHAMBER OUT
+// 1300020	   PMx SentMaterial	SentMaterial	Sent material %s from location %s.
+
+#CEID_E30__##CHM_FDC__STEP_END		  			1300021		// CHMx - STEP END
+// 1300021	   PMx StepEnded	StepEnded	Ended recipe step %s for material %s at elapsed time %d. %s
+#CEID_E30__##CHM_FDC__STEP_START		  		1300022		// CHMx - STEP START
+// 1300022	   PMx StepStarted	StepStarted	Started  recipe step %s on material %s. %s 
+
+

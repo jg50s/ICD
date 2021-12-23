@@ -1,0 +1,134 @@
+
+  //---------------------------------------------------
+  //  S5Fy
+
+
+  //------------------------------
+  // 	Alarm Report Send (ARS)    			H <- E
+  
+  #MESSAGE    S5F1   
+  #REPLY      1
+  #DIRECTION  SEND 		// EQP -> HOST
+  #TYPE	      0
+  
+  1.<L,  3
+         1.<B[1]    $ALCD
+         2.<U4[1]   $ALID
+#UNFIXED
+         3.<A[1]    $ALTX
+       
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Alarm Report Acknowledge (ARA)   		 H -> E	
+
+  #MESSAGE    S5F2
+  #DIRECTION  RECEIVE		// EQP <- HOST
+  
+  1.<B[1]  $ACKC5
+       
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	Enable/Disable Alarm Send. (EAS)     		H -> E
+
+  #MESSAGE    S5F3
+  #REPLY      1
+  #DIRECTION  RECEIVE 		// EQP <- HOST
+  #TYPE       0
+  
+  1.<L,  2 
+         1.<B[1]    $ALED
+#UNFIXED  
+         2.<U4[1]   $ALID
+       
+  #END
+  
+/*
+ALID
+	A zero-length item for ALID means all alarms.
+*/  
+  //------------------------------
+  //------------------------------
+  // 	Enable/Disable Acknowledge (EAA)   		 H <- E	
+
+  #MESSAGE    S5F4
+  #DIRECTION  SEND		// EQP -> HOST
+  
+  1.<B[1]   $ACKC5
+       
+  #END
+  
+/*
+ACKC5
+	0 = Accepted
+	>0 = Error, not accepted
+	1~63 Reserved
+*/  
+  //------------------------------
+
+
+  //------------------------------
+  // 	List Alarms Request (LAR)    			 H -> E
+
+  #MESSAGE    S5F5  
+  #REPLY      1
+  #DIRECTION  RECEIVE 		// EQP <- HOST
+  #TYPE       0
+  
+#UNFIXED  
+  1.<U4[1]   $ALID 
+
+  #END
+
+/*
+ALID
+	A zero-length item for ALID means all alarms.
+*/  
+  //------------------------------
+  //------------------------------
+  // 	List Alarm Data (LAD)    			 H <- E	
+
+  #MESSAGE    S5F6
+  #DIRECTION  SEND		// EQP -> HOST
+  
+#UNFORMATTED  
+  1.<L,  1   $LIST_LIMIT
+   	 1.<L,  3
+   	        1.<B[1]    $ALCD    	
+   	        2.<U4[1]   $ALID    	
+#UNFIXED
+   	        3.<A[1]    $ALTX    	
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	List Enabled Alarm Request (LEAR)    		 H -> E
+
+  #MESSAGE    S5F7   
+  #REPLY      1
+  #DIRECTION  RECEIVE 		// EQP <- HOST
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // 	List Enabled Alarm Data (LEAD)   		 H <- E
+
+  #MESSAGE    S5F8
+  #DIRECTION  SEND		// EQP -> HOST
+  
+#UNFORMATTED  
+  1.<L,  1   $LIST_LIMIT
+   	 1.<L,  3
+   	        1.<B[1]    $ALCD 	
+   	        2.<U4[1]   $ALID 	
+#UNFIXED
+   	        3.<A[1]    $ALTX 	
+
+  #END
+  //------------------------------
+

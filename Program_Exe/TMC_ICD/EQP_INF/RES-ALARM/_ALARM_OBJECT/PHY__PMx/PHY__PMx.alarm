@@ -1,0 +1,12 @@
+#ID=1	1	LIGHT	PHY__PMx - Valve Open TimeOut.
+#ID=2	2	LIGHT	PHY__PMx - PM Slot Valve.. PM Close TimeOut.
+#ID=3	3	LIGHT	PHY__PMx - PM Slot Valve.. TM Close TimeOut.
+#ID=4	4	LIGHT	PHY__PMx - VAC Robot's Arm not retracted sts.
+#ID=5	5	LIGHT	PHY__PMx - Slit Valve can not open, because of not ATM Pressure !
+#ID=6	6	LIGHT	PHY__PMx - Slit Valve can not open, because of not VAC Pressure !
+#ID=7	7	LIGHT	PHY__PMx - PM Slit Valve can not UP, because of not PM or TM SV OPEN Sts !
+#ID=8	8	LIGHT	PHY__PMx - Max Difference Press Alarm Occur !
+#ID=9	9	LIGHT	PHY__PMx - PM Not Exist Config Value !
+#ID=10	10	LIGHT	PHY__PMx - Can't Close Slot Valve ! 
+
+#ID=11	11	LIGHT	PHY__PMx - TMC and PMC's pressure is not same !

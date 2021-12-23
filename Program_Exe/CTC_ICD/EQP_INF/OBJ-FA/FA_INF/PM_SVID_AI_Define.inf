@@ -1,0 +1,51 @@
+
+
+
+//      MODULE 	VID  	  [CHANNEL or COMMAND]	
+//					                      				      														TYPE	BYTE	UNIT	      DISPLAY_NAME
+
+#SVID   ##PM    1       ##SVID_PMx+ai.Upr.Elect.DCBias											A     5     V      			Upper_Electrode_DC_Bias									// 0 ~ 10	
+#SVID   ##PM    2       ##SVID_PMx+ai.TCU.TopPlate.Temp											A     5     C			      TCU_Top_Plate_Temperature								// 0 ~ 100	
+#SVID   ##PM		3				##SVID_PMx+ai.TCU.ESC.Temp													A     5     C           TCU_ESC_Temperature											// 0 ~ 100	
+                                                	
+#SVID   ##PM		10			##SVID_PMx+ai.ChamPress.Manometer.Value		   	 			A     5    	mtorr		    Chamber_Pressure_Manometer_Value        // 0 ~ 1000
+#SVID   ##PM		11			##SVID_PMx+ai.ChamPress.Manometer.Volt		   	 			A     5    	V    		    Chamber_Pressure_Manometer_Volt         // 0 ~ 10
+#SVID   ##PM    12      ##SVID_PMx+ai.ForelinePress.Manometer.Volt	  			A     5	    V    		    Foreline_Pressure_Manometer_Volt 				// 0 ~ 10
+#SVID   ##PM		13			##SVID_PMx+ai.Process.Manometer.Volt		     	 			A     5    	V    		    Process_Manometer_Volt                  // 0 ~ 10
+#SVID   ##PM		14      ##SVID_PMx+ai.ESCCoolant.Flow												A     5     GPM			    ESC_Coolant_Flow												// 0 ~ 10	
+
+#SVID   ##PM		21			##SVID_PMx+ai.HeBack.Press.Outer										A     5    	Torr		    He_Outer_Back_Pressure									// 0 ~ 50	
+#SVID   ##PM    22      ##SVID_PMx+ai.HeBack.Flow.Outer											A     5     sccm		    He_Outer_Back_Flow											// 0 ~ 50	
+#SVID   ##PM    23      ##SVID_PMx+ai.HeBack.Press.Inner										A     5    	Torr		    He_Inner_Back_Pressure									// 0 ~ 50	
+#SVID   ##PM    24      ##SVID_PMx+ai.HeBack.Flow.Inner											A     5     sccm		    He_Inner_Back_Flow											// 0 ~ 50	
+                                                	
+#SVID   ##PM		31			##SVID_PMx+ai.ESC.Total.Po.Volt											A     5     V				    ESC_Total_Polarity_Volt									// 0 ~ 2000	
+#SVID   ##PM    32      ##SVID_PMx+ai.ESC.Bias.Po.Volt											A     5	    V				    ESC_Bias_Polarity_Volt									// 0 ~ 2000	
+#SVID   ##PM    33      ##SVID_PMx+ai.ESC.Cur.Monitor1											A     5   	•ÏA			    ESC_Current_Monitor1					          // 0 ~ 20		
+#SVID   ##PM    34      ##SVID_PMx+ai.ESC.Cur.Monitor2											A     5   	•ÏA			    ESC_Current_Monitor2										// 0 ~ 20		
+#SVID   ##PM		35      ##SVID_PMx+ai.BICEP.Volt														A     5    	V				    BICEP_Volt                              // 0 ~ 2000	
+#SVID   ##PM    36      ##SVID_PMx+ai.ESC.Total.IO.Volt		     							A     5     V	    	    ESC_Total_IO_Volt                       // 0 ~ 10	  
+#SVID   ##PM    37      ##SVID_PMx+ai.ESC.Bias.IO.Volt		       						A     5    	V	    	    ESC_Bias_IO_Volt                        // 0 ~ 10	  
+
+#SVID   ##PM    41      ##SVID_PMx+ai.Press.Trans01													A     5     psi		      Gas01_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    42      ##SVID_PMx+ai.Press.Trans02													A     5     psi		      Gas02_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    43      ##SVID_PMx+ai.Press.Trans03													A     5     psi		      Gas03_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    44      ##SVID_PMx+ai.Press.Trans04													A     5     psi		      Gas04_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    45      ##SVID_PMx+ai.Press.Trans05													A     5     psi		      Gas05_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    46      ##SVID_PMx+ai.Press.Trans06													A     5     psi		      Gas06_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    47      ##SVID_PMx+ai.Press.Trans07													A     5     psi		      Gas07_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    48      ##SVID_PMx+ai.Press.Trans08													A     5     psi		      Gas08_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    49      ##SVID_PMx+ai.Press.Trans09													A     5     psi		      Gas09_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    50      ##SVID_PMx+ai.Press.Trans10													A     5     psi		      Gas10_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    51      ##SVID_PMx+ai.Press.Trans11													A     5     psi		      Gas11_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    52      ##SVID_PMx+ai.Press.Trans12													A     5     psi		      Gas12_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    53      ##SVID_PMx+ai.Press.Trans13													A     5     psi		      Gas13_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    54      ##SVID_PMx+ai.Press.Trans14													A     5     psi		      Gas14_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    55      ##SVID_PMx+ai.Press.Trans15													A     5     psi		      Gas15_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    56      ##SVID_PMx+ai.Press.Trans16													A     5     psi		      Gas16_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    57      ##SVID_PMx+ai.Press.Trans17													A     5     psi		      Gas17_Transducer_Pressure               // -15 ~ 235	
+#SVID   ##PM    58      ##SVID_PMx+ai.Press.Trans18													A     5     psi		      Gas18_Transducer_Pressure               // -15 ~ 235	
+
+#SVID   ##PM    61      ##SVID_PMx+ai.DGF.Manometer        									A     5     Torr		    DGF_Manometer                           // 0 ~ 500
+
+

@@ -1,0 +1,687 @@
+
+  //---------------------------------------------------
+  //  S7Fy
+
+  //------------------------------
+  // 	Process Program Load Inquire (PPI)   		H -> E
+
+  #MESSAGE    S7F1  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+  
+  1.<L,  2
+#UNFIXED  
+         1.<A[1]    $PPID
+         2.<U4[1]   $LENGTH
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Process Program Load Grant (PPG)   		H <- E
+
+  #MESSAGE    S7F2
+  #DIRECTION  SEND
+  
+  1.<B[1]   $PPGNT
+       
+  #END
+
+/*
+PPGNT
+	0  = OK
+	1  = Already have
+	2  = No space
+	3  = Invlid PPID
+	4  = Busy, try later
+	5  = Will not accept
+	>5 = Other error
+*/
+  //------------------------------
+
+
+  //------------------------------
+  //	Process Program Send (PPS)    			H -> E
+
+  #MESSAGE    S7F3  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+
+  1.<L,  2
+#UNFIXED  
+	 1.<A[16]   $PPID      					// ROUTE RECIPE
+#UNFORMATTED
+	 2.<L,  1   $PM_LIST					// PM LIMIT
+	        1.<L,  4						
+	               1.<U1[1]   $PM_ID			// 1 ~ 6  (PM1 ~ PM6)
+#UNFIXED	               
+	               2.<A[16]   $PM_RECIPE			// PM PROCESS RECIPE
+#UNFORMATTED
+	               3.<L,  1   $STEP_LIMIT			// TOTAL STEP
+#UNFORMATTED
+	                      1.<L,  1  $ITEM_LIMIT		// STEP TOTAL ITEM 
+#UNFIXED
+	                             1.<A[10]   $STEP_PPARM	// STEP PROCESS PARAMETER
+#UNFORMATTED
+	               4.<L,  1   $CONFIG_LIMIT			// CONFIG TOTAL ITEM
+#UNFIXED
+	                      1.<A[10]   $CFG_PPARM		// CONFIG PROCESS PARAMETER
+
+  #END
+  //------------------------------
+  //------------------------------
+  //	Process Program Acknowledge (PPA)   		H <- E
+  
+  #MESSAGE    S7F4
+  #DIRECTION  SEND
+  
+  1.<B[1]  $ACKC7
+       
+  #END
+
+/*
+ACKC7
+	0  = Accepted
+	1  = Permission not granted
+	2  = Length error
+	3  = Matrix overflow
+	4  = PPID not found
+	5  = Mode unsupported
+	6  = Command will be performed with completion signaled later
+	>6 = Other error
+	
+*/
+  //------------------------------
+
+
+  //------------------------------
+  //	Process Program Request (PPR)   		H -> E
+
+  #MESSAGE    S7F5  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+
+#UNFIXED  
+  1.<A[16]   $PPID
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Process Program Data (PPD)    			H <- E
+
+  #MESSAGE    S7F6
+  #DIRECTION  SEND
+  
+#UNFORMATTED
+  1.<L,  2   $PPID_INFO
+#UNFIXED
+	 1.<A[1]   $PPID      					// A  :  ROUTE RECIPE
+#UNFORMATTED
+	 2.<L,  1   $PM_LIST					// LIST  :  PM LIMIT
+	        1.<L,  4						
+	               1.<V   $PM_ID				// U1 :  1 ~ 6
+	               2.<V   $PM_RECIPE			// A  :  PM PROCESS RECIPE
+#UNFORMATTED
+	               3.<L,  1   $STEP_LIMIT			// LIST  :  TOTAL STEP
+#UNFORMATTED
+	                      1.<L,  1   $ITEM_LIMIT		// LIST  :  STEP TOTAL ITEM 
+	                             1.<V   $STEP_PPARM		// A  :  STEP PROCESS PARAMETER DATA
+#UNFORMATTED
+	               4.<L,  1   $CONFIG_LIMIT			// LIST  :  CONFIG TOTAL ITEM
+	                      1.<V   $CFG_PPARM			// A  :  CONFIG PROCESS PARAMETER DATA
+       
+  #END
+  
+/*
+PPID_INFO
+	A zero-length list means request denied.
+*/
+  //------------------------------
+
+
+  //------------------------------
+  // 	Delete Process Program Send (DPS)   		H -> E
+
+  #MESSAGE    S7F17
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+
+#UNFORMATTED
+  1.<L,  1   $LIST_LIMIT  // n
+#UNFIXED  
+   	 1.<A[1]   $PPID
+  
+  #END
+  
+/*
+LIST_LIMIT
+	If n = 0, then delete all.
+*/  
+  //------------------------------
+  //------------------------------
+  // 	Delete Process Program Acknowledge (DPA)  	H <- E	
+
+  #MESSAGE    S7F18
+  #DIRECTION  SEND
+  
+  1.<B[1]   $ACKC7
+  
+  #END
+  
+/*
+ACKC7
+	0 = Accepted
+	1 = Permission not granted
+	2 = Length error
+	3 = Matrix overflow
+	4 = PPID not found
+	5 = Mode unsupported
+	6 = Command will be performed with completion signaled later
+	>6 = Other error
+	7 ~ 63 Reserved
+*/  
+  //------------------------------
+
+
+  //------------------------------
+  // 	Current EPPD Request (RER)    			H -> E
+
+  #MESSAGE    S7F19   
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+  
+  #END
+  //------------------------------
+  //------------------------------
+  //	Current EPPD Data (RED)    			H <- E	
+
+  #MESSAGE    S7F20
+  #DIRECTION  SEND
+
+#UNFORMATTED  
+  	1.<L,  1    $LIST_LIMIT
+               1.<A[12]   $PPID
+       
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	Formatted Process Program Send (FPS) 		H -> E
+
+  #MESSAGE    S7F23 
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<L,  4
+#UNFIXED  
+  	 1.<A[1]   $PPID						// A  :  ROUTE PPID
+#UNFIXED  
+  	 2.<A[1]   $MDLN						// A  :  MDLN
+#UNFIXED  
+  	 3.<A[1]   $SOFTREV						// A  :  SOFTREV
+#UNFORMATTED
+  	 4.<L,  1  $PM_LIST					
+	        1.<L,  4						
+	              1.<U1[1]   $PM_ID					// U1 :  PM1 ~ PM6
+#UNFIXED	              
+	              2.<A[1]    $PM_RECIPE				// A  :  PM PROCESS RECIPE
+#UNFORMATTED
+	              3.<L,  1   $STEP_LIMIT			
+#UNFORMATTED
+	                     1.<L,  1  $ITEM_LIMIT		
+#UNFIXED	              
+	                            1.<A[1]   $STEP_PPARM		// A  :  STEP PROCESS PARAMETER DATA
+#UNFORMATTED
+	              4.<L,  1   $CONFIG_LIMIT			
+#UNFIXED	              
+	                     1.<A[1]   $CFG_PPARM			// A  :  CONFIG PROCESS PARAMETER DATA
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Formatted Process Program Ack (FPA) 		H <- E	
+
+  #MESSAGE    S7F24
+  #DIRECTION  SEND
+  
+  1.<B[1]   $ACKC7
+       
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  //	Formatted Process Program Request (FPR)   	H -> E
+
+  #MESSAGE    S7F25
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+  
+#UNFIXED
+  1.<A[1]   $PPID
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Formatted Process Program Reply (FPD)  		H <- E
+
+  #MESSAGE    S7F26
+  #DIRECTION  SEND
+  
+#UNFORMATTED
+  1.<L,  4   $PPID_INFO
+#UNFIXED  
+  	 1.<A[1]   $PPID      					// A  :  ROUTE RECIPE
+  	 2.<V      MDLN						// A  :  MDLN
+  	 3.<V      SOFTREV					// A  :  SOFTREV
+#UNFORMATTED
+	 4.<L,  1   $PM_LIST
+	        1.<L,  2					
+	               1.<V   $PM_ID				// U1 :  1 ~ 6
+	               2.<V   $PM_RECIPE			// A  :  PM PROCESS RECIPE
+       
+  #END
+  
+/*
+PPID_INFO
+	A zero length list indicates the request was denied.
+*/  
+  //------------------------------
+
+
+  //------------------------------
+  // 	Full Formatted Process Program Send (FPS) 	H -> E
+
+  #MESSAGE    S7F83  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+  
+  1.<L,  4
+#UNFIXED
+  	 1.<A[1]   $PPID						// A  :  ROUTE RECIPE
+#UNFIXED
+  	 2.<A[1]   $MDLN						// A
+#UNFIXED
+  	 3.<A[1]   $SOFTREV						// A
+#UNFORMATTED  	 
+  	 4.<L,  1   $PM_LIST						// LIST  :  PM LIMIT
+	        1.<L,  4						
+	               1.<U1[1]   $PM_ID				// U1 :  PM1 ~ PM6
+#UNFIXED
+	               2.<A[1]    $PM_RECIPE				// A  :  PM PROCESS RECIPE
+#UNFORMATTED  	 
+	               3.<L,  1   $STEP_LIMIT				// LIST  :  TOTAL STEP
+#UNFORMATTED  	 
+              	              1.<L,  1  $ITEM_LIMIT			// LIST  :  STEP TOTAL ITEM 
+	              	             1.<L,  2
+#UNFIXED
+	              	              	    1.<A[1]   $STEP_PPARM_NAME	// A  :  STEP PARAMETER NAME
+#UNFIXED
+	              	            	    2.<A[1]   $STEP_PPARM_DATA	// A  :  STEP PARAMETER DATA
+#UNFORMATTED  	 
+	               4.<L,  1   $CONFIG_LIMIT				// LIST  :  CONFIG TOTAL ITEM
+	              	      1.<L,  2
+#UNFIXED
+	              	             1.<A[1]   $CFG_PPRAM_NAME		// A  :  CONFIG PARAMETER NAME
+#UNFIXED
+	              	             2.<A[1]   $CFG_PPARM_DATA		// A  :  CONFIG PARAMETER DATA
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Full Formatted Process Program Ack (FPA) 	H <- E	
+
+  #MESSAGE    S7F84
+  #DIRECTION  SEND
+  
+  1.<L,  2
+  	 1.<B[1]   $ACKC7				
+#UNFORMATTED
+         2.<L,  1   $PM_ERROR_LIST			
+                1.<L,  5
+                       1.<U1[1]   $PM_ACK		
+#UNFIXED                
+                       2.<A[1]    $PM_ID		
+#UNFIXED                
+                       3.<A[1]    $PM_RECIPE		
+#UNFORMATTED
+                       4.<L,  1   $STEP_ERROR_LIST
+                              1.<L,  2
+                                     1.<U1[1]   $STEP_NO			
+#UNFORMATTED
+                                     2.<L,  1  $ITEM_ERROR_LIST
+                                     	    1.<L,  2
+#UNFIXED                
+                                     	    	   1.<A[1]    $STEP_ITEM_NAME	
+                                     	    	   2.<U1[1]   $STEP_ERROR_CODE	
+#UNFORMATTED
+                       5.<L,  1   $CFG_ITEM_ERROR_LIST
+              	      	      1.<L,  2
+#UNFIXED                
+                       	       	     1.<A[1]    $CFG_ITEM_NAME			
+                       	       	     2.<U1[1]   $CFG_ERROR_CODE			
+
+  #END
+
+/*
+<ACKC7>  
+	0 = Accepted
+	1 = Permission not granted
+		
+<PM_ACK>	
+	0 = Accepted
+	1 = Permission not granted
+	6 = Invalid recipe
+	
+<ERROR_CODE>
+	1 = Parameter not exit
+	2 = Range Error
+	3 = Invalid Value
+*/
+  //------------------------------
+
+
+  //------------------------------
+  //	Full Formatted Process Program Data Request    	H -> E
+
+  #MESSAGE    S7F85 
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+
+#UNFIXED  
+  1.<A[1]   $PPID
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Full Formatted Process Program Data Reply  	H <- E
+
+  #MESSAGE    S7F86
+  #DIRECTION  SEND
+  
+#UNFORMATTED  	 
+  1.<L,  4   $PPID_INFO
+#UNFIXED  	 
+  	 1.<A[1]   $PPID      							// ROUTE RECIPE
+#UNFIXED  	 
+  	 2.<A[1]   MDLN		
+#UNFIXED  	 
+  	 3.<A[1]   SOFTREV	
+#UNFORMATTED  	 
+	 4.<L,  1  $PM_LIST					
+	        1.<L,  4						
+	               1.<V   $PM_ID						// 1 ~ 6
+	               2.<V   $PM_RECIPE					// PM PROCESS RECIPE
+#UNFORMATTED  	 
+	               3.<L,  1   $STEP_LIMIT			
+	              	      1.<L,  2
+	              	      	     1.<U1[1]   $STEP_NO
+#UNFORMATTED  	 
+	              	      	     2.<L,  1  $ITEM_LIMIT		
+	              	      	     	    1.<L,  4
+#UNFIXED  	 
+	              	      	     	     	   1.<A[1]   $STEP_PPARM_NAME
+#UNFIXED  	 
+	              	      	     	     	   2.<A[1]   $UNIT		
+#UNFIXED  	 
+	              	      	     	     	   3.<A[1]   $RANGE		
+	              	      	     	     	   4.<V      $DATA		
+#UNFORMATTED  	 
+	               4.<L,  1   $CONFIG_ITEM_LIMIT			
+	                      1.<L,  4
+#UNFIXED  	 
+	                      	     1.<A[1]   $CFG_PPARM_NAME			
+#UNFIXED  	 
+	                      	     2.<A[1]   $UNIT				
+#UNFIXED  	 
+	                      	     3.<A[1]   $RANGE				
+	                      	     4.<V      $DATA				
+       
+  #END
+
+/*
+PPID_INFO
+	A zero-length list means request denied.
+*/
+  //------------------------------
+
+  //------------------------------
+  // 	Partial Formatted Process Program Send 		H -> E
+
+  #MESSAGE    S7F93   1
+  #DIRECTION  RECEIVE
+  
+  1.<L, 4
+#UNFIXED
+  	1.<A[1]   $PPID									// ROUTE RECIPE
+#UNFIXED
+  	2.<A[1]   $MDLN									// MDLN
+#UNFIXED
+  	3.<A[1]   $SOFTREV								// SOFTREV
+#UNFORMATTED
+  	4.<L,  1  $PM_LIST					
+	       1.<L,  4						
+	              1.<U1[1]   $PM_ID							// 1 ~ 6
+#UNFIXED
+	              2.<A[1]    $PM_RECIPE						// PM PROCESS RECIPE
+#UNFORMATTED
+	              3.<L,  1   $STEP_LIMIT			
+	              	     1.<L,  2
+	              	            1.<U1[1]   $STEP_NO					// STEP_NO
+#UNFORMATTED
+	              	            2.<L,  1   $ITEM_LIMIT		
+	              	            	   1.<L,  2
+#UNFIXED
+	              	            	   	  1.<A[1]   $STEP_PPARM_NAME		// STEP PARAMETER NAME
+#UNFIXED
+	              	            	   	  2.<A[1]   $STEP_PPARM_DATA		// STEP PARAMETER DATA
+#UNFORMATTED
+	              4.<L,  1  $CONFIG_LIMIT		
+	              	     1.<L,  2
+#UNFIXED
+	              	            1.<A[1]   $CFG_PPRAM_NAME				// CONFIG PARAMETER NAME
+#UNFIXED
+	              	            2.<A[1]   $CFG_PPARM_DATA				// CONFIG PARAMETER DATA
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Partial Formatted Process Program Ack 	 	H <- E	
+
+  #MESSAGE    S7F94
+  #DIRECTION  SEND
+  
+  1.<L,  2
+    	 1.<B[1]   $ACKC7							// ACKC7
+#UNFORMATTED
+         2.<L,  1  $PM_ERROR_LIST
+                1.<L,  5
+                       1.<U1[1]   $PM_ACK					// PM_ACK
+                       2.<U1[1]   $PM_ID					// PM_ID
+#UNFIXED
+                       3.<A[1]    $PM_RECIPE					// PM_RECIPE
+#UNFORMATTED
+                       4.<L,  1   $STEP_ERROR_LIST
+                              1.<L,  2
+                                     1.<U1[1]   $STEP_NO			// STEP_NO	
+#UNFORMATTED
+                                     2.<L,  1   $ITEM_ERROR_LIST
+                                     	    1.<L,  2
+#UNFIXED
+                                     	    	   1.<A[1]    $STEP_ITEM_NAME	// STEP PARAMETER NAME
+                                     	    	   2.<U1[1]   $STEP_ERROR_CODE	// STEP ERROR CODE 
+#UNFORMATTED
+                       5.<L,  1   $CFG_ITEM_ERROR_LIST
+               	      	      1.<L,  2
+#UNFIXED
+                       	       	     1.<A[1]    $CFG_ITEM_NAME			// CFG PARAMETER NAME
+                       	       	     2.<U1[1]   $CFG_ERROR_CODE			// CFG ERROR CODE
+        
+  #END
+	/*
+	<ACKC7>  
+	0 = Accepted
+	1 = Permission not granted
+	6 = Invalid recipe
+	7 = Route Recipe not exist
+		
+	<PM_ACK>	
+	0 = Accepted
+	1 = Permission not granted
+	6 = Invalid recipe
+	7 = PM Recipe not exist
+	
+	<ERROR_CODE>
+	1 = Parameter not exit
+	2 = Range Error
+	3 = Invalid Value
+	4 = Step not exist
+	*/
+  //------------------------------
+	
+
+  //------------------------------
+  //	Partial Formatted Process Program Data Request   	H -> E
+
+  #MESSAGE    S7F95  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+
+  1.<L,  2
+#UNFIXED  
+  	 1.<A[1]   $PPID						// ROUTE RECIPE
+#UNFORMATTED
+  	 2.<L,  1  $PM_LIST					
+	        1.<L,  4						
+	               1.<U1[1]   $PM_ID				// 1 ~ 6
+#UNFIXED  
+	               2.<A[1]    $PM_RECIPE				// PM PROCESS RECIPE
+#UNFORMATTED
+	               3.<L,  1   $STEP_LIMIT				
+	              	      1.<L,  2
+	              	             1.<U1[1]   $STEP_NO		// STEP_NO
+#UNFORMATTED
+	              	             2.<L,  1   $ITEM_LIMIT		
+#UNFIXED  
+	              	             	    1.<A[1]   $STEP_PPARM_NAME	// STEP PARAMETER NAME
+#UNFORMATTED
+	               4.<L,  1   $CONFIG_ITEM_LIMIT
+#UNFIXED  
+	              	      1.<A[1]   $CFG_PPRAM_NAME			// CONFIG PARAMETER NAME
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  //	Partial Formatted Process Program Data Reply  		H <- E
+
+  #MESSAGE    S7F96
+  #DIRECTION  SEND
+  
+#UNFORMATTED
+  1.<L,  4   $PPID_INFO
+  	 1.<V      $PPID      							// ROUTE RECIPE
+#UNFIXED  
+  	 2.<A[1]   MDLN							
+#UNFIXED  
+  	 3.<A[1]   SOFTREV						
+#UNFORMATTED
+	 4.<L,  1  $PM_LIST					
+	        1.<L,  4						
+	               1.<V   $PM_ID						// PM1 ~ PM6
+	               2.<V   $PM_RECIPE					// PM PROCESS RECIPE
+#UNFORMATTED
+	               3.<L,  1   $STEP_LIMIT			
+	               	      1.<L,  2
+	              	      	     1.<U1[1]   $STEP_NO			// STEP_NO
+#UNFORMATTED
+	              	      	     2.<L,  1   $ITEM_LIMIT		
+	              	      	      	    1.<L,  4
+#UNFIXED  
+	              	      	     	      	   1.<A[1]   $STEP_PPARM_NAME	// PPARM NAME
+#UNFIXED  
+	              	      	     	     	   2.<A[1]   $UNIT			
+#UNFIXED  
+	              	      	     	     	   3.<A[1]   $RANGE			
+	              	      	     	     	   4.<V      $DATA			
+#UNFORMATTED
+	               4.<L,  1   $CONFIG_ITEM_LIMIT			
+	                      1.<L,  4
+#UNFIXED  
+	                      	     1.<A[1]   $CFG_PPARM_NAME			// PPARM NAME
+#UNFIXED  
+	                      	     2.<A[1]   $UNIT			
+#UNFIXED  
+	                      	     3.<A[1]   $RANGE			
+	                      	     4.<V      $DATA			
+       
+  #END
+
+/*
+PPID_INFO
+	A zero-length list means request denied.
+*/
+  //------------------------------
+
+
+  //------------------------------
+  //	Formatted Process Program Request   	H -> E
+
+  #MESSAGE    S7F97
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+
+#UNFIXED  
+  1.<A[1]   $PPID						// ROUTE RECIPE
+                      
+  #END
+  
+  /*
+  PM RECIPE FORMAT
+  
+  - In Case Of PM1  :  PM1_XXXXX
+  - In Case Of PM2  :  PM2_XXXXX
+  - In Case Of PM3  :  PM3_XXXXX
+  */
+  //------------------------------
+  //------------------------------
+  //	Formatted Process Program Reply (FPD)  		H <- E
+
+#MESSAGE    S7F98
+#DIRECTION  SEND
+  
+#UNFORMATTED
+  1.<L,  4   $PPID_INFO
+#UNFIXED  
+  	 1.<A[1]   $PPID      					// A  :  ROUTE RECIPE
+  	 2.<V      MDLN						// A  :  MDLN
+  	 3.<V      SOFTREV					// A  :  SOFTREV
+#UNFORMATTED
+	 4.<L,  1   $PM_LIST
+	        1.<L,  4					
+	               1.<V   $PM_ID				// U1 :  1 ~ 6
+	               2.<V   $PM_RECIPE			// A  :  PM PROCESS RECIPE
+#UNFORMATTED	               
+	               3.<L,  1   $STEP_LIMIT			
+#UNFORMATTED	               
+	                      1.<L,  1   $ITEM_LIMIT		
+	                             1.<V   $STEP_PPARM		// A  :  STEP PROCESS PARAMETER DATA
+#UNFORMATTED
+	               4.<L,  1   $CONFIG_LIMIT			
+	                      1.<V   $CFG_PPARM			// A  :  CONFIG PROCESS PARAMETER DATA
+       
+  #END
+
+  //------------------------------
+
+

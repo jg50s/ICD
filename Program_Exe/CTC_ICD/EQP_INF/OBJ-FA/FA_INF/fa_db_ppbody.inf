@@ -1,0 +1,99 @@
+/*
+Process Program Parameter
+*/
+
+#FORMAT
+{
+	// ITEM       UNIT   SIZE
+	#PM_ID        U      1
+	#PM_RECIPE    A	     20
+} 
+
+
+// Polisher Recipe
+#PARAMETER   PM1
+{
+	// CFG/STEP      :  ITEM-NAME   ITEM-UNIT   CHANNEL-NAME   	CHANNEL-TYPE	(CHANNEL-LIST)or(MIN ~ MAX)  
+	// FORMAT_PPARM  :  UNIT   SIZE
+
+  // HEADER : RCP PARAMETER .....	
+
+  // STEP : RCP PARAMETER .....
+	
+		// 
+		#FORMAT_PPARM   A  		20
+		
+    #STEP   STEP.MESSAGE                __        PHY_STAGE1+RCP.STEP.MSG                             S
+    #STEP   STEP.TIME                   sec       PHY_STAGE1+RCP.STEP.TIME                            A     0.0    100.0
+    #STEP   MAIN.STEP                   __        PHY_STAGE1+RCP.MAIN.STEP                            D     False  True
+    
+		// 
+		#FORMAT_PPARM   A  		25
+
+    #STEP   PLATEN.RPM                  m/sec     PHY_STAGE1+RCP.PLATEN.RPM	                          A	    -110   110
+    #STEP   PLATEN.ACCEL                m/sec2    PHY_STAGE1+RCP.PLATEN.ACCEL	                        A	    -110   110
+    #STEP   HEAD.RPM                    m/sec     PHY_STAGE1+RCP.HEAD.RPM	                            A     -110   110
+    #STEP   HEAD.ACCEL                  m/sec2    PHY_STAGE1+RCP.HEAD.ACCEL	                          A     -110   110
+    #STEP   HEAD.SWEEP.RECIPE           __        PHY_STAGE1+RCP.HEAD.SWEEP.RECIPE	                  S     
+    #STEP   HEAD.RET.RING.CMD           cmmd      PHY_STAGE1+RCP.RET.RING.CMD	                        D	    BLOCK  VAC  VENT  PRESSURE
+    #STEP   HEAD.RET.RING.PRESSURE      psi       PHY_STAGE1+RCP.RET.RING.PRESS	                      A 	  0    20
+    #STEP   ZONE1.CMD                   cmmd      PHY_STAGE1+RCP.ZONE1.CMD	                          D	    BLOCK  VAC  VENT  PRESSURE
+    #STEP   ZONE1.PRESSURE              psi       PHY_STAGE1+RCP.ZONE1.PRESS	                        A     0    20
+    #STEP   ZONE2.CMD                   cmmd      PHY_STAGE1+RCP.ZONE2.CMD	                          D    	BLOCK  VAC  VENT  PRESSURE
+    #STEP   ZONE2.PRESSURE              psi       PHY_STAGE1+RCP.ZONE2.PRESS	                        A     0    20
+    #STEP   ZONE3.CMD                   cmmd      PHY_STAGE1+RCP.ZONE3.CMD	                          D     BLOCK  VAC  VENT  PRESSURE
+    #STEP   ZONE3.PRESSURE              psi       PHY_STAGE1+RCP.ZONE3.PRESS	                        A     0    20
+    #STEP   ZONE4.CMD                   cmmd      PHY_STAGE1+RCP.ZONE4.CMD	                          D     BLOCK  VAC  VENT  PRESSURE
+    #STEP   ZONE4.PRESSURE              psi       PHY_STAGE1+RCP.ZONE4.PRESS	                        A     0    20
+    #STEP   ZONE5.CMD                   cmmd      PHY_STAGE1+RCP.ZONE5.CMD	                          D     BLOCK  VAC  VENT  PRESSURE
+    #STEP   ZONE5.PRESSURE              psi       PHY_STAGE1+RCP.ZONE5.PRESS	                        A     0    20
+    #STEP   PLATEN.HPR                  __        PHY_STAGE1+RCP.PLATEN.HPR	                          D	    False  True
+    #STEP   SLURRY1.FLOW                ml/min    PHY_STAGE1+RCP.SLURRY1.FLOW	                        A     0    500
+    #STEP   SLURRY2.FLOW                ml/min    PHY_STAGE1+RCP.SLURRY2.FLOW	                        A     0    500
+    #STEP   COND.DISK.RPM               m/sec     PHY_STAGE1+RCP.COND.DISK.RPM	                      A	    -110   110
+    #STEP   COND.DISK.ACCEL             m/sec2    PHY_STAGE1+RCP.COND.DISK.ACCEL	                    A	    -110   110
+    #STEP   COND.DOWNFORCE              psi       PHY_STAGE1+RCP.COND.DOWNFORCE	                      A	    0    20
+    #STEP   COND.SWEEP.RECIPE           __        PHY_STAGE1+RCP.COND.SWEEP.RECIPE	                  S     	
+}
+
+
+// Cleaner Recipe
+#PARAMETER   PM2
+{
+	// CFG/STEP      :  ITEM-NAME   ITEM-UNIT   CHANNEL-NAME   	CHANNEL-TYPE	(CHANNEL-LIST)or(MIN ~ MAX)  
+	// FORMAT_PPARM  :  UNIT   SIZE
+
+  // HEADER : RCP PARAMETER .....	
+    
+  // STEP : RCP PARAMETER .....
+	
+		// 
+		#FORMAT_PPARM   A  		20
+		
+    #STEP   STEP.MESSAGE                __        PHY_STAGE1+RCP.STEP.MESSAGE                         S
+    #STEP   STEP.TIME                   sec       PHY_STAGE1+RCP.STEP.TIME                            A     0    9999
+    #STEP   STEP.TYPE                   type      PHY_STAGE1+RCP.STEP.TYPE                            D     Time  End
+
+		// 
+		#FORMAT_PPARM   A  		25
+    
+    #STEP   ROLLER.RPM                  rpm       PHY_STAGE1+RCP.ROLLER.RPM	                          A     0    2000
+    #STEP   BRUSH.RPM                   rpm       PHY_STAGE1+RCP.BRUSH.RPM	                          A     0    200
+    #STEP   UPDOWN.BRUSH.POSITION       __        PHY_STAGE1+RCP.UPDOWN.BRUSH.POSITION	              D     Home  Transfer
+    #STEP   BRUSH.OSCILL.POSITION       __        PHY_STAGE1+RCP.BRUSH.OSCILL.POSITION	              D     Home  Transfer
+    #STEP   AUTO.LFC.0                  ml/min    PHY_STAGE1+RCP.AUTO.LFC.0	                          A	    0    2500
+    #STEP   AUTO.LFC.1                  ml/min    PHY_STAGE1+RCP.AUTO.LFC.1	                          A     0    2500
+    #STEP   AUTO.LFC.2                  ml/min    PHY_STAGE1+RCP.AUTO.LFC.2                           A	    0    2500
+    #STEP   AUTO.LFC.3                  ml/min    PHY_STAGE1+RCP.AUTO.LFC.3	                          A     0    2500
+    #STEP   AUTO.LFC.4                  ml/min    PHY_STAGE1+RCP.AUTO.LFC.4	                          A     0    2500
+    #STEP   AUTO.LFC.5                  ml/min    PHY_STAGE1+RCP.AUTO.LFC.5	                          A     0    2500
+    #STEP   MANUAL.LFC.0                ml/min    PHY_STAGE1+RCP.MANUAL.LFC.0	                        A     0    2500
+    #STEP   MANUAL.LFC.1                ml/min    PHY_STAGE1+RCP.MANUAL.LFC.1	                        A     0    2500
+    #STEP   MANUAL.LFC.2                ml/min    PHY_STAGE1+RCP.MANUAL.LFC.2	                        A     0    2500
+    #STEP   MANUAL.LFC.3                ml/min    PHY_STAGE1+RCP.MANUAL.LFC.3	                        A     0    2500
+    #STEP   MANUAL.LFC.4                ml/min    PHY_STAGE1+RCP.MANUAL.LFC.4	                        A     0    2500
+    #STEP   MANUAL.LFC.5                ml/min    PHY_STAGE1+RCP.MANUAL.LFC.5	                        A     0    2500
+    #STEP   UPDOWN.NOZZLE.POSITION      __        PHY_STAGE1+RCP.UPDOWN.NOZZLE.POSITION	              D     Home  Transfer
+    #STEP   SWING.NOZZLE.POSITION       __        PHY_STAGE1+RCP.SWING.NOZZLE.POSITION	              D     Home  Edge  Center
+}
+

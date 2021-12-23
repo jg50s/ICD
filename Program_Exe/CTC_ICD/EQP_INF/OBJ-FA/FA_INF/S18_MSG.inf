@@ -1,0 +1,169 @@
+
+/*
+  Result Status
+  	- Normal Operation  
+  	- Execution Error 
+  		Cannot read Tag data. 
+  		Cannot Read ID sequence, but equipment is normal.
+  	- Communication Error
+  		Syntax error of Message or Message format or Value.
+  	- Hardware Error
+  		ID reader/writer head fault, ID reader/writer head is powered off.
+  	- Tag Fault
+  		Power Fault, exceeded retry limit.
+*/
+
+
+  //-----------------------------
+  // 	Read Request (RR)		H -> E	
+
+  #MESSAGE    S18F5
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  3
+         1.<U1[1]   $TARGETID
+         2.<U1[1]   $DATASEG
+         3.<U1[1]   $DATALENGTH
+  
+  #END
+  
+/*
+If DATASEG and DATALENGTH are both omitted (are zero length items) then all data is requested.
+If DATALENGTH only is omitted, then all data within the indicated section is requested. 
+*/ 
+  //-----------------------------
+  //-----------------------------
+  // 	Read Data (RD) 			H <- E		
+
+  #MESSAGE    S18F6
+  #DIRECTION  SEND
+  
+  1.<L,  4
+  	 1.<U1[1]   $TARGETID
+  	 2.<U1[1]   $SSACK
+#UNFIXED  	 
+  	 3.<A[1]    $DATA
+#UNFORMATTED
+  	 4.<L,  1   $LIST_LIMIT
+#UNFIXED  	 
+  	 	      1.<A[1]   $STATUS
+  	 	
+  #END
+  
+/*
+If TARGETID is unknown, then DATA is zero length.
+*/  
+  //-----------------------------
+
+  //-----------------------------
+  // 	Write Data Request (WDR)	H -> E	
+
+  #MESSAGE    S18F7
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  4
+         1.<U1[1]   $TARGETID
+         2.<U1[1]   $DATASEG
+         3.<U1[1]   $DATALENGTH
+#UNFIXED         
+         4.<A[1]    $DATA
+  
+  #END
+  
+/*
+If DATASEG and DATALENGTH are both omitted (are zero length items) then all data is to be overwritten.
+If only DATALENGTH is omitted, then all data within the indicated section is to be written. 
+*/ 
+  //-----------------------------
+  //-----------------------------
+  // 	Write Data Acknowledge (WDA) 	H <- E		
+
+  #MESSAGE    S18F8
+  #DIRECTION  SEND
+  
+  1.<L,  3
+  	 1.<U1[1]   $TARGETID
+  	 2.<U1[1]   $SSACK
+#UNFORMATTED
+  	 3.<L,  1   $LIST_LIMIT
+#UNFIXED  	 
+  	 	      1.<A[1]   $STATUS
+  	 	
+  #END
+  
+/*
+LIST_LIMIT = 0, if and only if TARGETID is unknown.
+*/  
+  //-----------------------------
+
+  //-----------------------------
+  // 	Read ID Request (RIR)		H -> E	
+
+  #MESSAGE    S18F9
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<U1[1]   $TARGETID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Read ID Data (RID) 		H <- E		
+
+  #MESSAGE    S18F10
+  #DIRECTION  SEND
+  
+  1.<L,  4
+  	 1.<U1[1]   $TARGETID
+  	 2.<U1[1]   $SSACK
+#UNFIXED  	 
+  	 3.<A[1]    $MID
+#UNFORMATTED
+  	 4.<L,  1   $LIST_LIMIT
+#UNFIXED  	 
+  	 	      1.<A[1]   $STATUS
+  	 	
+  #END
+  
+/*
+LIST_LIMIT = 0, if and only if TARGETID is unknown.
+*/  
+  //-----------------------------
+
+  //-----------------------------
+  // 	Write ID Request (WIR)		H -> E	
+
+  #MESSAGE    S18F11
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  2
+         1.<U1[1]   $TARGETID
+#UNFIXED         
+         2.<A[1]    $MID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Write ID Acknowledge (WIA) 	H <- E		
+
+  #MESSAGE    S18F12
+  #DIRECTION  SEND
+  
+  1.<L,  3
+  	 1.<U1[1]   $TARGETID
+  	 2.<U1[1]   $SSACK
+#UNFORMATTED
+  	 3.<L,  1   $LIST_LIMIT
+#UNFIXED  	 
+  	 	1.<A[1]   $STATUS
+  	 	
+  #END
+  
+/*
+LIST_LIMIT = 0, if and only if TARGETID is unknown.
+*/  
+  //-----------------------------
+

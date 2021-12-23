@@ -1,0 +1,4579 @@
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 09:25:03:864	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 09:47:09:371	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 09:47:24:446	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 09:47:26:160	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 09:47:26:210	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 09:47:26:217	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 09:48:15:234	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 09:48:15:272	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 09:48:15:311	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 09:48:15:347	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 09:49:04:026	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 10:03:55:480	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:03:28:368	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 10:03:31:645	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 10:03:33:303	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 10:03:33:344	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 10:03:33:349	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 10:04:20:531	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 10:04:20:564	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 10:04:20:595	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 10:04:20:632	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:04:20:663	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:04:20:773	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 10:18:31:596	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 10:18:32:114	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:18:34:733	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, WARN_MIN:120.0, WARN_MAX:120.0
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 10:18:34:809	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, ABORT_MIN:120.0, ABORT_MAX:120.0
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 10:18:57:585	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 10:18:57:683	
+#RESULT=ABORT	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 10:18:57:728	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, ABORT_MIN:120.0, ABORT_MAX:120.0
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:18:57:757	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, WARN_MIN:120.0, WARN_MAX:120.0
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 10:18:57:786	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 10:18:57:815	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:18:57:849	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:18:57:861	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:20:07:188	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, WARN_MIN:120.0, WARN_MAX:120.0
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 10:20:07:275	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, ABORT_MIN:120.0, ABORT_MAX:120.0
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 10:20:30:412	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 10:31:43:938	
+#RESULT=ABORT	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 10:31:43:975	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, ABORT_MIN:120.0, ABORT_MAX:120.0
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:31:44:015	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING - SET_PRS:120.0, CUR_PRS:0.0, CFG:0.0 percent, WARN_MIN:120.0, WARN_MAX:120.0
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:31:44:049	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:31:44:069	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:32:19:375	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING - SET_PRS:120.0, CUR_PRS:0.0, CFG:5.0 percent, WARN_MIN:114.0, WARN_MAX:126.0
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 10:32:19:435	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM - SET_PRS:120.0, CUR_PRS:0.0, CFG:10.0 percent, ABORT_MIN:108.0, ABORT_MAX:132.0
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 10:32:39:008	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:51:41:930	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 10:51:45:133	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 10:51:46:859	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 10:51:46:927	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 10:51:46:932	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 10:59:20:528	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 10:59:20:567	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 10:59:20:601	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 10:59:20:632	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:59:20:659	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:59:20:724	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 10:59:33:928	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 10:59:34:382	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 10:59:38:891	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:5.0 %, WARN_MIN:114.0, WARN_MAX:126.0 
+
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 10:59:38:897	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM 
+SET_PRS:120.0, CUR_PRS:0.0 
+ CFG:10.0 %, ABORT_MIN:108.0, ABORT_MAX:132.0 
+
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 11:00:00:605	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 11:32:26:301	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 12:06:52:675	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:05:31:312	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 12:05:34:553	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 12:05:36:258	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 12:05:36:298	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 12:05:36:303	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 12:07:25:255	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 12:07:25:288	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 12:07:25:325	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 12:07:25:375	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:07:25:407	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:07:25:519	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 12:09:16:904	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 12:09:17:721	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:09:22:235	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:5.0 %, WARN_MIN:114.0, WARN_MAX:126.0 
+
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 12:09:22:241	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:10.0 %, ABORT_MIN:108.0, ABORT_MAX:132.0 
+
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 12:09:41:078	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 12:10:47:866	
+#RESULT=END	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 12:11:03:951	
+#RESULT=POST	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 12:11:11:667	
+#RESULT=NO	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 12:11:19:066	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:10.0 %, ABORT_MIN:108.0, ABORT_MAX:132.0 
+
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:11:19:099	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:5.0 %, WARN_MIN:114.0, WARN_MAX:126.0 
+
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 12:11:19:129	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 12:11:19:165	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:11:19:194	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:11:19:225	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:21:23:595	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 12:21:26:881	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 12:21:28:531	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 12:21:28:593	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 12:21:28:600	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:43:57:564	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 12:44:00:800	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 12:44:02:504	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 12:44:02:554	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 12:44:02:559	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 12:45:51:139	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 12:45:51:180	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 12:45:51:213	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 12:45:51:247	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:45:51:283	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:45:51:360	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 12:46:09:618	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 12:46:09:981	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 12:46:14:484	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Warning Range Alarm.	
+#MSG=START	
+PRESSURE WARNING 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:5.0 %, WARN_MIN:114.0, WARN_MAX:126.0 
+
+Pressure Control was over the Warning Range..
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=2	
+#TIME=2021.07.27 12:46:14:490	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Pressure Control Abort Range Alarm.	
+#MSG=START	
+PRESSURE ALARM 
+SET_PRS:120.0, CUR_PRS:0.0 
+CFG:10.0 %, ABORT_MIN:108.0, ABORT_MAX:132.0 
+
+Pressure Control was over the Abort Range..
+For Safety, Main VAC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 12:46:32:124	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:02:04:578	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 13:02:07:790	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 13:02:09:523	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:02:09:561	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 13:02:09:568	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 13:02:21:192	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:02:21:230	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 13:02:21:262	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 13:02:21:295	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:02:21:328	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:02:21:383	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 13:04:59:885	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 13:04:59:976	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:05:01:489	
+#RESULT=POST	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:05:01:491	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:05:02:489	
+#RESULT=POST	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:05:09:283	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:05:09:362	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:05:25:322	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:08:35:016	
+#RESULT=ABORT	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:08:35:068	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:08:35:136	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:08:35:190	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:08:35:220	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:08:35:249	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 13:08:35:277	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 13:08:35:302	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:08:35:326	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:08:35:376	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:08:54:223	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:08:59:301	
+#RESULT=POST	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:08:59:454	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:08:59:989	
+#RESULT=POST	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:09:02:255	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:09:18:240	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:09:36:520	
+#RESULT=ABORT	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:09:36:554	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:09:36:591	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:09:36:801	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:09:37:021	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:09:37:069	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:09:37:116	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:09:37:174	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:10:01:879	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:10:06:893	
+#RESULT=POST	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:10:07:128	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:10:07:489	
+#RESULT=POST	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:10:09:868	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:10:25:899	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:10:55:845	
+#RESULT=ABORT	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:10:55:881	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:10:55:913	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:10:55:947	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:10:55:979	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:10:56:006	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:10:56:033	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 13:10:56:085	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 13:11:39:310	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 13:11:44:489	
+#RESULT=POST	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 13:11:44:549	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 13:11:44:995	
+#RESULT=POST	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 13:12:03:319	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 14:48:58:598	
+#RESULT=ABORT	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 14:48:58:644	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 14:48:58:678	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 14:48:58:713	
+#RESULT=CHECK	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 14:48:58:745	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 14:48:58:775	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 14:48:58:786	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=9	
+#TIME=2021.07.27 14:49:41:057	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.	
+#MSG=START	
+CM1 Current Pressure (1000.000) mtorr > CM1 Config Over Pressure (800.000) mtorr 
+
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=15	
+#TIME=2021.07.27 14:49:44:096	
+#RESULT=POST	
+#TITLE=FNC_CHM - APC Valve Close Condition Occur.	
+#MSG=START	
+Current Chamber Pressure <- (1.000) torr 
+SW1 Config Over-Pressure <- (0.800) torr 
+SW2 Config Over-Pressure <- (0.800) torr 
+
+Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 14:49:44:236	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+If processing, process will be stoped. 
+
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 14:49:44:989	
+#RESULT=POST	
+#TITLE=FNC_CHM - Manometer Isolation Valve Close Condition Occur.	
+#MSG=START	
+Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 14:49:47:067	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=12	
+#TIME=2021.07.27 14:50:03:009	
+#RESULT=POST	
+#TITLE=FNC_PROC - Check Process Recovery Action !	
+#MSG=START	
+Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 14:59:35:272	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 14:59:38:543	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 14:59:40:252	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 14:59:40:333	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 14:59:40:337	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 14:59:48:121	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 14:59:48:151	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 14:59:48:179	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 14:59:48:219	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 14:59:48:254	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 14:59:48:266	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 15:00:02:230	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 15:00:26:701	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=69	
+#TIME=2021.07.27 15:01:49:317	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are checked ...	
+#MSG=START	
+TCU ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+ESC ... 
+   Currrent [0.000], Min [19.000], Max [21.000] 
+Top Plate ... 
+   Currrent [80.000], Min [79.000], Max [81.000] 
+
+Header recipe is running ...
+During process run, all temperature are checked ...
+Please, wait until all temperature are ready.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=70	
+#TIME=2021.07.27 15:01:49:680	
+#RESULT=POST	
+#TITLE=FNC_STEP : Header Ctrl - All temperature are ready ...	
+#MSG=START	
+Process will start ...
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 15:08:01:090	
+#RESULT=POST	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 15:08:05:830	
+#RESULT=NO	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 15:22:12:919	
+#RESULT=POST	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 15:22:17:493	
+#RESULT=NO	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 15:40:09:304	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 15:40:12:530	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 15:40:14:238	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 15:40:14:288	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=13	
+#TIME=2021.07.27 15:40:18:618	
+#RESULT=POST	
+#TITLE=FNC_CHM - PMC's slit valve is not closed !	
+#MSG=START	
+Cann't execute the "HIGH_VAC_PUMP" mode.
+
+Please, check the pmc's slit valve.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=13	
+#TIME=2021.07.27 15:40:25:546	
+#RESULT=RETRY	
+#TITLE=FNC_CHM - PMC's slit valve is not closed !	
+#MSG=START	
+Cann't execute the "HIGH_VAC_PUMP" mode.
+
+Please, check the pmc's slit valve.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 15:41:00:675	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 15:41:00:713	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 15:41:00:740	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 15:41:00:773	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 15:41:00:802	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 15:48:44:741	
+#RESULT=POST	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 15:48:49:931	
+#RESULT=NO	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 15:51:25:731	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 15:41:00:802	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:00:53:382	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 16:00:56:660	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 16:00:58:330	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 16:00:58:380	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 16:00:58:388	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 16:03:33:167	
+#RESULT=CHECK	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 16:03:33:203	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 16:03:33:233	
+#RESULT=CHECK	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 16:03:33:261	
+#RESULT=CHECK	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:289	
+#RESULT=CHECK	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 16:03:56:644	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 16:04:08:570	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 16:19:02:827	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 16:34:06:318	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 16:34:55:148	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 16:44:09:423	
+#RESULT=POST	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=16	
+#TIME=2021.07.27 16:44:12:812	
+#RESULT=NO	
+#TITLE=FNC_PROC - Do you want to convert the status of wafer ? 
+	
+#MSG=START	
+The lot ID of wafer is "". 
+The port ID of wafer is "". 
+The slot ID of wafer is "". 
+The recipe name of wafer is "PRC\PMC_FULL_TEST". 
+
+If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 16:58:37:733	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:10:30:116	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:12:53:212	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:27:18:342	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:28:22:257	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:35:20:055	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:37:50:367	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:39:25:438	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:41:42:990	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:43:26:738	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:46:23:789	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:56:31:365	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 16:03:33:375	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 17:58:45:601	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 18:09:31:866	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 17:59:07:361	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 17:59:10:555	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 17:59:12:281	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 17:59:12:331	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 17:59:12:338	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 18:18:34:189	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 18:20:13:333	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 17:59:07:361	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 17:59:10:555	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 17:59:12:281	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 17:59:12:331	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 17:59:12:338	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 18:33:36:757	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 18:39:09:005	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 18:38:57:312	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 18:39:00:519	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 18:39:02:258	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 18:39:02:298	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 18:39:02:303	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 18:46:39:472	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 18:46:42:726	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 18:46:44:426	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 18:46:44:476	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 18:46:44:481	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 18:49:44:443	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 18:49:47:717	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 18:49:49:365	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 18:49:49:404	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 18:49:49:410	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 18:50:54:613	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 18:50:57:799	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 18:50:59:552	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 18:50:59:601	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 18:50:59:606	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.07.27 19:00:33:123	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.07.27 19:00:36:392	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.07.27 19:00:38:053	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.07.27 19:00:38:113	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.07.27 19:00:38:120	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.07.27 19:09:47:938	
+POST	
+STOP	
+	

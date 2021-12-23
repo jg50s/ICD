@@ -1,0 +1,31 @@
+
+//---------------------------------------------------------------------------------------------------------
+//       1        2         3                                                                          4        5          6          7         		 8       		9         10
+//       ECID     COMMAND   CHANNEL-NAME                                                               UNIT     FMT-TYPE   FMT-BYTE   DEFAULT   		 MIN     		MAX       NAME
+                                                                                                                                                		         		
+#ECID     1       __        #DEFINE_NAME#+OBJ_HEAD_ROTATION.CFG.Pulse.Per.Degree											 Pulse		F						4					-7000					-7000				7000			 Head Rotation Pulse Per Degree
+#ECID			2				__				#DEFINE_NAME#+OBJ_HEAD_ROTATION.CFG.Pulse.Per.Position										 Pulse		F						4					-100000				-100000  		100000		 Head Rotation Pulse Per Position
+#ECID			3				__				#DEFINE_NAME#+OBJ_HEAD_ROTATION.CFG.Pulse.Per.Velocity                     Pulse    F           4					-100000				-100000  		100000		 Head Rotation Pulse Per Velocity
+#ECID     4       __        #DEFINE_NAME#+OBJ_HEAD_ROTATION.CFG.Pulse.Per.Acceleration                 Pulse    F           4         -100000				-100000  		100000		 Head Rotation Pulse Per Acceleration
+#ECID     5       __        #DEFINE_NAME#+OBJ_HEAD_ROTATION.CFG.Pulse.Per.Jerk                         Pulse    F           4         -100000				-100000  		100000		 Head Rotation Pulse Per Jerk
+#ECID     6       __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Pulse.Per.Degree                          Pulse    F           4         -7000					-7000    		7000			 Head Rotation Pulse Per Degree
+#ECID     7       __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Pulse.Per.Position                        Pulse    F           4					-100000				-100000  		100000		 Head Rotation Pulse Per Position
+#ECID			8				__				#DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Pulse.Per.Velocity                        Pulse    F           4         -100000				-100000  		100000		 Head Rotation Pulse Per Velocity
+#ECID			9       __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Pulse.Per.Acceleration                    Pulse    F           4         -100000				-100000  		100000		 Head Rotation Pulse Per Acceleration
+#ECID			10      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Pulse.Per.Jerk                            Pulse    F           4         -100000				-100000  		100000		 Head Rotation Pulse Per Jerk
+#ECID			11      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.HOME.PULSE                                Pulse    F           4         -100000				-100000  		100000		 Head Sweep:Home Pulse
+#ECID			12      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.HOME.HIGH.SPEED                           Pulse    F           4         0							0        		30000 		 Head Sweep:Home High Speed
+#ECID			13      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.HOME.LOW.SPEED                            Pulse    F           4					0							0        		15000			 Head Sweep:Home Low Speed
+#ECID			14      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.HOME.ACCEL                                Pulse    F           4					0         		0        		15000			 Head Sweep:Home Acceleration
+#ECID			15      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.ROTATE.VEL                                Pulse    F           4					0         		0        		800000		 Head Sweep:Rotate Velocity
+#ECID			16      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.ROTATE.ACC                                Pulse    F           4					0         		0        		800000		 Head Sweep:Rotate Acceleration
+#ECID			17      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.ROTATE.JRK                                Pulse    F           4					0         		0        		200000		 Head Sweep:Rotate Jerk
+#ECID			18      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Home.Pos                                  Inch     F           4					6							6        		10				 Head Sweep:Home Position
+#ECID			19      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.LoadCup.Position                          Inch     F           4					5							5        		7					 Head Sweep:LoadCup Position
+#ECID			20      __        #DEFINE_NAME#+OBJ_HEAD_SWEEP.CFG.Retract.Position                          Inch     F           4					5							5        		10				 Head Sweep:Retract Position
+
+
+// FMT-TYPE은 Digital, String Channel인 경우는 A 로 설정하고 Item의 최대 글자 수를 FMT-BYTE로 지정하면 됩니다.
+// Analog Channel은 Data Range 확인해서 FMT-TYPE과 FMT-BYTE 지정 바랍니다.
+// 참고로, U는 unsigned int이고 I는 signed int, F는 float 입니다.
+

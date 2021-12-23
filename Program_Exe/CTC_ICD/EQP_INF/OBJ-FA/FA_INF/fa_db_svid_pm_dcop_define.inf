@@ -1,0 +1,19 @@
+
+
+
+//  MODULE 	VID  	[CHANNEL or COMMAND]	
+//					                       	                          TYPE	BYTE	UNIT	         DISPLAY_NAME
+
+
+#SVID   ##PM     4      ##CTC_DCOP+TOTAL.STEP_NUMBER          A     10    Step.ID        ##NAME_DCOP+Total_Step_Number
+#SVID   ##PM     5      ##CTC_DCOP+PROCESS.STEP.NUM		        A     10	  Step.ID		     ##NAME_DCOP+Current_Step_Number	
+#SVID   ##PM     6	    ##CTC_DCOP+RCP.STEP.NAME		          A	    10	  __		         ##NAME_DCOP+Current_Step_Name		
+#SVID   ##PM     7 	    ##CTC_DCOP+STEP.TYPE			            A	    10	  mode		       ##NAME_DCOP+Current_Step_Type		
+#SVID   ##PM     8      ##CTC_DCOP+RECIPE.TOTAL_TIME	        A     10    sec            ##NAME_DCOP+Total_Process_Time
+#SVID   ##PM     9	    ##CTC_DCOP+RECIPE.STEP_TIME		        A     10    sec            ##NAME_DCOP+Recipe_Step_Time
+#SVID   ##PM    10	    ##CTC_DCOP+CURRENT.PROCESS_TIME	      A     10    sec            ##NAME_DCOP+Current_Process_Time
+#SVID   ##PM    11   	  ##CTC_DCOP+STEP.TIME    		          A	    10	  sec		         ##NAME_DCOP+Current_Step_Time		
+#SVID   ##PM    12      ##CTC_DCOP+CHAMBER.STATE		          A	    10  	__		         ##NAME_DCOP+Chamber_State		
+#SVID   ##PM    13   	  ##CTC_DCOP+CHAMBER.BASE.PRESS		      A	    10	  mtorr		       ##NAME_DCOP+Chamber_Base_Press		
+
+

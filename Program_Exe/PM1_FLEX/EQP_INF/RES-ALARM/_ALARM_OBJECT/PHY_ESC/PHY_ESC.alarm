@@ -1,0 +1,17 @@
+#ID=1	1	LIGHT	PHY_ESC - ESC Chuck Status Alarm.
+#ID=2	2	LIGHT	PHY_ESC - ESC Voltage Control Warning Range Alarm.
+#ID=3	3	LIGHT	PHY_ESC - ESC Voltage Control Abort Range Alarm.
+#ID=4	4	LIGHT	PHY_ESC - ESC BIAS Voltage Threshold Range Alarm.
+#ID=5	5	LIGHT	PHY_ESC - Inner Zone Pressure Abort Range Alarm.
+#ID=6	6	LIGHT	PHY_ESC - Inner Zone Pressure Warning Range Alarm.
+#ID=7	7	LIGHT	PHY_ESC - Outer Zone Pressure Abort Range Alarm.
+#ID=8	8	LIGHT	PHY_ESC - Outer Zone Pressure Warning Range Alarm.
+#ID=9	9	LIGHT	PHY_ESC - Inner Zone Flow Error
+#ID=10	10	LIGHT	PHY_ESC - Outer Zone Flow Error
+#ID=11	11	LIGHT	PHY_ESC - He Line Dump Timeout
+#ID=12	12	LIGHT	PHY_ESC - He Pressure is Low for ESC Turn ON.
+#ID=13	13	LIGHT	PHY_ESC - ESC BIAS Voltage Control Warning Range Alarm.
+#ID=14	14	LIGHT	PHY_ESC - ESC BIAS Voltage Control Abort Range Alarm.
+#ID=15	15	LIGHT	PHY_ESC - Inner Zone Max Flow Per Torr Threshold Error
+#ID=16	16	LIGHT	PHY_ESC - Outer Zone Max Flow Per Torr Threshold Error
+#ID=17	17	LIGHT	PHY_ESC - He Pressure Threshold Error 

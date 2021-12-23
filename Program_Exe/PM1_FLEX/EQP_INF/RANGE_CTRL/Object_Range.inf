@@ -1,0 +1,27 @@
+
+
+//-----------------------------------------------------------------------------------------------------
+#OBJECT_PROPERTY	      Mng_RANGE_CTRL
+
+#DEFINE_CONSTANT        SIZE.MAIN_CH		          3
+
+#DEFINE_CONSTANT        MAIN.CH.MAX.1 		        DB_SYS+CFG.CHM.MANOMETER.MAX.PRESSURE
+#DEFINE_CONSTANT        SIZE.DUAL_MAX_CH.1        0
+
+#DEFINE_CONSTANT        SIZE.SUB_CH.1 			      1
+#DEFINE_CONSTANT        SUB.CH.1.1 			          IO+ai.ChamPress.Manometer
+
+
+#DEFINE_CONSTANT        MAIN.CH.MAX.2		          DB_SYS+CFG.FORELINE.MANOMETER.MAX.PRESSURE
+#DEFINE_CONSTANT        SIZE.DUAL_MAX_CH.2        0
+
+#DEFINE_CONSTANT        SIZE.SUB_CH.2 			      1
+#DEFINE_CONSTANT        SUB.CH.2.1			          IO+ai.ForelinePress.Manometer
+
+
+#DEFINE_CONSTANT        MAIN.CH.MAX.3 		        DB_SYS+CFG.PROCESS.MANOMETER.MAX.PRESSURE
+#DEFINE_CONSTANT        SIZE.DUAL_MAX_CH.3        0
+
+#DEFINE_CONSTANT        SIZE.SUB_CH.3 			      1
+#DEFINE_CONSTANT        SUB.CH.3.1			          IO+ai.Process.Manometer
+

@@ -1,0 +1,209 @@
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.STEP.MESSAGE
+#TITLE             1._Step_Name
+#CH_TITLE          DB_RCP+RCP.STEP.MESSAGE
+#CHANNEL_TYPE      STRING
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.STEP.MODE
+#TITLE             2._Step_Mode
+#CH_TITLE          DB_RCP+RCP.STEP.MODE
+#CHANNEL_TYPE      DIGITAL
+#CH_CHANNEL_ITEM 
+#LIST              Time/Stable/End
+#RANGE             
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.STEP.TIME
+#TITLE             3._Time(sec)
+#CH_TITLE          DB_RCP+RCP.STEP.TIME
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST              
+#RANGE             (0,9999)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  4._APC
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.APC.MODE
+#TITLE             1._Control_Mode
+#CH_TITLE          DB_RCP+RCP.APC.MODE
+#CHANNEL_TYPE      DIGITAL
+#CH_CHANNEL_ITEM 
+#LIST              Position/Pressure
+#RANGE             
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.APC.PRESSURE
+#TITLE             2._Pressure(torr)
+#CH_TITLE          DB_RCP+RCP.APC.PRESSURE
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE             (0,10)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.APC.POSITION
+#TITLE             3._Position(%)
+#CH_TITLE          DB_RCP+RCP.APC.POSITION
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE             (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.APC.PRESET.POS
+#TITLE             4._Preset_Position(%)
+#CH_TITLE          DB_RCP+RCP.APC.PRESET.POS
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE             (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.APC.HOLD.DELAY
+#TITLE             5._Hold_Delay(sec)
+#CH_TITLE          DB_RCP+RCP.APC.HOLD.DELAY
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE             (0,10)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  5._GAS
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.GAS.N2.FLOW
+#TITLE             1._N2
+#CH_TITLE          
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE             
+#CH_ALG_MIN        DB_RCP+CFG.PARA.MFC.N2.RANGE.MIN
+#CH_ALG_MAX        DB_RCP+CFG.PARA.MFC.N2.RANGE.MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  6._LIFT_PIN
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.LIFT_PIN.MODE
+#TITLE             1._Lift_Pin
+#CH_TITLE          DB_RCP+RCP.LIFT_PIN.MODE
+#CHANNEL_TYPE      DIGITAL
+#CH_CHANNEL_ITEM 
+#LIST              Down/Up
+#RANGE             
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.LOOP_START
+#TITLE             7._Loop Start
+#CH_TITLE          DB_RCP+RCP.LOOP_START
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM   
+#LIST              
+#RANGE             (0,100)
+#CH_ALG_Min        
+#CH_ALG_Max        
+#TEXTCOLOR         
+#BACKCOLOR         
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           DB_RCP+RCP.LOOP_REPEAT
+#TITLE             8._Loop Repeat
+#CH_TITLE          DB_RCP+RCP.LOOP_REPEAT
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM   
+#LIST              
+#RANGE             (0,1000)
+#CH_ALG_Min        
+#CH_ALG_Max        
+#TEXTCOLOR         
+#BACKCOLOR         

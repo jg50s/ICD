@@ -1,0 +1,137 @@
+##SIMULATION_MODE	    
+
+#DEVICE_NAME     DEMO
+#GUI_TYPE        FAB		       // FAB   OFFICE
+
+
+// #TOTAL_ALARM_POPUP_BOX_ENABLE
+#MODULE_WINDOW_HIDE		     // Show (Default)
+
+#SINGLE_LOCAL               0
+// #SINGLE_REMOTE              2
+
+#SYSTEM_USER_LEVEL          OEM     // MAINT  
+
+
+//---------------------------------------------------------------------------------------
+// #PAGE_CHECK.LINK_FILE       PAGE_CHECK.inf
+// #ACTIVE.LOG_SIM_PAGE
+// #ACTIVE.LOG_INTERFACE_PART
+#ACTIVE.POPUP_PAGE_REDRAW
+
+//---------------------------------------------------------------------------------------
+/*
+#SINGLE_WINDOW.LINK_SCT     SINGLE_WIN.sct
+#SINGLE_WINDOW.LINK_CTRL    SINGLE_WIN.ctrl
+*/
+
+
+//---------------------------------------------------------------------------------------
+#PAGE_SIZE   1280_1024		// 1280 * 1024
+
+#EVENT_LEFT_BUTTON_UP_ENABLE
+
+
+//---------------------------------------------------------------------------------------
+#SYSTEM_DEFINE_FILE         SYS_DEF.inf
+
+
+#DEFINE  ##CTC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\CTC_ICD"
+#DEFINE  ##TMC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\TMC_ICD"
+
+#DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_FLEX"
+#DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_HEATER"
+#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_FLEX"
+#DEFINE  ##PM4_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM4_FLEX"
+
+
+#DIR_ROOT.CTC               ##CTC_DIR_ROOT
+#DIR_ROOT.TMC               ##TMC_DIR_ROOT
+
+#DIR_ROOT.PM1               ##PM1_DIR_ROOT
+#DIR_ROOT.PM2               ##PM2_DIR_ROOT
+#DIR_ROOT.PM3               ##PM3_DIR_ROOT
+#DIR_ROOT.PM4               ##PM4_DIR_ROOT
+
+
+#DEFINE  ##CTC_SCR_FILE     CTC_WIN-ICD.sct
+#DEFINE  ##CTC_SCR_CTRL     CTC_WIN-ICD.ctrl
+
+#DEFINE  ##TMC_SCR_FILE     TMC_WIN-ICD.sct
+#DEFINE  ##TMC_SCR_CTRL     TMC_WIN-ICD.ctrl
+
+#DEFINE  ##PMC_SCR_FILE     PMC_WIN-FLEX.sct
+#DEFINE  ##PMC_SCR_CTRL     PMC_WIN-FLEX.ctrl
+
+#DEFINE  ##NULL_SCR_FILE    WIN-NULL.sct
+#DEFINE  ##NULL_SCR_CTRL    WIN-NULL.ctrl
+
+
+// CTC
+#MAIN_DATA
+{
+#SEQ_NAME              CTC
+
+#SCREEN_FILE           ##CTC_SCR_FILE
+#SCREEN_CTRL	      	 ##CTC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##CTC_DIR_ROOT
+}
+
+// TMC
+#PM0_DATA
+{
+#SEQ_NAME              TMC
+
+#SCREEN_FILE           ##TMC_SCR_FILE
+#SCREEN_CTRL	         ##TMC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##TMC_DIR_ROOT
+}
+
+// PM1
+#PM1_DATA
+{
+#SEQ_NAME              PM1
+
+#SCREEN_FILE           ##PMC_SCR_FILE
+#SCREEN_CTRL	         ##PMC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##PM1_DIR_ROOT
+}
+
+// PM2
+#PM2_DATA
+{
+#SEQ_NAME              PM2
+
+#SCREEN_FILE           PMC_WIN-HEATER_TEST.sct
+#SCREEN_CTRL	         PMC_WIN-HEATER_TEST.ctrl
+
+#DIR_SEQ_ROOT          ##PM2_DIR_ROOT
+}
+
+/*
+// PM3
+#PM3_DATA
+{
+#SEQ_NAME              PM3
+
+#SCREEN_FILE           ##PMC_SCR_FILE
+#SCREEN_CTRL	         ##PMC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##PM3_DIR_ROOT
+}
+
+// PM4
+#PM4_DATA
+{
+#SEQ_NAME              PM4
+
+#SCREEN_FILE           ##PMC_SCR_FILE
+#SCREEN_CTRL	         ##PMC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##PM4_DIR_ROOT
+}
+*/
+

@@ -1,0 +1,15 @@
+
+
+// CTC Page ...
+#INCLUDE=            "_CTC_REPLAY_LOG.inf"
+
+// TMC Page ...
+#INCLUDE=            "_TMC_REPLAY_LOG.inf"
+
+// PMC Page ...
+#INCLUDE=            "_PM1_REPLAY_LOG.inf"
+#INCLUDE=            "_PM2_REPLAY_LOG.inf"
+#INCLUDE=            "_PM3_REPLAY_LOG.inf"
+#INCLUDE=            "_PM4_REPLAY_LOG.inf"
+#INCLUDE=            "_PM5_REPLAY_LOG.inf"
+#INCLUDE=            "_PM6_REPLAY_LOG.inf"

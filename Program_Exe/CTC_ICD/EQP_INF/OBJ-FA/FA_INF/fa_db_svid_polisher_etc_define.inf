@@ -1,0 +1,102 @@
+
+
+//      MODULE 	    VID  	[CHANNEL or ALIAS or COMMAND]	
+//					                            	                          TYPE	 BYTE	  UNIT	    DISPLAY_NAME
+
+
+// PMx로부터 Data 정보를 받아 전달하는 경우는 ##SVID+로 시작하면 됩니다.
+// VID는 만단위와 천단위의 정보를 제거한 다음 기입하면 됩니다.
+// 예를 들면, "Rotate Velocity (RPM)"를 나타내는 11031 VID는 31로 아래와 같이 기입합니다.
+// "CMP_Project_-_300mm_Common_Specification_v(1.2).xlsx"의 "SVID" 참고 바람.
+// 여기서, 아래의 "##SVID+Object_Name.Variable_Name"은 Module Link를 통해 생성된 Channel 이름입니다.
+  //----------------------platen  
+#SVID   ##MODULE     10135    IO.di.3.16.Platen1.SlurryArm.Interlock.Sensor                	A      10    __    P1_Platen_SlurryArm_Interlock_Sensor                 
+#SVID   ##MODULE     10235    IO.di.3.40.Platen2.SlurryArm.Interlock.Sensor                	A      10    __    P2_Platen_SlurryArm_Interlock_Sensor  
+#SVID   ##MODULE     10335    IO.di.4.16.Platen3.SlurryArm.Interlock.Sensor                	A      10    __    P3_Platen_SlurryArm_Interlock_Sensor
+#SVID   ##MODULE     10136    IO.di.3.17.Platen1.Rinse.Flow.Sensor                					A      10    __    P1_Platen_Rinse_Flow_Sensor        
+#SVID   ##MODULE     10236    IO.di.3.41.Platen2.Rinse.Flow.Sensor                					A      10    __    P2_Platen_Rinse_Flow_Sensor        
+#SVID   ##MODULE     10336    IO.di.4.17.Platen3.Rinse.Flow.Sensor                					A      10    __    P3_Platen_Rinse_Flow_Sensor        
+#SVID   ##MODULE     10137    IO.do.0.20.Pad.Cond1.Drive.Contactor                					A      10    __    P1_PadCond_Drive_Contactor        
+#SVID   ##MODULE     10237    IO.do.0.21.Pad.Cond2.Drive.Contactor                					A      10    __    P2_PadCond_Drive_Contactor        
+#SVID   ##MODULE     10337    IO.do.0.22.Pad.Cond3.Drive.Contactor                					A      10    __    P3_PadCond_Drive_Contactor        
+
+//-------------------------head
+#SVID   ##MODULE     11103    IO_SST.vao.Spindle.1.Ret.Ring.Actual.Pressure               A      10    __    H1_R-Ring_Read_Pressure           
+#SVID   ##MODULE     11104    IO_SST.vao.Spindle.1.Ret.Ring.Actual.State	                A      10    __    H1_R-Ring_Read_Command            
+#SVID   ##MODULE     11105    IO_SST.vao.Spindle.1.Zone.1.Actual.Pressure                 A      10    __    H1_Zone_1_Read_Pressure           
+#SVID   ##MODULE     11106    IO_SST.vao.Spindle.1.Zone.1.Actual.State     						    A      10    __    H1_Zone_1_Read_Command      
+#SVID   ##MODULE     11107    IO_SST.vao.Spindle.1.Zone.2.Actual.Pressure  						    A      10    __    H1_Zone_2_Read_Pressure     
+#SVID   ##MODULE     11108    IO_SST.vao.Spindle.1.Zone.2.Actual.State     						    A      10    __    H1_Zone_2_Read_Command      
+#SVID   ##MODULE     11109    IO_SST.vao.Spindle.1.Zone.3.Actual.Pressure  	              A      10    __    H1_Zone_3_Read_Pressure     					
+#SVID   ##MODULE     11110    IO_SST.vao.Spindle.1.Zone.3.Actual.State     	              A      10    __    H1_Zone_3_Read_Command      					
+#SVID   ##MODULE     11111    IO_SST.vao.Spindle.1.Zone.4.Actual.Pressure  	              A      10    __    H1_Zone_4_Read_Pressure     					
+#SVID   ##MODULE     11112    IO_SST.vao.Spindle.1.Zone.4.Actual.State     						    A      10    __    H1_Zone_4_Read_Command      					
+#SVID   ##MODULE     11113    IO_SST.vao.Spindle.1.Zone.5.Actual.Pressure  						    A      10    __    H1_Zone_5_Read_Pressure     					
+#SVID   ##MODULE     11114    IO_SST.vao.Spindle.1.Zone.5.Actual.State     						    A      10    __    H1_Zone_5_Read_Command      					
+
+#SVID   ##MODULE     11203    IO_SST.vao.Spindle.2.Ret.Ring.Actual.Pressure               A      10    __    H2_R-Ring_Read_Pressure           
+#SVID   ##MODULE     11204    IO_SST.vao.Spindle.2.Ret.Ring.Actual.State	                A      10    __    H2_R-Ring_Read_Command            
+#SVID   ##MODULE     11205    IO_SST.vao.Spindle.2.Zone.1.Actual.Pressure                 A      10    __    H2_Zone_1_Read_Pressure           
+#SVID   ##MODULE     11206    IO_SST.vao.Spindle.2.Zone.1.Actual.State     						    A      10    __    H2_Zone_1_Read_Command      
+#SVID   ##MODULE     11207    IO_SST.vao.Spindle.2.Zone.2.Actual.Pressure  						    A      10    __    H2_Zone_2_Read_Pressure     
+#SVID   ##MODULE     11208    IO_SST.vao.Spindle.2.Zone.2.Actual.State     						    A      10    __    H2_Zone_2_Read_Command      
+#SVID   ##MODULE     11209    IO_SST.vao.Spindle.2.Zone.3.Actual.Pressure  	              A      10    __    H2_Zone_3_Read_Pressure     					
+#SVID   ##MODULE     11210    IO_SST.vao.Spindle.2.Zone.3.Actual.State     	              A      10    __    H2_Zone_3_Read_Command      					
+#SVID   ##MODULE     11211    IO_SST.vao.Spindle.2.Zone.4.Actual.Pressure  	              A      10    __    H2_Zone_4_Read_Pressure     					
+#SVID   ##MODULE     11212    IO_SST.vao.Spindle.2.Zone.4.Actual.State     						    A      10    __    H2_Zone_4_Read_Command      					
+#SVID   ##MODULE     11213    IO_SST.vao.Spindle.2.Zone.5.Actual.Pressure  						    A      10    __    H2_Zone_5_Read_Pressure     					
+#SVID   ##MODULE     11214    IO_SST.vao.Spindle.2.Zone.5.Actual.State     						    A      10    __    H2_Zone_5_Read_Command 
+
+#SVID   ##MODULE     11303    IO_SST.vao.Spindle.3.Ret.Ring.Actual.Pressure               A      10    __    H3_R-Ring_Read_Pressure           
+#SVID   ##MODULE     11304    IO_SST.vao.Spindle.3.Ret.Ring.Actual.State	                A      10    __    H3_R-Ring_Read_Command            
+#SVID   ##MODULE     11305    IO_SST.vao.Spindle.3.Zone.1.Actual.Pressure                 A      10    __    H3_Zone_1_Read_Pressure           
+#SVID   ##MODULE     11306    IO_SST.vao.Spindle.3.Zone.1.Actual.State     						    A      10    __    H3_Zone_1_Read_Command      
+#SVID   ##MODULE     11307    IO_SST.vao.Spindle.3.Zone.2.Actual.Pressure  						    A      10    __    H3_Zone_2_Read_Pressure     
+#SVID   ##MODULE     11308    IO_SST.vao.Spindle.3.Zone.2.Actual.State     						    A      10    __    H3_Zone_2_Read_Command      
+#SVID   ##MODULE     11309    IO_SST.vao.Spindle.3.Zone.3.Actual.Pressure  	              A      10    __    H3_Zone_3_Read_Pressure     					
+#SVID   ##MODULE     11310    IO_SST.vao.Spindle.3.Zone.3.Actual.State     	              A      10    __    H3_Zone_3_Read_Command      					
+#SVID   ##MODULE     11311    IO_SST.vao.Spindle.3.Zone.4.Actual.Pressure  	              A      10    __    H3_Zone_4_Read_Pressure     					
+#SVID   ##MODULE     11312    IO_SST.vao.Spindle.3.Zone.4.Actual.State     						    A      10    __    H3_Zone_4_Read_Command      					
+#SVID   ##MODULE     11313    IO_SST.vao.Spindle.3.Zone.5.Actual.Pressure  						    A      10    __    H3_Zone_5_Read_Pressure     					
+#SVID   ##MODULE     11314    IO_SST.vao.Spindle.3.Zone.5.Actual.State     						    A      10    __    H3_Zone_5_Read_Command 
+
+#SVID   ##MODULE     11403    IO_SST.vao.Spindle.4.Ret.Ring.Actual.Pressure               A      10    __    H4_R-Ring_Read_Pressure           
+#SVID   ##MODULE     11404    IO_SST.vao.Spindle.4.Ret.Ring.Actual.State	                A      10    __    H4_R-Ring_Read_Command            
+#SVID   ##MODULE     11405    IO_SST.vao.Spindle.4.Zone.1.Actual.Pressure                 A      10    __    H4_Zone_1_Read_Pressure           
+#SVID   ##MODULE     11406    IO_SST.vao.Spindle.4.Zone.1.Actual.State     						    A      10    __    H4_Zone_1_Read_Command      
+#SVID   ##MODULE     11407    IO_SST.vao.Spindle.4.Zone.2.Actual.Pressure  						    A      10    __    H4_Zone_2_Read_Pressure     
+#SVID   ##MODULE     11408    IO_SST.vao.Spindle.4.Zone.2.Actual.State     						    A      10    __    H4_Zone_2_Read_Command      
+#SVID   ##MODULE     11409    IO_SST.vao.Spindle.4.Zone.3.Actual.Pressure  	              A      10    __    H4_Zone_3_Read_Pressure     					
+#SVID   ##MODULE     11410    IO_SST.vao.Spindle.4.Zone.3.Actual.State     	              A      10    __    H4_Zone_3_Read_Command      					
+#SVID   ##MODULE     11411    IO_SST.vao.Spindle.4.Zone.4.Actual.Pressure  	              A      10    __    H4_Zone_4_Read_Pressure     					
+#SVID   ##MODULE     11412    IO_SST.vao.Spindle.4.Zone.4.Actual.State     						    A      10    __    H4_Zone_4_Read_Command      					
+#SVID   ##MODULE     11413    IO_SST.vao.Spindle.4.Zone.5.Actual.Pressure  						    A      10    __    H4_Zone_5_Read_Pressure     					
+#SVID   ##MODULE     11414    IO_SST.vao.Spindle.4.Zone.5.Actual.State     						    A      10    __    H4_Zone_5_Read_Command 
+
+//-------------------pad cond
+#SVID   ##MODULE     12117    IO.do.0.20.Pad.Cond1.Drive.Contactor      	                A      10    __    C1_PadCond_Drive_Contactor
+#SVID   ##MODULE     12217    IO.do.0.21.Pad.Cond2.Drive.Contactor      	                A      10    __    C2_PadCond_Drive_Contactor
+#SVID   ##MODULE     12317    IO.do.0.22.Pad.Cond3.Drive.Contactor      	                A      10    __    C3_PadCond_Drive_Contactor
+#SVID   ##MODULE     12118    IO.do.0.23.Pad.Cond1.Sweep.Drive.Contactor         					A      10    __    C1_PadCond_Sweep_Drive_Contactor              
+#SVID   ##MODULE     12218    IO.do.0.24.Pad.Cond2.Sweep.Drive.Contactor         					A      10    __    C2_PadCond_Sweep_Drive_Contactor          
+#SVID   ##MODULE     12318    IO.do.0.25.Pad.Cond3.Sweep.Drive.Contactor         					A      10    __    C3_PadCond_Sweep_Drive_Contactor          
+#SVID   ##MODULE     12120    IO.di.3.23.PadCond1.Swp.Home.Sensor      		       					A      10    __    C1_PadCond_Sweep_Home_Sensor           
+#SVID   ##MODULE     12220    IO.di.3.47.PadCond2.Swp.Home.Sensor     		       					A      10    __    C2_PadCond_Sweep_Home_Sensor          
+#SVID   ##MODULE     12320    IO.di.4.23.PadCond3.Swp.Home.Sensor      		       					A      10    __    C3_PadCond_Sweep_Home_Sensor           
+
+
+//-----------------------io
+#SVID   ##MODULE     17001    IO.di.5.32.MainDrip.Tray.LeakDetect.Low                     A      10    __    MainDrip_Tray_LeakDetect_Low     
+#SVID   ##MODULE     17002    IO.di.5.33.MainDrip.Tray.LeakDetect.High                    A      10    __    MainDrip_Tray_LeakDetect_High    
+#SVID   ##MODULE     17003    IO.di.5.37.Exhaust.Slurry.Interlock                         A      10    __    Exhaust_Slurry_Interlock         
+#SVID   ##MODULE     17004    IO.di.5.38.Upper.exhaust.vent.block.detector  					    A      10    __    Upper_Exhaust_Vent_Block_Detector
+#SVID   ##MODULE     17005    IO.di.5.39.Low.exhaust.vent.block.detector    					    A      10    __    Low_Exhaust_Vent_Block_Detector  
+#SVID   ##MODULE     17006    IO.di.5.40.Slurry.Module.Leak                						    A      10    __    Slurry_Module_Leak               
+#SVID   ##MODULE     17007    IO.di.0.28.Polisher.Doors.Closed     					              A      10    __    Polisher_Door_Status             
+#SVID   ##MODULE     17008    IO.di.0.29.WetRobot.Doors.Closed       				              A      10    __    WetRobot_Door_Status             
+#SVID   ##MODULE     17009    IO.di.0.30.Polisher.Interlock.Reset                         A      10    __    Polisher_Interlock_Reset         
+#SVID   ##MODULE     17010    IO.di.0.31.WetRobot.Interlcok.Reset           					    A      10    __    WetRobot_Interlock_Reset         
+#SVID   ##MODULE     17011    IO.di.0.32.ServiceMode.Switch                 					    A      10    __    ServiceMode_Switch               
+#SVID   ##MODULE     17012    IO.di.1.37.OutputStation.Rinse.Flow.Sensor    					    A      10    __    Output_Station_Rinse_Flow_Sensor 
+#SVID   ##MODULE     17013    IO.di.1.39.Wafer.Chuck.Spray.Flow.Sensor                    A      10    __    Wafer_Chuck_Spray_Flow_Sensor    
+#SVID   ##MODULE     17014    IO.ai.0.07.Output.Station.Wafer.Sense                       A      10    __    Output_Station_Wafer_Status      

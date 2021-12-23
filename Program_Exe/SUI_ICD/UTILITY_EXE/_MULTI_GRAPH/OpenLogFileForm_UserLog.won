@@ -1,0 +1,26 @@
+09:54:22.275 >>>> Start Log <<<<
+09:54:22.325 0
+09:54:22.330 1
+09:54:22.330 2
+09:54:22.332 3
+09:54:22.682 Load
+09:54:22.708 4
+09:54:22.716 Update_ListView Start : D:\WORK_ANA-SOFT\PROGRAM_EXE\PM2-SAMPLE\EQP_LOG\DATALOG\\
+09:54:22.716 Update_ListView Exist
+09:54:22.735 Update_ListView GetDirectories
+09:54:22.738 Update_ListView GetFiles
+09:54:22.738 Update_ListView End
+09:54:22.742 Update_TreeFolder Start : D:\WORK_ANA-SOFT\PROGRAM_EXE\PM2-SAMPLE\EQP_LOG\DATALOG\
+09:54:22.744 Update_TreeFolder End
+09:54:22.889 Shown
+09:54:24.693 Update_ListView Start : D:\WORK_ANA-SOFT\PROGRAM_EXE\PM2-SAMPLE\EQP_LOG\DATALOG\\2020_10_28
+09:54:24.694 Update_ListView Exist
+09:54:24.719 Update_ListView GetDirectories
+09:54:24.742 Update_ListView GetFiles
+09:54:24.742 Update_ListView End
+09:54:26.332 Update_ListView Start : D:\WORK_ANA-SOFT\PROGRAM_EXE\PM2-SAMPLE\EQP_LOG\DATALOG\\2020_10_28\AAA_161204
+09:54:26.334 Update_ListView Exist
+09:54:26.369 Update_ListView GetDirectories
+09:54:26.370 Update_ListView GetFiles
+09:54:26.388 Update_ListView End
+09:54:31.841 >>>> Log Close <<<<

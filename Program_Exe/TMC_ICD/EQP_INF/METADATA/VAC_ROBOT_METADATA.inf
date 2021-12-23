@@ -1,0 +1,183 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__UPPER_VAC_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT			                    OPR__VAC_ROBOT
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ__LL1	                          OPR__LBA
+#DEFINE_CONSTANT    OBJ__LL2	                          OPR__LBB
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__VAC_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT     	                    OPR__VAC_ROBOT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__VAC_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT        		              FNC__VAC_ROBOT
+#DEFINE_CONSTANT    dHYPER_TERMINAL_LOCK	              PHY_IO__VAC_ROBOT+dHYPER.TERMINAL.LOCK.FLAG
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__VAC_ROBOT
+
+#DEFINE_CONSTANT    OBJ__DB           					        DB_CFG
+#DEFINE_CONSTANT    OBJ__ROBOT           				        PHY__VAC_ROBOT
+
+#DEFINE_CONSTANT    PM_SIZE     	        			        ##PM_LIMIT
+
+#DEFINE_CONSTANT    DATA.PMx_HANDOFF.TYPE  		          SINGLE
+#DEFINE_CONSTANT    OBJ__PMx_ACTIVE_HANDOFF			        OPR__PMx_HANDOFF
+#DEFINE_CONSTANT    OBJ__PMC			                      PHY__PMx
+
+#DEFINE_CONSTANT    ACTIVE.MANIFOLD_X                   YES
+#DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ__FNC_LL1	                      FNC__LBA
+#DEFINE_CONSTANT    OBJ__PHY_LL1	                      PHY__LBA
+#DEFINE_CONSTANT    OBJ__FNC_LL2	                      FNC__LBB
+#DEFINE_CONSTANT    OBJ__PHY_LL2	                      PHY__LBB
+
+#DEFINE_CONSTANT    OBJ__VAC_CHM		                    FNC__TMC_CHM
+#DEFINE_CONSTANT    OBJ__TMC_VLV		                    FNC__TMC_VLV
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__PMx_HANDOFF
+
+#DEFINE_CONSTANT    PM_SIZE     	        			        ##PM_LIMIT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__VAC_ROBOT
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+#DEFINE_CONSTANT    OBJ__ROBOT           	              PHY_IO__VAC_ROBOT	
+#DEFINE_CONSTANT    ROBOT.ARM_RNE_SNS                   IO+di.VAC.Robot.RNE
+
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+
+#DEFINE_CONSTANT    OBJ__TMC_CHM		                    PHY__TMC_CHM
+#DEFINE_CONSTANT    OBJ__PMC			                      PHY__PMx
+
+#DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
+#DEFINE_CONSTANT    LLx.MULTI_SLOT_VALVE                NO
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ__LL1	                          PHY__LBA
+#DEFINE_CONSTANT    OBJ__LL2	                          PHY__LBB
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__VAC_ROBOT										
+
+#OBJECT_IO_PARA     COM_PORT                            7
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__PMx_VLV
+
+#DEFINE_CONSTANT    OBJ__PM_VLV			                    PHY__PMx
+#DEFINE_CONSTANT    PM_SIZE                             ##PM_LIMIT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__PMx
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+#DEFINE_CONSTANT    VAR__IO_DI_DNET_COMM_STS            IO+di.Comm.Sts
+#DEFINE_CONSTANT    VAR__IO_DI_VAC_RB_RNE               IO+di.VAC.Robot.RNE
+#DEFINE_CONSTANT    VAR__IO_DI_TM_ATM_SNS               IO+di.CHM1.ATM.Sns
+#DEFINE_CONSTANT    VAR__IO_DI_TM_VAC_SNS               IO+di.CHM1.VAC.Sns
+
+// TM
+#DEFINE_CONSTANT    VAR__PHY_TM_PRESS_STS  				      PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS
+#DEFINE_CONSTANT    VAR__PHY_TM_PRESS_TORR  				    PHY__TMC_CHM+OTR.OUT.MON.aPRESSURE.TORR
+
+// PM INFO ...
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+
+// PM1
+// DO
+#DEFINE_CONSTANT    VAR__IO_DO_PM1_SV_PM_OPEN           IO+do.PM1.SV.PM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM1_SV_PM_CLOSE          IO+do.PM1.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM1_SV_TM_OPEN           IO+do.PM1.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM1_SV_TM_CLOSE          IO+do.PM1.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM1_SV_UP                IO+do.PM1.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DO_PM1_SV_DOWN              IO+do.PM1.SV.DOWN
+// DI
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_SV_PM_OPEN           IO+di.PM1.SV.PM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_SV_PM_CLOSE          IO+di.PM1.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_SV_TM_OPEN           IO+di.PM1.SV.TM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_SV_TM_CLOSE          IO+di.PM1.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_SV_UP                IO+di.PM1.SV.UP      
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_SV_DOWN              IO+di.PM1.SV.DOWN   	
+// PRESSURE
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_ATM_SNS		          IO+di.PM1.ATM
+#DEFINE_CONSTANT    VAR__IO_DI_PM1_VAC_SNS		          IO+di.PM1.VAC
+
+// PM2
+// DO
+#DEFINE_CONSTANT    VAR__IO_DO_PM2_SV_PM_OPEN           IO+do.PM2.SV.PM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM2_SV_PM_CLOSE          IO+do.PM2.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM2_SV_TM_OPEN           IO+do.PM2.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM2_SV_TM_CLOSE          IO+do.PM2.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM2_SV_UP                IO+do.PM2.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DO_PM2_SV_DOWN              IO+do.PM2.SV.DOWN
+// DI
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_SV_PM_OPEN           IO+di.PM2.SV.PM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_SV_PM_CLOSE          IO+di.PM2.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_SV_TM_OPEN           IO+di.PM2.SV.TM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_SV_TM_CLOSE          IO+di.PM2.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_SV_UP                IO+di.PM2.SV.UP      
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_SV_DOWN              IO+di.PM2.SV.DOWN   	
+// PRESSURE
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_ATM_SNS		          IO+di.PM2.ATM
+#DEFINE_CONSTANT    VAR__IO_DI_PM2_VAC_SNS		          IO+di.PM2.VAC
+
+// PM3
+// DO
+#DEFINE_CONSTANT    VAR__IO_DO_PM3_SV_PM_OPEN           IO+do.PM3.SV.PM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM3_SV_PM_CLOSE          IO+do.PM3.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM3_SV_TM_OPEN           IO+do.PM3.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM3_SV_TM_CLOSE          IO+do.PM3.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM3_SV_UP                IO+do.PM3.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DO_PM3_SV_DOWN              IO+do.PM3.SV.DOWN
+// DI
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_SV_PM_OPEN           IO+di.PM3.SV.PM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_SV_PM_CLOSE          IO+di.PM3.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_SV_TM_OPEN           IO+di.PM3.SV.TM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_SV_TM_CLOSE          IO+di.PM3.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_SV_UP                IO+di.PM3.SV.UP      
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_SV_DOWN              IO+di.PM3.SV.DOWN   	
+// PRESSURE
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_ATM_SNS		          IO+di.PM3.ATM
+#DEFINE_CONSTANT    VAR__IO_DI_PM3_VAC_SNS		          IO+di.PM3.VAC
+
+// PM4
+// DO
+#DEFINE_CONSTANT    VAR__IO_DO_PM4_SV_PM_OPEN           IO+do.PM4.SV.PM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM4_SV_PM_CLOSE          IO+do.PM4.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM4_SV_TM_OPEN           IO+do.PM4.SV.TM.OPEN
+#DEFINE_CONSTANT    VAR__IO_DO_PM4_SV_TM_CLOSE          IO+do.PM4.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DO_PM4_SV_UP                IO+do.PM4.SV.UP
+#DEFINE_CONSTANT    VAR__IO_DO_PM4_SV_DOWN              IO+do.PM4.SV.DOWN
+// DI
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_SV_PM_OPEN           IO+di.PM4.SV.PM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_SV_PM_CLOSE          IO+di.PM4.SV.PM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_SV_TM_OPEN           IO+di.PM4.SV.TM.OPEN 
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_SV_TM_CLOSE          IO+di.PM4.SV.TM.CLOSE
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_SV_UP                IO+di.PM4.SV.UP      
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_SV_DOWN              IO+di.PM4.SV.DOWN   	
+// PRESSURE
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_ATM_SNS		          IO+di.PM4.ATM
+#DEFINE_CONSTANT    VAR__IO_DI_PM4_VAC_SNS		          IO+di.PM4.VAC
+

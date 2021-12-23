@@ -1,0 +1,11 @@
+#ID=1	1	LIGHT	PHY_APC_VLV - APC Pressure Control Warning Range Alarm.
+#ID=2	2	LIGHT	PHY_APC_VLV - APC Pressure Control Abort Range Alarm.
+#ID=3	3	LIGHT	PHY_APC_VLV - APC Ballast Pressure Control Abort Range Alarm.
+#ID=4	4	LIGHT	PHY_APC_VLV - APC Valve can't control in no vacuum.
+#ID=9	9	LIGHT	PHY_APC_VLV - APC Valve can't control in CM1 & CM2 Lock.
+#ID=5	5	LIGHT	PHY_APC_VLV - APC Valve can't control in turbo pump on and no vacuum.
+#ID=7	7	LIGHT	PHY_APC_VLV - APC Valve can't control in turbo pump on and CM1 & CM2 Lock.
+#ID=6	6	LIGHT	PHY_APC_VLV - APC Valve can't control in dry-pump on and no vacuum.
+#ID=8	8	LIGHT	PHY_APC_VLV - APC Valve can't control in dry-pump on and CM1 & CM2 Lock.
+#ID=11	11	LIGHT	PHY_APC_VLV - "Transfer ballast pressure wait" occurred !
+#ID=12	12	LIGHT	PHY_APC_VLV - "Transfer ballast over pressure" occurred !

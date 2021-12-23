@@ -1,0 +1,39 @@
+
+#MODULE_PROPERTY
+{
+	#MODULE  PM1 	// PM2 PM3 PM4 PM5 PM6
+	{                         
+		//#ROOT_DRIVER   	  	H:
+		                
+		#DIR_ROOT               D:\DISCIPLINE_FA\PM1_SEQ\
+		//#DIR_CONFIG  		XXX2
+		//#DIR_DATALOG 		XXX3
+		#DIR_PROCESS 		RECIPE\
+		
+		/*
+		#DIR_ROOT_RENAME   	ROOT_DIR     		// ex) #PM1.ROOT_DIR 	 - #ROOT_DRIVER:\#DIR_ROOT\
+		#DIR_CONFIG_RENAME   	CFG_DIR      		// ex) #PM1.CFG_DIR  	 - #ROOT_DRIVER:\#DIR_ROOT\#DIR_CONFIG\
+		#DIR_DATALOG_RENAME  	DATALOG_DIR		// ex) #PM1.DATALOG_DIR  - #ROOT_DRIVER:\#DIR_ROOT\#DIR_DATALOG\
+		#DIR_PROCESS_RENAME  	PROCESS_DIR     	// ex) #PM1.PROCESS_DIR  - #ROOT_DRIVER:\#DIR_ROOT\#DIR_PROCESS\ 
+		*/
+	}
+
+	#MODULE  PM2
+	{                         
+		#DIR_ROOT               D:\DISCIPLINE_FA\PM2_SEQ\
+		#DIR_PROCESS 		RECIPE\
+	}
+
+	#MODULE  PM3
+	{                         
+		#DIR_ROOT               D:\DISCIPLINE_FA\PM3_SEQ\
+		#DIR_PROCESS 		RECIPE\
+	}
+
+	#MODULE  PM4
+	{                         
+		#DIR_ROOT               D:\DISCIPLINE_FA\PM4_SEQ\
+		#DIR_PROCESS 		RECIPE\
+	}
+}
+

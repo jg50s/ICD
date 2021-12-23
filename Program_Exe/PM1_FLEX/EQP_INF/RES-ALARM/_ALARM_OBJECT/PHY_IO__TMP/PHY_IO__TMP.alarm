@@ -1,0 +1,8 @@
+#ID=11	11	LIGHT	PHY_IO__TMP - Offline.
+#ID=12	12	LIGHT	PHY_IO__TMP - Controller is Local Mode.
+
+#ID=13	13	LIGHT	PHY_IO__TMP - Pump Power Off TimeOut.
+#ID=14	14	LIGHT	PHY_IO__TMP - Pump Power On TimeOut.
+#ID=15	15	LIGHT	PHY_IO__TMP - Pump Remote Command TimeOut.
+#ID=16	16	LIGHT	PHY_IO__TMP - Pump Local Command TimeOut.
+#ID=17	17	LIGHT	PHY_IO__TMP - Pump Acceleration TimeOut.

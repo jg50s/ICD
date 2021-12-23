@@ -1,0 +1,59 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_HTR_CHUCK
+
+#DEFINE_CONSTANT    DATA.LOOP_SIZE                     4
+
+#DEFINE_CONSTANT    DATA__CTRL_ACTIVE.1                YES
+#DEFINE_CONSTANT    CH__AO_TEMPERATURE_SET.1           IO+ao.Chuck.Zone_1.Temp.Set
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_READ.1          IO+si.Chuck.Zone_1.Temp.Read
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_SET.1           IO+si.Chuck.Zone_1.Temp.SetPoint
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_POWER.1         IO+si.Chuck.Zone_1.Temp.Output
+#DEFINE_CONSTANT    CH__AI_PV_OFFSET.1                 NULL
+#DEFINE_CONSTANT    CH__AI_OP_HIGH_LIMIT.1             NULL
+#DEFINE_CONSTANT    CH__AI_OP_FORWARD.1                NULL
+#DEFINE_CONSTANT    CH__DO_HEATER_POWER.1              IO+do.Chuck.Zone_1.Heater.Pwr
+#DEFINE_CONSTANT    CH__DI_OVER_TEMP.1                 IO+si.Chuck.Zone_1.OverTemp
+#DEFINE_CONSTANT    CH__DI_HIGH_LIMIT.1                NULL
+
+#DEFINE_CONSTANT    DATA__CTRL_ACTIVE.2                YES
+#DEFINE_CONSTANT    CH__AO_TEMPERATURE_SET.2           IO+ao.Chuck.Zone_2.Temp.Set
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_READ.2          IO+si.Chuck.Zone_2.Temp.Read
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_SET.2           IO+si.Chuck.Zone_2.Temp.SetPoint
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_POWER.2         IO+si.Chuck.Zone_2.Temp.Output
+#DEFINE_CONSTANT    CH__AI_PV_OFFSET.2                 NULL
+#DEFINE_CONSTANT    CH__AI_OP_HIGH_LIMIT.2             NULL
+#DEFINE_CONSTANT    CH__AI_OP_FORWARD.2                NULL
+#DEFINE_CONSTANT    CH__DO_HEATER_POWER.2              IO+do.Chuck.Zone_2.Heater.Pwr
+#DEFINE_CONSTANT    CH__DI_OVER_TEMP.2                 IO+si.Chuck.Zone_2.OverTemp
+#DEFINE_CONSTANT    CH__DI_HIGH_LIMIT.2                NULL
+
+#DEFINE_CONSTANT    DATA__CTRL_ACTIVE.3                YES
+#DEFINE_CONSTANT    CH__AO_TEMPERATURE_SET.3           IO+ao.Chuck.Zone_3.Temp.Set
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_READ.3          IO+si.Chuck.Zone_3.Temp.Read
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_SET.3           IO+si.Chuck.Zone_3.Temp.SetPoint
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_POWER.3         IO+si.Chuck.Zone_3.Temp.Output
+#DEFINE_CONSTANT    CH__AI_PV_OFFSET.3                 NULL
+#DEFINE_CONSTANT    CH__AI_OP_HIGH_LIMIT.3             NULL
+#DEFINE_CONSTANT    CH__AI_OP_FORWARD.3                NULL
+#DEFINE_CONSTANT    CH__DO_HEATER_POWER.3              IO+do.Chuck.Zone_3.Heater.Pwr
+#DEFINE_CONSTANT    CH__DI_OVER_TEMP.3                 IO+si.Chuck.Zone_3.OverTemp
+#DEFINE_CONSTANT    CH__DI_HIGH_LIMIT.3                NULL
+
+#DEFINE_CONSTANT    DATA__CTRL_ACTIVE.4                YES
+#DEFINE_CONSTANT    CH__AO_TEMPERATURE_SET.4           IO+ao.Chuck.Zone_4.Temp.Set
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_READ.4          IO+si.Chuck.Zone_4.Temp.Read
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_SET.4           IO+si.Chuck.Zone_4.Temp.SetPoint
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_POWER.4         IO+si.Chuck.Zone_4.Temp.Output
+#DEFINE_CONSTANT    CH__AI_PV_OFFSET.4                 NULL
+#DEFINE_CONSTANT    CH__AI_OP_HIGH_LIMIT.4             NULL
+#DEFINE_CONSTANT    CH__AI_OP_FORWARD.4                NULL
+#DEFINE_CONSTANT    CH__DO_HEATER_POWER.4              IO+do.Chuck.Zone_4.Heater.Pwr
+#DEFINE_CONSTANT    CH__DI_OVER_TEMP.4                 IO+si.Chuck.Zone_4.OverTemp
+#DEFINE_CONSTANT    CH__DI_HIGH_LIMIT.4                NULL
+
+#DEFINE_CONSTANT    CH__SI_ALARM_STATE.HEXA            NULL
+#DEFINE_CONSTANT    CH__SO_ALARM_RESET.HEXA            NULL
+
+

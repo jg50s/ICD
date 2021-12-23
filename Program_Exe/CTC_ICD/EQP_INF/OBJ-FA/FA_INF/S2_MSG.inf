@@ -1,0 +1,688 @@
+
+  //---------------------------------------------------
+  //  S2Fy
+
+  //-----------------------------
+  // 	Equipment Constant Request (ECR)    		H -> E
+
+  #MESSAGE    S2F13
+  #REPLY      1
+  #DIRECTION  RECEIVE    
+  #TYPE       0
+  
+#UNFORMATTED  
+  1.<L,  1  $LIST_LIMIT
+         1.<U4[1]   $ECID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Equipment Constant Data (ECD)   			H <- E	
+
+  #MESSAGE    S2F14
+  #DIRECTION  SEND  
+  
+#UNFORMATTED  
+  1.<L,  1  $LIST_LIMIT
+         1.<V   $ECV
+
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	New Equipment Constant Send (ECS)  		H -> E	
+
+  #MESSAGE    S2F15
+  #REPLY      1
+  #DIRECTION  RECEIVE 
+  #TYPE       0
+    
+#UNFORMATTED  
+  1.<L,  1  $LIST_LIMIT
+         1.<L,  2
+                1.<U4[1]   $ECID
+                2.<V       $ECV
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	New Equipment Constant Acknowledge (ECA) 	H <- E	
+
+  #MESSAGE    S2F16  
+  #DIRECTION  SEND
+  
+  1.<B[1]   $EAC
+    
+  #END
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Date and Time Request (DTR)   			H <- E
+
+  #MESSAGE    S2F17 
+  #REPLY      1
+  #DIRECTION  SEND       // EQP -> HOST   
+ 
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Date and Time Data (DTD)    			H -> E	
+
+  #MESSAGE    S2F18  
+  #DIRECTION  RECEIVE    // EQP <- HOST   
+  
+#UNFIXED  
+  1.<A[1]   $TIME
+  
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	Date and Time Request (DTR)   			H -> E
+
+  #MESSAGE    S2F17
+  #REPLY      1
+  #DIRECTION  RECEIVE    // EQP <- HOST   
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Date and Time Data (DTD)    			H <- E	
+
+  #MESSAGE    S2F18  
+  #DIRECTION  SEND       // EQP -> HOST   
+  
+#UNFIXED  
+  1.<A[1]   $TIME
+  
+  #END
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Trace Initialize Send (TIS)    			H -> E	
+
+  #MESSAGE    S2F23  
+  #REPLY      1
+  #DIRECTION  RECEIVE   
+  #TYPE	      0
+  
+  1.<L,  5
+         1.<U4[1]   $TRID
+         2.<A[6]    $DSPER
+         3.<U4[1]   $TOTSMP
+         4.<U4[1]   $REPGSZ
+#UNFORMATTED
+         5.<L,  1   $LIST_LIMIT
+                1.<U4[1]   $SVID  
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Trace Initialize Send (TIS)    			H -> E	
+
+  #MESSAGE    S2F23  
+  #REPLY      1
+  #DIRECTION  RECEIVE   
+  #TYPE	      1
+  
+  1.<L,  5
+         1.<U4[1]   $TRID
+         2.<A[8]    $DSPER
+         3.<U4[1]   $TOTSMP
+         4.<U4[1]   $REPGSZ
+#UNFORMATTED
+         5.<L,  1   $LIST_LIMIT
+                1.<U4[1]   $SVID  
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Trace Initialize Acknowledge (TIA)  		H <- E		
+
+  #MESSAGE    S2F24  
+  #DIRECTION  SEND  
+  
+  1.<B[1]   $TIAACK
+  
+  #END
+  
+/*
+TIAACK
+	0 = Everything correct
+	1 = Too many SVIDs
+	2 = No more traces allowed
+	3 = Invalid period
+	>3 = equipment-specified error
+	4-63 Reserved
+*/
+  //-----------------------------
+
+  //-----------------------------
+  //	Loopback Diagnostic Request (LDR)  		H -> E
+
+  #MESSAGE    S2F25  
+  #REPLY      1
+  #DIRECTION  RECEIVE    // EQP <- HOST   
+  
+  1.<B[10]  $ABS
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Loopback Diagnostic Data (LDD)   		H <- E		
+
+  #MESSAGE    S2F26  
+  #DIRECTION  SEND
+  
+  1.<B[10]  $ABS
+  
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	Loopback Diagnostic Request (LDR)  		H <- E
+
+  #MESSAGE    S2F25  
+  #REPLY      1
+  #DIRECTION  SEND
+  
+  1.<B[10]  $ABS
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Loopback Diagnostic Data (LDD)   		H -> E		
+
+  #MESSAGE    S2F26  
+  #DIRECTION  RECEIVE
+  
+  1.<B[10]  $ABS
+  
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	Equipment Constant Namelist Request(ECNR) 	H -> E
+
+  #MESSAGE    S2F29
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+
+#UNFORMATTED  
+  1.<L,  1  $LIST_LIMIT
+         1.<U4[1]   $ECID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Equipment constant Name list (ECN)   		H <- E	
+
+  #MESSAGE    S2F30
+  #DIRECTION  SEND
+  
+#UNFORMATTED  
+  1.<L,  1  $LIST_LIMIT
+         1.<L,  6
+                1.<U4[1]   $ECID
+#UNFIXED                 
+                2.<A[1]    $ECNAME
+                3.<F4[1]   $ECMIN
+                4.<F4[1]   $ECMAX
+                5.<F4[1]   $ECDEF
+#UNFIXED                 
+                6.<A[1]    $UNITS
+  
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  //	Date and Time Set Request (DTS)   		H -> E
+
+  #MESSAGE    S2F31 
+  #REPLY      1
+  #DIRECTION  RECEIVE    // EQP <- HOST   
+  
+#UNFIXED  
+  1.<A[1]   $TIME
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Date and Time Set Acknowledge (DTA)  		H <- E	
+ 
+  #MESSAGE    S2F32
+  #DIRECTION  SEND       // EQP -> HOST   
+  
+  1.<B[1]   $TIACK
+  
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	Define Report (DR)     				H -> E	
+
+  #MESSAGE    S2F33
+  #REPLY      1
+  #DIRECTION  RECEIVE   
+  #TYPE       0
+  
+  1.<L,  2
+         1.<U4[1]  $DATAID
+#UNFORMATTED         
+         2.<L,  1  $LIST_LIMIT
+                1.<L,  2
+                       1.<U4[1]  $RPTID
+#UNFORMATTED         
+                       2.<L,  1  $ITEM_LIMIT
+                              1.<U4[1]   $VID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Define Report Acknowledge (DRA)   		H <- E		
+ 
+  #MESSAGE    S2F34
+  #DIRECTION  SEND
+  
+  1.<B[1]   $DRACK>
+  
+  #END
+  
+/*
+DRACK
+	0 = Accept
+	1 = Denied. Insufficient space
+	2 = Denied. Invalid format
+	3 = Denied. At least one RPTID already defined.
+	4 = Denied. At least VID does not exist.
+	> 4 = Other errors.
+	5 ~ 63 Reserved
+*/
+  //-----------------------------
+
+  //-----------------------------
+  //	Link Event Report (LER)    			H -> E	
+
+  #MESSAGE    S2F35
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<L,  2
+         1.<U4[1]   $DATAID
+#UNFORMATTED         
+         2.<L,   1   $LIST_LIMIT
+                 1.<L,  2
+                        1.<U4[1]  $CEID
+#UNFORMATTED         
+                        2.<L,  1   $ITEM_LIMIT
+                               1.<U4[1]   $RPTID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Link Event Report Acknowledge (LERA)   		H <- E		
+
+  #MESSAGE    S2F36
+  #DIRECTION  SEND
+  
+  1.<B[1]   $LRACK
+  
+  #END
+  
+/*
+LRACK
+	0 = Accepted
+	1 = Denied. Insufficient space
+	2 = Denied. Invalid format
+	3 = Denied. At least one CEID link already defined
+	4 = Denied. At least one CEID does not exist
+	5 = Denied. At least one RPTID does not exist
+	> 5 = Other errors
+	6 ~ 63 Reserved
+*/  
+  //-----------------------------
+
+  //-----------------------------
+  // 	Enable/Disable Event Report (EDER)   		H -> E	
+
+  #MESSAGE    S2F37
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  2
+         1.<BOOL[1]   $CEED
+#UNFORMATTED
+         2.<L,  1  $LIST_LIMIT
+                1.<U4[1]   $CEID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Enable/Disable Event Report Ack (EERA)  	H <- E		
+
+  #MESSAGE    S2F38
+  #DIRECTION  SEND
+  
+  1.<B[1]   $ERACK
+  
+  #END
+  
+/*
+ERACK
+	0 = Accepted
+	1 = Denied. At least one CEID does not exist
+	> 1 = Other Errors
+	2 ~ 63 Reserved
+*/  
+  //-----------------------------
+
+  //-----------------------------
+  // 	Multi-Block Inquire (DMBI)   		H -> E	
+
+  #MESSAGE    S2F39
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  2
+         1.<U4[1]   $DATAID
+         2.<U4[1]   $DATALENGTH
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Multi-block Grant (DMBG)  	H <- E		
+
+  #MESSAGE    S2F40
+  #DIRECTION  SEND
+  
+  1.<B[1]   $GRANT
+  
+  #END
+  
+/*
+GRANT
+	0 = Permission Granted
+	1 = Busy, Try Again
+	2 = No Space Available
+	3 = Duplicate DATAID
+	>3 = Equipment Specific Error Code
+	4 ~ 63 Reserved
+*/  
+  //-----------------------------
+
+  //-----------------------------
+  // 	Host Command Send (HCS)		H -> E	
+
+  #MESSAGE    S2F41
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  2
+#UNFIXED                 
+         1.<A[1]   $RCMD
+#UNFORMATTED         
+         2.<L,  1   $LIST_LIMIT
+         	1.<L,  2
+#UNFIXED                 
+	               1.<A[1]   $CPNAME
+#UNFIXED                 
+         	       2.<A[1]   $CPVAL
+  
+  #END
+  
+/*
+// RCMD		CPNAME
+
+//-------------------------------------------------------
+PAUSE
+RESUME
+END
+STOP
+ABORT
+
+REMOTE
+LOCAL
+OFFLINE
+//-------------------------------------------------------
+
+//-------------------------------------------------------
+PTN_CANCEL
+PTN_PAUSE
+PTN_RESUME
+PTN_ABORT
+		PTN
+//-------------------------------------------------------
+
+//-------------------------------------------------------
+PM_ENABLE
+PM_DISABLE
+		PM
+			2, 3
+
+PM_CONTROL
+		PM
+		CONTROL
+//-------------------------------------------------------
+
+//-------------------------------------------------------
+ALARM_BUZZER
+		CONTROL
+			ON, OFF
+
+SIGNAL_TOWER_RED
+SIGANL_TOWER_YELLOW
+SIGNAL_TOWER_GREEN
+SIGNAL_TOWER_BLUE
+		CONTROL
+			ON, OFF, BLINK
+//-------------------------------------------------------
+*/  
+  //-----------------------------
+  //-----------------------------
+  // 	Host Command Acknowledge (HCA) 	H <- E		
+
+  #MESSAGE    S2F42
+  #DIRECTION  SEND
+  
+  1.<L,  2
+  	 1.<B[1]   $HCACK
+#UNFORMATTED         
+  	 2.<L,  1   $LIST_LIMIT
+  	 	1.<L,  2
+#UNFIXED                 
+  	 	       1.<A[1]   $CPNAME
+  	 	       2.<B[1]   $CPACK
+  
+  #END
+  
+/*
+HCACK
+	0 = Acknowledge, command has been performed.
+	1 = Command does not exist.
+	2 = Cannot perform now.
+	3 = At least, one parameter is invalid.
+CPACK
+	0 = Parameter Name does not exist.
+	1 = Illegal Value specified for CPVAL.
+	2 = Illegal Format specified for CPVAL.
+*/  
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Reset Spooling Streams and Functions  (RSSF) 	H -> E		
+
+  #MESSAGE    S2F43
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+#UNFORMATTED         
+  1.<L,  1   $STRID_LIST
+	 1.<L,  2   
+  	        1.<U1[1]   $STRID
+#UNFORMATTED         
+  	        2.<L,  1   $FNCID_LIST
+  	               1.<U1[1]   $FNCID
+  
+  #END
+  
+/*
+Note :
+1. A zero-length list, $STDID_LIST = 0, turns off spooling for all streams and functions.
+2. A zero-length list, $FNCID_LIST = 0, turns on spooling for all functions for the associated stream.
+
+3. Turning off spooling for all functions for a specific stream is achieved by omitting reference to the stream from this message.
+4. Spooling fro Stream 1 is not allowed.
+5. Equipment must allow host to spool all primary messages for a stream (except Stream 1).
+6. A defined list of functions for a stream in this message will replace any previously selected functions.
+*/  
+  //-----------------------------
+  //-----------------------------
+  // 	Reset Spooling Acknowledge (RSA) 	H <- E
+
+  #MESSAGE    S2F44
+  #DIRECTION  SEND
+  
+  1.<L,  2   
+         1.<B[1]   $RSPACK				// accept or reject
+#UNFORMATTED         
+         2.<L,  1   $STRID_LIST				// number of streams with errors
+                1.<L,  3
+                       1.<U1[1]   $STRID
+  	               2.<B[1]    $STRACK		// error in stream
+#UNFORMATTED         
+	               3.<L,  1   $FNCID_LIST
+	  		       1.<U1[1]   $FNCID
+
+  #END
+  
+/*
+RSPACK
+	0 = Acknowledge, spooling setup accepted
+	1 = Spooling setup rejected
+	2 ~ 63 = Reserved
+
+STRACK
+	1 = Spooling not allowed for stream (i.e., Stream 1)
+	2 = Stream unknown
+	3 = Unknown function specified for this stream
+	4 = Secondary function specified for this stream
+*/  
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Define Variable Limit Attribute Request (DVLA) 	H -> E		
+
+  #MESSAGE    S2F45
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  2
+  	 1.<U4[1]   $DATAID
+#UNFORMATTED         
+  	 2.<L,  1   $VID_LIST
+  	        1.<L,  2
+  	               1.<U4[1]   $VID
+#UNFORMATTED         
+  	               2.<L,  1   $INFO_LIST
+  	                      1.<L,  2
+  	                             1.<B[1]   $LIMITID
+#UNFORMATTED         
+  	                             2.<L,  2   $DB_LIST
+  	                                    1.<U4[1]   $UPPERDB
+  	                                    2.<U4[1]   $LOWERDB
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Variable Limit Attribute Acknowledge (VLAA) 	H <- E
+
+  #MESSAGE    S2F46
+  #DIRECTION  SEND
+  
+  1.<L,  2   
+         1.<B[1]   $VLAACK			
+#UNFORMATTED     
+         2.<L,  1   $VID_LIST
+                1.<L,  3
+                       1.<U4[1]   $VID          // VID With error
+                       2.<B[1]    $LVACK        // Reason
+#UNFORMATTED     
+                       3.<L,  2   $INFO_LIST
+                              1.<B[1]   $LIMITID
+                              2.<B[1]   $LIMITACK
+
+  #END
+  
+/*
+VLAACK
+	0 = Acknowledge, command will be performed
+	1 = Limit attribute definition error
+	2 = Cannot perform now
+	>2 = Other equipment-specific error   	
+
+LVACK
+	1 = Variable does not exist 
+	2 = Variable has no limits capability
+	3 = Variable repeated in message
+	4 = Limit value error as described in LIMITACK
+	5 ~ 6 = Reserved
+
+LIMITACK
+	1 = LIMITID does not exist
+	2 = UPPERDB > LIMITMAX
+	3 = LOWERDB < LIMITMIN
+	4 = UPPERDB < LOWERDB
+	5 = Illegal format specified for UPPERDB or LOWERDB
+	6 = ASCII value cannot be translated to numeric
+	7 = Duplicate limit definition for this variable
+	>7 = Other equipment-specific error
+*/
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Variable Limit Attribute Request (VLAR) 	H -> E		
+
+  #MESSAGE    S2F47
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+#UNFORMATTED         
+  1.<L,  1   $VID_LIST
+  	 1.<U4[1]   $VID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Variable Limit Attribute Acknowledge (VLAA) 	H <- E
+
+  #MESSAGE    S2F48
+  #DIRECTION  SEND
+  
+#UNFORMATTED     
+  1.<L,  1   $VID_LIST   
+         1.<L,  2   
+  	        1.<U4[1]   $VID
+#UNFORMATTED     
+         	2.<L,  4   $INFO_LIST
+#UNFIXED
+  		       1.<A[1]    $UNIT
+  		       2.<F4[1]   $LIMITMIN
+  		       3.<F4[1]   $LIMITMAX
+#UNFORMATTED     
+  		       4.<L,  1   $LIMITID_LIST
+  		              1.<L,  3
+  		                     1.<B[1]    $LIMITID
+  		                     2.<U4[1]   $UPPERDB
+  		                     3.<U4[1]   $LOWERDB
+
+  #END
+  //-----------------------------
+
+

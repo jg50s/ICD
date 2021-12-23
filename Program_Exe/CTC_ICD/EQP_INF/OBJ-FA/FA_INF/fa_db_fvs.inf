@@ -1,0 +1,129 @@
+
+// Formatted Variable Send (FVS : S6F9)
+
+/*
+UNSIGNED 1 BYTE  :  U1
+UNSIGNED 2 BYTE  :  U2
+UNSIGNED 4 BYTE  :  U4
+
+INTEGER 1 BYTE   :  I1
+INTEGER 2 BYTE   :  I2
+INTEGER 4 BYTE   :  I4
+
+BOOLEAN :  BOOL
+
+ASCII   :  A
+BINARY  :  B
+*/
+
+
+/*
+#DSID_TYPE  U2   // [U1 (DEFAULT), U2, U4]
+
+#CEID  1
+{
+	#PFCD    1
+	#DATAID  2
+	
+	#DSID    11
+	{
+		#VID  21
+		{
+			#FORMAT   U4
+			#SIZE	  2
+		}
+		#VID  22
+		{
+			#FORMAT   BOOL
+			#SIZE	  4
+		}
+		
+		#VID  1
+		{
+			#FORMAT   A
+			#SIZE	  16
+		}
+		#VID  5
+		{
+			/*
+			#FORMAT   A
+			#SIZE	  16
+			*/
+		}
+		#VID  7
+		{
+			/*
+			#FORMAT   A
+			#SIZE	  16
+			*/
+		}
+	}
+	
+	#DSID    12
+	{
+		#VID  1
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+		#VID  5
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+		#VID  7
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+	}
+}
+
+#CEID  101
+{
+	#PFCD    1
+	#DATAID  2
+
+	#DSID    1
+	{
+		#VID  1
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+	}
+	#DSID    2
+	{
+		#VID  1
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+		#VID  5
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+	}
+	#DSID    3
+	{
+		#VID  1
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+		#VID  5
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+		#VID  7
+		{
+			#FORMAT   A
+			#SIZE	  4
+		}
+	}
+}
+*/
+
+

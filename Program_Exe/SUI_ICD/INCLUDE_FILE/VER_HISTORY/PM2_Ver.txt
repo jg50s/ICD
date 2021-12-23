@@ -1,0 +1,52 @@
+#VER: 1.0
+
+============================================================================================================
+// 2011.03.02
+   
+1. 작업자 : 이진권
+  
+2. 작업 내용 : PMC Header Recipe 수정.
+   1) 문제 현상  : Top 또는 Bottom 설정 온도 중 하나만 Recipe 값과 일치하지 않는 경우, 온도를 Setting하지 않음.
+   2) 문제 해결  : 위의 둘중 하나만 온도 값이 다르면, 온도를 재설정하도록 수정함.
+   3) 수정된 DLL : PMC__Fnc_STEP.dll
+
+
+============================================================================================================
+// 2011.03.03  
+
+1. 작업자 : 이진권 
+   
+2. 작업 내용 : C-Ring의 Encoder를 사용시 Negative Signal Search 관련 Alarm이 발생하지 않도록 수정
+   1) 요청 사항 : C-Ring Board가 NEG_SIGNAL_SEARCH 수행 중 Limit Sensor 감지가 되지 않으면 Alarm이 발생한다.
+                 Encoder가 정상적으로 작동되고 이 기능이 Enable 되어있으면 위의 Alarm이 발생하지 않도록 수정을 요청함.
+   2) 수정된 내용 : Encoder 기능이 Enable 되어 있고, Encoder가 정상적으로 작동하는 경우에는 Up 동작시 
+                   Limit Sensor가 감지 되지 않아도 Alarm을 발생시키지 않는다.  
+   
+
+============================================================================================================
+// 2011.03.07  
+
+1. 작업자 : 이진권
+
+2. 작업 내용 : Step Temperature 기능을 추가함.
+   1) 요청 사항 : Recipe Step에서 온도를 제어할 수 있는 기능 요청.
+   2) 추가된 내용 : 
+        아래의 3개 온도 항목을 추가하고 각각의 온도 마다 7개의 Recipe Parameter를 추가함.
+        항목 : Top Chiller, Bottom Chiller, Top Plate
+        항목 당 Recipe Parameter :  Set(C), Warning(%), Abort(%), Low Limit(C), High Limit(C), TC (sec), TS (sec)  
+   3) 수정된 DLL : PMC__Fnc_STEP.dll  
+
+
+============================================================================================================
+// 2011.03.07  
+
+1. 작업지 : 이진권
+
+2. 작업 내용 : APC 관련 Pressure를 좀 더 정확히 제어하기 위해 Recipe 항목을 추가함.
+   1) 요청 사항 : Step Time이 긴 경우 (20초 이상) Step 시작시와 종료시의 APC 위치값이 차이가 발생하는 경우가 있음.
+                 따라서, 차후 Learnded 모드로 진행시 Step 시작 위치값이 변경되어 압력 제어에 문제가 발생함.
+                 기존의 절대 위치 값인 Preset Position 대신 Learned 위치의 상대 값인 Offset Position Parameter가 필요함. 
+   2) 추가된 내용 : Recipe에 APC Position 관련 Parameter 들을 추가함.
+      2.1) Learned Offset  : Step 시작시 Preset Pos 값이 '0'이면, Learned Position 값에 상대적인 위치 값을 적용하여 Preset 위치로 이동시키는 기능
+      2.2) Ramp Target Pos : Step 시작시 Preset 위치 값과 이 설정값을 기준으로 Hold Time 동안 Linear 하게 Position을 제어하는 기능   
+

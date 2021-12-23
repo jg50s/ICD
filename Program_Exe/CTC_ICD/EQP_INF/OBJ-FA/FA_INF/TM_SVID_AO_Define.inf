@@ -1,0 +1,8 @@
+
+
+//      MODULE 	VID  	  [CHANNEL or COMMAND]	
+//					                            																		TYPE	BYTE	UNIT	   DISPLAY_NAME
+
+#SVID   ##PM    1        ##SVID_TMx+ao.N2.SETPOINT                          A     10    Torr     // TM_Gauge	      
+
+

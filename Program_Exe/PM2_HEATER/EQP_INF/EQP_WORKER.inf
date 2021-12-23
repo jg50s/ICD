@@ -1,0 +1,15 @@
+
+===========================================================================
+#OBJECT_STD     PMC_DB__JGLEE               DB.INF                  DB_INF
+#OBJECT_STD     PMC_DB__JGLEE               DB.SYS                  DB_SYS
+#OBJECT_STD     PMC_DB__JGLEE               DB.GUI                  DB_GUI
+
+#OBJECT_STD     PMC_DB__JGLEE               DB.ETCHER               DB_ETCHER
+
+
+===========================================================================
+#OBJECT_STD     PHY_HEATER__JGLEE           MINI8.IO                PHY_HTR_CHUCK
+
+
+===========================================================================
+#OBJECT_IO      PMC__VIRTUAL_IO             IO.VIRTUAL              IO

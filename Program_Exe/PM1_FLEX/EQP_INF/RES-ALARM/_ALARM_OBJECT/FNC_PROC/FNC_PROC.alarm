@@ -1,0 +1,10 @@
+#ID=11	11	LIGHT	FNC_PROC - Process recipe does not exist.
+#ID=12	12	LIGHT	FNC_PROC - Check Process Recovery Action !
+#ID=13	13	LIGHT	FNC_PROC - Process [Plasma Dechuck] recipe does not exist.
+#ID=14	14	LIGHT	FNC_PROC - Process [Plasma Dechuck] Sequence Failed.
+#ID=15	15	LIGHT	FNC_PROC - Process recipe file is being changed, now. 
+
+#ID=16	16	LIGHT	FNC_PROC - Do you want to convert the status of wafer ? 
+
+#ID=17	17	LIGHT	FNC_PROC - Do you want to proceed the re-processing of wafer ?
+#ID=18	18	LIGHT	FNC_PROC - The step size of process recipe is not correct !

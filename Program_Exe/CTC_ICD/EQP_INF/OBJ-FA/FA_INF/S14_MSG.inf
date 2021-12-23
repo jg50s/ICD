@@ -1,0 +1,606 @@
+
+  //---------------------------------------------------
+  //  S14Fy
+  
+
+  //------------------------------
+  // Get Attribute Request 		(GAR)   	H -> E
+
+  #MESSAGE    S14F1
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  5     
+#UNFIXED  
+         1.<A[1]   $OBJSPEC
+#UNFIXED  
+         2.<A[1]   $OBJTYPE
+#UNFORMATTED         
+         3.<L,  1  $OBJID_LIST
+#UNFIXED  
+                1.<A[1]   $OBJID
+#UNFORMATTED         
+         4.<L,  1  $ATTR_LIST
+                1.<L,  3
+#UNFIXED  
+                       1.<A[1]    $ATTRID
+#UNFIXED  
+                       2.<A[1]    $ATTRDATA
+                       3.<U1[1]   $ATTRRELN
+#UNFORMATTED         
+         5.<L,  1  $ATTRID_LIST
+#UNFIXED  
+                1.<A[1]   $ATTRID
+	         
+  #END
+  
+/*
+ATTRRELN
+	0 = The qualifying value is equal to the value of interest
+	1 = The qualifying value is not equal to the value of interest
+	2 = The qualifying value is less than the value of interest
+	3 = The qualifying value is less than or equal ti the value of interest
+	4 = The qualifying value is greater than the value of interest
+	5 = The qualifying value is greater than or equal to the value of interest
+	6 = The qualifying value is present (contained in the set of) the value of interest
+	7 = The qualifying value is absent (not contained in the set of) the value of interest
+	> 7 = Reserved
+*/  
+
+/*
+	OBJSPEC		OBJTYPE		OBJID		ATTRID
+	"Equipment"
+			
+			"Carrier"
+							"Capacity"
+							"CarrierAccessingStatus"
+							"ContentMap"
+							"LocationID"
+							"SlotMap"
+							"SlotMapStatus"
+							"SubstrateCount"
+							"Usage"
+
+	    "ProcessJob"
+              "PrJobState"
+              "PrMtlNameList"
+              "PrMtlType"
+              "PrRecipeMethod"
+              "RecID"
+              "PauseEvent"
+              "PrProcessStart"
+              "RecVariableList"
+              "PrMtlOrder"
+	    
+	    "Substrate"
+              "LotID"
+              "MaterialStatus"
+              "SubstDestination"
+              "SubstHistory"
+              "SubstLocID"
+              "SubstLocIDList"
+              "SubstProcState"
+              "SubstSource"
+              "SubstState"
+              "SubstType"
+              "SubstUsage"
+	    
+	    "ControlJob"
+              "CurrentPrJob"
+              "StartMethod"
+              "State"
+              "CarrierInputSpec"
+              "ProcessOrderMgmt"
+
+			"CarrierID"
+							"Process_History"
+							"Module_History"	     
+
+			"LotID"
+							"Process_History"
+							"Module_History"
+
+			"JobID"
+							"Process_History"
+							"Module_History"
+*/
+
+  //------------------------------
+  //------------------------------
+  // Get Attribute Data Ack 		(GAD)   	H <- E
+
+  #MESSAGE    S14F2   
+  #DIRECTION  SEND
+  
+  1.<L,  2	
+#UNFORMATTED  
+   	 1.<L,  1  $OBJID_LIMIT
+   	        1.<L,  2
+#UNFIXED
+	   	       1.<A[1]   $OBJID
+#UNFORMATTED  
+   		       2.<L,  1  $ATTR_LIST
+ 	               	      1.<L,  2		
+#UNFIXED
+   	 	              	     1.<A[1]   $ATTRID
+#UNFIXED
+   	 	 	             2.<V      $ATTRDATA
+   	 2.<L,  2
+   	 	1.<U1[1]   $OBJACK
+#UNFORMATTED  
+   	 	2.<L,  1   $ERROR_LIST
+   	 	       1.<L,  2
+   	 	              1.<U1[1]   $ERRCODE
+#UNFIXED
+   	 	              2.<A[1]    $ERRTEXT
+
+  #END
+
+/*
+ERRCODE
+	00 = No error
+	01 = Unknown object in Object Specifier
+	02 = Unknown target object type
+	03 = Unknown object instance
+	04 = Unknown attribute name
+	05 = Read-only attribute - access denied
+	06 = Unknown object type
+	07 = Invalid attribute value
+	08 = Syntax error
+	09 = Verification error
+	10 = Validation error
+	11 = Object identifier in use
+	12 = Parameters improperly specified
+	13 = Insufficient parameters specified
+	14 = Unsupported option requested
+	15 = Busy
+	16 = Not available for processing
+	17 = Command not valid for current state
+	18 = No material altered
+	19 = Material partially processed
+	20 = All material processed
+	21 = Recipe specification related error
+	22 = Failed during processing
+	23 = Failed while not processing
+	24 = Failed due to lack of material
+	25 = Job aborted
+	26 = Job stopped
+	27 = Job cancelled
+	28 = Cannot change selected recipe
+	29 = Unknown event
+	30 = Duplicate report ID
+	31 = Unknown data report
+	32 = Data report not linked
+	33 = Unknown trace report
+	34 = Duplicate trace ID
+	35 = Too many data reports
+	36 = Sample period out of range
+	37 = Group size to large
+	38 = Recovery action currently invalid
+	39 = Busy with another recovery currently unable to perform the recovery
+	40 = No active recovery action
+	41 = Exception recovery failed
+	42 = Exception recovery aborted
+	43 = Invalid table element
+	44 = Unknown table element
+	45 = Cannot delete predefined
+	46 = Invalid token
+	47 = Invalid parameter
+	48 = Load port does not exist
+	49 = Load port already in use
+	50 = Missing Carrier
+	51 ~ 63 = Reserved
+*/ 
+  //------------------------------
+
+
+  //------------------------------
+  // Set Attribute Request 		(SAR)   	H -> E
+
+  #MESSAGE    S14F3
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  4     
+#UNFIXED  
+         1.<A[1]   $OBJSPEC
+#UNFIXED  
+         2.<A[1]   $OBJTYPE
+#UNFORMATTED         
+         3.<L,  1  $OBJID_LIST
+#UNFIXED  
+                1.<A[1]   $OBJID
+#UNFORMATTED         
+         4.<L,  1  $ATTR_LIST
+                1.<L,  2
+#UNFIXED  
+                       1.<A[1]    $ATTRID
+#UNFIXED  
+                       2.<A[1]    $ATTRDATA
+	         
+  #END
+  //------------------------------
+  //------------------------------
+  // Set Attribute Data Ack 		(SAD)   	H <- E
+
+  #MESSAGE    S14F4   
+  #DIRECTION  SEND
+  
+  1.<L,  2	
+#UNFORMATTED  
+   	 1.<L,  1  $OBJID_LIMIT
+   	        1.<L,  2
+#UNFIXED
+	   	       1.<A[1]   $OBJID
+#UNFORMATTED  
+   		       2.<L,  1  $ATTR_LIST
+ 	               	      1.<L,  2		
+#UNFIXED
+   	 	              	     1.<A[1]   $ATTRID
+#UNFIXED
+   	 	 	             2.<V      $ATTRDATA
+   	 2.<L,  2
+   	 	1.<U1[1]   $OBJACK
+#UNFORMATTED  
+   	 	2.<L,  1   $ERROR_LIST
+   	 	       1.<L,  2
+   	 	              1.<U1[1]   $ERRCODE
+#UNFIXED
+   	 	              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Get Type Request 			(GTR)   	H -> E
+
+  #MESSAGE    S14F5
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+#UNFIXED  
+  1.<A[1]   $OBJSPEC
+	         
+  #END
+  //------------------------------
+  //------------------------------
+  // Get Type Data Ack 			(GTD)   	H <- E
+
+  #MESSAGE    S14F6   
+  #DIRECTION  SEND
+  
+  1.<L,  2	
+#UNFORMATTED  
+   	 1.<L,  1  $OBJTYP_LIST
+#UNFIXED
+   	        1.<A[1]   $OBJTYP
+   	 2.<L,  2
+   	 	1.<U1[1]   $OBJACK
+#UNFORMATTED  
+   	 	2.<L,  1   $ERROR_LIST
+   	 	       1.<L,  2
+   	 	              1.<U1[1]   $ERRCODE
+#UNFIXED
+   	 	              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Get Attribute Name Request 	(GANR)   	H -> E
+
+  #MESSAGE    S14F7
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  2
+#UNFIXED  
+  	 1.<A[1]   $OBJSPEC
+#UNFORMATTED 
+	 2.<L,  1  $OBJTYP_LIST
+#UNFIXED
+	 	1.<A[1]   $OBJTYPE
+	         
+  #END
+  //------------------------------
+  //------------------------------
+  // Get Attribute Name Data Ack 	(GAND)   	H <- E
+
+  #MESSAGE    S14F8
+  #DIRECTION  SEND
+  
+  1.<L,  2	
+#UNFORMATTED  
+   	 1.<L,  1  $OBJTYP_LIST
+   	 	1.<L,  2
+#UNFIXED
+	   	       1.<A[1]   $OBJTYP
+#UNFORMATTED
+	   	       2.<L,  1  $ATTRID_LIST
+#UNFIXED
+	   	              1.<A[1]   $ATTRID
+   	 2.<L,  2
+   	 	1.<U1[1]   $OBJACK
+#UNFORMATTED  
+   	 	2.<L,  1   $ERROR_LIST
+   	 	       1.<L,  2
+   	 	              1.<U1[1]   $ERRCODE
+#UNFIXED
+   	 	              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Create Object Request 		(COR)    	H -> E
+
+  #MESSAGE    S14F9
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+         
+  1.<L,  3
+#UNFIXED  
+         1.<A[1]   "Equipment"
+#UNFIXED  
+         2.<A[1]   "ControlJob"
+         3.<L,  6  
+                1.<L,  2
+#UNFIXED  
+                       1.<A[1]   "ObjID"
+#UNFIXED  
+                       2.<A[1]   $CJOBID	 		// Control Job ID
+                2.<L,  2
+#UNFIXED  
+          	       1.<A[1]    "ProcessOrderMgmt"
+                       2.<U1[1]   $PROCESSORDERMGMT		// PROCESSORDERMGMT = 2  (OPTIMIZE)
+                3.<L,  2
+#UNFIXED  
+          	       1.<A[1]      "StartMethod" 
+          	       2.<BOOL[1]   $STARTMETHOD 	        // TRUE - Auto,   FALSE - UserStart  
+                4.<L,  2
+#UNFIXED  
+                       1.<A[1]   "CarrierInputSpec"
+#UNFORMATTED
+                       2.<L,  1  $CARRIER_LIMIT
+#UNFIXED  
+                              1.<A[1]   $CARRIERID	
+                5.<L,  2
+#UNFIXED  
+          	       1.<A[1]   "MtrlOutSpec"
+          	       2.<L,  0
+                6.<L,  2
+#UNFIXED  
+             	       1.<A[1]   "ProcessingCtrlSpec" 
+#UNFORMATTED
+          	       2.<L,  1  $PJOB_LIMIT
+          	              1.<L,  3
+#UNFIXED  
+          	                     1.<A[1]     $PJOBID
+          	                     2.<L, 0
+          	                     3.<L, 0
+
+  #END
+  //------------------------------
+  //------------------------------
+  // Create Object Acknowledge 	(CAO)    	H <- E
+
+  #MESSAGE    S14F10   
+  #DIRECTION  SEND
+  #TYPE       0
+  
+  1.<L,  3
+#UNFIXED  
+         1.<A[1]    $OBJSPEC
+#UNFORMATTED         
+         2.<L,  7   $ITEM_LIST
+                1.<L,  2
+#UNFIXED  
+                       1.<A[1]    "ObjID" 
+#UNFIXED  
+                       2.<A[1]    $CJOBID 	 		// Control Job ID
+                2.<L,  2
+#UNFIXED  
+          	       1.<A[1]    "ProcessOrderMgmt" 
+                       2.<U1[1]   $PROCESSORDERMGMT		// PROCESSORDERMGMT = 2  (OPTIMIZE)
+                3.<L,  2
+#UNFIXED  
+          	       1.<A[1]      "StartMethod" 
+          	       2.<BOOL[1]   $STARTMETHOD		// TRUE - Auto   FALSE - UserStart  
+                4.<L,  2
+#UNFIXED  
+                       1.<A[1]   "CarrierInputSpec" 
+                       2.<L,  1   $CARRIER_LIMIT
+#UNFIXED  
+                              1.<A[1]   $CARRIERID
+                5.<L,  2
+#UNFIXED  
+          	       1.<A[1]   "MtrlOutSpec" 
+          	       2.<L,  0
+                6.<L,  2
+#UNFIXED  
+          	       1.<A[1]   "ProcessingCtrlSpec"
+#UNFORMATTED
+          	       2.<L,  1  $PJOB_LIMIT 
+          	              1.<L,  3
+#UNFIXED  
+          	                     1.<A[1]   $PJOBID>
+          	                     2.<L,  0 
+          	                     3.<L,  0
+                7.<L,  2
+#UNFIXED  
+                       1.<A[1]   "PauseEvent"
+                       2.<L,  0
+         3.<L,  2
+                1.<U1[1]   $ACKA 
+#UNFORMATTED
+                2.<L,  1     $ERROR_LIMIT
+                       1.<L,  2
+#UNFIXED  
+                              1.<U2[1]   $ERRCODE
+#UNFIXED  
+                              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+
+  //------------------------------
+  // Create Object Request 		(COR)    	H -> E
+
+  #MESSAGE    S14F9
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       1
+         
+  1.<L,  3
+#UNFIXED  
+         1.<A[1]   "Equipment"
+#UNFIXED  
+         2.<A[1]   "ControlJob"
+         3.<L,  6  
+                1.<L,  2
+#UNFIXED  
+                       1.<A[1]   "ObjID"
+#UNFIXED  
+                       2.<A[1]   $CJOBID	 		// Control Job ID
+                2.<L,  2
+#UNFIXED  
+             	       1.<A[1]   "ProcessingCtrlSpec" 
+#UNFORMATTED
+          	       2.<L,  1  $PJOB_LIMIT
+          	              1.<L,  3
+#UNFIXED  
+          	                     1.<A[1]     $PJOBID
+          	                     2.<L, 0
+          	                     3.<L, 0       
+          	    3.<L,  2
+#UNFIXED  
+                       1.<A[1]   "CarrierInputSpec"
+#UNFORMATTED
+                       2.<L,  1  $CARRIER_LIMIT
+#UNFIXED  
+                              1.<A[1]   $CARRIERID	                 
+                4.<L,  2
+#UNFIXED  
+          	           1.<A[1]      "MtrlOutSpec"
+          	           2.<L,  0              
+                5.<L,  2
+#UNFIXED  
+          	           1.<A[1]      "ProcessOrderMgmt"
+                       2.<U1[1]     $PROCESSORDERMGMT		  // PROCESSORDERMGMT = 2  (OPTIMIZE)
+                6.<L,  2
+#UNFIXED  
+          	           1.<A[1]      "StartMethod" 
+          	           2.<BOOL[1]   $STARTMETHOD 	        // TRUE - Auto,   FALSE - UserStart                       
+         
+  #END
+  //------------------------------
+  //------------------------------
+  // Create Object Acknowledge 	(CAO)    	H <- E
+
+  #MESSAGE    S14F10   
+  #DIRECTION  SEND
+  #TYPE       1
+  
+  1.<L,  3
+#UNFIXED  
+         1.<A[1]    $OBJSPEC
+#UNFORMATTED         
+         2.<L,  6   $ITEM_LIST
+                1.<L,  2
+#UNFIXED  
+                       1.<A[1]    "ObjID" 
+#UNFIXED  
+                       2.<A[1]    $CJOBID 	 		// Control Job ID
+                2.<L,  2
+#UNFIXED  
+          	       1.<A[1]   "ProcessingCtrlSpec"
+#UNFORMATTED
+          	       2.<L,  1  $PJOB_LIMIT 
+          	              1.<L,  3
+#UNFIXED  
+          	                     1.<A[1]   $PJOBID>
+          	                     2.<L,  0 
+          	                     3.<L,  0       
+          	3.<L,  2
+#UNFIXED  
+                       1.<A[1]   "CarrierInputSpec" 
+                       2.<L,  1   $CARRIER_LIMIT
+#UNFIXED  
+                              1.<A[1]   $CARRIERID
+                4.<L,  2
+#UNFIXED  
+          	       1.<A[1]   "MtrlOutSpec" 
+          	       2.<L,  0                               
+                5.<L,  2
+#UNFIXED  
+          	       1.<A[1]    "ProcessOrderMgmt" 
+                       2.<U1[1]   $PROCESSORDERMGMT		// PROCESSORDERMGMT = 2  (OPTIMIZE)
+                6.<L,  2
+#UNFIXED  
+          	       1.<A[1]      "StartMethod" 
+          	       2.<BOOL[1]   $STARTMETHOD		// TRUE - Auto   FALSE - UserStart              
+                                
+         3.<L,  2
+                1.<U1[1]   $ACKA 
+#UNFORMATTED
+                2.<L,  1     $ERROR_LIMIT
+                       1.<L,  2
+#UNFIXED  
+                              1.<U2[1]   $ERRCODE
+#UNFIXED  
+                              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Delete Object Request 		(DOR)   	H -> E
+
+  #MESSAGE    S14F11
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  2
+#UNFIXED  
+  	 1.<A[1]   $OBJSPEC
+#UNFORMATTED 
+	 2.<L,  1  $ATTR_LIST
+	 	1.<L,  2
+#UNFIXED
+	 	       1.<A[1]   $ATTRID
+#UNFIXED
+		       2.<A[1]   $ATTRDATA
+	         
+  #END
+  //------------------------------
+  //------------------------------
+  // Delete Object Ack 			(DOA)   	H <- E
+
+  #MESSAGE    S14F12
+  #DIRECTION  SEND
+  
+  1.<L,  2	
+#UNFORMATTED  
+   	 1.<L,  1  $ATTR_LIST
+   	 	1.<L,  2
+#UNFIXED
+	   	       1.<A[1]   $ATTRID
+#UNFIXED
+	   	       2.<A[1]   $ATTRDATA
+   	 2.<L,  2
+   	 	1.<U1[1]   $OBJACK
+#UNFORMATTED  
+   	 	2.<L,  1   $ERROR_LIST
+   	 	       1.<L,  2
+   	 	              1.<U1[1]   $ERRCODE
+#UNFIXED
+   	 	              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+

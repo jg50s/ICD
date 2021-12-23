@@ -1,0 +1,11 @@
+
+
+//      MODULE 	VID  	  [CHANNEL or COMMAND]	
+//					                            																		TYPE	BYTE	UNIT	   DISPLAY_NAME
+
+#SVID   ##PM    1       ##SVID_TMx+ai.LBA.PRESSURE                          A     10    torr     // LLx_Gauge_Value
+#SVID   ##PM    2       ##SVID_TMx+ai.LBB.PRESSURE                          A     10    torr     // LLx_Gauge_Value
+#SVID   ##PM    3       ##SVID_TMx+ai.TM.PRESSURE                           A     10    Torr     // TM_Gauge	      
+#SVID   ##PM    4       ##SVID_TMx+ai.N2.PRESSURE                           A     10    mtorr    // 0.0    24576.0
+                                                                    
+

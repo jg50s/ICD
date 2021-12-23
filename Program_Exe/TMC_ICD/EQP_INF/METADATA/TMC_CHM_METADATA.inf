@@ -1,0 +1,156 @@
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__TMC_CHM
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          TMC_CHM.FNC
+
+#FNC_MODE           INIT                   FNC__TMC_CHM    INIT 
+#FNC_MODE           PUMP                   FNC__TMC_CHM    PUMP 
+#FNC_MODE           VENT                   FNC__TMC_CHM    VENT 
+#FNC_MODE           ISOLATE                FNC__TMC_CHM    ISOLATE 
+#FNC_MODE           LEAK_CHECK             FNC__TMC_CHM    LEAK_CHECK 
+#FNC_MODE           CYCLE_PURGE            FNC__TMC_CHM    CYCLE_PURGE 
+
+
+//------------------------------------------------               
+#OBJECT_PROPERTY    PAGE__TMC_LEAK                                   
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+                                                                 
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          TMC.LEAK
+
+#FNC_MODE           LEAK_CHECK             FNC__TMC_CHM    LEAK_CHECK
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__TMC_SYS
+
+#DEFINE_CONSTANT    OBJ__TMC_SYS           	            MNG__SYS_CTRL
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__TMC_CHM
+
+#DEFINE_CONSTANT    OBJ__TMC_CHM           	            OPR__TMC_CHM
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    MNG__SYS_CTRL
+
+/*
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    EXECUTE_MSG_POPUP                   DB_GUI+sPOPUP.MNT.INITIAL
+*/
+
+#DEFINE_CONSTANT    DATA.MAX_OBJECT                     10
+
+#DEFINE_CONSTANT    OBJ.MSG.1                           ATM_ROBOT
+#DEFINE_CONSTANT    OBJ.LINK.1                          OPR__ATM_ROBOT
+#DEFINE_CONSTANT    OBJ.WAIT.1                          NO
+
+#DEFINE_CONSTANT    OBJ.ASYNC.2                         YES
+#DEFINE_CONSTANT    OBJ.MSG.2                           VAC_ROBOT
+#DEFINE_CONSTANT    OBJ.LINK.2                          OPR__VAC_ROBOT
+#DEFINE_CONSTANT    OBJ.WAIT.2                          YES							// Waiting ...
+
+#DEFINE_CONSTANT    OBJ.MSG.3                           AL1
+#DEFINE_CONSTANT    OBJ.LINK.3                          OPR__AL1
+#DEFINE_CONSTANT    OBJ.WAITING.3                       NO
+
+#DEFINE_CONSTANT    OBJ.MSG.4                           LP1
+#DEFINE_CONSTANT    OBJ.LINK.4                          OPR__LP1
+#DEFINE_CONSTANT    OBJ.WAIT.4                          NO
+
+#DEFINE_CONSTANT    OBJ.MSG.5                           LP2
+#DEFINE_CONSTANT    OBJ.LINK.5                          OPR__LP2
+#DEFINE_CONSTANT    OBJ.WAIT.5                          NO
+
+#DEFINE_CONSTANT    OBJ.MSG.6                           LP3
+#DEFINE_CONSTANT    OBJ.LINK.6                          OPR__LP3
+#DEFINE_CONSTANT    OBJ.WAIT.6                          NO
+
+#DEFINE_CONSTANT    OBJ.MSG.7                           PUMP
+#DEFINE_CONSTANT    OBJ.LINK.7                          PHY__PUMP
+#DEFINE_CONSTANT    OBJ.WAIT.7                          YES							// Waiting ...
+
+#DEFINE_CONSTANT    OBJ.MSG.8                           TM_CHM
+#DEFINE_CONSTANT    OBJ.LINK.8                          OPR__TMC_CHM
+#DEFINE_CONSTANT    OBJ.WAIT.8                          NO
+
+#DEFINE_CONSTANT    OBJ.MSG.9                           LL1
+#DEFINE_CONSTANT    OBJ.LINK.9                          OPR__LBA
+#DEFINE_CONSTANT    OBJ.WAIT.9                          NO
+
+#DEFINE_CONSTANT    OBJ.MSG.10                          LL2
+#DEFINE_CONSTANT    OBJ.LINK.10                         OPR__LBB
+#DEFINE_CONSTANT    OBJ.WAIT.10                         YES						 // Waiting ...
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__TMC_CHM
+
+#DEFINE_CONSTANT    OBJ__TMC_CHM      		              FNC__TMC_CHM
+#DEFINE_CONSTANT    OBJ__TMC_VLV                        FNC__TMC_VLV
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    LINK_LLx.OBJ_FNC.1                  FNC__LBA
+#DEFINE_CONSTANT    LINK_LLx.OBJ_FNC.2                  FNC__LBB
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__TMC_CHM
+
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+#DEFINE_CONSTANT    OBJ__TMC_CHM       		              PHY__TMC_CHM
+#DEFINE_CONSTANT    OBJ__PMx                            PHY__PMx
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    LINK_LLx.OBJ_FNC.1                  FNC__LBA
+#DEFINE_CONSTANT    LINK_LLx.OBJ_PHY.1                  PHY__LBA
+#DEFINE_CONSTANT    LINK_LLx.OBJ_FNC.2                  FNC__LBB
+#DEFINE_CONSTANT    LINK_LLx.OBJ_PHY.2                  PHY__LBB
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__TMC_CHM
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    OBJ__PUMP        		                PHY__PUMP
+
+#DEFINE_CONSTANT    VAR__PRESSURE_TORR		              IO+ai.TM.PRESSURE
+#DEFINE_CONSTANT    VAR__EXHAUST_PRESSURE		            NO
+
+#DEFINE_CONSTANT    VAR__IO_DO_FAST_VENT_VLV            IO+do.CHM1.FAST.VENT.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_SOFT_VENT_VLV            NO
+
+#DEFINE_CONSTANT    VAR__IO_DO_FAST_PUMP_VLV            IO+do.CHM1.ISO.VLV.SET
+#DEFINE_CONSTANT    VAR__IO_DO_SOFT_PUMP_VLV            NO
+
+#DEFINE_CONSTANT    VAR__IO_DI_LID_CLOSE_SNS            NO
+
+#DEFINE_CONSTANT    DATA.ATM_SNS.VIRTUAL_TYPE           NO
+#DEFINE_CONSTANT    VAR__IO_DI_ATM_SNS		              IO+di.CHM1.ATM.Sns
+#DEFINE_CONSTANT    VAR__IO_DI_VAC_SNS		              IO+di.CHM1.VAC.Sns
+
+#DEFINE_CONSTANT    VAR__IO_DO_BALLAST_VALVE_SET        IO+do.TM.BALLAST.SET
+#DEFINE_CONSTANT    VAR__IO_AO_BALLAST_N2_SET           IO+ao.N2.SETPOINT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__TMC_VLV
+
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    OBJ__TMC_CHM       		              PHY__TMC_CHM
+
+#DEFINE_CONSTANT    DATA.LLx_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    LINK_LLx.OBJ_PHY.1                  PHY__LBA
+#DEFINE_CONSTANT    LINK_LLx.OBJ_PHY.2                  PHY__LBB
+
+#DEFINE_CONSTANT    OBJ__PMx                            PHY__PMx
+

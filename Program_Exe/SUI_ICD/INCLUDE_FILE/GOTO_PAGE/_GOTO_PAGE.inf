@@ -1,0 +1,16 @@
+
+
+#MODULE    "CTC"
+#INCLUDE   "_LINK_GOTO_PAGE-CTC.inf"
+
+#MODULE    "TMC"
+#INCLUDE   "_LINK_GOTO_PAGE-TMC.inf"
+
+
+/*
+#MODULE    "PM1"
+#INCLUDE   "_LINK_GOTO_PAGE-PMC.inf"
+
+#MODULE    "PM2"
+#INCLUDE   "_LINK_GOTO_PAGE-PMC.inf"
+*/

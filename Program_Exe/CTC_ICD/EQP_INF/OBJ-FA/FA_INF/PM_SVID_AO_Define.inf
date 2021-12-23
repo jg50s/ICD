@@ -1,0 +1,19 @@
+
+
+
+//      MODULE 	VID  	  [CHANNEL or COMMAND]	
+//					                            																		TYPE	BYTE	UNIT	      DISPLAY_NAME
+
+#SVID   ##PM    1       ##SVID_PMx+ao.DCProbe.Gain										      A     5     %						DC_Probe_Gain            				// -5 ~ 5			
+#SVID   ##PM    2       ##SVID_PMx+ao.TCU.ESC.SetTemp								        A     5     C						TCU_ESC_Set_Temperature					// 0 ~ 100		
+#SVID   ##PM    3       ##SVID_PMx+ao.TCU.TopPlate.SetTemp  					      A     5     C						TCU_Top_Plate_Set_Temperature		// 0 ~ 100		
+
+#SVID   ##PM    11      ##SVID_PMx+ao.HePress.Setpoint.Outer					      A     5     Torr				He_Outer_Pressure_Setpoint			// 0 ~ 50			
+#SVID   ##PM    12      ##SVID_PMx+ao.HePress.Setpoint.Inner					      A     5     Torr				He_Inner_Pressure_Setpoint      // 0 ~ 50		
+#SVID   ##PM    13      ##SVID_PMx+ao.ESCVolt.Setpoint								      A     5     V						ESC_Volt_Setpoint_Volt          // 0 ~ 2000	
+#SVID   ##PM    14      ##SVID_PMx+ao.ExtBias.Setpoint								      A     5     V						External_Bias_Setpoint_Volt     // 0 ~ 2000	
+#SVID   ##PM    15      ##SVID_PMx+ao.DCProbe.Offset									      A     5     %						DC_Probe_Offset_Percent					// -5 ~	5			
+#SVID   ##PM    16      ##SVID_PMx+ao.ESCBias.Offset									      A     5     V						ESC_Bias_Offset_Volt            // 0 ~ 10		
+#SVID   ##PM    17      ##SVID_PMx+ao.ESCBias.Slope    							        A     5     V						ESC_Bias_Slope_Volt             // 0 ~ 10		
+
+

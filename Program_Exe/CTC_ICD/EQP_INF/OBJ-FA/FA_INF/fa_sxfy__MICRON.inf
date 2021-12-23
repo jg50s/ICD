@@ -1,0 +1,68 @@
+
+  //-----------------------------------------------
+  #PORT_TYPE              HSMS       // HSMS    RS232
+  #CONNECTION_MODE        PASSIVE    // ACTIVE  PASSIVE
+  #DEVICEID               0
+
+  #IP                     127.0.0.1
+  #PORT                   7001 
+
+  #SERIAL_PORT            COM1       // SECS1 : (COM1, COM2, ... COM30)
+  #BAUD                   9600       // SECS1 : (150, 300, ... )   
+  #RETRY_LIMIT            3          // SECS1 :
+  
+  #T1                     1.0        // SECS1 : 
+  #T2                     10.0       // SECS1 : 
+  #T3                     10.0       // SECS1 / HSMS :
+  #T4                     45.0       // SECS1 : 
+
+  #LINK_TEST              10         // HSMS  :
+  #T5                     10.0       // HSMS  :
+  #T6                     5.0        // HSMS  : 
+  #T7                     10.0       // HSMS  : 
+  #T8                     5.0        // HSMS  :
+
+  
+  #DATALOG_SIZE    5      // 1 ~ 30  DAY   (UNIT : 1 HOUR)
+  //-----------------------------------------------
+
+  
+  //-----------------------------------------------
+  #ONLINE_MESSAGE   S1F1
+  #ONLINE_MESSAGE   S1F2
+  
+  #ONLINE_MESSAGE   S1F13
+  #ONLINE_MESSAGE   S1F14
+  
+  #ONLINE_MESSAGE   S1F17
+  #ONLINE_MESSAGE   S1F18
+  
+  #ONLINE_MESSAGE   S2F25
+  #ONLINE_MESSAGE   S2F26
+  //-----------------------------------------------
+
+  //-----------------------------------------------
+  #DEFINE_VARIABLE  MDLN	"FidesTech"	// Equipment model type, 6 bytes max
+  #DEFINE_VARIABLE  SOFTREV	"1.0 Ver"	// Software revision code, 6 bytes max
+  //-----------------------------------------------
+
+
+#INCLUDE  "S1_MSG.inf"
+#INCLUDE  "S2_MSG.inf"
+#INCLUDE  "S3_MSG.inf"
+
+#INCLUDE  "S5_MSG.inf"
+#INCLUDE  "S6_MSG.inf"
+#INCLUDE  "S7_MSG__MICRON.inf"
+
+#INCLUDE  "S9_MSG.inf"
+#INCLUDE  "S10_MSG.inf"
+
+#INCLUDE  "S14_MSG__MICRON.inf"
+#INCLUDE  "S15_MSG.inf"
+#INCLUDE  "S16_MSG.inf"
+
+#INCLUDE  "S18_MSG.inf"
+
+
+

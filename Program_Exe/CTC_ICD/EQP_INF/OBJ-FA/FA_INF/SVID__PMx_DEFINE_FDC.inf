@@ -1,0 +1,20 @@
+#DEFINE_CHANNEL_NAME
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// PM1  :  10000000 ~ 19999999
+// PM2  :  20000000 ~ 29999999
+// PM3  :  30000000 ~ 39999999
+// PM4  :  40000000 ~ 49999999
+
+
+//--------------------------------------------------------------------------                                                              
+#SVID   ##PM    1		  ##PHY_PM+FDC.LOTID             	    A 	40	  __		    LotID                                                      
+#SVID   ##PM    2     ##PHY_PM+ACC.PROCESSED.COUNT   	    A  	8   	Count  		Current_Wafer_Count  
+#SVID   ##PM    3		  ##PHY_PM+SVID.SLOT_DATA 				    A	  8	    __		    Wafer_Present_State	
+#SVID   ##PM    4		  ##PHY_PM+FDC.CLN.RECIPE      	      A   40	  __		    Clean_Recipe_Name		
+#SVID   ##PM    5		  ##PHY_PM+LPx.PORT_ID			          A 	8	    __		    LPx_PortID	
+#SVID   ##PM    6		  ##PHY_PM+LPx.SLOT_ID			          A 	8	    __		    LPx_SlotID	
+
+#SVID   ##PM    11		##CTC_FDC+PROCESS_STATE			        A	  4	    __		    Process_State		
+

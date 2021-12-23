@@ -1,0 +1,26 @@
+
+//---------------------------------------------------------------------------------------------------------
+//       1        2         3                                                                          4        5          6          7          8       9         10
+//       ECID     COMMAND   CHANNEL-NAME                                                               UNIT     FMT-TYPE   FMT-BYTE   DEFAULT    MIN     MAX       NAME
+
+#ECID     1       __        #DEFINE_NAME#+OBJ_STAGE.cfg.vd.wafer.detect.use                          	__   			  A          4        0           0       1        Spin Wafer Detect Use
+#ECID			2				__				#DEFINE_NAME#+OBJ_SPIN.Wafer.Detect.Count				 													__	 			  A				   4				0				    0			  4				 Spin Wafer Detect Count							
+#ECID			3				__				#DEFINE_NAME#+OBJ_SPIN.Home.Tech.Deg																		  deg					A					 4				0				    0			  3599		 Spin Home Teach
+#ECID			10      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.swingnozzle.DIW.flow.limit									%           A          4        0           0			  100			 DIW Front Nozzle Alarm Range
+#ECID			11      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.swing.DIW.stable.time											sec	        A          4        0           0			  10			 DIW Front Nozzle Stable Time
+#ECID			12      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.backnozzle.DIW.flow.limit									%           A          4        0           0			  100			 DIW Back Alarm Ragne
+#ECID			13      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.back.DIW.stable.time												sec         A          4        0           0			  10			 DIW Back Stable Time
+#ECID			16      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.SWING.NOZZLE.CENTER.POSITION									deg         F          4        0           0			  60			 Nozzle Swing Center Position
+#ECID			17      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.SWING.NOZZLE.EDGE.POSITION										deg/s       F          4        0           0			  60			 Nozzle Swing Edge Position
+#ECID			18      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.SWING.NOZZLE.VELOCITY												deg/s       F          4        0           0			  100			 Nozzle Swing Velocity
+#ECID			19      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.SWING.NOZZLE.ACCELERATION										sec					F				   4        0           0			  9			 	 Nozzle Swing Acceleration
+#ECID			20      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.SWING.NOZZLE.DECELERATION										sec         F          4        0           0			  9				 Nozzle Swing Deceleration
+#ECID			21      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.UPDOWN.NOZZLE.POSITION												mm          F          4        0           0			  35			 Nozzle UpDown Transfer Position
+#ECID			22      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.UPDOWN.NOZZLE.VELOCITY												mm/s        F          4        0           0			  70			 Nozzle UpDown Velocity
+#ECID			23      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.UPDOWN.NOZZLE.ACCELERATION										sec         F          4        0           0			  9				 Nozzle UpDown Acceleration
+#ECID			24      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.UPDOWN.NOZZLE.DECELERATION										sec         F          4        0           0			  9				 Nozzle UpDown Deceleration
+#ECID			25			__				#DEFINE_NAME#+OBJ_STAGE.cfg.va.IPA.flow.limit															%						A					 4				0				    0			  100			 IPA Swing Nozzle Alarm Range
+#ECID			26      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.LFC.stable.time														sec         A          4        0           0			  10			 IPA Swing Nozzle Stable Time
+#ECID			27      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.fixnozzle.DIW.flow.limit										%           A          4        0           0			  100			 DIW Fix Nozzle Alarm Range
+#ECID			28      __        #DEFINE_NAME#+OBJ_STAGE.cfg.va.fix.DIW.stable.time												sec         A          4        0           0			  10			 DIW Fix Nozzle Stable Time
+#ECID			29      __        #DEFINE_NAME#+OBJ_NOZZLE.CFG.HOME.SEARCH.TIMEOUT													sec         A          4        0           0			  60			 Nozzle Home TimeOut

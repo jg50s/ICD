@@ -1,0 +1,89 @@
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+#DEFINE   ##MODULE      PM2
+
+
+//------------------------------------------------------------------
+#DEFINE   ##STAGE+           PHY_CLEANER+S1.
+#DEFINE   ##SVID+            S1.
+#DEFINE   ##Sx+              Stage1.
+#DEFINE   ##STN              STN1
+#DEFINE   ##OBJ_STAGE        PHY_STAGE1
+#DEFINE   ##OBJ_BRUSH        FNC_BRUSH1
+#DEFINE   ##OBJ_NOZZLE       FNC_BRUSH1_NOZZLE
+#DEFINE   ##OBJ_AXIS_FRONT   PHY_MOTION_AJINTEK_9
+#DEFINE   ##OBJ_AXIS_BACK    PHY_MOTION_AJINTEK_10
+#DEFINE   ##OBJ_AXIS_OSCILL  PHY_MOTION_AJINTEK_11
+#DEFINE   ##OBJ_AXIS_UPDOWN  PHY_MOTION_AJINTEK_12
+#DEFINE   ##OBJ_AXIS_SWING   PHY_MOTION_AJINTEK_13
+#DEFINE   ##OBJ_LFC          FNC_LFC_BRUSH1
+#DEFINE   ##OBJ_IO           IO
+#DEFINE   ##N2_SET_IO        ao.MFC01.BRUSH1.FRONT.AEROSOL1
+#DEFINE   ##N2_GET_IO        ai.MFC01.BRUSH1.FRONT.AEROSOL1
+#DEFINE   ##N2_VALVE_IO      do.SV01.AV0113.CH1.FRONT.NOZZLE.N2
+#DEFINE   ##U_TORQUE         ai.Brush1.HighBrush.roation.MotorTorque.ratio
+#DEFINE   ##L_TORQUE         ai.Brush1.LowBrush.roation.MotoTtorque.ratio
+#DEFINE   ##Exhaust_Press    ai.Brush1.Exhaust
+
+#DEFINE_ID_OFFSET	  21000
+#INCLUDE  "fa_db_svid_chamber_common_define.inf"
+#INCLUDE  "fa_db_svid_cleaner_stage12_define.inf"
+
+//------------------------------------------------------------------
+#DEFINE   ##STAGE+           PHY_CLEANER+S2.
+#DEFINE   ##SVID+            S2.
+#DEFINE   ##Sx+              Stage2.
+#DEFINE   ##STN              STN2
+#DEFINE   ##OBJ_STAGE        PHY_STAGE2
+#DEFINE   ##OBJ_BRUSH        FNC_BRUSH2
+#DEFINE   ##OBJ_NOZZLE       FNC_BRUSH2_NOZZLE
+#DEFINE   ##OBJ_AXIS_FRONT   PHY_MOTION_AJINTEK_19
+#DEFINE   ##OBJ_AXIS_BACK    PHY_MOTION_AJINTEK_20
+#DEFINE   ##OBJ_AXIS_OSCILL  PHY_MOTION_AJINTEK_21
+#DEFINE   ##OBJ_AXIS_UPDOWN  PHY_MOTION_AJINTEK_22
+#DEFINE   ##OBJ_AXIS_SWING   PHY_MOTION_AJINTEK_23
+#DEFINE   ##OBJ_LFC          FNC_LFC_BRUSH2
+#DEFINE   ##OBJ_IO           IO
+#DEFINE   ##N2_SET_IO        ao.MFC02.BRUSH2.FRONT.AEROSOL1
+#DEFINE   ##N2_GET_IO        ai.MFC02.BRUSH2.FRONT.AEROSOL1
+#DEFINE   ##N2_VALVE_IO      do.SV03.AV0213.CH2.Front.NOZZLE.N2
+#DEFINE   ##U_TORQUE         ai.Brush2.HighBrush.roation.MotorTorque.ratio
+#DEFINE   ##L_TORQUE         ai.Brush2.LowBrush.roation.MotorTorque.ratio
+#DEFINE   ##Exhaust_Press    ai.Brush2.Exhaust
+
+#DEFINE_ID_OFFSET	  22000
+#INCLUDE  "fa_db_svid_chamber_common_define.inf"
+#INCLUDE  "fa_db_svid_cleaner_stage12_define.inf"
+
+
+//------------------------------------------------------------------
+#DEFINE   ##STAGE+           PHY_CLEANER+S3.
+#DEFINE   ##SVID+            S3.
+#DEFINE   ##Sx+              Stage3.
+#DEFINE   ##STN              STN3
+#DEFINE   ##OBJ_NOZZLE       FNC_DF_NOZZLE
+
+#DEFINE_ID_OFFSET	  23000
+#INCLUDE  "fa_db_svid_chamber_common_define.inf"
+#INCLUDE  "fa_db_svid_cleaner_stage3_define.inf"
+
+//------------------------------------------------------------------
+#DEFINE   ##STAGE+           PHY_CLEANER+S4.
+#DEFINE   ##SVID+            S4.
+#DEFINE   ##Sx+              Stage4.
+#DEFINE   ##STN              STN4
+#DEFINE   ##OBJ_NOZZLE       FNC_IPA_NOZZLE
+
+#DEFINE_ID_OFFSET	  24000
+#INCLUDE  "fa_db_svid_chamber_common_define.inf"
+#INCLUDE  "fa_db_svid_cleaner_stage4_define.inf"
+
+//------------------------------------------------------------------
+
+
+#DEFINE_ID_OFFSET	  25000
+#INCLUDE  "fa_db_svid_cleaner_else.inf"
+
+//------------------------------------------------------------------
+

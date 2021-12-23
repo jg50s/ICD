@@ -1,0 +1,411 @@
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__LP1_RF
+#FNC_MODE           CID_READ              PHY__LP1         CID_READ 
+#FNC_MODE           PAGE_READ             PHY__LP1         PAGE_READ 
+
+#OBJECT_PROPERTY    PAGE__LP2_RF
+#FNC_MODE           CID_READ              PHY__LP2         CID_READ 
+#FNC_MODE           PAGE_READ             PHY__LP2         PAGE_READ 
+
+#OBJECT_PROPERTY    PAGE__LP3_RF
+#FNC_MODE           CID_READ              PHY__LP3         CID_READ 
+#FNC_MODE           PAGE_READ             PHY__LP3         PAGE_READ 
+
+#OBJECT_PROPERTY    PAGE__LP4_RF
+#FNC_MODE           CID_READ              PHY__LP4         CID_READ 
+#FNC_MODE           PAGE_READ             PHY__LP4         PAGE_READ 
+
+#OBJECT_PROPERTY    PAGE__LP5_RF
+#FNC_MODE           CID_READ              PHY__LP5         CID_READ 
+#FNC_MODE           PAGE_READ             PHY__LP5         PAGE_READ 
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LP1
+
+#DEFINE_CONSTANT    OBJ.LPx     	        OPR__LP1
+#FNC_VARIABLE       VAR__LP_RELOAD_FLAG		PHY_IO__LP1   OTR.IN.sLP.RELOAD.FLAG
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LP2
+
+#DEFINE_CONSTANT    OBJ.LPx     	        OPR__LP2
+#FNC_VARIABLE       VAR__LP_RELOAD_FLAG		PHY_IO__LP2   OTR.IN.sLP.RELOAD.FLAG
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LP3
+
+#DEFINE_CONSTANT    OBJ.LPx     	        OPR__LP3
+#FNC_VARIABLE       VAR__LP_RELOAD_FLAG		PHY_IO__LP3   OTR.IN.sLP.RELOAD.FLAG
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LP4
+
+#DEFINE_CONSTANT    OBJ.LPx     	        OPR__LP4
+#FNC_VARIABLE       VAR__LP_RELOAD_FLAG		PHY_IO__LP4   OTR.IN.sLP.RELOAD.FLAG
+
+//------------------------------------------------
+#OBJECT_PROPERTY    INF__LP5
+
+#DEFINE_CONSTANT    OBJ.LPx     	        OPR__LP5
+#FNC_VARIABLE       VAR__LP_RELOAD_FLAG		PHY_IO__LP5   OTR.IN.sLP.RELOAD.FLAG
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LP1
+
+#DEFINE_CONSTANT    OBJ.LPx      		      PHY__LP1
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LP2
+
+#DEFINE_CONSTANT    OBJ.LPx      		      PHY__LP2
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LP3
+
+#DEFINE_CONSTANT    OBJ.LPx      		      PHY__LP3
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LP4
+
+#DEFINE_CONSTANT    OBJ.LPx      		      PHY__LP4
+
+//------------------------------------------------
+#OBJECT_PROPERTY    OPR__LP5
+
+#DEFINE_CONSTANT    OBJ.LPx      		      PHY__LP5
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__LP1
+
+#DEFINE_CONSTANT    LPx.ID                1
+#DEFINE_CONSTANT    OBJ.LPx               PHY__LP1
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__LP2
+
+#DEFINE_CONSTANT    LPx.ID                2
+#DEFINE_CONSTANT    OBJ.LPx               PHY__LP2
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__LP3
+
+#DEFINE_CONSTANT    LPx.ID                3
+#DEFINE_CONSTANT    OBJ.LPx               PHY__LP3
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__LP1
+
+#DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP1+OBJ.STATUS
+#DEFINE_CONSTANT    OBJ.LP           		  PHY_IO__LP1
+#DEFINE_CONSTANT    OBJ.RF           		  PHY_RFID__LP1
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__LP2
+
+#DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP2+OBJ.STATUS
+#DEFINE_CONSTANT    OBJ.LP           		  PHY_IO__LP2
+#DEFINE_CONSTANT    OBJ.RF           		  PHY_RFID__LP2
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__LP3
+
+#DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP3+OBJ.STATUS
+#DEFINE_CONSTANT    OBJ.LP           		  PHY_IO__LP3
+#DEFINE_CONSTANT    OBJ.RF           		  PHY_RFID__LP3
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__LP1
+
+#DEFINE_CONSTANT		OBJ.LPx_PIO					                PHY_OHT__LP1
+#DEFINE_CONSTANT		VAR__PIO.RUN_SNS					          INR.dE84.RUN.SNS
+#DEFINE_CONSTANT		VAR__PIO.TRANSFER_SNS		            OTR.OUT.MON.sTRANSFER.PIO.STATUS
+
+#DEFINE_CONSTANT		CH__IO_DI.COMM_STS									IO+di.Comm.Sts
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_UP									  IO+do.LP1.Door.Up
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_UP									  IO+di.LP1.Door.Up
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_DN									  IO+do.LP1.Door.Dn
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_DN									  IO+di.LP1.Door.Dn
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_EXT									IO+do.LP1.Door.Ext
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_EXT									IO+di.LP1.Door.Ext
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_RET									IO+do.LP1.Door.Ret
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_RET									IO+di.LP1.Door.Ret
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_VAC									IO+do.LP1.Vac
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_VAC									IO+di.LP1.Vac
+#DEFINE_CONSTANT		CH__IO_DI.SLIDE_OUT_SNS  					  IO+di.LP1.WfrSlide.Out
+
+#DEFINE_CONSTANT		CH__IO_DO.LATCH										  IO+do.LP1.Latch.Horizontal
+#DEFINE_CONSTANT		CH__IO_DI.LATCH										  IO+di.LP1.Latch.Horizontal
+#DEFINE_CONSTANT		CH__IO_DO.UNLATCH									  IO+do.LP1.Latch.Vertical
+#DEFINE_CONSTANT		CH__IO_DI.UNLATCH									  IO+di.LP1.Latch.Vertical
+#DEFINE_CONSTANT		CH__IO_DO.SHUTTLE_IN								IO+do.LP1.Shtle.In
+#DEFINE_CONSTANT		CH__IO_DI.SHUTTLE_IN								IO+di.LP1.Shtle.In
+#DEFINE_CONSTANT		CH__IO_DO.SHUTTLE_OUT							  IO+do.LP1.Shtle.Out
+#DEFINE_CONSTANT		CH__IO_DI.SHUTTLE_OUT							  IO+di.LP1.Shtle.Out
+#DEFINE_CONSTANT		CH__IO_DO.CLAMP										  IO+do.LP1.Clamp
+#DEFINE_CONSTANT		CH__IO_DI.CLAMP										  IO+di.LP1.Clamp.Sns
+#DEFINE_CONSTANT		CH__IO_DI.UNCLAMP									  IO+di.LP1.Unclamp.Sns
+#DEFINE_CONSTANT		CH__IO_DO.UNCLAMP									  IO+do.LP1.Unclamp
+
+#DEFINE_CONSTANT		CH__IO_DI.FOUP_PRESENT							IO+di.LP1.PlatForm.Occupied		
+#DEFINE_CONSTANT		CH__IO_DI.FOUP_PLACED							  IO+di.LP1.Foup.Placed			    
+
+#DEFINE_CONSTANT		CH__IO_DI.LOAD_BUTTON							  IO+di.LP1.LD.BTN.Swtich01	
+#DEFINE_CONSTANT		CH__IO_DI.UNLOAD_BUTTON						  IO+di.LP1.UNLD.BTN.Swtich02
+
+#DEFINE_CONSTANT		CH__IO_DO.LAMP01							      IO+do.LP1.UNLD.BTN.Lamp01 
+#DEFINE_CONSTANT		CH__IO_DO.LAMP02							      IO+do.LP1.LD.BTN.Lamp02
+#DEFINE_CONSTANT		CH__IO_DO.LAMP03							      IO+do.LP1.PAUSE.BTN.Lamp03
+#DEFINE_CONSTANT		CH__IO_DO.LAMP04							      IO+do.LP1.RESUME.BTN.Lamp04
+#DEFINE_CONSTANT		CH__IO_DO.LAMP05							      IO+do.LP1.AUTO.Lamp05
+#DEFINE_CONSTANT		CH__IO_DO.LAMP06							      IO+do.LP1.RESERVE.Lamp06 
+   	   	
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__LP2
+
+#DEFINE_CONSTANT		OBJ.LPx_PIO					                PHY_OHT__LP2
+#DEFINE_CONSTANT		VAR__PIO.RUN_SNS					          INR.dE84.RUN.SNS
+#DEFINE_CONSTANT		VAR__PIO.TRANSFER_SNS		            OTR.OUT.MON.sTRANSFER.PIO.STATUS
+
+#DEFINE_CONSTANT		CH__IO_DI.COMM_STS									IO+di.Comm.Sts
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_UP									  IO+do.LP2.Door.Up
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_UP									  IO+di.LP2.Door.Up
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_DN									  IO+do.LP2.Door.Dn
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_DN									  IO+di.LP2.Door.Dn
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_EXT									IO+do.LP2.Door.Ext
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_EXT									IO+di.LP2.Door.Ext
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_RET									IO+do.LP2.Door.Ret
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_RET									IO+di.LP2.Door.Ret
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_VAC									IO+do.LP2.Vac
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_VAC									IO+di.LP2.Vac
+#DEFINE_CONSTANT		CH__IO_DI.SLIDE_OUT_SNS  					  IO+di.LP2.WfrSlide.Out
+
+#DEFINE_CONSTANT		CH__IO_DO.LATCH										  IO+do.LP2.Latch.Horizontal
+#DEFINE_CONSTANT		CH__IO_DI.LATCH										  IO+di.LP2.Latch.Horizontal
+#DEFINE_CONSTANT		CH__IO_DO.UNLATCH									  IO+do.LP2.Latch.Vertical
+#DEFINE_CONSTANT		CH__IO_DI.UNLATCH									  IO+di.LP2.Latch.Vertical
+#DEFINE_CONSTANT		CH__IO_DO.SHUTTLE_IN								IO+do.LP2.Shtle.In
+#DEFINE_CONSTANT		CH__IO_DI.SHUTTLE_IN								IO+di.LP2.Shtle.In
+#DEFINE_CONSTANT		CH__IO_DO.SHUTTLE_OUT							  IO+do.LP2.Shtle.Out
+#DEFINE_CONSTANT		CH__IO_DI.SHUTTLE_OUT							  IO+di.LP2.Shtle.Out
+#DEFINE_CONSTANT		CH__IO_DO.CLAMP										  IO+do.LP2.Clamp
+#DEFINE_CONSTANT		CH__IO_DI.CLAMP										  IO+di.LP2.Clamp.Sns
+#DEFINE_CONSTANT		CH__IO_DI.UNCLAMP									  IO+di.LP2.Unclamp.Sns
+#DEFINE_CONSTANT		CH__IO_DO.UNCLAMP									  IO+do.LP2.Unclamp
+
+#DEFINE_CONSTANT		CH__IO_DI.FOUP_PRESENT							IO+di.LP2.PlatForm.Occupied		
+#DEFINE_CONSTANT		CH__IO_DI.FOUP_PLACED							  IO+di.LP2.Foup.Placed			    
+
+#DEFINE_CONSTANT		CH__IO_DI.LOAD_BUTTON							  IO+di.LP2.LD.BTN.Swtich01	
+#DEFINE_CONSTANT		CH__IO_DI.UNLOAD_BUTTON						  IO+di.LP2.UNLD.BTN.Swtich02
+
+#DEFINE_CONSTANT		CH__IO_DO.LAMP01							      IO+do.LP2.UNLD.BTN.Lamp01 
+#DEFINE_CONSTANT		CH__IO_DO.LAMP02							      IO+do.LP2.LD.BTN.Lamp02
+#DEFINE_CONSTANT		CH__IO_DO.LAMP03							      IO+do.LP2.PAUSE.BTN.Lamp03
+#DEFINE_CONSTANT		CH__IO_DO.LAMP04							      IO+do.LP2.RESUME.BTN.Lamp04
+#DEFINE_CONSTANT		CH__IO_DO.LAMP05							      IO+do.LP2.AUTO.Lamp05
+#DEFINE_CONSTANT		CH__IO_DO.LAMP06							      IO+do.LP2.RESERVE.Lamp06 
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__LP3
+
+#DEFINE_CONSTANT		OBJ.LPx_PIO					                PHY_OHT__LP3
+#DEFINE_CONSTANT		VAR__PIO.RUN_SNS					          INR.dE84.RUN.SNS
+#DEFINE_CONSTANT		VAR__PIO.TRANSFER_SNS		            OTR.OUT.MON.sTRANSFER.PIO.STATUS
+
+#DEFINE_CONSTANT		CH__IO_DI.COMM_STS									IO+di.Comm.Sts
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_UP									  IO+do.LP3.Door.Up
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_UP									  IO+di.LP3.Door.Up
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_DN									  IO+do.LP3.Door.Dn
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_DN									  IO+di.LP3.Door.Dn
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_EXT									IO+do.LP3.Door.Ext
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_EXT									IO+di.LP3.Door.Ext
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_RET									IO+do.LP3.Door.Ret
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_RET									IO+di.LP3.Door.Ret
+#DEFINE_CONSTANT		CH__IO_DO.DOOR_VAC									IO+do.LP3.Vac
+#DEFINE_CONSTANT		CH__IO_DI.DOOR_VAC									IO+di.LP3.Vac
+#DEFINE_CONSTANT		CH__IO_DI.SLIDE_OUT_SNS  					  IO+di.LP3.WfrSlide.Out
+
+#DEFINE_CONSTANT		CH__IO_DO.LATCH										  IO+do.LP3.Latch.Horizontal
+#DEFINE_CONSTANT		CH__IO_DI.LATCH										  IO+di.LP3.Latch.Horizontal
+#DEFINE_CONSTANT		CH__IO_DO.UNLATCH									  IO+do.LP3.Latch.Vertical
+#DEFINE_CONSTANT		CH__IO_DI.UNLATCH									  IO+di.LP3.Latch.Vertical
+#DEFINE_CONSTANT		CH__IO_DO.SHUTTLE_IN								IO+do.LP3.Shtle.In
+#DEFINE_CONSTANT		CH__IO_DI.SHUTTLE_IN								IO+di.LP3.Shtle.In
+#DEFINE_CONSTANT		CH__IO_DO.SHUTTLE_OUT							  IO+do.LP3.Shtle.Out
+#DEFINE_CONSTANT		CH__IO_DI.SHUTTLE_OUT							  IO+di.LP3.Shtle.Out
+#DEFINE_CONSTANT		CH__IO_DO.CLAMP										  IO+do.LP3.Clamp
+#DEFINE_CONSTANT		CH__IO_DI.CLAMP										  IO+di.LP3.Clamp.Sns
+#DEFINE_CONSTANT		CH__IO_DI.UNCLAMP									  IO+di.LP3.Unclamp.Sns
+#DEFINE_CONSTANT		CH__IO_DO.UNCLAMP									  IO+do.LP3.Unclamp
+
+#DEFINE_CONSTANT		CH__IO_DI.FOUP_PRESENT							IO+di.LP3.PlatForm.Occupied		
+#DEFINE_CONSTANT		CH__IO_DI.FOUP_PLACED							  IO+di.LP3.Foup.Placed			    
+
+#DEFINE_CONSTANT		CH__IO_DI.LOAD_BUTTON							  IO+di.LP3.LD.BTN.Swtich01	
+#DEFINE_CONSTANT		CH__IO_DI.UNLOAD_BUTTON						  IO+di.LP3.UNLD.BTN.Swtich02
+
+#DEFINE_CONSTANT		CH__IO_DO.LAMP01							      IO+do.LP3.UNLD.BTN.Lamp01 
+#DEFINE_CONSTANT		CH__IO_DO.LAMP02							      IO+do.LP3.LD.BTN.Lamp02
+#DEFINE_CONSTANT		CH__IO_DO.LAMP03							      IO+do.LP3.PAUSE.BTN.Lamp03
+#DEFINE_CONSTANT		CH__IO_DO.LAMP04							      IO+do.LP3.RESUME.BTN.Lamp04
+#DEFINE_CONSTANT		CH__IO_DO.LAMP05							      IO+do.LP3.AUTO.Lamp05
+#DEFINE_CONSTANT		CH__IO_DO.LAMP06							      IO+do.LP3.RESERVE.Lamp06 
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_RFID__LP1
+
+#OBJECT_IO_PARA     COM_PORT                11
+#OBJECT_IO_PARA     BAUD_RATE               19200
+#OBJECT_IO_PARA     DATA_BITS               8
+#OBJECT_IO_PARA     PARITY                  2       // Even
+#OBJECT_IO_PARA     STOP_BITS               1
+#OBJECT_IO_PARA     RETRY_COUNT             1
+#OBJECT_IO_PARA     TIME_OUT                1
+
+
+#OBJECT_PROPERTY    PHY_RFID__LP2
+
+#OBJECT_IO_PARA     COM_PORT                12
+#OBJECT_IO_PARA     BAUD_RATE               19200
+#OBJECT_IO_PARA     DATA_BITS               8
+#OBJECT_IO_PARA     PARITY                  2       // Even
+#OBJECT_IO_PARA     STOP_BITS               1
+#OBJECT_IO_PARA     RETRY_COUNT             1
+#OBJECT_IO_PARA     TIME_OUT                1
+
+
+#OBJECT_PROPERTY    PHY_RFID__LP3
+
+#OBJECT_IO_PARA     COM_PORT                13
+#OBJECT_IO_PARA     BAUD_RATE               19200
+#OBJECT_IO_PARA     DATA_BITS               8
+#OBJECT_IO_PARA     PARITY                  2       // Even
+#OBJECT_IO_PARA     STOP_BITS               1
+#OBJECT_IO_PARA     RETRY_COUNT             1
+#OBJECT_IO_PARA     TIME_OUT                1
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_OHT__LP1
+
+#DEFINE_CONSTANT    PHY.LP            									PHY_IO__LP1
+
+#DEFINE_CONSTANT		VAR__PHY_OBJ_LP_MODE                PHY_IO__LP1+OTR.OUT.sLP.MODE
+#DEFINE_CONSTANT		VAR__PHY_OBJ_LP_STS                 PHY_IO__LP1+OTR.OUT.sLP.OBJ.STS
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_DI_CST_EXIST        PHY_IO__LP1+OTR.OUT.MON.dFOUP.EXIST.FLAG
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_DI_CLAMP_STS        PHY_IO__LP1+OTR.OUT.MON.dFOUP.CLAMP.STATUS
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_SIMUL_FLAG          PHY_IO__LP1+OTR.IN.CFG.dSIMUL.FLAG
+
+#DEFINE_CONSTANT		VAR__IO_DI_FOUP_PLACED              IO+di.LP1.Foup.Placed
+#DEFINE_CONSTANT		VAR__IO_DI_FOUP_PRESENT             IO+di.LP1.PlatForm.Occupied
+#DEFINE_CONSTANT		VAR__IO_DO_CLAMP										IO+do.LP1.Clamp
+#DEFINE_CONSTANT		VAR__IO_DO_UNCLAMP									IO+do.LP1.Unclamp
+#DEFINE_CONSTANT		VAR__IO_DI_CLAMP									  IO+di.LP1.Clamp.Sns
+#DEFINE_CONSTANT		VAR__IO_DI_UNCLAMP								  IO+di.LP1.Unclamp.Sns
+#DEFINE_CONSTANT		VAR__IO_DI_LT_CURTAIN               IO+di.LIGHT.Curtain.Sns
+
+// P(SYSTEM) -> A(OHT)
+#DEFINE_CONSTANT		VAR__IO_DO_E84_LREQ									IO+do.E84.1.N.L_REQ    
+#DEFINE_CONSTANT		VAR__IO_DO_E84_UREQ									IO+do.E84.1.N.U_REQ   
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC1									IO+do.E84.1.N.NC1
+#DEFINE_CONSTANT		VAR__IO_DO_E84_READY								IO+do.E84.1.N.READY
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC2									IO+do.E84.1.N.NC2
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC3									IO+do.E84.1.N.NC3
+#DEFINE_CONSTANT		VAR__IO_DO_E84_HO_AVBL							IO+do.E84.1.N.HO_AVBL
+#DEFINE_CONSTANT		VAR__IO_DO_E84_ES										IO+do.E84.1.N.ES
+
+// P(SYSTEM) <- A(OHT)
+#DEFINE_CONSTANT		VAR__IO_DI_E84_VALID								IO+di.E84.1.N.VALID   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CS_0 								IO+di.E84.1.N.CS_0															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CS_1 								IO+di.E84.1.N.CS_1  															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_NC1  								IO+di.E84.1.N.NC1															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_TR_REQ								IO+di.E84.1.N.TR_REQ     
+#DEFINE_CONSTANT		VAR__IO_DI_E84_BUSY 								IO+di.E84.1.N.BUSY     
+#DEFINE_CONSTANT		VAR__IO_DI_E84_COMPT								IO+di.E84.1.N.COMPT 
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CONT 								IO+di.E84.1.N.CONT 
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_OHT__LP2
+
+#DEFINE_CONSTANT    PHY.LP            									PHY_IO__LP2
+
+#DEFINE_CONSTANT		VAR__PHY_OBJ_LP_MODE                PHY_IO__LP2+OTR.OUT.sLP.MODE
+#DEFINE_CONSTANT		VAR__PHY_OBJ_LP_STS                 PHY_IO__LP2+OTR.OUT.sLP.OBJ.STS
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_DI_CST_EXIST        PHY_IO__LP2+OTR.OUT.MON.dFOUP.EXIST.FLAG
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_DI_CLAMP_STS        PHY_IO__LP2+OTR.OUT.MON.dFOUP.CLAMP.STATUS
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_SIMUL_FLAG          PHY_IO__LP2+OTR.IN.CFG.dSIMUL.FLAG
+
+#DEFINE_CONSTANT		VAR__IO_DI_FOUP_PLACED              IO+di.LP2.Foup.Placed
+#DEFINE_CONSTANT		VAR__IO_DI_FOUP_PRESENT             IO+di.LP2.PlatForm.Occupied
+#DEFINE_CONSTANT		VAR__IO_DO_CLAMP										IO+do.LP2.Clamp
+#DEFINE_CONSTANT		VAR__IO_DO_UNCLAMP									IO+do.LP2.Unclamp
+#DEFINE_CONSTANT		VAR__IO_DI_CLAMP									  IO+di.LP2.Clamp.Sns
+#DEFINE_CONSTANT		VAR__IO_DI_UNCLAMP								  IO+di.LP2.Unclamp.Sns
+#DEFINE_CONSTANT		VAR__IO_DI_LT_CURTAIN               IO+di.LIGHT.Curtain.Sns
+		
+// P(SYSTEM) -> A(OHT)
+#DEFINE_CONSTANT		VAR__IO_DO_E84_LREQ									IO+do.E84.2.N.L_REQ    
+#DEFINE_CONSTANT		VAR__IO_DO_E84_UREQ									IO+do.E84.2.N.U_REQ   
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC1									IO+do.E84.2.N.NC1
+#DEFINE_CONSTANT		VAR__IO_DO_E84_READY								IO+do.E84.2.N.READY
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC2									IO+do.E84.2.N.NC2
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC3									IO+do.E84.2.N.NC3
+#DEFINE_CONSTANT		VAR__IO_DO_E84_HO_AVBL							IO+do.E84.2.N.HO_AVBL
+#DEFINE_CONSTANT		VAR__IO_DO_E84_ES										IO+do.E84.2.N.ES
+
+// P(SYSTEM) <- A(OHT)
+#DEFINE_CONSTANT		VAR__IO_DI_E84_VALID								IO+di.E84.2.N.VALID   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CS_0 								IO+di.E84.2.N.CS_0															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CS_1 								IO+di.E84.2.N.CS_1  															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_NC1  								IO+di.E84.2.N.NC1															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_TR_REQ								IO+di.E84.2.N.TR_REQ     
+#DEFINE_CONSTANT		VAR__IO_DI_E84_BUSY 								IO+di.E84.2.N.BUSY     
+#DEFINE_CONSTANT		VAR__IO_DI_E84_COMPT								IO+di.E84.2.N.COMPT 
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CONT 								IO+di.E84.2.N.CONT 
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_OHT__LP3
+
+#DEFINE_CONSTANT    PHY.LP            									PHY_IO__LP3
+
+#DEFINE_CONSTANT		VAR__PHY_OBJ_LP_MODE                PHY_IO__LP3+OTR.OUT.sLP.MODE
+#DEFINE_CONSTANT		VAR__PHY_OBJ_LP_STS                 PHY_IO__LP3+OTR.OUT.sLP.OBJ.STS
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_DI_CST_EXIST        PHY_IO__LP3+OTR.OUT.MON.dFOUP.EXIST.FLAG
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_DI_CLAMP_STS        PHY_IO__LP3+OTR.OUT.MON.dFOUP.CLAMP.STATUS
+#DEFINE_CONSTANT		VAR__PHY_OBJ_IO_SIMUL_FLAG          PHY_IO__LP3+OTR.IN.CFG.dSIMUL.FLAG
+
+#DEFINE_CONSTANT		VAR__IO_DI_FOUP_PLACED              IO+di.LP3.Foup.Placed
+#DEFINE_CONSTANT		VAR__IO_DI_FOUP_PRESENT             IO+di.LP3.PlatForm.Occupied
+#DEFINE_CONSTANT		VAR__IO_DO_CLAMP										IO+do.LP3.Clamp
+#DEFINE_CONSTANT		VAR__IO_DO_UNCLAMP									IO+do.LP3.Unclamp
+#DEFINE_CONSTANT		VAR__IO_DI_CLAMP									  IO+di.LP3.Clamp.Sns
+#DEFINE_CONSTANT		VAR__IO_DI_UNCLAMP								  IO+di.LP3.Unclamp.Sns
+#DEFINE_CONSTANT		VAR__IO_DI_LT_CURTAIN               IO+di.LIGHT.Curtain.Sns
+		
+// P(SYSTEM) -> A(OHT)
+#DEFINE_CONSTANT		VAR__IO_DO_E84_LREQ									IO+do.E84.3.N.L_REQ    
+#DEFINE_CONSTANT		VAR__IO_DO_E84_UREQ									IO+do.E84.3.N.U_REQ   
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC1									IO+do.E84.3.N.NC1
+#DEFINE_CONSTANT		VAR__IO_DO_E84_READY								IO+do.E84.3.N.READY
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC2									IO+do.E84.3.N.NC2
+#DEFINE_CONSTANT		VAR__IO_DO_E84_NC3									IO+do.E84.3.N.NC3
+#DEFINE_CONSTANT		VAR__IO_DO_E84_HO_AVBL							IO+do.E84.3.N.HO_AVBL
+#DEFINE_CONSTANT		VAR__IO_DO_E84_ES										IO+do.E84.3.N.ES
+
+// P(SYSTEM) <- A(OHT)
+#DEFINE_CONSTANT		VAR__IO_DI_E84_VALID								IO+di.E84.3.N.VALID   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CS_0 								IO+di.E84.3.N.CS_0															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CS_1 								IO+di.E84.3.N.CS_1  															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_NC1  								IO+di.E84.3.N.NC1															   
+#DEFINE_CONSTANT		VAR__IO_DI_E84_TR_REQ								IO+di.E84.3.N.TR_REQ     
+#DEFINE_CONSTANT		VAR__IO_DI_E84_BUSY 								IO+di.E84.3.N.BUSY     
+#DEFINE_CONSTANT		VAR__IO_DI_E84_COMPT								IO+di.E84.3.N.COMPT 
+#DEFINE_CONSTANT		VAR__IO_DI_E84_CONT 								IO+di.E84.3.N.CONT 
+

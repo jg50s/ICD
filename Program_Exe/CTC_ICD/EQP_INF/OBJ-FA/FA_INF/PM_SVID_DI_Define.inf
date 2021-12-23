@@ -1,0 +1,68 @@
+
+
+
+//      MODULE 	VID  	  [CHANNEL or COMMAND]	
+//					                      				      														TYPE	BYTE	UNIT	DISPLAY_NAME
+                                                          					
+#SVID   ##PM		1       ##SVID_PMx+di.60MHz.RF.OverTemp.Sts									A	    6     __    RF_60MHz_OverTemp_Status    									// "Normal  Error"				
+#SVID   ##PM		2				##SVID_PMx+di.60MHz.RF.On.Sts												A		  3     __    RF_60MHz_On_Status              							// "Off  On"     			
+#SVID   ##PM		3				##SVID_PMx+di.60MHz.RF.Interlock.Sts								A			5		  __    RF_60MHz_Interlock_Status											// "True  False"				
+#SVID   ##PM		4				##SVID_PMx+di.60MHz.Water.On.Sts										A			3			__		RF_60MHz_Water_On_Status											// "Off  On"     			
+#SVID   ##PM		5				##SVID_PMx+di.60MHz.Max.Ref.Power 									A     3     __    RF_60MHz_Max_Reflect_Power_STatus							// "Off  On"     			
+                                                          					                                                        				
+#SVID   ##PM		11			##SVID_PMx+di.27MHz.Match.Fan.On.Sts	    					A     3     __    RF_27MHz_Matcher_Fan_On_Status								// "Off  On"     			
+#SVID   ##PM		12      ##SVID_PMx+di.27MHz.RF.Fan.On.Sts		      					A     3     __    RF_27MHz_RF_Fan_On_Status											// "Off  On"     			
+#SVID   ##PM    13      ##SVID_PMx+di.27MHz.RF.Cover.Switch   							A     5     __    RF_27MHz_RF_Cover_Switch              				// "Open  Close" 				
+                                                          					                                                        				
+#SVID   ##PM		21      ##SVID_PMx+di.2MHz.RF.Cover.Switch									A     5     __    RF_2MHz_RF_Cover_Switch												// "Open  Close" 				
+#SVID   ##PM    22      ##SVID_PMx+di.2MHz.RF.Fan.On.Sts										A     5     __    RF_2MHz_RF_Fan_On_Status              				// "Off  On"   				
+                                                          					                                                        				
+#SVID   ##PM    31      ##SVID_PMx+di.RF.AC.Contactor             					A     7     __    RF_AC_Contactor                       				// "Disable  Enable" 			
+#SVID   ##PM    32      ##SVID_PMx+di.RF.Ground.Up.Sns         							A     3     __    RF_Ground_Up_Sensor                   				// "Off  On"       		
+#SVID   ##PM    33      ##SVID_PMx+di.RF.Ground.Down.Sns       							A     3     __    RF_Ground_Down_Sensor                 				// "Off  On"       		
+#SVID   ##PM    34      ##SVID_PMx+di.Lo.Match.Cover.Switch									A     5     __    Matcher_Cover_Switch                  				// "Open  Close" 				
+                                                          					                                                        				
+#SVID   ##PM    41      ##SVID_PMx+di.WAP.Error.Sts               					A     6     __    WAP_Error_Status															// "Normal  Error"				
+#SVID   ##PM    42      ##SVID_PMx+di.Scrubber.Switch.Sts      							A     5     __    Scrubber_Swtich_Status                				// "Open  Close"     		
+#SVID   ##PM    43      ##SVID_PMx+di.Throttle.Valve.Lock.Sns  							A     6     __    Throttle_Valve_Lock_Sensor            				// "Unlock  Lock"  		
+#SVID   ##PM    44      ##SVID_PMx+di.Manual.End.Point.Sns     							A     3     __    Manual_End_Posint_Sensor              				// "Off  On"    				
+                                                          					                                                        				
+#SVID   ##PM    51      ##SVID_PMx+di.TCU.Run.Sts                 					A     4     __    TCU_Run_Status                        				// "Run  Stop"  			
+#SVID   ##PM    52      ##SVID_PMx+di.TCU.Control.Mode											A     6     __    TCU_Control_Mode															// "Local  Remote" 				
+#SVID   ##PM    53      ##SVID_PMx+di.TCU.Warning.Sts     									A     7     __    TCU_Warning_Status                    				// "Normal  Warning"  				
+#SVID   ##PM    54      ##SVID_PMx+di.TCU.Error.Sts   											A		  6     __    TCU_Error_Status                      				// "Error  Normal" 			
+                                                                                                                                		
+#SVID   ##PM    61      ##SVID_PMx+di.Throttle.Valve.Intlk.Switch.Sts				A     5     __    Throttle_Valve_Interlock_Switch_Status				// "False  True"				
+#SVID   ##PM    62      ##SVID_PMx+di.TMPXover.Intlk.Switch.Sts							A     5     __    TMP_Cover_Interlock_Switch_Status         		// "False  True"				
+#SVID   ##PM    63      ##SVID_PMx+di.TMPExhaustValve.Intlk.Switch.Sts		  A     5     __    TMP_Exhaust_Valve_Interlock_Switch_Status 		// "False  True"				
+#SVID   ##PM    64      ##SVID_PMx+di.Vacuum.Switch.Sts											A     5     __    Vacuum_Switch_Status                          // "False  True"				
+#SVID   ##PM    65      ##SVID_PMx+di.ATM.Switch.Sts												A     5     __    ATM_Switch_Status                             // "False  True"				
+#SVID   ##PM    66      ##SVID_PMx+di.Cham.Closed.Switch.Sts								A     5     __    Chamber_Closed_Swithc_Status                  // "Open  Close"					
+#SVID   ##PM    67      ##SVID_PMx+di.CDAPress.Switch.Sts										A     5     __    CDA_Pressure_Switch_Status                    // "False  True"				
+#SVID   ##PM    68      ##SVID_PMx+di.UprCham.Flow.Switch.Sts								A     5     __    Chamber_Flow_Switch_Status                    // "False  True"				
+#SVID   ##PM    69      ##SVID_PMx+di.ESCCoolant.Flow.Sts										A     5     __    ESC_Coolant_Flow_Status                       // "False  True"				
+#SVID   ##PM    70      ##SVID_PMx+di.WaterLeak.Detection.Sts								A     5     __    Water_Leak_Detection_Status                   // "False  True"				
+#SVID   ##PM    71      ##SVID_PMx+di.Board.Connection.Sts									A     4     __    Board_Connection_Status                       // "Fail  Ok"					
+#SVID   ##PM    72      ##SVID_PMx+di.Pin.Middle.Pos.Sns                    A     3     __    Middle_Pin_Position_Sensor                    // "Off  On"						
+#SVID   ##PM    73      ##SVID_PMx+di.WaferLifterUp.Sns                     A     4     __    Wafer_Lifter_Up_Sensor                        // "None  Up"					
+#SVID   ##PM    74      ##SVID_PMx+di.WaferLifterDown.Sns										A     4     __    Wafer_Lifter_Down_Sensor                      // "None  Down"				
+#SVID   ##PM    75      ##SVID_PMx+di.HeRFEnclosure.Cover.Switch.Sts				A     5     __    He_RF_Enclosure_Cover_Switch_Status           // "Open  Close"					
+#SVID   ##PM    76      ##SVID_PMx+di.SlotValve.Sts													A     5     __    Slot_Valve_Status                             // "Open  Close"					
+#SVID   ##PM    77      ##SVID_PMx+di.LoElect.Closed.Switch.Sts							A     5     __    Low_Elect_Closed_Switch_Status                // "Open  Close"					
+#SVID   ##PM    78      ##SVID_PMx+di.SlotValve.Closed.Sts									A     5     __    Slot_Valve_Closed_Status                      // "False  True"				
+
+#SVID   ##PM    81      ##SVID_PMx+di.GasPerchg.ManVac.PSH2									A     5     __    Gas_ManVac_PSH2                               // "False  True"		
+#SVID   ##PM    82      ##SVID_PMx+di.Chamber.DeliverVac.PSH3               A     5     __    Chamber_DeliverVac_PSH3                       // "False  True"		
+#SVID   ##PM    83      ##SVID_PMx+di.Scrubber.Switch.PSH8									A     5     __    Scrubber_Switch_PSH8                          // "False  True"		
+#SVID   ##PM    84      ##SVID_PMx+di.N2Purge.Supply.PSH9										A     5     __    N2_Purge_Supply_PSH9                          // "False  True"		
+#SVID   ##PM    85      ##SVID_PMx+di.Customer.GasDetect.Switch							A     5     __    Customer_Gas_Delect_Switch                    // "False  True"		
+#SVID   ##PM    86      ##SVID_PMx+di.Customer.Intlk.Switch									A     5     __    Customer_Interlock_Switch                     // "False  True"		
+#SVID   ##PM    87      ##SVID_PMx+di.H2.Intlk.Switch												A     5     __    H2_Interlock_Switch                           // "False  True"		
+#SVID   ##PM    88      ##SVID_PMx+di.H2.Intlk.Switch.Installed							A     5     __    H2_Interlock_Switch_Installed                 // "False  True"		
+#SVID   ##PM    89      ##SVID_PMx+di.TunningGas.DeliverVac.PSH4            A     5     __    Tunning_Gas_Deliver_VAC_PSH4                  // "False  True"		
+#SVID   ##PM    90      ##SVID_PMx+di.Heater1.Sts	                          A     3     __    Heater1_Status                                // "Off  On"				
+#SVID   ##PM    91      ##SVID_PMx+di.Heater2.Sts												    A     3     __    Heater2_Status                                // "Off  On"				
+#SVID   ##PM    92      ##SVID_PMx+di.Conver.Intlk													A     5     __    Cover_Interlock_Status                        // "False  True"		
+
+
+

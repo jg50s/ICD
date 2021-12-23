@@ -1,0 +1,211 @@
+
+  //-----------------------------------------------
+  //  S1Fy
+
+  //-----------------------------
+  #MESSAGE    S1F1
+  #REPLY      1
+  #DIRECTION  SEND
+  #TYPE       0
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  #MESSAGE    S1F2
+  #DIRECTION  RECEIVE
+
+  1.<L,  0
+
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  #MESSAGE    S1F1
+  #REPLY      1
+  #DIRECTION  RECEIVE   
+  #TYPE       0
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  #MESSAGE    S1F2
+  #DIRECTION  SEND
+
+  1.<L,  2
+#UNFIXED  	 
+  	 1.<A[1]   MDLN
+#UNFIXED  	 
+  	 2.<A[1]   SOFTREV
+
+  #END
+  //-----------------------------
+
+
+  //-----------------------------
+  //	Selected Equipment Status Request (SSR)   	H -> E
+
+  #MESSAGE    S1F3
+  #REPLY      1
+  #DIRECTION  RECEIVE    
+  #TYPE	      0
+  
+#UNFORMATTED
+  1.<L,  1  $LIST_LIMIT
+         1.<U4[1]   $SVID
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Selected Equipment Status Data (SSD)   		H <- E	
+
+  #MESSAGE    S1F4  
+  #DIRECTION  SEND  
+
+#UNFORMATTED
+  1.<L,  1  $LIST_LIMIT
+         1.<V   $V
+
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	Status Variable Namelist (SVNR)    		H -> E
+
+  #MESSAGE    S1F11
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0  
+
+#UNFORMATTED  
+  1.<L,  1    $LIST_LIMIT
+         1.<U4[1]   $SVID 
+	  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Status Variable Namelist Reply (SVNRR)   	H <- E		
+
+  #MESSAGE    S1F12  
+  #DIRECTION  SEND   
+  
+#UNFORMATTED
+  1.<L,  1    $LIST_LIMIT
+   	 1.<L,  3 
+   	        1.<U4[1]   $SVID  
+   	        2.<A[20]   $SVNAME 
+   	        3.<A[10]   $UNITS  
+  
+  #END
+  //-----------------------------
+
+  //-----------------------------
+  // 	Establish Communication Request (ECR)   	H -> E
+  
+  #MESSAGE    S1F13
+  #REPLY      1
+  #DIRECTION  RECEIVE  
+  
+  1.<L,  0
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Establish Communications Request Ack.(CRA)  	H <- E	
+
+  #MESSAGE    S1F14  
+  #DIRECTION  SEND     
+  
+  1.<L,  2
+   	 1.<B[1]   $COMMACK 
+   	 2.<L,  2
+#UNFIXED
+   	        1.<A[1]   MDLN
+#UNFIXED
+   	        2.<A[1]   SOFTREV
+
+  #END
+  //-----------------------------
+ 
+  //-----------------------------
+  // 	Establish Communication Request (ECR)   	H <- E
+
+  #MESSAGE    S1F13
+  #REPLY      1
+  #DIRECTION  SEND       
+  
+  1.<L,  2
+#UNFIXED  
+   	 1.<A[1]   MDLN
+#UNFIXED  
+   	 2.<A[1]   SOFTREV
+   	
+  #END
+  //-----------------------------
+   //-----------------------------
+  // 	Establish Communications Request Ack.(CRA)  	H -> E	
+
+  #MESSAGE    S1F14  
+  #DIRECTION  RECEIVE    
+  
+  1.<L,  2
+   	 1.<B[1]  $COMMACK
+   	 2.<L,  0
+  
+  #END
+  //-----------------------------
+ 
+  //-----------------------------
+  // 	Request OFF-LINE (ROFL)    			H -> E	
+
+  #MESSAGE    S1F15  
+  #REPLY      1
+  #DIRECTION  RECEIVE   
+
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	OFF-LINE Acknowledge(OFLA)    			H <- E	
+
+  #MESSAGE    S1F16  
+  #DIRECTION  SEND 
+  
+  1.<B[1]   $OFLACK
+    
+  #END
+  
+/*
+OFLACK
+	0 = OFF-LINE Acknowledge
+	1 ~ 63 = Reserved
+*/  
+  //-----------------------------
+  
+  //-----------------------------
+  // 	Request ON-LINE (RONL)    			H -> E
+
+  #MESSAGE    S1F17
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	ON-LINE acknowledge (ONLA)   			H <- E	
+
+  #MESSAGE    S1F18  
+  #DIRECTION  SEND 
+  
+  1.<B[1]   $ONLACK 
+  
+  #END
+  
+/*
+ONLACK
+	0 = ON-LINE Accepted
+	1 = ON-LINE Not Allowed
+	2 = Equipment Already ON-LINE
+	3 ~ 63 = Reserved
+*/  
+  //-----------------------------
+
+

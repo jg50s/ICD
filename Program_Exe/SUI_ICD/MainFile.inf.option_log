@@ -1,0 +1,15 @@
+/*
+// SUI Option .....
+#GOI_TEST     EQP_ID   User_Level(...)   PAGE_NAME   GOI_Info_List(..., ...) 
+
+User_Level Item ... 
+   OPERATE 
+   MAINT   
+   PROCESS 
+   MANAGER 
+   OEM     
+   UNKNOWN 
+
+*/
+
+// Option Result ... 

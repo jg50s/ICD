@@ -1,0 +1,268 @@
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  1._Chamber_Pressure(mtorr)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.W.CHM.PRESSURE
+#TITLE             1._Warning
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.F.CHM.PRESSURE
+#TITLE             2._Fault
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TC.CHM.PRESSURE
+#TITLE             3._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TS.CHM.PRESSURE
+#TITLE             4._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE          2._RF_2MHz_Power(W)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.W.RF.2MHz.POWER
+#TITLE             1._Warning(%)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.F.RF.2MHz.POWER
+#TITLE             2._Fault(%)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TC.RF.2MHz.POWER
+#TITLE             3._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TS.RF.2MHz.POWER
+#TITLE             4._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE          3._RF_27MHz_Power(W)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.W.RF.27MHz.POWER
+#TITLE             1._Warning(%)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.F.RF.27MHz.POWER
+#TITLE             2._Fault(%)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TC.RF.27MHz.POWER
+#TITLE             3._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TS.RF.27MHz.POWER
+#TITLE             4._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE          4._RF_60MHz_Power(W)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.W.RF.60MHz.POWER
+#TITLE             1._Warning(%)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.F.RF.60MHz.POWER
+#TITLE             2._Fault(%)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,100)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TC.RF.60MHz.POWER
+#TITLE             3._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+TOLERANCE.TS.RF.60MHz.POWER
+#TITLE             4._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+

@@ -1,0 +1,56 @@
+
+// Command   Channel                                                      Name                                   Unit       Comment
+
+//======================================================================================================================
+#MODULE    "PMC"
+
+
+#GROUP     "MFC1"
+#CHANNEL     PHY_MFC1+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC1+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC2"
+#CHANNEL     PHY_MFC2+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC2+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC3"
+#CHANNEL     PHY_MFC3+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC3+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC4"
+#CHANNEL     PHY_MFC4+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC4+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC5"
+#CHANNEL     PHY_MFC5+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC5+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC6"
+#CHANNEL     PHY_MFC6+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC6+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC7"
+#CHANNEL     PHY_MFC7+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC7+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC8"
+#CHANNEL     PHY_MFC8+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC8+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC9"
+#CHANNEL     PHY_MFC9+MON.MFC.READ.FLOW                                   "Flow"           "sccm"
+#CHANNEL     PHY_MFC9+MON.MFC.SET.FLOW                                    "Set"            "sccm"
+
+#GROUP     "MFC10"
+#CHANNEL     PHY_MFC10+MON.MFC.READ.FLOW                                  "Flow"           "sccm"
+#CHANNEL     PHY_MFC10+MON.MFC.SET.FLOW                                   "Set"            "sccm"
+
+
+#GROUP     "FRC1"
+#CHANNEL     PHY_FRC1+MON.CH2.GET_RATIO                                   "CH2 Ratio.In"   
+#CHANNEL     PHY_FRC1+MON.CH1.GET_RATIO                                   "CH1 Ratio.In"   
+
+#GROUP     "FRC2"
+#CHANNEL     PHY_FRC2+MON.CH2.GET_RATIO                                   "CH2 Ratio.In"   
+#CHANNEL     PHY_FRC2+MON.CH1.GET_RATIO                                   "CH1 Ratio.In"   
+

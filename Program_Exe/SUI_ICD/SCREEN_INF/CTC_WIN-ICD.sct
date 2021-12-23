@@ -1,0 +1,826 @@
+/*  SCREEN INFOMATION  */
+
+
+#SCREEN_DIR  SCR__CTC-ICD\
+
+
+// -----------------------------------------------------------------------
+#DEFINE  DEF__FRAME_TOP
+	POPUP              CTC 
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         0
+	WIDTH              1280 
+	HEIGHT             155
+#END
+
+
+#DEFINE  DEF__FRAME_ALARM
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         55
+	WIDTH              1280
+	HEIGHT             869
+#END
+
+#DEFINE  DEF__FRAME_CLIENT
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         55
+	WIDTH              1280 
+	HEIGHT             770 
+#END
+
+#DEFINE  DEF__FRAME_CLIENT_NULL
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         56
+	WIDTH              0 
+	HEIGHT             0 
+#END
+
+
+#DEFINE  DEF__FRAME_BOTTOM_NAVI
+	POPUP              CTC
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         925
+	WIDTH              173 
+	HEIGHT             99 
+#END
+
+#DEFINE  DEF__FRAME_BOTTOM_SUB
+	POPUP              NO
+	LOW_LEFT_X         173
+	LOW_LEFT_Y         825
+	WIDTH              1107 
+	HEIGHT             41
+#END
+
+#DEFINE  DEF__FRAME_BOTTOM_MAIN
+	POPUP              NO
+	LOW_LEFT_X         173
+	LOW_LEFT_Y         866
+	WIDTH              1107 
+	HEIGHT             58
+#END
+
+
+
+// -----------------------------------------------------------------------
+//  CTC 
+
+WINDOW_NAME  CTC_TOP   
+{
+	#CALL_DEFINE                    DEF__FRAME_TOP
+	
+	CTRL_CHANNEL                    SCR.TOP
+	USER_LEVEL                      Unknown 
+}
+
+WINDOW_NAME  STD_BTM__NAVI_4PM
+{  
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_NAVI
+	
+	CTRL_CHANNEL                    SCR.BTM_NAVI
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME  STD_BTM__MAIN
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_MAIN
+		
+	CTRL_CHANNEL                    SCR.BTM_MAIN
+	USER_LEVEL                      Unknown  
+}
+
+
+// -----------------------------------------------------------------------
+WINDOW_NAME STD_BTM__OPERATE
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__CONFIG    
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__MAINT   
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__RECIPE   
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__DATALOG   
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__HOST    
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__PART   
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_BTM__UTILITY
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Unknown  
+}
+
+
+// -----------------------------------------------------------------------
+WINDOW_NAME STD_ALARM__MAIN   
+{
+	#CALL_DEFINE			              DEF__FRAME_ALARM
+	
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+// CLIENT
+WINDOW_NAME STD_OPERATE__MAIN
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__MAIN_WAFER
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__MAIN_PMx
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__PROC_PMx
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__TABLE_PROC
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__TOOLID
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__TRANSCRIPT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_OPERATE__SYSTEM_INFO
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+// CONFIG
+WINDOW_NAME STD_CONFIG__SYSTEM
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE1.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__SCHEDULER
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE2.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__CLEAN_RCP
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE3.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__SIGNAL_TOWER
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE4.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__DUMMY_PORT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE7.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__LEAK_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE6.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__AUTO_PM
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.PAGE.AUTO_PM.SAVE 
+}
+
+WINDOW_NAME STD_CONFIG__SYS_LLx
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.SYS_LLx.SAVE
+}
+
+WINDOW_NAME STD_CONFIG__SYS_PMx
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CTC.SYS_PMx.SAVE
+}
+
+
+// PART
+WINDOW_NAME STD_PART__PM1_MAIN 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_PART__PM2_MAIN 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_PART__PM3_MAIN 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_PART__PM4_MAIN 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+// MAINT
+WINDOW_NAME STD_MAINT__MOVE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_MAINT__RESYNC
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_MAINT__PARTICLE_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_MAINT__MACRO_MOVE_EDIT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_MAINT__ROBOT_TEACH
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+// RECIPE
+WINDOW_NAME STD_RECIPE__WAFER_ROUTE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_RECIPE__PMx_COMPARE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_RECIPE__ROUTE_EDIT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+WINDOW_NAME STD_CONFIG__PMx_COMPARE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+// HOST
+WINDOW_NAME STD_HOST__GEM_E30
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME STD_HOST__CMS
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME STD_HOST__RCMD_S2F41 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME STD_HOST__ECID
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME STD_HOST__E40  
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME STD_HOST__E87  
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME STD_HOST__E94  
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+
+// DATALOG
+WINDOW_NAME STD_DATALOG__JOB_HISTORY
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_DATALOG__REAL_TIME
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			POLLING
+}
+
+
+// UTILITY
+WINDOW_NAME UTILITY_LOG__REPLAY_CTRL
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+	
+	PAGE_TYPE			LOG.SIM
+}
+
+WINDOW_NAME UTILITY_LOG__CTC_MAIN
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__TMC_MAIN
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__PM1_MAINT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME UTILITY_LOG__PM1_GAS_LINE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__PM2_MAINT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME UTILITY_LOG__PM2_GAS_LINE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__PM3_MAINT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME UTILITY_LOG__PM3_GAS_LINE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__PM4_MAINT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME UTILITY_LOG__PM4_GAS_LINE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+// -----------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------
+// Popup Page
+
+WINDOW_NAME POPUP_LP1_RECIPE 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      30
+	LOW_LEFT_Y                      -10
+	WIDTH                           1024 
+	HEIGHT                          720
+	 
+	SEQ_CTRL_CHANNEL                DB_GUI+GUI.PORT1.RECIPE.POPUP
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_LP2_RECIPE 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      60
+	LOW_LEFT_Y                      -10
+	WIDTH                           1024 
+	HEIGHT                          720
+
+	SEQ_CTRL_CHANNEL                DB_GUI+GUI.PORT2.RECIPE.POPUP
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_LP3_RECIPE 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      90
+	LOW_LEFT_Y                      -10
+	WIDTH                           1024 
+	HEIGHT                          720
+	
+	SEQ_CTRL_CHANNEL                DB_GUI+GUI.PORT3.RECIPE.POPUP
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME POPUP_LP1_CSTID   
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      100
+	LOW_LEFT_Y                      150
+	WIDTH                           402
+	HEIGHT                          193 
+	
+	SEQ_CTRL_CHANNEL                PHY_LP1+SCR.WIN_CSTID
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_LP2_CSTID   
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      300
+	LOW_LEFT_Y                      150
+	WIDTH                           402
+	HEIGHT                          193 
+	
+	SEQ_CTRL_CHANNEL                PHY_LP2+SCR.WIN_CSTID
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_LP3_CSTID   
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      500
+	LOW_LEFT_Y                      150
+	WIDTH                           402
+	HEIGHT                          193 
+	
+	SEQ_CTRL_CHANNEL                PHY_LP3+SCR.WIN_CSTID
+	USER_LEVEL                      Unknown  
+}
+
+
+WINDOW_NAME CTC_POPUP_SYSTEM_INIT 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      10
+	LOW_LEFT_Y                      10
+	WIDTH                           397 
+	HEIGHT                          480 
+	
+	//SEQ_CTRL_CHANNEL              DB_GUI+GUI.SYSTEM.INIT.POPUP
+	CTRL_CHANNEL                    GUI.SYSTEM.INIT.POPUP
+	USER_LEVEL                      Unknown  
+}
+
+
+WINDOW_NAME POPUP_CJOB_START1 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      100
+	LOW_LEFT_Y                      150
+	WIDTH                           402
+	HEIGHT                          193 
+	
+	SEQ_CTRL_CHANNEL                FA_E94_CTRL+SCR.CJOB_START.WIN_NAME.1
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_CJOB_START2 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      300
+	LOW_LEFT_Y                      150
+	WIDTH                           402
+	HEIGHT                          193 
+	
+	SEQ_CTRL_CHANNEL                FA_E94_CTRL+SCR.CJOB_START.WIN_NAME.2
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_CJOB_START3 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      500
+	LOW_LEFT_Y                      150
+	WIDTH                           402
+	HEIGHT                          193 
+	
+	SEQ_CTRL_CHANNEL                FA_E94_CTRL+SCR.CJOB_START.WIN_NAME.3
+	USER_LEVEL                      Unknown  
+}
+
+
+WINDOW_NAME POPUP_TERMINAL_MESSAGE 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      5
+	WIDTH                           685
+	HEIGHT                          450 
+	
+	SEQ_CTRL_CHANNEL                FA_APP_CTRL+TERMINAL.WIN_NAME
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME POPUP_PMC_MESSAGE 
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           677
+	HEIGHT                          300 
+	
+	SEQ_CTRL_CHANNEL                DB_CFG+PMC_MSG.WIN_CTRL
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME POPUP_MACRO_MOVE_HISTORY_VIEW
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           677
+	HEIGHT                          430 
+	
+	SEQ_CTRL_CHANNEL                OPR_MAINT+MACRO_MOVE.SCR_NAME
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME POPUP_MACRO_MOVE_HISTORY_CTRL
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           677
+	HEIGHT                          430 
+	
+	SEQ_CTRL_CHANNEL                OPR_MAINT+MACRO_MOVE.SCR_NAME
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME POPUP_PM1_PART_MSG
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           677
+	HEIGHT                          300 
+	
+	SEQ_CTRL_CHANNEL                OPR_PART_PM1+MSG.WIN
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_PM2_PART_MSG
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           677
+	HEIGHT                          300 
+	
+	SEQ_CTRL_CHANNEL                OPR_PART_PM2+MSG.WIN
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME POPUP_PM3_PART_MSG
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           677
+	HEIGHT                          300 
+	
+	SEQ_CTRL_CHANNEL                OPR_PART_PM3+MSG.WIN
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME POPUP__REPLAY_CONSOLE
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      200
+	LOW_LEFT_Y                      -20
+	WIDTH                           420
+	HEIGHT                          380
+	
+	SEQ_CTRL_CHANNEL                UTILITY__LOG_SIM_CTRL+GUI.POPUP_CONSOLE
+	USER_LEVEL                      Unknown  
+}
+

@@ -1,0 +1,147 @@
+#DEFINE_CHANNEL_NAME
+
+
+//--------------------------------------------------------------------------------------------
+#DEFINE_ID_OFFSET   0
+
+
+#SVID     CTC     800004     #ALARMS_ENABLED     L     1	   __				//  List of Alarms Enabled
+// 800004		LamSEMIGEMEquipmentInterfaceAlarmsEnabled	AlarmsEnabled			List
+
+#SVID     CTC     800005     #ALARMS_SET	          L     1   __				//  List of Alarms Posted
+// 800005		LamSEMIGEMEquipmentInterfaceAlarmsSet	AlarmsSet			List
+
+#SVID     CTC     800006     #DATE_TIME			      AV   1   __   Date_And_Time		//  Date and Time(yyyymmddhhmmsscc)
+// 800006		LamSEMIGEMEquipmentInterfaceClock	Clock	cs		A
+
+// 800007		LamSEMIGEMEquipmentInterfaceControlState	ControlState			B
+
+#SVID     CTC     800009     #EVENTS_ENABLED       L     1	__				//  List of Events Enabled
+// 800009		LamSEMIGEMEquipmentInterfaceEventsEnabled	EventsEnabled			List
+
+#SVID	  CTC	  800017     FA_E30_CTRL+FA.STATUS		A     10   __   Online_Mode		//  Online Status : "OFFLINE"  "LOCAL"  "REMOTE"
+// 800017		LamSEMIGEMEquipmentInterfaceSECSConnectionConnectState	SECSConnectionConnectState		notSelected  selected  notConnected  	A
+// 800018		LamSEMIGEMEquipmentInterfaceSECSConnectionCurrentConnectMode	SECSConnectionCurrentConnectMode		active  passive  	A
+
+#SVID    CTC     800021     #PP_CHANGE_NAME           	AV      1       __				//  
+// 800021		Lam300StartLamRecipeExecutorPPExecName	PPExecName			List
+
+#SVID	  CTC     800022	  #PREVIOUS_PROCESS_STATE		A       10	__				//  
+// 800022		Lam300StartLamRecipeExecutorPreviousProcessState	PreviousProcessState			U1
+#SVID	  CTC	  800024     #PROCESS_STATE						A       10	__				//  
+// 800024		Lam300StartLamRecipeExecutorProcessState	ProcessState			U1
+
+#SVID     CTC     800063     #SPOOL_COUNT_ACTUAL             U       4       __				//  Spool Count Actual
+// 800063		LamSEMIGEMEquipmentInterfaceSpoolCountActual	SpoolCountActual			U4
+#SVID     CTC     800064     #SPOOL_COUNT_TOTAL               U       4       __				//  Max Spool Transmit
+// 800064		LamSEMIGEMEquipmentInterfaceSpoolCountTotal	SpoolCountTotal			U4
+#SVID     CTC     800065     #SPOOL_FULL_TIME                     AV      1       __				//  Spool Full Time   :  yyyymmddhhmmss
+// 800065		LamSEMIGEMEquipmentInterfaceSpoolFullTime	SpoolFullTime			A
+#SVID     CTC     800066     #SPOOL_START_TIME                   AV      1       __				//  Spool Start Time  :  yyyymmddhhmmss
+// 800066		LamSEMIGEMEquipmentInterfaceSpoolStartTime	SpoolStartTime			A
+
+// 800397		LamSEMIGEMEquipmentInterfaceHSMSS_RS232	HSMSS_RS232		rs232  hsms  	A
+
+// 800531		Lam2ndHSMSLamStationLinkConnectState	LamStationLinkConnectState		notSelected  selected  notConnected  	A
+// 800532		Lam2ndHSMSLamStationLinkCurrentConnectMode	LamStationLinkCurrentConnectMode		active  passive  	A
+// 800535		Lam2ndHSMSConnectionState	ConnectionState		disabled  disconnected  connected  	A
+// 800536		Lam300StartDefaultFlowName	DefaultFlowName			A
+// 800550		LamSEMIGEMEquipmentInterfacePPError	PPError			A
+// 800551		LamSEMIGEMEquipmentInterfacePPFormat	PPFormat			U1
+
+// 800556		CWE94ProcessJobManagerPRJobSpace	PRJobSpace			U2
+// 800558		CWE94ProcessJobManagerProcessJobIDs	ProcessJobIDs			List
+
+#SVID     CTC     800564     #E94__CJOB_QUEUE_AVAILABLE_SPACE   U	4	__		//  CJQueueAvailableSpace		
+// 800564		CWControlJobManagerQueueAvailableSpace	QueueAvailableSpace			U4
+#SVID     CTC     800565     #E94__QUEUED_CJOBS		                    L	   0	__		//  QueuedCJobs		
+// 800565		CWControlJobManagerQueuedCJobs	QueuedCJobs			List
+
+// 800639		Lam300StartPM1ID	PM1ID			A
+// 800640		Lam300StartPM2ID	PM2ID			A
+// 800641		Lam300StartPM3ID	PM3ID			A
+// 800642		Lam300StartPM4ID	PM4ID			A
+// 800643		Lam300StartTMID	TMID			    A
+// 800644		Lam300StartToolID	ToolID			A
+// 800645		Lam300StartTransferChamberID	TransferChamberID			A
+
+#SVID     CTC     800671     #E40_PJOBID              A     20   __				//  PRJobJID		
+// 800671		CWE94ProcessJobManagerPPExecName	PPExecName			List
+// 800672		CWE94ProcessJobManagerPreviousProcessState	PreviousProcessState			U1
+#SVID     CTC     800673     #E40_PJOB_STATUS     U     1     __     		//  PRJobState 
+// 800673		CWE94ProcessJobManagerProcessState	ProcessState			U1
+
+// 800819		Lam300StartSoftwareVersion	SoftwareVersion			A
+// 800859		Lam300StartAPM1ID	APM1ID			A
+// 800860		Lam300StartAPM1_CMID	APM1_CMID			A
+// 800861		Lam300StartAPM1_MMID	APM1_MMID			A
+// 800862		Lam300StartAPM1_OMID	APM1_OMID			A
+// 800863		Lam300StartAPM2ID	APM2ID			A
+// 800864		Lam300StartAPM2_CMID	APM2_CMID			A
+// 800865		Lam300StartAPM2_MMID	APM2_MMID			A
+// 800866		Lam300StartAPM2_OMID	APM2_OMID			A
+// 800867		Lam300StartAPM3ID	APM3ID			A
+// 800868		Lam300StartAPM4ID	APM4ID			A
+// 800869		Lam300StartAPM5ID	APM5ID			A
+// 800870		Lam300StartPM5ID	PM5ID			A
+// 800871		Lam300StartPM6ID	PM6ID			A
+
+#SVID     CTC     800873     DB_CFG+SYS.USER.ID     A     18     __     User_ID			//  User Id
+// 800873		CWSecurityManagerCurrentUser	CurrentUser			A
+// 800874		CWE94ProcessJobManagerPRMtrlOrder	PRMtrlOrder			U1
+
+// 800923		SEMIE116HandlerNumBusy	NumBusy			U4
+// 800924		SEMIE116HandlerNumBlocked	NumBlocked			U4
+// 800925		SEMIE116HandlerNumIdle	NumIdle			U4
+
+// 800968		SystemMonitoringDataTimeStamp	Date/Time			A
+// 800969		SystemMonitoringFreeAndTotalSpaceForDriveC	Drive C Free/Size (GB)	GB		A
+// 800970		SystemMonitoringFreeAndTotalSpaceForDriveD	Drive D Free/Size (GB)	GB		A
+// 800971		SystemMonitoringLastDiskeeperScanForDriveC	Diskeeper Started for C			A
+// 800972		SystemMonitoringLastDiskeeperScanForDriveD	Diskeeper Started for D			A
+// 800973		SystemMonitoringLastVirusScan	Last Virus Scan			A
+// 800974		SystemMonitoringOSVersion	OS Version			A
+// 800975		SystemMonitoringSystemUptime	System Uptime			A
+// 800976		SystemMonitoringTMMemoryUsage	TM Mem. Usage (MB)	MB		A
+// 800977		SystemMonitoringUIMemoryUsage	UI Mem. Usage (MB)	MB		A
+
+// 800978		Lam300StartAPM3_CMID	APM3_CMID			A
+// 800979		Lam300StartAPM3_MMID	APM3_MMID			A
+// 800980		Lam300StartAPM3_OMID	APM3_OMID			A
+// 801247		Lam300StartOnlineEmbeddedImageNames	OnlineEmbeddedImageNames			List
+
+// 801248		HostImageMemoryMonitorCompactions	Compactions			I8
+// 801249		HostImageMemoryMonitorFootprint	Footprint			I8
+// 801250		HostImageMemoryMonitorFragmentation	Fragmentation			F4
+// 801251		HostImageMemoryMonitorGCs	GCs			I8
+// 801252		HostImageMemoryMonitorGGCs	GGCs			I8
+// 801253		HostImageMemoryMonitorGrowth	Growth			I8
+// 801254		HostImageMemoryMonitorLargeSpace	LargeSpace			F4
+// 801255		HostImageMemoryMonitorOldSpace	OldSpace			F4
+// 801256		HostImageMemoryMonitorTotalSpace	TotalSpace			F4
+
+// 801263		Lam300StartELD11ID	ELD11ID			A
+// 801264		Lam300StartELD12ID	ELD12ID			A
+// 801265		Lam300StartELD13ID	ELD13ID			A
+// 801266		Lam300StartELD14ID	ELD14ID			A
+// 801267		Lam300StartELD21ID	ELD21ID			A
+// 801268		Lam300StartELD22ID	ELD22ID			A
+// 801269		Lam300StartELD23ID	ELD23ID			A
+// 801270		Lam300StartELD24ID	ELD24ID			A
+
+// 801271		SchedulerMachineResourceMode	MachineResourceMode		Exclusive  Shared  	A
+// 801272		LamSEMIGEMEquipmentInterfaceEnabledCWACPlanNames	EnabledCWACPlanNames			List
+// 801273		LamSEMIGEMEquipmentInterfaceDisabledCWACPlanNames	DisabledCWACPlanNames			List
+// 801380		PartsTrackingManagerPM1PartsList	PM1PartsList				List
+// 801381		PartsTrackingManagerPM2PartsList	PM2PartsList				List
+// 801382		PartsTrackingManagerPM3PartsList	PM3PartsList				List
+// 801383		PartsTrackingManagerPM4PartsList	PM4PartsList				List
+// 801384		PartsTrackingManagerPM5PartsList	PM5PartsList				List
+// 801385		PartsTrackingManagerPM6PartsList	PM6PartsList				List
+// 801386		PartsTrackingManagerAPM1PartsList	APM1PartsList			List
+// 801387		PartsTrackingManagerAPM2PartsList	APM2PartsList			List
+// 801388		InitializationPolicyResourcesWaitedOn	InitializationPolicyResourcesWaitedOn			List
+// 801389		InitializationPolicyStatus	InitializationPolicyStatus			A
+// 801390		SystemMonitoringRAIDControllerStatus	RAID Controller Status			U1
+
+

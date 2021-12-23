@@ -1,0 +1,51 @@
+
+//      MODULE 	    VID  	[CHANNEL or ALIAS or COMMAND]	
+//					                            	                                  TYPE	 BYTE	  UNIT	    DISPLAY_NAME
+                                                                           
+#SVID   ##MODULE     1      ##STAGE+FDC.LOTID                                A      20     __       ##Sx+Z_KEY_LOTID                   
+#SVID   ##MODULE     2      ##STAGE+FDC.RECIPE                               A      20     __       ##Sx+Z_KEY_RECIPE_NAME             
+#SVID   ##MODULE     3      ##SVID+Z_KEY_STATUS                              A      10     __       ##Sx+Z_KEY_STATUS                  
+#SVID   ##MODULE   	 4      ##STAGE+PROC_INFO.STEP_MSG                       A      20     __       ##Sx+Z_KEY_STEP_NAME               
+#SVID   ##MODULE   	 5      ##STAGE+CUR.LPx.SLOT_ID                          A      10     __       ##Sx+Z_KEY_WFR_NO                  
+
+#SVID   ##MODULE   	 11     ##STAGE+FDC.LOTID                                A      10     __       ##Sx+LOTID                  
+
+// #SVID   ##MODULE     12     ##STAGE+FDC.RECIPE                               A      20     __       ##Sx+RECIPE             
+#SVID   ##MODULE     12     #PPID__##CHM_##STN                              A      20     __       ##Sx+Last_Recipe_Name
+
+#SVID   ##MODULE     13     ##STAGE+CUR.MATERIALID                           A      20     __       ##Sx+MATERIALID
+
+// #SVID   ##MODULE     14     ##STAGE+PROC_INFO.DVID.CUR_STEP_COUNT            A      10     __       ##Sx+STEPID
+#SVID   ##MODULE     14     #STEP_NO__##CHM_##STN                            A      10     __       ##Sx+STEPID
+
+// #SVID   ##MODULE     15     ##STAGE+CUR.LPx.PORT_ID                          A      10     __       ##Sx+LPx_PortID
+#SVID   ##MODULE     15     #PTN__##CHM_##STN                               A      10     __       ##Sx+LPx_PortID
+
+// #SVID   ##MODULE     16     ##STAGE+CUR.LPx.SLOT_ID                          A      10     __       ##Sx+LPx_SlotID
+#SVID   ##MODULE     16     #SLOTID__##CHM_##STN                            A      10     __       ##Sx+LPx_SlotID
+
+#SVID   ##MODULE     17     ##STAGE+PROCESS.ASYNC_TIME                       A      10     __       ##Sx+Process_Time
+
+// #SVID   ##MODULE     18     ##STAGE+CUR.LPx.CID                              A      20     __       ##Sx+LPx_CID
+#SVID   ##MODULE     18     #CID__##CHM_##STN                               A      20     __       ##Sx+LPx_CID
+
+#SVID   ##MODULE     19     ##STAGE+PRE.RECIPE                               A      20     __       ##Sx+Last_Recipe_Name
+#SVID   ##MODULE     20     ##STAGE+FDC.CHAMBER.ID                           A      10     __       ##Sx+Chamber_ID
+
+#SVID   ##MODULE     22     ##STAGE+CUR.CJOBID                               A      20     __       ##Sx+CJobID
+
+// #SVID   ##MODULE     23     ##STAGE+CUR.PJOBID                               A      20     __       ##Sx+PJobID
+#SVID   ##MODULE     23     #PJOBID__##CHM_##STN                            A      20     __       ##Sx+PJobID
+
+#SVID   ##MODULE     24     ##STAGE+PROC_INFO.TOTAL_PROC_TIME                A      10     __       ##Sx+Total_Process_Time
+#SVID   ##MODULE     25     ##STAGE+PROC_INFO.CUR_PROC_TIME                  A      10     __       ##Sx+Current_Process_Time
+#SVID   ##MODULE     26     ##STAGE+PROC_INFO.TOTAL_STEP_COUNT               A      10     __       ##Sx+Total_Step_Count
+#SVID   ##MODULE     27     ##STAGE+PROC_INFO.DVID.CUR_STEP_COUNT            A      10     __       ##Sx+Current_Step_Count
+#SVID   ##MODULE     28     ##STAGE+PROC_INFO.STEP_TOTAL_TIME                A      10     __       ##Sx+Total_Step_Time
+#SVID   ##MODULE     29     ##STAGE+PROC_INFO.STEP_CUR_TIME                  A      10     __       ##Sx+Current_Step_Time
+#SVID   ##MODULE     30     ##STAGE+PROC_INFO.STEP_MSG                       A      20     __       ##Sx+Step_Message
+
+/*
+#SVID   ##MODULE     31     ##STAGE+FDC.SUB_RECIPE.1                         A      20     __       ##Sx+SUB_RECIPE_1
+#SVID   ##MODULE     32     ##STAGE+FDC.SUB_RECIPE.2                         A      20     __       ##Sx+SUB_RECIPE_2
+*/

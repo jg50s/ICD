@@ -1,0 +1,55 @@
+
+//      MODULE 	VID  	[CHANNEL or COMMAND]	
+//					                       	                TYPE	 BYTE   UNIT	              DISPLAY_NAME
+                                                                                    
+
+#SVID   ##PM   	1     ##DCOP+ANGLE                  A      10     %                   APC_Valve_Average_Position
+#SVID   ##PM   	2     ##DCOP+PRESSURE               A      10     torr                Chamber_Average_Pressure
+#SVID   ##PM   	3     ##DCOP+LH_PRESS               A      10     torr                LampHead_Average_Pressure
+
+#SVID   ##PM   	6     ##DCOP+ROT_SPEED              A      10     rpm                 Rotate_Average_Speed          
+#SVID   ##PM   	7     ##DCOP+TEMP1                  A      10     degC                T1_Average_Temperature
+#SVID   ##PM   	8     ##DCOP+TEMP2                  A      10     degC                T2_Average_Temperature
+#SVID   ##PM   	9     ##DCOP+TEMP3                  A      10     degC                T3_Average_Temperature
+#SVID   ##PM   	10    ##DCOP+TEMP4                  A      10     degC                T4_Average_Temperature
+#SVID   ##PM   	11    ##DCOP+TEMP5                  A      10     degC                T5_Average_Temperature
+#SVID   ##PM   	12    ##DCOP+TEMP6                  A      10     degC                T6_Average_Temperature
+#SVID   ##PM   	13    ##DCOP+TEMP7                  A      10     degC                T7_Average_Temperature
+#SVID   ##PM   	14    ##DCOP+TEMP8                  A      10     degC                T8_Average_Temperature
+#SVID   ##PM   	15    ##DCOP+EMISS                  A      10     degC                Wafer_Average_Emissivity
+#SVID   ##PM   	16    ##DCOP+PWRG10                 A      10     W                   Zone10_Average_Output_Power
+#SVID   ##PM   	17    ##DCOP+PWRG11                 A      10     W                   Zone11_Average_Output_Power
+#SVID   ##PM   	18    ##DCOP+PWRG12                 A      10     W                   Zone12_Average_Output_Power
+#SVID   ##PM   	19    ##DCOP+PWRG13                 A      10     W                   Zone13_Average_Output_Power
+#SVID   ##PM   	20    ##DCOP+PWRG14                 A      10     W                   Zone14_Average_Output_Power
+#SVID   ##PM   	21    ##DCOP+PWRG15                 A      10     W                   Zone15_Average_Output_Power
+#SVID   ##PM   	22    ##DCOP+PWRG1                  A      10     W                   Zone1_Average_Output_Power
+#SVID   ##PM   	23    ##DCOP+PWRG2                  A      10     W                   Zone2_Average_Output_Power
+#SVID   ##PM   	24    ##DCOP+PWRG3                  A      10     W                   Zone3_Average_Output_Power
+#SVID   ##PM   	25    ##DCOP+PWRG4                  A      10     W                   Zone4_Average_Output_Power
+#SVID   ##PM   	26    ##DCOP+PWRG5                  A      10     W                   Zone5_Average_Output_Power
+#SVID   ##PM   	27    ##DCOP+PWRG6                  A      10     W                   Zone6_Average_Output_Power
+#SVID   ##PM   	28    ##DCOP+PWRG7                  A      10     W                   Zone7_Average_Output_Power
+#SVID   ##PM   	29    ##DCOP+PWRG8                  A      10     W                   Zone8_Average_Output_Power
+#SVID   ##PM   	30    ##DCOP+PWRG9                  A      10     W                   Zone9_Average_Output_Power
+
+#SVID   ##PM   	31    ##DCOP+ANN_TIME               A      10     sec                 ANN_Time
+#SVID   ##PM   	32    ##PHY_PM+FDC.CHM.ID           A      10     id                  CH_ID
+
+#SVID   ##PM   	33    ##DCOP+STEP_NAME              A      10     __                  Step_Name
+#SVID   ##PM   	34    ##PHY_PM+LPx.PORT_ID          A      10     id                  Wafer_PortID
+#SVID   ##PM   	35    ##DCOP+RAMP_RATE              A      10     degC/sec            Temperaturre_Ramp_Rate
+
+
+#SVID   ##PM    41    ##DCOP+N2_FLOW                A      10     sccm                Gas_N2_Flow_Average           
+#SVID   ##PM    42    ##DCOP+NH3_FLOW               A      10     sccm                Gas_NH3_Flow_Average          
+#SVID   ##PM    43    ##DCOP+N2_PURGE2_FLOW         A      10     sccm                Gas_N2_Purge_2_Flow_Average   
+#SVID   ##PM    44    ##DCOP+N2_PURGE1_FLOW         A      10     sccm                Gas_N2_Purge_1_Flow_Average   
+#SVID   ##PM    45    ##DCOP+NO_PRESS_FLOW          A      10     sccm                Gas_NO Pressure_Flow_Average  
+#SVID   ##PM    46    ##DCOP+O2_LOW_FLOW            A      10     sccm                Gas_O2_Low_Flow_Average       
+#SVID   ##PM    47    ##DCOP+O2_HIGH_FLOW           A      10     sccm                Gas_O2_High_Flow_Average      
+#SVID   ##PM    48    ##DCOP+N2_PURGE_FLOW          A      10     sccm                Gas_N2_Purge_Flow_Average     
+#SVID   ##PM    49    ##DCOP+N2_BOTTOM_FLOW         A      10     sccm                Gas_N2_Bottom_Flow_Average    
+#SVID   ##PM    50    ##DCOP+He_BOTTOM_FLOW         A      10     sccm                Gas_He_Bottom_Flow_Average    
+#SVID   ##PM    51    ##DCOP+N2_MAGLEV_FLOW         A      10     sccm                Gas_N2_Maglev_Flow_Average    
+

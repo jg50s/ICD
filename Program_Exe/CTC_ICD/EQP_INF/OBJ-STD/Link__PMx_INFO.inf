@@ -1,0 +1,52 @@
+
+
+//-------------------------------------------------------------------------------------------------------
+#OBJECT_PROPERTY    MNG_PMx_INFO
+
+#DEFINE_CONSTANT    OBJ__DB	              ##DB_CFG
+
+#DEFINE_CONSTANT    DATA.PM_SIZE          ##PM_SIZE
+#DEFINE_CONSTANT    OBJ__PM1              PHY_PM1
+#DEFINE_CONSTANT    OBJ__PM2              PHY_PM2
+#DEFINE_CONSTANT    OBJ__PM3              PHY_PM3
+#DEFINE_CONSTANT    OBJ__PM4              PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5              PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6              PHY_PM6
+
+
+//-------------------------------------------------------------------------------------------------------
+// PM1 ...
+#DEFINE   ##CHMx            1   
+#DEFINE   ##PMx+            LINK_PM1_DCOP+
+
+#include   OBJ-STD\Define__PMx_INFO.inf
+
+// PM2 ...
+#DEFINE   ##CHMx            2   
+#DEFINE   ##PMx+            LINK_PM2_DCOP+
+
+#include   OBJ-STD\Define__PMx_INFO.inf
+
+// PM3 ...
+#DEFINE   ##CHMx            3   
+#DEFINE   ##PMx+            LINK_PM3_DCOP+
+
+#include   OBJ-STD\Define__PMx_INFO.inf
+
+// PM4 ...
+#DEFINE   ##CHMx            4   
+#DEFINE   ##PMx+            LINK_PM4_DCOP+
+
+#include   OBJ-STD\Define__PMx_INFO.inf
+
+// PM5 ...
+#DEFINE   ##CHMx            5   
+#DEFINE   ##PMx+            LINK_PM5_DCOP+
+
+#include   OBJ-STD\Define__PMx_INFO.inf
+
+// PM6 ...
+#DEFINE   ##CHMx            6   
+#DEFINE   ##PMx+            LINK_PM6_DCOP+
+
+#include   OBJ-STD\Define__PMx_INFO.inf

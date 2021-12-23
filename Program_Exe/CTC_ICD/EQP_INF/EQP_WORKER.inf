@@ -1,0 +1,85 @@
+
+#OBJECT_STD     EQP__STD_Utility_OBJ   LOG_SIM.CTRL       UTILITY__LOG_SIM_CTRL
+
+
+#OBJECT_STD     CTC__DB_OBJ            DB.CFG             DB_CFG
+#OBJECT_STD     CTC__DB_OBJ            DB.GUI             DB_GUI
+
+
+#OBJECT_STD     CTC__OPR_TIMER         TIMER.CLIENT       OPR_TIMER
+#OBJECT_STD     CTC__MNG_PART          PART.STD  	        OPR_PART
+
+#OBJECT_STD     CTC__OPR_MODULE        AUTO.MODE  	      OPR_CTC_MODE
+#OBJECT_STD     CTC__OPR_MODULE        MAINT.MODE         OPR_MAINT
+
+#OBJECT_STD     CTC__MNG_OBJ           SIGNAL_TOWER.EX  	MNG_SIGNAL_TOWER
+#OBJECT_STD     CTC__MNG_OBJ           ALARM_CTRL.STD   	MNG_ALARM_CTRL
+#OBJECT_STD     CTC__MNG_OBJ           SYSTEM_INFO.STD   	MNG_SYSTEM_INFO
+
+
+#OBJECT_STD     CTC__FNC_EFEM_ROBOT__ROUTE_TYPE_EX        SINGLE_ARM.STD     FNC_ATM_ROBOT
+#OBJECT_STD     CTC__FNC_VAC_ROBOT__ROUTE_TYPE_EX         DUAL_ARM.STD     	 FNC_VAC_ROBOT
+
+#OBJECT_STD     CTC__FNC_MODULE        TMC_SYS.STD        FNC_TMC_SYS
+#OBJECT_STD     CTC__FNC_MODULE        PMC_SYS.STD        FNC_PMC_SYS
+
+
+#OBJECT_STD     CTC__PHY_LPx           LPx.STD           	PHY_LP1
+#OBJECT_STD     CTC__PHY_LPx           LPx.STD           	PHY_LP2
+#OBJECT_STD     CTC__PHY_LPx           LPx.STD           	PHY_LP3
+
+#OBJECT_STD     CTC__PHY_ROBOT         ROBOT.ATM    	    PHY_ATM_ROBOT
+#OBJECT_STD     CTC__PHY_ROBOT         ROBOT.VAC    	    PHY_VAC_ROBOT
+
+#OBJECT_STD     CTC__PHY_TMC           ALx.STD            PHY_AL1
+#OBJECT_STD     CTC__PHY_TMC           LBx.STD           	PHY_LBA
+#OBJECT_STD     CTC__PHY_TMC           LBx.STD           	PHY_LBB
+
+#OBJECT_STD     CTC__PHY_TMC           SYS.STD           	PHY_TMC_SYS
+#OBJECT_STD     CTC__PHY_TMC           CHM.STD           	PHY_TMC_CHM
+
+#OBJECT_STD     CTC__PHY_BUFFER        BUFFER.STD	        PHY_BFF1
+#OBJECT_STD     CTC__PHY_BUFFER        BUFFER.STD         PHY_BFF2
+
+
+#OBJECT_STD     CTC__PHY_PMC           PMC.STD            PHY_PM1
+#OBJECT_STD     CTC__PHY_PMC           PMC.STD            PHY_PM2
+#OBJECT_STD     CTC__PHY_PMC           PMC.STD            PHY_PM3
+#OBJECT_STD     CTC__PHY_PMC           PMC.STD            PHY_PM4
+
+
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_CTC
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_TMC_LOG
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM1_LOG
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM2_LOG
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM3_LOG
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM4_LOG
+/*
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM1_DCOP
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM2_DCOP
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM3_DCOP
+#OBJECT_LINK    EQP__LINK_OBJ          MODULE.LINK        LINK_PM4_DCOP
+*/
+
+#OBJECT_STD     CTC__FA_LINK           APP.CTRL           FA_APP_CTRL
+/*
+#OBJECT_STD     CTC__FA_LINK           E30.CTRL           FA_E30_CTRL
+#OBJECT_STD     CTC__FA_LINK           E40.CTRL           FA_E40_CTRL
+#OBJECT_STD     CTC__FA_LINK           E94.CTRL           FA_E94_CTRL
+#OBJECT_STD     CTC__FA_LINK           PMx.CEID           FA_PMx_CEID
+*/
+
+/*
+#OBJECT_STD     CTC__FA_RMM            PMC.RMM            MNG_PM1_RMM
+#OBJECT_STD     CTC__FA_RMM            PMC.RMM            MNG_PM2_RMM
+#OBJECT_STD     CTC__FA_RMM            PMC.RMM            MNG_PM3_RMM
+#OBJECT_STD     CTC__FA_RMM            PMC.RMM            MNG_PM4_RMM
+*/
+/*
+#OBJECT_SEQ     CTC__ETCHER_RMM_RANGE     PMx_RMM_CTRL                  MNG__P1_RMM_RANGE
+#OBJECT_SEQ     CTC__ETCHER_RMM_RANGE     PMx_RMM_CTRL                  MNG__P2_RMM_RANGE
+#OBJECT_SEQ     CTC__ETCHER_RMM_RANGE     PMx_RMM_CTRL                  MNG__P3_RMM_RANGE
+#OBJECT_SEQ     CTC__ETCHER_RMM_RANGE     PMx_RMM_CTRL                  MNG__P4_RMM_RANGE
+*/
+
+#OBJECT_FA      EQP__FA_OBJ            STD.TYPE           FA_DRV

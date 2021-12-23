@@ -1,0 +1,83 @@
+
+//  MODULE 	VID  	[CHANNEL or ALIAS or COMMAND]	
+//					                            	TYPE	BYTE	UNIT	DISPLAY_NAME
+
+#SVID	##PM	1	LOT.ID						A	32	  __			//  
+#SVID	##PM	3	PROCESS.RECIPE					A	32	  __			// 
+#SVID	##PM	4	PORT.ID						U	4	  __			// 
+#SVID	##PM	5	SLOT.NUM					U	4	  __			// 
+#SVID	##PM	6	CURR.RECIPE.STEP.NO				U	4	  __			//
+#SVID	##PM	7	CURR.PROCESSING.TIME				U	4	  __			//
+#SVID	##PM	8	RF.FORWARD.POWER				U	4	  W	  		//
+#SVID	##PM	9	RF.REFLECT.POWER				U	4	  W	  		//
+#SVID	##PM	10	MATCHER.TUNE.POS				U	4	  __			//
+#SVID	##PM	11	MATCHER.LOAD.POS				U	4	  __			//
+#SVID	##PM	12	PRESSURE.CHAMBER				A 	7	  __			//
+#SVID	##PM	13	CURR.UPPER.TEMP					A 	7	  __			//
+#SVID	##PM	14	CURR.LOWER.TEMP					A 	7	  __			//
+#SVID	##PM	16	THROTTLE.POSITION				A 	7	  __			//
+#SVID	##PM	17	GAS01.FLOW					A 	7	  sccm 			//  02
+#SVID	##PM	18	GAS02.FLOW					A 	7	  sccm 			//  Ar
+#SVID	##PM	19	GAS03.FLOW					A 	7	  sccm 			//  CF4
+#SVID	##PM	20	GAS04.FLOW					A 	7	  sccm 			//  N2
+#SVID	##PM	21	GAS05.FLOW					A 	7	  sccm 			//  CF6
+#SVID	##PM	22	GAS06.FLOW					A 	7	  sccm 			//  He
+#SVID	##PM	23	LINEAR.POSITION					A 	7	  mm  			//
+#SVID	##PM	24	OPTICLE.OUT1					A 	7	  mm 			//  Laser1
+#SVID	##PM	25	OPTICLE.OUT2					A 	7	  mm			//  Laser2
+#SVID	##PM	26	GDP.TARGET.POS.SET				A 	7	  mm			//
+#SVID	##PM	27	GDP.TARGET.POS					A 	7	  mm			//
+#SVID	##PM	30	CHAMBER.STATUS					U 	4	  __			//  OFFLINE  UNINIT  NOTREADY  STANDBY  CTCINUSE  MAINTMODE
+#SVID	##PM	32	TOTAL.PROCESSED.WAFER.COUNT			U 	4	  __			//
+#SVID	##PM	33	TOTAL.PROCESSED.RF.TIME		  		U 	4	  sec			//
+#SVID	##PM	34	RF.PLASMA.STATE		  			U 	4	  sec			//  Off  On
+#SVID	##PM	35	DOOR.STATE		  			U 	4	  sec			//  UNKNOWN  CLOSE  OPEN
+#SVID	##PM	36	LIFT.PIN.STATE  				U 	4	  sec			//  Unknown  Down   Up
+#SVID	##PM	37	WAFER.STATE		  			U 	4	  sec			//  UNKNOWN  NONE   EXIST  PROCESSING  PROCESSED  ABORTED  MAPPED
+#SVID	##PM	50	DCOP.RF.MIN.POWER				U 	4	  W			//
+#SVID	##PM	51	DCOP.RF.MAX.POWER				U 	4	  W			//
+#SVID	##PM	52	DCOP.RF.AVE.POWER				U 	4	  W			//
+#SVID	##PM	53	DCOP.RF.REF.MIN.POWER				U 	4	  W			//
+#SVID	##PM	54	DCOP.RF.REF.MAX.POWER				U 	4	  W			//
+#SVID	##PM	55	DCOP.RF.REF.AVE.POWER				U 	4	  W			//
+#SVID	##PM	56	DCOP.MIN.PRESSURE				A 	7	  mtorr			//
+#SVID	##PM	57	DCOP.MAX.PRESSURE				A 	7	  mtorr			//
+#SVID	##PM	58	DCOP.AVE.PRESSURE				A 	7	  mtorr			//
+#SVID	##PM	59	DCOP.GAS01.FLOW.MIN				A 	7	  sccm			//  O2
+#SVID	##PM	60	DCOP.GAS01.FLOW.MAX				A 	7	  sccm			//
+#SVID	##PM	61	DCOP.GAS01.FLOW.AVE				A 	7	  sccm			//
+#SVID	##PM	62	DCOP.GAS02.FLOW.MIN				A 	7	  sccm			//  Ar
+#SVID	##PM	63	DCOP.GAS02.FLOW.MAX				A 	7	  sccm			//
+#SVID	##PM	64	DCOP.GAS02.FLOW.AVE				A 	7	  sccm			//
+#SVID	##PM	65	DCOP.GAS03.FLOW.MIN				A 	7	  sccm			//  CF4
+#SVID	##PM	66	DCOP.GAS03.FLOW.MAX				A 	7	  sccm			//
+#SVID	##PM	67	DCOP.GAS03.FLOW.AVE				A 	7	  sccm			//
+#SVID	##PM	68	DCOP.GAS04.FLOW.MIN				A 	7	  sccm			//  N2
+#SVID	##PM	69	DCOP.GAS04.FLOW.MAX				A 	7	  sccm			//
+#SVID	##PM	70	DCOP.GAS04.FLOW.AVE				A 	7	  sccm			//
+#SVID	##PM	71	DCOP.GAS05.FLOW.MIN				A 	7	  sccm			//  CF6
+#SVID	##PM	72	DCOP.GAS05.FLOW.MAX				A 	7	  sccm			//
+#SVID	##PM	73	DCOP.GAS05.FLOW.AVE				A 	7	  sccm			//
+#SVID	##PM	74	DCOP.GAS06.FLOW.MIN				A 	7	  sccm			//  He
+#SVID	##PM	75	DCOP.GAS06.FLOW.MAX				A 	7	  sccm			//
+#SVID	##PM	76	DCOP.GAS06.FLOW.AVE  				A 	7	  sccm			//
+#SVID	##PM	80	DCOP.PROCESSED.TIME.AVE    			U 	4	  sec			//
+#SVID	##PM	81	DCOP.RF.LOAD.AVE	  		  	A 	7	  __			//
+#SVID	##PM	82	DCOP.RF.TUNE.AVE	    			A 	7	  __			//
+#SVID	##PM	83	DCOP.LINEAR.POS.AVE		    		A 	7	  __			//
+#SVID	##PM	84	DCOP.OPTICLE.OUT1.AVE    	  		A 	7	  __			//
+#SVID	##PM	85	DCOP.OPTICLE.OUT2.AVE    	  		A 	7	  __			//
+#SVID	##PM	86	DCOP.THROTTLE.POS.AVE	    			A 	7	  __			//
+#SVID	##PM	87	DCOP.RF.LOAD.MIN	  		  	A 	7	  __			//
+#SVID	##PM	88	DCOP.RF.TUNE.MIN	    			A 	7	  __			//
+#SVID	##PM	89	DCOP.LINEAR.POS.MIN		    		A 	7	  __			//
+#SVID	##PM	90	DCOP.OPTICLE.OUT1.MIN    	  		A 	7	  __			//
+#SVID	##PM	91	DCOP.OPTICLE.OUT2.MIN    	  		A 	7	  __			//
+#SVID	##PM	92	DCOP.THROTTLE.POS.MIN	    			A 	7	  __			//
+#SVID	##PM	93	DCOP.RF.LOAD.MAX	  		  	A 	7	  __			//
+#SVID	##PM	94	DCOP.RF.TUNE.MAX    				A 	7	  __			//
+#SVID	##PM	95	DCOP.LINEAR.POS.MAX		    		A 	7	  __			//
+#SVID	##PM	96	DCOP.OPTICLE.OUT1.MAX    	  		A 	7	  __			//
+#SVID	##PM	97	DCOP.OPTICLE.OUT2.MAX    	  		A 	7	  __			//
+#SVID	##PM	98	DCOP.THROTTLE.POS.MAX	    			A 	7	  __			//
+

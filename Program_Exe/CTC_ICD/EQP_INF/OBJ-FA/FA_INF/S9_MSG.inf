@@ -1,0 +1,27 @@
+
+  //---------------------------------------------------
+  //  S9Fy
+
+  //------------------------------
+  // Conversation Timeout
+   
+  #MESSAGE    S9F13
+  #DIRECTION  SEND  	
+
+  1.<L,  2  
+#UNFIXED  
+         1.<A[1]   $MEXP
+#UNFIXED         
+         2.<A[1]   $EDID
+ 
+  #END
+
+/*
+MEXP
+	Message expected in the form SxxFyy where x is stream and y is function.
+
+EDID
+	Expected data Identification
+*/
+  //-----------------------------
+

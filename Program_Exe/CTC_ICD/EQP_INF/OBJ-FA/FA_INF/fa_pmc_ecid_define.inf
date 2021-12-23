@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------------------------------------
+#LIST_DEFINE  INTERLOCK_MODE     0
+ENABLE   0
+CONTROL  1
+DISABLE  2
+#LIST_END
+
+
+
+//---------------------------------------------------------------------------------------------------------
+// 	     ECID   COMMAND      	        CHANNEL-NAME    		            							          UNIT      FMT-TYPE    FMT-BYTE   DEFAULT   MIN     MAX     NAME  
+                                                                                              
+/*                                                                                            
+// PMx                                                                                        
+#ECID    1     __                    ##PM_ECID+CFG.SR.PRESSURE        							          __          F           4          1       0.000   999	   ##PM_NAME+CFG.SR.PRESS
+#ECID    2     #LIST:INTERLOCK_MODE  ##PM_ECID+CFG.INTERLOCK.MODE     							          __          U           1          0        0       2	     ##PM_NAME+CFG.INTERLOCK.MODE
+*/                                                                                            
+                                                                                              
+                                                                                              
+#ECID    1     __                    ##PM_ECID+RF2MHz.CFG.IGNITION.CHECK.DELAY			          sec         U           2          3        0       20     ##PM_NAME+RF_2MHz-Ignition_Check_Delay_(sec)
+#ECID    2     __                    ##PM_ECID+RF2MHz.CFG.OES.PLASMA.ON.THRESHOLD             __          U           2          10       0      1000    ##PM_NAME+RF_2MHz-OES_Plasma_On_Threshold
+#ECID    3     __                    ##PM_ECID+RF2MHz.CFG.IGNITION.FAIL.TIMEOUT               sec         U           2          5        0       20     ##PM_NAME+RF_2MHz-Ignition_Fail_Timeout_(sec)
+
+

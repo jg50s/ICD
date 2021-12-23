@@ -1,0 +1,13 @@
+@SCREEN_SIZE 500 584
+
+#BITMAP_EX
+{
+JGLEE__Popup_Back.bmp
+0
+(1, 0, 1)
+(0, 1, 0)
+(0, 0) (500 584)
+}
+#DYNAMIC
+{
+}

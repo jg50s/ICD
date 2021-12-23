@@ -1,0 +1,9 @@
+
+#INCLUDE  "_METADATA__HEATER_SYS.inf"
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO
+
+#OBJECT_IO_FILE     CFG_IO__PMC_MAIN.cfg  
+

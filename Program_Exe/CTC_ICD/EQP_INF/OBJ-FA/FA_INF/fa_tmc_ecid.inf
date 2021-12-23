@@ -1,0 +1,288 @@
+
+//---------------------------------------------------------------------------------------------------------
+#DEFINE_ID_OFFSET             0   
+
+//       1        2         3                                                                        4        5          6          7          8       9      10
+//       ECID     COMMAND   CHANNEL-NAME                                                             UNIT     FMT-TYPE   FMT-BYTE   DEFAULT    MIN     MAX    NAME
+                                                                                                                                                              
+// Page Name : Cooler Indexer                                                                                                                                 
+#ECID    700001   __        #DEFINE_NAME#+PHY_LCL.CFG.INDEXER.MOVING.TIMEOUT.SEC                      sec     U          2              30       0      60    Timeout (sec) of left-cooler's lift-pin to movr to the any position  
+#ECID    700002   __        #DEFINE_NAME#+PHY_LCL.CFG.INDEXER.HOME.TIMEOUT.SEC                        sec     U          2              30       0      60    Timeout (sec) of left-cooler's lift-pin to move to the home position  
+#ECID    700003   __        #DEFINE_NAME#+PHY_LCL.CFG.INDEXER.POS.DOWN                              pulse     U          4               0       0   999999   Down position of left-cooler's lift-pin 
+#ECID    700004   __        #DEFINE_NAME#+PHY_LCL.CFG.INDEXER.POS.MIDDLE                            pulse     U          4           20000       0   999999   Middle position of left-cooler's lift-pin 
+#ECID    700005   __        #DEFINE_NAME#+PHY_LCL.CFG.INDEXER.POS.UP                                pulse     U          4           300000      0   999999   Up position of left-cooler's lift-pin 
+#ECID    700006   __        #DEFINE_NAME#+PHY_LCL.CFG.HOME.FAST.VELOCITY                               __     U          2            4096    4096   12288    Fast velocity of left-cooler's lift-pin to move to the home position  
+#ECID    700007   __        #DEFINE_NAME#+PHY_LCL.CFG.HOME.SLOW.VELOCITY                               __     U          2            4096    4096   12288    Slow velocity of left-cooler's lift-pin to move to the home position  
+#ECID    700008   __        #DEFINE_NAME#+PHY_LCL.CFG.HOME.ACELERATION                                 __     U          2            1024    1024   61440    Acceleration of left-cooler's lift-pin to move to the home position  
+#ECID    700009   __        #DEFINE_NAME#+PHY_LCL.CFG.HOME.DECELERATION                                __     U          2            1024    1024   61440    Deceleration of left-cooler's lift-pin to move to the home position  
+#ECID    700010   __        #DEFINE_NAME#+PHY_LCL.CFG.HOME.TYPE.APPLY                                  __     A          8         DISABLE       0      1     Home type apply mode of left-cooler's lift-pin[DISABLE,ENABLE] 
+#ECID    700011   __        #DEFINE_NAME#+PHY_LCL.CFG.HOME.TYPE.DATA                                   __     A          2               0       0      1     Home Type Data of left-cooler's lift-pin[0,1] 
+#ECID    700012   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.VELOCITY.GOTO_DOWN                        __     U          2            4096    4096   61440    Velocity for moving to down position of left-cooler's lift-pin 
+#ECID    700013   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.ACELERATION.GOTO_DOWN                     __     U          2            1024    1024   61440    Aceleration for moving to down position of left-cooler's lift-pin 
+#ECID    700014   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.DECELERATION.GOTO_DOWN                    __     U          2            1024    1024   61440    Deceleration for moving to down position of left-cooler's lift-pin 
+#ECID    700015   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.FAULT.TOLERANCE.GOTO_DOWN              pulse     U          2              10      10    1000    Fault tolerance of pulse count for moving to down position of left-cooler's lift-pin 
+#ECID    700016   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.WARNING.TOLERANCE.GOTO_DOWN            pulse     U          2              10      10    1000    Warning tolerance of pulse count for moving to down position of left-cooler's lift-pin 
+#ECID    700017   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.VELOCITY.GOTO_MIDDLE                      __     U          2            4096    4096   61440    Velocity for moving to middle position of left-cooler's lift-pin                         
+#ECID    700018   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.ACELERATION.GOTO_MIDDLE                   __     U          2            1024    1024   61440    Aceleration for moving to middle position of left-cooler's lift-pin                      
+#ECID    700019   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.DECELERATION.GOTO_MIDDLE                  __     U          2            1024    1024   61440    Deceleration for moving to middle position of left-cooler's lift-pin                     
+#ECID    700020   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.FAULT.TOLERANCE.GOTO_MIDDLE            pulse     U          2              10      10    1000    Fault tolerance of pulse count for moving to middle position of left-cooler's lift-pin   
+#ECID    700021   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.WARNING.TOLERANCE.GOTO_MIDDLE          pulse     U          2              10      10    1000    Warning tolerance of pulse count for moving to middle position of left-cooler's lift-pin 
+#ECID    700022   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.VELOCITY.GOTO_UP                          __     U          2            4096    4096   61440    Velocity for moving to up position of left-cooler's lift-pin                         
+#ECID    700023   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.ACELERATION.GOTO_UP                       __     U          2            1024    1024   61440    Aceleration for moving to up position of left-cooler's lift-pin                      
+#ECID    700024   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.DECELERATION.GOTO_UP                      __     U          2            1024    1024   61440    Deceleration for moving to up position of left-cooler's lift-pin                     
+#ECID    700025   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.FAULT.TOLERANCE.GOTO_UP                pulse     U          2              10      10    1000    Fault tolerance of pulse count for moving to up position of left-cooler's lift-pin   
+#ECID    700026   __        #DEFINE_NAME#+PHY_LCL.CFG.MOVING.WARNING.TOLERANCE.GOTO_UP              pulse     U          2              10      10    1000    Warning tolerance of pulse count for moving to up position of left-cooler's lift-pin 
+#ECID    700027   __        #DEFINE_NAME#+PHY_RCL.CFG.INDEXER.MOVING.TIMEOUT.SEC                      sec     U          2              30       0      60    Timeout (sec) of right-cooler's lift-pin to movr to the any position                      
+#ECID    700028   __        #DEFINE_NAME#+PHY_RCL.CFG.INDEXER.HOME.TIMEOUT.SEC                        sec     U          2              30       0      60    Timeout (sec) of right-cooler's lift-pin to move to the home position                     
+#ECID    700029   __        #DEFINE_NAME#+PHY_RCL.CFG.INDEXER.POS.DOWN                              pulse     U          4               0       0   999999   Down position of right-cooler's lift-pin                                                  
+#ECID    700030   __        #DEFINE_NAME#+PHY_RCL.CFG.INDEXER.POS.MIDDLE                            pulse     U          4           20000       0   999999   Middle position of right-cooler's lift-pin                                                
+#ECID    700031   __        #DEFINE_NAME#+PHY_RCL.CFG.INDEXER.POS.UP                                pulse     U          4           300000      0   999999   Up position of right-cooler's lift-pin                                                    
+#ECID    700032   __        #DEFINE_NAME#+PHY_RCL.CFG.HOME.FAST.VELOCITY                               __     U          2            4096    4096   12288    Fast velocity of right-cooler's lift-pin to move to the home position                     
+#ECID    700033   __        #DEFINE_NAME#+PHY_RCL.CFG.HOME.SLOW.VELOCITY                               __     U          2            4096    4096   12288    Slow velocity of right-cooler's lift-pin to move to the home position                     
+#ECID    700034   __        #DEFINE_NAME#+PHY_RCL.CFG.HOME.ACELERATION                                 __     U          2            1024    1024   61440    Acceleration of right-cooler's lift-pin to move to the home position                      
+#ECID    700035   __        #DEFINE_NAME#+PHY_RCL.CFG.HOME.DECELERATION                                __     U          2            1024    1024   61440    Deceleration of right-cooler's lift-pin to move to the home position                      
+#ECID    700036   __        #DEFINE_NAME#+PHY_RCL.CFG.HOME.TYPE.APPLY                                  __     A          8           DISABLE     0       1    Home type apply mode of right-cooler's lift-pin                                          [DISABLE,ENABLE] 
+#ECID    700037   __        #DEFINE_NAME#+PHY_RCL.CFG.HOME.TYPE.DATA                                   __     A          2               0       0       1    Home Type Data of right-cooler's lift-pin                                                [0,1] 
+#ECID    700038   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.VELOCITY.GOTO_DOWN                        __     U          2            4096    4096   61440    Velocity for moving to down position of right-cooler's lift-pin                           
+#ECID    700039   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.ACELERATION.GOTO_DOWN                     __     U          2            1024    1024   61440    Aceleration for moving to down position of right-cooler's lift-pin                        
+#ECID    700040   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.DECELERATION.GOTO_DOWN                    __     U          2            1024    1024   61440    Deceleration for moving to down position of right-cooler's lift-pin                       
+#ECID    700041   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.FAULT.TOLERANCE.GOTO_DOWN              pulse     U          2              10      10    1000    Fault tolerance of pulse count for moving to down position of right-cooler's lift-pin     
+#ECID    700042   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.WARNING.TOLERANCE.GOTO_DOWN            pulse     U          2              10      10    1000    Warning tolerance of pulse count for moving to down position of right-cooler's lift-pin   
+#ECID    700043   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.VELOCITY.GOTO_MIDDLE                      __     U          2            4096    4096   61440    Velocity for moving to middle position of right-cooler's lift-pin                         
+#ECID    700044   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.ACELERATION.GOTO_MIDDLE                   __     U          2            1024    1024   61440    Aceleration for moving to middle position of right-cooler's lift-pin                      
+#ECID    700045   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.DECELERATION.GOTO_MIDDLE                  __     U          2            1024    1024   61440    Deceleration for moving to middle position of right-cooler's lift-pin                     
+#ECID    700046   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.FAULT.TOLERANCE.GOTO_MIDDLE            pulse     U          2              10      10    1000    Fault tolerance of pulse count for moving to middle position of right-cooler's lift-pin   
+#ECID    700047   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.WARNING.TOLERANCE.GOTO_MIDDLE          pulse     U          2              10      10    1000    Warning tolerance of pulse count for moving to middle position of right-cooler's lift-pin 
+#ECID    700048   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.VELOCITY.GOTO_UP                          __     U          2            4096    4096   61440    Velocity for moving to up position of right-cooler's lift-pin                         
+#ECID    700049   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.ACELERATION.GOTO_UP                       __     U          2            1024    1024   61440    Aceleration for moving to up position of right-cooler's lift-pin                      
+#ECID    700050   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.DECELERATION.GOTO_UP                      __     U          2            1024    1024   61440    Deceleration for moving to up position of right-cooler's lift-pin                     
+#ECID    700051   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.FAULT.TOLERANCE.GOTO_UP                pulse     U          2              10      10    1000    Fault tolerance of pulse count for moving to up position of right-cooler's lift-pin   
+#ECID    700052   __        #DEFINE_NAME#+PHY_RCL.CFG.MOVING.WARNING.TOLERANCE.GOTO_UP              pulse     U          2              10      10    1000    Warning tolerance of pulse count for moving to up position of right-cooler's lift-pin 
+
+
+// Page Name : Initialize & LPx PIO
+#ECID    700201   __        #DEFINE_NAME#+PHY_CHM.SYS_INIT.CFG.LEAK_CHECK.APPLY                        __     A          8           DISABLE     0       1    Leak-Check apply mode when MF chamber initialized.[DISABLE,ENABLE] 
+#ECID    700202   __        #DEFINE_NAME#+PHY_CHM.SYS_INIT.CFG.CYCLE_PURGE.APPLY                       __     A          8           ENABLE      0       1    Cycle-purge apply mode when MF chamber initialized.[DISABLE,ENABLE] 
+#ECID    700203   __        #DEFINE_NAME#+PHY_CHM.SYS_INIT.CFG.CYCLE_PURGE.COUNT                    count     U          2               5       0    1000    Cycle-purge count mode when MF chamber initialized. 
+#ECID    700204   __        #DEFINE_NAME#+PHY_CHM.SYS_INIT.CFG.CYCLE_PURGE.VENTING.PRESSURE_TORR     torr     U          2             500       0     700    Venting pressure (torr) for cycle-purge when MF chamber initialized. 
+#ECID    700205   __        #DEFINE_NAME#+PHY_CHM.SYS_INIT.CFG.CYCLE_PURGE.PUMPING.PRESSURE_TORR     torr     U          2           1.000   0.000   100.000  Pumping pressure (torr) for cycle-purge when MF chamber initialized. 
+#ECID    700206   __        #DEFINE_NAME#+PHY_LLA.SYS_INIT.CFG.LEAK_CHECK.APPLY                        __     A          8           DISABLE     0       1    Leak-Check apply mode when LLA chamber initialized.                  [DISABLE,ENABLE] 
+#ECID    700207   __        #DEFINE_NAME#+PHY_LLA.SYS_INIT.CFG.CYCLE_PURGE.APPLY                       __     A          8           ENABLE      0       1    Cycle-purge apply mode when LLA chamber initialized.                 [DISABLE,ENABLE] 
+#ECID    700208   __        #DEFINE_NAME#+PHY_LLA.SYS_INIT.CFG.CYCLE_PURGE.COUNT                    count     U          2               3       0    1000    Cycle-purge count mode when LLA chamber initialized.                  
+#ECID    700209   __        #DEFINE_NAME#+PHY_LLA.SYS_INIT.CFG.CYCLE_PURGE.VENTING.PRESSURE_TORR     torr     U          2             600       0     700    Venting pressure (torr) for cycle-purge when LLA chamber initialized. 
+#ECID    700210   __        #DEFINE_NAME#+PHY_LLA.SYS_INIT.CFG.CYCLE_PURGE.PUMPING.PRESSURE_TORR     torr     U          2           5.000   0.000   100.000  Pumping pressure (torr) for cycle-purge when LLA chamber initialized. 
+#ECID    700211   __        #DEFINE_NAME#+PHY_LLB.SYS_INIT.CFG.LEAK_CHECK.APPLY                        __     A          8           DISABLE     0       1    Leak-Check apply mode when LLB chamber initialized.                  [DISABLE,ENABLE] 
+#ECID    700212   __        #DEFINE_NAME#+PHY_LLB.SYS_INIT.CFG.CYCLE_PURGE.APPLY                       __     A          8           ENABLE      0       1    Cycle-purge apply mode when LLB chamber initialized.                 [DISABLE,ENABLE] 
+#ECID    700213   __        #DEFINE_NAME#+PHY_LLB.SYS_INIT.CFG.CYCLE_PURGE.COUNT                    count     U          2               3       0    1000    Cycle-purge count mode when LLB chamber initialized.                  
+#ECID    700214   __        #DEFINE_NAME#+PHY_LLB.SYS_INIT.CFG.CYCLE_PURGE.VENTING.PRESSURE_TORR     torr     U          2             600       0     700    Venting pressure (torr) for cycle-purge when LLB chamber initialized. 
+#ECID    700215   __        #DEFINE_NAME#+PHY_LLB.SYS_INIT.CFG.CYCLE_PURGE.PUMPING.PRESSURE_TORR     torr     U          2           5.000   0.000   100.000  Pumping pressure (torr) for cycle-purge when LLB chamber initialized. 
+#ECID    700216   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TP1                                          sec     U          2             1.0     1.0   999.0    TP1 Timeout (sec) for OHT PIO 
+#ECID    700217   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TP2                                          sec     U          2             1.0     1.0   999.0    TP2 Timeout (sec) for OHT PIO 
+#ECID    700218   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TP3                                          sec     U          2            60.0     1.0   999.0    TP3 Timeout (sec) for OHT PIO 
+#ECID    700219   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TP4                                          sec     U          2            60.0     1.0   999.0    TP4 Timeout (sec) for OHT PIO 
+#ECID    700220   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TP5                                          sec     U          2             2.0     1.0   999.0    TP5 Timeout (sec) for OHT PIO 
+#ECID    700221   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TP6                                          sec     U          2             2.0     1.0   999.0    TP6 Timeout (sec) for OHT PIO 
+#ECID    700222   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TD0                                          sec     U          2             1.0     0.0     1.0    TD0 Timeout (sec) for OHT PIO 
+#ECID    700223   __        #DEFINE_NAME#+DB_SYS.CFG.PIO.TD1                                          sec     U          2             1.0     1.0   999.0    TD1 Timeout (sec) for OHT PIO 
+#ECID    700224   __        #DEFINE_NAME#+DB_SYS.CFG.LLx.PUMPING_VLV_CLOSE.AFTER.PUMPING               __     A          8           ENABLE      0       1    Control mode to close LLx's pumping valve after pumping complete[ENABLE,DISABLE] 
+
+
+// Page Name : LLA Indexer
+#ECID    700301   __        #DEFINE_NAME#+PHY_LLA.CFG.INDEXER.MOVING.TIMEOUT.SEC                      sec     U          2              30       0      60    Moving timeout (sec) of LLA indexer 
+#ECID    700302   __        #DEFINE_NAME#+PHY_LLA.CFG.INDEXER.HOMING.TIMEOUT.SEC                      sec     U          2              30       0     300    Homing timeout (sec) of LLA indexer 
+#ECID    700303   __        #DEFINE_NAME#+PHY_LLA.CFG.HOMING.FAST.VELOCITY                      pulse/sec     U          2            4096    1000   10000    Homing fast velocity of LLA indexer 
+#ECID    700304   __        #DEFINE_NAME#+PHY_LLA.CFG.HOMING.SLOW.VELOCITY                      pulse/sec     U          2            4096    1000   10000    Homing slot velocity of LLA indexer 
+#ECID    700305   __        #DEFINE_NAME#+PHY_LLA.CFG.HOMING.ACELERATION                               __     U          2            1024    1024   61440    Homing acceleration of LLA indexer 
+#ECID    700306   __        #DEFINE_NAME#+PHY_LLA.CFG.HOMING.DECELERATION                              __     U          2            1024    1024   61440    Homing deceleration of LLA indexer 
+#ECID    700307   __        #DEFINE_NAME#+PHY_LLA.CFG.HOMING.TYPE.APPLY                                __     A          8           DISABLE     0       1    Homing apply mode of LLA indexer[DISABLE,ENABLE] 
+#ECID    700308   __        #DEFINE_NAME#+PHY_LLA.CFG.HOMING.TYPE.DATA                                 __     A          2               0       0       1    Homing apply data of LLA indexer[0,1] 
+#ECID    700309   __        #DEFINE_NAME#+PHY_LLA.CFG.1.INDEXER.POS.LIFT                            pulse     U          4           31000       0   100000   Lift position of LLA indexer's slot 1 
+#ECID    700310   __        #DEFINE_NAME#+PHY_LLA.CFG.2.INDEXER.POS.LIFT                            pulse     U          4           32000       0   99999    Lift position of LLA indexer's slot 2 
+#ECID    700311   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.VELOCITY.GOTO_LIFT                        __     U          2            4096       0   20000    Velocity of LLA indexer for moving to the lift position  
+#ECID    700312   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.ACELERATION.GOTO_LIFT                     __     U          2            1024       0   20000    Acceleration of LLA indexer for moving to the lift position  
+#ECID    700313   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.DECELERATION.GOTO_LIFT                    __     U          2            1024       0   20000    Deceleration of LLA indexer for moving to the lift position  
+#ECID    700314   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.FAULT.TOLERANCE.GOTO_LIFT              pulse     U          2              10       0      10    Fault tolerance of LLA indexer for moving to the lift position  
+#ECID    700315   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.WARNING.TOLERANCE.GOTO_LIFT            pulse     U          2              10       0      10    Warning tolerance of LLA indexer for moving to the lift position  
+#ECID    700316   __        #DEFINE_NAME#+PHY_LLA.CFG.1.INDEXER.POS.RELEASE                         pulse     U          4            2100       0   100000   Release position of LLA indexer's slot 1                             
+#ECID    700317   __        #DEFINE_NAME#+PHY_LLA.CFG.2.INDEXER.POS.RELEASE                         pulse     U          4            2200       0   99999    Release position of LLA indexer's slot 2                             
+#ECID    700318   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.VELOCITY.GOTO_RELEASE                     __     U          2            4096       0   20000    Velocity of LLA indexer for moving to the release position           
+#ECID    700319   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.ACELERATION.GOTO_RELEASE                  __     U          2            1024       0   20000    Acceleration of LLA indexer for moving to the release position       
+#ECID    700320   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.DECELERATION.GOTO_RELEASE                 __     U          2            1024       0   20000    Deceleration of LLA indexer for moving to the release position       
+#ECID    700321   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.FAULT.TOLERANCE.GOTO_RELEASE           pulse     U          2              10       0      10    Fault tolerance of LLA indexer for moving to the release position    
+#ECID    700322   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.WARNING.TOLERANCE.GOTO_RELEASE         pulse     U          2              10       0      10    Warning tolerance of LLA indexer for moving to the release position  
+#ECID    700323   __        #DEFINE_NAME#+PHY_LLA.CFG.1.INDEXER.POS.FI_XER                          pulse     U          4           41000       0   100000   FI_Xer position of LLA indexer's slot 1                             
+#ECID    700324   __        #DEFINE_NAME#+PHY_LLA.CFG.2.INDEXER.POS.FI_XER                          pulse     U          4           42000       0   99999    FI_Xer position of LLA indexer's slot 2                             
+#ECID    700325   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.VELOCITY.GOTO_FI_XER                      __     U          2            4096       0   20000    Velocity of LLA indexer for moving to the FI_Xer position           
+#ECID    700326   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.ACELERATION.GOTO_FI_XER                   __     U          2            1024       0   20000    Acceleration of LLA indexer for moving to the FI_Xer position       
+#ECID    700327   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.DECELERATION.GOTO_FI_XER                  __     U          2            1024       0   20000    Deceleration of LLA indexer for moving to the FI_Xer position       
+#ECID    700328   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.FAULT.TOLERANCE.GOTO_FI_XER            pulse     U          2              10       0      10    Fault tolerance of LLA indexer for moving to the FI_Xer position    
+#ECID    700329   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.WARNING.TOLERANCE.GOTO_FI_XER          pulse     U          2              10       0      10    Warning tolerance of LLA indexer for moving to the FI_Xer position  
+#ECID    700330   __        #DEFINE_NAME#+PHY_LLA.CFG.1.INDEXER.POS.COOL                            pulse     U          4            1100       0   100000   Cool position of LLA indexer's slot 1                             
+#ECID    700331   __        #DEFINE_NAME#+PHY_LLA.CFG.2.INDEXER.POS.COOL                            pulse     U          4            1200       0   99999    Cool position of LLA indexer's slot 2                             
+#ECID    700332   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.VELOCITY.GOTO_COOL                        __     U          2            4096       0   20000    Velocity of LLA indexer for moving to the Cool position           
+#ECID    700333   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.ACELERATION.GOTO_COOL                     __     U          2            1024       0   20000    Acceleration of LLA indexer for moving to the Cool position       
+#ECID    700334   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.DECELERATION.GOTO_COOL                    __     U          2            1024       0   20000    Deceleration of LLA indexer for moving to the Cool position       
+#ECID    700335   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.FAULT.TOLERANCE.GOTO_COOL              pulse     U          2              10       0      10    Fault tolerance of LLA indexer for moving to the Cool position    
+#ECID    700336   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.WARNING.TOLERANCE.GOTO_COOL            pulse     U          2              10       0      10    Warning tolerance of LLA indexer for moving to the Cool position  
+#ECID    700337   __        #DEFINE_NAME#+PHY_LLA.CFG.1.INDEXER.POS.PRECOOL                         pulse     U          4               0       0   100000   Pre-cool position of LLA indexer's slot 1                             
+#ECID    700338   __        #DEFINE_NAME#+PHY_LLA.CFG.2.INDEXER.POS.PRECOOL                         pulse     U          4               0       0   99999    Pre-cool position of LLA indexer's slot 2                             
+#ECID    700339   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.VELOCITY.GOTO_PRECOOL                     __     U          2            4096       0   20000    Velocity of LLA indexer for moving to the pre-cool position           
+#ECID    700340   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.ACELERATION.GOTO_PRECOOL                  __     U          2            1024       0   20000    Acceleration of LLA indexer for moving to pre-cool position       
+#ECID    700341   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.DECELERATION.GOTO_PRECOOL                 __     U          2            1024       0   20000    Deceleration of LLA indexer for moving to pre-cool position       
+#ECID    700342   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.FAULT.TOLERANCE.GOTO_PRECOOL           pulse     U          2              10       0      10    Fault tolerance of LLA indexer for moving to the pre-cool position    
+#ECID    700343   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.WARNING.TOLERANCE.GOTO_PRECOOL         pulse     U          2              10       0      10    Warning tolerance of LLA indexer for moving to the pre-cool position  
+#ECID    700344   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.SLOT_1.PULSE_COUNT.LIMIT               pulse     U          4           100000      0   1000000  Pulse count limit of LLA indexer's slot 1 
+#ECID    700345   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.SLOT_2.PULSE_COUNT.LIMIT               pulse     U          4           100000      0   1000000  Pulse count limit of LLA indexer's slot 2 
+#ECID    700346   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.VELOCITY.LIMIT                     pulse/sec     U          4           20000       0   1000000  Velocity limit of LLA indexer 
+#ECID    700347   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.ACCELERATION.LIMIT                 pulse/sec     U          4           20000       0   1000000  Acceleration limit of LLA indexer 
+#ECID    700348   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.DECELERATION.LIMIT                 pulse/sec     U          4           20000       0   1000000  Deceleration limit of LLA indexer 
+#ECID    700349   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.FAULT.TOLERANCE.LIMIT                  pulse     U          4              10       0   1000000  Fault tolerance limit of LLA indexer 
+#ECID    700350   __        #DEFINE_NAME#+PHY_LLA.CFG.MOVING.WARNING.TOLERANCE.LIMIT                pulse     U          4              10       0   1000000  Warning tolerance limit of LLA indexer 
+
+
+// Page Name : LLB Indexer
+#ECID    700401   __        #DEFINE_NAME#+PHY_LLB.CFG.INDEXER.MOVING.TIMEOUT.SEC                      sec     U          2              20       0      60    Moving timeout (sec) of LLB indexer 
+#ECID    700402   __        #DEFINE_NAME#+PHY_LLB.CFG.INDEXER.HOMING.TIMEOUT.SEC                      sec     U          2              30       0     300    Homing timeout (sec) of LLB indexer 
+#ECID    700403   __        #DEFINE_NAME#+PHY_LLB.CFG.HOMING.FAST.VELOCITY                      pulse/sec     U          2            4096    1000   10000    Homing fast velocity of LLB indexer 
+#ECID    700404   __        #DEFINE_NAME#+PHY_LLB.CFG.HOMING.SLOW.VELOCITY                      pulse/sec     U          2            4096    1000   10000    Homing slot velocity of LLB indexer 
+#ECID    700405   __        #DEFINE_NAME#+PHY_LLB.CFG.HOMING.ACELERATION                               __     U          2            1024    1024   61440    Homing acceleration of LLB indexer 
+#ECID    700406   __        #DEFINE_NAME#+PHY_LLB.CFG.HOMING.DECELERATION                              __     U          2            1024    1024   61440    Homing deceleration of LLB indexer 
+#ECID    700407   __        #DEFINE_NAME#+PHY_LLB.CFG.HOMING.TYPE.APPLY                                __     A          8           DISABLE     0       1    Homing apply mode of LLB indexer[DISABLE,ENABLE] 
+#ECID    700408   __        #DEFINE_NAME#+PHY_LLB.CFG.HOMING.TYPE.DATA                                 __     A          2               0       0       1    Homing apply data of LLB indexer[0,1] 
+#ECID    700409   __        #DEFINE_NAME#+PHY_LLB.CFG.1.INDEXER.POS.LIFT                            pulse     U          4           41000       0   100000   Lift position of LLB indexer's slot 1 
+#ECID    700410   __        #DEFINE_NAME#+PHY_LLB.CFG.2.INDEXER.POS.LIFT                            pulse     U          4           42000       0   99999    Lift position of LLB indexer's slot 2 
+#ECID    700411   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.VELOCITY.GOTO_LIFT                        __     U          2            4096       0   20000    Velocity of LLB indexer for moving to the lift position  
+#ECID    700412   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.ACELERATION.GOTO_LIFT                     __     U          2            1024       0   20000    Acceleration of LLB indexer for moving to the lift position  
+#ECID    700413   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.DECELERATION.GOTO_LIFT                    __     U          2            1024       0   20000    Deceleration of LLB indexer for moving to the lift position  
+#ECID    700414   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.FAULT.TOLERANCE.GOTO_LIFT              pulse     U          2              10       0      10    Fault tolerance of LLB indexer for moving to the lift position  
+#ECID    700415   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.WARNING.TOLERANCE.GOTO_LIFT            pulse     U          2              10       0      10    Warning tolerance of LLB indexer for moving to the lift position  
+#ECID    700416   __        #DEFINE_NAME#+PHY_LLB.CFG.1.INDEXER.POS.RELEASE                         pulse     U          4           11000       0   100000   Release position of LLB indexer's slot 1                             
+#ECID    700417   __        #DEFINE_NAME#+PHY_LLB.CFG.2.INDEXER.POS.RELEASE                         pulse     U          4           12000       0   99999    Release position of LLB indexer's slot 2                             
+#ECID    700418   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.VELOCITY.GOTO_RELEASE                     __     U          2            4096       0   20000    Velocity of LLB indexer for moving to the release position           
+#ECID    700419   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.ACELERATION.GOTO_RELEASE                  __     U          2            1024       0   20000    Acceleration of LLB indexer for moving to the release position       
+#ECID    700420   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.DECELERATION.GOTO_RELEASE                 __     U          2            1024       0   20000    Deceleration of LLB indexer for moving to the release position       
+#ECID    700421   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.FAULT.TOLERANCE.GOTO_RELEASE           pulse     U          2              10       0      10    Fault tolerance of LLB indexer for moving to the release position    
+#ECID    700422   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.WARNING.TOLERANCE.GOTO_RELEASE         pulse     U          2              10       0      10    Warning tolerance of LLB indexer for moving to the release position  
+#ECID    700423   __        #DEFINE_NAME#+PHY_LLB.CFG.1.INDEXER.POS.FI_XER                          pulse     U          4           10000       0   100000   FI_Xer position of LLB indexer's slot 1                             
+#ECID    700424   __        #DEFINE_NAME#+PHY_LLB.CFG.2.INDEXER.POS.FI_XER                          pulse     U          4           20000       0   99999    FI_Xer position of LLB indexer's slot 2                             
+#ECID    700425   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.VELOCITY.GOTO_FI_XER                      __     U          2            4096       0   20000    Velocity of LLB indexer for moving to the FI_Xer position           
+#ECID    700426   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.ACELERATION.GOTO_FI_XER                   __     U          2            1024       0   20000    Acceleration of LLB indexer for moving to the FI_Xer position       
+#ECID    700427   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.DECELERATION.GOTO_FI_XER                  __     U          2            1024       0   20000    Deceleration of LLB indexer for moving to the FI_Xer position       
+#ECID    700428   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.FAULT.TOLERANCE.GOTO_FI_XER            pulse     U          2              10       0      10    Fault tolerance of LLB indexer for moving to the FI_Xer position    
+#ECID    700429   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.WARNING.TOLERANCE.GOTO_FI_XER          pulse     U          2              10       0      10    Warning tolerance of LLB indexer for moving to the FI_Xer position  
+#ECID    700430   __        #DEFINE_NAME#+PHY_LLB.CFG.1.INDEXER.POS.COOL                            pulse     U          4            1100       0   100000   Cool position of LLB indexer's slot 1                             
+#ECID    700431   __        #DEFINE_NAME#+PHY_LLB.CFG.2.INDEXER.POS.COOL                            pulse     U          4            1200       0   99999    Cool position of LLB indexer's slot 2                             
+#ECID    700432   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.VELOCITY.GOTO_COOL                        __     U          2            4096       0   20000    Velocity of LLB indexer for moving to the Cool position           
+#ECID    700433   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.ACELERATION.GOTO_COOL                     __     U          2            1024       0   20000    Acceleration of LLB indexer for moving to the Cool position       
+#ECID    700434   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.DECELERATION.GOTO_COOL                    __     U          2            1024       0   20000    Deceleration of LLB indexer for moving to the Cool position       
+#ECID    700435   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.FAULT.TOLERANCE.GOTO_COOL              pulse     U          2              10       0      10    Fault tolerance of LLB indexer for moving to the Cool position    
+#ECID    700436   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.WARNING.TOLERANCE.GOTO_COOL            pulse     U          2              10       0      10    Warning tolerance of LLB indexer for moving to the Cool position  
+#ECID    700437   __        #DEFINE_NAME#+PHY_LLB.CFG.1.INDEXER.POS.PRECOOL                         pulse     U          4               0       0   100000   Pre-cool position of LLB indexer's slot 1                             
+#ECID    700438   __        #DEFINE_NAME#+PHY_LLB.CFG.2.INDEXER.POS.PRECOOL                         pulse     U          4               0       0   99999    Pre-cool position of LLB indexer's slot 2                             
+#ECID    700439   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.VELOCITY.GOTO_PRECOOL                     __     U          2            4096       0   20000    Velocity of LLB indexer for moving to the pre-cool position           
+#ECID    700440   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.ACELERATION.GOTO_PRECOOL                  __     U          2            1024       0   20000    Acceleration of LLB indexer for moving to pre-cool position       
+#ECID    700441   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.DECELERATION.GOTO_PRECOOL                 __     U          2            1024       0   20000    Deceleration of LLB indexer for moving to pre-cool position       
+#ECID    700442   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.FAULT.TOLERANCE.GOTO_PRECOOL           pulse     U          2              10       0      10    Fault tolerance of LLB indexer for moving to the pre-cool position    
+#ECID    700443   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.WARNING.TOLERANCE.GOTO_PRECOOL         pulse     U          2              10       0      10    Warning tolerance of LLB indexer for moving to the pre-cool position  
+#ECID    700444   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.SLOT_1.PULSE_COUNT.LIMIT               pulse     U          4           100000      0   1000000  Pulse count limit of LLB indexer's slot 1 
+#ECID    700445   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.SLOT_2.PULSE_COUNT.LIMIT               pulse     U          4           100000      0   1000000  Pulse count limit of LLB indexer's slot 2 
+#ECID    700446   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.VELOCITY.LIMIT                     pulse/sec     U          4           20000       0   1000000  Velocity limit of LLB indexer 
+#ECID    700447   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.ACCELERATION.LIMIT                 pulse/sec     U          4           20000       0   1000000  Acceleration limit of LLB indexer 
+#ECID    700448   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.DECELERATION.LIMIT                 pulse/sec     U          4           20000       0   1000000  Deceleration limit of LLB indexer 
+#ECID    700449   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.FAULT.TOLERANCE.LIMIT                  pulse     U          4              10       0   1000000  Fault tolerance limit of LLB indexer 
+#ECID    700450   __        #DEFINE_NAME#+PHY_LLB.CFG.MOVING.WARNING.TOLERANCE.LIMIT                pulse     U          4              10       0   1000000  Warning tolerance limit of LLB indexer 
+
+
+// Page Name : LLA Chamber
+#ECID    700501   __        #DEFINE_NAME#+DB_SYS.CFG.LLA.FAST_PUMPING.PRESSURE.TORR                  torr     U          2           0.001   0.000   10.000   LLA : Fast pumping pressure (torr) 
+#ECID    700502   __        #DEFINE_NAME#+PHY_LLA.CFG.VAC_SYS.PUMP.ADDITION.TIME                      sec     U          2               0       0     100    LLA : Additional time (sec) for fast pumping 
+#ECID    700503   __        #DEFINE_NAME#+PHY_LLA.CFG.VAC_SYS.BF_IN.AFTER.PUMP                         __     A          8           ENABLE      0       1    LLA : Back-fill apply mode after pumping[DISABLE,ENABLE] 
+#ECID    700504   __        #DEFINE_NAME#+PHY_LLA.CFG.VAC_SYS.BF_IN.PRESSURE.OPEN_FAST               torr     U          2             3.0     0.0    10.0    LLA : Back-fill pressure (torr) to open vent-valve 
+#ECID    700505   __        #DEFINE_NAME#+PHY_LLA.CFG.VAC_SYS.BF_IN.PRESSURE.CLOSE_FAST              torr     U          2             5.0     0.0    10.0    LLA : Back-fill pressure (torr) to close vent-valve 
+#ECID    700506   __        #DEFINE_NAME#+PHY_LLA.CFG.VAC_SYS.BF_IN.ADDITION.TIME                     sec     U          2              10       0     100    LLA : Back-fill additional time (sec) 
+#ECID    700507   __        #DEFINE_NAME#+PHY_LLA.CFG.CYCLE_PURGE.BASE.PRESSURE.TORR                 torr     U          2           10.000   0.000   100.000  LLA : Cycle-purge pumping pressure (torr) 
+#ECID    700508   __        #DEFINE_NAME#+PHY_LLA.CFG.CYCLE_PURGE.PUMP.ADDITION.TIME                  sec     U          2               3       0      60    LLA : Cycle-purge additional pumping time (sec) 
+#ECID    700509   __        #DEFINE_NAME#+PHY_LLA.CFG.CYCLE_PURGE.VENT.PRESSURE.TORR                 torr     U          2             500     100    1000    LLA : Cycle-purge venting pressure (torr) 
+#ECID    700510   __        #DEFINE_NAME#+PHY_LLA.CFG.CYCLE_PURGE.CYCLE.NUMBER                      count     U          2               5       1    1000    LLA : Cycle-purge cycle count 
+#ECID    700511   __        #DEFINE_NAME#+PHY_LLA.CFG.LEAK_CHECK.BASE.PRESSURE.mTORR                mtorr     U          2            10.0     0.0   1000.0   LLA : Leak-check base pressure (mtorr) 
+#ECID    700512   __        #DEFINE_NAME#+PHY_LLA.CFG.LEAK_CHECK.PUMP.ADDITION.TIME                   sec     U          2              10       0   10000    LLA : Leak-check additional pumping time (sec) 
+#ECID    700513   __        #DEFINE_NAME#+PHY_LLA.CFG.LEAK_CHECK.STABLE.TIME                          sec     U          2               5       0     100    LLA : Leak-check stable time (sec) 
+#ECID    700514   __        #DEFINE_NAME#+PHY_LLA.CFG.LEAK_CHECK.TEST.TIME                            min     U          2               3       1      10    LLA : Leak-check test time (sec) 
+
+
+// Page Name : LLB Chamber                            	  
+#ECID    700601   __        #DEFINE_NAME#+DB_SYS.CFG.LLB.FAST_PUMPING.PRESSURE.TORR                  torr     U          2           0.001   0.000   10.000   LLB : Fast pumping pressure (torr) 
+#ECID    700602   __        #DEFINE_NAME#+PHY_LLB.CFG.VAC_SYS.PUMP.ADDITION.TIME                      sec     U          2               0       0     100    LLB : Additional time (sec) for fast pumping 
+#ECID    700603   __        #DEFINE_NAME#+PHY_LLB.CFG.VAC_SYS.BF_IN.AFTER.PUMP                         __     A          8           DISABLE     0       1    LLB : Back-fill apply mode after pumping[DISABLE,ENABLE] 
+#ECID    700604   __        #DEFINE_NAME#+PHY_LLB.CFG.VAC_SYS.BF_IN.PRESSURE.OPEN_FAST               torr     U          2             0.0     0.0    10.0    LLB : Back-fill pressure (torr) to open vent-valve 
+#ECID    700605   __        #DEFINE_NAME#+PHY_LLB.CFG.VAC_SYS.BF_IN.PRESSURE.CLOSE_FAST              torr     U          2             0.0     0.0    10.0    LLB : Back-fill pressure (torr) to close vent-valve 
+#ECID    700606   __        #DEFINE_NAME#+PHY_LLB.CFG.VAC_SYS.BF_IN.ADDITION.TIME                     sec     U          2               0       0     100    LLB : Back-fill additional time (sec) 
+#ECID    700607   __        #DEFINE_NAME#+PHY_LLB.CFG.CYCLE_PURGE.BASE.PRESSURE.TORR                 torr     U          2           10.000   0.000   100.000  LLB : Cycle-purge pumping pressure (torr) 
+#ECID    700608   __        #DEFINE_NAME#+PHY_LLB.CFG.CYCLE_PURGE.PUMP.ADDITION.TIME                  sec     U          2               3       0      60    LLB : Cycle-purge additional pumping time (sec) 
+#ECID    700609   __        #DEFINE_NAME#+PHY_LLB.CFG.CYCLE_PURGE.VENT.PRESSURE.TORR                 torr     U          2             500     100    1000    LLB : Cycle-purge venting pressure (torr) 
+#ECID    700610   __        #DEFINE_NAME#+PHY_LLB.CFG.CYCLE_PURGE.CYCLE.NUMBER                      count     U          2               5       1    1000    LLB : Cycle-purge cycle count 
+#ECID    700611   __        #DEFINE_NAME#+PHY_LLB.CFG.LEAK_CHECK.BASE.PRESSURE.mTORR                mtorr     U          2            10.0     0.0   1000.0   LLB : Leak-check base pressure (mtorr) 
+#ECID    700612   __        #DEFINE_NAME#+PHY_LLB.CFG.LEAK_CHECK.PUMP.ADDITION.TIME                   sec     U          2              10       0   10000    LLB : Leak-check additional pumping time (sec) 
+#ECID    700613   __        #DEFINE_NAME#+PHY_LLB.CFG.LEAK_CHECK.STABLE.TIME                          sec     U          2               5       0     100    LLB : Leak-check stable time (sec) 
+#ECID    700614   __        #DEFINE_NAME#+PHY_LLB.CFG.LEAK_CHECK.TEST.TIME                            min     U          2               3       1      10    LLB : Leak-check test time (sec) 
+
+
+// Page Name : MF Chamber
+#ECID    700701   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.XFER.PRESSURE.TORR                     torr     U          2           5.000   0.000   5.000    MF : Wafer transfer pressure (torr) 
+#ECID    700702   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.BASE.PRESSURE.TORR                     torr     U          2           0.001   0.000   100.000   MF : Vacuum base pressure (torr) 
+#ECID    700703   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.PUMP.ADDITION.TIME                      sec     U          2               0       0     100    MF : Additional pumping time (sec) 
+#ECID    700704   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.BACKFILL.IN.AFTER.PUMP                   __     A          8           DISABLE     0       1    MF : Back-fill apply mode after pumping[DISABLE,ENABLE] 
+#ECID    700705   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.BACKFILL.IN.ADDITION.TIME               sec     U          2               0       0     100    MF : Back-fill additional time (sec) 
+#ECID    700706   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.OVER_PRESSURE.TORR                     torr     U          2             770     750     800    MF : Over-pressure limit (torr) 
+#ECID    700707   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.XFER.PRESSURE.OFFSET.TORR              torr     U          2             0.5     0.1     1.0    MF : Wafer transfer offset pressure (torr) 
+#ECID    700708   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.XFER.MAX.PRESSURE.TORR                 torr     U          2           6.000   6.000   10.000   MF : Wafer transfer Max pressure (torr) 
+#ECID    700709   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.XFER.PRESSURE.CHECK.TIME                sec     U          2               2       1       5    MF : Pressure error check time (sec) 
+#ECID    700710   __        #DEFINE_NAME#+PHY_CHM.CFG.VAC_SYS.XFER.PRESSURE.TIMEOUT.SEC               sec     U          2              10      10      60    MF : Pressure control timeout (sec) 
+#ECID    700711   __        #DEFINE_NAME#+PHY_CHM.CFG.LEAK_CHECK.BASE.PRESSURE.mTORR                mtorr     U          2            10.0     0.0   1000.0   MF : Leak-check base pressure (mtorr) 
+#ECID    700712   __        #DEFINE_NAME#+PHY_CHM.CFG.LEAK_CHECK.PUMP.ADDITION.TIME                   sec     U          2               5       0   10000    MF : Leak-check additional pumping time (sec) 
+#ECID    700713   __        #DEFINE_NAME#+PHY_CHM.CFG.LEAK_CHECK.STABLE.TIME                          sec     U          2               3       0     100    MF : Leak-check stable time (sec) 
+#ECID    700714   __        #DEFINE_NAME#+PHY_CHM.CFG.LEAK_CHECK.TEST.TIME                            min     U          2               5       1      10    MF : Leak-check test time (sec) 
+#ECID    700715   __        #DEFINE_NAME#+PHY_CHM.CFG.LEAK_CHECK.LEAK_RATE.MAX                  mtorr/min     U          2            20.0     0.0   100.0    MF : leak-check Max leak-rate (mtorr/min) 
+#ECID    700716   __        #DEFINE_NAME#+PHY_CHM.CFG.CYCLE_PURGE.BASE.PRESSURE.TORR                 torr     U          2           1.000   0.000   100.000   MF : Cycle-purge base pressure (torr) 
+#ECID    700717   __        #DEFINE_NAME#+PHY_CHM.CFG.CYCLE_PURGE.PUMP.ADDITION.TIME                  sec     U          2               3       0      60    MF : Cycle-purge additional pumping time (sec) 
+#ECID    700718   __        #DEFINE_NAME#+PHY_CHM.CFG.CYCLE_PURGE.VENT.PRESSURE.TORR                 torr     U          2             500     100    1000    MF : Cycle-purge slow-venting pressure (torr) 
+#ECID    700719   __        #DEFINE_NAME#+PHY_CHM.CFG.CYCLE_PURGE.VENT.PRESSURE.OPEN_FAST_VLV.TORR   torr     U          2             100       1    1000    MF : Cycle-purge fast-venting pressure (torr) 
+#ECID    700720   __        #DEFINE_NAME#+PHY_CHM.CFG.CYCLE_PURGE.CYCLE.NUMBER                      count     U          2               5       1    1000    MF : Cycle-purge cycle count 
+
+
+// Page Name : MF System
+#ECID    700801   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.LLA                                    __     A          4             YES       0       1    Use of LLA[NO,YES] 
+#ECID    700802   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.LLB                                    __     A          4             YES       0       1    Use of LLB[NO,YES] 
+#ECID    700803   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.CL1                                    __     A          4             YES       0       1    Use of left cooler[NO,YES] 
+#ECID    700804   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.CL2                                    __     A          4             YES       0       1    Use of right cooler[NO,YES] 
+#ECID    700805   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.PM1                                    __     A          4             YES       0       1    Use of PM1 (RTP-A)[NO,YES] 
+#ECID    700806   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.PM2                                    __     A          4             YES       0       1    Use of PM2 (RTP-B)[NO,YES] 
+#ECID    700807   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.PM3                                    __     A          4             YES       0       1    Use of PM3 (DPN-A)[NO,YES] 
+#ECID    700808   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.PM4                                    __     A          4             YES       0       1    Use of PM4 (DPN-B)[NO,YES] 
+#ECID    700809   __        #DEFINE_NAME#+DB_SYS.CFG.ATM.REF.PRESSURE.TORR                           torr     U          2             710     600     800    Reference pressure (torr) for ATM transfer 
+#ECID    700810   __        #DEFINE_NAME#+DB_SYS.CFG.VAC.REF.PRESSURE.TORR                           torr     U          2           1.000   0.000   10.000   Referance pressure (torr) for VAC transfer 
+#ECID    700811   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.LP1                                    __     A          4             YES       0       1    Use of load port 1[NO,YES] 
+#ECID    700812   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.LP2                                    __     A          4             YES       0       1    Use of load port 2[NO,YES] 
+#ECID    700813   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.LP3                                    __     A          4             YES       0       1    Use of load port 3[NO,YES] 
+#ECID    700814   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.AL1                                    __     A          4             YES       0       1    Use of aligner[NO,YES] 
+#ECID    700815   __        #DEFINE_NAME#+DB_INF.LP1.CFG.DOOR.CLOSE.AFTER.MAPPING                      __     A          8           ENABLE      0       1    LP1's door close after mappling complete[DISABLE,ENABLE] 
+#ECID    700816   __        #DEFINE_NAME#+DB_INF.LP2.CFG.DOOR.CLOSE.AFTER.MAPPING                      __     A          8           ENABLE      0       1    LP2's door close after mappling complete[DISABLE,ENABLE] 
+#ECID    700817   __        #DEFINE_NAME#+DB_INF.LP3.CFG.DOOR.CLOSE.AFTER.MAPPING                      __     A          8           ENABLE      0       1    LP3's door close after mappling complete[DISABLE,ENABLE] 
+#ECID    700818   __        #DEFINE_NAME#+DB_INF.LLA.CFG.ALIGN_ANGLE.INCREMENT.APPLY                   __     A          8           DISABLE     0       1    LLA : Apply mode for AL increment angle[DISABLE,ENABLE] 
+#ECID    700819   __        #DEFINE_NAME#+DB_INF.LLA.CFG.ALIGN_ANGLE.INCREMENT.ANGLE                  deg     U          2               0       0     360    LLA : Offset angle for AL increment 
+#ECID    700820   __        #DEFINE_NAME#+DB_INF.LLA.CFG.ALIGN_ANGLE.INCREMENT.START.ANGLE            deg     U          2               0       0     360    LLA : Start-angle for AL increment 
+#ECID    700821   __        #DEFINE_NAME#+DB_INF.LLA.CFG.ALIGN_ANGLE.INCREMENT.END.ANGLE              deg     U          2               0       0     360    LLA : End-angle for AL increment 
+#ECID    700822   __        #DEFINE_NAME#+DB_INF.LLB.CFG.ALIGN_ANGLE.INCREMENT.APPLY                   __     A          8           DISABLE     0       1    LLA : Apply mode for AL increment angle[DISABLE,ENABLE] 
+#ECID    700823   __        #DEFINE_NAME#+DB_INF.LLB.CFG.ALIGN_ANGLE.INCREMENT.ANGLE                  deg     U          2               0       0     360    LLA : Offset angle for AL increment     
+#ECID    700824   __        #DEFINE_NAME#+DB_INF.LLB.CFG.ALIGN_ANGLE.INCREMENT.START.ANGLE            deg     U          2               0       0     360    LLA : Start-angle for AL increment      
+#ECID    700825   __        #DEFINE_NAME#+DB_INF.LLB.CFG.ALIGN_ANGLE.INCREMENT.END.ANGLE              deg     U          2               0       0     360    LLA : End-angle for AL increment        
+#ECID    700826   __        #DEFINE_NAME#+DB_INF.LLA.CFG.TARGET.ALIGN_ANGLE                           deg     U          2              60       0     360    LLA : Target align angle 
+#ECID    700827   __        #DEFINE_NAME#+DB_INF.LLB.CFG.TARGET.ALIGN_ANGLE                           deg     U          2              90       0     360    LLB : Target align angle 
+#ECID    700828   __        #DEFINE_NAME#+DB_SYS.CFG.ALIGN.MODE                                        __     A          8           ATM_RB      0       1    Align angle control mode[ALIGNER,ATM_RB] 
+#ECID    700829   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.RFID1                                  __     A          4             YES       0       1    LP1 : Use of RF reader[NO,YES] 
+#ECID    700830   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.RFID2                                  __     A          4             YES       0       1    LP2 : Use of RF reader[NO,YES] 
+#ECID    700831   __        #DEFINE_NAME#+DB_SYS.CFG.MODULE_USE.RFID3                                  __     A          4             YES       0       1    LP3 : Use of RF reader[NO,YES] 
+#ECID    700832   __        #DEFINE_NAME#+DB_SYS.CFG.EFEM.DIFFERENTIAL_PRESSURE.ALARM                torr     U          2           0.0090   0.0000   1.0000  EFEM : Error differential pressure (torr) 
+#ECID    700833   __        #DEFINE_NAME#+DB_SYS.CFG.EFEM.FFU_RPM.ALARM                               rpm     U          2            1000       0    2000    EFEM : Error FFU RPM 
+
+

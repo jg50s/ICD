@@ -1,0 +1,110 @@
+
+<<<----  [OUT]
+2021/01/15 08:33:47:938
+
+---------------------------------------------------------------------
+// FA : Start Log ...
+
+
+<<<----  [OUT]
+2021/01/15 08:33:47:941
+
+//-------------------------------------------------------------
+Property Information
+
+   Driver Type [HSMS]
+   Driver Mode [ACTIVE]
+   IP    [192.168.100.113]
+   Port  [5000]
+//-------------------------------------------------------------
+
+
+<<<----  [OUT]
+2021/01/15 08:33:48:544
+
+Auto-Start Started ... (Active)
+
+<<<----  [OUT]
+2021/01/15 08:33:48:634
+
+Auto-Start Started ...  Waiting Stop-Connection.
+
+<<<----  [OUT]
+2021/01/15 08:33:48:634
+
+Auto-Start Started ...  Waiting Open-Socket.
+
+<<<----  [OUT]
+2021/01/15 08:33:48:664
+
+Socket Open Started...
+
+<<<----  [OUT]
+2021/01/15 08:33:48:664
+
+Socket Open Completed...
+
+<<<----  [OUT]
+2021/01/15 08:33:48:664
+
+Connecting Started...
+
+<<<----  [OUT]
+2021/01/15 08:33:48:725
+
+Auto-Start Completed ...  (Active)
+
+<<<----  [OUT]
+2021/01/15 08:36:26:693
+
+---------------------------------------------------------------------
+// FA : Start Log ...
+
+
+<<<----  [OUT]
+2021/01/15 08:36:26:698
+
+//-------------------------------------------------------------
+Property Information
+
+   Driver Type [HSMS]
+   Driver Mode [ACTIVE]
+   IP    [192.168.100.113]
+   Port  [5000]
+//-------------------------------------------------------------
+
+
+<<<----  [OUT]
+2021/01/15 08:36:27:299
+
+Auto-Start Started ... (Active)
+
+<<<----  [OUT]
+2021/01/15 08:36:27:390
+
+Auto-Start Started ...  Waiting Stop-Connection.
+
+<<<----  [OUT]
+2021/01/15 08:36:27:390
+
+Auto-Start Started ...  Waiting Open-Socket.
+
+<<<----  [OUT]
+2021/01/15 08:36:27:419
+
+Socket Open Started...
+
+<<<----  [OUT]
+2021/01/15 08:36:27:419
+
+Socket Open Completed...
+
+<<<----  [OUT]
+2021/01/15 08:36:27:419
+
+Connecting Started...
+
+<<<----  [OUT]
+2021/01/15 08:36:27:481
+
+Auto-Start Completed ...  (Active)

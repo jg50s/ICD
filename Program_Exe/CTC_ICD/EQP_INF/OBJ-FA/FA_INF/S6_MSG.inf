@@ -1,0 +1,271 @@
+
+  //---------------------------------------------------
+  //  S6Fy
+
+  //------------------------------
+  // 	Trace Data Send (TDS)    			H <- E
+
+  #MESSAGE    S6F1 
+  #REPLY      1
+  #DIRECTION  SEND
+  #TYPE       0
+  
+  1.<L,  4
+         1.<U4[1]   $TRID
+         2.<U4[1]   $SMPLN
+         3.<A[16]   $STIME
+#UNFORMATTED         
+         4.<L,  1   $LIST_LIMIT
+                1.<V   $V
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Trace Data Acknowledge (TDA)   			H -> E	
+
+  #MESSAGE    S6F2
+  #DIRECTION  RECEIVE
+  
+  1.<B[1]   $ACKC6
+       
+  #END
+  //------------------------------
+
+
+/*
+  //------------------------------
+  // 	Formatted Variable Send (FVS)   		H <- E
+
+  #MESSAGE    S6F9 
+  #REPLY      1
+  #DIRECTION  SEND
+  #TYPE	      0
+
+  1.<L,  4
+         1.<U4[1]   $PFCD
+         2.<U4[1]   $DATAID
+         3.<U4[1]   $CEID
+#UNFORMATTED
+         4.<L,  1   $DSID_LIST  
+                1.<L,  2
+                       1.<V   $DSID
+#UNFORMATTED
+                       2.<L,  1   $VID_LIST
+                              1.<V   $VID
+                      
+  #END
+  //------------------------------
+*/
+  //------------------------------
+  // 	Formatted Variable Send (FVS)   		H <- E
+
+  #MESSAGE    S6F9 
+  #REPLY      1
+  #DIRECTION  SEND
+  #TYPE	      0
+
+  1.<V,  $V_DATA
+                      
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Formatted Variable Acknowledge (FVA)  		H -> E
+
+  #MESSAGE    S6F10
+  #DIRECTION  RECEIVE
+  
+  1.<B[1]   $ACKC6
+       
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // 	Event Report Send (ERS)    			H <- E
+
+  #MESSAGE    S6F11
+  #REPLY      1
+  #DIRECTION  SEND
+  #TYPE	      0
+
+  1.<L,  3
+         1.<U4[1]    1
+         2.<U4[1]    $CEID
+#UNFORMATTED
+         3.<L,  1  $LIST_LIMIT
+                1.<L,  2
+                       1.<U4[1]   $RPTID
+#UNFORMATTED
+                       2.<L,  1  $VID_LIMIT
+                              1.<V   $VID
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Event Report Acknowledge (ERA)   		H -> E
+
+  #MESSAGE    S6F12
+  #DIRECTION  RECEIVE
+  
+  1.<B[1]  $ACKC6
+       
+  #END
+  //------------------------------
+
+  //------------------------------
+  // 	Event Report Request (ERR)    			H -> E
+
+  #MESSAGE    S6F15   
+  #REPLY      1
+  #DIRECTION  RECEIVE        // EQP <- HOST
+  #TYPE       0
+  
+  1.<U4[1]   $CEID
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Event Report Data (ERD)   			H <- E
+
+  #MESSAGE    S6F16
+  #DIRECTION  SEND	     // EQP -> HOST
+
+  1.<L,  3
+         1.<U4[1]   0		// DATAID
+         2.<U4[1]   $CEID
+#UNFORMATTED        
+         3.<L,  1  $LIST_LIMIT
+                1.<L,  2
+                       1.<U4[1]   $RPTID
+#UNFORMATTED        
+                       2.<L,  1  $SVID_LIMIT
+                              1.<V   $V
+                         
+  #END
+  //------------------------------
+
+  //------------------------------
+  // 	Annotated Event Report Request(AERR)  		H -> E
+
+  #MESSAGE    S6F17
+  #REPLY      1
+  #DIRECTION  RECEIVE        // EQP <- HOST
+  #TYPE       0  
+  
+  1.<U4[1]   $CEID 
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Annotated Event Report Data (AERD)   		H <- E
+
+  #MESSAGE    S6F18
+  #DIRECTION  SEND	     // EQP -> HOST
+
+  1.<L,  3
+         1.<U4[1]   0		// DATAID
+         2.<U4[1]   $CEID
+#UNFORMATTED        
+         3.<L,  1  $LIST_LIMIT
+                1.<L,  2
+                       1.<U4[1]   $RPTID
+#UNFORMATTED        
+                       2.<L,  1  $SVID_LIMIT
+                              1.<L, 2
+                                    1.<U4[1]   $VID
+                                    2.<V       $V
+  
+  #END
+  //------------------------------
+
+  //------------------------------
+  // 	Individual Report request (IRR)   		H -> E
+
+  #MESSAGE    S6F19 
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE	      0
+
+  1.<U4[1]   $RPTID
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Individual Report Data (IRD)    		H <- E	
+
+  #MESSAGE    S6F20
+  #DIRECTION  SEND          
+  
+#UNFORMATTED  
+  1.<L,  1    $LIST_LIMIT
+         1.<V   $V
+  
+  #END
+  //------------------------------
+
+  //------------------------------
+  // 	Annotated Individual Report request(IRR)        H -> E
+
+  #MESSAGE    S6F21
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<U4[1]   $RPTID
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Individual Report Data (IRD)    		H <- E
+
+  #MESSAGE    S6F22
+  #DIRECTION  SEND
+
+#UNFORMATTED  
+  1.<L,  1    $LIST_LIMIT
+         1.<L,  2
+                1.<U4[1]   $VID
+                2.<V       $V 
+  
+  #END
+  //------------------------------
+
+  //------------------------------
+  // 	Request Spooled Data (RSD)        H -> E
+
+  #MESSAGE    S6F23
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<U1[1]   $RSDC
+  
+  #END
+  
+/*
+RSDC
+	0 = Transmit Spooled Messages
+	1 = Purge Spooled Message
+	2 ~ 63 = Reserved
+*/
+  //------------------------------
+  //------------------------------
+  // 	Request Spooled Data Acknoledgement Send (RSDAS)    		H <- E
+
+  #MESSAGE    S6F24
+  #DIRECTION  SEND
+
+  1.<B[1]   $RSDA
+  
+  #END
+  
+/*
+RSDA
+	0 = OK
+	1 = Denied, busy try later
+	2 = Denied, spooled data does not exist
+	3 ~ 63 = Reserved
+*/  
+  //------------------------------
+
+

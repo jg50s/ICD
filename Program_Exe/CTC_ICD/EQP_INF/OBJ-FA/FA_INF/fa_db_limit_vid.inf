@@ -1,0 +1,8 @@
+
+
+/*
+//              CEID     VID     UNIT    LIMITMIN   LIMITMAX   LIMITID   UPPERDB   LOWERDB
+#LIMIT_CEID     10001    2001    sccm    100        900        1         700       300
+#LIMIT_CEID     10002    2002    slm     100        900        1         700       300
+*/
+

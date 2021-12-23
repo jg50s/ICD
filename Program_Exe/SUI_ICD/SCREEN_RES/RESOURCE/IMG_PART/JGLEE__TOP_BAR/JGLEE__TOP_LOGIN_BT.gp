@@ -1,0 +1,22 @@
+#BITMAP
+{
+JGLEE__TOP_LOGIN_INACTIVE.bmp
+0 0 68 68
+0
+}
+#DYNAMIC
+{
+IF_OR: (dCH == dSts)
+VIS 1
+}
+#BITMAP
+{
+JGLEE__TOP_LOGIN_ACTIVE.bmp
+0 0 68 68
+0
+}
+#DYNAMIC
+{
+IF_OR: (dCH != dSts)
+VIS 1
+}

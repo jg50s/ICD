@@ -1,0 +1,22 @@
+
+
+//      MODULE 	    VID  	[CHANNEL or ALIAS or COMMAND]	
+//					                            	                          TYPE	 BYTE	  UNIT	    DISPLAY_NAME
+
+
+// PMx로부터 Data 정보를 받아 전달하는 경우는 ##SVID+로 시작하면 됩니다.
+// VID는 만단위와 천단위의 정보를 제거한 다음 기입하면 됩니다.
+// 예를 들면, "Rotate Velocity (RPM)"를 나타내는 11031 VID는 31로 아래와 같이 기입합니다.
+// "CMP_Project_-_300mm_Common_Specification_v(1.2).xlsx"의 "SVID" 참고 바람.
+// 여기서, 아래의 "##SVID+Object_Name.Variable_Name"은 Module Link를 통해 생성된 Channel 이름입니다.
+    
+#SVID   ##MODULE     1    ##SVID+##FNC_H_SWP.MEMBRANE.WAFER.COUNT                 A      10    __    ##SVID+Membrane_Wafer_Count                
+#SVID   ##MODULE     2    ##SVID+##FNC_H_SWP.RET.RING.WAFER.COUNT                 A      10    __    ##SVID+R_Ring_Wafer_Count  
+#SVID   ##MODULE     3    ##SVID+##FNC_H_SWP.MEMBRANE.USE.TIME            A      10    __     ##SVID+Membrane_Use_Time
+#SVID   ##MODULE     4    ##SVID+##FNC_H_SWP.RET.RING.USE.TIME            A      10    __     ##SVID+R_Ring_Use_Time
+#SVID   ##MODULE     5    ##SVID+##FNC_H_SWP.va.Ret.Ring.Pressure.Mean             A      10    __     ##SVID+R_Ring_Pressure_Mean              
+#SVID   ##MODULE     6    ##SVID+##FNC_H_SWP.va.Zone1.Pressure.Mean                  A      10    __     ##SVID+Zone1_Pressure_Mean               
+#SVID   ##MODULE   	 7    ##SVID+##FNC_H_SWP.va.Zone2.Pressure.Mean                  A      10    __     ##SVID+Zone2_Pressure_Mean               
+#SVID   ##MODULE   	 8    ##SVID+##FNC_H_SWP.va.Zone3.Pressure.Mean                  A      10    __     ##SVID+Zone3_Pressure_Mean             
+#SVID   ##MODULE     9    ##SVID+##FNC_H_SWP.va.Zone4.Pressure.Mean         A      10    __     ##SVID+Zone4_Pressure_Mean              
+#SVID   ##MODULE     10    ##SVID+##FNC_H_SWP.va.Zone5.Pressure.Mean         A      10    __     ##SVID+Zone5_Pressure_Mean          

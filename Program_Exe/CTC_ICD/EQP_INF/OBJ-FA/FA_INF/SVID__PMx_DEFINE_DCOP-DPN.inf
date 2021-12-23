@@ -1,0 +1,49 @@
+
+//      MODULE 	VID  	[CHANNEL or COMMAND]	
+//					                       	                                 TYPE	  BYTE   UNIT	           DISPLAY_NAME
+                                                                                    
+                                                                                    
+#SVID   ##PM    1     ##DCOP+TGV_POSITION                            A      10     %               APC_Valve_Average_Position
+#SVID   ##PM    2     ##DCOP+PRESS                                   A      10     torr            Chamber_Average_Pressure
+
+#SVID   ##PM    3     ##DCOP+RF_CURRENT1                             A      10     A               Matcher_Average_Current1
+#SVID   ##PM    4     ##DCOP+RF_CURRENT2                             A      10     A               Matcher_Average_Current2
+#SVID   ##PM    5     ##DCOP+RF_CURT_RATIO                           A      10     ratio           Matcher_Average_Current_Ratio
+
+#SVID   ##PM    6     ##DCOP+ESC_CURRENT                             A      10     mA              ESC_Average_Current
+#SVID   ##PM    7     ##DCOP+ESC_VOLTAGE                             A      10     V               ESC_Average_Voltage
+
+#SVID   ##PM    8     ##DCOP+HE_LEAK                                 A      10     sccm            He_Average_Leak_Rate
+#SVID   ##PM    9     ##DCOP+HE_PRESS                                A      10     torr            He_Back_Side_Average_Pressure
+
+#SVID   ##PM    13    ##DCOP+MATCH_SERIES                            A      10     %               Matcher_Average_Series_Position
+#SVID   ##PM    14    ##DCOP+MATCH_SHUNT                             A      10     %               Matcher_Average_Shunt_Position
+
+#SVID   ##PM    15    ##DCOP+RF_DELIVERED                            A      10     W               RF_Average_Delivered_Power
+#SVID   ##PM    16    ##DCOP+RF_DUTY                                 A      10     offset          RF_Average_Duty_Cycle_Offset
+#SVID   ##PM    17    ##DCOP+RF_FORWARD                              A      10     W               RF_Average_Forward_Power
+#SVID   ##PM    18    ##DCOP+RF_RELFECT                              A      10     W               RF_Average_Reflect_Power
+
+#SVID   ##PM    19    ##PHY_PM+FDC.CHM.ID                            A      10     id              CH_ID
+
+#SVID   ##PM    20    ##DCOP+PROCESS_TIME                            A      10     sec             Process_Time
+
+#SVID   ##PM    21    ##PHY_PM+FDC.CHM.ID                            A      10     id              CHM_ID
+#SVID   ##PM    22    ##PHY_PM+FDC.CHM.ID                            A      10     id              CHM_ID1
+#SVID   ##PM    23    PHY_PM1+ACC.MATERIAL.COUNT                     A      10     count           A_Chamber_Count
+#SVID   ##PM    24    PHY_PM2+ACC.MATERIAL.COUNT                     A      10     count           B_Chamber_Count
+#SVID   ##PM    25    PHY_PM3+ACC.MATERIAL.COUNT                     A      10     count           C_Chamber_Count
+#SVID   ##PM    26    PHY_PM4+ACC.MATERIAL.COUNT                     A      10     count           D_Chamber_Count
+
+
+#SVID   ##PM    41    ##DCOP+O2_FLOW                                 A      10     sccm            Gas_O2_Flow_Average     
+#SVID   ##PM    42    ##DCOP+HE_HIGH_FLOW                            A      10     sccm            Gas_He_High_Flow_Average
+#SVID   ##PM    43    ##DCOP+HE_LOW_FLOW                             A      10     sccm            Gas_He_Low_Flow_Average 
+#SVID   ##PM    44    ##DCOP+AR_FLOW                                 A      10     sccm            Gas_Ar_Flow_Average     
+#SVID   ##PM    45    ##DCOP+N2_HIGH_FLOW                            A      10     sccm            Gas_N2_High_Flow_Average
+#SVID   ##PM    46    ##DCOP+N2_LOW_FLOW                             A      10     sccm            Gas_N2_Low_Flow_Average 
+#SVID   ##PM    47    ##DCOP+H2_FLOW                                 A      10     sccm            Gas_H2_Flow_Average     
+#SVID   ##PM    48    ##DCOP+N2_PP2_FLOW                             A      10     sccm            Gas_N2_PP2_Flow_Average 
+#SVID   ##PM    49    ##DCOP+NH3_FLOW                                A      10     sccm            Gas_NH3_Flow_Average    
+
+

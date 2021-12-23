@@ -1,0 +1,125 @@
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.11.16 16:32:13:938	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=1	
+#TIME=2021.11.16 16:31:18:608	
+#RESULT=POST	
+#TITLE=DB_INF - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=10	
+#TIME=2021.11.16 16:31:21:798	
+#RESULT=POST	
+#TITLE=PHY_IO__HEATER - HEATER SYSTEM : Chamber Not Closed. Heater Power Off !	
+#MSG=START	
+Heater Power was off. 
+When Chamber's lid is not closed, heater power must be off. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=89	
+#TIME=2021.11.16 16:31:23:549	
+#RESULT=POST	
+#TITLE=FNC_STEP : The door of gas box is not closed !	
+#MSG=START	
+The current status of gas box's interlock sensor is "False". 
+
+If chamber's status is "processing", process will be aborted. 
+If chamber's status is "idle", chamber's status will be "maint". 
+Please, check the status of gas box. 
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=100	
+#TIME=2021.11.16 16:31:23:599	
+#RESULT=POST	
+#TITLE=FNC_STEP : System interlock occurred !	
+#MSG=START	
+All RF Power <- Off 
+All Gas Valve <- Close 
+All Ballast Valve <- Close 
+
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=PM3	
+#ID=4	
+#TIME=2021.11.16 16:31:23:606	
+#RESULT=POST	
+#TITLE=PHY_APC_VLV - APC Valve can't control in no vacuum.	
+#MSG=START	
+Please, check vacuum sensor.
+	
+#MSG=END	
+#LINE=END	
+
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.11.16 16:43:35:627	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.11.16 23:11:09:845	
+POST	
+START	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.11.16 23:11:34:331	
+POST	
+STOP	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.11.16 23:12:13:339	
+POST	
+START	
+	
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2021.11.16 23:17:00:154	
+POST	
+STOP	
+	

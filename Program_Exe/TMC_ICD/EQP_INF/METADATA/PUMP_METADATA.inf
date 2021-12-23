@@ -1,0 +1,25 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__PUMP
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+#DEFINE_CONSTANT    OBJ__PUMP			                      PHY_IO__PUMP
+
+#DEFINE_CONSTANT    VAR__IO_AI_VACLINE_PRESS            IO+ai.FORELINE.PRESSURE
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__PUMP
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+// IO
+#DEFINE_CONSTANT		VAR__IO_DI_COMM_STS                 IO+di.Comm.Sts
+#DEFINE_CONSTANT		VAR__IO_DI_PUMP_RUNNING             IO+di.IPXPUMP.RUNNING
+#DEFINE_CONSTANT		VAR__IO_DI_PUMP_WARNING             IO+di.IPXPUMP.WARNING
+#DEFINE_CONSTANT		VAR__IO_DI_PUMP_ALARM               IO+di.IPXPUMP.ALARM
+#DEFINE_CONSTANT		VAR__IO_DI_PUMP_WATER_FLOW          IO+di.IPXPUMP.WATER.FLOW
+#DEFINE_CONSTANT		VAR__IO_DI_PUMP_LEAK_DETECT         IO+di.IPXWATER.LEAK.DETECT
+
+#DEFINE_CONSTANT		VAR__IO_DO_PUMP_ON_OFF              IO+do.IPXPUMP.ON

@@ -1,0 +1,132 @@
+
+#SVID	CTC	0	#CST_STATUS__##LP    		         U	  1	  __         LoadPort_Cassette_Status      			
+                                                                 //  0 : NONE	
+                                                                 //  1 : EXIST
+                                                      
+#SVID	CTC	1	#LOTID__##LP    		             A	  16	__			   LoadPort_LotID
+                                                                 //  Load Port  -  Lot ID 		
+                                             
+#SVID	CTC	2	#CSTID__##LP		 	               AV	  16	__			   LoadPort_CarrierID
+                                                                 //  Load Port  -  CarrierId
+                                             
+#SVID	CTC	3	#PPID__##LP     		             A	  12	__			   LoadPort_PPID
+                                                                 //  Load Port  -  PPID		
+                                             
+#SVID	CTC	4	#STATUS__##LP   		             A	  10	__			   LoadPort_Status
+                                                                 //  Load Port  -  Status	
+                                             
+#SVID	CTC	5	#SLOT_ASSIGNED__##LP		         U	  1	  __         LoadPort_Wafer_Number_Assigned			
+                                                                 //  Load Port  -  Wafer Number Assigned
+                                                      
+#SVID	CTC	6	#SLOT_PROCESSED__##LP		         U	  1	  __			   LoadPort_Wafer_Number_Processed
+                                                                 //  Load Port  -  Wafer Number Processed
+                                                      
+#SVID	CTC	7	#SLOT_INFO__##LP		             A	  25	__			   LoadPort_Wafer_Map
+                                                                 //  Load Port  -  Wafer Map  (0 = Wafer not Exist, 1 = Wafer Exist)
+                                                      
+#SVID	CTC	8	#SLOT_MAPPED__##LP		           I	  4	  __			   LoadPort_Total_Number_Of_Mapping_Wafer
+                                                                 //  Load Port  -  Total Number of Mapping Wafer 		
+                                                      
+#SVID CTC 9 #SLOT_ABORTED__##LP              U	  1	  __         LoadPort_Wafer_Number_Aborted			
+                                                                 //  Load Port  -  Wafer Number Aborted
+
+
+#SVID	CTC	10	#PORT_START_TIME__##LP		     A	 14	  __			   LoadPort_Lot_Start_Time
+                                                                 //  Load Port  -  Lot Start Date and Time (yyyymmddhhmmsscc)
+                                                                 
+#SVID	CTC	11	#PORT_END_TIME__##LP		       A	 14	  __			   LoadPort_Lot_End_Time
+                                                                 //  Load Port  -  Lot End Date and Time (yyyymmddhhmmsscc)
+                                                                 
+#SVID	CTC	12	#SLOT_START_TIME__##LP		     A	 14	  __			   LoadPort_Wafer_Start_Time
+                                                                 //  Load Port  -  Wafer Start Time (yyyymmddhhmmsscc)		
+                                                                 
+#SVID	CTC	13	#SLOT_END_TIME__##LP		       A	 14	  __			   LoadPort_Wafer_End_Time
+                                                                 //  Load Port  -  Wafer End time (yyyymmddhhmmsscc)
+                                                                 
+#SVID	CTC	14	#SLOT_MAX__##LP			           U	 1	  __			   LoadPort_Slot_Max
+                                                                 //  Load Port  -  Slot No. (Total Slot Size)		
+                                                                 
+#SVID	CTC	15	#SLOT_MODULE_HISTORY__##LP	   L	 0	  __			   LoadPort_Wafer_Visit_History
+                                                                 //  Load Port  -  Wafer visit history data
+					                                                       //  List of 4 bytes ascii  (PMxx)
+                                                                 
+#SVID	CTC	16	#PORTID__##LP			             U	 1	  __			   LoadPort_PortID
+                                                                 //  Load Port  -  Port No		
+                                                      
+#SVID	CTC	18	#SLOT_INFO_LIST__##LP		       L	 0	  __			   LoadPort_SlotInfoList
+                                                                 //  Load Port  -  Slot Info		
+					                                                       //  List of 25 Ascii  (SlotNo & MaterialID)
+
+#SVID	CTC	19	#BYPASS_READ_ID__##LP 		     BOOL	 1	__		     LoadPort_BypassReadID	
+                                                                 //  Load Port  -  ByPassReadID
+					                                                       //  True : the ID provided with Bind is used, automatically False :
+
+#SVID CTC 20  #LOCATION_ID__##LP             AV    4  __         LoadPort_LocationID             
+                                                                 // Load Port  -  Location ID
+													
+#SVID	CTC	30	#CLAMP_STATUS__##LP		         U	   1	__			   LoadPort_ClampStatus
+                                                                 //  Load Port  -  Clamp Status	
+					                                                       // 0 = Unclamped, 1 = Clamped														
+
+#SVID	CTC	31	#FOUP_STATUS__##LP		         U	   1	__			   LoadPort_Foup_Status
+                                                                 //  Load Port  -  FOUP Status	
+					                                                       // 0 = Unload,    1 = Load
+
+#SVID	CTC	32	#FOUP_DOOR__##LP		           U	   1	__			   LoadPort_Foup_Door_Status
+                                                                 //  Load Port  -  FOUP Door status  
+					                                                       // 0 = Open,      1 = Close
+
+
+#SVID	CTC	40	#ACCESS_MODE__##LP		         U	   1	__			   LoadPort_Access_Mode
+                                                                 //  Load Port  -  Access Mode		
+					                                                       //  0 = Manual Mode, 1 = Auto Mode
+												  
+#SVID	CTC	41	#CARRIERID_STATUS__##LP		     U	   1	__			   LoadPort_CarrierIDStatus
+                                                                 //  Load Port  -  CarrierIDStatus	
+					                                                       //  0 = ID NOT READ, 1 = WAITING FOR HOST, 2 = ID VERIFICATION OK, 3 = ID VERIFICATION FAILED
+												  
+#SVID	CTC	42	#SLOT_MAP_STATUS__##LP		     U	   1	__			   LoadPort_SlotMspStatus
+                                                                 //  Load Port  -  SlotMapStatus		
+					                                                       //  0 = SLOT MAP NOT READ, 1 = WAITING FOR HOST, 2 = SLOT MAP VERIFICATION OK, 3 = SLOT MAP VERIFICATION FAILED	
+
+#SVID	CTC	43	#CARRIER_ACCESS_STATUS__##LP	 U	   1	__			   LoadPort_CarrierAccessStatus
+                                                                 //  Load Port  -  CarrierAccessStatus	
+					                                                       //  0 = NOT ACCESSED, 1 = IN ACCESS, 2 = CARRIER COMPLETE, 3 = CARRIER STOPPED
+
+#SVID	CTC	44	#RESERVATION_STATUS__##LP	     U	   1	__			   LoadPort_ReservationStatus
+                                                                 //  Load Port  -  ReservationStatus	
+					                                                       //  0 = NOT RESERVED, 1 = RESERVED
+												  
+#SVID	CTC	45	#ASSOCIATION_STATUS__##LP	     U	   1	__			   LoadPort_AssociationStatus
+                                                                 //  Load Port  -  AssociationStatus	
+					                                                       //  0 = NOT ASSOCIATED, 1 = ASSOCIATED
+
+#SVID	CTC	46	#TRANSFER_STATUS__##LP		     U	   1	__			   LoadPort_TransferStatus
+                                                                 //  Load Port  -  TransferStatus	
+					                                                       //  0 = OUT OF SERVICE
+					                                                       //  1 = IN SERVICE
+					                                                       //  2 = TRANSFER_READY
+					                                                       //  3 = READY TO LOAD
+					                                                       //  4 = READY TO UNLOAD
+					                                                       //  5 = TRANSFER BLOCKED
+
+#SVID CTC 47  #PORT_STATE_INFO__##LP         L     1  __         LoadPort_StateInfo             
+                                                                 // Load Port State Info
+
+
+#SVID CTC 51  #PORT_LOCATION_ID_PLACEMENT__##LP  AV  1  __       LoadPort_LocID_Placement               
+                                                                 // LPn
+                                   
+#SVID CTC 52  #PORT_LOCATION_ID_DOCKED__##LP     AV  1  __       LoadPort_LocID_Docked             
+                                                                 // FIMS
+
+#SVID CTC 61  #CST_MAP_LIST__##LP          	 L     0   __        LoadPort_CassetteMap_List              
+                                                                 //  0 = None
+			                                                           //  1 = Exist
+			                                                           //  2 = Double
+			                                                           //  3 = Cross
+
+
+#SVID CTC 71  #PJOBID__##LP           	     AV    1  __         LoadPort_PJobID             
+                                                                 //  LPn PJOBID
+

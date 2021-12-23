@@ -1,0 +1,132 @@
+
+  //---------------------------------------------------
+  //  S15Fy
+
+  //-----------------------------
+  // 	Recipe Namespace Action Request   		H -> E	
+
+/*
+  #MESSAGE    S15F3
+  #REPLY      1
+  #DIRECTION  RECEIVE    
+  #TYPE       0
+  
+#UNFORMATTED
+  1.<L,  2
+#UNFIXED
+	 1.<A[1]   $RMNSSPEC
+	 2.<U1[1]  $RMNSCMD
+  
+  #END
+*/
+
+/*  
+RMNSCMD  :  Action to be poerformed on a recipe namespace
+	1 = Create
+	5 = Deleted
+	0, 2-4, 6-63 Reserved
+*/
+  //-----------------------------
+  //-----------------------------
+  // 	Recipe Namespace Action Acknowledge   		H <- E	
+
+/*
+  #MESSAGE    S15F4
+  #DIRECTION  SEND  
+  
+  1.<L,  2
+         1.<U1[1]   $RMACK
+#UNFORMATTED
+         2.<L,  1   $ERR_LIST
+		1.<L,  2
+		       1.<U4[1]  $ERRCODE
+#UNFIXED
+		       2.<A[1]   $ERRTEXT
+
+  #END
+*/
+
+/*  
+  RMACK
+	0 = Successful completion
+   	1 = Cannot perform action
+   	2 = Completed with errors
+   	3 = Action will be completed and notification sent
+   	4 = No request for the action exists
+*/  
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Recipe Namespace Rename Request  		H -> E	
+
+  #MESSAGE    S15F5
+  #REPLY      1
+  #DIRECTION  RECEIVE 
+  #TYPE       0
+
+  1.<L,  2
+#UNFIXED  
+         1.<A[1]   $RMNSSPEC
+#UNFIXED
+         2.<A[1]   $RMNEWNS
+  
+  #END
+  //-----------------------------
+  //-----------------------------
+  // 	Recipe Namespace Rename Acknowledge 	 	H <- E	
+
+  #MESSAGE    S15F6  
+  #DIRECTION  SEND
+  
+  1.<L,  2
+   	 1.<U1[1]   $RMACK
+#UNFORMATTED  
+	 2.<L,  1   $ERR_LIST
+		1.<L,  2
+   		       1.<U4[1]  $ERRCODE
+#UNFIXED
+   		       2.<A[1]   $ERRTEXT
+   				    
+  #END
+  //-----------------------------
+
+
+  //-----------------------------
+  // 	Recipe Rename Request  				H -> E
+
+  #MESSAGE    S15F19 
+  #REPLY      1
+  #DIRECTION  RECEIVE    // EQP <- HOST   
+ 
+  1.<L,  3
+#UNFIXED
+   	 1.<A[1]     $RCPSPEC
+   	 2.<BOOL[1]  $RCPRENAME
+#UNFIXED
+   	 3.<A[1]     $RCPNEWID
+   		 
+  #END
+
+/*  
+  RCPRENAME  :  Indicates whether a recipe is to be renamed (=TRUE) or copied (=FALSE)
+*/
+  //-----------------------------
+  //-----------------------------
+  // 	Recipe Rename Acknowledge 			H <- E	
+
+  #MESSAGE    S15F20  
+  #DIRECTION  SEND       // EQP -> HOST   
+
+  1.<L,  2
+   	 1.<U1[1]   $RMACK
+#UNFORMATTED
+   	 2.<L,  1   $ERR_LIST
+   		1.<L,  2
+   		       1.<U4[1]  $ERRCODE
+#UNFIXED
+   		       2.<A[1]   $ERRTEXT
+  
+  #END
+  //-----------------------------
+

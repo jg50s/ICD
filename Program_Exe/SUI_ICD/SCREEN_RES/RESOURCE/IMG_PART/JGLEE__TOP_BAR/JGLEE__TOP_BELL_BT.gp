@@ -1,0 +1,22 @@
+#BITMAP
+{
+JGLEE__TOP_BELLON_INACTIVE.bmp
+0 0 22 22
+0
+}
+#DYNAMIC
+{
+IF_AND: (dCH1 == dSts1)(dCH2 == dSts2)
+VIS 1
+}
+#BITMAP
+{
+JGLEE__TOP_BELLON_ACTIVE.bmp
+0 0 22 22
+0
+}
+#DYNAMIC
+{
+IF_OR: (dCH1 != dSts1)(dCH2 != dSts2)
+VIS 1
+}

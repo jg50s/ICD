@@ -1,0 +1,500 @@
+
+  //---------------------------------------------------
+  //  S16Fy
+
+
+  //------------------------------
+  // Process Job Command Request   					H->E
+
+  #MESSAGE    S16F5   
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  4
+         1.<U4[1]   $DATAID
+#UNFIXED
+         2.<A[1]    $PJOBID
+#UNFIXED
+         3.<A[1]    $PRCMDNAME      	// ABORT  CANCEL  PAUSE  RESUME 
+         4.<L,  0
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Command Acknowledge   				H<-E
+
+  #MESSAGE    S16F6
+  #DIRECTION  SEND
+
+  1.<L,  2
+#UNFIXED
+         1.<A[1]   $PJOBID
+         2.<L,  2
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED
+                2.<L,  1     $ERROR_LIMIT
+                       1.<L,  2
+                              1.<U1[1]   $ERRCODE
+#UNFIXED
+                              2.<A[1]    $ERRTEXT
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Alert Notify  					H<-E
+
+  #MESSAGE    S16F7 
+  #REPLY      1
+  #DIRECTION  SEND
+  
+  1.<L,  4
+#UNFIXED
+         1.<A[1]    $TIMESTAMP			      // yyyymmddhhmmsscc
+#UNFIXED
+         2.<A[1]    $PJOBID
+         3.<U1[1]   $PRJOBMILESTONE     	// 0 - PR Job Setup,     1 - PR Job Processing,     2 - PR Job Processing Complete, 
+         4.<L,  2				                  // 3 - PR Job Complete,  4 - PR Job Waiting for Start 
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED
+                2.<L,  1     $ERROR_LIMIT
+          	           1.<L,  2
+          	 	                1.<U1[1]   $ERRCODE
+#UNFIXED
+          	 	                2.<A[1]    $ERRTEXT
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Alert Confirm		(PRJAC)			H->E
+
+  #MESSAGE    S16F8
+  #DIRECTION  RECEIVE
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Event Notify  					H<-E
+
+  #MESSAGE    S16F9 
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  4
+         1.<U4[1]   $PREVENTID               // Unique collection event ID for "Waiting for Material" and Process Job State Change events.
+#UNFIXED
+         2.<A[1]    $TIMESTAMP
+#UNFIXED
+         3.<A[1]    $PJOBID
+#UNFORMATTED
+         4.<L,  1   $V_LIMIT
+                1.<L,  2
+                       1.<U4[1]   $VID
+                       2.<V       $V
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Event Confirm		(PRJEC)			H->E
+
+  #MESSAGE    S16F10
+  #DIRECTION  SEND
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Create Enhance Request  			H->E
+
+  #MESSAGE    S16F11 
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+  
+  1.<L,  7
+         1.<U4[1]   1
+#UNFIXED
+         2.<A[1]    $PJOBID
+         3.<B[1]    0D
+#UNFORMATTED         
+         4.<L,  1   $CST_LIST
+                1.<L,  2
+#UNFIXED
+                       1.<A[1]   $CARRIERID
+#UNFORMATTED
+                       2.<L,  1  $SLOT_LIMIT
+                              1.<U1[1]   $SLOTID 		// SLOTID = 1 ~ 25 or 26               
+         5.<L,  3
+                1.<U1[1]   $RECIPE_METHOD		        // 2 : Recipe Only
+#UNFIXED
+                2.<A[1]    $RCPSPEC			            // RCPSPEC - ROUTE RCP         		               		      
+#UNFORMATTED
+         	      3.<L,  1   $RCPPARNM_LIMIT 
+         	             1.<L,  2
+#UNFIXED
+         	                    1.<A[1]   $RCPPARNM
+         	                    2.<V      $RCPPARVR
+         6.<BOOL[1]   $PRPROCESSSTART				// TRUE - Automatic start, FALSE - Manual start
+         7.<L,  0						                // If null, then processing will not be automatically paused
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Create Enhance Ack    				H<-E
+
+  #MESSAGE    S16F12
+  #DIRECTION  SEND
+
+  1.<L,  2
+#UNFIXED
+         1.<A[1]   $PJOBID
+         2.<L,  2
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED
+                2.<L,  1     $ERROR_LIMIT
+                       1.<L,  2
+                              1.<U1[1]   $ERRCODE
+#UNFIXED
+                              2.<A[1]    $ERRTEXT
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Duplicate Create Request  			H->E
+
+  #MESSAGE    S16F13  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  #TYPE       0
+
+  1.<L,  5
+  	     1.<U4[1]   $DATAID
+#UNFORMATTED
+  	     2.<L,  1   $PJOB_LIMIT  	
+  	            1.<L,  3
+#UNFIXED
+  	                   1.<A[1]   $PJOBID
+  	                   2.<B[1]   0D
+#UNFORMATTED  	               
+  	                   3.<L,  1     $CST_LIST
+  	             	            1.<L,  2
+#UNFIXED
+  	             	                   1.<A[1]   $CARRIERID
+#UNFORMATTED
+  	             	  	               2.<L,  1  $SLOT_LIMIT
+  	             	  	                      1.<U1[1]   $SLOTID		// SLOTID = 1 ~ 25
+         3.<L,  3
+         		    1.<U1[1]   $RECIPE_METHOD		        // 2 : Recipe Only
+#UNFIXED
+         		    2.<A[1]    $RCPSPEC			            // RCPSPEC - ROUTE RCP         		      
+         		      
+#UNFORMATTED
+                3.<L,  1   $RCPPARNM_LIMIT 
+         	             1.<L,  2
+#UNFIXED
+         	                    1.<A[1]   $RCPPARNM
+         	                    2.<V]     $RCPPARVR
+  	        
+  	     4.<BOOL[1]   $PRPROCESSSTART					// TRUE - Automatic Start, FALSE - Manual Start
+  	     5.<L,  0							// PR-PAUSE EVENT : list, currently not supported
+
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Duplicate Create Ack    			H<-E
+
+  #MESSAGE    S16F14
+  #DIRECTION  SEND
+
+  1.<L,  2
+#UNFORMATTED
+         1.<L,  1  $PJOB_LIMIT
+#UNFIXED
+                1.<A[1]   $PJOBID				// A
+         2.<L,  2
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED
+                2.<L,  1  $ERROR_LIMIT
+                       1.<L, 2
+                             1.<U1[1]  $ERRCODE			// U1
+#UNFIXED
+                             2.<A[1]   $ERRTEXT
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Multi Create Request 				H->E
+
+  #MESSAGE    S16F15  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  2
+         1.<U4[1]   $DATAID						// DATAID = 1
+#UNFORMATTED
+         2.<L,  1   $LIST_LIMIT
+                1.<L,  6
+#UNFIXED
+                       1.<A[1]   $PJOBID
+                       2.<B[1]   0D	            			  // (0D - carriers, 0E - substrate) 
+#UNFORMATTED
+   		                 3.<L,  1     $CST_LIST
+   		                        1.<L,  2
+#UNFIXED
+             	                       1.<A[1]   $CARRIERID
+#UNFORMATTED
+       			                         2.<L,  1  $SLOT_LIMIT
+                                            1.<U1[1]   $SLOTID		// SLOTID = 1 ~ 25
+                       4.<L,  3                       
+         		                  1.<U1[1]   $RECIPE_METHOD		        // 2 : Recipe Only
+#UNFIXED
+         		                  2.<A[1]    $RCPSPEC			            // RCPSPEC - ROUTE RCP         		      
+
+#UNFORMATTED
+         		                  3.<L,  1   $RCPPARNM_LIMIT 
+         		                         1.<L,  2
+#UNFIXED
+         		                                1.<A[1]   $RCPPARNM
+#UNFIXED
+         		                                2.<A[1]   $RCPPARVAL
+
+   		                 5.<BOOL[1]   $PRPROCESSSTART			// TRUE - Automatic start, FALSE - Manual start
+   		                 6.<L,  0						              // If null, then processing will not be automatically paused
+    
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Multi Create Ack   				H<-E
+
+  #MESSAGE    S16F16
+  #DIRECTION  SEND
+
+  1.<L,  2
+#UNFORMATTED
+         1.<L,  1  $PJ_LIMIT
+#UNFIXED
+                1.<A[1]   $PJOBID
+         2.<L,  2
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED
+                2.<L,  1  $ERROR_LIMIT
+                       1.<L,  2
+                          1.<U1[1]   $ERRCODE			// U1
+#UNFIXED
+                          2.<A[1]    $ERRTEXT
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Dequeue Request  				H->E
+
+  #MESSAGE    S16F17  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+#UNFORMATTED
+  1.<L,  1  $PR_LIMIT
+#UNFIXED
+         1.<A[1]   $PJOBID		
+
+  #END
+  //------------------------------
+  //------------------------------
+  // 	Process Job Dequeue Acknowledge   			H<-E
+
+  #MESSAGE    S16F18
+  #DIRECTION  SEND
+         
+  1.<L,  2
+#UNFORMATTED
+         1.<L,  1   $PR_LIMIT
+#UNFIXED
+                1.<A[1]      $PJOBID
+         2.<L,  2
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED
+                2.<L,  1  $ERROR_LIMIT
+                       1.<L,  2
+                              1.<U1[1]   $ERRCODE			
+#UNFIXED
+                              2.<A[1]    $ERRTEXT
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Get All Jobs Request  				H->E
+
+  #MESSAGE    S16F19  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Get All Jobs Acknowledge  			H<-E
+
+  #MESSAGE    S16F20
+  #DIRECTION  SEND
+
+#UNFORMATTED
+  1.<L,  1  $LIST_LIMIT
+         1.<L,  2
+#UNFIXED
+                1.<A[1]    $PJOBID		
+                2.<U1[1]   $PRSTATE		
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Process Job Get Space Request  				H->E
+
+  #MESSAGE    S16F21  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  #END
+  //------------------------------
+  //------------------------------
+  // Process Job Get Space Acknowledge  			H<-E
+
+  #MESSAGE    S16F22
+  #DIRECTION  SEND
+  
+  1.<U2[1]   $PRJOBSPACE
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // PRJobSetStartMethod  					H->E
+
+  #MESSAGE    S16F25  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+  
+  1.<L,  2
+#UNFORMATTED  
+         1.<L,  1  $PR_LIMIT
+#UNFIXED
+                1.<A[1]   $PJOBID
+         2.<BOOL[1]   $PRPROCESSSTART		// TRUE - Automatic start, FALSE - Manual start
+
+  #END
+  //------------------------------
+  //------------------------------
+  // PRJobSetStartMethod Acknowledge   				H<-E
+
+  #MESSAGE    S16F26
+  #DIRECTION  SEND
+
+  1.<L,  2
+#UNFORMATTED  
+         1.<L,  1  $PR_LIMIT
+#UNFIXED
+                1.<A[1]   $PJOBID
+         2.<L,  2
+                1.<BOOL[1]   $ACKA
+#UNFORMATTED  
+                2.<L,  1  $ERROR_LIMIT
+                       1.<L,  2
+                              1.<U1[1]   $ERRCODE			
+#UNFIXED
+                              2.<A[1]   $ERRTEXT
+         
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // Control Job Command Request  				H->E
+
+  #MESSAGE    S16F27  
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<L,  3
+#UNFIXED
+         1.<A[1]    $CTLJOBID
+         2.<U1[1]   $CTLJOBCMD			
+#UNFORMATTED
+	 3.<L,  2   $LIST_LIMIT			
+#UNFIXED
+                1.<A[1]    "ACTION"		// CPNAME
+                2.<U1[1]   $CPVAL		// 0 = SAVEJOBS    0 != REMOVEJOBS
+  
+  #END
+  
+/*
+CTLJOBCMD
+	1 = CJStart   		(Not supported)
+	2 = CJPause		
+	3 = CJResume
+	4 = CJCancel
+	5 = CJDeselect
+	6 = CJStop
+	7 = CJAbort
+	8 = CJHOQ  		
+*/
+  //------------------------------
+  //------------------------------
+  // Control Job Command Acknowledge  				H<-E
+
+  #MESSAGE    S16F28
+  #DIRECTION  SEND
+         
+  1.<L,  2  	
+         1.<BOOL[1]   $ACKA	
+#UNFORMATTED
+         2.<L,  2  $LIST_LIMIT   
+	        1.<U2[1]   $ERRCODE
+#UNFIXED
+	        2.<A[1]    $ERRTEXT  
+
+  #END
+  //------------------------------
+
+
+  //------------------------------
+  // PRSetMtrlOrder Request  					H->E
+
+  #MESSAGE    S16F29
+  #REPLY      1
+  #DIRECTION  RECEIVE
+
+  1.<U1[1]   $PRMTRLORDER
+  
+  #END
+  
+  /*
+  1 = ARRIVAL  : Process whichever material first arrives
+  2 = OPTIMIZE : Process in an order that maximizes throughput
+  3 = LIST     : Follow the order in the list
+  */
+  //------------------------------
+  //------------------------------
+  // PRSetMtrlOrder Acknowledge  				H<-E
+
+  #MESSAGE    S16F30
+  #DIRECTION  SEND
+
+  1.<BOOL[1]   $ACKA         
+
+  #END
+  //------------------------------
+
+

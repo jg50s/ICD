@@ -1,0 +1,91 @@
+
+//---------------------------------------------------------------
+// CTC
+#EQP0__ALARM_OFFSET                       0
+#EQP0__ALARM_RANGE	                  19999
+
+
+// TMC
+#EQP1__ALARM_OFFSET                   20000
+#EQP1__ALARM_RANGE	                  79999
+
+
+// PM1
+#EQP2__ALARM_OFFSET                  100000
+#EQP2__ALARM_RANGE	                  99999
+
+// PM2
+#EQP3__ALARM_OFFSET                  200000
+#EQP3__ALARM_RANGE	                  99999
+
+// PM3
+#EQP4__ALARM_OFFSET                  300000
+#EQP4__ALARM_RANGE	                  99999
+
+// PM4
+#EQP5__ALARM_OFFSET                  400000
+#EQP5__ALARM_RANGE	                  99999
+
+// PM5
+#EQP6__ALARM_OFFSET                  500000
+#EQP6__ALARM_RANGE	                  99999
+
+// PM6
+#EQP7__ALARM_OFFSET                  600000
+#EQP7__ALARM_RANGE	                  99999
+//---------------------------------------------------------------
+
+
+//---------------------------------------------------------------
+#OBJECT		DB_CFG                       100
+#OBJECT		DB_GUI                       200
+
+#OBJECT		OPR_TIMER                    300
+#OBJECT		OPR_PART                     400
+#OBJECT		OPR_CTC_MODE                 600
+#OBJECT		OPR_MAINT                    700
+
+#OBJECT		MNG_SIGNAL_TOWER             800
+#OBJECT		MNG_ALARM_CTRL               900
+#OBJECT		MNG_SYSTEM_INFO              1000
+
+#OBJECT		FNC_ATM_ROBOT                1100
+#OBJECT		FNC_VAC_ROBOT                1200
+#OBJECT		FNC_TMC_SYS                  1300
+#OBJECT		FNC_PMC_SYS                  1400
+
+#OBJECT		PHY_LP1                      2100
+#OBJECT		PHY_LP2                      2200
+#OBJECT		PHY_LP3                      2300
+
+#OBJECT		PHY_ATM_ROBOT                2500
+#OBJECT		PHY_VAC_ROBOT                2600
+
+#OBJECT		PHY_AL1                      3100
+#OBJECT		PHY_LBA                      3200
+#OBJECT		PHY_LBB                      3300
+#OBJECT		PHY_LBC                      3400
+#OBJECT		PHY_LBD                      3500
+
+#OBJECT		PHY_TMC_SYS                  3600
+#OBJECT		PHY_TMC_CHM                  3700
+
+#OBJECT		PHY_BFF1                     3800
+#OBJECT		PHY_BFF2                     3900
+
+#OBJECT		PHY_PM1                      4100
+#OBJECT		PHY_PM2                      4200
+#OBJECT		PHY_PM3                      4300
+#OBJECT		PHY_PM4                      4400
+#OBJECT		PHY_PM5                      4500
+#OBJECT		PHY_PM6                      4600
+
+#OBJECT		UTILITY__LOG_SIM_CTRL        5100
+
+#OBJECT		LINK_CTC                     6100
+#OBJECT		LINK_TMC_LOG                 6200
+#OBJECT		LINK_PM1_LOG                 6300
+
+#OBJECT		FA_APP_CTRL                  7100
+#OBJECT		FA_DRV                       7200
+//---------------------------------------------------------------
