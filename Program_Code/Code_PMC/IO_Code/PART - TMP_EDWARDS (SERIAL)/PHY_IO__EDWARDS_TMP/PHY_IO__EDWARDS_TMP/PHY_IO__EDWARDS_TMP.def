@@ -1,0 +1,6 @@
+; PHY_IO__EDWARDS_TMP.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PHY_IO__EDWARDS_TMP"
+
+EXPORTS
+    ; Explicit exports can go here

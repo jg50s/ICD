@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IO_RS232__VAT_APC", "IO_RS232__VAT_APC\IO_RS232__VAT_APC.vcproj", "{6646EA9F-22BA-45AA-BC9D-4C555E906615}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6646EA9F-22BA-45AA-BC9D-4C555E906615}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6646EA9F-22BA-45AA-BC9D-4C555E906615}.Debug|Win32.Build.0 = Debug|Win32
+		{6646EA9F-22BA-45AA-BC9D-4C555E906615}.Release|Win32.ActiveCfg = Release|Win32
+		{6646EA9F-22BA-45AA-BC9D-4C555E906615}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

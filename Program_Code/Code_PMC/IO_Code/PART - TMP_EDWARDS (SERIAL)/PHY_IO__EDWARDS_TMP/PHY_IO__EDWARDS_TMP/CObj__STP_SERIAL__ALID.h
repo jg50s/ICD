@@ -1,0 +1,12 @@
+#pragma once
+
+
+// ...
+#define  ALID__OFFLINE_ALARM							11
+#define  ALID__CURRENT_STATUS__LOCAL_MODE				12
+#define  ALID__PUMP_POWER_OFF__TIMEOUT					13
+#define  ALID__PUMP_POWER_ON__TIMEOUT					14
+#define  ALID__PUMP_REMOTE__TIMEOUT						15
+#define  ALID__PUMP_LOCAL__TIMEOUT						16
+#define  ALID__PUMP_ACCELERATION__TIMEOUT				17
+

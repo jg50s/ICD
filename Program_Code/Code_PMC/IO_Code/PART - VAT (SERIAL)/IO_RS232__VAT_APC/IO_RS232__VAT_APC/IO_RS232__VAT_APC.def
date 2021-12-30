@@ -1,0 +1,6 @@
+; IO_RS232__VAT_APC.def : Declares the module parameters for the DLL.
+
+LIBRARY      "IO_RS232__VAT_APC"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -1,0 +1,6 @@
+; PHY_RS485__MFC_UNIT.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PHY_RS485__MFC_UNIT"
+
+EXPORTS
+    ; Explicit exports can go here
