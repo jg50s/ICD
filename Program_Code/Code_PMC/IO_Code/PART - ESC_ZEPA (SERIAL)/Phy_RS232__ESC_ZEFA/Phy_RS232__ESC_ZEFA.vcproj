@@ -125,6 +125,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="..\..\..\CCommon_Error;..\..\..\CCommon_Utility;..\PHY_RS232__ESC_ZEFA"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -187,43 +188,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\CCommon_Error.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA__CALL_FNC.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA__DRV_FNC.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA__LOG_FNC.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA__MON_FNC.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA__SUB_FNC.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Interface_Code.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Phy_RS232__ESC_ZEFA.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Phy_RS232__ESC_ZEFA.def"
+				>
+			</File>
+			<File
+				RelativePath=".\Phy_RS232__ESC_ZEFA.h"
 				>
 			</File>
 			<File
@@ -246,32 +219,96 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<Filter
+				Name="Interface_Code"
+				>
+				<File
+					RelativePath=".\Interface_Code.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Interface_Code.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CCommon_Error"
+				>
+				<File
+					RelativePath="..\..\..\CCommon_Error\CCommon_Error.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\CCommon_Error\CCommon_Error.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CCommon_DEF"
+				>
+				<File
+					RelativePath=".\CCommon_DEF.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CObj__ZEFA_SERIAL"
+				>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__CALL_PRC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__DRV_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__LOG_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ZEFA_SERIAL__MON_STATE_CHECK.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CCommon_Utility"
+				>
+				<File
+					RelativePath="..\..\..\CCommon_Utility\CCommon_Utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\CCommon_Utility\CCommon_Utility.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\CCommon_DEF.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CCommon_Error.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CObj_Phy__ESC_ZEFA.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Interface_Header.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Phy_RS232__ESC_ZEFA.h"
-				>
-			</File>
 			<File
 				RelativePath=".\Resource.h"
 				>

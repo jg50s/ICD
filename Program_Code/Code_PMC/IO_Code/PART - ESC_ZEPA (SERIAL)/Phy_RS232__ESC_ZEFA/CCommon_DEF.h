@@ -1,14 +1,13 @@
-#ifndef _CCommon_DEF_H_
-#define _CCommon_DEF_H_
+#pragma once
 
 
-//.....
+// ...
 #define  MAX_REAL			64
 #define  CRC16				0xA001
 
 #define  MAX_LEN			40
 
-//.....
+// ...
 #define  OFFLINE			-1
 #define  ONLINE				1
 #define  OFF				0
@@ -27,9 +26,4 @@
 #define	 SAC				0x23
 #define	 ECH				0x3E
 #define  PACKET_ADR_DEF		0x30
-
-//
-
-
-#endif
 

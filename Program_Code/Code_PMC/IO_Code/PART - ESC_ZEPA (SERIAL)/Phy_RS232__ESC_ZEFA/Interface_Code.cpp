@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "Interface_Header.h"
 
-#include "CObj_Phy__ESC_ZEFA.h"
+#include "CObj__ZEFA_SERIAL.h"
 
 
 
@@ -18,19 +18,19 @@ DECLARE_END__DLL_IO_OBJ__GET_VERSION
 //----------------------------------------------------------
 
 //----------------------------------------------------------
-#define CLS__ESC_ZEFA					"RS232"
+#define CLS__ZEFA_SERIAL				"ZEFA.SERIAL"
 
 
 DECLARE_START__DLL_IO_OBJ__GET_CLASS_LIST
 
-ADD__OBJ_CLS(CLS__ESC_ZEFA);
+ADD__OBJ_CLS(CLS__ZEFA_SERIAL);
 
 DECLARE_END__DLL_IO_OBJ__GET_CLASS_LIST
 
 
 DECLARE_START__DLL_IO_OBJ__CREATE_LINK
 
-IF__OBJ_CLS(CLS__ESC_ZEFA)		    return (new CObj_Phy__ESC_ZEFA);
+IF__OBJ_CLS(CLS__ZEFA_SERIAL)		    return (new CObj__ZEFA_SERIAL);
 
 DECLARE_END__DLL_IO_OBJ__CREATE_LINK
 
