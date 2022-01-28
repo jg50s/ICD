@@ -1,0 +1,5 @@
+#ID=11	24411	LIGHT	PHY_IO__AL1 - Offline.
+#ID=12	24412	LIGHT	PHY_IO__AL1 - Error Code !
+#ID=13	24413	LIGHT	PHY_IO__AL1 - Align and Pick Action Timeout Occur.
+#ID=14	24414	LIGHT	PHY_IO__AL1 - Config Option, Mapping Disable Alarm.
+#ID=15	24415	LIGHT	PHY_IO__AL1 - Invalid Target Station Eorror.

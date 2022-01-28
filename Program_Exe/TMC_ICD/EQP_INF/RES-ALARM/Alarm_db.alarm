@@ -1,0 +1,187 @@
+
+//---------------------------------------------------------------
+// CTC
+#EQP0__ALARM_OFFSET                       0
+#EQP0__ALARM_RANGE	                  19999
+
+
+// TMC
+#EQP1__ALARM_OFFSET                   20000
+#EQP1__ALARM_RANGE	                  79999
+
+
+// PM1
+#EQP2__ALARM_OFFSET                  100000
+#EQP2__ALARM_RANGE	                  99999
+
+// PM2
+#EQP3__ALARM_OFFSET                  200000
+#EQP3__ALARM_RANGE	                  99999
+
+// PM3
+#EQP4__ALARM_OFFSET                  300000
+#EQP4__ALARM_RANGE	                  99999
+
+// PM4
+#EQP5__ALARM_OFFSET                  400000
+#EQP5__ALARM_RANGE	                  99999
+
+// PM5
+#EQP6__ALARM_OFFSET                  500000
+#EQP6__ALARM_RANGE	                  99999
+
+// PM6
+#EQP7__ALARM_OFFSET                  600000
+#EQP7__ALARM_RANGE	                  99999
+//---------------------------------------------------------------
+
+
+//---------------------------------------------------------------
+#OBJECT		DB_CFG                       100
+#OBJECT		DB_GUI                       200
+#OBJECT		DB_LBA                       300
+#OBJECT		DB_LBB                       400
+#OBJECT		DB_RCP                       500
+
+#OBJECT		TMC_LINK                     600
+#OBJECT		FNC_BALLAST_DATALOG          700
+#OBJECT		PHY__SIGNAL_TOWER            800
+
+#OBJECT		INF__UPPER_VAC_ROBOT         1100
+#OBJECT		INF__VAC_ROBOT               1200
+#OBJECT		OPR__VAC_ROBOT               1300
+#OBJECT		FNC__VAC_ROBOT               1400
+#OBJECT		PHY__VAC_ROBOT               1500
+
+#OBJECT		PHY__PMx                     2100
+#OBJECT		OPR__PMx_HANDOFF             2200
+#OBJECT		PHY_IO__VAC_ROBOT            2300
+
+#OBJECT		INF__UPPER_ATM_ROBOT         3100
+#OBJECT		INF__ATM_ROBOT               3200
+#OBJECT		OPR__ATM_ROBOT               3300
+#OBJECT		FNC__ATM_ROBOT               3400
+#OBJECT		PHY__ATM_ROBOT               3500
+#OBJECT		PHY__BUFF1                   3600
+#OBJECT		PHY__BUFF2                   3700
+#OBJECT		PHY_IO__ATM_ROBOT            3800
+
+#OBJECT		INF__AL1                     4100
+#OBJECT		OPR__AL1                     4200
+#OBJECT		PHY__AL1                     4300
+#OBJECT		PHY_IO__AL1                  4400
+
+#OBJECT		PAGE__TMC_CHM                5100
+#OBJECT		PAGE__LBA                    5200
+#OBJECT		PAGE__LBB                    5300
+#OBJECT		PAGE__LBC                    5400
+#OBJECT		PAGE__LBD                    5500
+#OBJECT		PAGE__LP1_RF                 5600
+#OBJECT		PAGE__LP2_RF                 5700
+#OBJECT		PAGE__LP3_RF                 5800
+
+#OBJECT		INF__TMC_SYS                 6100
+#OBJECT		INF__TMC_CHM                 6200
+#OBJECT		OPR__TMC_SYS                 6300
+#OBJECT		OPR__TMC_CHM                 6400
+#OBJECT		FNC__VAC_CHM                 6500
+#OBJECT		FNC__TMC_VLV                 6600
+#OBJECT		FNC__PMx_VLV                 6700
+#OBJECT		PHY__TMC_VLV                 6800
+#OBJECT		PHY__TMC_CHM                 6900
+
+#OBJECT		INF__LBA                     7100
+#OBJECT		INF__LBB                     7200
+#OBJECT		INF__LBC                     7300
+#OBJECT		INF__LBD                     7400
+#OBJECT		OPR__LBA                     7500
+#OBJECT		OPR__LBB                     7600
+#OBJECT		OPR__LBC                     7700
+#OBJECT		OPR__LBD                     7800
+#OBJECT		MNT__LBA_PROC                8100
+#OBJECT		FNC__LBA_PROC                8200
+#OBJECT		FNC__LBA_STEP                8300
+#OBJECT		FNC__LBA_LOG                 8400
+#OBJECT		MNT__LBB_PROC                8500
+#OBJECT		FNC__LBB_PROC                8600
+#OBJECT		FNC__LBB_STEP                8700
+#OBJECT		FNC__LBB_LOG                 8800
+#OBJECT		FNC__LBx_TEST                8900
+#OBJECT		FNC__LBA                     9100
+#OBJECT		FNC__LBB                     9200
+#OBJECT		FNC__LBC                     9300
+#OBJECT		FNC__LBD                     9400
+#OBJECT		FNC__LBA_CHM                 9500
+#OBJECT		FNC__LBB_CHM                 9600
+#OBJECT		FNC__LBCD_CHM                9700
+#OBJECT		PHY__LBCD_VLV                9800
+#OBJECT		PHY__LBA                     9900
+#OBJECT		PHY__LBB                     10000
+#OBJECT		PHY__LBC                     10100
+#OBJECT		PHY__LBD                     10200
+
+#OBJECT		PHY__CHM_PUMP                11100
+#OBJECT		PHY__LBA_PUMP                11200
+#OBJECT		PHY__LBB_PUMP                11300
+#OBJECT		PHY__LBCD_PUMP               11400
+
+#OBJECT		INF__LP1                     12100
+#OBJECT		OPR__LP1                     12200
+#OBJECT		FNC__LP1                     12300
+#OBJECT		PHY__LP1                     12400
+#OBJECT		PHY_IO__LP1                  12500
+#OBJECT		PHY_RS232__LP1               12600
+#OBJECT		PHY_OHT__LP1                 12700
+
+#OBJECT		INF__LP2                     13100
+#OBJECT		OPR__LP2                     13200
+#OBJECT		FNC__LP2                     13300
+#OBJECT		PHY__LP2                     13400
+#OBJECT		PHY_IO__LP2                  13500
+#OBJECT		PHY_RS232__LP2               13600
+#OBJECT		PHY_OHT__LP2                 13700
+
+#OBJECT		INF__LP3                     14100
+#OBJECT		OPR__LP3                     14200
+#OBJECT		FNC__LP3                     14300
+#OBJECT		PHY__LP3                     14400
+#OBJECT		PHY_IO__LP3                  14500
+#OBJECT		PHY_RS232__LP3               14600
+#OBJECT		PHY_OHT__LP3                 14700
+
+#OBJECT		PHY_LBA_VAT                  20100
+#OBJECT		PHY_LBB_VAT                  20200
+
+#OBJECT		PHY_HTR__LL1_CHUCK           21100
+#OBJECT		PHY_HTR__LL1_PUMP            21200
+#OBJECT		PHY_HTR__LL2_CHUCK           21300
+#OBJECT		PHY_HTR__LL2_PUMP            21400
+#OBJECT		PHY_HTR__LL1_3_WALL          21500
+#OBJECT		PHY_HTR__LL2_4_WALL          21600
+#OBJECT		PHY_HTR__LL3_4_PUMP          21700
+#OBJECT		PHY_HTR__TM_PUMP             21800
+#OBJECT		PHY_HTR__PM1_GATE            21900
+#OBJECT		PHY_HTR__PM2_GATE            22000
+#OBJECT		PHY_HTR__PM3_GATE            22100
+#OBJECT		PHY_HTR__PM4_GATE            22200
+#OBJECT		PHY_HTR__PM5_GATE            22300
+#OBJECT		PHY_HTR__PM6_GATE            22400
+
+#OBJECT		MON__CDA                     23100
+
+#OBJECT		IO                           31100
+#OBJECT		PHY_LBA_MFC1                 31200
+#OBJECT		PHY_LBB_MFC1                 31300
+#OBJECT		IO_LBA__CHM_GAUGE            31400
+#OBJECT		IO_LBB__CHM_GAUGE            31500
+#OBJECT		IO_LBC__CHM_GAUGE            31600
+#OBJECT		IO_LBD__CHM_GAUGE            31700
+#OBJECT		IO_TM1__CHM_GAUGE            31800
+#OBJECT		IO_LBA__PUMP_GAUGE           31900
+#OBJECT		IO_LBB__PUMP_GAUGE           32000
+#OBJECT		IO_LBCD__PUMP_GAUGE          32100
+#OBJECT		IO_TM1__PUMP_GAUGE           32200
+#OBJECT		PHY_RS232__RF1               32300
+#OBJECT		PHY_RS232__RF2               32400
+#OBJECT		PHY_RS232__RF3               32500
+#OBJECT		PHY_IO__FFU                  32600

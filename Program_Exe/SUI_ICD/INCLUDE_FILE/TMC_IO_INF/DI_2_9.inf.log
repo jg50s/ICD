@@ -1,0 +1,6 @@
+00)   IO+di.ATM_Robot.Retract_LL1
+01)   IO+di.ATM_Robot.Retract_LL2
+02)   IO+di.EFEM.FFU.Alarm.Active
+03)   IO+di.TMC.IO_Box.Cooling.Fan1
+04)   IO+di.LBA.Chamber.Lid.Close
+05)   IO+di.LBB.Chamber.Lid.Close

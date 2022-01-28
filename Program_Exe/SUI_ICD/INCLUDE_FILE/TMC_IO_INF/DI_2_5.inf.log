@@ -1,0 +1,16 @@
+00)   IO+di.CDA.PM1.PRESSURE.SW
+01)   IO+di.CDA.PM2.PRESSURE.SW
+02)   IO+di.CDA.TM_LL.PRESSURE.SW
+03)   IO+di.LL1.Wafer.Protrusion.1.OK
+04)   IO+di.LL1.Wafer.Protrusion.2.OK
+05)   IO+di.LL1.Wafer.Protrusion.3.OK
+06)   IO+di.LL2.Wafer.Protrusion.1.OK
+07)   IO+di.LL2.Wafer.Protrusion.2.OK
+08)   IO+di.LL2.Wafer.Protrusion.3.OK
+09)   IO+di.PM1.Wafer.Protrusion.1.OK
+10)   IO+di.PM1.Wafer.Protrusion.2.OK
+11)   IO+di.PM1.Wafer.Protrusion.3.OK
+12)   IO+di.PM2.Wafer.Protrusion.1.OK
+13)   IO+di.PM2.Wafer.Protrusion.2.OK
+14)   IO+di.PM2.Wafer.Protrusion.3.OK
+15)   IO+di.PM3.Wafer.Protrusion.1.OK

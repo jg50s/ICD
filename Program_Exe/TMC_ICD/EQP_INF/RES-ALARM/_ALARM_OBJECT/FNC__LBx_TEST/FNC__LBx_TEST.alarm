@@ -1,4 +1,4 @@
-#ID=1	1	LIGHT	FNC__LBx_TEST - LBA's status is not "MAINTMODE".
-#ID=2	2	LIGHT	FNC__LBx_TEST - LBB's status is not "MAINTMODE".
-#ID=3	3	LIGHT	FNC__LBx_TEST - LBC's status is not "MAINTMODE".
-#ID=4	4	LIGHT	FNC__LBx_TEST - LBD's status is not "MAINTMODE".
+#ID=1	28901	LIGHT	FNC__LBx_TEST - LBA's status is not "MAINTMODE".
+#ID=2	28902	LIGHT	FNC__LBx_TEST - LBB's status is not "MAINTMODE".
+#ID=3	28903	LIGHT	FNC__LBx_TEST - LBC's status is not "MAINTMODE".
+#ID=4	28904	LIGHT	FNC__LBx_TEST - LBD's status is not "MAINTMODE".

@@ -1,5 +1,0 @@
-#ID=1	1	LIGHT	PHY_IO__PUMP - Offline.
-#ID=2	2	LIGHT	PHY_IO__PUMP - Pump Power Off TimeOut.
-#ID=3	3	LIGHT	PHY_IO__PUMP - Pump Power On TimeOut.
-#ID=4	4	LIGHT	PHY_IO__PUMP - Now... Pump is Alarm Status.
-#ID=5	5	LIGHT	PHY_IO__PUMP - Now... IPX Pump Water Leak Detect Status.

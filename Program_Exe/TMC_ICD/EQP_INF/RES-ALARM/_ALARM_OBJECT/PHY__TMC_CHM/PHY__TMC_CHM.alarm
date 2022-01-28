@@ -1,8 +1,8 @@
-#ID=1	1	LIGHT	PHY__TMC_CHM - Soft Pumping Timeout !
-#ID=2	2	LIGHT	PHY__TMC_CHM - Fast Pumping Timeout !
-#ID=3	3	LIGHT	PHY__TMC_CHM - Soft Venting Timeout !
-#ID=4	4	LIGHT	PHY__TMC_CHM - Fast Venting Timeout !
-#ID=5	5	LIGHT	PHY__TMC_CHM - Vent Valve Interlock With Pumping Valve Open !
-#ID=6	6	LIGHT	PHY__TMC_CHM - Dry Pump is Offline or Not Run Status !
-#ID=7	7	LIGHT	PHY__TMC_CHM - Exhaust Pressure Timeout !
-#ID=8	8	LIGHT	PHY__TMC_CHM - Chamber's lid is not closed !
+#ID=1	26901	LIGHT	PHY__TMC_CHM - Soft Pumping Timeout !
+#ID=2	26902	LIGHT	PHY__TMC_CHM - Fast Pumping Timeout !
+#ID=3	26903	LIGHT	PHY__TMC_CHM - Soft Venting Timeout !
+#ID=4	26904	LIGHT	PHY__TMC_CHM - Fast Venting Timeout !
+#ID=5	26905	LIGHT	PHY__TMC_CHM - Vent Valve Interlock With Pumping Valve Open !
+#ID=6	26906	LIGHT	PHY__TMC_CHM - Dry Pump is Offline or Not Run Status !
+#ID=7	26907	LIGHT	PHY__TMC_CHM - Exhaust Pressure Timeout !
+#ID=8	26908	LIGHT	PHY__TMC_CHM - Chamber's lid is not closed !

@@ -1,14 +1,14 @@
-#ID=1	1	LIGHT	FNC__VAC_ROBOT - Unknown Module Name !
-#ID=2	2	LIGHT	FNC__VAC_ROBOT - PMC's Slit Valve is not closed !
-#ID=3	3	LIGHT	FNC__VAC_ROBOT - There is no material on Robot's A-Arm.
+#ID=1	21401	LIGHT	FNC__VAC_ROBOT - Unknown Module Name !
+#ID=2	21402	LIGHT	FNC__VAC_ROBOT - PMC's Slit Valve is not closed !
+#ID=3	21403	LIGHT	FNC__VAC_ROBOT - There is no material on Robot's A-Arm.
 
-#ID=4	4	LIGHT	FNC__VAC_ROBOT - There is no material on Robot's B-Arm.
+#ID=4	21404	LIGHT	FNC__VAC_ROBOT - There is no material on Robot's B-Arm.
 
-#ID=5	5	LIGHT	FNC__VAC_ROBOT - There is material on Robot's A-Arm.
-#ID=6	6	LIGHT	FNC__VAC_ROBOT - There is material on Robot's B-Arm.
-#ID=7	7	LIGHT	FNC__VAC_ROBOT - There is no material in PMC.
-#ID=8	8	LIGHT	FNC__VAC_ROBOT - There is material in PMC.
-#ID=9	9	LIGHT	FNC__VAC_ROBOT - Target PM's transfer state is not ready to pick.
-#ID=10	10	LIGHT	FNC__VAC_ROBOT - Target PM's transfer state is not ready to place.
-#ID=11	11	LIGHT	FNC__VAC_ROBOT - Target PM's PIN not Up.
-#ID=12	12	LIGHT	FNC__VAC_ROBOT - Target PM's PIN not Down.
+#ID=5	21405	LIGHT	FNC__VAC_ROBOT - There is material on Robot's A-Arm.
+#ID=6	21406	LIGHT	FNC__VAC_ROBOT - There is material on Robot's B-Arm.
+#ID=7	21407	LIGHT	FNC__VAC_ROBOT - There is no material in PMC.
+#ID=8	21408	LIGHT	FNC__VAC_ROBOT - There is material in PMC.
+#ID=9	21409	LIGHT	FNC__VAC_ROBOT - Target PM's transfer state is not ready to pick.
+#ID=10	21410	LIGHT	FNC__VAC_ROBOT - Target PM's transfer state is not ready to place.
+#ID=11	21411	LIGHT	FNC__VAC_ROBOT - Target PM's PIN not Up.
+#ID=12	21412	LIGHT	FNC__VAC_ROBOT - Target PM's PIN not Down.

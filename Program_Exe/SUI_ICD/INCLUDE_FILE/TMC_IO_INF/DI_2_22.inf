@@ -1,0 +1,12 @@
+IO+di.Alm_CHM.Dry_Pump
+IO+di.Alm_CHM.Lid.Open
+IO+di.Alm_CHM.Water.Leak
+IO+di.Alm_Interlock.Disable
+IO+di.Alm_PM1.Water.Leak
+IO+di.Alm_PM2.Water.Leak
+IO+di.Alm_PM3.Water.Leak
+IO+di.Alm_PM4.Water.Leak
+IO+di.Alm_PM5.Water.Leak
+IO+di.Alm_PM6.Water.Leak
+IO+di.Alm_LL1.Lid.Open
+IO+di.Alm_LL2.Lid.Open

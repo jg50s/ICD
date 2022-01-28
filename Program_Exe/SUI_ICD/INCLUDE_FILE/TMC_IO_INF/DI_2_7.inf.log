@@ -1,0 +1,15 @@
+00)   IO+di.LLx.Dry_Pump.Warning.Normal
+01)   IO+di.LLx.Dry_Pump.Blower.Running
+02)   IO+di.LLx.Dry_Pump.Alarm.Normal
+03)   IO+di.CHM.Dry_Pump.Running
+04)   IO+di.CHM.Dry_Pump.Warning.Normal
+05)   IO+di.CHM.Dry_Pump.Blower.Running
+06)   IO+di.CHM.Dry_Pump.Alarm.Normal
+07)   IO+di.TMC.Chamber.Lid.Close
+08)   IO+di.TMC.Water_Leak.Sns.1.OK
+09)   IO+di.TMC.Water_Leak.Sns.2.OK
+10)   IO+di.PM1.VAC.SNS
+11)   IO+di.PM1.Shutter.Open
+12)   IO+di.PM1.Pin.Home.Pos
+13)   IO+di.PM2.VAC.SNS
+14)   IO+di.PM2.Shutter.Open

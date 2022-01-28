@@ -1,0 +1,16 @@
+IO+di.ATM_RB.Status.Ready
+IO+di.ATM_RB.Alarm.Normal
+IO+di.ATM_AL.Alarm.Normal
+IO+di.ATM_RB.Retract_LP1
+IO+di.ATM_RB.Retract_LP2
+IO+di.ATM_RB.Retract_LP3
+IO+di.ATM_RB.Retract_LL1
+IO+di.ATM_RB.Retract_LL2
+IO+di.Node1.Block4.Spare.08
+IO+di.Node1.Block4.Spare.09
+IO+di.Node1.Block4.Spare.10
+IO+di.Node1.Block4.Spare.11
+IO+di.Node1.Block4.Spare.12
+IO+di.Node1.Block4.Spare.13
+IO+di.Node1.Block4.Spare.14
+IO+di.Node1.Block4.Spare.15

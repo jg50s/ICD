@@ -1,4 +1,4 @@
-#ID=1	1	LIGHT	FNC__TMC_VLV - TMC_CHM & PMC's Transfer Pressure Error.
-#ID=2	2	LIGHT	FNC__TMC_VLV - Pressure is not ATM.
-#ID=11	11	LIGHT	FNC__TMC_VLV - PMC Shutter is not open !
-#ID=12	12	LIGHT	FNC__TMC_VLV - PMC lift-pin status is not down !
+#ID=1	26601	LIGHT	FNC__TMC_VLV - TMC_CHM & PMC's Transfer Pressure Error.
+#ID=2	26602	LIGHT	FNC__TMC_VLV - Pressure is not ATM.
+#ID=11	26611	LIGHT	FNC__TMC_VLV - PMC Shutter is not open !
+#ID=12	26612	LIGHT	FNC__TMC_VLV - PMC lift-pin status is not down !

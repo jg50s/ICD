@@ -1,0 +1,6 @@
+; TMC__Phy_PART.def : Declares the module parameters for the DLL.
+
+LIBRARY      "TMC__Phy_PART"
+
+EXPORTS
+    ; Explicit exports can go here

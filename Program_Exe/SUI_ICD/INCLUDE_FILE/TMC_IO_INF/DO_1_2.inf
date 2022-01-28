@@ -1,0 +1,16 @@
+IO+do.OHT3.PIO.L_Req
+IO+do.OHT3.PIO.U_Req
+IO+do.OHT3.Out3.NotUse
+IO+do.OHT3.PIO.Ready
+IO+do.OHT3.Out5.NotUse
+IO+do.OHT3.Out6.NotUse
+IO+do.OHT3.PIO.HO_Avbl
+IO+do.OHT3.PIO.ES
+IO+do.Signal_Tower.Red
+IO+do.Signal_Tower.Yellow
+IO+do.Signal_Tower.Green
+IO+do.Signal_Tower.Blue
+IO+do.Signal_Tower.Buzzer.1
+IO+do.Signal_Tower.Buzzer.2
+IO+do.Node1.Block2.Spare.14
+IO+do.Node1.Block2.Spare.15

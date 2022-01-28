@@ -1,0 +1,6 @@
+; TMC__Phy_SIGNAL_TOWER.def : Declares the module parameters for the DLL.
+
+LIBRARY      "TMC__Phy_SIGNAL_TOWER"
+
+EXPORTS
+    ; Explicit exports can go here

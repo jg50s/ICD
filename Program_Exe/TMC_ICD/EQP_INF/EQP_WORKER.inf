@@ -3,57 +3,18 @@
 #OBJECT_STD    TMC__DB_OBJ                   DB.CFG                   DB_CFG
 #OBJECT_STD    TMC__DB_OBJ                   DB.GUI                   DB_GUI
 
+#OBJECT_STD    TMC__DB_OBJ                   DB.LLx                   DB_LBA
+#OBJECT_STD    TMC__DB_OBJ                   DB.LLx                   DB_LBB
+
 
 ===========================================================================
 #OBJECT_LINK   EQP__LINK_OBJ                 MODULE.LINK              TMC_LINK
 
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__SYS_CTRL
-
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__TMC_CHM
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__LBA
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__LBB
-
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__TMC_LEAK
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__LBA_LEAK
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__LBB_LEAK
-
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__LBx_TEST
-#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__MANIFOLD_TEST
-
-#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP1_RF
-#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP2_RF
-#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP3_RF
-
-
 #OBJECT_STD    EQP__STD_OBJ                  PM_Datalog_Ex            FNC_BALLAST_DATALOG
 // #OBJECT_STD    EQP__STD_Utility_OBJ          CFG_TO_CSV               Mng_CFG_TO_CSV
 
-
-#OBJECT_STD    TMC__MON_OBJ                  SYSTEM                   MON__SYSTEM
-
-
-===========================================================================
+// #OBJECT_STD    TMC__MON_OBJ                  CDA                      MON__CDA
 #OBJECT_STD    TMC__Phy_SIGNAL_TOWER         STD.TYPE                 PHY__SIGNAL_TOWER
-
-
-===========================================================================
-#OBJECT_STD    TMC__Phy_PUMP                 STD.TYPE                 PHY__PUMP
-#OBJECT_STD    Phy_IO__PUMP                  EDWARD.IPX               PHY_IO__PUMP
-
-
-===========================================================================
-#OBJECT_STD    TMC__INF_MODULE               UPPER.ATM_ROBOT          INF__UPPER_ATM_ROBOT
-#OBJECT_STD    TMC__INF_MODULE               ATM_ROBOT.STD            INF__ATM_ROBOT
-
-#OBJECT_STD    TMC__OPR_MODULE               ATM_ROBOT.STD            OPR__ATM_ROBOT
-
-#OBJECT_STD    TMC__Fnc_ROBOT                ATM_ROBOT.STD            FNC__ATM_ROBOT
-
-#OBJECT_STD    TMC__Phy_ROBOT                ATM_ROBOT.STD            PHY__ATM_ROBOT
-#OBJECT_STD    TMC__Phy_ROBOT                SIDE.STORAGE             PHY__BUFF1
-#OBJECT_STD    TMC__Phy_ROBOT                SIDE.STORAGE             PHY__BUFF2
-
-#OBJECT_IO     Phy_RS232__BROOKS_ROBOT			 ATM.RelianceATR          PHY_IO__ATM_ROBOT
 
 
 ===========================================================================
@@ -64,11 +25,25 @@
 #OBJECT_STD    TMC__Fnc_ROBOT                VAC_ROBOT.EX             FNC__VAC_ROBOT
 #OBJECT_STD    TMC__Phy_ROBOT                VAC_ROBOT.STD            PHY__VAC_ROBOT
 
-#OBJECT_STD    TMC__Phy_PMC                  PMC.STD                  PHY__PMx
+#OBJECT_STD    TMC__Phy_PMC                  PMC.SIMPLE               PHY__PMx
 #OBJECT_STD    TMC__Active_HandOff           PMC.EX                   OPR__PMx_HANDOFF
 
-#OBJECT_IO     Phy_RS232__BROOKS_ROBOT			 VAC.MAGATRAN             PHY_IO__VAC_ROBOT
+#OBJECT_IO     Phy_IO__CYMECHS_ROBOT         PERSIMMON.NET            PHY_IO__VAC_ROBOT
 
+===========================================================================
+#OBJECT_STD    TMC__INF_MODULE               UPPER.ATM_ROBOT          INF__UPPER_ATM_ROBOT
+#OBJECT_STD    TMC__INF_MODULE               ATM_ROBOT.STD            INF__ATM_ROBOT
+
+#OBJECT_STD    TMC__OPR_MODULE               ATM_ROBOT.STD            OPR__ATM_ROBOT
+
+#OBJECT_STD    TMC__Fnc_ROBOT                ATM_ROBOT.STD            FNC__ATM_ROBOT
+
+#OBJECT_STD    TMC__Phy_ROBOT                ATM_ROBOT.FUSION         PHY__ATM_ROBOT
+
+#OBJECT_STD    TMC__Phy_ROBOT                SIDE.STORAGE             PHY__BUFF1
+#OBJECT_STD    TMC__Phy_ROBOT                SIDE.STORAGE             PHY__BUFF2
+
+#OBJECT_IO     Phy_IO__YASKAWA_ROBOT         SR100.RBx                PHY_IO__ATM_ROBOT
 
 ===========================================================================
 #OBJECT_STD    TMC__INF_MODULE               ALx.STD                  INF__AL1
@@ -76,22 +51,20 @@
 
 #OBJECT_STD    TMC__Phy_PART                 ALx.STD                  PHY__AL1
 
+#OBJECT_IO     Phy_IO__YASKAWA_ROBOT         SR100.ALx                PHY_IO__AL1
+
 
 ===========================================================================
-#OBJECT_STD    TMC__INF_MODULE               LBx.STD                  INF__LBA
-#OBJECT_STD    TMC__INF_MODULE               LBx.STD                  INF__LBB
+#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__SYS_CTRL
 
-#OBJECT_STD    TMC__Fnc_LBx                  LBx.TEST                 FNC__LBx_TEST
-#OBJECT_STD    TMC__Fnc_LBx                  ManiFold.TEST            FNC__MANIFOLD_TEST
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__TMC_CHM
 
-#OBJECT_STD    TMC__OPR_MODULE               LBx.STD                  OPR__LBA
-#OBJECT_STD    TMC__OPR_MODULE               LBx.STD                  OPR__LBB
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LBA
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LBB
 
-#OBJECT_STD    TMC__Fnc_LBx                  LBx.ManiFold_X           FNC__LBA
-#OBJECT_STD    TMC__Fnc_LBx                  LBx.ManiFold_X           FNC__LBB
-
-#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.STD              PHY__LBA
-#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.STD              PHY__LBB
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP1_RF
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP2_RF
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP3_RF
 
 
 ===========================================================================
@@ -99,18 +72,49 @@
 #OBJECT_STD    TMC__INF_MODULE               TMC_CHM.STD              INF__TMC_CHM
 
 #OBJECT_STD    EQP__STD_OBJ                  MNG.SYSTEM_CTRL          MNG__SYS_CTRL
-// #OBJECT_STD    TMC__OPR_MODULE               TMC_SYS.STD              OPR__TMC_SYS
-#OBJECT_STD    TMC__OPR_MODULE               TMC_CHM.ManiFold_X       OPR__TMC_CHM
+// #OBJECT_STD    TMC__OPR_MODULE               TMC_SYS.EX               OPR__TMC_SYS
+#OBJECT_STD    TMC__OPR_MODULE               TMC_CHM.STD              OPR__TMC_CHM
 
-#OBJECT_STD    TMC__Fnc_CHM                  CHM.ManiFold_X           FNC__TMC_CHM
+#OBJECT_STD    TMC__Fnc_CHM                  CHM.OneManiFold          FNC__VAC_CHM
+
+#OBJECT_STD    TMC__Fnc_VLV                  TMC.EX                   FNC__TMC_VLV
+#OBJECT_STD    TMC__Fnc_VLV                  PMC.STD                  FNC__PMx_VLV
+#OBJECT_STD    TMC__Fnc_VLV                  OneManiFold.TM           PHY__TMC_VLV
+
 #OBJECT_STD    TMC__Phy_CHM                  CHM.STD                  PHY__TMC_CHM
 
-#OBJECT_STD    TMC__Fnc_VLV                  TMC.ManiFold_X           FNC__TMC_VLV
-#OBJECT_STD    TMC__Fnc_VLV                  PMC.STD                  FNC__PMx_VLV
 
 
 ===========================================================================
-#OBJECT_IO     Phy_IO__DNET_HILSCHER         TYPE.BROOKS              IO
+#OBJECT_STD    TMC__INF_MODULE               LBx.STD                  INF__LBA
+#OBJECT_STD    TMC__INF_MODULE               LBx.STD                  INF__LBB
+
+#OBJECT_STD    TMC__OPR_MODULE               LBx.STD                  OPR__LBA
+#OBJECT_STD    TMC__OPR_MODULE               LBx.STD                  OPR__LBB
+
+#OBJECT_STD    TMC__Fnc_LBx                  LBx.TEST                 FNC__LBx_TEST
+#OBJECT_STD    TMC__Fnc_LBx                  LBx.TwoManiFold          FNC__LBA
+#OBJECT_STD    TMC__Fnc_LBx                  LBx.TwoManiFold          FNC__LBB
+
+#OBJECT_STD    TMC__Fnc_CHM                  LLx.TwoManiFold          FNC__LLx_CHM
+#OBJECT_STD    TMC__Fnc_VLV                  TwoManiFold.LL           PHY__LLx_VLV
+
+#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.SIMPLE           PHY__LBA
+#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.SIMPLE           PHY__LBB
+
+
+===========================================================================
+#OBJECT_STD    TMC__Phy_PUMP                 VIRTUAL.TYPE             PHY__CHM_PUMP
+#OBJECT_STD    TMC__Phy_PUMP                 VIRTUAL.TYPE             PHY__LLx_PUMP
+
+/*
+#OBJECT_STD    TMC__Phy_PUMP                 IO.OBJ                   PHY__CHM_PUMP
+#OBJECT_STD    TMC__Phy_PUMP                 IO.OBJ                   PHY__LLx_PUMP
+
+#OBJECT_IO     Phy_RS232__DRY_PUMP           LOT.VAC                  PHY_IO___CHM_PUMP
+#OBJECT_IO     Phy_RS232__DRY_PUMP           LOT.VAC                  PHY_IO___LLx_PUMP
+*/
+
 
 ===========================================================================
 #OBJECT_STD    TMC__INF_MODULE               LPx.STD                  INF__LP1
@@ -129,15 +133,31 @@
 #OBJECT_STD    TMC__Phy_LPx                  LPx.STD                  PHY__LP2
 #OBJECT_STD    TMC__Phy_LPx                  LPx.STD                  PHY__LP3
 
-#OBJECT_STD    Phy__IO_LOADPORT              BROOKS.IO                PHY_IO__LP1
-#OBJECT_STD    Phy__IO_LOADPORT              BROOKS.IO                PHY_IO__LP2
-#OBJECT_STD    Phy__IO_LOADPORT              BROOKS.IO                PHY_IO__LP3
+#OBJECT_STD    Phy__IO_LOADPORT              STD.TYPE                 PHY_IO__LP1
+#OBJECT_STD    Phy__IO_LOADPORT              STD.TYPE                 PHY_IO__LP2
+#OBJECT_STD    Phy__IO_LOADPORT              STD.TYPE                 PHY_IO__LP3
+
+#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_RS232__LP1
+#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_RS232__LP2
+#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_RS232__LP3
 
 #OBJECT_STD    Phy__IO_LOADPORT              OHT_E84.IO               PHY_OHT__LP1
 #OBJECT_STD    Phy__IO_LOADPORT              OHT_E84.IO               PHY_OHT__LP2
 #OBJECT_STD    Phy__IO_LOADPORT              OHT_E84.IO               PHY_OHT__LP3
 
-#OBJECT_IO     Phy_IO__BROOKS_RFID           HERMOS.SERIAL            PHY_RFID__LP1
-#OBJECT_IO     Phy_IO__BROOKS_RFID           HERMOS.SERIAL            PHY_RFID__LP2
-#OBJECT_IO     Phy_IO__BROOKS_RFID           HERMOS.SERIAL            PHY_RFID__LP3
+
+===========================================================================
+#OBJECT_IO     Phy_IO__DNET_HILSCHER         TYPE.BROOKS              IO
+
+#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LBA__CHM_GAUGE
+#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LBB__CHM_GAUGE
+#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_TM1__CHM_GAUGE
+#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LLx__PUMP_GAUGE
+#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_TM1__PUMP_GAUGE
+
+#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF1
+#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF2
+#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF3
+
+#OBJECT_IO     Phy_IO__MARS_FFU              MS.FC100                 PHY_IO__FFU
 

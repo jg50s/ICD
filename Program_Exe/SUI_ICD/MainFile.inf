@@ -7,7 +7,7 @@
 // #TOTAL_ALARM_POPUP_BOX_ENABLE
 #MODULE_WINDOW_HIDE		     // Show (Default)
 
-#SINGLE_LOCAL               0
+#SINGLE_LOCAL               1
 // #SINGLE_REMOTE              2
 
 #SYSTEM_USER_LEVEL          OEM     // MAINT  
@@ -39,10 +39,12 @@
 #DEFINE  ##CTC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\CTC_ICD"
 #DEFINE  ##TMC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\TMC_ICD"
 
-#DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_FLEX"
-#DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_HEATER"
-#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_FLEX"
-#DEFINE  ##PM4_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM4_FLEX"
+#DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_ICD"
+#DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_ICD"
+#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_ICD"
+#DEFINE  ##PM4_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM4_ICD"
+#DEFINE  ##PM5_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM5_ICD"
+#DEFINE  ##PM6_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM6_ICD"
 
 
 #DIR_ROOT.CTC               ##CTC_DIR_ROOT
@@ -52,6 +54,8 @@
 #DIR_ROOT.PM2               ##PM2_DIR_ROOT
 #DIR_ROOT.PM3               ##PM3_DIR_ROOT
 #DIR_ROOT.PM4               ##PM4_DIR_ROOT
+#DIR_ROOT.PM5               ##PM5_DIR_ROOT
+#DIR_ROOT.PM6               ##PM6_DIR_ROOT
 
 
 #DEFINE  ##CTC_SCR_FILE     CTC_WIN-ICD.sct
@@ -60,8 +64,8 @@
 #DEFINE  ##TMC_SCR_FILE     TMC_WIN-ICD.sct
 #DEFINE  ##TMC_SCR_CTRL     TMC_WIN-ICD.ctrl
 
-#DEFINE  ##PMC_SCR_FILE     PMC_WIN-FLEX.sct
-#DEFINE  ##PMC_SCR_CTRL     PMC_WIN-FLEX.ctrl
+#DEFINE  ##PMC_SCR_FILE     PMC_WIN-ICD.sct
+#DEFINE  ##PMC_SCR_CTRL     PMC_WIN-ICD.ctrl
 
 #DEFINE  ##NULL_SCR_FILE    WIN-NULL.sct
 #DEFINE  ##NULL_SCR_CTRL    WIN-NULL.ctrl
@@ -105,13 +109,12 @@
 {
 #SEQ_NAME              PM2
 
-#SCREEN_FILE           PMC_WIN-HEATER_TEST.sct
-#SCREEN_CTRL	         PMC_WIN-HEATER_TEST.ctrl
+#SCREEN_FILE           ##PMC_SCR_FILE
+#SCREEN_CTRL	         ##PMC_SCR_CTRL
 
 #DIR_SEQ_ROOT          ##PM2_DIR_ROOT
 }
 
-/*
 // PM3
 #PM3_DATA
 {
@@ -133,5 +136,26 @@
 
 #DIR_SEQ_ROOT          ##PM4_DIR_ROOT
 }
-*/
+
+// PM5
+#PM5_DATA
+{
+#SEQ_NAME              PM5
+
+#SCREEN_FILE           ##PMC_SCR_FILE
+#SCREEN_CTRL	         ##PMC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##PM5_DIR_ROOT
+}
+
+// PM6
+#PM6_DATA
+{
+#SEQ_NAME              PM6
+
+#SCREEN_FILE           ##PMC_SCR_FILE
+#SCREEN_CTRL	         ##PMC_SCR_CTRL
+
+#DIR_SEQ_ROOT          ##PM6_DIR_ROOT
+}
 

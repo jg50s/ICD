@@ -1,0 +1,16 @@
+00)   IO+di.EFEM.Door.Close
+01)   IO+di.Light.Curtain.Normal
+02)   IO+di.FFU.Alarm.Normal
+03)   IO+di.Interlock.Auto.Mode
+04)   IO+di.EFEM.Main.CDA.Pressure.OK
+05)   IO+di.EFEM.Main.VAC1.Pressure.OK
+06)   IO+di.EFEM.Main.VAC2.Pressure.OK
+07)   IO+di.EFEM.Robot.VAC.Pressure.OK
+08)   IO+di.LBA.Door.Open
+09)   IO+di.LBB.Door.Open
+10)   IO+di.Node1.Block5.Spare.10
+11)   IO+di.Node1.Block5.Spare.11
+12)   IO+di.Node1.Block5.Spare.12
+13)   IO+di.Node1.Block5.Spare.13
+14)   IO+di.Node1.Block5.Spare.14
+15)   IO+di.Node1.Block5.Spare.15

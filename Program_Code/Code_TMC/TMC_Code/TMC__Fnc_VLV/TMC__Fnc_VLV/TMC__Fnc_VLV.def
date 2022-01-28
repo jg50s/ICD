@@ -1,0 +1,6 @@
+; TMC__Fnc_VLV.def : Declares the module parameters for the DLL.
+
+LIBRARY      "TMC__Fnc_VLV"
+
+EXPORTS
+    ; Explicit exports can go here

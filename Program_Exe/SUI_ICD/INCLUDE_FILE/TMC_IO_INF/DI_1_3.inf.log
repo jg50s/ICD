@@ -1,0 +1,16 @@
+00)   IO+di.LPM3.Run
+01)   IO+di.LPM3.Open
+02)   IO+di.LPM3.Placement.Status
+03)   IO+di.LPM3.Present.Status
+04)   IO+di.EFEM.Power_Box.FAN.Status
+05)   IO+di.EFEM.IO_Box.FAN.Status
+06)   IO+di.EFEM.PC_Rack.FAN.Status
+07)   IO+di.EFEM.Heater_Box.FAN.Status
+08)   IO+di.Node1.Block3.Spare.08
+09)   IO+di.Node1.Block3.Spare.09
+10)   IO+di.Node1.Block3.Spare.10
+11)   IO+di.Node1.Block3.Spare.11
+12)   IO+di.Node1.Block3.Spare.12
+13)   IO+di.Node1.Block3.Spare.13
+14)   IO+di.Node1.Block3.Spare.14
+15)   IO+di.Node1.Block3.Spare.15

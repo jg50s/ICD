@@ -1,0 +1,16 @@
+00)   IO+di.ATM_RB.Status.Ready
+01)   IO+di.ATM_RB.Alarm.Normal
+02)   IO+di.ATM_AL.Alarm.Normal
+03)   IO+di.ATM_RB.Retract_LP1
+04)   IO+di.ATM_RB.Retract_LP2
+05)   IO+di.ATM_RB.Retract_LP3
+06)   IO+di.ATM_RB.Retract_LL1
+07)   IO+di.ATM_RB.Retract_LL2
+08)   IO+di.Node1.Block4.Spare.08
+09)   IO+di.Node1.Block4.Spare.09
+10)   IO+di.Node1.Block4.Spare.10
+11)   IO+di.Node1.Block4.Spare.11
+12)   IO+di.Node1.Block4.Spare.12
+13)   IO+di.Node1.Block4.Spare.13
+14)   IO+di.Node1.Block4.Spare.14
+15)   IO+di.Node1.Block4.Spare.15

@@ -1,0 +1,13 @@
+IO+di.Alm_PM1.Wafer.Protrude.Error
+IO+di.Alm_PM2.Wafer.Protrude.Error
+IO+di.Alm_PM3.Wafer.Protrude.Error
+IO+di.Alm_PM4.Wafer.Protrude.Error
+IO+di.Alm_PM5.Wafer.Protrude.Error
+IO+di.Alm_PM6.Wafer.Protrude.Error
+IO+di.Alm_CHM.Vent.Error
+IO+di.Alm_LL1.Roughing.Error
+IO+di.Alm_LL2.Roughing.Error
+IO+di.Alm_LL1.Vent_Rough.Vlv.Open.Error
+IO+di.Alm_LL2.Vent_Rough.VlV.Open.Error
+IO+di.Alm_CHM.Vent_Rough.Vlv.Open.Error
+IO+di.Alm_LLx.Dry_Pump.Error

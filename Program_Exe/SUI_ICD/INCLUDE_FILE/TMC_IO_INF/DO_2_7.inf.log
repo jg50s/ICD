@@ -1,0 +1,9 @@
+00)   IO+do.VTM_Robot.Extend_LBA.Enable
+01)   IO+do.VTM_Robot.Extend_LBB.Enable
+02)   IO+do.VTM_Robot.Extend_PM1.Enable
+03)   IO+do.VTM_Robot.Extend_PM2.Enable
+04)   IO+do.VTM_Robot.Extend_PM3.Enable
+05)   IO+do.VTM_Robot.Extend_PM4.Enable
+06)   IO+do.VTM_Robot.Extend_PM5.Enable
+07)   IO+do.VTM_Robot.Extend_PM6.Enable
+08)   IO+do.VTM_Robot.Interlock.Normal

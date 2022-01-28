@@ -1,0 +1,13 @@
+00)   IO+di.PM2.Pin.Home.Pos
+01)   IO+di.PM3.VAC.SNS
+02)   IO+di.PM3.Shutter.Open
+03)   IO+di.PM3.Pin.Home.Pos
+04)   IO+di.PM4.VAC.SNS
+05)   IO+di.PM4.Shutter.Open
+06)   IO+di.PM4.Pin.Home.Pos
+07)   IO+di.PM5.VAC.SNS
+08)   IO+di.PM5.Shutter.Open
+09)   IO+di.PM5.Pin.Home.Pos
+10)   IO+di.PM6.VAC.SNS
+11)   IO+di.PM6.Shutter.Open
+12)   IO+di.PM6.Pin.Home.Pos
