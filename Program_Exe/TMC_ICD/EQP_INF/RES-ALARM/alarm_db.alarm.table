@@ -558,6 +558,12 @@
 #ALARM   4   85   "FNC__LLx_CHM - Right_LLx's Leak Check is higher than config value !"
 #ALARM   5   85   "FNC__LLx_CHM - Slot-Valve is not Close !"
 
+#ALARM   1   85   "FNC__MANIFOLD_TEST - LL1's status is not "MAINTMODE"."
+#ALARM   2   85   "FNC__MANIFOLD_TEST - LL2's status is not "MAINTMODE"."
+#ALARM   3   85   "FNC__MANIFOLD_TEST - LL3's status is not "MAINTMODE"."
+#ALARM   4   85   "FNC__MANIFOLD_TEST - LL4's status is not "MAINTMODE"."
+#ALARM   5   85   "FNC__MANIFOLD_TEST - LL5's status is not "MAINTMODE"."
+
 #ALARM   1   85   "MNG__SYS_CTRL : SYSTEM INIT FAILED."
 
 #ALARM   1   85   "IO_LLx__PUMP_GAUGE - Offline !"

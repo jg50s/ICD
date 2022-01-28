@@ -458,16 +458,38 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			def_check = x_utility.Check__Link(def_data);
 			bActive__ATM_SNS_Virtual_Type = def_check;
 
-			//
-			def_name = "VAR__IO_DI_ATM_SNS";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__ATM_SNS, obj_name,var_name);
+			// ATM.SNS ...
+			{
+				def_name = "VAR__IO_DI_ATM_SNS";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__ATM_SENSOR, obj_name,var_name);
 
-			def_name = "VAR__IO_DI_VAC_SNS";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_SNS, obj_name,var_name);
+				//
+				def_name = "DATA.ATM_ON";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__ATM_ON = def_data;
+
+				def_name = "DATA.ATM_OFF";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__ATM_OFF = def_data;
+			}
+			// VAC.SNS ...
+			{
+				def_name = "VAR__IO_DI_VAC_SNS";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_SENSOR, obj_name,var_name);
+
+				//
+				def_name = "DATA.VAC_ON";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__VAC_ON = def_data;
+
+				def_name = "DATA.VAC_OFF";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__VAC_OFF = def_data;
+			}
 		}
 
 		// LID ...

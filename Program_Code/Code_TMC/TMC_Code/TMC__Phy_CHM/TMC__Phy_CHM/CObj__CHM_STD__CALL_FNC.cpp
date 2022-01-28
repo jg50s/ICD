@@ -160,7 +160,7 @@ int  CObj__CHM_STD
 		Fnc__LOG(str_log);
 
 		if((cur__press <= cfg__press)
-		&& (diEXT_CH__VAC_SNS->Check__DATA(STR__ON) > 0))
+		&& (diEXT_CH__VAC_SENSOR->Check__DATA(sDATA__VAC_ON) > 0))
 		{
 			Fnc__PUMP_FAST_VLV__OPEN(p_alarm);
 			Fnc__PUMP_BALLAST_VLV__OPEN(p_alarm);
@@ -196,8 +196,8 @@ int  CObj__CHM_STD
 
 			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Set__VALUE(cfg__press-0.01);
 
-			diEXT_CH__ATM_SNS->Set__DATA(STR__OFF);
-			diEXT_CH__VAC_SNS->Set__DATA(STR__OFF);
+			diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
+			diEXT_CH__VAC_SENSOR->Set__DATA(sDATA__VAC_OFF);
 		}
 
 		if(cur__press <= cfg__press)
@@ -207,12 +207,12 @@ int  CObj__CHM_STD
 			CII__VAR_ANALOG_CTRL *pch__cfg_timeout = aCH__CFG_SOFT_PUMP_TIMEOUT.Get__PTR();
 
 			bool active__atm_sns = TRUE;
-			CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SNS.Get__PTR();
-			CString trg__atm_sts = STR__OFF;
+			CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SENSOR.Get__PTR();
+			CString trg__atm_sts = sDATA__ATM_OFF;
 
 			bool active__vac_sns = FALSE;
-			CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SNS.Get__PTR();
-			CString trg__vac_sts = STR__ON;
+			CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SENSOR.Get__PTR();
+			CString trg__vac_sts = sDATA__VAC_ON;
 			
 			int alm_id__pumping_timeout = ALID__SOFT_PUMPING__TIMEOUT;
 
@@ -270,8 +270,8 @@ int  CObj__CHM_STD
 
 			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Set__VALUE(cfg__press-0.01);
 	
-			diEXT_CH__ATM_SNS->Set__DATA(STR__OFF);
-			diEXT_CH__VAC_SNS->Set__DATA(STR__ON);
+			diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
+			diEXT_CH__VAC_SENSOR->Set__DATA(sDATA__VAC_ON);
 		}
 
 		// ...
@@ -280,12 +280,12 @@ int  CObj__CHM_STD
 		CII__VAR_ANALOG_CTRL *pch__cfg_timeout = aCH__CFG_FAST_PUMP_TIMEOUT.Get__PTR();
 
 		bool active__atm_sns = TRUE;
-		CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SNS.Get__PTR();
-		CString trg__atm_sts = STR__OFF;
+		CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SENSOR.Get__PTR();
+		CString trg__atm_sts = sDATA__ATM_OFF;
 
 		bool active__vac_sns = TRUE;
-		CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SNS.Get__PTR();
-		CString trg__vac_sts = STR__ON;
+		CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SENSOR.Get__PTR();
+		CString trg__vac_sts = sDATA__VAC_ON;
 
 		int alm_id__pumping_timeout = ALID__FAST_PUMPING__TIMEOUT;
 
@@ -496,8 +496,8 @@ LOOP_RETRY:
 		Fnc__LOG(str_log);
 
 		if((cur__press >= cfg__press)
-		&& (diEXT_CH__ATM_SNS->Check__DATA(STR__ON)  > 0)
-		&& (diEXT_CH__VAC_SNS->Check__DATA(STR__OFF) > 0))
+		&& (diEXT_CH__ATM_SENSOR->Check__DATA(sDATA__ATM_ON)  > 0)
+		&& (diEXT_CH__VAC_SENSOR->Check__DATA(sDATA__VAC_OFF) > 0))
 		{
 			Fnc__PUMP_ALL_VLV__CLOSE(p_alarm);
 
@@ -527,8 +527,8 @@ LOOP_RETRY:
 			cfg__press = aCH__CFG_SOFT_VENT_PRESSURE_TORR->Get__VALUE();
 			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Set__VALUE(cfg__press+0.01);
 
-			diEXT_CH__ATM_SNS->Set__DATA(STR__OFF);
-			diEXT_CH__VAC_SNS->Set__DATA(STR__OFF);
+			diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
+			diEXT_CH__VAC_SENSOR->Set__DATA(sDATA__VAC_OFF);
 		}
 
 		// ...
@@ -537,12 +537,12 @@ LOOP_RETRY:
 		CII__VAR_ANALOG_CTRL *pch__cfg_timeout = aCH__CFG_SOFT_VENT_TIMEOUT.Get__PTR();
 
 		bool active__atm_sns = FALSE;
-		CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SNS.Get__PTR();
-		CString trg__atm_sts = STR__ON;
+		CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SENSOR.Get__PTR();
+		CString trg__atm_sts = sDATA__ATM_ON;
 
 		bool active__vac_sns = TRUE;
-		CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SNS.Get__PTR();
-		CString trg__vac_sts = STR__OFF;
+		CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SENSOR.Get__PTR();
+		CString trg__vac_sts = sDATA__VAC_OFF;
 
 		int alm_id__venting_timeout = ALID__SOFT_VENTING__TIMEOUT;
 
@@ -582,8 +582,8 @@ LOOP_RETRY:
 			cfg__press = aCH__CFG_FAST_VENT_PRESSURE_TORR->Get__VALUE();
 			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Set__VALUE(cfg__press+0.01);
 	
-			diEXT_CH__ATM_SNS->Set__DATA(STR__ON);
-			diEXT_CH__VAC_SNS->Set__DATA(STR__OFF);
+			diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_ON);
+			diEXT_CH__VAC_SENSOR->Set__DATA(sDATA__VAC_OFF);
 		}
 
 		// ...
@@ -592,12 +592,12 @@ LOOP_RETRY:
 		CII__VAR_ANALOG_CTRL *pch__cfg_timeout = aCH__CFG_FAST_VENT_TIMEOUT.Get__PTR();
 
 		bool active__atm_sns = TRUE;
-		CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SNS.Get__PTR();
-		CString trg__atm_sts = STR__ON;
+		CII__VAR_DIGITAL_CTRL *pch__atm_sns = diEXT_CH__ATM_SENSOR.Get__PTR();
+		CString trg__atm_sts = sDATA__ATM_ON;
 		
 		bool active__vac_sns = TRUE;
-		CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SNS.Get__PTR();
-		CString trg__vac_sts = STR__OFF;
+		CII__VAR_DIGITAL_CTRL *pch__vac_sns = diEXT_CH__VAC_SENSOR.Get__PTR();
+		CString trg__vac_sts = sDATA__VAC_OFF;
 		
 		int alm_id__venting_timeout = ALID__FAST_VENTING__TIMEOUT;
 		

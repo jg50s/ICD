@@ -17,8 +17,8 @@ void CObj__CHM_STD
 
 	if(iSim_Flag > 0)
 	{
-		diEXT_CH__ATM_SNS->Set__DATA(STR__OFF);
-		diEXT_CH__VAC_SNS->Set__DATA(STR__ON);
+		diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
+		diEXT_CH__VAC_SENSOR->Set__DATA(sDATA__VAC_ON);
 
 		aiEXT_CH__TMC_CHM__PRESSURE_TORR->Set__DATA("0.001");
 	}
@@ -49,11 +49,11 @@ void CObj__CHM_STD
 
 			if(cur_press < cfg_press)
 			{
-				diEXT_CH__ATM_SNS->Set__DATA(STR__OFF);
+				diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
 			}
 			else
 			{
-				diEXT_CH__ATM_SNS->Set__DATA(STR__ON);
+				diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_ON);
 			}
 		}
 
@@ -83,8 +83,8 @@ void CObj__CHM_STD
 			atm_range_max = ref_atm_press + tolerance_atm_press;
 
 			// Get Sensor Value ...
-			diEXT_CH__ATM_SNS->Get__DATA(str__atm_sns);
-			diEXT_CH__VAC_SNS->Get__DATA(str__vac_sns);
+			diEXT_CH__ATM_SENSOR->Get__DATA(str__atm_sns);
+			diEXT_CH__VAC_SENSOR->Get__DATA(str__vac_sns);
 
 			if((cur_press >= atm_range_min) 
 			&& ( (str__atm_sns.CompareNoCase(STR__ON) == 0) && (str__vac_sns.CompareNoCase(STR__OFF) == 0)) )
@@ -104,7 +104,7 @@ void CObj__CHM_STD
 
 		// ...
 		{
-			if(diEXT_CH__ATM_SNS->Check__DATA(STR__ON) > 0)
+			if(diEXT_CH__ATM_SENSOR->Check__DATA(sDATA__ATM_ON) > 0)
 			{
 				dCH__TMC_CMH_VAC_SNS->Set__DATA(STR__OFF);
 			}

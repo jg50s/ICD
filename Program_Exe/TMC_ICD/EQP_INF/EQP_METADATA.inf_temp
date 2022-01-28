@@ -505,6 +505,8 @@
 #OBJECT_PROPERTY     FNC__VAC_CHM 
 
    #DEFINE_CONSTANT     PM_SIZE                            6 
+   #DEFINE_CONSTANT     LLX.MULTI_DOOR_VALVE               NO 
+   #DEFINE_CONSTANT     LLX.MULTI_SLOT_VALVE               NO 
    #DEFINE_CONSTANT     LL_SIZE                            2 
    #DEFINE_CONSTANT     OBJ__LLX.1                         PHY__LBA 
    #DEFINE_CONSTANT     OBJ__LLX.2                         PHY__LBB 
@@ -535,7 +537,11 @@
    #DEFINE_CONSTANT     VAR__IO_DO_SOFT_PUMP_VLV           IO+do.CHM.FR.VLV 
    #DEFINE_CONSTANT     DATA.ATM_SNS.VIRTUAL_TYPE          NO 
    #DEFINE_CONSTANT     VAR__IO_DI_ATM_SNS                 IO+di.CHM.ATM.SNS 
+   #DEFINE_CONSTANT     DATA.ATM_ON                        ON 
+   #DEFINE_CONSTANT     DATA.ATM_OFF                       OFF 
    #DEFINE_CONSTANT     VAR__IO_DI_VAC_SNS                 IO+di.CHM.VAC.SNS 
+   #DEFINE_CONSTANT     DATA.VAC_ON                        ON 
+   #DEFINE_CONSTANT     DATA.VAC_OFF                       OFF 
    #DEFINE_CONSTANT     VAR__IO_DI_LID_CLOSE_SNS           IO+di.TMC.Chamber.Lid.Close 
    #DEFINE_CONSTANT     VAR__IO_DO_BALLAST_VALVE_SET       IO+do.CHM.BALLAST.VLV 
    #DEFINE_CONSTANT     VAR__IO_AO_BALLAST_N2_SET          IO+ao.N2.SETPOINT 
@@ -546,6 +552,27 @@
    #DEFINE_CONSTANT     VAR__IO_DO_TM_FAST_PUMP_VLV        IO+do.CHM.FR.VLV 
    #DEFINE_CONSTANT     VAR__IO_DO_TM_SOFT_VENT_VLV        IO+do.CHM.FAST.VENT.VLV 
    #DEFINE_CONSTANT     VAR__IO_DO_TM_FAST_VENT_VLV        IO+do.CHM.FAST.VENT.VLV 
+
+#OBJECT_PROPERTY     PAGE__LBx_TEST 
+
+   #FNC_MODE     LL1_SV.CYCLE_TEST                  FNC__LBx_TEST   LBA_SV.CYCLE_TEST 
+   #FNC_MODE     LL1_DV.CYCLE_TEST                  FNC__LBx_TEST   LBA_DV.CYCLE_TEST 
+   #FNC_MODE     LL2_SV.CYCLE_TEST                  FNC__LBx_TEST   LBB_SV.CYCLE_TEST 
+   #FNC_MODE     LL2_DV.CYCLE_TEST                  FNC__LBx_TEST   LBB_DV.CYCLE_TEST 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      LLx.FNC 
+
+#OBJECT_PROPERTY     PAGE__MANIFOLD_TEST 
+
+   #FNC_MODE     PUMPING.CYCLE_TEST                 FNC__MANIFOLD_TEST   PUMPING.CYCLE_TEST 
+
+   #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_CFG+CUR.UTILITY.CATEGORY 
+   #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
+   #DEFINE_CONSTANT     CH.FNC.LOCK                        DB_CFG+CUR.UTILITY.FNC.NAME 
+   #DEFINE_CONSTANT     DATA.FNC.LOCK                      MANIFOLD.FNC 
 
 #OBJECT_PROPERTY     PAGE__LBA 
 
@@ -591,6 +618,16 @@
    #DEFINE_CONSTANT     OBJ.LLX_OPR.2                      OPR__LBB 
    #DEFINE_CONSTANT     OBJ.LLX_FNC.2                      FNC__LBB 
 
+#OBJECT_PROPERTY     FNC__MANIFOLD_TEST 
+
+   #DEFINE_CONSTANT     DATA.MDX_SIZE                      2 
+   #DEFINE_CONSTANT     OBJ.MDX_NAME.1                     LBA 
+   #DEFINE_CONSTANT     OBJ.MDX_OPR.1                      OPR__LBA 
+   #DEFINE_CONSTANT     OBJ.MDX_FNC.1                      FNC__LBA 
+   #DEFINE_CONSTANT     OBJ.MDX_NAME.2                     LBB 
+   #DEFINE_CONSTANT     OBJ.MDX_OPR.2                      OPR__LBB 
+   #DEFINE_CONSTANT     OBJ.MDX_FNC.2                      FNC__LBB 
+
 #OBJECT_PROPERTY     FNC__LBA 
 
    #DEFINE_CONSTANT     LBX_NAME                           LEFT 
@@ -633,7 +670,11 @@
    #DEFINE_CONSTANT     VAR__EXHAUST_PRESSURE              IO_LLx__PUMP_GAUGE+s.DATA.PRESSURE.TORR 
    #DEFINE_CONSTANT     DATA.ATM_SNS.VIRTUAL_TYPE          NO 
    #DEFINE_CONSTANT     VAR__ATM_SNS                       IO+di.LBA.ATM.SNS 
+   #DEFINE_CONSTANT     DATA.ATM_ON                        ON 
+   #DEFINE_CONSTANT     DATA.ATM_OFF                       OFF 
    #DEFINE_CONSTANT     VAR__VAC_SNS                       IO+di.LBA.VAC.SNS 
+   #DEFINE_CONSTANT     DATA.VAC_ON                        ON 
+   #DEFINE_CONSTANT     DATA.VAC_OFF                       OFF 
    #DEFINE_CONSTANT     VAR__LID_CLOSE_SNS                 IO+di.LBA.Chamber.Lid.Close 
    #DEFINE_CONSTANT     LINK_OBJ.GAS                       NO 
    #DEFINE_CONSTANT     LINK_OBJ.VAT                       NO 
@@ -671,7 +712,11 @@
    #DEFINE_CONSTANT     VAR__EXHAUST_PRESSURE              IO_LLx__PUMP_GAUGE+s.DATA.PRESSURE.TORR 
    #DEFINE_CONSTANT     DATA.ATM_SNS.VIRTUAL_TYPE          NO 
    #DEFINE_CONSTANT     VAR__ATM_SNS                       IO+di.LBB.ATM.SNS 
+   #DEFINE_CONSTANT     DATA.ATM_ON                        ON 
+   #DEFINE_CONSTANT     DATA.ATM_OFF                       OFF 
    #DEFINE_CONSTANT     VAR__VAC_SNS                       IO+di.LBB.VAC.SNS 
+   #DEFINE_CONSTANT     DATA.VAC_ON                        ON 
+   #DEFINE_CONSTANT     DATA.VAC_OFF                       OFF 
    #DEFINE_CONSTANT     VAR__LID_CLOSE_SNS                 IO+di.LBB.Chamber.Lid.Close 
    #DEFINE_CONSTANT     LINK_OBJ.GAS                       NO 
    #DEFINE_CONSTANT     LINK_OBJ.VAT                       NO 

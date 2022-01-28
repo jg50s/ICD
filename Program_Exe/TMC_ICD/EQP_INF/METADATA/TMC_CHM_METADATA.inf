@@ -99,6 +99,9 @@
 
 #DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
 
+#DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
+#DEFINE_CONSTANT    LLx.MULTI_SLOT_VALVE                NO
+
 #DEFINE_CONSTANT    LL_SIZE	      		                  ##LL_LIMIT
 #DEFINE_CONSTANT    OBJ__LLx.1                          PHY__LBA
 #DEFINE_CONSTANT    OBJ__LLx.2                          PHY__LBB
@@ -140,7 +143,12 @@
 
 #DEFINE_CONSTANT    DATA.ATM_SNS.VIRTUAL_TYPE           NO
 #DEFINE_CONSTANT    VAR__IO_DI_ATM_SNS		              IO+di.CHM.ATM.SNS
+#DEFINE_CONSTANT    DATA.ATM_ON                         ON
+#DEFINE_CONSTANT    DATA.ATM_OFF                        OFF
 #DEFINE_CONSTANT    VAR__IO_DI_VAC_SNS		              IO+di.CHM.VAC.SNS
+#DEFINE_CONSTANT    DATA.VAC_ON                         ON
+#DEFINE_CONSTANT    DATA.VAC_OFF                        OFF
+
 #DEFINE_CONSTANT    VAR__IO_DI_LID_CLOSE_SNS            IO+di.TMC.Chamber.Lid.Close
 
 #DEFINE_CONSTANT    VAR__IO_DO_BALLAST_VALVE_SET        IO+do.CHM.BALLAST.VLV

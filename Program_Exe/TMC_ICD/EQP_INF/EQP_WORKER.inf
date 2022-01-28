@@ -57,8 +57,10 @@
 ===========================================================================
 #OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__SYS_CTRL
 
-#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__TMC_CHM
+#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__LBx_TEST
+#OBJECT_STD    EQP__Page_OBJ                 LOCK.TYPE                PAGE__MANIFOLD_TEST
 
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__TMC_CHM
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LBA
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LBB
 
@@ -84,7 +86,6 @@
 #OBJECT_STD    TMC__Phy_CHM                  CHM.STD                  PHY__TMC_CHM
 
 
-
 ===========================================================================
 #OBJECT_STD    TMC__INF_MODULE               LBx.STD                  INF__LBA
 #OBJECT_STD    TMC__INF_MODULE               LBx.STD                  INF__LBB
@@ -92,7 +93,9 @@
 #OBJECT_STD    TMC__OPR_MODULE               LBx.STD                  OPR__LBA
 #OBJECT_STD    TMC__OPR_MODULE               LBx.STD                  OPR__LBB
 
+#OBJECT_STD    TMC__Fnc_LBx                  ManiFold.TEST            FNC__MANIFOLD_TEST
 #OBJECT_STD    TMC__Fnc_LBx                  LBx.TEST                 FNC__LBx_TEST
+
 #OBJECT_STD    TMC__Fnc_LBx                  LBx.TwoManiFold          FNC__LBA
 #OBJECT_STD    TMC__Fnc_LBx                  LBx.TwoManiFold          FNC__LBB
 

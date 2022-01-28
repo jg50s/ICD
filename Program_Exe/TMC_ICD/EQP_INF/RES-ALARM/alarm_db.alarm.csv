@@ -638,6 +638,13 @@ OK,3,FNC__LLx_CHM - Left_LLx's Leak Check is higher than config value !,,CHECK	,
 OK,4,FNC__LLx_CHM - Right_LLx's Leak Check is higher than config value !,,CHECK	,
 OK,5,FNC__LLx_CHM - Slot-Valve is not Close !,,CHECK_RETRY	ABORT	,
 
+OBJECT_NAME : FNC__MANIFOLD_TEST,
+OK,1,FNC__MANIFOLD_TEST - LL1's status is not "MAINTMODE".,Please	 convert LL's status to "MAINTMODE" !<\n>,CHECK	,
+OK,2,FNC__MANIFOLD_TEST - LL2's status is not "MAINTMODE".,Please	 convert LL's status to "MAINTMODE" !<\n>,CHECK	,
+OK,3,FNC__MANIFOLD_TEST - LL3's status is not "MAINTMODE".,Please	 convert LL's status to "MAINTMODE" !<\n>,CHECK	,
+OK,4,FNC__MANIFOLD_TEST - LL4's status is not "MAINTMODE".,Please	 convert LL's status to "MAINTMODE" !<\n>,CHECK	,
+OK,5,FNC__MANIFOLD_TEST - LL5's status is not "MAINTMODE".,Please	 convert LL's status to "MAINTMODE" !<\n>,CHECK	,
+
 OBJECT_NAME : MNG__SYS_CTRL,
 OK,1,MNG__SYS_CTRL : SYSTEM INIT FAILED.,System component Initial-Action is failed !,CHECK	,
 

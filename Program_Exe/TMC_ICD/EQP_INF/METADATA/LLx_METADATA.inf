@@ -1,5 +1,29 @@
 
 //------------------------------------------------
+#OBJECT_PROPERTY    PAGE__LBx_TEST
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME
+#DEFINE_CONSTANT    DATA.FNC.LOCK          LLx.FNC
+
+#FNC_MODE           LL1_SV.CYCLE_TEST      FNC__LBx_TEST         LBA_SV.CYCLE_TEST
+#FNC_MODE           LL1_DV.CYCLE_TEST      FNC__LBx_TEST         LBA_DV.CYCLE_TEST
+#FNC_MODE           LL2_SV.CYCLE_TEST      FNC__LBx_TEST         LBB_SV.CYCLE_TEST
+#FNC_MODE           LL2_DV.CYCLE_TEST      FNC__LBx_TEST         LBB_DV.CYCLE_TEST
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PAGE__MANIFOLD_TEST
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK       DB_CFG+CUR.UTILITY.CATEGORY 
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK     VAC.AREA 
+#DEFINE_CONSTANT    CH.FNC.LOCK            DB_CFG+CUR.UTILITY.FNC.NAME 
+#DEFINE_CONSTANT    DATA.FNC.LOCK          MANIFOLD.FNC 
+
+#FNC_MODE           PUMPING.CYCLE_TEST     FNC__MANIFOLD_TEST   PUMPING.CYCLE_TEST
+
+
+//------------------------------------------------
 #OBJECT_PROPERTY    PAGE__LBA            
 
 #FNC_MODE           INIT                OPR__LBA         INIT 
@@ -47,12 +71,22 @@
 //------------------------------------------------
 #OBJECT_PROPERTY    FNC__LBx_TEST
 
-#DEFINE_CONSTANT    DATA.LLx_SIZE			                  ##LL_LIMIT
-#DEFINE_CONSTANT    OBJ.LLx_OPR.1    		                OPR__LBA
-#DEFINE_CONSTANT    OBJ.LLx_FNC.1                       FNC__LBA
-#DEFINE_CONSTANT    OBJ.LLx_OPR.2    		                OPR__LBB
-#DEFINE_CONSTANT    OBJ.LLx_FNC.2                       FNC__LBB
+#DEFINE_CONSTANT    DATA.LLX_SIZE                       ##LL_LIMIT
+#DEFINE_CONSTANT    OBJ.LLX_OPR.1                       OPR__LBA 
+#DEFINE_CONSTANT    OBJ.LLX_FNC.1                       FNC__LBA 
+#DEFINE_CONSTANT    OBJ.LLX_OPR.2                       OPR__LBB 
+#DEFINE_CONSTANT    OBJ.LLX_FNC.2                       FNC__LBB 
 
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC__MANIFOLD_TEST
+
+#DEFINE_CONSTANT    DATA.MDX_SIZE                       2
+#DEFINE_CONSTANT    OBJ.MDX_NAME.1                      LBA 
+#DEFINE_CONSTANT    OBJ.MDX_OPR.1                       OPR__LBA 
+#DEFINE_CONSTANT    OBJ.MDX_FNC.1                       FNC__LBA 
+#DEFINE_CONSTANT    OBJ.MDX_NAME.2                      LBB 
+#DEFINE_CONSTANT    OBJ.MDX_OPR.2                       OPR__LBB 
+#DEFINE_CONSTANT    OBJ.MDX_FNC.2                       FNC__LBB 
 
 //------------------------------------------------
 #OBJECT_PROPERTY    FNC__LBA
@@ -108,7 +142,12 @@
 
 #DEFINE_CONSTANT    DATA.ATM_SNS.VIRTUAL_TYPE           NO
 #DEFINE_CONSTANT    VAR__ATM_SNS                        IO+di.LBA.ATM.SNS
+#DEFINE_CONSTANT    DATA.ATM_ON                         ON
+#DEFINE_CONSTANT    DATA.ATM_OFF                        OFF
 #DEFINE_CONSTANT    VAR__VAC_SNS                        IO+di.LBA.VAC.SNS
+#DEFINE_CONSTANT    DATA.VAC_ON                         ON
+#DEFINE_CONSTANT    DATA.VAC_OFF                        OFF
+
 #DEFINE_CONSTANT    VAR__LID_CLOSE_SNS                  IO+di.LBA.Chamber.Lid.Close
 
 #DEFINE_CONSTANT    LINK_OBJ.GAS                        NO
@@ -172,7 +211,12 @@
 
 #DEFINE_CONSTANT    DATA.ATM_SNS.VIRTUAL_TYPE           NO
 #DEFINE_CONSTANT    VAR__ATM_SNS                        IO+di.LBB.ATM.SNS
+#DEFINE_CONSTANT    DATA.ATM_ON                         ON
+#DEFINE_CONSTANT    DATA.ATM_OFF                        OFF
 #DEFINE_CONSTANT    VAR__VAC_SNS                        IO+di.LBB.VAC.SNS
+#DEFINE_CONSTANT    DATA.VAC_ON                         ON
+#DEFINE_CONSTANT    DATA.VAC_OFF                        OFF
+
 #DEFINE_CONSTANT    VAR__LID_CLOSE_SNS                  IO+di.LBB.Chamber.Lid.Close
 
 #DEFINE_CONSTANT    LINK_OBJ.GAS                        NO

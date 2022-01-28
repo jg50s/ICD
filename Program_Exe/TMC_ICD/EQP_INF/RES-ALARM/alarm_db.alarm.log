@@ -37,6 +37,8 @@
 // Object Define Info ... 
 
 "__EQP" Object not defined ! 
+"PAGE__LBx_TEST" Object not defined ! 
+"PAGE__MANIFOLD_TEST" Object not defined ! 
 "PAGE__SYS_CTRL" Object not defined ! 
 "PHY__LLx_PUMP" Object not defined ! 
 "PHY__LLx_VLV" Object not defined ! 
@@ -8098,6 +8100,85 @@ OBJECT_NAME : FNC__LLx_CHM   (OffsetID:0) (ToolID:) (UnitID:)
 #RECOVERY_ACTION 
      CHECK_RETRY   ""
      ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC__MANIFOLD_TEST   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__MANIFOLD_TEST - LL1's status is not "MAINTMODE"."
+#MESSAGE 
+"Please, convert LL's status to "MAINTMODE" !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__MANIFOLD_TEST - LL2's status is not "MAINTMODE"."
+#MESSAGE 
+"Please, convert LL's status to "MAINTMODE" !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__MANIFOLD_TEST - LL3's status is not "MAINTMODE"."
+#MESSAGE 
+"Please, convert LL's status to "MAINTMODE" !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__MANIFOLD_TEST - LL4's status is not "MAINTMODE"."
+#MESSAGE 
+"Please, convert LL's status to "MAINTMODE" !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__MANIFOLD_TEST - LL5's status is not "MAINTMODE"."
+#MESSAGE 
+"Please, convert LL's status to "MAINTMODE" !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
