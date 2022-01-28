@@ -1,0 +1,39 @@
+// 2018.12.20, 2018.12.21
+// 1. Pulsing Mode추가
+//   1.1. aCH__Ps_Frequency_Set, 
+//		  aCH__Ps_Duty_Set, 
+//		  aCH__Ps_Frequency, 
+//		  aCH__Ps_Duty, 
+//		  aoCH__Ps_Frequency_Set : cmd  93 Pusling Frequency setting : 10 ~ 100000 Hz
+//		  aoCH__Ps_Duty_Set,	 : cmd  96 Pusling Dutyy setting : 10 ~ 90 %
+//		  aiCH__Ps_Frequency,	 : cmd 193 Pulsing Mode On일 때만 reading
+//		  aiCH__Ps_Duty			 : cmd 196 Pulsing Mode On일 때만 reading
+//		  dCH__Pulsing_Mode		 :
+//		  diCH__Pulsing_Status	 : cmd 172 B0 = 7, B2 = 0 or 1  
+//										   -.B0 = 7 : Pulsing Enabled - Pulsing On / Off 선택
+//										   -.B2 = 0:Pulsing OFF, 1:Pulsing ON
+
+//		  doCH__Pulsing_Mode_Set : cmd  26 B0 = 8, B2 = 0 or 1
+
+//										   -.B0 = 8: Pulsing / arc management mode 선택
+//										   -.B2 = 0: Pulsing and arc management disabled, 1: Pulsing enabled, 2: Arc management enabled
+//										   -.Chamber initial 시점에 한번 setting
+
+//										   -.B0 = 7, B2 = 0 or 1
+//										   -.B0 = 7: Pulsing On / Off 선택
+//										   -.B2 = 0: Pulsing off, 1: Pulsing on - Pusing off일 경우 출력은 CW파형, Pulsing on일 경우, 출력은 Pulse파형
+//										   -.Recipe Step의 RF mode에 따라 변경
+//										   -.Pulsing Off일 경우, Pusing Frequency 및 Duty는 '0' Setting
+//										   -.Pulsing On일 경우에도, Pulsing Frequency 및 Duty가 모두 '0'일 경우, 출력은 CW파형
+
+//										   -.B0 = 6, B2 = 0 or 1
+//										   -.B0 = 6: Implicet / Explicit mode 선택
+//										   -.B2 = 0: Implicit enable, 1: Explicit enable - Implicit : Gen. 내부 파라미터 사용(User접근허용안됨), Explicit : Gen. User파리미터 사용
+
+//										   -.B0 = 5, B2 = 0 or 1
+//										   -.B0 = 5: Memory mode 선택
+//										   -.B2 = 0: RAM, 1: NVRAM - RAM : 휘발성, NVRAM : 비휘발성
+
+//										   -.B0 = 1, B2 = 0 or 1
+//										   -.B0 = 1: Pulsing mode 선택
+//										   -.B2 = 0: Master mode, 1: Slave mode - Mater일 때, pulsing duty 및 frequency setting이 적용 된다.

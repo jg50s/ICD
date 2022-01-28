@@ -1,0 +1,6 @@
+; PHY_RS232__RF_NRF.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PHY_RS232__RF_NRF"
+
+EXPORTS
+    ; Explicit exports can go here
