@@ -1,0 +1,5 @@
+00)   IO+do.Heater.MC.SH
+01)   IO+do.Heater.MC.Wall
+02)   IO+do.PC.Alive.Pulse.1sec
+03)   IO+do.RPS.Plasma.On
+04)   IO+do.LF.Plasma.On

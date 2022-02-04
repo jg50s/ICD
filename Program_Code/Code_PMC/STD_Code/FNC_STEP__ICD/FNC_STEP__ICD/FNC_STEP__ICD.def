@@ -1,0 +1,6 @@
+; FNC_STEP__ICD.def : Declares the module parameters for the DLL.
+
+LIBRARY      "FNC_STEP__ICD"
+
+EXPORTS
+    ; Explicit exports can go here

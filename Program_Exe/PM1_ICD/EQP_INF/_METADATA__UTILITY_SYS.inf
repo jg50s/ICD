@@ -1,0 +1,137 @@
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	 	Mng_AUTO_PM
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	            DB_ETCHER+SYS.FNC.NAME
+                                            
+#DEFINE_CONSTANT   	OBJ.CHM_CTRL                  FNC_CHM     
+
+#DEFINE_CONSTANT   	OBJ.LEAK_CHECK                FNC_CHM
+#DEFINE_CONSTANT   	OBJ.GAUGE_CHECK								Mng_GAUGE_CHECK
+#DEFINE_CONSTANT   	OBJ.VAT_CHECK                 Mng_VAT_CONDUCTANCE
+#DEFINE_CONSTANT   	OBJ.MFC_CHECK                 Mng_MFC_FLOW
+
+#DEFINE_CONSTANT   	OBJ.FRC_CHECK.SIZE	  			  0
+
+//------------------------------------------------
+#OBJECT_PROPERTY		Mng_MFC_FLOW
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+#DEFINE_CONSTANT		OBJ.DB_ETCHER                 DB_ETCHER
+                                             
+#DEFINE_CONSTANT		OBJ.CHM_CTRL                  FNC_CHM
+#DEFINE_CONSTANT   	OBJ.VAT_CTRL                  PHY_VAT
+#DEFINE_CONSTANT    OBJ.GAS_VALVE                 FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                  ##MFC_SIZE
+#DEFINE_CONSTANT		OBJ.MFC1                      PHY_MFC1
+#DEFINE_CONSTANT		OBJ.MFC2                      PHY_MFC2
+#DEFINE_CONSTANT		OBJ.MFC3                      PHY_MFC3
+#DEFINE_CONSTANT		OBJ.MFC4                      PHY_MFC4
+#DEFINE_CONSTANT		OBJ.MFC5                      PHY_MFC5
+#DEFINE_CONSTANT		OBJ.MFC6                      PHY_MFC6
+#DEFINE_CONSTANT		OBJ.MFC7                      PHY_MFC7
+#DEFINE_CONSTANT		OBJ.MFC8                      PHY_MFC8
+#DEFINE_CONSTANT		OBJ.MFC9                      PHY_MFC9
+#DEFINE_CONSTANT		OBJ.MFC10                     PHY_MFC10
+#DEFINE_CONSTANT		OBJ.MFC11                     PHY_MFC11
+#DEFINE_CONSTANT		OBJ.MFC12                     PHY_MFC12
+#DEFINE_CONSTANT		OBJ.MFC13                     PHY_MFC17
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE.TORR  	      DB_INF+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE.mTORR         DB_INF+CHM.PRESSURE.mTORR
+#DEFINE_CONSTANT   	CH.ISO_VLV		                IO+do.Manometer.ISO.Vlv.1_torr
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	            DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	              DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	            DB_ETCHER+SYS.FNC.LOCK
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		Mng_VAT_CONDUCTANCE
+
+#DEFINE_CONSTANT   	OBJ.VAT_CTRL                  PHY_VAT
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE     	        DB_INF+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT		OBJ.CHM_CTRL           	      FNC_CHM
+#DEFINE_CONSTANT  	OBJ.GAS_VLV		 		            FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                  ##MFC_SIZE
+#DEFINE_CONSTANT		OBJ.MFC1                      PHY_MFC1
+#DEFINE_CONSTANT		OBJ.MFC2                      PHY_MFC2
+#DEFINE_CONSTANT		OBJ.MFC3                      PHY_MFC3
+#DEFINE_CONSTANT		OBJ.MFC4                      PHY_MFC4
+#DEFINE_CONSTANT		OBJ.MFC5                      PHY_MFC5
+#DEFINE_CONSTANT		OBJ.MFC6                      PHY_MFC6
+#DEFINE_CONSTANT		OBJ.MFC7                      PHY_MFC7
+#DEFINE_CONSTANT		OBJ.MFC8                      PHY_MFC8
+#DEFINE_CONSTANT		OBJ.MFC9                      PHY_MFC9
+#DEFINE_CONSTANT		OBJ.MFC10                     PHY_MFC10
+#DEFINE_CONSTANT		OBJ.MFC11                     PHY_MFC11
+#DEFINE_CONSTANT		OBJ.MFC12                     PHY_MFC12
+#DEFINE_CONSTANT		OBJ.MFC13                     PHY_MFC17
+
+//-------------------------------------------------
+#OBJECT_PROPERTY   	Mng_RF_CHECK
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+
+#DEFINE_CONSTANT   	OBJ.RF_SIZE                   3
+#DEFINE_CONSTANT   	OBJ.RF_TITLE.1                RPS
+#DEFINE_CONSTANT   	OBJ.RF_NAME.1                 PHY_RF_RPS
+#DEFINE_CONSTANT   	OBJ.RF_TITLE.2                400KHz
+#DEFINE_CONSTANT   	OBJ.RF_NAME.2                 PHY_RF_400KHZ
+#DEFINE_CONSTANT   	OBJ.RF_TITLE.3                40MHz
+#DEFINE_CONSTANT   	OBJ.RF_NAME.3                 PHY_RF_40MHZ
+
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 	          DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 	          DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT	  CH.VAC_IO_SENSOR		          IO+di.CHM.VAC.Sns
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		Mng_GAUGE_CHECK
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE     	        DB_INF+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT		OBJ.CHM_CTRL           	      FNC_CHM
+#DEFINE_CONSTANT  	OBJ.GAS_VLV		 		            FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                  ##MFC_SIZE
+#DEFINE_CONSTANT		OBJ.MFC1                      PHY_MFC1
+#DEFINE_CONSTANT		OBJ.MFC2                      PHY_MFC2
+#DEFINE_CONSTANT		OBJ.MFC3                      PHY_MFC3
+#DEFINE_CONSTANT		OBJ.MFC4                      PHY_MFC4
+#DEFINE_CONSTANT		OBJ.MFC5                      PHY_MFC5
+#DEFINE_CONSTANT		OBJ.MFC6                      PHY_MFC6
+#DEFINE_CONSTANT		OBJ.MFC7                      PHY_MFC7
+#DEFINE_CONSTANT		OBJ.MFC8                      PHY_MFC8
+#DEFINE_CONSTANT		OBJ.MFC9                      PHY_MFC9
+#DEFINE_CONSTANT		OBJ.MFC10                     PHY_MFC10
+#DEFINE_CONSTANT		OBJ.MFC11                     PHY_MFC11
+#DEFINE_CONSTANT		OBJ.MFC12                     PHY_MFC12
+#DEFINE_CONSTANT		OBJ.MFC13                     PHY_MFC17
+
+//-------------------------------------------------
+#OBJECT_PROPERTY		Mng_DGF_CHECK
+
+#DEFINE_CONSTANT    OBJ.DB_SYS					          DB_SYS
+#DEFINE_CONSTANT   	CH.FNC.NAME     	 		        DB_ETCHER+SYS.FNC.NAME
+#DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG
+#DEFINE_CONSTANT   	CH.FNC.LOCK     	 		        DB_ETCHER+SYS.FNC.LOCK
+
+#DEFINE_CONSTANT   	CH.CHM_PRESSURE     	        DB_INF+CHM.PRESSURE.VALUE
+#DEFINE_CONSTANT		OBJ.CHM_CTRL           	      FNC_CHM
+#DEFINE_CONSTANT  	OBJ.FNC_MFC		      	        FNC_GAS_VLV_CTRL
+#DEFINE_CONSTANT		OBJ.DGF_CTRL                  PHY_DGF
+

@@ -1,0 +1,8698 @@
+//==================================================================================== 
+// Command Info ... 
+/* 
+#EQP2__ALARM_OFFSET   ??? 
+#EQP2__ALARM_RANGE   ??? 
+
+#INCLUDE   ??? 
+
+#DEFINE   ?[Name)  ?[Data) 
+
+#OBJECT   ?[Name)  ?[OffsetID)  ?[ToolID)  ?[UnitID)  
+... 
+
+#OBJECT_START   ?[Name) 
+#ALID   ??? 
+#LEVEL     // HEAVY(Default)  LIGHT  WARNING  
+#HOST_REPORT_DISABLE
+#HOST_REPORT_ENABLE     // Default 
+#TITLE   " ... " 
+#MESSAGE   " ... " 
+#OPTION1   " ... " 
+#OPTION2   " ... " 
+#OPTION3   " ... " 
+#ACTION
+{ 
+   " ... " 
+} 
+#OBJECT_END
+*/ 
+
+//==================================================================================== 
+// Define List ... 
+
+
+
+//==================================================================================== 
+// Object Define Info ... 
+
+"__EQP" Object not defined ! 
+"DB_ETCHER" Object not defined ! 
+"DB_GUI" Object not defined ! 
+"DB_INF" Object not defined ! 
+"FNC_PROC_LOG" Object not defined ! 
+"MNT_PROCESS" Object not defined ! 
+"PAGE_CHM" Object not defined ! 
+"PAGE_SYSTEM_INIT" Object not defined ! 
+"PAGE_SYSTEM_MAINT" Object not defined ! 
+"PHY_DGF" Object not defined ! 
+"PHY_DRY" Object not defined ! 
+"PHY_GAS_VLV" Object not defined ! 
+"IO" Object not defined ! 
+
+
+//==================================================================================== 
+// Alarm Info ... 
+//------------------------------------------------------------
+OBJECT_NAME : __SYS   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   0 
+#EXTERNAL_ID   0 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - SYSTEM ERROR"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - System Error 11 - Dll Title"
+#MESSAGE 
+"System Error 11 - Dll Message"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - Alarm Clear Test !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - SYSTEM WARNING 12"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS - System Error : Async Timer Max Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(1)"
+#MESSAGE 
+"AlarmID(1)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.1   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(2)"
+#MESSAGE 
+"AlarmID(2)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.2   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(3)"
+#MESSAGE 
+"AlarmID(3)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.3   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(4)"
+#MESSAGE 
+"AlarmID(4)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.4   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"__SYS -  AlarmID(5)"
+#MESSAGE 
+"AlarmID(5)'s message ..."
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+     ACT.5   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : DB_SYS   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_SYS - Simulation mode is active !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_SYS - Setpoint Interlock Disable !"
+#MESSAGE 
+"Config Page에서 Setpoint Interlock를 Disable 설정했습니다.
+정상적인 설비 운영시에는 반드시 Enable로 전환 바랍니다.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"DB_SYS - Setpoint & Monitoring Interlock Disable !"
+#MESSAGE 
+"Config Page에서 Setpoint & Monitoring Interlock를 Disable 설정했습니다.
+정상적인 설비 운영시에는 반드시 Enable로 전환 바랍니다.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_CHM   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - ATM Pressure Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Soft Venting Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Soft Pumping Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Low Vacuum Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - High Vacuum Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Foreline Pumping Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Foreline Over-Pumping Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Foreline Pressure Sensor and Value Check Timeout"
+#MESSAGE 
+"Please, check the CM3S1 Sensor and Pressure Value"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   9 
+#EXTERNAL_ID   9 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Vacuum Sensor & Foreline Pressure Sensor Check Timeout"
+#MESSAGE 
+"Please, check the Vacuum Sensor & CM3S1 Pressure Sensor"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   10 
+#EXTERNAL_ID   10 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Chamber Pressure Sensor Check Timeout"
+#MESSAGE 
+"Please, Check the Chamber Vacuum Sensor."
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Process Pressure Sensor Check TImeout"
+#MESSAGE 
+"Please, Check the Chamber Vacuum Sensor."
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - ATM Sensor Check timeout"
+#MESSAGE 
+"Please, check the ATM Sensor"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - PMC's slot valve is not closed !"
+#MESSAGE 
+"Please, check the pmc's slit valve.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   30 
+#EXTERNAL_ID   30 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - PMC's shutter valve is not closed !"
+#MESSAGE 
+"Please, check the pmc's shutter valve.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - RF Contact Enable Timeout"
+#MESSAGE 
+"Please, RF Contact Status"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - APC Valve Close Condition Occur."
+#MESSAGE 
+"Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..
+For Safety, APC Valve Will be Closed !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Manometer Isolation Valve Close Condition Occur."
+#MESSAGE 
+"Now.. Chamber Pressure is higher than (CM2 SW2) Config Value..
+For Safety, Manometer Isolation Valve Will be Closed !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - During Venting, Vacuum Sensor Off Timeout."
+#MESSAGE 
+"Now.. Chamber Vacuum Sensor is not False whith a config timeout.
+Please, Check Sensor Status !!
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - During Venting, ATM Sensor On Timeout."
+#MESSAGE 
+"Now.. Chamber Atm Sensor is not True whith a config timeout.
+Please, Check Sensor Status !!
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   20 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Leak Check, Max Pressure Alarm"
+#MESSAGE 
+"During Leak Checking, Current Chamber Pressure is higher than config value.
+Please, Check Chamber Pressure Status !!
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Leak Check Result Value is abnormal Alarm"
+#MESSAGE 
+"After Leak Checking, Leak Rate Result is higher than config value.
+Please, Check Chamber Pressure Status !!
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Leak Check with VAT valve position moving is start pressure over !"
+#MESSAGE 
+"VAT valve관련 H/W를 확인해 주시기 바랍니다. 
+VAT 관련된 부위에 LEAK이 있는 것 같습니다. 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Main Water Leak Detect Alarm"
+#MESSAGE 
+"Please, Check Water Leak Detect Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - RF Contactor Automatically Off Condition Occur."
+#MESSAGE 
+"Please, Check RF and Matcher Offline Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - RF Contactor Automatically Off Condition Occur."
+#MESSAGE 
+"Please, Check Chamber Vacuum Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - RF Contactor Automatically Off Condition Occur."
+#MESSAGE 
+"Please, Check Dry Pump Power Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - RF Matcher Alarm Not Normal Status."
+#MESSAGE 
+"Please, Check Matcher Alarm Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - VAC Sensor Checking Timeout."
+#MESSAGE 
+"Please, Check VAC Sensor Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   29 
+#EXTERNAL_ID   29 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - The state of Dry-Pump is not On !"
+#MESSAGE 
+"Please, Check the state of Dry-Pump ! 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Top Plate Temperature must be less than 60 C."
+#MESSAGE 
+"If you want to execute "venting sequence", 
+You must set the temperature of top plate to less than 60 C. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_CHM - Current PMC's status is "ATM MAINT"."
+#MESSAGE 
+"Please, convert "ATM Maint"'s status from "YES" to "NO". 
+There is "ATM Maint" button in PMC maint page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_GAS_VLV_CTRL   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_GAS_VLV_CTRL - Chamber가 Pumping 상태가 아닙니다. 
+"
+#MESSAGE 
+"Chamber Pumping 후에 작업을 진행하시기 바랍니다.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_PROC   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Process recipe does not exist."
+#MESSAGE 
+"Please, check process recipe file.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Check Process Recovery Action !"
+#MESSAGE 
+"Please, check process recovery action.
+If you select [RESTART],				the process will restart after system initialize.
+If you select [ABORT],				the process will be aborted.
+If you select [JUMP],					the step that you select will be executed.
+If you select [END],					Without Plasma Dechuck.. the process will be normally completed.
+If you select [END_WITH_PLASMA_DECHUCK],       With Plasma Dechuck recipe will be executed.
+"
+#RECOVERY_ACTION 
+     RESTART   ""
+     ABORT   ""
+     JUMP   ""
+     END   ""
+     PLASMA_DECHUCK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Process [Plasma Dechuck] recipe does not exist."
+#MESSAGE 
+"Please, check [Plasma Dechuck] recipe file.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Process [Plasma Dechuck] Sequence Failed."
+#MESSAGE 
+"You must execute plasma dechuck sequence 
+
+If you don't, Wafer may be broken in the chamber. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Process recipe file is being changed, now. 
+"
+#MESSAGE 
+"The process will run after recipe file save. 
+Please, wait or recipe file. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Do you want to convert the status of wafer ? 
+"
+#MESSAGE 
+"If you click "YES", the status of wafer will be converted to "PROCESSED". 
+If you click "NO",  the status of wafer will be not changed. 
+"
+#RECOVERY_ACTION 
+     YES   ""
+     NO   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Do you want to proceed the re-processing of wafer ?"
+#MESSAGE 
+"If you click "YES", the process will be proceeded. 
+If you click "NO",  the process will be aborted. 
+"
+#RECOVERY_ACTION 
+     YES   ""
+     NO   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - The step size of process recipe is not correct !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   9 
+#EXTERNAL_ID   9 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_PROC - Process를 진행할 상태가 아닙니다."
+#MESSAGE 
+"Lift_Pin은 Down 상태이어야 합니다. 
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_STEP   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_STEP - STEP OVERTIME ALARM."
+#MESSAGE 
+"Process Step Time-Over Alarm Message.
+Check Process Step time and Control time."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_STEP - STABLE OVERTIME ALARM."
+#MESSAGE 
+"Process Stable Step Time-over Alarm Message.
+Check Process Stable Step time and Control time."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_SYSTEM   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_SYSTEM : SYSTEM INIT FAILED."
+#MESSAGE 
+"System Component Initialize Action Failed."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : FNC_TRANSFER   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_TRANSFER - RF POWER STATUS ALARM"
+#MESSAGE 
+"RF Power Status Error."
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_TRANSFER - ESC POWER STATUS ALARM"
+#MESSAGE 
+"ESC Power Status Error.
+Please Check ESC Power Status."
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_AUTO_PM   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_AUTO_PM - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_AUTO_PM - AUTO PM : Utility Program Can't run !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_DGF_CHECK   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_DGF_CHECK - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_DGF_CHECK - DGF CHECK : Utility Program Can't run !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_DGF_CHECK - Orifice Check : Tolerance Error"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_GAUGE_CHECK   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_GAUGE_CHECK - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_GAUGE_CHECK - APC Conductance : Utility Program Can't run !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_GAUGE_CHECK - APC Conductance : Range Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_MFC_FLOW   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC Partial & CAL. : Utility Program Can't run !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC FLOW CHECK Timeout !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC FLOW MAX. GAS CAL. FLOW : ERROR !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC1's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC2's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC3's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC4's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC5's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC6's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC7's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC8's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC9's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   20 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC10's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC11's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC12's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC13's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC14's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC15's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC16's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC17's Calibration : Low Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC1's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC2's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC3's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC4's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC5's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC6's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC7's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   38 
+#EXTERNAL_ID   38 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC8's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   39 
+#EXTERNAL_ID   39 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC9's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   40 
+#EXTERNAL_ID   40 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC10's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   41 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC11's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   42 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC12's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   43 
+#EXTERNAL_ID   43 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC13's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   44 
+#EXTERNAL_ID   44 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC14's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   45 
+#EXTERNAL_ID   45 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC15's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   46 
+#EXTERNAL_ID   46 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC16's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   47 
+#EXTERNAL_ID   47 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC17's Calibration : High Warning."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   51 
+#EXTERNAL_ID   51 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC1's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   52 
+#EXTERNAL_ID   52 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC2's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   53 
+#EXTERNAL_ID   53 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC3's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   54 
+#EXTERNAL_ID   54 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC4's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   55 
+#EXTERNAL_ID   55 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC5's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   56 
+#EXTERNAL_ID   56 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC6's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   57 
+#EXTERNAL_ID   57 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC7's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   58 
+#EXTERNAL_ID   58 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC8's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   59 
+#EXTERNAL_ID   59 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC9's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   60 
+#EXTERNAL_ID   60 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC10's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   61 
+#EXTERNAL_ID   61 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC11's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   62 
+#EXTERNAL_ID   62 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC12's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   63 
+#EXTERNAL_ID   63 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC13's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   64 
+#EXTERNAL_ID   64 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC14's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   65 
+#EXTERNAL_ID   65 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC15's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   66 
+#EXTERNAL_ID   66 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC16's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   67 
+#EXTERNAL_ID   67 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC17's Calibration : Low Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   71 
+#EXTERNAL_ID   71 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC1's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   72 
+#EXTERNAL_ID   72 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC2's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   73 
+#EXTERNAL_ID   73 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC3's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   74 
+#EXTERNAL_ID   74 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC4's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   75 
+#EXTERNAL_ID   75 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC5's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   76 
+#EXTERNAL_ID   76 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC6's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   77 
+#EXTERNAL_ID   77 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC7's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   78 
+#EXTERNAL_ID   78 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC8's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   79 
+#EXTERNAL_ID   79 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC9's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   80 
+#EXTERNAL_ID   80 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC10's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   81 
+#EXTERNAL_ID   81 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC11's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   82 
+#EXTERNAL_ID   82 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC12's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   83 
+#EXTERNAL_ID   83 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC13's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   84 
+#EXTERNAL_ID   84 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC14's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   85 
+#EXTERNAL_ID   85 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC15's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   86 
+#EXTERNAL_ID   86 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC16's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   87 
+#EXTERNAL_ID   87 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_MFC_FLOW - MFC17's Calibration : High Error."
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_RF_CHECK   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_RF_CHECK - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_RF_CHECK - RFx CHECK : Utility Program Can't run !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_RF_CHECK - Now, RF Type can be changed !"
+#MESSAGE 
+"Please, change RF type after RF Checking sequence is completed. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_RF_CHECK - Now, chamber's pressure status is not VAC. 
+"
+#MESSAGE 
+"To check the RF linearity, the chamber's status must be VAC. 
+Please, check VAC sensor. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : MNG_VAT_CONDUCTANCE   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_VAT_CONDUCTANCE - OBJECT MODE : UNKNOWN"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_VAT_CONDUCTANCE - APC Conductance : Utility Program Can't run !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"MNG_VAT_CONDUCTANCE - APC Conductance : Range Error !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : OPR_PMC   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"OPR_PMC - In PMC, there is a wafer that not processed."
+#MESSAGE 
+"If you click "IGNORE", the status of system will be converted to "STANDBY". 
+If you click "ABORT",  the status of system will be not initialized. 
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+     IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_CHM_IO   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_CHM_IO - Monitoring Interlock Disable !"
+#MESSAGE 
+"Config Page에서 Monitoring Interlock를 Disable 설정했습니다.
+이 Object에서 관리하는 모든 Monitoring Alarm들이 정지 됩니다.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_ESC   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Status is Unknown !"
+#MESSAGE 
+"Please, check current chuck-status ! 
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Error : Chamber pressure is not vacuum !"
+#MESSAGE 
+"Please, check pressure in chamber ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Error : There is no wafer !"
+#MESSAGE 
+"Please, check wafer in chamber ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Center Voltage : MIN. Error !"
+#MESSAGE 
+"Please, check esc center config ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Center Voltage : MAX. Error !"
+#MESSAGE 
+"Please, check esc center config ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Center voltage is in warning range !"
+#MESSAGE 
+"Please, check ESC_Center voltage ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Center voltage is in fault range !"
+#MESSAGE 
+"Please, check ESC_Center voltage ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Center voltage high limit !"
+#MESSAGE 
+"Please, check ESC_Center voltage ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Center current high limit !"
+#MESSAGE 
+"Please, check ESC_Center current ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Edge Voltage : MIN. Error !"
+#MESSAGE 
+"Please, check esc edge config ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC Chuck Edge Voltage : MAX. Error !"
+#MESSAGE 
+"Please, check esc edge config ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Edge voltage is in warning range !"
+#MESSAGE 
+"Please, check ESC_Edge voltage ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Edge voltage is in fault range !"
+#MESSAGE 
+"Please, check ESC_Edge voltage ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Edge voltage high limit !"
+#MESSAGE 
+"Please, check ESC_Edge voltage ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   38 
+#EXTERNAL_ID   38 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - ESC_Edge current high limit !"
+#MESSAGE 
+"Please, check ESC_Edge current ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Center Pressure Warning !"
+#MESSAGE 
+"Please, check he center pressure ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Center Pressure Fault !"
+#MESSAGE 
+"Please, check he center pressure ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Edge Pressure Warning !"
+#MESSAGE 
+"Please, check he edge pressure ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   28 
+#EXTERNAL_ID   28 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Edge Pressure Fault !"
+#MESSAGE 
+"Please, check he edge pressure ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Center Flow Min. Threshold Error !"
+#MESSAGE 
+"Please, check he center flow ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Center Flow Max. Threshold Error !"
+#MESSAGE 
+"Please, check he center flow ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Edge Flow Min. Threshold Error !"
+#MESSAGE 
+"Please, check he edge flow ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He Edge Flow Max. Threshold Error !"
+#MESSAGE 
+"Please, check he edger flow ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - Wafer가 Dechuck된 상태가 아닙니다 !"
+#MESSAGE 
+"Wafer Minimum Leak Error ! 
+Please, check He flow! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - Wafer Maximum Leak Error !"
+#MESSAGE 
+"Please, check He flow ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - Shutter not close !"
+#MESSAGE 
+"Shutter가 닫힌 상태인지? 확인 바랍니다 ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   9 
+#EXTERNAL_ID   9 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - Slot-Valve not close !"
+#MESSAGE 
+"Slot-Valve가 닫힌 상태인지? 확인 바랍니다 ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - He pressure Max. error !"
+#MESSAGE 
+"Please, check he pressure ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - Helium center config range error !"
+#MESSAGE 
+"Please, check helium center flow ! 
+Helium center flow config condition is as followings : 
+   1. Helium center pressure is set to 4.0 torr. 
+   2. Get the flow of helium center bypass. 
+   3. The flow of helium center bypass must be in (3.1 ~ 3.6) sccm range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   41 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_ESC - Helium setting error !"
+#MESSAGE 
+"Process 중에 Helium 설정 값을 변경하는 작업을 할 수 없습니다. 
+ESC 상태가 "Chucked"인 상태에서만 가능합니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_HTR_SH   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop1 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop1 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop2 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop2 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop3 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop3 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop4 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop4 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop5 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop5 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop6 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop6 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop7 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop7 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop8 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Loop8 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Max. Diff Temperature Error !"
+#MESSAGE 
+"온도차를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Temperature High Limit !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Output-Power High Limit !"
+#MESSAGE 
+"Working Power를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Initial-Heating Timeout Occurred !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Heating Timeout Occurred !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : Max. Deviation Occurred !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 00) !"
+#MESSAGE 
+"H/W Alarm(Bit : 00)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 01) !"
+#MESSAGE 
+"H/W Alarm(Bit : 01)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 02) !"
+#MESSAGE 
+"H/W Alarm(Bit : 02)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 03) !"
+#MESSAGE 
+"H/W Alarm(Bit : 03)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 04) !"
+#MESSAGE 
+"H/W Alarm(Bit : 04)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 05) !"
+#MESSAGE 
+"H/W Alarm(Bit : 05)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_SH : H/W Alarm Occurred (Bit : 06) !"
+#MESSAGE 
+"H/W Alarm(Bit : 06)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_HTR_WALL   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop1 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop1 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop2 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop2 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop3 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop3 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop4 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop4 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop5 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop5 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop6 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop6 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop7 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop7 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop8 Warning !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Loop8 Fault !"
+#MESSAGE 
+"Please, check the state of loop ! 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Max. Diff Temperature Error !"
+#MESSAGE 
+"온도차를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Temperature High Limit !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Output-Power High Limit !"
+#MESSAGE 
+"Working Power를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Initial-Heating Timeout Occurred !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Heating Timeout Occurred !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : Max. Deviation Occurred !"
+#MESSAGE 
+"온도를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 00) !"
+#MESSAGE 
+"H/W Alarm(Bit : 00)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 01) !"
+#MESSAGE 
+"H/W Alarm(Bit : 01)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 02) !"
+#MESSAGE 
+"H/W Alarm(Bit : 02)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 03) !"
+#MESSAGE 
+"H/W Alarm(Bit : 03)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 04) !"
+#MESSAGE 
+"H/W Alarm(Bit : 04)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 05) !"
+#MESSAGE 
+"H/W Alarm(Bit : 05)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_HTR_WALL : H/W Alarm Occurred (Bit : 06) !"
+#MESSAGE 
+"H/W Alarm(Bit : 06)이 발생 했습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_LIFT_PIN   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LIFT_PIN -  PIN LIFTER - Action Timeout ALARM."
+#MESSAGE 
+"Please, Check the I/O Module & PIN Lifter."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LIFT_PIN -  PIN LIFTER - Action Timeout ALARM."
+#MESSAGE 
+"Please, Check the I/O Module & PIN Lifter."
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LIFT_PIN -  PIN LIFTER - Chuck Status ALARM."
+#MESSAGE 
+"Please, Check the Chucking Status."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_LIFT_PIN -  PIN LIFTER - ESC VOLTAGE PIN UP THRESHOLD ALARM."
+#MESSAGE 
+"Please, Check ESC Voltage."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC1   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC1 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC1 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC1 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC1 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC1 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC1 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC10   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC10 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC10 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC10 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC10 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC10 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC10 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC11   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC11 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC11 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC11 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC11 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC11 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC11 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC12   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC12 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC12 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC12 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC12 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC12 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC12 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC17   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC17 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC17 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC17 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC17 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC17 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC17 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC2   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC2 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC2 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC2 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC2 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC2 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC2 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC3   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC3 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC3 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC3 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC3 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC3 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC3 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC4   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC4 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC4 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC4 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC4 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC4 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC4 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC5   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC5 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC5 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC5 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC5 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC5 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC5 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC6   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC6 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC6 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC6 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC6 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC6 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC6 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC7   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC7 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC7 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC7 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC7 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC7 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC7 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC8   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC8 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC8 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC8 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC8 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC8 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC8 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_MFC9   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC9 - In MFC config page, MFC's use is selected to "YES"."
+#MESSAGE 
+"Please, check MFC's Use Option in the config page. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC9 - MFC Flow Control Aborted !."
+#MESSAGE 
+"MFC Control Error !.
+Please, check H/W MFC controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC9 - MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"MFC Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC9 - MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC9 - During Idle, MFC Flow Control Warning Range Alarm."
+#MESSAGE 
+"Flow Control was over the Warning Range..
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MFC9 - During Idle, MFC Flow Control Abort Range Alarm."
+#MESSAGE 
+"Flow Control was over the Abort Range..
+For Safety, MFC Flow Will be Stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_PT   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT1 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT1 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT2 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT2 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT3 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT3 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT4 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT4 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT5 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT5 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT6 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT6 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT7 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT7 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT8 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   28 
+#EXTERNAL_ID   28 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT8 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   9 
+#EXTERNAL_ID   9 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT9 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   29 
+#EXTERNAL_ID   29 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT9 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   10 
+#EXTERNAL_ID   10 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT10 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   30 
+#EXTERNAL_ID   30 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT10 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT11 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT11 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT12 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT12 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT13 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT13 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT14 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT14 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT15 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT15 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT16 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT16 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT17 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT17 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT18 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   38 
+#EXTERNAL_ID   38 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT18 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT19 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   39 
+#EXTERNAL_ID   39 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT19 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   20 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT20 Threshold Warning."
+#MESSAGE 
+"PT was over threshold warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   40 
+#EXTERNAL_ID   40 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_PT - PT20 Threshold Abort."
+#MESSAGE 
+"PT was over threshold abort range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_RF_400KHZ   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ : RF Generator Not Use !"
+#MESSAGE 
+"RF Generator use option is not "YES". 
+Please, Check the config option of RF Generator !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - Control Aborted."
+#MESSAGE 
+"Please, check RF Status."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
+#MESSAGE 
+"Forward power is process warning tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
+#MESSAGE 
+"Forward power is process abort tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
+#MESSAGE 
+"Forward power is idle warning tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
+#MESSAGE 
+"Forward power is idle abort tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ : RF Power Control Alarm."
+#MESSAGE 
+"Chamber Vacuum Switch is not On.
+Please, Check Vacuum Switch Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ : RF Power Control Alarm."
+#MESSAGE 
+"Chamber ATM Switch is not Off.
+Please, Check ATM Switch Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ : RF Power Control Alarm."
+#MESSAGE 
+"The lid of chamber is not close.
+Please, check the lid close sensor of chamber !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ : RF Power Control Alarm."
+#MESSAGE 
+"The shutter of chamber is not close.
+Please, Check PM's shutter status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ : RF Power Control Alarm."
+#MESSAGE 
+"System Interlock Sensor가 감지 되었습니다.
+Interlock Sensor를 확인 바랍니다.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED POWER OVER."
+#MESSAGE 
+"Reflected Power Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED Coefficient OVER."
+#MESSAGE 
+"Reflected Coefficient Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED POWER WARNING."
+#MESSAGE 
+"Reflected Power is Soft Tolerance Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED POWER ALARM."
+#MESSAGE 
+"Reflected Power is Hard Tolerance Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
+#MESSAGE 
+"Wafer is Absent, RF Power Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_400KHZ :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
+#MESSAGE 
+"Set Power is not allowed."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_RF_40MHZ   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ : RF Generator Not Use !"
+#MESSAGE 
+"RF Generator use option is not "YES". 
+Please, Check the config option of RF Generator !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - Control Aborted."
+#MESSAGE 
+"Please, check RF Status."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
+#MESSAGE 
+"Forward power is process warning tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
+#MESSAGE 
+"Forward power is process abort tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
+#MESSAGE 
+"Forward power is idle warning tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
+#MESSAGE 
+"Forward power is idle abort tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ : RF Power Control Alarm."
+#MESSAGE 
+"Chamber Vacuum Switch is not On.
+Please, Check Vacuum Switch Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ : RF Power Control Alarm."
+#MESSAGE 
+"Chamber ATM Switch is not Off.
+Please, Check ATM Switch Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ : RF Power Control Alarm."
+#MESSAGE 
+"The lid of chamber is not close.
+Please, check the lid close sensor of chamber !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ : RF Power Control Alarm."
+#MESSAGE 
+"The shutter of chamber is not close.
+Please, Check PM's shutter status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ : RF Power Control Alarm."
+#MESSAGE 
+"System Interlock Sensor가 감지 되었습니다.
+Interlock Sensor를 확인 바랍니다.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED POWER OVER."
+#MESSAGE 
+"Reflected Power Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED Coefficient OVER."
+#MESSAGE 
+"Reflected Coefficient Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED POWER WARNING."
+#MESSAGE 
+"Reflected Power is Soft Tolerance Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED POWER ALARM."
+#MESSAGE 
+"Reflected Power is Hard Tolerance Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
+#MESSAGE 
+"Wafer is Absent, RF Power Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_40MHZ :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
+#MESSAGE 
+"Set Power is not allowed."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_RF_RPS   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS : RF Generator Not Use !"
+#MESSAGE 
+"RF Generator use option is not "YES". 
+Please, Check the config option of RF Generator !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - Control Aborted."
+#MESSAGE 
+"Please, check RF Status."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
+#MESSAGE 
+"Forward power is process warning tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
+#MESSAGE 
+"Forward power is process abort tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
+#MESSAGE 
+"Forward power is idle warning tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
+#MESSAGE 
+"Forward power is idle abort tolerance."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS : RF Power Control Alarm."
+#MESSAGE 
+"Chamber Vacuum Switch is not On.
+Please, Check Vacuum Switch Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS : RF Power Control Alarm."
+#MESSAGE 
+"Chamber ATM Switch is not Off.
+Please, Check ATM Switch Status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS : RF Power Control Alarm."
+#MESSAGE 
+"The lid of chamber is not close.
+Please, check the lid close sensor of chamber !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS : RF Power Control Alarm."
+#MESSAGE 
+"The shutter of chamber is not close.
+Please, Check PM's shutter status !!
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS : RF Power Control Alarm."
+#MESSAGE 
+"System Interlock Sensor가 감지 되었습니다.
+Interlock Sensor를 확인 바랍니다.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - REFLECTED POWER OVER."
+#MESSAGE 
+"Reflected Power Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - REFLECTED Coefficient OVER."
+#MESSAGE 
+"Reflected Coefficient Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - REFLECTED POWER WARNING."
+#MESSAGE 
+"Reflected Power is Soft Tolerance Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - REFLECTED POWER ALARM."
+#MESSAGE 
+"Reflected Power is Hard Tolerance Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
+#MESSAGE 
+"Wafer is Absent, RF Power Limit Over."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_RF_RPS :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
+#MESSAGE 
+"Set Power is not allowed."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_TMP   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMP - Forline Pressure Unstable Alarm !"
+#MESSAGE 
+"Forline Pressure Unstable Status
+Check the Forline Vac Switch and Dry Pump On Status!
+Now... Turbo Pump will be off.."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMP - PCW Unstable Alarm !"
+#MESSAGE 
+"PCW Unstable Status 
+Check the state of PCW ! 
+Now, Turbo Pump will be off.."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMP - The state of TMP or dry-pump is error !"
+#MESSAGE 
+"Check the state of TMP or dry-pump !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_TMP - TMP를 On 할 수 없습니다 !"
+#MESSAGE 
+"관련 Sensor 상태를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_VAC_VLV   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_VLV - FR Open Sensor Timeout !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_VLV - SR Open Sensor Timeout !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_VLV - FR Close Sensor Timeout !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAC_VLV - SR Close Sensor Timeout !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_VAT   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - VAT Control Warning Range Alarm."
+#MESSAGE 
+"VAT control was over the warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - VAT Control Abort Range Alarm."
+#MESSAGE 
+"VAT Control was over the abort range. 
+For safety, MFC flow will be stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - During Idle, VAT Control Warning Range Alarm."
+#MESSAGE 
+"VAT control was over the warning range. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - During Idle, VAT Control Abort Range Alarm."
+#MESSAGE 
+"VAT control was over the abort range. 
+For Safety, VAT will be stopped !!
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "Transfer ballast pressure wait" occurred !"
+#MESSAGE 
+"Please, check Ballast valve or N2 valve.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "Transfer ballast over pressure" occurred !"
+#MESSAGE 
+"Please, check Ballast valve or N2 valve.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "Chamber ballast pressure wait" occurred !"
+#MESSAGE 
+"Please, check Ballast valve or N2 valve.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "Chamber ballast over pressure" occurred !"
+#MESSAGE 
+"Please, check Ballast valve or N2 valve.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - VAT Control Aborted !."
+#MESSAGE 
+"VAT Control Error !.
+Please, check VAT controller."
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - In VAT config page, VAT's use is selected to "NOT USE"."
+#MESSAGE 
+"Please, check VAT's use option in the config page. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - TV Interlock 관련 Digital Output이 "ON" 되어 있습니다."
+#MESSAGE 
+"TV Interlock 관련 Digital Output 상태를 확인 바랍니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "VAT open timeout" occurred !"
+#MESSAGE 
+"Please, check VAT's board or cable. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "VAT close timeout" occurred !"
+#MESSAGE 
+"Please, check VAT's board or cable. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "VAT,Enable Sensor Error" occurred !"
+#MESSAGE 
+"Please, check VAT's Enable Sensor State. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - "VAT,Ready Error" occurred !"
+#MESSAGE 
+"Please, check VAT's All Sensor State. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_VAT - Open Interlock !"
+#MESSAGE 
+"Open 명령을 수행 할 수 없습니다. 
+"
+#RECOVERY_ACTION 
+     CLEAR   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__APC_VLV   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : Controller is Offline."
+#MESSAGE 
+"Check, Communication Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : CMD [REMOTE] is out of time."
+#MESSAGE 
+"Check, Controller Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : CMD [CONTROL] is out of time."
+#MESSAGE 
+"Check, CMD [OPEN, CLOSE, PRESSURE, POSITION, HOLD] Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : POSITION or AIR Error is exist."
+#MESSAGE 
+"Check, Device [POSITION or AIR Error] Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : Communication Error is exist."
+#MESSAGE 
+"Check, Device Communication Status.. Reference the manual !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : Device Error is exist."
+#MESSAGE 
+"Check, Device Error Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : Not Remote Status."
+#MESSAGE 
+"Check, Device Remote Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC SYSTEM : Auto Learning Command Timeout Error"
+#MESSAGE 
+"Check, Device Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC Position Control Timeout Error !"
+#MESSAGE 
+"Please, check APC's status ! 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__APC_VLV :  - APC로부터 통신 Error Code가 수신 되었습니다. 
+"
+#MESSAGE 
+" - APC로부터 통신 Error Code가 수신 되었습니다. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__DRY_PMP   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Offline."
+#MESSAGE 
+"Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Local Status."
+#MESSAGE 
+"Please, Check Control Mode !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Power Off TimeOut."
+#MESSAGE 
+"Power Sensor -> Off : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Power On TimeOut."
+#MESSAGE 
+"Power Sensor -> On : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Remote Command TimeOut."
+#MESSAGE 
+"Power Sensor -> Remote : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Local Command TimeOut."
+#MESSAGE 
+"Power Sensor -> Local : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Command Error [ERR 1]."
+#MESSAGE 
+"After Send Command, Received following Error Response.
+[From Manual..]
+The message sent was not a valid query or
+command message.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Command Error [ERR 2]."
+#MESSAGE 
+"After Send Command, Received following Error Response.
+[From Manual..]
+Part of a message (for example, {parameter}) was not found. 
+Resend the message in the correct format.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Command Error [ERR 3]."
+#MESSAGE 
+"After Send Command, Received following Error Response.
+[From Manual..]
+Part of a message was outside the valid range 
+for example the {0:1} digit in a command message was higher than 1.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   20 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Command Error [ERR 4:Parameter's value not received]."
+#MESSAGE 
+"After Send Command, Received following Error Response.
+[From Manual..]
+The corresponding sensor may be faulty or disconnected. 
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Pump Command Error [ERR 5:Command not possible]."
+#MESSAGE 
+"After Send Command, Received following Error Response.
+[From Manual..]
+You have tried to take or release control,
+but another module has control of the dry pumping system. 
+Release control from the other module, then try again.
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Control Mode : Converted "AUTO" To "MANUAL"."
+#MESSAGE 
+"Dry pump's control mode is converted "AUTO" to "MANUAL". 
+Please, check dry pump's control mode. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__DRY_PMP - Control Mode : Converted "MANUAL" to "AUTO"."
+#MESSAGE 
+"Dry pump's control mode is converted "MANUAL" to "AUTO". 
+Please, check dry pump's control mode. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__ESC   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__ESC - Controller Offline"
+#MESSAGE 
+"Controller Offline."
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__ESC - 수신된 Error 정보가 있습니다 !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__ESC - Control Mode가 Remote 상태가 아닙니다 !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__MATCHER   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MATCHER - Generator Offline"
+#MESSAGE 
+"Generator Offline."
+#RECOVERY_ACTION 
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MATCHER - Generator Communication Retry Over"
+#MESSAGE 
+"Generator Communication Retry Over"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__MFC_PART01   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[01] Offline."
+#MESSAGE 
+"MFC[01] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[02] Offline."
+#MESSAGE 
+"MFC[02] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[03] Offline."
+#MESSAGE 
+"MFC[03] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[04] Offline."
+#MESSAGE 
+"MFC[04] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[05] Offline."
+#MESSAGE 
+"MFC[05] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[06] Offline."
+#MESSAGE 
+"MFC[06] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[07] Offline."
+#MESSAGE 
+"MFC[07] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[08] Offline."
+#MESSAGE 
+"MFC[08] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   9 
+#EXTERNAL_ID   9 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[09] Offline."
+#MESSAGE 
+"MFC[09] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   10 
+#EXTERNAL_ID   10 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[10] Offline."
+#MESSAGE 
+"MFC[10] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[11] Offline."
+#MESSAGE 
+"MFC[11] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[12] Offline."
+#MESSAGE 
+"MFC[12] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[13] Offline."
+#MESSAGE 
+"MFC[13] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[14] Offline."
+#MESSAGE 
+"MFC[14] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[15] Offline."
+#MESSAGE 
+"MFC[15] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[16] Offline."
+#MESSAGE 
+"MFC[16] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[17] Offline."
+#MESSAGE 
+"MFC[17] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[18] Offline."
+#MESSAGE 
+"MFC[18] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[19] Offline."
+#MESSAGE 
+"MFC[19] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   20 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[20] Offline."
+#MESSAGE 
+"MFC[20] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[21] Offline."
+#MESSAGE 
+"MFC[21] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[01] Control Timeout."
+#MESSAGE 
+"MFC[01] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[02] Control Timeout."
+#MESSAGE 
+"MFC[02] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[03] Control Timeout."
+#MESSAGE 
+"MFC[03] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[04] Control Timeout."
+#MESSAGE 
+"MFC[04] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[05] Control Timeout."
+#MESSAGE 
+"MFC[05] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[06] Control Timeout."
+#MESSAGE 
+"MFC[06] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   28 
+#EXTERNAL_ID   28 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[07] Control Timeout."
+#MESSAGE 
+"MFC[07] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   29 
+#EXTERNAL_ID   29 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[08] Control Timeout."
+#MESSAGE 
+"MFC[08] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   30 
+#EXTERNAL_ID   30 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[09] Control Timeout."
+#MESSAGE 
+"MFC[09] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[10] Control Timeout."
+#MESSAGE 
+"MFC[10] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[11] Control Timeout."
+#MESSAGE 
+"MFC[11] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[12] Control Timeout."
+#MESSAGE 
+"MFC[12] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[13] Control Timeout."
+#MESSAGE 
+"MFC[13] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[14] Control Timeout."
+#MESSAGE 
+"MFC[14] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[15] Control Timeout."
+#MESSAGE 
+"MFC[15] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[16] Control Timeout."
+#MESSAGE 
+"MFC[16] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   38 
+#EXTERNAL_ID   38 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[17] Control Timeout."
+#MESSAGE 
+"MFC[17] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   39 
+#EXTERNAL_ID   39 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[18] Control Timeout."
+#MESSAGE 
+"MFC[18] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   40 
+#EXTERNAL_ID   40 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[19] Control Timeout."
+#MESSAGE 
+"MFC[19] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   41 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[20] Control Timeout."
+#MESSAGE 
+"MFC[20] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   42 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[21] Control Timeout."
+#MESSAGE 
+"MFC[21] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__MFC_PART02   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[07] Offline."
+#MESSAGE 
+"MFC[07] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[08] Offline."
+#MESSAGE 
+"MFC[08] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[09] Offline."
+#MESSAGE 
+"MFC[09] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[10] Offline."
+#MESSAGE 
+"MFC[10] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[11] Offline."
+#MESSAGE 
+"MFC[11] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[12] Offline."
+#MESSAGE 
+"MFC[12] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[13] Offline."
+#MESSAGE 
+"MFC[13] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   8 
+#EXTERNAL_ID   8 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[14] Offline."
+#MESSAGE 
+"MFC[14] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   9 
+#EXTERNAL_ID   9 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[15] Offline."
+#MESSAGE 
+"MFC[15] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   10 
+#EXTERNAL_ID   10 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[16] Offline."
+#MESSAGE 
+"MFC[16] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[17] Offline."
+#MESSAGE 
+"MFC[17] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[18] Offline."
+#MESSAGE 
+"MFC[18] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[19] Offline."
+#MESSAGE 
+"MFC[19] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[20] Offline."
+#MESSAGE 
+"MFC[20] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[21] Offline."
+#MESSAGE 
+"MFC[21] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[22] Offline."
+#MESSAGE 
+"MFC[22] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[23] Offline."
+#MESSAGE 
+"MFC[23] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   18 
+#EXTERNAL_ID   18 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[24] Offline."
+#MESSAGE 
+"MFC[24] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   19 
+#EXTERNAL_ID   19 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[25] Offline."
+#MESSAGE 
+"MFC[25] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   20 
+#EXTERNAL_ID   20 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[26] Offline."
+#MESSAGE 
+"MFC[26] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   21 
+#EXTERNAL_ID   21 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[27] Offline."
+#MESSAGE 
+"MFC[27] Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   22 
+#EXTERNAL_ID   22 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[07] Control Timeout."
+#MESSAGE 
+"MFC[07] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   23 
+#EXTERNAL_ID   23 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[08] Control Timeout."
+#MESSAGE 
+"MFC[08] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   24 
+#EXTERNAL_ID   24 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[09] Control Timeout."
+#MESSAGE 
+"MFC[09] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   25 
+#EXTERNAL_ID   25 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[10] Control Timeout."
+#MESSAGE 
+"MFC[10] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   26 
+#EXTERNAL_ID   26 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[11] Control Timeout."
+#MESSAGE 
+"MFC[11] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   27 
+#EXTERNAL_ID   27 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[12] Control Timeout."
+#MESSAGE 
+"MFC[12] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   28 
+#EXTERNAL_ID   28 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[13] Control Timeout."
+#MESSAGE 
+"MFC[13] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   29 
+#EXTERNAL_ID   29 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[14] Control Timeout."
+#MESSAGE 
+"MFC[14] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   30 
+#EXTERNAL_ID   30 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[15] Control Timeout."
+#MESSAGE 
+"MFC[15] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   31 
+#EXTERNAL_ID   31 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[16] Control Timeout."
+#MESSAGE 
+"MFC[16] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   32 
+#EXTERNAL_ID   32 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[17] Control Timeout."
+#MESSAGE 
+"MFC[17] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   33 
+#EXTERNAL_ID   33 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[18] Control Timeout."
+#MESSAGE 
+"MFC[18] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   34 
+#EXTERNAL_ID   34 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[19] Control Timeout."
+#MESSAGE 
+"MFC[19] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   35 
+#EXTERNAL_ID   35 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[20] Control Timeout."
+#MESSAGE 
+"MFC[20] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   36 
+#EXTERNAL_ID   36 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[21] Control Timeout."
+#MESSAGE 
+"MFC[21] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   37 
+#EXTERNAL_ID   37 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[22] Control Timeout."
+#MESSAGE 
+"MFC[22] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   38 
+#EXTERNAL_ID   38 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[23] Control Timeout."
+#MESSAGE 
+"MFC[23] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   39 
+#EXTERNAL_ID   39 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[24] Control Timeout."
+#MESSAGE 
+"MFC[24] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   40 
+#EXTERNAL_ID   40 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[25] Control Timeout."
+#MESSAGE 
+"MFC[25] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   41 
+#EXTERNAL_ID   41 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[26] Control Timeout."
+#MESSAGE 
+"MFC[26] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   42 
+#EXTERNAL_ID   42 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[27] Control Timeout."
+#MESSAGE 
+"MFC[27] Controller is Timeout.
+Please, Check MFC Control Status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__RF_400KHZ   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_400KHZ - Generator Offline"
+#MESSAGE 
+"Generator Offline."
+#RECOVERY_ACTION 
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_400KHZ - Generator Communication Retry Over"
+#MESSAGE 
+"Generator Communication Retry Over"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__RF_40MHZ   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_40MHZ - Generator Offline"
+#MESSAGE 
+"Generator Offline."
+#RECOVERY_ACTION 
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_40MHZ - Generator Communication Retry Over"
+#MESSAGE 
+"Generator Communication Retry Over"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__RF_RPS   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_RPS - Generator Offline"
+#MESSAGE 
+"Generator Offline."
+#RECOVERY_ACTION 
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_RPS - Generator Communication Retry Over"
+#MESSAGE 
+"Generator Communication Retry Over"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__SPECTROMETER   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__SPECTROMETER :  - OES SYSTEM : OES Offline."
+#MESSAGE 
+"Check the Online !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__SPECTROMETER :  - OES SYSTEM : Parameter Set Fail(First Coeff., Second Coeff, Intercept) ."
+#MESSAGE 
+"Check the Parameter and OES !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__TMP   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   11 
+#EXTERNAL_ID   11 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Offline."
+#MESSAGE 
+"Controller is Offline.
+Please, Check Communication Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   12 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Controller is Local Mode.
+"
+#MESSAGE 
+"Please, Check Mode.
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   13 
+#EXTERNAL_ID   13 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Pump Power Off TimeOut."
+#MESSAGE 
+"Power Sensor -> Off : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   14 
+#EXTERNAL_ID   14 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Pump Power On TimeOut."
+#MESSAGE 
+"Power Sensor -> On : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   15 
+#EXTERNAL_ID   15 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Pump Remote Command TimeOut."
+#MESSAGE 
+"Power Sensor -> Remote : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   16 
+#EXTERNAL_ID   16 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Pump Local Command TimeOut."
+#MESSAGE 
+"Power Sensor -> Local : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   17 
+#EXTERNAL_ID   17 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__TMP - Pump Acceleration TimeOut."
+#MESSAGE 
+"Power Sensor -> Acceleration : Timeout.
+Please, Check Pump Status !
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+

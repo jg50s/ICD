@@ -1,0 +1,4 @@
+#ID=3	3	LIGHT	PHY_TMP - Forline Pressure Unstable Alarm !
+#ID=4	4	LIGHT	PHY_TMP - PCW Unstable Alarm !
+#ID=1	1	LIGHT	PHY_TMP - The state of TMP or dry-pump is error !
+#ID=2	2	LIGHT	PHY_TMP - TMP를 On 할 수 없습니다 !

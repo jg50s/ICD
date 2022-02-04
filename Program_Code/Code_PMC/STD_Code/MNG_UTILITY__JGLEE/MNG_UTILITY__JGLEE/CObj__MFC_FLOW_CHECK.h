@@ -1,0 +1,247 @@
+#pragma once
+
+#include "Interface_Code.h"
+
+#include "CCommon_Error.h"
+#include "CCommon_Def.h"
+
+#include "CObj__MFC_FLOW_CHECK__ALID.h"
+#include "CObj__MFC_FLOW_CHECK__DEF.h"
+
+
+class CObj__MFC_FLOW_CHECK : public __IOBJ__STD_TYPE
+{
+private:
+	//-------------------------------------------------------------------------
+	CString sObject_Name;
+
+	CCommon_Error__DEF_VARIABLE mERROR__DEF_VAR;
+	CCommon_Error__USER_FNC     mERROR__USER_FNC;
+
+	// ...
+	int iSIM_MODE;
+	//
+
+
+	//-------------------------------------------------------------------------
+	//  INTERNAL PROPERTY
+
+	// SYSTEM CHANNEL .....
+	CX__VAR_STRING_CTRL  xCH__OBJ_MSG;
+	int iPRC_FLAG;
+
+	// INFO CHANNEL .....
+	CX__VAR_STRING_CTRL  sCH_INFO__CUR_GAS_ID;
+	CX__VAR_STRING_CTRL  sCH_INFO__CUR_GAS_NAME;
+	CX__VAR_STRING_CTRL  sCH_INFO__CUR_GAS_FLOW_SET;
+
+	CX__VAR_STRING_CTRL  sCH_INFO__CUR_GAS_MIN;
+	CX__VAR_STRING_CTRL  sCH_INFO__CUR_GAS_MAX;
+
+	CX__VAR_STRING_CTRL  sCH_INFO__LIST_CTRL;
+	CX__VAR_STRING_CTRL  sCH_INFO__ITEM_CTRL;
+
+	CX__VAR_STRING_CTRL  sCH_INFO__LIST_SEL_REQ;
+	CX__VAR_STRING_CTRL  sCH_INFO__LIST_SEL_STS;
+
+	CX__VAR_STRING_CTRL  sCH_INFO__SETPOINT_MODE;
+
+	// PARAMETER .....
+	// TEST MODE  :  MFC.FLOW  MFC.CAL
+	CX__VAR_DIGITAL_CTRL dCH_PARA__TEST_MODE;
+
+	// MFC SETTING MODE  :  10%  USER.DEF
+	CX__VAR_DIGITAL_CTRL dCH_PARA__MFC_SETTING_MODE;
+
+	//
+	CX__VAR_DIGITAL_CTRL dCH_APP__GAS_USE_FLAG[CFG__MFC_SIZE];
+	CX__VAR_STRING_CTRL  sCH_APP__GAS_ID[CFG__MFC_SIZE];
+	CX__VAR_ANALOG_CTRL  aCH_APP__GAS_CHECK_PRESSURE[CFG__MFC_SIZE];
+	CX__VAR_STRING_CTRL  sCH_APP__GAS_STATUS[CFG__MFC_SIZE];
+	CX__VAR_STRING_CTRL  sCH_APP__GAS_VIEW_FLAG[CFG__MFC_SIZE];
+	CX__VAR_STRING_CTRL  sCH_APP__GAS_RUN_MODE[CFG__MFC_SIZE];
+
+	CX__VAR_STRING_CTRL  sCH_APP__REQ_USER_DEFINE_SAVE;
+	CX__VAR_STRING_CTRL  sCH_APP__REQ_RESULT_VIEW;
+
+	//
+	// SET AUTO FLOW
+	CX__VAR_ANALOG_CTRL  aCH_PARA__GAS_SET_AUTO_FLOW[CFG__GAS_FLOW_LIST];
+
+	// SET USER FLOW
+	CX__VAR_ANALOG_CTRL  aCH_PARA__GAS_SET_USER_FLOW[CFG__GAS_FLOW_LIST];
+
+	// CURRENT FLOW
+	CX__VAR_STRING_CTRL  sCH_PARA__GAS_CURRENT_FLOW[CFG__GAS_FLOW_LIST];
+
+	// CURRENT PRESSURE
+	CX__VAR_STRING_CTRL  sCH_PARA__CURRENT_PRESSURE[CFG__GAS_FLOW_LIST];
+
+	// CAL. ERROR
+	CX__VAR_STRING_CTRL  sCH_PARA__CAL_ERROR_RESULT[CFG__GAS_FLOW_LIST];
+
+	// FLOW RESULT
+	// CX__VAR_STRING_CTRL  sCH_PARA__FLOW_RESULT[CFG__GAS_FLOW_LIST];
+
+	// START PRESSURE
+	CX__VAR_STRING_CTRL  sCH_PARA__CHECK_START_PRESSURE;
+
+	// END PRESSURE
+	CX__VAR_STRING_CTRL  sCH_PARA__CHECK_END_PRESSURE;
+
+	// CAL TIME 
+	CX__VAR_STRING_CTRL  sCH_PARA__CHECK_CAL_TIME;
+
+	// CHECK TIME COUNT
+	CX__VAR_STRING_CTRL  sCH_PARA__CHECK_TIME_COUNT;
+
+	// CHECK DATE & TIME
+	CX__VAR_STRING_CTRL  sCH_PARA__CHECK_DATE;
+	CX__VAR_STRING_CTRL  sCH_PARA__CHECK_TIME;
+
+	// RUN MODE CHECK
+	CX__VAR_STRING_CTRL  sCH_PARA__RUN_MODE_CHECK;
+
+	// CONFIG .....
+	CX__VAR_ANALOG_CTRL  aCH__CFG_PROPORTION_COEFFICENT;
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_MAX_GAS_CAL_FLOW;
+
+	CX__VAR_ANALOG_CTRL  aCH_CFG__OVER_PUMPING_TIME;
+
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_STABLE_DELAY_SEC;
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_REF_PRESSURE;  
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_CHECK_TIMEOUT;
+
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_LOW_ERROR[CFG__MFC_SIZE];
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_HIGH_ERROR[CFG__MFC_SIZE];
+
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_LOW_WARNING[CFG__MFC_SIZE];
+	CX__VAR_ANALOG_CTRL  aCH_CFG__MFC_FLOW_HIGH_WARNING[CFG__MFC_SIZE];
+
+	CX__VAR_DIGITAL_CTRL dCH_CFG__TEST_ORDER;
+
+	// RESULT .....
+	CX__VAR_STRING_CTRL  sCH_RESULT__CURRENT_FLOW[CFG__MFC_SIZE][CFG__GAS_FLOW_LIST];
+	CX__VAR_STRING_CTRL  sCH_RESULT__CURRENT_PRESSURE[CFG__MFC_SIZE][CFG__GAS_FLOW_LIST];
+	CX__VAR_STRING_CTRL  sCH_RESULT__CAL_ERROR[CFG__MFC_SIZE][CFG__GAS_FLOW_LIST];
+	CX__VAR_STRING_CTRL  sCH_RESULT__CHECK_DATE[CFG__MFC_SIZE];
+	CX__VAR_STRING_CTRL  sCH_RESULT__CHECK_TIME[CFG__MFC_SIZE];
+	//
+
+
+	//-------------------------------------------------------------------------
+	//  EXTERNAL PROPERTY
+
+	// DB - SYS
+	CX__VAR_STRING_CTRL  sEXT_CH__SYSTEM_MSG;
+	CX__VAR_STRING_CTRL  sEXT_CH__FNC_MSG;
+
+	// DB - ETCHER 
+	CX__VAR_ANALOG_CTRL aEXT_CH__DB_SYS_CHM_TEMPERATURE;
+	CX__VAR_ANALOG_CTRL aEXT_CH__DB_SYS_CHM_VOLUMN;
+
+	// SYSTEM CHANNEL
+	CX__VAR_STRING_CTRL  sEXT_CH__SYS_FNC_NAME;
+	CX__VAR_STRING_CTRL  sEXT_CH__SYS_FNC_MSG;
+	CX__VAR_STRING_CTRL  sEXT_CH__SYS_FNC_LOCK;
+
+	// CH.CHM.PRESSURE
+	CX__VAR_STRING_CTRL  sEXT_CH__CHM_PRESSURE_mTORR;
+	CX__VAR_STRING_CTRL  sEXT_CH__CHM_PRESSURE_TORR;
+
+	// CH.ISO_VLV
+	CX__VAR_DIGITAL_CTRL dEXT_CH___ISO_VLV;
+
+	// OBJ - CHM CTRL .....
+	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__CHM;
+
+	// OBJ - VAT CTRL .....
+	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__VAT;
+
+	// OBJ - GAS VLV ...
+	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__GAS_VLV;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__GAS_VLV__PARA_MFC_TYPE;
+	CX__VAR_ANALOG_CTRL  aEXT_CH__GAS_VLV__PARA_MFC_FLOW;
+
+	// OBJ - MFCx CTRL .....
+	int iSIZE__OBJ_MFCx;
+	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__MFCx[CFG__MFC_SIZE];
+
+	CX__VAR_ANALOG_CTRL  aEXT_CH__PARA_MFCx_SET_FLOW[CFG__MFC_SIZE];
+	CX__VAR_STRING_CTRL  sEXT_CH__PARA_MFCx_GAS_NAME[CFG__MFC_SIZE];
+	CX__VAR_ANALOG_CTRL  aEXT_CH__PARA_MFCx_GET_FLOW[CFG__MFC_SIZE];
+	//
+
+	//-------------------------------------------------------------------------
+	int iCHECK_MODE;
+
+	//.....
+	CString sMODE__PARTIAL_PRESSURE;
+	int  Call__PARTIAL_PRESSURE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__MFC_CAL;
+	int  Call__MFC_CAL(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__ALL_CHECK;
+	int  Call__ALL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	//
+	int  Fnc__INIT_PARAMETER(const int test_mode);
+
+	int  Fnc__ALL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	int  Fnc__UPPER_ALL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm,const int gas_index);
+
+	//
+	int  Fnc__PARTIAL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	int  Fnc__UPPER_PARTIAL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm,const int gas_index);
+
+	int  Fnc__LOWER_PARTIAL_CHECK(CII_OBJECT__VARIABLE *p_variable,
+								  CII_OBJECT__ALARM *p_alarm,
+								  CII_EXT_OBJECT__CTRL *p_obj_ctrl,
+								  CII__VAR_ANALOG_CTRL *p_mfc_set_ctrl,
+								  CII__VAR_ANALOG_CTRL *p_mfc_get_ctrl,
+								  const CString& gas_name,
+								  const int db_index);
+
+	//
+	int  Fnc__MFC_CAL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	int  Fnc__UPPER_MFC_CAL_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm,const int gas_index);
+
+	int  Fnc__LOWER_MFC_CAL_CHECK(CII_OBJECT__VARIABLE *p_variable,
+								  CII_OBJECT__ALARM *p_alarm,
+								  CII_EXT_OBJECT__CTRL *p_obj_ctrl,
+								  CII__VAR_ANALOG_CTRL *p_mfc_set_ctrl,
+								  CII__VAR_ANALOG_CTRL *p_mfc_get_ctrl,
+								  const CString& gas_name,
+								  const int gas_index,
+								  const int db_index);
+
+	double Get__GAS_CAL_RATE();
+	double Get__GAS_CAL_TIME(const double set_flow, const double trg_press);
+
+	//-------------------------------------------------------------------------
+	void  Mon__STATUS_CTRL(CII_OBJECT__VARIABLE *p_variable);
+	//
+
+
+public:
+	CObj__MFC_FLOW_CHECK();
+	~CObj__MFC_FLOW_CHECK();
+
+	//-------------------------------------------------------------------------
+	int __DEFINE__CONTROL_MODE(obj,l_mode);
+	int __DEFINE__VERSION_HISTORY(version);
+
+	int __DEFINE__VARIABLE_STD(p_variable);
+	int __DEFINE__ALARM(p_alarm);
+
+	int __Define__USER_FUNCTION(CII_DEFINE__FUNCTION *p_def_fnc);
+
+	//-------------------------------------------------------------------------
+	int __INITIALIZE__OBJECT(p_variable,p_ext_obj_create);
+
+	//-------------------------------------------------------------------------
+	int __CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm);
+	int __CALL__MONITORING(id,p_variable,p_alarm);
+};

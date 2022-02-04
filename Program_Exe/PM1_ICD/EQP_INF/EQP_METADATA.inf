@@ -1,0 +1,150 @@
+
+#DEFINE   ##MFC_SIZE           13
+#DEFINE   ##PT_SIZE            14
+
+
+#INCLUDE  "_METADATA__IO_INTERLOCK.inf"
+#INCLUDE  "_METADATA__GAS_BOX.inf"
+#INCLUDE  "_METADATA__VAC_SYS.inf"
+#INCLUDE  "_METADATA__RF_SYS.inf"
+#INCLUDE  "_METADATA__HEATER_SYS.inf"
+
+#INCLUDE  "_METADATA__PMC_SYS.inf"
+#INCLUDE  "_METADATA__PROC_SYS.inf"
+#INCLUDE  "_METADATA__UTILITY_SYS.inf"
+
+
+//-----------------------------------------------------------------------------------------------------
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_CHM_IO
+
+#DEFINE_CONSTANT    OBJ__DB_INF                         DB_INF
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    CH__DI_VAC_SNS                      IO+di.CHM.VAC.Sns
+#DEFINE_CONSTANT    CH__DI_ATM_SNS                      IO+di.CHM.ATM.Sns
+
+#DEFINE_CONSTANT    DATA.PRC_GAUGE_SIZE     	          1
+#DEFINE_CONSTANT    CH.DO_PRC_GAUGE_VLV.1	              IO+do.Manometer.ISO.Vlv.1_torr
+#DEFINE_CONSTANT    CH.AI_PRC_GAUGE_TORR.1              IO+ai.Process.Pressure.Value
+
+#DEFINE_CONSTANT    CH__AI_CHM_GAUGE_TORR               IO+ai.Chamber.Pressure.Value
+#DEFINE_CONSTANT    CH__AI_FORELINE_GAUGE_TORR          IO+ai.Pump_Line.Pressure.Value
+
+/*
+#DEFINE_CONSTANT    CH__PROC_STATE                      FNC_PROC+dPRC.STS
+*/
+
+#DEFINE_CONSTANT    CH__RF_TOTAL_ON_STATE               DB_INF+RF.ON.STS
+#DEFINE_CONSTANT    DATA.RF_SIZE						            3
+#DEFINE_CONSTANT    CH__RF_ON_STATE.1                   PHY_RF_RPS+MON.IO.POWER.STATE
+#DEFINE_CONSTANT    CH__RF_ON_STATE.2                   PHY_RF_400KHZ+MON.IO.POWER.STATE
+#DEFINE_CONSTANT    CH__RF_ON_STATE.3                   PHY_RF_40MHZ+MON.IO.POWER.STATE
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_LIFT_PIN
+
+#DEFINE_CONSTANT    CH__LIFT_PIN_STATE                  DB_INF+LIFT_PIN.STATUS
+
+#DEFINE_CONSTANT    CH__ESC_CHUCK_STATE                 PHY_ESC+MON.CHUCK_STATUS
+
+#DEFINE_CONSTANT    DATA__ESC_CH_SIZE					  		    2
+#DEFINE_CONSTANT    CH__ESC_AI_VOLTAGE.1					  		PHY_IO__ESC+INFO_STS.VOLT.CH1
+#DEFINE_CONSTANT    CH__ESC_AI_VOLTAGE.2					  		PHY_IO__ESC+INFO_STS.VOLT.CH2
+
+#DEFINE_CONSTANT    CH__DO_TRANSFER_PIN_UP              IO+do.Transfer.Pin.Up
+#DEFINE_CONSTANT    CH__DO_TRANSFER_PIN_DOWN            IO+do.Transfer.Pin.Down
+#DEFINE_CONSTANT    CH__DO_MIDDLE_PIN_UP                IO+do.Middle.Pin.Up
+#DEFINE_CONSTANT    CH__DO_MIDDLE_PIN_DOWN              IO+do.Middle.Pin.Down
+
+#DEFINE_CONSTANT    DATA__DI_PIN_SENSOR                 YES
+#DEFINE_CONSTANT    CH__DI_PIN_UP                       IO+di.Pin.Up
+#DEFINE_CONSTANT    CH__DI_PIN_MIDDLE                   IO+di.Pin.Middle
+#DEFINE_CONSTANT    CH__DI_PIN_DOWN                     IO+di.Pin.Down
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__ESC
+
+#OBJECT_IO_PARA     COM_PORT                  21
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_RPS
+
+#OBJECT_IO_PARA     COM_PORT                  22
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_400KHZ
+
+#OBJECT_IO_PARA     COM_PORT                  23
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_40MHZ
+
+#OBJECT_IO_PARA     COM_PORT                  24
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_PULSE
+
+#OBJECT_IO_PARA     COM_PORT                  25
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__MATCHER
+
+#OBJECT_IO_PARA     COM_PORT                  4
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__APC_VLV
+
+#OBJECT_IO_PARA     COM_PORT                  5
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__TMP
+
+#OBJECT_IO_PARA     COM_PORT                  6
+#OBJECT_IO_PARA     DEVICE_ID									0
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__DRY_PMP
+
+#OBJECT_IO_PARA     COM_PORT                  7
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO__MFC_PART01        // MFC01 ~ MFC06		
+
+#OBJECT_IO_PARA     COM_PORT                  10
+
+#DEFINE_CONSTANT	  MFC_BOARD_NUMBER		      33
+#DEFINE_CONSTANT	  MFC_START_NUM			        1
+#DEFINE_CONSTANT	  MFC_MAX_NUM			          6
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO__MFC_PART02        // MFC07 ~ MFC12, MFC17		
+
+#OBJECT_IO_PARA     COM_PORT                  11
+
+#DEFINE_CONSTANT	  MFC_BOARD_NUMBER		      41
+#DEFINE_CONSTANT	  MFC_START_NUM			        7
+#DEFINE_CONSTANT	  MFC_MAX_NUM			          13
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO
+
+#DEFINE_CONSTANT    CH__DO_DNET_HEARTBEAT               IO+do.PC.Alive.Toggle
+
+#OBJECT_IO_FILE     DNET_IO__PMC_ICD.cfg  
+
+//----------------------
+#OBJECT_IO_PARA     NODE.SIZE                           0
+
+#OBJECT_IO_PARA     NODE.1.MACID                        1
+#OBJECT_IO_PARA     NODE.1.NAME                         NA9112
+#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.1.IN_BYTE                      24
+#OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     10
+

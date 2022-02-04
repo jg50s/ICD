@@ -1,0 +1,104 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_VAC_VLV
+
+#DEFINE_CONSTANT    CH__DO_FR_VLV                       IO+do.FR.Valve
+#DEFINE_CONSTANT    CH__DO_SR_VLV                       IO+do.SR.Valve
+#DEFINE_CONSTANT    CH__DO_EXHAUST_VLV                  IO+do.TMP.Foreline.Vlv
+
+#DEFINE_CONSTANT    CH__DI_FR_OPEN_SNS                  NULL
+#DEFINE_CONSTANT    CH__DI_FR_CLOSE_SNS                 NULL
+
+#DEFINE_CONSTANT    CH__DI_SR_OPEN_SNS                  NONE
+#DEFINE_CONSTANT    CH__DI_SR_CLOSE_SNS                 NONE
+
+#DEFINE_CONSTANT    CH__DI_DRY_PUMP_POWER_SENSOR        PHY_DRY+MON.PUMP.POWER.SNS
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_VAT
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    DATA.CONTROL_TYPE                   OBJ   // IO OBJ
+
+#DEFINE_CONSTANT    OBJ__VAT_NAME                       PHY_IO__APC_VLV
+
+#DEFINE_CONSTANT    VAT_CMMD.INIT                       INIT
+#DEFINE_CONSTANT    VAT_CMMD.CLOSE                      CLOSE
+#DEFINE_CONSTANT    VAT_CMMD.OPEN                       OPEN
+#DEFINE_CONSTANT    VAT_CMMD.POSITION                   POSITION_CONTROL
+#DEFINE_CONSTANT    VAT_CMMD.PRESSURE                   PRESSURE_CONTROL
+
+#DEFINE_CONSTANT    VAR__PARA_PRESSURE_TORR             INR.aPRESSURE.SET
+#DEFINE_CONSTANT    VAR__PARA_POSITION_PERCENT          INR.aPOSITION.SET
+#DEFINE_CONSTANT    VAR__CUR_PRESSURE_TORR              INR.OUT.sPRESSURE.VALUE
+#DEFINE_CONSTANT    VAR__CUR_POSITION_PERCENT           INR.OUT.sPOSITION.VALUE
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_TMP
+
+#DEFINE_CONSTANT    DATA.TMP_TYPE                       OBJ   // IO OBJ
+
+// TMP.IO INFO ...
+#DEFINE_CONSTANT    LINK_TMP.DI_PUMP_STATE              PHY_IO__TMP+MON.PUMP.STS
+#DEFINE_CONSTANT    LINK_TMP.DI_ERROR_STATE             PHY_IO__TMP+MON.ERROR.STS
+#DEFINE_CONSTANT    LINK_TMP.AI_ROT_RPM                 PHY_IO__TMP+INFO.ROT_SPEED.RPM
+
+// TMP.OBJ INFO ...
+#DEFINE_CONSTANT    OBJ__TMP                            PHY_IO__TMP
+#DEFINE_CONSTANT    TMP_MODE.START                      PUMP_ON
+#DEFINE_CONSTANT    TMP_MODE.STOP                       AUTO_STOP
+#DEFINE_CONSTANT    TMP_MODE.STOP_NO_WAIT               AUTO_STOP_NO_WAIT
+
+#DEFINE_CONSTANT    LINK_TMP.DI_COMM_STATE              PHY_IO__TMP+MON.COMM.STS
+
+// GATE.VLV INFO ...
+#DEFINE_CONSTANT    DATA.GV_USE                         NULL
+/*
+#DEFINE_CONSTANT    LINK_GV.DO_OPEN                     NULL
+#DEFINE_CONSTANT    LINK_GV.DO_CLOSE                    NULL
+#DEFINE_CONSTANT    LINK_GV.DI_OPEN                     NULL
+#DEFINE_CONSTANT    LINK_GV.DI_CLOSE                    NULL
+*/
+
+// VAT.OBJ INFO ...
+#DEFINE_CONSTANT    OBJ__VAT                            PHY_VAT
+
+// LINK.IO INFO ...
+#DEFINE_CONSTANT    LINK_IO.DI_FORELINE_VAC_SNS         PHY_DRY+MON.VAC.ON.SNS
+#DEFINE_CONSTANT    LINK_IO.DI_BACKING_PUMP_ON          PHY_DRY+MON.PUMP.POWER.SNS
+
+#DEFINE_CONSTANT    LINK_IO.DI_PCW_ALARM                NULL
+#DEFINE_CONSTANT    LINK_IO.DI_PCW_WATER_LEAK           NULL
+
+#DEFINE_CONSTANT    LINK_IO.DO_TMP_EXHAUST_VALVE        IO+do.TMP.Foreline.Vlv
+#DEFINE_CONSTANT    LINK_IO.DO_TMP_PURGE_VALVE          IO+do.TMP.N2.Purge.Vlv
+
+//-------------------------------------------------
+/*
+#OBJECT_PROPERTY	  PHY_TURBO_PUMP
+
+#DEFINE_CONSTANT	  VAR__IO_DI_TMPEXHAUST_VALVE_INTLK_SW_STS	IO+di.TMPExhaustValve.Intlk.Switch.Sts	
+#DEFINE_CONSTANT	  VAR__PHY_IO_DI_PUMP_ON_STS			          PHY_DRY_PUMP+PUMP.POWER.SNS								
+#DEFINE_CONSTANT	  IO_TURBO_PUMP_OBJ				                  PHY_IO__TMP
+#DEFINE_CONSTANT	  VAR__IO_DO_PUMP_RUN_STOP	                PHY_IO__TMP+do.RUN.STOP
+#DEFINE_CONSTANT	  VAR_PUMP_ON_STATUS				                di.PUMP.STS
+#DEFINE_CONSTANT	  VAR_PUMP_STATUS						                di.RUN.STS
+#DEFINE_CONSTANT	  VAR_PUMP_SPEED						                ai.SPEED.STS
+#DEFINE_CONSTANT	  OBJ__IO						                        IO
+#DEFINE_CONSTANT	  EXHAUST_VALVE						                  do.TMPExhaust.Valve
+#DEFINE_CONSTANT	  TMP_N2_VALVE						                  do.TMPN2.Purge.Valve
+*/
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_DRY
+
+#DEFINE_CONSTANT    PUMP.CONTROL_TYPE                   MANUAL    // OBJECT   IO
+// #DEFINE_CONSTANT    OBJ__IO_PUMP                        PHY_IO_DRY
+// #DEFINE_CONSTANT    CH__DO_PUMP_SET                     IO+do.Pump.Power.Set
+
+#DEFINE_CONSTANT    CH__DI_PUMP_POWER_SNS               NULL
+#DEFINE_CONSTANT    CH__DI_PUMP_VAC_SNS                 NULL
+#DEFINE_CONSTANT    CH__AI_PUMP_PRESSURE_TORR           IO+ai.Pump_Line.Pressure.Value

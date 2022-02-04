@@ -1,0 +1,77 @@
+/*  SCREEN INFOMATION  */
+
+
+#SCREEN_DIR  SCR__CTC-PM6_LP3\
+
+
+// -----------------------------------------------------------------------
+#DEFINE  DEF__FRAME_TOP
+	POPUP              CTC 
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         0
+	WIDTH              1280 
+	HEIGHT             155
+#END
+
+
+#DEFINE  DEF__FRAME_ALARM
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         55
+	WIDTH              1280
+	HEIGHT             869
+#END
+
+#DEFINE  DEF__FRAME_CLIENT
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         55
+	WIDTH              1280 
+	HEIGHT             770 
+#END
+
+#DEFINE  DEF__FRAME_CLIENT_NULL
+	POPUP              NO
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         56
+	WIDTH              0 
+	HEIGHT             0 
+#END
+
+
+#DEFINE  DEF__FRAME_BOTTOM_NAVI
+	POPUP              CTC
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         925
+	WIDTH              173 
+	HEIGHT             99 
+#END
+
+#DEFINE  DEF__FRAME_BOTTOM_SUB
+	POPUP              NO
+	LOW_LEFT_X         173
+	LOW_LEFT_Y         825
+	WIDTH              1107 
+	HEIGHT             41
+#END
+
+#DEFINE  DEF__FRAME_BOTTOM_MAIN
+	POPUP              NO
+	LOW_LEFT_X         173
+	LOW_LEFT_Y         866
+	WIDTH              1107 
+	HEIGHT             58
+#END
+
+
+// -----------------------------------------------------------------------
+//  CTC 
+
+WINDOW_NAME MUJIN_TOP   
+{
+	#CALL_DEFINE                    DEF__FRAME_TOP
+	
+	CTRL_CHANNEL                    SCR.TOP
+	USER_LEVEL                      Unknown 
+}
+
