@@ -76,7 +76,7 @@ WINDOW_NAME  CTC_TOP
 	USER_LEVEL                      Unknown 
 }
 
-WINDOW_NAME  STD_BTM__NAVI_4PM
+WINDOW_NAME  STD_BTM__NAVI_6PM
 {  
 	#CALL_DEFINE                    DEF__FRAME_BOTTOM_NAVI
 	
@@ -369,6 +369,22 @@ WINDOW_NAME STD_PART__PM4_MAIN
 	USER_LEVEL                      Unknown  
 }
 
+WINDOW_NAME STD_PART__PM5_MAIN 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME STD_PART__PM6_MAIN 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
 
 // MAINT
 WINDOW_NAME STD_MAINT__MOVE
@@ -591,6 +607,7 @@ WINDOW_NAME UTILITY_LOG__PM3_GAS_LINE
 	USER_LEVEL                      Unknown  
 }
 
+/*
 WINDOW_NAME UTILITY_LOG__PM4_MAINT
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
@@ -605,6 +622,7 @@ WINDOW_NAME UTILITY_LOG__PM4_GAS_LINE
 	CTRL_CHANNEL                    SCR.CLIENT 
 	USER_LEVEL                      Unknown  
 }
+*/
 
 // -----------------------------------------------------------------------
 

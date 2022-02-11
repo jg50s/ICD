@@ -1,6 +1,6 @@
 #OBJECT_PROPERTY     OPR_PART 
 
-   #DEFINE_CONSTANT     DATA.PMX_SIZE                      4 
+   #DEFINE_CONSTANT     DATA.PMX_SIZE                      6 
    #DEFINE_CONSTANT     PM1.CH_CFG_MODULE_USE              DB_CFG+PM1.USE 
    #DEFINE_CONSTANT     PM1.CH_MATERIAL_COUNT              PHY_PM1+ACC.MATERIAL.COUNT 
    #DEFINE_CONSTANT     PM1.POPUP_WIN_NAME                 POPUP_PM1_PART_MSG 
@@ -13,6 +13,12 @@
    #DEFINE_CONSTANT     PM4.CH_CFG_MODULE_USE              DB_CFG+PM4.USE 
    #DEFINE_CONSTANT     PM4.CH_MATERIAL_COUNT              PHY_PM4+ACC.MATERIAL.COUNT 
    #DEFINE_CONSTANT     PM4.POPUP_WIN_NAME                 POPUP_PM4_PART_MSG 
+   #DEFINE_CONSTANT     PM5.CH_CFG_MODULE_USE              DB_CFG+PM5.USE 
+   #DEFINE_CONSTANT     PM5.CH_MATERIAL_COUNT              PHY_PM5+ACC.MATERIAL.COUNT 
+   #DEFINE_CONSTANT     PM5.POPUP_WIN_NAME                 POPUP_PM5_PART_MSG 
+   #DEFINE_CONSTANT     PM6.CH_CFG_MODULE_USE              DB_CFG+PM6.USE 
+   #DEFINE_CONSTANT     PM6.CH_MATERIAL_COUNT              PHY_PM6+ACC.MATERIAL.COUNT 
+   #DEFINE_CONSTANT     PM6.POPUP_WIN_NAME                 POPUP_PM6_PART_MSG 
 
 #OBJECT_PROPERTY     OPR_CTC_MODE 
 
@@ -46,26 +52,31 @@
    #DEFINE_CONSTANT     CH.VAC_RB.A.MATERIAL_TITLE.ARM     PHY_VAC_ROBOT+ARM.SLOT01.TITLE 
    #DEFINE_CONSTANT     CH.VAC_RB.B.MATERIAL_STATUS.ARM     PHY_VAC_ROBOT+ARM.SLOT02.STATUS 
    #DEFINE_CONSTANT     CH.VAC_RB.B.MATERIAL_TITLE.ARM     PHY_VAC_ROBOT+ARM.SLOT02.TITLE 
-   #DEFINE_CONSTANT     PMX_UNIT_SIZE                      4 
+   #DEFINE_CONSTANT     PMX_UNIT_SIZE                      6 
    #DEFINE_CONSTANT     OBJ__PM1                           PHY_PM1 
    #DEFINE_CONSTANT     OBJ__PM2                           PHY_PM2 
    #DEFINE_CONSTANT     OBJ__PM3                           PHY_PM3 
    #DEFINE_CONSTANT     OBJ__PM4                           PHY_PM4 
+   #DEFINE_CONSTANT     OBJ__PM5                           PHY_PM5 
+   #DEFINE_CONSTANT     OBJ__PM6                           PHY_PM6 
 
 #OBJECT_PROPERTY     OPR_MAINT 
 
    #DEFINE_CONSTANT     CH__TARGET_LLX_NAME                PHY_ATM_ROBOT+TARGET.LLx.NAME.SET 
+   #DEFINE_CONSTANT     CH__TARGET_LLX_SLOT                PHY_ATM_ROBOT+TARGET.LLx.SLOT.SET 
    #DEFINE_CONSTANT     LP_SIZE                            3 
    #DEFINE_CONSTANT     OBJ__LP1                           PHY_LP1 
    #DEFINE_CONSTANT     OBJ__LP2                           PHY_LP2 
    #DEFINE_CONSTANT     OBJ__LP3                           PHY_LP3 
    #DEFINE_CONSTANT     OBJ__ATM_RB                        FNC_ATM_ROBOT 
    #DEFINE_CONSTANT     OBJ__VAC_RB                        FNC_VAC_ROBOT 
-   #DEFINE_CONSTANT     PMX_UNIT_SIZE                      4 
+   #DEFINE_CONSTANT     PMX_UNIT_SIZE                      6 
    #DEFINE_CONSTANT     OBJ__PM1                           PHY_PM1 
    #DEFINE_CONSTANT     OBJ__PM2                           PHY_PM2 
    #DEFINE_CONSTANT     OBJ__PM3                           PHY_PM3 
    #DEFINE_CONSTANT     OBJ__PM4                           PHY_PM4 
+   #DEFINE_CONSTANT     OBJ__PM5                           PHY_PM5 
+   #DEFINE_CONSTANT     OBJ__PM6                           PHY_PM6 
    #DEFINE_CONSTANT     LLX_SIZE                           2 
    #DEFINE_CONSTANT     OBJ__LL1                           PHY_LBA 
    #DEFINE_CONSTANT     OBJ__LL2                           PHY_LBB 
@@ -95,11 +106,13 @@
    #DEFINE_CONSTANT     LLX_SIZE                           2 
    #DEFINE_CONSTANT     OBJ__LL1                           PHY_LBA 
    #DEFINE_CONSTANT     OBJ__LL2                           PHY_LBB 
-   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     PM_SIZE                            6 
    #DEFINE_CONSTANT     OBJ__PM1                           PHY_PM1 
    #DEFINE_CONSTANT     OBJ__PM2                           PHY_PM2 
    #DEFINE_CONSTANT     OBJ__PM3                           PHY_PM3 
    #DEFINE_CONSTANT     OBJ__PM4                           PHY_PM4 
+   #DEFINE_CONSTANT     OBJ__PM5                           PHY_PM5 
+   #DEFINE_CONSTANT     OBJ__PM6                           PHY_PM6 
    #DEFINE_CONSTANT     LP_SIZE                            3 
    #DEFINE_CONSTANT     OBJ__LP1                           PHY_LP1 
    #DEFINE_CONSTANT     OBJ__LP2                           PHY_LP2 
@@ -119,7 +132,7 @@
 
 #OBJECT_PROPERTY     FNC_PMC_SYS 
 
-   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     PM_SIZE                            6 
 
 #OBJECT_PROPERTY     Phy_LP1 
 
@@ -171,11 +184,13 @@
    #DEFINE_CONSTANT     OBJ_LL1                            PHY_LBA 
    #DEFINE_CONSTANT     OBJ_LL2                            PHY_LBB 
    #DEFINE_CONSTANT     OBJ_TMC_CHM                        PHY_TMC_CHM 
-   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     PM_SIZE                            6 
    #DEFINE_CONSTANT     OBJ_PM1                            PHY_PM1 
    #DEFINE_CONSTANT     OBJ_PM2                            PHY_PM2 
    #DEFINE_CONSTANT     OBJ_PM3                            PHY_PM3 
    #DEFINE_CONSTANT     OBJ_PM4                            PHY_PM4 
+   #DEFINE_CONSTANT     OBJ_PM5                            PHY_PM5 
+   #DEFINE_CONSTANT     OBJ_PM6                            PHY_PM6 
 
 #OBJECT_PROPERTY     PHY_TMC_CHM 
 
@@ -201,11 +216,13 @@
    #DEFINE_CONSTANT     LLX_SIZE                           2 
    #DEFINE_CONSTANT     OBJ_LL1                            PHY_LBA 
    #DEFINE_CONSTANT     OBJ_LL2                            PHY_LBB 
-   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     PM_SIZE                            6 
    #DEFINE_CONSTANT     OBJ_PM1                            PHY_PM1 
    #DEFINE_CONSTANT     OBJ_PM2                            PHY_PM2 
    #DEFINE_CONSTANT     OBJ_PM3                            PHY_PM3 
    #DEFINE_CONSTANT     OBJ_PM4                            PHY_PM4 
+   #DEFINE_CONSTANT     OBJ_PM5                            PHY_PM5 
+   #DEFINE_CONSTANT     OBJ_PM6                            PHY_PM6 
 
 #OBJECT_PROPERTY     PHY_PM1 
 
@@ -227,15 +244,27 @@
    #DEFINE_CONSTANT     PM_ID                              4 
    #DEFINE_CONSTANT     DB_CFG_NAME                        DB_CFG 
 
+#OBJECT_PROPERTY     PHY_PM5 
+
+   #DEFINE_CONSTANT     PM_ID                              5 
+   #DEFINE_CONSTANT     DB_CFG_NAME                        DB_CFG 
+
+#OBJECT_PROPERTY     PHY_PM6 
+
+   #DEFINE_CONSTANT     PM_ID                              6 
+   #DEFINE_CONSTANT     DB_CFG_NAME                        DB_CFG 
+
 #OBJECT_PROPERTY     FA_APP_CTRL 
 
    #DEFINE_CONSTANT     ENABLE__DEVICE_ID                  YES 
    #DEFINE_CONSTANT     ENABLE__INITIAL_CONTROL_STATE      YES 
-   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     PM_SIZE                            6 
    #DEFINE_CONSTANT     OBJ__PM1                           PHY_PM1 
    #DEFINE_CONSTANT     OBJ__PM2                           PHY_PM2 
    #DEFINE_CONSTANT     OBJ__PM3                           PHY_PM3 
    #DEFINE_CONSTANT     OBJ__PM4                           PHY_PM4 
+   #DEFINE_CONSTANT     OBJ__PM5                           PHY_PM5 
+   #DEFINE_CONSTANT     OBJ__PM6                           PHY_PM6 
 
 #OBJECT_PROPERTY     FA_E30_CTRL 
 
@@ -244,11 +273,13 @@
 
 #OBJECT_PROPERTY     FA_PMx_CEID 
 
-   #DEFINE_CONSTANT     PM_SIZE                            4 
+   #DEFINE_CONSTANT     PM_SIZE                            6 
    #DEFINE_CONSTANT     OBJ__PM1                           PHY_PM1 
    #DEFINE_CONSTANT     OBJ__PM2                           PHY_PM2 
    #DEFINE_CONSTANT     OBJ__PM3                           PHY_PM3 
    #DEFINE_CONSTANT     OBJ__PM4                           PHY_PM4 
+   #DEFINE_CONSTANT     OBJ__PM5                           PHY_PM5 
+   #DEFINE_CONSTANT     OBJ__PM6                           PHY_PM6 
 
 #OBJECT_PROPERTY     LINK_CTC 
    #OBJECT_LINK_FILE     LINK__CFG_CTC.cfg 

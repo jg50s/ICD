@@ -1,0 +1,154 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    DI_GAS_BOX
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    CH__INTERLOCK_HEAVY_ACTIVE          DB_SYS+MON.INTERLOCK.HEAVY.ACTIVE.GAS_BOX
+#DEFINE_CONSTANT    CH__INTERLOCK_LIGHT_ACTIVE          DB_SYS+MON.INTERLOCK.LIGHT.ACTIVE.GAS_BOX
+#DEFINE_CONSTANT    CH__INTERLOCK_HEAVY_MESSAGE         DB_SYS+MON.INTERLOCK.HEAVY.MSG.GAS_BOX
+#DEFINE_CONSTANT    CH__INTERLOCK_LIGHT_MESSAGE         DB_SYS+MON.INTERLOCK.LIGHT.MSG.GAS_BOX
+
+#DEFINE_CONSTANT    DATA.INTERLOCK_SIZE          9
+
+#DEFINE_CONSTANT    CH__CFG_USE.1                       IO+cfg.GasBox.Door.Open
+#DEFINE_CONSTANT    CH__DI_SENSOR.1                     IO+di.GasBox.Door.Open
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.1                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.1                    "Gas Box의 Door가 Open 된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.1                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.2                       IO+cfg.GasBox.Smoke.Alarm
+#DEFINE_CONSTANT    CH__DI_SENSOR.2                     IO+di.GasBox.Smoke.Alarm
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.2                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.2                    "Gas Box의 Smoke Alarm이 발생된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.2                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.3                       IO+cfg.GasBox.Diff_Pressure
+#DEFINE_CONSTANT    CH__DI_SENSOR.3                     IO+di.GasBox.Diff_Pressure
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.3                 On
+#DEFINE_CONSTANT    DATA.ERROR_MSG.3                    "Gas Box의 Diff.Pressure Alem이 발생된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.3                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.4                       IO+cfg.GasBox.Fire.Alarm
+#DEFINE_CONSTANT    CH__DI_SENSOR.4                     IO+di.GasBox.Fire.Alarm
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.4                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.4                    "Gas Box의 Fire Alarm이 발생된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.4                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.5                       IO+cfg.GasBox.Door.Open
+#DEFINE_CONSTANT    CH__DI_SENSOR.5                     IO+di.GasBox.Door.Open
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.5                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.5                    "Gas Box의 Door가 Open된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.5                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.6                       IO+cfg.GasBox.Reg.Door.Open
+#DEFINE_CONSTANT    CH__DI_SENSOR.6                     IO+di.GasBox.Reg.Door.Open
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.6                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.6                    "Gas Box의 Reg.Door가 Open된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.6                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.7                       IO+cfg.GasBox.Interlock.NH3
+#DEFINE_CONSTANT    CH__DI_SENSOR.7                     IO+di.GasBox.Interlock.NH3
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.7                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.7                    "Gas Box의 NH3 Interlock이 발생된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.7                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.8                       IO+cfg.PG1.He.Pressure
+#DEFINE_CONSTANT    CH__DI_SENSOR.8                     IO+di.PG1.He.Pressure
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.8                 On
+#DEFINE_CONSTANT    DATA.ERROR_MSG.8                    "Gas Box의 PG1(He) Interlock이 발생된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.8                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.9                       IO+cfg.PG2.N2.Pressure
+#DEFINE_CONSTANT    CH__DI_SENSOR.9                     IO+di.PG2.N2.Pressure
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.9                 On
+#DEFINE_CONSTANT    DATA.ERROR_MSG.9                    "Gas Box의 PG2(N2) Interlock이 발생된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.9                  HEAVY
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    DI_CHM
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    CH__INTERLOCK_HEAVY_ACTIVE          DB_SYS+MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER
+#DEFINE_CONSTANT    CH__INTERLOCK_LIGHT_ACTIVE          DB_SYS+MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER
+#DEFINE_CONSTANT    CH__INTERLOCK_HEAVY_MESSAGE         DB_SYS+MON.INTERLOCK.HEAVY.MSG.CHAMBER
+#DEFINE_CONSTANT    CH__INTERLOCK_LIGHT_MESSAGE         DB_SYS+MON.INTERLOCK.LIGHT.MSG.CHAMBER
+
+#DEFINE_CONSTANT    DATA.INTERLOCK_SIZE          8
+
+#DEFINE_CONSTANT    CH__CFG_USE.1                       IO+cfg.PMC.Box.Open.Alarm
+#DEFINE_CONSTANT    CH__DI_SENSOR.1                     IO+di.PMC.Box.Open.Alarm
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.1                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.1                    "PM Box가 Open 된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.1                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.2                       IO+cfg.CHM.LID.Open
+#DEFINE_CONSTANT    CH__DI_SENSOR.2                     IO+di.CHM.LID.Open
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.2                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.2                    "Chamber Lid가 Open된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.2                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.3                       IO+cfg.CDA.Pressure.SW
+#DEFINE_CONSTANT    CH__DI_SENSOR.3                     IO+di.CDA.Pressure.SW
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.3                 On
+#DEFINE_CONSTANT    DATA.ERROR_MSG.3                    "CDA Pressure SW가 Off 된 상태입니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.3                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.4                       IO+cfg.Fan1.Alarm.TopLID
+#DEFINE_CONSTANT    CH__DI_SENSOR.4                     IO+di.Fan1.Alarm.TopLID
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.4                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.4                    "Fan1(Top-LID) Alarm이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.4                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.5                       IO+cfg.Fan2.Alarm.Filter
+#DEFINE_CONSTANT    CH__DI_SENSOR.5                     IO+di.Fan2.Alarm.Filter
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.5                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.5                    "Fan2(Filter) Alarm이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.5                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.6                       IO+cfg.Fan3.Alarm.CBox
+#DEFINE_CONSTANT    CH__DI_SENSOR.6                     IO+di.Fan3.Alarm.CBox
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.6                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.6                    "Fan3(CBox) Alarm이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.6                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.7                       IO+cfg.Heater.Over.SH
+#DEFINE_CONSTANT    CH__DI_SENSOR.7                     IO+di.Heater.Over.SH
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.7                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.7                    "Heater(Showerhead) Overtemp Alarm이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.7                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.8                       IO+cfg.Heater.Over.Wall
+#DEFINE_CONSTANT    CH__DI_SENSOR.8                     IO+di.Heater.Over.Wall
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.8                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.8                    "Heater(Wall) Overtemp Alarm이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.8                  HEAVY
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    DI_RF_SYS
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    CH__INTERLOCK_HEAVY_ACTIVE          DB_SYS+MON.INTERLOCK.HEAVY.ACTIVE.RF_SYS
+#DEFINE_CONSTANT    CH__INTERLOCK_LIGHT_ACTIVE          DB_SYS+MON.INTERLOCK.LIGHT.ACTIVE.RF_SYS
+#DEFINE_CONSTANT    CH__INTERLOCK_HEAVY_MESSAGE         DB_SYS+MON.INTERLOCK.HEAVY.MSG.RF_SYS
+#DEFINE_CONSTANT    CH__INTERLOCK_LIGHT_MESSAGE         DB_SYS+MON.INTERLOCK.LIGHT.MSG.RF_SYS
+
+#DEFINE_CONSTANT    DATA.INTERLOCK_SIZE          2
+
+#DEFINE_CONSTANT    CH__CFG_USE.1                       IO+cfg.Matcher.Top.Interlock
+#DEFINE_CONSTANT    CH__DI_SENSOR.1                     IO+di.Matcher.Top.Interlock
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.1                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.1                    "Matcher(Top) Interlock이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.1                  HEAVY
+
+#DEFINE_CONSTANT    CH__CFG_USE.2                       IO+cfg.Matcher.Bottom.Interlock
+#DEFINE_CONSTANT    CH__DI_SENSOR.2                     IO+di.Matcher.Bottom.Interlock
+#DEFINE_CONSTANT    DATA.NORMAL_STATE.2                 Off
+#DEFINE_CONSTANT    DATA.ERROR_MSG.2                    "Matcher(Bottom) Interlock이 발생 했습니다."
+#DEFINE_CONSTANT    DATA.ERROR_LEVEL.2                  HEAVY
+

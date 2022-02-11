@@ -317,6 +317,22 @@ WINDOW_NAME PMC_MAINT_GAS_LINE-ICD
 	USER_LEVEL                      Maint
 }
 
+WINDOW_NAME PMC_MAINT_IO_SENSOR
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT_IO_INTERLOCK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
 WINDOW_NAME PMC_MAINT_PART_INFO
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT

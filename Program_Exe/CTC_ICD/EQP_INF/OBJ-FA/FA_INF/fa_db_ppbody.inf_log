@@ -34,7 +34,7 @@ PM_RECIPE - UNIT : A, SIZE : 20
 
 
 ------------------------------------------------------------
-CHM1.69005928 
+CHM1.71888552 
 
 STEP   ------------------------------------
 	01)  ITEM : STEP.MESSAGE, FORMAT : A[20], 	UNIT : __, CHANNEL : PHY_STAGE1+RCP.STEP.MSG, TYPE : 3 
@@ -68,7 +68,7 @@ STEP   ------------------------------------
 
 
 ------------------------------------------------------------
-CHM2.69005928 
+CHM2.71888552 
 
 STEP   ------------------------------------
 	01)  ITEM : STEP.MESSAGE, FORMAT : A[20], 	UNIT : __, CHANNEL : PHY_STAGE1+RCP.STEP.MESSAGE, TYPE : 3 

@@ -1,0 +1,168 @@
+/*
+// GUI Option .....
+#DEVICE_NAME   User-Device-Name   // Ex.)  ETCHER_01 or ASHER_01 
+#GUI_TYPE   FAB   // RCS 
+#TOTAL_ALARM_POPUP_BOX_ENABLE   // Default : Disable 
+#MODULE_WINDOW_SHOW   // Default 
+#MODULE_WINDOW_HIDE   // 
+#PAGE_SIZE   1280_1024   // 1280_1024 
+#PAGE_SIZE   1920_1024   // 1920_1024 
+#SYSTEM_USER_LEVEL   OEM   // OPERATE MAINT PROCESS MANAGER OEM 
+#EVENT_LEFT_BUTTON_UP_DISABLE   // Default 
+#EVENT_LEFT_BUTTON_UP_ENABLE   
+#PIXEL_BIT_COUNT   HIGH     // LOW (Default), MIDDLE, HIGH  
+#SINGLE_LOCAL   n   // n (EQP_ID) : 0 ~ n 
+#SINGLE_REMOTE   n   // n (EQP_ID) : 0 ~ n 
+#SINGLE_WINDOW.LINK_SCT    SINGLE_WIN.sct  [default] 
+#SINGLE_WINDOW.LINK_CTRL   SINGLE_WIN.ctrl [default] 
+
+#PAGE_CHECK.LINK_FILE    [Page Check File] 
+
+#ACTIVE.LOG_SIM_PAGE 
+
+#ACTIVE.LOG_INTERFACE_PART 
+
+#ACTIVE.POPUP_PAGE_REDRAW 
+
+#DIR_ROOT.CTC   [CTC_Dir_Root] 
+#DIR_ROOT.TMC   [TMC_Dir_Root] 
+#DIR_ROOT.PM1   [PM1_Dir_Root] 
+#DIR_ROOT.PM2   [PM2_Dir_Root] 
+#DIR_ROOT.PM3   [PM3_Dir_Root] 
+#DIR_ROOT.PM4   [PM4_Dir_Root] 
+#DIR_ROOT.PM5   [PM5_Dir_Root] 
+#DIR_ROOT.PM6   [PM6_Dir_Root] 
+#DIR_ROOT.PM7   [PM7_Dir_Root] 
+#DIR_ROOT.PM8   [PM8_Dir_Root] 
+#DIR_ROOT.PM9   [PM9_Dir_Root] 
+#DIR_ROOT.PM10   [PM10_Dir_Root] 
+
+#RCS_CTRL_CH   Channel-Name 
+
+// System Font ..... 
+#SYSTEM_FONT_NAME   Arial // System FixedSys Arial
+#SYSTEM_FONT_SIZE_MAIN_WIDTH   11
+#SYSTEM_FONT_SIZE_MAIN_HEIGHT   23
+#SYSTEM_FONT_SIZE_SUB_WIDTH   9
+#SYSTEM_FONT_SIZE_SUB_HEIGHT   19
+
+// Win Define .....
+#DEFINE   Def_Name   Def_Data 
+#SYSTEM_DEFINE_FILE   Sys_Def_File 
+#WIN_EQPn   // n (EqpID) : 0 ~ n 
+{
+     #SEQ_NAME   User_Seq_Name 
+
+     #DEFINE   Def_Name   Def_Data 
+
+     #SCREEN_CTRL   Scr_Sct_File 
+}
+*/
+
+##SIMULATION_MODE	    
+
+#DEVICE_NAME     DEMO
+#GUI_TYPE        FAB		       
+
+
+
+#MODULE_WINDOW_HIDE		     
+
+
+
+
+#SYSTEM_USER_LEVEL          OEM     
+
+
+
+
+
+
+#ACTIVE.POPUP_PAGE_REDRAW
+
+
+
+
+
+
+#PAGE_SIZE   1280_1024		
+
+#EVENT_LEFT_BUTTON_UP_ENABLE
+
+
+
+#SYSTEM_DEFINE_FILE         SYS_DEF.inf
+
+
+#DEFINE  ##CTC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\CTC_ICD"
+#DEFINE  ##TMC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\TMC_ICD"
+
+#DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_ICD"
+#DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_ICD"
+#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_ICD"
+#DEFINE  ##PM4_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM4_ICD"
+#DEFINE  ##PM5_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM5_ICD"
+#DEFINE  ##PM6_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM6_ICD"
+
+
+#DIR_ROOT.CTC               D:\WORK_ICD\PROGRAM_EXE\CTC_ICD
+#DIR_ROOT.TMC               D:\WORK_ICD\PROGRAM_EXE\TMC_ICD
+
+#DIR_ROOT.PM1               D:\WORK_ICD\PROGRAM_EXE\PM1_ICD
+#DIR_ROOT.PM2               D:\WORK_ICD\PROGRAM_EXE\PM2_ICD
+#DIR_ROOT.PM3               D:\WORK_ICD\PROGRAM_EXE\PM3_ICD
+#DIR_ROOT.PM4               D:\WORK_ICD\PROGRAM_EXE\PM4_ICD
+#DIR_ROOT.PM5               D:\WORK_ICD\PROGRAM_EXE\PM5_ICD
+#DIR_ROOT.PM6               D:\WORK_ICD\PROGRAM_EXE\PM6_ICD
+
+
+#DEFINE  ##CTC_SCR_FILE     CTC_WIN-ICD.sct
+#DEFINE  ##CTC_SCR_CTRL     CTC_WIN-ICD.ctrl
+
+#DEFINE  ##TMC_SCR_FILE     TMC_WIN-ICD.sct
+#DEFINE  ##TMC_SCR_CTRL     TMC_WIN-ICD.ctrl
+
+#DEFINE  ##PMC_SCR_FILE     PMC_WIN-ICD.sct
+#DEFINE  ##PMC_SCR_CTRL     PMC_WIN-ICD.ctrl
+
+#DEFINE  ##NULL_SCR_FILE    WIN-NULL.sct
+#DEFINE  ##NULL_SCR_CTRL    WIN-NULL.ctrl
+
+
+
+#MAIN_DATA
+{
+#SEQ_NAME              CTC
+
+#SCREEN_FILE           CTC_WIN-ICD.SCT
+#SCREEN_CTRL	      	 CTC_WIN-ICD.CTRL
+
+#DIR_SEQ_ROOT          D:\WORK_ICD\PROGRAM_EXE\CTC_ICD
+}
+
+
+#PM0_DATA
+{
+#SEQ_NAME              TMC
+
+#SCREEN_FILE           TMC_WIN-ICD.SCT
+#SCREEN_CTRL	         TMC_WIN-ICD.CTRL
+
+#DIR_SEQ_ROOT          D:\WORK_ICD\PROGRAM_EXE\TMC_ICD
+}
+
+
+
+
+#PM2_DATA
+{
+#SEQ_NAME              PM2
+
+#SCREEN_FILE           PMC_WIN-ICD.SCT
+#SCREEN_CTRL	         PMC_WIN-ICD.CTRL
+
+#DIR_SEQ_ROOT          D:\WORK_ICD\PROGRAM_EXE\PM2_ICD
+}
+
+
+

@@ -6,7 +6,7 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE  ##DB_CFG		           DB_CFG
 #DEFINE  ##SIGNAL_TOWER		     MNG_SIGNAL_TOWER
 
-#DEFINE  ##PM_SIZE             4
+#DEFINE  ##PM_SIZE             6
 #DEFINE  ##LP_SIZE						 3
 #DEFINE  ##LL_SIZE             2
 
@@ -31,6 +31,14 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    PM4.CH_CFG_MODULE_USE		    DB_CFG+PM4.USE
 #DEFINE_CONSTANT    PM4.CH_MATERIAL_COUNT	      PHY_PM4+ACC.MATERIAL.COUNT
 #DEFINE_CONSTANT    PM4.POPUP_WIN_NAME          POPUP_PM4_PART_MSG
+
+#DEFINE_CONSTANT    PM5.CH_CFG_MODULE_USE		    DB_CFG+PM5.USE
+#DEFINE_CONSTANT    PM5.CH_MATERIAL_COUNT	      PHY_PM5+ACC.MATERIAL.COUNT
+#DEFINE_CONSTANT    PM5.POPUP_WIN_NAME          POPUP_PM5_PART_MSG
+
+#DEFINE_CONSTANT    PM6.CH_CFG_MODULE_USE		    DB_CFG+PM6.USE
+#DEFINE_CONSTANT    PM6.CH_MATERIAL_COUNT	      PHY_PM6+ACC.MATERIAL.COUNT
+#DEFINE_CONSTANT    PM6.POPUP_WIN_NAME          POPUP_PM6_PART_MSG
 
 
 //-------------------------------------------------
@@ -78,11 +86,14 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ__PM2              PHY_PM2
 #DEFINE_CONSTANT    OBJ__PM3              PHY_PM3
 #DEFINE_CONSTANT    OBJ__PM4              PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5              PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6              PHY_PM6
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    OPR_MAINT
 
 #DEFINE_CONSTANT    CH__TARGET_LLx_NAME			PHY_ATM_ROBOT+TARGET.LLx.NAME.SET
+#DEFINE_CONSTANT    CH__TARGET_LLx_SLOT			PHY_ATM_ROBOT+TARGET.LLx.SLOT.SET
 
 #DEFINE_CONSTANT    LP_SIZE               ##LP_SIZE
 #DEFINE_CONSTANT    OBJ__LP1              PHY_LP1
@@ -97,11 +108,12 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ__PM2              PHY_PM2
 #DEFINE_CONSTANT    OBJ__PM3              PHY_PM3
 #DEFINE_CONSTANT    OBJ__PM4              PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5              PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6              PHY_PM6
 
 #DEFINE_CONSTANT    LLx_SIZE              ##LL_SIZE
 #DEFINE_CONSTANT    OBJ__LL1              PHY_LBA
 #DEFINE_CONSTANT    OBJ__LL2              PHY_LBB
-
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    FNC_ATM_ROBOT
@@ -142,6 +154,8 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ__PM2            PHY_PM2
 #DEFINE_CONSTANT    OBJ__PM3            PHY_PM3
 #DEFINE_CONSTANT    OBJ__PM4            PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5            PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6            PHY_PM6
 
 #DEFINE_CONSTANT    LP_SIZE             ##LP_SIZE
 #DEFINE_CONSTANT    OBJ__LP1            PHY_LP1
@@ -241,6 +255,8 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ_PM2             PHY_PM2
 #DEFINE_CONSTANT    OBJ_PM3             PHY_PM3
 #DEFINE_CONSTANT    OBJ_PM4             PHY_PM4
+#DEFINE_CONSTANT    OBJ_PM5             PHY_PM5
+#DEFINE_CONSTANT    OBJ_PM6             PHY_PM6
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    PHY_TMC_CHM
@@ -281,6 +297,8 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ_PM2             PHY_PM2
 #DEFINE_CONSTANT    OBJ_PM3             PHY_PM3
 #DEFINE_CONSTANT    OBJ_PM4             PHY_PM4
+#DEFINE_CONSTANT    OBJ_PM5             PHY_PM5
+#DEFINE_CONSTANT    OBJ_PM6             PHY_PM6
 
 
 //-------------------------------------------------
@@ -307,6 +325,18 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    PM_ID       	      4
 #DEFINE_CONSTANT    DB_CFG_NAME		      ##DB_CFG
 
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_PM5
+
+#DEFINE_CONSTANT    PM_ID       	      5
+#DEFINE_CONSTANT    DB_CFG_NAME		      ##DB_CFG
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_PM6
+
+#DEFINE_CONSTANT    PM_ID       	      6
+#DEFINE_CONSTANT    DB_CFG_NAME		      ##DB_CFG
+
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    FA_APP_CTRL
@@ -319,6 +349,8 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ__PM2              PHY_PM2
 #DEFINE_CONSTANT    OBJ__PM3              PHY_PM3
 #DEFINE_CONSTANT    OBJ__PM4              PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5              PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6              PHY_PM6
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    FA_E30_CTRL
@@ -334,6 +366,8 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ__PM2              PHY_PM2
 #DEFINE_CONSTANT    OBJ__PM3              PHY_PM3
 #DEFINE_CONSTANT    OBJ__PM4              PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5              PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6              PHY_PM6
 
 
 //-------------------------------------------------

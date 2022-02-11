@@ -1,0 +1,336 @@
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  1._Top_Chiller.Temperature(C)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.SETPOINT
+#TITLE             1._Setpoint
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.WARNING
+#TITLE             2._Warning
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.FAULT
+#TITLE             3._Fault
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.TC
+#TITLE             4._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.TS
+#TITLE             5._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.LOW_LIMIT
+#TITLE             6._Low_Limit
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_TEMP.HIGH_LIMIT
+#TITLE             7._High_Limit
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  2._Bottom_Chiller.Temperature(C)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.SETPOINT
+#TITLE             1._Setpoint
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.WARNING
+#TITLE             2._Warning
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.FAULT
+#TITLE             3._Fault
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.TC
+#TITLE             4._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.TS
+#TITLE             5._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.LOW_LIMIT
+#TITLE             6._Low_Limit
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.BOTTOM_TEMP.HIGH_LIMIT
+#TITLE             7._High_Limit
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#TITLE				  3._Top_Plate.Temperature(C)
+#CATEGORY				YES
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.SETPOINT
+#TITLE             1._Setpoint
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.WARNING
+#TITLE             2._Warning
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.FAULT
+#TITLE             3._Fault
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.TC
+#TITLE             4._Time_Check(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.TS
+#TITLE             5._Time_Stable(sec)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,60)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.LOW_LIMIT
+#TITLE             6._Low_Limit
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+HEADER.TOP_PLATE.HIGH_LIMIT
+#TITLE             7._High_Limit
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE		   			 (0,1000)
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+

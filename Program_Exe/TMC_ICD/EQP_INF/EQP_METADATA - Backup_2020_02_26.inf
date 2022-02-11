@@ -1,0 +1,189 @@
+/*
+	APPLICATION 개발자는 PROC__SEQ()와 CALL__MONITORING() 안에서는 
+	try catch 문을 사용하면 안됩니다.
+*/
+
+#DEFINE    ##PM_LIMIT               6
+#DEFINE    ##LL_LIMIT               4
+#DEFINE    ##LP_LIMIT               3
+
+
+//------------------------------------------------
+#INCLUDE   METADATA\LPx_METADATA.inf
+
+#INCLUDE   METADATA\ATM_ROBOT_METADATA.inf
+#INCLUDE   METADATA\VAC_ROBOT_METADATA.inf
+
+#INCLUDE   METADATA\TMC_CHM_METADATA.inf
+#INCLUDE   METADATA\LLx_METADATA.inf
+
+#INCLUDE   METADATA\ALx_METADATA.inf
+#INCLUDE   METADATA\VIS_METADATA.inf
+#INCLUDE   METADATA\PUMP_METADATA.inf
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    DB_CFG
+
+#DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_LBA_VAT
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_CFG
+
+#DEFINE_CONSTANT    CH__IO_IN_BYTE_HEXA                 IO+si.LBA.VAT.HEXA
+#DEFINE_CONSTANT    CH__IO_OUT_BYTE_HEXA                IO+so.LBA.VAT.HEXA
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_LBB_VAT
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_CFG
+
+#DEFINE_CONSTANT    CH__IO_IN_BYTE_HEXA                 IO+si.LBB.VAT.HEXA
+#DEFINE_CONSTANT    CH__IO_OUT_BYTE_HEXA                IO+so.LBB.VAT.HEXA
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_LBA_MFC1
+
+#OBJECT_IO_PARA     COM_PORT                            35
+#OBJECT_IO_PARA     SLAVE_ADDRESS                       0
+
+#DEFINE_CONSTANT    CH__SUPPLY_VLV                      IO+do.LBA.FAST.VENT.VLV
+#DEFINE_CONSTANT    CH__PURGE_VLV                       NONE
+#DEFINE_CONSTANT    CH__IN_VLV                          IO+do.LBA.MFC1.IN.VLV
+#DEFINE_CONSTANT    CH__OUT_VLV                         IO+do.LBA.MFC1.OUT.VLV
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_LBB_MFC1
+
+#OBJECT_IO_PARA     COM_PORT                            36
+#OBJECT_IO_PARA     SLAVE_ADDRESS                       0
+
+#DEFINE_CONSTANT    CH__SUPPLY_VLV                      IO+do.LBB.FAST.VENT.VLV
+#DEFINE_CONSTANT    CH__PURGE_VLV                       NONE
+#DEFINE_CONSTANT    CH__IN_VLV                          IO+do.LBB.MFC1.IN.VLV
+#DEFINE_CONSTANT    CH__OUT_VLV                         IO+do.LBB.MFC1.OUT.VLV
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO_LBA__CHM_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            20
+
+#OBJECT_PROPERTY    IO_LBB__CHM_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            21
+
+#OBJECT_PROPERTY    IO_LBC__CHM_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            22
+
+#OBJECT_PROPERTY    IO_LBD__CHM_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            23
+
+#OBJECT_PROPERTY    IO_TM1__CHM_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            24
+
+
+#OBJECT_PROPERTY    IO_LBA__PUMP_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            25
+
+#OBJECT_PROPERTY    IO_LBB__PUMP_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            26
+
+#OBJECT_PROPERTY    IO_LBCD__PUMP_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            27
+
+#OBJECT_PROPERTY    IO_TM1__PUMP_GAUGE
+#OBJECT_IO_PARA     COM_PORT                            28
+
+
+#OBJECT_PROPERTY    PHY_IO__FFU
+#OBJECT_IO_PARA     COM_PORT                            17
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO
+
+#OBJECT_IO_FILE     CFG_IO__DNet_TMC-Beta.cfg  
+
+//----------------------
+#OBJECT_IO_PARA     NODE.SIZE                           5
+
+#OBJECT_IO_PARA     NODE.1.MACID                        2
+#OBJECT_IO_PARA     NODE.1.NAME                         NA9111
+#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    1
+#OBJECT_IO_PARA     NODE.1.IN_BYTE                      19
+#OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     4
+
+#OBJECT_IO_PARA     NODE.2.MACID                        3
+#OBJECT_IO_PARA     NODE.2.NAME                         CJ1W_DRM2
+#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.2.IN_BYTE                      48
+#OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     20
+
+#OBJECT_IO_PARA     NODE.3.MACID                        4
+#OBJECT_IO_PARA     NODE.3.NAME                         EUROTHERM_MINI
+#OBJECT_IO_PARA     NODE.3.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.3.IN_BYTE                      67
+#OBJECT_IO_PARA     NODE.3.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.3.OUT_BYTE                     30
+
+#OBJECT_IO_PARA     NODE.4.MACID                        5
+#OBJECT_IO_PARA     NODE.4.NAME                         INTELLISYS
+#OBJECT_IO_PARA     NODE.4.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.4.IN_BYTE                      9
+#OBJECT_IO_PARA     NODE.4.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.4.OUT_BYTE                     4 
+
+#OBJECT_IO_PARA     NODE.5.MACID                        6
+#OBJECT_IO_PARA     NODE.5.NAME                         INTELLISYS
+#OBJECT_IO_PARA     NODE.5.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.5.IN_BYTE                      9
+#OBJECT_IO_PARA     NODE.5.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.5.OUT_BYTE                     4 
+//----------------------
+
+#DEFINE_CONSTANT    FLAG__DRV_LOG                       YES
+
+//----------------------
+#DEFINE_CONSTANT    LINK.IO_SIZE                        0
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.1                   IO+do.TM.SAFETY.LLA_ON
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.2                   IO+do.TM.SAFETY.LLB_ON
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.3                   IO+do.TM.SAFETY.SLOT_CLOSE
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.4                   IO+do.TM.SAFETY.SLOT_OPEN
+//----------------------
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    IO_OHT
+
+#OBJECT_IO_FILE     DNet_IO__LPx_OHT.cfg 
+
+#DEFINE_CONSTANT    FLAG__DRV_LOG                       YES
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    TMC_LINK
+
+#OBJECT_LINK_FILE   LINK__CFG_TMC_To_PMC.cfg
+
+#DEFINE_CONSTANT    FLAG__DRV_LOG                       YES
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    MON__SYSTEM
+
+#DEFINE_CONSTANT    OBJ__DB           		              DB_CFG+CFG.SIM.MODE
+#DEFINE_CONSTANT    IO_CH__DNET_COMM_STS                IO+di.Comm.Sts
+#DEFINE_CONSTANT    IO_CH__AIR_SNS	                    IO+di.AIR.SNS
+#DEFINE_CONSTANT    IO_CH__N2_SENSOR			              IO+di.N2.SNS
+#DEFINE_CONSTANT    IO_CH__EFEM_DOOR						        IO+di.EFEM.DOOR.CLOSE.SNS
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY__SIGNAL_TOWER
+
+#DEFINE_CONSTANT    OBJ__IO           		              IO
