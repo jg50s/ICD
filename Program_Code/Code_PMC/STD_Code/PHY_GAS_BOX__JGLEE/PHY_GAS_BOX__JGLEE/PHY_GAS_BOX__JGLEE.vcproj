@@ -410,6 +410,38 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="CObj__LFC_IO"
+				>
+				<File
+					RelativePath=".\CObj__LFC_IO.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LFC_IO.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LFC_IO__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LFC_IO__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LFC_IO__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LFC_IO__MON_ERROR_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LFC_IO__MON_STATE_CHECK.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="헤더 파일"

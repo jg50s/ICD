@@ -35,24 +35,21 @@ int CObj__PROC_STD
 {
 	CString log_msg;
 
-	/*
 	// PARA.INIT ...
 	{
-		xCH__PRC_TOTAL_TIME_TO_CTC->Set__DATA("");
-		sEXT_CH__PRC_TOTAL_TIME_TO_CTC->Set__DATA("");
-
-		xCH__PRC_CHANGE_TIME_TO_CTC->Set__DATA("");
+		sCH__PRC_TOTAL_TIME_TO_CTC->Set__DATA("");
 		sEXT_CH__PRC_CHANGE_TIME_TO_CTC->Set__DATA("");
 
-		//
-		xCH__PRC_TOTAL_TIME->Set__DATA("");
-		xCH__PRC_CUR_TIME->Set__DATA("");
-		xCH__STEP_TOTAL_NUM->Set__DATA("");
-		xCH__STEP_CUR_NUM->Set__DATA("-1");
+		sCH__PRC_CHANGE_TIME_TO_CTC->Set__DATA("");
+		sEXT_CH__PRC_CHANGE_TIME_TO_CTC->Set__DATA("");
 
-		xCH__PRC_STS->Set__DATA("IDLE");
+		sCH__PRC_TOTAL_TIME->Set__DATA("");
+		sCH__PRC_CUR_TIME->Set__DATA("");
+
+		//
+		aCH__STEP_TOTAL_NUM->Set__DATA("0");
+		aCH__STEP_CUR_NUM->Set__DATA("-1");
 	}
-	*/
 
 	// CHM : HIGH_VAC ...
 	{
@@ -71,6 +68,9 @@ int CObj__PROC_STD
 int CObj__PROC_STD
 ::Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+	dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__START);
+	sEXT_CH__MON_STEP_EXCEPTION_ACT->Set__DATA("");
+
 	if(dCH__CUR_PROCESS_TYPE->Check__DATA(STR__MANUAL) > 0)
 	{
 		if(dCH__PARA_MANUAL_PROCESS_DECHUCK_ACTIVE->Check__DATA(STR__ON) > 0)
@@ -104,6 +104,8 @@ int CObj__PROC_STD
 	}
 
 	Sub__PROC_END(p_variable, p_alarm);
+
+	dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__END);
 	return r_flag;
 }
 int CObj__PROC_STD

@@ -347,30 +347,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="CObj__VAC_VLV_FNC"
-				>
-				<File
-					RelativePath=".\CObj__VAC_VLV_FNC.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__VAC_VLV_FNC.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__VAC_VLV_FNC__CALL_FNC.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__VAC_VLV_FNC__DEF.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__VAC_VLV_FNC__MON_STATE_CHECK.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="CObj__VAC_VLV_PHY"
 				>
 				<File

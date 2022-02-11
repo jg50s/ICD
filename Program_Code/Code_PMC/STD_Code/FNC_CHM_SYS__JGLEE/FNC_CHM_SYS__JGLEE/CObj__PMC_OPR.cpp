@@ -182,7 +182,7 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		CString file_name;
 		CString log_msg;
 
-		file_name = sObject_Name+".log";
+		file_name.Format("%s_App.log", sObject_Name);
 
 		log_msg  = "\n\n";
 		log_msg += "//------------------------------------------------------------------------";
@@ -319,7 +319,7 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			def_name = "LIFT_PIN.PROCESS_READY";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK_MODE__LIFT_PIN__PROCESS_READY;
+			sLINK_MODE__LIFT_PIN__PROCESS_READY = def_data;
 		}
 	}
 
@@ -369,6 +369,20 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// OBJ.CHAMBER ...
+	{
+		def_name = "OBJ__CHAMBER";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__CHAMBER = def_check;
+		
+		if(def_check)
+		{
+			pOBJ_CTRL__CHAMBER = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		}
+	}
+
 	// ...
 	{
 		sEXT_CH__CHM_STAGE_REPORT_TO_CTC->Set__DATA(STR__Idle);
@@ -378,8 +392,7 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		SCX__SEQ_INFO x_seq_info;
 
-		if(x_seq_info->Is__SIMULATION_MODE() > 0)			iSIM_FLAG =  1;
-		else												iSIM_FLAG = -1;
+		iSIM_FLAG = x_seq_info->Is__SIMULATION_MODE();
 	}
 
 	if(iSIM_FLAG > 0)

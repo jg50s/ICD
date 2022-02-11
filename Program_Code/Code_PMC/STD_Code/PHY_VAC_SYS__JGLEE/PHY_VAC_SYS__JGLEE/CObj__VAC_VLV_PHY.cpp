@@ -222,14 +222,41 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	CCommon_Utility x_utility;
+	bool def_check;
 
 	// DO VLV ...
 	{
 		def_name = "CH__DO_FR_VLV";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_FR_VALVE_CTRL, obj_name,var_name);
 
+		def_check = x_utility.Check__Link(ch_name);
+		bActive__DO_FR_VALVE = def_check;
+		bActive__DO_FR_VAT = false;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_FR_VALVE_CTRL, obj_name,var_name);
+		}
+		else
+		{
+			def_name = "CH__DO_FR_VAT";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+			
+			def_check = x_utility.Check__Link(obj_name);
+			bActive__DO_FR_VAT = def_check;
+
+			if(def_check)
+			{
+				pOBJ_CTRL__DO_FR_VAT = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+				//
+				var_name = "MON.POSITION";
+				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__VAT__MON_POSITION, obj_name,var_name);
+			}
+		}
+		
+		//
 		def_name = "CH__DO_SR_VLV";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
@@ -239,7 +266,7 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "CH__DO_EXHAUST_VLV";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		bool def_check = x_utility.Check__Link(ch_name);
+		def_check = x_utility.Check__Link(ch_name);
 		bActive__DO_EXHAUST_VALVE_CTRL = def_check;
 
 		if(def_check)
@@ -254,7 +281,7 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "CH__DI_FR_OPEN_SNS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		bool def_check = x_utility.Check__Link(ch_name);
+		def_check = x_utility.Check__Link(ch_name);
 		bActive__DI_FR_OPEN_SNS = def_check;
 
 		if(def_check)
@@ -268,7 +295,7 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "CH__DI_FR_CLOSE_SNS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		bool def_check = x_utility.Check__Link(ch_name);
+		def_check = x_utility.Check__Link(ch_name);
 		bActive__DI_FR_CLOSE_SNS =  def_check;
 
 		if(def_check)
@@ -283,7 +310,7 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "CH__DI_SR_OPEN_SNS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		bool def_check = x_utility.Check__Link(ch_name);
+		def_check = x_utility.Check__Link(ch_name);
 		bActive__DI_SR_OPEN_SNS = def_check;
 
 		if(def_check)
@@ -297,7 +324,7 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "CH__DI_SR_CLOSE_SNS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		bool def_check = x_utility.Check__Link(ch_name);
+		def_check = x_utility.Check__Link(ch_name);
 		bActive__DI_SR_CLOSE_SNS = def_check;
 
 		if(def_check)

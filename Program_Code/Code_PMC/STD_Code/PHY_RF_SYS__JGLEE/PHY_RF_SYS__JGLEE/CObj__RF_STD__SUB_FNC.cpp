@@ -71,7 +71,20 @@ int CObj__RF_STD
 		}
 		return OBJ_ABORT;
 	}
-	if(dEXT_CH__DI_CHM_LID_CLOSE_SNS->Check__DATA(STR__ON) < 0)
+
+	// ...
+	bool active__chm_lid_open = false;
+
+	if(bActive__DI_CHM_LID_CLOSE_SNS)
+	{
+		if(dEXT_CH__DI_CHM_LID_CLOSE_SNS->Check__DATA(STR__ON) < 0)			active__chm_lid_open = true;
+	}
+	if(bActive__DI_CHM_LID_OPEN_SNS)
+	{
+		if(dEXT_CH__DI_CHM_LID_OPEN_SNS->Check__DATA(STR__OFF) < 0)			active__chm_lid_open = true;
+	}
+
+	if(active__chm_lid_open)
 	{
 		// ...
 		{
@@ -84,6 +97,7 @@ int CObj__RF_STD
 		return OBJ_ABORT;
 	}	
 
+	// ...
 	if(dEXT_CH__INTERLOCK_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		// ...

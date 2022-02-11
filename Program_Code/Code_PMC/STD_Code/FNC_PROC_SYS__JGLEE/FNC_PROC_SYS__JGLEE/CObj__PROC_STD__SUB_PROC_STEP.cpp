@@ -66,12 +66,29 @@ int CObj__PROC_STD
 
 			int r_step = Sub__STEP_CTRL(p_variable,p_alarm, cur__step_id,rcp__step_max);
 
+			x_timer__step->STOP();
+
 			// Process Recovery Check ...
 			if(r_step <  0)		
 			{
 				if(Check__ALARM_RECOVERY(p_variable, p_alarm) < 0)				return r_step;
 			}
-			
+
+			// Step Change time .....
+			{
+				int rcp_time = (int) aEXT_CH__RCP_STEP_TIME->Get__VALUE();
+				int cur_time = (int) x_timer__step->Get__CURRENT_TIME();
+				int change_time = cur_time - rcp_time;
+
+				if(change_time != 0)
+				{
+					ch_data.Format("%1d", change_time);
+
+					sCH__PRC_CHANGE_TIME_TO_CTC->Set__DATA(ch_data);
+					sEXT_CH__PRC_CHANGE_TIME_TO_CTC->Set__DATA(ch_data);
+				}
+			}
+
 			// Check : Exception.Act ...
 			while(1)
 			{

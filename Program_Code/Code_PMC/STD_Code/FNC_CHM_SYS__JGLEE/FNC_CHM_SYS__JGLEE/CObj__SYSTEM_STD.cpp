@@ -21,8 +21,8 @@ int CObj__SYSTEM_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__INIT,	"SYSTEM_INIT");
-		ADD__CTRL_VAR(sMODE__MAINT, "SYSTEM_MAINT");
+		ADD__CTRL_VAR(sMODE__SYSTEM_INIT,	"SYSTEM_INIT");
+		ADD__CTRL_VAR(sMODE__SYSTEM_MAINT, "SYSTEM_MAINT");
 
 		ADD__CTRL_VAR(sMODE__TRANSFER_INIT, "TRANSFER_INIT");
 	}
@@ -205,7 +205,7 @@ int CObj__SYSTEM_STD::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
-	//.....
+	// ...
 	{
 		alarm_id = ALID__SYSTEM_INIT_ALARM;
 		alarm_title  = title;
@@ -488,21 +488,17 @@ int CObj__SYSTEM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-		IF__CTRL_MODE(sMODE__INIT)
+		IF__CTRL_MODE(sMODE__SYSTEM_INIT)
 		{
-			flag = Call__INIT(p_variable, p_alarm);
+			flag = Call__SYSTEM_INIT(p_variable, p_alarm);
 		}
-		ELSE_IF__CTRL_MODE(sMODE__MAINT)
+		ELSE_IF__CTRL_MODE(sMODE__SYSTEM_MAINT)
 		{
-			flag = Call__MAINT(p_variable, p_alarm);
+			flag = Call__SYSTEM_MAINT(p_variable, p_alarm);
 		}
 		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_INIT)
 		{
 			flag = Call__TRANSFER_INIT(p_variable, p_alarm);
-		}
-		else
-		{
-			flag = -1;
 		}
 	}
 

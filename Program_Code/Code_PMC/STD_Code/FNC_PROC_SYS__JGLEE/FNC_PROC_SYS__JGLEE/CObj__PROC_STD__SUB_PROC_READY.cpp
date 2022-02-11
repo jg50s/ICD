@@ -150,8 +150,10 @@ LOOP_START:
 			}
 		}
 
-		ch_data.Format("%.2f", total_time);
+		ch_data.Format("%.0f", total_time);
 		sCH__PRC_TOTAL_TIME->Set__DATA(ch_data);
+		sCH__PRC_TOTAL_TIME_TO_CTC->Set__DATA(ch_data);
+		sEXT_CH__PRC_TOTAL_TIME_TO_CTC->Set__DATA(ch_data);
 
 		aCH__STEP_TOTAL_NUM->Set__VALUE(step_count);
 

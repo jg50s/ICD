@@ -19,6 +19,8 @@
 #define  STR__CONTROL			"CONTROL"
 #define  STR__SET_FLOW			"SET.FLOW"
 
+#define  STR__DUMP				"DUMP"
+
 // ...
 #define  STR__ENABLE			"ENABLE"
 #define  STR__DISABLE			"DISABLE"

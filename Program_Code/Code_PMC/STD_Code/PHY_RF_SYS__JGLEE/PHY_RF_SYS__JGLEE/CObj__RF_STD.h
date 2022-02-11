@@ -157,6 +157,8 @@ private:
 	// Link : IO_RF_Object ...
 	bool bActive__RF_FREQ_MODE;
 
+	//
+	bool bActive__RF_IO_OBJ;
 	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__IO_RF;
 
 	CString sLINK__RF_MODE__INIT;
@@ -185,7 +187,12 @@ private:
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DI_VAC_SNS;						// VAC Sensor ...
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DI_ATM_SNS;						// ATM Sensor ...
 
+	bool bActive__DI_CHM_LID_CLOSE_SNS;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DI_CHM_LID_CLOSE_SNS;				// Chamber Top_Lid Close Sensor ...
+
+	bool bActive__DI_CHM_LID_OPEN_SNS;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__DI_CHM_LID_OPEN_SNS;				// Chamber Top_Lid Open Sensor ...
+
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CHM_SHUTTER_STATE;				// Chamber Shutter State  ...
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__INTERLOCK_ACTIVE;

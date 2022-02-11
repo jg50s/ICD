@@ -73,7 +73,8 @@ int  CObj__MFC_IO
 
 	if(active__purge_vlv)
 	{
-		dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+		if(bActive__VLV_IN)				dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+
 		dEXT_CH__IO_VLV_OUT->Set__DATA(STR__OPEN);
 
 		if(bActive__VLV_PURGE)			dEXT_CH__IO_VLV_PURGE->Set__DATA(STR__OPEN);
@@ -89,11 +90,13 @@ int  CObj__MFC_IO
 		if(open_mode > 0)
 		{
 			dEXT_CH__IO_VLV_OUT->Set__DATA(STR__OPEN);
-			dEXT_CH__IO_VLV_IN->Set__DATA(STR__OPEN);
+
+			if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__OPEN);
 		}
 		else
 		{
-			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+			if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+
 			dEXT_CH__IO_VLV_OUT->Set__DATA(STR__CLOSE);
 		}
 	}
@@ -128,11 +131,13 @@ int  CObj__MFC_IO
 	if(open_mode > 0)
 	{
 		dEXT_CH__IO_VLV_OUT->Set__DATA(STR__OPEN);
-		dEXT_CH__IO_VLV_IN->Set__DATA(STR__OPEN);
+		
+		if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__OPEN);
 	}
 	else
 	{
-		dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+		if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+
 		dEXT_CH__IO_VLV_OUT->Set__DATA(STR__CLOSE);
 	}
 

@@ -13,7 +13,6 @@ int CObj__RF_STD
 		dEXT_CH__DI_VAC_SNS->Set__DATA(STR__ON);
 		dEXT_CH__DI_ATM_SNS->Set__DATA(STR__OFF);
 		
-		dEXT_CH__DI_CHM_LID_CLOSE_SNS->Set__DATA(STR__ON);
 		dEXT_CH__CHM_SHUTTER_STATE->Set__DATA(STR__CLOSE);
 	}
 
@@ -24,6 +23,7 @@ int CObj__RF_STD
 	}
 
 	// 3. PHY IO Object Initialize
+	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__INIT;
 
@@ -31,6 +31,12 @@ int CObj__RF_STD
 		{
 			return -21;
 		}
+	}
+	else
+	{
+		if(bActive__RF_DO_POWER_CTRL)		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__ON);
+
+		sEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
 	}
 
 	if(bActive__RF_DO_POWER_CTRL)	
@@ -44,11 +50,14 @@ int CObj__RF_STD
 ::Call__REMOTE(CII_OBJECT__VARIABLE *p_variable,
 			   CII_OBJECT__ALARM *p_alarm)
 {
-	CString obj_mode = sLINK__RF_MODE__REMOTE;
-
-	if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
+	if(bActive__RF_IO_OBJ)
 	{
-		return -11;
+		CString obj_mode = sLINK__RF_MODE__REMOTE;
+
+		if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
+		{
+			return -11;
+		}
 	}
 
 	return 1;
@@ -58,11 +67,14 @@ int CObj__RF_STD
 ::Call__LOCAL(CII_OBJECT__VARIABLE *p_variable,
 			  CII_OBJECT__ALARM *p_alarm)
 {
-	CString obj_mode = sLINK__RF_MODE__LOCAL;
-
-	if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
+	if(bActive__RF_IO_OBJ)
 	{
-		return -11;
+		CString obj_mode = sLINK__RF_MODE__LOCAL;
+
+		if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
+		{
+			return -11;
+		}
 	}
 
 	return 1;
@@ -88,6 +100,7 @@ int CObj__RF_STD
 	}
 
 	// 2. 
+	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__OFF;
 
@@ -96,6 +109,11 @@ int CObj__RF_STD
 			return -11;		
 		}
 	}
+	else
+	{
+		sEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
+	}
+
 	return 1;
 }
 
@@ -103,9 +121,11 @@ int CObj__RF_STD
 ::Call__QUICK_OFF(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	if(bActive__RF_DO_POWER_CTRL)	
+	{
 		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
+	}
 
-	// ...
+	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__OFF;
 	
@@ -114,6 +134,11 @@ int CObj__RF_STD
 			return -11;		
 		}
 	}
+	else
+	{
+		sEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
+	}
+
 	return 1;
 }
 
@@ -149,16 +174,21 @@ int CObj__RF_STD
 	// 2. RF Power SET
 	{
 		double para__set_pwr = aCH__PARA_SET_POWER->Get__VALUE();
-
-		// Lookup Offset Check ...
 		Fnc__SET_OFFSET_POWER(para__set_pwr);
 
 		str_data = sCH__PARA_RF_OFFSET_POWER->Get__STRING();
 		double set_offset = atof(str_data);
-
 		double set_power = para__set_pwr + set_offset; 
-
-		aEXT_CH__RF_PARA_SET_POWER->Set__VALUE(set_power);
+		
+		if(bActive__RF_IO_OBJ)
+		{
+			aEXT_CH__RF_PARA_SET_POWER->Set__VALUE(set_power);
+		}
+		else
+		{
+			str_data.Format("%.1f", set_power);		
+			sEXT_CH__RF_AO_SET_POWER->Set__DATA(str_data);;
+		}
 	}
 
 	if(bActive__RF_FREQ_MODE)
@@ -198,6 +228,7 @@ int CObj__RF_STD
 	}
 
 	// 8. RF Control START ...
+	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__SET_POWER;
 

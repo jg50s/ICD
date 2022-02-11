@@ -22,7 +22,6 @@ private:
 	// ...
 	SCX__USER_LOG_CTRL xLOG_CTRL;
 
-	int	m_nMFC_NUM;
 	int iActive__SIM_MODE;
 	//
 
@@ -163,7 +162,9 @@ private:
 	bool bActive__VLV_PURGE;
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_PURGE;
 
+	bool bActive__VLV_IN;
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_IN;
+
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_OUT;
 	//
 

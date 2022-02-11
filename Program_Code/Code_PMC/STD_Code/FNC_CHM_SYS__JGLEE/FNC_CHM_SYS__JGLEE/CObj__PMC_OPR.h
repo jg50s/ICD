@@ -74,6 +74,9 @@ private:
 	CString sLINK_MODE__PM_SLOT__CLOSE;
 	CString sLINK_MODE__PM_SLOT__OPEN;
 
+	bool bActive__OBJ_CTRL__CHAMBER;
+	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__CHAMBER;
+
 	// ...
 	CString sEXT_MODE__INIT;
 	CString sEXT_MODE__MAINT;

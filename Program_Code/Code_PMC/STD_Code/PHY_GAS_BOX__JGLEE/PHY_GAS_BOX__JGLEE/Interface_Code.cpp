@@ -4,6 +4,7 @@
 #include "CObj__GAS_VLV_FNC.h"
 #include "CObj__GAS_VLV_PHY.h"
 
+#include "CObj__LFC_IO.h"
 #include "CObj__MFC_IO.h"
 #include "CObj__PT_IO.h"
 
@@ -27,6 +28,7 @@ DECLARE_END__DLL_STD_OBJ__GET_VERSION
 #define CLS__GAS_VLV_FNC				"GAS_VLV.FNC"
 #define CLS__GAS_VLV_PHY				"GAS_VLV.PHY"
 
+#define CLS__LFC_IO						"LFC.IO"
 #define CLS__MFC_IO						"MFC.IO"
 #define CLS__PT_IO						"PT.IO"
 
@@ -38,6 +40,7 @@ DECLARE_START__DLL_STD_OBJ__GET_CLASS_LIST
 ADD__OBJ_CLS(CLS__GAS_VLV_FNC);
 ADD__OBJ_CLS(CLS__GAS_VLV_PHY);
 
+ADD__OBJ_CLS(CLS__LFC_IO);
 ADD__OBJ_CLS(CLS__MFC_IO);
 ADD__OBJ_CLS(CLS__PT_IO);
 
@@ -51,6 +54,7 @@ DECLARE_START__DLL_STD_OBJ__CREATE_LINK
 IF__OBJ_CLS(CLS__GAS_VLV_FNC)	   		return (new CObj__GAS_VLV_FNC);
 IF__OBJ_CLS(CLS__GAS_VLV_PHY)	   		return (new CObj__GAS_VLV_PHY);
 
+IF__OBJ_CLS(CLS__LFC_IO)		   		return (new CObj__LFC_IO);
 IF__OBJ_CLS(CLS__MFC_IO)		   		return (new CObj__MFC_IO);
 IF__OBJ_CLS(CLS__PT_IO)			   		return (new CObj__PT_IO);
 

@@ -71,6 +71,17 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIMER, var_name);
 	}
 
+	// CTC REPORT ...
+	{
+		var_name = "sPRC.TOTAL.TIME.TO.CTC";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__PRC_TOTAL_TIME_TO_CTC, var_name);
+
+		var_name = "sPRC.CHANGE.TIME.TO.CTC";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__PRC_CHANGE_TIME_TO_CTC, var_name);
+	}
+
 	// PARA ...
 	{
 		var_name = "PARA.MANUAL.PROCESS.DECHUCK.ACTIVE";
@@ -85,6 +96,11 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "PARA.MANUAL.STEP.CTRL.REQ";
 		STD__ADD_STRING(var_name);
 		LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_STEP_CTRL_REQ, var_name);
+
+		// Recovery.Restart ...
+		var_name = "ACT_RECOVERY.RESTART_FLAG";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__ACT_RECOVERY_RESTART_FLAG, var_name);
 	}
 
 	// WIN.JUMP_STEP ...
@@ -616,19 +632,8 @@ int CObj__PROC_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__POST_READY)			flag = Call__POST_READY(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__POST_START)			flag = Call__POST_START(p_variable, p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__MANUAL_READY)	
-		{
-			flag = Call__MANUAL_READY(p_variable, p_alarm);
-		}
-		ELSE_IF__CTRL_MODE(sMODE__MANUAL_START)
-		{
-			dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__START);
-			sEXT_CH__MON_STEP_EXCEPTION_ACT->Set__DATA("");
-
-			flag = Call__MANUAL_START(p_variable, p_alarm);
-
-			dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__IDLE);
-		}
+		ELSE_IF__CTRL_MODE(sMODE__MANUAL_READY)			flag = Call__MANUAL_READY(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__MANUAL_START)			flag = Call__MANUAL_START(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__JOB_STRT_READY)		flag = Call__JOB_START_READY(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__JOB_END_READY)		flag = Call__JOB_END_READY(p_variable, p_alarm);

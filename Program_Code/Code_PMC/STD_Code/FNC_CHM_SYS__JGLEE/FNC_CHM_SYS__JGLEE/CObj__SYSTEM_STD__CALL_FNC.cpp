@@ -4,9 +4,9 @@
 
 // ...
 int CObj__SYSTEM_STD
-::Call__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+::Call__SYSTEM_INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	int r_flag = Fnc__INIT(p_variable, p_alarm);
+	int r_flag = Fnc__SYSTEM_INIT(p_variable, p_alarm);
 
 	// ...
 	{
@@ -51,10 +51,11 @@ int CObj__SYSTEM_STD
 			sCH__LINK_OBJ_ACTIVE_CHM_DECHUCK->Set__DATA("");
 		}
 	}
+
 	return r_flag;
 }
 int CObj__SYSTEM_STD
-::Fnc__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+::Fnc__SYSTEM_INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
@@ -531,8 +532,7 @@ int CObj__SYSTEM_STD
 }
 
 int CObj__SYSTEM_STD
-::Call__MAINT(CII_OBJECT__VARIABLE *p_variable,
-			  CII_OBJECT__ALARM *p_alarm)
+::Call__SYSTEM_MAINT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
@@ -547,8 +547,7 @@ int CObj__SYSTEM_STD
 }
 
 int CObj__SYSTEM_STD
-::Call__TRANSFER_INIT(CII_OBJECT__VARIABLE *p_variable,
-					  CII_OBJECT__ALARM *p_alarm)
+::Call__TRANSFER_INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 

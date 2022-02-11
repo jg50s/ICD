@@ -711,6 +711,7 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	CCommon_Utility x_utility;
+	bool def_check;
 
 	// OBJ : DB_SYS 
 	{
@@ -747,94 +748,140 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__IO_RF";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		pOBJ_CTRL__IO_RF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		def_check = x_utility.Check__Link(obj_name);		
+		bActive__RF_IO_OBJ = def_check;
 
-		// Parameter ...
+		if(def_check)
 		{
-			var_name = "PARA.SET.POWER";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_SET_POWER, obj_name,var_name);
+			pOBJ_CTRL__IO_RF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
-			if(bActive__RF_FREQ_MODE)
+			// Parameter ...
 			{
-				var_name = "PARA.TUNE.USE";
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_PARA_TUNE_USE, obj_name,var_name);
+				var_name = "PARA.SET.POWER";
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_SET_POWER, obj_name,var_name);
 
-				var_name = "PARA.TUNE.DELAY";
-				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_TUNE_DELAY, obj_name,var_name);
+				if(bActive__RF_FREQ_MODE)
+				{
+					var_name = "PARA.TUNE.USE";
+					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_PARA_TUNE_USE, obj_name,var_name);
 
-				//
-				var_name = "PARA.START.FREQUENCY";
-				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_START_FREQUENCY, obj_name,var_name);
+					var_name = "PARA.TUNE.DELAY";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_TUNE_DELAY, obj_name,var_name);
 
-				var_name = "PARA.OUTPUT.FREQUENCY";
-				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_OUTPUT_FREQUENCY, obj_name,var_name);
+					//
+					var_name = "PARA.START.FREQUENCY";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_START_FREQUENCY, obj_name,var_name);
 
-				//
-				var_name = "PARA.RAMP.UP.TIME";
-				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_RAMP_UP_TIME, obj_name,var_name);
+					var_name = "PARA.OUTPUT.FREQUENCY";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_OUTPUT_FREQUENCY, obj_name,var_name);
 
-				var_name = "PARA.RAMP.DOWN.TIME";
-				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_RAMP_DOWN_TIME, obj_name,var_name);
+					//
+					var_name = "PARA.RAMP.UP.TIME";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_RAMP_UP_TIME, obj_name,var_name);
+
+					var_name = "PARA.RAMP.DOWN.TIME";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_RAMP_DOWN_TIME, obj_name,var_name);
+				}
+			}
+
+			// LINK_MODE ...
+			{
+				def_name = "LINK_MODE__INIT";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sLINK__RF_MODE__INIT = def_data;
+
+				def_name = "LINK_MODE__LOCAL";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sLINK__RF_MODE__LOCAL = def_data;
+
+				def_name = "LINK_MODE__REMOTE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sLINK__RF_MODE__REMOTE = def_data;
+
+				def_name = "LINK_MODE__SET_POWER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sLINK__RF_MODE__SET_POWER = def_data;
+
+				def_name = "LINK_MODE__OFF";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sLINK__RF_MODE__OFF = def_data;
+			}
+			// LINK_VAR ...
+			{
+				// DO,POWER_CTRL ...
+				{
+					def_name = "VAR__RF_DO_POWER_CTRL";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+
+					bool def_check = x_utility.Check__Link(var_name);
+					bActive__RF_DO_POWER_CTRL = def_check;
+
+					if(bActive__RF_DO_POWER_CTRL)
+					{
+						LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_DO_POWER_CTRL, obj_name,var_name);
+					}
+				}
+
+				// AO.SET_POWER ...
+				{
+					def_name = "VAR__RF_AO_SET_POWER";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+					LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AO_SET_POWER, obj_name,var_name);
+				}
+
+				// AI.FORWARD_POWER ...
+				{
+					def_name = "VAR__RF_AI_FORWARD_POWER";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+					LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AI_FORWARD_POWER, obj_name,var_name);
+				}
+				// AI.REFLECT_POWER ...
+				{
+					def_name = "VAR__RF_AI_REFLECT_POWER";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+					LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AI_REFLECT_POWER, obj_name,var_name);
+				}
 			}
 		}
-
-		// LINK_MODE ...
-		{
-			def_name = "LINK_MODE__INIT";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK__RF_MODE__INIT = def_data;
-
-			def_name = "LINK_MODE__LOCAL";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK__RF_MODE__LOCAL = def_data;
-
-			def_name = "LINK_MODE__REMOTE";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK__RF_MODE__REMOTE = def_data;
-
-			def_name = "LINK_MODE__SET_POWER";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK__RF_MODE__SET_POWER = def_data;
-
-			def_name = "LINK_MODE__OFF";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK__RF_MODE__OFF = def_data;
-		}
-		// LINK_VAR ...
+		else  
 		{
 			// DO,POWER_CTRL ...
 			{
-				def_name = "VAR__RF_DO_POWER_CTRL";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+				def_name = "CH__RF_DO_POWER_CTRL";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-				bool def_check = x_utility.Check__Link(var_name);
+				bool def_check = x_utility.Check__Link(ch_name);
 				bActive__RF_DO_POWER_CTRL = def_check;
 
 				if(bActive__RF_DO_POWER_CTRL)
 				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_DO_POWER_CTRL, obj_name,var_name);
 				}
 			}
 
 			// AO.SET_POWER ...
 			{
-				def_name = "VAR__RF_AO_SET_POWER";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+				def_name = "CH__RF_AO_SET_POWER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AO_SET_POWER, obj_name,var_name);
 			}
 
 			// AI.FORWARD_POWER ...
 			{
-				def_name = "VAR__RF_AI_FORWARD_POWER";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+				def_name = "CH__RF_AI_FORWARD_POWER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AI_FORWARD_POWER, obj_name,var_name);
 			}
 			// AI.REFLECT_POWER ...
 			{
-				def_name = "VAR__RF_AI_REFLECT_POWER";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
+				def_name = "CH__RF_AI_REFLECT_POWER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AI_REFLECT_POWER, obj_name,var_name);
-			}
+			}			
 		}
 	}
 
@@ -850,11 +897,33 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_ATM_SNS, obj_name,var_name);
 
+		//
 		def_name = "CH__DI_CHM_LID_CLOSE_SENSOR";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_CHM_LID_CLOSE_SNS, obj_name,var_name);
+		
+		def_check = x_utility.Check__Link(ch_name);
+		bActive__DI_CHM_LID_CLOSE_SNS = def_check;
 
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_CHM_LID_CLOSE_SNS, obj_name,var_name);
+		}
+
+		//
+		def_name = "CH__DI_CHM_LID_OPEN_SENSOR";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+		def_check = x_utility.Check__Link(ch_name);
+		bActive__DI_CHM_LID_OPEN_SNS = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_CHM_LID_OPEN_SNS, obj_name,var_name);
+		}
+
+		//
 		def_name = "CH__CHM_SHUTTER_STATE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);

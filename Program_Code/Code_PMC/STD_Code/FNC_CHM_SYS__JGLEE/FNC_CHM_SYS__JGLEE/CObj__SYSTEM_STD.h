@@ -102,12 +102,12 @@ private:
 	//
 
 	//-------------------------------------------------------------------------
-	CString sMODE__INIT;
-	int Call__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
-	int Fnc__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	CString sMODE__SYSTEM_INIT;
+	int Call__SYSTEM_INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	int Fnc__SYSTEM_INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
-	CString sMODE__MAINT;
-	int Call__MAINT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	CString sMODE__SYSTEM_MAINT;
+	int Call__SYSTEM_MAINT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__TRANSFER_INIT;
 	int Call__TRANSFER_INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
