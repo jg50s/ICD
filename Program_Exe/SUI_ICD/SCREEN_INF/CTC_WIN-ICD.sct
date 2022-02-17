@@ -592,6 +592,7 @@ WINDOW_NAME UTILITY_LOG__PM2_GAS_LINE
 	USER_LEVEL                      Unknown  
 }
 
+/*
 WINDOW_NAME UTILITY_LOG__PM3_MAINT
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
@@ -607,7 +608,6 @@ WINDOW_NAME UTILITY_LOG__PM3_GAS_LINE
 	USER_LEVEL                      Unknown  
 }
 
-/*
 WINDOW_NAME UTILITY_LOG__PM4_MAINT
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
@@ -616,6 +616,36 @@ WINDOW_NAME UTILITY_LOG__PM4_MAINT
 	USER_LEVEL                      Unknown  
 }
 WINDOW_NAME UTILITY_LOG__PM4_GAS_LINE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__PM5_MAINT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME UTILITY_LOG__PM5_GAS_LINE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+
+WINDOW_NAME UTILITY_LOG__PM6_MAINT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Unknown  
+}
+WINDOW_NAME UTILITY_LOG__PM6_GAS_LINE
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
 

@@ -44,3 +44,6 @@
 
 #define  ALID__LEAK_CHECK__VAT_MOVE__START_PRESSURE_OVER					34
 
+#define  ALID__CHM_SLOT_VLV_NOT_CLOSE										41
+#define  ALID__CHM_LID_NOT_CLOSE											42
+

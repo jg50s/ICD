@@ -80,8 +80,9 @@ private:
 
 	// VAT.OBJ ...
 	bool bActive__VAT_USE;
-
 	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__VAT;
+
+	CX__VAR_STRING_CTRL  sEXT_CH__VAT_MON_POSITION;
 
 	// IO ...
 	bool bActive__DI_FORELINE_VAC_SNS;
@@ -125,6 +126,9 @@ private:
 	//
 	CString sMODE__ON;
 	int Call__ON(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	//
+	bool bActive__FORELINE_VLV_CHECK;
 
 	CString sMODE__OFF;
 	CString sMODE__OFF_NO_WAIT;

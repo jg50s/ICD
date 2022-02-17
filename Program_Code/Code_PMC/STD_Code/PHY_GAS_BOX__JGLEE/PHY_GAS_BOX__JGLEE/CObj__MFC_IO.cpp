@@ -25,12 +25,18 @@ int CObj__MFC_IO::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 		ADD__CTRL_VAR(sMODE__OPEN,	"OPEN");
 		ADD__CTRL_VAR(sMODE__CLOSE,	"CLOSE");
-		ADD__CTRL_VAR(sMODE__PURGE, "PURGE");
 
+		//
 		ADD__CTRL_VAR(sMODE__CONTROL,   "CONTROL");
 		ADD__CTRL_VAR(sMODE__RAMP_CTRL, "RAMP.CTRL");
 
 		ADD__CTRL_VAR(sMODE__SET_FLOW, "SET.FLOW");
+
+		//
+		ADD__CTRL_VAR(sMODE__PURGE, "PURGE");
+
+		ADD__CTRL_VAR(sMODE__GAS_LINE_PURGE, "GAS_LINE_PURGE");
+		ADD__CTRL_VAR(sMODE__CHM_LINE_PURGE, "CHM_LINE_PURGE");
 	}
 	return 1;
 }
@@ -312,6 +318,11 @@ int CObj__MFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.ABORT.TOLERANCE.VALVE.CLOSE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ABORT_TOLE_VALVE_CLOSE, str_name);
+
+		//
+		str_name = "CFG.FLOW.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ALL CENTER EDGE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_FLOW_MODE, str_name);
 	}
 
 	// CFG - RANGE ...
@@ -500,6 +511,7 @@ int CObj__MFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 	CString ch_data;
+	int i;
 
 	// ...
 	CCommon_Utility m_fnc;	
@@ -671,38 +683,107 @@ int CObj__MFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 		}
 
-		// VLV ...
+		// VLV.PURGE_IN ...
 		{
-			def_name = "CH__IO_VLV_PURGE";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			def_name = "DATA.VLV_PURGE_IN";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-			def_check = m_fnc.Check__Link(ch_name);
-			bActive__VLV_PURGE = def_check;
+			iSIZE__VLV_PURGE_IN = atoi(def_data);
+			if(iSIZE__VLV_PURGE_IN > _CFG_MFC_VLV__SIZE)			iSIZE__VLV_PURGE_IN = _CFG_MFC_VLV__SIZE;
 
-			if(def_check)
+			for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
 			{
+				def_name.Format("CH__IO_VLV_PURGE_IN.%1d", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_PURGE, obj_name,var_name);
+
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_PURGE_IN_X[i], obj_name,var_name);
 			}
+		}
+		// VLV.IN ...
+		{
+			def_name = "DATA.VLV_IN";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-			//
-			def_name = "CH__IO_VLV_IN";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			iSIZE__VLV_IN = atoi(def_data);
+			if(iSIZE__VLV_IN > _CFG_MFC_VLV__SIZE)			iSIZE__VLV_IN = _CFG_MFC_VLV__SIZE;
 
-			def_check = m_fnc.Check__Link(ch_name);
-			bActive__VLV_IN = def_check;
-
-			if(def_check)
+			for(i=0; i<iSIZE__VLV_IN; i++)
 			{
+				def_name.Format("CH__IO_VLV_IN.%1d", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_IN, obj_name,var_name);
-			}
 
-			//
-			def_name = "CH__IO_VLV_OUT";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_OUT, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_IN_X[i], obj_name,var_name);
+			}
+		}
+		// VLV.OUT_ALL ...
+		{
+			def_name = "DATA.VLV_OUT_ALL";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			iSIZE__VLV_OUT_ALL = atoi(def_data);
+			if(iSIZE__VLV_OUT_ALL > _CFG_MFC_VLV__SIZE)			iSIZE__VLV_OUT_ALL = _CFG_MFC_VLV__SIZE;
+
+			for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+			{
+				def_name.Format("CH__IO_VLV_OUT_ALL.%1d", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_OUT_ALL_X[i], obj_name,var_name);
+			}
+		}
+		// VLV.OUT_CENTER ...
+		{
+			def_name = "DATA.VLV_OUT_CENTER";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			iSIZE__VLV_OUT_CENTER = atoi(def_data);
+			if(iSIZE__VLV_OUT_CENTER > _CFG_MFC_VLV__SIZE)		iSIZE__VLV_OUT_CENTER = _CFG_MFC_VLV__SIZE;
+
+			for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+			{
+				def_name.Format("CH__IO_VLV_OUT_CENTER.%1d", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_OUT_CENTER_X[i], obj_name,var_name);
+			}
+		}
+		// VLV.OUT_EDGE ...
+		{
+			def_name = "DATA.VLV_OUT_EDGE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			iSIZE__VLV_OUT_EDGE = atoi(def_data);
+			if(iSIZE__VLV_OUT_EDGE > _CFG_MFC_VLV__SIZE)		iSIZE__VLV_OUT_EDGE = _CFG_MFC_VLV__SIZE;
+
+			for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+			{
+				def_name.Format("CH__IO_VLV_OUT_EDGE.%1d", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_OUT_EDGE_X[i], obj_name,var_name);
+			}
+		}
+		// VLV.PURGE_OUT ...
+		{
+			def_name = "DATA.VLV_PURGE_OUT";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			iSIZE__VLV_PURGE_OUT = atoi(def_data);
+			if(iSIZE__VLV_PURGE_OUT > _CFG_MFC_VLV__SIZE)			iSIZE__VLV_PURGE_OUT = _CFG_MFC_VLV__SIZE;
+
+			for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
+			{
+				def_name.Format("CH__IO_VLV_PURGE_OUT.%1d", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VLV_PURGE_OUT_X[i], obj_name,var_name);
+			}
 		}
 	}
 
@@ -850,12 +931,6 @@ int CObj__MFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 			sCH__MON_MFC_STATE->Set__DATA(STR__OPEN);
 		}
-		ELSE_IF__CTRL_MODE(sMODE__PURGE)
-		{
-			flag = Call__PURGE(p_variable,p_alarm);
-
-			sCH__MON_MFC_STATE->Set__DATA(STR__OPEN);
-		}
 		ELSE_IF__CTRL_MODE(sMODE__CONTROL)
 		{
 			flag = Call__CONTROL(p_variable,p_alarm);
@@ -876,6 +951,24 @@ int CObj__MFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 			sCH__MON_MFC_STATE->Set__DATA(STR__CONTROL);
 			dCH__MON_ERROR_CHECK_ACTIVE->Set__DATA(STR__READY);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__PURGE)
+		{
+			flag = Call__PURGE(p_variable,p_alarm);
+
+			sCH__MON_MFC_STATE->Set__DATA(STR__OPEN);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__GAS_LINE_PURGE)
+		{
+			flag = Call__GAS_LINE_PURGE(p_variable,p_alarm);
+
+			sCH__MON_MFC_STATE->Set__DATA(STR__OPEN);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__CHM_LINE_PURGE)
+		{
+			flag = Call__CHM_LINE_PURGE(p_variable,p_alarm);
+
+			sCH__MON_MFC_STATE->Set__DATA(STR__CLOSE);
 		}
 	}
 

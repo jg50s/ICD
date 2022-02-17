@@ -1,0 +1,6 @@
+; PMC_INTERLOCK__JGLEE.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PMC_INTERLOCK__JGLEE"
+
+EXPORTS
+    ; Explicit exports can go here

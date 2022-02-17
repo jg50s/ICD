@@ -99,33 +99,46 @@ int CObj__GAS_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 
-	// N2 : SUPPLY VLV ...
+	
+	// GAS_LINE : PURGE VLV ...
 	{
-		def_name = "DATA.N2.VLV_SUPPLY";
+		def_name = "DATA.GAS_LINE.VLV_PURGE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-		iSIZE__N2__VLV_SUPPLY = atoi(def_data);
-		if(iSIZE__N2__VLV_SUPPLY > CFG_SIZE__VLV_SUPPLY)		iSIZE__N2__VLV_SUPPLY = CFG_SIZE__VLV_SUPPLY;
+		iSIZE__GAS_LINE__VLV_PURGE = atoi(def_data);
+		if(iSIZE__GAS_LINE__VLV_PURGE > CFG_SIZE__MFC__VLV_PURGE)		iSIZE__GAS_LINE__VLV_PURGE = CFG_SIZE__MFC__VLV_PURGE;
 
-		for(int i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
+		for(int i=0; i<iSIZE__GAS_LINE__VLV_PURGE; i++)
 		{
-			def_name.Format("CH.N2.VLV_SUPPLY.%1d", i+1);
+			def_name.Format("CH.GAS_LINE.VLV_PURGE.%1d", i+1);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__N2__SUPPLY_VLV[i], obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_LINE__VLV_PURGE[i], obj_name,var_name);
 		}
 	}
+	// CHM_LINE : PURGE VLV ...
+	{
+		def_name = "DATA.CHM_LINE.VLV_PURGE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
+		iSIZE__CHM_LINE__VLV_PURGE = atoi(def_data);
+		if(iSIZE__CHM_LINE__VLV_PURGE > CFG_SIZE__MFC__VLV_PURGE)		iSIZE__CHM_LINE__VLV_PURGE = CFG_SIZE__MFC__VLV_PURGE;
+
+		for(int i=0; i<iSIZE__CHM_LINE__VLV_PURGE; i++)
+		{
+			def_name.Format("CH.CHM_LINE.VLV_PURGE.%1d", i+1);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CHM_LINE__VLV_PURGE[i], obj_name,var_name);
+		}
+	}
 	// MFC : PURGE VLV ...
 	{
 		def_name = "DATA.MFC.VLV_PURGE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
 		iSIZE__MFC__VLV_PURGE = atoi(def_data);
-		if(iSIZE__MFC__VLV_PURGE > CFG_SIZE__MFC__VLV_PURGE)
-		{
-			iSIZE__MFC__VLV_PURGE = CFG_SIZE__MFC__VLV_PURGE;
-		}
+		if(iSIZE__MFC__VLV_PURGE > CFG_SIZE__MFC__VLV_PURGE)		iSIZE__MFC__VLV_PURGE = CFG_SIZE__MFC__VLV_PURGE;
 
 		for(int i=0; i<iSIZE__MFC__VLV_PURGE; i++)
 		{

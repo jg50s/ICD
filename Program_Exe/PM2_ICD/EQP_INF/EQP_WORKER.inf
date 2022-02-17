@@ -10,6 +10,7 @@
 #OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_SYSTEM_INIT
 #OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_SYSTEM_MAINT
 #OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_CHM
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_PROCESS
 
 ===========================================================================
 #OBJECT_STD     MNG_UTILITY__JGLEE             AUTO.PM                   MNG_AUTO_PM
@@ -122,8 +123,7 @@
 #OBJECT_IO      PMC__VIRTUAL_IO                IO.VIRTUAL                IO
 
 
-/*
 ===========================================================================
-#OBJECT_INTERLOCK     PMC__INTERLOCK_ICD 		   MFC.IO                    INTERLOCK_MFC
-#OBJECT_INTERLOCK     PMC__INTERLOCK_ICD 		   SYS.IO                    INTERLOCK_SYS
-*/
+#OBJECT_INTERLOCK   PMC_INTERLOCK__JGLEE       MFC.IO                    INTERLOCK_MFC
+#OBJECT_INTERLOCK   PMC_INTERLOCK__JGLEE 		   SYS.IO                    INTERLOCK_SYS
+

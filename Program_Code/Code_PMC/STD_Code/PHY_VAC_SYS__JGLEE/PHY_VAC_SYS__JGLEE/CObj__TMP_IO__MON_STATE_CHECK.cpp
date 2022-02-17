@@ -188,6 +188,43 @@ int CObj__TMP_IO
 			}
 		}
 
+		// TMP Exhaust Valve Close ...
+		if(bActive__FORELINE_VLV_CHECK)
+		{
+			bool active__foreline_vlv_open = false;
+
+			if(bActive__DO_TMP_EXHAUST_VALVE)
+			{
+				if(dEXT_CH__DO_TMP_EXHAUST_VALVE->Check__DATA(STR__OPEN) > 0)
+				{
+					active__foreline_vlv_open = true;
+				}
+			}
+
+			if(active__foreline_vlv_open)
+			{
+				if(bActive__DO_TMP_PURGE_VALVE)
+				{
+					dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__OPEN);
+				}
+			}
+			else
+			{
+				if(bActive__DO_TMP_PURGE_VALVE)
+				{
+					dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
+				}
+
+				if(bActive__VAT_USE)
+				{
+					ch_data = sEXT_CH__VAT_MON_POSITION->Get__STRING();
+					double cur_pos = atof(ch_data);
+
+					if(cur_pos > 0.1)		pOBJ_CTRL__VAT->Call__OBJECT("CLOSE");
+				}
+			}
+		}
+
 		// ...
 	}
 }

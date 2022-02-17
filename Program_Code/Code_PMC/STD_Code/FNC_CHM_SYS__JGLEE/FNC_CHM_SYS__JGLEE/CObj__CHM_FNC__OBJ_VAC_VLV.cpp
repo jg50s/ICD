@@ -14,12 +14,20 @@ int CObj__CHM_FNC
 
 	if(bActive__PHY_VAC_VLV)
 	{
-		if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__ALL_CLOSE) < 0)		r_flag = -11;
+		if(r_flag > 0)
+		{
+			if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__ALL_CLOSE) < 0)			r_flag = -11;
+		}
+
+		if(r_flag > 0)
+		{
+			if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__EXHAUST_CLOSE) < 0)		r_flag = -12;
+		}
 	}
 
 	if(bActive__VAT_OBJ)
 	{
-		if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)					r_flag = -21;
+		if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)			r_flag = -21;
 	}
 
 	return r_flag;

@@ -119,12 +119,6 @@ int CObj__TMP_IO
 	// ...
 	bool active__delay_check = false;
 
-	if(dEXT_CH__DO_TMP_PURGE_VALVE->Check__DATA(STR__OPEN) < 0)
-	{
-		dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__OPEN);
-
-		active__delay_check = true;
-	}
 	if(dEXT_CH__DO_TMP_EXHAUST_VALVE->Check__DATA(STR__OPEN) < 0)
 	{
 		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__OPEN);
@@ -163,18 +157,22 @@ int CObj__TMP_IO
 int CObj__TMP_IO
 ::Call__EXHAUST_OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	if(bActive__DO_TMP_PURGE_VALVE)
-		dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__OPEN);
-
 	if(bActive__DO_TMP_EXHAUST_VALVE)
+	{
 		return dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__OPEN);
-
+	}
 	return 1;
 }
 
 int CObj__TMP_IO
 ::Call__ON(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	// TMP Exhaust Valve Close ...
+	if(bActive__DO_TMP_EXHAUST_VALVE)
+	{
+		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+	}
+
 	// Backing.Pump Check ...
 	if(bActive__DI_BACKING_PUMP_ON)
 	{
@@ -229,6 +227,9 @@ int CObj__TMP_IO
 int CObj__TMP_IO
 ::Call__OFF(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active__no_wait)
 {
+	bActive__FORELINE_VLV_CHECK = false;
+
+	// ...
 	SCX__TIMER_CTRL x_timer;
 	x_timer->REGISTER__ABORT_OBJECT(sObject_Name);
 

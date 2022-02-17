@@ -1,0 +1,129 @@
+/*  SCREEN INFOMATION  */
+
+
+#SCREEN_DIR  SCR__HEATER-TEST\
+
+
+// -----------------------------------------------------------------------
+#DEFINE  DEF__FRAME_CLIENT
+	POPUP              NO
+	LOW_LEFT_X         0  
+	LOW_LEFT_Y         55
+	WIDTH              1280 
+	HEIGHT             770 
+#END
+
+#DEFINE  DEF__FRAME_CLIENT_NULL
+	POPUP              NO
+	LOW_LEFT_X         0  
+	LOW_LEFT_Y         55
+	WIDTH              0 
+	HEIGHT             0 
+#END
+
+#DEFINE  DEF__FRAME_CLIENT_HALF
+	POPUP              NO
+	LOW_LEFT_X         0  
+	LOW_LEFT_Y         55
+	WIDTH              1280
+	HEIGHT             475
+#END
+
+
+#DEFINE  DEF__FRAME_BOTTOM_SUB
+	POPUP              NO
+	LOW_LEFT_X         173 
+	LOW_LEFT_Y         825
+	WIDTH              1107 
+	HEIGHT             41
+#END
+
+#DEFINE  DEF__FRAME_BOTTOM_MAIN
+	POPUP              NO
+	LOW_LEFT_X         173 
+	LOW_LEFT_Y         866
+	WIDTH              1107 
+	HEIGHT             58
+#END
+
+
+
+// -----------------------------------------------------------------------
+// Side
+WINDOW_NAME PMC_BTM_MAIN_BAR
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_MAIN
+		
+	CTRL_CHANNEL                    SCR.BTM_MAIN
+	USER_LEVEL                      Operate
+}
+
+
+// Bottom
+WINDOW_NAME PMC_BTM_CONFIG
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate
+}
+
+WINDOW_NAME PMC_BTM_MAINT 
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate  
+}
+
+
+// Bottom => Config
+
+WINDOW_NAME PMC_CONFIG_HEATER_CHUCK-STABLE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.HEATER_CHUCK_STABLE.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_HEATER_CHUCK-INIT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.HEATER_CHUCK_INIT.SAVE
+}
+
+
+// Bottom => Maint
+
+WINDOW_NAME PMC_MAINT_CHAMBER
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint  
+}
+
+
+// Popup Page ------------------------------------------------------------------------------
+
+WINDOW_NAME APP_POPUP_HTR_CHUCK
+{
+	POPUP                           YES
+	LOW_LEFT_X                      125  
+	LOW_LEFT_Y                      25 
+	WIDTH                           780
+	HEIGHT                          605 
+	 
+	SEQ_CTRL_CHANNEL                DB_GUI+GUI.PMC.MNT.PUMP.POPUP1
+	USER_LEVEL                      Maint
+}
+

@@ -218,7 +218,7 @@ Fnc__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,const int 
 				}
 				else
 				{
-					xCH__aiVALVE_POS->Set__VALUE(1000.0);
+					xCH__aiVALVE_POS->Set__VALUE(MAX_CFG_RANGE_POSITION);
 				}
 			}
 
@@ -311,7 +311,7 @@ Fnc__OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 		Sleep(1000);
 
 		xCH__aiVALVE_PRESS->Set__DATA("0.0");
-		xCH__aiVALVE_POS->Set__VALUE(MAX_GUI_RANGE_POSITION);
+		xCH__aiVALVE_POS->Set__VALUE(MAX_CFG_RANGE_POSITION);
 	}
 
 	// 3. [OPEN] Command Check ...
@@ -432,15 +432,12 @@ Fnc__CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 }
 
 int  CObj__VAT650_TYPE::
-Fnc__PRESSURE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+Fnc__PRESSURE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_pressure)
 {
 	CString szLog;
 	int nCmd_Ret = -1;
 	int nGet_Set_Val = 0;
 	int nDrv_Set_Val = 0;
-
-	CString szGet_Set_Val;
-	CString szDrv_Set_Val;
 
 	Fnc__APP_LOG("Fnc__PRESSURE() ----> START !!\n");
 
@@ -450,25 +447,29 @@ Fnc__PRESSURE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 		if(Is__ONLINE(p_variable, p_alarm)  < 0)		return OBJ_ABORT;
 	}
 
-	//  1. Set Pressure Reading ... 
-	aCH__PRESSURE_SET->Get__DATA(szGet_Set_Val);
-	nGet_Set_Val = atoi(szGet_Set_Val);
+	// ...
+	CString log_msg;
+	CString log_bff;
 
-	// Sensor Range Convert...
-	nDrv_Set_Val = (nGet_Set_Val*MAX_CFG_RANGE_PRESSURE)/MAX_GUI_RANGE_PRESSURE;
-	szDrv_Set_Val.Format("%d", nDrv_Set_Val);
+	// ...
+	{
+		log_msg.Format(" * %s <- %.1f", 
+					 aCH__PARA_PRESSURE_SET->Get__VARIABLE_NAME(),
+					 para_pressure);
 
-	szLog.Format("CH_NAME : [%s], Get_GUI_Val : [%s], Converted : [%s]", aCH__PRESSURE_SET->Get__VARIABLE_NAME(),szGet_Set_Val, szDrv_Set_Val);
-	Fnc__APP_LOG(szLog);
+		Fnc__APP_LOG(log_msg);
+	}
 
 	//  2. Set Pressure Writing ... 
-	xCH__aoSET_PRESSURE->Set__DATA(szDrv_Set_Val);
+	xCH__aoSET_PRESSURE->Set__VALUE(para_pressure);
 
 	if(iACTIVE_SIM > 0)
 	{
 		xCH_diCTRL_STS->Set__DATA("PRESSURE");
+
 		Sleep(1000);
-		xCH__aiVALVE_PRESS->Set__DATA(szGet_Set_Val);
+
+		xCH__aiVALVE_PRESS->Set__VALUE(para_pressure);
 	}
 
 	//  3. [PRESSURE] Control Mode Check 
@@ -496,11 +497,11 @@ Fnc__PRESSURE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 }
 
 int  CObj__VAT650_TYPE::
-Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt)
 {
 	int fnc_flag = -1;
 
-	CString str_trg_pos;
+	CString ch_data;
 	CString log_msg;
 
 	// ...
@@ -518,14 +519,13 @@ Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 
 	// ... 
 	{
-		aCH__POSITION_SET->Get__DATA(str_trg_pos);
-		xCH__aoSET_POSITION->Set__DATA(str_trg_pos);
+		xCH__aoSET_POSITION->Set__VALUE(para_pos_cnt);
 
 		// ...
 		{
-			log_msg.Format("CH_NAME [%s] <- [%s]", 
-						   aCH__POSITION_SET->Get__VARIABLE_NAME(),
-						   str_trg_pos);
+			log_msg.Format(" * %s <- %.1f", 
+						   aCH__PARA_POSITION_SET->Get__VARIABLE_NAME(),
+						   para_position);
 
 			Fnc__APP_LOG(log_msg);
 		}
@@ -533,7 +533,7 @@ Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 		if(iACTIVE_SIM > 0)
 		{
 			xCH_diCTRL_STS->Set__DATA("POSITION");
-			xCH__aiVALVE_POS->Set__DATA(str_trg_pos);
+			xCH__aiVALVE_POS->Set__VALUE(para_pos_cnt);
 
 			Sleep(1000);
 		}
@@ -561,9 +561,7 @@ Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 		}
 		else if(fnc_flag > 0)
 		{
-			log_msg.Format("CH_NAME [%s] : Cmd[%s] Success", 
-						   aCH__POSITION_SET->Get__VARIABLE_NAME(), 
-						   "POSITION CONTROL");
+			log_msg = " * Success !";
 
 			Fnc__APP_LOG(log_msg);
 		}
@@ -575,31 +573,38 @@ Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 
 		Fnc__APP_LOG(log_msg);
 	}
-	return OBJ_AVAILABLE;
+	return 1;
 }
 
 int  CObj__VAT650_TYPE::
-Fnc__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,const int wait_flag)
+Fnc__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable,
+				   CII_OBJECT__ALARM* p_alarm,
+				   const int wait_flag, 
+				   const double para_position,
+				   const int para_pos_cnt)
 {
 	CString log_msg;
-	CString var_data;
+	CString log_bff;
 
-	CString data__set_pos;
+	CString ch_data;
 
 	// Set Position Reading ... 
 	{
-		aCH__POSITION_SET->Get__DATA(data__set_pos);
-		xCH__aoSET_POSITION->Set__DATA(data__set_pos);
+		xCH__aoSET_POSITION->Set__VALUE(para_pos_cnt);
 
 		// ...
 		{
-			log_msg.Format("Data - Set Position : [%s]", data__set_pos); 
+			log_msg.Format(" * Set.Position  <- %.1f \n", para_position); 
+
+			log_bff.Format(" * Set.Pos_Count <- %.1f \n", para_pos_cnt); 
+			log_msg += log_bff;
+
 			Fnc__APP_LOG(log_msg);
 		}
 
 		if(iACTIVE_SIM > 0)
 		{
-			xCH__aiVALVE_POS->Set__DATA(data__set_pos);
+			xCH__aiVALVE_POS->Set__VALUE(para_pos_cnt);
 			xCH_diCTRL_STS->Set__DATA("POSITION");
 
 			Sleep(100);
@@ -640,15 +645,14 @@ Fnc__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,c
 		SCX__ASYNC_TIMER_CTRL x_async_timer;
 		x_async_timer->START__COUNT_UP(9999);
 
-		double trg_pos = atof(data__set_pos);
+		double trg_pos = para_pos_cnt;
 		double min_pos = trg_pos - 1.0;
 		double max_pos = trg_pos + 1.0;
 		double cur_pos = 0.0;
 
 		while(1)
 		{
-			xCH__aiVALVE_POS->Get__DATA(var_data);
-			cur_pos = atof(var_data);
+			cur_pos = xCH__aiVALVE_POS->Get__VALUE();
 
 			if(trg_pos <= 1)
 			{

@@ -112,6 +112,8 @@ private:
 
 	CX__VAR_DIGITAL_CTRL dCH__CFG_ABORT_TOLE_VALVE_CLOSE;
 
+	CX__VAR_DIGITAL_CTRL dCH__CFG_FLOW_MODE;
+
 	// CFG - RANGE ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_RANGE_MFC_UNIT;
 
@@ -146,6 +148,7 @@ private:
 	CX__VAR_STRING_CTRL   sEXT_CH__IO_MFC_SET;
 	CX__VAR_STRING_CTRL   sEXT_CH__IO_MFC_READ;
 
+	//
 	bool bActive__MFC_STATE;
 	CX__VAR_STRING_CTRL   sEXT_CH__IO_MFC_STATE;
 
@@ -159,13 +162,23 @@ private:
 	CX__VAR_STRING_CTRL   sEXT_CH__IO_MFC_TEMPERATURE;
 
 	//
-	bool bActive__VLV_PURGE;
-	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_PURGE;
+	int iSIZE__VLV_PURGE_IN;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_PURGE_IN_X[_CFG_MFC_VLV__SIZE];
 
-	bool bActive__VLV_IN;
-	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_IN;
+	int iSIZE__VLV_IN;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_IN_X[_CFG_MFC_VLV__SIZE];
 
-	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_OUT;
+	int iSIZE__VLV_OUT_ALL;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_OUT_ALL_X[_CFG_MFC_VLV__SIZE];
+
+	int iSIZE__VLV_OUT_CENTER;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_OUT_CENTER_X[_CFG_MFC_VLV__SIZE];
+
+	int iSIZE__VLV_OUT_EDGE;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_OUT_EDGE_X[_CFG_MFC_VLV__SIZE];
+
+	int iSIZE__VLV_PURGE_OUT;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__IO_VLV_PURGE_OUT_X[_CFG_MFC_VLV__SIZE];
 	//
 
 
@@ -183,7 +196,7 @@ private:
 
 	CString sMODE__CONTROL;
 	int  Call__CONTROL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_max, const bool active__purge_vlv = false);
+	int  Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_ma);
 
 	CString sMODE__RAMP_CTRL;
 	int  Call__RAMP_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
@@ -193,8 +206,15 @@ private:
 	int  Call__SET_FLOW(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__SET_FLOW(const double set_flow);
 
+	// ...
 	CString sMODE__PURGE;
 	int  Call__PURGE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	CString sMODE__GAS_LINE_PURGE;
+	int  Call__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__CHM_LINE_PURGE;
+	int  Call__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 	//
 
 	// ...

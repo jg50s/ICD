@@ -52,7 +52,7 @@ int CObj__CHM_FNC
 
 	// LOW_VAC.PUMPING ...
 	{
-		int flag = Fnc__LOW_VAC_PUMP(p_variable,p_alarm, -1, -1);
+		int flag = Fnc__LOW_VAC_PUMP(p_variable,p_alarm, 1, -1);
 
 		if(flag < 0)
 		{

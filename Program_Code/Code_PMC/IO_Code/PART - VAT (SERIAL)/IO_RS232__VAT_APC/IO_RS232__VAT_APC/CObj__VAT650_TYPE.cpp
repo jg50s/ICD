@@ -51,9 +51,8 @@ int CObj__VAT650_TYPE::__DEFINE__VERSION_HISTORY(version)
 
 
 // ...
-#define  MON_ID__DRV_ALARM						1
-#define  MON_ID__IO_MONITOR						2
-#define  MON_ID__VALUE_MONITOR					3
+#define  MON_ID__STATE_CHECK					1
+
 
 int CObj__VAT650_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 {
@@ -89,14 +88,15 @@ int CObj__VAT650_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 	
 	// ...
 	{
-		str_name = "INR.aPRESSURE.SET";
+		str_name = "PARA.PRESSURE.SET";
 		STD__ADD_ANALOG(str_name, "mTorr", 3, 0, MAX_GUI_RANGE_PRESSURE);
-		LINK__VAR_ANALOG_CTRL(aCH__PRESSURE_SET,str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_PRESSURE_SET, str_name);
 
-		str_name = "INR.aPOSITION.SET";
+		str_name = "PARA.POSITION.SET";
 		STD__ADD_ANALOG(str_name, "--", 3, 0, MAX_GUI_RANGE_POSITION);
-		LINK__VAR_ANALOG_CTRL(aCH__POSITION_SET,str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_POSITION_SET, str_name);
 
+		//
 		str_name = "INR.OUT.sPRESSURE.VALUE";
 		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__MON_PRESSURE_VALUE,str_name);
@@ -139,9 +139,7 @@ int CObj__VAT650_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 
 	// ...
 	{
-		p_variable->Add__MONITORING_PROC(1.0, MON_ID__DRV_ALARM);
-		p_variable->Add__MONITORING_PROC(7.0, MON_ID__IO_MONITOR);
-		p_variable->Add__MONITORING_PROC(1.0, MON_ID__VALUE_MONITOR);
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATE_CHECK);
 	}
 	return 1;
 }
@@ -629,12 +627,35 @@ int CObj__VAT650_TYPE
 	
 		ELSE_IF__CTRL_MODE(sMODE__OPEN)					flag = Call__OPEN(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__CLOSE)				flag = Call__CLOSE(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__PRESSURE)				flag = Call__PRESSURE(p_variable, p_alarm);
+		
+		ELSE_IF__CTRL_MODE(sMODE__PRESSURE)
+		{
+			double para_pressure = aCH__PARA_PRESSURE_SET->Get__VALUE();
 
-		ELSE_IF__CTRL_MODE(sMODE__POSITION)				flag = Call__POSITION(p_variable, p_alarm);
+			flag = Call__PRESSURE(p_variable,p_alarm, para_pressure);
+		}
 
-		ELSE_IF__CTRL_MODE(sMODE__POSITION_WAIT)		flag = Call__POSITION_WAIT(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__POSITION_NO_WAIT)		flag = Call__POSITION_NO_WAIT(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__POSITION)
+		{
+			double para_position = aCH__PARA_POSITION_SET->Get__VALUE();
+			int para_pos_cnt = (int) (para_position * (MAX_GUI_RANGE_POSITION / 100.0));
+
+			flag = Call__POSITION(p_variable,p_alarm, para_position,para_pos_cnt);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__POSITION_WAIT)
+		{
+			double para_position = aCH__PARA_POSITION_SET->Get__VALUE();
+			int para_pos_cnt = (int) (para_position * (MAX_GUI_RANGE_POSITION / 100.0));
+
+			flag = Call__POSITION_WAIT(p_variable,p_alarm, para_position,para_pos_cnt);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__POSITION_NO_WAIT)
+		{
+			double para_position = aCH__PARA_POSITION_SET->Get__VALUE();
+			int para_pos_cnt = (int) (para_position * (MAX_GUI_RANGE_POSITION / 100.0));
+
+			flag = Call__POSITION_NO_WAIT(p_variable,p_alarm, para_position,para_pos_cnt);
+		}
 
 		ELSE_IF__CTRL_MODE(sMODE__HOLD)					flag = Call__HOLD(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__AUTO_LEARN)			flag = Call__AUTO_LEARN(p_variable, p_alarm);
@@ -665,26 +686,7 @@ int CObj__VAT650_TYPE
 int CObj__VAT650_TYPE
 ::__CALL__MONITORING(id, p_variable, p_alarm)
 {
-	switch(id)
-	{
-		case MON_ID__DRV_ALARM:
-			Mon__DRV_ALM(p_variable,p_alarm);
-			break;
+	if(id == MON_ID__STATE_CHECK)			Mon__STATE_CHECK(p_variable, p_alarm);
 
-		case MON_ID__IO_MONITOR:
-			Mon__IO_MONITOR(p_variable,p_alarm);
-			break;
-
-		case MON_ID__VALUE_MONITOR:
-			Mon__VALUE_MONITOR(p_variable,p_alarm);
-			break;		
-	}
-
-	return 1;
-}
-
-int CObj__VAT650_TYPE
-::__CLOSE__OBJECT()
-{
 	return 1;
 }

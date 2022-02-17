@@ -4,28 +4,60 @@
 
 // ...
 int CObj__GAS_VLV_PHY
-::Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable,
-				  CII_OBJECT__ALARM *p_alarm)
+::Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	int i;
 
-	for(i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
+	// GAS_LINE.PURGE ...
 	{
-		dEXT_CH__N2__SUPPLY_VLV[i]->Set__DATA(STR__CLOSE);
+		for(i=0; i<iSIZE__GAS_LINE__VLV_PURGE; i++)
+		{
+			dEXT_CH__GAS_LINE__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		}
+	}
+	// CHM_LINE.PURGE ...
+	{
+		for(i=0; i<iSIZE__CHM_LINE__VLV_PURGE; i++)
+		{
+			dEXT_CH__CHM_LINE__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		}
+	}
+	// MFC.PURGE ...
+	{
+		for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
+		{
+			dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		}
 	}
 
-	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
+	// SOFT.VENT ...
 	{
-		dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		for(i=0; i<iSIZE__SOFT_VENT__VLV_CLOSE; i++)
+		{
+			dEXT_CH__SOFT_VENT__VLV_CLOSE[i]->Set__DATA(STR__CLOSE);
+		}
+	}
+	// FAST.VENT ...
+	{
+		for(i=0; i<iSIZE__FAST_VENT__VLV_CLOSE; i++)
+		{
+			dEXT_CH__FAST_VENT__VLV_CLOSE[i]->Set__DATA(STR__CLOSE);
+		}
 	}
 
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PROC; i++)
+	// CHM.PURGE ...
 	{
-		dEXT_CH__TOP_CHM__VLV_PROC[i]->Set__DATA(STR__CLOSE);
+		for(i=0; i<iSIZE__TOP_CHM__VLV_PURGE; i++)
+		{
+			dEXT_CH__TOP_CHM__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		}
 	}
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PURGE; i++)
+	// CHM.PROC ..
 	{
-		dEXT_CH__TOP_CHM__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		for(i=0; i<iSIZE__TOP_CHM__VLV_PROC; i++)
+		{
+			dEXT_CH__TOP_CHM__VLV_PROC[i]->Set__DATA(STR__CLOSE);
+		}
 	}
 
 	return 1;
@@ -144,28 +176,14 @@ int CObj__GAS_VLV_PHY
 
 // ...
 int CObj__GAS_VLV_PHY
-::Call__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+::Call__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	int i;
 
-	for(i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
+	for(i=0; i<iSIZE__GAS_LINE__VLV_PURGE; i++)
 	{
-		dEXT_CH__N2__SUPPLY_VLV[i]->Set__DATA(STR__CLOSE);
+		dEXT_CH__GAS_LINE__VLV_PURGE[i]->Set__DATA(STR__OPEN);
 	}
-	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
-	{
-		dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
-	}
-
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PURGE; i++)
-	{
-		dEXT_CH__TOP_CHM__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
-	}
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PROC; i++)
-	{
-		dEXT_CH__TOP_CHM__VLV_PROC[i]->Set__DATA(STR__OPEN);
-	}
-
 	return 1;
 }
 int CObj__GAS_VLV_PHY
@@ -173,29 +191,10 @@ int CObj__GAS_VLV_PHY
 {
 	int i;
 
-	for(i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
+	for(i=0; i<iSIZE__CHM_LINE__VLV_PURGE; i++)
 	{
-		dEXT_CH__N2__SUPPLY_VLV[i]->Set__DATA(STR__CLOSE);
+		dEXT_CH__CHM_LINE__VLV_PURGE[i]->Set__DATA(STR__OPEN);
 	}
-	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
-	{
-		dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
-	}
-
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PURGE; i++)
-	{
-		dEXT_CH__TOP_CHM__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
-	}
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PROC; i++)
-	{
-		dEXT_CH__TOP_CHM__VLV_PROC[i]->Set__DATA(STR__OPEN);
-	}
-
-	for(i=0; i<iSIZE__SOFT_VENT__VLV_OPEN; i++)
-	{
-		dEXT_CH__SOFT_VENT__VLV_OPEN[i]->Set__DATA(STR__OPEN);
-	}
-
 	return 1;
 }
 int CObj__GAS_VLV_PHY
@@ -203,18 +202,13 @@ int CObj__GAS_VLV_PHY
 {
 	int i;
 
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PURGE; i++)
+	for(i=0; i<iSIZE__CHM_LINE__VLV_PURGE; i++)
 	{
-		dEXT_CH__TOP_CHM__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+		dEXT_CH__CHM_LINE__VLV_PURGE[i]->Set__DATA(STR__OPEN);
 	}
-	
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PROC; i++)
+	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
 	{
-		dEXT_CH__TOP_CHM__VLV_PROC[i]->Set__DATA(STR__OPEN);
-	}
-	for(i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
-	{
-		dEXT_CH__N2__SUPPLY_VLV[i]->Set__DATA(STR__OPEN);
+		dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__OPEN);
 	}
 
 	return 1;
@@ -224,9 +218,13 @@ int CObj__GAS_VLV_PHY
 {
 	int i;
 
-	for(i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
+	for(i=0; i<iSIZE__GAS_LINE__VLV_PURGE; i++)
 	{
-		dEXT_CH__N2__SUPPLY_VLV[i]->Set__DATA(STR__CLOSE);
+		dEXT_CH__GAS_LINE__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__CHM_LINE__VLV_PURGE; i++)
+	{
+		dEXT_CH__CHM_LINE__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
 	}
 	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
 	{
@@ -240,21 +238,7 @@ int CObj__GAS_VLV_PHY
 ::Call__PROC_OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
 	int i;
-
-	for(i=0; i<iSIZE__N2__VLV_SUPPLY; i++)
-	{
-		dEXT_CH__N2__SUPPLY_VLV[i]->Set__DATA(STR__CLOSE);
-	}
-	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
-	{
-		dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
-	}
-
-	for(i=0; i<iSIZE__TOP_CHM__VLV_PURGE; i++)
-	{
-		dEXT_CH__TOP_CHM__VLV_PURGE[i]->Set__DATA(STR__CLOSE);
-	}
-
+	
 	for(i=0; i<iSIZE__TOP_CHM__VLV_PROC; i++)
 	{
 		dEXT_CH__TOP_CHM__VLV_PROC[i]->Set__DATA(STR__OPEN);

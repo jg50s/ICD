@@ -18,6 +18,11 @@
 
 
 // ...
+#define  _HE_LINE_TYPE__ICD						1
+#define  _HE_LINE_TYPE__FLEX					2
+#define  _HE_LINE_TYPE__STD						3
+
+// ...
 #define HE_TYPE__CENTER							1
 #define HE_TYPE__EDGE							2
 

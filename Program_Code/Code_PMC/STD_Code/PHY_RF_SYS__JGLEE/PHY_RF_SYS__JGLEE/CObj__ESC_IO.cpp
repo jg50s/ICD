@@ -1727,6 +1727,13 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		// He Valve ...
 		{
+			def_name = "DATA.HE_LINE.TYPE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			
+				 if(def_data.CompareNoCase("ICD")  == 0)			iDATA__HE_LINE_TYPE = _HE_LINE_TYPE__ICD;
+			else if(def_data.CompareNoCase("FLEX") == 0)			iDATA__HE_LINE_TYPE = _HE_LINE_TYPE__FLEX;
+			else													iDATA__HE_LINE_TYPE = _HE_LINE_TYPE__STD;
+				
 			// Common ...
 			{
 				def_name = "CH__DO_HE_SIDE_SUPPLY_VLV";
@@ -1757,6 +1764,19 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Dump_Vlv_CENTER, obj_name,var_name);
+
+				//
+				def_name = "CH__DO_HE_SIDE_EXHAUST_VLV.CENTER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__He_Side_Exhaust_Vlv_CENTER = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Exhaust_Vlv_CENTER, obj_name,var_name);
+				}
 			}
 			// Edge ...
 			if(bActive__EDGE_USE)
@@ -1775,6 +1795,19 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Dump_Vlv_EDGE, obj_name,var_name);
+
+				//
+				def_name = "CH__DO_HE_SIDE_EXHAUST_VLV.EDGE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__He_Side_Exhaust_Vlv_EDGE = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Exhaust_Vlv_EDGE, obj_name,var_name);
+				}
 			}
 		}
 

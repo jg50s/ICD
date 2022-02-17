@@ -1,6 +1,0 @@
-Move : [LP1][12] -> [AL1][1]
-Move : [AL1][1] -> [LBD][1]
-Move : [LBD][1] -> [PM2][1]
-Move : [PM2][1] -> [LBD][1]
-Repeat[2] : [3] -> [4]
-TOOL_CLEAR

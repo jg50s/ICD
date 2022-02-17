@@ -115,8 +115,9 @@ private:
 	//-------------------------------------------------------------------------
 	// Virtual Channel
 	CX__VAR_STRING_CTRL  sCH__SEQUENCE_MSG;
-	CX__VAR_ANALOG_CTRL  aCH__PRESSURE_SET;
-	CX__VAR_ANALOG_CTRL  aCH__POSITION_SET;
+
+	CX__VAR_ANALOG_CTRL  aCH__PARA_PRESSURE_SET;
+	CX__VAR_ANALOG_CTRL  aCH__PARA_POSITION_SET;
 
 	CX__VAR_STRING_CTRL  sCH__MON_PRESSURE_VALUE;
 	CX__VAR_STRING_CTRL  sCH__MON_CUR_POSITION_VALUE;
@@ -194,24 +195,24 @@ private:
 
 	// PRESSURE ---
 	CString sMODE__PRESSURE;
-	int	Call__PRESSURE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int	Call__PRESSURE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const double para_pressure);
 
-	int Fnc__PRESSURE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int Fnc__PRESSURE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const double para_pressure);
 
 	// POSITION ---
 	CString sMODE__POSITION;
-	int	Call__POSITION(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int	Call__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt);
 
-	int Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int Fnc__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt);
 
 	// POSITION.WAIT ...
 	CString sMODE__POSITION_WAIT;
-	int	Call__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int	Call__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt);
 
 	CString sMODE__POSITION_NO_WAIT;
-	int	Call__POSITION_NO_WAIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int	Call__POSITION_NO_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt);
 
-	int Fnc__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm,const int wait_flag);
+	int Fnc__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm,const int wait_flag, const double para_position,const int para_pos_cnt);
 
 	// HOLD ---
 	CString sMODE__HOLD;
@@ -224,13 +225,11 @@ private:
 	int	Call__AUTO_LEARN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	int Fnc__AUTO_LEARN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
+	//
 
 	//-------------------------------------------------------------------------
 	// ...
-	void Mon__DRV_ALM(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	void Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	void Mon__VALUE_MONITOR(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	void Mon__STATE_CHECK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	int  Is__ONLINE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
@@ -264,7 +263,6 @@ public:
 	int __CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm);
 	int __CALL__MONITORING(id,p_variable,p_alarm);
 
-	int __CLOSE__OBJECT();
 
 	//-------------------------------------------------------------------------
 	int __Read__ANALOG(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, double& read_data);

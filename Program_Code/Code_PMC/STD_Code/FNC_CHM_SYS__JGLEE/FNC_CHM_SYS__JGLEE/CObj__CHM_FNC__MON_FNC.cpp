@@ -15,6 +15,14 @@ Mon__PRESSURE_STATUS(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alar
 
 	CString var_data;
 
+	if(iActive__SIM_MODE > 0)
+	{
+		if(bActive__CHM_LID_STATE)
+		{
+			dEXT_CH__CHM_LID_STATE->Set__DATA(sCHM_LID__CLOSE_STATE);
+		}
+	}
+
 
 	while(1)
 	{

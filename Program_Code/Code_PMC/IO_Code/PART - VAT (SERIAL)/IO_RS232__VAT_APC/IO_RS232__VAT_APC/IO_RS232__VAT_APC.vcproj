@@ -195,10 +195,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Macro__Function.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -270,7 +266,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__VAT650_TYPE__MON_FNC.cpp"
+					RelativePath=".\CObj__VAT650_TYPE__MON_STATE_CHECK.cpp"
 					>
 				</File>
 				<File
@@ -287,6 +283,18 @@
 				</File>
 				<File
 					RelativePath=".\Interface_Code.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Macro_Function"
+				>
+				<File
+					RelativePath=".\Macro_Function.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Macro_Function.h"
 					>
 				</File>
 			</Filter>

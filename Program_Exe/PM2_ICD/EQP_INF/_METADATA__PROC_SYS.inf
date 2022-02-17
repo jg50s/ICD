@@ -1,6 +1,18 @@
 
 
 //------------------------------------------------
+#OBJECT_PROPERTY		PAGE_PROCESS
+
+#FNC_MODE		  MANUAL_PROCESS   	                MNT_PROCESS     MANUAL_PROCESS
+#FNC_MODE		  ABORT_DECHUCK                     MNT_PROCESS     ABORT_DECHUCK
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK            DB_ETCHER+SYS.FNC.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK          PROCESS
+                                                                 
+#DEFINE_CONSTANT    CH.FNC.LOCK         		    DB_ETCHER+SYS.FNC.LOCK
+#DEFINE_CONSTANT    DATA.FNC.LOCK     		      CHM
+
+//------------------------------------------------
 #OBJECT_PROPERTY		MNT_PROCESS
 
 #DEFINE_CONSTANT    OBJ__DB_SYS						      DB_SYS
@@ -30,7 +42,6 @@
 #DEFINE_CONSTANT   	CH__SLOT_LOTID			        DB_INF+SLOT01.LOTID
 
 #DEFINE_CONSTANT    CH__SYS_CTRL_LOCK           DB_ETCHER+SYS.CTRL.LOCK
-#DEFINE_CONSTANT    CH__SYS_FNC_LOCK         		DB_ETCHER+SYS.FNC.LOCK
 #DEFINE_CONSTANT    CH__SYS_STATUS              OPR_PMC+OBJ.STATUS
 #DEFINE_CONSTANT    CH__STEP_STABLE_REQ         FNC_STEP+STEP.STABLE.REQ
 

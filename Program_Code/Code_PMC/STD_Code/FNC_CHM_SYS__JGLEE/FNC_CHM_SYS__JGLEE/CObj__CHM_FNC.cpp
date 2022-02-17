@@ -899,6 +899,37 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__CHM_SLOT_VLV_NOT_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "The slot-valve of chamber is not closed !";
+
+		alarm_msg = "Please, close the slot-valve of chamber. \n"; 
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__ABORT);
+		l_act.Add(ACT__RETRY);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__CHM_LID_NOT_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "The lid of chamber is not closed !";
+
+		alarm_msg = "Please, close the lid of chamber. \n"; 
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__ABORT);
+		l_act.Add(ACT__RETRY);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -1181,6 +1212,23 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CHM_ATM_SNS, obj_name,var_name);
+
+		//
+		def_name = "CH__CHM_LID_STATE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+		bool def_check = x_utility.Check__Link(ch_name);
+		bActive__CHM_LID_STATE = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CHM_LID_STATE, obj_name,var_name);
+
+			def_name = "CHM_LID.CLOSE_STATE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sCHM_LID__CLOSE_STATE = def_data;
+		}
 	}
 
 	// ...

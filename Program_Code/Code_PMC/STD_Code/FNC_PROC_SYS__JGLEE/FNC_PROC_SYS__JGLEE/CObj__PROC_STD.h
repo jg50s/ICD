@@ -149,7 +149,6 @@ private:
 
 	// LINK CHANNEL ...
 	CX__VAR_STRING_CTRL  sEXT_CH__SYS_CTRL_LOCK;
-	CX__VAR_STRING_CTRL  sEXT_CH__SYS_FNC_LOCK;
 	//
 
 	//-------------------------------------------------------------------------

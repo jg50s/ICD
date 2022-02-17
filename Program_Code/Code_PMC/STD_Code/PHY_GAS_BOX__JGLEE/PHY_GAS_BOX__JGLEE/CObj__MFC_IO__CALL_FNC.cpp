@@ -15,89 +15,229 @@ Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 int  CObj__MFC_IO::
 Call__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	double min_value;
-	double max_value;
-	int i_dec;
+	double cfg_max  = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
+	double set_flow = aCH__MON_MFC_SET_FLOW->Get__VALUE();
 
-	aCH__MON_MFC_SET_FLOW->Get__MIN_MAX_DEC(min_value,max_value,i_dec);
-
-	double set_flow = max_value;
-
-	return Fnc__CONTROL(set_flow, 1, max_value);
-}
-int  CObj__MFC_IO::
-Call__PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
-{
-	double min_value;
-	double max_value;
-	int i_dec;
-
-	aCH__MON_MFC_SET_FLOW->Get__MIN_MAX_DEC(min_value,max_value,i_dec);
-
-	double set_flow = max_value;
-
-	return Fnc__CONTROL(set_flow, 1, max_value, true);
+	return Fnc__CONTROL(set_flow, 1, cfg_max);
 }
 int  CObj__MFC_IO::
 Call__CLOSE(CII_OBJECT__VARIABLE* p_variable,
 			CII_OBJECT__ALARM* p_alarm)
 {
-	double min_value;
-	double max_value;
-	int i_dec;
-
-	aCH__MON_MFC_SET_FLOW->Get__MIN_MAX_DEC(min_value,max_value,i_dec);
-
+	double cfg_max  = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
 	double set_flow = 0.0;
 
-	return Fnc__CONTROL(set_flow, -1, max_value);
+	return Fnc__CONTROL(set_flow, -1, cfg_max);
 }
 
-int  CObj__MFC_IO
-::Call__CONTROL(CII_OBJECT__VARIABLE* p_variable,
-			    CII_OBJECT__ALARM*    p_alarm)
+int  CObj__MFC_IO::
+Call__PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	double min_value;
-	double max_value;
-	int i_dec;
+	int i;
+
+	if(iSIZE__VLV_IN < 1)
+	{
+		return -1;
+	}
+
+	for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__OPEN);
+	}
 	
-	aCH__PARA_SET_VALUE->Get__MIN_MAX_DEC(min_value,max_value,i_dec);
+	for(i=0; i<iSIZE__VLV_IN; i++)
+	{
+		dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__OPEN);
+	}
+
+	//
+	double cfg_max = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
+
+	return Fnc__SET_FLOW(cfg_max);
+}
+int  CObj__MFC_IO::
+Call__GAS_LINE_PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	int i;
+
+	if(iSIZE__VLV_IN < 1)
+	{
+		return -1;
+	}
+
+	for(i=0; i<iSIZE__VLV_IN; i++)
+	{
+		dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__OPEN);
+	}
+
+	//
+	return Fnc__SET_FLOW(0.0);
+}
+int  CObj__MFC_IO::
+Call__CHM_LINE_PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	int i;
+
+	for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_IN; i++)
+	{
+		dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
+	}
+	
+	for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__OPEN);
+	}
+
+	//
+	return Fnc__SET_FLOW(0.0);
+}
+
+int  CObj__MFC_IO::Call__CONTROL(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_max  = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
 	double set_flow = aCH__PARA_SET_VALUE->Get__VALUE();
 
-	return Fnc__CONTROL(set_flow, 1, max_value);
+	return Fnc__CONTROL(set_flow, 1, cfg_max);
 }
 int  CObj__MFC_IO
-::Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_max, const bool active__purge_vlv)
+::Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_max)
 {
-	int set_hexa = 0;
+	int i;
 
-	if(active__purge_vlv)
+	for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
 	{
-		if(bActive__VLV_IN)				dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
-
-		dEXT_CH__IO_VLV_OUT->Set__DATA(STR__OPEN);
-
-		if(bActive__VLV_PURGE)			dEXT_CH__IO_VLV_PURGE->Set__DATA(STR__OPEN);
-		else							return -11;
+		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__CLOSE);
 	}
-	else
+	for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
 	{
-		if(bActive__VLV_PURGE)
-		{
-			dEXT_CH__IO_VLV_PURGE->Set__DATA(STR__CLOSE);
-		}		
+		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__CLOSE);
+	}
 
-		if(open_mode > 0)
-		{
-			dEXT_CH__IO_VLV_OUT->Set__DATA(STR__OPEN);
+	if(open_mode > 0)
+	{
+		bool active__flow_center = false;
+		bool active__flow_edge   = false;
 
-			if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__OPEN);
+		CString cfg__flow_mode = dCH__CFG_FLOW_MODE->Get__STRING();
+
+			 if(cfg__flow_mode.CompareNoCase("CENTER") == 0)		active__flow_center = true;
+		else if(cfg__flow_mode.CompareNoCase("EDGE")   == 0)		active__flow_edge   = true;
+		else
+		{
+			active__flow_center = true;
+			active__flow_edge   = true;
+		}
+
+		// Out.All ...
+		{
+			for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+				dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__OPEN);
+		}
+		// Out.Center ...
+		if(active__flow_center)
+		{
+			for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+				dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__OPEN);
 		}
 		else
 		{
-			if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
-
-			dEXT_CH__IO_VLV_OUT->Set__DATA(STR__CLOSE);
+			for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+				dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
+		}
+		// Out.Edge ...
+		if(active__flow_edge)
+		{
+			for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+				dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__OPEN);
+		}
+		else
+		{
+			for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+				dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
+		}
+		
+		for(i=0; i<iSIZE__VLV_IN; i++)
+		{
+			dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__OPEN);
+		}
+	}
+	else
+	{
+		for(i=0; i<iSIZE__VLV_IN; i++)
+		{
+			dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
+		}
+		
+		for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+		{
+			dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
+		}
+		for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+		{
+			dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
+		}
+		for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+		{
+			dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
 		}
 	}
 
@@ -121,30 +261,6 @@ int  CObj__MFC_IO
 int  CObj__MFC_IO
 ::Fnc__RAMP_CTRL(CII_OBJECT__VARIABLE* p_variable, const double set_flow, const int open_mode, const double cfg_max)
 {
-	int set_hexa = 0;
-
-	if(bActive__VLV_PURGE)
-	{
-		dEXT_CH__IO_VLV_PURGE->Set__DATA(STR__CLOSE);
-	}
-
-	if(open_mode > 0)
-	{
-		dEXT_CH__IO_VLV_OUT->Set__DATA(STR__OPEN);
-		
-		if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__OPEN);
-	}
-	else
-	{
-		if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
-
-		dEXT_CH__IO_VLV_OUT->Set__DATA(STR__CLOSE);
-	}
-
-	// ...
-	CString ch_data;
-
-	// ...
 	double para__ramp_sec = aCH__PARA_RAMP_SEC->Get__VALUE();
 
 	if(para__ramp_sec > 0.1)
@@ -153,12 +269,14 @@ int  CObj__MFC_IO
 
 		double ref__loop_sec = 0.1;
 
-		sEXT_CH__IO_MFC_SET->Get__DATA(ch_data);
+		CString ch_data = sEXT_CH__IO_MFC_SET->Get__STRING();
 		double ref_value = atof(ch_data);
 
 		int loop_size = (int) para__ramp_sec / ref__loop_sec;
 		double inc_set = (set_flow - ref_value) / loop_size;
 		double set_value = ref_value;
+
+		Fnc__SET_FLOW(0.0);
 
 		while(loop_size > 0)
 		{

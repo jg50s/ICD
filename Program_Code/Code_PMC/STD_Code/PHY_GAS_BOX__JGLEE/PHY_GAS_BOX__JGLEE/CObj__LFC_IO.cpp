@@ -736,6 +736,11 @@ int CObj__LFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__3WAY_VLV_DUMP, obj_name,var_name);
+
+				//
+				def_name = "3WAY_VLV.IDLE_STATE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__3WAY_VLV_IDLE_STATE = def_data;
 			}
 		}
 
@@ -744,7 +749,7 @@ int CObj__LFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
-		sCH__MON_LFC_STATE->Set__DATA(STR__CLOSE);
+		sCH__REQ_3WAY_VLV->Set__DATA(sDATA__3WAY_VLV_IDLE_STATE);
 
 		aCH__MON_LFC_SET_FLOW->Set__DATA("0");
 	}
@@ -804,9 +809,9 @@ int CObj__LFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Check__DATA(STR__ON) > 0)		active__interlock_gas_box = true;
 
 		if((mode.CompareNoCase(sMODE__OPEN)      == 0)
-			|| (mode.CompareNoCase(sMODE__CONTROL)   == 0)
-			|| (mode.CompareNoCase(sMODE__RAMP_CTRL) == 0)
-			|| (mode.CompareNoCase(sMODE__SET_FLOW)  == 0))
+		|| (mode.CompareNoCase(sMODE__CONTROL)   == 0)
+		|| (mode.CompareNoCase(sMODE__RAMP_CTRL) == 0)
+		|| (mode.CompareNoCase(sMODE__SET_FLOW)  == 0))
 		{
 			flag = -1;
 

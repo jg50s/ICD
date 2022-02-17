@@ -12,13 +12,10 @@ int CObj__PROC_STD
 			sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__DECHUCK_PROC);
 		else
 			sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__MAINT_PROC);
-
-		sEXT_CH__SYS_FNC_LOCK->Set__DATA("");
 	}
 	else
 	{
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__AUTO_PROC);
-		sEXT_CH__SYS_FNC_LOCK->Set__DATA("");
 	}
 
 	int r_flag = _Fnc__PROC_READY(p_variable, p_alarm);
@@ -26,7 +23,6 @@ int CObj__PROC_STD
 	// ...
 	{
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA("");
-		sEXT_CH__SYS_FNC_LOCK->Set__DATA("");
 	}
 	return r_flag;
 }
@@ -77,13 +73,10 @@ int CObj__PROC_STD
 			sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__DECHUCK_PROC);
 		else
 			sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__MAINT_PROC);
-
-		sEXT_CH__SYS_FNC_LOCK->Set__DATA("");
 	}
 	else
 	{
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__AUTO_PROC);
-		sEXT_CH__SYS_FNC_LOCK->Set__DATA("");
 	}
 
 	int r_flag = _Fnc__PROC_START(p_variable, p_alarm);
@@ -91,7 +84,6 @@ int CObj__PROC_STD
 	// ...
 	{
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA("");
-		sEXT_CH__SYS_FNC_LOCK->Set__DATA("");
 	}
 
 	// ...

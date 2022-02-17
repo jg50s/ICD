@@ -22,25 +22,25 @@ Call__CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 }
 
 int  CObj__VAT650_TYPE::
-Call__PRESSURE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+Call__PRESSURE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_pressure)
 {
-	return Fnc__PRESSURE(p_variable,p_alarm);
-}
-int  CObj__VAT650_TYPE::
-Call__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
-{
-	return Fnc__POSITION(p_variable,p_alarm);
+	return Fnc__PRESSURE(p_variable,p_alarm, para_pressure);
 }
 
 int  CObj__VAT650_TYPE::
-Call__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+Call__POSITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt)
 {
-	return Fnc__POSITION_WAIT(p_variable,p_alarm,1);
+	return Fnc__POSITION(p_variable,p_alarm, para_position,para_pos_cnt);
 }
 int  CObj__VAT650_TYPE::
-Call__POSITION_NO_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+Call__POSITION_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt)
 {
-	return Fnc__POSITION_WAIT(p_variable,p_alarm,-1);
+	return Fnc__POSITION_WAIT(p_variable,p_alarm, 1, para_position,para_pos_cnt);
+}
+int  CObj__VAT650_TYPE::
+Call__POSITION_NO_WAIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double para_position,const int para_pos_cnt)
+{
+	return Fnc__POSITION_WAIT(p_variable,p_alarm, -1, para_position,para_pos_cnt);
 }
 
 int  CObj__VAT650_TYPE::

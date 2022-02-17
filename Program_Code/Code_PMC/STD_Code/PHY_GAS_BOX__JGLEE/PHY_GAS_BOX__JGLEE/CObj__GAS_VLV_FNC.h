@@ -27,6 +27,8 @@ private:
 	// INTERNAL PROPERTY
 
 	// OBJ ...
+	CX__VAR_DIGITAL_CTRL dCH__OBJ_CTRL;
+
 	CX__VAR_STRING_CTRL	 sCH__OBJ_STATUS;
 	CX__VAR_STRING_CTRL	 sCH__OBJ_MSG;
 
@@ -84,8 +86,11 @@ private:
 	// OBJ.FRC_X ...
 	int iFRC_SIZE;
 	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__FRC_X[_MAX__FRC_OBJ];
-	//
 
+	// OBJ.DGF_VLV ...
+	bool bActive__DGF_VLV;
+	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__DGF_VLV;
+	//
 
 	//------------------------------------------------------------
 	// ...

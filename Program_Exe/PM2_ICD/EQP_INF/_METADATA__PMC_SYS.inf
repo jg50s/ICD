@@ -24,7 +24,6 @@
 #DEFINE_CONSTANT    CH.FNC.LOCK         		            DB_ETCHER+SYS.FNC.LOCK
 #DEFINE_CONSTANT    DATA.FNC.LOCK     		              MAINT
 
-
 //------------------------------------------------
 #OBJECT_PROPERTY		PAGE_CHM
 
@@ -39,7 +38,6 @@
                                                                  
 #DEFINE_CONSTANT    CH.FNC.LOCK         		            DB_ETCHER+SYS.FNC.LOCK
 #DEFINE_CONSTANT    DATA.FNC.LOCK     		              CHM
-
 
 //------------------------------------------------
 #OBJECT_PROPERTY     INF_PMC
@@ -196,6 +194,9 @@
 
 #DEFINE_CONSTANT    CH__CHM_VAC_SNS                     IO+di.CHM.VAC.Sns
 #DEFINE_CONSTANT    CH__CHM_ATM_SNS                     IO+di.CHM.ATM.Sns
+
+#DEFINE_CONSTANT    CH__CHM_LID_STATE                   IO+di.CHM.LID.Open
+#DEFINE_CONSTANT    CHM_LID.CLOSE_STATE                 Off
 
 
 //------------------------------------------------

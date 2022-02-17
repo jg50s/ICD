@@ -574,11 +574,6 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SYS_CTRL_LOCK, obj_name,var_name);
-
-		def_name = "CH__SYS_FNC_LOCK";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SYS_FNC_LOCK, obj_name,var_name);
 	}
 
 	// ...

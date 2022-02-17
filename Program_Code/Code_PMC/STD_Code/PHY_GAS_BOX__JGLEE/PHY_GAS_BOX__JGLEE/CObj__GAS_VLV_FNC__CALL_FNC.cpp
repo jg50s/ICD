@@ -19,6 +19,9 @@
 #define FRC_CMMD__CONTROL_CFG				"CONTROL.CFG"
 #define FRC_CMMD__GASLINE_PUMP				"GASLINE_PUMP"
 
+#define DGF_CMMD__ALL_CLOSE					"ALL_CLOSE"
+#define DGF_CMMD__CONTROL					"CONTROL"
+
 
 // ...
 int CObj__GAS_VLV_FNC::Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
@@ -44,9 +47,28 @@ int CObj__GAS_VLV_FNC::Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
 }
 int CObj__GAS_VLV_FNC::Fnc__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
 {
-	for(int i=0; i<iMFC_SIZE; i++)
+	int i;
+
+	for(i=0; i<iMFC_SIZE; i++)
 	{
 		pOBJ_CTRL__MFC[i]->Run__OBJECT(MFC_CMMD__CLOSE);
+	}
+
+	// OBJ.FRC ...
+	{
+		for(i=0; i<iFRC_SIZE; i++)
+		{
+			pOBJ_CTRL__FRC_X[i]->Run__OBJECT(FRC_CMMD__ALL_CLOSE);
+		}
+		for(i=0; i<iFRC_SIZE; i++)
+		{
+			pOBJ_CTRL__FRC_X[i]->When__OBJECT();
+		}
+	}
+	// OBJ.DGF ...
+	if(bActive__DGF_VLV)
+	{
+		pOBJ_CTRL__DGF_VLV->Call__OBJECT(DGF_CMMD__ALL_CLOSE);
 	}
 
 	return pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__ALL_CLOSE);
@@ -54,11 +76,20 @@ int CObj__GAS_VLV_FNC::Fnc__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
 
 int CObj__GAS_VLV_FNC::Call__PROC_READY(CII_OBJECT__VARIABLE *p_variable)
 {
+	if(dCH__OBJ_CTRL->Check__DATA("ABORT") > 0)
+	{
+		dCH__OBJ_CTRL->Set__DATA("ABORTED");
+	}
+
+	//
 	pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__ALL_CLOSE);
+
+	// ...
+	int i;
 
 	// OBJ.MFC ...
 	{
-		for(int i=0; i<iMFC_SIZE; i++)
+		for(i=0; i<iMFC_SIZE; i++)
 		{
 			pOBJ_CTRL__MFC[i]->Run__OBJECT(MFC_CMMD__CLOSE);
 		}
@@ -66,17 +97,20 @@ int CObj__GAS_VLV_FNC::Call__PROC_READY(CII_OBJECT__VARIABLE *p_variable)
 
 	// OBJ.FRC ...
 	{
-		int i;
-
 		for(i=0; i<iFRC_SIZE; i++)
 		{
 			pOBJ_CTRL__FRC_X[i]->Run__OBJECT(FRC_CMMD__CONTROL_CFG);
 		}
-
+		
 		for(i=0; i<iFRC_SIZE; i++)
 		{
 			pOBJ_CTRL__FRC_X[i]->When__OBJECT();
 		}
+	}
+	// OBJ.DGF ...
+	if(bActive__DGF_VLV)
+	{
+		pOBJ_CTRL__DGF_VLV->Call__OBJECT(DGF_CMMD__CONTROL);
 	}
 
 	pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__PROC_OPEN);
@@ -156,42 +190,24 @@ int CObj__GAS_VLV_FNC::Call__MFC_CLOSE(CII_OBJECT__VARIABLE *p_variable)
 // 
 int CObj__GAS_VLV_FNC::Call__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 {
-	int flag = Fnc__GAS_LINE_PURGE(p_variable);
+	Fnc__ALL_CLOSE(p_variable);
 
-	Call__ALL_CLOSE(p_variable);
-	return flag;
+	int r_flag = Fnc__GAS_LINE_PURGE(p_variable);
+
+	Call__PROC_READY(p_variable);
+	return r_flag;
 }
 int CObj__GAS_VLV_FNC::Fnc__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 {
-	// 1. GAS ALL CLOSE ...
-	{
-		Call__ALL_CLOSE(p_variable);
-	}
-
-	// 2. FRC ALL CLOSE ...
-	{
-		int i;
-
-		for(i=0; i<iFRC_SIZE; i++)
-		{
-			pOBJ_CTRL__FRC_X[i]->Run__OBJECT(FRC_CMMD__CONTROL_CFG);
-		}
-		
-		for(i=0; i<iFRC_SIZE; i++)
-		{
-			pOBJ_CTRL__FRC_X[i]->When__OBJECT();
-		}
-	}
-
-	// 3. Gas Line Purge ...
+	// 1. Gas Line Purge ...
 	{
 		if(pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__GAS_LINE_PURGE) < 0)
 		{
-			return OBJ_ABORT;
+			return -11;
 		}
 	}
 
-	// 4. Only MFC N2 Purge Valve OPEN, MFC CLOSE
+	// 2. Only MFC N2 Purge Valve OPEN, MFC CLOSE
 	if(dCH__PARA_PURGE_TEST_MODE->Check__DATA(STR__ALL) > 0)
 	{
 		SCX__TIMER_CTRL x_timer_ctrl;
@@ -203,11 +219,8 @@ int CObj__GAS_VLV_FNC::Fnc__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 		x_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
 		x_timer_ctrl->REGISTER__COUNT_CHANNEL(aCH__CUR_PURGE_DELAY_SEC->Get__CHANNEL_NAME());
 
-		// ...
-		int i_size = iMFC_SIZE;
-		int i;
-
-		for(i=0; i<i_size; i++)
+		//
+		for(int i=0; i<iMFC_SIZE; i++)
 		{
 			if(dEXT_CH__CFG_MFC_USE[i]->Check__DATA(STR__YES) < 0)
 			{
@@ -236,12 +249,14 @@ int CObj__GAS_VLV_FNC::Fnc__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 		x_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
 		x_timer_ctrl->REGISTER__COUNT_CHANNEL(aCH__CUR_PURGE_DELAY_SEC->Get__CHANNEL_NAME());
 
-		// ...
-		int mfc_check_size = iMFC_SIZE - 1;
-		int i;
-
-		for(i=0; i<mfc_check_size; i++)
+		//
+		for(int i=0; i<iMFC_SIZE; i++)
 		{
+			if(p_variable->Check__CTRL_ABORT() > 0)
+			{
+				return -11;
+			}
+
 			if(dEXT_CH__CFG_MFC_USE[i]->Check__DATA(STR__YES) < 0)
 			{
 				continue;
@@ -278,44 +293,31 @@ int CObj__GAS_VLV_FNC::Fnc__GAS_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 		}
 	}
 
-	return OBJ_AVAILABLE;
+	return 1;
 }
 
 int CObj__GAS_VLV_FNC::Call__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 {
-	int flag = Fnc__CHM_LINE_PURGE(p_variable);
+	Fnc__ALL_CLOSE(p_variable);
 
-	Call__ALL_CLOSE(p_variable);
+	int r_flag = Fnc__CHM_LINE_PURGE(p_variable);
 
-	return flag;
+	Call__PROC_READY(p_variable);
+	return r_flag;
 }
 int CObj__GAS_VLV_FNC::Fnc__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 {
-	// 1. FRC ALL CLOSE ...
-	{
-		for(int i=0; i<iFRC_SIZE; i++)
-		{
-			pOBJ_CTRL__FRC_X[i]->Call__OBJECT(FRC_CMMD__CONTROL_CFG);
-		}
-	}
-
-	// 2. GAS ALL CLOSE ...
-	{
-		Call__ALL_CLOSE(p_variable);
-	}
-
-	// 3. Chamber Line Purge ...
+	// 1. Chamber Line Purge ...
 	{
 		if(pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__CHM_LINE_PURGE) < 0)
 		{
-			return OBJ_ABORT;
+			return -11;
 		}
 	}
 
-	// 4. Only MFC Secondary Valve OPEN, MFC CLOSE ...
+	// 2. Only MFC Secondary Valve OPEN, MFC CLOSE ...
 	if(dCH__PARA_PURGE_TEST_MODE->Check__DATA(STR__ALL) > 0)
 	{
-		// ...
 		SCX__TIMER_CTRL x_timer_ctrl;
 		CString var_data;
 
@@ -325,11 +327,8 @@ int CObj__GAS_VLV_FNC::Fnc__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 		x_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
 		x_timer_ctrl->REGISTER__COUNT_CHANNEL(aCH__CUR_PURGE_DELAY_SEC->Get__CHANNEL_NAME());
 
-		// ...
-		int mfc_check_size = iMFC_SIZE - 1;
-		int i;
-
-		for(i=0;i<mfc_check_size;i++)
+		//
+		for(int i=0; i<iMFC_SIZE; i++)
 		{
 			if(dEXT_CH__CFG_MFC_USE[i]->Check__DATA(STR__YES) < 0)
 			{
@@ -349,7 +348,6 @@ int CObj__GAS_VLV_FNC::Fnc__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 	}
 	else
 	{
-		// ...
 		SCX__TIMER_CTRL x_timer_ctrl;
 		CString var_data;
 
@@ -359,12 +357,14 @@ int CObj__GAS_VLV_FNC::Fnc__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 		x_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
 		x_timer_ctrl->REGISTER__COUNT_CHANNEL(aCH__CUR_PURGE_DELAY_SEC->Get__CHANNEL_NAME());
 
-		// ...
-		int mfc_check_size = iMFC_SIZE - 1;
-		int i;
-
-		for(i=0;i<mfc_check_size;i++)
+		//
+		for(int i=0; i<iMFC_SIZE; i++)
 		{
+			if(p_variable->Check__CTRL_ABORT() > 0)
+			{
+				return -11;
+			}
+
 			if(dEXT_CH__CFG_MFC_USE[i]->Check__DATA(STR__YES) < 0)
 			{
 				continue;
@@ -402,45 +402,21 @@ int CObj__GAS_VLV_FNC::Fnc__CHM_LINE_PURGE(CII_OBJECT__VARIABLE *p_variable)
 		}
 	}
 
-	return OBJ_AVAILABLE;
+	return 1;
 }
 
 //
 int CObj__GAS_VLV_FNC::Call__LINE_PURGE_WITH_N2(CII_OBJECT__VARIABLE *p_variable)
 {
-	int flag = Fnc__LINE_PURGE_WITH_N2(p_variable);
+	Fnc__ALL_CLOSE(p_variable);
 
-	Call__ALL_CLOSE(p_variable);
+	int r_flag = Fnc__LINE_PURGE_WITH_N2(p_variable);
 
-	return flag;
+	Call__PROC_READY(p_variable);
+	return r_flag;
 }
 int CObj__GAS_VLV_FNC::Fnc__LINE_PURGE_WITH_N2(CII_OBJECT__VARIABLE *p_variable)
 {
-	// 1. FRC ALL Close
-	{
-		int i;
-
-		for(i=0; i<iFRC_SIZE; i++)
-		{
-			pOBJ_CTRL__FRC_X[i]->Call__OBJECT(FRC_CMMD__CONTROL_CFG);
-		}
-
-		for(i=0; i<iFRC_SIZE; i++)
-		{
-			if(pOBJ_CTRL__FRC_X[i]->When__OBJECT() < 0)
-			{
-				CString log_msg;
-
-				int id = i + 1;
-				log_msg.Format("Fnc__LINE_PURGE_WITH_N2::OBJ_CTRL__FRC%1d->Call__OBJECT(FRC_CMMD__CONTROL) is Failed...", id);
-
-				Fnc__WRITE_LOG(log_msg);
-				return -11;
-			}
-		}
-	}
-
-	// ...
 	SCX__TIMER_CTRL x_timer_flow;
 	CString var_data;
 	int i;
@@ -473,9 +449,7 @@ int CObj__GAS_VLV_FNC::Fnc__LINE_PURGE_WITH_N2(CII_OBJECT__VARIABLE *p_variable)
 		// 5. MFC Open, During Parameter Config
 		if(dCH__PARA_PURGE_TEST_MODE->Check__DATA(STR__ALL) > 0)
 		{
-			int i_size = iMFC_SIZE;
-
-			for(i=0; i<i_size; i++)
+			for(i=0; i<iMFC_SIZE; i++)
 			{
 				if(dEXT_CH__CFG_MFC_USE[i]->Check__DATA(STR__YES) < 0)
 				{
@@ -494,50 +468,68 @@ int CObj__GAS_VLV_FNC::Fnc__LINE_PURGE_WITH_N2(CII_OBJECT__VARIABLE *p_variable)
 		}
 		else
 		{
-			int i_size = iMFC_SIZE;
-
-			for(i=0; i<i_size; i++)
+			for(i=0; i<iMFC_SIZE; i++)
 			{
 				pOBJ_CTRL__MFC[i]->Call__OBJECT(MFC_CMMD__CLOSE);
-			}
 
-			var_data = dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__STRING();
-			int gas_index = Get__MFC_INDEX(var_data);
+				// ...
+				int exit_flag = -1;
+				int gas_index = -1;
 
-			// ...
-			{
-				CString log_msg;
-				CString log_bff;
+				dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__DATA(var_data);
 
-				log_msg = "\n";
-				log_bff.Format("%s <- %s \n",
-								dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__CHANNEL_NAME(),
-								dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__STRING());
-				log_msg += log_bff;
-				log_bff.Format("gas_index <- %1d \n", gas_index);
-
-				log_msg += log_bff;
-				xLOG_CTRL->WRITE__LOG(log_msg);
-			}
-
-			if(gas_index >= 0)
-			{
-				if(pOBJ_CTRL__MFC[gas_index]->Call__OBJECT(MFC_CMMD__PURGE_MFC_FLOW) < 0)
+				if(var_data.CompareNoCase(STR__ALL) != 0)
 				{
-					return -101;
+					gas_index = Get__MFC_INDEX(var_data);
+					if(i != gas_index)		continue;
+
+					exit_flag = 1;
+				}
+				else
+				{
+					gas_index = i;
 				}
 
 				// ...
-				double cfg_sec = aCH__PARA_N2_FLOW_TIME->Get__VALUE();
-
-				x_timer_flow->INIT__COUNT_UP();
-
-				if(x_timer_flow->WAIT(cfg_sec) < 0)
 				{
-					return -1;
+					CString log_msg;
+					CString log_bff;
+
+					log_msg = "\n";
+					log_bff.Format("%s <- %s \n",
+									dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__CHANNEL_NAME(),
+									dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__STRING());
+					log_msg += log_bff;
+					log_bff.Format("gas_index <- %1d \n", gas_index);
+
+					log_msg += log_bff;
+					xLOG_CTRL->WRITE__LOG(log_msg);
+				}
+	
+				if(gas_index >= 0)
+				{
+					if(pOBJ_CTRL__MFC[gas_index]->Call__OBJECT(MFC_CMMD__PURGE_MFC_FLOW) < 0)
+					{
+						return -101;
+					}
+
+					// ...
+					double cfg_sec = aCH__PARA_N2_FLOW_TIME->Get__VALUE();
+
+					x_timer_flow->INIT__COUNT_UP();
+
+					if(x_timer_flow->WAIT(cfg_sec) < 0)
+					{
+						return -1;
+					}
+
+					pOBJ_CTRL__MFC[gas_index]->Call__OBJECT(MFC_CMMD__CLOSE);
 				}
 
-				pOBJ_CTRL__MFC[gas_index]->Call__OBJECT(MFC_CMMD__CLOSE);
+				if(exit_flag > 0)
+				{
+					break;
+				}
 			}
 		}
 
@@ -570,7 +562,7 @@ int CObj__GAS_VLV_FNC::Fnc__LINE_PURGE_WITH_N2(CII_OBJECT__VARIABLE *p_variable)
 	}
 	while(cycle_count > 0);
 
-	return OBJ_AVAILABLE;
+	return 1;
 }
 
 

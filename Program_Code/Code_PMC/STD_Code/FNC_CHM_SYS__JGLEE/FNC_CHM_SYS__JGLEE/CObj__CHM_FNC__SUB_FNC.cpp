@@ -14,6 +14,7 @@ int CObj__CHM_FNC
 	{
 		dEXT_CH__CHM_ATM_SNS->Set__DATA(STR__OFF);
 		dEXT_CH__CHM_VAC_SNS->Set__DATA(STR__ON);
+
 		dEXT_CH__PMC_SLIT_VLV_STS->Set__DATA(STR__CLOSE);
 	}	
 
@@ -88,13 +89,83 @@ int CObj__CHM_FNC
 int CObj__CHM_FNC
 ::Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag)
 {
+LOOP_RETRY:
+
 	CString ch_data;
 	CString log_msg;
 	int flag;
 
-	if(iActive__SIM_MODE > 0)
+	// SLOT.VALVE ...
 	{
-		dEXT_CH__PMC_SLIT_VLV_STS->Set__DATA(STR__CLOSE);
+		bool active__slot_vlv_open = true;
+
+		if(bActive__CHM_SHUTTER_STATE)
+		{
+			if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+		}
+		else
+		{
+			if(dEXT_CH__PMC_SLIT_VLV_STS->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+		}
+
+		if(active__slot_vlv_open)
+		{
+			// Alarm ...
+			{
+				int alm_id = ALID__CHM_SLOT_VLV_NOT_CLOSE;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				if(bActive__CHM_SHUTTER_STATE)
+				{
+					alm_bff.Format(" * %s <- %s",
+									dEXT_CH__CHM_SHUTTER_STATE->Get__CHANNEL_NAME(),
+									dEXT_CH__CHM_SHUTTER_STATE->Get__STRING());
+					alm_msg += alm_bff;
+				}
+				else
+				{
+					alm_bff.Format(" * %s <- %s",
+									dEXT_CH__PMC_SLIT_VLV_STS->Get__CHANNEL_NAME(),
+									dEXT_CH__PMC_SLIT_VLV_STS->Get__STRING());
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
+			}
+			return -101;
+		}
+	}
+
+	if(bActive__CHM_LID_STATE)
+	{
+		if(dEXT_CH__CHM_LID_STATE->Check__DATA(sCHM_LID__CLOSE_STATE) < 0)
+		{
+			// Alarm ...
+			{
+				int alm_id = ALID__CHM_LID_NOT_CLOSE;
+				CString alm_msg;
+				CString r_act;
+
+				alm_msg.Format(" * %s <- %s",
+							   dEXT_CH__CHM_LID_STATE->Get__CHANNEL_NAME(),
+							   dEXT_CH__CHM_LID_STATE->Get__STRING());
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
+			}
+			return -102;
+		}
 	}
 
 	// ESC Pump_Ready ...
@@ -406,20 +477,6 @@ int CObj__CHM_FNC
 		}
 	}
 
-	// VAC-Valve : All_Close ...
-	{
-		// ...
-		{
-			log_msg = "VAC-Valve <- All_Close";
-			xLOG_CTRL->WRITE__LOG(log_msg);
-		}
-
-		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm) < 0)
-		{
-			return -21;
-		}
-	}
-
 	// Turbo_Pump On : Check 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
@@ -433,8 +490,22 @@ int CObj__CHM_FNC
 		{
 			if(Fnc__TURBO_PUMP_ON(p_variable, p_alarm) < 0)
 			{
-				return -31;
+				return -21;
 			}
+		}
+	}
+
+	// VAC-Valve : All_Close ...
+	{
+		// ...
+		{
+			log_msg = "VAC-Valve <- All_Close";
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm) < 0)
+		{
+			return -31;
 		}
 	}
 
@@ -684,11 +755,6 @@ RETRY_LOOP:
 		{
 			log_msg = "Fnc__TURBO_PUMP_ON() : Check (2) ...";
 			xLOG_CTRL->WRITE__LOG(log_msg);
-		}
-
-		if(Call__VAC_VLV__EXHAUST_OPEN(p_variable, p_alarm) < 0)
-		{
-			return -206;
 		}
 
 		// ...

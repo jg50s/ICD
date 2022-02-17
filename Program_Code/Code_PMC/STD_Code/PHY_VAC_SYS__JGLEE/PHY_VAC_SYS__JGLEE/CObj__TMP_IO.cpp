@@ -407,6 +407,10 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		if(def_check)
 		{
 			pOBJ_CTRL__VAT = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			var_name = "MON.POSITION";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__VAT_MON_POSITION, obj_name,var_name);
 		}
 	}
 
@@ -509,6 +513,8 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
+		bActive__FORELINE_VLV_CHECK = true;
+
 		sCH__OBJ_STATUS->Set__DATA("STANDBY");
 	}
 	return 1;
@@ -539,8 +545,11 @@ int CObj__TMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__EXHAUST_OPEN)		flag = Call__EXHAUST_OPEN(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__ON)				flag = Call__ON(p_variable, p_alarm);
+
 		ELSE_IF__CTRL_MODE(sMODE__OFF)				flag = Call__OFF(p_variable, p_alarm, false);
 		ELSE_IF__CTRL_MODE(sMODE__OFF_NO_WAIT)		flag = Call__OFF(p_variable, p_alarm, true);
+
+		bActive__FORELINE_VLV_CHECK = true;
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

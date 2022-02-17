@@ -369,6 +369,9 @@ private:
 	CX__VAR_ANALOG_CTRL  aiEXT_CH__ESC_Voltage_EDGE;
 	CX__VAR_ANALOG_CTRL  aiEXT_CH__ESC_Current_EDGE;
 
+	// He_Line Type ...
+	int iDATA__HE_LINE_TYPE;
+
 	// Helium ...
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Side_Supply_Vlv;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Exhaust_Vlv;
@@ -378,10 +381,16 @@ private:
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Final_Dump_Vlv_CENTER;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Side_Dump_Vlv_CENTER;
 
+	bool bActive__He_Side_Exhaust_Vlv_CENTER;
+	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Side_Exhaust_Vlv_CENTER;
+
 	// He.Edge.Vlv
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Final_Out_Vlv_EDGE;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Final_Dump_Vlv_EDGE;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Side_Dump_Vlv_EDGE;
+
+	bool bActive__He_Side_Exhaust_Vlv_EDGE;
+	CX__VAR_DIGITAL_CTRL doEXT_CH__He_Side_Exhaust_Vlv_EDGE;
 
 	// He.Center.PRessure
 	CX__VAR_ANALOG_CTRL  aoEXT_CH__He_Pressure_CENTER;

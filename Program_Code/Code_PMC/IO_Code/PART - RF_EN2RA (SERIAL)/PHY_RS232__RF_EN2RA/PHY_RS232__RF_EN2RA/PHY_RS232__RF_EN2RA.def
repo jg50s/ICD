@@ -1,0 +1,6 @@
+; PHY_RS232__RF_EN2RA.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PHY_RS232__RF_EN2RA"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -2,6 +2,8 @@
 #include "CObj__GAS_VLV_FNC.h"
 #include "CObj__GAS_VLV_FNC__ALID.h"
 
+#include "CCommon_Utility.h"
+
 
 //-------------------------------------------------------------------------
 CObj__GAS_VLV_FNC::CObj__GAS_VLV_FNC()
@@ -237,6 +239,9 @@ int CObj__GAS_VLV_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 
+	CCommon_Utility x_utility;
+	bool def_check;
+
 	// ...
 	{
 		CString file_name;
@@ -292,6 +297,19 @@ int CObj__GAS_VLV_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			obj_name.Format("OBJ.FRC%1d", id);
 			pOBJ_CTRL__FRC_X[i] = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		}
+	}
+	// OBJ : DFG_VLV ...
+	{
+		def_name = "OBJ__DGF_VLV";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__DGF_VLV = def_check;
+
+		if(def_check)
+		{
+			pOBJ_CTRL__DGF_VLV = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 		}
 	}
 
@@ -351,11 +369,20 @@ int CObj__GAS_VLV_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		l_ballast_mfc_type.InsertAt(0, var_name);
 
 		p_variable->Change__DIGITAL_LIST(dCH__PARA_MFC_TYPE->Get__VARIABLE_NAME(),             l_mfc_type);
-		p_variable->Change__DIGITAL_LIST(dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__VARIABLE_NAME(), l_mfc_type);
 		p_variable->Change__DIGITAL_LIST(dCH__CFG_WAP_AUTO_LEARN_GAS->Get__VARIABLE_NAME(),    l_mfc_type);
 		
 		p_variable->Change__DIGITAL_LIST(dCH__CFG_CHAMBER_BALLAST_GAS_ID->Get__VARIABLE_NAME(),  l_ballast_mfc_type);
 		p_variable->Change__DIGITAL_LIST(dCH__CFG_TRANSFER_BALLAST_GAS_ID->Get__VARIABLE_NAME(), l_ballast_mfc_type);
+
+		//
+		l_mfc_type.InsertAt(0, "ALL");
+		p_variable->Change__DIGITAL_LIST(dCH__PARA_SINGLE_TEST_GAS_TYPE->Get__VARIABLE_NAME(), l_mfc_type);
+	}
+
+	// OBJ.CTRL ...
+	{
+		var_name = "CTRL";
+		LINK__EXT_VAR_DIGITAL_CTRL(dCH__OBJ_CTRL, sObject_Name,var_name);
 	}
 
 	// ...
