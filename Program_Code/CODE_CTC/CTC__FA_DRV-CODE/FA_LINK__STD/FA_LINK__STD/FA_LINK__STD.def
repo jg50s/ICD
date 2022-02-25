@@ -1,0 +1,6 @@
+; FA_LINK__STD.def : Declares the module parameters for the DLL.
+
+LIBRARY      "FA_LINK__STD"
+
+EXPORTS
+    ; Explicit exports can go here

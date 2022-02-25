@@ -1,0 +1,6 @@
+; CTC__PHY_LPx.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CTC__PHY_LPx"
+
+EXPORTS
+    ; Explicit exports can go here

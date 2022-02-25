@@ -406,7 +406,7 @@ try catch 문을 사용하면 안됩니다.
 
 //-------------------------------------------------
 #OBJECT_PROPERTY       FA_DRV
-#OBJECT_FA_FILE        FA_LINK__HYNIX.inf     
+#OBJECT_FA_FILE        FA_LINK__ICD.inf     
 #OBJECT_FA_SERVICE          
 
 #OBJECT_FA_PARA     PARA.1                DATA.1

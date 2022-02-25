@@ -107,9 +107,7 @@ COMMAND
                                                                           												                //  3 = Cross
 
 #SVID	  CTC	    19	    #LP_SLOT_SKIPPED		            U	      1	      __		    LoadPort_Slot_Skipped           //  Load Port  -  Material Number Skipped
-
-#SVID   CTC     20      #LP_HEAD_NAME_LIST          	  L       0       __        LoadPort_Head_Name_List         //  Head Name of Load Port
-                                                                          
+                                                                         
 
 // CONDITION : PTN & SLOT
 #SVID   CTC     21	    #SLOTID         		            U       1       __        SlotID                          //  SLOT ID
@@ -127,11 +125,6 @@ COMMAND
 										    		                                                                                      //  List of process moudle & process recipe 
 #SVID   CTC     30	    #SLOT_START_TIME		            A	      14	    __		    Slot_Start_Time                 //  Material Start Time
 #SVID   CTC     31      #SLOT_END_TIME			            A	      14	    __		    Slot_End_Time                   //  Material End Time 
-
-#SVID   CTC     32      #SLOT_HEAD_NAME		              AV	    1 	    __		    Slot_Head_Name                  //  Material Head Name
-#SVID   CTC     33      #SLOT_HEAD_NAME_01_25           AV	    1 	    __		    Slot_Head_Name_01_25            //  Material Head Name Array (01 ~ 25)
-#SVID   CTC     34      #SLOT_HEAD_NAME_01_15           AV	    1 	    __		    Slot_Head_Name_01_15            //  Material Head Name Array (01 ~ 15)
-#SVID   CTC     35      #SLOT_HEAD_NAME_16_25           AV	    1 	    __		    Slot_Head_Name_16_25            //  Material Head Name Array (16 ~ 25)
 
 /*
 #SVID	  CTC     41      #LP_SOURCE_PORTID               U       1       __        LPn_Source_PORTID		            //  LPn Source PortID
@@ -318,23 +311,205 @@ COMMAND
 #DEFINE   ##CTC_DCOP+   INF.PM1_DCOP.
 #DEFINE   ##NAME_DCOP+  PM1_
 #DEFINE   ##SVID_PMx+   PM1_SVID.
-#DEFINE   ##FDC+        PM1_FDC.
-#DEFINE   ##DCOP+       A_
-#DEFINE   ##CHM         CHM1
 
-#INCLUDE  "fa_db_svid_polisher_chamber.inf"
+#DEFINE_ID_OFFSET	1000
+#INCLUDE  "fa_db_svid_pm_define.inf"
 
+#DEFINE_ID_OFFSET	1100
+#INCLUDE  "fa_db_svid_pm_dcop_define.inf"
 
-//.....
+#DEFINE_ID_OFFSET	11000
+#INCLUDE  "PM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	11200
+#INCLUDE  "PM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	11500
+#INCLUDE  "PM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	11700
+#INCLUDE  "PM_SVID_AO_Define.inf"
+
+#DEFINE_ID_OFFSET	10000000
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+//
+.....
 #DEFINE   ##PM          PM2
 #DEFINE   ##PHY_PM      PHY_PM2
 #DEFINE   ##CTC_DCOP+   INF.PM2_DCOP.
 #DEFINE   ##NAME_DCOP+  PM2_
 #DEFINE   ##SVID_PMx+   PM2_SVID.
-#DEFINE   ##FDC+        PM2_FDC.
-#DEFINE   ##DCOP+       B_
-#DEFINE   ##CHM         CHM2
 
-#INCLUDE  "fa_db_svid_Cleaner_chamber.inf"
+#DEFINE_ID_OFFSET	2000
+#INCLUDE  "fa_db_svid_pm_define.inf"
 
+#DEFINE_ID_OFFSET	2100
+#INCLUDE  "fa_db_svid_pm_dcop_define.inf"
+
+#DEFINE_ID_OFFSET	21000
+#INCLUDE  "PM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	21200
+#INCLUDE  "PM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	21500
+#INCLUDE  "PM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	21700
+#INCLUDE  "PM_SVID_AO_Define.inf"
+
+#DEFINE_ID_OFFSET	20000000
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE   ##PM          PM3
+#DEFINE   ##PHY_PM      PHY_PM3
+#DEFINE   ##CTC_DCOP+   INF.PM3_DCOP.
+#DEFINE   ##NAME_DCOP+  PM3_
+#DEFINE   ##SVID_PMx+   PM3_SVID.
+
+#DEFINE_ID_OFFSET	3000
+#INCLUDE  "fa_db_svid_pm_define.inf"
+
+#DEFINE_ID_OFFSET	3100
+#INCLUDE  "fa_db_svid_pm_dcop_define.inf"
+
+#DEFINE_ID_OFFSET	31000
+#INCLUDE  "PM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	31200
+#INCLUDE  "PM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	31500
+#INCLUDE  "PM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	31700
+#INCLUDE  "PM_SVID_AO_Define.inf"
+
+#DEFINE_ID_OFFSET	30000000
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE   ##PM          PM4
+#DEFINE   ##PHY_PM      PHY_PM4
+#DEFINE   ##CTC_DCOP+   INF.PM4_DCOP.
+#DEFINE   ##NAME_DCOP+  PM4_
+#DEFINE   ##SVID_PMx+   PM4_SVID.
+
+#DEFINE_ID_OFFSET	4000
+#INCLUDE  "fa_db_svid_pm_define.inf"
+
+#DEFINE_ID_OFFSET	4100
+#INCLUDE  "fa_db_svid_pm_dcop_define.inf"
+
+#DEFINE_ID_OFFSET	41000
+#INCLUDE  "PM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	41200
+#INCLUDE  "PM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	41500
+#INCLUDE  "PM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	41700
+#INCLUDE  "PM_SVID_AO_Define.inf"
+
+#DEFINE_ID_OFFSET	40000000
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE   ##PM          PM5
+#DEFINE   ##PHY_PM      PHY_PM5
+#DEFINE   ##CTC_DCOP+   INF.PM5_DCOP.
+#DEFINE   ##NAME_DCOP+  PM5_
+#DEFINE   ##SVID_PMx+   PM5_SVID.
+
+#DEFINE_ID_OFFSET	5000
+#INCLUDE  "fa_db_svid_pm_define.inf"
+
+#DEFINE_ID_OFFSET	5100
+#INCLUDE  "fa_db_svid_pm_dcop_define.inf"
+
+#DEFINE_ID_OFFSET	51000
+#INCLUDE  "PM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	51200
+#INCLUDE  "PM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	51500
+#INCLUDE  "PM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	51700
+#INCLUDE  "PM_SVID_AO_Define.inf"
+
+#DEFINE_ID_OFFSET	50000000
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//.....
+#DEFINE   ##PM          PM6
+#DEFINE   ##PHY_PM      PHY_PM6
+#DEFINE   ##CTC_DCOP+   INF.PM6_DCOP.
+#DEFINE   ##NAME_DCOP+  PM6_
+#DEFINE   ##SVID_PMx+   PM6_SVID.
+
+#DEFINE_ID_OFFSET	6000
+#INCLUDE  "fa_db_svid_pm_define.inf"
+
+#DEFINE_ID_OFFSET	6100
+#INCLUDE  "fa_db_svid_pm_dcop_define.inf"
+
+#DEFINE_ID_OFFSET	61000
+#INCLUDE  "PM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	61200
+#INCLUDE  "PM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	61500
+#INCLUDE  "PM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	61700
+#INCLUDE  "PM_SVID_AO_Define.inf"
+
+#DEFINE_ID_OFFSET	60000000
+#INCLUDE  "SVID__PMx_DEFINE_FDC.inf"
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+//.....
+#DEFINE   ##PM          PM0
+#DEFINE   ##TMC_DCOP    TMC_DCOP
+#DEFINE   ##SVID_TMx+   TMC_SVID.
+
+#DEFINE_ID_OFFSET	7000
+#INCLUDE  "fa_db_svid_tmc_dcop.inf"
+
+#DEFINE_ID_OFFSET	0
+#INCLUDE  "SVID__TMC_PMx_DEFINE_FDC.inf"
+
+
+#DEFINE_ID_OFFSET	7000
+#INCLUDE  "TM_SVID_DI_Define.inf"
+
+#DEFINE_ID_OFFSET	7300
+#INCLUDE  "TM_SVID_DO_Define.inf"
+
+#DEFINE_ID_OFFSET	7700
+#INCLUDE  "TM_SVID_AI_Define.inf"
+
+#DEFINE_ID_OFFSET	7800
+#INCLUDE  "TM_SVID_AO_Define.inf"
+
+
+
+/*
+//--------------------------------------------------------------------------------------------------------------------------
+//.....
+#SVID   CTC     800975   	MNG_SYSTEM_INFO+1th.TOTAL_EQUIPMENT_PROCESS_TIME_FMT    A   8    hh:mm:ss    	 Today_Total_Equipment_Process_Time
+#SVID   CTC     800977   	DB_CFG+UI.MEMORY.USAGE                                  A   8    mbyte         UI_Memory_Usage
+*/
 

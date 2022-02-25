@@ -1,0 +1,6 @@
+; CTC__Mng_OBJ.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CTC__Mng_OBJ"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -3,35 +3,35 @@
 
 #DEFINE_ID_OFFSET   	0
 
-#CEID_E30__OFFLINE				1	
-#CEID_E30__LOCAL  				2
-#CEID_E30__REMOTE 				3
+#CEID_E30__OFFLINE				              1	
+#CEID_E30__LOCAL  				              2
+#CEID_E30__REMOTE 				              3
 
-#CEID_E30__OPERATOR_COMMAND_ISSUED		11
-#CEID_E30__PROCESSING_STARTED			12
-#CEID_E30__PROCESSING_COMPLETED			13
-#CEID_E30__PROCESSING_STOPPED			14
-#CEID_E30__PROCESSING_STATUS_CHANGE		15
-#CEID_E30__ALARM_DETECTED			16
-#CEID_E30__ALARM_CLEARED			17
+#CEID_E30__OPERATOR_COMMAND_ISSUED		 11
+#CEID_E30__PROCESSING_STARTED			     12
+#CEID_E30__PROCESSING_COMPLETED			   13
+#CEID_E30__PROCESSING_STOPPED			     14
+#CEID_E30__PROCESSING_STATUS_CHANGE		 15
+#CEID_E30__ALARM_DETECTED			         16
+#CEID_E30__ALARM_CLEARED			         17
 
-#CEID_E30__PROCESS_PROGRAM_CHANGE		19
-#CEID_E30__PROCESS_PROGRAM_SELECTED		20
-#CEID_E30__MATERIAL_RECEIVED			21
-#CEID_E30__MATERIAL_REMOVED			22
-#CEID_E30__SPOOLING_ACTIVATED			23
-#CEID_E30__SPOOLING_DEACTIVATED			24
-#CEID_E30__SPOOL_TRANSMIT_FAILURE		25
-#CEID_E30__MESSAGE_RECOGNITION			26
+#CEID_E30__PROCESS_PROGRAM_CHANGE		   19
+#CEID_E30__PROCESS_PROGRAM_SELECTED    20
+#CEID_E30__MATERIAL_RECEIVED			     21
+#CEID_E30__MATERIAL_REMOVED			       22
+#CEID_E30__SPOOLING_ACTIVATED			     23
+#CEID_E30__SPOOLING_DEACTIVATED			   24
+#CEID_E30__SPOOL_TRANSMIT_FAILURE		   25
+#CEID_E30__MESSAGE_RECOGNITION			   26
 
-#CEID_E30__NEW_EXECUTION_RECIPE			27
-#CEID_E30__EXECUTION_RECIPE_CHANGE		28
-#CEID_E30__SUCCESSFUL_UPLOAD			29
-#CEID_E30__BAD_UPLOAD				30
-#CEID_E30__OPERATOR_ECID_CHANGE			31
+#CEID_E30__NEW_EXECUTION_RECIPE			   27
+#CEID_E30__EXECUTION_RECIPE_CHANGE     28
+#CEID_E30__SUCCESSFUL_UPLOAD			     29
+#CEID_E30__BAD_UPLOAD				           30
+#CEID_E30__OPERATOR_ECID_CHANGE        31
 
-#CEID_E30__EQUIPMENT_ENGINEER_CALL		41
-#CEID_E30__PROCESS_ENGINEER_CALL                42
+#CEID_E30__EQUIPMENT_ENGINEER_CALL		 41
+#CEID_E30__PROCESS_ENGINEER_CALL       42
 
 //--------------------------------------------------------------------------------------------
 
@@ -458,66 +458,40 @@
 //--------------------------------------------------------------------------------------------
 
 
-
 //--------------------------------------------------------------------------------------------
-// Polisher Event
-
-#DEFINE   ##CHM     CHM1
-
-// P1 Stage
-#DEFINE_ID_OFFSET	  11000
-#DEFINE   ##STAGE   STAGE1
-
-#INCLUDE  "fa_polisher_stage_ceid_define.inf"
-
-// P2 Stage
-#DEFINE_ID_OFFSET	  12000
-#DEFINE   ##STAGE   STAGE2
-
-#INCLUDE  "fa_polisher_stage_ceid_define.inf"
-
-// P3 Stage
-#DEFINE_ID_OFFSET	  13000
-#DEFINE   ##STAGE   STAGE3
-
-#INCLUDE  "fa_polisher_stage_ceid_define.inf"
-
-
-//--------------------------------------------------------------------------------------------
-// Cleaner Event
-
-#DEFINE   ##CHM     CHM2
-
-// S1 Stage
-#DEFINE_ID_OFFSET	  21000
-#DEFINE   ##STAGE   STAGE1
-
-#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
-
-// S2 Stage
-#DEFINE_ID_OFFSET	  22000
-#DEFINE   ##STAGE   STAGE2
-
-#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
-
-// S3 Stage
-#DEFINE_ID_OFFSET	  23000
-#DEFINE   ##STAGE   STAGE3
-
-#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
-
-// S4 Stage
-#DEFINE_ID_OFFSET	  24000
-#DEFINE   ##STAGE   STAGE4
-
-#INCLUDE  "fa_cleaner_stage_ceid_define.inf"
-
-
-//--------------------------------------------------------------------------------------------
-//  °èÃø±â
-
-#DEFINE_ID_OFFSET	  30000
-#DEFINE   ##CHM     CMH4
+//  CHAMBER - 1
+#DEFINE_ID_OFFSET	10000
+#DEFINE   ##CHM   CHM1
 
 #INCLUDE  "fa_chm_ceid_define.inf"
 
+//  CHAMBER - 2
+#DEFINE_ID_OFFSET	20000
+#DEFINE   ##CHM   CHM2
+
+#INCLUDE  "fa_chm_ceid_define.inf"
+
+//  CHAMBER - 3
+#DEFINE_ID_OFFSET	30000
+#DEFINE   ##CHM   CHM3
+
+#INCLUDE  "fa_chm_ceid_define.inf"
+
+//  CHAMBER - 4
+#DEFINE_ID_OFFSET	40000
+#DEFINE   ##CHM   CHM4
+
+#INCLUDE  "fa_chm_ceid_define.inf"
+
+//  CHAMBER - 5
+#DEFINE_ID_OFFSET	50000
+#DEFINE   ##CHM   CHM5
+
+#INCLUDE  "fa_chm_ceid_define.inf"
+
+//  CHAMBER - 6
+#DEFINE_ID_OFFSET	60000
+#DEFINE   ##CHM   CHM6
+
+#INCLUDE  "fa_chm_ceid_define.inf"
+//--------------------------------------------------------------------------------------------
