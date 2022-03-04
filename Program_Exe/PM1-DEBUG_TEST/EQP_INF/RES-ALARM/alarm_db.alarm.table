@@ -1,0 +1,11 @@
+#ALARM   0   85   "__SYS - SYSTEM ERROR"
+#ALARM   11   85   "__SYS - System Error 11 - Dll Title"
+#ALARM   13   85   "__SYS - Alarm Clear Test !"
+#ALARM   12   85   "__SYS - SYSTEM WARNING 12"
+#ALARM   21   85   "__SYS - System Error : Async Timer Max Error"
+#ALARM   31   85   "__SYS -  AlarmID(1)"
+#ALARM   32   85   "__SYS -  AlarmID(2)"
+#ALARM   33   85   "__SYS -  AlarmID(3)"
+#ALARM   34   85   "__SYS -  AlarmID(4)"
+#ALARM   35   85   "__SYS -  AlarmID(5)"
+

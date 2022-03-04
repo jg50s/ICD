@@ -9,9 +9,9 @@
 			Name="Debug|Win32"
 			>
 			<DebugSettings
-				Command=""
-				WorkingDirectory=""
-				CommandArguments=""
+				Command="EQP__START_R.exe"
+				WorkingDirectory="D:\WORK_GITHUB\ICD\Program_Exe\PM2_ICD"
+				CommandArguments="-D  FNC_STEP  STD  FNC_STEP__ICD_D  STEP.STD  &quot;D:\WORK_GITHUB\ICD\Program_Code\Code_PMC\STD_Code\App_Ver\Debug-STD_Dll&quot;"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -22,7 +22,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""
@@ -37,9 +37,9 @@
 			Name="Release|Win32"
 			>
 			<DebugSettings
-				Command=""
-				WorkingDirectory=""
-				CommandArguments=""
+				Command="EQP__START_R.exe"
+				WorkingDirectory="D:\WORK_GITHUB\ICD\Program_Exe\PM2_ICD"
+				CommandArguments="-D  FNC_STEP  STD  FNC_STEP__ICD_D  STEP.METAL  &quot;D:\WORK_GITHUB\ICD\Program_Code\Code_PMC\STD_Code\App_Ver\Release-STD_Dll&quot;"
 				Attach="false"
 				DebuggerType="3"
 				Remote="1"
@@ -50,7 +50,7 @@
 				SQLDebugging=""
 				Environment=""
 				EnvironmentMerge="true"
-				DebuggerFlavor=""
+				DebuggerFlavor="0"
 				MPIRunCommand=""
 				MPIRunArguments=""
 				MPIRunWorkingDirectory=""

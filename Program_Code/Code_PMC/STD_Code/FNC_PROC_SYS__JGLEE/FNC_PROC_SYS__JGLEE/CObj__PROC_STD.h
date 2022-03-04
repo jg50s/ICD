@@ -195,6 +195,7 @@ private:
 	int Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int _Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int _Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	int Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int _Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);

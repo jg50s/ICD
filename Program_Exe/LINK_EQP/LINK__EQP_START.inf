@@ -1,0 +1,12 @@
+
+#EXIT_TIME_SEC          0
+
+#EXE_DIR                "D:\WORK_GITHUB\ICD\Program_Exe\PM2_ICD"
+#EXE_NAME               EQP__START_R.exe
+
+
+/*
+#LINK_WORKER_FILE       EQP_WORKER-NULL.inf
+#LINK_METADATA_FILE     EQP_METADATA-NULL.inf
+#LINK_SYSTEM_FILE       EQP_SYSTEM-RUN.cfg
+*/

@@ -48,6 +48,7 @@ int CObj__PROC_STD
 		int r_flag = xRCP__FILE_CTRL->Read__MEM();
 		if(r_flag < 0)			return 1;
 
+		//
 		aCH__STEP_CUR_NUM->Set__VALUE(cur__step_id);
 		sEXT_CH__MON_STEP_EXCEPTION_ACT->Set__DATA("");
 
@@ -89,6 +90,11 @@ int CObj__PROC_STD
 				}
 			}
 
+			if(iActive__SIM_MODE > 0)
+			{
+				printf(" * Exception - Start \n");
+			}
+
 			// Check : Exception.Act ...
 			while(1)
 			{
@@ -110,6 +116,14 @@ int CObj__PROC_STD
 				Sleep(10);
 			}
 
+			if(iActive__SIM_MODE > 0)
+			{
+				printf(" * Exception - End \n");
+				printf("  * %s <- %s \n", 
+					   dCH__MON_EXCEPTION_ACT->Get__CHANNEL_NAME(),
+					   dCH__MON_EXCEPTION_ACT->Get__STRING());
+			}
+
 			// Manual Next.Ctrl ...
 			if(dCH__CUR_PROCESS_TYPE->Check__DATA(STR__MANUAL) > 0)
 			{
@@ -121,26 +135,65 @@ int CObj__PROC_STD
 					{
 						Sleep(10);
 
-						if(p_variable->Check__CTRL_ABORT() > 0)					return -1;
+						if(p_variable->Check__CTRL_ABORT() > 0)	
+						{
+							return -11;
+						}
 
 						// ...
 						CString cur__step_ctrl = sCH__PARA_MANUAL_STEP_CTRL_REQ->Get__STRING();
 
-						if(cur__step_ctrl.CompareNoCase(STR__NEXT_STEP) == 0)		
+						if(cur__step_ctrl.CompareNoCase(STR__READY) == 0)
 						{
-							break;
+							continue;
 						}
+
+						if((cur__step_ctrl.CompareNoCase(STR__NEXT_STEP) != 0)		
+						&& (cur__step_ctrl.CompareNoCase(STR__CUR_STEP)  != 0)
+						&& (cur__step_ctrl.CompareNoCase(STR__PRE_STEP)  != 0))
+						{
+							continue;
+						}
+
+						// ...
+						int r_flag = _Fnc__RCP_UPLOAD(p_variable, p_alarm);
+						if(r_flag < 0)			return r_flag;
+
+						int step_max = xRCP__FILE_CTRL->Get__TOTAL_STEP_SIZE();
+						int step_id = (int) aCH__STEP_CUR_NUM->Get__VALUE();
+
 						if(cur__step_ctrl.CompareNoCase(STR__CUR_STEP) == 0)		
 						{
-							break;
-						}
-						if(cur__step_ctrl.CompareNoCase(STR__PRE_STEP) == 0)		
-						{
-							break;
-						}
-					}
 
-					// ...
+						}
+						else if(cur__step_ctrl.CompareNoCase(STR__PRE_STEP) == 0)		
+						{
+							step_id--;
+							
+							if(step_max < 1)			return -12;
+							if(step_id  < 0)			step_id = 0;
+						}
+						else if(cur__step_ctrl.CompareNoCase(STR__NEXT_STEP) == 0)		
+						{
+							step_id++;
+
+							if(step_id >= step_max)		return -13;
+						}
+
+						if(iActive__SIM_MODE > 0)
+						{
+							printf(" * Manual_Step-Ctrl \n");
+							printf(" * step_id  <- [%1d] \n", step_id );
+							printf(" * step_max <- [%1d] \n", step_max);
+							printf("\n");
+						}
+
+						cur__step_id = step_id;
+						xRCP__FILE_CTRL->Jump__STEP_NO(step_id);
+
+						aCH__STEP_CUR_NUM->Set__VALUE(step_id-1);						
+						break;
+					}
 				}
 			}
 		}
@@ -157,9 +210,12 @@ int CObj__PROC_STD
 int CObj__PROC_STD
 ::Sub__STEP_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int cur__step_id,const int rcp__step_max)
 {
-	printf(" * Sub__STEP_CTRL() ... \n");
-	printf("  ** cur__step_id <- [%1d] \n", cur__step_id);
-	printf("  ** cur__step_id <- [%1d] \n", rcp__step_max);
+	if(iActive__SIM_MODE > 0)
+	{
+		printf(" * Sub__STEP_CTRL() ... \n");
+		printf("  ** cur__step_id <- [%1d] \n", cur__step_id);
+		printf("  ** cur__step_id <- [%1d] \n", rcp__step_max);
+	}
 
 	Fnc__PRC_LOG__STEP_START();
 

@@ -25,6 +25,54 @@ int CObj__PROC_STD
 	}
 
 	// ...
+	{
+		int r_flag = _Fnc__RCP_UPLOAD(p_variable, p_alarm);
+		if(r_flag < 0)			return r_flag;
+	}
+
+	// Total Step Time Check .....
+	{
+		CString ch_data;
+
+		double total_time = 0.0;
+		int step_count = 0;
+
+		while(1)
+		{
+			int r_flag = xRCP__FILE_CTRL->Read__MEM();
+			if(r_flag < 0)		break;
+
+			if(r_flag > 0)
+			{
+				step_count++;
+
+				double step_time = aEXT_CH__RCP_STEP_TIME->Get__VALUE();
+				total_time += step_time;
+			}
+
+			if(p_variable->Check__CTRL_ABORT() > 0)
+			{
+				return -21;
+			}
+		}
+
+		ch_data.Format("%.0f", total_time);
+		sCH__PRC_TOTAL_TIME->Set__DATA(ch_data);
+		sCH__PRC_TOTAL_TIME_TO_CTC->Set__DATA(ch_data);
+		sEXT_CH__PRC_TOTAL_TIME_TO_CTC->Set__DATA(ch_data);
+
+		aCH__STEP_TOTAL_NUM->Set__VALUE(step_count);
+
+		xRCP__FILE_CTRL->Jump__STEP_NO(1);
+	}
+
+	return pOBJ_CTRL__STEP->Call__OBJECT(_STEP_CMD__READY);
+}
+
+
+int CObj__PROC_STD
+::_Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+{
 	CString rcp_path;
 	CString rcp_name;
 
@@ -124,41 +172,6 @@ LOOP_START:
 		}
 	}
 
-	// Total Step Time Check .....
-	{
-		CString ch_data;
-
-		double total_time = 0.0;
-		int step_count = 0;
-
-		while(1)
-		{
-			int r_flag = xRCP__FILE_CTRL->Read__MEM();
-			if(r_flag < 0)		break;
-
-			if(r_flag > 0)
-			{
-				step_count++;
-
-				double step_time = aEXT_CH__RCP_STEP_TIME->Get__VALUE();
-				total_time += step_time;
-			}
-
-			if(p_variable->Check__CTRL_ABORT() > 0)
-			{
-				return -21;
-			}
-		}
-
-		ch_data.Format("%.0f", total_time);
-		sCH__PRC_TOTAL_TIME->Set__DATA(ch_data);
-		sCH__PRC_TOTAL_TIME_TO_CTC->Set__DATA(ch_data);
-		sEXT_CH__PRC_TOTAL_TIME_TO_CTC->Set__DATA(ch_data);
-
-		aCH__STEP_TOTAL_NUM->Set__VALUE(step_count);
-
-		xRCP__FILE_CTRL->Jump__STEP_NO(1);
-	}
-
-	return pOBJ_CTRL__STEP->Call__OBJECT(_STEP_CMD__READY);
+	return 1;
 }
+

@@ -1,0 +1,11 @@
+
+# Window NT 인경우
+1. FixGrid_Need에 포함된 모든 파일을 c:\WINNT\SYSTEM32\ 폴더에 Copy합니다.
+2. Msflxgrd.ocx을 Register에 등록 시켜 줍니다.
+   c:\> regsvr32 c:\WINNT\SYSTEM32\Msflxgrd.ocx
+
+# Window 10 인경우
+1. FixGrid_Need에 포함된 모든 파일을 C:\Windows\System32\ 폴더에 Copy합니다.
+2. Msflxgrd.ocx을 Register에 등록 시켜 줍니다.
+    c:\> regsvr32 C:\Windows\System32\Msflxgrd.ocx
+     

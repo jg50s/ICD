@@ -1,0 +1,12 @@
+OBJECT_NAME : __SYS,
+OK,0,__SYS - SYSTEM ERROR,,CHECK	,
+OK,11,__SYS - System Error 11 - Dll Title,System Error 11 - Dll Message,CHECK	,
+OK,13,__SYS - Alarm Clear Test !,,CHECK	,
+OK,12,__SYS - SYSTEM WARNING 12,,CHECK	,
+OK,21,__SYS - System Error : Async Timer Max Error,,CHECK	,
+OK,31,__SYS -  AlarmID(1),AlarmID(1)'s message ...,ABORT	RETRY	ACT.1	,
+OK,32,__SYS -  AlarmID(2),AlarmID(2)'s message ...,ABORT	RETRY	ACT.2	,
+OK,33,__SYS -  AlarmID(3),AlarmID(3)'s message ...,ABORT	RETRY	ACT.3	,
+OK,34,__SYS -  AlarmID(4),AlarmID(4)'s message ...,ABORT	RETRY	ACT.4	,
+OK,35,__SYS -  AlarmID(5),AlarmID(5)'s message ...,ABORT	RETRY	ACT.5	,
+
