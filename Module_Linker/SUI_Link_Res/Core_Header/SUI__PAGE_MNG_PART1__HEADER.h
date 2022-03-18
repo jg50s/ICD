@@ -10,6 +10,7 @@ class CGUI_DISTRIBUTOR__PART_I__CREATE_CTRL
 public:
 	virtual ~CGUI_DISTRIBUTOR__PART_I__CREATE_CTRL(){};
 
+	//--------------------------------------------------------------------
 	virtual int System_Init(const CDS_SCREEN_INFO& scr_info,
 						    const int moduel_id = 0) = 0;
 	virtual int System_Optimize() = 0;
@@ -40,6 +41,9 @@ public:
 
 	//--------------------------------------------------------------------
 	virtual int System_Optimize_Without_Log() = 0;
+
+	//--------------------------------------------------------------------
+	virtual int Debug_Init(const CDS_SCREEN_INFO& scr_info, const int moduel_id = 0) = 0;
 };
 
 class CGUI_DISTRIBUTOR__PART_I__EVENT_CTRL

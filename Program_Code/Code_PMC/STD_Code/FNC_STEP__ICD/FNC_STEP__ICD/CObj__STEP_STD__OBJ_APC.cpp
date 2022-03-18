@@ -5,13 +5,22 @@
 
 // ...
 int CObj__STEP_STD
-::APC_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
+::APC_OBJ__Start_MODE(const CString& obj_mode, 
+					  const CString& para_data, 
+					  const double para_hold_sec,
+					  const double para_hold_pos)
 {
 	if(!bActive__OBJ_CTRL__APC)						return 1;
 
 		 if(obj_mode.CompareNoCase(_APC_CMD__POSITION) == 0)		aEXT_CH__APC_OBJ__PARA_POSITION->Set__DATA(para_data);
 	else if(obj_mode.CompareNoCase(_APC_CMD__PRESSURE) == 0)		aEXT_CH__APC_OBJ__PARA_PRESSURE->Set__DATA(para_data);
 	else															return -11;
+
+	if(obj_mode.CompareNoCase(_APC_CMD__PRESSURE) == 0)	
+	{
+		aEXT_CH__APC_OBJ__PARA_HOLD_SEC->Set__VALUE(para_hold_sec);
+		aEXT_CH__APC_OBJ__PARA_POSITION->Set__VALUE(para_hold_pos);
+	}
 
 	return pOBJ_CTRL__APC->Run__OBJECT(obj_mode);
 }

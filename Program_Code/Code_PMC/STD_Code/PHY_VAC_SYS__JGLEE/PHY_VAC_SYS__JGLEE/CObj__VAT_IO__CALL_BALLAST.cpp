@@ -13,7 +13,7 @@ int CObj__VAT_IO
 	{
 		double set_pressure = aCH__CFG_TRANSFER_BALLAST_PRESSURE->Get__VALUE();
 
-		Fnc__PRESSURE(p_alarm, set_pressure);
+		Fnc__PRESSURE(p_variable, p_alarm, set_pressure);
 	}
 	else
 	{
@@ -147,7 +147,7 @@ int CObj__VAT_IO
 	{
 		double set_pressure = aCH__CFG_CHAMBER_BALLAST_PRESSURE->Get__VALUE();
 
-		Fnc__PRESSURE(p_alarm, set_pressure);
+		Fnc__PRESSURE(p_variable, p_alarm, set_pressure);
 	}
 	else
 	{

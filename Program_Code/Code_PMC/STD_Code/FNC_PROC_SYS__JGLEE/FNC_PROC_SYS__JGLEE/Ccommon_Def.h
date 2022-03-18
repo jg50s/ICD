@@ -23,6 +23,8 @@
 #define STR__YES						"YES"
 #define STR__NO							"NO"
 
+#define STR__NONE						"NONE"
+
 #define STR__OFFLINE					"Offline"
 #define STR__ONLINE						"Online"
 #define STR__ALARM						"Alarm"

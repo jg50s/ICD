@@ -17,7 +17,9 @@ int CObj__STEP_STD
 
 	CString rcp__apc_mode;
 	CString rcp__apc_position;
+	CString rcp__apc_learned_pos;
 	CString rcp__apc_pressure;
+	CString rcp__apc_hold_sec;
 
 	CString rcp__mfc_x_flow[_CFG__MFC_SIZE];
 	CString rcp__mfc_x_ramp_sec[_CFG__MFC_SIZE];
@@ -67,8 +69,11 @@ int CObj__STEP_STD
 		// APC ...
 		dCH__RCP_APC_MODE->Get__DATA(rcp__apc_mode);
 		aCH__RCP_APC_POSITION->Get__DATA(rcp__apc_position);
+		sCH__RCP_APC_LEARNED_POS->Get__DATA(rcp__apc_learned_pos);
 		aCH__RCP_APC_PRESSURE->Get__DATA(rcp__apc_pressure);
+		sCH__RCP_APC_HOLD_DELAY->Get__DATA(rcp__apc_hold_sec);
 
+		// MFC ...
 		for(i=0; i<iDATA__MFC_SIZE; i++)
 		{
 			rcp__mfc_x_flow[i]     = sCH__RCP_GAS_FLOW_X[i]->Get__STRING();
@@ -141,7 +146,11 @@ int CObj__STEP_STD
 			para_data = rcp__apc_pressure;
 		}
 
-		APC_OBJ__Start_MODE(obj_mode, para_data);
+		double value__hold_sec = atof(rcp__apc_hold_sec);
+		double value__hold_pos = atof(rcp__apc_position);
+		if(value__hold_pos < 0.1)			value__hold_pos = atof(rcp__apc_learned_pos);
+
+		APC_OBJ__Start_MODE(obj_mode,para_data, value__hold_sec,value__hold_pos);
 	}
 
 	// MFC_X.CTRL ...
@@ -476,36 +485,46 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 	// STEP ...
 	{
 		log_bff.Format(" * %s <- %s \n", 
-			sCH__RCP_STEP_MESSAGE->Get__CHANNEL_NAME(),
-			sCH__RCP_STEP_MESSAGE->Get__STRING());
+						sCH__RCP_STEP_MESSAGE->Get__CHANNEL_NAME(),
+						sCH__RCP_STEP_MESSAGE->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-			dCH__RCP_STEP_MODE->Get__CHANNEL_NAME(),
-			dCH__RCP_STEP_MODE->Get__STRING());
+						dCH__RCP_STEP_MODE->Get__CHANNEL_NAME(),
+						dCH__RCP_STEP_MODE->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-			aCH__RCP_STEP_TIME->Get__CHANNEL_NAME(),
-			aCH__RCP_STEP_TIME->Get__STRING());
+						aCH__RCP_STEP_TIME->Get__CHANNEL_NAME(),
+						aCH__RCP_STEP_TIME->Get__STRING());
 		log_msg += log_bff;
 	}
 
 	// APC ...
 	{
 		log_bff.Format(" * %s <- %s \n", 
-			dCH__RCP_APC_MODE->Get__CHANNEL_NAME(),
-			dCH__RCP_APC_MODE->Get__STRING());
+						dCH__RCP_APC_MODE->Get__CHANNEL_NAME(),
+						dCH__RCP_APC_MODE->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-			aCH__RCP_APC_POSITION->Get__CHANNEL_NAME(),
-			aCH__RCP_APC_POSITION->Get__STRING());
+						aCH__RCP_APC_POSITION->Get__CHANNEL_NAME(),
+						aCH__RCP_APC_POSITION->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-			aCH__RCP_APC_PRESSURE->Get__CHANNEL_NAME(),
-			aCH__RCP_APC_PRESSURE->Get__STRING());
+						sCH__RCP_APC_LEARNED_POS->Get__CHANNEL_NAME(),
+						sCH__RCP_APC_LEARNED_POS->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						aCH__RCP_APC_PRESSURE->Get__CHANNEL_NAME(),
+						aCH__RCP_APC_PRESSURE->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						sCH__RCP_APC_HOLD_DELAY->Get__CHANNEL_NAME(),
+						sCH__RCP_APC_HOLD_DELAY->Get__STRING());
 		log_msg += log_bff;
 	}
 
@@ -513,13 +532,13 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 	for(i=0; i<iDATA__MFC_SIZE; i++)
 	{
 		log_bff.Format(" * %s <- %s \n", 
-			sCH__RCP_GAS_FLOW_X[i]->Get__CHANNEL_NAME(),
-			sCH__RCP_GAS_FLOW_X[i]->Get__STRING());
+						sCH__RCP_GAS_FLOW_X[i]->Get__CHANNEL_NAME(),
+						sCH__RCP_GAS_FLOW_X[i]->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-			sCH__RCP_GAS_RAMP_SEC_X[i]->Get__CHANNEL_NAME(),
-			sCH__RCP_GAS_RAMP_SEC_X[i]->Get__STRING());
+						sCH__RCP_GAS_RAMP_SEC_X[i]->Get__CHANNEL_NAME(),
+						sCH__RCP_GAS_RAMP_SEC_X[i]->Get__STRING());
 		log_msg += log_bff;
 	}
 

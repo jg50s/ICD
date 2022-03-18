@@ -1222,12 +1222,16 @@ public:
 									CStringArray& l_obj_type,
 									CStringArray& l_version) = 0;
 
-	//.....
+	// ...
 	virtual int Get__CORE_VERSION(CString& core_ver) = 0;
 
 	// ...
 	virtual int Change__Worker_File(const CString& file_name) = 0;
 	virtual int Change__MetaData_File(const CString& file_name) = 0;
+	virtual int Change__System_File(const CString& file_name) = 0;
+
+	//
+	virtual int Set__Debug_Property(const bool active_debug, const CStringArray& l_para) = 0;
 };
 //------------------------------------------------------
 

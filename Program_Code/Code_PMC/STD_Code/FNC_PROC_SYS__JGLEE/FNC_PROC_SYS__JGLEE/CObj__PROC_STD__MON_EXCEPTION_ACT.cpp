@@ -227,19 +227,11 @@ int CObj__PROC_STD
 					var_data.Format("%1d",step_id);
 					aCH__STEP_CUR_NUM->Set__DATA(var_data);										
 
-					/*
-					sEXT_CH__EXCEPTION_CONTINUE_REQ->Set__DATA(STR__YES);
-
-					aCH__CONTINUE_OVER_STEP_TIME->Get__DATA(var_data);
-					sEXT_CH__EXCEPTION_CONTINUE_STEP_OVER_TIME->Set__DATA(var_data);
-					*/
+					sCH__EXCEPTION_CONTINUE_REQ->Set__DATA(STR__YES);
 				}
 				else
 				{
-					/*
-					sEXT_CH__EXCEPTION_CONTINUE_REQ->Set__DATA("");
-					sEXT_CH__EXCEPTION_CONTINUE_STEP_OVER_TIME->Set__DATA("0");
-					*/
+					sCH__EXCEPTION_CONTINUE_REQ->Set__DATA("");
 				}
 			}
 

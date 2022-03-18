@@ -4,6 +4,7 @@
 
 #include "CCommon_Error.h"
 #include "CCommon_System.h"
+#include "CCommon_LEARNED_ITEM.h"
 
 #include "CObj__PROC_STD__ALID.h"
 #include "CObj__PROC_STD__DEF.h"
@@ -17,6 +18,8 @@ private:
 
 	// ...
 	SCX__USER_LOG_CTRL xI_LOG_CTRL;
+
+	CDS__LEARNED_ITEM_CTRL mCTRL__LEARNED_ITEM;
 
 	// ...
 	int iActive__PROC_START;
@@ -47,9 +50,19 @@ private:
 
 	CX__VAR_STRING_CTRL  sCH__ACT_RECOVERY_RESTART_FLAG;
 
+	// LEARNED INFO ... 
+	CX__VAR_DIGITAL_CTRL dCH__CFG_LEARNED_APPLY_MODE;
+	CX__VAR_STRING_CTRL  sCH__CUR_LEARNED_RESULT;
+
+	CX__VAR_STRING_CTRL  sCH__PRE_LOTID;
+	CX__VAR_STRING_CTRL  sCH__CUR_LEARNED_APPLY_STATUS;
+	
+	CX__VAR_STRING_CTRL  sCH__RCP_FILE_UPLOAD_FLAG;
+
 	// WIN.JUMP_STEP ...
 	CX__VAR_ANALOG_CTRL  aCH__JUMP_STEP_ID;
 	CX__VAR_ANALOG_CTRL  aCH__CONTINUE_OVER_STEP_TIME;
+	CX__VAR_STRING_CTRL  sCH__EXCEPTION_CONTINUE_REQ;
 
 	CX__VAR_STRING_CTRL  sCH__WIN_CTRL_JUMP_PAGE;
 	CX__VAR_STRING_CTRL  sCH__WIN_CTRL_MSG;
@@ -192,24 +205,28 @@ private:
 	int Call__JOB_END_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	// ....
-	int Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int _Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int _Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int _Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int _Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
 
-	int Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int _Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int Sub__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);	
+	int Fnc__PROC_START_EX(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int _Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Sub__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);	
 	int _Make__PROC_LOG(const int restart_count);	
 	
-	int Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
 	int Sub__STEP_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int cur__step_id,const int rcp__step_max);
 	int Sub__PROC_END(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int Save__LEARNED_MOCE();
 
 	int Check__ALARM_RECOVERY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int _Check__ALARM_RECOVERY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int Check__STEP_JUMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int Check__STEP_LOOP(const int cur__step_id);
+
+	int Fnc__PROC_DECHUCK(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	//
 
 	//-------------------------------------------------------------------------

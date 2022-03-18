@@ -103,6 +103,31 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__ACT_RECOVERY_RESTART_FLAG, var_name);
 	}
 
+	// LEARNED INFO ... 
+	{
+		var_name = "CFG.LEARNED.APPLY.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "DISABLE  ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LEARNED_APPLY_MODE, var_name);
+
+		var_name = "CUR.LEARNED_RESULT";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__CUR_LEARNED_RESULT, var_name);
+
+		//
+		var_name = "PRE.LOTID";
+		STD__ADD_STRING_WITH_X_OPTION(var_name, "");
+		LINK__VAR_STRING_CTRL(sCH__PRE_LOTID, var_name);
+
+		var_name = "CUR.LEARNED.APPLY.STATUS";
+		STD__ADD_STRING_WITH_X_OPTION(var_name,"");
+		LINK__VAR_STRING_CTRL(sCH__CUR_LEARNED_APPLY_STATUS, var_name);
+
+		//
+		var_name = "RCP_FILE.UPLOAD_FLAG";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__RCP_FILE_UPLOAD_FLAG, var_name);
+	}
+
 	// WIN.JUMP_STEP ...
 	{
 		var_name = "JUMP.STEP.ID";
@@ -112,6 +137,10 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "CONTINUE.OVER.STEP.TIME";
 		STD__ADD_ANALOG(var_name, "sec", 0, 0, 100);
 		LINK__VAR_ANALOG_CTRL(aCH__CONTINUE_OVER_STEP_TIME, var_name);
+
+		var_name = "EXCEPTION.CONTINUE.REQ";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__EXCEPTION_CONTINUE_REQ, var_name);
 
 		//
 		var_name = "WIN_CTRL.JUMP_PAGE";
@@ -164,7 +193,7 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		var_name = "MON.EXCEPTION.ACT";
-		STD__ADD_DIGITAL(var_name, "IDLE  START  ABORT  END  SKIP  PAUSE  RESUME  JUMP  ALARM");
+		STD__ADD_DIGITAL(var_name, "IDLE  START  RESTART  ABORT  END  SKIP  PAUSE  RESUME  JUMP  ALARM  PLASMA_DECHUCK");
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_EXCEPTION_ACT, var_name);
 
 		var_name = "MON.EXCEPTION.MSG";
@@ -274,9 +303,9 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
-	// Process Recovery Action ...
+	// Process Recovery Action With Wafer ...
 	{
-		alarm_id = ALID__PROCESS_RECOVERY_CHECK;
+		alarm_id = ALID__PROCESS_RECOVERY_CHECK_WITH_WAFER;
 
 		alarm_title  = title;
 		alarm_title += "Check Process Recovery Action !";
@@ -296,6 +325,29 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 		l_act.Add(ACT__JUMP);
 		l_act.Add(ACT__END);
 		l_act.Add(ACT__END_WITH_PLASMA_DECHUCK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// Process Recovery Action ...
+	{
+		alarm_id = ALID__PROCESS_RECOVERY_CHECK_NO_WAFER;
+
+		alarm_title  = title;
+		alarm_title += "Check Process Recovery Action !";
+
+		alarm_msg  = "Please, check process recovery action.\n";
+		alarm_msg += "If you select [RESTART],				the process will restart after system initialize.\n";
+		alarm_msg += "If you select [ABORT],				the process will be aborted.\n";
+		// alarm_msg += "If you select [CONTIUNE],				after current step time elapse, the next step will be executed.\n";
+		alarm_msg += "If you select [JUMP],					the step that you select will be executed.\n";
+		alarm_msg += "If you select [END],					Without Plasma Dechuck.. the process will be normally completed.\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__RESTART);
+		l_act.Add(ACT__ABORT);
+		// l_act.Add(ACT__CONTINUE);
+		l_act.Add(ACT__JUMP);
+		l_act.Add(ACT__END);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -574,6 +626,38 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SYS_CTRL_LOCK, obj_name,var_name);
+	}
+
+	// LEARNED.INFO ...
+	{
+		CString io_title;
+		CString rcp_name;
+		CString io_obj;
+		CString io_var;
+
+		def_name = "LEARNED_ITEM.SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		int i_limit = atoi(def_data);
+
+		for(i=0; i<i_limit; i++)
+		{
+			int id = i + 1;
+
+			def_name.Format("LEARNED_ITEM.TITLE.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			io_title = def_data;
+
+			def_name.Format("LEARNED_ITEM.RCP_NAME.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			rcp_name = def_data;
+
+			//
+			def_name.Format("LEARNED_ITEM.IO_NAME.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, io_obj,io_var);
+
+			mCTRL__LEARNED_ITEM.Load__IO_ITEM(p_ext_obj_create, io_title,rcp_name, io_obj,io_var);
+		}
 	}
 
 	// ...

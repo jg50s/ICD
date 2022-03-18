@@ -343,6 +343,11 @@ public:
 													  const CString& file_ext,
 													  const CString& in_file_name,
 													  CString& out_file_name) = 0;
+
+	virtual int Popup_File_Explorer_Using_Remote_Disk_Ex(const CString& dir_root,
+													     const CStringArray& l_file_ext,
+													     const CString& in_file_name,
+													     CString& out_file_name) = 0;
 };
 
 class CGI_FILE__ROOT_CTRL

@@ -17,7 +17,6 @@ public:
 
 	// scr_info : CDS_SCREEN_INFO
 	virtual int System_Get_Info(void* scr_info,const double version=3.0) = 0;
-	//-----------------------------------------
 
 	//-----------------------------------------
 	virtual int Change__Seq_Info(const int module_id,
@@ -25,7 +24,9 @@ public:
 								 const CString& dir_config,
 								 const CString& dir_datalog,
 								 const CString& dir_process) = 0;
+
 	//-----------------------------------------
+	virtual int Debugger_Init(const CString& dir_goi) = 0;
 };
 
 class CI_DISTRIBUTOR_OUTER_CTRL

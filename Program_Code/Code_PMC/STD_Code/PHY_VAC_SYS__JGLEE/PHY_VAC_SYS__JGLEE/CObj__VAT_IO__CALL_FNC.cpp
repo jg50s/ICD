@@ -117,11 +117,65 @@ int CObj__VAT_IO
 {
 	double set_pressure = aCH__PARA_PRESSURE->Get__VALUE();
 
-	return Fnc__PRESSURE(p_alarm, set_pressure);
+	return Fnc__PRESSURE(p_variable,p_alarm, set_pressure);
 }
 int CObj__VAT_IO
-::Fnc__PRESSURE(CII_OBJECT__ALARM *p_alarm, const double set_pressure)
+::Fnc__PRESSURE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const double set_pressure)
 {
+	double para__hold_sec = aCH__PARA_HOLD_SEC->Get__VALUE();
+
+	CString ch__hold_sec;
+	ch__hold_sec.Format("%.1f", para__hold_sec);
+	sCH__MON_SET_HOLD_SEC->Set__DATA(ch__hold_sec);
+
+	if(para__hold_sec > 0.1)
+	{
+		SCX__ASYNC_TIMER_CTRL x_timer_ctrl;
+		x_timer_ctrl->START__COUNT_UP(9999);
+
+		double para__hold_pos = aCH__PARA_POSITION->Get__VALUE();
+
+		if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
+		{
+			CString ch_pos;
+
+			ch_pos.Format("%.1f", para__hold_pos);
+			sCH__MON_SET_POSITION->Set__DATA(ch_pos);
+			aEXT_CH__VAT__PARA_POSITION_PER->Set__DATA(ch_pos);
+
+			pOBJ_CTRL__VAT->Run__OBJECT(sVAT_CMMD__POSITION);
+	
+			if(iActive__SIM_MODE > 0)
+			{
+				aEXT_CH__VAT__CUR_POSITION_PER->Set__DATA(ch_pos);
+			}
+		}
+		else
+		{
+			CString ch_pos;
+
+			ch_pos.Format("%.1f", para__hold_pos);
+			aEXT_CH__AO_APC_SETPOINT_DATA->Set__DATA(ch_pos);
+
+			dEXT_CH__DO_APC_SETPOINT_TYPE->Set__DATA(STR__POSITION);
+			dEXT_CH__DO_APC_CTRL_MODE->Set__DATA(STR__CONTROL);
+
+			if(iActive__SIM_MODE > 0)
+			{
+				aEXT_CH__AI_APC_POSITION->Set__DATA(ch_pos);
+			}
+		}
+
+		while(1)
+		{
+			Sleep(1);
+
+			if(p_variable->Check__CTRL_ABORT() > 0)							return -11;
+			if(x_timer_ctrl->Get__CURRENT_TIME() >= para__hold_sec)			break;
+		}
+	}
+
+	//
 	CString ch_pressure;
 	ch_pressure.Format("%.3f", set_pressure);
 

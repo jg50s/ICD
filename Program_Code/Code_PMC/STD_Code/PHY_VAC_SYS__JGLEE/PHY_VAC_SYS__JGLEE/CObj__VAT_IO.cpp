@@ -78,6 +78,10 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.POSITION";
 		STD__ADD_ANALOG(str_name, "%", 1, 0.0, 100.0);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_POSITION, str_name);
+
+		str_name = "PARA.HOLD.SEC";
+		STD__ADD_ANALOG(str_name, "sec", 1, 0.0, 5.0);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_HOLD_SEC, str_name);
 	}
 
 	// MON.PRESSURE ...
@@ -93,6 +97,10 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.PRESSURE.mTORR";
 		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__MON_PRESSURE_mTORR, str_name);
+
+		str_name = "MON.SET.HOLD.SEC";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_SET_HOLD_SEC, str_name);
 	}
 	// MON.POSITION ...
 	{

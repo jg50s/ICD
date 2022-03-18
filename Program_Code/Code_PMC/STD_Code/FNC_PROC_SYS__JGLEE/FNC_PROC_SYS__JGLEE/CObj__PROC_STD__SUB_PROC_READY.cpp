@@ -4,7 +4,7 @@
 
 // ...
 int CObj__PROC_STD
-::Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+::Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	CString obj_msg;
 
@@ -26,7 +26,7 @@ int CObj__PROC_STD
 
 	// ...
 	{
-		int r_flag = _Fnc__RCP_UPLOAD(p_variable, p_alarm);
+		int r_flag = _Fnc__RCP_UPLOAD(p_variable, p_alarm, active_dechuck);
 		if(r_flag < 0)			return r_flag;
 	}
 
@@ -71,14 +71,21 @@ int CObj__PROC_STD
 
 
 int CObj__PROC_STD
-::_Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+::_Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	CString rcp_path;
 	CString rcp_name;
 
 LOOP_START:
 
-	// ...
+	if(active_dechuck)
+	{
+		sEXT_CH__CFG_DECHUCK_RECIPE_ABORT->Get__DATA(rcp_name);
+
+		rcp_path.Format("%s%s.rcp", sDir_PROC,rcp_name);
+		sCH__CUR_RCP_FILE_PATH->Set__DATA(rcp_path);
+	}
+	else
 	{
 		sEXT_CH__RCP_NAME->Get__DATA(rcp_name);
 

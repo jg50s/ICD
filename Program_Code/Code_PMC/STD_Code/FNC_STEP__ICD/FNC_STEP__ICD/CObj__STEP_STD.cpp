@@ -129,10 +129,6 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_APC_LEARNED_POS, var_name);
 
-			var_name = "RCP.APC.PRESET.POS";
-			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_APC_PRESET_POS, var_name);
-
 			var_name = "RCP.APC.HOLD.DELAY";
 			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_APC_HOLD_DELAY, var_name);
@@ -441,6 +437,9 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			var_name = "PARA.POSITION";
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__APC_OBJ__PARA_POSITION, obj_name,var_name);
+
+			var_name = "PARA.HOLD.SEC";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__APC_OBJ__PARA_HOLD_SEC, obj_name,var_name);
 
 			//
 			var_name = "MON.PRESSURE.TORR";

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JGLEE__IMG_MNG", "JGLEE__IMG_MNG\JGLEE__IMG_MNG.vcproj", "{426494BE-7052-40E5-A825-37282348C706}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{426494BE-7052-40E5-A825-37282348C706}.Debug|Win32.ActiveCfg = Debug|Win32
+		{426494BE-7052-40E5-A825-37282348C706}.Debug|Win32.Build.0 = Debug|Win32
+		{426494BE-7052-40E5-A825-37282348C706}.Release|Win32.ActiveCfg = Release|Win32
+		{426494BE-7052-40E5-A825-37282348C706}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

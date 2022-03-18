@@ -4,7 +4,7 @@
 
 // ...
 int CObj__PROC_STD
-::Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+::Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	if(dCH__CUR_PROCESS_TYPE->Check__DATA(STR__MANUAL) > 0)
 	{
@@ -18,7 +18,7 @@ int CObj__PROC_STD
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__AUTO_PROC);
 	}
 
-	int r_flag = _Fnc__PROC_READY(p_variable, p_alarm);
+	int r_flag = _Fnc__PROC_READY(p_variable, p_alarm, active_dechuck);
 
 	// ...
 	{
@@ -27,7 +27,7 @@ int CObj__PROC_STD
 	return r_flag;
 }
 int CObj__PROC_STD
-::_Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+::_Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	CString log_msg;
 
@@ -58,11 +58,11 @@ int CObj__PROC_STD
 		}
 	}
 
-	return Sub__PROC_READY(p_variable, p_alarm);
+	return Sub__PROC_READY(p_variable, p_alarm, active_dechuck);
 }
 
 int CObj__PROC_STD
-::Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+::Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__START);
 	sEXT_CH__MON_STEP_EXCEPTION_ACT->Set__DATA("");
@@ -79,7 +79,7 @@ int CObj__PROC_STD
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__AUTO_PROC);
 	}
 
-	int r_flag = _Fnc__PROC_START(p_variable, p_alarm);
+	int r_flag = _Fnc__PROC_START(p_variable, p_alarm, active_dechuck);
 
 	// ...
 	{
@@ -97,17 +97,21 @@ int CObj__PROC_STD
 
 	Sub__PROC_END(p_variable, p_alarm);
 
-	dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__END);
+	if((dCH__MON_EXCEPTION_ACT->Check__DATA(ACT__RESTART) < 0)
+	&& (dCH__MON_EXCEPTION_ACT->Check__DATA(ACT__END_WITH_PLASMA_DECHUCK) < 0))
+	{
+		dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__END);
+	}
 	return r_flag;
 }
 int CObj__PROC_STD
-::_Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+::_Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	int r_flag = 1;
 
 	if(r_flag > 0)	
 	{
-		r_flag = Sub__PROC_START(p_variable, p_alarm);
+		r_flag = Sub__PROC_START(p_variable, p_alarm, active_dechuck);
 		if(r_flag < 0)		return r_flag;
 	}
 
@@ -115,7 +119,7 @@ int CObj__PROC_STD
 	{
 		iActive__PROC_START = 1;
 
-		r_flag = Sub__PROC_CTRL(p_variable, p_alarm);
+		r_flag = Sub__PROC_CTRL(p_variable, p_alarm, active_dechuck);
 		if(r_flag < 0)		return r_flag;
 	}
 	return 1;

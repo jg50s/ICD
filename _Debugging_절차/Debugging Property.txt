@@ -1,5 +1,6 @@
 
 # Command   :  EQP__START_R.exe
+  * CStringArray를 사요하는 경우는 EQP__START_D.exe 사용해햐 합니다.
 
 # Arguments :  -D  (1)  (2)  (3)  (4)  (5)
    * (1) : object name 

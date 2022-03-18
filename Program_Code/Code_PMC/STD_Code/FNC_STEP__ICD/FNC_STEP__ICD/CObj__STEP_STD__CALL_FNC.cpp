@@ -7,9 +7,7 @@
 int CObj__STEP_STD
 ::Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	printf("Debug test - Start \n");
 
-	printf("Debug test - End \n");
 	return 1;
 }
 

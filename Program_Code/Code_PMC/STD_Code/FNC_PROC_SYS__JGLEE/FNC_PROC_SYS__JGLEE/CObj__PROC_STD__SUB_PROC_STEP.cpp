@@ -1,10 +1,12 @@
 #include "StdAfx.h"
 #include "CObj__PROC_STD.h"
 
+#include "Ccommon_Def.h"
+
 
 // ...
 int CObj__PROC_STD
-::Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+::Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	CString obj_msg;
 
@@ -72,7 +74,16 @@ int CObj__PROC_STD
 			// Process Recovery Check ...
 			if(r_step <  0)		
 			{
-				if(Check__ALARM_RECOVERY(p_variable, p_alarm) < 0)				return r_step;
+				sCH__CUR_LEARNED_RESULT->Set__DATA(STR__ERROR);
+
+				int r_check = Check__ALARM_RECOVERY(p_variable, p_alarm);
+				if(r_check < 0)				return r_check;
+			}
+			else
+			{
+				int step_id = (int) cur__step_id;
+				
+				mCTRL__LEARNED_ITEM.Load__ITEM(step_id);
 			}
 
 			// Step Change time .....
@@ -156,7 +167,7 @@ int CObj__PROC_STD
 						}
 
 						// ...
-						int r_flag = _Fnc__RCP_UPLOAD(p_variable, p_alarm);
+						int r_flag = _Fnc__RCP_UPLOAD(p_variable, p_alarm, active_dechuck);
 						if(r_flag < 0)			return r_flag;
 
 						int step_max = xRCP__FILE_CTRL->Get__TOTAL_STEP_SIZE();
@@ -215,6 +226,17 @@ int CObj__PROC_STD
 		printf(" * Sub__STEP_CTRL() ... \n");
 		printf("  ** cur__step_id <- [%1d] \n", cur__step_id);
 		printf("  ** cur__step_id <- [%1d] \n", rcp__step_max);
+	}
+
+	if(sCH__EXCEPTION_CONTINUE_REQ->Check__DATA(STR__YES) > 0)
+	{
+		CString ch_data;
+
+		aCH__CONTINUE_OVER_STEP_TIME->Get__DATA(ch_data);
+		aEXT_CH__RCP_STEP_TIME->Set__DATA(ch_data);
+
+		sCH__EXCEPTION_CONTINUE_REQ->Set__DATA("");
+		aCH__CONTINUE_OVER_STEP_TIME->Set__DATA("0");
 	}
 
 	Fnc__PRC_LOG__STEP_START();
@@ -282,10 +304,29 @@ int CObj__PROC_STD
 
 	// ...
 	{
-		int alarm_id = ALID__PROCESS_RECOVERY_CHECK;
+		int alarm_id;
 		CString r_act;
 
+		if(dEXT_CH__SLOT01_STATUS->Check__DATA(STR__NONE) > 0)			alarm_id = ALID__PROCESS_RECOVERY_CHECK_NO_WAFER;
+		else															alarm_id = ALID__PROCESS_RECOVERY_CHECK_WITH_WAFER;
+
 		p_alarm->Post__ALARM_WITH_BLOCKING(alarm_id,r_act);
+
+		// ...
+		{
+			CString log_msg;
+			CString log_bff;
+
+			log_msg = "\n";
+			log_bff.Format(" * _Check__ALARM_RECOVERY() ... \n");
+			log_msg += log_bff;
+			log_bff.Format(" * alarm_id <- %1d \n", alarm_id);
+			log_msg += log_bff;
+			log_bff.Format(" * r_act <- [%s] \n", r_act);
+			log_msg += log_bff;
+
+			xI_LOG_CTRL->WRITE__LOG(log_msg);
+		}
 
 		//
 		if(r_act.CompareNoCase(ACT__ABORT) == 0)
@@ -296,8 +337,8 @@ int CObj__PROC_STD
 
 		if(r_act.CompareNoCase(ACT__RESTART) == 0)
 		{
-			dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__START);
-			return 1;
+			dCH__MON_EXCEPTION_ACT->Set__DATA(ACT__RESTART);
+			return -10001;
 		}		
 		if(r_act.CompareNoCase(ACT__JUMP) == 0)
 		{
@@ -322,8 +363,8 @@ int CObj__PROC_STD
 		}
 		if(r_act.CompareNoCase(ACT__END_WITH_PLASMA_DECHUCK) == 0)
 		{
-			dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__END);
-			return 1;
+			dCH__MON_EXCEPTION_ACT->Set__DATA(ACT__END_WITH_PLASMA_DECHUCK);
+			return -10011;
 		}
 	}
 
