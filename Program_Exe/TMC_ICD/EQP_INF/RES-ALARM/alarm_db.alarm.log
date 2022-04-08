@@ -41,7 +41,6 @@
 "PAGE__MANIFOLD_TEST" Object not defined ! 
 "PAGE__SYS_CTRL" Object not defined ! 
 "PHY__LLx_PUMP" Object not defined ! 
-"PHY__LLx_VLV" Object not defined ! 
 
 
 //==================================================================================== 
@@ -176,8 +175,9 @@ OBJECT_NAME : FNC__VAC_ROBOT   (OffsetID:21400) (ToolID:) (UnitID:)
 "Please, check material on Robot's A-Arm.
 PHY_VAC_ROBOT+OTR.OUT.MON.dARM_A.MATERIAL.STATUS"
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -193,8 +193,9 @@ PHY_VAC_ROBOT+OTR.OUT.MON.dARM_A.MATERIAL.STATUS"
 "Please, check material on Robot's B-Arm.
 PHY_VAC_ROBOT+OTR.OUT.MON.dARM_B.MATERIAL.STATUS"
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -241,8 +242,9 @@ PHY_VAC_ROBOT+OTR.OUT.MON.dARM_B.MATERIAL.STATUS"
 "Please, check material in PMC.
 "
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -405,8 +407,9 @@ OBJECT_NAME : PHY__VAC_ROBOT   (OffsetID:21500) (ToolID:) (UnitID:)
 "Please, check material on Robot's A-Arm.
 "
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -421,8 +424,9 @@ OBJECT_NAME : PHY__VAC_ROBOT   (OffsetID:21500) (ToolID:) (UnitID:)
 "Please, check material on Robot's B-Arm.
 "
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -437,8 +441,9 @@ OBJECT_NAME : PHY__VAC_ROBOT   (OffsetID:21500) (ToolID:) (UnitID:)
 "Please, check material in LLx.
 "
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -453,8 +458,9 @@ OBJECT_NAME : PHY__VAC_ROBOT   (OffsetID:21500) (ToolID:) (UnitID:)
 "Please, check material in PMx.
 "
 #RECOVERY_ACTION 
-     RETRY   ""
      ABORT   ""
+     RETRY   ""
+     IGNORE   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -2779,6 +2785,20 @@ OBJECT_NAME : FNC__LBA   (OffsetID:29100) (ToolID:) (UnitID:)
 #OPTION2    
 #OPTION3    
 
+#INTERNAL_ID   12 
+#EXTERNAL_ID   29112 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__LBA - Leak Check is higher than config value !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
 
 //------------------------------------------------------------
 OBJECT_NAME : FNC__LBB   (OffsetID:29200) (ToolID:) (UnitID:) 
@@ -2795,6 +2815,20 @@ OBJECT_NAME : FNC__LBB   (OffsetID:29200) (ToolID:) (UnitID:)
      ABORT   ""
      RETRY   ""
      IGNORE   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   12 
+#EXTERNAL_ID   29212 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC__LBB - Leak Check is higher than config value !"
+#MESSAGE 
+""
+#RECOVERY_ACTION 
+     CHECK   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
@@ -3773,69 +3807,14 @@ OBJECT_NAME : PHY__LP1   (OffsetID:32400) (ToolID:) (UnitID:)
 #OPTION2    
 #OPTION3    
 
-
-//------------------------------------------------------------
-OBJECT_NAME : PHY_IO__LP1   (OffsetID:32500) (ToolID:) (UnitID:) 
-
-#INTERNAL_ID   1 
-#EXTERNAL_ID   32501 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP1 - Offline."
-#MESSAGE 
-"Communication is Offline.
-Please, Check DeviceNet Communication Status !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   2 
-#EXTERNAL_ID   32502 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP1 - Offline."
-#MESSAGE 
-"Controller is Offline.
-Please, Check LoadPort Communication Status !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   3 
-#EXTERNAL_ID   32503 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP1 - Command Timeout."
-#MESSAGE 
-"After Command Send, Result Can't Receive.
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
 #INTERNAL_ID   4 
-#EXTERNAL_ID   32504 
+#EXTERNAL_ID   32404 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP1 - LOAD... FOUP NONE ALARM."
+"PHY__LP1 - Robot's arm is not retracted !"."
 #MESSAGE 
-"Before Foup Load Action, Foup Not Exist on the loadport.
-Please, Check Foup properly placed !
+"Please, check the RNE sensor of ATM Robot's arm ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -3845,11 +3824,44 @@ Please, Check Foup properly placed !
 #OPTION3    
 
 #INTERNAL_ID   5 
-#EXTERNAL_ID   32505 
+#EXTERNAL_ID   32405 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP1 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
+"PHY__LP1 - LOAD... FOUP NONE ALARM."
+#MESSAGE 
+"Before load action, foup dosen't exist on the load-port.
+Please, Check if foup is properly placed !
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   32406 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY__LP1 - LP Mapping Sensor Not Use"
+#MESSAGE 
+"Please, check config option !
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   32407 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY__LP1 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
 #MESSAGE 
 "Before LP Paddle Up Action, Wafer Slide Out Sensor On Status.
 Please, Check Wafer Status in the loadport !
@@ -3861,15 +3873,15 @@ Please, Check Wafer Status in the loadport !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   6 
-#EXTERNAL_ID   32506 
+#INTERNAL_ID   11 
+#EXTERNAL_ID   32411 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP1 - LP PADDLE UP/DN... PADDLE SENSOR NOT EXT STATUS ALARM."
+"PHY__LP1 - MAP ERROR (Door doesn't open) !"
 #MESSAGE 
-"Before LP Paddle Up/Down Action, Paddle Not Extend Status.
-Please, Check Paddle Extend Status !
+"The "Map" command cannot be executed, because the door of loadport is not open. 
+Please, open the door of loadport ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -3878,14 +3890,15 @@ Please, Check Paddle Extend Status !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   7 
-#EXTERNAL_ID   32507 
+#INTERNAL_ID   12 
+#EXTERNAL_ID   32412 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP1 - LP Mapping Sensor Not Use"
+"PHY__LP1 - MAP ERROR (Foup doesn't exist) !"
 #MESSAGE 
-"Please, check config option !
+"The "Map" command cannot be executed, because foup doesn't exist. 
+Please, check the state of foup ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -3894,14 +3907,15 @@ Please, Check Paddle Extend Status !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   8 
-#EXTERNAL_ID   32508 
+#INTERNAL_ID   13 
+#EXTERNAL_ID   32413 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP1 - LP has no RF-tag reader !"
+"PHY__LP1 - MAP ERROR (Foup isn't loadded) !"
 #MESSAGE 
-"Please, check config option !
+"The "Map" command cannot be executed, because foup isn't loaded. 
+Please, check the state of foup ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -3912,14 +3926,14 @@ Please, Check Paddle Extend Status !
 
 
 //------------------------------------------------------------
-OBJECT_NAME : PHY_RS232__LP1   (OffsetID:32600) (ToolID:) (UnitID:) 
+OBJECT_NAME : PHY_IO__LP1   (OffsetID:32500) (ToolID:) (UnitID:) 
 
 #INTERNAL_ID   11 
-#EXTERNAL_ID   32611 
+#EXTERNAL_ID   32511 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RS232__LP1 : Offline !"
+"PHY_IO__LP1 : Offline !"
 #MESSAGE 
 "Please, check communication line !
 "
@@ -3930,11 +3944,11 @@ OBJECT_NAME : PHY_RS232__LP1   (OffsetID:32600) (ToolID:) (UnitID:)
 #OPTION3    
 
 #INTERNAL_ID   12 
-#EXTERNAL_ID   32612 
+#EXTERNAL_ID   32512 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RS232__LP1 : Error Code !"
+"PHY_IO__LP1 : Error Code !"
 #MESSAGE 
 "Please, check HW status !
 "
@@ -3945,6 +3959,10 @@ OBJECT_NAME : PHY_RS232__LP1   (OffsetID:32600) (ToolID:) (UnitID:)
 #OPTION1    
 #OPTION2    
 #OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_RS232__LP1   (OffsetID:32600) (ToolID:) (UnitID:) 
 
 
 //------------------------------------------------------------
@@ -4389,69 +4407,14 @@ OBJECT_NAME : PHY__LP2   (OffsetID:33400) (ToolID:) (UnitID:)
 #OPTION2    
 #OPTION3    
 
-
-//------------------------------------------------------------
-OBJECT_NAME : PHY_IO__LP2   (OffsetID:33500) (ToolID:) (UnitID:) 
-
-#INTERNAL_ID   1 
-#EXTERNAL_ID   33501 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP2 - Offline."
-#MESSAGE 
-"Communication is Offline.
-Please, Check DeviceNet Communication Status !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   2 
-#EXTERNAL_ID   33502 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP2 - Offline."
-#MESSAGE 
-"Controller is Offline.
-Please, Check LoadPort Communication Status !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   3 
-#EXTERNAL_ID   33503 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP2 - Command Timeout."
-#MESSAGE 
-"After Command Send, Result Can't Receive.
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
 #INTERNAL_ID   4 
-#EXTERNAL_ID   33504 
+#EXTERNAL_ID   33404 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP2 - LOAD... FOUP NONE ALARM."
+"PHY__LP2 - Robot's arm is not retracted !"."
 #MESSAGE 
-"Before Foup Load Action, Foup Not Exist on the loadport.
-Please, Check Foup properly placed !
+"Please, check the RNE sensor of ATM Robot's arm ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -4461,11 +4424,44 @@ Please, Check Foup properly placed !
 #OPTION3    
 
 #INTERNAL_ID   5 
-#EXTERNAL_ID   33505 
+#EXTERNAL_ID   33405 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP2 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
+"PHY__LP2 - LOAD... FOUP NONE ALARM."
+#MESSAGE 
+"Before load action, foup dosen't exist on the load-port.
+Please, Check if foup is properly placed !
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   33406 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY__LP2 - LP Mapping Sensor Not Use"
+#MESSAGE 
+"Please, check config option !
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   33407 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY__LP2 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
 #MESSAGE 
 "Before LP Paddle Up Action, Wafer Slide Out Sensor On Status.
 Please, Check Wafer Status in the loadport !
@@ -4477,15 +4473,15 @@ Please, Check Wafer Status in the loadport !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   6 
-#EXTERNAL_ID   33506 
+#INTERNAL_ID   11 
+#EXTERNAL_ID   33411 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP2 - LP PADDLE UP/DN... PADDLE SENSOR NOT EXT STATUS ALARM."
+"PHY__LP2 - MAP ERROR (Door doesn't open) !"
 #MESSAGE 
-"Before LP Paddle Up/Down Action, Paddle Not Extend Status.
-Please, Check Paddle Extend Status !
+"The "Map" command cannot be executed, because the door of loadport is not open. 
+Please, open the door of loadport ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -4494,14 +4490,15 @@ Please, Check Paddle Extend Status !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   7 
-#EXTERNAL_ID   33507 
+#INTERNAL_ID   12 
+#EXTERNAL_ID   33412 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP2 - LP Mapping Sensor Not Use"
+"PHY__LP2 - MAP ERROR (Foup doesn't exist) !"
 #MESSAGE 
-"Please, check config option !
+"The "Map" command cannot be executed, because foup doesn't exist. 
+Please, check the state of foup ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -4510,14 +4507,15 @@ Please, Check Paddle Extend Status !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   8 
-#EXTERNAL_ID   33508 
+#INTERNAL_ID   13 
+#EXTERNAL_ID   33413 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP2 - LP has no RF-tag reader !"
+"PHY__LP2 - MAP ERROR (Foup isn't loadded) !"
 #MESSAGE 
-"Please, check config option !
+"The "Map" command cannot be executed, because foup isn't loaded. 
+Please, check the state of foup ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -4528,14 +4526,14 @@ Please, Check Paddle Extend Status !
 
 
 //------------------------------------------------------------
-OBJECT_NAME : PHY_RS232__LP2   (OffsetID:33600) (ToolID:) (UnitID:) 
+OBJECT_NAME : PHY_IO__LP2   (OffsetID:33500) (ToolID:) (UnitID:) 
 
 #INTERNAL_ID   11 
-#EXTERNAL_ID   33611 
+#EXTERNAL_ID   33511 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RS232__LP2 : Offline !"
+"PHY_IO__LP2 : Offline !"
 #MESSAGE 
 "Please, check communication line !
 "
@@ -4546,11 +4544,11 @@ OBJECT_NAME : PHY_RS232__LP2   (OffsetID:33600) (ToolID:) (UnitID:)
 #OPTION3    
 
 #INTERNAL_ID   12 
-#EXTERNAL_ID   33612 
+#EXTERNAL_ID   33512 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RS232__LP2 : Error Code !"
+"PHY_IO__LP2 : Error Code !"
 #MESSAGE 
 "Please, check HW status !
 "
@@ -4561,6 +4559,10 @@ OBJECT_NAME : PHY_RS232__LP2   (OffsetID:33600) (ToolID:) (UnitID:)
 #OPTION1    
 #OPTION2    
 #OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_RS232__LP2   (OffsetID:33600) (ToolID:) (UnitID:) 
 
 
 //------------------------------------------------------------
@@ -5005,69 +5007,14 @@ OBJECT_NAME : PHY__LP3   (OffsetID:34400) (ToolID:) (UnitID:)
 #OPTION2    
 #OPTION3    
 
-
-//------------------------------------------------------------
-OBJECT_NAME : PHY_IO__LP3   (OffsetID:34500) (ToolID:) (UnitID:) 
-
-#INTERNAL_ID   1 
-#EXTERNAL_ID   34501 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP3 - Offline."
-#MESSAGE 
-"Communication is Offline.
-Please, Check DeviceNet Communication Status !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   2 
-#EXTERNAL_ID   34502 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP3 - Offline."
-#MESSAGE 
-"Controller is Offline.
-Please, Check LoadPort Communication Status !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   3 
-#EXTERNAL_ID   34503 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__LP3 - Command Timeout."
-#MESSAGE 
-"After Command Send, Result Can't Receive.
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
 #INTERNAL_ID   4 
-#EXTERNAL_ID   34504 
+#EXTERNAL_ID   34404 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP3 - LOAD... FOUP NONE ALARM."
+"PHY__LP3 - Robot's arm is not retracted !"."
 #MESSAGE 
-"Before Foup Load Action, Foup Not Exist on the loadport.
-Please, Check Foup properly placed !
+"Please, check the RNE sensor of ATM Robot's arm ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -5077,11 +5024,44 @@ Please, Check Foup properly placed !
 #OPTION3    
 
 #INTERNAL_ID   5 
-#EXTERNAL_ID   34505 
+#EXTERNAL_ID   34405 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP3 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
+"PHY__LP3 - LOAD... FOUP NONE ALARM."
+#MESSAGE 
+"Before load action, foup dosen't exist on the load-port.
+Please, Check if foup is properly placed !
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   34406 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY__LP3 - LP Mapping Sensor Not Use"
+#MESSAGE 
+"Please, check config option !
+"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   34407 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY__LP3 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
 #MESSAGE 
 "Before LP Paddle Up Action, Wafer Slide Out Sensor On Status.
 Please, Check Wafer Status in the loadport !
@@ -5093,15 +5073,15 @@ Please, Check Wafer Status in the loadport !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   6 
-#EXTERNAL_ID   34506 
+#INTERNAL_ID   11 
+#EXTERNAL_ID   34411 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP3 - LP PADDLE UP/DN... PADDLE SENSOR NOT EXT STATUS ALARM."
+"PHY__LP3 - MAP ERROR (Door doesn't open) !"
 #MESSAGE 
-"Before LP Paddle Up/Down Action, Paddle Not Extend Status.
-Please, Check Paddle Extend Status !
+"The "Map" command cannot be executed, because the door of loadport is not open. 
+Please, open the door of loadport ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -5110,14 +5090,15 @@ Please, Check Paddle Extend Status !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   7 
-#EXTERNAL_ID   34507 
+#INTERNAL_ID   12 
+#EXTERNAL_ID   34412 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP3 - LP Mapping Sensor Not Use"
+"PHY__LP3 - MAP ERROR (Foup doesn't exist) !"
 #MESSAGE 
-"Please, check config option !
+"The "Map" command cannot be executed, because foup doesn't exist. 
+Please, check the state of foup ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -5126,14 +5107,15 @@ Please, Check Paddle Extend Status !
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   8 
-#EXTERNAL_ID   34508 
+#INTERNAL_ID   13 
+#EXTERNAL_ID   34413 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__LP3 - LP has no RF-tag reader !"
+"PHY__LP3 - MAP ERROR (Foup isn't loadded) !"
 #MESSAGE 
-"Please, check config option !
+"The "Map" command cannot be executed, because foup isn't loaded. 
+Please, check the state of foup ! 
 "
 #RECOVERY_ACTION 
      RETRY   ""
@@ -5144,14 +5126,14 @@ Please, Check Paddle Extend Status !
 
 
 //------------------------------------------------------------
-OBJECT_NAME : PHY_RS232__LP3   (OffsetID:34600) (ToolID:) (UnitID:) 
+OBJECT_NAME : PHY_IO__LP3   (OffsetID:34500) (ToolID:) (UnitID:) 
 
 #INTERNAL_ID   11 
-#EXTERNAL_ID   34611 
+#EXTERNAL_ID   34511 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RS232__LP3 : Offline !"
+"PHY_IO__LP3 : Offline !"
 #MESSAGE 
 "Please, check communication line !
 "
@@ -5162,11 +5144,11 @@ OBJECT_NAME : PHY_RS232__LP3   (OffsetID:34600) (ToolID:) (UnitID:)
 #OPTION3    
 
 #INTERNAL_ID   12 
-#EXTERNAL_ID   34612 
+#EXTERNAL_ID   34512 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RS232__LP3 : Error Code !"
+"PHY_IO__LP3 : Error Code !"
 #MESSAGE 
 "Please, check HW status !
 "
@@ -5177,6 +5159,10 @@ OBJECT_NAME : PHY_RS232__LP3   (OffsetID:34600) (ToolID:) (UnitID:)
 #OPTION1    
 #OPTION2    
 #OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_RS232__LP3   (OffsetID:34600) (ToolID:) (UnitID:) 
 
 
 //------------------------------------------------------------
@@ -8021,85 +8007,6 @@ OBJECT_NAME : __SYS   (OffsetID:0) (ToolID:) (UnitID:)
      ABORT   ""
      RETRY   ""
      ACT.5   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-
-//------------------------------------------------------------
-OBJECT_NAME : FNC__LLx_CHM   (OffsetID:0) (ToolID:) (UnitID:) 
-
-#INTERNAL_ID   1 
-#EXTERNAL_ID   1 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"FNC__LLx_CHM - Left_LLx's Vacuum Pressure Error."
-#MESSAGE 
-"Please, Check Left_LLx's Pressure !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   2 
-#EXTERNAL_ID   2 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"FNC__LLx_CHM - Right_LLx's Vacuum Pressure Error."
-#MESSAGE 
-"Please, Check Right_LLx's Pressure !
-"
-#RECOVERY_ACTION 
-     RETRY   ""
-     ABORT   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   3 
-#EXTERNAL_ID   3 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"FNC__LLx_CHM - Left_LLx's Leak Check is higher than config value !"
-#MESSAGE 
-""
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   4 
-#EXTERNAL_ID   4 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"FNC__LLx_CHM - Right_LLx's Leak Check is higher than config value !"
-#MESSAGE 
-""
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   5 
-#EXTERNAL_ID   5 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"FNC__LLx_CHM - Slot-Valve is not Close !"
-#MESSAGE 
-""
-#RECOVERY_ACTION 
-     CHECK_RETRY   ""
-     ABORT   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    

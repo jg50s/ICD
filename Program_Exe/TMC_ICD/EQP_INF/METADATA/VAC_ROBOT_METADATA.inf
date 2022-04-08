@@ -31,16 +31,9 @@
 
 #DEFINE_CONSTANT    DATA.PMx_HANDOFF.TYPE  		          SINGLE
 #DEFINE_CONSTANT    OBJ__PMx_ACTIVE_HANDOFF			        OPR__PMx_HANDOFF
-/*
-#DEFINE_CONSTANT    OBJ__PM1_ACTIVE_HANDOFF			        OPR_PM1_ACT_HANDOFF
-#DEFINE_CONSTANT    OBJ__PM2_ACTIVE_HANDOFF			        OPR_PM2_ACT_HANDOFF
-#DEFINE_CONSTANT    OBJ__PM3_ACTIVE_HANDOFF			        OPR_PM3_ACT_HANDOFF
-#DEFINE_CONSTANT    OBJ__PM4_ACTIVE_HANDOFF			        OPR_PM4_ACT_HANDOFF
-#DEFINE_CONSTANT    OBJ__PM5_ACTIVE_HANDOFF			        OPR_PM5_ACT_HANDOFF
-#DEFINE_CONSTANT    OBJ__PM6_ACTIVE_HANDOFF			        OPR_PM6_ACT_HANDOFF
-*/
-
 #DEFINE_CONSTANT    OBJ__PMC			                      PHY__PMx
+
+#DEFINE_CONSTANT    ACTIVE.MANIFOLD_X                   YES
 
 #DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
 #DEFINE_CONSTANT    OBJ__FNC_LL1	                      FNC__LBA
@@ -66,12 +59,24 @@
 
 #DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
 
+#DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
+#DEFINE_CONSTANT    LLx.MULTI_SLOT_VALVE                NO
+#DEFINE_CONSTANT    LLx.SLOT_SIZE                       2
+
 #DEFINE_CONSTANT    OBJ__TMC_CHM		                    PHY__TMC_CHM
 #DEFINE_CONSTANT    OBJ__PMC			                      PHY__PMx
 
 #DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
 #DEFINE_CONSTANT    OBJ__LL1	                          PHY__LBA
 #DEFINE_CONSTANT    OBJ__LL2	                          PHY__LBB
+
+// ARM.RNE SENSOR
+#DEFINE_CONSTANT    ROBOT.RNE_SNS.ARM_A                 IO+di.VTM_Robot.Arm_A.Retract
+#DEFINE_CONSTANT    ROBOT.RNE_SNS.ARM_B                 IO+di.VTM_Robot.Arm_B.Retract
+
+// ARM.RNE STATE
+#DEFINE_CONSTANT    DATA.RNE_ON                         On
+#DEFINE_CONSTANT    DATA.RNE_OFF                        Off
 
 
 //------------------------------------------------
@@ -100,10 +105,6 @@
 #DEFINE_CONSTANT    VAR__IO_DI_VAC_RB_RNE_PM4           IO+di.VTM_Robot.Retract_PM4
 #DEFINE_CONSTANT    VAR__IO_DI_VAC_RB_RNE_PM5           IO+di.VTM_Robot.Retract_PM5
 #DEFINE_CONSTANT    VAR__IO_DI_VAC_RB_RNE_PM6           IO+di.VTM_Robot.Retract_PM6
-
-#DEFINE_CONSTANT    VAR__IO_DI_DNET_COMM_STS            IO+di.Comm.Sts
-#DEFINE_CONSTANT    VAR__IO_DI_TM_ATM_SNS               IO+di.CHM.ATM.SNS
-#DEFINE_CONSTANT    VAR__IO_DI_TM_VAC_SNS               IO+di.CHM.VAC.SNS
 
 // TM
 #DEFINE_CONSTANT    VAR__PHY_TM_PRESS_STS  				      PHY__TMC_CHM+OTR.OUT.MON.dPRESSURE.STATUS
@@ -174,3 +175,13 @@
 //
 #DEFINE_CONSTANT    VAR__IO_DI_PM6_ATM_SNS		          PHY__PMx+MODULE.LINK.sPM6.ATM.SNS
 #DEFINE_CONSTANT    VAR__IO_DI_PM6_VAC_SNS		          PHY__PMx+MODULE.LINK.sPM6.VAC.SNS
+
+// ATM & VAC SENSOR
+#DEFINE_CONSTANT    DATA.ATM_ON                         ON
+#DEFINE_CONSTANT    DATA.ATM_OFF                        OFF
+#DEFINE_CONSTANT    DATA.VAC_ON                         ON
+#DEFINE_CONSTANT    DATA.VAC_OFF                        OFF
+
+// ARM_RNE.STATE
+#DEFINE_CONSTANT    DATA.RNE_ON                         On
+#DEFINE_CONSTANT    DATA.RNE_OFF                        Off

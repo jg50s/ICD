@@ -1,5 +1,0 @@
-#ID=1	1	LIGHT	FNC__LLx_CHM - Left_LLx's Vacuum Pressure Error.
-#ID=2	2	LIGHT	FNC__LLx_CHM - Right_LLx's Vacuum Pressure Error.
-#ID=3	3	LIGHT	FNC__LLx_CHM - Left_LLx's Leak Check is higher than config value !
-#ID=4	4	LIGHT	FNC__LLx_CHM - Right_LLx's Leak Check is higher than config value !
-#ID=5	5	LIGHT	FNC__LLx_CHM - Slot-Valve is not Close !

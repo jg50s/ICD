@@ -1,0 +1,130 @@
+
+//-------------------------------------------------------------------------------------------------
+// Command List ... 
+// #DEFINE_ID_OFFSET     ??? 
+// #DEFINE     ??? xxx 
+// #DEFINE_EQPID     ??? 
+// #DEFINE_TOOLID     ??? 
+// #DEFINE_UNITID     ??? 
+
+//-------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------
+#TMC_ECID_RANGE     10001   20000
+#PM1_ECID_RANGE     -1   -1
+#PM2_ECID_RANGE     -1   -1
+#PM3_ECID_RANGE     -1   -1
+#PM4_ECID_RANGE     -1   -1
+#PM5_ECID_RANGE     -1   -1
+#PM6_ECID_RANGE     -1   -1
+#PM7_ECID_RANGE     -1   -1
+#PM8_ECID_RANGE     -1   -1
+#PM9_ECID_RANGE     -1   -1
+
+//-------------------------------------------------------------------------------------------------
+
+#LIST_DEFINE   FALSE_TRUE   (0.000)
+     FALSE   0
+     TRUE   1
+     TRUE   255
+#LIST_END
+
+
+#LIST_DEFINE   CMMD_MODE   (5.000)
+     DISABLE   1
+     NOT_USE   3
+     ENABLE   5
+#LIST_END
+
+
+#LIST_DEFINE   INITIAL_STATE   (4.000)
+     EQUIPMENT_OFFLINE   1
+     ATTEMPT_ONLINE   2
+     HOST_OFFLINE   3
+     ONLINE_LOCAL   4
+     ONLINE_REMOTE   5
+#LIST_END
+
+
+#LIST_DEFINE   OFFLINE_STATE   (1.000)
+     EQUIPMENT_OFFLINE   1
+     HOST_OFFLINE   3
+#LIST_END
+
+
+#LIST_DEFINE   DISABLE_ENABLE   (0.000)
+     DISABLE   0
+     ENABLE   1
+     ENABLE   255
+#LIST_END
+
+
+
+//-------------------------------------------------------------------------------------------------
+// DEFINE LIST ...
+
+
+
+//-------------------------------------------------------------------------------------------------
+INDEX   ECID   COMMAND-STR   CHANNEL-FLAG (CHANNE-NAME)   UNIT   FMT-TYPE   FMT-BYTE   DEFAULT   MIN   MAX   NAME     (EqpID)(ToolID)(UnitID)
+   주의 사항)  FMT-TYPE이 F인 경우 MIN으로 설정된 값의 소수점 자리수를 전체 데이타의 소수점 자리수로 사용한다. 
+               FMT-TYPE으로 설정할 수 있은 값은 A, F, BOOL있다. 
+               일반적으로 Analog 값은 F로 설정하고 Digital 값은 A로 설정한다. 
+
+
+    1)           1           #DEVICE_ID     CHANNEL-NO   (FA_E30_CTRL+CFG.DEVICEID)        No.          U[4]        0.0        0.0    32767.0 "DEVICE-ID"     ()()()
+
+    2)           2         #S6F9_REPORT     CHANNEL-NO   (__)        ___          U[1]        0.0        0.0        1.0 "S6F9_REPORT"     ()()()
+
+    3)          11                  #T1     CHANNEL-NO   (FA_E30_CTRL+CFG.T1)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T1"     ()()()
+
+    4)          12                  #T2     CHANNEL-NO   (FA_E30_CTRL+CFG.T2)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T2"     ()()()
+
+    5)          13                  #T3     CHANNEL-NO   (FA_E30_CTRL+CFG.T3)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T3"     ()()()
+
+    6)          14                  #T4     CHANNEL-NO   (FA_E30_CTRL+CFG.T4)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T4"     ()()()
+
+    7)          15                  #T5     CHANNEL-NO   (FA_E30_CTRL+CFG.T5)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T5"     ()()()
+
+    8)          16                  #T6     CHANNEL-NO   (FA_E30_CTRL+CFG.T6)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T6"     ()()()
+
+    9)          17                  #T7     CHANNEL-NO   (FA_E30_CTRL+CFG.T7)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T7"     ()()()
+
+   10)          18                  #T8     CHANNEL-NO   (FA_E30_CTRL+CFG.T8)        sec          F[4]        2.0        1.0[Dec:1]       60.0 "T8"     ()()()
+
+   11)          19         #RETRY_LIMIT     CHANNEL-NO   (FA_E30_CTRL+CFG.RETRY_LIMIT)        num          U[1]        1.0        1.0       10.0 "RETRY_LIMIT"     ()()()
+
+   12)          20           #LINK_TEST     CHANNEL-NO   (FA_E30_CTRL+CFG.LINK_TEST)        sec          U[1]       10.0        1.0       30.0 "LINK_TEST"     ()()()
+
+   13)          21            #S6_REPLY     CHANNEL-NO   (__)        ___          U[1]        1.0        0.0        1.0 "S6_REPLY"     ()()()
+
+   14)          22           #S10_REPLY     CHANNEL-NO   (__)        ___          U[1]        1.0        0.0        1.0 "S10_REPLY"     ()()()
+
+   15)          25 #ESTABLISH_COMMUNICATION_TIMEOUT     CHANNEL-NO   (FA_E30_CTRL+FA.COMMUNICATION.TIME)        ___          U[4]       10.0       10.0      120.0 "Communication_Timeout"     ()()()
+
+   16)          30 #LP_GLOBAL_BYPASS_READ_ID     CHANNEL-NO   (__)         __       BOOL[1]        0.0        0.0        1.0 "LP_Global_BypassReadID"     ()()()
+
+   17)          31  #LP1_BYPASS_READ_ID     CHANNEL-YES  (PHY_LP1+FA.LP.BYPASS_ID.FLAG)         __       BOOL[1]        0.0        0.0        1.0 "LP1_BypassReadID"     ()()()
+
+   18)          32  #LP2_BYPASS_READ_ID     CHANNEL-YES  (PHY_LP2+FA.LP.BYPASS_ID.FLAG)         __       BOOL[1]        0.0        0.0        1.0 "LP2_BypassReadID"     ()()()
+
+   19)          33  #LP3_BYPASS_READ_ID     CHANNEL-YES  (PHY_LP3+FA.LP.BYPASS_ID.FLAG)         __       BOOL[1]        0.0        0.0        1.0 "LP3_BypassReadID"     ()()()
+
+   20)          41      UNKNOWN-COMMAND     CHANNEL-NO   (FA_E30_CTRL+FA.HEARTBEAT.INTERVAL.SEC)        sec          U[2]       10.0        0.0       60.0 "HeartBeat"     ()()()
+
+   21)          42 #LIST(CMMD_MODE : 1)     CHANNEL-NO   (FA_E30_CTRL+FA.COMMUNICATION.FLAG)      state          U[1]        5.0        1.0        5.0 "Default_Communication_State"     ()()()
+
+   22)          43 #LIST(INITIAL_STATE : 2)     CHANNEL-NO   (FA_E30_CTRL+DEFAULT.INITIAL.STATE)      state          U[1]        4.0        1.0        5.0 "Default_Initial_State"     ()()()
+
+   23)          44 #LIST(OFFLINE_STATE : 3)     CHANNEL-NO   (FA_E30_CTRL+DEFAULT.CONTROL.OFFLINE.STATE)      state          U[1]        3.0        1.0        3.0 "Default_Control_Offline_State"     ()()()
+
+   24)          45         #TIME_FORMAT     CHANNEL-NO   (FA_E30_CTRL+TIME.FORMAT.TYPE)        ___          U[1]        1.0        0.0        1.0 "Time_Format"     ()()()
+
+   25)          46      UNKNOWN-COMMAND     CHANNEL-NO   (FA_E30_CTRL+ECID.MAX.SPOOL.TRANSMIT)        ___          U[2]        1.0        0.0      100.0 "Max_Spool_Transmit"     ()()()
+
+   26)          47 #LIST(DISABLE_ENABLE : 4)     CHANNEL-NO   (FA_E30_CTRL+ECID.SPOOL.CONTROL)        ___       BOOL[1]        1.0        0.0        1.0 "OverWrite_Spool"     ()()()
+
+   27)          48 #LIST(DISABLE_ENABLE : 4)     CHANNEL-NO   (FA_E30_CTRL+ECID.OVERWRITE.SPOOL)        ___       BOOL[1]        1.0        0.0        1.0 "Spooling_Enable"     ()()()
+
+   28)          49      UNKNOWN-COMMAND     CHANNEL-NO   (FA_E30_CTRL+ECID.MAX.SPOOL.SAVE)        ___          U[2]      200.0        0.0     9999.0 "Max_Spool_Message"     ()()()
+

@@ -18,7 +18,6 @@
 #INCLUDE   METADATA\LLx_METADATA.inf
 
 #INCLUDE   METADATA\ALx_METADATA.inf
-#INCLUDE   METADATA\VIS_METADATA.inf
 #INCLUDE   METADATA\PUMP_METADATA.inf
 
 
@@ -26,6 +25,7 @@
 #OBJECT_PROPERTY    DB_CFG
 
 #DEFINE_CONSTANT    PM_SIZE     	                      ##PM_LIMIT
+#DEFINE_CONSTANT    LLx.MULTI_SLOT_VALVE                NO
 
 
 //------------------------------------------------

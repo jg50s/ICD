@@ -1,0 +1,11 @@
+Error List ... 
+   Error : [PHY_LBC+CTRL] (-1,-1,-1001) 
+   Error : [PHY_LBC+PRESSURE.VALUE] (-1,-1,-1) 
+   Error : [PHY_LBC+SCH.IN_COUNT] (-1,-1,-1) 
+   Error : [PHY_LBC+SCH.IN_OUT.FLAG] (-1,-1,-1) 
+   Error : [PHY_LBC+VAC.SNS] (-1,-1,-1) 
+   Error : [PHY_LBD+CTRL] (-1,-1,-1001) 
+   Error : [PHY_LBD+PRESSURE.VALUE] (-1,-1,-1) 
+   Error : [PHY_LBD+SCH.IN_COUNT] (-1,-1,-1) 
+   Error : [PHY_LBD+SCH.IN_OUT.FLAG] (-1,-1,-1) 
+

@@ -1,3 +1,10 @@
 #ID=1	33401	LIGHT	PHY__LP2 - Pump Pressure TimeOut.
 #ID=2	33402	LIGHT	PHY__LP2 - Door Status is not open !
 #ID=3	33403	LIGHT	PHY__LP2 - Currently, Load Port's status is "Mapping_Sequence Lock".
+#ID=4	33404	LIGHT	PHY__LP2 - Robot's arm is not retracted !".
+#ID=5	33405	LIGHT	PHY__LP2 - LOAD... FOUP NONE ALARM.
+#ID=6	33406	LIGHT	PHY__LP2 - LP Mapping Sensor Not Use
+#ID=7	33407	LIGHT	PHY__LP2 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM.
+#ID=11	33411	LIGHT	PHY__LP2 - MAP ERROR (Door doesn't open) !
+#ID=12	33412	LIGHT	PHY__LP2 - MAP ERROR (Foup doesn't exist) !
+#ID=13	33413	LIGHT	PHY__LP2 - MAP ERROR (Foup isn't loadded) !

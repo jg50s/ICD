@@ -1,0 +1,2922 @@
+// INDEX   MODULE   ID   ALCD   STATUS         TEXT
+
+
+
+001)  0     0          85    1          "(CTC) Core__Sys_Info - SYSTEM ERROR"
+
+002)  0     11         85    1          "(CTC) Core__Sys_Info - SYSTEM ERROR 11"
+
+003)  0     12         85    1          "(CTC) Core__Sys_Info - SYSTEM WARNING 12"
+
+004)  0     21         85    1          "(CTC) Core__Sys_Info - System Error : Async Timer Max Error"
+
+005)  0     311        85    1          "(CTC) OPR_CTC_MODE - OBJECT MODE : UNKNOWN"
+
+006)  0     312        85    1          "(CTC) OPR_CTC_MODE - SYSTEM IN PROCESS"
+
+007)  0     313        85    1          "(CTC) OPR_CTC_MODE - SYSTEM IN MAINT MODE"
+
+008)  0     321        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (1)"
+
+009)  0     322        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (2)"
+
+010)  0     323        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (3)"
+
+011)  0     324        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (4)"
+
+012)  0     325        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (5)"
+
+013)  0     331        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (6)"
+
+014)  0     332        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (6)"
+
+015)  0     333        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (6)"
+
+016)  0     334        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (6)"
+
+017)  0     335        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (6)"
+
+018)  0     326        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (7)"
+
+019)  0     341        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (8)"
+
+020)  0     342        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (9)"
+
+021)  0     351        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (10)"
+
+022)  0     352        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (10)"
+
+023)  0     353        85    1          "(CTC) OPR_CTC_MODE - JOB START ERROR (11)"
+
+024)  0     361        85    1          "(CTC) OPR_CTC_MODE - There is no dummy port !"
+
+025)  0     362        85    1          "(CTC) OPR_CTC_MODE - There is no dummy empty slot !"
+
+026)  0     363        85    1          "(CTC) OPR_CTC_MODE - Any job at dummy port can not be executed !"
+
+027)  0     364        85    1          "(CTC) OPR_CTC_MODE - All job were ended by user !"
+
+028)  0     365        85    1          "(CTC) OPR_CTC_MODE - New job can not use buffer. !"
+
+029)  0     366        85    1          "(CTC) OPR_CTC_MODE - Manual Job Start Error !"
+
+030)  0     367        85    1          "(CTC) OPR_CTC_MODE - Manual Job Start Error !"
+
+031)  0     371        85    1          "(CTC)  process type. "
+
+032)  0     372        85    1          "(CTC)  process type. "
+
+033)  0     401        85    1          "(CTC) OPR_MAINT [CObj_Opr__MAINT] : OBJECT MODE : UNKNOWN"
+
+034)  0     511        85    1          "(CTC) OPR_PM1 - OBJECT MODE : UNKNOWN"
+
+035)  0     611        85    1          "(CTC) OPR_PM2 - OBJECT MODE : UNKNOWN"
+
+036)  0     711        85    1          "(CTC) OPR_PM3 - OBJECT MODE : UNKNOWN"
+
+037)  0     811        85    1          "(CTC) OPR_PM4 - OBJECT MODE : UNKNOWN"
+
+038)  0     911        85    1          "(CTC) OPR_TIMER - OBJECT MODE : UNKNOWN"
+
+039)  0     1011       85    1          "(CTC) MNG_SIGNAL_TOWER [CObj_Mng__SIGNAL_TOWER_EX] : OBJECT MODE : UNKNOWN"
+
+040)  0     1111       85    1          "(CTC) MNG_ALARM_CTRL - OBJECT MODE : UNKNOWN"
+
+041)  0     1311       85    1          "(CTC) OPR_PART_PM1 - OBJECT MODE : UNKNOWN"
+
+042)  0     1411       85    1          "(CTC) OPR_PART_PM2 - OBJECT MODE : UNKNOWN"
+
+043)  0     1511       85    1          "(CTC) OPR_PART_PM3 - OBJECT MODE : UNKNOWN"
+
+044)  0     1611       85    1          "(CTC) OPR_PART_PM4 - OBJECT MODE : UNKNOWN"
+
+045)  0     1711       85    1          "(CTC) FNC_ATM_ROBOT - OBJECT UNKNOWN MODE"
+
+046)  0     1712       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+047)  0     1713       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+048)  0     1715       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+049)  0     1716       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+050)  0     1717       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+051)  0     1718       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+052)  0     1719       85    1          "(CTC) FNC_ATM_ROBOT - JOB ERROR"
+
+053)  0     1721       85    1          "(CTC) FNC_ATM_ROBOT - Module Move - Module Status Error"
+
+054)  0     1722       85    1          "(CTC) FNC_ATM_ROBOT - Tool Clear - Module Status Error"
+
+055)  0     1725       85    1          "(CTC) FNC_ATM_ROBOT - Wafer Moving Error !"
+
+056)  0     1726       85    1          "(CTC) FNC_ATM_ROBOT - GUI상의 Wafer 정보와 설비내의 실제 Wafer 정보가 일치하는지 확인바랍니다."
+
+057)  0     1727       85    1          "(CTC) FNC_ATM_ROBOT - Pick 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+
+058)  0     1728       85    1          "(CTC) FNC_ATM_ROBOT - Place 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+
+059)  0     1731       85    1          "(CTC) FNC_ATM_ROBOT - LBx Configuration Error"
+
+060)  0     1732       85    1          "(CTC) FNC_ATM_ROBOT - BUFFERx Configuration Error"
+
+061)  0     1735       85    1          "(CTC) FNC_ATM_ROBOT - ATM-ROBOT - SWAP ERROR !"
+
+062)  0     1741       85    1          "(CTC) FNC_ATM_ROBOT - ATM-Robot - Manual Move Error !"
+
+063)  0     1742       85    1          "(CTC) FNC_ATM_ROBOT - ATM-Robot - Tool Clear Error !"
+
+064)  0     1743       85    1          "(CTC) FNC_ATM_ROBOT - LPx Status is not available !"
+
+065)  0     1744       85    1          "(CTC) FNC_ATM_ROBOT - LPx material-pick error occurred in job running !"
+
+066)  0     1745       85    1          "(CTC) FNC_ATM_ROBOT - LPx material-place error occurred in job running !"
+
+067)  0     1746       85    1          "(CTC) FNC_ATM_ROBOT - LPx's mapping request is rejected !"
+
+068)  0     1747       85    1          "(CTC) FNC_ATM_ROBOT - AL's L/L target name error !"
+
+069)  0     1748       85    1          "(CTC) FNC_ATM_ROBOT - ATM Robot's moving is paused by user."
+
+070)  0     1749       85    1          "(CTC) FNC_ATM_ROBOT - Maint Pick Error : ATM Robot Paused !"
+
+071)  0     1750       85    1          "(CTC) FNC_ATM_ROBOT - Maint Place Error : ATM Robot Paused !"
+
+072)  0     1811       85    1          "(CTC) FNC_VAC_ROBOT : OBJECT MODE : UNKNOWN"
+
+073)  0     1812       85    1          "(CTC) FNC_VAC_ROBOT : JOB ERROR"
+
+074)  0     1813       85    1          "(CTC) FNC_VAC_ROBOT : JOB ERROR"
+
+075)  0     1814       85    1          "(CTC) FNC_VAC_ROBOT : CLEAN ERROR"
+
+076)  0     1815       85    1          "(CTC) FNC_VAC_ROBOT : VAC-Robot's A Arm : Config Error"
+
+077)  0     1816       85    1          "(CTC) FNC_VAC_ROBOT : VAC-Robot's B Arm : Config Error"
+
+078)  0     1817       85    1          "(CTC) FNC_VAC_ROBOT : VAC-Robot's any arm is not used : Config Error !"
+
+079)  0     1818       85    1          "(CTC) FNC_VAC_ROBOT : VAC-Robot's PICK ARM CONFIG ERROR !"
+
+080)  0     1821       85    1          "(CTC) FNC_VAC_ROBOT : JOB ERROR"
+
+081)  0     1822       85    1          "(CTC) FNC_VAC_ROBOT : JOB ERROR"
+
+082)  0     1823       85    1          "(CTC) FNC_VAC_ROBOT : JOB ERROR"
+
+083)  0     1825       85    1          "(CTC) FNC_VAC_ROBOT : Wafer Moving Error !"
+
+084)  0     1826       85    1          "(CTC) FNC_VAC_ROBOT : GUI상의 Wafer 정보와 설비내의 실제 Wafer 정보가 일치하는지 확인바랍니다."
+
+085)  0     1827       85    1          "(CTC) FNC_VAC_ROBOT : Pick 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+
+086)  0     1828       85    1          "(CTC) FNC_VAC_ROBOT : Place 명령 처리 후 Wafer 정보에 문제가 발생 했습니다."
+
+087)  0     1831       85    1          "(CTC) FNC_VAC_ROBOT : VAC_ROBOT STATUS ERROR"
+
+088)  0     1832       85    1          "(CTC) FNC_VAC_ROBOT : VAC_TMC STATUS ERROR"
+
+089)  0     1833       85    1          "(CTC) FNC_VAC_ROBOT : PMC STATUS ERROR"
+
+090)  0     1835       85    1          "(CTC) FNC_VAC_ROBOT : VAC-ROBOT - SWAP ERROR !"
+
+091)  0     1841       85    1          "(CTC) FNC_VAC_ROBOT : VAC-Robot - Manual Move Error !"
+
+092)  0     1842       85    1          "(CTC) FNC_VAC_ROBOT : VAC-Robot - Tool Clear Error !"
+
+093)  0     1843       85    1          "(CTC) FNC_VAC_ROBOT : VAC_Robot - Not Used Arm Error !"
+
+094)  0     1844       85    1          "(CTC) FNC_VAC_ROBOT : VAC_Robot - Not Used Arm Error !"
+
+095)  0     1845       85    1          "(CTC) FNC_VAC_ROBOT : PMx Status is not available !"
+
+096)  0     1846       85    1          "(CTC) FNC_VAC_ROBOT : VAC Robot's moving is paused by user."
+
+097)  0     1847       85    1          "(CTC) FNC_VAC_ROBOT : JOB Error : Material and PMC's process type is not mismatched."
+
+098)  0     1848       85    1          "(CTC) FNC_VAC_ROBOT : Maint Pick Error : Vacuum Robot Paused !"
+
+099)  0     1849       85    1          "(CTC) FNC_VAC_ROBOT : Maint Place Error : Vacuum Robot Paused !"
+
+100)  0     2101       85    1          "(CTC) PHY_TMC_SYS - MODULE OBJECT - ABORTED"
+
+101)  0     2102       85    1          "(CTC) PHY_TMC_SYS - MODULE OBJECT - OFFLINE"
+
+102)  0     2103       85    1          "(CTC) PHY_TMC_SYS - MODULE OBJECT - NOT STANDBY"
+
+103)  0     2104       85    1          "(CTC) PHY_TMC_SYS - MODULE OBJECT - CALL ERROR"
+
+104)  0     2111       85    1          "(CTC) PHY_TMC_SYS - OBJECT MODE : UNKNOWN"
+
+105)  0     2201       85    1          "(CTC) PHY_TMC_CHM - MODULE OBJECT - ABORTED"
+
+106)  0     2202       85    1          "(CTC) PHY_TMC_CHM - MODULE OBJECT - OFFLINE"
+
+107)  0     2203       85    1          "(CTC) PHY_TMC_CHM - MODULE OBJECT - NOT STANDBY"
+
+108)  0     2204       85    1          "(CTC) PHY_TMC_CHM - MODULE OBJECT - CALL ERROR"
+
+109)  0     2211       85    1          "(CTC) PHY_TMC_CHM - OBJECT MODE : UNKNOWN"
+
+110)  0     2212       85    1          "(CTC) PHY_TMC_CHM - TMC OFFLINE"
+
+111)  0     2213       85    1          "(CTC) PHY_TMC_CHM - VENT ERROR"
+
+112)  0     2214       85    1          "(CTC) PHY_TMC_CHM - PUMP ERROR"
+
+113)  0     2301       85    1          "(CTC) PHY_ATM_ROBOT - MODULE OBJECT - ABORTED"
+
+114)  0     2302       85    1          "(CTC) PHY_ATM_ROBOT - MODULE OBJECT - OFFLINE"
+
+115)  0     2303       85    1          "(CTC) PHY_ATM_ROBOT - MODULE OBJECT - NOT STANDBY"
+
+116)  0     2304       85    1          "(CTC) PHY_ATM_ROBOT - MODULE OBJECT - CALL ERROR"
+
+117)  0     2311       85    1          "(CTC) PHY_ATM_ROBOT - OBJECT MODE : UNKNOWN"
+
+118)  0     2401       85    1          "(CTC) PHY_VAC_ROBOT - MODULE OBJECT - ABORTED"
+
+119)  0     2402       85    1          "(CTC) PHY_VAC_ROBOT - MODULE OBJECT - OFFLINE"
+
+120)  0     2403       85    1          "(CTC) PHY_VAC_ROBOT - MODULE OBJECT - NOT STANDBY"
+
+121)  0     2404       85    1          "(CTC) PHY_VAC_ROBOT - MODULE OBJECT - CALL ERROR"
+
+122)  0     2411       85    1          "(CTC) PHY_VAC_ROBOT - OBJECT MODE : UNKNOWN"
+
+123)  0     2501       85    1          "(CTC) PHY_AL1 [CObj_Phy__AL] : MODULE OBJECT - ABORTED"
+
+124)  0     2502       85    1          "(CTC) PHY_AL1 [CObj_Phy__AL] : MODULE OBJECT - OFFLINE"
+
+125)  0     2503       85    1          "(CTC) PHY_AL1 [CObj_Phy__AL] : MODULE OBJECT - NOT STANDBY"
+
+126)  0     2504       85    1          "(CTC) PHY_AL1 [CObj_Phy__AL] : MODULE OBJECT - CALL ERROR"
+
+127)  0     2511       85    1          "(CTC) PHY_AL1 [CObj_Phy__AL] : OBJECT MODE : UNKNOWN"
+
+128)  0     2601       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : MODULE OBJECT - ABORTED"
+
+129)  0     2602       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : MODULE OBJECT - OFFLINE"
+
+130)  0     2603       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : MODULE OBJECT - NOT STANDBY"
+
+131)  0     2604       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : MODULE OBJECT - CALL ERROR"
+
+132)  0     2611       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : OBJECT MODE : UNKNOWN"
+
+133)  0     2613       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : VENT ERROR"
+
+134)  0     2614       85    1          "(CTC) PHY_LBA [CObj_Phy__LBx] : PUMP ERROR"
+
+135)  0     2701       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : MODULE OBJECT - ABORTED"
+
+136)  0     2702       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : MODULE OBJECT - OFFLINE"
+
+137)  0     2703       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : MODULE OBJECT - NOT STANDBY"
+
+138)  0     2704       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : MODULE OBJECT - CALL ERROR"
+
+139)  0     2711       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : OBJECT MODE : UNKNOWN"
+
+140)  0     2713       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : VENT ERROR"
+
+141)  0     2714       85    1          "(CTC) PHY_LBB [CObj_Phy__LBx] : PUMP ERROR"
+
+142)  0     2801       85    1          "(CTC) PHY_CL1 [CObj_Phy__CLx] : MODULE OBJECT - ABORTED"
+
+143)  0     2802       85    1          "(CTC) PHY_CL1 [CObj_Phy__CLx] : MODULE OBJECT - OFFLINE"
+
+144)  0     2803       85    1          "(CTC) PHY_CL1 [CObj_Phy__CLx] : MODULE OBJECT - NOT STANDBY"
+
+145)  0     2804       85    1          "(CTC) PHY_CL1 [CObj_Phy__CLx] : MODULE OBJECT - CALL ERROR"
+
+146)  0     2811       85    1          "(CTC) PHY_CL1 [CObj_Phy__CLx] : OBJECT MODE : UNKNOWN"
+
+147)  0     2901       85    1          "(CTC) PHY_CL2 [CObj_Phy__CLx] : MODULE OBJECT - ABORTED"
+
+148)  0     2902       85    1          "(CTC) PHY_CL2 [CObj_Phy__CLx] : MODULE OBJECT - OFFLINE"
+
+149)  0     2903       85    1          "(CTC) PHY_CL2 [CObj_Phy__CLx] : MODULE OBJECT - NOT STANDBY"
+
+150)  0     2904       85    1          "(CTC) PHY_CL2 [CObj_Phy__CLx] : MODULE OBJECT - CALL ERROR"
+
+151)  0     2911       85    1          "(CTC) PHY_CL2 [CObj_Phy__CLx] : OBJECT MODE : UNKNOWN"
+
+152)  0     3001       85    1          "(CTC) PHY_LP1 - MODULE OBJECT - ABORTED"
+
+153)  0     3002       85    1          "(CTC) PHY_LP1 - MODULE OBJECT - OFFLINE"
+
+154)  0     3003       85    1          "(CTC) PHY_LP1 - MODULE OBJECT - NOT STANDBY"
+
+155)  0     3004       85    1          "(CTC) PHY_LP1 - MODULE OBJECT - CALL ERROR"
+
+156)  0     3011       85    1          "(CTC) PHY_LP1 - OBJECT MODE : UNKNOWN"
+
+157)  0     3021       85    1          "(CTC) PHY_LP1 - Access Mode Violation !"
+
+158)  0     3022       85    1          "(CTC) PHY_LP1 - Carrier Verification Failure !"
+
+159)  0     3023       85    1          "(CTC) PHY_LP1 - Slot Map Verification Failed !"
+
+160)  0     3025       85    1          "(CTC) PHY_LP1 - Port Access Manual To Auto : Error"
+
+161)  0     3026       85    1          "(CTC) PHY_LP1 - Port Access Auto To Manual : Error"
+
+162)  0     3031       85    1          "(CTC) ON"
+
+163)  0     3032       85    1          "(CTC) PHY_LP1 - Unexpectedly, cassette disappeared."
+
+164)  0     3033       85    1          "(CTC) PHY_LP1 - LP1's status is out_of_service."
+
+165)  0     3035       85    1          "(CTC) PHY_LP1 - Currently, LP1 is in use. So, can't unload."
+
+166)  0     3041       85    1          "(CTC) PHY_LP1 - LP1's job is ended by user."
+
+167)  0     3044       85    1          "(CTC) PHY_LP1 - LP1's job is aborted by user."
+
+168)  0     3042       85    1          "(CTC) PHY_LP1 - LP1's job is paused by user."
+
+169)  0     3043       85    1          "(CTC) PHY_LP1 - LP1's job is resumed by user."
+
+170)  0     3051       85    1          "(CTC) ."
+
+171)  0     3052       85    1          "(CTC) ."
+
+172)  0     3101       85    1          "(CTC) PHY_LP2 - MODULE OBJECT - ABORTED"
+
+173)  0     3102       85    1          "(CTC) PHY_LP2 - MODULE OBJECT - OFFLINE"
+
+174)  0     3103       85    1          "(CTC) PHY_LP2 - MODULE OBJECT - NOT STANDBY"
+
+175)  0     3104       85    1          "(CTC) PHY_LP2 - MODULE OBJECT - CALL ERROR"
+
+176)  0     3111       85    1          "(CTC) PHY_LP2 - OBJECT MODE : UNKNOWN"
+
+177)  0     3121       85    1          "(CTC) PHY_LP2 - Access Mode Violation !"
+
+178)  0     3122       85    1          "(CTC) PHY_LP2 - Carrier Verification Failure !"
+
+179)  0     3123       85    1          "(CTC) PHY_LP2 - Slot Map Verification Failed !"
+
+180)  0     3125       85    1          "(CTC) PHY_LP2 - Port Access Manual To Auto : Error"
+
+181)  0     3126       85    1          "(CTC) PHY_LP2 - Port Access Auto To Manual : Error"
+
+182)  0     3131       85    1          "(CTC) ON"
+
+183)  0     3132       85    1          "(CTC) PHY_LP2 - Unexpectedly, cassette disappeared."
+
+184)  0     3133       85    1          "(CTC) PHY_LP2 - LP2's status is out_of_service."
+
+185)  0     3135       85    1          "(CTC) PHY_LP2 - Currently, LP2 is in use. So, can't unload."
+
+186)  0     3141       85    1          "(CTC) PHY_LP2 - LP2's job is ended by user."
+
+187)  0     3144       85    1          "(CTC) PHY_LP2 - LP2's job is aborted by user."
+
+188)  0     3142       85    1          "(CTC) PHY_LP2 - LP2's job is paused by user."
+
+189)  0     3143       85    1          "(CTC) PHY_LP2 - LP2's job is resumed by user."
+
+190)  0     3151       85    1          "(CTC) ."
+
+191)  0     3152       85    1          "(CTC) ."
+
+192)  0     3201       85    1          "(CTC) PHY_LP3 - MODULE OBJECT - ABORTED"
+
+193)  0     3202       85    1          "(CTC) PHY_LP3 - MODULE OBJECT - OFFLINE"
+
+194)  0     3203       85    1          "(CTC) PHY_LP3 - MODULE OBJECT - NOT STANDBY"
+
+195)  0     3204       85    1          "(CTC) PHY_LP3 - MODULE OBJECT - CALL ERROR"
+
+196)  0     3211       85    1          "(CTC) PHY_LP3 - OBJECT MODE : UNKNOWN"
+
+197)  0     3221       85    1          "(CTC) PHY_LP3 - Access Mode Violation !"
+
+198)  0     3222       85    1          "(CTC) PHY_LP3 - Carrier Verification Failure !"
+
+199)  0     3223       85    1          "(CTC) PHY_LP3 - Slot Map Verification Failed !"
+
+200)  0     3225       85    1          "(CTC) PHY_LP3 - Port Access Manual To Auto : Error"
+
+201)  0     3226       85    1          "(CTC) PHY_LP3 - Port Access Auto To Manual : Error"
+
+202)  0     3231       85    1          "(CTC) ON"
+
+203)  0     3232       85    1          "(CTC) PHY_LP3 - Unexpectedly, cassette disappeared."
+
+204)  0     3233       85    1          "(CTC) PHY_LP3 - LP3's status is out_of_service."
+
+205)  0     3235       85    1          "(CTC) PHY_LP3 - Currently, LP3 is in use. So, can't unload."
+
+206)  0     3241       85    1          "(CTC) PHY_LP3 - LP3's job is ended by user."
+
+207)  0     3244       85    1          "(CTC) PHY_LP3 - LP3's job is aborted by user."
+
+208)  0     3242       85    1          "(CTC) PHY_LP3 - LP3's job is paused by user."
+
+209)  0     3243       85    1          "(CTC) PHY_LP3 - LP3's job is resumed by user."
+
+210)  0     3251       85    1          "(CTC) ."
+
+211)  0     3252       85    1          "(CTC) ."
+
+212)  0     3301       85    1          "(CTC) PHY_PM1 : MODULE OBJECT - ABORTED"
+
+213)  0     3302       85    1          "(CTC) PHY_PM1 : MODULE OBJECT - OFFLINE"
+
+214)  0     3303       85    1          "(CTC) PHY_PM1 : MODULE OBJECT - NOT STANDBY"
+
+215)  0     3304       85    1          "(CTC) PHY_PM1 : MODULE OBJECT - CALL ERROR"
+
+216)  0     3311       85    1          "(CTC) PHY_PM1 : OBJECT MODE : UNKNOWN"
+
+217)  0     3312       85    1          "(CTC) PHY_PM1 : PMC OFFLINE"
+
+218)  0     3313       85    1          "(CTC) PHY_PM1 : VENT ERROR"
+
+219)  0     3314       85    1          "(CTC) PHY_PM1 : PUMP ERROR"
+
+220)  0     3315       85    1          "(CTC) PHY_PM1 : SLIT VALVE NOT CLOSE"
+
+221)  0     3321       85    1          "(CTC) PHY_PM1 : PROCESS ALARM"
+
+222)  0     3322       85    1          "(CTC) PHY_PM1 : PMC's 2st slot is not empty."
+
+223)  0     3323       85    1          "(CTC) ."
+
+224)  0     3324       85    1          "(CTC) ."
+
+225)  0     3331       85    1          "(CTC) ."
+
+226)  0     3332       85    1          "(CTC) ."
+
+227)  0     3333       85    1          "(CTC)  command is retried."
+
+228)  0     3334       85    1          "(CTC)  command is retried."
+
+229)  0     3335       85    1          "(CTC) PHY_PM1 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+
+230)  0     3401       85    1          "(CTC) PHY_PM2 : MODULE OBJECT - ABORTED"
+
+231)  0     3402       85    1          "(CTC) PHY_PM2 : MODULE OBJECT - OFFLINE"
+
+232)  0     3403       85    1          "(CTC) PHY_PM2 : MODULE OBJECT - NOT STANDBY"
+
+233)  0     3404       85    1          "(CTC) PHY_PM2 : MODULE OBJECT - CALL ERROR"
+
+234)  0     3411       85    1          "(CTC) PHY_PM2 : OBJECT MODE : UNKNOWN"
+
+235)  0     3412       85    1          "(CTC) PHY_PM2 : PMC OFFLINE"
+
+236)  0     3413       85    1          "(CTC) PHY_PM2 : VENT ERROR"
+
+237)  0     3414       85    1          "(CTC) PHY_PM2 : PUMP ERROR"
+
+238)  0     3415       85    1          "(CTC) PHY_PM2 : SLIT VALVE NOT CLOSE"
+
+239)  0     3421       85    1          "(CTC) PHY_PM2 : PROCESS ALARM"
+
+240)  0     3422       85    1          "(CTC) PHY_PM2 : PMC's 2st slot is not empty."
+
+241)  0     3423       85    1          "(CTC) ."
+
+242)  0     3424       85    1          "(CTC) ."
+
+243)  0     3431       85    1          "(CTC) ."
+
+244)  0     3432       85    1          "(CTC) ."
+
+245)  0     3433       85    1          "(CTC)  command is retried."
+
+246)  0     3434       85    1          "(CTC)  command is retried."
+
+247)  0     3435       85    1          "(CTC) PHY_PM2 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+
+248)  0     3501       85    1          "(CTC) PHY_PM3 : MODULE OBJECT - ABORTED"
+
+249)  0     3502       85    1          "(CTC) PHY_PM3 : MODULE OBJECT - OFFLINE"
+
+250)  0     3503       85    1          "(CTC) PHY_PM3 : MODULE OBJECT - NOT STANDBY"
+
+251)  0     3504       85    1          "(CTC) PHY_PM3 : MODULE OBJECT - CALL ERROR"
+
+252)  0     3511       85    1          "(CTC) PHY_PM3 : OBJECT MODE : UNKNOWN"
+
+253)  0     3512       85    1          "(CTC) PHY_PM3 : PMC OFFLINE"
+
+254)  0     3513       85    1          "(CTC) PHY_PM3 : VENT ERROR"
+
+255)  0     3514       85    1          "(CTC) PHY_PM3 : PUMP ERROR"
+
+256)  0     3515       85    1          "(CTC) PHY_PM3 : SLIT VALVE NOT CLOSE"
+
+257)  0     3521       85    1          "(CTC) PHY_PM3 : PROCESS ALARM"
+
+258)  0     3522       85    1          "(CTC) PHY_PM3 : PMC's 2st slot is not empty."
+
+259)  0     3523       85    1          "(CTC) ."
+
+260)  0     3524       85    1          "(CTC) ."
+
+261)  0     3531       85    1          "(CTC) ."
+
+262)  0     3532       85    1          "(CTC) ."
+
+263)  0     3533       85    1          "(CTC)  command is retried."
+
+264)  0     3534       85    1          "(CTC)  command is retried."
+
+265)  0     3535       85    1          "(CTC) PHY_PM3 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+
+266)  0     3601       85    1          "(CTC) PHY_PM4 : MODULE OBJECT - ABORTED"
+
+267)  0     3602       85    1          "(CTC) PHY_PM4 : MODULE OBJECT - OFFLINE"
+
+268)  0     3603       85    1          "(CTC) PHY_PM4 : MODULE OBJECT - NOT STANDBY"
+
+269)  0     3604       85    1          "(CTC) PHY_PM4 : MODULE OBJECT - CALL ERROR"
+
+270)  0     3611       85    1          "(CTC) PHY_PM4 : OBJECT MODE : UNKNOWN"
+
+271)  0     3612       85    1          "(CTC) PHY_PM4 : PMC OFFLINE"
+
+272)  0     3613       85    1          "(CTC) PHY_PM4 : VENT ERROR"
+
+273)  0     3614       85    1          "(CTC) PHY_PM4 : PUMP ERROR"
+
+274)  0     3615       85    1          "(CTC) PHY_PM4 : SLIT VALVE NOT CLOSE"
+
+275)  0     3621       85    1          "(CTC) PHY_PM4 : PROCESS ALARM"
+
+276)  0     3622       85    1          "(CTC) PHY_PM4 : PMC's 2st slot is not empty."
+
+277)  0     3623       85    1          "(CTC) ."
+
+278)  0     3624       85    1          "(CTC) ."
+
+279)  0     3631       85    1          "(CTC) ."
+
+280)  0     3632       85    1          "(CTC) ."
+
+281)  0     3633       85    1          "(CTC)  command is retried."
+
+282)  0     3634       85    1          "(CTC)  command is retried."
+
+283)  0     3635       85    1          "(CTC) PHY_PM4 : PMC의 기간 LeakCheck Time이 경과 되었습니다."
+
+284)  0     3701       85    1          "(CTC) PHY_BFF1 - MODULE OBJECT - ABORTED"
+
+285)  0     3702       85    1          "(CTC) PHY_BFF1 - MODULE OBJECT - OFFLINE"
+
+286)  0     3703       85    1          "(CTC) PHY_BFF1 - MODULE OBJECT - NOT STANDBY"
+
+287)  0     3704       85    1          "(CTC) PHY_BFF1 - MODULE OBJECT - CALL ERROR"
+
+288)  0     3801       85    1          "(CTC) PHY_BFF2 - MODULE OBJECT - ABORTED"
+
+289)  0     3802       85    1          "(CTC) PHY_BFF2 - MODULE OBJECT - OFFLINE"
+
+290)  0     3803       85    1          "(CTC) PHY_BFF2 - MODULE OBJECT - NOT STANDBY"
+
+291)  0     3804       85    1          "(CTC) PHY_BFF2 - MODULE OBJECT - CALL ERROR"
+
+
+292)  1     100000     85    1          "(TMC) Core__Sys_Info - SYSTEM ERROR"
+
+293)  1     100011     85    1          "(TMC) Core__Sys_Info - SYSTEM ERROR 11"
+
+294)  1     100012     85    1          "(TMC) Core__Sys_Info - SYSTEM WARNING 12"
+
+295)  1     100021     85    1          "(TMC) Core__Sys_Info - System Error : Async Timer Max Error"
+
+296)  1     100301     85    1          "(TMC) DB_SYS - EFEM System : FFU RPM alarm !"
+
+297)  1     100302     85    1          "(TMC) DB_SYS - EFEM System : Differantial pressure alarm !"
+
+298)  1     100303     85    1          "(TMC) DB_SYS - EFEM System : EFEM side door is not closed !"
+
+299)  1     100304     85    1          "(TMC) DB_SYS - EFEM System : EFEM light curtain sensor is detected !"
+
+300)  1     103201     85    1          "(TMC) FNC_MF_ROBOT - Unknown Module Name !"
+
+301)  1     103202     85    1          "(TMC) FNC_MF_ROBOT - PMC's Slit Valve is not closed !"
+
+302)  1     103203     85    1          "(TMC) FNC_MF_ROBOT - There is no material on Robot's A-Arm."
+
+303)  1     103204     85    1          "(TMC) FNC_MF_ROBOT - There is no material on Robot's B-Arm."
+
+304)  1     103205     85    1          "(TMC) FNC_MF_ROBOT - There is material on Robot's A-Arm."
+
+305)  1     103206     85    1          "(TMC) FNC_MF_ROBOT - There is material on Robot's B-Arm."
+
+306)  1     103207     85    1          "(TMC) FNC_MF_ROBOT - There is no material in PMC."
+
+307)  1     103208     85    1          "(TMC) FNC_MF_ROBOT - There is material in PMC."
+
+308)  1     103211     85    1          "(TMC) FNC_MF_ROBOT - There is no material in LLA."
+
+309)  1     103212     85    1          "(TMC) FNC_MF_ROBOT - There is no material in LLB."
+
+310)  1     103213     85    1          "(TMC) FNC_MF_ROBOT - There is no material in CL1."
+
+311)  1     103214     85    1          "(TMC) FNC_MF_ROBOT - There is no material in CL2."
+
+312)  1     103215     85    1          "(TMC) FNC_MF_ROBOT - There is material in LLA."
+
+313)  1     103216     85    1          "(TMC) FNC_MF_ROBOT - There is material in LLB."
+
+314)  1     103217     85    1          "(TMC) FNC_MF_ROBOT - There is material in CL1."
+
+315)  1     103218     85    1          "(TMC) FNC_MF_ROBOT - There is material in CL2."
+
+316)  1     103221     85    1          "(TMC) FNC_MF_ROBOT - Vacuum Robot Initial-Error !"
+
+317)  1     103301     85    1          "(TMC) PHY_MF_ROBOT - There is material on Robot's A-Arm."
+
+318)  1     103302     85    1          "(TMC) PHY_MF_ROBOT - There is material on Robot's B-Arm."
+
+319)  1     103311     85    1          "(TMC) PHY_MF_ROBOT - There is material in LLA."
+
+320)  1     103312     85    1          "(TMC) PHY_MF_ROBOT - There is material in LLB."
+
+321)  1     103313     85    1          "(TMC) PHY_MF_ROBOT - There is material in PMC."
+
+322)  1     103321     85    1          "(TMC) PHY_MF_ROBOT - There is no material on Robot's A-Arm."
+
+323)  1     103322     85    1          "(TMC) PHY_MF_ROBOT - There is no material on Robot's B-Arm."
+
+324)  1     103331     85    1          "(TMC) PHY_MF_ROBOT - There is no material in LLA."
+
+325)  1     103332     85    1          "(TMC) PHY_MF_ROBOT - There is no material in LLB."
+
+326)  1     103333     85    1          "(TMC) PHY_MF_ROBOT - There is no material in PMC."
+
+327)  1     103341     85    1          "(TMC) PHY_MF_ROBOT - STN does not exist."
+
+328)  1     103342     85    1          "(TMC) PHY_MF_ROBOT - Vacuum-robot can not rotate."
+
+329)  1     103343     85    1          "(TMC) PHY_MF_ROBOT - Vacuum-robot interlock for LLx lift-pin status error."
+
+330)  1     103344     85    1          "(TMC) PHY_MF_ROBOT - During LLx's lift-pin moving, command is aborted."
+
+331)  1     103345     85    1          "(TMC) PHY_MF_ROBOT - Vacuum-robot interlock for CLx lift-pin status error."
+
+332)  1     103346     85    1          "(TMC) PHY_MF_ROBOT - During CLx's lift-pin moving, command is aborted."
+
+333)  1     103347     85    1          "(TMC) PHY_MF_ROBOT - Vacuum-robot interlock for PMx lift-pin status error."
+
+334)  1     103348     85    1          "(TMC) PHY_MF_ROBOT - During PMx's lift-pin moving, command is aborted."
+
+335)  1     103351     85    1          "(TMC) PHY_MF_ROBOT - Vacuum-robot interlock for PMx inner-door status error."
+
+336)  1     103352     85    1          "(TMC) PHY_MF_ROBOT - During PMx's inner-door moving, command is aborted."
+
+337)  1     103375     85    1          "(TMC) PHY_MF_ROBOT - LLA's valve status is not open."
+
+338)  1     103376     85    1          "(TMC) PHY_MF_ROBOT - LLB's valve status is not open."
+
+339)  1     103377     85    1          "(TMC) PHY_MF_ROBOT - PMC's valve status is not open."
+
+340)  1     103381     85    1          "(TMC) PHY_MF_ROBOT - TMC_CHM's Pressure is not ATM."
+
+341)  1     103382     85    1          "(TMC) PHY_MF_ROBOT - LLA's Pressure is not ATM."
+
+342)  1     103383     85    1          "(TMC) PHY_MF_ROBOT - LLB's pressure is not ATM."
+
+343)  1     103385     85    1          "(TMC) PHY_MF_ROBOT - PMC's pressure is not ATM."
+
+344)  1     103391     85    1          "(TMC) PHY_MF_ROBOT - TMC_CHM's Pressure is not VAC."
+
+345)  1     103392     85    1          "(TMC) PHY_MF_ROBOT - LLA's Pressure is not VAC."
+
+346)  1     103393     85    1          "(TMC) PHY_MF_ROBOT - LLB's pressure is not VAC."
+
+347)  1     103395     85    1          "(TMC) PHY_MF_ROBOT - PMC's pressure is not VAC."
+
+348)  1     103396     85    1          "(TMC) PHY_MF_ROBOT - Cannot use PICK or PLACE Command in PM CHAMBER."
+
+349)  1     103501     85    1          "(TMC) FNC_EFEM_ROBOT - Unknown Module Name !"
+
+350)  1     103503     85    1          "(TMC) FNC_EFEM_ROBOT - There is no material on Robot's A-Arm."
+
+351)  1     103505     85    1          "(TMC) FNC_EFEM_ROBOT - There is material on Robot's A-Arm."
+
+352)  1     103507     85    1          "(TMC) FNC_EFEM_ROBOT - There is no material in LPx."
+
+353)  1     103508     85    1          "(TMC) FNC_EFEM_ROBOT - There is material in LPx."
+
+354)  1     103511     85    1          "(TMC) FNC_EFEM_ROBOT - There is no material in LLA."
+
+355)  1     103512     85    1          "(TMC) FNC_EFEM_ROBOT - There is no material in LLB."
+
+356)  1     103513     85    1          "(TMC) FNC_EFEM_ROBOT - There is no material in AL1."
+
+357)  1     103515     85    1          "(TMC) FNC_EFEM_ROBOT - There is material in LLA."
+
+358)  1     103516     85    1          "(TMC) FNC_EFEM_ROBOT - There is material in LLB."
+
+359)  1     103517     85    1          "(TMC) FNC_EFEM_ROBOT - There is material in AL1."
+
+360)  1     103601     85    1          "(TMC) PHY_EFEM_ROBOT - There is material on Robot's A-Arm."
+
+361)  1     103602     85    1          "(TMC) PHY_EFEM_ROBOT - There is material on AL1."
+
+362)  1     103603     85    1          "(TMC) PHY_EFEM_ROBOT - There is material in LLA."
+
+363)  1     103604     85    1          "(TMC) PHY_EFEM_ROBOT - There is material in LLB."
+
+364)  1     103605     85    1          "(TMC) PHY_EFEM_ROBOT - There is material in LPx."
+
+365)  1     103611     85    1          "(TMC) PHY_EFEM_ROBOT - There is no material on Robot's A-Arm."
+
+366)  1     103612     85    1          "(TMC) PHY_EFEM_ROBOT - There is no material on AL1."
+
+367)  1     103613     85    1          "(TMC) PHY_EFEM_ROBOT - There is no material in LLA."
+
+368)  1     103615     85    1          "(TMC) PHY_EFEM_ROBOT - There is no material in LPx."
+
+369)  1     103621     85    1          "(TMC) PHY_EFEM_ROBOT - STN does not exist."
+
+370)  1     103631     85    1          "(TMC) PHY_EFEM_ROBOT - LLA's door status is not open."
+
+371)  1     103632     85    1          "(TMC) PHY_EFEM_ROBOT - LLB's door status is not open."
+
+372)  1     103633     85    1          "(TMC) PHY_EFEM_ROBOT - LPx's door status is not open."
+
+373)  1     103641     85    1          "(TMC) PHY_EFEM_ROBOT - LLA's Pressure is not ATM."
+
+374)  1     103642     85    1          "(TMC) PHY_EFEM_ROBOT - LLB's pressure is not ATM."
+
+375)  1     103651     85    1          "(TMC) ."
+
+376)  1     103652     85    1          "(TMC) ."
+
+377)  1     103653     85    1          "(TMC) ."
+
+378)  1     103654     85    1          "(TMC) PHY_EFEM_ROBOT - LPx's foup is not clamped."
+
+379)  1     103655     85    1          "(TMC) PHY_EFEM_ROBOT - Robot can not map LPx."
+
+380)  1     103661     85    1          "(TMC) PHY_EFEM_ROBOT - LPx_MAP_Interlock : Door not open."
+
+381)  1     103662     85    1          "(TMC) PHY_EFEM_ROBOT - During waiting door open, command aborted !"
+
+382)  1     103663     85    1          "(TMC) PHY_EFEM_ROBOT - LPx_MAP_Interlock : Shuttle not load position."
+
+383)  1     103664     85    1          "(TMC) PHY_EFEM_ROBOT - During waiting shuttle load position, command aborted !"
+
+384)  1     103665     85    1          "(TMC) PHY_EFEM_ROBOT - LPx_MAP_Interlock : Shuttle not clamped."
+
+385)  1     103666     85    1          "(TMC) PHY_EFEM_ROBOT - During waiting shuttle clamped, command aborted !"
+
+386)  1     103701     85    1          "(TMC) PHY_EFEM_ROBOT_HANDOFF - MODULE OBJECT - ABORTED"
+
+387)  1     103702     85    1          "(TMC) PHY_EFEM_ROBOT_HANDOFF - MODULE OBJECT - OFFLINE"
+
+388)  1     103703     85    1          "(TMC) PHY_EFEM_ROBOT_HANDOFF - MODULE OBJECT - NOT STANDBY"
+
+389)  1     103704     85    1          "(TMC) PHY_EFEM_ROBOT_HANDOFF - MODULE OBJECT - CALL ERROR"
+
+390)  1     103711     85    1          "(TMC) PHY_EFEM_ROBOT_HANDOFF - OBJECT MODE : UNKNOWN"
+
+391)  1     103801     85    1          "(TMC) PHY_LP1 - MODULE OBJECT - ABORTED"
+
+392)  1     103802     85    1          "(TMC) PHY_LP1 - MODULE OBJECT - OFFLINE"
+
+393)  1     103803     85    1          "(TMC) PHY_LP1 - MODULE OBJECT - NOT STANDBY"
+
+394)  1     103804     85    1          "(TMC) PHY_LP1 - MODULE OBJECT - CALL ERROR"
+
+395)  1     103811     85    1          "(TMC) PHY_LP1 - OBJECT MODE : UNKNOWN"
+
+396)  1     103901     85    1          "(TMC) PHY_LP2 - MODULE OBJECT - ABORTED"
+
+397)  1     103902     85    1          "(TMC) PHY_LP2 - MODULE OBJECT - OFFLINE"
+
+398)  1     103903     85    1          "(TMC) PHY_LP2 - MODULE OBJECT - NOT STANDBY"
+
+399)  1     103904     85    1          "(TMC) PHY_LP2 - MODULE OBJECT - CALL ERROR"
+
+400)  1     103911     85    1          "(TMC) PHY_LP2 - OBJECT MODE : UNKNOWN"
+
+401)  1     104001     85    1          "(TMC) PHY_LP3 - MODULE OBJECT - ABORTED"
+
+402)  1     104002     85    1          "(TMC) PHY_LP3 - MODULE OBJECT - OFFLINE"
+
+403)  1     104003     85    1          "(TMC) PHY_LP3 - MODULE OBJECT - NOT STANDBY"
+
+404)  1     104004     85    1          "(TMC) PHY_LP3 - MODULE OBJECT - CALL ERROR"
+
+405)  1     104011     85    1          "(TMC) PHY_LP3 - OBJECT MODE : UNKNOWN"
+
+406)  1     104101     85    1          "(TMC) PHY_PM1_HANDOFF - MODULE OBJECT - ABORTED"
+
+407)  1     104102     85    1          "(TMC) PHY_PM1_HANDOFF - MODULE OBJECT - OFFLINE"
+
+408)  1     104103     85    1          "(TMC) PHY_PM1_HANDOFF - MODULE OBJECT - NOT STANDBY"
+
+409)  1     104104     85    1          "(TMC) PHY_PM1_HANDOFF - MODULE OBJECT - CALL ERROR"
+
+410)  1     104111     85    1          "(TMC) PHY_PM1_HANDOFF - OBJECT MODE : UNKNOWN"
+
+411)  1     104201     85    1          "(TMC) PHY_PM2_HANDOFF - MODULE OBJECT - ABORTED"
+
+412)  1     104202     85    1          "(TMC) PHY_PM2_HANDOFF - MODULE OBJECT - OFFLINE"
+
+413)  1     104203     85    1          "(TMC) PHY_PM2_HANDOFF - MODULE OBJECT - NOT STANDBY"
+
+414)  1     104204     85    1          "(TMC) PHY_PM2_HANDOFF - MODULE OBJECT - CALL ERROR"
+
+415)  1     104211     85    1          "(TMC) PHY_PM2_HANDOFF - OBJECT MODE : UNKNOWN"
+
+416)  1     104301     85    1          "(TMC) PHY_PM3_HANDOFF - MODULE OBJECT - ABORTED"
+
+417)  1     104302     85    1          "(TMC) PHY_PM3_HANDOFF - MODULE OBJECT - OFFLINE"
+
+418)  1     104303     85    1          "(TMC) PHY_PM3_HANDOFF - MODULE OBJECT - NOT STANDBY"
+
+419)  1     104304     85    1          "(TMC) PHY_PM3_HANDOFF - MODULE OBJECT - CALL ERROR"
+
+420)  1     104311     85    1          "(TMC) PHY_PM3_HANDOFF - OBJECT MODE : UNKNOWN"
+
+421)  1     104401     85    1          "(TMC) PHY_PM4_HANDOFF - MODULE OBJECT - ABORTED"
+
+422)  1     104402     85    1          "(TMC) PHY_PM4_HANDOFF - MODULE OBJECT - OFFLINE"
+
+423)  1     104403     85    1          "(TMC) PHY_PM4_HANDOFF - MODULE OBJECT - NOT STANDBY"
+
+424)  1     104404     85    1          "(TMC) PHY_PM4_HANDOFF - MODULE OBJECT - CALL ERROR"
+
+425)  1     104411     85    1          "(TMC) PHY_PM4_HANDOFF - OBJECT MODE : UNKNOWN"
+
+426)  1     106601     85    1          "(TMC) PHY_CHM - System Interlock Sensor Error !"
+
+427)  1     106602     85    1          "(TMC) PHY_CHM - MF chamber Over-Pressure Error !"
+
+428)  1     106611     85    1          "(TMC) PHY_CHM - Pumping Error !"
+
+429)  1     106612     85    1          "(TMC) PHY_CHM - Venting Error !"
+
+430)  1     106621     85    1          "(TMC) PHY_CHM - LeakCheck Base-Pressure Timeout !"
+
+431)  1     106622     85    1          "(TMC) PHY_CHM - LeakCheck Leak-Rate MAX. Error !"
+
+432)  1     106624     85    1          "(TMC) PHY_CHM - Xfer Pressure Ctrl : Max Pressure Error !"
+
+433)  1     106625     85    1          "(TMC) PHY_CHM - Xfer Pressure Ctrl : Stable Timeout !"
+
+434)  1     106801     85    1          "(TMC) PHY_LLA -  LLx Lift-Pin Moving Timeout !"
+
+435)  1     106802     85    1          "(TMC) PHY_LLA - LLx's lid is open !"
+
+436)  1     106803     85    1          "(TMC) PHY_LLA - Door Close Interlock : EFEM Robot's arm extended !"
+
+437)  1     106804     85    1          "(TMC) PHY_LLA - Door Open Interlock : LLx pressure is not ATM !"
+
+438)  1     106805     85    1          "(TMC) PHY_LLA - Slit-Valve Close Interlock : MF Robot's arm extended !"
+
+439)  1     106806     85    1          "(TMC) PHY_LLA - Slit-Valve Open Interlock : Other S/V opened !"
+
+440)  1     106807     85    1          "(TMC) PHY_LLA - Slit-Valve Open Interlock : Pressure difference error !"
+
+441)  1     106811     85    1          "(TMC) PHY_LLA - Slit-Valve Open Timeout !"
+
+442)  1     106812     85    1          "(TMC) PHY_LLA - Slit-Valve Close Timeout !"
+
+443)  1     106813     85    1          "(TMC) PHY_LLA - Door-Open Timeout !"
+
+444)  1     106814     85    1          "(TMC) PHY_LLA - Door-Close Timeout !"
+
+445)  1     106821     85    1          "(TMC) PHY_LLA - Command aborted !"
+
+446)  1     106822     85    1          "(TMC) PHY_LLA - Indexer.Init Command Error !"
+
+447)  1     106823     85    1          "(TMC) PHY_LLA - Indexer.Moving Command Error !"
+
+448)  1     106824     85    1          "(TMC) PHY_LLA - Indexer.Moving Command Warning !"
+
+449)  1     106831     85    1          "(TMC) PHY_LLA - LeakCheck Base-Pressure Timeout !"
+
+450)  1     106832     85    1          "(TMC) PHY_LLA - LeakCheck Leak-Rate MAX. Error !"
+
+451)  1     106841     85    1          "(TMC) PHY_LLA - System Interlock Sensor Error !"
+
+452)  1     106842     85    1          "(TMC) . "
+
+453)  1     106843     85    1          "(TMC) ."
+
+454)  1     106901     85    1          "(TMC) PHY_LLB -  LLx Lift-Pin Moving Timeout !"
+
+455)  1     106902     85    1          "(TMC) PHY_LLB - LLx's lid is open !"
+
+456)  1     106903     85    1          "(TMC) PHY_LLB - Door Close Interlock : EFEM Robot's arm extended !"
+
+457)  1     106904     85    1          "(TMC) PHY_LLB - Door Open Interlock : LLx pressure is not ATM !"
+
+458)  1     106905     85    1          "(TMC) PHY_LLB - Slit-Valve Close Interlock : MF Robot's arm extended !"
+
+459)  1     106906     85    1          "(TMC) PHY_LLB - Slit-Valve Open Interlock : Other S/V opened !"
+
+460)  1     106907     85    1          "(TMC) PHY_LLB - Slit-Valve Open Interlock : Pressure difference error !"
+
+461)  1     106911     85    1          "(TMC) PHY_LLB - Slit-Valve Open Timeout !"
+
+462)  1     106912     85    1          "(TMC) PHY_LLB - Slit-Valve Close Timeout !"
+
+463)  1     106913     85    1          "(TMC) PHY_LLB - Door-Open Timeout !"
+
+464)  1     106914     85    1          "(TMC) PHY_LLB - Door-Close Timeout !"
+
+465)  1     106921     85    1          "(TMC) PHY_LLB - Command aborted !"
+
+466)  1     106922     85    1          "(TMC) PHY_LLB - Indexer.Init Command Error !"
+
+467)  1     106923     85    1          "(TMC) PHY_LLB - Indexer.Moving Command Error !"
+
+468)  1     106924     85    1          "(TMC) PHY_LLB - Indexer.Moving Command Warning !"
+
+469)  1     106931     85    1          "(TMC) PHY_LLB - LeakCheck Base-Pressure Timeout !"
+
+470)  1     106932     85    1          "(TMC) PHY_LLB - LeakCheck Leak-Rate MAX. Error !"
+
+471)  1     106941     85    1          "(TMC) PHY_LLB - System Interlock Sensor Error !"
+
+472)  1     106942     85    1          "(TMC) . "
+
+473)  1     106943     85    1          "(TMC) ."
+
+474)  1     107001     85    1          "(TMC) PHY_LL_OneManiFold - LLA's pressure is not vacuum !"
+
+475)  1     107002     85    1          "(TMC) PHY_LL_OneManiFold - LLB's pressure is not vacuum !"
+
+476)  1     107003     85    1          "(TMC) PHY_LL_OneManiFold - LLA's soft-pumping timeout occurred !"
+
+477)  1     107004     85    1          "(TMC) PHY_LL_OneManiFold - LLB's soft-pumping timeout occurred !"
+
+478)  1     107005     85    1          "(TMC) PHY_LL_OneManiFold - LLA's fast-pumping timeout occurred !"
+
+479)  1     107101     85    1          "(TMC) PHY_LCL - Cooler's Lift-Pin Homing Timeout !"
+
+480)  1     107102     85    1          "(TMC) PHY_LCL - Cooler's Lift-Pin Moving Timeout !"
+
+481)  1     107103     85    1          "(TMC) PHY_LCL - Cooler's Lift-Pin Alarm-Clear Timeout !"
+
+482)  1     107105     85    1          "(TMC) ."
+
+483)  1     107106     85    1          "(TMC) ."
+
+484)  1     107201     85    1          "(TMC) PHY_RCL - Cooler's Lift-Pin Homing Timeout !"
+
+485)  1     107202     85    1          "(TMC) PHY_RCL - Cooler's Lift-Pin Moving Timeout !"
+
+486)  1     107203     85    1          "(TMC) PHY_RCL - Cooler's Lift-Pin Alarm-Clear Timeout !"
+
+487)  1     107205     85    1          "(TMC) ."
+
+488)  1     107206     85    1          "(TMC) ."
+
+489)  1     107401     85    1          "(TMC) PHY_APC - APC Pressure Control Warning Range Alarm."
+
+490)  1     107402     85    1          "(TMC) PHY_APC - APC Pressure Control Abort Range Alarm."
+
+491)  1     107403     85    1          "(TMC) PHY_APC - APC Valve can't be controled with CHM ISO open and pump off."
+
+492)  1     107501     85    1          "(TMC) PHY_MF_PMP : Dry-Pump Interlock Sensing !"
+
+493)  1     107502     85    1          "(TMC) PHY_MF_PMP : Cann't set Dry-Pump's power off !"
+
+494)  1     107503     85    1          "(TMC) PHY_MF_PMP : Dry-Pump Power-On Timeout !"
+
+495)  1     107504     85    1          "(TMC) PHY_MF_PMP : Dry-Pump Power-Off Timeout !"
+
+496)  1     107601     85    1          "(TMC) PHY_LL_PMP : Dry-Pump Interlock Sensing !"
+
+497)  1     107602     85    1          "(TMC) PHY_LL_PMP : Cann't set Dry-Pump's power off !"
+
+498)  1     107603     85    1          "(TMC) PHY_LL_PMP : Dry-Pump Power-On Timeout !"
+
+499)  1     107604     85    1          "(TMC) PHY_LL_PMP : Dry-Pump Power-Off Timeout !"
+
+500)  1     107811     85    1          "(TMC) PHY_RS232__APC - APC System : Controller is Offline."
+
+501)  1     107812     85    1          "(TMC) PHY_RS232__APC - APC System : CMD [REMOTE] is out of time."
+
+502)  1     107813     85    1          "(TMC) PHY_RS232__APC - APC System : CMD [CONTROL] is out of time."
+
+503)  1     107814     85    1          "(TMC) PHY_RS232__APC - APC System : Not Remote Status."
+
+504)  1     107815     85    1          "(TMC) PHY_RS232__APC - APC Position Control Timeout Error !"
+
+505)  1     107901     85    1          "(TMC) IO - DeviceNet Offline. (Analog Read)"
+
+506)  1     107902     85    1          "(TMC) IO - DeviceNet Offline. (Digital Read)"
+
+507)  1     107903     85    1          "(TMC) IO - DeviceNet Offline. (Analog Write)"
+
+508)  1     107904     85    1          "(TMC) IO - DeviceNet Offline. (Digital Write)"
+
+509)  1     107911     85    1          "(TMC) IO - DeviceNet I/O - Analog Write Timeout !"
+
+510)  1     107912     85    1          "(TMC) IO - DeviceNet I/O - Digital Write Timeout !"
+
+511)  1     107913     85    1          "(TMC) IO - DeviceNet I/O - Analog Read Timeout !"
+
+512)  1     107914     85    1          "(TMC) IO - DeviceNet I/O - Digital Read Timeout !"
+
+513)  1     107921     85    1          "(TMC) IO - D-Net Driver에 Error가 발생한 것 같습니다."
+
+
+514)  2     200000     85    1          "(PM1) Core__Sys_Info - SYSTEM ERROR"
+
+515)  2     200011     85    1          "(PM1) Core__Sys_Info - SYSTEM ERROR 11"
+
+516)  2     200012     85    1          "(PM1) Core__Sys_Info - SYSTEM WARNING 12"
+
+517)  2     200021     85    1          "(PM1) Core__Sys_Info - System Error : Async Timer Max Error"
+
+518)  2     202201     85    1          "(PM1) ."
+
+519)  2     203011     85    1          "(PM1) FNC_PROC - Process recipe does not exist."
+
+520)  2     203012     85    1          "(PM1) FNC_PROC - Check Process Recovery Action !"
+
+521)  2     203015     85    1          "(PM1) FNC_PROC - Process recipe file is being changed, now."
+
+522)  2     203016     85    1          "(PM1) FNC_PROC - DB_PRESTEP Error !"
+
+523)  2     203101     85    1          "(PM1) PHY_CHM :  SYSTEM - Chamber Initialize Error !"
+
+524)  2     203102     85    1          "(PM1) PHY_CHM :  SYSTEM - PROCESS STEP OVERTIME ALARM."
+
+525)  2     203103     85    1          "(PM1) PHY_CHM :  SYSTEM - PROCESS STEP STABLE OVERTIME ALARM."
+
+526)  2     203105     85    1          "(PM1) PHY_CHM :  SYSTEM - PROCESS INTERLOCK CHANNEL ALARM."
+
+527)  2     203107     85    1          "(PM1) PHY_CHM :  SYSTEM - Interlock Sensor Error !"
+
+528)  2     203108     85    1          "(PM1) PHY_CHM :  - MFC Interlock Close Error !"
+
+529)  2     203109     85    1          "(PM1) PHY_CHM : Process recipe file is being changed, now."
+
+530)  2     203151     85    1          "(PM1) PHY_CHM : Chamber Pressure Tolerance Warning !"
+
+531)  2     203152     85    1          "(PM1) PHY_CHM : Chamber Pressure Tolerance Fault !"
+
+532)  2     203158     85    1          "(PM1) PHY_CHM : Middle-Pin Up Timeout !"
+
+533)  2     203161     85    1          "(PM1) PHY_CHM : Pumping Error !"
+
+534)  2     203162     85    1          "(PM1) PHY_CHM : Venting Error !"
+
+535)  2     203183     85    1          "(PM1)  Recovery Action : System Init Error"
+
+536)  2     203181     85    1          "(PM1) !"
+
+537)  2     203182     85    1          "(PM1) PHY_CHM : System interlock occurred !"
+
+538)  2     203111     85    1          "(PM1) PHY_CHM : Gas01's Flow Tolerance Warning !"
+
+539)  2     203112     85    1          "(PM1) PHY_CHM : Gas02's Flow Tolerance Warning !"
+
+540)  2     203113     85    1          "(PM1) PHY_CHM : Gas03's Flow Tolerance Warning !"
+
+541)  2     203114     85    1          "(PM1) PHY_CHM : Gas04's Flow Tolerance Warning !"
+
+542)  2     203115     85    1          "(PM1) PHY_CHM : Gas05's Flow Tolerance Warning !"
+
+543)  2     203116     85    1          "(PM1) PHY_CHM : Gas06's Flow Tolerance Warning !"
+
+544)  2     203117     85    1          "(PM1) PHY_CHM : Gas07's Flow Tolerance Warning !"
+
+545)  2     203118     85    1          "(PM1) PHY_CHM : Gas08's Flow Tolerance Warning !"
+
+546)  2     203119     85    1          "(PM1) PHY_CHM : Gas09's Flow Tolerance Warning !"
+
+547)  2     203120     85    1          "(PM1) PHY_CHM : Gas10's Flow Tolerance Warning !"
+
+548)  2     203121     85    1          "(PM1) PHY_CHM : Gas11's Flow Tolerance Warning !"
+
+549)  2     203131     85    1          "(PM1) PHY_CHM : Gas01's Flow Tolerance Fault !"
+
+550)  2     203132     85    1          "(PM1) PHY_CHM : Gas02's Flow Tolerance Fault !"
+
+551)  2     203133     85    1          "(PM1) PHY_CHM : Gas03's Flow Tolerance Fault !"
+
+552)  2     203134     85    1          "(PM1) PHY_CHM : Gas04's Flow Tolerance Fault !"
+
+553)  2     203135     85    1          "(PM1) PHY_CHM : Gas05's Flow Tolerance Fault !"
+
+554)  2     203136     85    1          "(PM1) PHY_CHM : Gas06's Flow Tolerance Fault !"
+
+555)  2     203137     85    1          "(PM1) PHY_CHM : Gas07's Flow Tolerance Fault !"
+
+556)  2     203138     85    1          "(PM1) PHY_CHM : Gas08's Flow Tolerance Fault !"
+
+557)  2     203139     85    1          "(PM1) PHY_CHM : Gas09's Flow Tolerance Fault !"
+
+558)  2     203140     85    1          "(PM1) PHY_CHM : Gas10's Flow Tolerance Fault !"
+
+559)  2     203141     85    1          "(PM1) PHY_CHM : Gas11's Flow Tolerance Fault !"
+
+560)  2     203185     85    1          "(PM1) PHY_CHM : LeakCheck Base-Pressure Timeout !"
+
+561)  2     203186     85    1          "(PM1) PHY_CHM : LeakCheck Leak-Rate MAX. Error !"
+
+562)  2     203187     85    1          "(PM1) PHY_CHM : RTC Temperature Control Error !"
+
+563)  2     203188     85    1          "(PM1) PHY_CHM : Pressure Control Error !"
+
+564)  2     204001     85    1          "(PM1) PHY_LAMP_HEAD : Max. pressure before lamp-head pumpdowns !"
+
+565)  2     204002     85    1          "(PM1) PHY_LAMP_HEAD : Min. pressure before lamp-head backfills !"
+
+566)  2     204003     85    1          "(PM1) PHY_LAMP_HEAD : Leak Check Test Error !"
+
+567)  2     204004     85    1          "(PM1) PHY_LAMP_HEAD : Cycle-Purge Pumping Test Error !"
+
+568)  2     204005     85    1          "(PM1) PHY_LAMP_HEAD : Cycle-Purge Venting Test Error !"
+
+569)  2     204006     85    1          "(PM1) PHY_LAMP_HEAD : Lamp Head Pressure Max Limit !"
+
+570)  2     204101     85    1          "(PM1) PHY_APC - APC Pressure Control Warning Range Alarm."
+
+571)  2     204102     85    1          "(PM1) PHY_APC - APC Pressure Control Abort Range Alarm."
+
+572)  2     204104     85    1          "(PM1) PHY_APC - APC Valve can't control in no vacuum."
+
+573)  2     204109     85    1          "(PM1) PHY_APC - APC Valve can't control in CM1 & CM2 Lock."
+
+574)  2     204105     85    1          "(PM1) PHY_APC - APC Valve can't control in turbo pump on and no vacuum."
+
+575)  2     204107     85    1          "(PM1) PHY_APC - APC Valve can't control in turbo pump on and CM1 & CM2 Lock."
+
+576)  2     204106     85    1          "(PM1) PHY_APC - APC Valve can't control in dry-pump on and no vacuum."
+
+577)  2     204108     85    1          "(PM1) PHY_APC - APC Valve can't control in dry-pump on and CM1 & CM2 Lock."
+
+578)  2     204201     85    1          "(PM1) PHY_PIN : Lift_Pin Home Timeout !"
+
+579)  2     204202     85    1          "(PM1) PHY_PIN : Lift_Pin Up Timeout !"
+
+580)  2     204204     85    1          "(PM1) PHY_PIN : Lift_Pin Middle Timeout !"
+
+581)  2     204205     85    1          "(PM1) PHY_PIN : Lift_Pin Down Timeout !"
+
+582)  2     204206     85    1          "(PM1) PHY_PIN : Lift_Pin Transfer-Up Moving Timeout !"
+
+583)  2     204207     85    1          "(PM1) PHY_PIN : Lift_Pin Transfer-Down Moving Timeout !"
+
+584)  2     204211     85    1          "(PM1) PHY_PIN : Lift-Pin moving interlock with rotor not home !"
+
+585)  2     204215     85    1          "(PM1) . "
+
+586)  2     204216     85    1          "(PM1) . "
+
+587)  2     204301     85    1          "(PM1) PHY_ROTOR : Rotor Stop Timeout !"
+
+588)  2     204302     85    1          "(PM1) PHY_ROTOR : Rotor Speed Warning !"
+
+589)  2     204303     85    1          "(PM1) PHY_ROTOR : Rotor Speed Fault !"
+
+590)  2     204311     85    1          "(PM1) PHY_ROTOR : Rotor moving interlock with lift-pin not down !"
+
+591)  2     204401     85    1          "(PM1) ."
+
+592)  2     204402     85    1          "(PM1) PHY_MFC1 - MFC control is aborted !"
+
+593)  2     204411     85    1          "(PM1) PHY_MFC1 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+594)  2     204412     85    1          "(PM1) PHY_MFC1 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+595)  2     204413     85    1          "(PM1) PHY_MFC1 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+596)  2     204414     85    1          "(PM1) PHY_MFC1 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+597)  2     204421     85    1          "(PM1) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+598)  2     204422     85    1          "(PM1) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+599)  2     204501     85    1          "(PM1) ."
+
+600)  2     204502     85    1          "(PM1) PHY_MFC4 - MFC control is aborted !"
+
+601)  2     204511     85    1          "(PM1) PHY_MFC4 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+602)  2     204512     85    1          "(PM1) PHY_MFC4 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+603)  2     204513     85    1          "(PM1) PHY_MFC4 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+604)  2     204514     85    1          "(PM1) PHY_MFC4 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+605)  2     204521     85    1          "(PM1) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+606)  2     204522     85    1          "(PM1) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+607)  2     204601     85    1          "(PM1) ."
+
+608)  2     204602     85    1          "(PM1) PHY_MFC5 - MFC control is aborted !"
+
+609)  2     204611     85    1          "(PM1) PHY_MFC5 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+610)  2     204612     85    1          "(PM1) PHY_MFC5 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+611)  2     204613     85    1          "(PM1) PHY_MFC5 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+612)  2     204614     85    1          "(PM1) PHY_MFC5 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+613)  2     204621     85    1          "(PM1) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+614)  2     204622     85    1          "(PM1) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+615)  2     204701     85    1          "(PM1) ."
+
+616)  2     204702     85    1          "(PM1) PHY_MFC6 - MFC control is aborted !"
+
+617)  2     204711     85    1          "(PM1) PHY_MFC6 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+618)  2     204712     85    1          "(PM1) PHY_MFC6 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+619)  2     204713     85    1          "(PM1) PHY_MFC6 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+620)  2     204714     85    1          "(PM1) PHY_MFC6 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+621)  2     204721     85    1          "(PM1) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+622)  2     204722     85    1          "(PM1) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+623)  2     204801     85    1          "(PM1) ."
+
+624)  2     204802     85    1          "(PM1) PHY_MFC7 - MFC control is aborted !"
+
+625)  2     204811     85    1          "(PM1) PHY_MFC7 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+626)  2     204812     85    1          "(PM1) PHY_MFC7 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+627)  2     204813     85    1          "(PM1) PHY_MFC7 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+628)  2     204814     85    1          "(PM1) PHY_MFC7 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+629)  2     204821     85    1          "(PM1) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+630)  2     204822     85    1          "(PM1) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+631)  2     204901     85    1          "(PM1) ."
+
+632)  2     204902     85    1          "(PM1) PHY_MFC9 - MFC control is aborted !"
+
+633)  2     204911     85    1          "(PM1) PHY_MFC9 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+634)  2     204912     85    1          "(PM1) PHY_MFC9 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+635)  2     204913     85    1          "(PM1) PHY_MFC9 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+636)  2     204914     85    1          "(PM1) PHY_MFC9 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+637)  2     204921     85    1          "(PM1) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+638)  2     204922     85    1          "(PM1) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+639)  2     205001     85    1          "(PM1) ."
+
+640)  2     205002     85    1          "(PM1) PHY_MFC10 - MFC control is aborted !"
+
+641)  2     205011     85    1          "(PM1) PHY_MFC10 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+642)  2     205012     85    1          "(PM1) PHY_MFC10 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+643)  2     205013     85    1          "(PM1) PHY_MFC10 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+644)  2     205014     85    1          "(PM1) PHY_MFC10 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+645)  2     205021     85    1          "(PM1) PHY_MFC10 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+646)  2     205022     85    1          "(PM1) PHY_MFC10 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+647)  2     205101     85    1          "(PM1) ."
+
+648)  2     205102     85    1          "(PM1) PHY_MFC11 - MFC control is aborted !"
+
+649)  2     205111     85    1          "(PM1) PHY_MFC11 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+650)  2     205112     85    1          "(PM1) PHY_MFC11 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+651)  2     205113     85    1          "(PM1) PHY_MFC11 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+652)  2     205114     85    1          "(PM1) PHY_MFC11 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+653)  2     205121     85    1          "(PM1) PHY_MFC11 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+654)  2     205122     85    1          "(PM1) PHY_MFC11 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+655)  2     205201     85    1          "(PM1) ."
+
+656)  2     205202     85    1          "(PM1) PHY_MFC12 - MFC control is aborted !"
+
+657)  2     205211     85    1          "(PM1) PHY_MFC12 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+658)  2     205212     85    1          "(PM1) PHY_MFC12 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+659)  2     205213     85    1          "(PM1) PHY_MFC12 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+660)  2     205214     85    1          "(PM1) PHY_MFC12 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+661)  2     205221     85    1          "(PM1) PHY_MFC12 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+662)  2     205222     85    1          "(PM1) PHY_MFC12 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+663)  2     205301     85    1          "(PM1) ."
+
+664)  2     205302     85    1          "(PM1) PHY_MFC13 - MFC control is aborted !"
+
+665)  2     205311     85    1          "(PM1) PHY_MFC13 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+666)  2     205312     85    1          "(PM1) PHY_MFC13 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+667)  2     205313     85    1          "(PM1) PHY_MFC13 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+668)  2     205314     85    1          "(PM1) PHY_MFC13 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+669)  2     205321     85    1          "(PM1) PHY_MFC13 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+670)  2     205322     85    1          "(PM1) PHY_MFC13 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+671)  2     205401     85    1          "(PM1) ."
+
+672)  2     205402     85    1          "(PM1) PHY_MFC14 - MFC control is aborted !"
+
+673)  2     205411     85    1          "(PM1) PHY_MFC14 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+674)  2     205412     85    1          "(PM1) PHY_MFC14 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+675)  2     205413     85    1          "(PM1) PHY_MFC14 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+676)  2     205414     85    1          "(PM1) PHY_MFC14 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+677)  2     205421     85    1          "(PM1) PHY_MFC14 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+678)  2     205422     85    1          "(PM1) PHY_MFC14 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+679)  2     205501     85    1          "(PM1) PHY_DRY_PMP : Dry-Pump Interlock Sensing !"
+
+680)  2     205502     85    1          "(PM1) PHY_DRY_PMP : Cann't set Dry-Pump's power off !"
+
+681)  2     205503     85    1          "(PM1) PHY_DRY_PMP : Dry-Pump Power-On Timeout !"
+
+682)  2     205504     85    1          "(PM1) PHY_DRY_PMP : Dry-Pump Power-Off Timeout !"
+
+683)  2     205505     85    1          "(PM1) PHY_DRY_PMP : Dry-Pump Power-Off Interlock !"
+
+684)  2     205601     85    1          "(PM1) PHY_RTC :  RTC Offline Occurred !"
+
+685)  2     205602     85    1          "(PM1) PHY_RTC : CheckSum Error !"
+
+686)  2     205603     85    1          "(PM1) PHY_RTC : RTC Initial Data File Error !"
+
+687)  2     205711     85    1          "(PM1) PHY_RS232__APC - APC System : Controller is Offline."
+
+688)  2     205712     85    1          "(PM1) PHY_RS232__APC - APC System : CMD [REMOTE] is out of time."
+
+689)  2     205713     85    1          "(PM1) PHY_RS232__APC - APC System : CMD [CONTROL] is out of time."
+
+690)  2     205714     85    1          "(PM1) PHY_RS232__APC - APC System : Not Remote Status."
+
+691)  2     205715     85    1          "(PM1) PHY_RS232__APC - APC Position Control Timeout Error !"
+
+692)  2     205811     85    1          "(PM1) PHY_RS232__LFD - LFD System : Controller is Offline."
+
+693)  2     205901     85    1          "(PM1) IO - DeviceNet Offline. (Analog Read)"
+
+694)  2     205902     85    1          "(PM1) IO - DeviceNet Offline. (Digital Read)"
+
+695)  2     205903     85    1          "(PM1) IO - DeviceNet Offline. (Analog Write)"
+
+696)  2     205904     85    1          "(PM1) IO - DeviceNet Offline. (Digital Write)"
+
+697)  2     205911     85    1          "(PM1) IO - DeviceNet I/O - Analog Write Timeout !"
+
+698)  2     205912     85    1          "(PM1) IO - DeviceNet I/O - Digital Write Timeout !"
+
+699)  2     205913     85    1          "(PM1) IO - DeviceNet I/O - Analog Read Timeout !"
+
+700)  2     205914     85    1          "(PM1) IO - DeviceNet I/O - Digital Read Timeout !"
+
+701)  2     205921     85    1          "(PM1) IO - D-Net Driver에 Error가 발생한 것 같습니다."
+
+
+702)  3     300000     85    1          "(PM2) Core__Sys_Info - SYSTEM ERROR"
+
+703)  3     300011     85    1          "(PM2) Core__Sys_Info - SYSTEM ERROR 11"
+
+704)  3     300012     85    1          "(PM2) Core__Sys_Info - SYSTEM WARNING 12"
+
+705)  3     300021     85    1          "(PM2) Core__Sys_Info - System Error : Async Timer Max Error"
+
+706)  3     302201     85    1          "(PM2) ."
+
+707)  3     303011     85    1          "(PM2) FNC_PROC - Process recipe does not exist."
+
+708)  3     303012     85    1          "(PM2) FNC_PROC - Check Process Recovery Action !"
+
+709)  3     303015     85    1          "(PM2) FNC_PROC - Process recipe file is being changed, now."
+
+710)  3     303016     85    1          "(PM2) FNC_PROC - DB_PRESTEP Error !"
+
+711)  3     303101     85    1          "(PM2) PHY_CHM :  SYSTEM - Chamber Initialize Error !"
+
+712)  3     303102     85    1          "(PM2) PHY_CHM :  SYSTEM - PROCESS STEP OVERTIME ALARM."
+
+713)  3     303103     85    1          "(PM2) PHY_CHM :  SYSTEM - PROCESS STEP STABLE OVERTIME ALARM."
+
+714)  3     303105     85    1          "(PM2) PHY_CHM :  SYSTEM - PROCESS INTERLOCK CHANNEL ALARM."
+
+715)  3     303107     85    1          "(PM2) PHY_CHM :  SYSTEM - Interlock Sensor Error !"
+
+716)  3     303108     85    1          "(PM2) PHY_CHM :  - MFC Interlock Close Error !"
+
+717)  3     303109     85    1          "(PM2) PHY_CHM : Process recipe file is being changed, now."
+
+718)  3     303151     85    1          "(PM2) PHY_CHM : Chamber Pressure Tolerance Warning !"
+
+719)  3     303152     85    1          "(PM2) PHY_CHM : Chamber Pressure Tolerance Fault !"
+
+720)  3     303158     85    1          "(PM2) PHY_CHM : Middle-Pin Up Timeout !"
+
+721)  3     303161     85    1          "(PM2) PHY_CHM : Pumping Error !"
+
+722)  3     303162     85    1          "(PM2) PHY_CHM : Venting Error !"
+
+723)  3     303183     85    1          "(PM2)  Recovery Action : System Init Error"
+
+724)  3     303181     85    1          "(PM2) !"
+
+725)  3     303182     85    1          "(PM2) PHY_CHM : System interlock occurred !"
+
+726)  3     303111     85    1          "(PM2) PHY_CHM : Gas01's Flow Tolerance Warning !"
+
+727)  3     303112     85    1          "(PM2) PHY_CHM : Gas02's Flow Tolerance Warning !"
+
+728)  3     303113     85    1          "(PM2) PHY_CHM : Gas03's Flow Tolerance Warning !"
+
+729)  3     303114     85    1          "(PM2) PHY_CHM : Gas04's Flow Tolerance Warning !"
+
+730)  3     303115     85    1          "(PM2) PHY_CHM : Gas05's Flow Tolerance Warning !"
+
+731)  3     303116     85    1          "(PM2) PHY_CHM : Gas06's Flow Tolerance Warning !"
+
+732)  3     303117     85    1          "(PM2) PHY_CHM : Gas07's Flow Tolerance Warning !"
+
+733)  3     303118     85    1          "(PM2) PHY_CHM : Gas08's Flow Tolerance Warning !"
+
+734)  3     303119     85    1          "(PM2) PHY_CHM : Gas09's Flow Tolerance Warning !"
+
+735)  3     303120     85    1          "(PM2) PHY_CHM : Gas10's Flow Tolerance Warning !"
+
+736)  3     303121     85    1          "(PM2) PHY_CHM : Gas11's Flow Tolerance Warning !"
+
+737)  3     303131     85    1          "(PM2) PHY_CHM : Gas01's Flow Tolerance Fault !"
+
+738)  3     303132     85    1          "(PM2) PHY_CHM : Gas02's Flow Tolerance Fault !"
+
+739)  3     303133     85    1          "(PM2) PHY_CHM : Gas03's Flow Tolerance Fault !"
+
+740)  3     303134     85    1          "(PM2) PHY_CHM : Gas04's Flow Tolerance Fault !"
+
+741)  3     303135     85    1          "(PM2) PHY_CHM : Gas05's Flow Tolerance Fault !"
+
+742)  3     303136     85    1          "(PM2) PHY_CHM : Gas06's Flow Tolerance Fault !"
+
+743)  3     303137     85    1          "(PM2) PHY_CHM : Gas07's Flow Tolerance Fault !"
+
+744)  3     303138     85    1          "(PM2) PHY_CHM : Gas08's Flow Tolerance Fault !"
+
+745)  3     303139     85    1          "(PM2) PHY_CHM : Gas09's Flow Tolerance Fault !"
+
+746)  3     303140     85    1          "(PM2) PHY_CHM : Gas10's Flow Tolerance Fault !"
+
+747)  3     303141     85    1          "(PM2) PHY_CHM : Gas11's Flow Tolerance Fault !"
+
+748)  3     303185     85    1          "(PM2) PHY_CHM : LeakCheck Base-Pressure Timeout !"
+
+749)  3     303186     85    1          "(PM2) PHY_CHM : LeakCheck Leak-Rate MAX. Error !"
+
+750)  3     303187     85    1          "(PM2) PHY_CHM : RTC Temperature Control Error !"
+
+751)  3     303188     85    1          "(PM2) PHY_CHM : Pressure Control Error !"
+
+752)  3     304001     85    1          "(PM2) PHY_LAMP_HEAD : Max. pressure before lamp-head pumpdowns !"
+
+753)  3     304002     85    1          "(PM2) PHY_LAMP_HEAD : Min. pressure before lamp-head backfills !"
+
+754)  3     304003     85    1          "(PM2) PHY_LAMP_HEAD : Leak Check Test Error !"
+
+755)  3     304004     85    1          "(PM2) PHY_LAMP_HEAD : Cycle-Purge Pumping Test Error !"
+
+756)  3     304005     85    1          "(PM2) PHY_LAMP_HEAD : Cycle-Purge Venting Test Error !"
+
+757)  3     304006     85    1          "(PM2) PHY_LAMP_HEAD : Lamp Head Pressure Max Limit !"
+
+758)  3     304101     85    1          "(PM2) PHY_APC - APC Pressure Control Warning Range Alarm."
+
+759)  3     304102     85    1          "(PM2) PHY_APC - APC Pressure Control Abort Range Alarm."
+
+760)  3     304104     85    1          "(PM2) PHY_APC - APC Valve can't control in no vacuum."
+
+761)  3     304109     85    1          "(PM2) PHY_APC - APC Valve can't control in CM1 & CM2 Lock."
+
+762)  3     304105     85    1          "(PM2) PHY_APC - APC Valve can't control in turbo pump on and no vacuum."
+
+763)  3     304107     85    1          "(PM2) PHY_APC - APC Valve can't control in turbo pump on and CM1 & CM2 Lock."
+
+764)  3     304106     85    1          "(PM2) PHY_APC - APC Valve can't control in dry-pump on and no vacuum."
+
+765)  3     304108     85    1          "(PM2) PHY_APC - APC Valve can't control in dry-pump on and CM1 & CM2 Lock."
+
+766)  3     304201     85    1          "(PM2) PHY_PIN : Lift_Pin Home Timeout !"
+
+767)  3     304202     85    1          "(PM2) PHY_PIN : Lift_Pin Up Timeout !"
+
+768)  3     304204     85    1          "(PM2) PHY_PIN : Lift_Pin Middle Timeout !"
+
+769)  3     304205     85    1          "(PM2) PHY_PIN : Lift_Pin Down Timeout !"
+
+770)  3     304206     85    1          "(PM2) PHY_PIN : Lift_Pin Transfer-Up Moving Timeout !"
+
+771)  3     304207     85    1          "(PM2) PHY_PIN : Lift_Pin Transfer-Down Moving Timeout !"
+
+772)  3     304211     85    1          "(PM2) PHY_PIN : Lift-Pin moving interlock with rotor not home !"
+
+773)  3     304215     85    1          "(PM2) . "
+
+774)  3     304216     85    1          "(PM2) . "
+
+775)  3     304301     85    1          "(PM2) PHY_ROTOR : Rotor Stop Timeout !"
+
+776)  3     304302     85    1          "(PM2) PHY_ROTOR : Rotor Speed Warning !"
+
+777)  3     304303     85    1          "(PM2) PHY_ROTOR : Rotor Speed Fault !"
+
+778)  3     304311     85    1          "(PM2) PHY_ROTOR : Rotor moving interlock with lift-pin not down !"
+
+779)  3     304401     85    1          "(PM2) ."
+
+780)  3     304402     85    1          "(PM2) PHY_MFC1 - MFC control is aborted !"
+
+781)  3     304411     85    1          "(PM2) PHY_MFC1 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+782)  3     304412     85    1          "(PM2) PHY_MFC1 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+783)  3     304413     85    1          "(PM2) PHY_MFC1 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+784)  3     304414     85    1          "(PM2) PHY_MFC1 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+785)  3     304421     85    1          "(PM2) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+786)  3     304422     85    1          "(PM2) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+787)  3     304501     85    1          "(PM2) ."
+
+788)  3     304502     85    1          "(PM2) PHY_MFC4 - MFC control is aborted !"
+
+789)  3     304511     85    1          "(PM2) PHY_MFC4 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+790)  3     304512     85    1          "(PM2) PHY_MFC4 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+791)  3     304513     85    1          "(PM2) PHY_MFC4 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+792)  3     304514     85    1          "(PM2) PHY_MFC4 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+793)  3     304521     85    1          "(PM2) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+794)  3     304522     85    1          "(PM2) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+795)  3     304601     85    1          "(PM2) ."
+
+796)  3     304602     85    1          "(PM2) PHY_MFC5 - MFC control is aborted !"
+
+797)  3     304611     85    1          "(PM2) PHY_MFC5 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+798)  3     304612     85    1          "(PM2) PHY_MFC5 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+799)  3     304613     85    1          "(PM2) PHY_MFC5 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+800)  3     304614     85    1          "(PM2) PHY_MFC5 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+801)  3     304621     85    1          "(PM2) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+802)  3     304622     85    1          "(PM2) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+803)  3     304701     85    1          "(PM2) ."
+
+804)  3     304702     85    1          "(PM2) PHY_MFC6 - MFC control is aborted !"
+
+805)  3     304711     85    1          "(PM2) PHY_MFC6 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+806)  3     304712     85    1          "(PM2) PHY_MFC6 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+807)  3     304713     85    1          "(PM2) PHY_MFC6 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+808)  3     304714     85    1          "(PM2) PHY_MFC6 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+809)  3     304721     85    1          "(PM2) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+810)  3     304722     85    1          "(PM2) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+811)  3     304801     85    1          "(PM2) ."
+
+812)  3     304802     85    1          "(PM2) PHY_MFC7 - MFC control is aborted !"
+
+813)  3     304811     85    1          "(PM2) PHY_MFC7 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+814)  3     304812     85    1          "(PM2) PHY_MFC7 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+815)  3     304813     85    1          "(PM2) PHY_MFC7 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+816)  3     304814     85    1          "(PM2) PHY_MFC7 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+817)  3     304821     85    1          "(PM2) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+818)  3     304822     85    1          "(PM2) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+819)  3     304901     85    1          "(PM2) ."
+
+820)  3     304902     85    1          "(PM2) PHY_MFC9 - MFC control is aborted !"
+
+821)  3     304911     85    1          "(PM2) PHY_MFC9 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+822)  3     304912     85    1          "(PM2) PHY_MFC9 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+823)  3     304913     85    1          "(PM2) PHY_MFC9 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+824)  3     304914     85    1          "(PM2) PHY_MFC9 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+825)  3     304921     85    1          "(PM2) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+826)  3     304922     85    1          "(PM2) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+827)  3     305001     85    1          "(PM2) ."
+
+828)  3     305002     85    1          "(PM2) PHY_MFC10 - MFC control is aborted !"
+
+829)  3     305011     85    1          "(PM2) PHY_MFC10 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+830)  3     305012     85    1          "(PM2) PHY_MFC10 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+831)  3     305013     85    1          "(PM2) PHY_MFC10 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+832)  3     305014     85    1          "(PM2) PHY_MFC10 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+833)  3     305021     85    1          "(PM2) PHY_MFC10 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+834)  3     305022     85    1          "(PM2) PHY_MFC10 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+835)  3     305101     85    1          "(PM2) ."
+
+836)  3     305102     85    1          "(PM2) PHY_MFC11 - MFC control is aborted !"
+
+837)  3     305111     85    1          "(PM2) PHY_MFC11 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+838)  3     305112     85    1          "(PM2) PHY_MFC11 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+839)  3     305113     85    1          "(PM2) PHY_MFC11 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+840)  3     305114     85    1          "(PM2) PHY_MFC11 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+841)  3     305121     85    1          "(PM2) PHY_MFC11 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+842)  3     305122     85    1          "(PM2) PHY_MFC11 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+843)  3     305201     85    1          "(PM2) ."
+
+844)  3     305202     85    1          "(PM2) PHY_MFC12 - MFC control is aborted !"
+
+845)  3     305211     85    1          "(PM2) PHY_MFC12 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+846)  3     305212     85    1          "(PM2) PHY_MFC12 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+847)  3     305213     85    1          "(PM2) PHY_MFC12 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+848)  3     305214     85    1          "(PM2) PHY_MFC12 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+849)  3     305221     85    1          "(PM2) PHY_MFC12 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+850)  3     305222     85    1          "(PM2) PHY_MFC12 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+851)  3     305301     85    1          "(PM2) ."
+
+852)  3     305302     85    1          "(PM2) PHY_MFC13 - MFC control is aborted !"
+
+853)  3     305311     85    1          "(PM2) PHY_MFC13 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+854)  3     305312     85    1          "(PM2) PHY_MFC13 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+855)  3     305313     85    1          "(PM2) PHY_MFC13 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+856)  3     305314     85    1          "(PM2) PHY_MFC13 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+857)  3     305321     85    1          "(PM2) PHY_MFC13 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+858)  3     305322     85    1          "(PM2) PHY_MFC13 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+859)  3     305401     85    1          "(PM2) ."
+
+860)  3     305402     85    1          "(PM2) PHY_MFC14 - MFC control is aborted !"
+
+861)  3     305411     85    1          "(PM2) PHY_MFC14 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+862)  3     305412     85    1          "(PM2) PHY_MFC14 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+863)  3     305413     85    1          "(PM2) PHY_MFC14 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+864)  3     305414     85    1          "(PM2) PHY_MFC14 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+865)  3     305421     85    1          "(PM2) PHY_MFC14 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+866)  3     305422     85    1          "(PM2) PHY_MFC14 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+867)  3     305501     85    1          "(PM2) PHY_DRY_PMP : Dry-Pump Interlock Sensing !"
+
+868)  3     305502     85    1          "(PM2) PHY_DRY_PMP : Cann't set Dry-Pump's power off !"
+
+869)  3     305503     85    1          "(PM2) PHY_DRY_PMP : Dry-Pump Power-On Timeout !"
+
+870)  3     305504     85    1          "(PM2) PHY_DRY_PMP : Dry-Pump Power-Off Timeout !"
+
+871)  3     305505     85    1          "(PM2) PHY_DRY_PMP : Dry-Pump Power-Off Interlock !"
+
+872)  3     305601     85    1          "(PM2) PHY_RTC :  RTC Offline Occurred !"
+
+873)  3     305602     85    1          "(PM2) PHY_RTC : CheckSum Error !"
+
+874)  3     305603     85    1          "(PM2) PHY_RTC : RTC Initial Data File Error !"
+
+875)  3     305711     85    1          "(PM2) PHY_RS232__APC - APC System : Controller is Offline."
+
+876)  3     305712     85    1          "(PM2) PHY_RS232__APC - APC System : CMD [REMOTE] is out of time."
+
+877)  3     305713     85    1          "(PM2) PHY_RS232__APC - APC System : CMD [CONTROL] is out of time."
+
+878)  3     305714     85    1          "(PM2) PHY_RS232__APC - APC System : Not Remote Status."
+
+879)  3     305715     85    1          "(PM2) PHY_RS232__APC - APC Position Control Timeout Error !"
+
+880)  3     305811     85    1          "(PM2) PHY_RS232__LFD - LFD System : Controller is Offline."
+
+881)  3     305901     85    1          "(PM2) IO - DeviceNet Offline. (Analog Read)"
+
+882)  3     305902     85    1          "(PM2) IO - DeviceNet Offline. (Digital Read)"
+
+883)  3     305903     85    1          "(PM2) IO - DeviceNet Offline. (Analog Write)"
+
+884)  3     305904     85    1          "(PM2) IO - DeviceNet Offline. (Digital Write)"
+
+885)  3     305911     85    1          "(PM2) IO - DeviceNet I/O - Analog Write Timeout !"
+
+886)  3     305912     85    1          "(PM2) IO - DeviceNet I/O - Digital Write Timeout !"
+
+887)  3     305913     85    1          "(PM2) IO - DeviceNet I/O - Analog Read Timeout !"
+
+888)  3     305914     85    1          "(PM2) IO - DeviceNet I/O - Digital Read Timeout !"
+
+889)  3     305921     85    1          "(PM2) IO - D-Net Driver에 Error가 발생한 것 같습니다."
+
+
+890)  4     400000     85    1          "(PM3) Core__Sys_Info - SYSTEM ERROR"
+
+891)  4     400011     85    1          "(PM3) Core__Sys_Info - SYSTEM ERROR 11"
+
+892)  4     400012     85    1          "(PM3) Core__Sys_Info - SYSTEM WARNING 12"
+
+893)  4     400021     85    1          "(PM3) Core__Sys_Info - System Error : Async Timer Max Error"
+
+894)  4     400401     85    1          "(PM3) INF_ACTIVE_HANDOFF :  Inner-Door is not open !"
+
+895)  4     402101     85    1          "(PM3) ."
+
+896)  4     402901     85    1          "(PM3) Mng_RF_CHECK - OBJECT MODE : UNKNOWN"
+
+897)  4     402902     85    1          "(PM3) Mng_RF_CHECK - RFx CHECK : Utility Program Can't run !"
+
+898)  4     402903     85    1          "(PM3) Mng_RF_CHECK - Now, RF Type can be changed !"
+
+899)  4     402904     85    1          "(PM3) Mng_RF_CHECK - Now, chamber's pressure status is not VAC. "
+
+900)  4     403011     85    1          "(PM3) FNC_PROC - Process recipe does not exist."
+
+901)  4     403012     85    1          "(PM3) FNC_PROC - Check Process Recovery Action !"
+
+902)  4     403013     85    1          "(PM3) FNC_PROC - Process [Plasma Dechuck] recipe does not exist."
+
+903)  4     403014     85    1          "(PM3) FNC_PROC - Process [Plasma Dechuck] Sequence Failed."
+
+904)  4     403015     85    1          "(PM3) FNC_PROC - Process recipe file is being changed, now. "
+
+905)  4     403101     85    1          "(PM3) PHY_CHM :  SYSTEM - Chamber Initialize Error !"
+
+906)  4     403102     85    1          "(PM3) PHY_CHM :  SYSTEM - PROCESS STEP OVERTIME ALARM."
+
+907)  4     403103     85    1          "(PM3) PHY_CHM :  SYSTEM - PROCESS STEP STABLE OVERTIME ALARM."
+
+908)  4     403105     85    1          "(PM3) PHY_CHM :  SYSTEM - PROCESS INTERLOCK CHANNEL ALARM."
+
+909)  4     403106     85    1          "(PM3) PHY_CHM :  SYSTEM - RECIPE OES DATA NULL ERROR."
+
+910)  4     403107     85    1          "(PM3) PHY_CHM :  SYSTEM - Interlock Sensor Error !"
+
+911)  4     403108     85    1          "(PM3) PHY_CHM :  - MFC Interlock Close Error !"
+
+912)  4     403109     85    1          "(PM3) PHY_CHM : Process recipe file is being changed, now. "
+
+913)  4     403151     85    1          "(PM3) PHY_CHM : Chamber Pressure Tolerance Warning !"
+
+914)  4     403152     85    1          "(PM3) PHY_CHM : Chamber Pressure Tolerance Fault !"
+
+915)  4     403155     85    1          "(PM3) PHY_CHM : RF Power Tolerance Warning !"
+
+916)  4     403156     85    1          "(PM3) PHY_CHM : RF Power Tolerance Fault !"
+
+917)  4     403157     85    1          "(PM3) PHY_CHM : EPD Detect Timeout !"
+
+918)  4     403158     85    1          "(PM3) PHY_CHM : Middle-Pin Up Timeout !"
+
+919)  4     403161     85    1          "(PM3) PHY_CHM : Pumping Error !"
+
+920)  4     403162     85    1          "(PM3) PHY_CHM : Venting Error !"
+
+921)  4     403183     85    1          "(PM3)  Recovery Action : System Init Error"
+
+922)  4     403171     85    1          "(PM3)  Timeout !"
+
+923)  4     403172     85    1          "(PM3)  Initial Error !"
+
+924)  4     403181     85    1          "(PM3) !"
+
+925)  4     403182     85    1          "(PM3) PHY_CHM : System interlock occurred !"
+
+926)  4     403111     85    1          "(PM3) PHY_CHM : Gas01's Flow Tolerance Warning !"
+
+927)  4     403112     85    1          "(PM3) PHY_CHM : Gas02's Flow Tolerance Warning !"
+
+928)  4     403113     85    1          "(PM3) PHY_CHM : Gas03's Flow Tolerance Warning !"
+
+929)  4     403114     85    1          "(PM3) PHY_CHM : Gas04's Flow Tolerance Warning !"
+
+930)  4     403115     85    1          "(PM3) PHY_CHM : Gas05's Flow Tolerance Warning !"
+
+931)  4     403116     85    1          "(PM3) PHY_CHM : Gas06's Flow Tolerance Warning !"
+
+932)  4     403117     85    1          "(PM3) PHY_CHM : Gas07's Flow Tolerance Warning !"
+
+933)  4     403118     85    1          "(PM3) PHY_CHM : Gas08's Flow Tolerance Warning !"
+
+934)  4     403119     85    1          "(PM3) PHY_CHM : Gas09's Flow Tolerance Warning !"
+
+935)  4     403131     85    1          "(PM3) PHY_CHM : Gas01's Flow Tolerance Fault !"
+
+936)  4     403132     85    1          "(PM3) PHY_CHM : Gas02's Flow Tolerance Fault !"
+
+937)  4     403133     85    1          "(PM3) PHY_CHM : Gas03's Flow Tolerance Fault !"
+
+938)  4     403134     85    1          "(PM3) PHY_CHM : Gas04's Flow Tolerance Fault !"
+
+939)  4     403135     85    1          "(PM3) PHY_CHM : Gas05's Flow Tolerance Fault !"
+
+940)  4     403136     85    1          "(PM3) PHY_CHM : Gas06's Flow Tolerance Fault !"
+
+941)  4     403137     85    1          "(PM3) PHY_CHM : Gas07's Flow Tolerance Fault !"
+
+942)  4     403138     85    1          "(PM3) PHY_CHM : Gas08's Flow Tolerance Fault !"
+
+943)  4     403139     85    1          "(PM3) PHY_CHM : Gas09's Flow Tolerance Fault !"
+
+944)  4     403185     85    1          "(PM3) PHY_CHM : LeakCheck Base-Pressure Timeout !"
+
+945)  4     403186     85    1          "(PM3) PHY_CHM : LeakCheck Leak-Rate MAX. Error !"
+
+946)  4     403187     85    1          "(PM3) PHY_CHM : RF Plasma detector sensor is not On !"
+
+947)  4     404101     85    1          "(PM3) PHY_APC - APC Pressure Control Warning Range Alarm."
+
+948)  4     404102     85    1          "(PM3) PHY_APC - APC Pressure Control Abort Range Alarm."
+
+949)  4     404104     85    1          "(PM3) PHY_APC - APC Valve can't control in no vacuum."
+
+950)  4     404109     85    1          "(PM3) PHY_APC - APC Valve can't control in CM1 & CM2 Lock."
+
+951)  4     404105     85    1          "(PM3) PHY_APC - APC Valve can't control in turbo pump on and no vacuum."
+
+952)  4     404107     85    1          "(PM3) PHY_APC - APC Valve can't control in turbo pump on and CM1 & CM2 Lock."
+
+953)  4     404106     85    1          "(PM3) PHY_APC - APC Valve can't control in dry-pump on and no vacuum."
+
+954)  4     404108     85    1          "(PM3) PHY_APC - APC Valve can't control in dry-pump on and CM1 & CM2 Lock."
+
+955)  4     404301     85    1          "(PM3) PHY_ESC - ESC Chuck Status is Unknown !"
+
+956)  4     404302     85    1          "(PM3) PHY_ESC - ESC Chuck Error : Chamber pressure is not vacuum !"
+
+957)  4     404303     85    1          "(PM3) PHY_ESC - ESC Chuck Error : There is no wafer !"
+
+958)  4     404304     85    1          "(PM3) PHY_ESC - ESC Chuck Voltage : MIN. Error !"
+
+959)  4     404305     85    1          "(PM3) PHY_ESC - ESC Chuck Voltage : MAX. Error !"
+
+960)  4     404306     85    1          "(PM3) PHY_ESC - ESC voltage is in warning range !"
+
+961)  4     404307     85    1          "(PM3) PHY_ESC - ESC voltage is in abort range !"
+
+962)  4     404311     85    1          "(PM3) PHY_ESC - UPC pressure is in warning range !"
+
+963)  4     404312     85    1          "(PM3) PHY_ESC - UPC pressure is in abort range !"
+
+964)  4     404313     85    1          "(PM3) PHY_ESC - UPC flow is in warning range !"
+
+965)  4     404314     85    1          "(PM3) PHY_ESC - UPC flow is in abort range !"
+
+966)  4     404321     85    1          "(PM3) PHY_ESC - ESC Voltage MAX. Error !"
+
+967)  4     404322     85    1          "(PM3) PHY_ESC - He Leak MIN Error During Dechucking !"
+
+968)  4     404331     85    1          "(PM3) PHY_ESC - Recipe He : Flow Warning Error !"
+
+969)  4     404332     85    1          "(PM3) PHY_ESC - Recipe He : Flow Fault Error !"
+
+970)  4     404333     85    1          "(PM3) PHY_ESC - Recipe He : Wafer Leak Warning Error !"
+
+971)  4     404334     85    1          "(PM3) PHY_ESC - Recipe He : Wafer Leak Fault Error !"
+
+972)  4     404335     85    1          "(PM3) PHY_ESC - Recipe He : Minimum Leak Error !"
+
+973)  4     404336     85    1          "(PM3) PHY_ESC - Recipe He : Maximum Leak Error !"
+
+974)  4     404341     85    1          "(PM3) PHY_ESC - Helium config range error !"
+
+975)  4     404401     85    1          "(PM3) PHY_PIN : Lift_Pin Home Timeout !"
+
+976)  4     404402     85    1          "(PM3) PHY_PIN : Lift_Pin Home Timeout !"
+
+977)  4     404403     85    1          "(PM3) PHY_PIN : Lift_Pin Up Timeout !"
+
+978)  4     404404     85    1          "(PM3) PHY_PIN : Lift_Pin Up Timeout !"
+
+979)  4     404405     85    1          "(PM3) PHY_PIN : Lift_Pin Release Moving Timeout !"
+
+980)  4     404406     85    1          "(PM3) PHY_PIN : Lift_Pin Release Moving Timeout !"
+
+981)  4     404407     85    1          "(PM3) PHY_PIN : Lift_Pin Middle Timeout !"
+
+982)  4     404408     85    1          "(PM3) PHY_PIN : Lift_Pin Middle Timeout !"
+
+983)  4     404409     85    1          "(PM3) PHY_PIN : Lift_Pin Down Timeout !"
+
+984)  4     404410     85    1          "(PM3) PHY_PIN : Lift_Pin Down Timeout !"
+
+985)  4     404411     85    1          "(PM3) PHY_PIN : Lift_Pin Moving Interlock !"
+
+986)  4     404412     85    1          "(PM3) PHY_PIN : Lift_Pin Moving Interlock !"
+
+987)  4     404415     85    1          "(PM3) . "
+
+988)  4     404416     85    1          "(PM3) . "
+
+989)  4     404501     85    1          "(PM3) PHY_HEATER - Temperature Max. Limit !"
+
+990)  4     404502     85    1          "(PM3) PHY_HEATER - Temperature fault error !"
+
+991)  4     404503     85    1          "(PM3) PHY_HEATER - Temperature warning error !"
+
+992)  4     404504     85    1          "(PM3) PHY_HEATER - Over-Temperature Sensing Error !"
+
+993)  4     404601     85    1          "(PM3) PHY_HX1 - Temperature Max. Limit !"
+
+994)  4     404603     85    1          "(PM3) PHY_HX1 - Temperature fault error !"
+
+995)  4     404602     85    1          "(PM3) PHY_HX1 - Temperature warning error !"
+
+996)  4     404604     85    1          "(PM3) PHY_HX1 - Resistivity Warning Limit !"
+
+997)  4     404605     85    1          "(PM3) PHY_HX1 - Resistivity Fault Limit !"
+
+998)  4     404606     85    1          "(PM3) PHY_HX1 - System Error Sensor Detected !"
+
+999)  4     404607     85    1          "(PM3)  !"
+
+1000)  4     404701     85    1          "(PM3) PHY_INNER_DOOR : Inner-Door Open Timeout !"
+
+1001)  4     404702     85    1          "(PM3) PHY_INNER_DOOR : Inner-Door Close Timeout !"
+
+1002)  4     404703     85    1          "(PM3) PHY_INNER_DOOR : Inner-Door Open Interlock !"
+
+1003)  4     404704     85    1          "(PM3) PHY_INNER_DOOR : Inner-Door Close Interlock !"
+
+1004)  4     404801     85    1          "(PM3) ."
+
+1005)  4     404802     85    1          "(PM3) PHY_MFC1 - MFC control is aborted !"
+
+1006)  4     404811     85    1          "(PM3) PHY_MFC1 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1007)  4     404812     85    1          "(PM3) PHY_MFC1 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1008)  4     404813     85    1          "(PM3) PHY_MFC1 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1009)  4     404814     85    1          "(PM3) PHY_MFC1 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1010)  4     404821     85    1          "(PM3) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1011)  4     404822     85    1          "(PM3) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1012)  4     404901     85    1          "(PM3) ."
+
+1013)  4     404902     85    1          "(PM3) PHY_MFC2 - MFC control is aborted !"
+
+1014)  4     404911     85    1          "(PM3) PHY_MFC2 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1015)  4     404912     85    1          "(PM3) PHY_MFC2 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1016)  4     404913     85    1          "(PM3) PHY_MFC2 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1017)  4     404914     85    1          "(PM3) PHY_MFC2 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1018)  4     404921     85    1          "(PM3) PHY_MFC2 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1019)  4     404922     85    1          "(PM3) PHY_MFC2 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1020)  4     405001     85    1          "(PM3) ."
+
+1021)  4     405002     85    1          "(PM3) PHY_MFC3 - MFC control is aborted !"
+
+1022)  4     405011     85    1          "(PM3) PHY_MFC3 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1023)  4     405012     85    1          "(PM3) PHY_MFC3 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1024)  4     405013     85    1          "(PM3) PHY_MFC3 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1025)  4     405014     85    1          "(PM3) PHY_MFC3 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1026)  4     405021     85    1          "(PM3) PHY_MFC3 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1027)  4     405022     85    1          "(PM3) PHY_MFC3 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1028)  4     405101     85    1          "(PM3) ."
+
+1029)  4     405102     85    1          "(PM3) PHY_MFC4 - MFC control is aborted !"
+
+1030)  4     405111     85    1          "(PM3) PHY_MFC4 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1031)  4     405112     85    1          "(PM3) PHY_MFC4 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1032)  4     405113     85    1          "(PM3) PHY_MFC4 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1033)  4     405114     85    1          "(PM3) PHY_MFC4 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1034)  4     405121     85    1          "(PM3) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1035)  4     405122     85    1          "(PM3) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1036)  4     405201     85    1          "(PM3) ."
+
+1037)  4     405202     85    1          "(PM3) PHY_MFC5 - MFC control is aborted !"
+
+1038)  4     405211     85    1          "(PM3) PHY_MFC5 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1039)  4     405212     85    1          "(PM3) PHY_MFC5 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1040)  4     405213     85    1          "(PM3) PHY_MFC5 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1041)  4     405214     85    1          "(PM3) PHY_MFC5 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1042)  4     405221     85    1          "(PM3) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1043)  4     405222     85    1          "(PM3) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1044)  4     405301     85    1          "(PM3) ."
+
+1045)  4     405302     85    1          "(PM3) PHY_MFC6 - MFC control is aborted !"
+
+1046)  4     405311     85    1          "(PM3) PHY_MFC6 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1047)  4     405312     85    1          "(PM3) PHY_MFC6 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1048)  4     405313     85    1          "(PM3) PHY_MFC6 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1049)  4     405314     85    1          "(PM3) PHY_MFC6 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1050)  4     405321     85    1          "(PM3) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1051)  4     405322     85    1          "(PM3) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1052)  4     405401     85    1          "(PM3) ."
+
+1053)  4     405402     85    1          "(PM3) PHY_MFC7 - MFC control is aborted !"
+
+1054)  4     405411     85    1          "(PM3) PHY_MFC7 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1055)  4     405412     85    1          "(PM3) PHY_MFC7 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1056)  4     405413     85    1          "(PM3) PHY_MFC7 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1057)  4     405414     85    1          "(PM3) PHY_MFC7 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1058)  4     405421     85    1          "(PM3) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1059)  4     405422     85    1          "(PM3) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1060)  4     405501     85    1          "(PM3) ."
+
+1061)  4     405502     85    1          "(PM3) PHY_MFC8 - MFC control is aborted !"
+
+1062)  4     405511     85    1          "(PM3) PHY_MFC8 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1063)  4     405512     85    1          "(PM3) PHY_MFC8 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1064)  4     405513     85    1          "(PM3) PHY_MFC8 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1065)  4     405514     85    1          "(PM3) PHY_MFC8 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1066)  4     405521     85    1          "(PM3) PHY_MFC8 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1067)  4     405522     85    1          "(PM3) PHY_MFC8 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1068)  4     405601     85    1          "(PM3) ."
+
+1069)  4     405602     85    1          "(PM3) PHY_MFC9 - MFC control is aborted !"
+
+1070)  4     405611     85    1          "(PM3) PHY_MFC9 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1071)  4     405612     85    1          "(PM3) PHY_MFC9 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1072)  4     405613     85    1          "(PM3) PHY_MFC9 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1073)  4     405614     85    1          "(PM3) PHY_MFC9 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1074)  4     405621     85    1          "(PM3) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1075)  4     405622     85    1          "(PM3) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1076)  4     405701     85    1          "(PM3) PHY_DRY_PMP : Dry-Pump Interlock Sensing !"
+
+1077)  4     405702     85    1          "(PM3) PHY_DRY_PMP : Cann't set Dry-Pump's power off !"
+
+1078)  4     405703     85    1          "(PM3) PHY_DRY_PMP : Dry-Pump Power-On Timeout !"
+
+1079)  4     405704     85    1          "(PM3) PHY_DRY_PMP : Dry-Pump Power-Off Timeout !"
+
+1080)  4     405705     85    1          "(PM3) PHY_DRY_PMP : Dry-Pump Power-Off Interlock !"
+
+1081)  4     405801     85    1          "(PM3) PHY_TMP : Cann't open Forline-Valve."
+
+1082)  4     405802     85    1          "(PM3) PHY_TMP : Safety-interlock occurred for dry-pump power off !"
+
+1083)  4     405803     85    1          "(PM3) PHY_TMP : Can't turn TMP-pump on."
+
+1084)  4     405804     85    1          "(PM3) PHY_TMP : Can't turn TMP-pump on."
+
+1085)  4     405805     85    1          "(PM3) PHY_TMP : Can't turn TMP-pump off."
+
+1086)  4     405811     85    1          "(PM3) PHY_TMP : TMP At_Speed Timeout !"
+
+1087)  4     405812     85    1          "(PM3) PHY_TMP : TMP Off Timeout !"
+
+1088)  4     405813     85    1          "(PM3) PHY_TMP : TMP Max. Inlet pressure Interlock !"
+
+1089)  4     405814     85    1          "(PM3) PHY_TMP : TMP Max. Inlet pressure Alarm !"
+
+1090)  4     405901     85    1          "(PM3) PHY_RF_GEN - Forward Power Limit Error !"
+
+1091)  4     405902     85    1          "(PM3) PHY_RF_GEN - Forward Power Warning Tolerance Error !"
+
+1092)  4     405903     85    1          "(PM3) PHY_RF_GEN - Forward Power Fault Tolerance Error !"
+
+1093)  4     405911     85    1          "(PM3) PHY_RF_GEN - Reflect Power Limit Error !"
+
+1094)  4     405912     85    1          "(PM3) PHY_RF_GEN - Reflect Power Warning Tolerance Error !"
+
+1095)  4     405913     85    1          "(PM3) PHY_RF_GEN - Reflect Power Fault Tolerance Error !"
+
+1096)  4     405921     85    1          "(PM3) PHY_RF_GEN - Frequency Deviation Tolerance Error !"
+
+1097)  4     405922     85    1          "(PM3) PHY_RF_GEN - Duty-Cycle Deviation Tolerance Error !"
+
+1098)  4     405923     85    1          "(PM3) PHY_RF_GEN - RF On Onterlock Error !"
+
+1099)  4     406001     85    1          "(PM3) PHY_RF_MAT :  - Current1 lower warning limit error !"
+
+1100)  4     406002     85    1          "(PM3) PHY_RF_MAT :  - Current1 upper warning limit error !"
+
+1101)  4     406003     85    1          "(PM3) PHY_RF_MAT :  - Current1 lower fault limit error !"
+
+1102)  4     406004     85    1          "(PM3) PHY_RF_MAT :  - Current1 upper fault limit error !"
+
+1103)  4     406011     85    1          "(PM3) PHY_RF_MAT :  - Current2 lower warning limit error !"
+
+1104)  4     406012     85    1          "(PM3) PHY_RF_MAT :  - Current2 upper warning limit error !"
+
+1105)  4     406013     85    1          "(PM3) PHY_RF_MAT :  - Current2 lower fault limit error !"
+
+1106)  4     406014     85    1          "(PM3) PHY_RF_MAT :  - Current2 upper fault limit error !"
+
+1107)  4     406111     85    1          "(PM3) PHY_RS232__APC - APC System : Controller is Offline."
+
+1108)  4     406112     85    1          "(PM3) PHY_RS232__APC - APC System : CMD [REMOTE] is out of time."
+
+1109)  4     406113     85    1          "(PM3) PHY_RS232__APC - APC System : CMD [CONTROL] is out of time."
+
+1110)  4     406114     85    1          "(PM3) PHY_RS232__APC - APC System : Not Remote Status."
+
+1111)  4     406115     85    1          "(PM3) PHY_RS232__APC - APC Position Control Timeout Error !"
+
+1112)  4     406211     85    1          "(PM3) PHY_RS232__TMP - TMP System : Controller is Offline."
+
+1113)  4     406212     85    1          "(PM3)  occurred !."
+
+1114)  4     406213     85    1          "(PM3)  occurred !."
+
+1115)  4     406301     85    1          "(PM3) PHY_RS232__RF_MAT - RF Matcher Offline."
+
+1116)  4     406302     85    1          "(PM3) PHY_RS232__RF_MAT - RF Matcher Remote."
+
+1117)  4     406311     85    1          "(PM3) PHY_RS232__RF_MAT - RF Matcher Control Aborted."
+
+1118)  4     406401     85    1          "(PM3) PHY_RS232__RF_GEN - RF Generator Offline."
+
+1119)  4     406402     85    1          "(PM3) PHY_RS232__RF_GEN - RF Generator Remote."
+
+1120)  4     406411     85    1          "(PM3) PHY_RS232__RF_GEN - RF Generator Control Aborted."
+
+1121)  4     406412     85    1          "(PM3) PHY_RS232__RF_GEN - RF Generator Status Fault."
+
+1122)  4     406501     85    1          "(PM3) IO - DeviceNet Offline. (Analog Read)"
+
+1123)  4     406502     85    1          "(PM3) IO - DeviceNet Offline. (Digital Read)"
+
+1124)  4     406503     85    1          "(PM3) IO - DeviceNet Offline. (Analog Write)"
+
+1125)  4     406504     85    1          "(PM3) IO - DeviceNet Offline. (Digital Write)"
+
+1126)  4     406511     85    1          "(PM3) IO - DeviceNet I/O - Analog Write Timeout !"
+
+1127)  4     406512     85    1          "(PM3) IO - DeviceNet I/O - Digital Write Timeout !"
+
+1128)  4     406513     85    1          "(PM3) IO - DeviceNet I/O - Analog Read Timeout !"
+
+1129)  4     406514     85    1          "(PM3) IO - DeviceNet I/O - Digital Read Timeout !"
+
+1130)  4     406521     85    1          "(PM3) IO - D-Net Driver에 Error가 발생한 것 같습니다."
+
+
+1131)  5     500000     85    1          "(PM4) Core__Sys_Info - SYSTEM ERROR"
+
+1132)  5     500011     85    1          "(PM4) Core__Sys_Info - SYSTEM ERROR 11"
+
+1133)  5     500012     85    1          "(PM4) Core__Sys_Info - SYSTEM WARNING 12"
+
+1134)  5     500021     85    1          "(PM4) Core__Sys_Info - System Error : Async Timer Max Error"
+
+1135)  5     500401     85    1          "(PM4) INF_ACTIVE_HANDOFF :  Inner-Door is not open !"
+
+1136)  5     502101     85    1          "(PM4) ."
+
+1137)  5     502901     85    1          "(PM4) Mng_RF_CHECK - OBJECT MODE : UNKNOWN"
+
+1138)  5     502902     85    1          "(PM4) Mng_RF_CHECK - RFx CHECK : Utility Program Can't run !"
+
+1139)  5     502903     85    1          "(PM4) Mng_RF_CHECK - Now, RF Type can be changed !"
+
+1140)  5     502904     85    1          "(PM4) Mng_RF_CHECK - Now, chamber's pressure status is not VAC. "
+
+1141)  5     503011     85    1          "(PM4) FNC_PROC - Process recipe does not exist."
+
+1142)  5     503012     85    1          "(PM4) FNC_PROC - Check Process Recovery Action !"
+
+1143)  5     503013     85    1          "(PM4) FNC_PROC - Process [Plasma Dechuck] recipe does not exist."
+
+1144)  5     503014     85    1          "(PM4) FNC_PROC - Process [Plasma Dechuck] Sequence Failed."
+
+1145)  5     503015     85    1          "(PM4) FNC_PROC - Process recipe file is being changed, now. "
+
+1146)  5     503101     85    1          "(PM4) PHY_CHM :  SYSTEM - Chamber Initialize Error !"
+
+1147)  5     503102     85    1          "(PM4) PHY_CHM :  SYSTEM - PROCESS STEP OVERTIME ALARM."
+
+1148)  5     503103     85    1          "(PM4) PHY_CHM :  SYSTEM - PROCESS STEP STABLE OVERTIME ALARM."
+
+1149)  5     503105     85    1          "(PM4) PHY_CHM :  SYSTEM - PROCESS INTERLOCK CHANNEL ALARM."
+
+1150)  5     503106     85    1          "(PM4) PHY_CHM :  SYSTEM - RECIPE OES DATA NULL ERROR."
+
+1151)  5     503107     85    1          "(PM4) PHY_CHM :  SYSTEM - Interlock Sensor Error !"
+
+1152)  5     503108     85    1          "(PM4) PHY_CHM :  - MFC Interlock Close Error !"
+
+1153)  5     503109     85    1          "(PM4) PHY_CHM : Process recipe file is being changed, now. "
+
+1154)  5     503151     85    1          "(PM4) PHY_CHM : Chamber Pressure Tolerance Warning !"
+
+1155)  5     503152     85    1          "(PM4) PHY_CHM : Chamber Pressure Tolerance Fault !"
+
+1156)  5     503155     85    1          "(PM4) PHY_CHM : RF Power Tolerance Warning !"
+
+1157)  5     503156     85    1          "(PM4) PHY_CHM : RF Power Tolerance Fault !"
+
+1158)  5     503157     85    1          "(PM4) PHY_CHM : EPD Detect Timeout !"
+
+1159)  5     503158     85    1          "(PM4) PHY_CHM : Middle-Pin Up Timeout !"
+
+1160)  5     503161     85    1          "(PM4) PHY_CHM : Pumping Error !"
+
+1161)  5     503162     85    1          "(PM4) PHY_CHM : Venting Error !"
+
+1162)  5     503183     85    1          "(PM4)  Recovery Action : System Init Error"
+
+1163)  5     503171     85    1          "(PM4)  Timeout !"
+
+1164)  5     503172     85    1          "(PM4)  Initial Error !"
+
+1165)  5     503181     85    1          "(PM4) !"
+
+1166)  5     503182     85    1          "(PM4) PHY_CHM : System interlock occurred !"
+
+1167)  5     503111     85    1          "(PM4) PHY_CHM : Gas01's Flow Tolerance Warning !"
+
+1168)  5     503112     85    1          "(PM4) PHY_CHM : Gas02's Flow Tolerance Warning !"
+
+1169)  5     503113     85    1          "(PM4) PHY_CHM : Gas03's Flow Tolerance Warning !"
+
+1170)  5     503114     85    1          "(PM4) PHY_CHM : Gas04's Flow Tolerance Warning !"
+
+1171)  5     503115     85    1          "(PM4) PHY_CHM : Gas05's Flow Tolerance Warning !"
+
+1172)  5     503116     85    1          "(PM4) PHY_CHM : Gas06's Flow Tolerance Warning !"
+
+1173)  5     503117     85    1          "(PM4) PHY_CHM : Gas07's Flow Tolerance Warning !"
+
+1174)  5     503118     85    1          "(PM4) PHY_CHM : Gas08's Flow Tolerance Warning !"
+
+1175)  5     503119     85    1          "(PM4) PHY_CHM : Gas09's Flow Tolerance Warning !"
+
+1176)  5     503131     85    1          "(PM4) PHY_CHM : Gas01's Flow Tolerance Fault !"
+
+1177)  5     503132     85    1          "(PM4) PHY_CHM : Gas02's Flow Tolerance Fault !"
+
+1178)  5     503133     85    1          "(PM4) PHY_CHM : Gas03's Flow Tolerance Fault !"
+
+1179)  5     503134     85    1          "(PM4) PHY_CHM : Gas04's Flow Tolerance Fault !"
+
+1180)  5     503135     85    1          "(PM4) PHY_CHM : Gas05's Flow Tolerance Fault !"
+
+1181)  5     503136     85    1          "(PM4) PHY_CHM : Gas06's Flow Tolerance Fault !"
+
+1182)  5     503137     85    1          "(PM4) PHY_CHM : Gas07's Flow Tolerance Fault !"
+
+1183)  5     503138     85    1          "(PM4) PHY_CHM : Gas08's Flow Tolerance Fault !"
+
+1184)  5     503139     85    1          "(PM4) PHY_CHM : Gas09's Flow Tolerance Fault !"
+
+1185)  5     503185     85    1          "(PM4) PHY_CHM : LeakCheck Base-Pressure Timeout !"
+
+1186)  5     503186     85    1          "(PM4) PHY_CHM : LeakCheck Leak-Rate MAX. Error !"
+
+1187)  5     503187     85    1          "(PM4) PHY_CHM : RF Plasma detector sensor is not On !"
+
+1188)  5     504101     85    1          "(PM4) PHY_APC - APC Pressure Control Warning Range Alarm."
+
+1189)  5     504102     85    1          "(PM4) PHY_APC - APC Pressure Control Abort Range Alarm."
+
+1190)  5     504104     85    1          "(PM4) PHY_APC - APC Valve can't control in no vacuum."
+
+1191)  5     504109     85    1          "(PM4) PHY_APC - APC Valve can't control in CM1 & CM2 Lock."
+
+1192)  5     504105     85    1          "(PM4) PHY_APC - APC Valve can't control in turbo pump on and no vacuum."
+
+1193)  5     504107     85    1          "(PM4) PHY_APC - APC Valve can't control in turbo pump on and CM1 & CM2 Lock."
+
+1194)  5     504106     85    1          "(PM4) PHY_APC - APC Valve can't control in dry-pump on and no vacuum."
+
+1195)  5     504108     85    1          "(PM4) PHY_APC - APC Valve can't control in dry-pump on and CM1 & CM2 Lock."
+
+1196)  5     504301     85    1          "(PM4) PHY_ESC - ESC Chuck Status is Unknown !"
+
+1197)  5     504302     85    1          "(PM4) PHY_ESC - ESC Chuck Error : Chamber pressure is not vacuum !"
+
+1198)  5     504303     85    1          "(PM4) PHY_ESC - ESC Chuck Error : There is no wafer !"
+
+1199)  5     504304     85    1          "(PM4) PHY_ESC - ESC Chuck Voltage : MIN. Error !"
+
+1200)  5     504305     85    1          "(PM4) PHY_ESC - ESC Chuck Voltage : MAX. Error !"
+
+1201)  5     504306     85    1          "(PM4) PHY_ESC - ESC voltage is in warning range !"
+
+1202)  5     504307     85    1          "(PM4) PHY_ESC - ESC voltage is in abort range !"
+
+1203)  5     504311     85    1          "(PM4) PHY_ESC - UPC pressure is in warning range !"
+
+1204)  5     504312     85    1          "(PM4) PHY_ESC - UPC pressure is in abort range !"
+
+1205)  5     504313     85    1          "(PM4) PHY_ESC - UPC flow is in warning range !"
+
+1206)  5     504314     85    1          "(PM4) PHY_ESC - UPC flow is in abort range !"
+
+1207)  5     504321     85    1          "(PM4) PHY_ESC - ESC Voltage MAX. Error !"
+
+1208)  5     504322     85    1          "(PM4) PHY_ESC - He Leak MIN Error During Dechucking !"
+
+1209)  5     504331     85    1          "(PM4) PHY_ESC - Recipe He : Flow Warning Error !"
+
+1210)  5     504332     85    1          "(PM4) PHY_ESC - Recipe He : Flow Fault Error !"
+
+1211)  5     504333     85    1          "(PM4) PHY_ESC - Recipe He : Wafer Leak Warning Error !"
+
+1212)  5     504334     85    1          "(PM4) PHY_ESC - Recipe He : Wafer Leak Fault Error !"
+
+1213)  5     504335     85    1          "(PM4) PHY_ESC - Recipe He : Minimum Leak Error !"
+
+1214)  5     504336     85    1          "(PM4) PHY_ESC - Recipe He : Maximum Leak Error !"
+
+1215)  5     504341     85    1          "(PM4) PHY_ESC - Helium config range error !"
+
+1216)  5     504401     85    1          "(PM4) PHY_PIN : Lift_Pin Home Timeout !"
+
+1217)  5     504402     85    1          "(PM4) PHY_PIN : Lift_Pin Home Timeout !"
+
+1218)  5     504403     85    1          "(PM4) PHY_PIN : Lift_Pin Up Timeout !"
+
+1219)  5     504404     85    1          "(PM4) PHY_PIN : Lift_Pin Up Timeout !"
+
+1220)  5     504405     85    1          "(PM4) PHY_PIN : Lift_Pin Release Moving Timeout !"
+
+1221)  5     504406     85    1          "(PM4) PHY_PIN : Lift_Pin Release Moving Timeout !"
+
+1222)  5     504407     85    1          "(PM4) PHY_PIN : Lift_Pin Middle Timeout !"
+
+1223)  5     504408     85    1          "(PM4) PHY_PIN : Lift_Pin Middle Timeout !"
+
+1224)  5     504409     85    1          "(PM4) PHY_PIN : Lift_Pin Down Timeout !"
+
+1225)  5     504410     85    1          "(PM4) PHY_PIN : Lift_Pin Down Timeout !"
+
+1226)  5     504411     85    1          "(PM4) PHY_PIN : Lift_Pin Moving Interlock !"
+
+1227)  5     504412     85    1          "(PM4) PHY_PIN : Lift_Pin Moving Interlock !"
+
+1228)  5     504415     85    1          "(PM4) . "
+
+1229)  5     504416     85    1          "(PM4) . "
+
+1230)  5     504501     85    1          "(PM4) PHY_HEATER - Temperature Max. Limit !"
+
+1231)  5     504502     85    1          "(PM4) PHY_HEATER - Temperature fault error !"
+
+1232)  5     504503     85    1          "(PM4) PHY_HEATER - Temperature warning error !"
+
+1233)  5     504504     85    1          "(PM4) PHY_HEATER - Over-Temperature Sensing Error !"
+
+1234)  5     504601     85    1          "(PM4) PHY_HX1 - Temperature Max. Limit !"
+
+1235)  5     504603     85    1          "(PM4) PHY_HX1 - Temperature fault error !"
+
+1236)  5     504602     85    1          "(PM4) PHY_HX1 - Temperature warning error !"
+
+1237)  5     504604     85    1          "(PM4) PHY_HX1 - Resistivity Warning Limit !"
+
+1238)  5     504605     85    1          "(PM4) PHY_HX1 - Resistivity Fault Limit !"
+
+1239)  5     504606     85    1          "(PM4) PHY_HX1 - System Error Sensor Detected !"
+
+1240)  5     504607     85    1          "(PM4)  !"
+
+1241)  5     504701     85    1          "(PM4) PHY_INNER_DOOR : Inner-Door Open Timeout !"
+
+1242)  5     504702     85    1          "(PM4) PHY_INNER_DOOR : Inner-Door Close Timeout !"
+
+1243)  5     504703     85    1          "(PM4) PHY_INNER_DOOR : Inner-Door Open Interlock !"
+
+1244)  5     504704     85    1          "(PM4) PHY_INNER_DOOR : Inner-Door Close Interlock !"
+
+1245)  5     504801     85    1          "(PM4) ."
+
+1246)  5     504802     85    1          "(PM4) PHY_MFC1 - MFC control is aborted !"
+
+1247)  5     504811     85    1          "(PM4) PHY_MFC1 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1248)  5     504812     85    1          "(PM4) PHY_MFC1 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1249)  5     504813     85    1          "(PM4) PHY_MFC1 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1250)  5     504814     85    1          "(PM4) PHY_MFC1 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1251)  5     504821     85    1          "(PM4) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1252)  5     504822     85    1          "(PM4) PHY_MFC1 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1253)  5     504901     85    1          "(PM4) ."
+
+1254)  5     504902     85    1          "(PM4) PHY_MFC2 - MFC control is aborted !"
+
+1255)  5     504911     85    1          "(PM4) PHY_MFC2 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1256)  5     504912     85    1          "(PM4) PHY_MFC2 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1257)  5     504913     85    1          "(PM4) PHY_MFC2 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1258)  5     504914     85    1          "(PM4) PHY_MFC2 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1259)  5     504921     85    1          "(PM4) PHY_MFC2 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1260)  5     504922     85    1          "(PM4) PHY_MFC2 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1261)  5     505001     85    1          "(PM4) ."
+
+1262)  5     505002     85    1          "(PM4) PHY_MFC3 - MFC control is aborted !"
+
+1263)  5     505011     85    1          "(PM4) PHY_MFC3 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1264)  5     505012     85    1          "(PM4) PHY_MFC3 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1265)  5     505013     85    1          "(PM4) PHY_MFC3 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1266)  5     505014     85    1          "(PM4) PHY_MFC3 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1267)  5     505021     85    1          "(PM4) PHY_MFC3 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1268)  5     505022     85    1          "(PM4) PHY_MFC3 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1269)  5     505101     85    1          "(PM4) ."
+
+1270)  5     505102     85    1          "(PM4) PHY_MFC4 - MFC control is aborted !"
+
+1271)  5     505111     85    1          "(PM4) PHY_MFC4 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1272)  5     505112     85    1          "(PM4) PHY_MFC4 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1273)  5     505113     85    1          "(PM4) PHY_MFC4 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1274)  5     505114     85    1          "(PM4) PHY_MFC4 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1275)  5     505121     85    1          "(PM4) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1276)  5     505122     85    1          "(PM4) PHY_MFC4 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1277)  5     505201     85    1          "(PM4) ."
+
+1278)  5     505202     85    1          "(PM4) PHY_MFC5 - MFC control is aborted !"
+
+1279)  5     505211     85    1          "(PM4) PHY_MFC5 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1280)  5     505212     85    1          "(PM4) PHY_MFC5 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1281)  5     505213     85    1          "(PM4) PHY_MFC5 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1282)  5     505214     85    1          "(PM4) PHY_MFC5 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1283)  5     505221     85    1          "(PM4) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1284)  5     505222     85    1          "(PM4) PHY_MFC5 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1285)  5     505301     85    1          "(PM4) ."
+
+1286)  5     505302     85    1          "(PM4) PHY_MFC6 - MFC control is aborted !"
+
+1287)  5     505311     85    1          "(PM4) PHY_MFC6 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1288)  5     505312     85    1          "(PM4) PHY_MFC6 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1289)  5     505313     85    1          "(PM4) PHY_MFC6 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1290)  5     505314     85    1          "(PM4) PHY_MFC6 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1291)  5     505321     85    1          "(PM4) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1292)  5     505322     85    1          "(PM4) PHY_MFC6 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1293)  5     505401     85    1          "(PM4) ."
+
+1294)  5     505402     85    1          "(PM4) PHY_MFC7 - MFC control is aborted !"
+
+1295)  5     505411     85    1          "(PM4) PHY_MFC7 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1296)  5     505412     85    1          "(PM4) PHY_MFC7 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1297)  5     505413     85    1          "(PM4) PHY_MFC7 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1298)  5     505414     85    1          "(PM4) PHY_MFC7 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1299)  5     505421     85    1          "(PM4) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1300)  5     505422     85    1          "(PM4) PHY_MFC7 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1301)  5     505501     85    1          "(PM4) ."
+
+1302)  5     505502     85    1          "(PM4) PHY_MFC8 - MFC control is aborted !"
+
+1303)  5     505511     85    1          "(PM4) PHY_MFC8 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1304)  5     505512     85    1          "(PM4) PHY_MFC8 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1305)  5     505513     85    1          "(PM4) PHY_MFC8 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1306)  5     505514     85    1          "(PM4) PHY_MFC8 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1307)  5     505521     85    1          "(PM4) PHY_MFC8 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1308)  5     505522     85    1          "(PM4) PHY_MFC8 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1309)  5     505601     85    1          "(PM4) ."
+
+1310)  5     505602     85    1          "(PM4) PHY_MFC9 - MFC control is aborted !"
+
+1311)  5     505611     85    1          "(PM4) PHY_MFC9 - MFC의 현재 Flow가 Warning Lower 영역에 있습니다."
+
+1312)  5     505612     85    1          "(PM4) PHY_MFC9 - MFC의 현재 Flow가 Warning Upper 영역에 있습니다."
+
+1313)  5     505613     85    1          "(PM4) PHY_MFC9 - MFC의 현재 Flow가 Fault Lower 영역에 있습니다."
+
+1314)  5     505614     85    1          "(PM4) PHY_MFC9 - MFC의 현재 Flow가 Fault Upper 영역에 있습니다."
+
+1315)  5     505621     85    1          "(PM4) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Lower Limit 영역에 있습니다."
+
+1316)  5     505622     85    1          "(PM4) PHY_MFC9 - MFC의 Flow가 Zero 설정 상태에서 Upper Limit 영역에 있습니다."
+
+1317)  5     505701     85    1          "(PM4) PHY_DRY_PMP : Dry-Pump Interlock Sensing !"
+
+1318)  5     505702     85    1          "(PM4) PHY_DRY_PMP : Cann't set Dry-Pump's power off !"
+
+1319)  5     505703     85    1          "(PM4) PHY_DRY_PMP : Dry-Pump Power-On Timeout !"
+
+1320)  5     505704     85    1          "(PM4) PHY_DRY_PMP : Dry-Pump Power-Off Timeout !"
+
+1321)  5     505705     85    1          "(PM4) PHY_DRY_PMP : Dry-Pump Power-Off Interlock !"
+
+1322)  5     505801     85    1          "(PM4) PHY_TMP : Cann't open Forline-Valve."
+
+1323)  5     505802     85    1          "(PM4) PHY_TMP : Safety-interlock occurred for dry-pump power off !"
+
+1324)  5     505803     85    1          "(PM4) PHY_TMP : Can't turn TMP-pump on."
+
+1325)  5     505804     85    1          "(PM4) PHY_TMP : Can't turn TMP-pump on."
+
+1326)  5     505805     85    1          "(PM4) PHY_TMP : Can't turn TMP-pump off."
+
+1327)  5     505811     85    1          "(PM4) PHY_TMP : TMP At_Speed Timeout !"
+
+1328)  5     505812     85    1          "(PM4) PHY_TMP : TMP Off Timeout !"
+
+1329)  5     505813     85    1          "(PM4) PHY_TMP : TMP Max. Inlet pressure Interlock !"
+
+1330)  5     505814     85    1          "(PM4) PHY_TMP : TMP Max. Inlet pressure Alarm !"
+
+1331)  5     505901     85    1          "(PM4) PHY_RF_GEN - Forward Power Limit Error !"
+
+1332)  5     505902     85    1          "(PM4) PHY_RF_GEN - Forward Power Warning Tolerance Error !"
+
+1333)  5     505903     85    1          "(PM4) PHY_RF_GEN - Forward Power Fault Tolerance Error !"
+
+1334)  5     505911     85    1          "(PM4) PHY_RF_GEN - Reflect Power Limit Error !"
+
+1335)  5     505912     85    1          "(PM4) PHY_RF_GEN - Reflect Power Warning Tolerance Error !"
+
+1336)  5     505913     85    1          "(PM4) PHY_RF_GEN - Reflect Power Fault Tolerance Error !"
+
+1337)  5     505921     85    1          "(PM4) PHY_RF_GEN - Frequency Deviation Tolerance Error !"
+
+1338)  5     505922     85    1          "(PM4) PHY_RF_GEN - Duty-Cycle Deviation Tolerance Error !"
+
+1339)  5     505923     85    1          "(PM4) PHY_RF_GEN - RF On Onterlock Error !"
+
+1340)  5     506001     85    1          "(PM4) PHY_RF_MAT :  - Current1 lower warning limit error !"
+
+1341)  5     506002     85    1          "(PM4) PHY_RF_MAT :  - Current1 upper warning limit error !"
+
+1342)  5     506003     85    1          "(PM4) PHY_RF_MAT :  - Current1 lower fault limit error !"
+
+1343)  5     506004     85    1          "(PM4) PHY_RF_MAT :  - Current1 upper fault limit error !"
+
+1344)  5     506011     85    1          "(PM4) PHY_RF_MAT :  - Current2 lower warning limit error !"
+
+1345)  5     506012     85    1          "(PM4) PHY_RF_MAT :  - Current2 upper warning limit error !"
+
+1346)  5     506013     85    1          "(PM4) PHY_RF_MAT :  - Current2 lower fault limit error !"
+
+1347)  5     506014     85    1          "(PM4) PHY_RF_MAT :  - Current2 upper fault limit error !"
+
+1348)  5     506111     85    1          "(PM4) PHY_RS232__APC - APC System : Controller is Offline."
+
+1349)  5     506112     85    1          "(PM4) PHY_RS232__APC - APC System : CMD [REMOTE] is out of time."
+
+1350)  5     506113     85    1          "(PM4) PHY_RS232__APC - APC System : CMD [CONTROL] is out of time."
+
+1351)  5     506114     85    1          "(PM4) PHY_RS232__APC - APC System : Not Remote Status."
+
+1352)  5     506115     85    1          "(PM4) PHY_RS232__APC - APC Position Control Timeout Error !"
+
+1353)  5     506211     85    1          "(PM4) PHY_RS232__TMP - TMP System : Controller is Offline."
+
+1354)  5     506212     85    1          "(PM4)  occurred !."
+
+1355)  5     506213     85    1          "(PM4)  occurred !."
+
+1356)  5     506301     85    1          "(PM4) PHY_RS232__RF_MAT - RF Matcher Offline."
+
+1357)  5     506302     85    1          "(PM4) PHY_RS232__RF_MAT - RF Matcher Remote."
+
+1358)  5     506311     85    1          "(PM4) PHY_RS232__RF_MAT - RF Matcher Control Aborted."
+
+1359)  5     506401     85    1          "(PM4) PHY_RS232__RF_GEN - RF Generator Offline."
+
+1360)  5     506402     85    1          "(PM4) PHY_RS232__RF_GEN - RF Generator Remote."
+
+1361)  5     506411     85    1          "(PM4) PHY_RS232__RF_GEN - RF Generator Control Aborted."
+
+1362)  5     506412     85    1          "(PM4) PHY_RS232__RF_GEN - RF Generator Status Fault."
+
+1363)  5     506501     85    1          "(PM4) IO - DeviceNet Offline. (Analog Read)"
+
+1364)  5     506502     85    1          "(PM4) IO - DeviceNet Offline. (Digital Read)"
+
+1365)  5     506503     85    1          "(PM4) IO - DeviceNet Offline. (Analog Write)"
+
+1366)  5     506504     85    1          "(PM4) IO - DeviceNet Offline. (Digital Write)"
+
+1367)  5     506511     85    1          "(PM4) IO - DeviceNet I/O - Analog Write Timeout !"
+
+1368)  5     506512     85    1          "(PM4) IO - DeviceNet I/O - Digital Write Timeout !"
+
+1369)  5     506513     85    1          "(PM4) IO - DeviceNet I/O - Analog Read Timeout !"
+
+1370)  5     506514     85    1          "(PM4) IO - DeviceNet I/O - Digital Read Timeout !"
+
+1371)  5     506521     85    1          "(PM4) IO - D-Net Driver에 Error가 발생한 것 같습니다."
+
+
+1372)  8     800000     85    1          "(PM7) Core__Sys_Info - SYSTEM ERROR"
+
+1373)  8     800011     85    1          "(PM7) Core__Sys_Info - SYSTEM ERROR 11"
+
+1374)  8     800012     85    1          "(PM7) Core__Sys_Info - SYSTEM WARNING 12"
+
+1375)  8     800021     85    1          "(PM7) Core__Sys_Info - System Error : Async Timer Max Error"
+
+1376)  8     800201     85    1          "(PM7) INF_LP1 : OBJECT MODE : UNKNOWN"
+
+1377)  8     800211     85    1          "(PM7) INF_LP1 : Initial Command Error !"
+
+1378)  8     800212     85    1          "(PM7) INF_LP1 : Prepload Command Error !"
+
+1379)  8     800213     85    1          "(PM7) INF_LP1 : Load Command Error !"
+
+1380)  8     800214     85    1          "(PM7) INF_LP1 : RlsUnload Command Error !"
+
+1381)  8     800215     85    1          "(PM7) INF_LP1 : Unload Command Error !"
+
+1382)  8     800216     85    1          "(PM7) INF_LP1 : CID_Read Command Error !"
+
+1383)  8     800217     85    1          "(PM7) INF_LP1 : RF_CID_Read Command Error !"
+
+1384)  8     800218     85    1          "(PM7) INF_LP1 : RF_Page_Read Command Error !"
+
+1385)  8     800219     85    1          "(PM7) INF_LP1 : RF_CID_Write Command Error !"
+
+1386)  8     800220     85    1          "(PM7) INF_LP1 : RF_Page_Write Command Error !"
+
+1387)  8     800221     85    1          "(PM7) INF_LP1 : PIO Load : Foup Error !"
+
+1388)  8     800222     85    1          "(PM7) INF_LP1 : PIO Load : Foup Error !"
+
+1389)  8     800223     85    1          "(PM7) INF_LP1 : OHT PIO : Signal Error !"
+
+1390)  8     800224     85    1          "(PM7) INF_LP1 : Light cutrain sensor detected !"
+
+1391)  8     800231     85    1          "(PM7) INF_LP1 : TA1 Timeout !"
+
+1392)  8     800232     85    1          "(PM7) INF_LP1 : TA2 Timeout !"
+
+1393)  8     800233     85    1          "(PM7) INF_LP1 : TA3 Timeout !"
+
+1394)  8     800234     85    1          "(PM7) INF_LP1 : TP1 Timeout !"
+
+1395)  8     800235     85    1          "(PM7) INF_LP1 : TP2 Timeout !"
+
+1396)  8     800236     85    1          "(PM7) INF_LP1 : TP3 Timeout !"
+
+1397)  8     800237     85    1          "(PM7) INF_LP1 : TP4 Timeout !"
+
+1398)  8     800238     85    1          "(PM7) INF_LP1 : TP5 Timeout !"
+
+1399)  8     800239     85    1          "(PM7) INF_LP1 : TP6 Timeout !"
+
+1400)  8     800240     85    1          "(PM7) INF_LP1 : TD0 Timeout !"
+
+1401)  8     800241     85    1          "(PM7) INF_LP1 : TD1 Timeout !"
+
+1402)  8     800301     85    1          "(PM7) INF_LP2 : OBJECT MODE : UNKNOWN"
+
+1403)  8     800311     85    1          "(PM7) INF_LP2 : Initial Command Error !"
+
+1404)  8     800312     85    1          "(PM7) INF_LP2 : Prepload Command Error !"
+
+1405)  8     800313     85    1          "(PM7) INF_LP2 : Load Command Error !"
+
+1406)  8     800314     85    1          "(PM7) INF_LP2 : RlsUnload Command Error !"
+
+1407)  8     800315     85    1          "(PM7) INF_LP2 : Unload Command Error !"
+
+1408)  8     800316     85    1          "(PM7) INF_LP2 : CID_Read Command Error !"
+
+1409)  8     800317     85    1          "(PM7) INF_LP2 : RF_CID_Read Command Error !"
+
+1410)  8     800318     85    1          "(PM7) INF_LP2 : RF_Page_Read Command Error !"
+
+1411)  8     800319     85    1          "(PM7) INF_LP2 : RF_CID_Write Command Error !"
+
+1412)  8     800320     85    1          "(PM7) INF_LP2 : RF_Page_Write Command Error !"
+
+1413)  8     800321     85    1          "(PM7) INF_LP2 : PIO Load : Foup Error !"
+
+1414)  8     800322     85    1          "(PM7) INF_LP2 : PIO Load : Foup Error !"
+
+1415)  8     800323     85    1          "(PM7) INF_LP2 : OHT PIO : Signal Error !"
+
+1416)  8     800324     85    1          "(PM7) INF_LP2 : Light cutrain sensor detected !"
+
+1417)  8     800331     85    1          "(PM7) INF_LP2 : TA1 Timeout !"
+
+1418)  8     800332     85    1          "(PM7) INF_LP2 : TA2 Timeout !"
+
+1419)  8     800333     85    1          "(PM7) INF_LP2 : TA3 Timeout !"
+
+1420)  8     800334     85    1          "(PM7) INF_LP2 : TP1 Timeout !"
+
+1421)  8     800335     85    1          "(PM7) INF_LP2 : TP2 Timeout !"
+
+1422)  8     800336     85    1          "(PM7) INF_LP2 : TP3 Timeout !"
+
+1423)  8     800337     85    1          "(PM7) INF_LP2 : TP4 Timeout !"
+
+1424)  8     800338     85    1          "(PM7) INF_LP2 : TP5 Timeout !"
+
+1425)  8     800339     85    1          "(PM7) INF_LP2 : TP6 Timeout !"
+
+1426)  8     800340     85    1          "(PM7) INF_LP2 : TD0 Timeout !"
+
+1427)  8     800341     85    1          "(PM7) INF_LP2 : TD1 Timeout !"
+
+1428)  8     800401     85    1          "(PM7) INF_LP3 : OBJECT MODE : UNKNOWN"
+
+1429)  8     800411     85    1          "(PM7) INF_LP3 : Initial Command Error !"
+
+1430)  8     800412     85    1          "(PM7) INF_LP3 : Prepload Command Error !"
+
+1431)  8     800413     85    1          "(PM7) INF_LP3 : Load Command Error !"
+
+1432)  8     800414     85    1          "(PM7) INF_LP3 : RlsUnload Command Error !"
+
+1433)  8     800415     85    1          "(PM7) INF_LP3 : Unload Command Error !"
+
+1434)  8     800416     85    1          "(PM7) INF_LP3 : CID_Read Command Error !"
+
+1435)  8     800417     85    1          "(PM7) INF_LP3 : RF_CID_Read Command Error !"
+
+1436)  8     800418     85    1          "(PM7) INF_LP3 : RF_Page_Read Command Error !"
+
+1437)  8     800419     85    1          "(PM7) INF_LP3 : RF_CID_Write Command Error !"
+
+1438)  8     800420     85    1          "(PM7) INF_LP3 : RF_Page_Write Command Error !"
+
+1439)  8     800421     85    1          "(PM7) INF_LP3 : PIO Load : Foup Error !"
+
+1440)  8     800422     85    1          "(PM7) INF_LP3 : PIO Load : Foup Error !"
+
+1441)  8     800423     85    1          "(PM7) INF_LP3 : OHT PIO : Signal Error !"
+
+1442)  8     800424     85    1          "(PM7) INF_LP3 : Light cutrain sensor detected !"
+
+1443)  8     800431     85    1          "(PM7) INF_LP3 : TA1 Timeout !"
+
+1444)  8     800432     85    1          "(PM7) INF_LP3 : TA2 Timeout !"
+
+1445)  8     800433     85    1          "(PM7) INF_LP3 : TA3 Timeout !"
+
+1446)  8     800434     85    1          "(PM7) INF_LP3 : TP1 Timeout !"
+
+1447)  8     800435     85    1          "(PM7) INF_LP3 : TP2 Timeout !"
+
+1448)  8     800436     85    1          "(PM7) INF_LP3 : TP3 Timeout !"
+
+1449)  8     800437     85    1          "(PM7) INF_LP3 : TP4 Timeout !"
+
+1450)  8     800438     85    1          "(PM7) INF_LP3 : TP5 Timeout !"
+
+1451)  8     800439     85    1          "(PM7) INF_LP3 : TP6 Timeout !"
+
+1452)  8     800440     85    1          "(PM7) INF_LP3 : TD0 Timeout !"
+
+1453)  8     800441     85    1          "(PM7) INF_LP3 : TD1 Timeout !"
+
+1454)  8     800511     85    1          "(PM7) INF_ATM_ROBOT : OBJECT MODE : UNKNOWN"
+
+1455)  8     801311     85    1          "(PM7) PHY_RS232__FFU - FFU System : Controller is Offline."
+
+1456)  8     801711     85    1          "(PM7) EFEM_IO :  - Controller is Offline."
+

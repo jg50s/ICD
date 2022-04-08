@@ -8,7 +8,8 @@
 #MODULE_WINDOW_HIDE		     // Show (Default)
 
 // #SINGLE_LOCAL               0
-// #SINGLE_LOCAL               3
+// #SINGLE_LOCAL               1
+#SINGLE_LOCAL               3
 // #SINGLE_REMOTE              2
 
 #SYSTEM_USER_LEVEL          OEM     // MAINT  

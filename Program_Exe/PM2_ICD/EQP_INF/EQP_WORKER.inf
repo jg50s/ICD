@@ -21,6 +21,9 @@
 #OBJECT_STD     MNG_UTILITY__JGLEE             RF.CONDUCT                MNG_RF_CHECK
 
 ===========================================================================
+#OBJECT_STD		  PHY_MTC__ICD					         MTC.FNC					PHY_MTC
+
+===========================================================================
 #OBJECT_STD     FNC_CHM_SYS__JGLEE             PMC.INF                   INF_PMC
 #OBJECT_STD     FNC_CHM_SYS__JGLEE             ACTIVE_HANDOFF.INF        INF_ACTIVE_HANDOFF
 
@@ -67,8 +70,8 @@
 #OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC12
 #OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC17
 
-#OBJECT_IO      IO_RS485__MFC                  UNIT.TYPE                 PHY_IO__MFC_PART01
-#OBJECT_IO      IO_RS485__MFC                  UNIT.TYPE                 PHY_IO__MFC_PART02
+#OBJECT_IO      PHY_RS485__MFC_UNIT            UNIT.TYPE                 PHY_IO__MFC_PART01
+#OBJECT_IO      PHY_RS485__MFC_UNIT            UNIT.TYPE                 PHY_IO__MFC_PART02
 
 
 ===========================================================================
@@ -94,19 +97,19 @@
 #OBJECT_STD     PHY_RF_SYS__JGLEE              ESC.IO                    PHY_ESC
 
 #OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_RPS
-#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_400KHZ
-#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_40MHZ
+#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_LF
+#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_HF
 
 #OBJECT_IO      PHY_RS232__ESC_ZEFA            ZEFA.SERIAL               PHY_IO__ESC
 
 #OBJECT_IO      PHY_RS232__RF_EN2RA            RPS.SERIAL                PHY_IO__RF_RPS
 #OBJECT_IO      PHY_RS232__RF_NRF              RFG.SERIAL                PHY_IO__RF_400KHZ
 #OBJECT_IO      PHY_RS232__RF_NRF              RFG.SERIAL                PHY_IO__RF_40MHZ
-/*
 #OBJECT_IO      PHY_RS232__RF_NRF              NXA.PULSE                 PHY_IO__RF_PULSE
-*/
 
-#OBJECT_IO      PHY_IO__MATCHER_AE             NAVII.SERIAL              PHY_IO__MATCHER
+// #OBJECT_IO      PHY_IO__MATCHER_AE             NAVII.SERIAL              PHY_IO__MATCHER
+#OBJECT_IO      PHY_RS232__MATCHER_NRF         MAT.SERIAL                PHY_IO__MAT_LF
+#OBJECT_IO      PHY_RS232__MATCHER_NRF         MAT.SERIAL                PHY_IO__MAT_HF
 
 
 ===========================================================================

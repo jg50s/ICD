@@ -1,5 +1,4 @@
 
-
 //-------------------------------------------------
 #OBJECT_PROPERTY	 	Mng_AUTO_PM
 
@@ -84,10 +83,10 @@
 #DEFINE_CONSTANT   	OBJ.RF_SIZE                   3
 #DEFINE_CONSTANT   	OBJ.RF_TITLE.1                RPS
 #DEFINE_CONSTANT   	OBJ.RF_NAME.1                 PHY_RF_RPS
-#DEFINE_CONSTANT   	OBJ.RF_TITLE.2                400KHz
-#DEFINE_CONSTANT   	OBJ.RF_NAME.2                 PHY_RF_400KHZ
-#DEFINE_CONSTANT   	OBJ.RF_TITLE.3                40MHz
-#DEFINE_CONSTANT   	OBJ.RF_NAME.3                 PHY_RF_40MHZ
+#DEFINE_CONSTANT   	OBJ.RF_TITLE.2                LF
+#DEFINE_CONSTANT   	OBJ.RF_NAME.2                 PHY_RF_LF
+#DEFINE_CONSTANT   	OBJ.RF_TITLE.3                HF
+#DEFINE_CONSTANT   	OBJ.RF_NAME.3                 PHY_RF_HF
 
 #DEFINE_CONSTANT   	CH.FNC.NAME     	 	          DB_ETCHER+SYS.FNC.NAME
 #DEFINE_CONSTANT   	CH.FNC.MSG     	 		          DB_ETCHER+SYS.FNC.MSG

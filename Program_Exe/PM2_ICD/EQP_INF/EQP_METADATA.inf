@@ -38,8 +38,8 @@
 #DEFINE_CONSTANT    CH__RF_TOTAL_ON_STATE               DB_INF+RF.ON.STS
 #DEFINE_CONSTANT    DATA.RF_SIZE						            3
 #DEFINE_CONSTANT    CH__RF_ON_STATE.1                   PHY_RF_RPS+MON.IO.POWER.STATE
-#DEFINE_CONSTANT    CH__RF_ON_STATE.2                   PHY_RF_400KHZ+MON.IO.POWER.STATE
-#DEFINE_CONSTANT    CH__RF_ON_STATE.3                   PHY_RF_40MHZ+MON.IO.POWER.STATE
+#DEFINE_CONSTANT    CH__RF_ON_STATE.2                   PHY_RF_LF+MON.IO.POWER.STATE
+#DEFINE_CONSTANT    CH__RF_ON_STATE.3                   PHY_RF_HF+MON.IO.POWER.STATE
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY_LIFT_PIN
@@ -91,9 +91,15 @@
 
 
 //-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__MATCHER
+#OBJECT_PROPERTY    Phy_IO__MAT_LF            
 
-#OBJECT_IO_PARA     COM_PORT                  4
+#OBJECT_IO_PARA     COM_PORT                  11
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__MAT_HF            
+
+#OBJECT_IO_PARA     COM_PORT                  12
+
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    PHY_IO__APC_VLV
@@ -117,18 +123,66 @@
 
 #OBJECT_IO_PARA     COM_PORT                  10
 
-#DEFINE_CONSTANT	  MFC_BOARD_NUMBER		      33
-#DEFINE_CONSTANT	  MFC_START_NUM			        1
-#DEFINE_CONSTANT	  MFC_MAX_NUM			          6
+#DEFINE_CONSTANT	  DATA.BOARD_ID    		      32
+#DEFINE_CONSTANT	  DATA.MFC_SIZE   		      6
+#DEFINE_CONSTANT	  MFC.Mac_ID.1     		      1
+#DEFINE_CONSTANT	  MFC.Var_ID.1    		      01
+#DEFINE_CONSTANT	  MFC.Mac_ID.2     		      2
+#DEFINE_CONSTANT	  MFC.Var_ID.2    		      02
+#DEFINE_CONSTANT	  MFC.Mac_ID.3     		      3
+#DEFINE_CONSTANT	  MFC.Var_ID.3   		        03
+#DEFINE_CONSTANT	  MFC.Mac_ID.4    		      4
+#DEFINE_CONSTANT	  MFC.Var_ID.4   		        04
+#DEFINE_CONSTANT	  MFC.Mac_ID.5    		      5
+#DEFINE_CONSTANT	  MFC.Var_ID.5   		        05
+#DEFINE_CONSTANT	  MFC.Mac_ID.6    		      6
+#DEFINE_CONSTANT	  MFC.Var_ID.6   		        06
 
 //-------------------------------------------------
 #OBJECT_PROPERTY	  PHY_IO__MFC_PART02        // MFC07 ~ MFC12, MFC17		
 
 #OBJECT_IO_PARA     COM_PORT                  11
 
-#DEFINE_CONSTANT	  MFC_BOARD_NUMBER		      41
-#DEFINE_CONSTANT	  MFC_START_NUM			        7
-#DEFINE_CONSTANT	  MFC_MAX_NUM			          13
+#DEFINE_CONSTANT	  DATA.BOARD_ID    		      40
+#DEFINE_CONSTANT	  DATA.MFC_SIZE   		      7
+#DEFINE_CONSTANT	  MFC.Mac_ID.1      		    1
+#DEFINE_CONSTANT	  MFC.Var_ID.1    		      07
+#DEFINE_CONSTANT	  MFC.Mac_ID.2      		    2
+#DEFINE_CONSTANT	  MFC.Var_ID.2  		        08
+#DEFINE_CONSTANT	  MFC.Mac_ID.3    		      3
+#DEFINE_CONSTANT	  MFC.Var_ID.3  		        09
+#DEFINE_CONSTANT	  MFC.Mac_ID.4    		      4
+#DEFINE_CONSTANT	  MFC.Var_ID.4  		        10
+#DEFINE_CONSTANT	  MFC.Mac_ID.5    		      5
+#DEFINE_CONSTANT	  MFC.Var_ID.5  		        11
+#DEFINE_CONSTANT	  MFC.Mac_ID.6    		      6
+#DEFINE_CONSTANT	  MFC.Var_ID.6  		        12
+#DEFINE_CONSTANT	  MFC.Mac_ID.7    		      7
+#DEFINE_CONSTANT	  MFC.Var_ID.7  		        17
+
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_MTC
+
+#DEFINE_CONSTANT    CH__DI_CHM_VAC_SNS                  IO+di.CHM.VAC.Sns
+#DEFINE_CONSTANT    CH__DI_CHM_ATM_SNS                  IO+di.CHM.ATM.Sns
+
+#DEFINE_CONSTANT    CH__DI_MTC_VAC_SNS              		IO+di.MTC.VAC.Sns
+#DEFINE_CONSTANT    CH__DI_MTC_ATM_SNS            		  IO+di.MTC.ATM.Sns
+#DEFINE_CONSTANT    CH__DI_MTC_GATE_OPEN_SNS            IO+di.MTC.Gate.Open
+#DEFINE_CONSTANT    CH__DI_MTC_GATE_CLOSE_SNS           IO+di.MTC.Gate.Close
+#DEFINE_CONSTANT    CH__DI_MTC_GATE_CLOSE_SNS           IO+di.MTC.Gate.Close
+
+#DEFINE_CONSTANT    CH__DO_MTC_GATE_OPEN              	IO+do.MTC.Gate.Open
+#DEFINE_CONSTANT    CH__DO_MTC_GATE_CLOSE              	IO+do.MTC.Gate.Close
+#DEFINE_CONSTANT    CH__DO_MTC_2STAGE_SLOW              IO+do.MTC.2Stage.SlowVV
+#DEFINE_CONSTANT    CH__DO_MTC_2STAGE_FAST              IO+do.MTC.2Stage.FastVV
+#DEFINE_CONSTANT    CH__DO_MTC_CHECK_VV              		IO+do.MTC.Check.VV
+#DEFINE_CONSTANT    CH__DO_MTC_N2PURGE_SLOW             IO+do.MTC.N2Purge.SlowVV
+#DEFINE_CONSTANT    CH__DO_MTC_N2PURGE_FAST             IO+do.MTC.N2Purge.FastVV
+
+#DEFINE_CONSTANT    CH__SI_MTC_GAUGE_STATUS             IO+si.MTC.Gauge.Status.HEXA
+#DEFINE_CONSTANT    CH__SI_MTC_GAUGE_PRESSURE           IO+si.MTC.Gauge.Pressure.HEXA
 
 
 //------------------------------------------------

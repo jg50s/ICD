@@ -18,5 +18,14 @@
 #DEFINE_CONSTANT    CH.AL_OBJ_STATUS                    OPR__AL1+OBJ.STATUS
 #DEFINE_CONSTANT    CH.CFG_SLOT_MAX    		              DB_CFG+CFG.AL1.SLOT.MAX
 
-#DEFINE_CONSTANT    OBJ__AL           		              PHY_IO__AL1
 #DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
+
+#DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
+#DEFINE_CONSTANT    LLx.SLOT_SIZE                       2
+
+#DEFINE_CONSTANT    OBJ__AL           		              PHY_IO__AL1
+#DEFINE_CONSTANT    AL_MODE.INIT  		                  INIT
+#DEFINE_CONSTANT    AL_MODE.ALIGN  		                  ALIGN
+
+#DEFINE_CONSTANT    CH_AL.PARA_SLOT_ID 		              PHY_IO__AL1+PARA.STN.SLOT
+#DEFINE_CONSTANT    CH_AL.PARA_CCD_POS 		              PHY_IO__AL1+PARA.CCD.POS

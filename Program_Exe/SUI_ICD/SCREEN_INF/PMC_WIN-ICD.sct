@@ -461,6 +461,14 @@ WINDOW_NAME PMC_PART-CFG_PARAMETER
 	USER_LEVEL                      Maint
 }
 
+WINDOW_NAME PMC_PART-MTC
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
 
 // Bottom => Utility
 
@@ -526,6 +534,18 @@ WINDOW_NAME  UTILITY_CFG1
 
 // Popup Page ------------------------------------------------------------------------------
 
+WINDOW_NAME APP_POPUP_MTC
+{
+	POPUP                           YES
+	LOW_LEFT_X                      25  
+	LOW_LEFT_Y                      25 
+	WIDTH                           510
+	HEIGHT                          620
+	 
+	CTRL_CHANNEL                    GUI.PMC.MTC.POPUP
+	USER_LEVEL                      Maint
+}
+
 WINDOW_NAME APP_POPUP_MNT_PMC
 {
 	POPUP                           YES
@@ -583,7 +603,7 @@ WINDOW_NAME APP_POPUP_PMC_RF-RPS
 	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
 	USER_LEVEL                      Maint
 }
-WINDOW_NAME APP_POPUP_PMC_RF-400KHZ
+WINDOW_NAME APP_POPUP_PMC_RF-LF
 {
 	POPUP                           YES
 	LOW_LEFT_X                      175  
@@ -594,7 +614,7 @@ WINDOW_NAME APP_POPUP_PMC_RF-400KHZ
 	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
 	USER_LEVEL                      Maint
 }
-WINDOW_NAME APP_POPUP_PMC_RF-40MHZ
+WINDOW_NAME APP_POPUP_PMC_RF-HF
 {
 	POPUP                           YES
 	LOW_LEFT_X                      225  
@@ -606,10 +626,21 @@ WINDOW_NAME APP_POPUP_PMC_RF-40MHZ
 	USER_LEVEL                      Maint
 }
 
-WINDOW_NAME APP_POPUP_PMC_MATCHER
+WINDOW_NAME APP_POPUP_PMC_MAT_LF
 {
 	POPUP                           YES
 	LOW_LEFT_X                      200  
+	LOW_LEFT_Y                      125 
+	WIDTH                           530
+	HEIGHT                          542 
+	
+	CTRL_CHANNEL                    GUI.PMC.MATCHER.POPUP
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME APP_POPUP_PMC_MAT_HF
+{
+	POPUP                           YES
+	LOW_LEFT_X                      300  
 	LOW_LEFT_Y                      125 
 	WIDTH                           530
 	HEIGHT                          542 

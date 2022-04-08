@@ -1,1 +1,1 @@
-ALL
+ONLY_INPUT

@@ -203,8 +203,10 @@
 #ALARM   28904   85   "FNC__LBx_TEST - LBD's status is not "MAINTMODE"."
 
 #ALARM   29111   85   "FNC__LBA - SV & Door Open Error"
+#ALARM   29112   85   "FNC__LBA - Leak Check is higher than config value !"
 
 #ALARM   29211   85   "FNC__LBB - SV & Door Open Error"
+#ALARM   29212   85   "FNC__LBB - Leak Check is higher than config value !"
 
 #ALARM   29901   85   "PHY__LBA - Door Valve Open TimeOut."
 #ALARM   29902   85   "PHY__LBA - Door Valve Close TimeOut."
@@ -265,22 +267,19 @@
 
 
 
-
 #ALARM   32401   85   "PHY__LP1 - Pump Pressure TimeOut."
 #ALARM   32402   85   "PHY__LP1 - Door Status is not open !"
 #ALARM   32403   85   "PHY__LP1 - Currently, Load Port's status is "Mapping_Sequence Lock"."
+#ALARM   32404   85   "PHY__LP1 - Robot's arm is not retracted !"."
+#ALARM   32405   85   "PHY__LP1 - LOAD... FOUP NONE ALARM."
+#ALARM   32406   85   "PHY__LP1 - LP Mapping Sensor Not Use"
+#ALARM   32407   85   "PHY__LP1 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
+#ALARM   32411   85   "PHY__LP1 - MAP ERROR (Door doesn't open) !"
+#ALARM   32412   85   "PHY__LP1 - MAP ERROR (Foup doesn't exist) !"
+#ALARM   32413   85   "PHY__LP1 - MAP ERROR (Foup isn't loadded) !"
 
-#ALARM   32501   85   "PHY_IO__LP1 - Offline."
-#ALARM   32502   85   "PHY_IO__LP1 - Offline."
-#ALARM   32503   85   "PHY_IO__LP1 - Command Timeout."
-#ALARM   32504   85   "PHY_IO__LP1 - LOAD... FOUP NONE ALARM."
-#ALARM   32505   85   "PHY_IO__LP1 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
-#ALARM   32506   85   "PHY_IO__LP1 - LP PADDLE UP/DN... PADDLE SENSOR NOT EXT STATUS ALARM."
-#ALARM   32507   85   "PHY_IO__LP1 - LP Mapping Sensor Not Use"
-#ALARM   32508   85   "PHY_IO__LP1 - LP has no RF-tag reader !"
-
-#ALARM   32611   85   "PHY_RS232__LP1 : Offline !"
-#ALARM   32612   85   "PHY_RS232__LP1 : Error Code !"
+#ALARM   32511   85   "PHY_IO__LP1 : Offline !"
+#ALARM   32512   85   "PHY_IO__LP1 : Error Code !"
 
 #ALARM   32701   85   "PHY_OHT__LP1 - Offline."
 #ALARM   32702   85   "PHY_OHT__LP1 - Offline."
@@ -309,22 +308,19 @@
 
 
 
-
 #ALARM   33401   85   "PHY__LP2 - Pump Pressure TimeOut."
 #ALARM   33402   85   "PHY__LP2 - Door Status is not open !"
 #ALARM   33403   85   "PHY__LP2 - Currently, Load Port's status is "Mapping_Sequence Lock"."
+#ALARM   33404   85   "PHY__LP2 - Robot's arm is not retracted !"."
+#ALARM   33405   85   "PHY__LP2 - LOAD... FOUP NONE ALARM."
+#ALARM   33406   85   "PHY__LP2 - LP Mapping Sensor Not Use"
+#ALARM   33407   85   "PHY__LP2 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
+#ALARM   33411   85   "PHY__LP2 - MAP ERROR (Door doesn't open) !"
+#ALARM   33412   85   "PHY__LP2 - MAP ERROR (Foup doesn't exist) !"
+#ALARM   33413   85   "PHY__LP2 - MAP ERROR (Foup isn't loadded) !"
 
-#ALARM   33501   85   "PHY_IO__LP2 - Offline."
-#ALARM   33502   85   "PHY_IO__LP2 - Offline."
-#ALARM   33503   85   "PHY_IO__LP2 - Command Timeout."
-#ALARM   33504   85   "PHY_IO__LP2 - LOAD... FOUP NONE ALARM."
-#ALARM   33505   85   "PHY_IO__LP2 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
-#ALARM   33506   85   "PHY_IO__LP2 - LP PADDLE UP/DN... PADDLE SENSOR NOT EXT STATUS ALARM."
-#ALARM   33507   85   "PHY_IO__LP2 - LP Mapping Sensor Not Use"
-#ALARM   33508   85   "PHY_IO__LP2 - LP has no RF-tag reader !"
-
-#ALARM   33611   85   "PHY_RS232__LP2 : Offline !"
-#ALARM   33612   85   "PHY_RS232__LP2 : Error Code !"
+#ALARM   33511   85   "PHY_IO__LP2 : Offline !"
+#ALARM   33512   85   "PHY_IO__LP2 : Error Code !"
 
 #ALARM   33701   85   "PHY_OHT__LP2 - Offline."
 #ALARM   33702   85   "PHY_OHT__LP2 - Offline."
@@ -353,22 +349,19 @@
 
 
 
-
 #ALARM   34401   85   "PHY__LP3 - Pump Pressure TimeOut."
 #ALARM   34402   85   "PHY__LP3 - Door Status is not open !"
 #ALARM   34403   85   "PHY__LP3 - Currently, Load Port's status is "Mapping_Sequence Lock"."
+#ALARM   34404   85   "PHY__LP3 - Robot's arm is not retracted !"."
+#ALARM   34405   85   "PHY__LP3 - LOAD... FOUP NONE ALARM."
+#ALARM   34406   85   "PHY__LP3 - LP Mapping Sensor Not Use"
+#ALARM   34407   85   "PHY__LP3 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
+#ALARM   34411   85   "PHY__LP3 - MAP ERROR (Door doesn't open) !"
+#ALARM   34412   85   "PHY__LP3 - MAP ERROR (Foup doesn't exist) !"
+#ALARM   34413   85   "PHY__LP3 - MAP ERROR (Foup isn't loadded) !"
 
-#ALARM   34501   85   "PHY_IO__LP3 - Offline."
-#ALARM   34502   85   "PHY_IO__LP3 - Offline."
-#ALARM   34503   85   "PHY_IO__LP3 - Command Timeout."
-#ALARM   34504   85   "PHY_IO__LP3 - LOAD... FOUP NONE ALARM."
-#ALARM   34505   85   "PHY_IO__LP3 - LP PADDLE UP... WAFER SLIDE OUT SENSOR ALARM."
-#ALARM   34506   85   "PHY_IO__LP3 - LP PADDLE UP/DN... PADDLE SENSOR NOT EXT STATUS ALARM."
-#ALARM   34507   85   "PHY_IO__LP3 - LP Mapping Sensor Not Use"
-#ALARM   34508   85   "PHY_IO__LP3 - LP has no RF-tag reader !"
-
-#ALARM   34611   85   "PHY_RS232__LP3 : Offline !"
-#ALARM   34612   85   "PHY_RS232__LP3 : Error Code !"
+#ALARM   34511   85   "PHY_IO__LP3 : Offline !"
+#ALARM   34512   85   "PHY_IO__LP3 : Error Code !"
 
 #ALARM   34701   85   "PHY_OHT__LP3 - Offline."
 #ALARM   34702   85   "PHY_OHT__LP3 - Offline."
@@ -551,12 +544,6 @@
 #ALARM   33   85   "__SYS -  AlarmID(3)"
 #ALARM   34   85   "__SYS -  AlarmID(4)"
 #ALARM   35   85   "__SYS -  AlarmID(5)"
-
-#ALARM   1   85   "FNC__LLx_CHM - Left_LLx's Vacuum Pressure Error."
-#ALARM   2   85   "FNC__LLx_CHM - Right_LLx's Vacuum Pressure Error."
-#ALARM   3   85   "FNC__LLx_CHM - Left_LLx's Leak Check is higher than config value !"
-#ALARM   4   85   "FNC__LLx_CHM - Right_LLx's Leak Check is higher than config value !"
-#ALARM   5   85   "FNC__LLx_CHM - Slot-Valve is not Close !"
 
 #ALARM   1   85   "FNC__MANIFOLD_TEST - LL1's status is not "MAINTMODE"."
 #ALARM   2   85   "FNC__MANIFOLD_TEST - LL2's status is not "MAINTMODE"."

@@ -6820,6 +6820,100 @@ For Safety, MFC Flow Will be Stopped !!
 
 
 //------------------------------------------------------------
+OBJECT_NAME : PHY_MTC   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MTC - Soft Venting Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MTC - Soft Pumping Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MTC - Venting Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MTC - Pumping Time-Out !"
+#MESSAGE 
+"Please, check the chamber's pressure.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MTC - Gate Open Time-Out !"
+#MESSAGE 
+"Please, check the MTC's Gate Sensor.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_MTC - Gate Close Time-Out !"
+#MESSAGE 
+"Please, check the MTC's Gate Sensor.
+"
+#RECOVERY_ACTION 
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
 OBJECT_NAME : PHY_PT   (OffsetID:0) (ToolID:) (UnitID:) 
 
 #INTERNAL_ID   1 
@@ -7424,14 +7518,14 @@ OBJECT_NAME : PHY_PT   (OffsetID:0) (ToolID:) (UnitID:)
 
 
 //------------------------------------------------------------
-OBJECT_NAME : PHY_RF_400KHZ   (OffsetID:0) (ToolID:) (UnitID:) 
+OBJECT_NAME : PHY_RF_HF   (OffsetID:0) (ToolID:) (UnitID:) 
 
 #INTERNAL_ID   1 
 #EXTERNAL_ID   1 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ : RF Generator Not Use !"
+"PHY_RF_HF : RF Generator Not Use !"
 #MESSAGE 
 "RF Generator use option is not "YES". 
 Please, Check the config option of RF Generator !!
@@ -7447,7 +7541,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - Control Aborted."
+"PHY_RF_HF :  RF SYSTEM - Control Aborted."
 #MESSAGE 
 "Please, check RF Status."
 #RECOVERY_ACTION 
@@ -7461,7 +7555,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
+"PHY_RF_HF :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
 #MESSAGE 
 "Forward power is process warning tolerance."
 #RECOVERY_ACTION 
@@ -7475,7 +7569,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
+"PHY_RF_HF :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
 #MESSAGE 
 "Forward power is process abort tolerance."
 #RECOVERY_ACTION 
@@ -7489,7 +7583,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
+"PHY_RF_HF :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
 #MESSAGE 
 "Forward power is idle warning tolerance."
 #RECOVERY_ACTION 
@@ -7503,7 +7597,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
+"PHY_RF_HF :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
 #MESSAGE 
 "Forward power is idle abort tolerance."
 #RECOVERY_ACTION 
@@ -7517,7 +7611,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ : RF Power Control Alarm."
+"PHY_RF_HF : RF Power Control Alarm."
 #MESSAGE 
 "Chamber Vacuum Switch is not On.
 Please, Check Vacuum Switch Status !!
@@ -7533,7 +7627,7 @@ Please, Check Vacuum Switch Status !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ : RF Power Control Alarm."
+"PHY_RF_HF : RF Power Control Alarm."
 #MESSAGE 
 "Chamber ATM Switch is not Off.
 Please, Check ATM Switch Status !!
@@ -7549,7 +7643,7 @@ Please, Check ATM Switch Status !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ : RF Power Control Alarm."
+"PHY_RF_HF : RF Power Control Alarm."
 #MESSAGE 
 "The lid of chamber is not close.
 Please, check the lid close sensor of chamber !
@@ -7565,7 +7659,7 @@ Please, check the lid close sensor of chamber !
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ : RF Power Control Alarm."
+"PHY_RF_HF : RF Power Control Alarm."
 #MESSAGE 
 "The shutter of chamber is not close.
 Please, Check PM's shutter status !!
@@ -7581,7 +7675,7 @@ Please, Check PM's shutter status !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ : RF Power Control Alarm."
+"PHY_RF_HF : RF Power Control Alarm."
 #MESSAGE 
 "System Interlock Sensor가 감지 되었습니다.
 Interlock Sensor를 확인 바랍니다.
@@ -7597,7 +7691,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED POWER OVER."
+"PHY_RF_HF :  RF SYSTEM - REFLECTED POWER OVER."
 #MESSAGE 
 "Reflected Power Limit Over."
 #RECOVERY_ACTION 
@@ -7611,7 +7705,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED Coefficient OVER."
+"PHY_RF_HF :  RF SYSTEM - REFLECTED Coefficient OVER."
 #MESSAGE 
 "Reflected Coefficient Limit Over."
 #RECOVERY_ACTION 
@@ -7625,7 +7719,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED POWER WARNING."
+"PHY_RF_HF :  RF SYSTEM - REFLECTED POWER WARNING."
 #MESSAGE 
 "Reflected Power is Soft Tolerance Over."
 #RECOVERY_ACTION 
@@ -7639,7 +7733,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - REFLECTED POWER ALARM."
+"PHY_RF_HF :  RF SYSTEM - REFLECTED POWER ALARM."
 #MESSAGE 
 "Reflected Power is Hard Tolerance Over."
 #RECOVERY_ACTION 
@@ -7653,7 +7747,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
+"PHY_RF_HF :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
 #MESSAGE 
 "Wafer is Absent, RF Power Limit Over."
 #RECOVERY_ACTION 
@@ -7667,7 +7761,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_400KHZ :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
+"PHY_RF_HF :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
 #MESSAGE 
 "Set Power is not allowed."
 #RECOVERY_ACTION 
@@ -7678,14 +7772,14 @@ Interlock Sensor를 확인 바랍니다.
 
 
 //------------------------------------------------------------
-OBJECT_NAME : PHY_RF_40MHZ   (OffsetID:0) (ToolID:) (UnitID:) 
+OBJECT_NAME : PHY_RF_LF   (OffsetID:0) (ToolID:) (UnitID:) 
 
 #INTERNAL_ID   1 
 #EXTERNAL_ID   1 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ : RF Generator Not Use !"
+"PHY_RF_LF : RF Generator Not Use !"
 #MESSAGE 
 "RF Generator use option is not "YES". 
 Please, Check the config option of RF Generator !!
@@ -7701,7 +7795,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - Control Aborted."
+"PHY_RF_LF :  RF SYSTEM - Control Aborted."
 #MESSAGE 
 "Please, check RF Status."
 #RECOVERY_ACTION 
@@ -7715,7 +7809,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
+"PHY_RF_LF :  RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE."
 #MESSAGE 
 "Forward power is process warning tolerance."
 #RECOVERY_ACTION 
@@ -7729,7 +7823,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
+"PHY_RF_LF :  RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE."
 #MESSAGE 
 "Forward power is process abort tolerance."
 #RECOVERY_ACTION 
@@ -7743,7 +7837,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
+"PHY_RF_LF :  RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE."
 #MESSAGE 
 "Forward power is idle warning tolerance."
 #RECOVERY_ACTION 
@@ -7757,7 +7851,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
+"PHY_RF_LF :  RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE."
 #MESSAGE 
 "Forward power is idle abort tolerance."
 #RECOVERY_ACTION 
@@ -7771,7 +7865,7 @@ Please, Check the config option of RF Generator !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ : RF Power Control Alarm."
+"PHY_RF_LF : RF Power Control Alarm."
 #MESSAGE 
 "Chamber Vacuum Switch is not On.
 Please, Check Vacuum Switch Status !!
@@ -7787,7 +7881,7 @@ Please, Check Vacuum Switch Status !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ : RF Power Control Alarm."
+"PHY_RF_LF : RF Power Control Alarm."
 #MESSAGE 
 "Chamber ATM Switch is not Off.
 Please, Check ATM Switch Status !!
@@ -7803,7 +7897,7 @@ Please, Check ATM Switch Status !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ : RF Power Control Alarm."
+"PHY_RF_LF : RF Power Control Alarm."
 #MESSAGE 
 "The lid of chamber is not close.
 Please, check the lid close sensor of chamber !
@@ -7819,7 +7913,7 @@ Please, check the lid close sensor of chamber !
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ : RF Power Control Alarm."
+"PHY_RF_LF : RF Power Control Alarm."
 #MESSAGE 
 "The shutter of chamber is not close.
 Please, Check PM's shutter status !!
@@ -7835,7 +7929,7 @@ Please, Check PM's shutter status !!
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ : RF Power Control Alarm."
+"PHY_RF_LF : RF Power Control Alarm."
 #MESSAGE 
 "System Interlock Sensor가 감지 되었습니다.
 Interlock Sensor를 확인 바랍니다.
@@ -7851,7 +7945,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED POWER OVER."
+"PHY_RF_LF :  RF SYSTEM - REFLECTED POWER OVER."
 #MESSAGE 
 "Reflected Power Limit Over."
 #RECOVERY_ACTION 
@@ -7865,7 +7959,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED Coefficient OVER."
+"PHY_RF_LF :  RF SYSTEM - REFLECTED Coefficient OVER."
 #MESSAGE 
 "Reflected Coefficient Limit Over."
 #RECOVERY_ACTION 
@@ -7879,7 +7973,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED POWER WARNING."
+"PHY_RF_LF :  RF SYSTEM - REFLECTED POWER WARNING."
 #MESSAGE 
 "Reflected Power is Soft Tolerance Over."
 #RECOVERY_ACTION 
@@ -7893,7 +7987,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - REFLECTED POWER ALARM."
+"PHY_RF_LF :  RF SYSTEM - REFLECTED POWER ALARM."
 #MESSAGE 
 "Reflected Power is Hard Tolerance Over."
 #RECOVERY_ACTION 
@@ -7907,7 +8001,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
+"PHY_RF_LF :  RF SYSTEM - MAX POWER OVER WITHOUT WAFER."
 #MESSAGE 
 "Wafer is Absent, RF Power Limit Over."
 #RECOVERY_ACTION 
@@ -7921,7 +8015,7 @@ Interlock Sensor를 확인 바랍니다.
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_RF_40MHZ :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
+"PHY_RF_LF :  RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM."
 #MESSAGE 
 "Set Power is not allowed."
 #RECOVERY_ACTION 
@@ -8976,30 +9070,63 @@ OBJECT_NAME : PHY_IO__ESC   (OffsetID:0) (ToolID:) (UnitID:)
 
 
 //------------------------------------------------------------
-OBJECT_NAME : PHY_IO__MATCHER   (OffsetID:0) (ToolID:) (UnitID:) 
+OBJECT_NAME : PHY_IO__MAT_HF   (OffsetID:0) (ToolID:) (UnitID:) 
 
-#INTERNAL_ID   11 
-#EXTERNAL_ID   11 
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__MATCHER - Generator Offline"
+"PHY_IO__MAT_HF - Matcher Offline"
 #MESSAGE 
-"Generator Offline."
+"Matcher Offline."
 #RECOVERY_ACTION 
      RETRY   ""
 #OPTION1    
 #OPTION2    
 #OPTION3    
 
-#INTERNAL_ID   12 
-#EXTERNAL_ID   12 
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__MATCHER - Generator Communication Retry Over"
+"PHY_IO__MAT_HF - Matcher Communication Retry Over"
 #MESSAGE 
-"Generator Communication Retry Over"
+"Matcher Communication Retry Over"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__MAT_LF   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MAT_LF - Matcher Offline"
+#MESSAGE 
+"Matcher Offline."
+#RECOVERY_ACTION 
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MAT_LF - Matcher Communication Retry Over"
+#MESSAGE 
+"Matcher Communication Retry Over"
 #RECOVERY_ACTION 
      RETRY   ""
      ABORT   ""
@@ -9019,327 +9146,7 @@ OBJECT_NAME : PHY_IO__MFC_PART01   (OffsetID:0) (ToolID:) (UnitID:)
 "PHY_IO__MFC_PART01 - GAS[01] Offline."
 #MESSAGE 
 "MFC[01] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   2 
-#EXTERNAL_ID   2 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[02] Offline."
-#MESSAGE 
-"MFC[02] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   3 
-#EXTERNAL_ID   3 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[03] Offline."
-#MESSAGE 
-"MFC[03] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   4 
-#EXTERNAL_ID   4 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[04] Offline."
-#MESSAGE 
-"MFC[04] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   5 
-#EXTERNAL_ID   5 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[05] Offline."
-#MESSAGE 
-"MFC[05] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   6 
-#EXTERNAL_ID   6 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[06] Offline."
-#MESSAGE 
-"MFC[06] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   7 
-#EXTERNAL_ID   7 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[07] Offline."
-#MESSAGE 
-"MFC[07] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   8 
-#EXTERNAL_ID   8 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[08] Offline."
-#MESSAGE 
-"MFC[08] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   9 
-#EXTERNAL_ID   9 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[09] Offline."
-#MESSAGE 
-"MFC[09] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   10 
-#EXTERNAL_ID   10 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[10] Offline."
-#MESSAGE 
-"MFC[10] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   11 
-#EXTERNAL_ID   11 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[11] Offline."
-#MESSAGE 
-"MFC[11] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   12 
-#EXTERNAL_ID   12 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[12] Offline."
-#MESSAGE 
-"MFC[12] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   13 
-#EXTERNAL_ID   13 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[13] Offline."
-#MESSAGE 
-"MFC[13] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   14 
-#EXTERNAL_ID   14 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[14] Offline."
-#MESSAGE 
-"MFC[14] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   15 
-#EXTERNAL_ID   15 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[15] Offline."
-#MESSAGE 
-"MFC[15] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   16 
-#EXTERNAL_ID   16 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[16] Offline."
-#MESSAGE 
-"MFC[16] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   17 
-#EXTERNAL_ID   17 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[17] Offline."
-#MESSAGE 
-"MFC[17] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   18 
-#EXTERNAL_ID   18 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[18] Offline."
-#MESSAGE 
-"MFC[18] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   19 
-#EXTERNAL_ID   19 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[19] Offline."
-#MESSAGE 
-"MFC[19] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   20 
-#EXTERNAL_ID   20 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[20] Offline."
-#MESSAGE 
-"MFC[20] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   21 
-#EXTERNAL_ID   21 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[21] Offline."
-#MESSAGE 
-"MFC[21] Controller is Offline.
-Please, Check Communication Status !
+Please, check communication status ! 
 "
 #RECOVERY_ACTION 
      CHECK   ""
@@ -9355,7 +9162,23 @@ Please, Check Communication Status !
 "PHY_IO__MFC_PART01 - GAS[01] Control Timeout."
 #MESSAGE 
 "MFC[01] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[02] Offline."
+#MESSAGE 
+"MFC[02] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -9370,7 +9193,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART01 - GAS[02] Control Timeout."
 #MESSAGE 
 "MFC[02] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[03] Offline."
+#MESSAGE 
+"MFC[03] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -9385,7 +9224,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART01 - GAS[03] Control Timeout."
 #MESSAGE 
 "MFC[03] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[04] Offline."
+#MESSAGE 
+"MFC[04] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -9400,7 +9255,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART01 - GAS[04] Control Timeout."
 #MESSAGE 
 "MFC[04] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[05] Offline."
+#MESSAGE 
+"MFC[05] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -9415,7 +9286,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART01 - GAS[05] Control Timeout."
 #MESSAGE 
 "MFC[05] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART01 - GAS[06] Offline."
+#MESSAGE 
+"MFC[06] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -9430,232 +9317,7 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART01 - GAS[06] Control Timeout."
 #MESSAGE 
 "MFC[06] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   28 
-#EXTERNAL_ID   28 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[07] Control Timeout."
-#MESSAGE 
-"MFC[07] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   29 
-#EXTERNAL_ID   29 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[08] Control Timeout."
-#MESSAGE 
-"MFC[08] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   30 
-#EXTERNAL_ID   30 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[09] Control Timeout."
-#MESSAGE 
-"MFC[09] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   31 
-#EXTERNAL_ID   31 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[10] Control Timeout."
-#MESSAGE 
-"MFC[10] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   32 
-#EXTERNAL_ID   32 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[11] Control Timeout."
-#MESSAGE 
-"MFC[11] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   33 
-#EXTERNAL_ID   33 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[12] Control Timeout."
-#MESSAGE 
-"MFC[12] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   34 
-#EXTERNAL_ID   34 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[13] Control Timeout."
-#MESSAGE 
-"MFC[13] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   35 
-#EXTERNAL_ID   35 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[14] Control Timeout."
-#MESSAGE 
-"MFC[14] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   36 
-#EXTERNAL_ID   36 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[15] Control Timeout."
-#MESSAGE 
-"MFC[15] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   37 
-#EXTERNAL_ID   37 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[16] Control Timeout."
-#MESSAGE 
-"MFC[16] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   38 
-#EXTERNAL_ID   38 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[17] Control Timeout."
-#MESSAGE 
-"MFC[17] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   39 
-#EXTERNAL_ID   39 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[18] Control Timeout."
-#MESSAGE 
-"MFC[18] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   40 
-#EXTERNAL_ID   40 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[19] Control Timeout."
-#MESSAGE 
-"MFC[19] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   41 
-#EXTERNAL_ID   41 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[20] Control Timeout."
-#MESSAGE 
-"MFC[20] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   42 
-#EXTERNAL_ID   42 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART01 - GAS[21] Control Timeout."
-#MESSAGE 
-"MFC[21] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -9674,327 +9336,7 @@ OBJECT_NAME : PHY_IO__MFC_PART02   (OffsetID:0) (ToolID:) (UnitID:)
 "PHY_IO__MFC_PART02 - GAS[07] Offline."
 #MESSAGE 
 "MFC[07] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   2 
-#EXTERNAL_ID   2 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[08] Offline."
-#MESSAGE 
-"MFC[08] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   3 
-#EXTERNAL_ID   3 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[09] Offline."
-#MESSAGE 
-"MFC[09] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   4 
-#EXTERNAL_ID   4 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[10] Offline."
-#MESSAGE 
-"MFC[10] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   5 
-#EXTERNAL_ID   5 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[11] Offline."
-#MESSAGE 
-"MFC[11] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   6 
-#EXTERNAL_ID   6 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[12] Offline."
-#MESSAGE 
-"MFC[12] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   7 
-#EXTERNAL_ID   7 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[13] Offline."
-#MESSAGE 
-"MFC[13] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   8 
-#EXTERNAL_ID   8 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[14] Offline."
-#MESSAGE 
-"MFC[14] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   9 
-#EXTERNAL_ID   9 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[15] Offline."
-#MESSAGE 
-"MFC[15] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   10 
-#EXTERNAL_ID   10 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[16] Offline."
-#MESSAGE 
-"MFC[16] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   11 
-#EXTERNAL_ID   11 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[17] Offline."
-#MESSAGE 
-"MFC[17] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   12 
-#EXTERNAL_ID   12 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[18] Offline."
-#MESSAGE 
-"MFC[18] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   13 
-#EXTERNAL_ID   13 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[19] Offline."
-#MESSAGE 
-"MFC[19] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   14 
-#EXTERNAL_ID   14 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[20] Offline."
-#MESSAGE 
-"MFC[20] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   15 
-#EXTERNAL_ID   15 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[21] Offline."
-#MESSAGE 
-"MFC[21] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   16 
-#EXTERNAL_ID   16 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[22] Offline."
-#MESSAGE 
-"MFC[22] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   17 
-#EXTERNAL_ID   17 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[23] Offline."
-#MESSAGE 
-"MFC[23] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   18 
-#EXTERNAL_ID   18 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[24] Offline."
-#MESSAGE 
-"MFC[24] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   19 
-#EXTERNAL_ID   19 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[25] Offline."
-#MESSAGE 
-"MFC[25] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   20 
-#EXTERNAL_ID   20 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[26] Offline."
-#MESSAGE 
-"MFC[26] Controller is Offline.
-Please, Check Communication Status !
-"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   21 
-#EXTERNAL_ID   21 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[27] Offline."
-#MESSAGE 
-"MFC[27] Controller is Offline.
-Please, Check Communication Status !
+Please, check communication status ! 
 "
 #RECOVERY_ACTION 
      CHECK   ""
@@ -10010,7 +9352,23 @@ Please, Check Communication Status !
 "PHY_IO__MFC_PART02 - GAS[07] Control Timeout."
 #MESSAGE 
 "MFC[07] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[08] Offline."
+#MESSAGE 
+"MFC[08] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10025,7 +9383,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART02 - GAS[08] Control Timeout."
 #MESSAGE 
 "MFC[08] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   3 
+#EXTERNAL_ID   3 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[09] Offline."
+#MESSAGE 
+"MFC[09] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10040,7 +9414,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART02 - GAS[09] Control Timeout."
 #MESSAGE 
 "MFC[09] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   4 
+#EXTERNAL_ID   4 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[10] Offline."
+#MESSAGE 
+"MFC[10] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10055,7 +9445,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART02 - GAS[10] Control Timeout."
 #MESSAGE 
 "MFC[10] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   5 
+#EXTERNAL_ID   5 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[11] Offline."
+#MESSAGE 
+"MFC[11] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10070,7 +9476,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART02 - GAS[11] Control Timeout."
 #MESSAGE 
 "MFC[11] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   6 
+#EXTERNAL_ID   6 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[12] Offline."
+#MESSAGE 
+"MFC[12] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10085,7 +9507,23 @@ Please, Check MFC Control Status !"
 "PHY_IO__MFC_PART02 - GAS[12] Control Timeout."
 #MESSAGE 
 "MFC[12] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   7 
+#EXTERNAL_ID   7 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__MFC_PART02 - GAS[17] Offline."
+#MESSAGE 
+"MFC[17] Controller is Offline.
+Please, check communication status ! 
+"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10097,220 +9535,10 @@ Please, Check MFC Control Status !"
 #LEVEL   LIGHT 
 #HOST_REPORT   YES
 #TITLE 
-"PHY_IO__MFC_PART02 - GAS[13] Control Timeout."
-#MESSAGE 
-"MFC[13] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   29 
-#EXTERNAL_ID   29 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[14] Control Timeout."
-#MESSAGE 
-"MFC[14] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   30 
-#EXTERNAL_ID   30 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[15] Control Timeout."
-#MESSAGE 
-"MFC[15] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   31 
-#EXTERNAL_ID   31 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[16] Control Timeout."
-#MESSAGE 
-"MFC[16] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   32 
-#EXTERNAL_ID   32 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
 "PHY_IO__MFC_PART02 - GAS[17] Control Timeout."
 #MESSAGE 
 "MFC[17] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   33 
-#EXTERNAL_ID   33 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[18] Control Timeout."
-#MESSAGE 
-"MFC[18] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   34 
-#EXTERNAL_ID   34 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[19] Control Timeout."
-#MESSAGE 
-"MFC[19] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   35 
-#EXTERNAL_ID   35 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[20] Control Timeout."
-#MESSAGE 
-"MFC[20] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   36 
-#EXTERNAL_ID   36 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[21] Control Timeout."
-#MESSAGE 
-"MFC[21] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   37 
-#EXTERNAL_ID   37 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[22] Control Timeout."
-#MESSAGE 
-"MFC[22] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   38 
-#EXTERNAL_ID   38 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[23] Control Timeout."
-#MESSAGE 
-"MFC[23] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   39 
-#EXTERNAL_ID   39 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[24] Control Timeout."
-#MESSAGE 
-"MFC[24] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   40 
-#EXTERNAL_ID   40 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[25] Control Timeout."
-#MESSAGE 
-"MFC[25] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   41 
-#EXTERNAL_ID   41 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[26] Control Timeout."
-#MESSAGE 
-"MFC[26] Controller is Timeout.
-Please, Check MFC Control Status !"
-#RECOVERY_ACTION 
-     CHECK   ""
-#OPTION1    
-#OPTION2    
-#OPTION3    
-
-#INTERNAL_ID   42 
-#EXTERNAL_ID   42 
-#LEVEL   LIGHT 
-#HOST_REPORT   YES
-#TITLE 
-"PHY_IO__MFC_PART02 - GAS[27] Control Timeout."
-#MESSAGE 
-"MFC[27] Controller is Timeout.
-Please, Check MFC Control Status !"
+Please, check MFC control status !"
 #RECOVERY_ACTION 
      CHECK   ""
 #OPTION1    
@@ -10374,6 +9602,39 @@ OBJECT_NAME : PHY_IO__RF_40MHZ   (OffsetID:0) (ToolID:) (UnitID:)
 #HOST_REPORT   YES
 #TITLE 
 "PHY_IO__RF_40MHZ - Generator Communication Retry Over"
+#MESSAGE 
+"Generator Communication Retry Over"
+#RECOVERY_ACTION 
+     RETRY   ""
+     ABORT   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+
+//------------------------------------------------------------
+OBJECT_NAME : PHY_IO__RF_PULSE   (OffsetID:0) (ToolID:) (UnitID:) 
+
+#INTERNAL_ID   1 
+#EXTERNAL_ID   1 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_PULSE - Generator Offline"
+#MESSAGE 
+"Generator Offline."
+#RECOVERY_ACTION 
+     RETRY   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   2 
+#EXTERNAL_ID   2 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"PHY_IO__RF_PULSE - Generator Communication Retry Over"
 #MESSAGE 
 "Generator Communication Retry Over"
 #RECOVERY_ACTION 

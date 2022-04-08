@@ -1,5 +1,4 @@
 
-
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY_RF_RPS
 
@@ -31,7 +30,7 @@
 #DEFINE_CONSTANT    CH__INTERLOCK_MSG                   DB_SYS+MON.INTERLOCK.HEAVY.MSG.RF_SYS
 
 //------------------------------------------------
-#OBJECT_PROPERTY    PHY_RF_400KHZ
+#OBJECT_PROPERTY    PHY_RF_LF
 
 #DEFINE_CONSTANT    OBJ__DB_SYS							            DB_SYS
 
@@ -61,7 +60,7 @@
 #DEFINE_CONSTANT    CH__INTERLOCK_MSG                   DB_SYS+MON.INTERLOCK.HEAVY.MSG.RF_SYS
 
 //------------------------------------------------
-#OBJECT_PROPERTY    PHY_RF_40MHZ
+#OBJECT_PROPERTY    PHY_RF_HF
 
 #DEFINE_CONSTANT    OBJ__DB_SYS							            DB_SYS
 

@@ -37,7 +37,6 @@
 #OBJECT_STD    TMC__OPR_MODULE               ATM_ROBOT.STD            OPR__ATM_ROBOT
 
 #OBJECT_STD    TMC__Fnc_ROBOT                ATM_ROBOT.STD            FNC__ATM_ROBOT
-
 #OBJECT_STD    TMC__Phy_ROBOT                ATM_ROBOT.FUSION         PHY__ATM_ROBOT
 
 #OBJECT_STD    TMC__Phy_ROBOT                SIDE.STORAGE             PHY__BUFF1
@@ -96,14 +95,11 @@
 #OBJECT_STD    TMC__Fnc_LBx                  ManiFold.TEST            FNC__MANIFOLD_TEST
 #OBJECT_STD    TMC__Fnc_LBx                  LBx.TEST                 FNC__LBx_TEST
 
-#OBJECT_STD    TMC__Fnc_LBx                  LBx.TwoManiFold          FNC__LBA
-#OBJECT_STD    TMC__Fnc_LBx                  LBx.TwoManiFold          FNC__LBB
+#OBJECT_STD    TMC__Fnc_LBx                  LBx.ManiFold_X           FNC__LBA
+#OBJECT_STD    TMC__Fnc_LBx                  LBx.ManiFold_X           FNC__LBB
 
-#OBJECT_STD    TMC__Fnc_CHM                  LLx.TwoManiFold          FNC__LLx_CHM
-#OBJECT_STD    TMC__Fnc_VLV                  TwoManiFold.LL           PHY__LLx_VLV
-
-#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.SIMPLE           PHY__LBA
-#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.SIMPLE           PHY__LBB
+#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.SLOT             PHY__LBA
+#OBJECT_STD    TMC__Phy_LBx_CHM              LBx_CHM.SLOT             PHY__LBB
 
 
 ===========================================================================
@@ -128,21 +124,17 @@
 #OBJECT_STD    TMC__OPR_MODULE               LPx.STD                  OPR__LP2
 #OBJECT_STD    TMC__OPR_MODULE               LPx.STD                  OPR__LP3
 
-#OBJECT_STD    TMC__Fnc_LPx                  LPx.STD                  FNC__LP1
-#OBJECT_STD    TMC__Fnc_LPx                  LPx.STD                  FNC__LP2
-#OBJECT_STD    TMC__Fnc_LPx                  LPx.STD                  FNC__LP3
+#OBJECT_STD    TMC__Phy_LPx                  LPx.SYS                  PHY__LP1
+#OBJECT_STD    TMC__Phy_LPx                  LPx.SYS                  PHY__LP2
+#OBJECT_STD    TMC__Phy_LPx                  LPx.SYS                  PHY__LP3
 
-#OBJECT_STD    TMC__Phy_LPx                  LPx.STD                  PHY__LP1
-#OBJECT_STD    TMC__Phy_LPx                  LPx.STD                  PHY__LP2
-#OBJECT_STD    TMC__Phy_LPx                  LPx.STD                  PHY__LP3
+#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_IO__LP1
+#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_IO__LP2
+#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_IO__LP3
 
-#OBJECT_STD    Phy__IO_LOADPORT              STD.TYPE                 PHY_IO__LP1
-#OBJECT_STD    Phy__IO_LOADPORT              STD.TYPE                 PHY_IO__LP2
-#OBJECT_STD    Phy__IO_LOADPORT              STD.TYPE                 PHY_IO__LP3
-
-#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_RS232__LP1
-#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_RS232__LP2
-#OBJECT_IO     Phy_IO__CYMECHS_LPx           DURAPORT.SERIAL          PHY_RS232__LP3
+#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF1
+#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF2
+#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF3
 
 #OBJECT_STD    Phy__IO_LOADPORT              OHT_E84.IO               PHY_OHT__LP1
 #OBJECT_STD    Phy__IO_LOADPORT              OHT_E84.IO               PHY_OHT__LP2
@@ -157,10 +149,6 @@
 #OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_TM1__CHM_GAUGE
 #OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LLx__PUMP_GAUGE
 #OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_TM1__PUMP_GAUGE
-
-#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF1
-#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF2
-#OBJECT_IO     Phy_IO__BROOKS_RFID           LF80.SERIAL              PHY_RS232__RF3
 
 #OBJECT_IO     Phy_IO__MARS_FFU              MS.FC100                 PHY_IO__FFU
 
