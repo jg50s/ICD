@@ -1,6 +1,0 @@
-; PMC_DEBUG.def : Declares the module parameters for the DLL.
-
-LIBRARY      "PMC_DEBUG"
-
-EXPORTS
-    ; Explicit exports can go here

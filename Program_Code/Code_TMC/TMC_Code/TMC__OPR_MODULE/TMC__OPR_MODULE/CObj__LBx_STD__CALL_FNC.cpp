@@ -5,8 +5,14 @@
 #define _CMMD_CHM__INIT					"INIT"
 #define _CMMD_CHM__MAINT				"MAINT"
 
+#define _CMMD_CHM__DV_OPEN				"DV_OPEN"
 #define _CMMD_CHM__DV_CLOSE				"DV_CLOSE"
+
+#define _CMMD_CHM__SV_OPEN				"SV_OPEN"
 #define _CMMD_CHM__SV_CLOSE				"SV_CLOSE"
+
+#define _CMMD_CHM__LIFT_PIN_UP			"LIFT_PIN.UP"
+#define _CMMD_CHM__LIFT_PIN_DOWN		"LIFT_PIN.DOWN"
 
 #define _CMMD_CHM__PUMP					"PUMP"
 #define _CMMD_CHM__VENT					"VENT"
@@ -65,6 +71,37 @@ Call__VENT(CII_OBJECT__VARIABLE* p_variable)
 	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__VENT);
 }
 
+
+// ...
+int  CObj__LBx_STD::Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__DV_OPEN);
+}
+int  CObj__LBx_STD::Call__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__DV_CLOSE);
+}
+
+int  CObj__LBx_STD::Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__SV_OPEN);
+}
+int  CObj__LBx_STD::Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__SV_CLOSE);
+}
+
+int  CObj__LBx_STD::Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__LIFT_PIN_UP);
+}
+int  CObj__LBx_STD::Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pOBJ_CTRL__LLx_CHM->Call__OBJECT(_CMMD_CHM__LIFT_PIN_DOWN);
+}
+
+
+// ...
 int  CObj__LBx_STD::
 Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable)
 {

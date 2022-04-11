@@ -28,12 +28,11 @@ int CObj__NXA_PULSE::__DEFINE__CONTROL_MODE(obj, l_mode)
 	{
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 
-		ADD__CTRL_VAR(sMODE__CLK_A_SET, "CLK_A.SET");
-		ADD__CTRL_VAR(sMODE__CLK_B_SET, "CLK_B.SET");
-		ADD__CTRL_VAR(sMODE__CLK_C_SET, "CLK_C.SET");
+		ADD__CTRL_VAR(sMODE__PARA_USER_ON,  "PARA_USER.ON");
+		ADD__CTRL_VAR(sMODE__PARA_USER_OFF, "PARA_USER.OFF");
 
-		ADD__CTRL_VAR(sMODE__CLK_EXEC_ON,  "CLK_EXEC.ON");
-		ADD__CTRL_VAR(sMODE__CLK_EXEC_OFF, "CLK_EXEC.OFF");
+		ADD__CTRL_VAR(sMODE__PARA_RCP_ON,  "PARA_RCP.ON");
+		ADD__CTRL_VAR(sMODE__PARA_RCP_OFF, "PARA_RCP.OFF");
 
 		ADD__CTRL_VAR(sMODE__TEST_DRV, "TEST.DRV");
 	}
@@ -72,54 +71,135 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
 	}
 
-	// PARA ...
+	// PARA.USER ...
 	{
-		str_name = "PARA.PARAM_A.FREQ";
+		str_name = "PARA.A.USER.FREQ";
 		STD__ADD_ANALOG(str_name, "Hz", 2, 0, 10000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_A_FREQ, str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_FREQ, str_name);
 
-		str_name = "PARA.PARAM_A.DUTY";
+		str_name = "PARA.A.USER.DUTY";
 		STD__ADD_ANALOG(str_name, "%", 2, 0, 100);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_A_DUTY, str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_DUTY, str_name);
 
-		str_name = "PARA.PARAM_A.ON_TIME";
+		str_name = "PARA.A.USER.ON_TIME";
 		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_A_ON_TIME, str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_ON_TIME, str_name);
 
-		str_name = "PARA.PARAM_A.OFF_TIME";
+		str_name = "PARA.A.USER.OFF_TIME";
 		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_A_OFF_TIME, str_name);
-
-		//
-		str_name = "PARA.PARAM_B.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_B_ON_SHIFT_TIME, str_name);
-
-		str_name = "PARA.PARAM_B.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_B_OFF_SHIFT_TIME, str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_OFF_TIME, str_name);
 
 		//
-		str_name = "PARA.PARAM_C.ON_SHIFT_TIME";
+		str_name = "PARA.B.USER.ON_SHIFT_TIME";
 		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_C_ON_SHIFT_TIME, str_name);
-		
-		str_name = "PARA.PARAM_C.OFF_SHIFT_TIME";
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_USER_ON_SHIFT_TIME, str_name);
+
+		str_name = "PARA.B.USER.OFF_SHIFT_TIME";
 		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_PARAM_C_OFF_SHIFT_TIME, str_name);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_USER_OFF_SHIFT_TIME, str_name);
 
 		//
-		str_name = "PARA.CLK_A.CTRL";
-		STD__ADD_DIGITAL(str_name, "OFF  ON");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_CLK_A_CTRL, str_name);
+		str_name = "PARA.C.USER.ON_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_USER_ON_SHIFT_TIME, str_name);
 		
-		str_name = "PARA.CLK_B.CTRL";
-		STD__ADD_DIGITAL(str_name, "OFF  ON");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_CLK_B_CTRL, str_name);
+		str_name = "PARA.C.USER.OFF_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_USER_OFF_SHIFT_TIME, str_name);
+
+		//
+		str_name = "PARA.A.USER.CLK.CTRL";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_A_USER_CLK_CTRL, str_name);
 		
-		str_name = "PARA.CLK_C.CTRL";
-		STD__ADD_DIGITAL(str_name, "OFF  ON");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_CLK_C_CTRL, str_name);
+		str_name = "PARA.B.USER.CLK.CTRL";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_B_USER_CLK_CTRL, str_name);
+		
+		str_name = "PARA.C.USER.CLK.CTRL";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_C_USER_CLK_CTRL, str_name);
+	}
+	// PARA.RCP ...
+	{
+		str_name = "PARA.RCP.FREQUENCY";
+		STD__ADD_ANALOG(str_name, "Hz", 2, 0, 10000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_FREQUENCY, str_name);
+
+		str_name = "PARA.RCP.DUTY";
+		STD__ADD_ANALOG(str_name, "%", 2, 0, 100);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_DUTY, str_name);
+
+		str_name = "PARA.RCP.ON_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_ON_TIME, str_name);
+
+		str_name = "PARA.RCP.OFF_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_OFF_TIME, str_name);
+
+		//
+		str_name = "PARA.RCP.ON_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_ON_SHIFT_TIME, str_name);
+
+		str_name = "PARA.RCP.OFF_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_OFF_SHIFT_TIME, str_name);
+
+		//
+		str_name = "PARA.RCP.EXEC";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_RCP_EXEC, str_name);
+	}
+	// PARA.DRV ...
+	{
+		str_name = "PARA.A.DRV.FREQ";
+		STD__ADD_ANALOG(str_name, "Hz", 2, 0, 10000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_FREQ, str_name);
+
+		str_name = "PARA.A.DRV.DUTY";
+		STD__ADD_ANALOG(str_name, "%", 2, 0, 100);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_DUTY, str_name);
+
+		str_name = "PARA.A.DRV.ON_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_ON_TIME, str_name);
+
+		str_name = "PARA.A.DRV.OFF_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_OFF_TIME, str_name);
+
+		//
+		str_name = "PARA.B.DRV.ON_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_DRV_ON_SHIFT_TIME, str_name);
+
+		str_name = "PARA.B.DRV.OFF_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_DRV_OFF_SHIFT_TIME, str_name);
+
+		//
+		str_name = "PARA.C.DRV.ON_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_DRV_ON_SHIFT_TIME, str_name);
+
+		str_name = "PARA.C.DRV.OFF_SHIFT_TIME";
+		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_DRV_OFF_SHIFT_TIME, str_name);
+
+		//
+		str_name = "PARA.A.DRV.CLK.CTRL";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_A_DRV_CLK_CTRL, str_name);
+
+		str_name = "PARA.B.DRV.CLK.CTRL";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_B_DRV_CLK_CTRL, str_name);
+
+		str_name = "PARA.C.DRV.CLK.CTRL";
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_C_DRV_CLK_CTRL, str_name);
 	}
 
 	// MON ...
@@ -127,6 +207,11 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.COMM.STS";
 		STD__ADD_DIGITAL(str_name, APP_DSP__COMM_STATUS);
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_COMM_STS, str_name);
+
+		//
+		str_name = "MON.POWER.ABORT.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_POWER_ABORT_ACTIVE, str_name);
 	}
 
 	// CFG ...
@@ -420,16 +505,15 @@ int CObj__NXA_PULSE::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 
 	// ...
 	{
-			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
+			 IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable, p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__CLK_A_SET)		flag = Call__CLK_A_SET(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__CLK_B_SET)		flag = Call__CLK_B_SET(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__CLK_C_SET)		flag = Call__CLK_C_SET(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_USER_ON)			flag = Call__PARA_USER_CTRL(p_variable, p_alarm, false);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_USER_OFF)		flag = Call__PARA_USER_CTRL(p_variable, p_alarm, true);
 
-		ELSE_IF__CTRL_MODE(sMODE__CLK_EXEC_ON)		flag = Call__CLK_EXEC_SET(p_variable, p_alarm, true);
-		ELSE_IF__CTRL_MODE(sMODE__CLK_EXEC_OFF)		flag = Call__CLK_EXEC_SET(p_variable, p_alarm, false);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_RCP_ON)			flag = Call__PARA_RCP_CTRL(p_variable, p_alarm, false);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_RCP_OFF)			flag = Call__PARA_RCP_CTRL(p_variable, p_alarm, true);
 
-		ELSE_IF__CTRL_MODE(sMODE__TEST_DRV)			flag =  Call__TEST_DRV(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__TEST_DRV)				flag =  Call__TEST_DRV(p_variable, p_alarm);
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

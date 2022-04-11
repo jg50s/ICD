@@ -12,6 +12,8 @@ int  CObj__LBx_STD::Call__MAINT(CII_OBJECT__VARIABLE* p_variable)
 	return pLBx__OBJ_CTRL->Call__OBJECT("MAINT");
 }
 
+
+// ...
 int  CObj__LBx_STD::Call__PUMP(CII_OBJECT__VARIABLE* p_variable)
 {
 	return pLBx__OBJ_CTRL->Call__OBJECT("PUMP");
@@ -21,6 +23,37 @@ int  CObj__LBx_STD::Call__VENT(CII_OBJECT__VARIABLE* p_variable)
 	return pLBx__OBJ_CTRL->Call__OBJECT("VENT");
 }
 
+
+// ...
+int  CObj__LBx_STD::Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLBx__OBJ_CTRL->Call__OBJECT("DOOR.OPEN");
+}
+int  CObj__LBx_STD::Call__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLBx__OBJ_CTRL->Call__OBJECT("DOOR.CLOSE");
+}
+
+int  CObj__LBx_STD::Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLBx__OBJ_CTRL->Call__OBJECT("SLOT.OPEN");
+}
+int  CObj__LBx_STD::Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLBx__OBJ_CTRL->Call__OBJECT("SLOT.CLOSE");
+}
+
+int  CObj__LBx_STD::Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLBx__OBJ_CTRL->Call__OBJECT("PIN.UP");
+}
+int  CObj__LBx_STD::Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLBx__OBJ_CTRL->Call__OBJECT("PIN.DOWN");
+}
+
+
+// ...
 int  CObj__LBx_STD::Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable)
 {
 	return pLBx__OBJ_CTRL->Call__OBJECT("PREPMATER");

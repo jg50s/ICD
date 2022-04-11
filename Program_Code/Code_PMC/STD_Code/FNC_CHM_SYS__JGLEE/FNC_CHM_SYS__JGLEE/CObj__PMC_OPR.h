@@ -85,6 +85,11 @@ private:
 	CString sEXT_MODE__LEAK_CHECK;
 	CString sEXT_MODE__PURGE;
 
+	CString sEXT_MODE__SLOT_OPEN;
+	CString sEXT_MODE__SLOT_CLOSE;
+	CString sEXT_MODE__PIN_UP;
+	CString sEXT_MODE__PIN_DOWN;
+
 	CString sEXT_MODE__PRO_READY;
 	CString sEXT_MODE__PRO_START;
 	CString sEXT_MODE__CLN_READY;
@@ -123,6 +128,21 @@ private:
 	CString sMODE__PURGE;
 	int Call__PURGE(CII_OBJECT__VARIABLE *p_variable);
 
+	//
+	CString sMODE__SLOT_OPEN;
+	int Call__SLOT_OPEN(CII_OBJECT__VARIABLE *p_variable);
+
+	CString sMODE__SLOT_CLOSE;
+	int Call__SLOT_CLOSE(CII_OBJECT__VARIABLE *p_variable);
+
+	//
+	CString sMODE__PIN_UP;
+	int Call__PIN_UP(CII_OBJECT__VARIABLE *p_variable);
+
+	CString sMODE__PIN_DOWN;
+	int Call__PIN_DOWN(CII_OBJECT__VARIABLE *p_variable);
+
+	//
 	CString sMODE__PICK_READY;
 	int Call__PICK_READY(CII_OBJECT__VARIABLE *p_variable);
 

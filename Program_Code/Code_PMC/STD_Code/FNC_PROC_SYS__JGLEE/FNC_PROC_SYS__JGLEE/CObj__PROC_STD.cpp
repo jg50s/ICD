@@ -201,6 +201,34 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_EXCEPTION_MSG, var_name);
 	}
 
+	// MON.WAFER_INFO ...
+	{
+		var_name = "MON.WAFER_INFO.TOTAL_COUNT.START_DATE";
+		STD__ADD_STRING_WITH_X_OPTION(var_name, "");
+		LINK__VAR_STRING_CTRL(sCH__MON_WAFER_INFO_TOTAL_COUNT_START_DATE, var_name);
+
+		var_name = "MON.WAFER_INFO.TOTAL_COUNT.VALUE";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "count", 0, 0, 9999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__MON_WAFER_INFO_TOTAL_COUNT_VALUE, var_name);
+
+		var_name = "MON.WAFER_INFO.TOTAL_COUNT.RESET";
+		STD__ADD_DIGITAL_WITH_COMMENT(var_name, "RETURN RESET", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_WAFER_INFO_TOTAL_COUNT_RESET, var_name);
+
+		//
+		var_name = "MON.WAFER_INFO.CURRENT_COUNT.START_DATE";
+		STD__ADD_STRING_WITH_X_OPTION(var_name, "");
+		LINK__VAR_STRING_CTRL(sCH__MON_WAFER_INFO_CURRENT_COUNT_START_DATE, var_name);
+
+		var_name = "MON.WAFER_INFO.CURRENT_COUNT.VALUE";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "count", 0, 0, 9999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__MON_WAFER_INFO_CURRENT_COUNT_VALUE, var_name);
+
+		var_name = "MON.WAFER_INFO.CURRENT_COUNT.RESET";
+		STD__ADD_DIGITAL_WITH_COMMENT(var_name, "RETURN RESET", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_WAFER_INFO_CURRENT_COUNT_RESET, var_name);
+	}
+
 	// CUR ...
 	{
 		var_name = "CUR.RCP.FILE.PATH";
@@ -479,10 +507,10 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
 	CString def_name;
 	CString def_data;
-
-	CString ch_name;
 	CString obj_name;
 	CString var_name;
+	CString ch_name;
+	CString ch_data;
 	int i;
 
 	// ...
@@ -681,6 +709,26 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		dCH__PARA_MANUAL_STEP_CTRL_ACTIVE->Set__DATA(STR__OFF);
 		sCH__PARA_MANUAL_STEP_CTRL_REQ->Set__DATA("");
 	}
+
+	// Total Count ...
+	if(sCH__MON_WAFER_INFO_TOTAL_COUNT_START_DATE->Check__DATA("") > 0)
+	{
+		SYSTEMTIME st;
+		GetLocalTime(&st);
+
+		ch_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+		sCH__MON_WAFER_INFO_TOTAL_COUNT_START_DATE->Set__DATA(ch_data);
+	}
+	// Current Count ...
+	if(sCH__MON_WAFER_INFO_CURRENT_COUNT_START_DATE->Check__DATA("") > 0)
+	{
+		SYSTEMTIME st;
+		GetLocalTime(&st);
+
+		ch_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+		sCH__MON_WAFER_INFO_CURRENT_COUNT_START_DATE->Set__DATA(ch_data);
+	}
+
 	return 1;
 }
 

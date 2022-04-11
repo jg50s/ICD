@@ -2,6 +2,12 @@
 
 
 // ...
+// ...
+#define  ACT__RETRY						"RETRY"
+#define  ACT__ABORT						"ABORT"
+#define  ACT__COMPLETE					"COMPLETE"
+
+// ...
 #define  ALID__OFFLINE_ALARM									1
 #define  ALID__LOADPORT_OFFLINE_ALARM							2
 #define  ALID__CMD_TIMEOUT_ALARM								3
@@ -39,6 +45,11 @@
 
 
 // ...
+#define  _PIO_CMMD__LOAD_REQ			"LOAD.REQ"
+#define  _PIO_CMMD__UNLOAD_REQ         "UNLOAD.REQ"
+
+
+// ...
 #define  _YES							"YES"
 #define  _NO							"NO"
 
@@ -49,6 +60,10 @@
 #define  _EXIST							"EXIST"
 #define  _NONE							"NONE"
 
+#define  _RUN							"RUN"
 #define  _DONE							"DONE"
 #define  _STOP							"STOP"
+
+#define  _CLAMP                         "CLAMP"
+#define  _UNCLAMP                       "UNCLAMP"
 

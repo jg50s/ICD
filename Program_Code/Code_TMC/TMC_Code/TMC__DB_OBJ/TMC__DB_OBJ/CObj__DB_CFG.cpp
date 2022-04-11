@@ -685,24 +685,24 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		if(bActive__LLx_MULTI_SLOT_VALVE)
 		{
 			str_name.Format("CFG.LL%1d.1.POST.POSITION.INCREMENT", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,0,3,"def:0");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,3, "");
 
 			str_name.Format("CFG.LL%1d.2.POST.POSITION.INCREMENT", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,0,3,"def:0");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,3, "");
 
 			//
 			str_name.Format("CFG.LL%1d.1.POST.POSITION.INCREMENT.RANGE", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,0,30,"def:0");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
 
 			str_name.Format("CFG.LL%1d.2.POST.POSITION.INCREMENT.RANGE", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,0,30,"def:0");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
 
 			//
 			str_name.Format("CFG.LL%1d.1.POST.POSITION.INCREMENT.START.ANGLE", id); 
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,50,90,"def:64");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
 
 			str_name.Format("CFG.LL%1d.2.POST.POSITION.INCREMENT.START.ANGLE", id); 
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,50,90,"def:64");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
 
 			//
 			str_name.Format("CFG.LL%1d.1.POST.POSITION.INCREMENT.APPLY", id);
@@ -713,27 +713,27 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 
 			//
 			str_name.Format("CUR.LL%1d.1.POST.POSITION.INCREMENT.ANGLE", id);
-			STD__ADD_ANALOG(str_name,"angle",0,0,360);
+			STD__ADD_ANALOG(str_name,"degree", 0,0,360);
 
 			str_name.Format("CUR.LL%1d.2.POST.POSITION.INCREMENT.ANGLE", id);
-			STD__ADD_ANALOG(str_name,"angle",0,0,360);
+			STD__ADD_ANALOG(str_name,"degree", 0,0,360);
 		}
 		else
 		{
 			str_name.Format("CFG.aLL%1d.POST.POSITION.INCREMENT", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,0,3,"def:0");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,3, "");
 
 			str_name.Format("CFG.aLL%1d.POST.POSITION.INCREMENT.RANGE", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,0,30,"def:0");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
 
 			str_name.Format("CFG.aLL%1d.POST.POSITION.INCREMENT.START.ANGLE", id); 
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"angle",0,50,90,"def:64");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
 
 			str_name.Format("CFG.LL%1d.POST.POSITION.INCREMENT.APPLY", id);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"DISABLE ENABLE","");
 
 			str_name.Format("CUR.aLL%1d.POST.POSITION.INCREMENT.ANGLE", id);
-			STD__ADD_ANALOG(str_name,"angle",0,0,360);
+			STD__ADD_ANALOG(str_name, "degree", 0,0,360);
 		}
 	}
 

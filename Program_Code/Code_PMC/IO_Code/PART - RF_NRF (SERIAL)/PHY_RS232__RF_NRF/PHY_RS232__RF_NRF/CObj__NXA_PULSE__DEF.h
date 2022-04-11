@@ -22,3 +22,10 @@
 #define _NXA_CMD__GET_PARAM_C			0x43
 #define _NXA_CMD__GET_EXEC				0x50
 
+
+// ...
+#define STR__NORMAL					"NORMAL"
+#define STR__INVERSE				"INVERSE"
+#define STR__HIGH					"HIGH"
+#define STR__LOW					"LOW"
+

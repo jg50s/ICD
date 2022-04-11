@@ -5,8 +5,6 @@
 #define  _CFG__MFC_SIZE					20
 #define  _CFG__PT_SIZE					20
 
-#define  _CFG__SH_SIZE					4
-
 
 // ...
 #define  _ACT_CMD__IDLE					"IDLE"
@@ -39,6 +37,9 @@
 
 #define  _RF_CMD__SET_POWER				"SET_POWER"
 #define  _RF_CMD__OFF					"OFF"
+
+#define  _PULSE_CMD__PARA_RCP_ON		"PARA_RCP.ON"
+#define  _PULSE_CMD__PARA_RCP_OFF		"PARA_RCP.OFF"
 
 #define  _MAT_CMD__PROC_CTRL			"PROC.CTRL"
 

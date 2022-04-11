@@ -52,6 +52,26 @@ LOOP_RESTART:
 		goto LOOP_RESTART;
 	}
 
+	if(r_flag > 0)
+	{
+		if(dEXT_CH__SLOT01_STATUS->Check__DATA(STR__NONE) < 0)
+		{
+			// Total Count ...
+			{
+				aCH__MON_WAFER_INFO_TOTAL_COUNT_VALUE->Inc__VALUE(1);
+
+				sCH__MON_WAFER_INFO_TOTAL_COUNT_START_DATE;
+				dCH__MON_WAFER_INFO_TOTAL_COUNT_RESET;
+			}
+			// Current Count ...
+			{
+				aCH__MON_WAFER_INFO_CURRENT_COUNT_VALUE->Inc__VALUE(1);
+
+				sCH__MON_WAFER_INFO_CURRENT_COUNT_START_DATE;
+				dCH__MON_WAFER_INFO_CURRENT_COUNT_RESET;			
+			}
+		}
+	}
 	return r_flag;
 }
 

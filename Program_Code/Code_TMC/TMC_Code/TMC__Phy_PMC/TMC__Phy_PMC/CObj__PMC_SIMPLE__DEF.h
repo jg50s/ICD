@@ -14,6 +14,7 @@
 #define  STR__ON				"ON"
 #define  STR__OFF				"OFF"
 
+#define  STR__NO				"NO"
 #define  STR__YES				"YES"
 
 #define  STR__VAC				"VAC"

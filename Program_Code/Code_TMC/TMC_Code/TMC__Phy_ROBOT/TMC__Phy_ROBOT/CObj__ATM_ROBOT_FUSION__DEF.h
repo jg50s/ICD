@@ -7,6 +7,8 @@
 #define  CMMD__INIT					"INIT"
 
 #define  CMMD__PICK					"PICK"
+#define  CMMD__ALIGN_PICK			"ALIGN_PICK"
+
 #define  CMMD__PLACE				"PLACE"
 #define  CMMD__ROTATE				"ROTATE"
 
@@ -36,6 +38,7 @@
 
 #define  STR__YES					"YES"
 #define  STR__NO					"NO"
+#define  STR__NULL					"NULL"
 
 #define  STR__OPEN					"OPEN"
 #define  STR__CLAMP					"CLAMP"
@@ -47,6 +50,7 @@
 #define  STR__DISABLE			    "DISABLE"
 
 #define  STR__ALIGNER				"ALIGNER"
+#define  STR__ATM_RB				"ATM_RB"
 
 
 // ...

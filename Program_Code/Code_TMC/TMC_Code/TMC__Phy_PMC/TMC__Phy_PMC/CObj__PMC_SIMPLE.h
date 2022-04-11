@@ -16,7 +16,7 @@ private:
 	int iPM_LIMIT;
 
 	SCX__USER_LOG_CTRL xLOG_CTRL;
-	bool bActive__SIM_MODE;
+	int iActive__SIM_MODE;
 	//
 
 	//-------------------------------------------------------------------------
@@ -137,11 +137,19 @@ private:
 
 	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__ATM_SNS[CFG_PMx__SIZE];
 	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__VAC_SNS[CFG_PMx__SIZE];
-	
-	CX__VAR_DIGITAL_CTRL diEXT_CH__TMC__VAC_SNS;
-	CX__VAR_DIGITAL_CTRL diEXT_CH__TMC__ATM_SNS;
-	
+
 	CX__VAR_DIGITAL_CTRL diEXT_CH__VAC_RB__RNE_PM_X[CFG_PMx__SIZE];
+
+	// ATM & VAC STATE ...
+	CString sDATA__ATM_ON;
+	CString sDATA__ATM_OFF;
+
+	CString sDATA__VAC_ON;
+	CString sDATA__VAC_OFF;
+
+	// ARM_RNE.STATE ...
+	CString sDATA__RNE_ON;
+	CString sDATA__RNE_OFF;
 	//
 
 

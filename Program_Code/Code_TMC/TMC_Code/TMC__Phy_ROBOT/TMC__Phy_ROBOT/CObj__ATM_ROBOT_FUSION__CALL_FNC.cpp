@@ -111,7 +111,8 @@ int  CObj__ATM_ROBOT_FUSION
 			 CII_OBJECT__ALARM* p_alarm,
 			 const CString& arm_type,
 			 const CString& stn_name,
-			 const CString& para_slot)
+			 const CString& para_slot,
+			 const bool active__align_pick)
 {
 	CString act_name;
 	CString stn_slot = para_slot;
@@ -155,18 +156,21 @@ int  CObj__ATM_ROBOT_FUSION
 	Set_ANI__ROBOT_EXTEND(arm_type, stn_name,stn_slot);
 
 	// ...
-	int flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
+	int r_flag;
 
-	if(flag > 0)
+	if(active__align_pick)		r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__ALIGN_PICK);
+	else						r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
+
+	if(r_flag > 0)
 	{
 		Fnc__CHANGE_MATERIAL_INFO(-1,arm_type, stn_name,stn_slot);
 		Set_ANI__ROBOT_RETRACT(arm_type, stn_name,stn_slot);
 	}
 
-	act_name.Format("End..Call__PICK.. ret:%d", flag);
+	act_name.Format("End..Call__PICK.. ret:%d", r_flag);
 	Fnc__APP_LOG(act_name);
 
-	return flag;
+	return r_flag;
 }
 int  CObj__ATM_ROBOT_FUSION
 ::Fnc__ACTION(const CString& arm_type,
@@ -202,7 +206,11 @@ int  CObj__ATM_ROBOT_FUSION
 
 		int db_index = -1;
 
-			 if(cmmd_act.CompareNoCase(CMMD__PICK)   == 0)			db_index = _ACT_INDEX__PICK;
+		if((cmmd_act.CompareNoCase(CMMD__PICK) == 0)
+		|| (cmmd_act.CompareNoCase(CMMD__ALIGN_PICK) == 0))
+		{
+			db_index = _ACT_INDEX__PICK;
+		}
 		else if(cmmd_act.CompareNoCase(CMMD__PLACE)  == 0)			db_index = _ACT_INDEX__PLACE;
 		else if(cmmd_act.CompareNoCase(CMMD__ROTATE) == 0)			db_index = _ACT_INDEX__ROTATE;
 
@@ -640,11 +648,6 @@ int  CObj__ATM_ROBOT_FUSION
 ::Call__ALGN(CII_OBJECT__VARIABLE* p_variable,
 			 CII_OBJECT__ALARM* p_alarm)
 {
-	if(dEXT_CH__CFG_ALIGN_DEVICE->Check__DATA(STR__ALIGNER) < 0)
-	{
-		return -11;
-	}
-
 	return pAL1__OBJ_CTRL->Call__OBJECT(CMMD__ALIGN);
 }
 

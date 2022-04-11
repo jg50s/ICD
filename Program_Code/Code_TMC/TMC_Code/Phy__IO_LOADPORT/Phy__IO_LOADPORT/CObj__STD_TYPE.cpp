@@ -35,12 +35,6 @@ int CObj__STD_TYPE::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 		ADD__CTRL_VAR(sMODE__CLOSEDOOR,	 "CLOSEDOOR");
 		ADD__CTRL_VAR(sMODE__OPENDOOR,	 "OPENDOOR");
-
-		//
-		ADD__CTRL_VAR(sMODE__CID_READ,   "CID_READ");
-		ADD__CTRL_VAR(sMODE__PAGE_READ,  "PAGE_READ");
-		ADD__CTRL_VAR(sMODE__CID_WRITE,  "CID_WRITE");
-		ADD__CTRL_VAR(sMODE__PAGE_WRITE, "PAGE_WRITE");
 	}
 
 	return 1;
@@ -135,22 +129,6 @@ int CObj__STD_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "OTR.IN.sLP.FA.SERVICE.MODE";
 		STD__ADD_STRING(str_name);								// "NO YES"
 		LINK__VAR_STRING_CTRL(sCH__OTR_IN_LP__FA_SERVICE_MODE,str_name);
-
-		str_name = "OTR.IN.MON.dATM_RB1.ARM";					//INF.dATM_RB1.ARM
-		STD__ADD_DIGITAL(str_name, "A B");
-		LINK__VAR_DIGITAL_CTRL(dCH__OTR_IN_MON_dATM_RB1_ARM,str_name);
-
-		str_name = "OTR.IN.MON.dATM_RB1.TRG.MOVE";				//INF.dATM_RB1.TRG.MOVE
-		STD__ADD_DIGITAL(str_name, APP_DSP__RB_TARGET_MOVE);
-		LINK__VAR_DIGITAL_CTRL(dCH__OTR_IN_MON_dATM_RB1_TRG_MOVE,str_name);
-
-		str_name = "OTR.IN.MON.dATM_RB1.ARM_A.ACT";				//INF.dATM_RB1.ARM_A.ACT
-		STD__ADD_DIGITAL(str_name, "UNKNOWN EXTEND RETRACT");
-		LINK__VAR_DIGITAL_CTRL(dCH__OTR_IN_MON_dATM_RB1_ARM_A_ACT,str_name);
-
-		str_name = "OTR.IN.MON.dATM_RB1.ARM_B.ACT";				//INF.dATM_RB1.ARM_B.ACT
-		STD__ADD_DIGITAL(str_name, "UNKNOWN EXTEND RETRACT");
-		LINK__VAR_DIGITAL_CTRL(dCH__OTR_IN_MON_dATM_RB1_ARM_B_ACT,str_name);
 
 		str_name = "OTR.IN.sLP.RELOAD.FLAG";
 		STD__ADD_STRING(str_name);
@@ -263,21 +241,6 @@ int CObj__STD_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.INIT.SLOT.STATE.UNKNOWN";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INIT_SLOT_STATE_UNKNOWN, str_name);
-	}
-
-	// ...
-	{
-		str_name = "OTR.OUT.MON.sCID.STRING";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__CID_STRING, str_name);
-
-		str_name = "OTR.IN.dLP.FA.MODE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__FA_MODE, str_name);
-
-		str_name = "OTR.IN.dLP.FA.SERVICE.MODE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__FA_SERVICE_MODE, str_name);
 	}
 
 	// ...
@@ -486,22 +449,6 @@ int CObj__STD_TYPE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			str_name.Format("RES.MAP.SLOT%02d", i+1);
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LPx__RES_MAP_SLOT[i], obj_name,str_name);
 		}
-
-		//
-		str_name = "RSP.PAGE.CID";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LPx__RSP_PAGE_CID, obj_name,str_name);
-
-		str_name = "RSP.PAGE.DATA";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LPx__RSP_PAGE_DATA, obj_name,str_name);
-
-		str_name = "PARA.PAGE.CID";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LPx__PARA_PAGE_CID, obj_name,str_name);
-
-		str_name = "PARA.PAGE.ID";
-		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__LPx__PARA_PAGE_ID, obj_name,str_name);
-
-		str_name = "PARA.PAGE.DATA";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LPx__PARA_PAGE_DATA, obj_name,str_name);
 	}
 
 	// LPx_PIO OBJECT -----
@@ -662,11 +609,6 @@ int CObj__STD_TYPE::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 
 		ELSE_IF__CTRL_MODE(sMODE__CLOSEDOOR)		flag = Call__CLOSEDOOR(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__OPENDOOR)			flag = Call__OPENDOOR(p_variable,p_alarm);
-
-		ELSE_IF__CTRL_MODE(sMODE__CID_READ)			flag = Call__CID_READ(p_variable,   p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__PAGE_READ)		flag = Call__PAGE_READ(p_variable,  p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__CID_WRITE)		flag = Call__CID_WRITE(p_variable,  p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__PAGE_WRITE)		flag = Call__PAGE_WRITE(p_variable, p_alarm);
 	}
 
 	if(flag < 0)

@@ -33,10 +33,11 @@ Fnc__APP_MSG(const CString& log_msg)
 int  CObj__OHT_E84_IO::
 Is__LP_AUTO_MODE()
 {
-	if(sCH__MON_ACTIVE_FA_AUTO->Check__DATA(_YES) > 0) 
+	if(dEXT_CH__LINK_PIO_ACTIVE_FA_AUTO->Check__DATA(_ON) > 0)
 	{
 		return 1;
 	}
+
 	return -1;
 }
 
@@ -45,14 +46,11 @@ Is__LP_AUTO_MODE()
 int CObj__OHT_E84_IO::
 Is__Abort(CII_OBJECT__VARIABLE* p_variable)
 {
-	CString szData;
-	sEXT_CH__PHY_LPx__STS->Get__DATA(szData);
-
-	if( (szData.CompareNoCase("ABORT")   == 0)
-	|| 	(szData.CompareNoCase("ABORTED") == 0) )
+	if(dEXT_CH__LINK_PIO_ACTIVE_RUN->Check__DATA(_ON) < 0)
 	{
 		return 1;
 	}
+
 	return -1;
 }
 
@@ -145,7 +143,7 @@ RETRY_CMD:
 
 	pch_set_cmd->Set__DATA(str_cmd);
 
-	if(iSIM_FLAG > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		pch_get_sns->Set__DATA(str_cmd);
 	}

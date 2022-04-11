@@ -27,6 +27,18 @@ Set_ANI__ROBOT_EXTEND(const CString& arm_type,
 
 		 if(arm_type.CompareNoCase(ARM_A) == 0)			dCH__OTR_OUT_MON__ARM_A_ACT->Set__DATA(STR__EXTEND);
 	else if(arm_type.CompareNoCase(ARM_B) == 0)			dCH__OTR_OUT_MON__ARM_B_ACT->Set__DATA(STR__EXTEND);
+
+	if(iActive__SIM_MODE > 0)
+	{
+		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_OFF);
+		}
+		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_OFF);
+		}
+	}
 }
 
 void  CObj__ATM_ROBOT_FUSION::
@@ -34,6 +46,12 @@ Set_ANI__ROBOT_ALL_RETRACT()
 {
 	dCH__OTR_OUT_MON__ARM_A_ACT->Set__DATA(STR__RETRACT);
 	dCH__OTR_OUT_MON__ARM_B_ACT->Set__DATA(STR__RETRACT);
+
+	if(iActive__SIM_MODE > 0)
+	{
+		if(bActive__ROBOT_RNE_SNS__ARM_A)				dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		if(bActive__ROBOT_RNE_SNS__ARM_B)				dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
+	}
 }
 void  CObj__ATM_ROBOT_FUSION::
 Set_ANI__ROBOT_RETRACT(const CString& arm_type,
@@ -44,6 +62,18 @@ Set_ANI__ROBOT_RETRACT(const CString& arm_type,
 
 		 if(arm_type.CompareNoCase(ARM_A) == 0)			dCH__OTR_OUT_MON__ARM_A_ACT->Set__DATA(STR__RETRACT);
 	else if(arm_type.CompareNoCase(ARM_B) == 0)			dCH__OTR_OUT_MON__ARM_B_ACT->Set__DATA(STR__RETRACT);
+
+	if(iActive__SIM_MODE > 0)
+	{
+		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		}
+		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
+		}
+	}
 }
 
 void  CObj__ATM_ROBOT_FUSION::
@@ -57,6 +87,18 @@ Set_ANI__ROBOT_ROTATE(const CString& arm_type,
 
 		dCH__OTR_OUT_MON__ARM_A_ACT->Set__DATA(STR__RETRACT);
 		dCH__OTR_OUT_MON__ARM_B_ACT->Set__DATA(STR__RETRACT);
+	}
+
+	if(iActive__SIM_MODE > 0)
+	{
+		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		}
+		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
+		}
 	}
 
 	_Set_ANI__ROBOT_ROTATE(arm_type, stn_name, stn_slot);

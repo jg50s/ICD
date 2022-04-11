@@ -450,16 +450,16 @@ LOOP_RETRY:
 
 	if(iSim_Flag > 0)
 	{
-		diEXT_CH__VAC_RB_RNE->Set__DATA(STR__OFF);
+		diEXT_CH__VAC_RB_RNE->Set__DATA(STR__ON);
 	}
 
-	int r_flag = diEXT_CH__VAC_RB_RNE->When__DATA(STR__OFF, 2);
+	int r_flag = diEXT_CH__VAC_RB_RNE->When__DATA(STR__ON, 2);
 	if(r_flag == 0)			return -11;
 
 	CString var_data;
 	diEXT_CH__VAC_RB_RNE->Get__DATA(var_data);
 
-	if(var_data.CompareNoCase(STR__OFF) != 0)
+	if(var_data.CompareNoCase(STR__ON) != 0)
 	{
 		int alarm_id = ALID__VAC_RB_NOT_RETRACTED;
 
@@ -490,16 +490,16 @@ LOOP_RETRY:
 
 	if(iSim_Flag > 0)
 	{
-		diEXT_CH__ATM_RB_RNE->Set__DATA(STR__OFF);
+		diEXT_CH__ATM_RB_RNE->Set__DATA(STR__ON);
 	}
 
-	int r_flag = diEXT_CH__ATM_RB_RNE->When__DATA(STR__OFF, 2);
+	int r_flag = diEXT_CH__ATM_RB_RNE->When__DATA(STR__ON, 2);
 	if(r_flag < 0)			return -11;
 
 	CString var_data;
 	diEXT_CH__ATM_RB_RNE->Get__DATA(var_data);
 
-	if(var_data.CompareNoCase(STR__OFF) != 0)
+	if(var_data.CompareNoCase(STR__ON) != 0)
 	{
 		int alarm_id = ALID__ATM_RB_NOT_RETRACTED;
 

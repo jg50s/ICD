@@ -63,21 +63,24 @@ private:
 	CX__VAR_STRING_CTRL  sEXT_CH__OBJ_STATUS;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_SLOT_MAX;
 
-	// ALx OBJECT ...
+	// OBJ - ALx ...
+	bool bActive__AL1_USE;
 	CII_EXT_OBJECT__CTRL *pALx__OBJ_CTRL;
+	
+	CString sDATA__AL_MODE__INIT;
+	CString sDATA__AL_MODE__ALIGN;
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__ALx_PARA_SLOT;
 	CX__VAR_STRING_CTRL  sEXT_CH__ALx_PARA_CCD_POS;
 	//
 
 	//------------------------------------------------------------------------------
-	// INIT ----- 
 	CString sMODE__INIT;
 	int  Call__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
-	// ALIGN -----
 	CString sMODE__ALIGN;
 	int  Call__ALIGN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	//
 
 
 public:

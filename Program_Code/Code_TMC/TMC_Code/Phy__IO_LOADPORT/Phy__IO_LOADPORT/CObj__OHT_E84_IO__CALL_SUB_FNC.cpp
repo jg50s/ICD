@@ -11,10 +11,8 @@ Fnc__INIT(CII_OBJECT__VARIABLE* p_variable,
 	return OBJ_AVAILABLE;
 }
 
-int  CObj__OHT_E84_IO::
-Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
-					  CII_OBJECT__ALARM* p_alarm, 
-					  const CString sz_ctrl_mode)
+int  CObj__OHT_E84_IO
+::Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const CString& active__pio_cmmd)
 {
 	// Read TP config
 	Get__Read_TP_Config();
@@ -68,17 +66,17 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 	nDo_Loop = OBJ_ABORT;
 	nzCS0_Alarm_Count = 0;
 	
-	if(iSIM_FLAG > 0)
+	if(iActive__SIM_MODE > 0)
 	{
-		if(sz_ctrl_mode.CompareNoCase("PREPLOAD") == 0)
+		if(active__pio_cmmd.CompareNoCase(_PIO_CMMD__LOAD_REQ) == 0)
 		{
-			diEXT_CH__PHY_LPx__CST_PLACE->Set__DATA(_OFF);
-			diEXT_CH__PHY_LPx__CST_PRESENT->Set__DATA(_OFF);
+			dEXT_CH__LPx_IO__FOUP_PLACED_DI->Set__DATA(_OFF);
+			dEXT_CH__LPx_IO__FOUP_PRESENT_DI->Set__DATA(_OFF);
 		}
-		else if(sz_ctrl_mode.CompareNoCase("UNLOAD") == 0)
+		else if(active__pio_cmmd.CompareNoCase(_PIO_CMMD__UNLOAD_REQ) == 0)
 		{
-			diEXT_CH__PHY_LPx__CST_PLACE->Set__DATA(_ON);
-			diEXT_CH__PHY_LPx__CST_PRESENT->Set__DATA(_ON);
+			dEXT_CH__LPx_IO__FOUP_PLACED_DI->Set__DATA(_ON);
+			dEXT_CH__LPx_IO__FOUP_PRESENT_DI->Set__DATA(_ON);
 		}
 
 		diEXT_CH__LPx__E84_CS_0->Set__DATA(_ON);
@@ -129,7 +127,7 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 		szFOUP_Sns = Is__FOUP_STATE_PIO();
 
 		// Load 때 Foup이 임의로 놓인 경우...
-		if(szFOUP_Sns.CompareNoCase("ON") == 0)
+		if(szFOUP_Sns.CompareNoCase(_ON) == 0)
 		{
 			// stop timer
 			if(nPresent_First > 0)
@@ -162,7 +160,7 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 				nFoup_None_First   = -1;
 			}
 
-			if(sz_ctrl_mode.CompareNoCase("PREPLOAD") == 0)
+			if(active__pio_cmmd.CompareNoCase(_PIO_CMMD__LOAD_REQ) == 0)
 			{
 				nPlace_First     = -1;
 				nPresent_First   = -1;
@@ -186,21 +184,24 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 					szUser_Log.Format("===> Before Scenario Start Wait or Started, Now Foup[EXIST] == ERROR Occur");
 					Fnc__E84_LOG(szUser_Log);
 					
-					int alarm_id = ALID__LP_E84A_LOAD_FOUP_EXIST;
-					CString r_act;
+					// ...
+					{
+						int alarm_id = ALID__LP_E84A_LOAD_FOUP_EXIST;
+						CString r_act;
 					
-					p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
-					nFoup_Exist_First = -1;
+						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
+						nFoup_Exist_First = -1;
 					
-					     if(r_act.CompareNoCase("RETRY")    == 0)			return OBJ_RETRY;
-					else if(r_act.CompareNoCase("COMPLETE") == 0)			return SEQ_COMPLETE;
-
-					return OBJ_ABORT;
+						     if(r_act.CompareNoCase(ACT__RETRY)    == 0)			return OBJ_RETRY;
+						else if(r_act.CompareNoCase(ACT__COMPLETE) == 0)			return SEQ_COMPLETE;
+	
+						return OBJ_ABORT;
+					}
 				}
 			}
 		}
 		// Foup이 사라진 경우 !!
-		else if(szFOUP_Sns.CompareNoCase("OFF") == 0)
+		else if(szFOUP_Sns.CompareNoCase(_OFF) == 0)
 		{
 			// stop timer
 			if(nPresent_First > 0)
@@ -233,7 +234,7 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 				nFoup_Exist_First   = -1;
 			}
 
-			if(sz_ctrl_mode.CompareNoCase("UNLOAD") == 0)
+			if(active__pio_cmmd.CompareNoCase(_PIO_CMMD__UNLOAD_REQ) == 0)
 			{
 				nPlace_First      = -1;
 				nPresent_First    = -1;
@@ -252,27 +253,30 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 				}
 				else if(LP_None_Timer->Get__CURRENT_TIME() <= 0.1)
 				{
-					Set__HOAVBL("OFF");
+					Set__HOAVBL(_OFF);
 					
 					szUser_Log.Format("===> Before Scenario Start Wait or Started, Now FOUP [NONE] == ERROR Occur");
 					Fnc__E84_LOG(szUser_Log);
 					
-					int alarm_id = ALID__LP_E84A_UNLOAD_FOUP_NONE;
-					CString r_act;
+					// ...
+					{
+						int alarm_id = ALID__LP_E84A_UNLOAD_FOUP_NONE;
+						CString r_act;
 					
-					p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
-					nFoup_None_First = -1;
+						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
+						nFoup_None_First = -1;
+						
+						     if(r_act.CompareNoCase(ACT__RETRY)    == 0)		return OBJ_RETRY;
+						else if(r_act.CompareNoCase(ACT__COMPLETE) == 0)		return SEQ_COMPLETE;
 					
-					     if(r_act.CompareNoCase("RETRY")    == 0)		return OBJ_RETRY;
-					else if(r_act.CompareNoCase("COMPLETE") == 0)		return SEQ_COMPLETE;
-					
-					return OBJ_ABORT;
+						return OBJ_ABORT;
+					}
 				}
 			}
 		}
-		else if(szFOUP_Sns.CompareNoCase("UNKNOWN") == 0)
+		else if(szFOUP_Sns.CompareNoCase(_UNKNOWN) == 0)
 		{
-			if(diEXT_CH__PHY_LPx__CST_PRESENT->Check__DATA("ON") > 0)
+			if(dEXT_CH__LPx_IO__FOUP_PRESENT_DI->Check__DATA(_ON) > 0)
 			{
 				nPlace_First      = -1;
 				nFoup_None_First  = -1;
@@ -291,24 +295,26 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 				}
 				else if(LP_Present_Timer->Get__CURRENT_TIME() <= 0.1)
 				{
+					Set__HOAVBL(_OFF);
+
 					szUser_Log.Format("===> Before Scenario Start Wait or Started, PR[ON] Async Timer[%.f sec] End - Alarm Occur", dblfoup_logic_time);
 					Fnc__E84_LOG(szUser_Log);
 
-					// ... OFF
-					Set__HOAVBL("OFF");
-
-					int alarm_id = ALID__LP_E84A_PRESENT_SNS_ON;
-					CString r_act;
+					// ...
+					{
+						int alarm_id = ALID__LP_E84A_PRESENT_SNS_ON;
+						CString r_act;
 					
-					p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
+						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
+						
+						     if(r_act.CompareNoCase(ACT__RETRY)    == 0)		return OBJ_RETRY;
+						else if(r_act.CompareNoCase(ACT__COMPLETE) == 0)		return SEQ_COMPLETE;
 					
-					     if(r_act.CompareNoCase("RETRY")    == 0)		return OBJ_RETRY;
-					else if(r_act.CompareNoCase("COMPLETE") == 0)		return SEQ_COMPLETE;
-					
-					return OBJ_ABORT;
+						return OBJ_ABORT;
+					}
 				}
 			}
-			else if(diEXT_CH__PHY_LPx__CST_PLACE->Check__DATA("ON") > 0)
+			else if(dEXT_CH__LPx_IO__FOUP_PLACED_DI->Check__DATA(_ON) > 0)
 			{
 				nPresent_First = -1;
 				nFoup_None_First  = -1;
@@ -339,8 +345,8 @@ Fnc__CS_VALID_WAITING(CII_OBJECT__VARIABLE* p_variable,
 
 					p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, szUser_Log, r_act);
 
-					     if(r_act.CompareNoCase("RETRY")    == 0)		return OBJ_RETRY;
-					else if(r_act.CompareNoCase("COMPLETE") == 0)		return SEQ_COMPLETE;
+					     if(r_act.CompareNoCase(ACT__RETRY)    == 0)		return OBJ_RETRY;
+					else if(r_act.CompareNoCase(ACT__COMPLETE) == 0)		return SEQ_COMPLETE;
 					
 					return OBJ_ABORT;
 				}
@@ -813,7 +819,7 @@ Fnc__LOAD_PIO(CII_OBJECT__VARIABLE* p_variable,
  	
 	LP_TP_Timer->STOP();
 	
-	//5. Check FOUP Sns : TP3, LREQ -> Off	
+	// 5. Check FOUP Sns : TP3, LREQ -> Off	
 	sLog_Msg.Format("[E84] PIO_LOAD Start...(TP3:%d)", m_nTP3);
 	Fnc__E84_LOG(sLog_Msg);
 
@@ -823,7 +829,7 @@ Fnc__LOAD_PIO(CII_OBJECT__VARIABLE* p_variable,
 
 	do 
 	{
-		if(Is__FOUP_STATE() > 0)
+		if(Is__FOUP_EXIST() > 0)
 		{
 			status = 1;
 
@@ -1139,12 +1145,15 @@ Fnc__LOAD_PIO(CII_OBJECT__VARIABLE* p_variable,
  	
 	LP_TP_Timer->STOP();
 
-	dCH__OTR_OUT_dLP_PIO_TRANSFER->Set__DATA(_NO);
+	dEXT_CH__LINK_PIO_TRANSFER_STATE->Set__DATA(_NO);
 
-	if(status < 0)	sMsg = "LOAD Failed..";
-	else			sMsg = "LOAD Completed..";
-	Fnc__APP_MSG(sMsg);	Fnc__E84_LOG(sMsg);
-
+	// ...
+	{
+		if(status < 0)			sMsg = "LOAD Failed..";
+		else					sMsg = "LOAD Completed..";
+	
+		Fnc__APP_MSG(sMsg);	Fnc__E84_LOG(sMsg);
+	}
 	return SEQ_COMPLETE;
 }
 
@@ -1174,7 +1183,7 @@ Fnc__UNLOAD_PIO(CII_OBJECT__VARIABLE* p_variable,
 				return -1;
 			}
 
-			if(diEXT_CH__PHY_LPx__CLAMP_STS->Check__DATA("UNCLAMP") > 0)
+			if(dEXT_CH__LPx_INFO__CLAMP_STATE->Check__DATA(_UNCLAMP) > 0)
 			{
 				break;
 			}
@@ -1417,8 +1426,8 @@ Fnc__UNLOAD_PIO(CII_OBJECT__VARIABLE* p_variable,
 	LP_TP_Timer->STOP();
 
 	// Check the UNCLAMP
-    //3. Check Unclamp , READY -> On  
-	if(diEXT_CH__PHY_LPx__CLAMP_STS->Check__DATA("UNCLAMP") < 0)
+    // 3. Check Unclamp , READY -> On  
+	if(dEXT_CH__LPx_INFO__CLAMP_STATE->Check__DATA(_UNCLAMP) < 0)
 	{
 		Set__HOAVBL("OFF");
 		
@@ -1876,14 +1885,18 @@ Fnc__UNLOAD_PIO(CII_OBJECT__VARIABLE* p_variable,
 		Wait_Time->POLL(dblCheck_Polling_time);
 	} 
 	while(status < 0);
+
  	LP_TP_Timer->STOP();
 
-	dCH__OTR_OUT_dLP_PIO_TRANSFER->Set__DATA(_NO);
+	dEXT_CH__LINK_PIO_TRANSFER_STATE->Set__DATA(_NO);
 
-	if(status < 0)	sMsg = "UNLOAD Failed..";
-	else			sMsg = "UNLOAD Completed..";
-	Fnc__APP_MSG(sMsg);	Fnc__E84_LOG(sMsg);
+	// ...
+	{
+		if(status < 0)		sMsg = "UNLOAD Failed..";
+		else				sMsg = "UNLOAD Completed..";
 	
+		Fnc__APP_MSG(sMsg);	Fnc__E84_LOG(sMsg);
+	}
 	return SEQ_COMPLETE;
 }
 
@@ -1914,7 +1927,7 @@ Active_Signal_Check(const bool active__load_seq,
 					CString& str_log, 
 					CString& valid_chk)
 {
-	if(iSIM_FLAG > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		if(tp_time.CompareNoCase("START") == 0)			// CS0[ON], VALID[ON] <--> Before Set... L_REQ[ON]
 		{
@@ -1980,13 +1993,13 @@ Active_Signal_Check(const bool active__load_seq,
 
 			if(active__load_seq)
 			{
-				diEXT_CH__PHY_LPx__CST_PLACE->Set__DATA(_ON);
-				diEXT_CH__PHY_LPx__CST_PRESENT->Set__DATA(_ON);
+				dEXT_CH__LPx_IO__FOUP_PLACED_DI->Set__DATA(_ON);
+				dEXT_CH__LPx_IO__FOUP_PRESENT_DI->Set__DATA(_ON);
 			}
 			else
 			{
-				diEXT_CH__PHY_LPx__CST_PLACE->Set__DATA(_OFF);
-				diEXT_CH__PHY_LPx__CST_PRESENT->Set__DATA(_OFF);
+				dEXT_CH__LPx_IO__FOUP_PLACED_DI->Set__DATA(_OFF);
+				dEXT_CH__LPx_IO__FOUP_PRESENT_DI->Set__DATA(_OFF);
 			}
 		}
 		else if(tp_time.CompareNoCase("TP4") == 0)		// L_REQ[OFF] <--> TR_REQ[OFF], BUSY[OFF], COMPT[ON]
@@ -2286,24 +2299,23 @@ Set__READY(const CString& ch_data)
 }
 
 int	CObj__OHT_E84_IO::
-Is__FOUP_STATE()
+Is__FOUP_EXIST()
 {
-	if(diEXT_CH__PHY_LPx__CST_EXIST->Check__DATA(_EXIST) > 0)		return 1;
+	if(dEXT_CH__LPx_INFO__FOUP_STATE->Check__DATA(_EXIST) > 0)		return 1;
 	else															return -1;
 }
-
 int	CObj__OHT_E84_IO::
 Is__FOUP_NONE()
 {
-	if(diEXT_CH__PHY_LPx__CST_EXIST->Check__DATA(_NONE) > 0)		return 1;
+	if(dEXT_CH__LPx_INFO__FOUP_STATE->Check__DATA(_NONE) > 0)		return 1;
 	else															return -1;
 }
 
 CString	CObj__OHT_E84_IO::
 Is__FOUP_STATE_PIO()
 {
-	CString ch_data1 = diEXT_CH__PHY_LPx__CST_PLACE->Get__STRING();
-	CString ch_data2 = diEXT_CH__PHY_LPx__CST_PRESENT->Get__STRING();;
+	CString ch_data1 = dEXT_CH__LPx_IO__FOUP_PLACED_DI->Get__STRING();
+	CString ch_data2 = dEXT_CH__LPx_IO__FOUP_PRESENT_DI->Get__STRING();;
 
 	if((ch_data1.CompareNoCase(_ON) == 0)
 	&& (ch_data2.CompareNoCase(_ON) == 0))
@@ -2383,7 +2395,7 @@ Set__AllOff_Except_ES()
 		Set__HOAVBL(_OFF);
 	}
 
-	if(diEXT_CH__LPx__LT_CURTAIN->Check__DATA(_ON) > 0)
+	if(dEXT_CH__LPx_IO__LIGHT_CURTAIN_DI->Check__DATA(_ON) > 0)
 	{	
 		Set__ES(_OFF);
 	}
@@ -2433,14 +2445,14 @@ Fnc__CLAMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const CS
 	int state = Is__ONLINE(p_variable, p_alarm);
 	if(state > 0)
 	{
-		doEXT_CH__LPx__UNCLAMP->Set__DATA("OFF");
+		dEXT_CH__LPx_IO__UNCLAMP_DO->Set__DATA(_OFF);
 	}
 
 	if(state > 0)
 	{
-		state = CMD_STAMP("ON", "CLAMP",
-						  doEXT_CH__LPx__CLAMP.Get__PTR(), 
-						  diEXT_CH__LPx__CLAMP.Get__PTR(), 
+		state = CMD_STAMP(_ON, _CLAMP,
+						  dEXT_CH__LPx_IO__CLAMP_DO.Get__PTR(), 
+						  dEXT_CH__LPx_IO__CLAMP_DI.Get__PTR(), 
 						  p_alarm);
 	}
 	
@@ -2474,21 +2486,21 @@ Fnc__UNCLAMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const 
 
 	if(state > 0)
 	{
-		doEXT_CH__LPx__CLAMP->Set__DATA("OFF");
+		dEXT_CH__LPx_IO__CLAMP_DO->Set__DATA(_OFF);
 	}
 
 	if(state > 0)
 	{
-		state = CMD_STAMP("ON", "UNCLAMP", 
-						  doEXT_CH__LPx__UNCLAMP.Get__PTR(), 
-						  diEXT_CH__LPx__UNCLAMP.Get__PTR(), 
+		state = CMD_STAMP(_ON, _UNCLAMP, 
+						  dEXT_CH__LPx_IO__UNCLAMP_DO.Get__PTR(), 
+						  dEXT_CH__LPx_IO__UNCLAMP_DI.Get__PTR(), 
 						  p_alarm);
 	}
 
-	if( (state > 0) && (iSIM_FLAG > 0) )
+	if( (state > 0) && (iActive__SIM_MODE > 0) )
 	{
-		diEXT_CH__LPx__CLAMP->Set__DATA("OFF");
-		diEXT_CH__LPx__UNCLAMP->Set__DATA("ON");
+		dEXT_CH__LPx_IO__CLAMP_DI->Set__DATA(_OFF);
+		dEXT_CH__LPx_IO__UNCLAMP_DI->Set__DATA(_ON);
 	}
 
 	if(state < 0)	sMsg = "UNCLAMP Failed..";
@@ -2508,7 +2520,7 @@ Is__LT_BROKEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 	CString str_recovery;
 	CString r_act;
 
-	if(diEXT_CH__LPx__LT_CURTAIN->Check__DATA("On") > 0)
+	if(dEXT_CH__LPx_IO__LIGHT_CURTAIN_DI->Check__DATA(_ON) > 0)
 	{
 		Set__ES("OFF");
 		Set__HOAVBL("Off");
@@ -2532,7 +2544,7 @@ Is__LT_BROKEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 		if(Is__LP_AUTO_MODE() < 0)		return OBJ_ABORT;
 
 	} 
-	while(diEXT_CH__LPx__LT_CURTAIN->Check__DATA("On") > 0);
+	while(dEXT_CH__LPx_IO__LIGHT_CURTAIN_DI->Check__DATA(_ON) > 0);
 
 	Fnc__E84_LOG("LT Cleared..");
 

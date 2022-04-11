@@ -53,10 +53,10 @@ Set_ANI__ROBOT_ALL_RETRACT()
 		for(int i=0; i<iLLx_SIZE; i++)
 		{
 			if(bActive__LLx_ARM_RNE_SNS[i])
-				dEXT_CH__LLx_ARM_RNE_SNS[i]->Set__DATA(STR__None);
+				dEXT_CH__LLx_ARM_RNE_SNS[i]->Set__DATA(sDATA__LLx_ARM_RNE_ON_STS[i]);			
 
-			if(bActive__LLx_LOAD_ENABLE[i])
-				dEXT_CH__LLx_LOAD_ENABLE[i]->Set__DATA(STR__None);
+			if(bActive__LLx_LOAD_ENABLE_SNS[i])
+				dEXT_CH__LLx_LOAD_ENABLE_SNS[i]->Set__DATA(sDATA__LLx_LOAD_ENABLE_OFF_STS[i]);
 		}
 	}
 }

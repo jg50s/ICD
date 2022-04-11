@@ -172,6 +172,10 @@ int CObj__VAC_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_PHY__IO_CH__HYPER_TERMINAL_LOCK, obj_name, var_name);
 	}
 
+	// ...
+	{
+		dCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 

@@ -113,9 +113,10 @@ enum COMMAND_ENUM
 #define CMD_TIMEOUT				20
 #define NOT_FULL_AUTO			3
 
+/*
 #define STR_MODE_PREPLOAD		"PREPLOAD"
 #define STR_MODE_UNLOAD 		"UNLOAD"
-
+*/
 
 // ...
 #define	LP_SLOT_MAX				25

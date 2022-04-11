@@ -27,23 +27,21 @@ LOOP_RETRY:
 	// 2. TM Chamber Pressure Status...
 	dEXT_CH__PHY_TM__PRESS_STS->Get__DATA(str_TM_prss_sts);
 
-	if((str_PMx_prss_sts.CompareNoCase("ATM") != 0) 
-		|| (str_TM_prss_sts.CompareNoCase("ATM")  != 0))
+	if((str_PMx_prss_sts.CompareNoCase(STR__ATM) != 0) 
+	|| (str_TM_prss_sts.CompareNoCase(STR__ATM)  != 0))
 	{
 		CString alarm_msg;
 		CString alarm_bff;
 		CString r_act;
 
-		alarm_msg.Format("The pressure of PM%d is [%s] status.\n",
-			pmc_id, str_PMx_prss_sts);
+		alarm_msg.Format("The pressure of PM%d is [%s] status.\n", pmc_id, str_PMx_prss_sts);
 
-		alarm_bff.Format("The pressure of TM is [%s] status.\n",
-			str_TM_prss_sts);
+		alarm_bff.Format("The pressure of TM is [%s] status.\n", str_TM_prss_sts);
 		alarm_msg += alarm_bff;
 
 		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,alarm_msg,r_act);
 
-		if(r_act.CompareNoCase("RETRY") == 0)
+		if(r_act.CompareNoCase(ACT__RETRY) == 0)
 		{	
 			goto LOOP_RETRY;
 		}
@@ -75,23 +73,21 @@ LOOP_RETRY:
 	// 2. TM Chamber Pressure Status...
 	dEXT_CH__PHY_TM__PRESS_STS->Get__DATA(str_TM_prss_sts);
 
-	if((str_PMx_prss_sts.CompareNoCase("VAC") != 0) 
-	|| (str_TM_prss_sts.CompareNoCase("VAC")  != 0))
+	if((str_PMx_prss_sts.CompareNoCase(STR__VAC) != 0) 
+	|| (str_TM_prss_sts.CompareNoCase(STR__VAC)  != 0))
 	{
 		CString alarm_msg;
 		CString alarm_bff;
 		CString r_act;
 
-		alarm_msg.Format("The pressure of PM%d is [%s] status.\n",
-			pmc_id, str_PMx_prss_sts);
+		alarm_msg.Format("The pressure of PM%d is [%s] status.\n", pmc_id, str_PMx_prss_sts);
 
-		alarm_bff.Format("The pressure of TM is [%s] status.\n",
-			str_TM_prss_sts);
+		alarm_bff.Format("The pressure of TM is [%s] status.\n", str_TM_prss_sts);
 		alarm_msg += alarm_bff;
 
 		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,alarm_msg,r_act);
 
-		if(r_act.CompareNoCase("RETRY") == 0)
+		if(r_act.CompareNoCase(ACT__RETRY) == 0)
 		{	
 			goto LOOP_RETRY;
 		}
@@ -122,13 +118,14 @@ LOOP_RETRY:
 	dCH__PRESS_STATUS[pm_index]->Get__DATA(str_pmc_prss_sts);
 	dEXT_CH__PHY_TM__PRESS_STS->Get__DATA(str_tmc_prss_sts);
 
-	if((str_pmc_prss_sts.CompareNoCase("VAC") == 0) 
-		&& (str_tmc_prss_sts.CompareNoCase("VAC") == 0))
+	if((str_pmc_prss_sts.CompareNoCase(STR__VAC) == 0) 
+	&& (str_tmc_prss_sts.CompareNoCase(STR__VAC) == 0))
 	{
 		return 1;
 	}
-	if((str_pmc_prss_sts.CompareNoCase("ATM") == 0) 
-		&& (str_tmc_prss_sts.CompareNoCase("ATM") == 0))
+	
+	if((str_pmc_prss_sts.CompareNoCase(STR__ATM) == 0) 
+	&& (str_tmc_prss_sts.CompareNoCase(STR__ATM) == 0))
 	{
 		return 1;
 	}
@@ -145,21 +142,19 @@ LOOP_RETRY:
 		alarm_bff.Format("TMC's pressure and PM%1d's pressure must be same. \n", pmc_id);
 		alarm_msg += alarm_bff;
 
-		alarm_bff.Format("The pressure of PM%d is [%s] status.\n",
-			pmc_id, str_pmc_prss_sts);
+		alarm_bff.Format("The pressure of PM%d is [%s] status.\n", pmc_id, str_pmc_prss_sts);
 		alarm_msg += alarm_bff;
 
-		alarm_bff.Format("The pressure of TM is [%s] status.\n",
-			str_tmc_prss_sts);
+		alarm_bff.Format("The pressure of TM is [%s] status.\n", str_tmc_prss_sts);
 		alarm_msg += alarm_bff;
 
 		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,alarm_msg,r_act);
 
-		if(r_act.CompareNoCase("RETRY") == 0)
+		if(r_act.CompareNoCase(ACT__RETRY) == 0)
 		{	
 			goto LOOP_RETRY;
 		}
-		if(r_act.CompareNoCase("IGNORE") == 0)
+		if(r_act.CompareNoCase(ACT__IGNORE) == 0)
 		{
 			return 1;
 		}
@@ -201,19 +196,19 @@ int  CObj__PMC_SIMPLE
 
 LOOP_RETRY:
 
-	if(bActive__SIM_MODE)
+	if(iActive__SIM_MODE > 0)
 	{
-		diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Set__DATA("None");
+		diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Set__DATA(STR__ON);
 	}
 
 	// 1. VAC Robot Arm Retract Status. !!
-	int r_ret = diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->When__DATA("None", 2);
+	int r_ret = diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->When__DATA(STR__ON, 2);
 	if(r_ret == 0)
 	{
 		return OBJ_ABORT;
 	}
 
-	if(diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Check__DATA("None") < 0)
+	if(diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Check__DATA(STR__ON) < 0)
 	{
 		int alarm_id = ALID__VAC_RB_NOT_RETRACTED;
 
@@ -331,7 +326,7 @@ int  CObj__PMC_SIMPLE
 		return -1;
 	}
 
-	if(bActive__SIM_MODE)
+	if(iActive__SIM_MODE > 0)
 	{
 		SCX__TIMER_CTRL sim_timer;
 
@@ -379,7 +374,7 @@ int  CObj__PMC_SIMPLE
 			break;
 		}
 
-		if(dEXT_CH__CFG_PMx_SV_USE[pm_index]->Check__DATA("NO") > 0)
+		if(dEXT_CH__CFG_PMx_SV_USE[pm_index]->Check__DATA(STR__NO) > 0)
 		{
 			r_ret = 1;
 			break;
@@ -441,7 +436,7 @@ int  CObj__PMC_SIMPLE
 		return -1;
 	}
 
-	if(bActive__SIM_MODE)
+	if(iActive__SIM_MODE > 0)
 	{
 		SCX__TIMER_CTRL sim_timer;
 
@@ -494,7 +489,7 @@ int  CObj__PMC_SIMPLE
 			break;
 		}
 
-		if(dEXT_CH__CFG_PMx_SV_USE[pm_index]->Check__DATA("NO") > 0)
+		if(dEXT_CH__CFG_PMx_SV_USE[pm_index]->Check__DATA(STR__NO) > 0)
 		{
 			r_ret = 1;
 			break;

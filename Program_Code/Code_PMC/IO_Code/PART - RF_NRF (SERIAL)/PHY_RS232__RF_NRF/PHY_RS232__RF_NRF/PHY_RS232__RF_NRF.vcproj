@@ -298,6 +298,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__NXA_PULSE__CALL_PARA_RCP.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NXA_PULSE__CALL_PARA_USER.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__NXA_PULSE__DEF.h"
 					>
 				</File>

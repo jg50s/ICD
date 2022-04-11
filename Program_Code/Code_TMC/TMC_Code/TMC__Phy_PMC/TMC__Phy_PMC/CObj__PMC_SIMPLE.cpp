@@ -556,6 +556,7 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString def_name;
 	CString def_data;
 	CString str_name;
+	CString ch_name;
 	CString obj_name;
 	CString var_name;
 	int i;
@@ -599,16 +600,19 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	}
 
 	// PHY_TM : TMÀÇ Pressure Status (ATM, VAC, BTW)
-	str_name.Format("VAR__PHY_TM_PRESS_STS");
-	p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-	p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-	LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_TM__PRESS_STS, obj_name,var_name);
-
+	{
+		str_name.Format("VAR__PHY_TM_PRESS_STS");
+		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_TM__PRESS_STS, obj_name,var_name);
+	}
 	// PHY_TM : TMÀÇ Pressure torr
-	str_name.Format("VAR__PHY_TM_PRESS_TORR");
-	p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-	p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-	LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PHY_TM__PRESS_TORR, obj_name,var_name);
+	{
+		str_name.Format("VAR__PHY_TM_PRESS_TORR");
+		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PHY_TM__PRESS_TORR, obj_name,var_name);
+	}
 
 	// I/O OBJECT ...
 	{
@@ -651,23 +655,43 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		// VAC_RB ...
 		for(i=0; i<iPM_LIMIT; i++)
 		{
-			str_name.Format("VAR__IO_DI_VAC_RB_RNE_PM%1d", i+1);	//
+			int id = i + 1;
+
+			str_name.Format("VAR__IO_DI_VAC_RB_RNE_PM%1d", id);	
 			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_RB__RNE_PM_X[i], obj_name,var_name);
 		}
 
-		// TMC CHM ...
+		// DATA.ATM & VAC ...
 		{
-			str_name.Format("VAR__IO_DI_TM_VAC_SNS");	//
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__TMC__VAC_SNS, obj_name,var_name);
+			def_name = "DATA.ATM_ON";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__ATM_ON = def_data;
 
-			str_name.Format("VAR__IO_DI_TM_ATM_SNS");	//
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__TMC__ATM_SNS, obj_name,var_name);
+			def_name = "DATA.ATM_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__ATM_OFF = def_data;
+
+			//
+			def_name = "DATA.VAC_ON";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__VAC_ON = def_data;
+
+			def_name = "DATA.VAC_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__VAC_OFF = def_data;
+		}
+
+		// ARM_RNE.STATE ...
+		{
+			def_name = "DATA.RNE_ON";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__RNE_ON = def_data;
+
+			def_name = "DATA.RNE_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__RNE_OFF = def_data;
 		}
 	}
 
@@ -675,9 +699,16 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		SCX__SEQ_INFO x_seq_info;
 
-		bActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
+	if(iActive__SIM_MODE > 0)
+	{
+		for(i=0; i<iPM_LIMIT; i++)
+		{
+			diEXT_CH__VAC_RB__RNE_PM_X[i]->Set__DATA(sDATA__RNE_ON);
+		}
+	}
 	return 1;
 }
 

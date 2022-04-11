@@ -17,6 +17,8 @@ private:
 	SCX__USER_LOG_CTRL xAPP_LOG_CTRL;
 	int iFlag__APP_LOG;
 
+	int iActive__SIM_MODE;
+
 
 	//-------------------------------------------------------------------------
 	//  INTERNAL PROPERTY
@@ -195,6 +197,18 @@ private:
 	CX__VAR_DIGITAL_CTRL dEXT_CH__SIDE_STORAGE2_SLOT_STATUS[CFG_LPx__SLOT_SIZE];
 	CX__VAR_STRING_CTRL  sEXT_CH__SIDE_STORAGE2_SLOT_TITLE[CFG_LPx__SLOT_SIZE];
 
+	// ARM_RNE.SENSOR ...
+	bool bActive__ROBOT_RNE_SNS__ARM_A;
+	bool bActive__ROBOT_RNE_SNS__ARM_B;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__ROBOT_RNE_SNS__ARM_A;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__ROBOT_RNE_SNS__ARM_B;
+
+	// ARM_RNE.STATE ...
+	CString sDATA__RNE_ON;
+	CString sDATA__RNE_OFF;
+	//
+
 
 	//-------------------------------------------------------------------------
 	CString sMODE__INIT;
@@ -219,7 +233,8 @@ private:
 					CII_OBJECT__ALARM* p_alarm,
 					const CString& arm_type,
 					const CString& stn_name,
-					const CString& stn_slot);
+					const CString& stn_slot,
+					const bool active__align_pick);
 
 	int  Fnc__ACTION(const CString& arm_type,
 					 const CString& stn_name,

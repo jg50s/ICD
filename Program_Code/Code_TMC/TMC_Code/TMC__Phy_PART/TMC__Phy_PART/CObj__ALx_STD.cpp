@@ -263,14 +263,44 @@ int CObj__ALx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__AL";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		pALx__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
-	
-		//
-		var_name = "PARA.STN.SLOT";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ALx_PARA_SLOT, obj_name,var_name);
+		if((obj_name.CompareNoCase("NO")   == 0)
+		|| (obj_name.CompareNoCase("NULL") == 0))
+		{
+			bActive__AL1_USE = false;
+		}
+		else
+		{
+			bActive__AL1_USE = true;
+		}
 
-		var_name = "PARA.CCD.POS";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ALx_PARA_CCD_POS, obj_name,var_name);
+		if(bActive__AL1_USE)
+		{
+			pALx__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			// LINK.MODE ...
+			{
+				def_name = "AL_MODE.INIT";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__AL_MODE__INIT = def_data;
+
+				def_name = "AL_MODE.ALIGN";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__AL_MODE__ALIGN = def_data;
+			}
+
+			// LINK.CHANNEL ...
+			{
+				def_name = "CH_AL.PARA_SLOT_ID";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ALx_PARA_SLOT, obj_name,var_name);
+
+				def_name = "CH_AL.PARA_CCD_POS";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ALx_PARA_CCD_POS, obj_name,var_name);
+			}
+		}
 	}
 
 	return 1;

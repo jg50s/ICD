@@ -73,25 +73,11 @@ int CObj__OHT_E84_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__ACTIVE_PIO_LOG, str_name);
 	}
 
-	// ...
+	// REPORT_PIO ...
 	{
-		str_name = "MON.ACTIVE.FA.AUTO";
-		STD__ADD_STRING(str_name);	
-		LINK__VAR_STRING_CTRL(sCH__MON_ACTIVE_FA_AUTO, str_name);
-
-		//
-		str_name = "INR.dE84.RUN.SNS";
+		str_name = "REPORT_PIO.E84_RUN.STATE";
 		STD__ADD_DIGITAL(str_name, "UNKNOWN RUN DONE STOP");
-		LINK__VAR_DIGITAL_CTRL(dCH__E84_RUN_SNS,str_name);
-
-		str_name.Format("OTR.OUT.MON.sTRANSFER.PIO.STATUS");
-		STD__ADD_DIGITAL(str_name, "NO YES");
-		LINK__VAR_DIGITAL_CTRL(dCH__OTR_OUT_dLP_PIO_TRANSFER,str_name);
-
-		//
-		str_name = "OTR.IN.dLP.MODE";
-		STD__ADD_DIGITAL(str_name, "LOAD UNLOAD");			// , "LOAD UNLOAD"
-		LINK__VAR_DIGITAL_CTRL(dCH__OTR_IN_LP_MODE,str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__REPORT_PIO_E84_RUN_STATE, str_name);
 	}
 
 	// ...
@@ -598,156 +584,6 @@ int CObj__OHT_E84_IO::__Define__USER_FUNCTION(CII_DEFINE__FUNCTION *p_fnc_ctrl)
 //--------------------------------------------------------------------------------
 int CObj__OHT_E84_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	CString def_name;
-	CString def_data;
-	CString str_name;
-	CString obj_name;
-
-	// OBJ : PHY_LPx ...
-	{
-		def_name = "PHY.LP";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		pPHY_IO_LPx__OBJ = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
-
-		// LPx OBJ STS ...
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__PHY_OBJ_LP_STS", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PHY_LPx__STS, obj_name,str_name);
-
-		// LPx OBJ MODE ...
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__PHY_OBJ_LP_MODE", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PHY_LPx__MODE, obj_name,str_name);
-
-		// CST EXIST ...
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__PHY_OBJ_IO_DI_CST_EXIST", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PHY_LPx__CST_EXIST, obj_name,str_name);
-
-		// CLAMP STS ...
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__PHY_OBJ_IO_DI_CLAMP_STS", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PHY_LPx__CLAMP_STS, obj_name,str_name);
-	}
-
-	// OBJ : I/O ...
-	{
-		//.. CST PLACE
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_FOUP_PLACED", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PHY_LPx__CST_PLACE, obj_name,str_name);
-
-		//.. CST PRESENT
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_FOUP_PRESENT", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PHY_LPx__CST_PRESENT, obj_name,str_name);
-
-		// DO
-		def_name.Format("VAR__IO_DO_CLAMP");
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__CLAMP, obj_name,str_name);
-
-		def_name.Format("VAR__IO_DO_UNCLAMP");
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__UNCLAMP, obj_name,str_name);
-
-		// DI
-		def_name.Format("VAR__IO_DI_CLAMP");
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__CLAMP, obj_name,str_name);
-
-		def_name.Format("VAR__IO_DI_UNCLAMP");
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__UNCLAMP, obj_name,str_name);
-
-		// DI
-		def_name.Format("VAR__IO_DI_LT_CURTAIN");
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__LT_CURTAIN, obj_name,str_name);
-
-		// E84 PIO CHANNEL LINK !!!
-		// P(SYSTEM) -> A(OHT)
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_LREQ", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_L_REQ, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_UREQ", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_U_REQ, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_NC1", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_NC1, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_READY", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_READY, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_NC2", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_NC2, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_NC3", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_NC3, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_HO_AVBL", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_HO_AVBL, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_ES", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_ES, obj_name,str_name);
-
-		// di
-		// P(SYSTEM) <- A(OHT)
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_VALID", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_VALID, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_CS_0", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_CS_0, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_CS_1", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_CS_1, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_NC1", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_NC1, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_TR_REQ", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_TR_REQ, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_BUSY", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_BUSY, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_COMPT", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_COMPT, obj_name,str_name);
-
-		p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_CONT", def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, str_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_CONT, obj_name,str_name);
-	}
-
-	// ...
-	{
-		SCX__SEQ_INFO x_seq_info;
-
-		iSIM_FLAG = x_seq_info->Is__SIMULATION_MODE();
-	}
-
-	iFlag__PIO_LOG = 1;
-
 	// ...
 	{
 		CString file_name;
@@ -768,7 +604,7 @@ int CObj__OHT_E84_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xPIO_LOG_CTRL->WRITE__LOG("   START   \n");
 	}
 
-	iFlag__E84_LOG = 1;
+	iFlag__PIO_LOG = 1;
 
 	// ...
 	{
@@ -789,6 +625,182 @@ int CObj__OHT_E84_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xE84_LOG_CTRL->ENABLE__TIME_LOG();
 		xE84_LOG_CTRL->WRITE__LOG("   START   \n");
 	}
+
+	iFlag__E84_LOG = 1;
+
+	// ...
+	CString def_name;
+	CString ch_name;
+	CString obj_name;
+	CString var_name;
+
+	// LINK_PIO ...
+	{
+		def_name = "CH.LINK_PIO.TRANSFER_STATE";			// NO  YES
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LINK_PIO_TRANSFER_STATE, obj_name,var_name);
+
+		//
+		def_name = "CH.LINK_PIO.ACTIVE.RUN";				// OFF ON
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LINK_PIO_ACTIVE_RUN, obj_name,var_name);
+
+		def_name = "CH.LINK_PIO.ACTIVE.FA_AUTO";			// OFF ON
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LINK_PIO_ACTIVE_FA_AUTO, obj_name,var_name);
+
+		def_name = "CH.LINK_PIO.ACTIVE.LOAD_REQ";			// OFF ON
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LINK_PIO_ACTIVE_LOAD_REQ, obj_name,var_name);
+
+		def_name = "CH.LINK_PIO.ACTIVE.UNLOAD_REQ";			// OFF ON
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LINK_PIO_ACTIVE_UNLOAD_REQ, obj_name,var_name);
+	}
+
+	// OBJ : LPx_INFO ...
+	{
+		def_name = "CH.FOUP_STATE";      // NONE  EXIST
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_INFO__FOUP_STATE, obj_name,var_name);
+
+		def_name = "CH.CLAMP_STATE";     // CLAMP  UNCLAMP
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_INFO__CLAMP_STATE, obj_name,var_name);
+	}
+
+	// OBJ : IO ...
+	{
+		// DI 
+		{
+			def_name = "CH.FOUP_PLACED.DI";			// OFF  ON
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__FOUP_PLACED_DI, obj_name,var_name);
+
+			def_name = "CH.FOUP_PRESENT.DI";		// OFF  ON
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__FOUP_PRESENT_DI, obj_name,var_name);
+		}
+		
+		// CLAMP : DIO
+		{
+			def_name = "CH.CLAMP.DO";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__CLAMP_DO, obj_name,var_name);
+
+			def_name = "CH.UNCLAMP.DO";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__UNCLAMP_DO, obj_name,var_name);
+
+			//
+			def_name = "CH.CLAMP.DI";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__CLAMP_DI, obj_name,var_name);
+
+			def_name = "CH.UNCLAMP.DI";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__UNCLAMP_DI, obj_name,var_name);
+		}
+
+		// DI
+		{
+			def_name = "CH.LIGHT_CURTAIN.DI";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_IO__LIGHT_CURTAIN_DI, obj_name,var_name);
+		}
+
+		// P(SYSTEM) -> A(OHT) ...
+		{
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_LREQ", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_L_REQ, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_UREQ", ch_name);;
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_U_REQ, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_NC1", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_NC1, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_READY", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_READY, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_NC2", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_NC2, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_NC3", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_NC3, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_HO_AVBL", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_HO_AVBL, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DO_E84_ES", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LPx__E84_ES, obj_name,var_name);
+		}
+
+		// P(SYSTEM) <- A(OHT) ...
+		{
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_VALID", ch_name);;
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_VALID, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_CS_0", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_CS_0, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_CS_1", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_CS_1, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_NC1", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_NC1, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_TR_REQ", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_TR_REQ, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_BUSY", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_BUSY, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_COMPT", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_COMPT, obj_name,var_name);
+
+			p_ext_obj_create->Get__DEF_CONST_DATA("VAR__IO_DI_E84_CONT", ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx__E84_CONT, obj_name,var_name);
+		}
+	}
+
+	// ...
+	{
+		SCX__SEQ_INFO x_seq_info;
+
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
+	}
+
 	return 1;
 }
 

@@ -1053,10 +1053,10 @@ _Fnc__EXTENDSHUTTLE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,
 	{
 		CString cmd_name = "SHUTTLE.EXTEND";
 
-		CII__VAR_DIGITAL_CTRL* p_ch__di_on = doEXT_CH__LPx__SHUTTLE_OUT.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__di_on = diEXT_CH__LPx__SHUTTLE_OUT.Get__PTR();
 		CString str__di_on = STR__ON;
 
-		CII__VAR_DIGITAL_CTRL* p_ch__di_off = doEXT_CH__LPx__SHUTTLE_IN.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__di_off = diEXT_CH__LPx__SHUTTLE_IN.Get__PTR();
 		CString str__di_off = STR__OFF;
 
 		int r_flag = _Wait_CHECK(p_variable,p_alarm, cmd_name, p_ch__di_on,str__di_on, p_ch__di_off,str__di_off);
@@ -1139,10 +1139,10 @@ _Fnc__RETRACTSHUTTLE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm
 	{
 		CString cmd_name = "SHUTTLE.RETRACT";
 
-		CII__VAR_DIGITAL_CTRL* p_ch__di_on = doEXT_CH__LPx__SHUTTLE_IN.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__di_on = diEXT_CH__LPx__SHUTTLE_IN.Get__PTR();
 		CString str__di_on = STR__ON;
 
-		CII__VAR_DIGITAL_CTRL* p_ch__di_off = doEXT_CH__LPx__SHUTTLE_OUT.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__di_off = diEXT_CH__LPx__SHUTTLE_OUT.Get__PTR();
 		CString str__di_off = STR__OFF;
 
 		int r_flag = _Wait_CHECK(p_variable,p_alarm, cmd_name, p_ch__di_on,str__di_on, p_ch__di_off,str__di_off);
@@ -1219,7 +1219,7 @@ _Fnc__VACON(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const C
 	{
 		CString cmd_name = "VAC.ON";
 
-		CII__VAR_DIGITAL_CTRL* p_ch__di_on = doEXT_CH__LPx__DOOR_VAC.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__di_on = diEXT_CH__LPx__DOOR_VAC.Get__PTR();
 		CString str__di_on = STR__ON;
 
 		CII__VAR_DIGITAL_CTRL* p_ch__di_off = NULL;
@@ -1300,7 +1300,7 @@ _Fnc__VACOFF(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const 
 		CII__VAR_DIGITAL_CTRL* p_ch__di_on = NULL;
 		CString str__di_on = "";
 
-		CII__VAR_DIGITAL_CTRL* p_ch__di_off = doEXT_CH__LPx__DOOR_VAC.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__di_off = diEXT_CH__LPx__DOOR_VAC.Get__PTR();
 		CString str__di_off = STR__OFF;
 
 		int r_flag = _Wait_CHECK(p_variable,p_alarm, cmd_name, p_ch__di_on,str__di_on, p_ch__di_off,str__di_off);

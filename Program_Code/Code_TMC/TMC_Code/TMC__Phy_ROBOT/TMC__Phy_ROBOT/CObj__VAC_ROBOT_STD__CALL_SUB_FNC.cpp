@@ -40,7 +40,14 @@ Set_ANI__ROBOT_EXTEND(const CString& arm_type,
 
 	if(iActive_SIM > 0)
 	{
-		if(bActive__ROBOT_ARM_RNE_SNS)			dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(STR__Extend);
+		if(arm_type.CompareNoCase(_ARM_A) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_OFF);
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_OFF);
+		}
 	}
 }
 void  CObj__VAC_ROBOT_STD::
@@ -109,7 +116,8 @@ void  CObj__VAC_ROBOT_STD
 
 	if(iActive_SIM > 0)
 	{
-		if(bActive__ROBOT_ARM_RNE_SNS)			dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(STR__None);
+		if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
 	}
 }
 void  CObj__VAC_ROBOT_STD
@@ -135,7 +143,14 @@ void  CObj__VAC_ROBOT_STD
 
 	if(iActive_SIM > 0)
 	{
-		if(bActive__ROBOT_ARM_RNE_SNS)			dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(STR__None);
+		if(arm_type.CompareNoCase(_ARM_A) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
+		}
 	}
 }
 void  CObj__VAC_ROBOT_STD
@@ -218,6 +233,15 @@ void  CObj__VAC_ROBOT_STD
 			ani_str.Format("PM%1d%1d", id_left,id_right);
 		}
 	}
+	else
+	{
+		int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
+
+		if(ll_i >= 0)
+		{
+			ani_str.Format("%s-%s", stn_name,stn_slot);
+		}
+	}
 
 	if(ani_str.GetLength() > 0)
 	{
@@ -232,7 +256,19 @@ void  CObj__VAC_ROBOT_STD
 
 	if(iActive_SIM > 0)
 	{
-		if(bActive__ROBOT_ARM_RNE_SNS)			dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(STR__None);
+		if(arm_type.CompareNoCase(_ARM_A) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
+		}
+		else if(arm_type.CompareNoCase(_ARM_AB) == 0)
+		{
+			if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+			if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
+		}
 	}
 }
 

@@ -178,8 +178,8 @@ int CObj__NXA_PULSE
 	{
 		cmmd_id = _NXA_CMD__SET_PARAM_A1;
 
-		double para_freq = aCH__PARA_PARAM_A_FREQ->Get__VALUE();
-		double para_duty = aCH__PARA_PARAM_A_DUTY->Get__VALUE();
+		double para_freq = aCH__PARA_A_DRV_FREQ->Get__VALUE();
+		double para_duty = aCH__PARA_A_DRV_DUTY->Get__VALUE();
 
 		_DATA__3BYTE_INT data_freq;
 		_DATA__2BYTE_INT data_duty;
@@ -202,8 +202,8 @@ int CObj__NXA_PULSE
 	{
 		cmmd_id = _NXA_CMD__SET_PARAM_A2;
 
-		double para__on_time  = aCH__PARA_PARAM_A_ON_TIME->Get__VALUE();
-		double para__off_time = aCH__PARA_PARAM_A_OFF_TIME->Get__VALUE();
+		double para__on_time  = aCH__PARA_A_DRV_ON_TIME->Get__VALUE();
+		double para__off_time = aCH__PARA_A_DRV_OFF_TIME->Get__VALUE();
 
 		_DATA__3BYTE_INT data__on_time;
 		_DATA__2BYTE_INT data__off_time;
@@ -234,15 +234,15 @@ int CObj__NXA_PULSE
 		{
 			cmmd_id = _NXA_CMD__SET_PARAM_B;
 
-			para__on_time  = aCH__PARA_PARAM_B_ON_SHIFT_TIME->Get__VALUE();
-			para__off_time = aCH__PARA_PARAM_B_OFF_SHIFT_TIME->Get__VALUE();
+			para__on_time  = aCH__PARA_B_DRV_ON_SHIFT_TIME->Get__VALUE();
+			para__off_time = aCH__PARA_B_DRV_OFF_SHIFT_TIME->Get__VALUE();
 		}
 		else if(doCH__PARAM_C->Check__VARIABLE_NAME(var_name) > 0)
 		{
 			cmmd_id = _NXA_CMD__SET_PARAM_C;
 
-			para__on_time  = aCH__PARA_PARAM_C_ON_SHIFT_TIME->Get__VALUE();
-			para__off_time = aCH__PARA_PARAM_C_OFF_SHIFT_TIME->Get__VALUE();
+			para__on_time  = aCH__PARA_C_DRV_ON_SHIFT_TIME->Get__VALUE();
+			para__off_time = aCH__PARA_C_DRV_OFF_SHIFT_TIME->Get__VALUE();
 		}
 
 		_DATA__3BYTE_INT data__on_time;
@@ -268,22 +268,28 @@ int CObj__NXA_PULSE
 	{
 		cmmd_id = _NXA_CMD__SET_EXEC;
 
-		CString para__clk_a = dCH__PARA_CLK_A_CTRL->Get__STRING();
-		CString para__clk_b = dCH__PARA_CLK_B_CTRL->Get__STRING();
-		CString para__clk_c = dCH__PARA_CLK_C_CTRL->Get__STRING();
+		CString para__clk_a = dCH__PARA_A_DRV_CLK_CTRL->Get__STRING();
+		CString para__clk_b = dCH__PARA_B_DRV_CLK_CTRL->Get__STRING();
+		CString para__clk_c = dCH__PARA_C_DRV_CLK_CTRL->Get__STRING();
 
 		int db_i = 0;
 
 		if(set_data.CompareNoCase(STR__ON) == 0)
 		{
-			if(para__clk_a.CompareNoCase(STR__ON) == 0)			param_data[db_i++] = 0;		// Output
-			else												param_data[db_i++] = 3;		// Low.Fixed
+				 if(para__clk_a.CompareNoCase(STR__NORMAL)  == 0)		param_data[db_i++] = 0;		// Normal
+			else if(para__clk_a.CompareNoCase(STR__INVERSE) == 0)		param_data[db_i++] = 1;		// Inverse
+			else if(para__clk_a.CompareNoCase(STR__HIGH)    == 0)		param_data[db_i++] = 2;		// High
+			else														param_data[db_i++] = 3;		// Low.Fixed
 
-			if(para__clk_b.CompareNoCase(STR__ON) == 0)			param_data[db_i++] = 0;
-			else												param_data[db_i++] = 3;
+				 if(para__clk_b.CompareNoCase(STR__NORMAL)  == 0)		param_data[db_i++] = 0;		// Normal
+			else if(para__clk_b.CompareNoCase(STR__INVERSE) == 0)		param_data[db_i++] = 1;		// Inverse
+			else if(para__clk_b.CompareNoCase(STR__HIGH)    == 0)		param_data[db_i++] = 2;		// High
+			else														param_data[db_i++] = 3;		// Low.Fixed
 
-			if(para__clk_c.CompareNoCase(STR__ON) == 0)			param_data[db_i++] = 0;
-			else												param_data[db_i++] = 3;
+				 if(para__clk_c.CompareNoCase(STR__NORMAL)  == 0)		param_data[db_i++] = 0;		// Normal
+			else if(para__clk_c.CompareNoCase(STR__INVERSE) == 0)		param_data[db_i++] = 1;		// Inverse
+			else if(para__clk_c.CompareNoCase(STR__HIGH)    == 0)		param_data[db_i++] = 2;		// High
+			else														param_data[db_i++] = 3;		// Low.Fixed
 		}
 		else
 		{

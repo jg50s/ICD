@@ -8,12 +8,25 @@
 int CObj__RF_STD::
 Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	int loop_count = 0;
 	CString ch_data;
 
+	if(sCH__MON_RF_ON_TIME_START_DATE->Check__DATA("") > 0)
+	{
+		SYSTEMTIME st;
+		GetLocalTime(&st);
 
+		ch_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+		sCH__MON_RF_ON_TIME_START_DATE->Set__DATA(ch_data);
+	}
+
+	
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
 
 
 		// Range : Power ...
@@ -76,6 +89,44 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			{
 				ch_data = sEXT_CH__RF_AI_REFLECT_POWER->Get__STRING();
 				sCH__MON_IO_REFLECT_POWER->Set__DATA(ch_data);
+			}
+		}
+
+		// RF.ON TIME ...
+		if(loop_count == 1)
+		{
+			ch_data = sCH__MON_IO_FORWARD_POWER->Get__STRING();
+			double cur__rf_power = atof(ch_data);
+
+			if(cur__rf_power > 1.0)
+			{		
+				aCH__MON_RF_ON_TIME_TOTAL_SEC->Inc__VALUE(1);
+				double cur__on_sec = aCH__MON_RF_ON_TIME_TOTAL_SEC->Get__VALUE();
+	
+				if(cur__on_sec >= 3600)
+				{
+					aCH__MON_RF_ON_TIME_TOTAL_SEC->Set__VALUE(0);
+					aCH__MON_RF_ON_TIME_TOTAL_HOUR->Inc__VALUE(1);
+				}
+			}
+		}
+		else
+		{
+			if(dCH__MON_RF_ON_TIME_RESET->Check__DATA(STR__RESET) > 0)
+			{
+				dCH__MON_RF_ON_TIME_RESET->Set__DATA(STR__RETURN);
+
+				// ...
+				{
+					SYSTEMTIME st;
+					GetLocalTime(&st);
+
+					ch_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+					sCH__MON_RF_ON_TIME_START_DATE->Set__DATA(ch_data);
+				
+					aCH__MON_RF_ON_TIME_TOTAL_HOUR->Set__VALUE(0);
+					aCH__MON_RF_ON_TIME_TOTAL_SEC->Set__VALUE(0);
+				}
 			}
 		}
 

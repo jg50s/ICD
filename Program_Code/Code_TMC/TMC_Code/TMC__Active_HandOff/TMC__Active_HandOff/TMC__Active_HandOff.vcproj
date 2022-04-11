@@ -297,10 +297,6 @@
 					RelativePath=".\CObj__PMC_EX__DEF.h"
 					>
 				</File>
-				<File
-					RelativePath=".\CObj__PMC_EX__MON_FNC.cpp"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter

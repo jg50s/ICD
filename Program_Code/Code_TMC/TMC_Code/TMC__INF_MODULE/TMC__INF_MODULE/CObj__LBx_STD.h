@@ -18,6 +18,8 @@ private:
 	//------------------------------------------------------------------------------
 	// INTRENAL PROPERTY
 
+	CX__VAR_DIGITAL_CTRL dCH__PARA_SLOT_ID;
+
 	CX__VAR_ANALOG_CTRL  aCH__PARA_PREHEAT_TIME;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_COOLING_TIME;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_PREMATERIAL_SLOT;	
@@ -29,6 +31,8 @@ private:
 	CII_EXT_OBJECT__CTRL *pLBx__OBJ_CTRL;
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__OBJ_STATUS;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PARA_SLOT_ID;
 
 	CX__VAR_ANALOG_CTRL  aEXT_CH__PARA_PREHEAT_TIME;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__PARA_COOLING_TIME;
@@ -48,6 +52,28 @@ private:
 	CString sMODE__VENT;
 	int  Call__VENT(CII_OBJECT__VARIABLE* p_variable);
 
+	//
+	CString sMODE__DOOR_OPEN;
+	int  Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable);
+
+	CString sMODE__DOOR_CLOSE;
+	int  Call__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable);
+
+	//
+	CString sMODE__SLOT_OPEN;
+	int  Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable);
+
+	CString sMODE__SLOT_CLOSE;
+	int  Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable);
+
+	//
+	CString sMODE__PIN_UP;
+	int  Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable);
+
+	CString sMODE__PIN_DOWN;
+	int  Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable);
+
+	//
 	CString sMODE__PREPMATER;
 	int  Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable);
 

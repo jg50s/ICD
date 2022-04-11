@@ -107,6 +107,11 @@ int CObj__VIS_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xLOG_CTRL->ENABLE__TIME_LOG();
 		xLOG_CTRL->WRITE__LOG("   START   \n");
 	}
+
+	// ...
+	{
+		xCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 

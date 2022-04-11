@@ -131,7 +131,7 @@ int  CObj__DRV_LINK_RBx
 
 		log_msg.Format(" * Check Start ... \n");
 
-		log_bff.Format(" * iSim_Mode <- [%1d] \n", iSim_Mode);
+		log_bff.Format(" * iCFG__SIM_MODE <- [%1d] \n", iCFG__SIM_MODE);
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
@@ -151,7 +151,7 @@ int  CObj__DRV_LINK_RBx
 
 		log_msg.Format(" * Check End ... \n");
 
-		log_bff.Format(" * iSim_Mode <- [%1d] \n", iSim_Mode);
+		log_bff.Format(" * iCFG__SIM_MODE <- [%1d] \n", iCFG__SIM_MODE);
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 

@@ -13,7 +13,7 @@ int CObj__STD_TYPE
 
 	while(1)
 	{
-		_sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		Fnc__LD_buttonMon(p_variable, p_alarm, cnt_load);
 		Fnc__UNLD_buttonMon(p_variable, p_alarm, cnt_unld); 

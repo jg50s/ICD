@@ -258,6 +258,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__LPx_STD__ALARM_CHECK.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__LPx_STD__ALID.h"
 					>
 				</File>
@@ -266,15 +270,43 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__LPx_STD__CALL_SUB_FNC.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\CObj__LPx_STD__DEF.h"
 					>
 				</File>
 				<File
 					RelativePath=".\CObj__LPx_STD__MON_FNC.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CObj__LPx_SYS"
+				>
+				<File
+					RelativePath=".\CObj__LPx_SYS.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LPx_SYS.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LPx_SYS__ALARM_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LPx_SYS__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LPx_SYS__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LPx_SYS__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__LPx_SYS__MON_FNC.cpp"
 					>
 				</File>
 			</Filter>

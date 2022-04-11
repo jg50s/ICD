@@ -143,6 +143,24 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL(str_name, "OFF ON", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_IO_POWER_STATE, str_name);
 	}
+	// MON : RF_ON ...
+	{
+		str_name = "MON.RF_ON.TIME.START_DATE";
+		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+		LINK__VAR_STRING_CTRL(sCH__MON_RF_ON_TIME_START_DATE, str_name);
+
+		str_name = "MON.RF_ON.TIME.TOTAL_HOUR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "hour", 0, 0, 9999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__MON_RF_ON_TIME_TOTAL_HOUR, str_name);
+
+		str_name = "MON.RF_ON.TIME.TOTAL_SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__MON_RF_ON_TIME_TOTAL_SEC, str_name);
+
+		str_name = "MON.RF_ON.TIME.RESET";
+		STD__ADD_DIGITAL(str_name, "RETURN  RESET");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_RF_ON_TIME_RESET, str_name);
+	}
 
 	// MON : STABLE  ...
 	{

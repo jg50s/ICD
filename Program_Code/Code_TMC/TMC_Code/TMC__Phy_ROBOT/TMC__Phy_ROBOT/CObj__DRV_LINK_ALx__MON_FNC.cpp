@@ -9,28 +9,25 @@ void CObj__DRV_LINK_ALx
 ::Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 				  CII_OBJECT__ALARM* p_alarm)
 {
-	SCX__SEQ_INFO x_seq;
 
 	SCX__ASYNC_TIMER_CTRL x_timer_ctrl;
 	double sec_wait = 0.0;
 
 	while(1)
 	{
-		Sleep(90);
+		p_variable->Wait__SINGLE_OBJECT(0.01);
 
-		if(x_seq->Is__SIMULATION_MODE() > 0)
+		if(iActive__SIM_MODE > 0)
 		{
-			if(dCH__SIM_CFG__REAL_TEST->Check__DATA(STR__YES) > 0)
-				iSim_Mode = -1;
-			else
-				iSim_Mode = 1;
+			if(dCH__SIM_CFG__REAL_TEST->Check__DATA(STR__YES) > 0)			iCFG__SIM_MODE = -1;
+			else															iCFG__SIM_MODE =  1;
 		}
 		else
 		{
-			iSim_Mode = -1;
+			iCFG__SIM_MODE = -1;
 		}
 
-		if(iSim_Mode > 0)
+		if(iCFG__SIM_MODE > 0)
 		{
 			if(sEXT_CH__ALx_CMMD_STS->Check__DATA(STR__RUN) > 0)
 			{
@@ -49,9 +46,7 @@ void CObj__DRV_LINK_ALx
 				}
 			}
 		}
-		else
-		{
 
-		}
+		// ...
 	}	
 }

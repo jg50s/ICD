@@ -22,3 +22,6 @@
 
 #define  STR__CLOSE							"CLOSE"
 
+#define  STR__RESET                         "RESET"
+#define  STR__RETURN                        "RETURN"
+

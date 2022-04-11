@@ -21,21 +21,22 @@ Mon__ALL_STATE(CII_OBJECT__VARIABLE* p_variable,
 	// ...
 	int loop_count = 0;
 
-	if(iSIM_FLAG > 0)
+	if(iActive__SIM_MODE > 0)
 	{
-		diEXT_CH__LPx__LT_CURTAIN->Set__DATA("Off");
+		dEXT_CH__LPx_IO__LIGHT_CURTAIN_DI->Set__DATA(_OFF);
 	}
+
 
 	while(1)
 	{
-		_sleep(10);
+		p_variable->Wait__SINGLE_OBJECT(0.01);
 
 		loop_count++;
 		if(loop_count > 40)			loop_count = 1;	
 
 
 		// PIO LOG ...
-		if(dCH__ACTIVE_PIO_LOG->Check__DATA("YES") > 0)
+		if(dCH__ACTIVE_PIO_LOG->Check__DATA(_YES) > 0)
 		{
 			Fnc__IO_LP_PIO_LOG(p_variable);
 		}
@@ -43,7 +44,7 @@ Mon__ALL_STATE(CII_OBJECT__VARIABLE* p_variable,
 		// FOUP VIOLATION ERROR ...
 		if(loop_count == 1)
 		{
-			int state__pio_trans  = dCH__OTR_OUT_dLP_PIO_TRANSFER->Check__DATA(_YES);
+			int state__pio_trans = dEXT_CH__LINK_PIO_TRANSFER_STATE->Check__DATA(_YES);
 			CString str__fuop_pio = Is__FOUP_STATE_PIO();
 
 			// FOUP VIOLATION ERROR ...

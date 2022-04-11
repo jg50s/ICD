@@ -19,34 +19,6 @@ int CObj__STEP_STD
 int CObj__STEP_STD
 ::Call__START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	CString rcp__sh_temp_x[_CFG__SH_SIZE];
-	CString rcp__sh_offset_x[_CFG__SH_SIZE];
-	CString rcp__sh_warning_x[_CFG__SH_SIZE];
-	CString rcp__sh_alarm_x[_CFG__SH_SIZE];
-
-	CString rcp__wall_main_temp;
-	CString rcp__wall_offset;
-	CString rcp__wall_warning;
-	CString rcp__wall_alarm;
-
-	int i;
-
-	// Showerhead.Temperature ...
-	for(i=0; i<_CFG__SH_SIZE; i++)
-	{
-		rcp__sh_temp_x[i]    = sCH__RCP_SH_TEMP_X[i]->Get__STRING();
-		rcp__sh_offset_x[i]  = sCH__RCP_SH_OFFSET_X[i]->Get__STRING();
-		rcp__sh_warning_x[i] = sCH__RCP_SH_WARNING_X[i]->Get__STRING();
-		rcp__sh_alarm_x[i]   = sCH__RCP_SH_ALARM_X[i]->Get__STRING();
-	}
-	// Wall.Temperature ...
-	{
-		rcp__wall_main_temp = sCH__RCP_WALL_MAIN_TEMP->Get__STRING();
-		rcp__wall_offset    = sCH__RCP_WALL_MAIN_OFFSET->Get__STRING();	
-		rcp__wall_warning   = sCH__RCP_WALL_MAIN_WARNING->Get__STRING();	
-		rcp__wall_alarm     = sCH__RCP_WALL_MAIN_ALARM->Get__STRING();
-	}
-
 	// Temperature.Check ...
 	{
 
@@ -87,13 +59,17 @@ int CObj__STEP_STD::_Fnc__END()
 	{
 		RF_RPS_OBJ__Start_OFF();
 	}
-	// RF.400KHZ ...
+	// RF.PULSE ...
 	{
-		RF_400KHZ_OBJ__Start_OFF();
+		RF_PULSE_OBJ__Start_OFF();
 	}
-	// RF.40MHZ ...
+	// RF.LF ...
 	{
-		RF_40MHZ_OBJ__Start_OFF();
+		RF_LF_OBJ__Start_OFF();
+	}
+	// RF.HF ...
+	{
+		RF_HF_OBJ__Start_OFF();
 	}
 	
 	// ESC ...

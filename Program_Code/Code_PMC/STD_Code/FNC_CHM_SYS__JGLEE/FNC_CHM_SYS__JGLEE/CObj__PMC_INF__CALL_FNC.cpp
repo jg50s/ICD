@@ -105,6 +105,39 @@ int CObj__PMC_INF
 	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__PURGE);
 }
 
+
+// ...
+int CObj__PMC_INF
+::Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable)
+{
+	DECLARE__EXT_CTRL(p_variable);
+
+	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__SLOT_OPEN);
+}
+int CObj__PMC_INF
+::Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable)
+{
+	DECLARE__EXT_CTRL(p_variable);
+
+	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__SLOT_CLOSE);
+}
+
+int CObj__PMC_INF
+::Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable)
+{
+	DECLARE__EXT_CTRL(p_variable);
+
+	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__PIN_UP);
+}
+int CObj__PMC_INF
+::Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable)
+{
+	DECLARE__EXT_CTRL(p_variable);
+
+	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__PIN_DOWN);
+}
+
+
 // ...
 int CObj__PMC_INF
 ::Call__PICK_READY(CII_OBJECT__VARIABLE* p_variable)

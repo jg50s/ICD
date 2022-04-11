@@ -57,11 +57,11 @@ void CObj__LBx_CHM_SLOT
 
 			if(cur_press < cfg_press)
 			{
-				diEXT_CH__LBx__ATM_SNS->Set__DATA("None");
+				diEXT_CH__LBx__ATM_SNS->Set__DATA(sDATA__ATM_OFF);
 			}
 			else
 			{
-				diEXT_CH__LBx__ATM_SNS->Set__DATA("ATM");
+				diEXT_CH__LBx__ATM_SNS->Set__DATA(sDATA__ATM_ON);
 			}
 		}
 
@@ -105,8 +105,8 @@ void CObj__LBx_CHM_SLOT
 			int vac_sns = -1;
 			int atm_sns = -1;
 
-			if(diEXT_CH__LBx__ATM_SNS->Check__DATA("ATM") > 0)		atm_sns = 1;
-			if(diEXT_CH__LBx__VAC_SNS->Check__DATA("VAC") > 0)		vac_sns = 1;
+			if(diEXT_CH__LBx__ATM_SNS->Check__DATA(sDATA__ATM_ON) > 0)		atm_sns = 1;
+			if(diEXT_CH__LBx__VAC_SNS->Check__DATA(sDATA__VAC_ON) > 0)		vac_sns = 1;
 
 			if((atm_range_min <= cur_press)
 				&& (atm_sns > 0)
@@ -129,7 +129,7 @@ void CObj__LBx_CHM_SLOT
 
 		// ...
 		{
-			if(diEXT_CH__LBx__ATM_SNS->Check__DATA("ATM") > 0)
+			if(diEXT_CH__LBx__ATM_SNS->Check__DATA(sDATA__ATM_ON) > 0)
 			{
 				dCH__VAC_SNS->Set__DATA("OFF");
 			}
@@ -283,6 +283,12 @@ void CObj__LBx_CHM_SLOT
 			dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__UNKNOWN);
 		}
 	}
+
+	if(iLBx_SLOT_SIZE > 0)
+	{
+		CString ch_data = dCH__SLIT_VALVE_STATUS_X[0]->Get__STRING();
+		dCH__SLIT_VALVE_STATUS->Set__DATA(ch_data);
+	}
 }
 void CObj__LBx_CHM_SLOT
 ::Update__DV_STS(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
@@ -309,6 +315,12 @@ void CObj__LBx_CHM_SLOT
 		{
 			dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__UNKNOWN);
 		}
+	}
+
+	if(iLBx_SLOT_SIZE > 0)
+	{
+		CString ch_data = dCH__DOOR_VALVE_STATUS_X[0]->Get__STRING();
+		dCH__DOOR_VALVE_STATUS->Set__DATA(ch_data);
 	}
 }
 void CObj__LBx_CHM_SLOT

@@ -15,7 +15,8 @@ private:
 	CCommon_Error__USER_FNC mERROR__USER_FNC;
 
 	// ..
-	int iSim_Mode;
+	int iActive__SIM_MODE;
+	int iCFG__SIM_MODE;
 
 	SCX__USER_LOG_CTRL xAPP_LOG_CTRL;
 	//

@@ -40,6 +40,10 @@ int CObj__CHM_FNC::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__LEAK_CHECK,	   "LEAK_CHECK");
 		ADD__CTRL_VAR(sMODE__PURGE,			   "PURGE");
 
+		//
+		ADD__CTRL_VAR(sMODE__SLOT_OPEN,        "SLOT.OPEN");
+		ADD__CTRL_VAR(sMODE__SLOT_CLOSE,       "SLOT.CLOSE");
+
 		// PICK ...
 		ADD__CTRL_VAR(sMODE__PICK_READY,       "PICK_READY");
 		ADD__CTRL_VAR(sMODE__PICK_X_READY,     "PICK_X_READY");
@@ -1414,6 +1418,10 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK)				flag = Call__LEAK_CHECK(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__PURGE)					flag = Call__PURGE(p_variable, p_alarm);
+
+		//
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)				flag = Call__SLOT_OPEN(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_CLOSE)				flag = Call__SLOT_CLOSE(p_variable, p_alarm);
 
 		// PICK ...
 		ELSE_IF__CTRL_MODE(sMODE__PICK_READY)				flag = Call__PICK_READY(p_variable, p_alarm);

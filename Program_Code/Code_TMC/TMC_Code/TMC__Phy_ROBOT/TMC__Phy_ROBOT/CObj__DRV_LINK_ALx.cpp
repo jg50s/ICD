@@ -192,7 +192,7 @@ int CObj__DRV_LINK_ALx::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		SCX__SEQ_INFO seq_info;
 
-		iSim_Mode = seq_info->Is__SIMULATION_MODE();
+		iActive__SIM_MODE = seq_info->Is__SIMULATION_MODE();
 	}
 	return 1;
 }

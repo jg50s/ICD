@@ -617,22 +617,19 @@ int CObj__PMC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__VAC_SNS[i], obj_name,var_name);
 		}
 
-		// ..... DNET Comm Sts
-		// di
+		// DNET Comm Sts
 		str_name.Format("VAR__IO_DI_DNET_COMM_STS");	//
 		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DNET_COMM_STS, obj_name,var_name);
 
-		// ..... VAC Robot RNE Sns
-		// di
-		str_name.Format("VAR__IO_DI_VAC_RB_RNE");	//
+		// VAC Robot RNE Sns
+		str_name = "VAR__IO_DI_VAC_RB_RNE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_RB_RNE, obj_name,var_name);
 
-		// ..... TM CHAM VAC, ATM Sns
-		// di
+		// TM CHAM VAC, ATM Sns
 		str_name.Format("VAR__IO_DI_TM_VAC_SNS");	//
 		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);

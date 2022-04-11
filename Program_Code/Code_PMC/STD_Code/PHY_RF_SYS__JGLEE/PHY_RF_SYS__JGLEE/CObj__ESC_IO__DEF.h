@@ -97,6 +97,9 @@
 #define  STR__DECHUCKED						"DECHUCKED"
 #define  STR__ABORTED						"ABORTED"
 
+#define  STR__RESET                         "RESET"
+#define  STR__RETURN                        "RETURN"
+
 // ...
 #define  STR__Pass							"Pass"
 //

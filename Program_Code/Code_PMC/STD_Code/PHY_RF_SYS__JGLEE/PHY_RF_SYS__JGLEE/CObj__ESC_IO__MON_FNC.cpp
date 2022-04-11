@@ -269,9 +269,11 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 		doEXT_CH__He_Exhaust_Vlv->Set__DATA(STR__Open);
 	}
 
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
 
 		if(iActive__SIM_MODE > 0)
 		{
@@ -624,9 +626,59 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 		x_timer__esc_stable_delay__edge->STOP_ZERO();
 	}
 
+	// ...
+	int loop_count = 0;
+
+	if(sCH__MON_ESC_ON_TIME_START_DATE->Check__DATA("") > 0)
+	{
+		SYSTEMTIME st;
+		GetLocalTime(&st);
+
+		var_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+		sCH__MON_ESC_ON_TIME_START_DATE->Set__DATA(var_data);
+	}
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
+		loop_count++;
+		if(loop_count > 10)		loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			if((dCH__MON_CENTER_ESC_VOLTAGE_STATE->Check__DATA(STR__ON) > 0)
+			|| (dCH__MON_EDGE_ESC_VOLTAGE_STATE->Check__DATA(STR__ON)   > 0))
+			{
+				aCH__MON_ESC_ON_TIME_TOTAL_SEC->Inc__VALUE(1);
+				double cur__on_sec = aCH__MON_ESC_ON_TIME_TOTAL_SEC->Get__VALUE();
+
+				if(cur__on_sec >= 3600)
+				{
+					aCH__MON_ESC_ON_TIME_TOTAL_SEC->Set__VALUE(0);
+					aCH__MON_ESC_ON_TIME_TOTAL_HOUR->Inc__VALUE(1);
+				}
+			}
+		}
+		else
+		{
+			if(dCH__MON_ESC_ON_TIME_RESET->Check__DATA(STR__RESET) > 0)
+			{
+				dCH__MON_ESC_ON_TIME_RESET->Set__DATA(STR__RETURN);
+
+				// ...
+				{
+					SYSTEMTIME st;
+					GetLocalTime(&st);
+
+					var_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+					sCH__MON_ESC_ON_TIME_START_DATE->Set__DATA(var_data);
+
+					aCH__MON_ESC_ON_TIME_TOTAL_HOUR->Set__VALUE(0);
+					aCH__MON_ESC_ON_TIME_TOTAL_SEC->Set__VALUE(0);
+				}
+			}
+		}
 
 		// ...
 		CII__VAR_STRING_CTRL *pch_change_esc_state;

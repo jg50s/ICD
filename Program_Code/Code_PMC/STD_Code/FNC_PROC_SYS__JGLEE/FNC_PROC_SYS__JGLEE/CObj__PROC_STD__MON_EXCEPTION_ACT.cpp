@@ -19,6 +19,37 @@ void CObj__PROC_STD
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 
+		// Wafer.Count ...
+		{
+			if(dCH__MON_WAFER_INFO_TOTAL_COUNT_RESET->Check__DATA(STR__RESET) > 0)
+			{
+				dCH__MON_WAFER_INFO_TOTAL_COUNT_RESET->Set__DATA(STR__RETURN);
+
+				// ...
+				SYSTEMTIME st;
+				GetLocalTime(&st);
+
+				var_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+				sCH__MON_WAFER_INFO_TOTAL_COUNT_START_DATE->Set__DATA(var_data);
+
+				aCH__MON_WAFER_INFO_TOTAL_COUNT_VALUE->Set__VALUE(0);
+			}
+			
+			if(dCH__MON_WAFER_INFO_CURRENT_COUNT_RESET->Check__DATA(STR__RESET) > 0)
+			{
+				dCH__MON_WAFER_INFO_CURRENT_COUNT_RESET->Set__DATA(STR__RETURN);
+
+				// ...
+				SYSTEMTIME st;
+				GetLocalTime(&st);
+
+				var_data.Format("%00004d.%002d.%002d", st.wYear,st.wMonth,st.wDay);
+				sCH__MON_WAFER_INFO_CURRENT_COUNT_START_DATE->Set__DATA(var_data);
+
+				aCH__MON_WAFER_INFO_CURRENT_COUNT_VALUE->Set__VALUE(0);
+			}
+		}
+
 		if(iActive__PROC_START < 0)
 		{
 			sCH__MON_EXCEPTION_MSG->Set__DATA("__");

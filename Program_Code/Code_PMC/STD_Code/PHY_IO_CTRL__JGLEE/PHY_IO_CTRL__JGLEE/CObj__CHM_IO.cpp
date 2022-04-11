@@ -71,6 +71,13 @@ int CObj__CHM_IO::__DEFINE__VARIABLE_STD(p_variable)
 		}
 	}
 
+	// MON ...
+	{
+		str_name = "MON.CHM.PRESSURE.DISPLAY";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_CHM_PRESSURE_DISPLAY, str_name);
+	}
+
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATUS);

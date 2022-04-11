@@ -219,8 +219,8 @@ LOOP_RETRY:
 
 	if(iSim_Flag > 0)
 	{
-		diEXT_CH__LBx__ATM_SNS->Set__DATA("None");
-		diEXT_CH__LBx__VAC_SNS->Set__DATA("None");
+		diEXT_CH__LBx__ATM_SNS->Set__DATA(sDATA__ATM_OFF);
+		diEXT_CH__LBx__VAC_SNS->Set__DATA(sDATA__VAC_OFF);
 	}
 
 	// Soft Pumping -----
@@ -347,8 +347,8 @@ START_FAST_PUMP:
 
 	if(iSim_Flag > 0)
 	{
-		diEXT_CH__LBx__ATM_SNS->Set__DATA("None");
-		diEXT_CH__LBx__VAC_SNS->Set__DATA("VAC");
+		diEXT_CH__LBx__ATM_SNS->Set__DATA(sDATA__ATM_OFF);
+		diEXT_CH__LBx__VAC_SNS->Set__DATA(sDATA__VAC_ON);
 	}
 
 	// ...
@@ -636,8 +636,8 @@ LOOP_RETRY:
 
 		if(iSim_Flag > 0)
 		{
-			diEXT_CH__LBx__ATM_SNS->Set__DATA("None");
-			diEXT_CH__LBx__VAC_SNS->Set__DATA("None");
+			diEXT_CH__LBx__ATM_SNS->Set__DATA(sDATA__ATM_OFF);
+			diEXT_CH__LBx__VAC_SNS->Set__DATA(sDATA__VAC_OFF);
 		}
 
 		// ...
@@ -768,8 +768,8 @@ LOOP_RETRY:
 
 		if(iSim_Flag > 0)
 		{
-			diEXT_CH__LBx__ATM_SNS->Set__DATA("ATM");
-			diEXT_CH__LBx__VAC_SNS->Set__DATA("None");
+			diEXT_CH__LBx__ATM_SNS->Set__DATA(sDATA__ATM_ON);
+			diEXT_CH__LBx__VAC_SNS->Set__DATA(sDATA__VAC_OFF);
 		}
 
 		// ...
@@ -902,8 +902,11 @@ int  CObj__LBx_CHM_SLOT
 		int para_id = (int)	aCH__PARA_SLOT_ID->Get__VALUE();
 		int p_index = para_id - 1;
 
-		doEXT_CH__LLx__DV_OPEN_X[p_index]->Set__DATA(STR__OFF);
-		doEXT_CH__LLx__DV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		if((p_index >= 0) && (p_index < iLBx_SLOT_SIZE))
+		{
+			doEXT_CH__LLx__DV_OPEN_X[p_index]->Set__DATA(STR__OFF);
+			doEXT_CH__LLx__DV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		}
 	}
 	return r_flag;
 }
@@ -1035,8 +1038,11 @@ int  CObj__LBx_CHM_SLOT
 		int para_id = (int)	aCH__PARA_SLOT_ID->Get__VALUE();
 		int p_index = para_id - 1;
 
-		doEXT_CH__LLx__DV_OPEN_X[p_index]->Set__DATA(STR__OFF);
-		doEXT_CH__LLx__DV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		if((p_index >= 0) && (p_index < iLBx_SLOT_SIZE))
+		{
+			doEXT_CH__LLx__DV_OPEN_X[p_index]->Set__DATA(STR__OFF);
+			doEXT_CH__LLx__DV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		}
 	}
 	return r_flag;
 }
@@ -1155,8 +1161,11 @@ int  CObj__LBx_CHM_SLOT
 		int para_id = (int)	aCH__PARA_SLOT_ID->Get__VALUE();
 		int p_index = para_id - 1;
 
-		doEXT_CH__LLx__SV_OPEN_X[p_index]->Set__DATA(STR__OFF);
-		doEXT_CH__LLx__SV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		if((p_index >= 0) && (p_index < iLBx_SLOT_SIZE))
+		{
+			doEXT_CH__LLx__SV_OPEN_X[p_index]->Set__DATA(STR__OFF);
+			doEXT_CH__LLx__SV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		}
 	}
 	return r_flag;
 }
@@ -1282,8 +1291,11 @@ int  CObj__LBx_CHM_SLOT
 		int para_id = (int)	aCH__PARA_SLOT_ID->Get__VALUE();
 		int p_index = para_id - 1;
 
-		doEXT_CH__LLx__SV_OPEN_X[p_index]->Set__DATA(STR__OFF);
-		doEXT_CH__LLx__SV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		if((p_index >= 0) && (p_index < iLBx_SLOT_SIZE))
+		{
+			doEXT_CH__LLx__SV_OPEN_X[p_index]->Set__DATA(STR__OFF);
+			doEXT_CH__LLx__SV_CLOSE_X[p_index]->Set__DATA(STR__OFF);
+		}
 	}
 	return r_flag;
 }
@@ -1881,7 +1893,7 @@ int  CObj__LBx_CHM_SLOT
 		}
 	}
 
-	if(diEXT_CH__LBx__VAC_SNS->Check__DATA(STR__VAC) < 0)
+	if(diEXT_CH__LBx__VAC_SNS->Check__DATA(sDATA__VAC_ON) < 0)
 	{
 		// Alarm Post ...
 		{

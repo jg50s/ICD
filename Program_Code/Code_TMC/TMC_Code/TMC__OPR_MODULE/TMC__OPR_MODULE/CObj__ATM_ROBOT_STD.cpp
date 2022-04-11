@@ -187,6 +187,11 @@ int CObj__ATM_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_PHY__IO_CH__HYPER_TERMINAL_LOCK, obj_name, var_name);
 	}
+
+	// ...
+	{
+		xCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 

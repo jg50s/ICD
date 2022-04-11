@@ -22,37 +22,28 @@ int CObj__STEP_STD
 	CString rcp__apc_hold_sec;
 
 	CString rcp__mfc_x_flow[_CFG__MFC_SIZE];
-	CString rcp__mfc_x_ramp_sec[_CFG__MFC_SIZE];
 
 	CString rcp__rf_rps_power;
-	CString rcp__rf_rps_warning;
-	CString rcp__rf_rps_alarm;
+	CString rcp__rf_lf_power;
+	CString rcp__rf_hf_power;
 
-	CString rcp__rf_400_wait_sec;
-	CString rcp__rf_400_power;
-	CString rcp__rf_400_warning;
-	CString rcp__rf_400_alarm;
+	CString rcp__rf_pulse_frequency;
+	CString rcp__rf_pulse_duty;
+	CString rcp__rf_pulse_exec;
+	CString rcp__rf_pulse_on_time;
+	CString rcp__rf_pulse_off_time;
+	CString rcp__rf_pulse_on_shift_time;
+	CString rcp__rf_pulse_off_shift_time;
 
-	CString rcp__rf_40m_wait_sec;
-	CString rcp__rf_40m_power;
-	CString rcp__rf_40m_warning;
-	CString rcp__rf_40m_alarm;
+	CString rcp__mat_lf_shunt;
+	CString rcp__mat_lf_series;
 
-	CString rcp__mat_400_shunt;
-	CString rcp__mat_400_series;
-	CString rcp__mat_400_capacity;
-
-	CString rcp__mat_40m_shunt;
-	CString rcp__mat_40m_series;
-	CString rcp__mat_40m_capacity;
+	CString rcp__mat_hf_shunt;
+	CString rcp__mat_hf_series;
 
 	CString rcp__esc_mode;
 	CString rcp__dpc_center_pressure;
-	CString rcp__dpc_center_flow_max;
-	CString rcp__dpc_center_flow_min;
 	CString rcp__dpc_edge_pressure;
-	CString rcp__dpc_edge_flow_max;
-	CString rcp__dpc_edge_flow_min;
 
 	CString rcp__lift_pin_mode;
 
@@ -76,48 +67,43 @@ int CObj__STEP_STD
 		// MFC ...
 		for(i=0; i<iDATA__MFC_SIZE; i++)
 		{
-			rcp__mfc_x_flow[i]     = sCH__RCP_GAS_FLOW_X[i]->Get__STRING();
-			rcp__mfc_x_ramp_sec[i] = sCH__RCP_GAS_RAMP_SEC_X[i]->Get__STRING();
+			rcp__mfc_x_flow[i]= sCH__RCP_GAS_FLOW_X[i]->Get__STRING();
 		}
 
 		// RF.RPS ...
 		sCH__RCP_RF_RPS_POWER->Get__DATA(rcp__rf_rps_power);
-		sCH__RCP_RF_RPS_TOL_WARNING->Get__DATA(rcp__rf_rps_warning);
-		sCH__RCP_RF_RPS_TOL_ALARM->Get__DATA(rcp__rf_rps_alarm);
 
-		// RF.400KHZ ...
-		sCH__RCP_RF_400KHZ_WAIT_TIME->Get__DATA(rcp__rf_400_wait_sec);
-		sCH__RCP_RF_400KHZ_POWER->Get__DATA(rcp__rf_400_power);
-		sCH__RCP_RF_400KHZ_TOL_WARNING->Get__DATA(rcp__rf_400_warning);
-		sCH__RCP_RF_400KHZ_TOL_ALARM->Get__DATA(rcp__rf_400_alarm);
+		// RF.LF ...
+		sCH__RCP_RF_LF_POWER->Get__DATA(rcp__rf_lf_power);
 
-		// RF.40MHZ ...
-		sCH__RCP_RF_40MHZ_WAIT_TIME->Get__DATA(rcp__rf_40m_wait_sec);
-		sCH__RCP_RF_40MHZ_POWER->Get__DATA(rcp__rf_40m_power);
-		sCH__RCP_RF_40MHZ_TOL_WARNING->Get__DATA(rcp__rf_40m_warning);
-		sCH__RCP_RF_40MHZ_TOL_ALARM->Get__DATA(rcp__rf_40m_alarm);
+		// RF.HF ...
+		sCH__RCP_RF_HF_POWER->Get__DATA(rcp__rf_hf_power);
 
-		// MAT.400KHZ ...
-		sCH__RCP_MAT_400KHZ_SHUNT->Get__DATA(rcp__mat_400_shunt);
-		sCH__RCP_MAT_400KHZ_SERIES->Get__DATA(rcp__mat_400_series);
-		sCH__RCP_MAT_400KHZ_CAPACITY->Get__DATA(rcp__mat_400_capacity);
+		// RF.PULSE ...
+		rcp__rf_pulse_frequency = aCH__RCP_RF_PULSE_FREQUENCY->Get__STRING();
+		rcp__rf_pulse_duty = aCH__RCP_RF_PULSE_DUTY->Get__STRING();
+		rcp__rf_pulse_exec = dCH__RCP_RF_PULSE_EXEC->Get__STRING();
+		rcp__rf_pulse_on_time  = aCH__RCP_RF_PULSE_ON_TIME->Get__STRING();
+		rcp__rf_pulse_off_time = aCH__RCP_RF_PULSE_OFF_TIME->Get__STRING();
+		rcp__rf_pulse_on_shift_time  = aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Get__STRING();
+		rcp__rf_pulse_off_shift_time = aCH__RCP_RF_PULSE_OFF_SHIFT_TIME->Get__STRING();
 
-		sCH__RCP_MAT_40MHZ_SHUNT->Get__DATA(rcp__mat_40m_shunt);
-		sCH__RCP_MAT_40MHZ_SERIES->Get__DATA(rcp__mat_40m_series);
-		sCH__RCP_MAT_40MHZ_CAPACITY->Get__DATA(rcp__mat_40m_capacity);
+		// MAT.LF ...
+		sCH__RCP_MAT_LF_SHUNT->Get__DATA(rcp__mat_lf_shunt);
+		sCH__RCP_MAT_LF_SERIES->Get__DATA(rcp__mat_lf_series);
+
+		// MAT.HF ...
+		sCH__RCP_MAT_HF_SHUNT->Get__DATA(rcp__mat_hf_shunt);
+		sCH__RCP_MAT_HF_SERIES->Get__DATA(rcp__mat_hf_series);
 
 		// ESC.MODE ...
 		dCH__RCP_ESC_CTRL_MODE->Get__DATA(rcp__esc_mode);
 
 		// DPC.CENTER ...
 		sCH__RCP_DPC_CENTER_PRESSURE->Get__DATA(rcp__dpc_center_pressure);
-		sCH__RCP_DPC_CENTER_ZONE_FLOW_MAX_THRESHOLD->Get__DATA(rcp__dpc_center_flow_max);
-		sCH__RCP_DPC_CENTER_ZONE_FLOW_MIN_THRESHOLD->Get__DATA(rcp__dpc_center_flow_min);
 
 		// DPC.EDGE ...
 		sCH__RCP_DPC_EDGE_PRESSURE->Get__DATA(rcp__dpc_edge_pressure);
-		sCH__RCP_DPC_EDGE_ZONE_FLOW_MAX_THRESHOLD->Get__DATA(rcp__dpc_edge_flow_max);
-		sCH__RCP_DPC_EDGE_ZONE_FLOW_MIN_THRESHOLD->Get__DATA(rcp__dpc_edge_flow_min);
 
 		//
 		dCH__RCP_LIFT_PIN_MODE->Get__DATA(rcp__lift_pin_mode);
@@ -156,7 +142,7 @@ int CObj__STEP_STD
 	// MFC_X.CTRL ...
 	for(i=0; i<iDATA__MFC_SIZE; i++)
 	{
-		MFC_OBJ__Start_CONTROL(i, rcp__mfc_x_flow[i],rcp__mfc_x_ramp_sec[i]);
+		MFC_OBJ__Start_CONTROL(i, rcp__mfc_x_flow[i], "0");
 	}
 
 	// RF.RPS ...
@@ -170,59 +156,60 @@ int CObj__STEP_STD
 
 		RF_RPS_OBJ__Start_MODE(obj_mode, rcp__rf_rps_power);
 	}
-	// RF.400KHZ ...
-	if(bActive__OBJ_CTRL__RF_400KHZ)
+	// RF.PULSE ...
+	if(bActive__OBJ_CTRL__RF_PULSE)
 	{
-		CString obj_mode;
-		double set_power = atof(rcp__rf_400_power);
-
-		if(set_power > 0.1)				obj_mode = _RF_CMD__SET_POWER;
-		else							obj_mode = _RF_CMD__OFF;
-
-		RF_400KHZ_OBJ__Start_MODE(obj_mode, rcp__rf_400_power);
+		RF_PULSE_OBJ__Start_ON();
 	}
-	// RF.40MHZ ...
-	if(bActive__OBJ_CTRL__RF_40MHZ)
+	// RF.LF ...
+	if(bActive__OBJ_CTRL__RF_LF)
 	{
 		CString obj_mode;
-		double set_power = atof(rcp__rf_40m_power);
+		double set_power = atof(rcp__rf_lf_power);
 
 		if(set_power > 0.1)				obj_mode = _RF_CMD__SET_POWER;
 		else							obj_mode = _RF_CMD__OFF;
 
-		RF_40MHZ_OBJ__Start_MODE(obj_mode, rcp__rf_40m_power);
+		RF_LF_OBJ__Start_MODE(obj_mode, rcp__rf_lf_power);
+	}
+	// RF.HF ...
+	if(bActive__OBJ_CTRL__RF_HF)
+	{
+		CString obj_mode;
+		double set_power = atof(rcp__rf_hf_power);
+
+		if(set_power > 0.1)				obj_mode = _RF_CMD__SET_POWER;
+		else							obj_mode = _RF_CMD__OFF;
+
+		RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power);
 	}
 
 	// MATCHER ...
-	if(bActive__OBJ_CTRL__MAT)
+	if(bActive__OBJ_CTRL__MAT_LF)
 	{
 		CString obj_mode = _MAT_CMD__PROC_CTRL;
 		CString ch_data;
 
-		// MAT.400KHZ ...
+		// MAT.LF ...
 		{
-			sCH__RCP_MAT_400KHZ_SHUNT->Get__DATA(ch_data);
-			aEXT_CH__MAT__PARA_LOAD_POS_CH1->Set__DATA(ch_data);
+			sCH__RCP_MAT_LF_SHUNT->Get__DATA(ch_data);
+			aEXT_CH__MAT_LF__PARA_LOAD_POS->Set__DATA(ch_data);
 
-			sCH__RCP_MAT_400KHZ_SERIES->Get__DATA(ch_data);
-			aEXT_CH__MAT__PARA_TUNE_POS_CH1->Set__DATA(ch_data);
+			sCH__RCP_MAT_LF_SERIES->Get__DATA(ch_data);
+			aEXT_CH__MAT_LF__PARA_TUNE_POS->Set__DATA(ch_data);
 
-			sCH__RCP_MAT_400KHZ_CAPACITY->Get__DATA(ch_data);
-			aEXT_CH__MAT__PARA_CAP_POS_CH1->Set__DATA(ch_data);
+			MAT_LF_OBJ__Start_MODE(obj_mode);
 		}
-		// MAT.40MHZ ...
+		// MAT.HF ...
 		{
-			sCH__RCP_MAT_40MHZ_SHUNT->Get__DATA(ch_data);
-			aEXT_CH__MAT__PARA_LOAD_POS_CH2->Set__DATA(ch_data);
+			sCH__RCP_MAT_HF_SHUNT->Get__DATA(ch_data);
+			aEXT_CH__MAT_HF__PARA_LOAD_POS->Set__DATA(ch_data);
 
-			sCH__RCP_MAT_40MHZ_SERIES->Get__DATA(ch_data);
-			aEXT_CH__MAT__PARA_TUNE_POS_CH2->Set__DATA(ch_data);
+			sCH__RCP_MAT_HF_SERIES->Get__DATA(ch_data);
+			aEXT_CH__MAT_HF__PARA_TUNE_POS->Set__DATA(ch_data);
 
-			sCH__RCP_MAT_40MHZ_CAPACITY->Get__DATA(ch_data);
-			aEXT_CH__MAT__PARA_CAP_POS_CH2->Set__DATA(ch_data);
+			MAT_HF_OBJ__Start_MODE(obj_mode);
 		}
-
-		MAT_OBJ__Start_MODE(obj_mode);
 	}
 
 	// ESC ...
@@ -245,23 +232,11 @@ int CObj__STEP_STD
 			{
 				sCH__RCP_DPC_CENTER_PRESSURE->Get__DATA(ch_data);
 				sEXT_CH__ESC__RCP_He_CENTER_PRESSURE_SETPOINT_TORR->Set__DATA(ch_data);
-
-				sCH__RCP_DPC_CENTER_ZONE_FLOW_MAX_THRESHOLD->Get__DATA(ch_data);
-				sEXT_CH__ESC__RCP_He_CENTER_FLOW_MAX_THRESHOLD->Set__DATA(ch_data);
-
-				sCH__RCP_DPC_CENTER_ZONE_FLOW_MIN_THRESHOLD->Get__DATA(ch_data);
-				sEXT_CH__ESC__RCP_He_CENTER_FLOW_MIN_THRESHOLD->Set__DATA(ch_data);
 			}
 			// EDGE ...
 			{
 				sCH__RCP_DPC_EDGE_PRESSURE->Get__DATA(ch_data);
 				sEXT_CH__ESC__RCP_He_EDGE_PRESSURE_SETPOINT_TORR->Set__DATA(ch_data);
-
-				sCH__RCP_DPC_EDGE_ZONE_FLOW_MAX_THRESHOLD->Get__DATA(ch_data);
-				sEXT_CH__ESC__RCP_He_EDGE_FLOW_MAX_THRESHOLD->Set__DATA(ch_data);
-
-				sCH__RCP_DPC_EDGE_ZONE_FLOW_MIN_THRESHOLD->Get__DATA(ch_data);
-				sEXT_CH__ESC__RCP_He_EDGE_FLOW_MIN_THRESHOLD->Set__DATA(ch_data);
 			}
 
 			ESC_OBJ__Start_MODE(obj_mode);
@@ -332,21 +307,25 @@ int CObj__STEP_STD
 			if(APC_OBJ__Check_ERROR() > 0)				return -112;
 			if(PT_OBJ__Check_ERROR()  > 0)				return -113;
 
-			if(RF_RPS_OBJ__Check_ERROR()    > 0)		return -121;
-			if(RF_400KHZ_OBJ__Check_ERROR() > 0)		return -122;
-			if(RF_40MHZ_OBJ__Check_ERROR()  > 0)		return -123;
+			if(RF_RPS_OBJ__Check_ERROR()   > 0)			return -121;
+			if(RF_LF_OBJ__Check_ERROR()    > 0)			return -122;
+			if(RF_HF_OBJ__Check_ERROR()    > 0)			return -123;
+			if(RF_PULSE_OBJ__Check_ERROR() > 0)			return -124;
 		}
 		// ABORTEDR CHECK ...
 		{
 			if(MFC_OBJ__Check_ABORTED() > 0)			return -211;
 			if(APC_OBJ__Check_ABORTED() > 0)			return -212;
 
-			if(RF_RPS_OBJ__Check_ABORTED()    > 0)		return -221;
-			if(RF_400KHZ_OBJ__Check_ABORTED() > 0)		return -222;
-			if(RF_40MHZ_OBJ__Check_ABORTED()  > 0)		return -223;
+			if(RF_RPS_OBJ__Check_ABORTED()   > 0)		return -221;
+			if(RF_LF_OBJ__Check_ABORTED()    > 0)		return -222;
+			if(RF_HF_OBJ__Check_ABORTED()    > 0)		return -223;
+			if(RF_PULSE_OBJ__Check_ABORTED() > 0)		return -224;
 			
-			if(MAT_OBJ__Check_ABORTED() > 0)			return -224;
-			if(ESC_OBJ__Check_ABORTED() > 0)			return -225;
+			if(MAT_LF_OBJ__Check_ABORTED() > 0)			return -231;
+			if(MAT_HF_OBJ__Check_ABORTED() > 0)			return -232;
+
+			if(ESC_OBJ__Check_ABORTED() > 0)			return -241;
 		}
 
 		if(active__stable_mode)
@@ -535,11 +514,6 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 						sCH__RCP_GAS_FLOW_X[i]->Get__CHANNEL_NAME(),
 						sCH__RCP_GAS_FLOW_X[i]->Get__STRING());
 		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_GAS_RAMP_SEC_X[i]->Get__CHANNEL_NAME(),
-						sCH__RCP_GAS_RAMP_SEC_X[i]->Get__STRING());
-		log_msg += log_bff;
 	}
 
 	// RF.RPS ...
@@ -548,94 +522,81 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 						sCH__RCP_RF_RPS_POWER->Get__CHANNEL_NAME(),
 						sCH__RCP_RF_RPS_POWER->Get__STRING());
 		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_RPS_TOL_WARNING->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_RPS_TOL_WARNING->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_RPS_TOL_ALARM->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_RPS_TOL_ALARM->Get__STRING());
-		log_msg += log_bff;
 	}
-	// RF.400KHZ ...
+	// RF.PULSE ...
 	{
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_400KHZ_WAIT_TIME->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_400KHZ_WAIT_TIME->Get__STRING());
+						aCH__RCP_RF_PULSE_FREQUENCY->Get__CHANNEL_NAME(),
+						aCH__RCP_RF_PULSE_FREQUENCY->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_400KHZ_POWER->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_400KHZ_POWER->Get__STRING());
+						aCH__RCP_RF_PULSE_DUTY->Get__CHANNEL_NAME(),
+						aCH__RCP_RF_PULSE_DUTY->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_400KHZ_TOL_WARNING->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_400KHZ_TOL_WARNING->Get__STRING());
+						dCH__RCP_RF_PULSE_EXEC->Get__CHANNEL_NAME(),
+						dCH__RCP_RF_PULSE_EXEC->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_400KHZ_TOL_ALARM->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_400KHZ_TOL_ALARM->Get__STRING());
+						aCH__RCP_RF_PULSE_ON_TIME->Get__CHANNEL_NAME(),
+						aCH__RCP_RF_PULSE_ON_TIME->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						aCH__RCP_RF_PULSE_OFF_TIME->Get__CHANNEL_NAME(),
+						aCH__RCP_RF_PULSE_OFF_TIME->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Get__CHANNEL_NAME(),
+						aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						aCH__RCP_RF_PULSE_OFF_SHIFT_TIME->Get__CHANNEL_NAME(),
+						aCH__RCP_RF_PULSE_OFF_SHIFT_TIME->Get__STRING());
 		log_msg += log_bff;
 	}
-	// RF.40MHZ ...
+	// RF.LF ...
 	{
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_40MHZ_WAIT_TIME->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_40MHZ_WAIT_TIME->Get__STRING());
+						sCH__RCP_RF_LF_POWER->Get__CHANNEL_NAME(),
+						sCH__RCP_RF_LF_POWER->Get__STRING());
 		log_msg += log_bff;
-
+	}
+	// RF.HF ...
+	{
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_40MHZ_POWER->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_40MHZ_POWER->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_40MHZ_TOL_WARNING->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_40MHZ_TOL_WARNING->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_RF_40MHZ_TOL_ALARM->Get__CHANNEL_NAME(),
-						sCH__RCP_RF_40MHZ_TOL_ALARM->Get__STRING());
+						sCH__RCP_RF_HF_POWER->Get__CHANNEL_NAME(),
+						sCH__RCP_RF_HF_POWER->Get__STRING());
 		log_msg += log_bff;
 	}
 
 	// MATCHER ...
 	{
-		// 400KHZ ...
+		// LF ...
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_MAT_400KHZ_SHUNT->Get__CHANNEL_NAME(),
-						sCH__RCP_MAT_400KHZ_SHUNT->Get__STRING());
+						sCH__RCP_MAT_LF_SHUNT->Get__CHANNEL_NAME(),
+						sCH__RCP_MAT_LF_SHUNT->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_MAT_400KHZ_SERIES->Get__CHANNEL_NAME(),
-						sCH__RCP_MAT_400KHZ_SERIES->Get__STRING());
+						sCH__RCP_MAT_LF_SERIES->Get__CHANNEL_NAME(),
+						sCH__RCP_MAT_LF_SERIES->Get__STRING());
+		log_msg += log_bff;
+
+		// HF ...
+		log_bff.Format(" * %s <- %s \n", 
+						sCH__RCP_MAT_HF_SHUNT->Get__CHANNEL_NAME(),
+						sCH__RCP_MAT_HF_SHUNT->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_MAT_400KHZ_CAPACITY->Get__CHANNEL_NAME(),
-						sCH__RCP_MAT_400KHZ_CAPACITY->Get__STRING());
-		log_msg += log_bff;
-
-		// 40MHZ
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_MAT_40MHZ_SHUNT->Get__CHANNEL_NAME(),
-						sCH__RCP_MAT_40MHZ_SHUNT->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_MAT_40MHZ_SERIES->Get__CHANNEL_NAME(),
-						sCH__RCP_MAT_40MHZ_SERIES->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_MAT_40MHZ_CAPACITY->Get__CHANNEL_NAME(),
-						sCH__RCP_MAT_40MHZ_CAPACITY->Get__STRING());
+						sCH__RCP_MAT_HF_SERIES->Get__CHANNEL_NAME(),
+						sCH__RCP_MAT_HF_SERIES->Get__STRING());
 		log_msg += log_bff;
 	}
 
@@ -649,16 +610,6 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 		log_bff.Format(" * %s <- %s \n", 
 						sCH__RCP_DPC_CENTER_PRESSURE->Get__CHANNEL_NAME(),
 						sCH__RCP_DPC_CENTER_PRESSURE->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_DPC_CENTER_ZONE_FLOW_MAX_THRESHOLD->Get__CHANNEL_NAME(),
-						sCH__RCP_DPC_CENTER_ZONE_FLOW_MAX_THRESHOLD->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						sCH__RCP_DPC_CENTER_ZONE_FLOW_MIN_THRESHOLD->Get__CHANNEL_NAME(),
-						sCH__RCP_DPC_CENTER_ZONE_FLOW_MIN_THRESHOLD->Get__STRING());
 		log_msg += log_bff;
 	}
 

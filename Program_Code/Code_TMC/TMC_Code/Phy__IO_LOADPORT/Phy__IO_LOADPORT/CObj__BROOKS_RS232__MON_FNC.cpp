@@ -148,15 +148,11 @@ Mon__IO_CH_OUT_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_ala
 void CObj__BROOKS_RS232::
 Mon__IO_CST_EXIST_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	SCX__TIMER_CTRL cx_timer_ctrl;
 	CString var_data;
 	double nCnt = 0;
-	double nTarget_Cnt;
-
-	Sleep(1000);
 
 	aCFG_CST_PROPERLY_EXIST_TIME->Get__DATA(var_data);
-	nTarget_Cnt = atof(var_data)*0.01;
+	double nTarget_Cnt = atof(var_data) * 0.01;
 
 	while(1)
 	{

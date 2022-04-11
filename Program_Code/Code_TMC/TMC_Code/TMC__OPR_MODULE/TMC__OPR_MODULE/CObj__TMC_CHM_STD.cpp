@@ -28,6 +28,9 @@ int CObj__TMC_CHM_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__ISOLATE,     "ISOLATE");
 		ADD__CTRL_VAR(sMODE__LEAK_CHECK,  "LEAK_CHECK");
 		ADD__CTRL_VAR(sMODE__CYCLE_PURGE, "CYCLE_PURGE");
+
+		ADD__CTRL_VAR(sMODE__PMx_SV_OPEN,  "PMx.SV_OPEN");
+		ADD__CTRL_VAR(sMODE__PMx_SV_CLOSE, "PMx.SV_CLOSE");
 	}
 	return 1;
 }
@@ -64,6 +67,13 @@ int CObj__TMC_CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "sOBJ.SEQ.MSG";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_SEQ_MSG,str_name);
+	}
+
+	// PARA ...
+	{
+		str_name = "PARA.PMx.ID";
+		STD__ADD_DIGITAL(str_name, "1 2 3 4 5 6 7 8 9 10");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_PMx_ID, str_name);
 	}
 
 	// ...
@@ -120,6 +130,7 @@ int CObj__TMC_CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		pTMC_CHM__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 
+		//
 		str_name = "OTR.OUT.MON.OBJ.STATUS";
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__OBJ_STATUS, def_data,str_name);
 	}
@@ -139,6 +150,10 @@ int CObj__TMC_CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_variable->Get__DEF_CONST_DATA(def_name, def_data);
 
 		pTMC_VLV__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
+
+		//
+		str_name = "OTR.IN.PARA.aPMC.ID";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_VLV__PARA_PMx_ID, def_data,str_name);
 	}
 
 	// Press_VLV -----
@@ -149,6 +164,10 @@ int CObj__TMC_CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		pPress_VLV__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 	}
 
+	// ...
+	{
+		dCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 
@@ -169,20 +188,18 @@ int CObj__TMC_CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__MAINT)			flag = Call__MAINT(p_variable);
+			 IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__MAINT)				flag = Call__MAINT(p_variable);
 
-		ELSE_IF__CTRL_MODE(sMODE__PUMP)				flag = Call__PUMP(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__VENT)				flag = Call__VENT(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PUMP)					flag = Call__PUMP(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__VENT)					flag = Call__VENT(p_variable);
 
-		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)			flag = Call__ISOLATE(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK)		flag = Call__LEAK_CHECK(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__CYCLE_PURGE)		flag = Call__CYCLE_PURGE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)				flag = Call__ISOLATE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK)			flag = Call__LEAK_CHECK(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__CYCLE_PURGE)			flag = Call__CYCLE_PURGE(p_variable);
 
-		else									
-		{
-
-		}
+		ELSE_IF__CTRL_MODE(sMODE__PMx_SV_OPEN)			flag = Call__PMx_SV_OPEN(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PMx_SV_CLOSE)			flag = Call__PMx_SV_CLOSE(p_variable);
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

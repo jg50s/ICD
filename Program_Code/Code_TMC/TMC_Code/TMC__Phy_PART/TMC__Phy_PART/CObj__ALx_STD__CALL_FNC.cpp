@@ -7,12 +7,23 @@
 int  CObj__ALx_STD
 ::Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	return pALx__OBJ_CTRL->Call__OBJECT(CMMD__INIT);
+	if(!bActive__AL1_USE)
+	{
+		return -1;
+	}
+
+	return pALx__OBJ_CTRL->Call__OBJECT(sDATA__AL_MODE__INIT);
 }
 
 int  CObj__ALx_STD
 ::Call__ALIGN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
+	if(!bActive__AL1_USE)
+	{
+		return -1;
+	}
+
+	// ...
 	int cfg_max  = aEXT_CH__CFG_SLOT_MAX->Get__VALUE();
 	int cur_slot = aCH__PARA_SLOT->Get__VALUE();
 
@@ -55,5 +66,5 @@ int  CObj__ALx_STD
 	sEXT_CH__CUR_AL1_CCD_POS->Get__DATA(ch_data);
 	sEXT_CH__ALx_PARA_CCD_POS->Set__DATA(ch_data);
 
-	return pALx__OBJ_CTRL->Call__OBJECT(CMMD__ALIGN);
+	return pALx__OBJ_CTRL->Call__OBJECT(sDATA__AL_MODE__ALIGN);
 }

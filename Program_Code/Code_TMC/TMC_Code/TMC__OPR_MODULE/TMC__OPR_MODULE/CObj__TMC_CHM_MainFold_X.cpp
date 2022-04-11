@@ -152,6 +152,10 @@ int CObj__TMC_CHM_MainFold_X::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// ...
+	{
+		dCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 

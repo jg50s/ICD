@@ -23,6 +23,10 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__OBJ_STATUS;
 	CX__VAR_STRING_CTRL  sCH__OBJ_SEQ_MSG;
 
+	// PARA ...
+	CX__VAR_DIGITAL_CTRL dCH__PARA_PMx_ID;
+	//
+
 
 	//------------------------------------------------------------------------------
 	// EXTERNAL CHANNEL
@@ -32,9 +36,11 @@ private:
 
 	CX__VAR_STRING_CTRL  sEXT_CH__OBJ_STATUS;
 	CX__VAR_STRING_CTRL  sEXT_CH__PHY__TMC_OBJ_MSG;
-
+	
 	// TMC_VLV -----
 	CII_EXT_OBJECT__CTRL *pTMC_VLV__OBJ_CTRL;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__TMC_VLV__PARA_PMx_ID;
 
 	// Press_VLV -----	
 	CII_EXT_OBJECT__CTRL *pPress_VLV__OBJ_CTRL;
@@ -62,6 +68,14 @@ private:
 
 	CString sMODE__CYCLE_PURGE;
 	int  Call__CYCLE_PURGE(CII_OBJECT__VARIABLE* p_variable);
+
+	// ...
+	CString sMODE__PMx_SV_OPEN;
+	int  Call__PMx_SV_OPEN(CII_OBJECT__VARIABLE* p_variable);
+
+	CString sMODE__PMx_SV_CLOSE;
+	int  Call__PMx_SV_CLOSE(CII_OBJECT__VARIABLE* p_variable);
+	//
 
 
 	// ...

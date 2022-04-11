@@ -200,7 +200,7 @@ int CObj__LPx_STD::__DEFINE__ALARM(p_alarm)
 {
 	DECLARE__ALARM;
 
-	//.....
+	// ...
 	CString title;
 	title.Format("%s - ",sObject_Name);
 
@@ -209,40 +209,55 @@ int CObj__LPx_STD::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
-	//.....
-	alarm_id = ALID__PUMP_PRESSURE__TIMEOUT;
+	// ...
+	{
+		alarm_id = ALID__PUMP_PRESSURE__TIMEOUT;
 
-	alarm_title  = title;
-	alarm_title += "Pump Pressure TimeOut.";
+		alarm_title  = title;
+		alarm_title += "Pump Pressure TimeOut.";
 
-	alarm_msg = "Please, check pump pressure config !\n";
+		alarm_msg = "Please, check pump pressure config !\n";
 
-	ACT__RETRY_ABORT;
-	ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__DOOR__NOT_OPEN;
 
-	//.....
-	alarm_id = ALID__DOOR__NOT_OPEN;
+		alarm_title  = title;
+		alarm_title += "Door Status is not open !";
 
-	alarm_title  = title;
-	alarm_title += "Door Status is not open !";
+		alarm_msg = "Please, check loadport door status !\n";
+	
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__MAP_SEQ_LOCK__INTERLOCK;
 
-	alarm_msg = "Please, check loadport door status !\n";
+		alarm_title  = title;
+		alarm_title += "Currently, Load Port's status is \"Mapping_Sequence Lock\".";
 
-	ACT__RETRY_ABORT;
-	ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+		alarm_msg = "Please, check ATM Robot's status !\n";
 
-	//.....
-	alarm_id = ALID__MAP_SEQ_LOCK__INTERLOCK;
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__ROBOT_ARM__NOT_RETRACTED;
 
-	alarm_title  = title;
-	alarm_title += "Currently, Load Port's status is \"Mapping_Sequence Lock\".";
+		alarm_title  = title;
+		alarm_title += "Robot's arm is not retracted !\".";
 
-	alarm_msg = "Please, check ATM Robot's status !\n";
+		alarm_msg = "Please, check the RNE sensor of ATM Robot's arm ! \n";
 
-	ACT__RETRY_ABORT;
-	ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
 
-	//
 	return 1;
 }
 
@@ -272,9 +287,10 @@ int CObj__LPx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	CString def_name;
 	CString def_data;
+	CString str_name;
 	CString ch_name;
 	CString obj_name;
-	CString str_name;
+	CString var_name;
 	int i;
 
 	// ...
@@ -359,6 +375,35 @@ int CObj__LPx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// ARM_RNE.SENSOR ...
+	{
+		def_name = "ROBOT.ARM_RNE_SNS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if((def_data.CompareNoCase(STR__NO)   == 0)
+		|| (def_data.CompareNoCase(STR__NULL) == 0))
+		{
+			bActive__ROBOT_ARM_RNE_SNS = false;
+		}
+		else
+		{
+			bActive__ROBOT_ARM_RNE_SNS = true;
+
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_ARM_RNE_SNS, obj_name,var_name);
+		}
+
+		//
+		def_name = "DATA.RNE_ON";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sDATA__RNE_ON = def_data;
+
+		def_name = "DATA.RNE_OFF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sDATA__RNE_OFF = def_data;
+	}
+
+	// ...
 	if(obj_lp.CompareNoCase(obj_rf) == 0)
 	{
 		bOBJ_TYPE__DUAL = FALSE;
@@ -388,6 +433,12 @@ int CObj__LPx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				dCH__SLOT_STATUS[i]->Set__DATA(STR__EXIST);
 			}
 			*/
+
+			//
+			if(bActive__ROBOT_ARM_RNE_SNS)
+			{
+				dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(sDATA__RNE_ON);
+			}
 		}
 	}
 
@@ -475,11 +526,6 @@ LOOP_RETRY:
 
 		ELSE_IF__CTRL_MODE(sMODE__EXTENDSHUTTLE)		flag = Call__EXTENDSHUTTLE(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__RETRACTSHUTTLE)		flag = Call__RETRACTSHUTTLE(p_variable,p_alarm);
-
-		else
-		{
-
-		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

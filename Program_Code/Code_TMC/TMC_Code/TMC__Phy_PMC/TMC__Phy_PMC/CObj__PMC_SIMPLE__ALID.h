@@ -2,8 +2,10 @@
 
 
 // ...
-#define  ACT__RETRY								"RETRY"
-#define  ACT__ABORT								"ABORT"
+#define  ACT__RETRY											"RETRY"
+#define  ACT__ABORT											"ABORT"
+#define  ACT__IGNORE										"IGNORE"
+
 
 // ...
 #define  ALID__VALVE_OPEN__TIMEOUT							1
@@ -18,3 +20,4 @@
 
 #define  ALID__SV_CLOSE_NOT_EQUAL_PRESSURE_ALARAM			10
 #define  ALID__TMC_PMC_PRESSURE_IS_NOT_SAME					11
+

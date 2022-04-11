@@ -26,6 +26,9 @@ private:
 	// CFG ...
 	CX__VAR_ANALOG_CTRL   aCH__CFG_PROCESS_MANOMETER_MAX_PRESSURE_mTORR_X[_CFG__PRC_GAUGE_SIZE];
 
+	// MON ...
+	CX__VAR_STRING_CTRL   sCH__MON_CHM_PRESSURE_DISPLAY;
+	//
 
 	//-------------------------------------------------------------------------
 	// OBJ : DB_INF

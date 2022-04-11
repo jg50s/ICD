@@ -116,15 +116,16 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_DIGITAL_WITH_OPTION(var_name, "POSITION PRESSURE", -1, "E", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_APC_MODE, var_name);
 
+			//
 			var_name = "RCP.APC.POSITION";		
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 1, 0.0, 100.0, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_APC_POSITION, var_name);
 
+			//
 			var_name = "RCP.APC.PRESSURE";		
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "torr", 3, 0.0, 10.0, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_APC_PRESSURE, var_name);
 
-			//
 			var_name = "RCP.APC.LEARNED.POS";
 			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_APC_LEARNED_POS, var_name);
@@ -132,14 +133,6 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.APC.HOLD.DELAY";
 			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_APC_HOLD_DELAY, var_name);
-
-			var_name = "RCP.APC.TOL.WARNING";
-			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_APC_TOL_WARNING, var_name);
-
-			var_name = "RCP.APC.TOL.ALARM";
-			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_APC_TOL_ALARM, var_name);
 		}
 
 		// MFC ...
@@ -148,10 +141,6 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name.Format("RCP.GAS.%02d.FLOW", i+1);
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_GAS_FLOW_X[i], var_name);
-
-			var_name.Format("RCP.GAS.%02d.RAMP.SEC", i+1);
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_GAS_RAMP_SEC_X[i], var_name);
 		}
 
 		// RF.RPS ...
@@ -159,78 +148,70 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.RF.RPS.POWER";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_RF_RPS_POWER, var_name);
-
-			var_name = "RCP.RF.RPS.TOL.WARNING";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_RPS_TOL_WARNING, var_name);
-
-			var_name = "RCP.RF.RPS.TOL.ALARM";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_RPS_TOL_ALARM, var_name);
 		}
-		// RF.400KHZ ...
+		// RF.LF ...
 		{
-			var_name = "RCP.RF.400KHZ.WAIT.TIME";
+			var_name = "RCP.RF.LF.POWER";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_400KHZ_WAIT_TIME, var_name);
-
-			var_name = "RCP.RF.400KHZ.POWER";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_400KHZ_POWER, var_name);
-
-			var_name = "RCP.RF.400KHZ.TOL.WARNING";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_400KHZ_TOL_WARNING, var_name);
-
-			var_name = "RCP.RF.400KHZ.TOL.ALARM";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_400KHZ_TOL_ALARM, var_name);
+			LINK__VAR_STRING_CTRL(sCH__RCP_RF_LF_POWER, var_name);
 		}
-		// RF.40MHZ ...
+		// RF.HF ...
 		{
-			var_name = "RCP.RF.40MHZ.WAIT.TIME";
+			var_name = "RCP.RF.HF.POWER";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_40MHZ_WAIT_TIME, var_name);
-
-			var_name = "RCP.RF.40MHZ.POWER";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_40MHZ_POWER, var_name);
-
-			var_name = "RCP.RF.40MHZ.TOL.WARNING";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_40MHZ_TOL_WARNING, var_name);
-
-			var_name = "RCP.RF.40MHZ.TOL.ALARM";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_RF_40MHZ_TOL_ALARM, var_name);
+			LINK__VAR_STRING_CTRL(sCH__RCP_RF_HF_POWER, var_name);
 		}
-
-		// MATCHER ...
+		// RF.PULSE ...
 		{
-			var_name = "RCP.MAT.400KHZ.SHUNT";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_400KHZ_SHUNT, var_name);
+			var_name = "RCP.RF.PULSE.FREQUENCY";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "hz", 0, 0, 5000, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_FREQUENCY, var_name);
 
-			var_name = "RCP.MAT.400KHZ.SERIES";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_400KHZ_SERIES, var_name);
+			var_name = "RCP.RF.PULSE.DUTY";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 0, 0, 100, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_DUTY, var_name);
 
-			var_name = "RCP.MAT.400KHZ.CAPACITY";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_400KHZ_CAPACITY, var_name);
+			var_name = "RCP.RF.PULSE.EXEC";
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, "LOW NORMAL REVERSE", -1, "E", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_PULSE_EXEC, var_name);
 
 			//
-			var_name = "RCP.MAT.40MHZ.SHUNT";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_40MHZ_SHUNT, var_name);
+			var_name = "RCP.RF.PULSE.ON_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_ON_TIME, var_name);
 
-			var_name = "RCP.MAT.40MHZ.SERIES";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_40MHZ_SERIES, var_name);
+			var_name = "RCP.RF.PULSE.OFF_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_OFF_TIME, var_name);
 
-			var_name = "RCP.MAT.40MHZ.CAPACITY";
+			var_name = "RCP.RF.PULSE.ON_SHIFT_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_ON_SHIFT_TIME, var_name);
+
+			var_name = "RCP.RF.PULSE.OFF_SHIFT_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_OFF_SHIFT_TIME, var_name);
+		}
+
+		// MAT.LF ...
+		{
+			var_name = "RCP.MAT.LF.SHUNT";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_40MHZ_CAPACITY, var_name);
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_LF_SHUNT, var_name);
+
+			var_name = "RCP.MAT.LF.SERIES";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_LF_SERIES, var_name);
+		}
+		// MAT.HF ...
+		{
+			var_name = "RCP.MAT.HF.SHUNT";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_HF_SHUNT, var_name);
+
+			var_name = "RCP.MAT.HF.SERIES";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_HF_SERIES, var_name);
 		}
 
 		// ESC ...
@@ -245,67 +226,10 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_DPC_CENTER_PRESSURE, var_name);
 
-			var_name = "RCP.DPC.CENTER.ZONE.FLOW.MAX.THRESHOLD";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_DPC_CENTER_ZONE_FLOW_MAX_THRESHOLD, var_name);
-			
-			var_name = "RCP.DPC.CENTER.ZONE.FLOW.MIN.THRESHOLD";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_DPC_CENTER_ZONE_FLOW_MIN_THRESHOLD, var_name);
-
 			// EDGE ...
 			var_name = "RCP.DPC.EDGE.PRESSURE";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_DPC_EDGE_PRESSURE, var_name);
-
-			var_name = "RCP.DPC.EDGE.ZONE.FLOW.MAX.THRESHOLD";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_DPC_EDGE_ZONE_FLOW_MAX_THRESHOLD, var_name);
-
-			var_name = "RCP.DPC.EDGE.ZONE.FLOW.MIN.THRESHOLD";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_DPC_EDGE_ZONE_FLOW_MIN_THRESHOLD, var_name);
-		}
-
-		// SH.TEMPERATURE ...
-		for(i=0; i<_CFG__SH_SIZE; i++)
-		{
-			int id = i + 1;
-
-			var_name.Format("RCP.SH%1d.TEMP", id);
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_SH_TEMP_X[i], var_name);
-
-			var_name.Format("RCP.SH%1d.OFFSET", id);
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_SH_OFFSET_X[i], var_name);
-
-			var_name.Format("RCP.SH%1d.WARNING", id);
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_SH_WARNING_X[i], var_name);
-
-			var_name.Format("RCP.SH%1d.ALARM", id);
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_SH_ALARM_X[i], var_name);
-		}
-
-		// WALL.TEMPERATURE ...
-		{
-			var_name = "RCP.WALL.MAIN.TEMP";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_WALL_MAIN_TEMP, var_name);
-
-			var_name = "RCP.WALL.MAIN.OFFSET";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_WALL_MAIN_OFFSET, var_name);
-
-			var_name = "RCP.WALL.MAIN.WARNING";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_WALL_MAIN_WARNING, var_name);
-
-			var_name = "RCP.WALL.MAIN.ALARM";
-			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
-			LINK__VAR_STRING_CTRL(sCH__RCP_WALL_MAIN_ALARM, var_name);
 		}
 
 		// LIFT_PIN ...
@@ -500,7 +424,7 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
-	// OBJ RF.RPS ...
+	// OBJ RF_RPS ...
 	{
 		def_name = "OBJ__RF_RPS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
@@ -530,99 +454,146 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_RPS__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
 		}
 	}
-	// OBJ RF.400KHZ ...
+	// OBJ RF_PULSE ...
 	{
-		def_name = "OBJ__RF_400KHZ";
+		def_name = "OBJ__RF_PULSE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
 
 		def_check = x_utility.Check__Link(obj_name);
-		bActive__OBJ_CTRL__RF_400KHZ = def_check;
+		bActive__OBJ_CTRL__RF_PULSE = def_check;
 
 		if(def_check)
 		{
-			pOBJ_CTRL__RF_400KHZ = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+			pOBJ_CTRL__RF_PULSE = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 			//
-			var_name = "PARA.SET.POWER";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_400KHZ__PARA_SET_POWER, obj_name,var_name);
-
-			var_name = "PARA.HOLD.TIME";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_400KHZ__PARA_HOLD_TIME, obj_name,var_name);
+			var_name = "PARA.RCP.FREQUENCY";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__PARA_RCP_FREQUENCY, obj_name,var_name);
+			
+			var_name = "PARA.RCP.DUTY";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__PARA_RCP_DUTY, obj_name,var_name);
+			
+			var_name = "PARA.RCP.EXEC";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_PULSE__PARA_RCP_EXEC, obj_name,var_name);
+			
+			//
+			var_name = "PARA.RCP.ON_TIME";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__PARA_RCP_ON_TIME, obj_name,var_name);
+			
+			var_name = "PARA.RCP.OFF_TIME";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__PARA_RCP_OFF_TIME, obj_name,var_name);
+			
+			var_name = "PARA.RCP.ON_SHIFT_TIME";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__PARA_RCP_ON_SHIFT_TIME, obj_name,var_name);
+			
+			var_name = "PARA.RCP.OFF_SHIFT_TIME";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__PARA_RCP_OFF_SHIFT_TIME, obj_name,var_name);
 
 			//
 			var_name = "MON.POWER.ABORT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_400KHZ__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
-
-			var_name = "MON.REFLECT.HIGH_LIMIT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_400KHZ__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
-
-			var_name = "MON.REFLECT.MAX_COEFFICIENT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_400KHZ__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_PULSE__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
 		}
 	}
-	// OBJ RF.40MHZ ...
+
+	// OBJ RF_LF ...
 	{
-		def_name = "OBJ__RF_40MHZ";
+		def_name = "OBJ__RF_LF";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
 
 		def_check = x_utility.Check__Link(obj_name);
-		bActive__OBJ_CTRL__RF_40MHZ = def_check;
+		bActive__OBJ_CTRL__RF_LF = def_check;
 
 		if(def_check)
 		{
-			pOBJ_CTRL__RF_40MHZ = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+			pOBJ_CTRL__RF_LF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 			//
 			var_name = "PARA.SET.POWER";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_40MHZ__PARA_SET_POWER, obj_name,var_name);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_LF__PARA_SET_POWER, obj_name,var_name);
 
 			var_name = "PARA.HOLD.TIME";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_40MHZ__PARA_HOLD_TIME, obj_name,var_name);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_LF__PARA_HOLD_TIME, obj_name,var_name);
 
 			//
 			var_name = "MON.POWER.ABORT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_40MHZ__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
 
 			var_name = "MON.REFLECT.HIGH_LIMIT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_40MHZ__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
 
 			var_name = "MON.REFLECT.MAX_COEFFICIENT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_40MHZ__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
 		}
 	}
-
-	// OBJ MATCHER ...
+	// OBJ RF_HF ...
 	{
-		def_name = "OBJ__MATCHER";
+		def_name = "OBJ__RF_HF";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
 
 		def_check = x_utility.Check__Link(obj_name);
-		bActive__OBJ_CTRL__MAT = def_check;
+		bActive__OBJ_CTRL__RF_HF = def_check;
 
 		if(def_check)
 		{
-			pOBJ_CTRL__MAT = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+			pOBJ_CTRL__RF_HF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 			//
-			var_name = "PARA.LOAD_POS.CH1";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT__PARA_LOAD_POS_CH1, obj_name,var_name);
+			var_name = "PARA.SET.POWER";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_HF__PARA_SET_POWER, obj_name,var_name);
 
-			var_name = "PARA.LOAD_POS.CH2";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT__PARA_LOAD_POS_CH2, obj_name,var_name);
-
-			//
-			var_name = "PARA.TUNE_POS.CH1";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT__PARA_TUNE_POS_CH1, obj_name,var_name);
-
-			var_name = "PARA.TUNE_POS.CH2";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT__PARA_TUNE_POS_CH2, obj_name,var_name);
+			var_name = "PARA.HOLD.TIME";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_HF__PARA_HOLD_TIME, obj_name,var_name);
 
 			//
-			var_name = "PARA.CAP_POS.CH1";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT__PARA_CAP_POS_CH1, obj_name,var_name);
+			var_name = "MON.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
 
-			var_name = "PARA.CAP_POS.CH2";
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT__PARA_CAP_POS_CH2, obj_name,var_name);
+			var_name = "MON.REFLECT.HIGH_LIMIT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
+
+			var_name = "MON.REFLECT.MAX_COEFFICIENT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
+		}
+	}
+
+	// OBJ MAT_LF ...
+	{
+		def_name = "OBJ__MAT_LF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__MAT_LF = def_check;
+
+		if(def_check)
+		{
+			pOBJ_CTRL__MAT_LF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			var_name = "PARA.LOAD_POS";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT_LF__PARA_LOAD_POS, obj_name,var_name);
+
+			var_name = "PARA.TUNE_POS";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT_LF__PARA_TUNE_POS, obj_name,var_name);
+		}
+	}
+	// OBJ MAT_HF ...
+	{
+		def_name = "OBJ__MAT_HF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__MAT_HF = def_check;
+
+		if(def_check)
+		{
+			pOBJ_CTRL__MAT_HF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			var_name = "PARA.LOAD_POS";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT_HF__PARA_LOAD_POS, obj_name,var_name);
+
+			var_name = "PARA.TUNE_POS";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MAT_HF__PARA_TUNE_POS, obj_name,var_name);
 		}
 	}
 

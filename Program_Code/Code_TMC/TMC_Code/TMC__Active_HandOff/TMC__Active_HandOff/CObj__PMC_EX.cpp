@@ -39,9 +39,6 @@ int CObj__PMC_EX::__DEFINE__VERSION_HISTORY(version)
 
 
 // ...
-#define  MON_ID__MODULE_STATUS							1
-
-// ...
 #define  DSP__OBJ_MODE									\
 "INIT                                                   \
 S1 S2 S3												\
@@ -109,10 +106,6 @@ int CObj__PMC_EX::__DEFINE__VARIABLE_STD(p_variable)
 		}
 	}
 
-	// ...
-	{
-		// p_variable->Add__MONITORING_PROC(3.0, MON_ID__MODULE_STATUS);
-	}
 	return 1;
 }
 int CObj__PMC_EX::__DEFINE__ALARM(p_alarm)
@@ -271,20 +264,6 @@ int CObj__PMC_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__R1)			flag = Call__R1(p_variable, pm_i);
 		ELSE_IF__CTRL_MODE(sMODE__R2)			flag = Call__R2(p_variable, pm_i);
 		ELSE_IF__CTRL_MODE(sMODE__R3)			flag = Call__R3(p_variable, pm_i);
-
-		else
-		{
-			CString bff;
-			CString alarm_msg;
-			CString r_act;
-
-			bff.Format("Object Name : %s\n", sObject_Name);
-			alarm_msg  = bff;
-			bff.Format("Unknown Object Mode : \"%s\"\n", mode);
-			alarm_msg += bff;
-
-			p_alarm->Popup__ALARM_With_MESSAGE(ALID__OBJECT_MODE_UNKNOWN,alarm_msg,r_act);		
-		}
 	}
 	else
 	{
@@ -318,12 +297,6 @@ int CObj__PMC_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 int CObj__PMC_EX::__CALL__MONITORING(id,p_variable,p_alarm)
 {
-	switch(id)
-	{
-		case MON_ID__MODULE_STATUS:
-			Mon__MODULE_STATUS(p_variable,p_alarm);
-			break;
-	}
 
 	return 1;
 }

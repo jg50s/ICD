@@ -132,7 +132,7 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_He_OBJ_STATUS, var_name);
 	}
 
-	// ...
+	// MON.HE ...
 	{
 		// ...
 		{
@@ -174,6 +174,25 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_STRING(var_name);
 			LINK__VAR_STRING_CTRL(sCH__MON_He_Flow_EDGE, var_name);
 		}
+	}
+
+	// MON.ESC_ON ...
+	{
+		var_name = "MON.ESC_ON.TIME.START_DATE";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_ESC_ON_TIME_START_DATE, var_name);
+
+		var_name = "MON.ESC_ON.TIME.TOTAL_HOUR";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "hour", 0, 0, 9999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__MON_ESC_ON_TIME_TOTAL_HOUR, var_name);
+
+		var_name = "MON.ESC_ON.TIME.TOTAL_SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 0, 0, 9999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__MON_ESC_ON_TIME_TOTAL_SEC, var_name);
+
+		var_name = "MON.ESC_ON.TIME.RESET";
+		STD__ADD_DIGITAL(var_name, "RETURN  RESET");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_ESC_ON_TIME_RESET, var_name);
 	}
 
 	// ZERO CAL - HE_PRESSURE ...

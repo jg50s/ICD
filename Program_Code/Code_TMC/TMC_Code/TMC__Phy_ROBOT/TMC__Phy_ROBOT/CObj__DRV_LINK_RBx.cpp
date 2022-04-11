@@ -17,10 +17,7 @@ CObj__DRV_LINK_RBx::~CObj__DRV_LINK_RBx()
 //--------------------------------------------------------------------------------
 int CObj__DRV_LINK_RBx::__DEFINE__CONTROL_MODE(obj,l_mode)
 {
-	// ...
-	{
-		sObject_Name = obj;
-	}
+	sObject_Name = obj;
 
 	// ...
 	{
@@ -340,7 +337,8 @@ int CObj__DRV_LINK_RBx::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	{
 		SCX__SEQ_INFO x_seq;
-		iSim_Mode = x_seq->Is__SIMULATION_MODE();
+
+		iActive__SIM_MODE = x_seq->Is__SIMULATION_MODE();
 	}
 	return 1;
 }

@@ -18,6 +18,10 @@ private:
 	//-------------------------------------------------------------------------
 	// INTERNAL CHANNEL
 
+	// PARA ...
+	CX__VAR_DIGITAL_CTRL dCH__PARA_PMx_ID;
+	//
+
 
 	//------------------------------------------------------------------------------
 	// EXTERNAL CHANNEL
@@ -25,6 +29,9 @@ private:
 	CII_EXT_OBJECT__CTRL *pTMC_CHM__OBJ_CTRL;
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__OBJ_STATUS;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PARA_PMx_ID;
+	//
 
 
 	//------------------------------------------------------------------------------
@@ -39,7 +46,15 @@ private:
 
 	CString sMODE__VENT;
 	int  Call__VENT(CII_OBJECT__VARIABLE* p_variable);
+
+	// ...
+	CString sMODE__PMx_SV_OPEN;
+	int  Call__PMx_SV_OPEN(CII_OBJECT__VARIABLE* p_variable);
+
+	CString sMODE__PMx_SV_CLOSE;
+	int  Call__PMx_SV_CLOSE(CII_OBJECT__VARIABLE* p_variable);
 	//
+
 
 public:
 	CObj__TMC_CHM_STD();

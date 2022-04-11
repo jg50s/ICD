@@ -46,17 +46,6 @@ Fnc__APP_MSG(const CString& log_msg)
 	sCH__INR_LP__MSG->Set__DATA(log_msg);
 }
 
-int  CObj__STD_TYPE::
-Is__LP_AUTO_MODE()
-{
-	if( (sCH__OTR_IN_LP__FA_MODE->Check__DATA("AUTO") > 0) 
-	&& 	(sCH__OTR_IN_LP__FA_SERVICE_MODE->Check__DATA("YES") > 0) )
-	{
-		return 1;
-	}
-
-	return -1;
-}
 
 //-------------------------------------------------------------------------
 // Is__Abort
@@ -152,9 +141,6 @@ IS_ROBOT_ARM_RETRACT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alar
 	CString sTarget;
 	CString sActiveArm;
 	CString sArmAction;
-
-	dCH__OTR_IN_MON_dATM_RB1_ARM->Get__DATA(sActiveArm);
-	dCH__OTR_IN_MON_dATM_RB1_TRG_MOVE->Get__DATA(sTarget);
 
 	/*
 	if(m_sLPx_Name.CompareNoCase(sTarget) == 0)

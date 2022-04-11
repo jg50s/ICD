@@ -14,7 +14,7 @@ Mon__STATE_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 
 	while(1)
 	{
-		Sleep(500);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
 
 		if(sCH__TAS_RESET_REQ->Check__DATA("") < 0)
 		{

@@ -51,7 +51,9 @@ int CObj__CHM_IO
 			ch_data = sEXT_CH__SIM_PRESSURE_TORR->Get__STRING();
 
 			for(i=0; i<iSIZE__PRC_GUAGE; i++)
+			{
 				aEXT_CH__AI_PRC_GAUGE_TORR_X[i]->Set__DATA(ch_data);
+			}
 
 			aEXT_CH__AI_CHM_GAUGE_TORR->Set__DATA(ch_data);
 		}
@@ -152,6 +154,24 @@ int CObj__CHM_IO
 					ch_data.Format("%.1f", cur_press*1000.0);
 					sEXT_CH__CHM_PRESSURE_mTORR->Set__DATA(ch_data);
 				}
+			}
+
+			// ...
+			{
+				ch_data = sEXT_CH__CHM_PRESSURE_VALUE->Get__STRING();
+				double cur__press_torr = atof(ch_data);
+
+				ch_data = sEXT_CH__CHM_PRESSURE_mTORR->Get__STRING();
+				double cur__press_mtorr = atof(ch_data);
+
+					 if(cur__press_torr <  0.01)		ch_data.Format("%1.2f mtorr", cur__press_mtorr);
+				else if(cur__press_torr <   0.1)		ch_data.Format("%2.1f mtorr", cur__press_mtorr);
+				else if(cur__press_torr <   1.0)		ch_data.Format("%3.0f mtorr", cur__press_mtorr);
+				else if(cur__press_torr <  10.0)		ch_data.Format("%.3f torr", cur__press_torr);
+				else if(cur__press_torr < 100.0)		ch_data.Format("%.2f torr", cur__press_torr);
+				else									ch_data.Format("%.1f torr", cur__press_torr);
+
+				sCH__MON_CHM_PRESSURE_DISPLAY->Set__DATA(ch_data);
 			}
 		}
 

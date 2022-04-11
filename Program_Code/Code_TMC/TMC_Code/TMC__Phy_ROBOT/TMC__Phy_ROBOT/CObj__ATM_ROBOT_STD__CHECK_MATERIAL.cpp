@@ -215,9 +215,20 @@ LOOP_RETRY:
 				{
 					int alarm_id = ALID__LBA__MATERIAL_NONE_ERROR + ll_i;
 					CString err_msg;
+					CString err_bff;
 					CString r_act;
 
 					err_msg.Format("Material in %s(%s) must exist.\n",stn_name,stn_slot);
+
+					err_bff.Format(" * ll_i <- [%1d] \n", ll_i);
+					err_msg += err_bff;
+					err_bff.Format(" * slot_index <- [%1d] \n", slot_index);
+					err_msg += err_bff;
+
+					err_bff.Format(" * %s <- [%s] \n", 
+									dEXT_CH__LLx_SLOT_STATUS[ll_i][slot_index]->Get__CHANNEL_NAME(),
+									dEXT_CH__LLx_SLOT_STATUS[ll_i][slot_index]->Get__STRING());
+					err_msg += err_bff;
 
 					p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
 

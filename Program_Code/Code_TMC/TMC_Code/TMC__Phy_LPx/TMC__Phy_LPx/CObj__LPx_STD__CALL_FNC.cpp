@@ -97,10 +97,15 @@ int  CObj__LPx_STD
 int  CObj__LPx_STD
 ::Call__UNLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	int flag = pLPx__OBJ_CTRL->Call__OBJECT(CMMD__UNLOAD);
+	int r_flag;
+
+	r_flag = Alarm_Check__ARM_NOT_RETRACTED(p_alarm);
+	if(r_flag < 0)		return r_flag;
+
+	r_flag = pLPx__OBJ_CTRL->Call__OBJECT(CMMD__UNLOAD);
 
 	Update__MAP_INFO(p_variable,p_alarm);
-	return flag;
+	return r_flag;
 }
 
 // PREPLOAD -----
@@ -293,6 +298,9 @@ int  CObj__LPx_STD
 int  CObj__LPx_STD
 ::Call__CLOSEDOOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
+	int r_flag = Alarm_Check__ARM_NOT_RETRACTED(p_alarm);
+	if(r_flag < 0)		return r_flag;
+
 	return pLPx__OBJ_CTRL->Call__OBJECT(CMMD__CLOSEDOOR);
 }
 	

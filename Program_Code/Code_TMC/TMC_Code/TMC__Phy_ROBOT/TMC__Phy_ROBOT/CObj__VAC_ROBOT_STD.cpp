@@ -62,6 +62,10 @@ int CObj__VAC_ROBOT_STD::__DEFINE__VERSION_HISTORY(version)
  PM1  PM2  PM3  PM4  PM5  PM6						\
  PM12 PM34 PM56 									\
  LBA  LBB  LBC  LBD									\
+ LBA-1   LBA-2										\
+ LBB-1   LBB-2										\
+ LBC-1   LBC-2										\
+ LBD-1   LBC-2										\
  LBA-12  LBB-12  LBC-12  LBD-12"
 
 #define APP_DSP__STN_NAME							\
@@ -1305,23 +1309,50 @@ int CObj__VAC_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ROBOT_DA_RESULT_T_OFFSET_MM, def_data,str_name); 
 		}
 
-		// IO : ARM_RNE_SNS ... 
+		// ARM_RNE.SENSOR ... 
 		{
-			def_name = "ROBOT.ARM_RNE_SNS";
+			def_name = "ROBOT.RNE_SNS.ARM_A";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
 			if((def_data.CompareNoCase(STR__NO)   == 0)
 			|| (def_data.CompareNoCase(STR__NULL) == 0))
 			{
-				bActive__ROBOT_ARM_RNE_SNS = false;
+				bActive__ROBOT_RNE_SNS__ARM_A = false;
 			}
 			else
 			{
-				bActive__ROBOT_ARM_RNE_SNS = true;
+				bActive__ROBOT_RNE_SNS__ARM_A = true;
 
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,str_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_ARM_RNE_SNS, obj_name,str_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_RNE_SNS__ARM_A, obj_name,str_name);
 			}
+
+			//
+			def_name = "ROBOT.RNE_SNS.ARM_B";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			if((def_data.CompareNoCase(STR__NO)   == 0)
+			|| (def_data.CompareNoCase(STR__NULL) == 0))
+			{
+				bActive__ROBOT_RNE_SNS__ARM_B = false;
+			}
+			else
+			{
+				bActive__ROBOT_RNE_SNS__ARM_B = true;
+
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,str_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_RNE_SNS__ARM_B, obj_name,str_name);
+			}
+		}
+		// ARM_RNE.STATE ...
+		{
+			def_name = "DATA.RNE_ON";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__RNE_ON = def_data;
+
+			def_name = "DATA.RNE_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__RNE_OFF = def_data;
 		}
 	}
 
@@ -1357,8 +1388,6 @@ int CObj__VAC_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
-	iFlag__APP_LOG = 1;
-
 	if(iActive_SIM > 0)
 	{
 		CString ch__lotid = "LOTID";
@@ -1385,8 +1414,12 @@ int CObj__VAC_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			sCH__OTR_OUT_MON__ARM_A_MATERIAL_TITLE->Set__DATA("");
 			sCH__OTR_OUT_MON__ARM_B_MATERIAL_TITLE->Set__DATA("");
 		}
+
+		if(bActive__ROBOT_RNE_SNS__ARM_A)			dEXT_CH__ROBOT_RNE_SNS__ARM_A->Set__DATA(sDATA__RNE_ON);
+		if(bActive__ROBOT_RNE_SNS__ARM_B)			dEXT_CH__ROBOT_RNE_SNS__ARM_B->Set__DATA(sDATA__RNE_ON);
 	}
 
+	iFlag__APP_LOG = 1;
 	return 1;
 }
 
@@ -1625,10 +1658,6 @@ int CObj__VAC_ROBOT_STD::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm
 		ELSE_IF__CTRL_MODE(sMODE__TIME_TEST)
 		{
 			flag = Call__TIME_TEST(p_variable,p_alarm);
-		}
-		else	
-		{
-			flag = -1;
 		}
 	}
 

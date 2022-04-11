@@ -290,6 +290,13 @@ private:
 	int Seq__PURGE_VENT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int Seq__PURGE_PUMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,const int cycle_count);
 
+	//
+	CString sMODE__SLOT_OPEN;
+	int Call__SLOT_OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__SLOT_CLOSE;
+	int Call__SLOT_CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
 	// PICK ...
 	CString sMODE__PICK_READY;
 	int Call__PICK_READY(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);

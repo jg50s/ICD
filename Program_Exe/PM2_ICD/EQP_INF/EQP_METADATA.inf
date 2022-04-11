@@ -26,7 +26,7 @@
 
 #DEFINE_CONSTANT    DATA.PRC_GAUGE_SIZE     	          1
 #DEFINE_CONSTANT    CH.DO_PRC_GAUGE_VLV.1	              IO+do.Manometer.ISO.Vlv.1_torr
-#DEFINE_CONSTANT    CH.AI_PRC_GAUGE_TORR.1              IO+ai.Process.Pressure.Value
+#DEFINE_CONSTANT    CH.AI_PRC_GAUGE_TORR.1              IO+ai.Process.Pressure.Torr
 
 #DEFINE_CONSTANT    CH__AI_CHM_GAUGE_TORR               IO+ai.Chamber.Pressure.Value
 #DEFINE_CONSTANT    CH__AI_FORELINE_GAUGE_TORR          IO+ai.Pump_Line.Pressure.Value
@@ -164,17 +164,19 @@
 //-------------------------------------------------
 #OBJECT_PROPERTY    PHY_MTC
 
+#DEFINE_CONSTANT    CH__SLOT_VALVE                      DB_INF+SLIT.VLV.STS
+
 #DEFINE_CONSTANT    CH__DI_CHM_VAC_SNS                  IO+di.CHM.VAC.Sns
 #DEFINE_CONSTANT    CH__DI_CHM_ATM_SNS                  IO+di.CHM.ATM.Sns
 
 #DEFINE_CONSTANT    CH__DI_MTC_VAC_SNS              		IO+di.MTC.VAC.Sns
 #DEFINE_CONSTANT    CH__DI_MTC_ATM_SNS            		  IO+di.MTC.ATM.Sns
+
 #DEFINE_CONSTANT    CH__DI_MTC_GATE_OPEN_SNS            IO+di.MTC.Gate.Open
 #DEFINE_CONSTANT    CH__DI_MTC_GATE_CLOSE_SNS           IO+di.MTC.Gate.Close
-#DEFINE_CONSTANT    CH__DI_MTC_GATE_CLOSE_SNS           IO+di.MTC.Gate.Close
-
 #DEFINE_CONSTANT    CH__DO_MTC_GATE_OPEN              	IO+do.MTC.Gate.Open
 #DEFINE_CONSTANT    CH__DO_MTC_GATE_CLOSE              	IO+do.MTC.Gate.Close
+
 #DEFINE_CONSTANT    CH__DO_MTC_2STAGE_SLOW              IO+do.MTC.2Stage.SlowVV
 #DEFINE_CONSTANT    CH__DO_MTC_2STAGE_FAST              IO+do.MTC.2Stage.FastVV
 #DEFINE_CONSTANT    CH__DO_MTC_CHECK_VV              		IO+do.MTC.Check.VV
@@ -193,12 +195,61 @@
 #OBJECT_IO_FILE     DNET_IO__PMC_ICD.cfg  
 
 //----------------------
-#OBJECT_IO_PARA     NODE.SIZE                           0
+#OBJECT_IO_PARA     NODE.SIZE                           8
 
 #OBJECT_IO_PARA     NODE.1.MACID                        1
-#OBJECT_IO_PARA     NODE.1.NAME                         NA9112
+#OBJECT_IO_PARA     NODE.1.NAME                         NETS-DIO2
 #OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.1.IN_BYTE                      24
+#OBJECT_IO_PARA     NODE.1.IN_BYTE                      8
 #OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     10
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     8
+
+#OBJECT_IO_PARA     NODE.2.MACID                        2
+#OBJECT_IO_PARA     NODE.2.NAME                         BT-8844
+#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.2.IN_BYTE                      8
+#OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     8
+
+#OBJECT_IO_PARA     NODE.3.MACID                        3
+#OBJECT_IO_PARA     NODE.3.NAME                         MINI-8
+#OBJECT_IO_PARA     NODE.3.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.3.IN_BYTE                      4
+#OBJECT_IO_PARA     NODE.3.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.3.OUT_BYTE                     8
+
+#OBJECT_IO_PARA     NODE.4.MACID                        4
+#OBJECT_IO_PARA     NODE.4.NAME                         EX180-SDN1
+#OBJECT_IO_PARA     NODE.4.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.4.IN_BYTE                      3
+#OBJECT_IO_PARA     NODE.4.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.4.OUT_BYTE                     0
+
+#OBJECT_IO_PARA     NODE.5.MACID                        10
+#OBJECT_IO_PARA     NODE.5.NAME                         NA-9211
+#OBJECT_IO_PARA     NODE.5.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.5.IN_BYTE                      32
+#OBJECT_IO_PARA     NODE.5.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.5.OUT_BYTE                     0
+
+#OBJECT_IO_PARA     NODE.6.MACID                        11
+#OBJECT_IO_PARA     NODE.6.NAME                         EX180-SDN1
+#OBJECT_IO_PARA     NODE.6.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.6.IN_BYTE                      0
+#OBJECT_IO_PARA     NODE.6.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.6.OUT_BYTE                     8
+ 
+#OBJECT_IO_PARA     NODE.7.MACID                        13
+#OBJECT_IO_PARA     NODE.7.NAME                         TM-GAUGE
+#OBJECT_IO_PARA     NODE.7.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.7.IN_BYTE                      5
+#OBJECT_IO_PARA     NODE.7.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.7.OUT_BYTE                     0
+
+#OBJECT_IO_PARA     NODE.8.MACID                        14
+#OBJECT_IO_PARA     NODE.8.NAME                         TM-VLV
+#OBJECT_IO_PARA     NODE.8.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.8.IN_BYTE                      0
+#OBJECT_IO_PARA     NODE.8.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.8.OUT_BYTE                     2
 

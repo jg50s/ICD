@@ -405,13 +405,13 @@ int  CObj__LBx_CHM_STD
 
 LOOP_RETRY:
 	
-	int nRet = diEXT_CH__VAC_RB_RNE->When__DATA("None", 2);
+	int nRet = diEXT_CH__VAC_RB_RNE->When__DATA(STR__ON, 2);
 	if(nRet == 0)	return OBJ_ABORT;
 
 	CString var_data;
 	diEXT_CH__VAC_RB_RNE->Get__DATA(var_data);
 
-	if(var_data.CompareNoCase("None") != 0)
+	if(var_data.CompareNoCase(STR__ON) != 0)
 	{
 		int alarm_id = ALID__VAC_RB_NOT_RETRACTED;
 
@@ -444,7 +444,7 @@ int  CObj__LBx_CHM_STD
 LOOP_RETRY:
 
 	// ...
-	int nRet = diEXT_CH__ATM_RB_RNE->When__DATA("None", 2);
+	int nRet = diEXT_CH__ATM_RB_RNE->When__DATA(STR__ON, 2);
 	if(nRet == 0)	return OBJ_ABORT;	// Object Abort
 
 	diEXT_CH__ATM_RB_RNE->Get__DATA(var_data);
@@ -453,7 +453,7 @@ LOOP_RETRY:
 				  diEXT_CH__ATM_RB_RNE->Get__VARIABLE_NAME(), var_data);
 	Fnc__LOG(str_log);
 
-	if(var_data.CompareNoCase("None") != 0)
+	if(var_data.CompareNoCase(STR__ON) != 0)
 	{
 		int alarm_id = ALID__ATM_RB_NOT_RETRACTED;
 

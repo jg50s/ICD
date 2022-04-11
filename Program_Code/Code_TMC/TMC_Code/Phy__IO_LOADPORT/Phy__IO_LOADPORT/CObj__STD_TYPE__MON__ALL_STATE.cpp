@@ -12,7 +12,7 @@ void CObj__STD_TYPE
 
 	while(1)
 	{
-		_sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		Fnc__PIO_TRANSFER_MONITOR(p_variable, p_alarm);
 		// Fnc__IO_MONITOR(p_variable, p_alarm);

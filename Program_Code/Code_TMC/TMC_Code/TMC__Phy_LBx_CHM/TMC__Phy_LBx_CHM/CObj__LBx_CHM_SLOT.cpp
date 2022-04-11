@@ -280,82 +280,102 @@ int CObj__LBx_CHM_SLOT::__DEFINE__VARIABLE_STD(p_variable)
 	LINK__VAR_DIGITAL_CTRL(dCH__VAC_SNS, str_name);
 
 
-	//.....
-	CString dsc_item_list;
-	p_variable->Get__STD_DESCRIPTION(DSP__SLOT_STATUS,dsc_item_list);
-
-	for(i=0;i<CFG_LBx__SLOT_SIZE;i++)
+	// ...
 	{
-		int id = i + 1;
+		CString dsc_item_list;
+		p_variable->Get__STD_DESCRIPTION(DSP__SLOT_STATUS,dsc_item_list);
 
-		//
-		str_name.Format("OTR.OUT.MON.dSLOT%002d.STATUS", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,dsc_item_list,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__SLOT_STATUS[i],str_name);
+		for(i=0; i<CFG_LBx__SLOT_SIZE; i++)
+		{
+			int id = i + 1;
 
-		str_name.Format("OTR.OUT.MON.sSLOT%002d.TITLE", id);
-		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__SLOT_TITLE[i],str_name);
+			//
+			str_name.Format("OTR.OUT.MON.dSLOT%002d.STATUS", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,dsc_item_list,"");
+			LINK__VAR_DIGITAL_CTRL(dCH__SLOT_STATUS[i],str_name);
 
-		//
-		str_name.Format("OTR.OUT.MON.sSLOT%002d.LOTID", id);
-		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__SLOT_LOTID[i], str_name);
+			str_name.Format("OTR.OUT.MON.sSLOT%002d.TITLE", id);
+			STD__ADD_STRING_WITH_X_OPTION(str_name,"");
+			LINK__VAR_STRING_CTRL(sCH__SLOT_TITLE[i],str_name);
 
-		//
-		str_name.Format("OTR.OUT.MON.dSLIT.VALVE.STATUS.%1d", id);
-		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__CLOSE_OPEN,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__SLIT_VALVE_STATUS_X[i], str_name);
+			//
+			str_name.Format("OTR.OUT.MON.sSLOT%002d.LOTID", id);
+			STD__ADD_STRING_WITH_X_OPTION(str_name,"");
+			LINK__VAR_STRING_CTRL(sCH__SLOT_LOTID[i], str_name);
 
-		str_name.Format("SLIT_VALVE.LOCK_FLAG.%1d", id);
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__SLIT_VALVE_LOCK_FLAG_X[i], str_name);
+			//
+			str_name.Format("OTR.OUT.MON.dSLIT.VALVE.STATUS.%1d", id);
+			STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__CLOSE_OPEN,"");
+			LINK__VAR_DIGITAL_CTRL(dCH__SLIT_VALVE_STATUS_X[i], str_name);
 
-		//
-		str_name.Format("OTR.OUT.MON.dDOOR.VALVE.STATUS.%1d", id);
-		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__CLOSE_OPEN,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__DOOR_VALVE_STATUS_X[i], str_name);
+			str_name.Format("SLIT_VALVE.LOCK_FLAG.%1d", id);
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+			LINK__VAR_STRING_CTRL(sCH__SLIT_VALVE_LOCK_FLAG_X[i], str_name);
+
+			//
+			str_name.Format("OTR.OUT.MON.dDOOR.VALVE.STATUS.%1d", id);
+			STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__CLOSE_OPEN,"");
+			LINK__VAR_DIGITAL_CTRL(dCH__DOOR_VALVE_STATUS_X[i], str_name);
+		}
+
+		// SLOT.VLV ...
+		{
+			str_name = "OTR.OUT.MON.dSLIT.VALVE.STATUS";
+			STD__ADD_DIGITAL_WITH_COMMENT(str_name, APP_DSP__CLOSE_OPEN,"");
+			LINK__VAR_DIGITAL_CTRL(dCH__SLIT_VALVE_STATUS, str_name);
+
+			str_name = "SLIT_VALVE.LOCK_FLAG";
+			STD__ADD_STRING_WITH_COMMENT(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH__SLIT_VALVE_LOCK_FLAG, str_name);
+		}
+		// DOOR.VLV ...
+		{
+			str_name = "OTR.OUT.MON.dDOOR.VALVE.STATUS";
+			STD__ADD_DIGITAL_WITH_COMMENT(str_name, APP_DSP__CLOSE_OPEN,"");
+			LINK__VAR_DIGITAL_CTRL(dCH__DOOR_VALVE_STATUS, str_name);
+		}
 	}
 
-	//
-	str_name = "aTIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__TIME_COUNT,str_name);
+	// ...
+	{
+		str_name = "aTIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__TIME_COUNT,str_name);
 
-	str_name = "aPUMPING.ELAPSED.TIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__PUMPING_ELAPSED_TIME,str_name);
+		str_name = "aPUMPING.ELAPSED.TIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__PUMPING_ELAPSED_TIME,str_name);
 
-	str_name = "aVENTING.ELAPSED.TIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__VENTING_ELAPSED_TIME,str_name);
+		str_name = "aVENTING.ELAPSED.TIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__VENTING_ELAPSED_TIME,str_name);
 
-	str_name = "SV.UP.aTIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH_SV_UP__TIME_COUNT,str_name);
+		str_name = "SV.UP.aTIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH_SV_UP__TIME_COUNT,str_name);
 
-	str_name = "SV.DOWN.aTIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH_SV_DOWN__TIME_COUNT,str_name);
+		str_name = "SV.DOWN.aTIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH_SV_DOWN__TIME_COUNT,str_name);
 
-	str_name = "SV.OPEN.aTIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH_SV_OPEN__TIME_COUNT,str_name);
+		str_name = "SV.OPEN.aTIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH_SV_OPEN__TIME_COUNT,str_name);
 
-	str_name = "SV.CLOSE.aTIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH_SV_CLOSE__TIME_COUNT,str_name);
+		str_name = "SV.CLOSE.aTIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH_SV_CLOSE__TIME_COUNT,str_name);
 
-	str_name = "CFG.aCONVECT.ATM.HIGH.PRESS";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"mtorr",0,0,80000000,"");
-	LINK__VAR_ANALOG_CTRL(aCFG_CH_CONVECT_ATM_HIGH_PRESS,str_name);
+		str_name = "CFG.aCONVECT.ATM.HIGH.PRESS";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"mtorr",0,0,80000000,"");
+		LINK__VAR_ANALOG_CTRL(aCFG_CH_CONVECT_ATM_HIGH_PRESS,str_name);
+	}
 
-	//.....
+	// ...
 	str_name.Format("CFG.aMAX.SV.OPEN.DIFFERENTIAL.PRESS");
 	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"mtorr",0,10,1000,"200mtorr");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_MAX_SV_OPEN_DIFF_PRESS,str_name);
 
-	//.....
 	str_name.Format("CFG.dINIT.PUMP.DOWN");
 	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "");
 	LINK__VAR_DIGITAL_CTRL(dCH__CFG_PUMP_DOWN_OPTION,str_name);
@@ -1037,16 +1057,25 @@ int CObj__LBx_CHM_SLOT::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			// VAC Robot Arm Sns
 			def_name.Format("VAR__IO_DI_VAC_RB_RNE.%1d", i+1);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_RB_RNE_X[i], obj_name,var_name);
 
 			// ATM Robot Arm Sns
 			def_name.Format("VAR__IO_DI_ATM_RB_RNE.%1d", i+1);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__ATM_RB_RNE_X[i], obj_name,var_name);
+		}
+
+		// DATA.ARM STATE ...
+		{
+			def_name = "DATA.RNE_ON";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__RNE_ON = def_data;
+
+			def_name = "DATA.RNE_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sDATA__RNE_OFF = def_data;
 		}
 	}
 
@@ -1201,6 +1230,26 @@ int CObj__LBx_CHM_SLOT::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LBx__VAC_SNS, obj_name,var_name);
 	}
 
+	// DATA.ATM & VAC ...
+	{
+		def_name = "DATA.ATM_ON";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sDATA__ATM_ON = def_data;
+
+		def_name = "DATA.ATM_OFF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sDATA__ATM_OFF = def_data;
+
+		//
+		def_name = "DATA.VAC_ON";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sDATA__VAC_ON = def_data;
+
+		def_name = "DATA.VAC_OFF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sDATA__VAC_OFF = def_data;
+	}
+
 	// PHY_TM : TMÀÇ Pressure Status (ATM, VAC, BTW)
 	{
 		str_name.Format("VAR__PHY_TM_PRESS_STS");
@@ -1323,33 +1372,57 @@ int CObj__LBx_CHM_SLOT::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		}
 		ELSE_IF__CTRL_MODE(sMODE__SV_CLOSE)
 		{
-			if(para__slot_index >= 0)		sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA(STR__YES);
+			if(para__slot_index >= 0)
+			{
+				sCH__SLIT_VALVE_LOCK_FLAG->Set__DATA(STR__YES);				
+				sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA(STR__YES);
+			}
 
 			flag = Call__SV_CLOSE(p_variable,p_alarm, para__slot_id);
 
 			Update__SV_STS(p_variable,p_alarm);
 
-			if(para__slot_index >= 0)		sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA("");
+			if(para__slot_index >= 0)
+			{
+				sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA("");
+				sCH__SLIT_VALVE_LOCK_FLAG->Set__DATA("");				
+			}
 		}
 		ELSE_IF__CTRL_MODE(sMODE__SV_OPEN)
 		{
-			if(para__slot_index >= 0)		sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA(STR__YES);
+			if(para__slot_index >= 0)
+			{
+				sCH__SLIT_VALVE_LOCK_FLAG->Set__DATA(STR__YES);				
+				sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA(STR__YES);
+			}
 
 			flag = Call__SV_OPEN(p_variable,p_alarm, para__slot_id);
 
 			Update__SV_STS(p_variable,p_alarm);
 
-			if(para__slot_index >= 0)		sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA("");
+			if(para__slot_index >= 0)
+			{
+				sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA("");
+				sCH__SLIT_VALVE_LOCK_FLAG->Set__DATA("");				
+			}
 		}
 		ELSE_IF__CTRL_MODE(sMODE__ALL_GAS_VLV_CLOSE)
 		{
-			if(para__slot_index >= 0)		sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA(STR__YES);
+			if(para__slot_index >= 0)
+			{
+				sCH__SLIT_VALVE_LOCK_FLAG->Set__DATA(STR__YES);				
+				sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA(STR__YES);
+			}
 
 			flag = Call__ALL_GAS_VLV_CLOSE(p_variable,p_alarm);
 
 			Update__SV_STS(p_variable,p_alarm);
 
-			if(para__slot_index >= 0)		sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA("");
+			if(para__slot_index >= 0)
+			{
+				sCH__SLIT_VALVE_LOCK_FLAG_X[para__slot_index]->Set__DATA("");
+				sCH__SLIT_VALVE_LOCK_FLAG->Set__DATA("");				
+			}
 		}
 		ELSE_IF__CTRL_MODE(sMODE__LIFT_PIN_UP)
 		{

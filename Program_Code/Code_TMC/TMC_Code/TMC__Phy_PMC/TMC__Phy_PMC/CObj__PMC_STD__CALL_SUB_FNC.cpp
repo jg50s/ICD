@@ -202,12 +202,12 @@ int  CObj__PMC_STD
 LOOP_RETRY:
 
 	// 1. VAC Robot Arm Retract Status. !!
-	int nRet = diEXT_CH__VAC_RB_RNE->When__DATA("None", 2);
+	int nRet = diEXT_CH__VAC_RB_RNE->When__DATA(STR__ON, 2);
 	if(nRet == 0)		return OBJ_ABORT;
 
 	diEXT_CH__VAC_RB_RNE->Get__DATA(var_data);
 
-	if(var_data.CompareNoCase("None") != 0)
+	if(var_data.CompareNoCase(STR__ON) != 0)
 	{
 		// Popup Alarm Occur !!
 

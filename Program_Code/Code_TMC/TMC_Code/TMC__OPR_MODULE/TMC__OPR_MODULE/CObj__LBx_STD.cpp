@@ -28,6 +28,17 @@ int CObj__LBx_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__PUMP, "PUMP");
 		ADD__CTRL_VAR(sMODE__VENT, "VENT");
 
+		//
+		ADD__CTRL_VAR(sMODE__DOOR_OPEN,  "DOOR.OPEN");
+		ADD__CTRL_VAR(sMODE__DOOR_CLOSE, "DOOR.CLOSE");
+
+		ADD__CTRL_VAR(sMODE__SLOT_OPEN,  "SLOT.OPEN");
+		ADD__CTRL_VAR(sMODE__SLOT_CLOSE, "SLOT.CLOSE");
+
+		ADD__CTRL_VAR(sMODE__PIN_UP,   "PIN.UP");
+		ADD__CTRL_VAR(sMODE__PIN_DOWN, "PIN.DOWN");
+
+		//
 		ADD__CTRL_VAR(sMODE__PREPMATER, "PREPMATER");
 		ADD__CTRL_VAR(sMODE__COMPMATER, "COMPMATER");
 
@@ -83,6 +94,11 @@ int CObj__LBx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "OBJ.STATUS";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,dsc_item_list,"");
 		LINK__VAR_DIGITAL_CTRL(dCH__OBJ_STATUS,str_name);
+
+		//
+		str_name = "PARA.SLOT.ID";
+		STD__ADD_DIGITAL(str_name, "1 2");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_SLOT_ID, str_name);
 
 		//
 		str_name = "PARA.PREHEAT.TIME";
@@ -146,6 +162,10 @@ int CObj__LBx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__OBJ_STATUS, obj_name,var_name);
 
 			//
+			var_name = "PARA.SLOT.ID";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PARA_SLOT_ID, obj_name,var_name);
+
+			//
 			var_name = "OTR.IN.PARA.aPREHEAT.TIME";
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PARA_PREHEAT_TIME, obj_name,var_name);
 
@@ -199,6 +219,11 @@ int CObj__LBx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xLOG_CTRL->ENABLE__TIME_LOG();
 		xLOG_CTRL->WRITE__LOG("   START   \n");
 	}
+
+	// ...
+	{
+		dCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 
@@ -210,10 +235,16 @@ int CObj__LBx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
+		CString para__slot_id;
 		CString para__preheat_time;
 		CString para__cooling_time;
 		CString para__prematerial_slot;
 
+		//
+		para__slot_id = dCH__PARA_SLOT_ID->Get__STRING();
+		dEXT_CH__PARA_SLOT_ID->Set__DATA(para__slot_id);
+
+		//
 		aCH__PARA_PREHEAT_TIME->Get__DATA(para__preheat_time);
 		aEXT_CH__PARA_PREHEAT_TIME->Set__DATA(para__preheat_time);
 
@@ -223,8 +254,9 @@ int CObj__LBx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		aCH__PARA_PREMATERIAL_SLOT->Get__DATA(para__prematerial_slot);
 		aEXT_CH__PARA_PREMATERIAL_SLOT->Set__DATA(para__prematerial_slot);
 
-		log_msg.Format("Start ... :  [%s] (%s,%s,%s)",
+		log_msg.Format("Start ... :  [%s] (%1d) (%s,%s,%s)",
 						mode,
+						para__slot_id,
 						para__preheat_time,
 						para__cooling_time,
 						para__prematerial_slot);
@@ -243,6 +275,13 @@ int CObj__LBx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__SV_CLOSE)			flag = Call__SV_CLOSE(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PUMP)				flag = Call__PUMP(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__VENT)				flag = Call__VENT(p_variable);
+
+		ELSE_IF__CTRL_MODE(sMODE__DOOR_OPEN)		flag = Call__DOOR_OPEN(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__DOOR_CLOSE)		flag = Call__DOOR_CLOSE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)		flag = Call__SLOT_OPEN(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_CLOSE)		flag = Call__SLOT_CLOSE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PIN_UP)			flag = Call__PIN_UP(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PIN_DOWN)			flag = Call__PIN_DOWN(p_variable);
 
 		ELSE_IF__CTRL_MODE(sMODE__PREPMATER)		flag = Call__PREPMATER(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__COMPMATER)		flag = Call__COMPMATER(p_variable);

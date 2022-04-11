@@ -38,14 +38,11 @@ int  CObj__PMC_SIMPLE
 	CStringArray l_err_msg;
 	CString err_msg;
 
-	int pmc_id;
-	int i;
-
-	for(i=0; i<iPM_LIMIT; i++)
+	for(int i=0; i<iPM_LIMIT; i++)
 	{
-		pmc_id = i + 1;
+		int pmc_id = i + 1;
 
-		if(dEXT_CH__CFG_PMx_EXIST_FLAG[i]->Check__DATA("YES") < 0)
+		if(dEXT_CH__CFG_PMx_EXIST_FLAG[i]->Check__DATA(STR__YES) < 0)
 		{
 			continue;
 		}
@@ -79,27 +76,24 @@ LOOP_RETRY:
 	if(pm_index < 0)				return -1;
 	if(pm_index > iPM_LIMIT)		return -1;
 
-	if(dEXT_CH__CFG_PMx_EXIST_FLAG[pm_index]->Check__DATA("YES") < 0)
+	if(dEXT_CH__CFG_PMx_EXIST_FLAG[pm_index]->Check__DATA(STR__YES) < 0)
 	{
+		int alarm_id = ALID__PM_NOT_EXIST_CONFIG_ALARAM;
+
+		CString alm_msg;
 		CString r_act;
-		CString str_msg;
 
 		// ...
 		{
-			str_msg.Format("Check.. PM%d SV OPEN", pmc_id);
+			alm_msg.Format("Check.. PM%d SV OPEN", pmc_id);
 			Fnc_App_Log("PM Not Exist.. Config Value... Skip..");
 		}
 
-		// ...
-		{
-			int alarm_id = ALID__PM_NOT_EXIST_CONFIG_ALARAM;
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,alm_msg, r_act);
 
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,str_msg, r_act);
-
-			if(r_act.CompareNoCase("ABORT") == 0)
-			{	
-				return OBJ_ABORT;
-			}
+		if(r_act.CompareNoCase(ACT__ABORT) == 0)
+		{	
+			return OBJ_ABORT;
 		}
 	}
 
@@ -157,11 +151,11 @@ LOOP_RETRY:
 
 			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,alarm_msg,r_act);
 
-			if(r_act.CompareNoCase("RETRY") == 0)
+			if(r_act.CompareNoCase(ACT__RETRY) == 0)
 			{	
 				goto LOOP_RETRY;
 			}
-			else if(r_act.CompareNoCase("ABORT") == 0)
+			if(r_act.CompareNoCase(ACT__ABORT) == 0)
 			{	
 				return OBJ_ABORT;
 			}
@@ -245,7 +239,7 @@ LOOP_RETRY:
 	if(pm_index <  0)				return -1;
 	if(pm_index >= iPM_LIMIT)		return -1;
 
-	if(dEXT_CH__CFG_PMx_EXIST_FLAG[pm_index]->Check__DATA("YES") < 0)
+	if(dEXT_CH__CFG_PMx_EXIST_FLAG[pm_index]->Check__DATA(STR__YES) < 0)
 	{
 		if(alarm_check < 0)
 		{

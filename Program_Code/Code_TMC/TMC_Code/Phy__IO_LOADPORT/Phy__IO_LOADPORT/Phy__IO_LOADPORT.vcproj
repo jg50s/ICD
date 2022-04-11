@@ -366,10 +366,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__STD_TYPE__CALL_RF_TAG.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\CObj__STD_TYPE__CALL_SUB_FNC.cpp"
 					>
 				</File>

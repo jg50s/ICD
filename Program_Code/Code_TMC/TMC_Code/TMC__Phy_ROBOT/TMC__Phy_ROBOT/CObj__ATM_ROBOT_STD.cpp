@@ -834,10 +834,12 @@ int CObj__ATM_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			for(i=0; i<CFG_LLx__SLOT_SIZE; i++)
 			{
-				str_name.Format("OTR.OUT.MON.dSLOT%002d.STATUS", id);
+				int slot_id = i + 1;
+
+				str_name.Format("OTR.OUT.MON.dSLOT%002d.STATUS", slot_id);
 				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_SLOT_STATUS[ll_i][i], def_data,str_name);
 
-				str_name.Format("OTR.OUT.MON.sSLOT%002d.TITLE", id);
+				str_name.Format("OTR.OUT.MON.sSLOT%002d.TITLE", slot_id);
 				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LLx_SLOT_TITLE[ll_i][i], def_data,str_name);
 			}
 
@@ -846,7 +848,7 @@ int CObj__ATM_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_DOOR_STATUS[ll_i], def_data,str_name);		
 
 			//
-			def_name.Format("LL%1d.ARM_RNE_SNS", id);
+			def_name.Format("LL%1d.ARM_RNE.SNS", id);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 			
 			if((def_data.CompareNoCase(STR__NO)   == 0)
@@ -860,23 +862,41 @@ int CObj__ATM_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_ARM_RNE_SNS[ll_i], obj_name,var_name);
+
+				//
+				def_name.Format("LL%1d.ARM_RNE_ON.STS", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LLx_ARM_RNE_ON_STS[ll_i] = def_data;
+
+				def_name.Format("LL%1d.ARM_RNE_OFF.STS", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LLx_ARM_RNE_OFF_STS[ll_i] = def_data;
 			}
 
 			//
-			def_name.Format("LL%1d.LOAD_ENABLE", id);
+			def_name.Format("LL%1d.LOAD_ENABLE.SNS", id);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
 			if((def_data.CompareNoCase(STR__NO)   == 0)
 			|| (def_data.CompareNoCase(STR__NULL) == 0))
 			{
-				bActive__LLx_LOAD_ENABLE[ll_i] = false;
+				bActive__LLx_LOAD_ENABLE_SNS[ll_i] = false;
 			}
 			else
 			{
-				bActive__LLx_LOAD_ENABLE[ll_i] = true;
+				bActive__LLx_LOAD_ENABLE_SNS[ll_i] = true;
 
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_LOAD_ENABLE[ll_i], obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_LOAD_ENABLE_SNS[ll_i], obj_name,var_name);
+
+				//
+				def_name.Format("LL%1d.LOAD_ENABLE_OFF.STS", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LLx_LOAD_ENABLE_OFF_STS[ll_i] = def_data;
+
+				def_name.Format("LL%1d.LOAD_ENABLE_ON.STS", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LLx_LOAD_ENABLE_ON_STS[ll_i] = def_data;
 			}
 		}
 	}

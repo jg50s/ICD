@@ -19,6 +19,8 @@
 // ...
 #define  ACT__RETRY					"RETRY"
 #define  ACT__ABORT					"ABORT"
+#define  ACT__COMPLETE				"COMPLETE"
 
 // ...
 #define  SEQ_IGNORE					2
+

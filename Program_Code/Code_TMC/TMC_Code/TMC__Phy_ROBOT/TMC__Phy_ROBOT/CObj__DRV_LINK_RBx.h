@@ -18,7 +18,9 @@ private:
 
 	// ..
 	SCX__USER_LOG_CTRL xAPP_LOG_CTRL;
-	int iSim_Mode;
+
+	int iActive__SIM_MODE;
+	int iCFG__SIM_MODE;
 
 	CMng__Error_Code mMNG__ERR_CODE;
 	//

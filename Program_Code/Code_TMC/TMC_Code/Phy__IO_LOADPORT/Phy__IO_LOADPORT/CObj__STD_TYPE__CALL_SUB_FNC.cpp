@@ -3,6 +3,20 @@
 #include "CObj__STD_TYPE__DEF.h"
 
 
+
+//-------------------------------------------------------------------------	
+int  CObj__STD_TYPE
+::Is__LP_AUTO_MODE()
+{
+	if((sCH__OTR_IN_LP__FA_MODE->Check__DATA("AUTO") > 0) 
+	&& (sCH__OTR_IN_LP__FA_SERVICE_MODE->Check__DATA("YES") > 0))
+	{
+		return 1;
+	}
+
+	return -1;
+}
+
 //-------------------------------------------------------------------------	
 int  CObj__STD_TYPE
 ::Fnc__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const CString str_caller)

@@ -177,6 +177,11 @@ int CObj__TMC_SYS_EX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xLOG_CTRL->ENABLE__TIME_LOG();
 		xLOG_CTRL->WRITE__LOG("   START   \n");
 	}
+
+	// ...
+	{
+		dCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+	}
 	return 1;
 }
 

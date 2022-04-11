@@ -238,11 +238,6 @@ int CObj__LPx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__EXTENDSHUTTLE)		flag = Call__EXTENDSHUTTLE(mode,p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__RETRACTSHUTTLE)		flag = Call__RETRACTSHUTTLE(mode,p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__HALT)					flag = Call__HALT(mode,p_variable);
-
-		else									
-		{
-
-		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

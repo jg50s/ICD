@@ -83,6 +83,13 @@ private:
 
 	CX__VAR_STRING_CTRL  sEXT_CH__RFx__CID_STRING;
 	CX__VAR_STRING_CTRL  sEXT_CH__RFx__MON_ACTIVE_FA_AUTO;
+
+	// ARM_RNE.INFO ...
+	bool bActive__ROBOT_ARM_RNE_SNS;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__ROBOT_ARM_RNE_SNS;
+
+	CString sDATA__RNE_ON;
+	CString sDATA__RNE_OFF;
 	//
 
 
@@ -204,10 +211,12 @@ private:
 	CString sMODE__HALT;
 	int  Call__HALT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
-
 	// ...
 	void Mon__ANI_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	void Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	// ...
+	int  Alarm_Check__ARM_NOT_RETRACTED(CII_OBJECT__ALARM* p_alarm);
 	//
 
 

@@ -56,41 +56,114 @@ int CObj__STEP_STD
 }
 
 
-// RF.400KHZ ...
+// RF.PULSE ...
 int CObj__STEP_STD
-::RF_400KHZ_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
+::RF_PULSE_OBJ__Start_ON()
 {
-	if(!bActive__OBJ_CTRL__RF_400KHZ)				return 1;
+	if(!bActive__OBJ_CTRL__RF_PULSE)				return 1;
 
-	aEXT_CH__RF_400KHZ__PARA_SET_POWER->Set__DATA(para_data);
-	aEXT_CH__RF_400KHZ__PARA_HOLD_TIME->Set__VALUE(0.0);
+	// ...
+	{
+		CString ch_data;
 
-	return pOBJ_CTRL__RF_400KHZ->Run__OBJECT(obj_mode);
+		ch_data = aCH__RCP_RF_PULSE_FREQUENCY->Get__STRING();
+		aEXT_CH__RF_PULSE__PARA_RCP_FREQUENCY->Set__DATA(ch_data);
+
+		ch_data = aCH__RCP_RF_PULSE_DUTY->Get__STRING();
+		aEXT_CH__RF_PULSE__PARA_RCP_DUTY->Set__DATA(ch_data);
+
+		ch_data = dCH__RCP_RF_PULSE_EXEC->Get__STRING();
+		dEXT_CH__RF_PULSE__PARA_RCP_EXEC->Set__DATA(ch_data);
+
+		//
+		ch_data = aCH__RCP_RF_PULSE_ON_TIME->Get__STRING();
+		aEXT_CH__RF_PULSE__PARA_RCP_ON_TIME->Set__DATA(ch_data);
+
+		ch_data = aCH__RCP_RF_PULSE_OFF_TIME->Get__STRING();
+		aEXT_CH__RF_PULSE__PARA_RCP_OFF_TIME->Set__DATA(ch_data);
+
+		ch_data = aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Get__STRING();
+		aEXT_CH__RF_PULSE__PARA_RCP_ON_SHIFT_TIME->Set__DATA(ch_data);
+
+		ch_data = aCH__RCP_RF_PULSE_OFF_SHIFT_TIME->Get__STRING();
+		aEXT_CH__RF_PULSE__PARA_RCP_OFF_SHIFT_TIME->Set__DATA(ch_data);
+	}
+
+	// ...
+	CString obj_mode = _PULSE_CMD__PARA_RCP_ON;
+	
+	return pOBJ_CTRL__RF_PULSE->Run__OBJECT(obj_mode);
 }
 int CObj__STEP_STD
-::RF_400KHZ_OBJ__Start_OFF()
+::RF_PULSE_OBJ__Start_OFF()
 {
-	if(!bActive__OBJ_CTRL__RF_400KHZ)				return 1;
+	if(!bActive__OBJ_CTRL__RF_PULSE)				return 1;
 
-	CString obj_mode = _RF_CMD__OFF;
+	// ...
+	CString obj_mode = _PULSE_CMD__PARA_RCP_OFF;
 
-	return pOBJ_CTRL__RF_400KHZ->Run__OBJECT(obj_mode);
+	return pOBJ_CTRL__RF_PULSE->Run__OBJECT(obj_mode);
 }
 
 int CObj__STEP_STD
-::RF_400KHZ_OBJ__Check_ERROR()
+::RF_PULSE_OBJ__Check_ERROR()
 {
-	if(!bActive__OBJ_CTRL__RF_400KHZ)				return -11;
+	if(!bActive__OBJ_CTRL__RF_PULSE)				return -11;
 
-	if(dEXT_CH__RF_400KHZ__MON_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)
+	if(dEXT_CH__RF_PULSE__MON_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		return 1;
 	}
-	if(dEXT_CH__RF_400KHZ__MON_REFLECT_HIGH_LIMIT_ACTIVE->Check__DATA(STR__ON) > 0)
+
+	return -1;
+}
+int CObj__STEP_STD
+::RF_PULSE_OBJ__Check_ABORTED()
+{
+	if(!bActive__OBJ_CTRL__RF_PULSE)				return -1;
+
+	int obj_sts = pOBJ_CTRL__RF_PULSE->Get__OBJECT_STATUS();
+	if(obj_sts == OBJECT_STATUS__ABORTED)			return 1;
+
+	return -1;
+}
+
+
+// RF.LF ...
+int CObj__STEP_STD
+::RF_LF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
+{
+	if(!bActive__OBJ_CTRL__RF_LF)					return 1;
+
+	aEXT_CH__RF_LF__PARA_SET_POWER->Set__DATA(para_data);
+	aEXT_CH__RF_LF__PARA_HOLD_TIME->Set__VALUE(0.0);
+
+	return pOBJ_CTRL__RF_LF->Run__OBJECT(obj_mode);
+}
+int CObj__STEP_STD
+::RF_LF_OBJ__Start_OFF()
+{
+	if(!bActive__OBJ_CTRL__RF_LF)					return 1;
+
+	CString obj_mode = _RF_CMD__OFF;
+
+	return pOBJ_CTRL__RF_LF->Run__OBJECT(obj_mode);
+}
+
+int CObj__STEP_STD
+::RF_LF_OBJ__Check_ERROR()
+{
+	if(!bActive__OBJ_CTRL__RF_LF)					return -11;
+
+	if(dEXT_CH__RF_LF__MON_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)
+	{
+		return 1;
+	}
+	if(dEXT_CH__RF_LF__MON_REFLECT_HIGH_LIMIT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		return 2;
 	}
-	if(dEXT_CH__RF_400KHZ__MON_REFLECT_MAX_COEFFICIENT_ACTIVE->Check__DATA(STR__ON) > 0)
+	if(dEXT_CH__RF_LF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		return 3;
 	}
@@ -98,52 +171,52 @@ int CObj__STEP_STD
 	return -1;
 }
 int CObj__STEP_STD
-::RF_400KHZ_OBJ__Check_ABORTED()
+::RF_LF_OBJ__Check_ABORTED()
 {
-	if(!bActive__OBJ_CTRL__RF_400KHZ)				return -1;
+	if(!bActive__OBJ_CTRL__RF_LF)					return -1;
 
-	int obj_sts = pOBJ_CTRL__RF_400KHZ->Get__OBJECT_STATUS();
+	int obj_sts = pOBJ_CTRL__RF_LF->Get__OBJECT_STATUS();
 	if(obj_sts == OBJECT_STATUS__ABORTED)			return 1;
 
 	return -1;
 }
 
 
-// RF.40MHZ ...
+// RF.HF ...
 int CObj__STEP_STD
-::RF_40MHZ_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
+::RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
 {
-	if(!bActive__OBJ_CTRL__RF_40MHZ)					return 1;
+	if(!bActive__OBJ_CTRL__RF_HF)					return 1;
 
-	aEXT_CH__RF_40MHZ__PARA_SET_POWER->Set__DATA(para_data);
-	aEXT_CH__RF_40MHZ__PARA_HOLD_TIME->Set__VALUE(0.0);
+	aEXT_CH__RF_HF__PARA_SET_POWER->Set__DATA(para_data);
+	aEXT_CH__RF_HF__PARA_HOLD_TIME->Set__VALUE(0.0);
 
-	return pOBJ_CTRL__RF_40MHZ->Run__OBJECT(obj_mode);
+	return pOBJ_CTRL__RF_HF->Run__OBJECT(obj_mode);
 }
 int CObj__STEP_STD
-::RF_40MHZ_OBJ__Start_OFF()
+::RF_HF_OBJ__Start_OFF()
 {
-	if(!bActive__OBJ_CTRL__RF_40MHZ)				return 1;
+	if(!bActive__OBJ_CTRL__RF_HF)					return 1;
 
 	CString obj_mode = _RF_CMD__OFF;
 
-	return pOBJ_CTRL__RF_40MHZ->Run__OBJECT(obj_mode);
+	return pOBJ_CTRL__RF_HF->Run__OBJECT(obj_mode);
 }
 
 int CObj__STEP_STD
-::RF_40MHZ_OBJ__Check_ERROR()
+::RF_HF_OBJ__Check_ERROR()
 {
-	if(!bActive__OBJ_CTRL__RF_40MHZ)				return -11;
+	if(!bActive__OBJ_CTRL__RF_HF)					return -11;
 
-	if(dEXT_CH__RF_40MHZ__MON_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)
+	if(dEXT_CH__RF_HF__MON_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		return 1;
 	}
-	if(dEXT_CH__RF_40MHZ__MON_REFLECT_HIGH_LIMIT_ACTIVE->Check__DATA(STR__ON) > 0)
+	if(dEXT_CH__RF_HF__MON_REFLECT_HIGH_LIMIT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		return 2;
 	}
-	if(dEXT_CH__RF_40MHZ__MON_REFLECT_MAX_COEFFICIENT_ACTIVE->Check__DATA(STR__ON) > 0)
+	if(dEXT_CH__RF_HF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
 		return 3;
 	}
@@ -151,12 +224,13 @@ int CObj__STEP_STD
 	return -1;
 }
 int CObj__STEP_STD
-::RF_40MHZ_OBJ__Check_ABORTED()
+::RF_HF_OBJ__Check_ABORTED()
 {
-	if(!bActive__OBJ_CTRL__RF_40MHZ)				return -1;
+	if(!bActive__OBJ_CTRL__RF_HF)					return -1;
 
-	int obj_sts = pOBJ_CTRL__RF_40MHZ->Get__OBJECT_STATUS();
+	int obj_sts = pOBJ_CTRL__RF_HF->Get__OBJECT_STATUS();
 	if(obj_sts == OBJECT_STATUS__ABORTED)			return 1;
 
 	return -1;
 }
+
