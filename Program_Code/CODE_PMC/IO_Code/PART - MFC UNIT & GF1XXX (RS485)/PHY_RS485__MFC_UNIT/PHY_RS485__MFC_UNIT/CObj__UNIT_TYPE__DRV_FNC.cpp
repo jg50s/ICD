@@ -351,16 +351,6 @@ int CObj__UNIT_TYPE
 			{
 				read_data = "ONLINE";
 			}
-
-			// ...
-			{
-				str__log.Format("Read__DIGITAL_EX [%s] GAS_NUM [%d], [%s] <-- OUT \n", 
-								fnc_name, 
-								mac_id, 
-								read_data);
-
-				Fnc__DRV_LOG(str__log);
-			}
 		}
 		return 1;
 
@@ -393,12 +383,7 @@ int CObj__UNIT_TYPE
 		break;
 	
 		default:
-		{
-			str__log.Format("[%s] Unknown Channel Error\n",
-				            fnc_name);
-			Fnc__DRV_LOG(str__log);
-		}
-		return -1;
+			return -1;
 	}
 
 	// ...
@@ -504,39 +489,8 @@ int CObj__UNIT_TYPE
 int CObj__UNIT_TYPE
 ::__Read__STRING(const CString& fnc_name, const CDS_IO__CHANNEL_INFO& io_info, CString& read_data)
 {
-	int cmd_id = atoi(fnc_name);
-	int mac_id = atoi(io_info.sCOMMAND1);
-	int mfc_index = atoi(io_info.sCOMMAND2);
 
-	// ...
-	{
-		CString log_msg;
-
-		log_msg.Format("Read__STRING_EX [%s] GAS_NUM [%d] --> IN", 
-			           fnc_name, mac_id); 
-
-		Fnc__DRV_LOG(log_msg);
-	}
-
-	switch(cmd_id)
-	{
-		case 301:
-		{
-			read_data.Format("%s", m_szFirm_Revision[mfc_index]);
-		}
-		break;
-	}
-
-	// ...
-	{
-		CString log_msg;
-
-		log_msg.Format("Read__STRING_EX [%s] GAS_NUM [%d] <-- OUT \n", 
-					   fnc_name, mac_id);
-
-		Fnc__DRV_LOG(log_msg);
-	}
-	return 1;
+	return -1;
 }
 
 
@@ -1521,11 +1475,16 @@ int CObj__UNIT_TYPE
 	{
 		case 251:
 		{
-			m_szFirm_Revision[mfc_index].Format("%c%c%c%c",
-				                                szReadData[8], 
-												szReadData[9], 
-												szReadData[10], 
-												szReadData[11]);
+			CString str__version;
+		
+			str__version.Format("%c%c%c%c",
+								szReadData[8], 
+								szReadData[9], 
+								szReadData[10], 
+								szReadData[11]);
+
+			m_szFirm_Revision[mfc_index] = str__version;
+			sCH__MON_MFC_VERSION_X[mfc_index]->Set__DATA(str__version);
 		}
 		break;
 	}

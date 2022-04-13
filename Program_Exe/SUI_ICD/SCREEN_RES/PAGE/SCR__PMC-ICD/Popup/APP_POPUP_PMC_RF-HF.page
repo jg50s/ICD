@@ -41,14 +41,14 @@ RECTANGLE
 #TEXT_EX
 {
 Microsoft Sans Serif
-RF-HF
+RF-PULSE
 (255, 255, 255)
 12
 3
 (100, 100, 100)
 0
 255
-(45, 1) (112 21)
+(45, 1) (134 21)
 }
 #DYNAMIC
 {

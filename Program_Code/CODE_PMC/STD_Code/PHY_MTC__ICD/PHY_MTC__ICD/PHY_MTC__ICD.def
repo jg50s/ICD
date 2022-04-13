@@ -1,0 +1,6 @@
+; PHY_MTC__ICD.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PHY_MTC__ICD"
+
+EXPORTS
+    ; Explicit exports can go here

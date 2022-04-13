@@ -52,6 +52,7 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 	CString def_value;
 	CString str_name;
 	CString str_temp;
+	int i;
 
 	// ...
 	sList__MAC_ID.RemoveAll();
@@ -65,9 +66,11 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 
 		def_name = "DATA.MFC_SIZE";
 		p_variable->Get__DEF_CONST_DATA(def_name, def_value);
-		int i_limit = atoi(def_value);
 
-		for(int i=0; i<i_limit; i++)
+		int i_limit = atoi(def_value);
+		if(i_limit > MAX_MFC)			i_limit = MAX_MFC;
+
+		for(i=0; i<i_limit; i++)
 		{
 			int id = i + 1;
 
@@ -103,15 +106,72 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__ALM_TEST__TIMEOUT,str_name);
 	}
 
-	// ...
+	// CFG ...
 	{
 		str_name = "CFG.BAUD_RATE.NEXT_APPLY";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "38400 19200 9600", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_BAUD_RATE_NEXT_APPLY, str_name);
-		
-		str_name = "CUR.BAUD_RATE.APPLIED";
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_BAUD_RATE_NEXT_APPLY, str_name);		
+	}
+
+	// USER ...
+	{
+		str_name = "USER.INFO.UPDATE.REQ";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__CUR_BAUD_RATE_APPLIED, str_name);
+		LINK__VAR_STRING_CTRL(sCH__USER_INFO_UPDATE_REQ, str_name);
+	}
+
+	// INFO ...
+	{
+		str_name = "INFO.DRV.COM_PORT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_COM_PORT, str_name);
+
+		str_name = "INFO.DRV.BAUD_RATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_BAUD_RATE, str_name);
+
+		str_name = "INFO.DRV.END_STRING";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_END_STRING, str_name);
+
+		str_name = "INFO.DRV.RECV.TIMEOUT.mSEC";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_RECV_TIMEOUT_mSEC, str_name);
+
+		str_name = "INFO.DRV.RETRY.COUNT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_RETRY_COUNT, str_name);
+
+		str_name = "INFO.MFC.BOARD_ID";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_MFC_BOARD_ID, str_name);
+
+		int i_limit = sList__VAR_ID.GetSize();
+		for(i=0; i<i_limit; i++)
+		{
+			CString str_id = sList__VAR_ID[i];
+			
+			str_name.Format("INFO.MFC.MACID.%s", str_id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__INFO_MFC_MACID_X[i], str_name);
+		}
+	}
+	// MON ...
+	{
+		int i_limit = sList__VAR_ID.GetSize();
+
+		for(i=0; i<i_limit; i++)
+		{
+			CString str_id = sList__VAR_ID[i];
+
+			str_name.Format("MON.MFC.VERSION.%s", str_id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_MFC_VERSION_X[i], str_name);
+
+			str_name.Format("MON.MFC.VLV.STS.%s", str_id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_MFC_VLV_STS_X[i], str_name);
+		}
 	}
 
 	// ...
@@ -214,8 +274,9 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_IO(p_io_variable)
 		// AI ...
 		{
 			str_name.Format("ai.MFC%s.FLOW", var_id);
-			p_analog_io->Add__ANALOG_READ_EX(str_name, "101", "sccm", 1, -10000, 99999, mac_id, str_index, "", -1);
+			p_analog_io->Add__ANALOG_READ_EX(str_name, "101", "sccm", 1, -10000, 99999, mac_id, str_index, "", 0.1);
 
+			//
 			str_name.Format("ai.MFC%s.VOLT", var_id);
 			p_analog_io->Add__ANALOG_READ_EX(str_name, "102", "volt", 1,-15.00, 15, mac_id, str_index, "", -1);
 
@@ -235,7 +296,9 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_IO(p_io_variable)
 		{
 			str_name.Format("do.MFC%s.GET.FIRM.VER", var_id);
 			p_digital_io->Add__DIGITAL_WRITE_EX(str_name, "251", "GET", mac_id, str_index, "");
+			LINK__IO_VAR_DIGITAL_CTRL(dCH__DO_MFC_VERSION_X[i], str_name);
 
+			//
 			str_name.Format("do.MFC%s.INIT", var_id);
 			p_digital_io->Add__DIGITAL_WRITE_EX(str_name, "252",APP_DSP__UNIT_INIT, mac_id, str_index, "");
 
@@ -254,16 +317,12 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_IO(p_io_variable)
 		// DI ...
 		{
 			str_name.Format("di.MFC%s.COMM.STS", var_id);
-			p_digital_io->Add__DIGITAL_READ_EX(str_name, "201",APP_DSP__COMM_STS, mac_id, str_index, "", -1);
+			p_digital_io->Add__DIGITAL_READ_EX(str_name, "201",APP_DSP__COMM_STS, mac_id, str_index, "", 1);
+			LINK__IO_VAR_DIGITAL_CTRL(dCH__DI_MFC_COMM_STATE_X[i], str_name);
 
 			str_name.Format("di.MFC%s.VALVE.STS", var_id);
 			p_digital_io->Add__DIGITAL_READ_EX(str_name, "202",APP_DSP__VALVE_CTRL, mac_id, str_index, "", -1);
-		}
-
-		// SI ...
-		{
-			str_name.Format("si.MFC%s.Version", var_id);
-			p_string_io->Add__STRING_READ_EX(str_name, "301", mac_id, str_index, "", -1);
+			LINK__IO_VAR_DIGITAL_CTRL(dCH__DI_MFC_VLV_CTRL_X[i], str_name);
 		}
 	}
 
@@ -278,6 +337,7 @@ int CObj__UNIT_TYPE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString def_data;
 	CString obj_name;
 	CString var_name;
+	CString ch_data;
 	
 	// DB_SYS ...
 	{
@@ -317,6 +377,18 @@ int CObj__UNIT_TYPE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
+		ch_data.Format("%1d", m_BoardID);
+		sCH__INFO_MFC_BOARD_ID->Set__DATA(ch_data);
+
+		int i_limit = sList__MAC_ID.GetSize();
+		for(int i=0; i<i_limit; i++)
+		{
+			sCH__INFO_MFC_MACID_X[i]->Set__DATA(sList__MAC_ID[i]);
+		}
+	}
+
+	// ...
+	{
 		SCX__SEQ_INFO x_seq_info;
 
 		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
@@ -342,6 +414,8 @@ int CObj__UNIT_TYPE::__INITIALIZE__IO(p_io_para)
 		m_Term_Str[1] = LF;
 		m_Term_Str[2] = '\0';
 		m_Term_Str[3] = '\0';
+
+		sCH__INFO_DRV_END_STRING->Set__DATA("<CR><LF>");
 	}
 
 	// ...
@@ -385,22 +459,32 @@ int CObj__UNIT_TYPE::__INITIALIZE__IO(p_io_para)
 			if(p_io_para->Get__PARAMETER_DATA(para_cmmd, para_data) > 0)
 			{
 				com_port = atoi(para_data);
+				sCH__INFO_DRV_COM_PORT->Set__DATA(para_data);
 			}
 		}
 	}
 
 	// ...
 	{
-		CString str_data = dCH__CFG_BAUD_RATE_NEXT_APPLY->Get__STRING();
+		CString str_data = dCH__CFG_BAUD_RATE_NEXT_APPLY->Get__STRING();		
+		sCH__INFO_DRV_BAUD_RATE->Set__DATA(str_data);
 
 		nRate = atoi(str_data);
-		sCH__CUR_BAUD_RATE_APPLIED->Set__DATA(str_data);
 	}
 
 	// ...
 	{
 		m_nRetryCnt = 1;
 		m_Rcv_Time = 300;		// ms
+
+		// ...
+		CString ch_data;
+
+		ch_data.Format("%1d", m_Rcv_Time);
+		sCH__INFO_DRV_RECV_TIMEOUT_mSEC->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", m_nRetryCnt);
+		sCH__INFO_DRV_RETRY_COUNT->Set__DATA(ch_data);
 	}
 
 	// ...
@@ -455,6 +539,7 @@ int CObj__UNIT_TYPE::__INITIALIZE__IO(p_io_para)
 
 		xDRV_LOG_CTRL->WRITE__LOG(msg);
 	}
+
 	return 1;
 }
 

@@ -127,7 +127,7 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			{
 				sCH__ZERO_CAL_RESET_HE_PRESSURE_CENTER->Set__DATA("");
 
-				sCH__ZERO_CAL_He_Pressure_CENTER->Set__DATA("");
+				sCH__ZERO_CAL_He_Pressure_CENTER->Set__DATA("0");
 			}
 		}
 		// ZERO-CAL - HE_PRESSURE.EDGE ...
@@ -144,7 +144,7 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			{
 				sCH__ZERO_CAL_RESET_HE_PRESSURE_EDGE->Set__DATA("");
 
-				sCH__ZERO_CAL_He_Pressure_EDGE->Set__DATA("");
+				sCH__ZERO_CAL_He_Pressure_EDGE->Set__DATA("0");
 			}
 		}
 
@@ -162,7 +162,7 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			{
 				sCH__ZERO_CAL_RESET_HE_FLOW_CENTER->Set__DATA("");
 
-				sCH__ZERO_CAL_He_Flow_CENTER->Set__DATA("");
+				sCH__ZERO_CAL_He_Flow_CENTER->Set__DATA("0");
 			}
 		}
 		// ZERO-CAL - HE_FLOW.EDGE ...
@@ -179,7 +179,7 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			{
 				sCH__ZERO_CAL_RESET_HE_FLOW_EDGE->Set__DATA("");
 
-				sCH__ZERO_CAL_He_Flow_EDGE->Set__DATA("");
+				sCH__ZERO_CAL_He_Flow_EDGE->Set__DATA("0");
 			}
 		}
 

@@ -299,6 +299,42 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="CObj__DNET_STD"
+				>
+				<File
+					RelativePath=".\CObj__DNET_STD.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__DRV_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__DRV_INIT.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__LOG_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__MON_FNC.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

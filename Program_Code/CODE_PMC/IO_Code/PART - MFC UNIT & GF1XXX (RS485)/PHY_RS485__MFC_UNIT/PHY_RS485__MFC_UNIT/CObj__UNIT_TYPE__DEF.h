@@ -2,8 +2,8 @@
 
 
 // ...
-#define VLV_CTRL_MODE__CLOSE			1
-#define VLV_CTRL_MODE__CONTROL			2
+#define  VLV_CTRL_MODE__CLOSE			1
+#define  VLV_CTRL_MODE__CONTROL			2
 
 #define  MAX_MFC						20
 

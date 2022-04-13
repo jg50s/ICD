@@ -1,5 +1,19 @@
 
 //------------------------------------------------
+#OBJECT_PROPERTY		PAGE_RF_PULSE
+
+#FNC_MODE		  INIT      			      PHY_IO__RF_PULSE    INIT
+#FNC_MODE		  ON            	      PHY_IO__RF_PULSE    PARA_USER.ON
+#FNC_MODE		  OFF           	      PHY_IO__RF_PULSE    PARA_USER.OFF
+
+#DEFINE_CONSTANT    CH.CATEGORY.LOCK                    DB_ETCHER+SYS.FNC.CATEGORY
+#DEFINE_CONSTANT    DATA.CATEGORY.LOCK                  RF_PULSE
+                                                                 
+#DEFINE_CONSTANT    CH.FNC.LOCK         		            DB_ETCHER+SYS.FNC.LOCK
+#DEFINE_CONSTANT    DATA.FNC.LOCK     		              RF_PULSE
+
+
+//------------------------------------------------
 #OBJECT_PROPERTY    PHY_RF_RPS
 
 #DEFINE_CONSTANT    OBJ__DB_SYS							            DB_SYS

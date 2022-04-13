@@ -12,6 +12,8 @@
 #OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_CHM
 #OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_PROCESS
 
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_RF_PULSE
+
 ===========================================================================
 #OBJECT_STD     MNG_UTILITY__JGLEE             AUTO.PM                   MNG_AUTO_PM
 #OBJECT_STD     MNG_UTILITY__JGLEE             MFC.FLOW.CHECK            MNG_MFC_FLOW
@@ -118,12 +120,14 @@
 
 
 ===========================================================================
-#OBJECT_IO     IO_USB__SPECTROMETER            ADC1000                   PHY_IO__SPECTROMETER
+#OBJECT_STD     PHY_EPD__JGLEE                 EPD.STD                   PHY_EPD
+
+#OBJECT_IO      IO_USB__SPECTROMETER           ADC1000                   PHY_IO__OES
 
 
 ===========================================================================
-// #OBJECT_IO     IO_DNET__HILSCHER-FLEX          TYPE.STD                  IO
-#OBJECT_IO      PMC__VIRTUAL_IO                IO.VIRTUAL                IO
+#OBJECT_IO      Phy_IO__DNET_HILSCHER          DNET.STD                  IO
+// #OBJECT_IO      PMC__VIRTUAL_IO                IO.VIRTUAL                IO
 
 
 ===========================================================================

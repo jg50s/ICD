@@ -11,7 +11,8 @@
 #DEFINE_CONSTANT   	OBJ.VAT_CHECK                 Mng_VAT_CONDUCTANCE
 #DEFINE_CONSTANT   	OBJ.MFC_CHECK                 Mng_MFC_FLOW
 
-#DEFINE_CONSTANT   	OBJ.FRC_CHECK.SIZE	  			  0
+#DEFINE_CONSTANT   	OBJ.FRC_CHECK.SIZE	  			  1
+#DEFINE_CONSTANT   	OBJ.FRC_CHECK.1               Mng_DGF_CHECK
 
 //------------------------------------------------
 #OBJECT_PROPERTY		Mng_MFC_FLOW

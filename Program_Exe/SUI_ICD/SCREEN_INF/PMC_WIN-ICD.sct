@@ -445,7 +445,15 @@ WINDOW_NAME PMC_PART-MFC_IO_2
 	USER_LEVEL                      Maint
 }
 
-WINDOW_NAME PMC_PART-IO_INTERLOCK
+WINDOW_NAME PMC_PART-IO
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-INTERLOCK
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
 
@@ -615,6 +623,18 @@ WINDOW_NAME APP_POPUP_PMC_RF-LF
 	USER_LEVEL                      Maint
 }
 WINDOW_NAME APP_POPUP_PMC_RF-HF
+{
+	POPUP                           YES
+	LOW_LEFT_X                      225  
+	LOW_LEFT_Y                      25 
+	WIDTH                           475
+	HEIGHT                          540 
+	
+	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_PMC_RF-PULSE
 {
 	POPUP                           YES
 	LOW_LEFT_X                      225  

@@ -6,9 +6,23 @@
 void CObj__UNIT_TYPE
 ::Mon__STATE_CHECK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	int alm_id;
-	int gas_id;
-	CString alm_msg;
+	int mfc_size = sList__MAC_ID.GetSize();
+
+	if(iActive__SIM_MODE > 0)
+	{
+		CString ch_data;
+
+		for(int i=0; i<mfc_size; i++)
+		{
+			dCH__DI_MFC_COMM_STATE_X[i]->Set__DATA(STR__ONLINE);
+
+			ch_data = dCH__DI_MFC_VLV_CTRL_X[i]->Get__STRING();
+			sCH__MON_MFC_VLV_STS_X[i]->Set__DATA(ch_data);
+			
+			ch_data.Format("Ver.%1d", i);
+			sCH__MON_MFC_VERSION_X[i]->Set__DATA(ch_data);
+		}
+	}
 
 
 	while(1)
@@ -16,12 +30,46 @@ void CObj__UNIT_TYPE
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 
-		while(mDB__ALM_CTRL.Get__ALM_INFO(alm_id,gas_id,alm_msg) > 0)
+		if(sCH__USER_INFO_UPDATE_REQ->Check__DATA(STR__YES) > 0)
 		{
-			CString r_act;
+			sCH__USER_INFO_UPDATE_REQ->Set__DATA("");
 
-			p_alarm->Check__ALARM(alm_id,r_act);
-			p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+			for(int i=0; i<mfc_size; i++)
+			{
+				dCH__DO_MFC_VERSION_X[i]->Set__DATA("GET");
+
+				CString ch_data = dCH__DI_MFC_VLV_CTRL_X[i]->Get__STRING();
+				sCH__MON_MFC_VLV_STS_X[i]->Set__DATA(ch_data);
+			}
+		}
+
+		// Communication Check ...
+		{
+			for(int i=0; i<mfc_size; i++)
+			{
+				if(dCH__DI_MFC_COMM_STATE_X[i]->Check__DATA(STR__ONLINE) > 0)		continue;
+
+				int alm_id = ALID__GASx_OFFLINE + i;
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM(alm_id);
+			}
+		}
+
+		// ...
+		{
+			int alm_id;
+			int gas_id;
+			CString alm_msg;
+
+			while(mDB__ALM_CTRL.Get__ALM_INFO(alm_id,gas_id,alm_msg) > 0)
+			{
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id,r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+			}
 		}
 
 		// ALARM.TEST ...

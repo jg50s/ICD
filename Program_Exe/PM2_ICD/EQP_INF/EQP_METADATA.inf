@@ -7,6 +7,7 @@
 #INCLUDE  "_METADATA__GAS_BOX.inf"
 #INCLUDE  "_METADATA__VAC_SYS.inf"
 #INCLUDE  "_METADATA__RF_SYS.inf"
+#INCLUDE  "_METADATA__EPD_SYS.inf"
 #INCLUDE  "_METADATA__HEATER_SYS.inf"
 
 #INCLUDE  "_METADATA__PMC_SYS.inf"
@@ -195,6 +196,7 @@
 #OBJECT_IO_FILE     DNET_IO__PMC_ICD.cfg  
 
 //----------------------
+#OBJECT_IO_PARA     BOARD.ID                            0
 #OBJECT_IO_PARA     NODE.SIZE                           8
 
 #OBJECT_IO_PARA     NODE.1.MACID                        1
@@ -253,3 +255,10 @@
 #OBJECT_IO_PARA     NODE.8.OUT_OFFSET                   0
 #OBJECT_IO_PARA     NODE.8.OUT_BYTE                     2
 
+//----------------------
+#DEFINE_CONSTANT    LINK.IO_SIZE                        0
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.1                   IO+do.TM.SAFETY.LLA_ON
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.2                   IO+do.TM.SAFETY.LLB_ON
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.3                   IO+do.TM.SAFETY.SLOT_CLOSE
+#DEFINE_CONSTANT    LINK.IO_CHANNEL.4                   IO+do.TM.SAFETY.SLOT_OPEN
+//----------------------

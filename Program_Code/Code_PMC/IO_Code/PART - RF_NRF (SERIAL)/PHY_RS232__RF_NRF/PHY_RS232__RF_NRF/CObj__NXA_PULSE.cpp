@@ -82,29 +82,29 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_DUTY, str_name);
 
 		str_name = "PARA.A.USER.ON_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_ON_TIME, str_name);
 
 		str_name = "PARA.A.USER.OFF_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_OFF_TIME, str_name);
 
 		//
 		str_name = "PARA.B.USER.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_USER_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.B.USER.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_USER_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "PARA.C.USER.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_USER_ON_SHIFT_TIME, str_name);
 		
 		str_name = "PARA.C.USER.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_USER_OFF_SHIFT_TIME, str_name);
 
 		//
@@ -131,20 +131,20 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_DUTY, str_name);
 
 		str_name = "PARA.RCP.ON_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_ON_TIME, str_name);
 
 		str_name = "PARA.RCP.OFF_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_OFF_TIME, str_name);
 
 		//
 		str_name = "PARA.RCP.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.RCP.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_OFF_SHIFT_TIME, str_name);
 
 		//
@@ -163,29 +163,29 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_DUTY, str_name);
 
 		str_name = "PARA.A.DRV.ON_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_ON_TIME, str_name);
 
 		str_name = "PARA.A.DRV.OFF_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_DRV_OFF_TIME, str_name);
 
 		//
 		str_name = "PARA.B.DRV.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_DRV_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.B.DRV.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_DRV_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "PARA.C.DRV.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_DRV_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.C.DRV.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 2, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_DRV_OFF_SHIFT_TIME, str_name);
 
 		//
@@ -507,11 +507,11 @@ int CObj__NXA_PULSE::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 	{
 			 IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable, p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__PARA_USER_ON)			flag = Call__PARA_USER_CTRL(p_variable, p_alarm, false);
-		ELSE_IF__CTRL_MODE(sMODE__PARA_USER_OFF)		flag = Call__PARA_USER_CTRL(p_variable, p_alarm, true);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_USER_ON)			flag = Call__PARA_USER_CTRL(p_variable, p_alarm, true);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_USER_OFF)		flag = Call__PARA_USER_CTRL(p_variable, p_alarm, false);
 
-		ELSE_IF__CTRL_MODE(sMODE__PARA_RCP_ON)			flag = Call__PARA_RCP_CTRL(p_variable, p_alarm, false);
-		ELSE_IF__CTRL_MODE(sMODE__PARA_RCP_OFF)			flag = Call__PARA_RCP_CTRL(p_variable, p_alarm, true);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_RCP_ON)			flag = Call__PARA_RCP_CTRL(p_variable, p_alarm, true);
+		ELSE_IF__CTRL_MODE(sMODE__PARA_RCP_OFF)			flag = Call__PARA_RCP_CTRL(p_variable, p_alarm, false);
 
 		ELSE_IF__CTRL_MODE(sMODE__TEST_DRV)				flag =  Call__TEST_DRV(p_variable, p_alarm);
 	}

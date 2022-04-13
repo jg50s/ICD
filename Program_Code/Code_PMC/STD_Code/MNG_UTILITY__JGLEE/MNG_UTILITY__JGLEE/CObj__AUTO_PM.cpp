@@ -319,7 +319,9 @@ int CObj__AUTO_PM::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			int id = i + 1;
 
-			obj_name.Format("OBJ.FRC_CHECK.%1d", id);
+			def_name.Format("OBJ.FRC_CHECK.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
 			pOBJ_CTRL__FRC_CHECK_X[i] = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 		}
 	}
@@ -377,29 +379,12 @@ int CObj__AUTO_PM::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		return -1;
 	}
 
-
 	// ...
 	int flag = -1;
 
-	// ...
+	IF__CTRL_MODE(sMODE__AUTO_PM)
 	{
-		IF__CTRL_MODE(sMODE__AUTO_PM)
-		{
-			flag = Call__AUTO_PM(p_variable,p_alarm);
-		}
-		else
-		{
-			CString bff;
-			CString alarm_msg;
-			CString r_act;
-
-			bff.Format("Object Name : %s\n",sObject_Name);
-			alarm_msg  = bff;
-			bff.Format("Unknown Object Mode : \"%s\"\n",mode);
-			alarm_msg += bff;
-
-			p_alarm->Popup__ALARM_With_MESSAGE(ALID__OBJECT_MODE_UNKNOWN,alarm_msg,r_act);
-		}
+		flag = Call__AUTO_PM(p_variable,p_alarm);
 	}
 
 	return flag;
