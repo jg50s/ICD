@@ -191,7 +191,7 @@
 //------------------------------------------------
 #OBJECT_PROPERTY    IO
 
-#DEFINE_CONSTANT    CH__DO_DNET_HEARTBEAT               IO+do.PC.Alive.Toggle
+#DEFINE_CONSTANT    CH__DO_DNET_HEARTBEAT               IO+do.PC.Alive.Pulse.1sec
 
 #OBJECT_IO_FILE     DNET_IO__PMC_ICD.cfg  
 

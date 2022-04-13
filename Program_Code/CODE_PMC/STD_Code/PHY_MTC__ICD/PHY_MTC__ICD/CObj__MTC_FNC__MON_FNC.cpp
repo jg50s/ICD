@@ -16,12 +16,20 @@ union UNION_4_BYTE__FLOAT
  void CObj__MTC_FNC::
  Mon__PRESSURE_STATUS(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
  {
-	CString ch_data;
+	 CString ch_data;
+
+	 if(iActive__SIM_MODE > 0)
+	 {
+		dEXT_CH__DI_MTC_GATE_OPEN_SNS->Set__DATA(STR__OFF);
+		dEXT_CH__DI_MTC_GATE_CLOSE_SNS->Set__DATA(STR__ON);
+	 }
+
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 		
+	
 		// State Mon ...
 		{
 			// PUMPING_STATE Mon ...
