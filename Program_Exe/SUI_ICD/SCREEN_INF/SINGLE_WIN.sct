@@ -22,6 +22,14 @@
 	HEIGHT             869
 #END
 
+#DEFINE  DEF__FRAME_BOTTOM_NAVI
+	POPUP              CTC
+	LOW_LEFT_X         0
+	LOW_LEFT_Y         925
+	WIDTH              173 
+	HEIGHT             99 
+#END
+
 
 // -----------------------------------------------------------------------
 //  SINGLE-WINDOW
@@ -42,3 +50,10 @@ WINDOW_NAME SINGLE_ALARM__MAIN
 	USER_LEVEL                      Unknown  
 }
 
+WINDOW_NAME SINGLE__NAVI
+{  
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_NAVI
+	
+	CTRL_CHANNEL                    SCR.BTM_NAVI
+	USER_LEVEL                      Unknown  
+}

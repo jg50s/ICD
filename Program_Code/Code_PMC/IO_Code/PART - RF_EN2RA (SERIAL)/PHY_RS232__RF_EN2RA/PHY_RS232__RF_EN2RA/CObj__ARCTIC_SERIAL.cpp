@@ -182,33 +182,33 @@ int CObj__ARCTIC_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// INFO.DRV ...
 	{
-		str_name = "INFO_DRV.COM_PORT";
+		str_name = "INFO.DRV.COM_PORT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_COM_PORT, str_name);
 
 		//
-		str_name = "INFO_DRV.BAUD_RATE";
+		str_name = "INFO.DRV.BAUD_RATE";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_BAUD_RATE, str_name);
 
-		str_name = "INFO_DRV.DATA_BIT";
+		str_name = "INFO.DRV.DATA_BIT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_DATA_BIT, str_name);
 
-		str_name = "INFO_DRV.STOP_BIT";
+		str_name = "INFO.DRV.STOP_BIT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_STOP_BIT, str_name);
 
-		str_name = "INFO_DRV.PARITY";
+		str_name = "INFO.DRV.PARITY";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_PARITY, str_name);
 
 		//
-		str_name = "INFO_DRV.END_SEND";
+		str_name = "INFO.DRV.END_SEND";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_END_SEND, str_name);
 
-		str_name = "INFO_DRV.END_RECV";
+		str_name = "INFO.DRV.END_RECV";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_END_RECV, str_name);
 	}

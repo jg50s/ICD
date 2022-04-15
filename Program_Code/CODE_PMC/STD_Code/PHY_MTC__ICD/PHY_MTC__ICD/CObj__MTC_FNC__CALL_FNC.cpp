@@ -34,11 +34,15 @@ int CObj__MTC_FNC
 
 	if(flag < 0)
 	{
-		CString log_msg;
-
-		log_msg.Format("Fnc__GATE_CTL_%d() : Failed [%d]...",bOpen, flag);
-		xLOG_CTRL->WRITE__LOG(log_msg);
+		// ...
+		{
+			CString log_msg;
+			log_msg.Format("Fnc__GATE_CTL_%d() : Failed [%d]...",bOpen, flag);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+		return flag;
 	}
+
 	return 1;
 }
 
@@ -46,6 +50,12 @@ int CObj__MTC_FNC
 ::Call__PUMPING(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
 	CString log_msg;
+
+	// GATE.VLV CHECK ...
+	if(dEXT_CH__MON_GATE_STATE->Check__DATA(STR__CLOSE) < 0)
+	{
+		return -101;
+	}
 
 	// ALL_VV_CLOSE ...
 	{
@@ -90,6 +100,12 @@ int CObj__MTC_FNC
 ::Call__VENT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
 	CString log_msg;
+
+	// GATE.VLV CHECK ...
+	if(dEXT_CH__MON_GATE_STATE->Check__DATA(STR__CLOSE) < 0)
+	{
+		return -101;
+	}
 
 	// ALL_VV_CLOSE ...
 	{

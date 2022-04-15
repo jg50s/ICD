@@ -63,105 +63,6 @@
 #DEFINE_CONSTANT    CH__DI_PIN_MIDDLE                   IO+di.Pin.Middle
 #DEFINE_CONSTANT    CH__DI_PIN_DOWN                     IO+di.Pin.Down
 
-
-//-----------------------------------------------------------------------------------------------------
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__ESC
-
-#OBJECT_IO_PARA     COM_PORT                  21
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__RF_RPS
-
-#OBJECT_IO_PARA     COM_PORT                  22
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__RF_400KHZ
-
-#OBJECT_IO_PARA     COM_PORT                  23
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__RF_40MHZ
-
-#OBJECT_IO_PARA     COM_PORT                  24
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__RF_PULSE
-
-#OBJECT_IO_PARA     COM_PORT                  25
-
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__MAT_LF            
-
-#OBJECT_IO_PARA     COM_PORT                  11
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__MAT_HF            
-
-#OBJECT_IO_PARA     COM_PORT                  12
-
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    PHY_IO__APC_VLV
-
-#OBJECT_IO_PARA     COM_PORT                  5
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    PHY_IO__TMP
-
-#OBJECT_IO_PARA     COM_PORT                  6
-#OBJECT_IO_PARA     DEVICE_ID									0
-
-//-------------------------------------------------
-#OBJECT_PROPERTY    PHY_IO__DRY_PMP
-
-#OBJECT_IO_PARA     COM_PORT                  7
-
-
-//-------------------------------------------------
-#OBJECT_PROPERTY	  PHY_IO__MFC_PART01        // MFC01 ~ MFC06		
-
-#OBJECT_IO_PARA     COM_PORT                  10
-
-#DEFINE_CONSTANT	  DATA.BOARD_ID    		      32
-#DEFINE_CONSTANT	  DATA.MFC_SIZE   		      6
-#DEFINE_CONSTANT	  MFC.Mac_ID.1     		      1
-#DEFINE_CONSTANT	  MFC.Var_ID.1    		      01
-#DEFINE_CONSTANT	  MFC.Mac_ID.2     		      2
-#DEFINE_CONSTANT	  MFC.Var_ID.2    		      02
-#DEFINE_CONSTANT	  MFC.Mac_ID.3     		      3
-#DEFINE_CONSTANT	  MFC.Var_ID.3   		        03
-#DEFINE_CONSTANT	  MFC.Mac_ID.4    		      4
-#DEFINE_CONSTANT	  MFC.Var_ID.4   		        04
-#DEFINE_CONSTANT	  MFC.Mac_ID.5    		      5
-#DEFINE_CONSTANT	  MFC.Var_ID.5   		        05
-#DEFINE_CONSTANT	  MFC.Mac_ID.6    		      6
-#DEFINE_CONSTANT	  MFC.Var_ID.6   		        06
-
-//-------------------------------------------------
-#OBJECT_PROPERTY	  PHY_IO__MFC_PART02        // MFC07 ~ MFC12, MFC17		
-
-#OBJECT_IO_PARA     COM_PORT                  11
-
-#DEFINE_CONSTANT	  DATA.BOARD_ID    		      40
-#DEFINE_CONSTANT	  DATA.MFC_SIZE   		      7
-#DEFINE_CONSTANT	  MFC.Mac_ID.1      		    1
-#DEFINE_CONSTANT	  MFC.Var_ID.1    		      07
-#DEFINE_CONSTANT	  MFC.Mac_ID.2      		    2
-#DEFINE_CONSTANT	  MFC.Var_ID.2  		        08
-#DEFINE_CONSTANT	  MFC.Mac_ID.3    		      3
-#DEFINE_CONSTANT	  MFC.Var_ID.3  		        09
-#DEFINE_CONSTANT	  MFC.Mac_ID.4    		      4
-#DEFINE_CONSTANT	  MFC.Var_ID.4  		        10
-#DEFINE_CONSTANT	  MFC.Mac_ID.5    		      5
-#DEFINE_CONSTANT	  MFC.Var_ID.5  		        11
-#DEFINE_CONSTANT	  MFC.Mac_ID.6    		      6
-#DEFINE_CONSTANT	  MFC.Var_ID.6  		        12
-#DEFINE_CONSTANT	  MFC.Mac_ID.7    		      7
-#DEFINE_CONSTANT	  MFC.Var_ID.7  		        17
-
-
 //-------------------------------------------------
 #OBJECT_PROPERTY    PHY_MTC
 
@@ -186,6 +87,103 @@
 
 #DEFINE_CONSTANT    CH__SI_MTC_GAUGE_STATUS             IO+si.MTC.Gauge.Status.HEXA
 #DEFINE_CONSTANT    CH__SI_MTC_GAUGE_PRESSURE           IO+si.MTC.Gauge.Pressure.HEXA
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__APC_VLV
+
+#OBJECT_IO_PARA     COM_PORT                  2
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__DRY_PMP
+
+#OBJECT_IO_PARA     COM_PORT                  3
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_PULSE
+
+#OBJECT_IO_PARA     COM_PORT                  4
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__MAT_LF            
+
+#OBJECT_IO_PARA     COM_PORT                  5
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__MAT_HF            
+
+#OBJECT_IO_PARA     COM_PORT                  6
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__ESC
+
+#OBJECT_IO_PARA     COM_PORT                  7
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_RPS
+
+#OBJECT_IO_PARA     COM_PORT                  10
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_40MHZ
+
+#OBJECT_IO_PARA     COM_PORT                  11
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    Phy_IO__RF_400KHZ
+
+#OBJECT_IO_PARA     COM_PORT                  12
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO__MFC_PART01        // MFC01 ~ MFC06		
+
+#OBJECT_IO_PARA     COM_PORT                  13
+
+#DEFINE_CONSTANT	  DATA.BOARD_ID    		      32
+#DEFINE_CONSTANT	  DATA.MFC_SIZE   		      6
+#DEFINE_CONSTANT	  MFC.Mac_ID.1     		      1
+#DEFINE_CONSTANT	  MFC.Var_ID.1    		      01
+#DEFINE_CONSTANT	  MFC.Mac_ID.2     		      2
+#DEFINE_CONSTANT	  MFC.Var_ID.2    		      02
+#DEFINE_CONSTANT	  MFC.Mac_ID.3     		      3
+#DEFINE_CONSTANT	  MFC.Var_ID.3   		        03
+#DEFINE_CONSTANT	  MFC.Mac_ID.4    		      4
+#DEFINE_CONSTANT	  MFC.Var_ID.4   		        04
+#DEFINE_CONSTANT	  MFC.Mac_ID.5    		      5
+#DEFINE_CONSTANT	  MFC.Var_ID.5   		        05
+#DEFINE_CONSTANT	  MFC.Mac_ID.6    		      6
+#DEFINE_CONSTANT	  MFC.Var_ID.6   		        06
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_IO__MFC_PART02        // MFC07 ~ MFC12, MFC17		
+
+#OBJECT_IO_PARA     COM_PORT                  14
+
+#DEFINE_CONSTANT	  DATA.BOARD_ID    		      40
+#DEFINE_CONSTANT	  DATA.MFC_SIZE   		      7
+#DEFINE_CONSTANT	  MFC.Mac_ID.1      		    1
+#DEFINE_CONSTANT	  MFC.Var_ID.1    		      07
+#DEFINE_CONSTANT	  MFC.Mac_ID.2      		    2
+#DEFINE_CONSTANT	  MFC.Var_ID.2  		        08
+#DEFINE_CONSTANT	  MFC.Mac_ID.3    		      3
+#DEFINE_CONSTANT	  MFC.Var_ID.3  		        09
+#DEFINE_CONSTANT	  MFC.Mac_ID.4    		      4
+#DEFINE_CONSTANT	  MFC.Var_ID.4  		        10
+#DEFINE_CONSTANT	  MFC.Mac_ID.5    		      5
+#DEFINE_CONSTANT	  MFC.Var_ID.5  		        11
+#DEFINE_CONSTANT	  MFC.Mac_ID.6    		      6
+#DEFINE_CONSTANT	  MFC.Var_ID.6  		        12
+#DEFINE_CONSTANT	  MFC.Mac_ID.7    		      7
+#DEFINE_CONSTANT	  MFC.Var_ID.7  		        17
+
+//-------------------------------------------------
+#OBJECT_PROPERTY    PHY_IO__TMP
+
+#OBJECT_IO_PARA     COM_PORT                  15
+#OBJECT_IO_PARA     DEVICE_ID									0
 
 
 //------------------------------------------------

@@ -39,7 +39,8 @@ int CObj__STP_SERIAL::__DEFINE__VERSION_HISTORY(version)
 
 
 // ...
-#define  MON_ID__IO_MONITOR						1
+#define  MON_ID__STATE_CHECK				1
+
 
 int CObj__STP_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 {
@@ -107,6 +108,15 @@ int CObj__STP_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// INFO ...
 	{
+		str_name = "INFO.DRV.COM_PORT";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_COM_PORT, str_name);
+
+		str_name = "INFO.DRV.BAUD_RATE";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_BAUD_RATE, str_name);
+
+		//
 		str_name = "INFO.ROT_SPEED.HZ";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_ROT_SPEED_HZ, str_name);
@@ -154,7 +164,7 @@ int CObj__STP_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// ...
 	{
-		p_variable->Add__MONITORING_PROC(7.0, MON_ID__IO_MONITOR);
+		p_variable->Add__MONITORING_PROC(7.0, MON_ID__STATE_CHECK);
 	}
 	return 1;
 }
@@ -183,9 +193,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Please, Check Communication Status !\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -200,9 +208,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "Please, Check Mode.\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -218,9 +224,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Please, Check Pump Status !\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -236,9 +240,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Please, Check Pump Status !\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -254,9 +256,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Please, Check Pump Status !\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -272,9 +272,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Please, Check Pump Status !\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -290,9 +288,7 @@ int CObj__STP_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Please, Check Pump Status !\n";
 
 		l_act.RemoveAll();
-		//	l_act.Add("RETRY");
-		//	l_act.Add("ABORT");
-		l_act.Add("CHECK");
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -342,7 +338,7 @@ int CObj__STP_SERIAL::__DEFINE__VARIABLE_IO(p_io_variable)
 		LINK__IO_VAR_DIGITAL_CTRL(doCH__OP_CMMD, str_name);
 	}
 
-	// DI  ----------
+	// DI ...
 	{
 		str_name = "di.COMM.STS";
 		IO__ADD_DIGITAL_READ__MANUAL(str_name, APP_DSP__COMM_STS);
@@ -407,7 +403,7 @@ int CObj__STP_SERIAL::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		SCX__SEQ_INFO x_seq_info;
 
-		iACTIVE_SIM = x_seq_info->Is__SIMULATION_MODE();
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 	return 1;
 }
@@ -492,7 +488,18 @@ int CObj__STP_SERIAL::__INITIALIZE__IO(p_io_para)
 		xDRV_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 
-	if(iACTIVE_SIM < 0)
+	// ...
+	{
+		CString ch_data;
+
+		ch_data.Format("%1d", com_port);
+		sCH__INFO_DRV_COM_PORT->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", nRate);
+		sCH__INFO_DRV_BAUD_RATE->Set__DATA(ch_data);
+	}
+
+	if(iActive__SIM_MODE < 0)
 	{
 		CString msg;
 
@@ -563,7 +570,7 @@ int CObj__STP_SERIAL::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 
 int CObj__STP_SERIAL::__CALL__MONITORING(id, p_variable, p_alarm)
 {
-	if(id == MON_ID__IO_MONITOR)		Mon__IO_MONITOR(p_variable,p_alarm);
+	if(id == MON_ID__STATE_CHECK)		Mon__STATE_CHECK(p_variable, p_alarm);
 
 	return 1;
 }

@@ -8,7 +8,7 @@
 int  CObj__STP_SERIAL::
 Call__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	if(iACTIVE_SIM > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		diCH__COMM_STS->Set__DATA(STR__ONLINE);
 
@@ -60,7 +60,7 @@ ACT_RETRY:
 		log_msg.Format("Waiting TMP(Acceleration), config timeout.(%.1f) sec.", cfg_sec);			
 		Fnc__APP_LOG(log_msg);
 
-		if(iACTIVE_SIM > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			sCH__INFO_PUMP_OP_MODE->Set__DATA(STR__Acceleration);
 		}
@@ -102,7 +102,7 @@ ACT_RETRY:
 		log_msg.Format("Waiting TMP(Normal), config timeout.(%.1f) sec.", cfg_sec);			
 		Fnc__APP_LOG(log_msg);
 
-		if(iACTIVE_SIM > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			sCH__INFO_PUMP_OP_MODE->Set__DATA(STR__Normal);
 		}

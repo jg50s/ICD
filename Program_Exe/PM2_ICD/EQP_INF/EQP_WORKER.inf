@@ -113,22 +113,18 @@
 #OBJECT_IO      PHY_RS232__MATCHER_NRF         MAT.SERIAL                PHY_IO__MAT_LF
 #OBJECT_IO      PHY_RS232__MATCHER_NRF         MAT.SERIAL                PHY_IO__MAT_HF
 
-
 ===========================================================================
 #OBJECT_STD     PHY_HEATER__JGLEE              MINI8.IO                  PHY_HTR_SH
 #OBJECT_STD     PHY_HEATER__JGLEE              MINI8.IO                  PHY_HTR_WALL
-
 
 ===========================================================================
 #OBJECT_STD     PHY_EPD__JGLEE                 EPD.STD                   PHY_EPD
 
 #OBJECT_IO      IO_USB__SPECTROMETER           ADC1000                   PHY_IO__OES
 
-
 ===========================================================================
 #OBJECT_IO      Phy_IO__DNET_HILSCHER          DNET.STD                  IO
 // #OBJECT_IO      PMC__VIRTUAL_IO                IO.VIRTUAL                IO
-
 
 ===========================================================================
 #OBJECT_INTERLOCK   PMC_INTERLOCK__JGLEE       MFC.IO                    INTERLOCK_MFC

@@ -258,7 +258,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__STP_SERIAL__MON_FNC.cpp"
+					RelativePath=".\CObj__STP_SERIAL__MON_STATE_CHECK.cpp"
 					>
 				</File>
 				<File

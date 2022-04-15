@@ -137,6 +137,17 @@ int CObj__VAT650_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_POS_COUNT_TYPE, str_name);
 	}
 
+	// INFO ...
+	{
+		str_name = "INFO.DRV.COM_PORT";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_COM_PORT, str_name);
+
+		str_name = "INFO.DRV.BAUD_RATE";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_BAUD_RATE, str_name);
+	}
+
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATE_CHECK);
@@ -584,6 +595,17 @@ int CObj__VAT650_TYPE
 
 		xAPP_LOG_CTRL->WRITE__LOG(log_msg);
 		xDRV_LOG_CTRL->WRITE__LOG(log_msg);
+	}
+
+	// ...
+	{
+		CString ch_data;
+
+		ch_data.Format("%1d", com_port);
+		sCH__INFO_DRV_COM_PORT->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", nBaudRate);
+		sCH__INFO_DRV_BAUD_RATE->Set__DATA(ch_data);
 	}
 
 	if(iACTIVE_SIM < 0)

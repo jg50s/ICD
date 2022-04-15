@@ -223,6 +223,15 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 
 	// INFO ...
 	{
+		str_name = "INFO.DRV.COM_PORT";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_COM_PORT, str_name);
+
+		str_name = "INFO.DRV.BAUD_RATE";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_BAUD_RATE, str_name);
+
+		//
 		str_name = "INFO.LAST.ERROR.CODE";	  
 		STD__ADD_STRING(str_name);	
 		LINK__VAR_STRING_CTRL(sCH__INFO_LAST_ERROR_CODE, str_name);
@@ -476,7 +485,7 @@ int CObj__NXA_PULSE::__INITIALIZE__IO(p_io_para)
 	// ...
 	{
 		sPROTOCOL_INFO.Format("Rate[%1d] DataBit[%1d] StopBit[%1d] Parity[%1d] \n",
-			nRate, nByte, nStop, nParity);
+							  nRate, nByte, nStop, nParity);
 
 		sPROTOCOL_INFO += "Terminal String : [CR] \n";							  
 	}
@@ -484,6 +493,17 @@ int CObj__NXA_PULSE::__INITIALIZE__IO(p_io_para)
 	if(iActive__SIM_MODE < 0)
 	{
 		mX_Serial->INIT__COMPORT(com_port, nRate, nByte, nStop, nParity);
+	}
+
+	// ...
+	{
+		CString ch_data;
+
+		ch_data.Format("%1d", com_port);
+		sCH__INFO_DRV_COM_PORT->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", nRate);
+		sCH__INFO_DRV_BAUD_RATE->Set__DATA(ch_data);
 	}
 	return 1;
 }

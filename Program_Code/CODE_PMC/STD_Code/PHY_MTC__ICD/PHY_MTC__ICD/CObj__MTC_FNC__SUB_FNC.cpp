@@ -46,18 +46,41 @@ int CObj__MTC_FNC
 		{
 			int Interlock_Check = 1;
 
-			// CHM PRESSURE SNS
-			if((dEXT_CH__DI_CHM_VAC_SNS->Check__DATA(STR__OFF) > 0) 
-			|| (dEXT_CH__DI_CHM_ATM_SNS->Check__DATA(STR__ON) > 0))
-			{
-				Interlock_Check = -11;
-			}
+			bool active__mtc_atm = false;
+			bool active__mtc_vac = false;
 
 			// MTC PRESSURE SNS
-			if((dEXT_CH__DI_MTC_VAC_SNS->Check__DATA(STR__OFF) > 0) 
-			|| (dEXT_CH__DI_MTC_ATM_SNS->Check__DATA(STR__ON) > 0))
+			if(dEXT_CH__DI_MTC_ATM_SNS->Check__DATA(STR__ON) > 0) 
 			{
-				Interlock_Check = -12;
+				if(dEXT_CH__DI_MTC_VAC_SNS->Check__DATA(STR__OFF) > 0)
+					active__mtc_atm = true;
+			}
+			else
+			{
+				if(dEXT_CH__DI_MTC_VAC_SNS->Check__DATA(STR__ON) > 0)
+					active__mtc_vac = true;
+			}
+
+			// CHM PRESSURE SNS
+			if(active__mtc_atm)
+			{
+				if((dEXT_CH__DI_CHM_ATM_SNS->Check__DATA(STR__ON)  < 0) 
+				|| (dEXT_CH__DI_CHM_VAC_SNS->Check__DATA(STR__OFF) < 0))
+				{
+					Interlock_Check = -11;
+				}
+			}
+			else if(active__mtc_vac)
+			{
+				if((dEXT_CH__DI_CHM_ATM_SNS->Check__DATA(STR__OFF) < 0) 
+				|| (dEXT_CH__DI_CHM_VAC_SNS->Check__DATA(STR__ON)  < 0))
+				{
+					Interlock_Check = -12;
+				}
+			}
+			else
+			{
+				Interlock_Check = -13;
 			}
 
 			if(Interlock_Check < 0) 

@@ -19,7 +19,7 @@ private:
 	SCX__USER_LOG_CTRL xAPP_LOG_CTRL;
 	SCX__USER_LOG_CTRL xDRV_LOG_CTRL;
 
-	int iACTIVE_SIM;
+	int iActive__SIM_MODE;
 
 	// ...
 	SCX__SERIAL_JG	mX_Serial;
@@ -46,7 +46,10 @@ private:
 	CX__VAR_ANALOG_CTRL  aCH__CFG_TARGET_SPEED_TIMEOUT;
 	CX__VAR_ANALOG_CTRL  aCH__CFG_MON_INTERVAL;
 
-	// ...
+	// INFO ...
+	CX__VAR_STRING_CTRL  sCH__INFO_DRV_COM_PORT;	  
+	CX__VAR_STRING_CTRL  sCH__INFO_DRV_BAUD_RATE;	  
+
 	CX__VAR_STRING_CTRL  sCH__INFO_ROT_SPEED_HZ;
 	CX__VAR_STRING_CTRL  sCH__INFO_ROT_SPEED_RPM;
 
@@ -112,7 +115,7 @@ private:
 	//
 
 	//-------------------------------------------------------------------------
-	void Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	void Mon__STATE_CHECK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	int  Is__OFFLINE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);

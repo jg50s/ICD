@@ -129,6 +129,15 @@ int CObj__MAT_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// INFO ...
 	{
+		str_name = "INFO.DRV.COM_PORT";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_COM_PORT, str_name);
+
+		str_name = "INFO.DRV.BAUD_RATE";	  
+		STD__ADD_STRING(str_name);	
+		LINK__VAR_STRING_CTRL(sCH__INFO_DRV_BAUD_RATE, str_name);
+
+		//
 		str_name = "INFO.LAST.ERROR.CODE";	  
 		STD__ADD_STRING(str_name);	
 		LINK__VAR_STRING_CTRL(sCH__INFO_LAST_ERROR_CODE, str_name);
@@ -472,6 +481,17 @@ int CObj__MAT_SERIAL::__INITIALIZE__IO(p_io_para)
 	if(iActive__SIM_MODE < 0)
 	{
 		mX_Serial->INIT__COMPORT(com_port, nRate, nByte, nStop, nParity);
+	}
+
+	// ...
+	{
+		CString ch_data;
+
+		ch_data.Format("%1d", com_port);
+		sCH__INFO_DRV_COM_PORT->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", nRate);
+		sCH__INFO_DRV_BAUD_RATE->Set__DATA(ch_data);
 	}
 	return 1;
 }
