@@ -307,6 +307,13 @@ WINDOW_NAME TMC_PART__IO_DNET
 	CTRL_CHANNEL                    SCR.CLIENT 
 	USER_LEVEL                      Maint  
 }
+WINDOW_NAME TMC_PART__IO_INTERLOCK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint  
+}
 WINDOW_NAME TMC_PART__IO_SERIAL
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT

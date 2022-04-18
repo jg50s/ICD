@@ -15,8 +15,15 @@ int CObj__DNET_STD
 				 const CDS_IO__CHANNEL_INFO& io_info, 
 				 double& read_data)
 {
-	if(io_info.iMD_NO < 1)
+	int node_id = io_info.iMD_NO;
+	if(node_id <  1)		return -1;
+	if(node_id == 0)		return 1;
+
+	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
+	if(md_id < 0)
 	{
+		// Error
+
 		return -1;
 	}
 
@@ -31,7 +38,6 @@ int CObj__DNET_STD
 		unsigned char uch_data[11];
 		memset(uch_data, 0, 11);
 
-		int md_id = io_info.iMD_NO;
 		int ch_id = io_info.iCH_NO;
 
 		int byte_offset = atoi(io_info.sCOMMAND2);
@@ -186,8 +192,15 @@ int CObj__DNET_STD
 				  const CDS_IO__CHANNEL_INFO& io_info, 
 				  CString& read_data,int& item_index)
 {
-	if(io_info.iMD_NO < 1)
+	int node_id = io_info.iMD_NO;
+	if(node_id <  1)		return -1;
+	if(node_id == 0)		return 1;
+
+	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
+	if(md_id < 0)
 	{
+		// Error
+
 		return -1;
 	}
 
@@ -199,7 +212,6 @@ int CObj__DNET_STD
 
 	// ...
 	{
-		int md_id      = io_info.iMD_NO;
 		int ch_id      = io_info.iCH_NO;
 		int bit_offset = atoi(io_info.sCOMMAND2);
 
@@ -216,8 +228,15 @@ int CObj__DNET_STD
 int CObj__DNET_STD
 ::__Read__STRING(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, CString& read_data)
 {
-	if(io_info.iMD_NO < 1)
+	int node_id = io_info.iMD_NO;
+	if(node_id <  1)		return -1;
+	if(node_id == 0)		return 1;
+
+	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
+	if(md_id < 0)
 	{
+		// Error
+
 		return -1;
 	}
 
@@ -232,7 +251,6 @@ int CObj__DNET_STD
 		unsigned char uch_data[101];
 		memset(uch_data, 0, 101);
 
-		int md_id = io_info.iMD_NO;
 		int ch_id = io_info.iCH_NO;
 
 		int byte_offset = atoi(io_info.sCOMMAND2);
@@ -298,9 +316,16 @@ int CObj__DNET_STD
 int CObj__DNET_STD
 ::__Write__ANALOG(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const double set_data)
 {
-	if(io_info.iMD_NO < 1)
+	int node_id = io_info.iMD_NO;
+	if(node_id <  1)		return -1;
+	if(node_id == 0)		return 1;
+
+	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
+	if(md_id < 0)
 	{
-		return 1;
+		// Error
+
+		return -1;
 	}
 
 	// ...
@@ -312,7 +337,6 @@ int CObj__DNET_STD
 		unsigned char uch_data[11];
 		memset(uch_data, 0, 11);
 
-		int md_id       = io_info.iMD_NO;
 		int ch_id       = io_info.iCH_NO;
 		int byte_offset = atoi(io_info.sCOMMAND2);
 		int byte_size   = atoi(io_info.sCOMMAND3);
@@ -340,9 +364,16 @@ int CObj__DNET_STD
 int CObj__DNET_STD
 ::__Write__DIGITAL(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const CString& set_data,const int item_index)
 {
-	if(io_info.iMD_NO < 1)
+	int node_id = io_info.iMD_NO;
+	if(node_id <  1)		return -1;
+	if(node_id == 0)		return 1;
+
+	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
+	if(md_id < 0)
 	{
-		return 1;
+		// Error
+
+		return -1;
 	}
 
 	// ...
@@ -350,7 +381,6 @@ int CObj__DNET_STD
 	Write__DRV_LOG(fnc_type, var_name, io_info, set_data,item_index);
 
 	// ...
-	int md_id      = io_info.iMD_NO;
 	int ch_id      = io_info.iCH_NO;
 	int bit_offset = atoi(io_info.sCOMMAND2);
 	int bit_size   = atoi(io_info.sCOMMAND3);
@@ -375,9 +405,16 @@ int CObj__DNET_STD
 int CObj__DNET_STD
 ::__Write__STRING(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const CString& set_data)
 {
-	if(io_info.iMD_NO < 1)
+	int node_id = io_info.iMD_NO;
+	if(node_id <  1)		return -1;
+	if(node_id == 0)		return 1;
+
+	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
+	if(md_id < 0)
 	{
-		return 1;
+		// Error
+
+		return -1;
 	}
 
 	// ...
@@ -389,7 +426,6 @@ int CObj__DNET_STD
 		unsigned char uch_data[101];
 		memset(uch_data, 0, 101);
 
-		int md_id = io_info.iMD_NO;
 		int ch_id = io_info.iCH_NO;
 
 		int byte_offset = atoi(io_info.sCOMMAND2);

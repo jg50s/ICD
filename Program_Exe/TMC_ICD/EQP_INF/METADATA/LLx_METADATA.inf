@@ -180,8 +180,8 @@
 #DEFINE_CONSTANT    VAR__IO_DI_ATM_RB_RNE.1             IO+di.ATM_RB.Retract_LL1
 
 // ARM.RNE STATE
-#DEFINE_CONSTANT    DATA.RNE_ON                         None
-#DEFINE_CONSTANT    DATA.RNE_OFF                        Extend
+#DEFINE_CONSTANT    DATA.RNE_ON                         On
+#DEFINE_CONSTANT    DATA.RNE_OFF                        Off
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY__LBB

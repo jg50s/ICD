@@ -63,49 +63,32 @@
 //------------------------------------------------
 #OBJECT_PROPERTY    IO
 
+#DEFINE_CONSTANT    CH__DO_DNET_HEARTBEAT               IO+do.PC.Alive.Pulse
+
 #OBJECT_IO_FILE     DNET_IO__TMC_ICD.cfg  
 
 //----------------------
 #OBJECT_IO_PARA     BOARD.ID                            0
-#OBJECT_IO_PARA     NODE.SIZE                           5
+#OBJECT_IO_PARA     BOARD.OUT_OFFSET                    0
+#OBJECT_IO_PARA     BOARD.IN_OFFSET                     0
+
+//----------------------
+#OBJECT_IO_PARA     NODE.SIZE                           2
 
 #OBJECT_IO_PARA     NODE.1.MACID                        2
-#OBJECT_IO_PARA     NODE.1.NAME                         NA9111
-#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    1
-#OBJECT_IO_PARA     NODE.1.IN_BYTE                      19
+#OBJECT_IO_PARA     NODE.1.NAME                         CJ1W_DRM2
+#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0       
+#OBJECT_IO_PARA     NODE.1.IN_BYTE                      56
 #OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     4
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     20
 
 #OBJECT_IO_PARA     NODE.2.MACID                        3
-#OBJECT_IO_PARA     NODE.2.NAME                         CJ1W_DRM2
-#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0       
-#OBJECT_IO_PARA     NODE.2.IN_BYTE                      48
+#OBJECT_IO_PARA     NODE.2.NAME                         NA9111
+#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.2.IN_BYTE                      18
 #OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     20
-
-#OBJECT_IO_PARA     NODE.3.MACID                        4
-#OBJECT_IO_PARA     NODE.3.NAME                         EUROTHERM_MINI
-#OBJECT_IO_PARA     NODE.3.IN_OFFSET                    0       
-#OBJECT_IO_PARA     NODE.3.IN_BYTE                      112
-#OBJECT_IO_PARA     NODE.3.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.3.OUT_BYTE                     30
-
-#OBJECT_IO_PARA     NODE.4.MACID                        5
-#OBJECT_IO_PARA     NODE.4.NAME                         INTELLISYS
-#OBJECT_IO_PARA     NODE.4.IN_OFFSET                    0       
-#OBJECT_IO_PARA     NODE.4.IN_BYTE                      9
-#OBJECT_IO_PARA     NODE.4.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.4.OUT_BYTE                     4 
-
-#OBJECT_IO_PARA     NODE.5.MACID                        6
-#OBJECT_IO_PARA     NODE.5.NAME                         INTELLISYS
-#OBJECT_IO_PARA     NODE.5.IN_OFFSET                    0       
-#OBJECT_IO_PARA     NODE.5.IN_BYTE                      9
-#OBJECT_IO_PARA     NODE.5.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.5.OUT_BYTE                     4 
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     4
 //----------------------
-
-#DEFINE_CONSTANT    FLAG__DRV_LOG                       YES
 
 //----------------------
 #DEFINE_CONSTANT    LINK.IO_SIZE                        0

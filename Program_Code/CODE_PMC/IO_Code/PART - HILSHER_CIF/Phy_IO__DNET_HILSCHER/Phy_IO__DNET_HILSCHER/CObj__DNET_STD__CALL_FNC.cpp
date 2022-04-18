@@ -7,6 +7,18 @@
 
 //-------------------------------------------------------------------------	
 int  CObj__DNET_STD
+::Call__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+{
+	if(iActive__SIM_MODE > 0)
+	{
+		diCH__COMM_STS->Set__DATA(STR__ONLINE);
+	}
+
+	return 1;
+}
+
+//
+int  CObj__DNET_STD
 ::Call__LINK_IO_SET_OFF(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
 	int i_limit = iSIZE__LINK_IO;
@@ -31,7 +43,7 @@ int  CObj__DNET_STD
 	return 1;
 }
 
-//
+// ...
 int  CObj__DNET_STD
 ::Call__FLOAT_TO_HEXA(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
@@ -60,7 +72,6 @@ int  CObj__DNET_STD
 	sCH__FLOAT_TO_HEXA__RESULT->Set__DATA(ch_data);
 	return 1;
 }
-
 int  CObj__DNET_STD
 ::Call__HEXA_TO_FLOAT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
@@ -97,11 +108,10 @@ CString CObj__DNET_STD
 	return str_float;
 }
 
-//
+// ...
 int  CObj__DNET_STD
 ::Call__NODE_OUT_BYTE_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	/*
 	unsigned char data_bff[256];
 	CString ch_data;
 
@@ -116,10 +126,8 @@ int  CObj__DNET_STD
 			sCH__DNET_INFO__OUT_BYTE_DATA_X[i]->Set__DATA(ch_data);
 		}
 	}
-	*/
 	return 1;
 }
-
 int  CObj__DNET_STD
 ::Call__NODE_IN_BYTE_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {

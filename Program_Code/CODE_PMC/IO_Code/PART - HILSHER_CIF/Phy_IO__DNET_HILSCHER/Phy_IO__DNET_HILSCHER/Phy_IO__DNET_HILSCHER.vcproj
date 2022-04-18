@@ -240,42 +240,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="CObj__TYPE_BROOKS"
-				>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS__CALL_FNC.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS__DEF.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS__DNET_FNC.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS__DRV_FNC.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS__LOG_FNC.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__TYPE_BROOKS__MON_FNC.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="DNet_Mng"
 				>
 				<File
@@ -308,6 +272,14 @@
 				</File>
 				<File
 					RelativePath=".\CObj__DNET_STD.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__DNET_STD__CALL_DEV_INFO.cpp"
 					>
 				</File>
 				<File

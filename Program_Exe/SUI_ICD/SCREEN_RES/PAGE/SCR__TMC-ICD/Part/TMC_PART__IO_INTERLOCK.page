@@ -1,0 +1,1636 @@
+@SCREEN_SIZE 1280 800
+
+#BACK_PAGE_FILE
+{
+JGLEE__STD_CLIENT_COMMON
+}
+#RECTANGLE
+{
+RECTANGLE
+1
+229
+(0, 0, 0)
+(255, 255, 255)
+(939, 56) (1250, 120) 
+}
+#DYNAMIC
+{
+}
+#RECTANGLE
+{
+RECTANGLE
+1
+255
+(0, 0, 0)
+(255, 255, 255)
+(934, 182) (1253, 337) 
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+1182 287 1247 310
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-DB_CFG+CFG.PROCESS.MANOMETER.MAX.PRESSURE.mTORR-STRING
+DATA.INIT_TITLE=Mode
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,210)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(0,0,210)
+DATA.EDGE_DOWN_COLOR=RGB(0,0,210)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+CFG Process Nanomater Max. Pressure (mtorr)
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(945, 291) (1175 305)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+VAT Paramter
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(1117, 270) (1187 284)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+SIM Pressure Torr
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(1054, 314) (1175 328)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+1182 310 1247 333
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-DB_CFG+SIM.PRESSURE.TORR-STRING
+DATA.INIT_TITLE=Mode
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,210)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(0,0,210)
+DATA.EDGE_DOWN_COLOR=RGB(0,0,210)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#RECTANGLE
+{
+RECTANGLE
+1
+229
+(0, 0, 0)
+(255, 255, 255)
+(39, 56) (540, 331) 
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 66 205 82
+}
+#RENAME
+{
+S-IO+di.Alm_LL1.Door.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL1.DV..Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 67) (197 81)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 84 205 100
+}
+#RENAME
+{
+S-IO+di.Alm_LL2.Door.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL2.DV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 85) (197 99)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RECT
+1095 64 1105 80
+}
+#RENAME
+{
+S-IO+di.TMC.Chamber.Lid.Close
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.TMC.Chamber.Lid.Close
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(955, 65) (1085 79)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 102 205 118
+}
+#RENAME
+{
+S-IO+di.Alm_LL3.Door.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL3.DV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 103) (197 117)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 120 205 136
+}
+#RENAME
+{
+S-IO+di.Alm_LL4.Door.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL4.DV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 121) (197 135)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 141 205 157
+}
+#RENAME
+{
+S-IO+di.Alm_LL1.Slot.Vlv.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL1.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 142) (197 156)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 159 205 175
+}
+#RENAME
+{
+S-IO+di.Alm_LL2.Slot.Vlv.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL2.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 160) (197 174)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 177 205 193
+}
+#RENAME
+{
+S-IO+di.Alm_LL3.Slot.Vlv.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL3.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 178) (197 192)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 195 205 211
+}
+#RENAME
+{
+S-IO+di.Alm_LL4.Slot.Vlv.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL4.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 196) (197 210)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 216 205 232
+}
+#RENAME
+{
+S-IO+di.Alm_PM1.Slot.VlV.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM1.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 217) (197 231)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 234 205 250
+}
+#RENAME
+{
+S-IO+di.Alm_PM2.Slot.VlV.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM2.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 235) (197 249)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 252 205 268
+}
+#RENAME
+{
+S-IO+di.Alm_PM3.Slot.VlV.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM3.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 253) (197 267)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 270 205 286
+}
+#RENAME
+{
+S-IO+di.Alm_PM4.Slot.VlV.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM4.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 271) (197 285)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 288 205 304
+}
+#RENAME
+{
+S-IO+di.Alm_PM5.Slot.VlV.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM5.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 289) (197 303)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+195 306 205 322
+}
+#RENAME
+{
+S-IO+di.Alm_PM6.Slot.VlV.Open.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM6.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(58, 307) (197 321)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 66 362 82
+}
+#RENAME
+{
+S-IO+di.Alm_LL1.Door.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL1.DV..Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 67) (354 81)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 84 362 100
+}
+#RENAME
+{
+S-IO+di.Alm_LL2.Door.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL2.DV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 85) (354 99)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 102 362 118
+}
+#RENAME
+{
+S-IO+di.Alm_LL3.Door.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL3.DV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 103) (354 117)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 120 362 136
+}
+#RENAME
+{
+S-IO+di.Alm_LL4.Door.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL4.DV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 121) (354 135)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 141 362 157
+}
+#RENAME
+{
+S-IO+di.Alm_LL1.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL1.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 142) (354 156)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 159 362 175
+}
+#RENAME
+{
+S-IO+di.Alm_LL2.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL2.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 160) (354 174)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 177 362 193
+}
+#RENAME
+{
+S-IO+di.Alm_LL3.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL3.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 178) (354 192)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 195 362 211
+}
+#RENAME
+{
+S-IO+di.Alm_LL4.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di..LL4.SV.Open.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 196) (354 210)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 216 362 232
+}
+#RENAME
+{
+S-IO+di.Alm_PM1.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM1.SV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 217) (354 231)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 234 362 250
+}
+#RENAME
+{
+S-IO+di.Alm_PM2.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM2.SV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 235) (354 249)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 252 362 268
+}
+#RENAME
+{
+S-IO+di.Alm_PM3.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM3.SV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 253) (354 267)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 270 362 286
+}
+#RENAME
+{
+S-IO+di.Alm_PM4.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM4.SV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 271) (354 285)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 288 362 304
+}
+#RENAME
+{
+S-IO+di.Alm_PM5.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM5.SV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 289) (354 303)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+352 306 362 322
+}
+#RENAME
+{
+S-IO+di.Alm_PM6.Slot.VlV.Close.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM6.SV.Close.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(215, 307) (354 321)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 66 529 82
+}
+#RENAME
+{
+S-IO+di.Alm_LL1.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL1.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(372, 67) (511 81)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 84 529 100
+}
+#RENAME
+{
+S-IO+di.Alm_LL2.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL2.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(372, 85) (511 99)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 102 529 118
+}
+#RENAME
+{
+S-IO+di.Alm_LL3.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL3.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(372, 103) (511 117)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 120 529 136
+}
+#RENAME
+{
+S-IO+di.Alm_LL4.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL4.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(372, 121) (511 135)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 141 529 157
+}
+#RENAME
+{
+S-IO+di.Alm_PM1.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM1.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(370, 142) (510 156)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 159 529 175
+}
+#RENAME
+{
+S-IO+di.Alm_PM2.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM2.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(370, 160) (510 174)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 177 529 193
+}
+#RENAME
+{
+S-IO+di.Alm_PM3.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM3.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(370, 178) (510 192)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 195 529 211
+}
+#RENAME
+{
+S-IO+di.Alm_PM4.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM4.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(370, 196) (510 210)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 213 529 229
+}
+#RENAME
+{
+S-IO+di.Alm_PM5.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM5.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(370, 214) (510 228)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RED
+519 231 529 247
+}
+#RENAME
+{
+S-IO+di.Alm_PM6.Wafer.Protrude.Error
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.PM6.Wafer.Protrude.Error
+(128, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(370, 232) (510 246)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RECT
+1095 81 1105 97
+}
+#RENAME
+{
+S-IO+di.LBC.Chamber.Lid.Close
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL3.Chamber.Lid.Close
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(955, 82) (1085 96)
+}
+#DYNAMIC
+{
+}
+#GP_INF
+{
+JGLEE__LED_RECT
+1095 98 1105 114
+}
+#RENAME
+{
+S-IO+di.LBD.Chamber.Lid.Close
+On
+}
+#TEXT_EX
+{
+Tahoma
+di.LL4.Chamber.Lid.Close
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(955, 99) (1085 113)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+do.Host.PLC.Alarm.Reset
+(0, 0, 0)
+8
+0
+(192, 192, 192)
+0
+255
+(1027, 194) (1177 208)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+1182 190 1247 213
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+do.Host.PLC.Alarm.Reset-STRING
+DATA.INIT_TITLE=Mode
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,210)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(0,0,210)
+DATA.EDGE_DOWN_COLOR=RGB(0,0,210)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#RECTANGLE
+{
+RECTANGLE
+1
+157
+(0, 0, 0)
+(242, 240, 240)
+(553, 56) (871, 268) 
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+GN2 Pressure Switch
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(566, 84) (685 98)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+Node02 - AI
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(668, 58) (755 72)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 79 816 102
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.GN2.Pressure.Switch
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+CDA1 PM Pressure Switch
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(565, 106) (710 120)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 101 816 124
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.CDA1.PM.Pressure.Switch
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+CDA2 PM Pressure Switch
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(565, 128) (710 142)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 123 816 146
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.CDA2.PM.Pressure.Switch
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+CDA2 TM_LL Pressure Switch
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(564, 150) (729 164)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 145 816 168
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.CDA2.TM_LL.Pressure.Switch
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+PCW Flow Meter
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(564, 176) (658 190)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 171 816 194
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.PCW.Flow.Meter
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+UPC Gauge
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(563, 198) (627 212)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 193 816 216
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.UPC.Gauge
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+DI Pressure Switch
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(564, 220) (673 234)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 215 816 238
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.DI.Pressure.Switch
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+Node2 Block1 Spare
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(564, 242) (678 256)
+}
+#DYNAMIC
+{
+}
+#GOBJ_INTERFACE
+{
+JGLEE__BTN_DISPLAY_STD
+745 237 816 260
+}
+#RENAME
+{
+DATA.BUTTON_TYPE=Channel_Button
+CH.STATE=S-IO+ai.Node2.Block1.Spare
+DATA.INIT_TITLE=Flow
+DATA.FONT_NAME=Fixedsys
+DATA.TEXT_COLOR=RGB(0,0,0)
+DATA.BACK_COLOR=RGB(255,255,255)
+DATA.TEXT_WIDTH=6
+DATA.TEXT_HEIGHT=15
+DATA.TEXT_WEIGHT=
+DATA.EDGE_WIDTH=1
+DATA.EDGE_UP_COLOR=RGB(90,90,90)
+DATA.EDGE_DOWN_COLOR=RGB(90,90,90)
+DATA.OUTLINE_COLOR=
+DATA.TEXT.Y_POS.OFFSET=0
+}
+#TEXT_EX
+{
+Tahoma
+MPa
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(825, 84) (852 98)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+MPa
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(825, 106) (852 120)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+MPa
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(826, 128) (853 142)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+MPa
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(826, 150) (853 164)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+L/Min
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(826, 176) (862 190)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+&
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(825, 198) (837 212)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+MPa
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(826, 220) (853 234)
+}
+#DYNAMIC
+{
+}
+#TEXT_EX
+{
+Tahoma
+__
+(67, 67, 67)
+8
+1
+(146, 51, 51)
+0
+255
+(826, 242) (843 256)
+}
+#DYNAMIC
+{
+}

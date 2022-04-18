@@ -2,11 +2,14 @@
 
 #include "Interface_Code.h"
 
+#include "CObj__DNET_STD__ALID.h"
 #include "CObj__DNET_STD__DEF.h"
+
 #include "CCtrl__DNet_Node.h"
 #include "DNet_Mng.h"
 
 
+// ...
 #define CFG__SLAVE_SIZE					20
 
 #define CFG__DNET_OUT_BYTE_LIMIT		200
@@ -25,6 +28,8 @@ private:
 	int iActive__SIM_MODE;
 
 	int iDNet_BoardNumber;
+	int iDNet_Board_Out_Offset;
+	int iDNet_Board_In_Offset;
 	CDNet_Mng mDNet_Mng;
 
 	unsigned char  abOutputData[3584];
@@ -43,14 +48,14 @@ private:
 
 	void Write__DRV_LOG(const CString& log_msg);
 	void Write__DRV_LOG(const CString& fnc_type,
-		const CString& var_name, 
-		const CDS_IO__CHANNEL_INFO& io_info,
-		const CString& io_data = "",
-		const int io_index = -1);
+						const CString& var_name, 
+						const CDS_IO__CHANNEL_INFO& io_info,
+						const CString& io_data = "",
+						const int io_index = -1);
 	void Write__DRV_LOG(const CString& fnc_type,
-		const CString& var_name, 
-		const CDS_IO__CHANNEL_INFO& io_info,
-		const double set_data);
+						const CString& var_name, 
+						const CDS_IO__CHANNEL_INFO& io_info,
+						const double set_data);
 
 
 	//-------------------------------------------------------------------------
@@ -63,10 +68,22 @@ private:
 	CX__VAR_STRING_CTRL  sCH__DNET_HEARTBEAT_TIME_COUNT;
 
 	//
-	CX__VAR_STRING_CTRL  sCH__DNET_INFO__MASTER_BOARD_NAME;
 	CX__VAR_STRING_CTRL  sCH__DNET_INFO__MASTER_BOARD_ID;
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__MASTER_BOARD_IN_BYTE_OFFSET;
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__MASTER_BOARD_OUT_BYTE_OFFSET;
+
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__MASTER_BOARD_NAME;
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION;
 	CX__VAR_STRING_CTRL  sCH__DNET_INFO__BAUD_RATE;
 
+	//
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__TOTAL_OUT_BYTE;
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__TOTAL_IN_BYTE;
+
+	CX__VAR_STRING_CTRL  sCH__DNET_CFG__TOTAL_OUT_BYTE;
+	CX__VAR_STRING_CTRL  sCH__DNET_CFG__TOTAL_IN_BYTE;
+
+	//
 	int iSLAVE_COUNT;
 
 	//
@@ -79,6 +96,12 @@ private:
 	CX__VAR_STRING_CTRL  sCH__DNET_INFO__SLAVE_X__NAME[CFG__SLAVE_SIZE];
 	CX__VAR_STRING_CTRL  sCH__DNET_INFO__SLAVE_X__IN_SIZE[CFG__SLAVE_SIZE];
 	CX__VAR_STRING_CTRL  sCH__DNET_INFO__SLAVE_X__OUT_SIZE[CFG__SLAVE_SIZE];
+
+	CX__VAR_DIGITAL_CTRL dCH__DNET_INFO__COMM_STATE_CHECK_ACTIVE;
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__SLAVE_X__COMM_STATE[CFG__SLAVE_SIZE];
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__SLAVE_X__COMM_HEXA[CFG__SLAVE_SIZE];
+
+	CX__VAR_STRING_CTRL  sCH__DNET_INFO__SLAVE_X__ERROR_CHECK_ID[CFG__SLAVE_SIZE];
 
 	//
 	CX__VAR_STRING_CTRL  sCH__DNET_CFG__SLAVE_COUNT;
@@ -125,11 +148,20 @@ private:
 
 
 	//-------------------------------------------------------------------------
+	CString sMODE__INIT;
+	int  Call__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	//
 	CString sMODE__LINK_IO_SET_OFF;
 	int  Call__LINK_IO_SET_OFF(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	CString sMODE__LINK_IO_SET_ON;
 	int  Call__LINK_IO_SET_ON(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	//
+	CString sMODE__DEV_INFO;
+	int  Call__DEV_INFO(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int  _Fnc__DEV_INFO(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	//
 	CString sMODE__FLOAT_TO_HEXA;
@@ -159,8 +191,10 @@ private:
 										unsigned char *ptRespData);
 
 	// ...
-	int _Init__DNET_MASTER_BY_AUTO_CFG();
+	bool bActive__DNET_INIT;
+
 	int _Init__DNET_MASTER_BY_USER_CFG();
+	int _Init__DNET_MASTER_BY_AUTO_CFG();
 	//
 
 

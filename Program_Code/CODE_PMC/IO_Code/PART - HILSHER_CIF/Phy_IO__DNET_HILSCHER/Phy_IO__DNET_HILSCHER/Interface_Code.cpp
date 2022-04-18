@@ -2,7 +2,6 @@
 #include "Interface_Code.h"
 
 #include "CObj__DNET_STD.h"
-#include "CObj__TYPE_BROOKS.h"
 
 
 //----------------------------------------------------------
@@ -20,13 +19,11 @@ DECLARE_END__DLL_IO_OBJ__GET_VERSION
 
 //----------------------------------------------------------
 #define CLS__DNET_STD						"DNET.STD"
-#define CLS__TYPE_BROOKS					"TYPE.BROOKS"
 
 
 DECLARE_START__DLL_IO_OBJ__GET_CLASS_LIST
 
 ADD__OBJ_CLS(CLS__DNET_STD);
-ADD__OBJ_CLS(CLS__TYPE_BROOKS);
 
 DECLARE_END__DLL_IO_OBJ__GET_CLASS_LIST
 
@@ -34,6 +31,5 @@ DECLARE_END__DLL_IO_OBJ__GET_CLASS_LIST
 DECLARE_START__DLL_IO_OBJ__CREATE_LINK
 
 IF__OBJ_CLS(CLS__DNET_STD)					return (new CObj__DNET_STD);
-IF__OBJ_CLS(CLS__TYPE_BROOKS)				return (new CObj__TYPE_BROOKS);
 
 DECLARE_END__DLL_IO_OBJ__CREATE_LINK

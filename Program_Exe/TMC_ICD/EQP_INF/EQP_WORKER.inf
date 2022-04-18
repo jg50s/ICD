@@ -142,7 +142,7 @@
 
 
 ===========================================================================
-#OBJECT_IO     Phy_IO__DNET_HILSCHER         TYPE.BROOKS              IO
+#OBJECT_IO     Phy_IO__DNET_HILSCHER         DNET.STD                 IO
 
 #OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LBA__CHM_GAUGE
 #OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LBB__CHM_GAUGE

@@ -42,16 +42,22 @@ void CObj__DNET_STD
 		x_link_io_timer->START__COUNT_UP(9999);
 	}
 
+	// ...
+	int loop_count = 0;
+
+	if((bActive__DNET_INIT)
+	|| (iActive__SIM_MODE > 0))
+	{
+		Call__DEV_INFO(p_variable, p_alarm);
+	}
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.05);
 
+		loop_count++;
+		if(loop_count > 20)			loop_count = 1;
 
-		if(iActive__SIM_MODE > 0)
-		{
-			diCH__COMM_STS->Set__DATA("ONLINE");
-		}
 
 		// LINK : IO ...
 		if(iSIZE__LINK_IO > 0)
@@ -105,19 +111,35 @@ void CObj__DNET_STD
 			}
 		}
 
-		if(diCH__COMM_STS->Check__DATA("OFFLINE") > 0)
+		if(loop_count == 1)
 		{
-			int alm_id = ALID__OFFLINE;
-			CString alm_msg;
-			CString	r_act;
+			if(diCH__COMM_STS->Check__DATA(STR__OFFLINE) > 0)
+			{
+				int alm_id = ALID__OFFLINE;
+				CString alm_msg;
+				CString	r_act;
 
-			alm_msg = "";
+				alm_msg = "";
 
-			p_alarm->Check__ALARM(alm_id, r_act);
-			p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			}
+
+			// ...
+			unsigned short err_code;
+			CString err_msg;
+
+			if(mDNet_Mng.Check__LAST_ERROR_CODE(err_code, err_msg))
+			{
+				int alm_id = ALID__LAST_ERROR_CODE;
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, err_msg);
+			}
 		}
 
-		// ...
+		if(bActive__DNET_INIT)
 		{
 			EnterCriticalSection(&mLOCK_DNET);
 
@@ -135,6 +157,7 @@ void CObj__DNET_STD
 {
 	if(iDNet_BoardNumber < 0)
 	{
+		printf("iDNet_BoardNumber < -%1d \n", iDNet_BoardNumber);
 		return;
 	}
 
@@ -161,16 +184,97 @@ void CObj__DNET_STD
 		}
 	}
 
-	DevExchangeIO(dev_id,
-					0,
-					usOutputOffset,
-					&abOutputData,
-					0,
-					usInputOffset,
-					&abInputData,
-					500L);
+	// ...
+	COMSTATE tComState;
+	short s_ret;
+
+	/*
+	s_ret = DevExchangeIO(dev_id,
+						0,
+						usOutputOffset,
+						&abOutputData,
+						0,
+						usInputOffset,
+						&abInputData,
+						500L);
+	*/
+	s_ret = DevExchangeIOErr(dev_id,
+							iDNet_Board_Out_Offset,
+							usOutputOffset,
+							&abOutputData,
+							iDNet_Board_In_Offset,
+							usInputOffset,
+							&abInputData,
+							&tComState,
+							100L);
+
+	// slave state ...
+	if(s_ret == DRV_NO_ERROR)
+	{
+		if(dCH__DNET_INFO__COMM_STATE_CHECK_ACTIVE->Check__DATA(STR__YES) > 0)
+		{
+			CString log_msg;
+			CString log_bff;
+
+			bool active__state_check = false;
+
+			switch(tComState.usMode) 
+			{
+				case STATE_MODE_3:
+					active__state_check = true;
+
+					log_bff  = "STATE_MODE_3: \n";
+					log_msg += log_bff;
+					
+					log_bff = "  Check state field usStateFlag signals entrys \n";
+					log_msg += log_bff;
+					break;
+				
+				case STATE_MODE_4:
+					active__state_check = true;
+
+					log_bff  = "STATE_MODE_4: \n";
+					log_msg += log_bff;
+					
+					log_bff  = "  Check state field usStateFlag signals new entrys \n";
+					log_msg += log_bff;
+					break;
+
+				default:
+					log_bff  = "State mode unknown or not implemented \n";
+					log_msg += log_bff;
+
+					log_bff.Format("  usStateFlag <- %d \n", tComState.usStateFlag);
+					log_msg += log_bff;
+					break;
+			} 
+
+			if(active__state_check)
+			{
+				if(tComState.usStateFlag != 0) 
+				{
+					int k_limit = sizeof(tComState.abState);
+
+					log_msg += "\n";
+					log_bff.Format("Comm.abState (%1d) ... \n", k_limit);
+					log_msg += log_bff;
+			
+					for(int k=0; k<k_limit; k++)
+					{
+						log_bff.Format("%02X ", 0x0ff & tComState.abState[k]);
+						log_msg += log_bff;
+	
+						if((k % 10) == 0)		log_msg += "\n  ";
+					}
+				}
+			}
+
+			printf(log_msg);
+		}
+	}
 
 	// Input Upload ...
+	if(s_ret == DRV_NO_ERROR)
 	{
 		mCtrl__DNet_Node.Update__ALL_IN_BYTE(abInputData,usInputOffset);
 
@@ -185,5 +289,14 @@ void CObj__DNET_STD
 				}
 			}
 		}
+	}
+	else
+	{
+		diCH__COMM_STS->Set__DATA(STR__ONLINE);
+
+		printf("DevExchangeIO( %1d, ... ) : Error (%1d) \n", dev_id, s_ret);
+		printf(" * Error Message : \"%s\" \n", mDNet_Mng.Get__ERR_CODE(s_ret));
+
+		Sleep(1000);
 	}
 }

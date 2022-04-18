@@ -14,6 +14,8 @@
 //--------------------------------------------------------------------------------
 int CObj__DNET_STD::_Init__DNET_MASTER_BY_USER_CFG()
 {
+	bActive__DNET_INIT = false;
+
 	if(mDNet_Mng.Call__BOARD_OPEN() < 0)
 	{
 		return -1;
@@ -23,9 +25,10 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_USER_CFG()
 		return -1;
 	}
 
-	iDNet_BoardNumber = mDNet_Mng.Get__BOARD_ID();
+	bActive__DNET_INIT = true;
 	return 1;
 }
+
 int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 {
 	int dev_id = 0;
@@ -768,13 +771,13 @@ unsigned char CObj__DNET_STD
 	tMsgExt.b  = DNM_Get_Set_Attribute; 
 	tMsgExt.e  = 0;
 
-	tMsgExt.device_adr  = bDeviceAdr;
-	tMsgExt.data_area   = bClass;
-	tMsgExt.data_adr    = usInstance;
-	tMsgExt.data_idx    = bAttribute;
-	tMsgExt.data_cnt    = 0;
-	tMsgExt.data_type   = 0;
-	tMsgExt.function    = TASK_TFC_READ;
+	tMsgExt.device_adr = bDeviceAdr;
+	tMsgExt.data_area  = bClass;
+	tMsgExt.data_adr   = usInstance;
+	tMsgExt.data_idx   = bAttribute;
+	tMsgExt.data_cnt   = 0;
+	tMsgExt.data_type  = 0;
+	tMsgExt.function   = TASK_TFC_READ;
 
 	if((s_ret = DevPutMessage(iDNet_BoardNumber, (MSG_STRUC *)&tMsgExt, 500L)) == DRV_NO_ERROR) 
 	{
@@ -787,22 +790,19 @@ unsigned char CObj__DNET_STD
 			}
 			else
 			{
+				printf("\n ERROR - tMsgExt.f (%1d) \n", tMsgExt.f);
 				return ( 0 );
 			}
 		}
 		else 
 		{
 			printf("\nDevGetMessage(%d, sizeof(tMsgExt), &tMsgExt, 500): %d\n", iDNet_BoardNumber, (int) s_ret);
-
-			// __CLOSE__OBJECT();
 			return ( 0 );
 		}
 	}
 	else 
 	{
 		printf("\nDevPutMessage(%d, &tMsgExt, 500): %d\n", iDNet_BoardNumber, (int) s_ret);
-
-		// __CLOSE__OBJECT();
 		return ( 0 );
 	}
 

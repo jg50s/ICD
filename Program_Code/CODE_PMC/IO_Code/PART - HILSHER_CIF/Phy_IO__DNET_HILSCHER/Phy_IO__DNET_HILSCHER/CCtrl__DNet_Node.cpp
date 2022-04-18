@@ -90,6 +90,34 @@ int CCtrl__DNet_Node::Load__Complete()
 	return 1;
 }
 
+int CCtrl__DNet_Node::Get_MacID_Of_Node_ID(const int node_id)
+{
+	EnterCriticalSection(&mLOCK);
+
+	int mac_id = _Get_MacID_Of_Node_ID(node_id);
+
+	LeaveCriticalSection(&mLOCK);
+	return mac_id;
+}
+int CCtrl__DNet_Node::_Get_MacID_Of_Node_ID(const int node_id)
+{
+	int i_limit = pList_Node.GetSize();
+	int i;
+
+	for(i=0; i<i_limit; i++)
+	{
+		CInfo__DNet_Node *p_node = (CInfo__DNet_Node*) pList_Node[i];
+
+		if(node_id != p_node->iNODE_ID)
+		{
+			continue;
+		}
+
+		return p_node->iMAC_ID;
+	}
+	return -1;
+}
+
 CString CCtrl__DNet_Node::Get__All_Node_Info()
 {
 	EnterCriticalSection(&mLOCK);

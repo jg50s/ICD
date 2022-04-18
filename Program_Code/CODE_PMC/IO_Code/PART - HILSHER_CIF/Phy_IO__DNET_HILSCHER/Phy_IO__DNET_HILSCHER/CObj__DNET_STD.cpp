@@ -13,6 +13,8 @@ CObj__DNET_STD::CObj__DNET_STD()
 	InitializeCriticalSection(&mLOCK_DNET);
 
 	iDNet_BoardNumber = -1;
+	iDNet_Board_Out_Offset = 0;
+	iDNet_Board_In_Offset  = 0;
 }
 CObj__DNET_STD::~CObj__DNET_STD()
 {
@@ -30,8 +32,14 @@ int CObj__DNET_STD::__DEFINE__CONTROL_MODE(obj, l_mode)
 
 	// ...
 	{
+		ADD__CTRL_VAR(sMODE__INIT, "INIT");
+
+		//
 		ADD__CTRL_VAR(sMODE__LINK_IO_SET_OFF, "LINK_IO.SET_OFF");
 		ADD__CTRL_VAR(sMODE__LINK_IO_SET_ON,  "LINK_IO.SET_ON" );
+
+		//
+		ADD__CTRL_VAR(sMODE__DEV_INFO, "DEV_INFO");
 
 		// 
 		ADD__CTRL_VAR(sMODE__FLOAT_TO_HEXA, "FLOAT_TO_HEXA");
@@ -82,17 +90,49 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// ...
 	{
+		str_name = "DNET.INFO.MASTER_BOARD.ID";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__MASTER_BOARD_ID, str_name);
+
+		str_name = "DNET.INFO.MASTER_BOARD.IN_BYTE.OFFSET";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__MASTER_BOARD_IN_BYTE_OFFSET, str_name);
+
+		str_name = "DNET.INFO.MASTER_BOARD.OUT_BYTE.OFFSET";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__MASTER_BOARD_OUT_BYTE_OFFSET, str_name);
+
+		//
 		str_name = "DNET.INFO.MASTER_BOARD_NAME";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__MASTER_BOARD_NAME, str_name);
 
-		str_name = "DNET.INFO.MASTER_BOARD_ID";
+		str_name = "DNET.INFO._MASTER_BOARD.DRIVER_VERSION";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__MASTER_BOARD_ID, str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION, str_name);
 
+		//
 		str_name = "DNET.INFO.BAUD_RATE";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__BAUD_RATE, str_name);
+
+		//
+		str_name = "DNET.INFO.TOTAL_OUT_BYTE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__TOTAL_OUT_BYTE, str_name);
+
+		str_name = "DNET.INFO.TOTAL_IN_BYTE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__TOTAL_IN_BYTE, str_name);
+
+		//
+		str_name = "DNET.CFG.TOTAL_OUT_BYTE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_OUT_BYTE, str_name);
+
+		str_name = "DNET.CFG.TOTAL_IN_BYTE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_IN_BYTE, str_name);
 
 		//
 		{
@@ -139,6 +179,20 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 				str_name.Format("DNET.INFO.SLAVE.%1d.OUT_SIZE", id);
 				STD__ADD_STRING(str_name);
 				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i], str_name);
+
+				//
+				str_name.Format("DNET.INFO.SLAVE.%1d.COMM_STATE", id);
+				STD__ADD_STRING(str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__COMM_STATE[i], str_name);
+
+				str_name.Format("DNET.INFO.SLAVE.%1d.COMM_HEXA", id);
+				STD__ADD_STRING(str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__COMM_HEXA[i], str_name);
+
+				//
+				str_name.Format("DNET.INFO.SLAVE.%1d.ERROR_CHECK_ID", id);
+				STD__ADD_STRING(str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__ERROR_CHECK_ID[i], str_name);
 			}
 
 			// CFG ...
@@ -169,6 +223,13 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 				STD__ADD_STRING(str_name);
 				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i], str_name);
 			}
+		}
+
+		//
+		{
+			str_name = "DNET.INFO.COMM_STATE.CHECK.ACTIVE";
+			STD__ADD_DIGITAL(str_name, "NO YES");
+			LINK__VAR_DIGITAL_CTRL(dCH__DNET_INFO__COMM_STATE_CHECK_ACTIVE, str_name);
 		}
 	}
 
@@ -281,6 +342,20 @@ int CObj__DNET_STD::__DEFINE__ALARM(p_alarm)
 
 		alm_title  = obj_title;
 		alm_title += "Offline !";
+
+		alm_msg = "Check the line & parameter.";
+
+		l_act.RemoveAll();
+		l_act.Add("CHECK");
+
+		ADD__ALARM_EX(alm_id, alm_title, alm_msg, l_act);
+	}
+	// ...
+	{
+		alm_id = ALID__LAST_ERROR_CODE;
+
+		alm_title  = obj_title;
+		alm_title += "Last Error Code !";
 
 		alm_msg = "Check the line & parameter.";
 
@@ -430,10 +505,20 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		int bd_ud = atoi(para_data);
 		mDNet_Mng.Set__BOARD_ID(bd_ud);
 
+		para_name = "BOARD.OUT_OFFSET";
+		p_io_para->Get__PARAMETER_DATA(para_name, para_data);
+		iDNet_Board_Out_Offset = atoi(para_data);
+
+		para_name = "BOARD.IN_OFFSET";
+		p_io_para->Get__PARAMETER_DATA(para_name, para_data);
+		iDNet_Board_In_Offset = atoi(para_data);
+
+		//
 		para_name = "NODE.SIZE";
 		p_io_para->Get__PARAMETER_DATA(para_name, para_data);
 		i_limit = atoi(para_data);
 		if(i_limit > CFG__SLAVE_SIZE)		i_limit = CFG__SLAVE_SIZE;
+		iSLAVE_COUNT = i_limit;
 
 		para_data.Format("%1d", i_limit);
 		sCH__DNET_CFG__SLAVE_COUNT->Set__DATA(para_data);
@@ -482,6 +567,8 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		{
 			CInfo__DNet_Node node_info;
 
+			node_info.iNODE_ID = i + 1;
+
 			sCH__DNET_CFG__SLAVE_X__MACID[i]->Get__DATA(ch_data);
 			node_info.iMAC_ID = atoi(ch_data);
 
@@ -514,39 +601,14 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		}
 	}
 
-	// ...
-	SCX__SEQ_INFO x_seq_info;
-	int sim_mode = x_seq_info->Is__SIMULATION_MODE();
-
-	// ...
 	printf("%s : Initial Starting ... \n", sObject_Name);
 
-	int r_ret;
-
-	if(sim_mode < 0)
-	{
-		r_ret = _Init__DNET_MASTER_BY_USER_CFG();
-	}
-	else
-	{
-		r_ret = -1;
-
-		//
-		CString ch_data;
-
-		sCH__DNET_INFO__MASTER_BOARD_NAME->Set__DATA("???");
-		sCH__DNET_INFO__BAUD_RATE->Set__DATA("??");
-
-		ch_data.Format("%1d", mDNet_Mng.Get__BOARD_ID());
-		sCH__DNET_INFO__MASTER_BOARD_ID->Set__DATA(ch_data);
-	}
+	// ...
+	int r_ret = _Init__DNET_MASTER_BY_USER_CFG();
 
 	if(r_ret > 0)
 	{
-		usInputOffset  = mCtrl__DNet_Node.Get__TOTAL_IN_BYTE();
-		usOutputOffset = mCtrl__DNet_Node.Get__TOTAL_OUT_BYTE();
-
-		diCH__COMM_STS->Set__DATA("ONLINE");
+		diCH__COMM_STS->Set__DATA(STR__ONLINE);
 
 		printf("%s : Initial Completed ... \n", sObject_Name);
 	}
@@ -555,11 +617,44 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		usInputOffset  = 0;
 		usOutputOffset = 0;
 
-		diCH__COMM_STS->Set__DATA("OFFLINE");
+		diCH__COMM_STS->Set__DATA(STR__OFFLINE);
 
 		printf("%s : Initial Aborted ... \n", sObject_Name);
 	}
 
+	// ...
+	{
+		CString ch_data;
+		int cur_byte;
+
+		cur_byte = mCtrl__DNet_Node.Get__TOTAL_OUT_BYTE();
+		usOutputOffset = cur_byte;
+		ch_data.Format("%1d", cur_byte);
+		sCH__DNET_CFG__TOTAL_OUT_BYTE->Set__DATA(ch_data);
+
+		cur_byte = mCtrl__DNet_Node.Get__TOTAL_IN_BYTE();
+		usInputOffset = cur_byte;
+		ch_data.Format("%1d", cur_byte);
+		sCH__DNET_CFG__TOTAL_IN_BYTE->Set__DATA(ch_data);
+
+		//
+		iDNet_BoardNumber = mDNet_Mng.Get__BOARD_ID();
+		ch_data.Format("%1d", iDNet_BoardNumber);
+		sCH__DNET_INFO__MASTER_BOARD_ID->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", iDNet_Board_In_Offset);
+		sCH__DNET_INFO__MASTER_BOARD_IN_BYTE_OFFSET->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", iDNet_Board_Out_Offset);
+		sCH__DNET_INFO__MASTER_BOARD_OUT_BYTE_OFFSET->Set__DATA(ch_data);
+
+		//
+		ch_data = mDNet_Mng.Get__FIRMWARE_INFO();
+		sCH__DNET_INFO__MASTER_BOARD_NAME->Set__DATA(ch_data);
+
+		ch_data = mDNet_Mng.Get__DRIVER_VERSION();
+		sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION->Set__DATA(ch_data);
+	}
 	return 1;
 }
 
@@ -581,8 +676,12 @@ int CObj__DNET_STD
 
 	// ...
 	{
-		IF__CTRL_MODE(sMODE__LINK_IO_SET_OFF)				flag = Call__LINK_IO_SET_OFF(p_variable, p_alarm);
+			 IF__CTRL_MODE(sMODE__INIT)							flag = Call__INIT(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__LINK_IO_SET_OFF)				flag = Call__LINK_IO_SET_OFF(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__LINK_IO_SET_ON)				flag = Call__LINK_IO_SET_ON(p_variable, p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__DEV_INFO)						flag = Call__DEV_INFO(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__FLOAT_TO_HEXA)				flag = Call__FLOAT_TO_HEXA(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__HEXA_TO_FLOAT)				flag = Call__HEXA_TO_FLOAT(p_variable,p_alarm);
@@ -613,9 +712,9 @@ int CObj__DNET_STD::__CALL__MONITORING(id, p_variable, p_alarm)
 {
 	switch(id)
 	{
-	case MON_ID__MONITOR:
-		Mon__MONITOR(p_variable,p_alarm);
-		break;
+		case MON_ID__MONITOR:
+			Mon__MONITOR(p_variable,p_alarm);
+			break;
 	}
 
 	return 1;

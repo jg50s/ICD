@@ -34,6 +34,8 @@ union UNION_4_BYTE__FLOAT
 class CHeader__DNet_Node
 {
 public:
+	int iNODE_ID;
+
 	int iMAC_ID;
 	CString sNAME;
 
@@ -46,6 +48,8 @@ public:
 public:
 	CHeader__DNet_Node()
 	{
+		iNODE_ID = -1;
+
 		iMAC_ID = -1;
 		sNAME   = "";
 
@@ -58,6 +62,8 @@ public:
 
 	void Copy_From(CHeader__DNet_Node* p_info)
 	{
+		iNODE_ID = p_info->iNODE_ID;
+
 		iMAC_ID = p_info->iMAC_ID;
 		sNAME   = p_info->sNAME;
 
@@ -105,6 +111,8 @@ private:
 	int iSize__OUT_BYTE;
 	int iSize__IN_BYTE;
 
+	int _Get_MacID_Of_Node_ID(const int node_id);
+
 	int _Get__IN_BYTE_INDEX_OF_MACID(const int mac_id);
 	int _Get__OUT_BYTE_INDEX_OF_MACID(const int mac_id);
 
@@ -122,6 +130,8 @@ public:
 	CString Get__All_Node_Info();
 
 	// ...
+	int Get_MacID_Of_Node_ID(const int node_id);
+
 	int Get__IN_BYTE_INDEX_OF_MACID(const int mac_id);
 	int Get__OUT_BYTE_INDEX_OF_MACID(const int mac_id);
 
