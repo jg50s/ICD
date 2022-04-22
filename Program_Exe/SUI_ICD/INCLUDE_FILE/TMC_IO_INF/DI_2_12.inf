@@ -1,8 +1,0 @@
-IO+di.VTM_Robot.Arm_A.Retract
-IO+di.VTM_Robot.Arm_B.Retract
-IO+di.Auto_Mode.Active
-IO+di.Initialize.Complete
-IO+di.XXX.Busy
-IO+di.XXX.Alarm
-IO+di.VTM_Robot.Arm_C.Retract
-IO+di.VTM_Robot.Arm_D.Retract

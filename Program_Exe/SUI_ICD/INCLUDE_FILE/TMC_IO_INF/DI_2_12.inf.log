@@ -1,8 +1,0 @@
-00)   IO+di.VTM_Robot.Arm_A.Retract
-01)   IO+di.VTM_Robot.Arm_B.Retract
-02)   IO+di.Auto_Mode.Active
-03)   IO+di.Initialize.Complete
-04)   IO+di.XXX.Busy
-05)   IO+di.XXX.Alarm
-06)   IO+di.VTM_Robot.Arm_C.Retract
-07)   IO+di.VTM_Robot.Arm_D.Retract
