@@ -74,7 +74,38 @@ LOOP__RETRY:
 			return -13;
 		}
 
-		if(p_lb_door->Check__DATA(STR__OPEN) < 0)
+		// ...
+		bool active__sv_err = true;
+
+		SCX__ASYNC_TIMER_CTRL x_timer_ctrl;
+		double ref_sec = 10.0;
+
+		x_timer_ctrl->START__COUNT_UP(9999);
+
+		int check_count = 0;
+		int ref_count = 10;
+
+		while(1)
+		{
+			Sleep(90);
+
+			if(p_lb_door->Check__DATA(STR__OPEN) > 0)		check_count++;
+			else											check_count = 0;
+
+			if(check_count >= ref_count)
+			{
+				active__sv_err = false;
+				break;
+			}
+
+			if(x_timer_ctrl->Get__CURRENT_TIME() > ref_sec)		
+			{
+				break;
+			}
+		}
+
+		if((active__sv_err)
+		|| (p_lb_door->Check__DATA(STR__OPEN) < 0))
 		{
 			int alarm_id = ALID__LLx__NOT_VALVE_OPEN;
 			CString err_msg;
@@ -86,6 +117,18 @@ LOOP__RETRY:
 			err_bff.Format("Please, check %s(%s) ! \n", stn_name,stn_slot);
 			err_msg += err_bff;
 
+			err_bff.Format(" * %s <- %s \n", 
+							p_lb_door->Get__CHANNEL_NAME(),
+							p_lb_door->Get__STRING());
+			err_msg += err_bff;
+
+			err_bff.Format(" * ref_sec <- %.1f (sec) \n", ref_sec);
+			err_msg += err_bff;
+
+			err_bff.Format(" * ref_check_count <- %1d \n", ref_count);
+			err_msg += err_bff;
+
+			//
 			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, err_msg, r_act);
 
 			if(r_act.CompareNoCase(ACT__RETRY) == 0)
@@ -93,7 +136,7 @@ LOOP__RETRY:
 				goto LOOP__RETRY;
 			}
 
-			return -13;
+			return -14;
 		}
 
 		return 1;
@@ -111,12 +154,46 @@ LOOP__RETRY:
 			return -22;
 		}
 
-		if(dEXT_CH__PMx_SLIT_VALVE_STATUS[pm_index]->When__DATA(STR__OPEN, 2.0) == 0)
+		// ...
+		CII__VAR_DIGITAL_CTRL *p_pm_sv = dEXT_CH__PMx_SLIT_VALVE_STATUS[pm_index].Get__PTR();
+
+		if(p_pm_sv->When__DATA(STR__OPEN, 2.0) == 0)
 		{
 			return -23;
 		}
 
-		if(dEXT_CH__PMx_SLIT_VALVE_STATUS[pm_index]->Check__DATA(STR__OPEN) < 0)
+		// ...
+		bool active__sv_err = true;
+
+		SCX__ASYNC_TIMER_CTRL x_timer_ctrl;
+		double ref_sec = 10.0;
+
+		x_timer_ctrl->START__COUNT_UP(9999);
+
+		int check_count = 0;
+		int ref_count = 10;
+
+		while(1)
+		{
+			Sleep(90);
+
+			if(p_pm_sv->Check__DATA(STR__OPEN) > 0)			check_count++;
+			else											check_count = 0;
+
+			if(check_count >= ref_count)
+			{
+				active__sv_err = false;
+				break;
+			}
+
+			if(x_timer_ctrl->Get__CURRENT_TIME() > ref_sec)		
+			{
+				break;
+			}
+		}
+
+		if((active__sv_err)
+		|| (p_pm_sv->Check__DATA(STR__OPEN) < 0))
 		{
 			int alarm_id = ALID__PMx__NOT_VALVE_OPEN;
 			CString err_msg;
@@ -129,6 +206,18 @@ LOOP__RETRY:
 			err_bff.Format(" -. PM%1d \n", pm_index+1);
 			err_msg += err_bff;
 
+			err_bff.Format(" * %s <- %s \n", 
+							p_pm_sv->Get__CHANNEL_NAME(),
+							p_pm_sv->Get__STRING());
+			err_msg += err_bff;
+
+			err_bff.Format(" * ref_sec <- %.1f (sec) \n", ref_sec);
+			err_msg += err_bff;
+
+			err_bff.Format(" * ref_check_count <- %1d \n", ref_count);
+			err_msg += err_bff;
+
+			//
 			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
 
 			if(r_act.CompareNoCase(ACT__RETRY) == 0)

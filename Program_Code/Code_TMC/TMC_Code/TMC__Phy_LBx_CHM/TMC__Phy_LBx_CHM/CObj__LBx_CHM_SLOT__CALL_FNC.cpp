@@ -522,9 +522,9 @@ int  CObj__LBx_CHM_SLOT
 	x_timer->REGISTER__ABORT_OBJECT(sObject_Name);
 
 	// Equalize-Valve <<- "Open" ...
+	if(bActive__ATM_EQUAL_VLV)
 	{
-		if(bActive__ATM_EQUAL_VLV)
-			doEXT_CH__ATM_EQUAL_VLV__SET->Set__DATA(STR__OPEN);
+		doEXT_CH__ATM_EQUAL_VLV__SET->Set__DATA(STR__OPEN);
 	}
 
 	// Over-Vent Time ...
@@ -533,46 +533,47 @@ int  CObj__LBx_CHM_SLOT
 
 		if(x_timer->WAIT(cfg_sec) < 0)
 		{
-			return OBJ_ABORT;
+			return -11;
 		}
 
 		Fnc__VENT_ALL_VLV__CLOSE_WITHOUT_EQUAL_VLV(p_alarm);
 	}
 
 	// Equalize-Vent Time ...
+	if(bActive__ATM_EQUAL_VLV)
 	{
 		double cfg_sec = aCH__CFG_EQUALIZE_VENT_TIME->Get__VALUE();
 
 		if(x_timer->WAIT(cfg_sec) < 0)
 		{
-			return OBJ_ABORT;
+			return -21;
 		}
 	}
 
 	// Venting 후 압력 Limit 체크 ...
 	{
-		double  cur__press;
-		double  cfg__press;
-
-		cfg__press = aCFG_CH_CONVECT_ATM_HIGH_PRESS->Get__VALUE();
-		cfg__press = cfg__press * 0.001;			// mtorr -> torr
+		double cfg__press = aCH__CFG_ATM_HIGH_PRESSURE_TORR->Get__VALUE();
 
 		if(cfg__press > 700)
 		{
-			cur__press = aiEXT_CH__LBx__PRESSURE_TORR->Get__VALUE();
+			double cur__press = aiEXT_CH__LBx__PRESSURE_TORR->Get__VALUE();
 
 			if(cur__press > cfg__press)
 			{
-				int alm_id = ALID__CONVECTRON_ATM_HIGH_PRESS_ALARM;
+				int alm_id = ALID__ATM_HIGH_PRESSURE_LIMIT;
 				CString alm_msg;
+				CString alm_bff;
 
-				alm_msg.Format("%s Module.. After Venting Complete, Current Press %.3f (torr) > Config %.3f (torr) Status.\n", 
-								m_sLBx__MODULE_NAME, 
-								cur__press, 
-								cfg__press);
+				alm_msg = "After venting complete, \n";
+
+				alm_bff.Format(" * current pressure <- %.1f (torr) \n", cur__press);
+				alm_msg += alm_bff;
+
+				alm_msg.Format(" * config pressure <- %.1f (torr) \n", cfg__press);
+				alm_msg += alm_bff;
 
 				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-				return OBJ_ABORT;
+				return -31;
 			}
 		}
 	}
@@ -739,7 +740,6 @@ LOOP_RETRY:
 			}
 		}
 	}
-
 
 	// Fast Venting ...
 	{
@@ -1357,8 +1357,8 @@ LOOP_RETRY:
 
 	if(r_ret > 0)
 	{
-		Sleep(500);			// HW 동작 time
-		return 1;			// FULL OPEN Complete !!
+		// Sleep(500);			// HW 동작 time
+		return 1;				// FULL OPEN Complete !!
 	}
 	if(r_ret < 0)
 	{

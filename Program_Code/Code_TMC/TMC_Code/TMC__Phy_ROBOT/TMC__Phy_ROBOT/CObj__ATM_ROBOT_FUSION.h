@@ -127,6 +127,8 @@ private:
 	CX__VAR_STRING_CTRL  sEXT_CH__CUR_AL1_CCD_POS;
 
 	// LLx ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_SLOT_USE_X[CFG_LLx__SIZE][CFG_LLx__SLOT_SIZE];
+
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_LLx_ALIGN_ANGLE[CFG_LLx__SIZE];
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT[CFG_LLx__SIZE];
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_RANGE[CFG_LLx__SIZE];
@@ -321,6 +323,7 @@ private:
 								    const CString& stn_name,
 								    const CString& stn_slot,
 								    const CString& act_name);
+
 	int  Interlock__CHECK_DOOR_OPEN(CII_OBJECT__ALARM* p_alarm,
 									const CString& stn_name,
 									const CString& stn_slot,
@@ -332,10 +335,13 @@ private:
 									const CString& stn_slot);
 
 	// ...
-	int  Interlock__AL1_SLOT_CHECK(const CString& stn_name,
+	int  Interlock__AL1_SLOT_CHECK(CII_OBJECT__ALARM* p_alarm,
+									const CString& stn_name,
 									const CString& para_slot,
 									CString& trg_slot);
-	int  Interlock__LLx_SLOT_CHECK(const CString& stn_name,
+
+	int  Interlock__LLx_SLOT_CHECK(CII_OBJECT__ALARM* p_alarm,
+								   const CString& stn_name,
 									const CString& para_slot,
 									CString& trg_slot);
 

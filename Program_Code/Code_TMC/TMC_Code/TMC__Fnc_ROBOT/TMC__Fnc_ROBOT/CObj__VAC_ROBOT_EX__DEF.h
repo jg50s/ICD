@@ -38,6 +38,8 @@ enum {ACT_HOFF__SWAP__PICK_X__PLACE = -1, ACT_HOFF__SWAP__PLACE_X__PICK = 1};
 #define  CMMD__PLACE_COMPLETE   "PLACE_COMPLETE"
 
 // ...
+#define  CMMD__VENT				"VENT"
+
 #define  CMMD__PUMP				"PUMP"
 #define  CMMD__TRANSFER_PUMP	"TRANSFER_PUMP"
 
@@ -64,6 +66,7 @@ enum {ACT_HOFF__SWAP__PICK_X__PLACE = -1, ACT_HOFF__SWAP__PLACE_X__PICK = 1};
 #define  STR__CLOSE				"CLOSE"
 
 #define  STR__VAC				"VAC"
+#define  STR__ATM				"ATM"
 
 #define  STR__UP				"UP"
 #define  STR__DOWN				"DOWN"

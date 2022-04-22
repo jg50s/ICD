@@ -8,15 +8,13 @@
 void CObj__LBx_CHM_STD
 ::Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	SCX__TIMER_CTRL cx_timer_ctrl;
-
 	CString str__atm_sns;
 	CString str__vac_sns;
 	CString var__data;
 
 	while(1)
 	{
-		Sleep(9);
+		p_variable->Wait__SINGLE_OBJECT(0.01);
 
 		// PRESSURE ...
 		{

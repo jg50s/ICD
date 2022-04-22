@@ -202,7 +202,7 @@ int CObj_NET__ATM_SR100
 		}
 	} 
 
-	return -1;
+	return -2;
 }
 
 int  CObj_NET__ATM_SR100
@@ -240,8 +240,8 @@ int  CObj_NET__ATM_SR100
 		unsigned char x_sts = i_sts2;
 
 		// 1H : Controller battery status
-		if(x_sts & 0x01)		sCH__MON_SYS_STS__CONTROLLRT_BATTERY->Set__DATA(STR__LOW);
-		else					sCH__MON_SYS_STS__CONTROLLRT_BATTERY->Set__DATA(STR__OK);
+		if(x_sts & 0x01)		sCH__MON_SYS_STS__CONTROLLER_BATTERY->Set__DATA(STR__LOW);
+		else					sCH__MON_SYS_STS__CONTROLLER_BATTERY->Set__DATA(STR__OK);
 
 		// 2H : Wafer presence status1
 		if(x_sts & 0x02)		sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Set__DATA(STR__ON);

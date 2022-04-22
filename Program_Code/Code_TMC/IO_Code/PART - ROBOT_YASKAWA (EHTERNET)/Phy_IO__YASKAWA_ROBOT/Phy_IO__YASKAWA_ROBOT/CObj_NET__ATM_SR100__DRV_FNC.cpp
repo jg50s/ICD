@@ -22,7 +22,8 @@ int CObj_NET__ATM_SR100
 	int flag;
 
 
-	if(diCH__RB_STS->Check__VARIABLE_NAME(var_name) > 0)
+	if((diCH__RB_STS_AUTO->Check__VARIABLE_NAME(var_name)   > 0)
+	|| (diCH__RB_STS_MANUAL->Check__VARIABLE_NAME(var_name) > 0))
 	{
 		str__cmmd.Format("%s,RSTS", sDRV_UnitID);
 
@@ -35,12 +36,19 @@ int CObj_NET__ATM_SR100
 		// ROBOT_STATUS ...
 		if(l_rsp.GetSize() > 6)
 		{
-			CString str_err = l_rsp[5];
-			CString str_rsp = l_rsp[6];
+			CString rsp__sys_sts   = l_rsp[2];
+			CString rsp__err_code  = l_rsp[5];
+			CString rsp__robot_sts = l_rsp[6];
 
-			_Update__ERROR_CODE(str_err);
-			_Update__ROBOT_STATUS(str_rsp);
+			_Update__SYSTEM_STATUS(rsp__sys_sts);
+			_Update__ERROR_CODE(rsp__err_code);
+			_Update__ROBOT_STATUS(rsp__robot_sts);
+
+			read_data = STR__Ok;
+			return 1;
 		}
+
+		read_data = STR__Error;
 		return 1;
 	}
 
@@ -263,28 +271,41 @@ int CObj_NET__ATM_SR100
 
 		flag = _Recv__CMMD(var_name, true, str__cmmd,str__recv_data);
 
-		if(flag == _DRV_RSP__ERROR)
-		{
-			return -1;
-		}
-
 		if(flag == _DRV_RSP__COMPLETE)
 		{
 			CStringArray l_rsp;
 			_Get__STRING_ARRAY(str__recv_data,",", l_rsp);
 
-			if(l_rsp.GetSize() > 4)
+			if(l_rsp.GetSize() > 4)		
 			{
-				CString rsp_sts = l_rsp[2];
-				CString rsp_err = l_rsp[3];
+				CString rsp__sys_sts  = l_rsp[2];
+				CString rsp__err_code = l_rsp[3];
 
-				_Update__SYSTEM_STATUS(rsp_sts);
-				_Update__ERROR_CODE(rsp_err);
+				// ...
+				{
+					CString log_msg;
+					CString log_bff;
 
-				_Check__ERROR_CODE(rsp_err);
+					log_msg = "_DRV_RSP__COMPLETE !!! \n";
+
+					log_bff.Format(" * rsp__sys_sts  <- [%s] \n", rsp__sys_sts);
+					log_msg += log_bff;
+
+					log_bff.Format(" * rsp__err_code <- [%s] \n", rsp__err_code);
+					log_msg += log_bff;
+
+					Fnc__DRV_LOG(log_msg);
+				}
+
+				_Update__SYSTEM_STATUS(rsp__sys_sts);
+				_Update__ERROR_CODE(rsp__err_code);
+
+				_Check__ERROR_CODE(rsp__err_code);
+				return 1;
 			}
+			return -1001;
 		}
-		return 1;   
+		return flag;   
 	}
 	
 	return -1;

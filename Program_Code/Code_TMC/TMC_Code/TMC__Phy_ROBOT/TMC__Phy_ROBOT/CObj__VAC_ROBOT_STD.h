@@ -204,6 +204,8 @@ private:
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_REF_ATM_PRESSURE;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_REF_VAC_PRESSURE;
 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_SLOT_MAX[CFG_LLx__SIZE];
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_SLOT_USE_X[CFG_LLx__SIZE][CFG_LLx__SLOT_SIZE];
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_1_EXIST_FLAG[CFG_LLx__SIZE];
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_2_EXIST_FLAG[CFG_LLx__SIZE];
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_EXIST_FLAG[CFG_LLx__SIZE];
@@ -427,6 +429,10 @@ private:
 
 	//-------------------------------------------------------------------------
 	// ...
+	int  Interlock__LLx_SLOT_CHECK(CII_OBJECT__ALARM* p_alarm,
+								   const CString& stn_name, 
+								   const CString& para_slot);
+
 	int  Interlock__CHECK_MATERIAL(CII_OBJECT__ALARM* p_alarm,
 								   const bool active_place,
 								   const CString& arm_type,

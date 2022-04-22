@@ -393,11 +393,6 @@ int CObj__ATM_ROBOT_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 								para_module,
 								para_slot);
 		}
-
-		else									
-		{
-
-		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

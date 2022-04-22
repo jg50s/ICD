@@ -48,6 +48,8 @@ void CObj__DNET_STD
 	if((bActive__DNET_INIT)
 	|| (iActive__SIM_MODE > 0))
 	{
+		Sleep(1000);   // NDet æ»¡§»≠
+
 		Call__DEV_INFO(p_variable, p_alarm);
 	}
 

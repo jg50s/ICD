@@ -104,6 +104,15 @@ int CObj__ARCTIC_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__INFO_POWER_SETPOINT, str_name);
 
 		//
+		str_name = "INFO.FORWARD_POWER";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_FORWARD_POWER, str_name);
+
+		str_name = "INFO.REFLECT_POWER";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_REFLECT_POWER, str_name);
+
+		//
 		str_name = "INFO.RF_VOLTAGE";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_VOLTAGE, str_name);

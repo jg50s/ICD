@@ -460,10 +460,18 @@ int  CObj__CHM_STD
 	}
 
 	int r_flag = _Fnc__VENT(p_variable,p_alarm);
+	if(r_flag > 0)
+	{
+		r_flag = _Sub__VENT(p_variable, p_alarm);
+	}
 
-	Fnc__VENT_ALL_VLV__CLOSE(p_alarm);
 	Fnc__VENT_ALL_VLV__CLOSE_WITHOUT_EQUAL_VLV(p_alarm);
 
+	if(dCH__CFG_EQUAL_VLV_OPEN_WHEN_ATM->Check__DATA(STR__ENABLE) < 0)
+	{
+		if(bActive__ATM_EQUAL_VLV)
+			doEXT_CH__ATM_EQUAL_VLV__SET->Set__DATA(STR__CLOSE);
+	}
 	return r_flag;
 }
 int  CObj__CHM_STD
@@ -755,6 +763,72 @@ LOOP_RETRY:
 	}
 
 	return -23;
+}
+int  CObj__CHM_STD
+::_Sub__VENT(CII_OBJECT__VARIABLE* p_variable,
+			 CII_OBJECT__ALARM* p_alarm)
+{
+	SCX__TIMER_CTRL x_timer;
+	x_timer->REGISTER__ABORT_OBJECT(sObject_Name);
+
+	// Equalize-Valve <<- "Open" ...
+	if(bActive__ATM_EQUAL_VLV)
+	{
+		doEXT_CH__ATM_EQUAL_VLV__SET->Set__DATA(STR__OPEN);
+	}
+
+	// Over-Vent Time ...
+	{
+		double cfg_sec = aCH__CFG_OVER_VENT_TIME->Get__VALUE();
+
+		if(x_timer->WAIT(cfg_sec) < 0)
+		{
+			return OBJ_ABORT;
+		}
+
+		Fnc__VENT_ALL_VLV__CLOSE_WITHOUT_EQUAL_VLV(p_alarm);
+	}
+
+	// Equalize-Vent Time ...
+	if(bActive__ATM_EQUAL_VLV)
+	{
+		double cfg_sec = aCH__CFG_EQUALIZE_VENT_TIME->Get__VALUE();
+
+		if(x_timer->WAIT(cfg_sec) < 0)
+		{
+			return OBJ_ABORT;
+		}
+	}
+
+	// Venting 후 압력 Limit 체크 ...
+	{
+		double cfg__press = aCH__CFG_ATM_HIGH_PRESSURE_TORR->Get__VALUE();
+
+		if(cfg__press > 700)
+		{
+			double cur__press = aiEXT_CH__TMC_CHM__PRESSURE_TORR->Get__VALUE();
+
+			if(cur__press > cfg__press)
+			{
+				int alm_id = ALID__ATM_HIGH_PRESSURE_LIMIT;
+				CString alm_msg;
+				CString alm_bff;
+
+				alm_msg = "After venting complete, \n";
+
+				alm_bff.Format(" * current pressure <- %.1f (torr) \n", cur__press);
+				alm_msg += alm_bff;
+
+				alm_msg.Format(" * config pressure <- %.1f (torr) \n", cfg__press);
+				alm_msg += alm_bff;
+
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+				return -31;
+			}
+		}
+	}
+
+	return 1;
 }
 
 

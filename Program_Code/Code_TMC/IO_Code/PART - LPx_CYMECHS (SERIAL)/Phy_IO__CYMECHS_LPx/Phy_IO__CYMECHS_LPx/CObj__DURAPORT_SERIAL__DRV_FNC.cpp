@@ -161,6 +161,31 @@ int CObj__DURAPORT_SERIAL
 		     if(set_data.CompareNoCase("DOCK") == 0)		s_data = "DOCK";
 		else if(set_data.CompareNoCase("UNDOCK") == 0)	    s_data = "UNDOCK";
 	}
+	else if(doCH__OPR_VAC_SET->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		if(set_data.CompareNoCase("ON") == 0)				s_data = "MVAC ON";
+		else												s_data = "MVAC OFF";
+	}
+	else if(doCH__OPR_LATCH_SET->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		if(set_data.CompareNoCase("ON") == 0)				s_data = "MDOR_LOCK OFF";
+		else												s_data = "MDOR_LOCK ON";
+	}
+	else if(doCH__OPR_PORT_DOOR_OPEN_SET->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		if(set_data.CompareNoCase("ON") == 0)				s_data = "MDOR_OPN ON";
+		else												s_data = "MDOR_OPN OFF";
+	}
+	else if(doCH__OPR_DOOR_LIFT_DOWN_SET->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		if(set_data.CompareNoCase("ON") == 0)				s_data = "MLIFT_DN ON";
+		else												s_data = "MLIFT_DN OFF";
+	}
+	else if(doCH__OPR_MAINT_MODE_SET->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		if(set_data.CompareNoCase("ON") == 0)				s_data = "MAINT_MODE ON";
+		else												s_data = "MAINT_MODE OFF";
+	}
 	else
 	{
 		log_msg = "__Write__DIGITAL() : Var_Name Error ! \n";
@@ -369,7 +394,7 @@ int CObj__DURAPORT_SERIAL
 	{
 		Sleep(1);
 
-		if(iSim_Mode > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(100);
 			continue;
@@ -534,8 +559,8 @@ _Update__SYSTEM_STATUS(const CString& r_data)
 		else if(i == 4)			// Bit : 12 ~ 15
 		{
 			// Bit 12 : POD undocked  (1=Undocked, 0=Not undocked)
-			if(ch_hexa & 0x01)		sCH__BIT_STS__PAD_UNDOCKED->Set__DATA(STR__ON);
-			else					sCH__BIT_STS__PAD_UNDOCKED->Set__DATA(STR__OFF);
+			if(ch_hexa & 0x01)		sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__ON);
+			else					sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__OFF);
 			
 			// Bit 13 : Vacuum Condition (1=Vacuum, 0=Not vacuum)
 			if(ch_hexa & 0x02)		sCH__BIT_STS__VACUUM_CONDITION->Set__DATA(STR__ON);
@@ -635,12 +660,12 @@ _Update__SYSTEM_STATUS(const CString& r_data)
 
 		if(sCH__BIT_STS__POD_DOCKED->Check__DATA(STR__ON) > 0)
 		{
-			if(sCH__BIT_STS__PAD_UNDOCKED->Check__DATA(STR__OFF) > 0)
+			if(sCH__BIT_STS__POD_UNDOCKED->Check__DATA(STR__OFF) > 0)
 				ch_data = STR__LOAD;
 		}
 		else
 		{
-			if(sCH__BIT_STS__PAD_UNDOCKED->Check__DATA(STR__ON) > 0)
+			if(sCH__BIT_STS__POD_UNDOCKED->Check__DATA(STR__ON) > 0)
 				ch_data = STR__UNLOAD;
 		}
 
@@ -711,12 +736,12 @@ _Update__SYSTEM_STATUS()
 
 		if(sCH__BIT_STS__POD_DOCKED->Check__DATA(STR__ON) > 0)
 		{
-			if(sCH__BIT_STS__PAD_UNDOCKED->Check__DATA(STR__OFF) > 0)
+			if(sCH__BIT_STS__POD_UNDOCKED->Check__DATA(STR__OFF) > 0)
 				ch_data = STR__LOAD;
 		}
 		else
 		{
-			if(sCH__BIT_STS__PAD_UNDOCKED->Check__DATA(STR__ON) > 0)
+			if(sCH__BIT_STS__POD_UNDOCKED->Check__DATA(STR__ON) > 0)
 				ch_data = STR__UNLOAD;
 		}
 

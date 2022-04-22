@@ -534,7 +534,6 @@ int  CObj__LBx_CHM_SIMPLE
 		double  cfg__press;
 
 		cfg__press = aCFG_CH_CONVECT_ATM_HIGH_PRESS->Get__VALUE();
-		cfg__press = cfg__press * 0.001;			// mtorr -> torr
 
 		if(cfg__press > 700)
 		{
@@ -544,11 +543,15 @@ int  CObj__LBx_CHM_SIMPLE
 			{
 				int alm_id = ALID__CONVECTRON_ATM_HIGH_PRESS_ALARM;
 				CString alm_msg;
+				CString alm_bff;
 
-				alm_msg.Format("%s Module.. After Venting Complete, Current Press %.3f (torr) > Config %.3f (torr) Status.\n", 
-					           m_sLBx__MODULE_NAME, 
-							   cur__press, 
-							   cfg__press);
+				alm_msg = "After venting complete, \n";
+
+				alm_bff.Format(" * current pressure <- %.1f (torr) \n", cur__press);
+				alm_msg += alm_bff;
+
+				alm_msg.Format(" * config pressure <- %.1f (torr) \n", cfg__press);
+				alm_msg += alm_bff;
 
 				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
 				return OBJ_ABORT;

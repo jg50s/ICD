@@ -24,6 +24,7 @@
 #define  ALID__PMx__MATERIAL_NONE_ERROR					14
 
 #define  ALID__STN__NOT_EXIST_ERROR						15
+#define  ALID__LLx__SLOT_ID_ERROR						16
 
 #define  ALID__LLx__NOT_VALVE_OPEN						21
 #define  ALID__PMx__NOT_VALVE_OPEN						22

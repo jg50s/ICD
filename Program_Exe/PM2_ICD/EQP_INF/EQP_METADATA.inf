@@ -94,6 +94,9 @@
 #OBJECT_PROPERTY    PHY_IO__APC_VLV
 
 #OBJECT_IO_PARA     COM_PORT                  2
+#OBJECT_IO_PARA     BAUD_RATE                 4800
+#OBJECT_IO_PARA     DATA_BIT                  7
+#OBJECT_IO_PARA     PARITY                    EVEN
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    PHY_IO__DRY_PMP
@@ -118,7 +121,7 @@
 //-------------------------------------------------
 #OBJECT_PROPERTY    Phy_IO__ESC
 
-#OBJECT_IO_PARA     COM_PORT                  7
+#OBJECT_IO_PARA     COM_PORT                  8
 
 
 //-----------------------------------------------------------------------------------------------------
@@ -195,7 +198,11 @@
 
 //----------------------
 #OBJECT_IO_PARA     BOARD.ID                            0
-#OBJECT_IO_PARA     NODE.SIZE                           8
+#OBJECT_IO_PARA     BOARD.OUT_OFFSET                    0
+#OBJECT_IO_PARA     BOARD.IN_OFFSET                     0
+
+//----------------------
+#OBJECT_IO_PARA     NODE.SIZE                           7
 
 #OBJECT_IO_PARA     NODE.1.MACID                        1
 #OBJECT_IO_PARA     NODE.1.NAME                         NETS-DIO2
@@ -206,29 +213,29 @@
 
 #OBJECT_IO_PARA     NODE.2.MACID                        2
 #OBJECT_IO_PARA     NODE.2.NAME                         BT-8844
-#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.2.IN_BYTE                      8
-#OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     8
+#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    2
+#OBJECT_IO_PARA     NODE.2.IN_BYTE                      10
+#OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   2
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     10
 
 #OBJECT_IO_PARA     NODE.3.MACID                        3
 #OBJECT_IO_PARA     NODE.3.NAME                         MINI-8
 #OBJECT_IO_PARA     NODE.3.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.3.IN_BYTE                      4
+#OBJECT_IO_PARA     NODE.3.IN_BYTE                      36
 #OBJECT_IO_PARA     NODE.3.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.3.OUT_BYTE                     8
+#OBJECT_IO_PARA     NODE.3.OUT_BYTE                     14
 
 #OBJECT_IO_PARA     NODE.4.MACID                        4
 #OBJECT_IO_PARA     NODE.4.NAME                         EX180-SDN1
 #OBJECT_IO_PARA     NODE.4.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.4.IN_BYTE                      3
+#OBJECT_IO_PARA     NODE.4.IN_BYTE                      0
 #OBJECT_IO_PARA     NODE.4.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.4.OUT_BYTE                     0
+#OBJECT_IO_PARA     NODE.4.OUT_BYTE                     4
 
 #OBJECT_IO_PARA     NODE.5.MACID                        10
 #OBJECT_IO_PARA     NODE.5.NAME                         NA-9211
 #OBJECT_IO_PARA     NODE.5.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.5.IN_BYTE                      32
+#OBJECT_IO_PARA     NODE.5.IN_BYTE                      40
 #OBJECT_IO_PARA     NODE.5.OUT_OFFSET                   0
 #OBJECT_IO_PARA     NODE.5.OUT_BYTE                     0
 
@@ -237,21 +244,28 @@
 #OBJECT_IO_PARA     NODE.6.IN_OFFSET                    0
 #OBJECT_IO_PARA     NODE.6.IN_BYTE                      0
 #OBJECT_IO_PARA     NODE.6.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.6.OUT_BYTE                     8
- 
-#OBJECT_IO_PARA     NODE.7.MACID                        13
-#OBJECT_IO_PARA     NODE.7.NAME                         TM-GAUGE
-#OBJECT_IO_PARA     NODE.7.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.7.IN_BYTE                      5
-#OBJECT_IO_PARA     NODE.7.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.7.OUT_BYTE                     0
+#OBJECT_IO_PARA     NODE.6.OUT_BYTE                     4
 
-#OBJECT_IO_PARA     NODE.8.MACID                        14
-#OBJECT_IO_PARA     NODE.8.NAME                         TM-VLV
+#OBJECT_IO_PARA     NODE.7.MACID                        12
+#OBJECT_IO_PARA     NODE.7.NAME                         EX180-SDN1
+#OBJECT_IO_PARA     NODE.7.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.7.IN_BYTE                      0
+#OBJECT_IO_PARA     NODE.7.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.7.OUT_BYTE                     4
+
+#OBJECT_IO_PARA     NODE.8.MACID                        13
+#OBJECT_IO_PARA     NODE.8.NAME                         TM-GAUGE
 #OBJECT_IO_PARA     NODE.8.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.8.IN_BYTE                      0
+#OBJECT_IO_PARA     NODE.8.IN_BYTE                      5
 #OBJECT_IO_PARA     NODE.8.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.8.OUT_BYTE                     2
+#OBJECT_IO_PARA     NODE.8.OUT_BYTE                     0
+
+#OBJECT_IO_PARA     NODE.9.MACID                        14
+#OBJECT_IO_PARA     NODE.9.NAME                         TM-VLV
+#OBJECT_IO_PARA     NODE.9.IN_OFFSET                    0
+#OBJECT_IO_PARA     NODE.9.IN_BYTE                      0
+#OBJECT_IO_PARA     NODE.9.OUT_OFFSET                   0
+#OBJECT_IO_PARA     NODE.9.OUT_BYTE                     2
 
 //----------------------
 #DEFINE_CONSTANT    LINK.IO_SIZE                        0

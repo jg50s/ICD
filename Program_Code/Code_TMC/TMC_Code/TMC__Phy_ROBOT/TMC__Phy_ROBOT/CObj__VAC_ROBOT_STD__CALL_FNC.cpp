@@ -73,6 +73,12 @@ Fnc__PICK(CII_OBJECT__VARIABLE* p_variable,
 			Fnc__APP_LOG(act_name);
 			return -12;
 		}
+
+		// LLx Slot Check ...
+		if(Interlock__LLx_SLOT_CHECK(p_alarm, stn_name, stn_slot) < 0)
+		{
+			return -13;
+		}
 	}
 
 	Set_ANI__ROBOT_EXTEND(arm_type,stn_name,stn_slot);
@@ -307,13 +313,19 @@ Fnc__PLACE(CII_OBJECT__VARIABLE* p_variable,
 		// Valve Check ...
 		if(Interlock__CHECK_VALVE_OPEN(p_alarm, arm_type,stn_name,stn_slot, act_name) < 0)
 		{
-			return -1;
+			return -11;
 		}
 
 		// Material Check ...
 		if(Interlock__CHECK_MATERIAL(p_alarm, true, arm_type,stn_name,stn_slot, act_name) < 0)
 		{
-			return -1;
+			return -12;
+		}
+
+		// LLx Slot Check ...
+		if(Interlock__LLx_SLOT_CHECK(p_alarm, stn_name, stn_slot) < 0)
+		{
+			return -13;
 		}
 	}
 

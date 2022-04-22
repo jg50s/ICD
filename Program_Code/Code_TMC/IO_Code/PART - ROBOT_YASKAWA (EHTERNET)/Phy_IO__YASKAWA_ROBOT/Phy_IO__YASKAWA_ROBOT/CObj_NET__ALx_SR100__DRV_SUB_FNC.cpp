@@ -233,8 +233,8 @@ int  CObj_NET__ALx_SR100
 		unsigned char x_sts = i_sts2;
 
 		// 1H : Controller battery status
-		if(x_sts & 0x01)		sCH__MON_SYS_STS__CONTROLLRT_BATTERY->Set__DATA(STR__LOW);
-		else					sCH__MON_SYS_STS__CONTROLLRT_BATTERY->Set__DATA(STR__OK);
+		if(x_sts & 0x01)		sCH__MON_SYS_STS__CONTROLLER_BATTERY->Set__DATA(STR__LOW);
+		else					sCH__MON_SYS_STS__CONTROLLER_BATTERY->Set__DATA(STR__OK);
 
 		// 2H : Wafer presence status1
 		if(x_sts & 0x02)		sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Set__DATA(STR__ON);
@@ -262,7 +262,7 @@ int  CObj_NET__ALx_SR100
 	err_level.Delete(1, 3);
 	err_code.Delete(0, 1);
 
-	if(err_code.CompareNoCase("1") == 0)			sCH__MON_ERR_SYS__LEVEL->Set__DATA("W1");
+	     if(err_code.CompareNoCase("1") == 0)			sCH__MON_ERR_SYS__LEVEL->Set__DATA("W1");
 	else if(err_code.CompareNoCase("2") == 0)			sCH__MON_ERR_SYS__LEVEL->Set__DATA("W2");
 	else if(err_code.CompareNoCase("3") == 0)			sCH__MON_ERR_SYS__LEVEL->Set__DATA("A1");
 	else if(err_code.CompareNoCase("4") == 0)			sCH__MON_ERR_SYS__LEVEL->Set__DATA("A2");

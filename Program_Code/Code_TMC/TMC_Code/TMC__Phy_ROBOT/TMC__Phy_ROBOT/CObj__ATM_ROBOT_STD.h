@@ -311,6 +311,7 @@ private:
 	int  Interlock__AL1_SLOT_CHECK(const CString& stn_name,
 		                           const CString& para_slot,
 								   CString& trg_slot);
+
 	int  Interlock__LLx_SLOT_CHECK(const CString& stn_name,
 								   const CString& para_slot,
 								   CString& trg_slot);

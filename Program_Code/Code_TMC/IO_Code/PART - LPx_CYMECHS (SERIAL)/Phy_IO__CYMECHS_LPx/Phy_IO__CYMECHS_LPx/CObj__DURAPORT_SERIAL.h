@@ -72,13 +72,13 @@ private:
 
 	// ...
 	CCommon_Error__USER_FNC mERROR__USER_FNC;	
+
 	SCX__USER_LOG_CTRL xAPP__LOG_CTRL;
 	SCX__USER_LOG_CTRL xDRV__LOG_CTRL;
 
-	// ...
-	SCX__TIMER_CTRL	xI_TIMER;
-	SCX__SEQ_INFO	xSEQ_INFO;
+	int iActive__SIM_MODE;
 
+	// ...
 	SCX__SERIAL mX_Serial;
 	CMng__RSP_MSG mMng__RSP_MSG;
 
@@ -98,7 +98,7 @@ private:
 	int iFlag__DRV_LOG;
 
 	CMng__Error_Code mMNG__ERR_CODE;
-
+	//
 
 	//-------------------------------------------------------------------------
 	//  EXTERNAL PROPERTY
@@ -113,6 +113,8 @@ private:
 	//  INTERNAL PROPERTY
 
 	CX__VAR_STRING_CTRL  sCH__SEQUENCE_MSG;
+
+	CX__VAR_DIGITAL_CTRL dCH__CFG_CTRL_MODE;
 
 	CX__VAR_DIGITAL_CTRL dCH__LP_STATE;
 	CX__VAR_DIGITAL_CTRL dCH__CMD_STATE;
@@ -140,8 +142,15 @@ private:
 	// OPR CMD---------------------------------
 	CX__VAR_DIGITAL_CTRL  doCH__OPR_LOAD_SET;
 	CX__VAR_DIGITAL_CTRL  doCH__OPR_DOCK_SET;
+	
 	CX__VAR_DIGITAL_CTRL  doCH__OPR_CLAMP_SET;
 	CX__VAR_DIGITAL_CTRL  doCH__OPR_MAIN_SET;
+
+	CX__VAR_DIGITAL_CTRL  doCH__OPR_MAINT_MODE_SET;
+	CX__VAR_DIGITAL_CTRL  doCH__OPR_VAC_SET;
+	CX__VAR_DIGITAL_CTRL  doCH__OPR_LATCH_SET;
+	CX__VAR_DIGITAL_CTRL  doCH__OPR_PORT_DOOR_OPEN_SET;
+	CX__VAR_DIGITAL_CTRL  doCH__OPR_DOOR_LIFT_DOWN_SET;
 	//-------------------------------------------
 
 	CX__VAR_DIGITAL_CTRL  diCH__COMM_STS;
@@ -185,7 +194,7 @@ private:
 	CX__VAR_STRING_CTRL   sCH__BIT_STS__POD_UNCLAMPED;
 	CX__VAR_STRING_CTRL   sCH__BIT_STS__POD_DOCKED;
 
-	CX__VAR_STRING_CTRL   sCH__BIT_STS__PAD_UNDOCKED;
+	CX__VAR_STRING_CTRL   sCH__BIT_STS__POD_UNDOCKED;
 	CX__VAR_STRING_CTRL   sCH__BIT_STS__VACUUM_CONDITION;
 	CX__VAR_STRING_CTRL   sCH__BIT_STS__LATCH_CONDITION;
 	CX__VAR_STRING_CTRL   sCH__BIT_STS__UNLATCH_CONDITION;
@@ -228,7 +237,6 @@ private:
 
 	
 	//-------------------------------------------------------------------------
-	// INIT --
 	CString sMODE__INIT;
 	int	 Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
@@ -238,30 +246,20 @@ private:
 	int	 Call__HOME(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__HOME(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
 
-	CString sMODE__OPEN;
-	int	 Call__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+	//
+	CString sMODE__DOOR_OPEN;
+	int	 Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+	int  _Auto__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  _Manual__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
-	CString sMODE__CLOSE;
-	int  Call__CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+	CString sMODE__DOOR_CLOSE;
+	int  Call__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+	int  _Auto__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  _Manual__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
-	CString sMODE__LOAD;
-	int	 Call__LOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__LOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
-
-	CString sMODE__UNLOAD;
-	int  Call__UNLOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__UNLOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
-
-	CString sMODE__DOCK;
-	int	 Call__DOCK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__DOCK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
-
-	CString sMODE__UNDOCK;
-	int	 Call__UNDOCK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__UNDOCK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
-
+	//
 	CString sMODE__CLAMP;
 	int	 Call__CLAMP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__CLAMP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
@@ -270,37 +268,33 @@ private:
 	int	 Call__UNCLAMP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__UNCLAMP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
 
+	//
+	CString sMODE__SHUTTLE_IN;
+	int	 Call__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+	int  _Auto__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  _Manual__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+
+	CString sMODE__SHUTTLE_OUT;
+	int	 Call__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+	int  _Auto__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  _Manual__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+
+	//
+	CString sMODE__LOAD;
+	int	 Call__LOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__LOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+
+	CString sMODE__UNLOAD;
+	int  Call__UNLOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__UNLOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const CString str_caller);
+
 	// ...
 	CString sMODE__MAP;
 	int	 Call__MAP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 	int	 Fnc__MAP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	// ...
-	CString sMODE__CID_READ;
-	int	 Call__CID_READ(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-	int	 Fnc__CID_READ(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	CString sMODE__PAGE_READ;
-	int	 Call__PAGE_READ(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	CString sMODE__CID_WRITE;
-	int	 Call__CID_WRITE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	CString sMODE__PAGE_WRITE;
-	int	 Call__PAGE_WRITE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	// ...
-	CString sMODE__AMHS_AUTO;
-	int	 Call__AMHS_AUTO(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	CString sMODE__AMHS_MANUAL;
-	int	 Call__AMHS_MANUAL(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	CString sMODE__AMHS_HO_ENABLE;
-	int	 Call__AMHS_HO_ENABLE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
-
-	CString sMODE__AMHS_HO_DISABLE;
-	int	 Call__AMHS_HO_DISBLE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	//
 
 	// ...
 	CString sMODE__SIM_FOUP_EXIST;
@@ -309,9 +303,6 @@ private:
 	// ...
 	CString sLastCommand;
 	
-	// ...
-	int Fnc__Display_STS();
-
 	
 	//-------------------------------------------------------------------------
 	void Mon__STATE_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
@@ -319,8 +310,6 @@ private:
 
 
 	//-------------------------------------------------------------------------
-	int iSim_Mode;
-
 	// ...
 	int Is__ONLINE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 	int Is__REMOTE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);

@@ -54,7 +54,7 @@
 
 #DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
 #DEFINE_CONSTANT    LLx.MULTI_SLOT_VALVE                NO
-#DEFINE_CONSTANT    LLx.SLOT_SIZE                       2
+#DEFINE_CONSTANT    LLx.SLOT_SIZE                       ##LL_SLOT
 
 #DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
 #DEFINE_CONSTANT    OBJ__LL1	                          PHY__LBA
@@ -84,11 +84,14 @@
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY_IO__ATM_ROBOT
 
-#OBJECT_IO_PARA     IP        192.168.100.20
+#DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
+
+#OBJECT_IO_PARA     IP        192.168.100.100
 #OBJECT_IO_PARA     PORT      10110
+
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY_IO__AL1
 
-#OBJECT_IO_PARA     IP        192.168.100.20
+#OBJECT_IO_PARA     IP        192.168.100.100
 #OBJECT_IO_PARA     PORT      10111

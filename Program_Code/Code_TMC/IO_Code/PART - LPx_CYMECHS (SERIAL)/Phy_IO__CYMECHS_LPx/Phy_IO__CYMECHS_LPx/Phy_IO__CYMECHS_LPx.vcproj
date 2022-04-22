@@ -126,7 +126,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\CCommon_Error;..\Phy_IO__CYMECHS_LPx"
+				AdditionalIncludeDirectories="..\..\..\..\CCommon_Error;..\Phy_IO__CYMECHS_LPx"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -148,7 +148,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="..\..\..\App_Ver\Release-IO_Dll\$(ProjectName)_R.dll"
+				OutputFile="..\..\..\..\App_Ver\Release-IO_Dll\$(ProjectName)_R.dll"
 				LinkIncremental="1"
 				ModuleDefinitionFile=".\Phy_IO__CYMECHS_LPx.def"
 				GenerateDebugInformation="true"
@@ -220,11 +220,11 @@
 				Name="CCommon_Error"
 				>
 				<File
-					RelativePath="..\..\..\CCommon_Error\CCommon_Error.cpp"
+					RelativePath="..\..\..\..\CCommon_Error\CCommon_Error.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\CCommon_Error\CCommon_Error.h"
+					RelativePath="..\..\..\..\CCommon_Error\CCommon_Error.h"
 					>
 				</File>
 			</Filter>
@@ -241,14 +241,6 @@
 				</File>
 				<File
 					RelativePath=".\CObj__DURAPORT_SERIAL__ALID.h"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__DURAPORT_SERIAL__CALL_AMHS.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CObj__DURAPORT_SERIAL__CALL_CID.cpp"
 					>
 				</File>
 				<File

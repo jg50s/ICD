@@ -88,11 +88,6 @@ int CObj__DURAPORT_SERIAL
 		sCH__MON_FIRMWARE_VER->Set__DATA(var_data);
 	}
 
-	// ...
-	{
-		Fnc__Display_STS();
-	}
-	
 	return 1;
 }
 
@@ -110,117 +105,374 @@ int CObj__DURAPORT_SERIAL
 	
 	str_log.Format("HOME Starting ...");
 	Fnc__APP_LOG(str_log);
-	
+
+	// ...
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// HOME ...
 	{
-		// 1. 
 		doCH__OPR_MAIN_SET->Set__DATA("HOME");
 		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(500);
 
 			sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__OFF);
 			sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__ON);
-
-			sCH__MON_DOOR_STATUS->Set__DATA(STR__CLOSE);
-			return 1;
 		}
 
-		// 2. event
-		if(dCH__LP_STATE->Check__DATA(STR_INITIALIZED) > 0)
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__OFF, cfg_sec) <= 0)		return -11;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__ON,  cfg_sec) <= 0)		return -12;
+
+		if(iActive__SIM_MODE > 0)
 		{
-			Fnc__Display_STS();
+			Sleep(500);
+
+			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__OFF);
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__ON);
 		}
+
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__OFF,  cfg_sec) <= 0)		return -13;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__ON, cfg_sec) <= 0)		return -14;
+
+		dCH__LP_STATE->Set__DATA(STR_INITIALIZED);
 	}	
-	return state;
+
+	return 1;
 }
 
 // ...
 int CObj__DURAPORT_SERIAL
-::Fnc__OPEN(CII_OBJECT__VARIABLE* p_variable, 
-			CII_OBJECT__ALARM* p_alarm, 
-			const CString str_caller)
+::Fnc__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, 
+			     CII_OBJECT__ALARM* p_alarm, 
+			     const CString str_caller)
 {
-	CString str_log;
 	CString fnc_name = "Fnc__OPEN()";
 	
-	str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
-	Fnc__APP_LOG(str_log);
-	
-	str_log.Format("OPEN Starting ...");
-	Fnc__APP_LOG(str_log);
-	
+	// ...
+	{
+		CString str_log;
+		CString str_bff;
+
+		str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
+
+		str_log.Format("OPEN Starting ...");
+		str_log += str_bff;
+
+		str_log.Format(" * %s <- %s \n", 
+						dCH__CFG_CTRL_MODE->Get__CHANNEL_NAME(),
+						dCH__CFG_CTRL_MODE->Get__STRING());
+		str_log += str_bff;
+
+		Fnc__APP_LOG(str_log);
+	}
+
+	if(dCH__CFG_CTRL_MODE->Check__DATA(STR__AUTO) > 0)	
+	{
+		return _Auto__DOOR_OPEN(p_variable, p_alarm);
+	}
+	return _Manual__DOOR_OPEN(p_variable, p_alarm);
+}
+int CObj__DURAPORT_SERIAL
+::_Auto__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// MAINT_MODE ...
 	{
-		// 1. 
-		doCH__OPR_MAIN_SET->Set__DATA("OPEN");
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__OFF);
 
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		if(sCH__BIT_STS__MAINT_MODE->When__DATA(STR__OFF, cfg_sec) <= 0)				return -10001;
+	}
+
+	// DOOR.OPEN ...
+	{
+		doCH__OPR_MAIN_SET->Set__DATA(STR__OPEN);
+
+		if(iActive__SIM_MODE > 0)
 		{
-			Sleep(500);
+			if((sCH__BIT_STS__LATCH_CONDITION->Check__DATA(STR__ON) < 0)
+			|| (sCH__BIT_STS__DOOR_OPENED->Check__DATA(STR__ON)  < 0)
+			|| (sCH__BIT_STS__DOOR_CLOSED->Check__DATA(STR__OFF) < 0))
+			{
+				Sleep(500);
 
-			sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__ON);
-			sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__OFF);
-
-			sCH__MON_DOOR_STATUS->Set__DATA(STR__OPEN);
-			return 1;
+				sCH__BIT_STS__LATCH_CONDITION->Set__DATA(STR__ON);
+				sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__ON);
+				sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__OFF);
+			}
 		}
 
-		// 2. event
-		if (dCH__LP_STATE->Check__DATA(STR_OPENED) > 0)
-		{
-			Fnc__Display_STS();
-		}
+		if(sCH__BIT_STS__LATCH_CONDITION->When__DATA(STR__ON, cfg_sec) <= 0)			return -31;
+
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__ON,  cfg_sec) <= 0)				return -33;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__OFF, cfg_sec) <= 0)				return -34;
+
+		dCH__LP_STATE->Set__DATA(STR_OPENED);
 	}	
-	return state;
+
+	return 1;
+}
+int CObj__DURAPORT_SERIAL
+::_Manual__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	return -10001;
+
+	double cfg_sec = 2.0;
+
+	// Check Online !!
+	int state = Is__ONLINE(p_variable, p_alarm);
+	if(state < 0)		return -1;
+
+	// MAINT_MODE ...
+	{
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__ON);
+
+		if(sCH__BIT_STS__MAINT_MODE->When__DATA(STR__ON, cfg_sec) <= 0)					return -10001;
+	}
+
+	// VAC.ON ...
+	{
+		doCH__OPR_VAC_SET->Set__DATA(STR__ON);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(sCH__BIT_STS__VACUUM_CONDITION->Check__DATA(STR__ON) < 0)
+			{
+				Sleep(500);
+				sCH__BIT_STS__VACUUM_CONDITION->Set__DATA(STR__ON);
+			}
+		}
+
+		if(sCH__BIT_STS__VACUUM_CONDITION->When__DATA(STR__ON, cfg_sec) <= 0)			return -11;
+	}
+
+	// LATCH.ON ...
+	{
+		doCH__OPR_LATCH_SET->Set__DATA(STR__ON);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(sCH__BIT_STS__UNLATCH_CONDITION->Check__DATA(STR__OFF) < 0)
+			{
+				Sleep(500);
+
+				sCH__BIT_STS__LATCH_CONDITION->Set__DATA(STR__OFF);
+				sCH__BIT_STS__UNLATCH_CONDITION->Set__DATA(STR__OFF);
+			}
+		}
+
+		// if(sCH__BIT_STS__LATCH_CONDITION->When__DATA(STR__ON, cfg_sec)    <= 0)			return -21;
+		if(sCH__BIT_STS__UNLATCH_CONDITION->When__DATA(STR__OFF, cfg_sec) <= 0)			return -22;
+	}
+
+	// DOOR.OPEN ...
+	{
+		doCH__OPR_PORT_DOOR_OPEN_SET->Set__DATA(STR__ON);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if((sCH__BIT_STS__LATCH_CONDITION->Check__DATA(STR__ON) < 0)
+			|| (sCH__BIT_STS__DOOR_OPENED->Check__DATA(STR__ON)  < 0)
+			|| (sCH__BIT_STS__DOOR_CLOSED->Check__DATA(STR__OFF) < 0))
+			{
+				Sleep(500);
+
+				sCH__BIT_STS__LATCH_CONDITION->Set__DATA(STR__ON);
+				sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__ON);
+				sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__OFF);
+			}
+		}
+
+		if(sCH__BIT_STS__LATCH_CONDITION->When__DATA(STR__ON, cfg_sec) <= 0)			return -31;
+
+		//
+		doCH__OPR_DOOR_LIFT_DOWN_SET->Set__DATA(STR__ON);
+
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__ON,  cfg_sec) <= 0)				return -33;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__OFF, cfg_sec) <= 0)				return -34;
+
+		dCH__LP_STATE->Set__DATA(STR_OPENED);
+	}	
+
+	// MAINT_MODE ...
+	{
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__OFF);
+	}
+
+	return 1;
 }
 
 // ...
 int CObj__DURAPORT_SERIAL
-::Fnc__CLOSE(CII_OBJECT__VARIABLE* p_variable, 
-			CII_OBJECT__ALARM* p_alarm, 
-			const CString str_caller)
+::Fnc__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, 
+			      CII_OBJECT__ALARM* p_alarm, 
+			      const CString str_caller)
 {
-	CString str_log;
 	CString fnc_name = "Fnc__CLOSE()";
+
+	// ...
+	{
+		CString str_log;
+		CString str_bff;
 	
-	str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
-	Fnc__APP_LOG(str_log);
+		str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
 	
-	str_log.Format("CLOSE Starting ...");
-	Fnc__APP_LOG(str_log);
-	
+		str_log.Format("CLOSE Starting ...");
+		str_log += str_bff;
+
+		str_log.Format(" * %s <- %s \n", 
+					   dCH__CFG_CTRL_MODE->Get__CHANNEL_NAME(),
+					   dCH__CFG_CTRL_MODE->Get__STRING());
+		str_log += str_bff;
+
+		Fnc__APP_LOG(str_log);
+	}
+
+	if(dCH__CFG_CTRL_MODE->Check__DATA(STR__AUTO) > 0)	
+	{
+		return _Auto__DOOR_CLOSE(p_variable, p_alarm);
+	}
+	return _Manual__DOOR_CLOSE(p_variable, p_alarm);
+}
+int CObj__DURAPORT_SERIAL
+::_Auto__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// MAINT_MODE ...
 	{
-		doCH__OPR_MAIN_SET->Set__DATA("CLOSE");
-		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__OFF);
+
+		if(sCH__BIT_STS__MAINT_MODE->When__DATA(STR__OFF, cfg_sec) <= 0)			return -10001;
+	}
+
+	// DOOR.CLOSE ...
+	{
+		doCH__OPR_MAIN_SET->Set__DATA(STR__CLOSE);
+
+		if(iActive__SIM_MODE > 0)
 		{
-			Sleep(500);
+			if((sCH__BIT_STS__LATCH_CONDITION->Check__DATA(STR__OFF) < 0)
+			|| (sCH__BIT_STS__DOOR_OPENED->Check__DATA(STR__OFF) < 0)
+			|| (sCH__BIT_STS__DOOR_CLOSED->Check__DATA(STR__ON)  < 0))
+			{
+				Sleep(500);
 
-			sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__OFF);
-			sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__ON);
-
-			sCH__MON_DOOR_STATUS->Set__DATA("CLOSE");
-			return 1;
+				sCH__BIT_STS__LATCH_CONDITION->Set__DATA(STR__OFF);
+				sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__OFF);
+				sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__ON);
+			}
 		}
 
-		if(dCH__LP_STATE->Check__DATA(STR_CLOSED) > 0)
-		{
-			Fnc__Display_STS();
-		}
+		if(sCH__BIT_STS__LATCH_CONDITION->When__DATA(STR__OFF, cfg_sec) <= 0)		return -11;
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__OFF, cfg_sec) <= 0)			return -12;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__ON,  cfg_sec) <= 0)			return -13;
+
+		dCH__LP_STATE->Set__DATA(STR_CLOSED);
 	}	
-	return state;
+
+	// MAINT_MODE ...
+	{
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__OFF);
+	}
+
+	return 1;
+}
+int CObj__DURAPORT_SERIAL
+::_Manual__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	return -10001;
+
+	double cfg_sec = 2.0;
+
+	// Check Online !!
+	int state = Is__ONLINE(p_variable, p_alarm);
+	if(state < 0)		return -1;
+
+	// MAINT_MODE ...
+	{
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__ON);
+
+		if(sCH__BIT_STS__MAINT_MODE->When__DATA(STR__ON, cfg_sec) <= 0)					return -10001;
+	}
+
+	// DOOR.CLOSE ...
+	{
+		doCH__OPR_PORT_DOOR_OPEN_SET->Set__DATA(STR__OFF);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if((sCH__BIT_STS__LATCH_CONDITION->Check__DATA(STR__OFF)  < 0)
+				|| (sCH__BIT_STS__DOOR_OPENED->Check__DATA(STR__OFF) < 0)
+				|| (sCH__BIT_STS__DOOR_CLOSED->Check__DATA(STR__ON)  < 0))
+			{
+				Sleep(500);
+
+				sCH__BIT_STS__LATCH_CONDITION->Set__DATA(STR__OFF);
+				sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__OFF);
+				sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__ON);
+			}
+		}
+
+		if(sCH__BIT_STS__LATCH_CONDITION->When__DATA(STR__OFF,  cfg_sec) <= 0)		return -11;
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__OFF, cfg_sec) <= 0)			return -12;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__ON,  cfg_sec) <= 0)			return -13;
+
+		dCH__LP_STATE->Set__DATA(STR_CLOSED);
+	}	
+
+	// LATCH.OFF ...
+	{
+		doCH__OPR_LATCH_SET->Set__DATA(STR__OFF);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(sCH__BIT_STS__UNLATCH_CONDITION->Check__DATA(STR__ON) < 0)
+			{
+				Sleep(500);
+
+				sCH__BIT_STS__UNLATCH_CONDITION->Set__DATA(STR__ON);
+			}
+		}
+
+		if(sCH__BIT_STS__UNLATCH_CONDITION->When__DATA(STR__ON, cfg_sec) <= 0)		return -22;
+	}
+
+	// VAC.OFF ...
+	{
+		doCH__OPR_VAC_SET->Set__DATA(STR__OFF);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(sCH__BIT_STS__VACUUM_CONDITION->Check__DATA(STR__OFF) < 0)
+			{
+				Sleep(500);
+				sCH__BIT_STS__VACUUM_CONDITION->Set__DATA(STR__OFF);
+			}
+		}
+
+		if(sCH__BIT_STS__VACUUM_CONDITION->When__DATA(STR__OFF, cfg_sec) <= 0)		return -31;
+	}
+
+	// MAINT_MODE ...
+	{
+		doCH__OPR_MAINT_MODE_SET->Set__DATA(STR__OFF);
+	}
+
+	return 1;
 }
 
 // ...
@@ -237,19 +489,24 @@ int CObj__DURAPORT_SERIAL
 	
 	str_log.Format("LOAD Starting ...");
 	Fnc__APP_LOG(str_log);
-	
+
+	// ...
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// LOAD ...
 	{
 		_Update__LPx_INIT();
 
 		doCH__OPR_LOAD_SET->Set__DATA("LOAD");
 
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		if(iActive__SIM_MODE > 0)
 		{
-			sCH__MON_CLAMP_STATUS->Set__DATA("CLAMP");
+			sCH__BIT_STS__POD_CLAMPED->Set__DATA(STR__ON);
+			sCH__BIT_STS__POD_UNCLAMPED->Set__DATA(STR__OFF);
 
 			Sleep(500);
 
@@ -257,23 +514,22 @@ int CObj__DURAPORT_SERIAL
 			sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__OFF);
 
 			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__ON);
-			sCH__BIT_STS__PAD_UNDOCKED->Set__DATA(STR__OFF);
-
-			sCH__MON_FOUP_POS_STATUS->Set__DATA(STR__LOAD);
-			sCH__MON_DOOR_STATUS->Set__DATA(STR__OPEN);
-			return 1;
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__OFF);
 		}
-		
-		str_log.Format("LOAD Command : Completed ...");
-		Fnc__APP_LOG(str_log);
 
-		if(dCH__LP_STATE->Check__DATA(STR_LOADED) > 0)
-		{
-			Fnc__Display_STS();
-		}	
+		if(sCH__BIT_STS__POD_CLAMPED->When__DATA(STR__ON,    cfg_sec) <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNCLAMPED->When__DATA(STR__OFF, cfg_sec) <= 0)			return -12;
+
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__ON,    cfg_sec) <= 0)			return -21;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__OFF,   cfg_sec) <= 0)			return -22;
+
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__ON,     cfg_sec) <= 0)			return -31;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__OFF,  cfg_sec) <= 0)			return -32;
+
+		dCH__LP_STATE->Set__DATA(STR_LOADED);
 	}
 
-	return state;
+	return 1;
 }
 
 int CObj__DURAPORT_SERIAL
@@ -290,112 +546,221 @@ int CObj__DURAPORT_SERIAL
 	str_log.Format("UNLOAD Starting ...");
 	Fnc__APP_LOG(str_log);
 	
+	// ...
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// UNLOAD ...
 	{
 		doCH__OPR_LOAD_SET->Set__DATA("UNLOAD");
 		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		if(iActive__SIM_MODE > 0)
 		{
-			sCH__MON_CLAMP_STATUS->Set__DATA(STR__UNCLAMP);
-
-			Sleep(500);
-
 			sCH__BIT_STS__DOOR_OPENED->Set__DATA(STR__OFF);
 			sCH__BIT_STS__DOOR_CLOSED->Set__DATA(STR__ON);
 
 			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__OFF);
-			sCH__BIT_STS__PAD_UNDOCKED->Set__DATA(STR__ON);
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__ON);
 
-			sCH__MON_FOUP_POS_STATUS->Set__DATA(STR__UNLOAD);
-			sCH__MON_DOOR_STATUS->Set__DATA(STR__CLOSE);
-			return 1;
+			Sleep(500);
+
+			sCH__BIT_STS__POD_CLAMPED->Set__DATA(STR__ON);
+			sCH__BIT_STS__POD_UNCLAMPED->Set__DATA(STR__OFF);
 		}
-		
-		str_log.Format("UNLOAD Command : Completed ...");
-		Fnc__APP_LOG(str_log);
 
-		if(dCH__LP_STATE->Check__DATA(STR_UNLOADED) > 0)
-		{
-			Fnc__Display_STS();
-		}	
+		if(sCH__BIT_STS__POD_CLAMPED->When__DATA(STR__OFF,   cfg_sec) <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNCLAMPED->When__DATA(STR__ON,  cfg_sec) <= 0)			return -12;
+
+		if(sCH__BIT_STS__DOOR_OPENED->When__DATA(STR__OFF,   cfg_sec) <= 0)			return -21;
+		if(sCH__BIT_STS__DOOR_CLOSED->When__DATA(STR__ON,    cfg_sec) <= 0)			return -22;
+
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__OFF,    cfg_sec) <= 0)			return -31;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__ON,   cfg_sec) <= 0)			return -32;
+
+		dCH__LP_STATE->Set__DATA(STR_UNLOADED);
 	}
-	return state;
+
+	return 1;
 }
 
 // ...
 int CObj__DURAPORT_SERIAL
-::Fnc__DOCK(CII_OBJECT__VARIABLE* p_variable, 
-			CII_OBJECT__ALARM* p_alarm, 
-			const CString str_caller)
+::Fnc__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, 
+			      CII_OBJECT__ALARM* p_alarm, 
+			      const CString str_caller)
 {
-	CString str_log;
-	CString fnc_name = "Fnc__DOCK()";
+	CString fnc_name = "Fnc__SHUTTLE_IN()";
 	
-	str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
-	Fnc__APP_LOG(str_log);
-	
-	str_log.Format("DOCK Starting ...");
-	Fnc__APP_LOG(str_log);
-	
+	// ...
+	{
+		CString str_log;
+		CString str_bff;
+
+		str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
+
+		str_log.Format("SHUTTLE_IN Starting ...");
+		str_log += str_bff;
+
+		str_log.Format(" * %s <- %s \n", 
+						dCH__CFG_CTRL_MODE->Get__CHANNEL_NAME(),
+						dCH__CFG_CTRL_MODE->Get__STRING());
+		str_log += str_bff;
+
+		Fnc__APP_LOG(str_log);
+	}
+
+	if(dCH__CFG_CTRL_MODE->Check__DATA(STR__AUTO) > 0)	
+		return _Auto__SHUTTLE_IN(p_variable, p_alarm);
+
+	return _Manual__SHUTTLE_IN(p_variable, p_alarm);
+}
+int CObj__DURAPORT_SERIAL
+::_Auto__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// LOAD ...
 	{
-		doCH__OPR_DOCK_SET->Set__DATA("DOCK");
-		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		doCH__OPR_LOAD_SET->Set__DATA("LOAD");
+
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(500);
 
-			dCH__LP_STATE->Set__DATA(STR_DOCKED);
+			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__ON);
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__OFF);
 		}
-		
-		if(dCH__LP_STATE->Check__DATA(STR_DOCKED) > 0)
-		{
-			Fnc__Display_STS();
-		}	
+
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__ON, cfg_sec)	 <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__OFF, cfg_sec) <= 0)			return -12;
+
+		dCH__LP_STATE->Set__DATA(STR_DOCKED);
 	}
-	return state;
+
+	return 1;
+}
+int CObj__DURAPORT_SERIAL
+::_Manual__SHUTTLE_IN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_sec = 2.0;
+
+	// Check Online !!
+	int state = Is__ONLINE(p_variable, p_alarm);
+	if(state < 0)		return -1;
+
+	// DOCK ...
+	{
+		doCH__OPR_DOCK_SET->Set__DATA("DOCK");
+
+		if(iActive__SIM_MODE > 0)
+		{
+			Sleep(500);
+
+			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__ON);
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__OFF);
+		}
+
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__ON, cfg_sec)	 <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__OFF, cfg_sec) <= 0)			return -12;
+
+		dCH__LP_STATE->Set__DATA(STR_DOCKED);
+	}
+
+	return 1;
 }
 
 int CObj__DURAPORT_SERIAL
-::Fnc__UNDOCK(CII_OBJECT__VARIABLE* p_variable, 
-			  CII_OBJECT__ALARM* p_alarm, 
-			  const CString str_caller)
+::Fnc__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, 
+				   CII_OBJECT__ALARM* p_alarm,
+				   const CString str_caller)
 {
-	CString str_log;
-	CString fnc_name = "Fnc__UNDOCK()";
-	
-	str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
-	Fnc__APP_LOG(str_log);
-	
-	str_log.Format("UNDOCK Starting ...");
-	Fnc__APP_LOG(str_log);
-	
+	CString fnc_name = "Fnc__SHUTTLE_OUT()";
+
+	// ...
+	{
+		CString str_log;
+		CString str_bff;
+
+		str_log.Format("---> From : [%s], CALL : [%s]", str_caller, fnc_name);
+
+		str_log.Format("SHUTTLE_OUT Starting ...");
+		str_log += str_bff;
+
+		str_log.Format(" * %s <- %s \n", 
+						dCH__CFG_CTRL_MODE->Get__CHANNEL_NAME(),
+						dCH__CFG_CTRL_MODE->Get__STRING());
+		str_log += str_bff;
+
+		Fnc__APP_LOG(str_log);
+	}
+
+	if(dCH__CFG_CTRL_MODE->Check__DATA(STR__AUTO) > 0)	
+		return _Auto__SHUTTLE_OUT(p_variable, p_alarm);
+
+	return _Manual__SHUTTLE_OUT(p_variable, p_alarm);
+}
+int CObj__DURAPORT_SERIAL
+::_Auto__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// UNDOCK ...
 	{
-		doCH__OPR_DOCK_SET->Set__DATA("UNDOCK");
-		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		doCH__OPR_LOAD_SET->Set__DATA("UNLOAD");
+
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(500);
 
-			dCH__LP_STATE->Set__DATA(STR_UNDOCKED);
+			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__OFF);
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__ON);
 		}
 
-		if(dCH__LP_STATE->Check__DATA(STR_UNDOCKED) > 0)
-		{
-			Fnc__Display_STS();
-		}	
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__OFF,  cfg_sec) <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__ON, cfg_sec) <= 0)			return -12;
+
+		dCH__LP_STATE->Set__DATA(STR_UNDOCKED);
 	}
-	return state;
+	return 1;
+}
+int CObj__DURAPORT_SERIAL
+::_Manual__SHUTTLE_OUT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	double cfg_sec = 2.0;
+
+	// Check Online !!
+	int state = Is__ONLINE(p_variable, p_alarm);
+	if(state < 0)		return -1;
+
+	// UNDOCK ...
+	{
+		doCH__OPR_DOCK_SET->Set__DATA("UNDOCK");
+
+		if(iActive__SIM_MODE > 0)
+		{
+			Sleep(500);
+
+			sCH__BIT_STS__POD_DOCKED->Set__DATA(STR__OFF);
+			sCH__BIT_STS__POD_UNDOCKED->Set__DATA(STR__ON);
+		}
+
+		if(sCH__BIT_STS__POD_DOCKED->When__DATA(STR__OFF,  cfg_sec) <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNDOCKED->When__DATA(STR__ON, cfg_sec) <= 0)			return -12;
+
+		dCH__LP_STATE->Set__DATA(STR_UNDOCKED);
+	}
+	return 1;
 }
 
 // ...
@@ -413,26 +778,32 @@ int CObj__DURAPORT_SERIAL
 	str_log.Format("CLAMP Starting ...");
 	Fnc__APP_LOG(str_log);
 	
+	// ...
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// CLAMP ...
 	{
 		doCH__OPR_CLAMP_SET->Set__DATA("CLAMP");
 		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(500);
 
-			dCH__LP_STATE->Set__DATA(STR_CLAMPED);
+			sCH__BIT_STS__POD_CLAMPED->Set__DATA(STR__ON);
+			sCH__BIT_STS__POD_UNCLAMPED->Set__DATA(STR__OFF);
 		}
 
-		if(dCH__LP_STATE->Check__DATA(STR_CLAMPED) > 0)
-		{
-			Fnc__Display_STS();
-		}	
+		if(sCH__BIT_STS__POD_CLAMPED->When__DATA(STR__ON,    cfg_sec) <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNCLAMPED->When__DATA(STR__OFF, cfg_sec) <= 0)			return -12;
+
+		dCH__LP_STATE->Set__DATA(STR_CLAMPED);
 	}
-	return state;
+
+	return 1;
 }
 
 // ...
@@ -450,31 +821,30 @@ int CObj__DURAPORT_SERIAL
 	str_log.Format("UNCLAMP Starting ...");
 	Fnc__APP_LOG(str_log);
 	
+	// ...
+	double cfg_sec = 2.0;
+
 	// Check Online !!
 	int state = Is__ONLINE(p_variable, p_alarm);
-	
-	if(state > 0)
+	if(state < 0)		return -1;
+
+	// UNCLAMP ...
 	{
 		doCH__OPR_CLAMP_SET->Set__DATA("UNCLAMP");
 		
-		if(xSEQ_INFO->Is__SIMULATION_MODE() > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(500);
 
-			dCH__LP_STATE->Set__DATA(STR_UNCLAMPED);
+			sCH__BIT_STS__POD_CLAMPED->Set__DATA(STR__OFF);
+			sCH__BIT_STS__POD_UNCLAMPED->Set__DATA(STR__ON);
 		}
-		
-		if(dCH__LP_STATE->Check__DATA(STR_UNCLAMPED) > 0)
-		{
-			Fnc__Display_STS();
-		}	
-	}
-	return state;
-}
 
-int CObj__DURAPORT_SERIAL
-::Fnc__Display_STS()
-{
+		if(sCH__BIT_STS__POD_CLAMPED->When__DATA(STR__OFF,  cfg_sec) <= 0)			return -11;
+		if(sCH__BIT_STS__POD_UNCLAMPED->When__DATA(STR__ON, cfg_sec) <= 0)			return -12;
+
+		dCH__LP_STATE->Set__DATA(STR_UNCLAMPED);
+	}
 
 	return 1;
 }

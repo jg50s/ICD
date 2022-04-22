@@ -85,6 +85,10 @@ int CObj__VAC_ROBOT_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,dsc_item_list,"");
 		LINK__VAR_DIGITAL_CTRL(dCH__OBJ_STATUS,str_name);
 
+		str_name = "OBJ.MSG";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
+
 		//
 		str_name = "PARA.ARM";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PARA_ARM,"");
@@ -208,6 +212,14 @@ int CObj__VAC_ROBOT_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
+	// ...
+	{
+		CString obj_msg;
+
+		obj_msg.Format("%s Started ...", mode);
+		sCH__OBJ_MSG->Set__DATA(obj_msg);
+	}
+
 	int flag = -1;
 
 	// ...
@@ -238,17 +250,36 @@ int CObj__VAC_ROBOT_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		dCH__OBJ_STATUS->Set__DATA("MAINTMODE");
 
 		// ...
-		CString log_msg;
+		{
+			CString log_msg;
 
-		log_msg.Format("Aborted ... :  [%s]", mode);
-		xLOG_CTRL->WRITE__LOG(log_msg);
+			log_msg.Format("Aborted ... :  [%s]", mode);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+		// ...
+		{
+			CString obj_msg;
+
+			obj_msg.Format("%s Aborted ...", mode);
+			sCH__OBJ_MSG->Set__DATA(obj_msg);
+		}
 	}
 	else
 	{
-		CString log_msg;
+		// ...
+		{
+			CString log_msg;
 
-		log_msg.Format("Completed ... :  [%s]", mode);
-		xLOG_CTRL->WRITE__LOG(log_msg);
+			log_msg.Format("Completed ... :  [%s]", mode);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+		// ...
+		{
+			CString obj_msg;
+
+			obj_msg.Format("%s Completed ...", mode);
+			sCH__OBJ_MSG->Set__DATA(obj_msg);
+		}
 	}
 
 	return flag;

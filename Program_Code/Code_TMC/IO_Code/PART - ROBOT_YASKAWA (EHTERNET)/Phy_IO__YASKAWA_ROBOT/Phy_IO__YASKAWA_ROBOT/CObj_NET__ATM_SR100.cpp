@@ -32,6 +32,7 @@ int CObj_NET__ATM_SR100::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__ROTATE, "ROTATE");			
 
 		ADD__CTRL_VAR(sMODE__CHECK_ERROR_CODE, "CHECK.ERROR_CODE");
+		ADD__CTRL_VAR(sMODE__CHECK_STN_INFO,   "CHECK.STN_INFO");
 	}
 
 	return 1;
@@ -223,6 +224,66 @@ int CObj_NET__ATM_SR100::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON__ARM_B_MATERIAL_TITLE, str_name);
 	}
 
+	// CFG POS.INFO ...
+	{
+		CString list__cp0_cp9 = "??? ";
+		CString list__str;
+
+		for(i=0; i<10; i++)
+		{
+			list__str.Format("C%02d ", i+1);
+			list__cp0_cp9 += list__str;
+		}
+
+		// AL1 ...
+		{
+			str_name = "CFG.AL1.STN.NUM";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "P01", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_AL1_STN_NUM, str_name);
+		}
+
+		// LLx ...
+		{
+			int ll_i;
+
+			for(ll_i=0; ll_i<CFG_LLx__SIZE; ll_i++)
+			{
+				CString ll_name = Macro__Get_LLx_NAME(ll_i);
+
+				str_name.Format("CFG.%s.STN.NUM", ll_name);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, list__cp0_cp9, "");
+				LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_STN_NUM[ll_i], str_name);
+			}
+
+			for(ll_i=0; ll_i<CFG_LLx__SIZE; ll_i++)
+			{
+				int id = ll_i + 1;
+
+				str_name.Format("CFG.LL%1d.1.STN.NUM", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, list__cp0_cp9, "");
+				LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_1_STN_NUM[ll_i], str_name);
+
+				str_name.Format("CUR.LL%1d.2.STN.NUM", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, list__cp0_cp9, "");
+				LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_2_STN_NUM[ll_i], str_name);
+			}
+		}
+
+		// ST1 ...
+		{
+			str_name = "CFG.ST1.STN.NUM";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, list__cp0_cp9, "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_ST1_STN_NUM, str_name);
+		}
+
+		// LPx ...
+		for(i=0; i<CFG_LPx__SIZE; i++)
+		{
+			str_name.Format("CFG.LP%1d.STN.NUM", i+1);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, list__cp0_cp9, "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_LPx_STN_NUM[i], str_name);
+		}
+	}
 	// CURRENT INFO ...
 	{
 		// ALx ...
@@ -353,9 +414,9 @@ int CObj_NET__ATM_SR100::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_SYS_STS__ERROR_STATUS, str_name);
 
 		//
-		str_name = "MON.SYS_STS.CONTROLLRT_BATTERY";
+		str_name = "MON.SYS_STS.CONTROLLER_BATTERY";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_SYS_STS__CONTROLLRT_BATTERY, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_SYS_STS__CONTROLLER_BATTERY, str_name);
 
 		str_name = "MON.SYS_STS.WAFER_PRESENCE_STS1";
 		STD__ADD_STRING(str_name);
@@ -422,97 +483,6 @@ int CObj_NET__ATM_SR100::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__LP_WFR_SLOT_STS,"");
 		LINK__VAR_DIGITAL_CTRL(dCH__LPx_SLOT_STATUS[i],str_name);
 	}
-
-	// ATMAlignAndPickTime		: Excel Num 82
-	str_name = "CFG.aALIGN.AND.PICK.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.5,100.0,"recommand:9 sec");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG__ALIGN_AND_PICK_TIMEOUT, str_name);
-
-	// ATMAlignOCRTime
-	str_name = "CFG.aALIGN.OCR.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.5,100.0,"recommand:4 sec");
-
-	// AtmDynamicAlignmentDirection
-	str_name.Format("CFG.dDYNAMIC.ALIGN.DIRECTION");	// 자동으로 da 하지만, 명령어 끝에 option을 줘야한다.
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"RETRACT EXTEND","REC:RETRACT");
-	LINK__VAR_DIGITAL_CTRL(dCFG__CH__DYNAMIC_ALIGN_DIRECTION,str_name);
-
-	// ATMPadType
-	str_name = "CFG.dPAD.TYPE";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "UNKNOWN", "");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_PAD_TYPE,str_name);
-
-	// ATMPickTime
-	str_name = "CFG.aPICK.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.5,100.0,"recommand:4.2 sec");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG__PICK_TIMEOUT, str_name);
-
-	// ATMPlaceTime
-	str_name = "CFG.aPLACE.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.5,100.0,"recommand:4.4 sec");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG__PLACE_TIMEOUT, str_name);
-
-	// ATMPlaceToAlignerTime
-	str_name = "CFG.aPLACE.AND.ALIGN.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.5,100.0,"recommand:9 sec");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG__PLACE_AND_ALIGN_TIMEOUT, str_name);
-
-	// CheckWaferSlideOut
-	str_name = "CFG.dMAPPING.ACTION.SLIDEOUT.CHECK";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"NO YES","");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_MAPPING_ACTION_SLIDE_OUT_CHECK,str_name);
-
-	// CoverWaferAlignmentBeforeReturnToPort
-	str_name = "CFG.dBEFORE.PLACE.TO.LP.ALIGN";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"NO YES", "");
-
-	// DAAlignerRadialHardTolerance
-	str_name = "CFG.aDA.ALIGNER.R.HARD.TOLE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"-",0,1000,8000,"recommand:4000");
-
-	// DAAlignerRadialSoftTolerance
-	str_name = "CFG.aDA.ALIGNER.R.SOFT.TOLE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"-",0,500,4000,"recommand:2000");
-
-	// DAAlignerRadialThetaHardTolerance
-	str_name = "CFG.aDA.ALIGNER.T.HARD.TOLE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"-",0,75,600,"recommand:300");
-
-	// DAAlignerRadialThetaSoftTolerance
-	str_name = "CFG.aDA.ALIGNER.T.SOFT.TOLE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"-",0,37,300,"recommand:150");
-
-	// DisableExtendedAlign : 103
-	str_name = "CFG.dDISABLE.EXTEND.ALIGN";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"FALSE TRUE", "");
-
-	//
-	str_name = "CFG.aBEFORE.PLACE.TO.LP.ALIGN.ANGLE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "angle", 0, 0, 360, "recommand:180");
-
-	// ...
-	str_name = "CFG.aPADDLE.DOWN.CHECK.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 12, "rec:2");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_LP__PADDLE_CHECK_TIME,str_name);
-
-	// ...
-	str_name = "CFG.dMAPPING.DISABLE";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_MAPPING_DISABLE,str_name);
-
-	// ...
-	str_name = "CFG.dALIGN.SKIP";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_ALIGN_SKIP,str_name);
-
-	// UseSlowPickPlaceFromAirLockToCool
-	str_name = "CFG.dSLOW.PICK.PLACE.FROM.LLx.TO.COOL.STN";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "rec:NO");
-
-	// WaferAlignmentBeforePostProcessedIMMMeasurement
-	str_name = "CFG.dWFR.ALGN.BEFORE.IMM.MEASURE";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "rec:TRUE");
-	//
 
 	// ...	
 	{
@@ -612,6 +582,24 @@ int CObj_NET__ATM_SR100::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__SYSTEM_STATE_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "System State Error !";
+
+		alarm_msg = "Please, check system state ! \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__RETRY);
+		l_act.Add(ACT__IGNORE);
+		l_act.Add(ACT__ABORT);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	//
 	for(i=0; i<5; i++)
 	{
 		// DOOR NOT OPEN
@@ -771,6 +759,7 @@ int CObj_NET__ATM_SR100::__DEFINE__ALARM(p_alarm)
 #define APP_DSP__WfrShapes			"Round  Square"
 #define APP_DSP__CCDPos				"1  2  3"
 #define APP_DSP__DOffOn				"Off  On"
+#define APP_DSP__OkError			"Ok  Error"
 #define APP_DSP__DZPos				"Unknown  Up  Down"
 #define APP_DSP__DRPos				"Unknown  Retract  Extend"
 
@@ -819,9 +808,13 @@ int CObj_NET__ATM_SR100::__DEFINE__VARIABLE_IO(p_io_variable)
 
 	// DI
 	{
-		str_name = "di.RB.Sts";
-		IO__ADD_DIGITAL_READ__MANUAL(str_name, APP_DSP__DOffOn);
-		LINK__IO_VAR_DIGITAL_CTRL(diCH__RB_STS, str_name);
+		str_name = "di.RB.Sts.Auto";
+		IO__ADD_DIGITAL_READ_WITH_OPTION(str_name, APP_DSP__OkError, "", "", "", 0.5, "");
+		LINK__IO_VAR_DIGITAL_CTRL(diCH__RB_STS_AUTO, str_name);
+
+		str_name = "di.RB.Sts.Manual";
+		IO__ADD_DIGITAL_READ__MANUAL(str_name, APP_DSP__OkError);
+		LINK__IO_VAR_DIGITAL_CTRL(diCH__RB_STS_MANUAL, str_name);
 	}
 
 	// SI
@@ -1142,13 +1135,12 @@ LOOP_RETRY:
 
 	if(l_para.GetSize() > 0)
 	{
-		CString para_data;
-		int limit = l_para.GetSize();
+		int i_limit = l_para.GetSize();
 		int i;
 
-		for(i=0;i<limit;i++)
+		for(i=0; i<i_limit; i++)
 		{
-			para_data = l_para[i];
+			CString para_data = l_para[i];
 
 			switch(i)
 			{
@@ -1226,6 +1218,55 @@ LOOP_RETRY:
 		}
 	}
 
+	// System State Check ...
+	{
+		CString err_msg;
+		CString err_bff;
+
+		bool active__sys_err = false;
+
+		if(sCH__MON_SYS_STS__MANIPULATOR_BATTERY->Check__DATA(STR__OK) < 0)
+		{
+			active__sys_err = true;
+
+			err_bff.Format(" * %s <- %s \n",
+							sCH__MON_SYS_STS__MANIPULATOR_BATTERY->Get__CHANNEL_NAME(),
+							sCH__MON_SYS_STS__MANIPULATOR_BATTERY->Get__STRING());
+			err_msg += err_bff;
+		}
+
+		if(sCH__MON_SYS_STS__SERVO_STATUS->Check__DATA(STR__ON) < 0)
+		{
+			active__sys_err = true;
+
+			err_bff.Format(" * %s <- %s \n",
+							sCH__MON_SYS_STS__SERVO_STATUS->Get__CHANNEL_NAME(),
+							sCH__MON_SYS_STS__SERVO_STATUS->Get__STRING());
+			err_msg += err_bff;
+		}
+
+		if(sCH__MON_SYS_STS__CONTROLLER_BATTERY->Check__DATA(STR__OK) < 0)
+		{
+			active__sys_err = true;
+
+			err_bff.Format(" * %s <- %s \n",
+							sCH__MON_SYS_STS__CONTROLLER_BATTERY->Get__CHANNEL_NAME(),
+							sCH__MON_SYS_STS__CONTROLLER_BATTERY->Get__STRING());
+			err_msg += err_bff;
+		}
+
+		if(active__sys_err)
+		{
+			int alm_id = ALID__SYSTEM_STATE_ERROR;
+			CString r_act;
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, err_msg, r_act);
+	
+				 if(r_act.CompareNoCase(ACT__RETRY)  == 0)			goto LOOP_RETRY;
+			else if(r_act.CompareNoCase(ACT__IGNORE) != 0)			seq_flag = -1;
+		}
+	}
+
 	// Driver Option ...
 	{
 		if(dCH__CFG_ACTIVE_ACKN_SEND->Check__DATA(STR__YES) > 0)
@@ -1260,6 +1301,7 @@ LOOP_RETRY:
 		ELSE_IF__CTRL_MODE(sMODE__ROTATE)				flag = Call__ROTATE(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
 
 		ELSE_IF__CTRL_MODE(sMODE__CHECK_ERROR_CODE)		flag = Call__CHECK_ERROR_CODE(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__CHECK_STN_INFO)		flag = Call__CHECK_STN_INFO(p_variable,p_alarm);
 	}
 	else
 	{
@@ -1351,7 +1393,7 @@ LOOP_RETRY:
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
 		CString log_msg;	
-		log_msg.Format("Aborted ... :  [%s]\n", mode);
+		log_msg.Format("Aborted (%1d) ... :  [%s]\n", flag,mode);
 
 		Fnc__APP_LOG(log_msg);
 		Fnc__ACT_MSG(log_msg);

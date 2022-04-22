@@ -15,6 +15,9 @@
 #define  STR__LOCAL					"LOCAL"
 #define  STR__REMOTE				"REMOTE"
 
+#define  STR__AUTO					"AUTO"
+#define  STR__MAINT					"MAINT"
+
 #define  STR__ON					"ON"
 #define  STR__OFF					"OFF"
 #define  STR__BLINK					"BLINK"

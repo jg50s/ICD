@@ -105,7 +105,7 @@
 #OBJECT_IO      PHY_RS232__ESC_ZEFA            ZEFA.SERIAL               PHY_IO__ESC
 
 #OBJECT_IO      PHY_RS232__RF_EN2RA            RPS.SERIAL                PHY_IO__RF_RPS
-#OBJECT_IO      PHY_RS232__RF_NRF              RFG.SERIAL                PHY_IO__RF_400KHZ
+#OBJECT_IO      PHY_RS232__RF_EN2RA            ARCTIC.SERIAL             PHY_IO__RF_400KHZ
 #OBJECT_IO      PHY_RS232__RF_NRF              RFG.SERIAL                PHY_IO__RF_40MHZ
 #OBJECT_IO      PHY_RS232__RF_NRF              NXA.PULSE                 PHY_IO__RF_PULSE
 

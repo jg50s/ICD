@@ -157,14 +157,30 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 	}
 	else if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 	{
-		str_log.Format("LL%1d(%s) : Call__DV_OPEN", ll_index+1,para_slot);
-		xLOG_CTRL->WRITE__LOG(str_log);
-
-		aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
-
-		if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.OPEN") < 0)
+		// ...
 		{
-			return -102;
+			str_log.Format("LL%1d : Call__%s", ll_index+1, LLx_CMMD__VENT);
+			xLOG_CTRL->WRITE__LOG(str_log);
+
+			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
+
+			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT(LLx_CMMD__VENT) < 0)
+			{
+				return -102;
+			}
+		}
+
+		// ...
+		{
+			str_log.Format("LL%1d(%s) : Call__DV_OPEN", ll_index+1,para_slot);
+			xLOG_CTRL->WRITE__LOG(str_log);
+
+			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
+	
+			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.OPEN") < 0)
+			{
+				return -103;
+			}
 		}
 	}
 
@@ -281,14 +297,30 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 	}
 	else if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 	{
-		str_log.Format("LL%1d : Call__DV_OPEN", ll_index+1);
-		xLOG_CTRL->WRITE__LOG(str_log);
-
-		aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
-
-		if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.OPEN") < 0)
+		// ...
 		{
-			return -102;
+			str_log.Format("LL%1d : Call__%s", ll_index+1, LLx_CMMD__VENT);
+			xLOG_CTRL->WRITE__LOG(str_log);
+
+			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
+
+			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT(LLx_CMMD__VENT) < 0)
+			{
+				return -102;
+			}
+		}
+
+		// ...
+		{
+			str_log.Format("LL%1d : Call__DV_OPEN", ll_index+1);
+			xLOG_CTRL->WRITE__LOG(str_log);
+
+			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
+
+			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.OPEN") < 0)
+			{
+				return -103;
+			}
 		}
 	}
 

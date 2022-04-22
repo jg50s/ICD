@@ -583,6 +583,30 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 		ACT__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
+	//.....
+	{
+		alarm_id = ALID__ALx__SLOT_ID_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "ALx Slot_ID Error !";
+
+		alarm_msg = "Please, check the ALx slot parameter of command. \n";
+
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	//.....
+	{
+		alarm_id = ALID__LLx__SLOT_ID_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "LLx Slot_ID Error !";
+
+		alarm_msg = "Please, check the LLx slot parameter of command. \n";
+
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
 
 	//.....
 	{
@@ -888,18 +912,11 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		if(def_data.CompareNoCase("YES") == 0)			bActive__LLx_MULTI_SLOT_VALVE = true;
 		else											bActive__LLx_MULTI_SLOT_VALVE = false;
 
-		if((bActive__LLx_MULTI_DOOR_VALVE) || (bActive__LLx_MULTI_SLOT_VALVE))
-		{
-			def_name = "LLx.SLOT_SIZE";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+		def_name = "LLx.SLOT_SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
-			iLLx_SLOT_SIZE = atoi(def_data);
-			if(iLLx_SLOT_SIZE > CFG_LLx__SLOT_SIZE)		iLLx_SLOT_SIZE = CFG_LLx__SLOT_SIZE;
-		}
-		else
-		{
-			iLLx_SLOT_SIZE = 1;
-		}
+		iLLx_SLOT_SIZE = atoi(def_data);
+		if(iLLx_SLOT_SIZE > CFG_LLx__SLOT_SIZE)		iLLx_SLOT_SIZE = CFG_LLx__SLOT_SIZE;
 
 		//
 		def_name = "DATA.LLx_SIZE";
@@ -1034,6 +1051,17 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		for(i=0; i<CFG_LLx__SIZE; i++)
 		{
 			int id = i + 1;
+
+			// .CFG.SLOT.USE ..
+			{
+				for(int  k=0; k<CFG_LLx__SLOT_SIZE; k++)
+				{
+					int slot = k + 1;
+
+					str_name.Format("CFG.LL%1d.SLOT%02d.USE", id, slot);
+					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_LLx_SLOT_USE_X[i][k], def_data,str_name);
+				}
+			}
 
 			if(bActive__LLx_MULTI_DOOR_VALVE)
 			{

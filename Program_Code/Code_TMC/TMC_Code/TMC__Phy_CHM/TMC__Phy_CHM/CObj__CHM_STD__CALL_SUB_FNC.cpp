@@ -69,6 +69,11 @@ int  CObj__CHM_STD
 		if(doEXT_CH__SOFT_VENT_VLV__SET->Check__DATA(STR__CLOSE) < 0)
 			flag_close = -1;
 	}
+	if(bActive__ATM_EQUAL_VLV)
+	{
+		if(doEXT_CH__ATM_EQUAL_VLV__SET->Check__DATA(STR__CLOSE) < 0)
+			flag_close = -1;
+	}
 
 	//
 	doEXT_CH__FAST_VENT_VLV__SET->Set__DATA(STR__CLOSE);
@@ -76,6 +81,10 @@ int  CObj__CHM_STD
 	if(bActive__SOFT_VENT_VLV__SET)
 	{
 		doEXT_CH__SOFT_VENT_VLV__SET->Set__DATA(STR__CLOSE);
+	}
+	if(bActive__ATM_EQUAL_VLV)
+	{
+		doEXT_CH__ATM_EQUAL_VLV__SET->Set__DATA(STR__CLOSE);
 	}
 
 	//

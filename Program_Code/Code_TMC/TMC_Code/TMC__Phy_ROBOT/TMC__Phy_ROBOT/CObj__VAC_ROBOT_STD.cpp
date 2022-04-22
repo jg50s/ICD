@@ -952,6 +952,18 @@ int CObj__VAC_ROBOT_STD::__DEFINE__ALARM(p_alarm)
 		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
+	// ...
+	{
+		alarm_id = ALID__LLx__SLOT_ID_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "LLx Slot_ID Error !";
+
+		alarm_msg = "Please, check the LLx slot parameter of command. \n";
+
+		_LALM__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
 
 	// ...
 	{
@@ -1157,18 +1169,11 @@ int CObj__VAC_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		if(def_data.CompareNoCase("YES") == 0)			bActive__LLx_MULTI_SLOT_VALVE = true;
 		else											bActive__LLx_MULTI_SLOT_VALVE = false;
 
-		if((bActive__LLx_MULTI_DOOR_VALVE) || (bActive__LLx_MULTI_SLOT_VALVE))
-		{
-			def_name = "LLx.SLOT_SIZE";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+		def_name = "LLx.SLOT_SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
-			iLLx_SLOT_SIZE = atoi(def_data);
-			if(iLLx_SLOT_SIZE > CFG_LLx__SLOT_SIZE)		iLLx_SLOT_SIZE = CFG_LLx__SLOT_SIZE;
-		}
-		else
-		{
-			iLLx_SLOT_SIZE = 1;
-		}
+		iLLx_SLOT_SIZE = atoi(def_data);
+		if(iLLx_SLOT_SIZE > CFG_LLx__SLOT_SIZE)		iLLx_SLOT_SIZE = CFG_LLx__SLOT_SIZE;
 
 		//
 		def_name = "DATA.LLx_SIZE";
@@ -1249,6 +1254,20 @@ int CObj__VAC_ROBOT_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			CString ll_name = Macro__GET_LLx_NAME(i);
 			int ll_id = i + 1;
+
+			// .CFG.SLOT.USE ..
+			{
+				str_name.Format("CFG.%s.SLOT.MAX", ll_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_LLx_SLOT_MAX[i], obj_name,str_name);
+
+				for(int  k=0; k<CFG_LLx__SLOT_SIZE; k++)
+				{
+					int slot = k + 1;
+
+					str_name.Format("CFG.LL%1d.SLOT%02d.USE", ll_id, slot);
+					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_LLx_SLOT_USE_X[i][k], obj_name,str_name);
+				}
+			}
 
 			// DA Use ...
 			str_name.Format("CFG.DA.USE.LL%1d", ll_id);

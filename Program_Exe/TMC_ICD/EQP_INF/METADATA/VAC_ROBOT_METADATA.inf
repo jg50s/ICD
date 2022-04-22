@@ -61,7 +61,7 @@
 
 #DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
 #DEFINE_CONSTANT    LLx.MULTI_SLOT_VALVE                NO
-#DEFINE_CONSTANT    LLx.SLOT_SIZE                       2
+#DEFINE_CONSTANT    LLx.SLOT_SIZE                       ##LL_SLOT
 
 #DEFINE_CONSTANT    OBJ__TMC_CHM		                    PHY__TMC_CHM
 #DEFINE_CONSTANT    OBJ__PMC			                      PHY__PMx
@@ -82,7 +82,7 @@
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY_IO__VAC_ROBOT
 
-#OBJECT_IO_PARA     IP        192.168.100.21
+#OBJECT_IO_PARA     IP        192.168.1.125
 #OBJECT_IO_PARA     PORT      5000
 
 

@@ -21,7 +21,7 @@
 #DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
 
 #DEFINE_CONSTANT    LLx.MULTI_DOOR_VALVE                NO
-#DEFINE_CONSTANT    LLx.SLOT_SIZE                       2
+#DEFINE_CONSTANT    LLx.SLOT_SIZE                       ##LL_SLOT
 
 #DEFINE_CONSTANT    OBJ__AL           		              PHY_IO__AL1
 #DEFINE_CONSTANT    AL_MODE.INIT  		                  INIT

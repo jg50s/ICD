@@ -11,13 +11,15 @@ Mon__STATE_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 				   CII_OBJECT__ALARM* p_alarm)
 {
 	SCX__TIMER_CTRL cx_timer_ctrl;
-	CString var_data;
+	CString ch_data;
 
 	m_nCommSts = ONLINE;
 
+
 	while(1)
 	{
-		cx_timer_ctrl->WAIT(0.5);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
+
 
 		// ...
 		{
@@ -25,9 +27,15 @@ Mon__STATE_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 			doCH__UPDATE_INDICATOR->Set__DATA(STR__ON);
 		}
 
-		if(iSim_Mode > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			m_nCommSts = ONLINE;
+
+			// ...
+			{
+				ch_data = doCH__OPR_MAINT_MODE_SET->Get__STRING();
+				sCH__BIT_STS__MAINT_MODE->Set__DATA(ch_data);
+			}
 
 			_Update__SYSTEM_STATUS();
 		}
@@ -37,8 +45,8 @@ Mon__STATE_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 
 		if(sCH__MON_COMMUNICATION_STATE->Check__DATA(STR__OFFLINE) > 0)
 		{
-			CString r_act;
 			int alarm_id = ALID__OFFLINE;
+			CString r_act;
  				
 			p_alarm->Check__ALARM(alarm_id,r_act);
 			p_alarm->Post__ALARM(alarm_id);

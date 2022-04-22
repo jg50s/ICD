@@ -18,3 +18,5 @@
 #define  ALID__EXHAUST_PRESSURE_TIMEOUT					7
 
 #define  ALID__CHM_LID_NOT_CLOSED						8
+#define  ALID__ATM_HIGH_PRESSURE_LIMIT					9
+

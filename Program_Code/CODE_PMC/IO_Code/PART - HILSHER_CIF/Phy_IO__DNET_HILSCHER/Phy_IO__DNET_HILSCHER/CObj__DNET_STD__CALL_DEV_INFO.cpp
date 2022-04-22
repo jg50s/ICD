@@ -13,13 +13,21 @@ int  CObj__DNET_STD
 {
 	EnterCriticalSection(&mLOCK_DNET);
 
-	int r_flag = _Fnc__DEV_INFO(p_variable, p_alarm);
+	int err_count = _Fnc__DEV_INFO(p_variable, p_alarm, true);
+	if(err_count > 0)
+	{
+		err_count = _Fnc__DEV_INFO(p_variable, p_alarm, false);
+	}
 
 	LeaveCriticalSection(&mLOCK_DNET);
-	return r_flag;
+
+	_Check__DEV_TOTAL_MEMORY(p_variable,p_alarm);
+
+	if(err_count > 0)		return -1;
+	return 1;
 }
 int  CObj__DNET_STD
-::_Fnc__DEV_INFO(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+::_Fnc__DEV_INFO(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_update)
 {
 	unsigned char abResponseData[RCS_SEGMENT_LEN];
 	unsigned char bLen;
@@ -28,10 +36,10 @@ int  CObj__DNET_STD
 	CString log_add;
 
 	CString ch_data;
-	
+
 	// ...
-	unsigned short total__in_byte  = 0;
-	unsigned short total__out_byte = 0;
+	int err_check__count = 0;
+	CString err_sts = "???";
 
 	for(int i=0; i<iSLAVE_COUNT; i++)
 	{
@@ -51,6 +59,8 @@ int  CObj__DNET_STD
 		}
 
 		// Get the name of the Device from the network
+		if((active_update)
+		|| (sCH__DNET_INFO__SLAVE_X__NAME[i]->Check__DATA(err_sts) > 0))
 		{
 			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
 										DNM_IDENTITY_CLASS, 
@@ -73,11 +83,13 @@ int  CObj__DNET_STD
 			{
 				err_check__id = 1;
 
-				sCH__DNET_INFO__SLAVE_X__NAME[i]->Set__DATA("???");
+				sCH__DNET_INFO__SLAVE_X__NAME[i]->Set__DATA(err_sts);
+				err_check__count++;
 			}
 		}
 
 		// VendorID ...
+		if(active_update)
 		{
 			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
 										DNM_IDENTITY_CLASS, 
@@ -99,6 +111,7 @@ int  CObj__DNET_STD
 		}
 
 		// DeviceType ...
+		if(active_update)
 		{
 			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
 										DNM_IDENTITY_CLASS, 
@@ -119,6 +132,7 @@ int  CObj__DNET_STD
 		}
 		
 		// ProductCode ...
+		if(active_update)
 		{
 			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
 										DNM_IDENTITY_CLASS, 
@@ -139,6 +153,7 @@ int  CObj__DNET_STD
 		}
 
 		// Revision ...
+		if(active_update)
 		{
 			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
 										DNM_IDENTITY_CLASS, 
@@ -176,56 +191,86 @@ int  CObj__DNET_STD
 			*/
 	
 			// In.Byte ...
-			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
-										DNM_CNXN_CLASS, 
-										usInstance, 
-										DNM_CNXN_PSIZE_ATTR_ID, 
-										&abResponseData[0]);
-			if( bLen != 0 )
+			if((active_update)
+			|| (sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Check__DATA(err_sts) > 0))
 			{
-				bProducedSize = abResponseData[0];
-				total__in_byte += bProducedSize;
+				bLen = DNet__ReadDeviceData((unsigned char) mac_id,
+											DNM_CNXN_CLASS, 
+											usInstance, 
+											DNM_CNXN_PSIZE_ATTR_ID, 
+											&abResponseData[0]);
+				if( bLen != 0 )
+				{
+					bProducedSize = abResponseData[0];
 
-				log_msg.Format("  * ProducedSize(In) <- [%1d] \n", bProducedSize);
-				printf(log_msg);
+					log_msg.Format("  * ProducedSize(In) <- [%1d] \n", bProducedSize);
+					printf(log_msg);
 
-				ch_data.Format("%1d", bProducedSize);;
-				sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Set__DATA(ch_data);
-			}
-			else
-			{
-				err_check__id = 11;
+					ch_data.Format("%1d", bProducedSize);;
+					sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Set__DATA(ch_data);
+				}
+				else
+				{
+					err_check__id = 11;
 
-				sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Set__DATA("???");
+					sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Set__DATA(err_sts);
+					err_check__count++;
+				}
 			}
 
 			// Out.Byte ...
-			bLen = DNet__ReadDeviceData((unsigned char) mac_id,
-										DNM_CNXN_CLASS, 
-										usInstance, 
-										DNM_CNXN_CSIZE_ATTR_ID, 
-										&abResponseData[0]);
-			if(bLen != 0)
+			if((active_update)
+			|| (sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Check__DATA(err_sts) > 0))
 			{
-				bConsumedSize = abResponseData[0];
-				total__out_byte += bConsumedSize;
+				bLen = DNet__ReadDeviceData((unsigned char) mac_id,
+											DNM_CNXN_CLASS, 
+											usInstance, 
+											DNM_CNXN_CSIZE_ATTR_ID, 
+											&abResponseData[0]);
+				if(bLen != 0)
+				{
+					bConsumedSize = abResponseData[0];
 
-				log_msg.Format("  * ConsumedSize(Out) <- [%1d] \n", bConsumedSize);
-				printf(log_msg);
+					log_msg.Format("  * ConsumedSize(Out) <- [%1d] \n", bConsumedSize);
+					printf(log_msg);
 
-				ch_data.Format("%1d", bConsumedSize);;
-				sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Set__DATA(ch_data);
-			}
-			else
-			{
-				err_check__id = 12;
+					ch_data.Format("%1d", bConsumedSize);;
+					sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Set__DATA(ch_data);
+				}
+				else
+				{
+					err_check__id = 12;
 
-				sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Set__DATA("???");
+					sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Set__DATA(err_sts);
+					err_check__count++;
+				}
 			}
 		}
 
 		ch_data.Format("%1d", err_check__id);
 		sCH__DNET_INFO__SLAVE_X__ERROR_CHECK_ID[i]->Set__DATA(ch_data);
+	}
+
+	return err_check__count;
+}
+int  CObj__DNET_STD
+::_Check__DEV_TOTAL_MEMORY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	unsigned short total__in_byte  = 0;
+	unsigned short total__out_byte = 0;
+
+	CString ch_data;
+	int cur_byte;
+
+	for(int i=0; i<iSLAVE_COUNT; i++)
+	{
+		ch_data = sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Get__STRING();
+		cur_byte = atoi(ch_data);
+		total__in_byte += cur_byte;
+
+		ch_data = sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Get__STRING();
+		cur_byte = atoi(ch_data);
+		total__out_byte += cur_byte;
 	}
 
 	// ...
@@ -237,6 +282,9 @@ int  CObj__DNET_STD
 		sCH__DNET_INFO__TOTAL_OUT_BYTE->Set__DATA(ch_data);
 
 		//
+		CString log_msg;
+		CString log_add;
+
 		log_msg.Format("  * Total In_Byte  <- [%1d] \n", total__in_byte );
 		log_add.Format("  * Total Out_Byte <- [%1d] \n", total__out_byte);
 		log_msg += log_add;

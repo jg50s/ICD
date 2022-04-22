@@ -648,9 +648,19 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		ch_data.Format("%1d", iDNet_Board_Out_Offset);
 		sCH__DNET_INFO__MASTER_BOARD_OUT_BYTE_OFFSET->Set__DATA(ch_data);
 
-		//
-		ch_data = mDNet_Mng.Get__FIRMWARE_INFO();
-		sCH__DNET_INFO__MASTER_BOARD_NAME->Set__DATA(ch_data);
+		// ...
+		{
+			if(iActive__SIM_MODE > 0)		ch_data = "DNM   12345 67890  ";
+			else							ch_data = mDNet_Mng.Get__FIRMWARE_INFO();
+		
+			int s_index = ch_data.Find("DNM");
+			if(s_index >= 0)		ch_data.Delete(0, s_index+3);
+
+			ch_data.TrimLeft();
+			ch_data.TrimRight();
+			
+			sCH__DNET_INFO__MASTER_BOARD_NAME->Set__DATA(ch_data);
+		}
 
 		ch_data = mDNet_Mng.Get__DRIVER_VERSION();
 		sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION->Set__DATA(ch_data);

@@ -157,9 +157,9 @@ int CObj_NET__ALx_SR100::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_SYS_STS__ERROR_STATUS, str_name);
 
 		//
-		str_name = "MON.SYS_STS.CONTROLLRT_BATTERY";
+		str_name = "MON.SYS_STS.CONTROLLER_BATTERY";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_SYS_STS__CONTROLLRT_BATTERY, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_SYS_STS__CONTROLLER_BATTERY, str_name);
 
 		str_name = "MON.SYS_STS.WAFER_PRESENCE_STS1";
 		STD__ADD_STRING(str_name);
@@ -218,19 +218,10 @@ int CObj_NET__ALx_SR100::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__ROM_DATE,str_name);
 	}
 
+	/*
 	// ATMAlignOCRTime
 	str_name = "CFG.aALIGN.OCR.TIME";
 	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.5,100.0,"recommand:4 sec");
-
-	// ATMPadType
-	str_name = "CFG.dPAD.TYPE";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "UNKNOWN", "");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_PAD_TYPE,str_name);
-
-	// CheckWaferSlideOut
-	str_name = "CFG.dMAPPING.ACTION.SLIDEOUT.CHECK";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"NO YES","");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_MAPPING_ACTION_SLIDE_OUT_CHECK,str_name);
 
 	// CoverWaferAlignmentBeforeReturnToPort
 	str_name = "CFG.dBEFORE.PLACE.TO.LP.ALIGN";
@@ -256,14 +247,17 @@ int CObj_NET__ALx_SR100::__DEFINE__VARIABLE_STD(p_variable)
 	str_name = "CFG.dDISABLE.EXTEND.ALIGN";
 	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"FALSE TRUE", "");
 
-	// ...
-	str_name = "CFG.dALIGN.SKIP";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_ALIGN_SKIP,str_name);
-
 	// WaferAlignmentBeforePostProcessedIMMMeasurement
 	str_name = "CFG.dWFR.ALGN.BEFORE.IMM.MEASURE";
 	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "rec:TRUE");
+	*/
+
+	// ...
+	{
+		str_name = "CFG.dALIGN.SKIP";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "FALSE TRUE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ALIGN_SKIP,str_name);
+	}
 
 	// ...	
 	{

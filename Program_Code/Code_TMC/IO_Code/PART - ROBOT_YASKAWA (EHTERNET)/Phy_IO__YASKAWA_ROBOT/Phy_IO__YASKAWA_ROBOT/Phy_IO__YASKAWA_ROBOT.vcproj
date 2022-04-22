@@ -127,7 +127,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\CCommon_Error;..\Phy_IO__YASKAWA_ROBOT"
+				AdditionalIncludeDirectories="..\..\..\..\CCommon_Error;..\Phy_IO__YASKAWA_ROBOT"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -281,11 +281,11 @@
 				Name="CCommon_Error"
 				>
 				<File
-					RelativePath="..\..\..\CCommon_Error\CCommon_Error.cpp"
+					RelativePath="..\..\..\..\CCommon_Error\CCommon_Error.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\CCommon_Error\CCommon_Error.h"
+					RelativePath="..\..\..\..\CCommon_Error\CCommon_Error.h"
 					>
 				</File>
 			</Filter>

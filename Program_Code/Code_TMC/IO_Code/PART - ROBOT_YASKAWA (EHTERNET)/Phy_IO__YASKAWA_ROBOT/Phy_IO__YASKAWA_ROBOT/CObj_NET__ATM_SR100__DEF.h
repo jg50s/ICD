@@ -32,6 +32,10 @@
 #define  STR__LOAD					"LOAD"
 #define  STR__UNLOAD				"UNLOAD"
 
+#define  STR__Ok                    "Ok"
+#define  STR__Error					"Error"
+
+
 // ..
 #define  ARM_A						"A"
 #define  ARM_B						"B"

@@ -622,6 +622,20 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"FALSE TRUE","def:TRUE");
 	}
 
+	// CFG : LLx SLOT ...
+	{
+		for(i=0; i<CFG_LLx__LIMIT; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("CFG.LL%1d.SLOT01.USE", id);
+			STD__ADD_DIGITAL(str_name,"NO  YES");
+
+			str_name.Format("CFG.LL%1d.SLOT02.USE", id);
+			STD__ADD_DIGITAL(str_name,"NO  YES");
+		}
+	}
+
 	// LLx ALIGN ...
 	{
 		// ...

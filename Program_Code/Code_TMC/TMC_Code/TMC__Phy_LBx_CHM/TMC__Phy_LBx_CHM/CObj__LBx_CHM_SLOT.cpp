@@ -225,8 +225,9 @@ int CObj__LBx_CHM_SLOT::__DEFINE__VARIABLE_STD(p_variable)
 	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,0,60,"");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_OVER_VENT_TIME, str_name);
 
+	//
 	str_name = "OTR.IN.CFG.EQUALIZE.VENT.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,0,10,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0, 10, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_EQUALIZE_VENT_TIME, str_name);
 
 	str_name = "OTR.IN.CFG.EQUAL_VLV.OPEN.WHEN_ATM";
@@ -235,20 +236,20 @@ int CObj__LBx_CHM_SLOT::__DEFINE__VARIABLE_STD(p_variable)
 
 	//
 	str_name = "OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,3,60,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1, 0, 60, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_DELAY_TIME, str_name);
 
 	str_name = "OTR.IN.CFG.aSOFT.VENT.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,3,60,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1, 0, 60, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_DELAY_TIME, str_name);
 
 	//
 	str_name = "CFG.PUMP.VALVE.CLOSE.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,0.3,1.0,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1, 0.3, 3.0, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_PUMP_VALVE_CLOSE_DELAY_TIME, str_name);
 
 	str_name = "CFG.VENT.VALVE.CLOSE.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,0.3,1.0,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1, 0.3, 3.0, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_VENT_VALVE_CLOSE_DELAY_TIME, str_name);
 
 	//
@@ -366,9 +367,9 @@ int CObj__LBx_CHM_SLOT::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
 		LINK__VAR_ANALOG_CTRL(aCH_SV_CLOSE__TIME_COUNT,str_name);
 
-		str_name = "CFG.aCONVECT.ATM.HIGH.PRESS";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"mtorr",0,0,80000000,"");
-		LINK__VAR_ANALOG_CTRL(aCFG_CH_CONVECT_ATM_HIGH_PRESS,str_name);
+		str_name = "CFG.ATM.HIGH.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 0, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_HIGH_PRESSURE_TORR, str_name);
 	}
 
 	// ...
@@ -799,14 +800,14 @@ int CObj__LBx_CHM_SLOT::__DEFINE__ALARM(p_alarm)
 	}
 	// ...
 	{
-		alarm_id = ALID__CONVECTRON_ATM_HIGH_PRESS_ALARM;
+		alarm_id = ALID__ATM_HIGH_PRESSURE_LIMIT;
 
 		alarm_title  = title;
-		alarm_title += "After Venting Complete, Atm High Press Alarm !";
+		alarm_title += "ATM High Pressure limit !";
 
-		alarm_msg.Format("Please, check LL Pressure or Gauge Status.\n");
+		alarm_msg.Format("Please, check config pressure or gauge status.\n");
 
-		ALARM_ACT__ABORT;
+		ACT__CHECK;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...

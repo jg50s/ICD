@@ -156,16 +156,16 @@ int CObj__CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	//
 	str_name = "OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,3,60,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 60,"");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_DELAY_TIME, str_name);
 
 	str_name = "OTR.IN.CFG.aSOFT.VENT.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,3,60,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 60,"");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_DELAY_TIME, str_name);
 
 	//
 	str_name = "OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",3,0.3,1.0,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0.3, 5.0,"");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_VALVE_CLOSE_DELAY_TIME, str_name);
 
 	//
@@ -221,8 +221,21 @@ int CObj__CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
 	LINK__VAR_DIGITAL_CTRL(dTM_BALLAST_CTRL_INIT_FLAG,str_name);
 
 	str_name = "CFG.aATM.PRESS.STS.TOLERANCE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr",0,-20,20,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 0, -20, 20, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_PRESS_STS_TOLERANCE, str_name);
+
+	//
+	str_name = "OTR.IN.CFG.EQUALIZE.VENT.TIME";
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 10, "");
+	LINK__VAR_ANALOG_CTRL(aCH__CFG_EQUALIZE_VENT_TIME, str_name);
+
+	str_name = "OTR.IN.CFG.EQUAL_VLV.OPEN.WHEN_ATM";
+	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+	LINK__VAR_DIGITAL_CTRL(dCH__CFG_EQUAL_VLV_OPEN_WHEN_ATM, str_name);
+
+	str_name = "CFG.ATM.HIGH.PRESSURE.TORR";
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 0, 1000, "");
+	LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_HIGH_PRESSURE_TORR, str_name);
 	//
 
 	// ...
@@ -364,6 +377,19 @@ int CObj__CHM_STD::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__ATM_HIGH_PRESSURE_LIMIT;
+
+		alarm_title  = title;
+		alarm_title += "ATM High Pressure limit !";
+
+		alarm_msg.Format("Please, check config pressure or gauge status.\n");
+
+		ACT__CHECK;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -427,6 +453,19 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			{
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__SOFT_VENT_VLV__SET, obj_name,var_name);
+			}
+
+			//
+			def_name = "VAR__IO_DO_EQUAL_VLV";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			def_check = x_utility.Check__Link(def_data);
+			bActive__ATM_EQUAL_VLV = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__ATM_EQUAL_VLV__SET, obj_name,var_name);
 			}
 		}
 		// PUMP VLV ...

@@ -33,6 +33,41 @@ int  CObj_NET__ATM_SR100
 	{
 		doCH__COMMAND->Set__DATA(_CMMD__RBErrClr);
 	}
+
+	if(r_flag > 0)
+	{
+		CString ch_data = diCH__RB_STS_MANUAL->Get__STRING();
+		if(ch_data.CompareNoCase(STR__Error) == 0)			return r_flag;
+	}
+
+	// Wafer Check ...
+	if(r_flag > 0)
+	{
+		// Arm_A ...
+		{
+			if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Check__DATA(STR__ON) > 0)
+			{
+				dCH__MON__ARM_A_MATERIAL_STATUS->Set__DATA(STR__EXIST);
+			}
+			else if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Check__DATA(STR__OFF) > 0)
+			{
+				dCH__MON__ARM_A_MATERIAL_STATUS->Set__DATA(STR__NONE);
+			}
+		}
+
+		// Arm_B ...
+		{
+			if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Check__DATA(STR__ON) > 0)
+			{
+				dCH__MON__ARM_B_MATERIAL_STATUS->Set__DATA(STR__EXIST);
+			}
+			else if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Check__DATA(STR__OFF) > 0)
+			{
+				dCH__MON__ARM_B_MATERIAL_STATUS->Set__DATA(STR__NONE);
+			}
+		}
+	}
+
 	return r_flag;
 }
 
@@ -285,6 +320,74 @@ LOOP_RETRY:
 		{
 			// ...
 		}
+	}
+
+	return 1;
+}
+
+int  CObj_NET__ATM_SR100
+::Call__CHECK_STN_INFO(CII_OBJECT__VARIABLE* p_variable,
+					   CII_OBJECT__ALARM* p_alarm)
+{
+	CString stn_name;
+	CString stn_slot;
+	CString stn_id;
+	int i;
+
+	// ALx ...
+	{
+		stn_name = STR__AL1;
+		stn_slot = "1";
+
+		stn_id = _Get__TRG_STN(stn_name, stn_slot);
+
+		sCH__CUR_AL1_STN_NUM->Set__DATA(stn_id);
+	}
+	// STx ...
+	{
+		stn_name = STR__BUFF1;
+		stn_slot = "1";
+
+		stn_id = _Get__TRG_STN(stn_name, stn_slot);
+
+		sCH__CUR_ST1_STN_NUM->Set__DATA(stn_id);
+	}
+	// LLx ...
+	for(i=0; i<CFG_LLx__SIZE; i++)
+	{
+		stn_name = Macro__Get_LLx_NAME(i);
+
+		if(bActive__LLx_MULTI_DOOR_VALVE)
+		{
+			CString stn_slot;
+
+			for(int k=0; k<2; k++)
+			{
+				int slot_id = k + 1;
+
+				stn_slot.Format("%1d", slot_id);
+				stn_id = _Get__TRG_STN(stn_name, stn_slot);
+
+				     if(slot_id == 1)		sCH__CUR_LLx_1_STN_NUM[i]->Set__DATA(stn_id);
+				else if(slot_id == 2)		sCH__CUR_LLx_2_STN_NUM[i]->Set__DATA(stn_id);
+			}
+		}
+		else
+		{
+			stn_id = _Get__TRG_STN(stn_name, "1");
+
+			sCH__CUR_LLx_STN_NUM[i]->Set__DATA(stn_id);
+		}
+	}
+	// LPx ...
+	for(i=0; i<CFG_LPx__SIZE; i++)
+	{
+		stn_name = Macro__Get_LPx_NAME(i);
+		stn_slot = "1";
+
+		stn_id = _Get__TRG_STN(stn_name, stn_slot);
+
+		sCH__CUR_LPx_STN_NUM[i]->Set__DATA(stn_id);
 	}
 
 	return 1;

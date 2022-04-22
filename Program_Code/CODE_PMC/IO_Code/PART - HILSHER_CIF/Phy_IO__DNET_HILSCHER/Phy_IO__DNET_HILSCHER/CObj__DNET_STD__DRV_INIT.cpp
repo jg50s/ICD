@@ -759,6 +759,10 @@ unsigned char CObj__DNET_STD
 					   unsigned char  bAttribute,
 					   unsigned char *ptRespData)
 {
+	double cfg_delay__msec = 100;
+	Sleep(cfg_delay__msec);
+
+	// ...
 	RCS_MESSAGETELEGRAM_10 tMsgExt;
 	short s_ret;
 

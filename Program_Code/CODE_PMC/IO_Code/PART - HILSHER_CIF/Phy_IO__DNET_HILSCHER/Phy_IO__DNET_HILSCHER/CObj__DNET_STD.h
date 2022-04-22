@@ -161,7 +161,8 @@ private:
 	//
 	CString sMODE__DEV_INFO;
 	int  Call__DEV_INFO(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int  _Fnc__DEV_INFO(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int  _Fnc__DEV_INFO(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_update);
+	int  _Check__DEV_TOTAL_MEMORY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	//
 	CString sMODE__FLOAT_TO_HEXA;

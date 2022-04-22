@@ -8,6 +8,101 @@
 
 //------------------------------------------------------------------------------------
 int  CObj__VAC_ROBOT_STD::
+Interlock__LLx_SLOT_CHECK(CII_OBJECT__ALARM* p_alarm,
+						  const CString& stn_name, 
+						  const CString& para_slot)
+{
+LOOP_RETRY:
+
+	int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
+	if(ll_i <  0)				return  1;
+	if(ll_i >= iSIZE__LLx)		return -1;
+
+	// ...
+	CString ch_data = dEXT_CH__CFG_LLx_SLOT_MAX[ll_i]->Get__STRING();
+	int cfg__slot_max = atoi(ch_data);
+
+	// Check ...
+	{
+		int i_slot = atoi(para_slot);
+
+		// CFG.MAX ...
+		if((i_slot > cfg__slot_max)
+		|| (i_slot < 1))
+		{
+			CString log_msg;
+
+			// ...
+			{
+				CString log_bff;
+
+				log_msg.Format(" * Error : %s's Slot_MAX ... \n", stn_name);
+				log_bff.Format(" * para_slot : %1d \n", i_slot);
+				log_msg += log_bff;
+				log_bff.Format(" * cfg_slot : %1d \n", cfg__slot_max);
+				log_msg += log_bff;
+
+				Fnc__APP_LOG(log_msg);
+			}
+
+			// ...
+			{
+				int alm_id = ALID__LLx__SLOT_ID_ERROR;
+				CString r_act;
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, log_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)	
+				{
+					goto LOOP_RETRY;
+				}
+			}
+			return -1;
+		}
+
+		// CFG.USE ...
+		int slot_index = i_slot - 1;
+
+		if(dEXT_CH__CFG_LLx_SLOT_USE_X[ll_i][slot_index]->Check__DATA(STR__YES) < 0)
+		{
+			CString log_msg;
+
+			// ...
+			{
+				CString log_bff;
+
+				log_msg.Format(" * Error : %s's Slot_USE ... \n", stn_name);
+				log_bff.Format(" * para_slot : %1d \n", i_slot);
+				log_msg += log_bff;
+				log_bff.Format(" * %s <- %s \n",
+								dEXT_CH__CFG_LLx_SLOT_USE_X[ll_i][slot_index]->Get__CHANNEL_NAME(),
+								dEXT_CH__CFG_LLx_SLOT_USE_X[ll_i][slot_index]->Get__STRING());
+				log_msg += log_bff;
+
+				Fnc__APP_LOG(log_msg);
+			}
+
+			// ...
+			{
+				int alm_id = ALID__LLx__SLOT_ID_ERROR;
+				CString r_act;
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, log_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)	
+				{
+					goto LOOP_RETRY;
+				}
+			}
+			return -2;
+		}
+	}
+
+	return 1;
+
+}
+
+int  CObj__VAC_ROBOT_STD::
 Interlock__CHECK_MATERIAL(CII_OBJECT__ALARM* p_alarm,
 						  const bool active_place,
 						  const CString& arm_type,

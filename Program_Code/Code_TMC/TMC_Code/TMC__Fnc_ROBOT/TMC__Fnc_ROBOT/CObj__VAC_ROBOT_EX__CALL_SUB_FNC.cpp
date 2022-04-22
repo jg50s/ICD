@@ -1422,6 +1422,24 @@ int  CObj__VAC_ROBOT_EX
 			}
 		}
 	}
+	else if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+	{
+		// LLx - VENT
+		int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
+		if(ll_i >= 0)
+		{
+			if(sEXT_CH__LLx__PRESSURE_STATUS[ll_i]->Check__DATA(STR__ATM) < 0)
+			{
+				pLLx__OBJ_CTRL[ll_i]->Call__OBJECT(CMMD__VENT);
+			}
+		}
+
+		// VAC_CHM - VENT
+		if(sEXT_CH__VAC_CHM__PRESSURE_STATUS->Check__DATA(STR__ATM) < 0)
+		{
+			pVAC_CHM__OBJ_CTRL->Call__OBJECT(CMMD__VENT);
+		}
+	}
 	return 1;
 }
 

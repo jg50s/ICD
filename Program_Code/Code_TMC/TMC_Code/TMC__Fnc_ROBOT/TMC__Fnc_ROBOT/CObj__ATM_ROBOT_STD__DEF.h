@@ -43,3 +43,8 @@
 #define  CMMD__LP_CHECK_DOOR_OPEN					"CHECK_DOOR_OPEN"
 #define  CMMD__LP_OPENDOOR							"OPENDOOR"
 // #define  CMMD__LP_OPENDOOR_WITH_NO_UNLATCH			"OPENDOOR_WITH_NO_UNLATCH"
+
+// ...
+#define  LLx_CMMD__VENT				"VENT"
+
+

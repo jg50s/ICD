@@ -29,6 +29,8 @@
 #define  ALID__SIDE_STORAGE2__MATERIAL_EXIST_ERROR				26		
 
 #define  ALID__PMx__MATERIAL_EXIST_ERROR						31
+#define  ALID__ALx__SLOT_ID_ERROR								32
+#define  ALID__LLx__SLOT_ID_ERROR								33
 
 //
 #define  ALID__ARM_A__MATERIAL_NONE_ERROR						41

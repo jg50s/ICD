@@ -50,7 +50,9 @@ CString CObj_NET__ATM_SR100
 {
 	int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
 	int lp_i = Macro__CHECK_LPx_INDEX(stn_name);
+	int slot_id = atoi(stn_slot);
 
+	/*
 	// ...
 	CString drv__stn_name = "XXX";
 
@@ -78,6 +80,40 @@ CString CObj_NET__ATM_SR100
 	else if(stn_name.CompareNoCase(STR__BUFF1) == 0)
 	{
 		drv__stn_name.Format("C%02d", 4);
+	}
+	*/
+	// ...
+	CString drv__stn_name = "XXX";
+
+	if(stn_name.CompareNoCase(STR__AL1) == 0)
+	{
+		// drv__stn_name = "P01";
+		drv__stn_name = dCH__CFG_AL1_STN_NUM->Get__STRING();
+	}
+	else if(lp_i >= 0)				
+	{
+		// drv__stn_name.Format("C%02d", lp_i+1);
+		drv__stn_name = dCH__CFG_LPx_STN_NUM[lp_i]->Get__STRING();
+	}
+	else if(ll_i >= 0)
+	{
+		// drv__stn_name.Format("C%02d", ll_i + 4);
+		if(bActive__LLx_MULTI_DOOR_VALVE)
+		{
+			if(slot_id == 1)		
+				drv__stn_name = dCH__CFG_LLx_1_STN_NUM[ll_i]->Get__STRING();
+			else if(slot_id == 2)
+				drv__stn_name = dCH__CFG_LLx_2_STN_NUM[ll_i]->Get__STRING();
+		}
+		else
+		{
+			drv__stn_name = dCH__CFG_LLx_STN_NUM[ll_i]->Get__STRING();
+		}
+	}
+	else if(stn_name.CompareNoCase(STR__BUFF1) == 0)
+	{
+		// drv__stn_name.Format("C%02d", 8);
+		drv__stn_name = dCH__CFG_ST1_STN_NUM->Get__STRING();
 	}
 
 	return drv__stn_name;
@@ -142,7 +178,7 @@ int  CObj_NET__ATM_SR100
 {
 LOOP_RETRY:
 
-	doCH__COMMAND->Set__DATA(_CMMD__Pick);
+	int r_act = doCH__COMMAND->Set__DATA(_CMMD__Pick);
 
 	// ...
 	{
@@ -157,26 +193,68 @@ LOOP_RETRY:
 		}
 	}
 
-	/*
-	int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
-	if(ll_i >= 0)
+	if(r_act < 0)
 	{
-		CString log_msg;
+		CString ch_data = diCH__RB_STS_MANUAL->Get__STRING();
+		if(ch_data.CompareNoCase(STR__Error) == 0)			return r_act;
+	}
 
-		log_msg.Format("%s - RNE Sensor Check ...", stn_name);
-		Fnc__APP_LOG(log_msg);
-		
-		int r_flag = dEXT_IO_CH__ARM_LLx_RNE_SNS[ll_i]->When__DATA("None", 3.0);
-		if(r_flag <= 0)
+	// Wafer Check ...
+	{
+		double cfg_sec = 2.0;
+
+		if(iSim_Flag > 0)
 		{
-			log_msg.Format("RNE Sensor Result : :%d", r_flag);
-			Fnc__APP_LOG(log_msg);
-			return -1;
+			sCH__MON_SYS_STS__UNIT_STATUS->Set__DATA(STR__READY);
+			sCH__MON_SYS_STS__ERROR_STATUS->Set__DATA(STR__OFF);
+		}
+
+		int r_state = sCH__MON_SYS_STS__UNIT_STATUS->When__DATA(STR__READY, cfg_sec);
+		if(r_state <= 0)
+		{
+			r_act = -101;
+		}
+
+		if(sCH__MON_SYS_STS__ERROR_STATUS->Check__DATA(STR__OFF) < 0)
+		{
+			r_act = -201;
+		}
+
+		if(arm_type.CompareNoCase(ARM_A) == 0)
+		{
+			if(iSim_Flag > 0)
+			{
+				sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Set__DATA(STR__ON);
+			}
+
+			if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Check__DATA(STR__ON) > 0)
+			{
+				dCH__MON__ARM_A_MATERIAL_STATUS->Set__DATA(STR__EXIST);
+			}
+			else if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Check__DATA(STR__OFF) > 0)
+			{
+				dCH__MON__ARM_A_MATERIAL_STATUS->Set__DATA(STR__NONE);
+			}
+		}
+		else if(arm_type.CompareNoCase(ARM_B) == 0)
+		{
+			if(iSim_Flag > 0)
+			{
+				sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Set__DATA(STR__ON);
+			}
+
+			if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Check__DATA(STR__ON) > 0)
+			{
+				dCH__MON__ARM_B_MATERIAL_STATUS->Set__DATA(STR__EXIST);
+			}
+			else if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Check__DATA(STR__OFF) > 0)
+			{
+				dCH__MON__ARM_B_MATERIAL_STATUS->Set__DATA(STR__NONE);
+			}
 		}
 	}
-	*/
 
-	return 1;
+	return r_act;
 }
 int  CObj_NET__ATM_SR100
 ::Seq__ROBOT_PLACE(CII_OBJECT__VARIABLE* p_variable,
@@ -187,7 +265,7 @@ int  CObj_NET__ATM_SR100
 {
 LOOP_RETRY:
 
-	doCH__COMMAND->Set__DATA(_CMMD__Place);
+	int r_act = doCH__COMMAND->Set__DATA(_CMMD__Place);
 
 	// ...
 	{
@@ -202,7 +280,68 @@ LOOP_RETRY:
 		}
 	}
 
-	return 1;
+	if(r_act < 0)
+	{
+		CString ch_data = diCH__RB_STS_MANUAL->Get__STRING();
+		if(ch_data.CompareNoCase(STR__Error) == 0)			return r_act;
+	}
+
+	// Wafer Check ...
+	{
+		double cfg_sec = 2.0;
+
+		if(iSim_Flag > 0)
+		{
+			sCH__MON_SYS_STS__UNIT_STATUS->Set__DATA(STR__READY);
+			sCH__MON_SYS_STS__ERROR_STATUS->Set__DATA(STR__OFF);
+		}
+
+		int r_state = sCH__MON_SYS_STS__UNIT_STATUS->When__DATA(STR__READY, cfg_sec);
+		if(r_state <= 0)
+		{
+			r_act = -101;
+		}
+
+		if(sCH__MON_SYS_STS__ERROR_STATUS->Check__DATA(STR__OFF) < 0)
+		{
+			r_act = -201;
+		}
+
+		if(arm_type.CompareNoCase(ARM_A) == 0)
+		{
+			if(iSim_Flag > 0)
+			{
+				sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Set__DATA(STR__OFF);
+			}
+
+			if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Check__DATA(STR__ON) > 0)
+			{
+				dCH__MON__ARM_A_MATERIAL_STATUS->Set__DATA(STR__EXIST);
+			}
+			else if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS1->Check__DATA(STR__OFF) > 0)
+			{
+				dCH__MON__ARM_A_MATERIAL_STATUS->Set__DATA(STR__NONE);
+			}
+		}
+		else if(arm_type.CompareNoCase(ARM_B) == 0)
+		{
+			if(iSim_Flag > 0)
+			{
+				sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Set__DATA(STR__OFF);
+			}
+
+			if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Check__DATA(STR__ON) > 0)
+			{
+				dCH__MON__ARM_B_MATERIAL_STATUS->Set__DATA(STR__EXIST);
+			}
+			else if(sCH__MON_SYS_STS__WAFER_PRESENCE_STS2->Check__DATA(STR__OFF) > 0)
+			{
+				dCH__MON__ARM_B_MATERIAL_STATUS->Set__DATA(STR__NONE);
+			}
+		}
+	}
+
+	return r_act;
 }
 int  CObj_NET__ATM_SR100
 ::Seq__ROBOT_ROTATE(CII_OBJECT__VARIABLE* p_variable,

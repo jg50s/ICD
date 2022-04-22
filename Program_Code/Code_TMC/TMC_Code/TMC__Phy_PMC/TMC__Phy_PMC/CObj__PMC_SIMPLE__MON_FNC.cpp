@@ -82,14 +82,12 @@ void CObj__PMC_SIMPLE
 	CString str_atm_sns;
 	CString str_vac_sns;
 
+	CString ch_data;
 	int i;
 
 
 	for(i=0; i<iPM_LIMIT; i++)
 	{
-		Sleep(10);
-
-
 		if(dEXT_CH__CFG_PMx_EXIST_FLAG[i]->Check__DATA("YES") < 0)
 		{
 			dCH__SLIT_VALVE_STATUS[i]->Set__DATA(STR__CLOSE);		// SV가 NONE이면 CLOSE로 간주
@@ -182,10 +180,16 @@ void CObj__PMC_SIMPLE
 			if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
 			{
 				dCH__PRESS_STATUS[i]->Set__DATA(STR__ATM);
+				
+				aEXT_CH__PHY_TM__PRESS_TORR->Get__DATA(ch_data);
+				aCH__PRESSURE_TORR[i]->Set__DATA(ch_data);
 			}
 			else
 			{
 				dCH__PRESS_STATUS[i]->Set__DATA(STR__VAC);
+
+				aEXT_CH__PHY_TM__PRESS_TORR->Get__DATA(ch_data);
+				aCH__PRESSURE_TORR[i]->Set__DATA(ch_data);
 			}
 		}
 		else

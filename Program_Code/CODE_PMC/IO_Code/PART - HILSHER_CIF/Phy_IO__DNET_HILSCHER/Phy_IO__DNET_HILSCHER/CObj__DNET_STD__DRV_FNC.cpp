@@ -16,8 +16,8 @@ int CObj__DNET_STD
 				 double& read_data)
 {
 	int node_id = io_info.iMD_NO;
-	if(node_id <  1)		return -1;
 	if(node_id == 0)		return 1;
+	if(node_id <  0)		return -1;
 
 	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
 	if(md_id < 0)
@@ -193,8 +193,8 @@ int CObj__DNET_STD
 				  CString& read_data,int& item_index)
 {
 	int node_id = io_info.iMD_NO;
-	if(node_id <  1)		return -1;
 	if(node_id == 0)		return 1;
+	if(node_id <  0)		return -1;
 
 	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
 	if(md_id < 0)
@@ -229,8 +229,8 @@ int CObj__DNET_STD
 ::__Read__STRING(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, CString& read_data)
 {
 	int node_id = io_info.iMD_NO;
-	if(node_id <  1)		return -1;
 	if(node_id == 0)		return 1;
+	if(node_id <  0)		return -1;
 
 	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
 	if(md_id < 0)
@@ -317,8 +317,8 @@ int CObj__DNET_STD
 ::__Write__ANALOG(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const double set_data)
 {
 	int node_id = io_info.iMD_NO;
-	if(node_id <  1)		return -1;
 	if(node_id == 0)		return 1;
+	if(node_id <  0)		return -1;
 
 	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
 	if(md_id < 0)
@@ -365,8 +365,8 @@ int CObj__DNET_STD
 ::__Write__DIGITAL(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const CString& set_data,const int item_index)
 {
 	int node_id = io_info.iMD_NO;
-	if(node_id <  1)		return -1;
 	if(node_id == 0)		return 1;
+	if(node_id <  0)		return -1;
 
 	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
 	if(md_id < 0)
@@ -406,8 +406,8 @@ int CObj__DNET_STD
 ::__Write__STRING(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const CString& set_data)
 {
 	int node_id = io_info.iMD_NO;
-	if(node_id <  1)		return -1;
 	if(node_id == 0)		return 1;
+	if(node_id <  0)		return -1;
 
 	int md_id = mCtrl__DNet_Node.Get_MacID_Of_Node_ID(node_id);
 	if(md_id < 0)

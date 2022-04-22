@@ -10,12 +10,16 @@
 
 
 // ...
-#define  ALID__OFFLINE_ALARM							11
-#define  ALID__ERROR_CODE								12
+#define  ALID__OFFLINE_ALARM							1
+#define  ALID__ERROR_CODE								2
 
-#define  ALID__ALGN_AND_PICK_TIMEOUT_ALARM				13 
-#define  ALID__MAPPING_DISABLE_CONFIG_ALARM				14
+#define  ALID__ALGN_AND_PICK_TIMEOUT_ALARM				3 
+#define  ALID__MAPPING_DISABLE_CONFIG_ALARM				4
 
+#define  ALID__SYSTEM_STATE_ERROR						5
+
+
+// ...
 #define  ALID__LLx__NOT_ATM_PRESSURE					21
 
 #define  ALID__LP1__NOT_DOOR_OPEN						31

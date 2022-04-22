@@ -560,6 +560,39 @@ int CObj__VAT650_TYPE
 				com_port = atoi(para_data);
 			}
 		}
+		// 2.
+		{
+			para_cmmd = "BAUD_RATE";
+
+			if(p_io_para->Get__PARAMETER_DATA(para_cmmd, para_data) > 0)
+			{
+				nBaudRate = atoi(para_data);
+			}
+		}
+		// 3.
+		{
+			para_cmmd = "DATA_BIT";
+
+			if(p_io_para->Get__PARAMETER_DATA(para_cmmd, para_data) > 0)
+			{
+				nDataBit = atoi(para_data);
+			}
+		}
+		// 4.
+		{
+			para_cmmd = "PARITY";
+
+			if(p_io_para->Get__PARAMETER_DATA(para_cmmd, para_data) > 0)
+			{
+				// None(0), Odd(1), Even(2), Mark(3), Space(4)
+
+				     if(para_data.CompareNoCase("Odd")   == 0)		nParity = 1;
+				else if(para_data.CompareNoCase("Even")  == 0)		nParity = 2;
+				else if(para_data.CompareNoCase("Mark")  == 0)		nParity = 3;
+				else if(para_data.CompareNoCase("Space") == 0)		nParity = 4;
+				else												nParity = 0;
+			}
+		}
 	}
 	
 	// ...

@@ -25,9 +25,8 @@ void CObj__CHM_STD
 	
 	while(1)
 	{
-		Sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 		
-
 		// PRESSURE ...
 		{
 			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Get__DATA(var__data);
@@ -207,9 +206,6 @@ int CObj__CHM_STD
 	CString    szData, szData_bak;
 	CString    szData_DOOR_bak, szData_CLAMP_bak;
 
-	SCX__TIMER_CTRL Wait_Time;	
-	Wait_Time->REGISTER__ABORT_OBJECT(sObject_Name);
-
 	szData_bak			= "~";
 	szData_DOOR_bak		= "~";
 	szData_CLAMP_bak	= "~";
@@ -252,10 +248,12 @@ int CObj__CHM_STD
 	
 	int nPGSet_RUN     = -1;
 	int nPGSet_DISABLE = -1;
-	
+
+
 	while(1)
 	{
-		Wait_Time->WAIT(0.100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
+
 
 		if(dTM_BALLAST_CTRL_INIT_FLAG->Check__DATA("NONE") > 0)	
 		{

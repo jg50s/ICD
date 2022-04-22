@@ -24,33 +24,27 @@ int CObj__DURAPORT_SERIAL::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__INIT,		"INIT");
-		ADD__CTRL_VAR(sMODE__HOME,		"HOME");
-		ADD__CTRL_VAR(sMODE__OPEN,		"OPEN");
-		ADD__CTRL_VAR(sMODE__CLOSE,		"CLOSE");
+		ADD__CTRL_VAR(sMODE__INIT, "INIT");
+		ADD__CTRL_VAR(sMODE__HOME, "HOME");
 
-		ADD__CTRL_VAR(sMODE__LOAD,		"LOAD");
-		ADD__CTRL_VAR(sMODE__UNLOAD,	"UNLOAD");
-		ADD__CTRL_VAR(sMODE__DOCK,		"DOCK");
-		ADD__CTRL_VAR(sMODE__UNDOCK,	"UNDOCK");
-		ADD__CTRL_VAR(sMODE__CLAMP,		"CLAMP");
-		ADD__CTRL_VAR(sMODE__UNCLAMP,	"UNCLAMP");
+		ADD__CTRL_VAR(sMODE__DOOR_OPEN,	 "DOOR_OPEN");
+		ADD__CTRL_VAR(sMODE__DOOR_CLOSE, "DOOR_CLOSE");
 
-		ADD__CTRL_VAR(sMODE__MAP,       "MAP");
+		ADD__CTRL_VAR(sMODE__CLAMP,	  "CLAMP");
+		ADD__CTRL_VAR(sMODE__UNCLAMP, "UNCLAMP");
 
-		ADD__CTRL_VAR(sMODE__CID_READ,   "CID_READ");
-		ADD__CTRL_VAR(sMODE__PAGE_READ,  "PAGE_READ");
-		ADD__CTRL_VAR(sMODE__CID_WRITE,  "CID_WRITE");
-		ADD__CTRL_VAR(sMODE__PAGE_WRITE, "PAGE_WRITE");
+		ADD__CTRL_VAR(sMODE__SHUTTLE_IN,  "SHUTTLE_IN");
+		ADD__CTRL_VAR(sMODE__SHUTTLE_OUT, "SHUTTLE_OUT");
 
-		ADD__CTRL_VAR(sMODE__AMHS_AUTO,       "AMHS.AUTO");
-		ADD__CTRL_VAR(sMODE__AMHS_MANUAL,     "AMHS.MANUAL");
-		ADD__CTRL_VAR(sMODE__AMHS_HO_ENABLE,  "AMHS.HO.ENABLE");
-		ADD__CTRL_VAR(sMODE__AMHS_HO_DISABLE, "AMHS.HO.DISBLE");
+		ADD__CTRL_VAR(sMODE__LOAD,	 "LOAD");
+		ADD__CTRL_VAR(sMODE__UNLOAD, "UNLOAD");
+
+		ADD__CTRL_VAR(sMODE__MAP, "MAP");
 
 		ADD__CTRL_VAR(sMODE__SIM_FOUP_EXIST, "SIM.FOUP_EXIST");
 		ADD__CTRL_VAR(sMODE__SIM_FOUP_NONE,  "SIM.FOUP_NONE");
 	}
+
 	return 1;
 }
 int CObj__DURAPORT_SERIAL::__DEFINE__VERSION_HISTORY(version)
@@ -92,6 +86,13 @@ int CObj__DURAPORT_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CMD.STATE";
 		STD__ADD_DIGITAL(str_name, "UNKNOWN INPROGRESS SUCCEEDED FAILED");
 		LINK__VAR_DIGITAL_CTRL(dCH__CMD_STATE, str_name);
+	}
+
+	// CFG ...
+	{
+		str_name = "CFG.CTRL.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "AUTO  MAINT", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_CTRL_MODE, str_name);
 	}
 
 	// ...
@@ -280,9 +281,9 @@ int CObj__DURAPORT_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__BIT_STS__POD_DOCKED, str_name);
 
 		//
-		str_name = "s.BIT_STS.PAD_UNDOCKED";
+		str_name = "s.BIT_STS.POD_UNDOCKED";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__BIT_STS__PAD_UNDOCKED, str_name);
+		LINK__VAR_STRING_CTRL(sCH__BIT_STS__POD_UNDOCKED, str_name);
 
 		str_name = "s.BIT_STS.VACUUM_CONDITION";
 		STD__ADD_STRING(str_name);
@@ -423,16 +424,38 @@ int CObj__DURAPORT_SERIAL::__DEFINE__VARIABLE_IO(p_io_variable)
 			LINK__IO_VAR_DIGITAL_CTRL(doCH__UPDATE_INDICATOR, str_name);
 
 			// OPR Command 
+			str_name = "do.Opr.Maint_Mode.Set";
+			IO__ADD_DIGITAL_WRITE(str_name, "OFF ON");
+			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_MAINT_MODE_SET, str_name);
+
 			str_name  = "do.Opr.Load.Set";
 			item_list = "UNKNOWN UNLOAD LOAD";
 			IO__ADD_DIGITAL_WRITE(str_name, item_list);
 			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_LOAD_SET, str_name);
 
+			//
 			str_name  = "do.Opr.Dock.Set";
 			item_list = "UNKNOWN UNDOCK DOCK";
 			IO__ADD_DIGITAL_WRITE(str_name, item_list);
 			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_DOCK_SET, str_name);
 
+			str_name = "do.Opr.VAC.Set";
+			IO__ADD_DIGITAL_WRITE(str_name, "OFF ON");
+			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_VAC_SET, str_name);
+
+			str_name = "do.Opr.Latch.Set";
+			IO__ADD_DIGITAL_WRITE(str_name, "OFF ON");
+			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_LATCH_SET, str_name);
+
+			str_name = "do.Opr.Port_Door.Open.Set";
+			IO__ADD_DIGITAL_WRITE(str_name, "OFF ON");
+			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_PORT_DOOR_OPEN_SET, str_name);
+
+			str_name = "do.Opr.Door_Lift.Down.Set";
+			IO__ADD_DIGITAL_WRITE(str_name, "OFF ON");
+			LINK__IO_VAR_DIGITAL_CTRL(doCH__OPR_DOOR_LIFT_DOWN_SET, str_name);
+
+			//
 			str_name  = "do.Opr.Clamp.Set";
 			item_list = "UNKNOWN UNCLAMP CLAMP";
 			IO__ADD_DIGITAL_WRITE(str_name, item_list);
@@ -522,9 +545,6 @@ int CObj__DURAPORT_SERIAL::__DEFINE__ALARM(p_alarm)
 int CObj__DURAPORT_SERIAL
 ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	xI_TIMER->REGISTER__ABORT_OBJECT(sObject_Name);	
-
-	// ...
 	CString def_name;
 	CString def_data;
 	CString str_name;
@@ -556,10 +576,10 @@ int CObj__DURAPORT_SERIAL
 	{
 		SCX__SEQ_INFO x_seq;
 
-		iSim_Mode = x_seq->Is__SIMULATION_MODE();
-
-		iFlag__APP_LOG = 1;
+		iActive__SIM_MODE = x_seq->Is__SIMULATION_MODE();
 	}
+
+	iFlag__APP_LOG = 1;
 	return 1;
 }
 int CObj__DURAPORT_SERIAL
@@ -665,7 +685,7 @@ int CObj__DURAPORT_SERIAL
 		log_bff.Format("Timeout: %1d msec \n", m_nTimeout);
 		log_msg += log_bff;
 
-		if(iSim_Mode > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			log_bff.Format("Simulation Mode !!! \n");
 			log_msg += log_bff;
@@ -683,9 +703,6 @@ int CObj__DURAPORT_SERIAL
 			return -1;
 		}
 
-		// ...
-		Fnc__Display_STS();
-			
 		log_msg += "Initialize RS-232 Complete \n";
 		Fnc__DRV_LOG(log_msg);
 	}
@@ -722,27 +739,20 @@ LOOP_RETRY:
 	{
 		     IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__HOME)				flag = Call__HOME(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__OPEN)				flag = Call__OPEN(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__CLOSE)			flag = Call__CLOSE(p_variable, p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__LOAD)				flag = Call__LOAD(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__UNLOAD)			flag = Call__UNLOAD(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__DOCK)				flag = Call__DOCK(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__UNDOCK)			flag = Call__UNDOCK(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__DOOR_OPEN)		flag = Call__DOOR_OPEN(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__DOOR_CLOSE)		flag = Call__DOOR_CLOSE(p_variable, p_alarm);
+
 		ELSE_IF__CTRL_MODE(sMODE__CLAMP)			flag = Call__CLAMP(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__UNCLAMP)			flag = Call__UNCLAMP(p_variable, p_alarm);
 
+		ELSE_IF__CTRL_MODE(sMODE__SHUTTLE_IN)		flag = Call__SHUTTLE_IN(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SHUTTLE_OUT)		flag = Call__SHUTTLE_OUT(p_variable, p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__LOAD)				flag = Call__LOAD(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__UNLOAD)			flag = Call__UNLOAD(p_variable, p_alarm);
+
 		ELSE_IF__CTRL_MODE(sMODE__MAP)				flag = Call__MAP(p_variable, p_alarm);
-
-		ELSE_IF__CTRL_MODE(sMODE__CID_READ)			flag = Call__CID_READ(p_variable,   p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__PAGE_READ)		flag = Call__PAGE_READ(p_variable,  p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__CID_WRITE)		flag = Call__CID_WRITE(p_variable,  p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__PAGE_WRITE)		flag = Call__PAGE_WRITE(p_variable, p_alarm);
-
-		ELSE_IF__CTRL_MODE(sMODE__AMHS_AUTO)		flag = Call__AMHS_AUTO(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__AMHS_MANUAL)		flag = Call__AMHS_MANUAL(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__AMHS_HO_ENABLE)   flag = Call__AMHS_HO_ENABLE(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__AMHS_HO_DISABLE)  flag = Call__AMHS_HO_DISBLE(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__SIM_FOUP_EXIST)
 		{
@@ -879,7 +889,6 @@ LOOP_RETRY:
 int CObj__DURAPORT_SERIAL
 ::__CALL__MONITORING(id, p_variable, p_alarm)
 {
-
 	switch(id)
 	{
 		case MON_ID__STATE_MONITOR:
