@@ -14,12 +14,23 @@ Mon__ALM_REPORT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 	// ...
 	CString ch_data;
 
-	Call__INIT(p_variable, p_alarm);
-
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.5);
 
+		if(iSTATE__PRESSURE_TYPE == _PRESSURE_TYPE__ERROR)
+		{
+			Call__INIT(p_variable, p_alarm);
+		}
+
+		if(iActive__SIM_MODE > 0)
+		{
+			ch_data = dCH__CFG_PRESSURE_TYPE->Get__STRING();
+			sCH__MON_PRESSURE_TYPE->Set__DATA(ch_data);
+
+			ch_data = sCH__MON_PRESSURE_TORR->Get__STRING();
+			sCH__MON_PRESSURE_VALUE->Set__DATA(ch_data);
+		}
 
 		if(iCOMM_STATE == _DEF__OFFLINE)
 		{
@@ -38,7 +49,7 @@ Mon__ALM_REPORT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 			}
 
 			ch_data.Format("%.3f", aSet__Offline_Value);
-			sCH__DATA_PRESSURE_TORR->Set__DATA(ch_data);
+			sCH__MON_PRESSURE_TORR->Set__DATA(ch_data);
 		}
 		else
 		{

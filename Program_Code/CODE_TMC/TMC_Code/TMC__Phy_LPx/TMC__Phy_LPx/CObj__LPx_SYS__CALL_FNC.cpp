@@ -43,6 +43,12 @@ int  CObj__LPx_SYS
 	return pLPx__OBJ_CTRL->Call__OBJECT(CMMD__HOME);
 }
 
+int  CObj__LPx_SYS
+::Call__ALARM_RESET(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+{
+	return pLPx__OBJ_CTRL->Call__OBJECT(CMMD__ALARM_RESET);
+}
+
 // DOOR OPEN -----	
 int  CObj__LPx_SYS
 ::Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
@@ -174,7 +180,6 @@ int  CObj__LPx_SYS
 		sCH__ACTIVE_CHECK_FOUP_PLACED_DI->Set__DATA(STR__YES);
 	}
 
-	// ...
 	int r_flag = Fnc__RLSUNLOAD(p_variable, p_alarm);
 	if(r_flag < 0)			return r_flag;
 
@@ -184,7 +189,7 @@ int  CObj__LPx_SYS
 		sCH__ACTIVE_CHECK_FOUP_PLACED_DI->Set__DATA(STR__ERROR);
 	}
 
-	do 
+	while(1)
 	{
 		Sleep(20);
 
@@ -252,7 +257,6 @@ int  CObj__LPx_SYS
 			}
 		}
 	} 
-	while(1);
 
 	// ACTIVE.OK ...
 	{
@@ -325,7 +329,6 @@ int  CObj__LPx_SYS
 		}
 	}
 
-	// ...
 	do 
 	{
 		Sleep(200);

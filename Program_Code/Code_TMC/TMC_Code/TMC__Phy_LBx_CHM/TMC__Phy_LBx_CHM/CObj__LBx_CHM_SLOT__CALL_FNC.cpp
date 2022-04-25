@@ -464,10 +464,42 @@ START_FAST_PUMP:
 int  CObj__LBx_CHM_SLOT
 ::Call__VENT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	SCX__TIMER_CTRL xTimer;
+	// ...
+	{
+		double cur__press = aiEXT_CH__LBx__PRESSURE_TORR->Get__VALUE();
 
-	double  cur__press;
-	double  cfg__press;
+		double cfg__press = aCH__CFG_ATM_PRESSURE_TORR->Get__VALUE();
+		double cfg__atm_tol = aCH__CFG_ATM_PRESS_STS_TOLERANCE->Get__VALUE();
+
+		if((cur__press > (cfg__press - cfg__atm_tol))
+		&& (dCH__PRESSURE_STATUS->Check__DATA(STR__IO_ATM) > 0))
+		{
+			Fnc__VENT_ALL_VLV__CLOSE(p_alarm);
+
+			// ...
+			{
+				CString log_msg;
+				CString log_bff;
+			
+				log_msg = "Already ATM State \n";
+				log_bff.Format("  * Current pressure : %.3f torr \n", cur__press);
+				log_msg += log_bff;
+				log_bff.Format("  * Config atm-pressure : %.3f torr \n", cfg__press);
+				log_msg += log_bff;
+				log_bff.Format("  * Config atm-tolerance : %.1f torr \n", cfg__atm_tol);
+				log_msg += log_bff;
+				log_bff.Format("  * ATM-Sensor state \n");
+				log_msg += log_bff;
+				log_bff.Format("   * %s <- %s \n", 
+								dCH__PRESSURE_STATUS->Get__CHANNEL_NAME(),
+								dCH__PRESSURE_STATUS->Get__STRING());
+				log_msg += log_bff;
+							
+				Fnc__LOG(log_msg);
+			}
+			return 1;
+		}
+	}
 
 	// ...
 	{
@@ -604,7 +636,7 @@ LOOP_RETRY:
 	Fnc__LOG(sLog);
 
 	if((cur__press > cfg__press)
-		&& (dCH__PRESSURE_STATUS->Check__DATA(STR__IO_ATM) > 0))
+	&& (dCH__PRESSURE_STATUS->Check__DATA(STR__IO_ATM) > 0))
 	{
 		Fnc__VENT_ALL_VLV__CLOSE(p_alarm);
 

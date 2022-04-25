@@ -12,7 +12,9 @@ LOOP_RETRY:
 
 	if(bActive__ROBOT_ARM_RNE_SNS)
 	{
-		if(dEXT_CH__ROBOT_ARM_RNE_SNS->Check__DATA(sDATA__RNE_ON) < 0)
+		int r_flag = dEXT_CH__ROBOT_ARM_RNE_SNS->When__DATA(sDATA__RNE_ON, 2.0); 
+
+		if(r_flag <= 0)
 		{
 			int alm_id = ALID__ROBOT_ARM__NOT_RETRACTED;
 

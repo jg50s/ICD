@@ -7,6 +7,11 @@
 #include "CObj__PIRANI_SERIAL__DEF.h"
 
 
+#define _PRESSURE_TYPE__ERROR					0
+#define _PRESSURE_TYPE__MBAR					1
+#define _PRESSURE_TYPE__TORR					2
+
+
 class CObj__PIRANI_SERIAL : public __IOBJ__IO_TYPE
 {
 private:
@@ -23,6 +28,7 @@ private:
 
 	// ...
 	unsigned char iADDRESS_ID;
+	int iSTATE__PRESSURE_TYPE;
 
 	int	m_Rcv_Time;
 	int m_nRetryCnt;
@@ -37,10 +43,10 @@ private:
 
 	// IO ...
 	CX__VAR_DIGITAL_CTRL diCH__PRESSURE_GET;
-	CX__VAR_STRING_CTRL  sCH__DATA_PRESSURE_TORR;
+	CX__VAR_STRING_CTRL  sCH__MON_PRESSURE_TORR;
+	CX__VAR_STRING_CTRL  sCH__MON_PRESSURE_VALUE;
 
 	CX__VAR_DIGITAL_CTRL doCH__PRESSURE_TYPE;
-
 	CX__VAR_STRING_CTRL  siCH__PRESSURE_TYPE;
 	CX__VAR_STRING_CTRL  sCH__MON_PRESSURE_TYPE;
 

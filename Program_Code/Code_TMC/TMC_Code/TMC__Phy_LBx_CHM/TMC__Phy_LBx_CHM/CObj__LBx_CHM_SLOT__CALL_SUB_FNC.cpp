@@ -502,8 +502,7 @@ LOOP_RETRY:
 	return -1;
 }
 int  CObj__LBx_CHM_SLOT
-::Check__TRANSFER_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm,
-							 const CString& act_name)
+::Check__TRANSFER_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm, const CString& act_name)
 {
 	int i;
 
@@ -525,7 +524,6 @@ LOOP_RETRY:
 	// ...
 	{
 		Fnc__LOG("Door and Slit Valve Close Check.. Start");
-		Fnc__LOG("Door Valve Close Check..");
 	}
 
 	if(iSim_Flag > 0)
@@ -540,84 +538,88 @@ LOOP_RETRY:
 		}
 	}
 
-	//
-	for(i=0; i<iLBx_SLOT_SIZE; i++)
+	// DV CHECK ...
 	{
-		int r_val = dCH__DOOR_VALVE_STATUS_X[i]->When__DATA(STR__CLOSE, 5.0);	// 0:Aborted, -1:Timeout
+		Fnc__LOG("Door Valve Close Check..");
 
-		// ...
+		for(i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			str_log.Format("DOOR VLV STS Ret:%d", r_val);
-			Fnc__LOG(str_log);
-		}
+			int r_val = dCH__DOOR_VALVE_STATUS_X[i]->When__DATA(STR__CLOSE, 5.0);	// 0:Aborted, -1:Timeout
 
-		if(r_val < 0)
-		{
-			int alarm_id = ALID__DOOR_VALVE__NOT_CLOSE;
-
-			CString alarm_msg;
-			CString r_act;
-
-			str_temp.Format("Can not %s, Cause Door Valve Not Close Sts !!\n", act_name);
-			alarm_msg = str_temp;
-
-			Fnc__LOG(alarm_msg);
-
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alarm_msg, r_act);
-
-			if(r_act.CompareNoCase(ACT__RETRY) == 0)
+			// ...
 			{
-				goto LOOP_RETRY;
+				str_log.Format("DOOR VLV STS Ret:%d", r_val);
+				Fnc__LOG(str_log);
 			}
-			else if(r_act.CompareNoCase(ACT__ABORT) == 0)
+
+			if(r_val < 0)
 			{
-				return -1;
+				int alarm_id = ALID__DOOR_VALVE__NOT_CLOSE;
+
+				CString alarm_msg;
+				CString r_act;
+
+				str_temp.Format("Can not %s, Cause Door Valve Not Close Sts !!\n", act_name);
+				alarm_msg = str_temp;
+
+				Fnc__LOG(alarm_msg);
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alarm_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
+				else if(r_act.CompareNoCase(ACT__ABORT) == 0)
+				{
+					return -1;
+				}
 			}
-		}
-		else if(r_val == 0)
-		{
-			return OBJ_ABORT;
+			else if(r_val == 0)
+			{
+				return OBJ_ABORT;
+			}
 		}
 	}
 
-	// ...
+	// SV CHECK ...
 	{
 		Fnc__LOG("Slit Valve Close Check..");
-	}
 
-	for(i=0; i<iLBx_SLOT_SIZE; i++)
-	{
-		int r_val = dCH__SLIT_VALVE_STATUS_X[i]->When__DATA(STR__CLOSE, 5.0);
-
-		// ...
+		for(i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			str_log.Format("SLIT VLV STS Ret:%d", r_val);
-			Fnc__LOG(str_log);
-		}
+			int r_val = dCH__SLIT_VALVE_STATUS_X[i]->When__DATA(STR__CLOSE, 5.0);
 
-		if(r_val < 0)
-		{
-			int alarm_id = ALID__SLIT_VALVE__NOT_CLOSE;
-
-			CString alarm_msg;
-			CString r_act;
-
-			alarm_msg.Format("Can not %s !\n", act_name);
-
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alarm_msg, r_act);
-
-			if(r_act.CompareNoCase(ACT__RETRY) == 0)
+			// ...
 			{
-				goto LOOP_RETRY;
+				str_log.Format("SLIT VLV STS Ret:%d", r_val);
+				Fnc__LOG(str_log);
 			}
-			else if(r_act.CompareNoCase(ACT__ABORT) == 0)
+
+			if(r_val < 0)
 			{
-				return -1;
+				int alarm_id = ALID__SLIT_VALVE__NOT_CLOSE;
+
+				CString alarm_msg;
+				CString r_act;
+
+				alarm_msg.Format("Can not %s !\n", act_name);
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alarm_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
+				else if(r_act.CompareNoCase(ACT__ABORT) == 0)
+				{
+					return -1;
+				}
 			}
-		}
-		else if(r_val == 0)
-		{
-			return OBJ_ABORT;
+			else if(r_val == 0)
+			{
+				return OBJ_ABORT;
+			}
 		}
 	}
 

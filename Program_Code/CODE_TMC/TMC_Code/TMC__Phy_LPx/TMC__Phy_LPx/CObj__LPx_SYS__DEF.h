@@ -5,6 +5,8 @@
 #define  CMMD__INIT				"INIT"
 #define  CMMD__HOME				"HOME"
 
+#define  CMMD__ALARM_RESET		"ALARM.RESET"
+
 #define  CMMD__CLAMP			"CLAMP"
 #define  CMMD__UNCLAMP			"UNCLAMP"
 

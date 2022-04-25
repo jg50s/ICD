@@ -1,5 +1,62 @@
 
 //------------------------------------------------
+#OBJECT_PROPERTY    PAGE__LP1
+#FNC_MODE           HOME                  OPR__LP1         HOME
+#FNC_MODE           ALARM.RESET           OPR__LP1         ALARM.RESET
+#FNC_MODE           CLAMP                 OPR__LP1         CLAMP
+#FNC_MODE           UNCLAMP               OPR__LP1         UNCLAMP
+#FNC_MODE           LOAD                  OPR__LP1         LOAD
+#FNC_MODE           UNLOAD                OPR__LP1         UNLOAD
+#FNC_MODE           DOOR.OPEN             OPR__LP1         OPENDOOR
+#FNC_MODE           DOOR.CLOSE            OPR__LP1         CLOSEDOOR
+#FNC_MODE           MAP                   OPR__LP1         MAP
+
+#OBJECT_PROPERTY    PAGE__LP2
+#FNC_MODE           HOME                  OPR__LP2         HOME
+#FNC_MODE           ALARM.RESET           OPR__LP2         ALARM.RESET
+#FNC_MODE           CLAMP                 OPR__LP2         CLAMP
+#FNC_MODE           UNCLAMP               OPR__LP2         UNCLAMP
+#FNC_MODE           LOAD                  OPR__LP2         LOAD
+#FNC_MODE           UNLOAD                OPR__LP2         UNLOAD
+#FNC_MODE           DOOR.OPEN             OPR__LP2         OPENDOOR
+#FNC_MODE           DOOR.CLOSE            OPR__LP2         CLOSEDOOR
+#FNC_MODE           MAP                   OPR__LP2         MAP
+
+#OBJECT_PROPERTY    PAGE__LP3
+#FNC_MODE           HOME                  OPR__LP3         HOME
+#FNC_MODE           ALARM.RESET           OPR__LP3         ALARM.RESET
+#FNC_MODE           CLAMP                 OPR__LP3         CLAMP
+#FNC_MODE           UNCLAMP               OPR__LP3         UNCLAMP
+#FNC_MODE           LOAD                  OPR__LP3         LOAD
+#FNC_MODE           UNLOAD                OPR__LP3         UNLOAD
+#FNC_MODE           DOOR.OPEN             OPR__LP3         OPENDOOR
+#FNC_MODE           DOOR.CLOSE            OPR__LP3         CLOSEDOOR
+#FNC_MODE           MAP                   OPR__LP3         MAP
+
+#OBJECT_PROPERTY    PAGE__LP4
+#FNC_MODE           HOME                  OPR__LP4         HOME
+#FNC_MODE           ALARM.RESET           OPR__LP4         ALARM.RESET
+#FNC_MODE           CLAMP                 OPR__LP4         CLAMP
+#FNC_MODE           UNCLAMP               OPR__LP4         UNCLAMP
+#FNC_MODE           LOAD                  OPR__LP4         LOAD
+#FNC_MODE           UNLOAD                OPR__LP4         UNLOAD
+#FNC_MODE           DOOR.OPEN             OPR__LP4         OPENDOOR
+#FNC_MODE           DOOR.CLOSE            OPR__LP4         CLOSEDOOR
+#FNC_MODE           MAP                   OPR__LP4         MAP
+
+#OBJECT_PROPERTY    PAGE__LP5
+#FNC_MODE           HOME                  OPR__LP5         HOME
+#FNC_MODE           ALARM.RESET           OPR__LP5         ALARM.RESET
+#FNC_MODE           CLAMP                 OPR__LP5         CLAMP
+#FNC_MODE           UNCLAMP               OPR__LP5         UNCLAMP
+#FNC_MODE           LOAD                  OPR__LP5         LOAD
+#FNC_MODE           UNLOAD                OPR__LP5         UNLOAD
+#FNC_MODE           DOOR.OPEN             OPR__LP5         OPENDOOR
+#FNC_MODE           DOOR.CLOSE            OPR__LP5         CLOSEDOOR
+#FNC_MODE           MAP                   OPR__LP5         MAP
+
+
+//------------------------------------------------
 #OBJECT_PROPERTY    PAGE__LP1_RF
 #FNC_MODE           CID_READ              PHY__LP1         CID_READ 
 #FNC_MODE           PAGE_READ             PHY__LP1         PAGE_READ 

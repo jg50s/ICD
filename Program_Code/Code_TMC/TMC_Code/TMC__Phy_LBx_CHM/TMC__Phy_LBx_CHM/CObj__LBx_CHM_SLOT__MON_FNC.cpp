@@ -107,15 +107,15 @@ void CObj__LBx_CHM_SLOT
 			if(diEXT_CH__LBx__VAC_SNS->Check__DATA(sDATA__VAC_ON) > 0)		vac_sns = 1;
 
 			if((atm_range_min <= cur_press)
-				&& (atm_sns > 0)
-				&& (vac_sns < 0))
+			&& (atm_sns > 0)
+			&& (vac_sns < 0))
 			{
 				dCH__PRESSURE_STATUS->Set__DATA("ATM");
 			}
 			else if((cur_press > 0)					// 0.0 이면 Gauge Offline 가능성 큼.. 
-				&&	(cur_press <= ref_vac_max)
-				&& (atm_sns < 0)
-				&& (vac_sns > 0))
+				 && (cur_press <= ref_vac_max)
+				 && (atm_sns < 0)
+				 && (vac_sns > 0))
 			{
 				dCH__PRESSURE_STATUS->Set__DATA("VAC");
 			}

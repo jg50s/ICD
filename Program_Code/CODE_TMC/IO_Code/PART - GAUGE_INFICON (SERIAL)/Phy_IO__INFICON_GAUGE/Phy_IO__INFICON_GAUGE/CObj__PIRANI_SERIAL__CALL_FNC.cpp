@@ -7,31 +7,32 @@ int  CObj__PIRANI_SERIAL::
 Call__INIT(CII_OBJECT__VARIABLE* p_variable,
 		   CII_OBJECT__ALARM* p_alarm)
 {
-	CString ch_data;
+	int cur__retry_count = 0;
 
-	ch_data = dCH__CFG_PRESSURE_TYPE->Get__STRING();
-	doCH__PRESSURE_TYPE->Set__DATA(ch_data);
-
-	ch_data = siCH__PRESSURE_TYPE->Get__STRING();
-
-	// ...
+	while(1)
 	{
-		CString log_msg;
-		CString log_bff;
+		CString ch_data = dCH__CFG_PRESSURE_TYPE->Get__STRING();
+		doCH__PRESSURE_TYPE->Set__DATA(ch_data);
 
-		log_msg = "Init Result ... \n";
+		siCH__PRESSURE_TYPE->Get__STRING();
 
-		log_bff.Format(" * %s <- %s \n",
-						doCH__PRESSURE_TYPE->Get__CHANNEL_NAME(),
-						doCH__PRESSURE_TYPE->Get__STRING());
-		log_msg += log_bff;
+		ch_data = sCH__MON_PRESSURE_TYPE->Get__STRING();
+		if(dCH__CFG_PRESSURE_TYPE->Check__DATA(ch_data) > 0)
+		{
+				 if(ch_data.CompareNoCase(STR__mbar) == 0)			iSTATE__PRESSURE_TYPE = _PRESSURE_TYPE__MBAR;
+			else if(ch_data.CompareNoCase(STR__torr) == 0)			iSTATE__PRESSURE_TYPE = _PRESSURE_TYPE__TORR;
+			else													iSTATE__PRESSURE_TYPE = _PRESSURE_TYPE__ERROR;
 
-		log_bff.Format(" * %s <- %s \n",
-						sCH__MON_PRESSURE_TYPE->Get__CHANNEL_NAME(),
-						sCH__MON_PRESSURE_TYPE->Get__STRING());
-		log_msg += log_bff;
+			return 1;
+		}
+		
+		cur__retry_count++;
+		if(cur__retry_count > 3)
+		{
+			return -1;
+		}
 
-		xDRV_LOG_CTRL->WRITE__LOG(log_msg);
+		Sleep(500);
 	}
 	return 1;
 }

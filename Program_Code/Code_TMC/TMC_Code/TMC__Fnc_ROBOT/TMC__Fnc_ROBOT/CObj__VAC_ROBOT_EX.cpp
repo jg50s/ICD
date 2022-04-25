@@ -818,7 +818,7 @@ int CObj__VAC_ROBOT_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		// ...
 		{
 			CString log_msg;
-			log_msg.Format("Aborted ... :  [%s]",mode);
+			log_msg.Format("Aborted (%1d) ... :  [%s]", flag, mode);
 
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}

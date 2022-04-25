@@ -65,9 +65,13 @@ int CObj__PIRANI_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// MON ...
 	{
-		var_name = "s.DATA.PRESSURE.TORR";
+		var_name = "MON.PRESSURE.TORR";
 		STD__ADD_STRING_WITH_OPTION(var_name, -1, log_type, "");
-		LINK__VAR_STRING_CTRL(sCH__DATA_PRESSURE_TORR, var_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PRESSURE_TORR, var_name);
+
+		var_name = "MON.PRESSURE.VALUE";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PRESSURE_VALUE, var_name);
 
 		var_name = "MON.PRESSURE.TYPE";
 		STD__ADD_STRING(var_name);
@@ -184,6 +188,7 @@ int CObj__PIRANI_SERIAL::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
+	iSTATE__PRESSURE_TYPE = _PRESSURE_TYPE__ERROR;
 	iCOMM_STATE = _DEF__OFFLINE;
 	return 1;
 }

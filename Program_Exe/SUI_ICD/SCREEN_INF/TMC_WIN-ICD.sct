@@ -401,8 +401,8 @@ WINDOW_NAME TMC_POPUP__LP1_RF_MNT
 	POPUP                           YES
 	LOW_LEFT_X                      10  
 	LOW_LEFT_Y                      10 
-	WIDTH                           410 
-	HEIGHT                          402 
+	WIDTH                           530
+	HEIGHT                          542 
 
 	SEQ_CTRL_CHANNEL                DB_GUI+sPOPUP.MNT.LP1
 	USER_LEVEL                      Maint  
@@ -410,10 +410,10 @@ WINDOW_NAME TMC_POPUP__LP1_RF_MNT
 WINDOW_NAME TMC_POPUP__LP2_RF_MNT 
 {
 	POPUP                           YES
-	LOW_LEFT_X                      10  
+	LOW_LEFT_X                      110  
 	LOW_LEFT_Y                      10 
-	WIDTH                           410 
-	HEIGHT                          402 
+	WIDTH                           530
+	HEIGHT                          542 
 
 	SEQ_CTRL_CHANNEL                DB_GUI+sPOPUP.MNT.LP2
 	USER_LEVEL                      Maint  
@@ -421,10 +421,10 @@ WINDOW_NAME TMC_POPUP__LP2_RF_MNT
 WINDOW_NAME TMC_POPUP__LP3_RF_MNT 
 {
 	POPUP                           YES
-	LOW_LEFT_X                      10  
+	LOW_LEFT_X                      210  
 	LOW_LEFT_Y                      10 
-	WIDTH                           410 
-	HEIGHT                          402 
+	WIDTH                           530
+	HEIGHT                          542 
 
 	SEQ_CTRL_CHANNEL                DB_GUI+sPOPUP.MNT.LP3
 	USER_LEVEL                      Maint  

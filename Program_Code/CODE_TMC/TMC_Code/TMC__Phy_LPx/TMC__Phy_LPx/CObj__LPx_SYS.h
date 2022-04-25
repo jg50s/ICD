@@ -177,6 +177,9 @@ private:
 	CString sMODE__HOME;
 	int  Call__HOME(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
+	CString sMODE__ALARM_RESET;
+	int  Call__ALARM_RESET(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
 	// DOOR OPEN -----
 	CString sMODE__DOOR_OPEN;
 	int  Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);

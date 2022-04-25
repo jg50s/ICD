@@ -442,6 +442,9 @@ int CObj__LBx_ManiFold_X::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				pOther_CHM__OBJ_FNC_X[i] = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 				//
+				str_name = "OBJ.ACTIVE.MODE";
+				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__OTHER_CHM__OBJ_ACTIVE_MODE_X[i], obj_name,str_name);
+
 				str_name = "dOTR.OUT.PUMPING.STS.FLAG";
 				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__OTHER_CHM__PUMPING_STS_FLAG_X[i], obj_name,str_name);
 			}

@@ -1308,7 +1308,7 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 
 		if(Fnc__RUN_SV_OPEN(para_arm, para_module, para_slot) < 0)
 		{
-			return OBJ_ABORT;
+			return -111;
 		}
 
 		if(Fnc__RUN_ROTATE(p_variable,
@@ -1317,17 +1317,17 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 						   para_module,
 						   para_slot) < 0)
 		{
-			return OBJ_ABORT;
+			return -112;
 		}
 
 		if(pTMC_VLV__OBJ_CTRL->When__OBJECT() < 0)
 		{
-			return -222;
+			return -113;
 		}
 
 		if(pROBOT__OBJ_CTRL->When__OBJECT() < 0)
 		{
-			return -111;
+			return -114;
 		}
 
 		// ...

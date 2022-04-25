@@ -63,6 +63,10 @@
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LBA
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LBB
 
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP1
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP2
+#OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP3
+
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP1_RF
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP2_RF
 #OBJECT_STD    EQP__Page_OBJ                 STD.TYPE                 PAGE__LP3_RF
@@ -144,11 +148,11 @@
 ===========================================================================
 #OBJECT_IO     Phy_IO__DNET_HILSCHER         DNET.STD                 IO
 
-#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LBA__CHM_GAUGE
-#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LBB__CHM_GAUGE
-#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_TM1__CHM_GAUGE
-#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_LLx__PUMP_GAUGE
-#OBJECT_IO     Phy_IO__MKS_GAUGE             901P.SERIAL              IO_TM1__PUMP_GAUGE
+#OBJECT_IO     Phy_IO__INFICON_GAUGE         PIRANI.SERIAL            IO_LBA__CHM_GAUGE
+#OBJECT_IO     Phy_IO__INFICON_GAUGE         PIRANI.SERIAL            IO_LBB__CHM_GAUGE
+#OBJECT_IO     Phy_IO__INFICON_GAUGE         PIRANI.SERIAL            IO_TM1__CHM_GAUGE
+#OBJECT_IO     Phy_IO__INFICON_GAUGE         PIRANI.SERIAL            IO_LLx__PUMP_GAUGE
+#OBJECT_IO     Phy_IO__INFICON_GAUGE         PIRANI.SERIAL            IO_TM1__PUMP_GAUGE
 
 #OBJECT_IO     Phy_IO__MARS_FFU              MS.FC100                 PHY_IO__FFU
 

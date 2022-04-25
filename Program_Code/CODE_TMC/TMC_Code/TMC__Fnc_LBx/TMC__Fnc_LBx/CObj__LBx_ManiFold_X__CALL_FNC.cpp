@@ -95,7 +95,10 @@ Mode_Chk_Rty:
 	// Other : CL.PUMP_VLV
 	for(i=0; i<iOTHER_CHM__SIZE; i++)
 	{
-		if(pOther_CHM__OBJ_PHY_X[i]->Is__OBJ_BUSY() > 0)		continue;
+		if(sEXT_CH__OTHER_CHM__OBJ_ACTIVE_MODE_X[i]->Check__DATA(sMODE__VENT) > 0)
+		{
+			continue;
+		}
 
 		pOther_CHM__OBJ_PHY_X[i]->Call__OBJECT("CL.PUMP_VLV");
 	}

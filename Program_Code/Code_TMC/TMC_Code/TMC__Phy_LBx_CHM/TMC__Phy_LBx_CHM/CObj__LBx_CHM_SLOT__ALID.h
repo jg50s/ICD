@@ -4,6 +4,7 @@
 // ..
 #define  ACT__RETRY									"RETRY"
 #define  ACT__ABORT									"ABORT"
+#define  ACT__OK									"OK"
 
 
 // ..

@@ -38,6 +38,9 @@ private:
 	CX__VAR_ANALOG_CTRL  aCH__PARA_COOLING_TIME;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_PREMATERIAL_SLOT;	
 
+	// SIM.TEST ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_SIM_TEST_ACTIVE__WAIT;
+
 	// DOOR VALVE ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_DOOR_1_VALVE_OPEN_TIMEOUT;
 	CX__VAR_ANALOG_CTRL  aCH__CFG_DOOR_2_VALVE_OPEN_TIMEOUT;
@@ -414,7 +417,7 @@ private:
 	int  Check__PRESSURE_VAC(CII_OBJECT__ALARM* p_alarm);
 
 	int  Check__LLx_LID__CLOSE(CII_OBJECT__ALARM* p_alarm,const CString& act_name);
-	int  Check__TRANSFER_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm,const CString& act_name);
+	int  Check__TRANSFER_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm,	const CString& act_name);
 
 	int  Check__VENT_ALL_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
 	int  Check__PUMP_ALL_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);

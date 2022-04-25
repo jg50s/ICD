@@ -108,23 +108,32 @@ int CObj__LBx_CHM_SLOT::__DEFINE__VARIABLE_STD(p_variable)
 	STD__ADD_STRING(str_name);
 	LINK__VAR_STRING_CTRL(sCH__OUTPROC_ACTIVE_FLAG, str_name);
 
-	// ...
-	str_name = "PARA.SLOT.ID";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name, "ID", 0, 1, 2, "");
-	LINK__VAR_ANALOG_CTRL(aCH__PARA_SLOT_ID, str_name);
+	// PARA ...
+	{
+		str_name = "PARA.SLOT.ID";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name, "ID", 0, 1, 2, "");
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_SLOT_ID, str_name);
 
-	//
-	str_name = "OTR.IN.PARA.aPREHEAT.TIME";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",1,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__PARA_PREHEAT_TIME,str_name);
+		//
+		str_name = "OTR.IN.PARA.aPREHEAT.TIME";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",1,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_PREHEAT_TIME,str_name);
 
-	str_name = "OTR.IN.PARA.aCOOLING.TIME";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",1,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__PARA_COOLING_TIME,str_name);
+		str_name = "OTR.IN.PARA.aCOOLING.TIME";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",1,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_COOLING_TIME,str_name);
 
-	str_name = "OTR.IN.PARA.aPREMATERIAL.SLOT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",1,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__PARA_PREMATERIAL_SLOT,str_name);
+		str_name = "OTR.IN.PARA.aPREMATERIAL.SLOT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",1,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_PREMATERIAL_SLOT,str_name);
+	}
+
+	// SIM.TEST ...
+	{
+		str_name = "CFG.SIM_TEST.ACTIVE.WAIT";
+		STD__ADD_DIGITAL(str_name, "NO YES");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_SIM_TEST_ACTIVE__WAIT, str_name);
+	}
 
 	// DOOR VALVE ...
 	{
@@ -210,7 +219,7 @@ int CObj__LBx_CHM_SLOT::__DEFINE__VARIABLE_STD(p_variable)
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_PRESSURE_TORR, str_name);
 
 	str_name = "CFG.aATM.PRESS.STS.TOLERANCE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr",0,-20,20,"");
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 0, 0, 20, "");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_PRESS_STS_TOLERANCE, str_name);
 
 	str_name = "OTR.IN.CFG.aFAST.VENT.TIMEOUT";
@@ -1496,6 +1505,28 @@ int CObj__LBx_CHM_SLOT::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__TIME_TEST)
 		{
 			flag = Call__TIME_TEST(p_variable,p_alarm);
+		}
+	}
+
+	if(iSim_Flag > 0)
+	{
+		if(dCH__CFG_SIM_TEST_ACTIVE__WAIT->Check__DATA(STR__YES) > 0)
+		{
+			CString str_title;
+			CString str_msg;
+			CStringArray l_act;
+			CString r_act;
+
+			str_title.Format("%s - Action Test", sObject_Name);
+			str_msg.Format("%s ?", mode);
+
+			l_act.RemoveAll();
+			l_act.Add(ACT__ABORT);
+			l_act.Add(ACT__OK);
+
+			p_alarm->Popup__MESSAGE_BOX(str_msg, str_title, l_act,r_act);
+
+			if(r_act.CompareNoCase(ACT__ABORT) == 0)			flag = -1;
 		}
 	}
 

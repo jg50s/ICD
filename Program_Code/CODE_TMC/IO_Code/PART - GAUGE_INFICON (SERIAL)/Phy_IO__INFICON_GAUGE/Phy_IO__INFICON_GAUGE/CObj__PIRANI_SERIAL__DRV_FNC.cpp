@@ -88,45 +88,29 @@ int CObj__PIRANI_SERIAL
 		packet_data.cBYTE[1] = 0x0ff & r_packet[11];
 		packet_data.cBYTE[0] = 0x0ff & r_packet[12];
 
+		float cur__press_value = packet_data.fDATA;
 		float cur__press_torr = 0.0;
-		float cur__press_mbar = 0.0;
 
-		if(doCH__PRESSURE_TYPE->Check__DATA(STR__mbar) > 0)
+		if(iSTATE__PRESSURE_TYPE == _PRESSURE_TYPE__MBAR)
 		{
-			cur__press_mbar = packet_data.fDATA;
-			cur__press_torr = cur__press_mbar * (760.0 / 1013.25);
+			cur__press_torr = cur__press_value * (760.0 / 1013.25);
+		}
+		else if(iSTATE__PRESSURE_TYPE == _PRESSURE_TYPE__TORR)
+		{
+			cur__press_torr = cur__press_value;
 		}
 		else
 		{
-			cur__press_torr = packet_data.fDATA;
+			Fnc__DRV_LOG_OF_MSG("PRESSURE.TYPE ERROR !");
+
+			cur__press_torr = 300.0;
 		}
 
-		// ...
-		{
-			log_msg  = "\n";
-			log_msg += "  * ";
-
-			for(int i=0; i<4; i++)
-			{
-				log_bff.Format("%02X ", 0x0ff & packet_data.cBYTE[i]); 
-				log_msg += log_bff;
-			}
-			log_msg += "\n";
-
-			if(doCH__PRESSURE_TYPE->Check__DATA(STR__mbar) > 0)
-			{
-				log_bff.Format(" * %.3f (mbar) \n", cur__press_mbar); 
-				log_msg += log_bff;
-			}
-
-			log_bff.Format(" * %.3f (torr) \n", cur__press_torr); 
-			log_msg += log_bff;
-
-			Fnc__DRV_LOG_OF_MSG(log_msg);
-		}
+		ch_data.Format("%.3f", cur__press_value);
+		sCH__MON_PRESSURE_VALUE->Set__DATA(ch_data);
 
 		ch_data.Format("%.3f", cur__press_torr);
-		sCH__DATA_PRESSURE_TORR->Set__DATA(ch_data);
+		sCH__MON_PRESSURE_TORR->Set__DATA(ch_data);
 		return 1;
 	}
 
@@ -200,7 +184,7 @@ int CObj__PIRANI_SERIAL
 			return -1;
 		}
 
-		unsigned char cur_type = 0x0ff & r_packet[8];
+		unsigned char cur_type = 0x0ff & r_packet[9];
 
 		if(cur_type == 0x00)
 		{

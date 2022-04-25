@@ -23,6 +23,8 @@ int CObj__LPx_SYS::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 		ADD__CTRL_VAR(sMODE__HOME, "HOME");
 
+		ADD__CTRL_VAR(sMODE__ALARM_RESET, "ALARM.RESET");
+
 		ADD__CTRL_VAR(sMODE__DOOR_OPEN,  "DOOR_OPEN");
 		ADD__CTRL_VAR(sMODE__CHECK_DOOR_OPEN, "CHECK_DOOR_OPEN");
 
@@ -851,6 +853,8 @@ LOOP_RETRY:
 	{
 			 IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__HOME)					flag = Call__HOME(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__ALARM_RESET)			flag = Call__ALARM_RESET(p_variable,p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__DOOR_OPEN)			flag = Call__DOOR_OPEN(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__CHECK_DOOR_OPEN)		flag = Call__CHECK_DOOR_OPEN(p_variable,p_alarm);
