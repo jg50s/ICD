@@ -1,6 +1,0 @@
-; Phy_IO__BROOKS_RFID.def : Declares the module parameters for the DLL.
-
-LIBRARY      "Phy_IO__BROOKS_RFID"
-
-EXPORTS
-    ; Explicit exports can go here
