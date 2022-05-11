@@ -15,11 +15,17 @@ int CObj__CHM_IO
 	{
 		dEXT_CH__DI_VAC_SNS->Set__DATA(STR__ON);
 		dEXT_CH__DI_ATM_SNS->Set__DATA(STR__OFF);
+
+		//
+		if(bActive__DI_SLOT_VLV_OPEN)		dEXT_CH__DI_SLOT_VLV_OPEN->Set__DATA(STR__OFF);
+		if(bActive__DI_SLOT_VLV_CLOSE)		dEXT_CH__DI_SLOT_VLV_CLOSE->Set__DATA(STR__ON);
 	}
+
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
 
 		// ...
 		int interlock__do_iso_vlv = 1;
@@ -56,6 +62,38 @@ int CObj__CHM_IO
 			}
 
 			aEXT_CH__AI_CHM_GAUGE_TORR->Set__DATA(ch_data);
+		}
+
+		// SLOT.VLV SNS ...
+		if((bActive__DI_SLOT_VLV_OPEN)
+		|| (bActive__DI_SLOT_VLV_CLOSE))
+		{
+			int check_open  = 0;
+			int check_close = 0;
+
+			if(bActive__DI_SLOT_VLV_OPEN)
+			{
+				if(dEXT_CH__DI_SLOT_VLV_OPEN->Check__DATA(STR__ON) > 0)			check_open =  1;
+				else															check_open = -1;
+			}
+			if(bActive__DI_SLOT_VLV_CLOSE)
+			{
+				if(dEXT_CH__DI_SLOT_VLV_CLOSE->Check__DATA(STR__ON) > 0)		check_close  = 1;
+				else															check_close = -1;
+			}
+
+			if((check_close >= 0) && (check_open <= 0))
+			{
+				dEXT_CH__CHM_SLOT_VLV_STATE->Set__DATA(STR__CLOSE);
+			}
+			else if((check_close <= 0) && (check_open >= 0))
+			{
+				dEXT_CH__CHM_SLOT_VLV_STATE->Set__DATA(STR__OPEN);
+			}
+			else
+			{
+				dEXT_CH__CHM_SLOT_VLV_STATE->Set__DATA(STR__UNKNOWN);
+			}
 		}
 
 		// ...

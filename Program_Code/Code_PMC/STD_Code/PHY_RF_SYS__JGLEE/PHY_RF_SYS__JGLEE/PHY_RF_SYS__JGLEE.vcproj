@@ -262,11 +262,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__RF_STD__MON_ERROR_CHECK.cpp"
+					RelativePath=".\CObj__RF_STD__MON_IDLE_ERROR_CHECK.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\CObj__RF_STD__MON_INTERLOCK_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__RF_STD__MON_PROC_ERROR_CHECK.cpp"
 					>
 				</File>
 				<File

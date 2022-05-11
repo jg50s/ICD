@@ -5,6 +5,9 @@
 #define  _CFG__MFC_SIZE					20
 #define  _CFG__PT_SIZE					20
 
+#define  _CFG__SH_SIZE					1
+#define  _CFG__WALL_SIZE				1
+
 
 // ...
 #define  _ACT_CMD__IDLE					"IDLE"
@@ -85,4 +88,7 @@
 
 // ...
 #define  STR__ON						"ON"
+#define  STR__ENABLE					"ENABLE"
 
+#define  STR__YES						"YES"
+#define  STR__NO						"NO"

@@ -264,7 +264,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__MINI8_IO__MON_ERROR_CHECK.cpp"
+					RelativePath=".\CObj__MINI8_IO__MON_IDLE_ERROR_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__MINI8_IO__MON_PROC_ERROR_CHECK.cpp"
 					>
 				</File>
 				<File

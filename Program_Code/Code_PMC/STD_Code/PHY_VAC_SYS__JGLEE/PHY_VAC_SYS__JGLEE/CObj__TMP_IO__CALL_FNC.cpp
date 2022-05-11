@@ -220,8 +220,40 @@ int CObj__TMP_IO
 	if(iDATA__TMP_TYPE == _TMP_TYPE__OBJ)
 	{
 		if(pOBJ_CTRL__TMP->Call__OBJECT(sTMP_MODE__START) < 0)
-			return -1;
+			return -31;
 	}
+	else if(iDATA__TMP_TYPE == _TMP_TYPE__IO)
+	{
+		if(bActive__TMP_DO_RESET)		dEXT_CH__TMP_DO_RESET->Set__DATA(STR__OFF);
+		if(bActive__TMP_DO_STOP)		dEXT_CH__TMP_DO_STOP->Set__DATA(STR__OFF);
+
+		if(bActive__TMP_DO_START)		dEXT_CH__TMP_DO_START->Set__DATA(STR__ON);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(bActive__TMP_DI_NORMAL_SPEED)		dEXT_CH__TMP_DI_NORMAL_SPEED->Set__DATA(STR__ON);
+			if(bActive__TMP_DI_ACCELERATION)		dEXT_CH__TMP_DI_ACCELERATION->Set__DATA(STR__OFF);
+
+			if(bActive__TMP_DI_ALARM_STATE)			dEXT_CH__TMP_DI_ALARM_STATE->Set__DATA(STR__OFF);
+			if(bActive__TMP_DI_WARNING_STATE)		dEXT_CH__TMP_DI_WARNING_STATE->Set__DATA(STR__OFF);
+		}
+
+		while(1)
+		{
+			Sleep(90);
+
+			if(p_variable->Check__CTRL_ABORT() > 0)
+			{
+				return -31;
+			}
+
+			if(sCH__MON_PUMP_STATE->Check__DATA(STR__NORMAL) > 0)
+			{
+				break;
+			}
+		}
+	}
+
 	return 1;
 }
 int CObj__TMP_IO
@@ -256,6 +288,41 @@ int CObj__TMP_IO
 		else
 		{
 			if(pOBJ_CTRL__TMP->Call__OBJECT(sTMP_MODE__STOP) < 0)				return -12;
+		}
+	}
+	else if(iDATA__TMP_TYPE == _TMP_TYPE__IO)
+	{
+		if(bActive__TMP_DO_RESET)		dEXT_CH__TMP_DO_RESET->Set__DATA(STR__OFF);
+		if(bActive__TMP_DO_START)		dEXT_CH__TMP_DO_START->Set__DATA(STR__OFF);
+
+		if(bActive__TMP_DO_STOP)		dEXT_CH__TMP_DO_STOP->Set__DATA(STR__ON);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(bActive__TMP_DI_NORMAL_SPEED)		dEXT_CH__TMP_DI_NORMAL_SPEED->Set__DATA(STR__OFF);
+			if(bActive__TMP_DI_ACCELERATION)		dEXT_CH__TMP_DI_ACCELERATION->Set__DATA(STR__OFF);
+		}
+
+		if(active__no_wait)
+		{
+			
+		}
+		else
+		{
+			while(1)
+			{
+				Sleep(90);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					return -11;
+				}
+
+				if(sCH__MON_PUMP_STATE->Check__DATA(STR__STOP) > 0)
+				{
+					break;
+				}
+			}
 		}
 	}
 

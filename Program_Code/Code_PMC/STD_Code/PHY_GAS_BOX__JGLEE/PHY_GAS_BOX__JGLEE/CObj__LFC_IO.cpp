@@ -159,6 +159,11 @@ int CObj__LFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 	// MON.STABLE ...
 	{
+		str_name = "MON.LFC.PROC.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_LFC_PROC_ACTIVE, str_name);
+
+		//
 		str_name = "MON.LFC.ABORT.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "OFF ON");
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_LFC_ABORT_ACTIVE, str_name);

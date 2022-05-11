@@ -265,18 +265,27 @@ int  CObj__MFC_IO
 
 	if(para__ramp_sec > 0.1)
 	{
-		SCX__TIMER_CTRL x_timer_ctrl;
-
 		double ref__loop_sec = 0.1;
+		double ref_value;
 
-		CString ch_data = sEXT_CH__IO_MFC_SET->Get__STRING();
-		double ref_value = atof(ch_data);
+		if(iLINK_DATA__TYPE == _DATA_TYPE__HEXA)
+		{
+			CString ch_data = sEXT_CH__IO_MFC_SET_HEXA->Get__STRING();
+			ref_value = atof(ch_data);
+		}
+		else
+		{
+			ref_value = aEXT_CH__IO_MFC_SET_DEC->Get__VALUE();
+		}
 
 		int loop_size = (int) para__ramp_sec / ref__loop_sec;
 		double inc_set = (set_flow - ref_value) / loop_size;
 		double set_value = ref_value;
 
 		Fnc__SET_FLOW(0.0);
+
+		// ...
+		SCX__TIMER_CTRL x_timer_ctrl;
 
 		while(loop_size > 0)
 		{
@@ -339,20 +348,20 @@ int  CObj__MFC_IO
 		sCH__MON_MFC_SET_PERCENT->Set__DATA(ch_data);
 
 		ch_data.Format("%1d", set_hexa);
-		sEXT_CH__IO_MFC_SET->Set__DATA(ch_data);
+		sEXT_CH__IO_MFC_SET_HEXA->Set__DATA(ch_data);
 
 		if(iActive__SIM_MODE > 0)
 		{
-			sEXT_CH__IO_MFC_READ->Set__DATA(ch_data);
+			sEXT_CH__IO_MFC_READ_HEXA->Set__DATA(ch_data);
 		}
 	}
 	else
 	{
-		sEXT_CH__IO_MFC_SET->Set__DATA(ch_data);
+		aEXT_CH__IO_MFC_SET_DEC->Set__DATA(ch_data);
 
 		if(iActive__SIM_MODE > 0)
 		{
-			sEXT_CH__IO_MFC_READ->Set__DATA(ch_data);
+			aEXT_CH__IO_MFC_READ_DEC->Set__DATA(ch_data);
 		}
 
 		// 

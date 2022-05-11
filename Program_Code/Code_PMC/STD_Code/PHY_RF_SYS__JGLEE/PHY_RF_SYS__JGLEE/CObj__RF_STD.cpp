@@ -43,7 +43,8 @@ int CObj__RF_STD::__DEFINE__VERSION_HISTORY(version)
 // ...
 #define MON_ID__STATE_CHECK						1
 #define MON_ID__INTERLOCK_CHECK					2
-#define MON_ID__ERROR_CHECK						3
+#define MON_ID__IDLE_ERROR_CHECK				3
+#define MON_ID__PROC_ERROR_CHECK				4
 
 
 int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
@@ -162,54 +163,104 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_RF_ON_TIME_RESET, str_name);
 	}
 
-	// MON : STABLE  ...
+	// MON : STABLE_IDLE  ...
 	{
-		str_name = "MON.ERROR.CHECK.ACTIVE";
+		str_name = "MON.IDLE.ERROR.CHECK.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "OFF ON READY");
-		LINK__VAR_DIGITAL_CTRL(dCH__MON_POWER_CHECK_ACTIVE, str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_IDLE_POWER_CHECK_ACTIVE, str_name);
 
-		str_name = "MON.POWER.ABORT.ACTIVE";
+		str_name = "MON.IDLE.POWER.ABORT.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "OFF ON");
-		LINK__VAR_DIGITAL_CTRL(dCH__MON_POWER_ABORT_ACTIVE, str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_IDLE_POWER_ABORT_ACTIVE, str_name);
 
-		str_name = "MON.POWER.STABLE.ACTIVE";
+		str_name = "MON.IDLE.POWER.STABLE.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "OFF ON");
-		LINK__VAR_DIGITAL_CTRL(dCH__MON_POWER_STABLE_ACTIVE, str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_IDLE_POWER_STABLE_ACTIVE, str_name);
 
 		//
-		str_name = "MON.POWER.STABLE.MIN";
+		str_name = "MON.IDLE.POWER.STABLE.MIN";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_STABLE_MIN, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_STABLE_MIN, str_name);
 
-		str_name = "MON.POWER.STABLE.MAX";
+		str_name = "MON.IDLE.POWER.STABLE.MAX";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_STABLE_MAX, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_STABLE_MAX, str_name);
 
-		str_name = "MON.POWER.STABLE.DELAY.TIME";
+		str_name = "MON.IDLE.POWER.STABLE.DELAY.TIME";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_STABLE_DELAY_TIME, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_STABLE_DELAY_TIME, str_name);
 
-		str_name = "MON.POWER.STABLE.CHECK.TIME";
+		str_name = "MON.IDLE.POWER.STABLE.CHECK.TIME";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_STABLE_CHECK_TIME, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_STABLE_CHECK_TIME, str_name);
 
-		str_name = "MON.POWER.WARNING.CHECK.TIME";
+		str_name = "MON.IDLE.POWER.WARNING.CHECK.TIME";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_WARNING_CHECK_TIME, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_WARNING_CHECK_TIME, str_name);
 
-		str_name = "MON.POWER.ABORT.MIN";
+		str_name = "MON.IDLE.POWER.ABORT.MIN";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_ABORT_MIN, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_ABORT_MIN, str_name);
 
-		str_name = "MON.POWER.ABORT.MAX";
+		str_name = "MON.IDLE.POWER.ABORT.MAX";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_ABORT_MAX, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_ABORT_MAX, str_name);
 
-		str_name = "MON.POWER.ABORT.CHECK.TIME";
+		str_name = "MON.IDLE.POWER.ABORT.CHECK.TIME";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__MON_POWER_ABORT_CHECK_TIME, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_IDLE_POWER_ABORT_CHECK_TIME, str_name);
+	}
+
+	// MON : STABLE_PROC  ...
+	{
+		str_name = "MON.PROC.ERROR.CHECK.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON READY");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PROC_POWER_CHECK_ACTIVE, str_name);
+
+		str_name = "MON.PROC.POWER.ABORT.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PROC_POWER_ABORT_ACTIVE, str_name);
+
+		str_name = "MON.PROC.POWER.STABLE.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PROC_POWER_STABLE_ACTIVE, str_name);
 
 		//
+		str_name = "MON.PROC.POWER.STABLE.MIN";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_STABLE_MIN, str_name);
+
+		str_name = "MON.PROC.POWER.STABLE.MAX";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_STABLE_MAX, str_name);
+
+		str_name = "MON.PROC.POWER.STABLE.DELAY.TIME";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_STABLE_DELAY_TIME, str_name);
+
+		str_name = "MON.PROC.POWER.STABLE.CHECK.TIME";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_STABLE_CHECK_TIME, str_name);
+
+		str_name = "MON.PROC.POWER.WARNING.CHECK.TIME";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_WARNING_CHECK_TIME, str_name);
+
+		str_name = "MON.PROC.POWER.ABORT.MIN";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_ABORT_MIN, str_name);
+
+		str_name = "MON.PROC.POWER.ABORT.MAX";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_ABORT_MAX, str_name);
+
+		str_name = "MON.PROC.POWER.ABORT.CHECK.TIME";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PROC_POWER_ABORT_CHECK_TIME, str_name);
+	}
+
+	// MON : COMMON  ...
+	{
 		str_name = "MON.REFLECT.HIGH_LIMIT.CHECK.TIME";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_REFLECT_HIGH_LIMIT_CHECK_TIME, str_name);
@@ -266,14 +317,6 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_POWER_ABORT_TIMEOUT, str_name);
 
 		//
-		str_name = "CFG.POWER.WARNING.BAND";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_POWER_WARNING_BAND, str_name);
-
-		str_name = "CFG.POWER.ABORT.BAND";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_POWER_ABORT_BAND, str_name);
-
 		str_name = "CFG.IDLE.POWER.WARNING.BAND";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_IDLE_POWER_WARNING_BAND, str_name);
@@ -282,6 +325,16 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_IDLE_POWER_ABORT_BAND, str_name);
 
+		//
+		str_name = "CFG.PROC.POWER.WARNING.BAND";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_PROC_POWER_WARNING_BAND, str_name);
+
+		str_name = "CFG.PROC.POWER.ABORT.BAND";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_PROC_POWER_ABORT_BAND, str_name);
+
+		//
 		str_name = "CFG.Zero.Setpoint.Tolerance.Compensation";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 1, 0, 10, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_Zero_Setpoint_Tolerance_Compensation, str_name);
@@ -421,7 +474,9 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATE_CHECK);
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__INTERLOCK_CHECK);
-		p_variable->Add__MONITORING_PROC(1.0, MON_ID__ERROR_CHECK);
+
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__IDLE_ERROR_CHECK);
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__PROC_ERROR_CHECK);
 	}
 	return 1;
 }
@@ -990,9 +1045,13 @@ int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-		dCH__MON_POWER_CHECK_ACTIVE->Set__DATA(STR__OFF);
-		dCH__MON_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);	
-		dCH__MON_POWER_ABORT_ACTIVE->Set__DATA(STR__OFF);	
+		dCH__MON_IDLE_POWER_CHECK_ACTIVE->Set__DATA(STR__OFF);
+		dCH__MON_IDLE_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);	
+		dCH__MON_IDLE_POWER_ABORT_ACTIVE->Set__DATA(STR__OFF);	
+
+		dCH__MON_PROC_POWER_CHECK_ACTIVE->Set__DATA(STR__OFF);
+		dCH__MON_PROC_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);	
+		dCH__MON_PROC_POWER_ABORT_ACTIVE->Set__DATA(STR__OFF);	
 	}
 
 	if(dCH__CFG_USE_PART->Check__DATA(STR__YES) < 0)
@@ -1029,7 +1088,11 @@ int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		{
 			flag = Call__SET_POWER(p_variable, p_alarm);
 
-			if(flag > 0)		dCH__MON_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
+			if(flag > 0)
+			{
+				dCH__MON_IDLE_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
+				dCH__MON_PROC_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
+			}
 		}
 		ELSE_IF__CTRL_MODE(sMODE__REMOTE)
 		{
@@ -1085,9 +1148,11 @@ int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 int CObj__RF_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 {
-	if(id == MON_ID__STATE_CHECK)			Mon__STATE_CHECK(p_variable, p_alarm);
-	if(id == MON_ID__INTERLOCK_CHECK)		Mon__INTERLOCK_CHECK(p_variable, p_alarm);
-	if(id == MON_ID__ERROR_CHECK)			Mon__ERROR_CHECK(p_variable, p_alarm);
+	if(id == MON_ID__STATE_CHECK)				Mon__STATE_CHECK(p_variable, p_alarm);
+	if(id == MON_ID__INTERLOCK_CHECK)			Mon__INTERLOCK_CHECK(p_variable, p_alarm);
+	
+	if(id == MON_ID__IDLE_ERROR_CHECK)			Mon__IDLE_ERROR_CHECK(p_variable, p_alarm);
+	if(id == MON_ID__PROC_ERROR_CHECK)			Mon__PROC_ERROR_CHECK(p_variable, p_alarm);
 
 	return 1;
 }

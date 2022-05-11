@@ -187,7 +187,7 @@ int  CObj__LFC_IO
 		CString gas_name = sCH__CFG_GAS_NAME->Get__STRING();
 
 		int active__error_check = dCH__MON_ERROR_CHECK_ACTIVE->Check__DATA(STR__ON);
-		int active__proc_state  = dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE->Check__DATA(STR__YES);
+		int active__proc_state  = dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE->Check__DATA(STR__ON);
 
 		// Warning Check ...
 		{
@@ -216,6 +216,8 @@ int  CObj__LFC_IO
 						p_alarm->Post__ALARM_With_MESSAGE(alarm_id, str_msg);
 					}
 				}
+
+				dCH__MON_LFC_PROC_ACTIVE->Set__DATA(STR__ON);
 			}
 			else   // Idle State ...
 			{
@@ -242,6 +244,8 @@ int  CObj__LFC_IO
 						p_alarm->Post__ALARM_With_MESSAGE(alarm_id, str_msg);
 					}
 				}
+
+				dCH__MON_LFC_PROC_ACTIVE->Set__DATA(STR__OFF);
 			}
 		}
 

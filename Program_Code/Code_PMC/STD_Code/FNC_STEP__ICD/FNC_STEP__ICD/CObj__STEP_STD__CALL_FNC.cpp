@@ -14,6 +14,11 @@ int CObj__STEP_STD
 int CObj__STEP_STD
 ::Call__READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+	// ...
+	{
+		sCH__INFO_STEP_CUR_NUM->Set__DATA("");
+	}
+
 	return _Fnc__END();
 }
 int CObj__STEP_STD
@@ -75,6 +80,7 @@ int CObj__STEP_STD::_Fnc__END()
 	// ESC ...
 	{
 		ESC_OBJ__Start_HE_CLOSE();
+		ESC_OBJ__Init_DATA();
 	}
 
 	// MFC_X.CTRL ...

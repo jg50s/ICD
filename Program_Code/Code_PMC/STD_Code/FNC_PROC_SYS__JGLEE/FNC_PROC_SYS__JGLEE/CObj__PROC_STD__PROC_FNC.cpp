@@ -79,12 +79,11 @@ int CObj__PROC_STD
 		sEXT_CH__SYS_CTRL_LOCK->Set__DATA(STR__AUTO_PROC);
 	}
 
+	dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE->Set__DATA(STR__ON);
+
 	int r_flag = _Fnc__PROC_START(p_variable, p_alarm, active_dechuck);
 
-	// ...
-	{
-		sEXT_CH__SYS_CTRL_LOCK->Set__DATA("");
-	}
+	dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE->Set__DATA(STR__OFF);
 
 	// ...
 	{
@@ -92,6 +91,7 @@ int CObj__PROC_STD
 
 		sEXT_CH__PMC_PROCESS_STATUS->Set__DATA(STR__Idle);
 
+		sEXT_CH__SYS_CTRL_LOCK->Set__DATA("");
 		aCH__STEP_CUR_NUM->Set__DATA("-1");		
 	}
 

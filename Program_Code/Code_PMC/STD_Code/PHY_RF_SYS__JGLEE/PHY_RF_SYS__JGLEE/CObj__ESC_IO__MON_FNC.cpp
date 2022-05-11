@@ -681,6 +681,7 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 		}
 
 		// ...
+		CII__VAR_STRING_CTRL *pch_esc_ctrl_check;
 		CII__VAR_STRING_CTRL *pch_change_esc_state;
 		CII__VAR_STRING_CTRL *pch_fault_esc_state;
 		CII__VAR_STRING_CTRL *pch_stable_esc_state;
@@ -706,6 +707,7 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 					cur__esc_setpoint = aoEXT_CH__ESC_Voltage_CENTER->Get__VALUE();
 					p_pre__esc_setpoint = &pre__esc_setpoint__center;
 
+					pch_esc_ctrl_check = sCH__MON_ESC_CENTER_CTRL_CHECK.Get__PTR();
 					pch_change_esc_state = sCH__MON_CENTER_CHANGE_ESC_STATE.Get__PTR();
 					pch_fault_esc_state  = sCH__MON_CENTER_FAULT_ESC_STATE.Get__PTR();
 					pch_stable_esc_state = sCH__MON_CENTER_STABLE_ESC_STATE.Get__PTR();
@@ -737,6 +739,7 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 					cur__esc_setpoint = aoEXT_CH__ESC_Voltage_EDGE->Get__VALUE();
 					p_pre__esc_setpoint = &pre__esc_setpoint__edge;
 
+					pch_esc_ctrl_check = sCH__MON_ESC_EDGE_CTRL_CHECK.Get__PTR();
 					pch_change_esc_state = sCH__MON_EDGE_CHANGE_ESC_STATE.Get__PTR();
 					pch_fault_esc_state  = sCH__MON_EDGE_FAULT_ESC_STATE.Get__PTR();
 					pch_stable_esc_state = sCH__MON_EDGE_STABLE_ESC_STATE.Get__PTR();
@@ -766,6 +769,12 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 				continue;
 			}
 
+			// ...
+			{
+				if(cur__esc_setpoint > 0.1)			pch_esc_ctrl_check->Set__DATA(STR__YES);
+				else								pch_esc_ctrl_check->Set__DATA(STR__NO);
+			}
+
 			if(*p_pre__esc_setpoint != cur__esc_setpoint)
 			{
 				*p_pre__esc_setpoint = cur__esc_setpoint;
@@ -776,10 +785,10 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 					p_timer__esc_change_delay->STOP_ZERO();
 
 					p_timer__esc_check_delay->STOP_ZERO();
-					pch_fault_esc_state->Set__DATA("");
+					pch_fault_esc_state->Set__DATA(STR__NO);
 
 					p_timer__esc_stable_delay->STOP_ZERO();
-					pch_stable_esc_state->Set__DATA("");
+					pch_stable_esc_state->Set__DATA(STR__NO);
 				}
 			}
 
@@ -835,7 +844,7 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 							// ...
 							{
 								p_timer__esc_stable_delay->STOP_ZERO();
-								pch_stable_esc_state->Set__DATA("");
+								pch_stable_esc_state->Set__DATA(STR__NO);
 							}
 						}
 						else
@@ -854,7 +863,7 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 							// ...
 							{
 								p_timer__esc_check_delay->STOP_ZERO();
-								pch_fault_esc_state->Set__DATA("");
+								pch_fault_esc_state->Set__DATA(STR__NO);
 							}
 						}
 					}
@@ -862,26 +871,26 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 				else if(dCH__MON_CHUCK_STATUS->Check__DATA(STR__DECHUCKED) > 0)
 				{
 					p_timer__esc_check_delay->STOP_ZERO();
-					pch_fault_esc_state->Set__DATA("");
+					pch_fault_esc_state->Set__DATA(STR__NO);
 
 					p_timer__esc_stable_delay->STOP_ZERO();
-					pch_stable_esc_state->Set__DATA("YES");
+					pch_stable_esc_state->Set__DATA(STR__YES);
 				}
 				else
 				{
 					p_timer__esc_check_delay->STOP_ZERO();
-					pch_fault_esc_state->Set__DATA("");
+					pch_fault_esc_state->Set__DATA(STR__NO);
 
 					p_timer__esc_stable_delay->STOP_ZERO();
-					pch_stable_esc_state->Set__DATA("");
+					pch_stable_esc_state->Set__DATA(STR__NO);
 				}
 			}
 
 			// ...
 		}
 
-		if(active__esc_voltage)			dCH__MON_ESC_VOLTAGE_STATE->Set__DATA(STR__ON);
-		else							dCH__MON_ESC_VOLTAGE_STATE->Set__DATA(STR__OFF);
+		if(active__esc_voltage)			dCH__MON_ESC_VOLTAGE_ACTIVE->Set__DATA(STR__ON);
+		else							dCH__MON_ESC_VOLTAGE_ACTIVE->Set__DATA(STR__OFF);
 
 		//  STABLE.CHECK ...
 		{
@@ -906,11 +915,11 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 
 			if(active__stable_check)
 			{
-				sCH__MON_STABLE_FLAG->Set__DATA(STR__ON);
+				dCH__MON_STABLE_ACTIVE->Set__DATA(STR__ON);
 			}
 			else
 			{
-				sCH__MON_STABLE_FLAG->Set__DATA("");
+				dCH__MON_STABLE_ACTIVE->Set__DATA(STR__OFF);
 			}
 		}
 		// FAULT.CHECK ...
@@ -936,11 +945,11 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 			
 			if(active__fault_check)
 			{
-				sCH__MON_FAULT_FLAG->Set__DATA(STR__ON);
+				dCH__MON_FAULT_ACTIVE->Set__DATA(STR__ON);
 			}
 			else
 			{
-				sCH__MON_FAULT_FLAG->Set__DATA("");
+				dCH__MON_FAULT_ACTIVE->Set__DATA(STR__OFF);
 			}
 		}
 
@@ -1003,6 +1012,7 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 			SCI__ASYNC_TIMER_CTRL *p_timer__stable_delay;
 			SCI__ASYNC_TIMER_CTRL *p_timer__check_delay;
 
+			CII__VAR_STRING_CTRL *p_ch_ctrl_check;
 			CII__VAR_STRING_CTRL *p_ch__change;
 			CII__VAR_STRING_CTRL *p_ch__stable;
 			CII__VAR_STRING_CTRL *p_ch__fault;
@@ -1028,6 +1038,7 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 						p_timer__stable_delay = x_timer__he_center_stable_delay.Get__PTR();
 						p_timer__check_delay  = x_timer__he_center_check_delay.Get__PTR();
 
+						p_ch_ctrl_check = sCH__MON_HE_CENTER_CTRL_CHECK.Get__PTR();
 						p_ch__change = sCH__MON_CHANGE_HE_CENTER_STATE.Get__PTR();
 						p_ch__stable = sCH__MON_STABLE_HE_CENTER_STATE.Get__PTR();
 						p_ch__fault  = sCH__MON_FAULT_HE_CENTER_STATE.Get__PTR();
@@ -1050,6 +1061,7 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 						p_timer__stable_delay = x_timer__he_edge_stable_delay.Get__PTR();
 						p_timer__check_delay  = x_timer__he_edge_check_delay.Get__PTR();
 
+						p_ch_ctrl_check = sCH__MON_HE_EDGE_CTRL_CHECK.Get__PTR();
 						p_ch__change = sCH__MON_CHANGE_HE_EDGE_STATE.Get__PTR();
 						p_ch__stable = sCH__MON_STABLE_HE_EDGE_STATE.Get__PTR();
 						p_ch__fault  = sCH__MON_FAULT_HE_EDGE_STATE.Get__PTR();
@@ -1062,6 +1074,12 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 				else
 				{
 					continue;
+				}
+
+				// ...
+				{
+					if(cur__he_set > 0.1)		p_ch_ctrl_check->Set__DATA(STR__YES);
+					else						p_ch_ctrl_check->Set__DATA(STR__NO);
 				}
 
 				if(*p_pre__he_set != cur__he_set)

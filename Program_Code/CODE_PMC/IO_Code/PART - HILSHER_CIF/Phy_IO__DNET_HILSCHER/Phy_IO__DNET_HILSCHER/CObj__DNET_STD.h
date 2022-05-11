@@ -64,6 +64,11 @@ private:
 	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;
 
 	// Config ...
+	CX__VAR_ANALOG_CTRL  aCH__CFG_DRV_INT_STABLE_SEC;
+	CX__VAR_ANALOG_CTRL  aCH__CFG_DRV_INT_DELAY_mSEC;
+	CX__VAR_ANALOG_CTRL  aCH__CFG_DRV_INT_RETRY_CHECK;
+
+	//
 	CX__VAR_ANALOG_CTRL  aCH__CFG_DNET_HEARTBEAT_PERIOD;
 	CX__VAR_STRING_CTRL  sCH__DNET_HEARTBEAT_TIME_COUNT;
 
@@ -186,6 +191,11 @@ private:
 
 	// ...
 	unsigned char DNet__ReadDeviceData(unsigned char  bDeviceAdr,
+										unsigned char  bClass,
+										unsigned short usInstance,
+										unsigned char  bAttribute,
+										unsigned char *ptRespData);
+	unsigned char _DNet__ReadDeviceData(unsigned char  bDeviceAdr,
 										unsigned char  bClass,
 										unsigned short usInstance,
 										unsigned char  bAttribute,

@@ -759,7 +759,27 @@ unsigned char CObj__DNET_STD
 					   unsigned char  bAttribute,
 					   unsigned char *ptRespData)
 {
-	double cfg_delay__msec = 100;
+	int ref_count = (int) aCH__CFG_DRV_INT_RETRY_CHECK->Get__VALUE();
+	int cur_count = 0;
+
+	while(cur_count < ref_count)
+	{
+		int r_flag = _DNet__ReadDeviceData(bDeviceAdr,bClass,usInstance, bAttribute, ptRespData);
+		if(r_flag > 0)			return r_flag;
+
+		cur_count++;
+	}
+
+	return 0;
+}
+unsigned char CObj__DNET_STD
+::_DNet__ReadDeviceData(unsigned char  bDeviceAdr,
+					    unsigned char  bClass,
+					    unsigned short usInstance,
+					    unsigned char  bAttribute,
+					    unsigned char *ptRespData)
+{
+	double cfg_delay__msec = (int) aCH__CFG_DRV_INT_DELAY_mSEC->Get__VALUE();
 	Sleep(cfg_delay__msec);
 
 	// ...

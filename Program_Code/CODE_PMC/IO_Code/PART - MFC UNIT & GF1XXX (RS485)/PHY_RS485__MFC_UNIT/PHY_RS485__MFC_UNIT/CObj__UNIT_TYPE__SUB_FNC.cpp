@@ -34,3 +34,22 @@ CheckSum(unsigned char *str_data, const int nStart, const int nSize)
 	return uchReturn;
 }
 
+bool CObj__UNIT_TYPE::Check__MFC_USE(const int mfc_index)
+{
+	if(mfc_index <  0)				return false;
+	if(mfc_index >= MAX_MFC)		return false;
+
+	if(dCH__CFG_MFC_USE_X[mfc_index]->Check__DATA(STR__YES) < 0)		return false;
+
+	return true;
+}
+bool CObj__UNIT_TYPE::Check__MFC_NOT_USE(const int mfc_index)
+{
+	if(mfc_index <  0)				return false;
+	if(mfc_index >= MAX_MFC)		return false;
+
+	if(dCH__CFG_MFC_USE_X[mfc_index]->Check__DATA(STR__YES) > 0)		return false;
+
+	return true;
+}
+

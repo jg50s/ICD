@@ -22,11 +22,15 @@ int CObj__MINI8_IO::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__INIT,	      "INIT");
-		ADD__CTRL_VAR(sMODE__ALARM_RESET, "ALARM.RESET");
+		ADD__CTRL_VAR(sMODE__INIT,	       "INIT");
+		ADD__CTRL_VAR(sMODE__ALARM_RESET,  "ALARM.RESET");
 
-		ADD__CTRL_VAR(sMODE__HEATING,     "HEATING");
-		ADD__CTRL_VAR(sMODE__POWER_OFF,   "POWER.OFF");
+		ADD__CTRL_VAR(sMODE__HEATING_IDLE, "HEATING.IDLE");
+		ADD__CTRL_VAR(sMODE__HEATING_PROC, "HEATING.PROC");
+
+		ADD__CTRL_VAR(sMODE__POWER_OFF,    "POWER.OFF");
+		
+		ADD__CTRL_VAR(sMODE__STABLE_CHECK, "STABLE.CHECK");
 	}
 	return 1;
 }
@@ -39,7 +43,8 @@ int CObj__MINI8_IO::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define MON_ID__STATE_CHECK						1
-#define MON_ID__ERROR_CHECK						2
+#define MON_ID__IDLE_ERROR_CHECK				2
+#define MON_ID__PROC_ERROR_CHECK				3
 
 
 int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
@@ -83,19 +88,32 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 	// Parameter ...
 	{
-		str_name = "PARA.LOOP.ID";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "1 2 3 4 5 6 7 8", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_LOOP_ID, str_name);
+		// PARA ...
+		{
+			str_name = "PARA.LOOP.ID";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "1 2 3 4 5 6 7 8", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__PARA_LOOP_ID, str_name);
 
-		str_name = "PARA.TARGET.SP";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_TARGET_SP, str_name);
+			str_name = "PARA.TARGET.SP";
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 0, 100, "");
+			LINK__VAR_ANALOG_CTRL(aCH__PARA_TARGET_SP, str_name);
+		}
 
-		//
+		// HEATING ...
 		for(i=0; i<iLOOP_SIZE; i++)
 		{
 			int id = i + 1;
 
+			//
+			str_name.Format("PARA.PROC.REF.SP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__PARA_PROC_REF_SP__LOOP_X[i], str_name);
+
+			str_name.Format("PARA.TARGET.SP.%02d", id);
+			STD__ADD_ANALOG(str_name, "C", 0, 0, 100);
+			LINK__VAR_ANALOG_CTRL(aCH__PARA_TARGET_SP__LOOP_X[i], str_name);
+
+			//
 			str_name.Format("CFG.TARGET.SP.%02d", id);
 			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 0, 100, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_TARGET_SP__LOOP_X[i], str_name);
@@ -107,85 +125,100 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		int id = i + 1;
 
-		str_name.Format("CFG.NAME.LOOP.%02d", id);
-		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-		LINK__VAR_STRING_CTRL(sCH__CFG_NAME__LOOP_X[i], str_name);
+		// COMMON ...
+		{
+			str_name.Format("CFG.NAME.LOOP.%02d", id);
+			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH__CFG_NAME__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.USE.LOOP.%02d", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_USE__LOOP_X[i], str_name);
+			str_name.Format("CFG.USE.LOOP.%02d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_USE__LOOP_X[i], str_name);
 
-		//
-		str_name.Format("CFG.MIN.VALUE.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 0, 0, 999999, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_MIN_VALUE__LOOP_X[i], str_name);
+			//
+			str_name.Format("CFG.MIN.VALUE.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 0, 0, 999999, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_MIN_VALUE__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.MAX.VALUE.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 0, 0, 999999, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_MAX_VALUE__LOOP_X[i], str_name);
+			str_name.Format("CFG.MAX.VALUE.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 0, 0, 999999, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_MAX_VALUE__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.DEC.VALUE.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 0, 0, 6, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DEC_VALUE__LOOP_X[i], str_name);
+			str_name.Format("CFG.DEC.VALUE.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 0, 0, 6, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_DEC_VALUE__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.UNIT.LOOP.%02d", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "C  F", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_UNIT__LOOP_X[i], str_name);
+			str_name.Format("CFG.UNIT.LOOP.%02d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "C  F", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_UNIT__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.PV_OFFSET.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 3, 0, 10, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_PV_OFFSET__LOOP_X[i], str_name);
+			str_name.Format("CFG.PV_OFFSET.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "__", 3, 0, 10, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_PV_OFFSET__LOOP_X[i], str_name);
 
-		//
-		str_name.Format("CFG.STABLE.CHECK.TIMEOUT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 1800, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_STABLE_CHECK_TIMEOUT__LOOP_X[i], str_name);
+			//
+			str_name.Format("CFG.STABLE.CHECK.TIMEOUT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 1800, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_STABLE_CHECK_TIMEOUT__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.DELAY.CHECK.TIMEOUT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 1800, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DELAY_CHECK_TIMEOUT__LOOP_X[i], str_name);
+			str_name.Format("CFG.DELAY.CHECK.TIMEOUT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 1800, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_DELAY_CHECK_TIMEOUT__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.HARD.TOLERANCE.TIMEOUT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_HARD_TOLERANCE_TIMEOUT__LOOP_X[i], str_name);
+			str_name.Format("CFG.HARD.TOLERANCE.TIMEOUT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_HARD_TOLERANCE_TIMEOUT__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.SOFT.TOLERANCE.TIMEOUT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_TOLERANCE_TIMEOUT__LOOP_X[i], str_name);
+			str_name.Format("CFG.SOFT.TOLERANCE.TIMEOUT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_TOLERANCE_TIMEOUT__LOOP_X[i], str_name);
 
-		//
-		str_name.Format("CFG.HARD.TOLERANCE.THRESHOLD.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "psi", 3, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_HARD_TOLERANCE_THRESHOLD__LOOP_X[i], str_name);
+			//
+			str_name.Format("CFG.ERROR.CHECK.TIMEOUT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 1800, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_ERROR_CHECK_TIMEOUT__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.SOFT.TOLERANCE.THRESHOLD.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "psi", 3, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_TOLERANCE_THRESHOLD__LOOP_X[i], str_name);
+			str_name.Format("CFG.TEMP.HIGH_LIMIT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 1, 0.0, 1000.0, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_TEMP_HIGH_LIMIT__LOOP_X[i], str_name);
 
-		//
-		str_name.Format("CFG.ERROR.CHECK.TIMEOUT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 1800, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_ERROR_CHECK_TIMEOUT__LOOP_X[i], str_name);
+			str_name.Format("CFG.OP.HIGH_LIMIT.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 1, 0.0, 100.0, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_OP_HIGH_LIMIT__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.TEMP.HIGH_LIMIT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 1, 0.0, 1000.0, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_TEMP_HIGH_LIMIT__LOOP_X[i], str_name);
+			str_name.Format("CFG.MAX_DEVIATION.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 0.0, 100.0, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_MAX_DEVIATION__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.OP.HIGH_LIMIT.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 1, 0.0, 100.0, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_OP_HIGH_LIMIT__LOOP_X[i], str_name);
+			str_name.Format("CFG.DI.OVER_TEMP.LOOP.%02d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_OVER_TEMP__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.MAX_DEVIATION.LOOP.%02d", id);
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 0.0, 100.0, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_MAX_DEVIATION__LOOP_X[i], str_name);
+			str_name.Format("CFG.DI.HIGH_LIMIT.LOOP.%02d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_HIGH_LIMIT__LOOP_X[i], str_name);
+		}
 
-		str_name.Format("CFG.DI.OVER_TEMP.LOOP.%02d", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_OVER_TEMP__LOOP_X[i], str_name);
+		// IDLE.CONDITION ...
+		{
+			str_name.Format("CFG.HARD.TOLERANCE.THRESHOLD.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 1, 0, 100, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_IDLE_HARD_TOLERANCE_THRESHOLD__LOOP_X[i], str_name);
 
-		str_name.Format("CFG.DI.HIGH_LIMIT.LOOP.%02d", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_HIGH_LIMIT__LOOP_X[i], str_name);
+			str_name.Format("CFG.SOFT.TOLERANCE.THRESHOLD.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 1, 0, 100, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_IDLE_SOFT_TOLERANCE_THRESHOLD__LOOP_X[i], str_name);
+		}
+		// PROC.CONDITION ...
+		{
+			str_name.Format("CFG.PROC.HARD.TOLERANCE.THRESHOLD.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 1, 0, 100, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_PROC_HARD_TOLERANCE_THRESHOLD__LOOP_X[i], str_name);
+
+			str_name.Format("CFG.PROC.SOFT.TOLERANCE.THRESHOLD.LOOP.%02d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 1, 0, 100, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_PROC_SOFT_TOLERANCE_THRESHOLD__LOOP_X[i], str_name);
+		}
 	}
 
 	// Interlock Config ...
@@ -362,58 +395,123 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_HEATING_ACTIVE, str_name);
 	}
 
-	// MON.STABLE ...
+	// MON.STABLE_IDLE ...
 	{
 		for(i=0; i<iLOOP_SIZE; i++)
 		{
 			int id = i + 1;
 
-			str_name.Format("MON.ERROR.CHECK.ACTIVE.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.ERROR.CHECK.ACTIVE.LOOP.%02d", id);
 			STD__ADD_DIGITAL(str_name, "OFF ON READY");
-			LINK__VAR_DIGITAL_CTRL(dCH__MON_ERROR_CHECK_ACTIVE__LOOP_X[i], str_name);
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_IDLE_ERROR_CHECK_ACTIVE__LOOP_X[i], str_name);
 
-			str_name.Format("MON.ABORT.ACTIVE.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.ABORT.ACTIVE.LOOP.%02d", id);
 			STD__ADD_DIGITAL(str_name, "OFF ON");
-			LINK__VAR_DIGITAL_CTRL(dCH__MON_ABORT_ACTIVE__LOOP_X[i], str_name);
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_IDLE_ABORT_ACTIVE__LOOP_X[i], str_name);
 
-			str_name.Format("MON.STABLE.ACTIVE.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.STABLE.ACTIVE.LOOP.%02d", id);
 			STD__ADD_DIGITAL(str_name, "OFF ON");
-			LINK__VAR_DIGITAL_CTRL(dCH__MON_STABLE_ACTIVE__LOOP_X[i], str_name);
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_IDLE_STABLE_ACTIVE__LOOP_X[i], str_name);
 
 			//
-			str_name.Format("MON.STABLE.CHECK.TIME.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.STABLE.CHECK.TIME.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_STABLE_CHECK_TIME__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_STABLE_CHECK_TIME__LOOP_X[i], str_name);
 
-			str_name.Format("MON.DELAY.CHECK.TIME.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.DELAY.CHECK.TIME.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_DELAY_CHECK_TIME__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_DELAY_CHECK_TIME__LOOP_X[i], str_name);
 
-			str_name.Format("MON.WARNING.MIN.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.WARNING.MIN.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_WARNING_MIN__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_WARNING_MIN__LOOP_X[i], str_name);
 
-			str_name.Format("MON.WARNING.MAX.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.WARNING.MAX.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_WARNING_MAX__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_WARNING_MAX__LOOP_X[i], str_name);
 
-			str_name.Format("MON.WARNING.CHECK.TIME.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.WARNING.CHECK.TIME.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_WARNING_CHECK_TIME__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_WARNING_CHECK_TIME__LOOP_X[i], str_name);
 
-			str_name.Format("MON.ABORT.MIN.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.ABORT.MIN.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_ABORT_MIN__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_ABORT_MIN__LOOP_X[i], str_name);
 
-			str_name.Format("MON.ABORT.MAX.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.ABORT.MAX.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_ABORT_MAX__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_ABORT_MAX__LOOP_X[i], str_name);
 
-			str_name.Format("MON.ABORT.CHECK.TIME.LOOP.%02d", id);
+			str_name.Format("MON.IDLE.ABORT.CHECK.TIME.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
-			LINK__VAR_STRING_CTRL(sCH__MON_ABORT_CHECK_TIME__LOOP_X[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_IDLE_ABORT_CHECK_TIME__LOOP_X[i], str_name);
+		}
+	}
+	// MON.STABLE_PROC ...
+	{
+		for(i=0; i<iLOOP_SIZE; i++)
+		{
+			int id = i + 1;
 
-			// ...
+			str_name.Format("MON.PROC.ERROR.CHECK.ACTIVE.LOOP.%02d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON READY");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_PROC_ERROR_CHECK_ACTIVE__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.ABORT.ACTIVE.LOOP.%02d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_PROC_ABORT_ACTIVE__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.STABLE.ACTIVE.LOOP.%02d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_PROC_STABLE_ACTIVE__LOOP_X[i], str_name);
+
+			//
+			str_name.Format("MON.PROC.STABLE.CHECK.TIME.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_STABLE_CHECK_TIME__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.DELAY.CHECK.TIME.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_DELAY_CHECK_TIME__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.WARNING.MIN.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_WARNING_MIN__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.WARNING.MAX.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_WARNING_MAX__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.WARNING.CHECK.TIME.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_WARNING_CHECK_TIME__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.ABORT.MIN.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_ABORT_MIN__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.ABORT.MAX.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_ABORT_MAX__LOOP_X[i], str_name);
+
+			str_name.Format("MON.PROC.ABORT.CHECK.TIME.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_PROC_ABORT_CHECK_TIME__LOOP_X[i], str_name);
+		}
+	}
+
+	// MON.STABLE_COMMON ...
+	{
+		for(i=0; i<iLOOP_SIZE; i++)
+		{
+			int id = i + 1;
+
+			//
+			str_name.Format("MON.REF.SET.LOOP.%02d", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_REF_SET__LOOP_X[i], str_name);
+
+			//
 			str_name.Format("MON.TEMP.HIGH_LIMIT.ACTIVE.LOOP.%02d", id);
 			STD__ADD_STRING(str_name);
 			LINK__VAR_STRING_CTRL(sCH__MON_TEMP_HIGH_LIMIT_ACTIVE__LOOP_X[i], str_name);
@@ -482,7 +580,9 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(3.0, MON_ID__STATE_CHECK);
-		p_variable->Add__MONITORING_PROC(3.0, MON_ID__ERROR_CHECK);
+
+		p_variable->Add__MONITORING_PROC(3.0, MON_ID__IDLE_ERROR_CHECK);
+		p_variable->Add__MONITORING_PROC(3.0, MON_ID__PROC_ERROR_CHECK);
 	}
 	return 1;
 }
@@ -809,6 +909,16 @@ int CObj__MINI8_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	CCommon_Utility x_utility;
 
+	// OBJ : DB_SYS 
+	{
+		def_name = "OBJ__DB_SYS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		//
+		var_name = "MON.SYSTEM.PROCESS.ACTIVE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+	}
+
 	// LINK : IO_Chammel
 	{
 		def_name = "DATA.LOOP_SIZE";
@@ -1034,6 +1144,28 @@ int CObj__MINI8_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			sCH__MON_DO_HEATER_POWER__LOOP_X[i]->Set__DATA("__");
 		}
 	}
+
+	// ACTIVE.PROC_ERROR_CHECK
+	{
+		def_name = "ACTIVE.PROC_ERROR_CHECK";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		bool def_check = x_utility.Check__Link(def_data);
+		bActive__PROC_ERROR_CHECK = def_check;
+
+		if(!def_check)
+		{
+			p_variable->Stop__MONITORING_PROC(MON_ID__PROC_ERROR_CHECK);
+
+			for(i=0; i<iLOOP_SIZE; i++)
+			{
+				dCH__MON_PROC_ERROR_CHECK_ACTIVE__LOOP_X[i]->Set__DATA(STR__OFF);
+				dCH__MON_PROC_ABORT_ACTIVE__LOOP_X[i]->Set__DATA(STR__OFF);
+				dCH__MON_PROC_STABLE_ACTIVE__LOOP_X[i]->Set__DATA(STR__OFF);
+			}
+		}
+	}
+
 	return 1;
 }
 
@@ -1053,11 +1185,15 @@ int CObj__MINI8_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-		     IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__ALARM_RESET)		flag = Call__ALARM_RESET(p_variable,p_alarm);
+		     IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__ALARM_RESET)			flag = Call__ALARM_RESET(p_variable,p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__HEATING)			flag = Call__HEATING(p_variable,p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__POWER_OFF)		flag = Call__POWER_OFF(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__HEATING_IDLE)			flag = Call__HEATING_IDLE(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__HEATING_PROC)			flag = Call__HEATING_PROC(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__POWER_OFF)			flag = Call__POWER_OFF(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__STABLE_CHECK)			flag = Call__STABLE_CHECK(p_variable,p_alarm);
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
@@ -1082,8 +1218,10 @@ int CObj__MINI8_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 int CObj__MINI8_IO::__CALL__MONITORING(id,p_variable,p_alarm)
 {
-	if(id == MON_ID__STATE_CHECK)		Mon__STATE_CHECK(p_variable, p_alarm);
-	if(id == MON_ID__ERROR_CHECK)		Mon__ERROR_CHECK(p_variable, p_alarm);
+	if(id == MON_ID__STATE_CHECK)			Mon__STATE_CHECK(p_variable, p_alarm);
+
+	if(id == MON_ID__IDLE_ERROR_CHECK)		Mon__IDLE_ERROR_CHECK(p_variable, p_alarm);
+	if(id == MON_ID__PROC_ERROR_CHECK)		Mon__PROC_ERROR_CHECK(p_variable, p_alarm);
 
 	return 1;
 }

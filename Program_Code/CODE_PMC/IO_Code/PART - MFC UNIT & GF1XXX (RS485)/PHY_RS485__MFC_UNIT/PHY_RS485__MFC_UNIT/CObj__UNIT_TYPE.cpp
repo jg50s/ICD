@@ -108,6 +108,15 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CFG ...
 	{
+		for(i=0; i<MAX_MFC; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("CFG.MFC%1d.USE", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_MFC_USE_X[i], str_name);
+		}
+
 		str_name = "CFG.BAUD_RATE.NEXT_APPLY";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "38400 19200 9600", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_BAUD_RATE_NEXT_APPLY, str_name);		
@@ -154,6 +163,10 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 			str_name.Format("INFO.MFC.MACID.%s", str_id);
 			STD__ADD_STRING(str_name);
 			LINK__VAR_STRING_CTRL(sCH__INFO_MFC_MACID_X[i], str_name);
+
+			str_name.Format("INFO.MFC.SEND_ID.%s", str_id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__INFO_MFC_SEND_ID_X[i], str_name);
 		}
 	}
 	// MON ...
@@ -274,14 +287,14 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_IO(p_io_variable)
 		// AI ...
 		{
 			str_name.Format("ai.MFC%s.FLOW", var_id);
-			p_analog_io->Add__ANALOG_READ_EX(str_name, "101", "sccm", 1, -10000, 99999, mac_id, str_index, "", 0.1);
+			p_analog_io->Add__ANALOG_READ_EX(str_name, "101", "sccm", 1, -100, 100, mac_id, str_index, "", 0.1);
 
 			//
 			str_name.Format("ai.MFC%s.VOLT", var_id);
 			p_analog_io->Add__ANALOG_READ_EX(str_name, "102", "volt", 1,-15.00, 15, mac_id, str_index, "", -1);
 
 			str_name.Format("ai.MFC%s.SETPOINT", var_id);
-			p_analog_io->Add__ANALOG_READ_EX(str_name, "103", "sccm", 1,-10000, 99999, mac_id, str_index, "", -1);
+			p_analog_io->Add__ANALOG_READ_EX(str_name, "103", "sccm", 1,-100, 100, mac_id, str_index, "", -1);
 
 			str_name.Format("ai.MFC%s.MACID", var_id);
 			p_analog_io->Add__ANALOG_READ_EX(str_name, "104", "num", 0, -100, 100, mac_id, str_index, "", -1);
@@ -289,7 +302,7 @@ int CObj__UNIT_TYPE::__DEFINE__VARIABLE_IO(p_io_variable)
 		// AO ...
 		{
 			str_name.Format("ao.MFC%s.SETPOINT", var_id);
-			p_analog_io->Add__ANALOG_WRITE_EX(str_name, "150", "sccm", 1,-10000, 99999, mac_id, str_index, "");
+			p_analog_io->Add__ANALOG_WRITE_EX(str_name, "150", "sccm", 1,-100, 100, mac_id, str_index, "");
 		}
 
 		// DO ...
@@ -384,6 +397,10 @@ int CObj__UNIT_TYPE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		for(int i=0; i<i_limit; i++)
 		{
 			sCH__INFO_MFC_MACID_X[i]->Set__DATA(sList__MAC_ID[i]);
+
+			int send_id = m_BoardID + atoi(sList__MAC_ID[i]);
+			ch_data.Format("%1d", send_id);
+			sCH__INFO_MFC_SEND_ID_X[i]->Set__DATA(ch_data);
 		}
 	}
 

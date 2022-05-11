@@ -262,6 +262,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__STEP_STD__OBJ_HTR.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__STEP_STD__OBJ_LIFT_PIN.cpp"
 					>
 				</File>

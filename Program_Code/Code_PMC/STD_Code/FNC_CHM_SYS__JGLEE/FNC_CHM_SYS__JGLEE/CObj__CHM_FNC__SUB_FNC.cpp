@@ -14,8 +14,6 @@ int CObj__CHM_FNC
 	{
 		dEXT_CH__CHM_ATM_SNS->Set__DATA(STR__OFF);
 		dEXT_CH__CHM_VAC_SNS->Set__DATA(STR__ON);
-
-		dEXT_CH__PMC_SLIT_VLV_STS->Set__DATA(STR__CLOSE);
 	}	
 
 	if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
@@ -102,6 +100,10 @@ LOOP_RETRY:
 		if(bActive__CHM_SHUTTER_STATE)
 		{
 			if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+		}
+		else if(bActive__CHM_SLOT_VLV_STATE)
+		{
+			if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) > 0)		active__slot_vlv_open = false;
 		}
 		else
 		{

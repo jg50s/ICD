@@ -7,7 +7,8 @@
 
 // ...
 #define HTR_TYPE__INIT				1
-#define HTR_TYPE__ZONE				2
+#define HTR_TYPE__IDLE				2
+#define HTR_TYPE__PROC				3
 
 
 // ...
@@ -92,9 +93,18 @@ int CObj__MINI8_IO
 }
 
 int CObj__MINI8_IO
-::Call__HEATING(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+::Call__HEATING_IDLE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	if(Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__ZONE) < 0)
+	if(Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__IDLE) < 0)
+	{
+		return -1;
+	}
+	return 1;
+}
+int CObj__MINI8_IO
+::Call__HEATING_PROC(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	if(Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__PROC) < 0)
 	{
 		return -1;
 	}
@@ -124,8 +134,10 @@ int CObj__MINI8_IO
 	{
 		for(i=0; i<iLOOP_SIZE; i++)
 		{
-			if(htr_type == HTR_TYPE__INIT)			trg_sp[i] = aCH__CFG_INITIAL_TARTGET_TEMP__LOOP_X[i]->Get__VALUE();
-			else									trg_sp[i] = aCH__CFG_TARGET_SP__LOOP_X[i]->Get__VALUE();
+				 if(htr_type == HTR_TYPE__INIT)			trg_sp[i] = aCH__CFG_INITIAL_TARTGET_TEMP__LOOP_X[i]->Get__VALUE();
+			else if(htr_type == HTR_TYPE__IDLE)			trg_sp[i] = aCH__CFG_TARGET_SP__LOOP_X[i]->Get__VALUE();
+			else if(htr_type == HTR_TYPE__PROC)			trg_sp[i] = aCH__PARA_TARGET_SP__LOOP_X[i]->Get__VALUE();
+			else										return -11;
 
 			ch_data = sCH__MON_IO_GET_PV__LOOP_X[i]->Get__STRING();
 			start_pv[i] = atof(ch_data);
@@ -309,7 +321,6 @@ int CObj__MINI8_IO
 	return 1;
 }
 
-// ...
 int CObj__MINI8_IO
 ::Call__POWER_OFF(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
@@ -317,6 +328,21 @@ int CObj__MINI8_IO
 	{
 		if(bActive__DO_HEATER_POWER__LOOP_X[i])
 			dEXT_CH__DO_HEATER_POWER__LOOP_X[i]->Set__DATA(STR__OFF);
+	}
+
+	return 1;
+}
+
+int CObj__MINI8_IO
+::Call__STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	for(int i=0; i<iLOOP_SIZE; i++)
+	{
+		if(dCH__MON_IDLE_ERROR_CHECK_ACTIVE__LOOP_X[i]->Check__DATA(STR__ON) < 0)
+			dCH__MON_IDLE_ERROR_CHECK_ACTIVE__LOOP_X[i]->Set__DATA(STR__READY);
+
+		if(dCH__MON_PROC_ERROR_CHECK_ACTIVE__LOOP_X[i]->Check__DATA(STR__ON) < 0)
+			dCH__MON_PROC_ERROR_CHECK_ACTIVE__LOOP_X[i]->Set__DATA(STR__READY);
 	}
 
 	return 1;

@@ -398,6 +398,8 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	{
 		sEXT_CH__CHM_STAGE_REPORT_TO_CTC->Set__DATA(STR__Idle);
+
+		xCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
 	}
 
 	// ...

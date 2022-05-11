@@ -24,6 +24,9 @@ void CObj__UNIT_TYPE
 		}
 	}
 
+	// ...
+	int i;
+
 
 	while(1)
 	{
@@ -34,7 +37,17 @@ void CObj__UNIT_TYPE
 		{
 			sCH__USER_INFO_UPDATE_REQ->Set__DATA("");
 
-			for(int i=0; i<mfc_size; i++)
+			for(i=0; i<mfc_size; i++)
+			{
+				if(Check__MFC_NOT_USE(i))
+				{
+					sCH__MON_MFC_VERSION_X[i]->Set__DATA("---");
+					continue;
+				}
+
+				sCH__MON_MFC_VERSION_X[i]->Set__DATA("???");
+			}
+			for(i=0; i<mfc_size; i++)
 			{
 				dCH__DO_MFC_VERSION_X[i]->Set__DATA("GET");
 
@@ -45,15 +58,25 @@ void CObj__UNIT_TYPE
 
 		// Communication Check ...
 		{
-			for(int i=0; i<mfc_size; i++)
+			for(i=0; i<mfc_size; i++)
 			{
-				if(dCH__DI_MFC_COMM_STATE_X[i]->Check__DATA(STR__ONLINE) > 0)		continue;
+				if(Check__MFC_NOT_USE(i))
+				{
+					continue;
+				}
+				if(dCH__DI_MFC_COMM_STATE_X[i]->Check__DATA(STR__ONLINE) > 0)
+				{
+					continue;
+				}
 
-				int alm_id = ALID__GASx_OFFLINE + i;
-				CString r_act;
+				// ...
+				{
+					int alm_id = ALID__GASx_OFFLINE + i;
+					CString r_act;
 
-				p_alarm->Check__ALARM(alm_id, r_act);
-				p_alarm->Post__ALARM(alm_id);
+					p_alarm->Check__ALARM(alm_id, r_act);
+					p_alarm->Post__ALARM(alm_id);
+				}
 			}
 		}
 

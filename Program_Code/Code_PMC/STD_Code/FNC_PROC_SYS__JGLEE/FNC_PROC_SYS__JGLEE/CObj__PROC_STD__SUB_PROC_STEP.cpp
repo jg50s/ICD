@@ -9,6 +9,7 @@ int CObj__PROC_STD
 ::Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
 {
 	CString obj_msg;
+	CString log_msg;
 
 	obj_msg = "Process Control - Start ...";
 	sCH__OBJ_MSG->Set__DATA(obj_msg);
@@ -52,6 +53,11 @@ int CObj__PROC_STD
 
 		//
 		aCH__STEP_CUR_NUM->Set__VALUE(cur__step_id);
+
+		ch_data = aCH__STEP_CUR_NUM->Get__STRING();
+		sEXT_CH__INFO_STEP_CUR_NUM->Set__DATA(ch_data);
+
+		//
 		sEXT_CH__MON_STEP_EXCEPTION_ACT->Set__DATA("");
 
 		if(active__start_step)
@@ -65,11 +71,23 @@ int CObj__PROC_STD
 
 		// Step.Start ...
 		{
+			// ...
+			{
+				log_msg.Format("Start(%1d) Start ... \n", cur__step_id);
+				xI_LOG_CTRL->WRITE__LOG(log_msg);
+			}
+
 			x_timer__step->START__COUNT_UP(99999);
 
 			int r_step = Sub__STEP_CTRL(p_variable,p_alarm, cur__step_id,rcp__step_max);
 
 			x_timer__step->STOP();
+
+			// ...
+			{
+				log_msg.Format("Start(%1d) End ... (%1d) \n", cur__step_id, r_step);
+				xI_LOG_CTRL->WRITE__LOG(log_msg);
+			}
 
 			// Process Recovery Check ...
 			if(r_step <  0)		
@@ -148,7 +166,13 @@ int CObj__PROC_STD
 
 						if(p_variable->Check__CTRL_ABORT() > 0)	
 						{
+							sCH__PARA_MANUAL_STEP_CTRL_REQ->Set__DATA("");
 							return -11;
+						}
+						else if(dCH__MON_EXCEPTION_ACT->Check__DATA(_ACT_CMD__ABORT) > 0)
+						{
+							sCH__PARA_MANUAL_STEP_CTRL_REQ->Set__DATA("");
+							return -12;
 						}
 
 						// ...

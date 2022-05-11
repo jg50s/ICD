@@ -1640,7 +1640,7 @@ Fnc__HV_SETPOINT_INTERLOCK_CHECK(CII_OBJECT__ALARM* p_alarm, const double set_vo
 	{
 		if(sEXT_CH__SHUTTER_STATUS->Check__DATA(STR__Close) < 0)			active__shutter_error = true;
 	}
-	if(bActive__SHUTTER_STATUS)
+	if(bActive__SLOT_VALVE_STATE)
 	{
 		if(sEXT_CH__SLOT_VALVE_STATE->Check__DATA(STR__Close) < 0)			active__slot_vlv_error = true;
 	}
@@ -2226,8 +2226,7 @@ Fnc__HE_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 		{
 			check_flow = (cfg__flow_min + cfg__flow_max) * 0.5;
 
-			var_data.Format("%.1f", check_flow);
-			sCH__MON_He_Flow_CENTER->Set__DATA(var_data);
+			aiEXT_CH__He_Flow_CENTER_IO->Set__VALUE(check_flow);
 		}
 	}
 	else if(he_type == HE_TYPE__EDGE)
@@ -2293,8 +2292,7 @@ Fnc__HE_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 		{
 			check_flow = (cfg__flow_min + cfg__flow_max) * 0.5;
 
-			var_data.Format("%.1f", check_flow);
-			sCH__MON_He_Flow_EDGE->Set__DATA(var_data);
+			aiEXT_CH__He_Flow_EDGE_IO->Set__VALUE(check_flow);
 		}
 	}
 	else

@@ -89,7 +89,13 @@ int CObj__INTERLOCK_IO
 
 		// ...
 		{
-			int control_mode = dEXT_CH__CFG_INTERLOCK_USE_MODE->Check__DATA(STR__CONTROL);
+			int control_mode = -1;
+
+			if((dEXT_CH__CFG_INTERLOCK_USE_MODE->Check__DATA(STR__CONTROL) > 0)
+			|| (dEXT_CH__CFG_INTERLOCK_USE_MODE->Check__DATA(STR__ENABLE)  > 0))
+			{
+				control_mode = 1;
+			}
 
 			int count__err_heavy = 0;
 			int count__err_light = 0;

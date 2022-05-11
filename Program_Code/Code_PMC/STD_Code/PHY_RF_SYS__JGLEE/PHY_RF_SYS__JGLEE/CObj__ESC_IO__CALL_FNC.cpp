@@ -110,7 +110,7 @@ int  CObj__ESC_IO
 
 		// Setting ...
 		{
-			// Center.Cfg ...
+			// Center.CFG ...
 			{
 				aCH__CFG_ESC_CENTER_CHUCKING_VOLTAGE_SETPOINT->Get__DATA(var_data);
 				sCH__PARA_ESC_CENTER_SET_VOLTAGE->Set__DATA(var_data);
@@ -118,7 +118,7 @@ int  CObj__ESC_IO
 				var_data = sCH__RCP_He_CENTER_PRESSURE_SETPOINT_TORR->Get__STRING();
 				sCH__PARA_He_SET_PRESSURE_CENTER->Set__DATA(var_data);
 			}
-			// Edge.Cfg ...
+			// Edge.CFG ...
 			{
 				aCH__CFG_ESC_EDGE_CHUCKING_VOLTAGE_SETPOINT->Get__DATA(var_data);
 				sCH__PARA_ESC_EDGE_SET_VOLTAGE->Set__DATA(var_data);

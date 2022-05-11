@@ -36,6 +36,12 @@ int  CObj__MFC_IO
 			aCH__MON_MFC_SET_FLOW->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
 			aCH__MON_MFC_READ_FLOW->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
 			aCH__PARA_SET_VALUE->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+
+			if(iLINK_DATA__TYPE != _DATA_TYPE__HEXA)
+			{
+				aEXT_CH__IO_MFC_SET_DEC->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+				aEXT_CH__IO_MFC_READ_DEC->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+			}
 		}
 
 		// Flow ...
@@ -44,7 +50,7 @@ int  CObj__MFC_IO
 			UNION_2_BYTE__UINT m_value;
 			double cur_percent;
 
-			ch_data = sEXT_CH__IO_MFC_READ->Get__STRING();
+			ch_data = sEXT_CH__IO_MFC_READ_HEXA->Get__STRING();
 			m_value.uiDATA = atoi(ch_data);
 
 			int max_flow = iLINK_DATA__MAX_FLOW;
@@ -63,8 +69,7 @@ int  CObj__MFC_IO
 		}
 		else
 		{
-			ch_data = sEXT_CH__IO_MFC_READ->Get__STRING();
-			double cur__io_flow = atof(ch_data);
+			double cur__io_flow = aEXT_CH__IO_MFC_READ_DEC->Get__VALUE();
 
 			double cfg__flow_max = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
 			double cur__flow_per = 0.0;

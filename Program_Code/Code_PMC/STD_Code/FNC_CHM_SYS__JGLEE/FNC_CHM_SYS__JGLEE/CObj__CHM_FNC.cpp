@@ -610,7 +610,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 		alarm_title  = title;
 		alarm_title += "PMC's slot valve is not closed !";
 
-		alarm_msg = "Please, check the pmc's slit valve.\n";
+		alarm_msg = "Please, check the pmc's slot valve.\n";
 
 		l_act.RemoveAll();
 		l_act.Add("RETRY");
@@ -1190,6 +1190,20 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// CHM.SLOT_VLV ...
+	{
+		def_name = "CH__CHM_SLOT_VLV_STATE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+		bool def_check = x_utility.Check__Link(ch_name);
+		bActive__CHM_SLOT_VLV_STATE = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CHM_SLOT_VLV_STATE, obj_name,var_name);
+		}
+	}
 	// CHM.SHUTTER ...
 	{
 		def_name = "CH__CHM_SHUTTER_STATE";
@@ -1242,11 +1256,6 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
-	if(iActive__SIM_MODE > 0)
-	{
-		dEXT_CH__PMC_SLIT_VLV_STS->Set__DATA(STR__CLOSE);
-	}
-
 	if(sCH__LEAK_CHECK__BASE_PRESSURE_mTORR->Check__DATA("") > 0)
 	{
 		sCH__LEAK_CHECK__BASE_PRESSURE_mTORR->Set__DATA("0.0");
@@ -1269,6 +1278,8 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		xLOG_CTRL->WRITE__LOG(log_msg);
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 	}
+
+LOOP_RETRY:
 
 	// ...
 	int check__pumping_condition = -1;
@@ -1312,13 +1323,13 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	if((check__pumping_condition > 0)
 	|| (check__venting_condition > 0))
 	{
-		// Slit-Valve Checking ...
+		if(bActive__CHM_SLOT_VLV_STATE)
 		{
 			int retry_count = 0;
 
 			while(1)
 			{
-				if(dEXT_CH__PMC_SLIT_VLV_STS->Check__DATA(STR__CLOSE) < 0)
+				if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) < 0)
 				{
 					if(retry_count < 50)
 					{
@@ -1331,6 +1342,7 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 					// ...
 					{
 						int alarm_id = ALID__CHM_SLOT_VALVE_NOT_CLOSE;
+
 						CString log_msg;
 						CString r_act;
 
@@ -1340,7 +1352,7 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 						if(r_act.CompareNoCase("RETRY") == 0)
 						{
-							return OBJ_RETRY;
+							goto LOOP_RETRY;
 						}
 						if(r_act.CompareNoCase("IGNORE") == 0)
 						{
@@ -1354,7 +1366,6 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 			}
 		}
 
-		// Shutter-Valve Checking ...
 		if(bActive__CHM_SHUTTER_STATE)
 		{
 			int retry_count = 0;

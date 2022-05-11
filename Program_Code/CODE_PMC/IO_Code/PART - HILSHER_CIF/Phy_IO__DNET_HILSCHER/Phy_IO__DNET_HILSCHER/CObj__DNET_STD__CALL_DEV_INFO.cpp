@@ -11,6 +11,8 @@
 int  CObj__DNET_STD
 ::Call__DEV_INFO(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+LOOP_RETRY:
+
 	EnterCriticalSection(&mLOCK_DNET);
 
 	int err_count = _Fnc__DEV_INFO(p_variable, p_alarm, true);
@@ -23,7 +25,107 @@ int  CObj__DNET_STD
 
 	_Check__DEV_TOTAL_MEMORY(p_variable,p_alarm);
 
-	if(err_count > 0)		return -1;
+	// Error.Check ...
+	{
+		bool active__error_check = false;
+
+		CString err_msg;
+		CString err_bff;
+
+		CString ch_data;
+
+		// Total.Check ...
+		{
+			// In-Byte
+			ch_data = sCH__DNET_CFG__TOTAL_IN_BYTE->Get__STRING();
+			if(sCH__DNET_INFO__TOTAL_IN_BYTE->Check__DATA(ch_data) < 0)
+			{
+				active__error_check = true;
+
+				err_bff  = "Total In-Byte \n";
+				err_msg += err_bff;
+
+				err_bff.Format("  * Config <- %s \n",    sCH__DNET_CFG__TOTAL_IN_BYTE->Get__STRING());
+				err_msg += err_bff;
+				err_bff.Format("  * Scan.Info <- %s \n", sCH__DNET_INFO__TOTAL_IN_BYTE->Get__STRING());
+				err_msg += err_bff;
+			}
+
+			// Out-Byte
+			ch_data = sCH__DNET_CFG__TOTAL_OUT_BYTE->Get__STRING();
+			if(sCH__DNET_INFO__TOTAL_OUT_BYTE->Check__DATA(ch_data) < 0)
+			{
+				active__error_check = true;
+
+				err_bff  = "Total Out-Byte \n";
+				err_msg += err_bff;
+
+				err_bff.Format("  * Config <- %s \n",    sCH__DNET_CFG__TOTAL_OUT_BYTE->Get__STRING());
+				err_msg += err_bff;
+				err_bff.Format("  * Scan.Info <- %s \n", sCH__DNET_INFO__TOTAL_OUT_BYTE->Get__STRING());
+				err_msg += err_bff;
+			}
+		}
+
+		// Node.Check ...
+		for(int i=0; i<iSLAVE_COUNT; i++)
+		{
+			bool active__node_error = false;
+			int node_id = i + 1;
+
+			// In-Byte
+			ch_data = sCH__DNET_CFG__SLAVE_X__IN_SIZE[i]->Get__STRING();
+			if(sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Check__DATA(ch_data) < 0)
+			{
+				active__node_error = true;
+			}
+
+			// In-Byte
+			ch_data = sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i]->Get__STRING();
+			if(sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Check__DATA(ch_data) < 0)
+			{
+				active__node_error = true;
+			}
+
+			// Communication
+			ch_data = sCH__DNET_INFO__SLAVE_X__ERROR_CHECK_ID[i]->Get__STRING();
+			int err_id = atoi(ch_data);
+			if(err_id > 0)
+			{
+				active__node_error = true;
+			}
+
+			if(active__node_error)
+			{
+				active__error_check = true;
+
+				err_bff.Format("Node(%1d) Error ! \n", node_id);
+				err_msg += err_bff;
+				err_bff.Format("  * MacID <- %s \n", sCH__DNET_CFG__SLAVE_X__MACID[i]->Get__STRING());
+				err_msg += err_bff;
+			}
+		}
+	
+		if(active__error_check)
+		{
+			int alm_id = ALID__DNET_NODE_ERROR;
+			CString r_act;
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, err_msg, r_act);
+
+			if(r_act.CompareNoCase(_ACT__RETRY) == 0)		goto LOOP_RETRY;
+			if(r_act.CompareNoCase(_ACT__ABORT) == 0)
+			{
+				bActive__DNET_INIT = false;
+				return -1;
+			}
+		}
+	}
+
+	if(iActive__SIM_MODE > 0)
+	{
+		bActive__DNET_INIT = true;
+	}
 	return 1;
 }
 int  CObj__DNET_STD
@@ -262,15 +364,42 @@ int  CObj__DNET_STD
 	CString ch_data;
 	int cur_byte;
 
-	for(int i=0; i<iSLAVE_COUNT; i++)
+	if(iActive__SIM_MODE > 0)
 	{
-		ch_data = sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Get__STRING();
-		cur_byte = atoi(ch_data);
-		total__in_byte += cur_byte;
+		for(int i=0; i<iSLAVE_COUNT; i++)
+		{
+			ch_data = sCH__DNET_CFG__SLAVE_X__NAME[i]->Get__STRING();
+			sCH__DNET_INFO__SLAVE_X__NAME[i]->Set__DATA(ch_data);
 
-		ch_data = sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Get__STRING();
-		cur_byte = atoi(ch_data);
-		total__out_byte += cur_byte;
+			//
+			ch_data = sCH__DNET_CFG__SLAVE_X__IN_SIZE[i]->Get__STRING();
+			sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Set__DATA(ch_data);
+
+			ch_data = sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i]->Get__STRING();
+			sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Set__DATA(ch_data);
+
+			//
+			ch_data = sCH__DNET_CFG__SLAVE_X__IN_SIZE[i]->Get__STRING();
+			cur_byte = atoi(ch_data);
+			total__in_byte += cur_byte;
+
+			ch_data = sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i]->Get__STRING();
+			cur_byte = atoi(ch_data);
+			total__out_byte += cur_byte;
+		}
+	}
+	else
+	{
+		for(int i=0; i<iSLAVE_COUNT; i++)
+		{
+			ch_data = sCH__DNET_INFO__SLAVE_X__IN_SIZE[i]->Get__STRING();
+			cur_byte = atoi(ch_data);
+			total__in_byte += cur_byte;
+
+			ch_data = sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i]->Get__STRING();
+			cur_byte = atoi(ch_data);
+			total__out_byte += cur_byte;
+		}
 	}
 
 	// ...

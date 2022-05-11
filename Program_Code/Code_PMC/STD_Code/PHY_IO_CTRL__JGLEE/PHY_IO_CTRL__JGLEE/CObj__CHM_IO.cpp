@@ -158,6 +158,10 @@ int CObj__CHM_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
 		//
+		var_name = "SLIT.VLV.STS";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CHM_SLOT_VLV_STATE, obj_name,var_name);
+
+		//
 		var_name = "CHM.PRESSURE.VALUE";
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__CHM_PRESSURE_VALUE, obj_name,var_name);
 
@@ -205,15 +209,46 @@ int CObj__CHM_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// LINK : IO_Chammel
 	{
-		def_name = "CH__DI_VAC_SNS";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_VAC_SNS, obj_name,var_name);
+		// ATM & VAC SNS ...
+		{
+			def_name = "CH__DI_VAC_SNS";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_VAC_SNS, obj_name,var_name);
 
-		def_name = "CH__DI_ATM_SNS";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_ATM_SNS, obj_name,var_name);
+			def_name = "CH__DI_ATM_SNS";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_ATM_SNS, obj_name,var_name);
+		}
+
+		// SLOT.VLV SNS ...
+		{
+			def_name = "CH__DI_SLOT_VLV_OPEN";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			def_check = x_utility.Check__Link(def_data);
+			bActive__DI_SLOT_VLV_OPEN = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_SLOT_VLV_OPEN, obj_name,var_name);
+			}
+			
+			//
+			def_name = "CH__DI_SLOT_VLV_CLOSE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			def_check = x_utility.Check__Link(def_data);
+			bActive__DI_SLOT_VLV_CLOSE = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_SLOT_VLV_CLOSE, obj_name,var_name);
+			}
+		}
 
 		//
 		def_name = "DATA.PRC_GAUGE_SIZE";

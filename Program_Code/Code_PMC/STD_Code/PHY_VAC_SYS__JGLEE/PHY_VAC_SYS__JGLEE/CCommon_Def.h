@@ -26,8 +26,11 @@
 #define STR__POSITION				"POSITION"
 
 #define STR__NORMAL					"NORMAL"
-#define STR__ALARM					"ALARM"
 #define STR__ACCELERATION			"ACCELERATION"
+#define STR__STOP					"STOP"
+#define STR__ALARM					"ALARM"
+#define STR__WARNING				"WARNING"
+#define STR__OK     				"OK"
 
 #define STR__PUMPING				"PUMPING"
 #define STR__IDLE					"IDLE"

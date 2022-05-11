@@ -22,8 +22,6 @@ int CObj__RF_STD
 	{
 		dEXT_CH__DI_VAC_SNS->Set__DATA(STR__ON);
 		dEXT_CH__DI_ATM_SNS->Set__DATA(STR__OFF);
-
-		dEXT_CH__CHM_SHUTTER_STATE->Set__DATA(STR__CLOSE);
 	}
 
 	// ...

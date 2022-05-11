@@ -70,6 +70,13 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_SUB_MSG, var_name);
 	}
 
+	// INFO ...
+	{
+		var_name = "INFO.STEP.CUR_NUM";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_STEP_CUR_NUM, var_name);
+	}
+
 	// MON ...
 	{
 		var_name = "MON.STEP.EXCEPTION.ACT";
@@ -88,9 +95,72 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 1, 0, 5, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_STEP_STABLE_MIN_SEC, var_name);
 
+		var_name = "CFG.STEP.OBJECT_OVER_TIME.ERRPR_REF.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 2, 0.05, 1.0, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_STEP_OBJECT_OVER_TIME_ERRPR_REF_SEC, var_name);
+
 		var_name = "CFG.CHM.PRESSURE.HIGH.LIMIT";
 		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "torr", 0, 1, 900, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_CHM_PRESSURE_HIGH_LIMIT, var_name);
+
+		//
+		var_name = "CFG.STEP_DELAY.RF_OFF";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 1, 0, 2, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_STEP_DELAY_RF_OFF, var_name);
+
+		var_name = "CFG.STEP_DELAY.MFC_CLOSE";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 1, 0, 2, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_STEP_DELAY_MFC_CLOSE, var_name);
+
+		//
+		var_name = "CFG.STEP_READY.HEATER.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "DISABLE  ONLY.CHECK  CONTROL", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_STEP_READY_HEATER_MODE, var_name);
+
+		var_name = "CFG.STEP_READY.CHECK.TIME.MIN";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_STEP_READY_CHECK_TIME_MIN, var_name);
+
+		var_name = "CFG.STEP_READY.CHECK.TIME.MAX";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 0, 5, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_STEP_READY_CHECK_TIME_MAX, var_name);
+
+		//
+		var_name = "CFG.STEP_CTRL.HEATER.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "DISABLE  ONLY.CHECK", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_STEP_CTRL_HEATER_MODE, var_name);
+
+		var_name = "CFG.STEP_CTRL.ERROR.CONTROL";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "DISABLE  ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_STEP_CTRL_ERROR_CONTROL, var_name);
+	}
+
+	// CFG.PARTx ...
+	{
+		var_name = "CFG.RCP.PART.USE.RFx_RPS";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_RFx_RPS, var_name);
+
+		var_name = "CFG.RCP.PART.USE.RFx_PULSE";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_RFx_PULSE, var_name);
+
+		var_name = "CFG.RCP.PART.USE.RFx_HF";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_RFx_HF, var_name);
+
+		var_name = "CFG.RCP.PART.USE.RFx_LF";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_RFx_LF, var_name);
+
+		//
+		var_name = "CFG.RCP.PART.USE.MATx_HF";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_MATx_HF, var_name);
+
+		var_name = "CFG.RCP.PART.USE.MATx_LF";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_MATx_LF, var_name);
 	}
 
 	// RCP ...
@@ -102,7 +172,7 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			LINK__VAR_STRING_CTRL(sCH__RCP_STEP_MESSAGE, var_name);
 
 			var_name = "RCP.STEP.MODE";
-			STD__ADD_DIGITAL_WITH_OPTION(var_name, "Time Stable End", -1, "E", "");
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, "Time  Stable  High.Vac  OverEtch  EndPT  End", -1, "E", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_STEP_MODE, var_name);
 
 			var_name = "RCP.STEP.TIME";
@@ -117,14 +187,14 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_APC_MODE, var_name);
 
 			//
+			var_name = "RCP.APC.PRESSURE.mTORR";		
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "mtorr", 0, 0.0, 10000.0, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_APC_PRESSURE_mTORR, var_name);
+
+			//
 			var_name = "RCP.APC.POSITION";		
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 1, 0.0, 100.0, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_APC_POSITION, var_name);
-
-			//
-			var_name = "RCP.APC.PRESSURE";		
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "torr", 3, 0.0, 10.0, -1, "E", "");
-			LINK__VAR_ANALOG_CTRL(aCH__RCP_APC_PRESSURE, var_name);
 
 			var_name = "RCP.APC.LEARNED.POS";
 			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
@@ -202,6 +272,15 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.MAT.LF.SERIES";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_LF_SERIES, var_name);
+
+			//
+			var_name = "RCP.MAT.LF.LEARNED.SHUNT";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_LF_LEARNED_SHUNT, var_name);
+
+			var_name = "RCP.MAT.LF.LEARNED.SERIES";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_LF_LEARNED_SERIES, var_name);
 		}
 		// MAT.HF ...
 		{
@@ -212,6 +291,15 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.MAT.HF.SERIES";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_HF_SERIES, var_name);
+
+			//
+			var_name = "RCP.MAT.HF.LEARNED.SHUNT";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_HF_LEARNED_SHUNT, var_name);
+
+			var_name = "RCP.MAT.HF.LEARNED.SERIES";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_MAT_HF_LEARNED_SERIES, var_name);
 		}
 
 		// ESC ...
@@ -279,6 +367,50 @@ int CObj__STEP_STD::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Process Stable Step Time-over Alarm Message.\n";
 		alarm_msg += "Check Process Stable Step time and Control time.";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__OBJECT_OVERTIME;
+
+		alarm_title  = title;
+		alarm_title += "OBJECT OVERTIME ALARM.";
+
+		alarm_msg  = "Object control time must be less than process step time ! \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__STEP_READY__TEMPERATURE_STABLE_TIMEOUT_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "Temperature stable timeout error In the step preparation.";
+
+		alarm_msg = "Please, check the current temperature of system and temperature parameter in 1st step recipe ! \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__STEP_READY__TEMPERATURE_STABLE_TIMEOUT_WARNING;
+
+		alarm_title  = title;
+		alarm_title += "Temperature stable timeout warning In the step preparation.";
+
+		alarm_msg = "Please, check the current temperature of system and temperature parameter in 1st step recipe ! \n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CLEAR);
@@ -370,11 +502,18 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__APC_OBJ__MON_PRESSURE_TORR, obj_name,var_name);
 
 			//
-			var_name = "MON.PRESSURE.ABORT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__APC_OBJ__MON_PRESSURE_ABORT_ACTIVE, obj_name,var_name);
+			var_name = "MON.PROC.PRESSURE.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__APC_OBJ__MON_PROC_PRESSURE_ABORT_ACTIVE, obj_name,var_name);
 
-			var_name = "MON.PRESSURE.STABLE.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__APC_OBJ__MON_PRESSURE_STABLE_ACTIVE, obj_name,var_name);
+			var_name = "MON.PROC.PRESSURE.STABLE.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__APC_OBJ__MON_PROC_PRESSURE_STABLE_ACTIVE, obj_name,var_name);
+
+			//
+			var_name = "MON.IDLE.PRESSURE.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__APC_OBJ__MON_IDLE_PRESSURE_ABORT_ACTIVE, obj_name,var_name);
+
+			var_name = "MON.IDLE.PRESSURE.STABLE.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__APC_OBJ__MON_IDLE_PRESSURE_STABLE_ACTIVE, obj_name,var_name);
 		}
 	}
 
@@ -444,9 +583,13 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_RPS__PARA_HOLD_TIME, obj_name,var_name);
 
 			//
-			var_name = "MON.POWER.ABORT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_RPS__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
+			var_name = "MON.IDLE.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_RPS__MON_IDLE_POWER_ABORT_ACTIVE, obj_name,var_name);
 
+			var_name = "MON.PROC.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_RPS__MON_PROC_POWER_ABORT_ACTIVE, obj_name,var_name);
+
+			//
 			var_name = "MON.REFLECT.HIGH_LIMIT.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_RPS__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
 
@@ -515,9 +658,13 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_LF__PARA_HOLD_TIME, obj_name,var_name);
 
 			//
-			var_name = "MON.POWER.ABORT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
+			var_name = "MON.IDLE.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_IDLE_POWER_ABORT_ACTIVE, obj_name,var_name);
 
+			var_name = "MON.PROC.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_PROC_POWER_ABORT_ACTIVE, obj_name,var_name);
+
+			//
 			var_name = "MON.REFLECT.HIGH_LIMIT.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
 
@@ -545,9 +692,13 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_HF__PARA_HOLD_TIME, obj_name,var_name);
 
 			//
-			var_name = "MON.POWER.ABORT.ACTIVE";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
+			var_name = "MON.IDLE.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_IDLE_POWER_ABORT_ACTIVE, obj_name,var_name);
 
+			var_name = "MON.PROC.POWER.ABORT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_PROC_POWER_ABORT_ACTIVE, obj_name,var_name);
+
+			//
 			var_name = "MON.REFLECT.HIGH_LIMIT.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_REFLECT_HIGH_LIMIT_ACTIVE, obj_name,var_name);
 
@@ -609,6 +760,10 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			pOBJ_CTRL__ESC = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
+			// ...
+			var_name = "MON.FAULT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ESC__MON_FAULT_ACTIVE, obj_name,var_name);
+
 			// CENTER ...
 			var_name = "RCP.He_CENTER.PRESSURE_SETPOINT.TORR";
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ESC__RCP_He_CENTER_PRESSURE_SETPOINT_TORR, obj_name,var_name);
@@ -642,6 +797,51 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		if(def_check)
 		{
 			pOBJ_CTRL__LIFT_PIN = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		}
+	}
+
+	// OBJ__HTR_SH ...
+	{
+		def_name = "OBJ__HTR_SH";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__HTR_SH = def_check;
+
+		if(def_check)
+		{
+			for(i=0; i<_CFG__SH_SIZE; i++)
+			{
+				int id = i+1;
+
+				var_name.Format("MON.IDLE.STABLE.ACTIVE.LOOP.%02d", id);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__HTR_SH__MON_IDLE_STABLE_ACTIVE_X[i], obj_name,var_name);
+
+				var_name.Format("MON.IDLE.ABORT.ACTIVE.LOOP.%02d", id);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__HTR_SH__MON_IDLE_ABORT_ACTIVE_X[i], obj_name,var_name);
+			}
+		}
+	}
+	// OBJ__HTR_WALL ...
+	{
+		def_name = "OBJ__HTR_WALL";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__HTR_WALL = def_check;
+
+		if(def_check)
+		{
+			for(i=0; i<_CFG__WALL_SIZE; i++)
+			{
+				int id = i+1;
+
+				var_name.Format("MON.IDLE.STABLE.ACTIVE.LOOP.%02d", id);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__HTR_WALL__MON_IDLE_STABLE_ACTIVE_X[i], obj_name,var_name);
+
+				var_name.Format("MON.IDLE.ABORT.ACTIVE.LOOP.%02d", id);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__HTR_WALL__MON_IDLE_ABORT_ACTIVE_X[i], obj_name,var_name);
+			}
 		}
 	}
 

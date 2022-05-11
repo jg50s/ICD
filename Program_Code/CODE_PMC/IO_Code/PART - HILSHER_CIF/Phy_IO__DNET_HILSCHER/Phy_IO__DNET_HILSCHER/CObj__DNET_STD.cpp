@@ -79,6 +79,19 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// Config ...
 	{
+		str_name = "CFG.DRV_INT.STABLE.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_INT_STABLE_SEC, str_name);
+
+		str_name = "CFG.DRV_INT.DELAY.mSEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "msec", 0, 200, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_INT_DELAY_mSEC, str_name);
+
+		str_name = "CFG.DRV_INT.RETRY.CHECK";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "count", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_INT_RETRY_CHECK, str_name);
+
+		//
 		str_name = "CFG.DNET.HEARTBEAT.PERIOD";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 10, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_DNET_HEARTBEAT_PERIOD, str_name);
@@ -361,6 +374,36 @@ int CObj__DNET_STD::__DEFINE__ALARM(p_alarm)
 
 		l_act.RemoveAll();
 		l_act.Add("CHECK");
+
+		ADD__ALARM_EX(alm_id, alm_title, alm_msg, l_act);
+	}
+	// ...
+	{
+		alm_id = ALID__DNET_NODE_ERROR;
+
+		alm_title  = obj_title;
+		alm_title += "Device-Net Node Error !";
+
+		alm_msg = "Check the device-net node.";
+
+		l_act.RemoveAll();
+		l_act.Add(_ACT__ABORT);
+		l_act.Add(_ACT__RETRY);
+		l_act.Add(_ACT__IGNORE);
+
+		ADD__ALARM_EX(alm_id, alm_title, alm_msg, l_act);
+	}
+	// ...
+	{
+		alm_id = ALID__DNET_INIT_ERROR;
+
+		alm_title  = obj_title;
+		alm_title += "Device-Net Initial Error !";
+
+		alm_msg = "Check the device-net state.";
+
+		l_act.RemoveAll();
+		l_act.Add(_ACT__CHECK);
 
 		ADD__ALARM_EX(alm_id, alm_title, alm_msg, l_act);
 	}

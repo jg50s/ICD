@@ -75,10 +75,16 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 	// MON ...
 	{
+		str_name = "MON.TMP.TYPE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_TMP_TYPE, str_name);
+
+		//
 		str_name = "MON.COMM.STATE";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_COMM_STATE, str_name);
 
+		//
 		str_name = "MON.PUMP.ON.SNS";
 		STD__ADD_DIGITAL(str_name, "Off On");
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_PUMP_ON_SNS, str_name);
@@ -87,10 +93,16 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_PUMP_STATE, str_name);
 
-		str_name = "MON.ERROR.STATE";
+		//
+		str_name = "MON.ERROR.ON.SNS";
 		STD__ADD_DIGITAL(str_name, "Off On");
-		LINK__VAR_DIGITAL_CTRL(dCH__MON_ERROR_STATE, str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_ERROR_ON_SNS, str_name);
 
+		str_name = "MON.ERROR.STATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_ERROR_STATE, str_name);
+
+		//
 		str_name = "MON.PUMP.RPM.VALUE";
 		STD__ADD_ANALOG(str_name, "rpm", 1, 0.0, 50000.0);
 		LINK__VAR_ANALOG_CTRL(aCH__MON_PUMP_RPM_VALUE, str_name);
@@ -180,9 +192,9 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 		alarm_id = ALID__PUMP_STATE_ERROR;
 
 		alarm_title  = title;
-		alarm_title += "The state of TMP or dry-pump is error !";
+		alarm_title += "The state of TMP is error !";
 
-		alarm_msg = "Check the state of TMP or dry-pump !\n";
+		alarm_msg = "Check the state of TMP !\n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CHECK);
@@ -198,6 +210,35 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 		alarm_title += "TMP를 On 할 수 없습니다 !";
 
 		alarm_msg = "관련 Sensor 상태를 확인 바랍니다. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__PUMP_ALARM_STATE;
+
+		alarm_title  = title;
+		alarm_title += "The state of TMP is alarm !";
+
+		alarm_msg = "Check the state of TMP !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__PUMP_WARNING_STATE;
+
+		alarm_title  = title;
+		alarm_title += "The state of TMP is warning !";
+
+		alarm_msg = "Check the state of TMP !\n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CHECK);
@@ -244,11 +285,20 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// Init ...
 	{
-		bActive__TMP_DI_COMM_STATE  = false;
-		bActive__TMP_DI_PUMP_STATE  = false;
-		bActive__TMP_DI_ERROR_STATE = false;
-		bActive__TMP_AI_ROT_RPM     = false;
+		bActive__TMP_DI_COMM_STATE = false;
 
+		bActive__TMP_DO_START = false;
+		bActive__TMP_DO_STOP  = false;
+		bActive__TMP_DO_RESET = false;
+
+		bActive__TMP_DI_NORMAL_SPEED  = false;
+		bActive__TMP_DI_ACCELERATION  = false;
+		bActive__TMP_DI_ALARM_STATE   = false;
+		bActive__TMP_DI_WARNING_STATE = false;
+
+		bActive__TMP_AI_ROT_RPM = false;
+
+		//
 		bActive__GV_USE  = false;
 	    bActive__VAT_USE = false;
 
@@ -263,8 +313,10 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "DATA.TMP_TYPE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-		if(def_data.CompareNoCase("IO") == 0)			iDATA__TMP_TYPE = _TMP_TYPE__IO;
-		else											iDATA__TMP_TYPE = _TMP_TYPE__OBJ;
+		sCH__MON_TMP_TYPE->Set__DATA(def_data);
+
+			 if(def_data.CompareNoCase("IO")  == 0)		iDATA__TMP_TYPE = _TMP_TYPE__IO;
+		else if(def_data.CompareNoCase("OBJ") == 0)		iDATA__TMP_TYPE = _TMP_TYPE__OBJ;
 	}
 
 	// TMP.IO INFO ...
@@ -284,32 +336,61 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 		}
 
-		// DI.PUMP_STATE ...
+		// DI.NORMAL_SPEED ...
 		{
-			def_name = "LINK_TMP.DI_PUMP_STATE";
+			def_name = "LINK_TMP.DI_NORMAL_SPEED";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
 			def_check = x_utility.Check__Link(ch_name);
-			bActive__TMP_DI_PUMP_STATE = def_check;
+			bActive__TMP_DI_NORMAL_SPEED = def_check;
 
 			if(def_check)
 			{
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DI_PUMP_STATE, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DI_NORMAL_SPEED, obj_name,var_name);
 			}
 		}
-		// DI.ERROR_STATE ...
+		// DI.ACCELERATION ...
 		{
-			def_name = "LINK_TMP.DI_ERROR_STATE";
+			def_name = "LINK_TMP.DI_ACCELERATION";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
 			def_check = x_utility.Check__Link(ch_name);
-			bActive__TMP_DI_ERROR_STATE = def_check;
+			bActive__TMP_DI_ACCELERATION = def_check;
 
 			if(def_check)
 			{
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DI_ERROR_STATE, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DI_ACCELERATION, obj_name,var_name);
+			}
+		}
+
+		// DI.ALARM_STATE ...
+		{
+			def_name = "LINK_TMP.DI_ALARM_STATE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__TMP_DI_ALARM_STATE = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DI_ALARM_STATE, obj_name,var_name);
+			}
+		}
+		// DI.WARNING_STATE ...
+		{
+			def_name = "LINK_TMP.DI_WARNING_STATE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__TMP_DI_WARNING_STATE = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DI_WARNING_STATE, obj_name,var_name);
 			}
 		}
 
@@ -328,8 +409,53 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 		}
 	}
-	// TMP.OBJ INFO ...
-	if(iDATA__TMP_TYPE == _TMP_TYPE__OBJ)
+
+	if(iDATA__TMP_TYPE == _TMP_TYPE__IO)
+	{
+		// DO.START ...
+		{
+			def_name = "LINK_TMP.DO_START";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__TMP_DO_START = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DO_START, obj_name,var_name);
+			}
+		}
+		// DO.STOP ...
+		{
+			def_name = "LINK_TMP.DO_STOP";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__TMP_DO_STOP = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DO_STOP, obj_name,var_name);
+			}
+		}
+		// DO.RESET ...
+		{
+			def_name = "LINK_TMP.DO_RESET";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__TMP_DO_RESET = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_DO_RESET, obj_name,var_name);
+			}
+		}
+	}
+	else if(iDATA__TMP_TYPE == _TMP_TYPE__OBJ)
 	{
 		// OBJ.LINK ...
 		{

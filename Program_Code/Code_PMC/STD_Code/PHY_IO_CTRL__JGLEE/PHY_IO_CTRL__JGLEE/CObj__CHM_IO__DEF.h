@@ -16,7 +16,7 @@
 
 #define STR__OPEN					"OPEN"
 #define STR__CLOSE					"CLOSE"
-
+#define STR__UNKNOWN				"UNKNOWN"
 
 #define STR__ENABLE					"ENABLE"
 #define STR__CONTROL				"CONTROL"

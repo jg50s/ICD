@@ -21,14 +21,33 @@ int CObj__UNIT_TYPE
 	int mac_id = atoi(io_info.sCOMMAND1);
 	int mfc_index = atoi(io_info.sCOMMAND2);
 
+	bool active__mfc_not_use = Check__MFC_NOT_USE(mfc_index);
+	unsigned char send_macid = m_BoardID + mac_id;
+
 	// ...
 	{
 		CString log_msg;
+		CString log_bff;
 
-		log_msg.Format("Read__ANALOG_EX [%s] GAS_NUM [%d] --> IN", 
-					   fnc_name, mac_id);
+		log_bff.Format("[%1d] __Read__ANALOG_EX [%s] GAS_NUM [%d] --> IN",  send_macid, fnc_name, mac_id);
+		log_msg += "\n";	
+
+		log_bff.Format(" * Max_Value <- [%.3f] ", io_info.dMAX_VALUE);
+		log_msg += "\n";	
+
+		if(active__mfc_not_use)
+		{
+			log_bff.Format(" ** MFC(%1d) is not \"use\" !", mac_id);
+			log_msg += log_bff;
+			log_msg += "\n";	
+		}
 
 		Fnc__DRV_LOG(log_msg);
+	}
+
+	if(active__mfc_not_use)
+	{
+		return -1;
 	}
 
 	// ...
@@ -60,7 +79,7 @@ int CObj__UNIT_TYPE
 			// ...
 			nSizeOfRecv = 12;
 
-			szSendData[0] = m_BoardID + mac_id;
+			szSendData[0] = 0x0ff & send_macid;
 			szSendData[1] = STX;
 			szSendData[2] = 0x80;	// CMD
 			szSendData[3] = 0x03;	// Packet Length
@@ -81,7 +100,7 @@ int CObj__UNIT_TYPE
 			// ...
 			nSizeOfRecv = 12;
 
-			szSendData[0] = m_BoardID + mac_id;
+			szSendData[0] = 0x0ff & send_macid;
 			szSendData[1] = STX;
 			szSendData[2] = 0x80;
 			szSendData[3] = 0x03;
@@ -102,7 +121,7 @@ int CObj__UNIT_TYPE
 			// ...
 			nSizeOfRecv = 12;
 
-			szSendData[0] = m_BoardID + mac_id;
+			szSendData[0] = 0x0ff & send_macid;
 			szSendData[1] = STX;
 			szSendData[2] = 0x80;
 			szSendData[3] = 0x03;
@@ -130,7 +149,7 @@ int CObj__UNIT_TYPE
 			}
 
 			// ...
-			szSendData[0] = m_BoardID + mac_id;
+			szSendData[0] = 0x0ff & send_macid;
 
 			szSendData[1] = STX;
 			szSendData[2] = 0x80;
@@ -215,11 +234,11 @@ int CObj__UNIT_TYPE
 		{
 			nHighByte = ((unsigned int) szReadData[9]) * 256;
 			nLowByte  = ((unsigned int) szReadData[8]);
-		
+
 			dblCurrSetPoint = nHighByte + nLowByte;
 			dblConvSetPoint = (dblCurrSetPoint - 16384.0) / 327.68;
-			dblConvSetPoint = (dblConvSetPoint / 100.0) * dbleMaxValue;
-		
+			dblConvSetPoint = (dblConvSetPoint / 100.0) * dbleMaxValue;	
+
 			szRcvData.Format("%f",dblConvSetPoint);
 		}
 		break;
@@ -260,9 +279,9 @@ int CObj__UNIT_TYPE
 				recv_chk_sum = szReadData[11];
 			}
 		
-			if(recv_macid == (m_BoardID + mac_id))
+			if(recv_macid == send_macid)
 			{
-				szRcvData.Format("%d", (m_BoardID + mac_id));
+				szRcvData.Format("%d", send_macid);
 			}
 			else
 			{
@@ -326,14 +345,29 @@ int CObj__UNIT_TYPE
 	int mac_id = atoi(io_info.sCOMMAND1);
 	int mfc_index = atoi(io_info.sCOMMAND2);
 
+	bool active__mfc_not_use = Check__MFC_NOT_USE(mfc_index);
+	unsigned char send_macid = m_BoardID + mac_id;
+
 	// ...
 	{
 		CString log_msg;
+		CString log_bff;
 
-		log_msg.Format("Read__DIGITAL_EX [%s] GAS_NUM [%d] --> IN", 
-					   fnc_name, mac_id);
+		log_msg.Format("[%1d] __Read__DIGITAL [%s] GAS_NUM [%d] --> IN", send_macid, fnc_name, mac_id);
+
+		if(active__mfc_not_use)
+		{
+			log_bff.Format("** MFC(%1d) is not \"use\" !", mac_id);
+			log_msg += log_bff;
+			log_msg += "\n";	
+		}
 
 		Fnc__DRV_LOG(log_msg);
+	}
+
+	if(active__mfc_not_use)
+	{
+		return -1;
 	}
 
 	// ...
@@ -368,7 +402,7 @@ int CObj__UNIT_TYPE
 				nSizeOfRecv = 12;
 			}
 		
-			szSendData[0] = m_BoardID + mac_id;
+			szSendData[0] = 0x0ff & send_macid;
 			szSendData[1] = STX;
 			szSendData[2] = 0x80;
 			szSendData[3] = 0x04;		// nSizeOfSend-6 ÀÌ´Ù..
@@ -504,6 +538,33 @@ int CObj__UNIT_TYPE
 
 	double min_value = io_info.dMIN_VALUE;
 	double max_value = io_info.dMAX_VALUE;
+
+	bool active__mfc_not_use = Check__MFC_NOT_USE(mfc_index);
+
+	// ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg.Format("Write__ANALOG [%s] GAS_NUM [%d] --> IN", fnc_name, mac_id);
+
+		log_bff.Format(" * Max_Value <- %.3f ", max_value);
+		log_msg += log_bff;
+
+		if(active__mfc_not_use)
+		{
+			log_bff.Format("** MFC(%1d) is not \"use\" !", mac_id);
+			log_msg += log_bff;
+			log_msg += "\n";	
+		}
+
+		Fnc__DRV_LOG(log_msg);
+	}
+
+	if(active__mfc_not_use)
+	{
+		return -1;
+	}
 
 	// ...
 	int retry_count = 0;
@@ -642,11 +703,13 @@ int CObj__UNIT_TYPE
 	CString log_msg;
 	CString log_bff;
 
+	unsigned char send_macid = m_BoardID + mac_id;
+
 	// ...
 	{
 		log_msg = "\n";
 
-		log_bff.Format("Write__ANALOG_EX [%1d] GAS_NUM [%d] --> IN", cmd_id,mac_id);
+		log_bff.Format("[%1d] __Write__ANALOG_EX [%1d] GAS_NUM [%d] --> IN", send_macid, cmd_id, mac_id);
 		log_msg += log_bff;
 		log_msg += "\n";
 
@@ -682,7 +745,7 @@ int CObj__UNIT_TYPE
 		// ...
 		nSizeOfRecv	  = 2;
 
-		szSendData[0] = m_BoardID + mac_id;
+		szSendData[0] = 0x0ff & send_macid;
 		szSendData[1] = STX;
 		szSendData[2] = 0x81;
 		szSendData[3] = 0x05;
@@ -773,6 +836,8 @@ int CObj__UNIT_TYPE
 	CString log_msg;
 	CString log_bff;
 
+	unsigned char send_macid = m_BoardID + mac_id;
+
 	// ...
 	int nPaddingSize = 0;
 
@@ -783,7 +848,7 @@ int CObj__UNIT_TYPE
 		str_cmd_name = "SETPOINT-READ";
 
 		nSizeOfRecv = 12;
-		szSendData[0] = m_BoardID + mac_id;
+		szSendData[0] = send_macid;
 		szSendData[1] = STX;
 		szSendData[2] = 0x80;
 		szSendData[3] = 0x03;
@@ -799,7 +864,7 @@ int CObj__UNIT_TYPE
 	{
 		log_msg = "\n";
 
-		log_bff.Format("Read__ANALOG_EX : GAS_NUM [%1d] --> IN", mac_id);
+		log_bff.Format("[%1d] __Read__ANALOG : GAS_NUM [%1d] --> IN", send_macid, mac_id);
 		log_msg += log_bff;
 		log_msg += "\n";
 
@@ -916,12 +981,15 @@ int CObj__UNIT_TYPE
 	int nPaddingSize = 0;
 
 	// ...
+	unsigned char send_macid = m_BoardID + mac_id;
+
+	// ...
 	{
 		CString log_msg;
 		CString log_bff;
 
 		log_msg = "\n";
-		log_bff.Format("%s <-- GAS_NUM [%d] : Started", fnc_name,mac_id);
+		log_bff.Format("[%1d] %s <-- GAS_NUM [%d] : Started", send_macid, fnc_name,mac_id);
 		log_msg += log_bff;
 		log_msg += "\n";
 
@@ -938,7 +1006,7 @@ int CObj__UNIT_TYPE
 		// ...
 		nSizeOfRecv = 2;
 
-		szSendData[0] = m_BoardID + mac_id;
+		szSendData[0] = 0x0ff & send_macid;
 		szSendData[1] = STX;
 		szSendData[2] = 0x81;
 		szSendData[3] = 0x04;
@@ -957,7 +1025,7 @@ int CObj__UNIT_TYPE
 		// ...
 		nSizeOfRecv = 2;
 
-		szSendData[0] = m_BoardID + mac_id;
+		szSendData[0] = 0x0ff & send_macid;
 		szSendData[1] = STX;
 		szSendData[2] = 0x81;
 		szSendData[3] = 0x04;
@@ -1047,6 +1115,9 @@ int CObj__UNIT_TYPE
 	int mac_id = atoi(io_info.sCOMMAND1);
 	int mfc_index = atoi(io_info.sCOMMAND2);
 
+	bool active__mfc_not_use = Check__MFC_NOT_USE(mfc_index);
+	unsigned char send_macid = m_BoardID + mac_id;
+
 	// ...
 	{
 		CString log_msg;
@@ -1054,7 +1125,7 @@ int CObj__UNIT_TYPE
 
 		log_msg = "\n";
 
-		log_bff.Format("Write__DIGITAL_EX [%s] GAS_NUM [%d] --> IN", fnc_name,mac_id);
+		log_bff.Format("[%1d] __Write__DIGITAL [%s] GAS_NUM [%d] --> IN", send_macid, fnc_name, mac_id);
 		log_msg += log_bff;
 		log_msg += "\n";
 
@@ -1062,7 +1133,19 @@ int CObj__UNIT_TYPE
 		log_msg += log_bff;
 		log_msg += "\n";
 
+		if(active__mfc_not_use)
+		{
+			log_bff.Format("** MFC(%1d) is not \"use\" !", mac_id);
+			log_msg += log_bff;
+			log_msg += "\n";	
+		}
+
 		Fnc__DRV_LOG(log_msg);
+	}
+
+	if(active__mfc_not_use)
+	{
+		return -1;
 	}
 
 	// ...
@@ -1070,7 +1153,7 @@ int CObj__UNIT_TYPE
 
 	switch(cmd_id)
 	{
-		case 251:
+		case 251:			
 			str_cmd_name = "GET Firm Ver.";
 
 			if(set_data.CompareNoCase("GET") == 0)
@@ -1078,7 +1161,7 @@ int CObj__UNIT_TYPE
 				nSizeOfRecv = 14;
 				
 				// ...
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x80;
 				szSendData[3] = 0x03;
@@ -1108,7 +1191,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 				
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1126,7 +1209,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x07;
@@ -1144,7 +1227,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;			
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1163,7 +1246,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 				
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x05;
@@ -1197,7 +1280,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1215,7 +1298,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1246,7 +1329,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1265,7 +1348,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1296,7 +1379,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1315,7 +1398,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1334,7 +1417,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1353,7 +1436,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;
 				szSendData[3] = 0x04;
@@ -1384,7 +1467,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;	
 				szSendData[3] = 0x04;
@@ -1403,7 +1486,7 @@ int CObj__UNIT_TYPE
 				// ...
 				nSizeOfRecv = 2;
 
-				szSendData[0] = m_BoardID + mac_id;
+				szSendData[0] = 0x0ff & send_macid;
 				szSendData[1] = STX;
 				szSendData[2] = 0x81;	
 				szSendData[3] = 0x04;
@@ -1694,7 +1777,7 @@ int CObj__UNIT_TYPE
 
 				for(int i=0; i<nRecvSize; i++)
 				{
-					log_bff.Format("%#X ", szRecvData[i]);
+					log_bff.Format("%02X ", 0x0ff & szRecvData[i]);
 					log_msg += log_bff;
 				}
 				log_msg += "\n";
@@ -1830,7 +1913,7 @@ int CObj__UNIT_TYPE
 						log_msg += "RECV Data : "; 
 						for(t=0;t<nRecvSize;t++)
 						{
-							log_bff.Format("%#X ", szRecvData[t]);
+							log_bff.Format("%02X ", 0x0ff & szRecvData[t]);
 							log_msg += log_bff;
 						}
 						log_msg += "\n";
@@ -1858,7 +1941,7 @@ int CObj__UNIT_TYPE
 
 				for (int i=0; i<nRecvSize; i++)
 				{
-					log_bff.Format("%#X ", szRecvData[i]);
+					log_bff.Format("%02X ", 0x0ff & szRecvData[i]);
 					log_msg += log_bff;
 				}
 				log_msg += "\n";

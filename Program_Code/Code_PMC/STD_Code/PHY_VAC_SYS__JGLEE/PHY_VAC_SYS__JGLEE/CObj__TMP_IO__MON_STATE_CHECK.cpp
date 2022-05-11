@@ -14,7 +14,7 @@ int CObj__TMP_IO
 		sCH__MON_COMM_STATE->Set__DATA(STR__ONLINE);
 
 		dCH__MON_PUMP_ON_SNS->Set__DATA(STR__OFF);
-		dCH__MON_ERROR_STATE->Set__DATA(STR__OFF);
+		dCH__MON_ERROR_ON_SNS->Set__DATA(STR__OFF);
 
 		aCH__MON_PUMP_RPM_VALUE->Set__DATA("0");
 	}
@@ -44,27 +44,68 @@ int CObj__TMP_IO
 				sCH__MON_COMM_STATE->Set__DATA(ch_data);
 			}
 
-			if(bActive__TMP_DI_PUMP_STATE)
+			// ...
 			{
-				ch_data = dEXT_CH__TMP_DI_PUMP_STATE->Get__STRING();
-				sCH__MON_PUMP_STATE->Set__DATA(ch_data);
+				bool active__normal_speed = false;
+				bool active__acceleration = false;
 
-				if((ch_data.CompareNoCase(STR__NORMAL)       == 0)
-				|| (ch_data.CompareNoCase(STR__ON)           == 0)
-				|| (ch_data.CompareNoCase(STR__ACCELERATION) == 0))
+				if(bActive__TMP_DI_NORMAL_SPEED)
 				{
+					if(dEXT_CH__TMP_DI_NORMAL_SPEED->Check__DATA(STR__ON) > 0)			active__normal_speed = true;
+					else																active__normal_speed = false;
+				}
+				if(bActive__TMP_DI_ACCELERATION)
+				{
+					if(dEXT_CH__TMP_DI_ACCELERATION->Check__DATA(STR__ON) > 0)			active__acceleration = true;
+					else																active__acceleration = false;
+				}
+
+				if((active__normal_speed)
+				|| (active__acceleration))
+				{
+						 if(active__normal_speed)		sCH__MON_PUMP_STATE->Set__DATA(STR__NORMAL);
+					else if(active__acceleration)		sCH__MON_PUMP_STATE->Set__DATA(STR__ACCELERATION);
+
 					dCH__MON_PUMP_ON_SNS->Set__DATA(STR__ON);
 				}
 				else
 				{
+					sCH__MON_PUMP_STATE->Set__DATA(STR__STOP);
+
 					dCH__MON_PUMP_ON_SNS->Set__DATA(STR__OFF);
 				}
 			}
 
-			if(bActive__TMP_DI_ERROR_STATE)
+			// ...
 			{
-				dEXT_CH__TMP_DI_ERROR_STATE->Get__DATA(ch_data);
-				dCH__MON_ERROR_STATE->Set__DATA(ch_data);
+				bool active__alarm_sts   = false;
+				bool active__warning_sts = false;
+
+				if(bActive__TMP_DI_ALARM_STATE)
+				{
+					if(dEXT_CH__TMP_DI_ALARM_STATE->Check__DATA(STR__ON) > 0)			active__alarm_sts = true;
+					else																active__alarm_sts = false;
+				}
+				if(bActive__TMP_DI_WARNING_STATE)
+				{
+					if(dEXT_CH__TMP_DI_WARNING_STATE->Check__DATA(STR__ON) > 0)			active__warning_sts = true;
+					else																active__warning_sts = false;
+				}
+
+				if((active__alarm_sts)
+				|| (active__warning_sts))
+				{
+						 if(active__alarm_sts)			sCH__MON_ERROR_STATE->Set__DATA(STR__ALARM);
+					else if(active__warning_sts)		sCH__MON_ERROR_STATE->Set__DATA(STR__WARNING);
+
+					dCH__MON_ERROR_ON_SNS->Set__DATA(STR__ON);
+				}
+				else
+				{
+					sCH__MON_ERROR_STATE->Set__DATA(STR__OK);
+
+					dCH__MON_ERROR_ON_SNS->Set__DATA(STR__OFF);
+				}
 			}
 
 			if(bActive__TMP_AI_ROT_RPM)
@@ -72,6 +113,38 @@ int CObj__TMP_IO
 				aEXT_CH__TMP_AI_ROT_RPM->Get__DATA(ch_data);
 				aCH__MON_PUMP_RPM_VALUE->Set__DATA(ch_data);
 			}				
+		}
+
+
+		// PUMP ERROR ...
+		if(dCH__MON_ERROR_ON_SNS->Check__DATA(STR__ON) > 0)
+		{
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+
+			// ...
+			{
+				alm_bff.Format(" * %s <- %s \n", 
+								sCH__MON_ERROR_STATE->Get__CHANNEL_NAME(),
+								sCH__MON_ERROR_STATE->Get__STRING());
+				alm_msg += alm_bff;
+			}
+
+			if(sCH__MON_ERROR_STATE->Check__DATA(STR__ALARM) > 0)
+			{
+				int alm_id = ALID__PUMP_ALARM_STATE;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			}
+			else if(sCH__MON_ERROR_STATE->Check__DATA(STR__WARNING) > 0)
+			{
+				int alm_id = ALID__PUMP_WARNING_STATE;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			}
 		}
 
 		// INTERLOCK.CHECK : FORELINE ...

@@ -91,6 +91,7 @@ int CObj__MINI8_IO
 
 				aCH__CFG_TEMP_HIGH_LIMIT__LOOP_X[i]->Change__MIN_MAX_DEC(cfg_min,cfg_max+30,cfg_dec);
 				aCH__CFG_INITIAL_TARTGET_TEMP__LOOP_X[i]->Change__MIN_MAX_DEC(cfg_min,cfg_max,cfg_dec);
+				aCH__PARA_TARGET_SP__LOOP_X[i]->Change__MIN_MAX_DEC(cfg_min,cfg_max,cfg_dec);
 
 				if(dCH__CFG_SP_RANGE_INTERLOCK_USE->Check__DATA(STR__YES) > 0)
 				{
@@ -111,7 +112,6 @@ int CObj__MINI8_IO
 					aCH__CFG_TARGET_SP__LOOP_X[i]->Change__MIN_MAX_DEC(cfg_min,cfg_max,cfg_dec);
 				}
 			}
-
 		}
 
 		// 
@@ -386,6 +386,12 @@ int CObj__MINI8_IO
 
 			for(i=0; i<iLOOP_SIZE; i++)
 			{
+				if(dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0)
+				{
+					continue;
+				}
+
+				// ...
 				ch_data = sCH__MON_IO_GET_PV__LOOP_X[i]->Get__STRING();
 				double cur_pv = atof(ch_data);
 
@@ -494,6 +500,12 @@ int CObj__MINI8_IO
 
 			for(i=0; i<iLOOP_SIZE; i++)
 			{
+				if(dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0)
+				{
+					continue;
+				}
+
+				// ...
 				ch_data = sCH__MON_IO_GET_PV__LOOP_X[i]->Get__STRING();
 				double cur_value = atof(ch_data);
 				double cfg_limit = aCH__CFG_TEMP_HIGH_LIMIT__LOOP_X[i]->Get__VALUE();
@@ -600,6 +612,12 @@ int CObj__MINI8_IO
 
 			for(i=0; i<iLOOP_SIZE; i++)
 			{
+				if(dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0)
+				{
+					continue;
+				}
+
+				// ...
 				ch_data = sCH__MON_IO_GET_WORKING_OP__LOOP_X[i]->Get__STRING();
 				double cur_value = atof(ch_data);
 				double cfg_limit = aCH__CFG_OP_HIGH_LIMIT__LOOP_X[i]->Get__VALUE();
@@ -704,6 +722,11 @@ int CObj__MINI8_IO
 
 			for(i=0; i<iLOOP_SIZE; i++)
 			{
+				if(dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0)
+				{
+					continue;
+				}
+
 				// OVER.TEMP ...
 				if(bActive__DI_OVER_TEMP__LOOP_X[i])
 				{
@@ -847,7 +870,9 @@ int CObj__MINI8_IO
 				for(i=0; i<iLOOP_SIZE; i++)
 				{
 					if(sCH__MON_DI_OVER_TEMP_STATE_LOOP_X[i]->Check__DATA(STR__ON) < 0)
+					{
 						continue;
+					}
 
 					active__all_clear = false;
 					break;

@@ -125,7 +125,7 @@ int CObj__DB_INF::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "CFG.DECHUCK.CTRL.MODE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "CONFIG RECIPE", "");
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "CONFIG", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DECHUCK_CTRL_MODE, str_name);
 
 		str_name = "CFG.DECHUCK.RECIPE.ABORT";
@@ -134,9 +134,19 @@ int CObj__DB_INF::__DEFINE__VARIABLE_STD(p_variable)
 
 		for(i=0; i<DEF_SIZE__DECHUCK_PROCESS; i++)
 		{
-			str_name.Format("CFG.DECHUCK.RECIPE.PROCESS%1d", i+1);
+			int id = i + 1;
+
+			str_name.Format("CFG.DECHUCK.RECIPE.USE.%1d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "NO");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_DECHUCK_RECIPE_USE_X[i], str_name);
+
+			str_name.Format("CFG.DECHUCK.RECIPE.PROCESS.%1d", id);
 			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
 			LINK__VAR_STRING_CTRL(sCH__CFG_DECHUCK_RECIPE_PROCESS_X[i], str_name);
+
+			str_name.Format("CFG.DECHUCK.RECIPE.COMMENT.%1d", id);
+			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH__CFG_DECHUCK_RECIPE_COMMENT_X[i], str_name);
 		}
 	}
 

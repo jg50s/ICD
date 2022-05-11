@@ -136,7 +136,7 @@ int CObj__PROC_STD::Save__LEARNED_MOCE()
 		log_bff.Format(" * change_flag <- [%1d] \n", change_flag);
 		log_msg += log_bff;
 
-		printf(log_msg);
+		xI_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 
 	sCH__CUR_LEARNED_RESULT->Set__DATA("");

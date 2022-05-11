@@ -81,8 +81,10 @@ private:
 	CX__VAR_STRING_CTRL  sCH__ALM_TEST__OFFLINE;
 	CX__VAR_STRING_CTRL  sCH__ALM_TEST__TIMEOUT;
 
+	// CFG ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_MFC_USE_X[MAX_MFC];
+	
 	CX__VAR_DIGITAL_CTRL dCH__CFG_BAUD_RATE_NEXT_APPLY;
-
 	CX__VAR_STRING_CTRL  sCH__USER_INFO_UPDATE_REQ;
 
 	// INFO ...
@@ -94,6 +96,7 @@ private:
 
 	CX__VAR_STRING_CTRL  sCH__INFO_MFC_BOARD_ID;
 	CX__VAR_STRING_CTRL  sCH__INFO_MFC_MACID_X[MAX_MFC];
+	CX__VAR_STRING_CTRL  sCH__INFO_MFC_SEND_ID_X[MAX_MFC];
 
 	// MON ...
 	CX__VAR_STRING_CTRL  sCH__MON_MFC_VERSION_X[MAX_MFC];
@@ -122,7 +125,10 @@ private:
 	// ...
 	unsigned char CheckSum(unsigned char * str_data,const int nStart,const int nSize);
 
-	int Is__OFFLINE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,const int nGas_Num);
+	int  Is__OFFLINE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm,const int nGas_Num);
+
+	bool Check__MFC_USE(const int mfc_index);
+	bool Check__MFC_NOT_USE(const int mfc_index);
 
 	// ...
 	int SendCommand(const int flag_s_cmmd,
