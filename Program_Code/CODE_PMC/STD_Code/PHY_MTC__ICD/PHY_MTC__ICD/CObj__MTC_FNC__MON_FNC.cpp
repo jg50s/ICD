@@ -61,9 +61,9 @@ union UNION_4_BYTE__FLOAT
 					active__slot_close = true;
 				}
 
-					 if(active__slot_open)		dEXT_CH__MON_GATE_STATE->Set__DATA(STR__OPEN);
-				else if(active__slot_close)		dEXT_CH__MON_GATE_STATE->Set__DATA(STR__CLOSE);
-				else							dEXT_CH__MON_GATE_STATE->Set__DATA(STR__UNKNOWN);
+					 if(active__slot_open)		sCH__MON_GATE_STATE->Set__DATA(STR__OPEN);
+				else if(active__slot_close)		sCH__MON_GATE_STATE->Set__DATA(STR__CLOSE);
+				else							sCH__MON_GATE_STATE->Set__DATA(STR__UNKNOWN);
 			}
 		}
 
@@ -85,40 +85,51 @@ union UNION_4_BYTE__FLOAT
 			double cur__press_mtorr = cur__press_torr * 1000.0;
 
 			aCH__MTC_PRESSURE_TORR->Set__VALUE(cur__press_torr);
-
-				 if(cur__press_torr < 0.1)		ch_data.Format("%.1f mtorr", cur__press_mtorr);
-			else if(cur__press_torr < 1.0)		ch_data.Format("%.0f mtorr", cur__press_mtorr);
-			else								ch_data.Format("%.0f torr",  cur__press_torr);
-
-			sCH__MTC_PRESSURE_DISPLAY->Set__DATA(ch_data);
 		}
 		else
 		{
-			// Pressure Mon ...
 			ch_data = sEXT_CH__SI_MTC_GAUGE_PRESSURE_HEXA->Get__STRING();
 			
 			CStringArray l_data;
 			Macro__Get_StringArrray_From_String(ch_data, " ", l_data);
 
 			// ...
-			byte r_data[5];
-			memset(r_data, 0, 5);
+			byte hexa_data[5];
+			memset(hexa_data, 0, 5);
 
 			int data_len = l_data.GetSize();
 			for(int i=0; i<data_len; i++)
 			{
-				r_data[i] = 0xff & Macro__Get_Hexa_From_String(l_data[i]);
+				hexa_data[i] = 0xff & Macro__Get_Hexa_From_String(l_data[i]);
 			}
 
 			// ...
 			UNION_4_BYTE__FLOAT m_pressure;
 
-			m_pressure.cBYTE[0] = 0xff & r_data[3];
-			m_pressure.cBYTE[1] = 0xff & r_data[2];
-			m_pressure.cBYTE[2] = 0xff & r_data[1];
-			m_pressure.cBYTE[3] = 0xff & r_data[0];
+			m_pressure.cBYTE[0] = 0xff & hexa_data[0];
+			m_pressure.cBYTE[1] = 0xff & hexa_data[1];
+			m_pressure.cBYTE[2] = 0xff & hexa_data[2];
+			m_pressure.cBYTE[3] = 0xff & hexa_data[3];
+			/*
+			m_pressure.cBYTE[0] = 0xff & hexa_data[3];
+			m_pressure.cBYTE[1] = 0xff & hexa_data[2];
+			m_pressure.cBYTE[2] = 0xff & hexa_data[1];
+			m_pressure.cBYTE[3] = 0xff & hexa_data[0];
+			*/
 
 			aCH__MTC_PRESSURE_TORR->Set__VALUE(m_pressure.fDATA);
+		}
+
+		// ...
+		{
+			double cur__press_torr  = aCH__MTC_PRESSURE_TORR->Get__VALUE();
+			double cur__press_mtorr = cur__press_torr * 1000.0;
+
+				 if(cur__press_torr < 0.1)		ch_data.Format("%.1f mtorr", cur__press_mtorr);
+			else if(cur__press_torr < 1.0)		ch_data.Format("%.0f mtorr", cur__press_mtorr);
+			else								ch_data.Format("%.0f torr",  cur__press_torr);
+
+			sCH__MTC_PRESSURE_DISPLAY->Set__DATA(ch_data);
 		}
 
 		// ...

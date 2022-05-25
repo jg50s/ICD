@@ -54,6 +54,15 @@ int CObj__MTC_FNC
 	// GATE.VLV CHECK ...
 	if(dEXT_CH__MON_GATE_STATE->Check__DATA(STR__CLOSE) < 0)
 	{
+		int alarm_id = ALID__MTC_GATE_VALVE_NOT_CLOSE;
+		CString alm_msg;
+		CString r_act;
+
+		alm_msg.Format(" * %s <- %s \n", 
+						dEXT_CH__MON_GATE_STATE->Get__CHANNEL_NAME(),
+						dEXT_CH__MON_GATE_STATE->Get__STRING());
+
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alm_msg, r_act);
 		return -101;
 	}
 
@@ -104,6 +113,15 @@ int CObj__MTC_FNC
 	// GATE.VLV CHECK ...
 	if(dEXT_CH__MON_GATE_STATE->Check__DATA(STR__CLOSE) < 0)
 	{
+		int alarm_id = ALID__MTC_GATE_VALVE_NOT_CLOSE;
+		CString alm_msg;
+		CString r_act;
+
+		alm_msg.Format(" * %s <- %s \n", 
+						dEXT_CH__MON_GATE_STATE->Get__CHANNEL_NAME(),
+						dEXT_CH__MON_GATE_STATE->Get__STRING());
+
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alm_msg, r_act);
 		return -101;
 	}
 

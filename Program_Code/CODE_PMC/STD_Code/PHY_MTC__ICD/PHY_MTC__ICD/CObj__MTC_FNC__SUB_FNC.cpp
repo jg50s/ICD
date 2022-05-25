@@ -85,6 +85,44 @@ int CObj__MTC_FNC
 
 			if(Interlock_Check < 0) 
 			{
+				int alarm_id = ALID__MTC_CHM_PRESSURE_ERROR;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				// MTC ...
+				{
+					alm_bff.Format("MTC DI.Sensor \n");
+					alm_msg += alm_bff;
+				
+					alm_bff.Format("  * %s <- %s \n",
+									dEXT_CH__DI_MTC_ATM_SNS->Get__CHANNEL_NAME(),
+									dEXT_CH__DI_MTC_ATM_SNS->Get__STRING());
+					alm_msg += alm_bff;
+
+					alm_bff.Format("  * %s <- %s \n", 
+									dEXT_CH__DI_MTC_VAC_SNS->Get__CHANNEL_NAME(),
+									dEXT_CH__DI_MTC_VAC_SNS->Get__STRING());
+					alm_msg += alm_bff;
+				}
+				// CHM ...
+				{
+					alm_bff.Format("CHM DI.Sensor \n");
+					alm_msg += alm_bff;
+
+					alm_bff.Format("  * %s <- %s \n",
+									dEXT_CH__DI_CHM_ATM_SNS->Get__CHANNEL_NAME(),
+									dEXT_CH__DI_CHM_ATM_SNS->Get__STRING());
+					alm_msg += alm_bff;
+
+					alm_bff.Format("  * %s <- %s \n", 
+									dEXT_CH__DI_CHM_VAC_SNS->Get__CHANNEL_NAME(),
+									dEXT_CH__DI_CHM_VAC_SNS->Get__STRING());
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alm_msg, r_act);
+				
 				return Interlock_Check;
 			}
 		}
@@ -143,6 +181,11 @@ int CObj__MTC_FNC
 				Sleep(100);
 			} 
 			while (1);
+
+			if(iActive__SIM_MODE > 0)
+			{
+				dEXT_CH__DI_SLOT_VLV_CLOSE->Set__DATA(STR__OFF);
+			}
 		}
 	}
 	// Gate Close ...
@@ -202,6 +245,11 @@ int CObj__MTC_FNC
 				Sleep(100);
 			} 
 			while (1);
+
+			if(iActive__SIM_MODE > 0)
+			{
+				dEXT_CH__DI_SLOT_VLV_CLOSE->Set__DATA(STR__ON);
+			}
 		}
 	}
 

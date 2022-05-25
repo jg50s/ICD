@@ -78,6 +78,10 @@ int CObj__MTC_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.MTC.STATUS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_MTC_STATUS, str_name);
+
+		str_name = "MON.GATE.STATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_GATE_STATE, str_name);
 	}
 
 	// CFG - VENTING PARAMETER ...
@@ -256,6 +260,36 @@ int CObj__MTC_FNC::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id, alarm_title, alarm_msg, l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__MTC_GATE_VALVE_NOT_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "Gate's valve is not close !";
+
+		alarm_msg = "Please, check the state of gate valve. \n";
+
+		l_act.RemoveAll();
+		l_act.Add("ABORT");
+
+		ADD__ALARM_EX(alarm_id, alarm_title, alarm_msg, l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__MTC_CHM_PRESSURE_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "MTC & Chamber pressure error !";
+
+		alarm_msg = "Please, check the pressure in MTC and Chamber. \n";
+
+		l_act.RemoveAll();
+		l_act.Add("ABORT");
+
+		ADD__ALARM_EX(alarm_id, alarm_title, alarm_msg, l_act);
+	}
+
 	return 1;
 }
 
@@ -336,7 +370,13 @@ int CObj__MTC_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_MTC_GATE_CLOSE_SNS, obj_name,var_name);
- 	}
+
+		//
+		def_name = "CH__DI_SLOT_VLV_CLOSE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_SLOT_VLV_CLOSE, obj_name,var_name);
+	}
 
 	// DO Channel Link ...
 	{

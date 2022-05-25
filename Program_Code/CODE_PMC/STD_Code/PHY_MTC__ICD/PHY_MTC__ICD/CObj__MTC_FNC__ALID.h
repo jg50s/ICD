@@ -16,3 +16,5 @@
 #define  ALID__GATEOPEN_TIMEOUT												5
 #define  ALID__GATECLOSE_TIMEOUT											6
 
+#define  ALID__MTC_GATE_VALVE_NOT_CLOSE										8
+#define  ALID__MTC_CHM_PRESSURE_ERROR										9
