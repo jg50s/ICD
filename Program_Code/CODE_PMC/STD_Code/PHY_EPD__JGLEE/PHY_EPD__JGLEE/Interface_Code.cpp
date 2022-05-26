@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Interface_Code.h"
 
+#include "CObj__EPD_SINGLE.h"
 #include "CObj__EPD_STD.h"
 
 
@@ -19,11 +20,13 @@ DECLARE_END__DLL_STD_OBJ__GET_VERSION
 
 
 //----------------------------------------------------------
+#define CLS__EPD_SINGLE							"EPD.SINGLE"
 #define CLS__EPD_STD							"EPD.STD"
 
 
 DECLARE_START__DLL_STD_OBJ__GET_CLASS_LIST
 
+ADD__OBJ_CLS(CLS__EPD_SINGLE)
 ADD__OBJ_CLS(CLS__EPD_STD)
 
 DECLARE_END__DLL_STD_OBJ__GET_CLASS_LIST
@@ -31,6 +34,8 @@ DECLARE_END__DLL_STD_OBJ__GET_CLASS_LIST
 
 DECLARE_START__DLL_STD_OBJ__CREATE_LINK
 
+IF__OBJ_CLS(CLS__EPD_SINGLE)					return (new CObj__EPD_SINGLE);
 IF__OBJ_CLS(CLS__EPD_STD)						return (new CObj__EPD_STD);
 
 DECLARE_END__DLL_STD_OBJ__CREATE_LINK
+

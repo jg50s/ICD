@@ -18,8 +18,9 @@ private:
 	CCommon_Error__USER_FNC mERROR__USER_FNC;
 
 	SCX__USER_LOG_CTRL xLOG_CTRL;
-
 	int iActive__SIM_MODE;
+
+	CStringArray sList__GAS_TYPE;
 	//
 
 
@@ -55,10 +56,12 @@ private:
 	// CFG : TRANSFER.BALLAST ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_TRANSFER_BALLAST_GAS_FLOW;
 	CX__VAR_DIGITAL_CTRL dCH__CFG_TRANSFER_BALLAST_GAS_ID;
+	CX__VAR_STRING_CTRL  sCH__CUR_TRANSFER_BALLAST_GAS_NAME;
 
 	// CFG : CHAMBER.BALLAST ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_CHAMBER_BALLAST_GAS_FLOW;
 	CX__VAR_DIGITAL_CTRL dCH__CFG_CHAMBER_BALLAST_GAS_ID;
+	CX__VAR_STRING_CTRL  sCH__CUR_CHAMBER_BALLAST_GAS_NAME;
 	//
 
 
@@ -98,6 +101,11 @@ private:
 	int Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable);
 	int Fnc__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable);
 
+	CString sMODE__MFC_ALL_CLOSE;
+	int Call__MFC_ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable);
+	int Fnc__MFC_ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable);
+
+	//
 	CString sMODE__PROC_READY;
 	int Call__PROC_READY(CII_OBJECT__VARIABLE *p_variable);
 
@@ -148,7 +156,7 @@ private:
 	//
 
 	//------------------------------------------------------------
-	void Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable);
+	int Mon__STATE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	// ...
 	int  Get__MFC_INDEX(const CString& gas_name);

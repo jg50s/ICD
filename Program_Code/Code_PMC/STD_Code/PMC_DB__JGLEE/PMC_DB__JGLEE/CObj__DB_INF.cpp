@@ -17,6 +17,12 @@ int CObj__DB_INF::__DEFINE__CONTROL_MODE(obj,l_mode)
 {
 	sObject_Name = obj;
 
+	// ...
+	{
+		ADD__CTRL_VAR(sMODE__POST_ALARM_LIST,    "POST_ALARM.LIST");
+		ADD__CTRL_VAR(sMODE__POST_ALARM_CLEAR,   "POST_ALARM.CLEAR");
+		ADD__CTRL_VAR(sMODE__POST_ALARM_DB_SIZE, "POST_ALARM.DB_SIZE");
+	}
 	return 1;
 }
 int CObj__DB_INF::__DEFINE__VERSION_HISTORY(version)
@@ -267,8 +273,13 @@ int CObj__DB_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__DB_INF::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	int flag = -1;
 
-	return -1;
+		 IF__CTRL_MODE(sMODE__POST_ALARM_LIST)			flag = Call__POST_ALARM_LIST(p_variable, p_alarm);
+	ELSE_IF__CTRL_MODE(sMODE__POST_ALARM_CLEAR)			flag = Call__POST_ALARM_CLEAR(p_variable, p_alarm);
+	ELSE_IF__CTRL_MODE(sMODE__POST_ALARM_DB_SIZE)		flag = Call__POST_ALARM_DB_SIZE(p_variable, p_alarm);
+
+	return flag;
 }
 
 int CObj__DB_INF::__CALL__MONITORING(id,p_variable,p_alarm)

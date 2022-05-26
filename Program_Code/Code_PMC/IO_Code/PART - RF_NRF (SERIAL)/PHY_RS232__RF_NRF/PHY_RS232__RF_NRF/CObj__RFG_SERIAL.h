@@ -49,6 +49,9 @@ private:
 	// ...
 	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;		  
 
+	// CFG : SYSTEM ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_PART_USE;
+
 	// PARA ...
 	CX__VAR_ANALOG_CTRL  aCH__PARA_SET_POWER;
 

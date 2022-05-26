@@ -50,6 +50,13 @@ int CObj__PMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 
+	// MON.PART ...
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
+	}
+
 	// MON ...
 	{
 		str_name = "MON.COMM.STATE";
@@ -80,6 +87,8 @@ int CObj__PMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 }
 int CObj__PMP_IO::__DEFINE__ALARM(p_alarm)
 {
+
+	iLIST_ALID__PART.RemoveAll();
 
 	return 1;
 }
@@ -196,12 +205,14 @@ int CObj__PMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__PMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	DECLARE__EXT_CTRL(p_variable);
+
 	int flag = -1;
 
 	// ...
 	{
 		CString log_msg;
-		log_msg.Format("Start ... :  [%s]",mode);
+		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
 	}

@@ -258,6 +258,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__STEP_STD__OBJ_DGF.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_STD__OBJ_EPD.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__STEP_STD__OBJ_ESC.cpp"
 					>
 				</File>

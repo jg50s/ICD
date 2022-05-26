@@ -74,6 +74,42 @@ int CObj__GAS_VLV_FNC::Fnc__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
 	return pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__ALL_CLOSE);
 }
 
+int CObj__GAS_VLV_FNC::Call__MFC_ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
+{
+	int i;
+
+	for(i=0; i<iMFC_SIZE; i++)
+	{
+		pOBJ_CTRL__MFC[i]->Dislink__UPPER_OBJECT();
+	}
+	pOBJ_CTRL__GAS->Dislink__UPPER_OBJECT();
+
+	int flag = Fnc__MFC_ALL_CLOSE(p_variable);
+
+	for(i=0; i<iMFC_SIZE; i++)
+	{
+		pOBJ_CTRL__MFC[i]->Link__UPPER_OBJECT();
+	}
+	pOBJ_CTRL__GAS->Link__UPPER_OBJECT();
+
+	return flag;
+}
+int CObj__GAS_VLV_FNC::Fnc__MFC_ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable)
+{
+	int i;
+
+	for(i=0; i<iMFC_SIZE; i++)
+	{
+		pOBJ_CTRL__MFC[i]->Run__OBJECT(MFC_CMMD__CLOSE);
+	}
+
+	for(i=0; i<iMFC_SIZE; i++)
+	{
+		pOBJ_CTRL__MFC[i]->When__OBJECT();
+	}
+	return 1;
+}
+
 int CObj__GAS_VLV_FNC::Call__PROC_READY(CII_OBJECT__VARIABLE *p_variable)
 {
 	if(dCH__OBJ_CTRL->Check__DATA("ABORT") > 0)
@@ -143,6 +179,26 @@ int CObj__GAS_VLV_FNC::Call__MFC_CONTROL(CII_OBJECT__VARIABLE *p_variable)
 	CString var_data;
 	int db_index;
 
+	// ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg = "Call__MFC_CONTROL() ... \n";
+
+		log_bff.Format(" %s <- %s \n", 
+						dCH__PARA_MFC_TYPE->Get__CHANNEL_NAME(),
+						dCH__PARA_MFC_TYPE->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" %s <- %s \n", 
+						aCH__PARA_MFC_FLOW->Get__CHANNEL_NAME(),
+						aCH__PARA_MFC_FLOW->Get__STRING());
+		log_msg += log_bff;
+
+		printf(log_msg);
+	}
+
 	// 1. MFC Number READ
 	{
 		dCH__PARA_MFC_TYPE->Get__DATA(var_data);
@@ -159,6 +215,12 @@ int CObj__GAS_VLV_FNC::Call__MFC_CONTROL(CII_OBJECT__VARIABLE *p_variable)
 		for(int i=0; i<iFRC_SIZE; i++)
 		{
 			pOBJ_CTRL__FRC_X[i]->Call__OBJECT(FRC_CMMD__CONTROL_CFG);
+		}
+
+		// DGF ...
+		if(bActive__DGF_VLV)
+		{
+			pOBJ_CTRL__DGF_VLV->Call__OBJECT(DGF_CMMD__CONTROL);
 		}
 	}
 

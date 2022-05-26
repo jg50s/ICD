@@ -16,11 +16,24 @@ int CObj__PM_SLOT_IO
 		dEXT_CH__DI_DOOR_OPEN->Set__DATA(STR__OFF);
 	}
 
+	int loop_count = 0;
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
-		// ...
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__PART);
+
+			if(active__err_check > 0)		dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
+
+		// State.Update ...
 		{
 			if((dEXT_CH__DI_DOOR_CLOSE->Check__DATA(STR__ON) > 0)
 			&& (dEXT_CH__DI_DOOR_OPEN->Check__DATA(STR__OFF) > 0))

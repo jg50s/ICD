@@ -56,25 +56,39 @@ int CObj__DGF_FLEX::__DEFINE__VARIABLE_STD(p_variable)
 	int i;
 	int k;
 
-	// ...
-	str_name.Format("APP.OBJ.MSG");
-	STD__ADD_STRING(str_name);
-	LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
+	//.OBJ ..
+	{
+		str_name = "OBJ.MSG";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
+	}
 
-	//
-	str_name = "PARA.ORIFICE.TYPE";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"VLV1  VLV2  VLV3  VLV4  VLV5  VLV6","");
-	LINK__VAR_DIGITAL_CTRL(dCH_PARA__ORIFICE_TYPE, str_name);
-
+	// PARA ...
+	{
+		str_name = "PARA.ORIFICE.TYPE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"VLV1  VLV2  VLV3  VLV4  VLV5  VLV6","");
+		LINK__VAR_DIGITAL_CTRL(dCH_PARA__ORIFICE_TYPE, str_name);
+	}
 
 	// DGF Center Setpoint (%) ...
-	str_name = "CENTER.Wt.SETPOINT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CENTER_Wt_SET_POINT, str_name);
+	{
+		str_name = "CENTER.Wt.SETPOINT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CENTER_Wt_SET_POINT, str_name);
+	
+		str_name = "CTRL_OPEN.REQ";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CTRL_OPEN_REQ, str_name);
 
-	str_name = "CTRL_OPEN.REQ";
-	STD__ADD_STRING(str_name);
-	LINK__VAR_STRING_CTRL(sCH__CTRL_OPEN_REQ, str_name);
+		//
+		str_name = "CUR.CENTER.SETPOINT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CUR_CENTER_SETPOINT, str_name);
+
+		str_name = "MON.ALL.CLOSE.ACTIVE";
+		STD__ADD_DIGITAL(str_name,"OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_ALL_CLOSE_ACTIVE, str_name);
+	}
 
 	//
 	for(i=0; i<_CFG__MAX_DGF_LEVEL; i++)
@@ -326,12 +340,14 @@ int CObj__DGF_FLEX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__DGF_FLEX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	DECLARE__EXT_CTRL(p_variable);
+
 	int flag = -1;
 
 	// ...
 	{
 		CString log_msg;
-		log_msg.Format("Start ... :  [%s]",mode);
+		log_msg.Format("Start [%s] ... Called By %s", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xLOG_CTRL->WRITE__LOG(log_msg);

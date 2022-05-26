@@ -8,9 +8,11 @@
 int CObj__PM_SLOT_IO
 ::Call__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	sCH__OBJ_STATUS->Set__DATA(STR__STANDBY);
+	int r_flag = Call__DOOR_CLOSE(p_variable, p_alarm);
+	if(r_flag < 0)			return r_flag;
 
-	return OBJ_AVAILABLE;
+	sCH__OBJ_STATUS->Set__DATA(STR__STANDBY);
+	return 1;
 }
 
 int CObj__PM_SLOT_IO

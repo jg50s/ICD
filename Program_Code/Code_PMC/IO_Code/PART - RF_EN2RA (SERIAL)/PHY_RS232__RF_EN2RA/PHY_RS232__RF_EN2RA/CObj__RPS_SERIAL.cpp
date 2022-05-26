@@ -74,13 +74,13 @@ int CObj__RPS_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CFG ...
 	{
-		str_name = "CFG.DRV_CHAR_SEDN_DELAY.mSEC";
-		STD__ADD_ANALOG_WITH_OPTION(str_name, "msec", 0, 0, 100, -1, "L", "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_CHAR_SEDN_DELAY_mSEC, str_name);
+		str_name = "CFG.DRV_CHAR_SEDN_DELAY.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 3, 0.01, 1.0, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_CHAR_SEDN_DELAY_SEC, str_name);
 
-		str_name = "CFG.DRV_LINE_SEDN_DELAY.mSEC";
-		STD__ADD_ANALOG_WITH_OPTION(str_name, "msec", 0, 0, 100, -1, "L", "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_LINE_SEDN_DELAY_mSEC, str_name);
+		str_name = "CFG.DRV_LINE_SEDN_DELAY.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 3, 0.01, 1.0, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_LINE_SEDN_DELAY_SEC, str_name);
 
 		//
 		str_name = "CFG.DRV_LOG.ENABLE";

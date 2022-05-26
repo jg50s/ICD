@@ -30,11 +30,22 @@ int CObj__TMP_IO
 	double cur__di_foreline__err_sec = 0;
 	double cur__di_pcw__err_sec = 0;
 
+	int loop_count = 0;
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(loop_sec);
 
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__PART);
+
+			if(active__err_check > 0)		dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
 
 		// UPDATE.IO ...
 		{
@@ -64,7 +75,7 @@ int CObj__TMP_IO
 				|| (active__acceleration))
 				{
 						 if(active__normal_speed)		sCH__MON_PUMP_STATE->Set__DATA(STR__NORMAL);
-					else if(active__acceleration)		sCH__MON_PUMP_STATE->Set__DATA(STR__ACCELERATION);
+					else if(active__acceleration)		sCH__MON_PUMP_STATE->Set__DATA(STR__ACCEL);
 
 					dCH__MON_PUMP_ON_SNS->Set__DATA(STR__ON);
 				}

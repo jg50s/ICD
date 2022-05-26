@@ -18,14 +18,18 @@ private:
 	CCommon_Error__USER_FNC mERROR__USER_FNC;	
 
 	SCX__USER_LOG_CTRL xLOG_CTRL;
-
 	int iActive__SIM_MODE;
+
+	CUIntArray iLIST_ALID__PIN;
 	//
 
 	//-------------------------------------------------------------------------
 	// ...
 	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL  sCH__OBJ_TIMER;
+
+	// MON.PART ... 
+	CX__VAR_DIGITAL_CTRL dCH__MON_PIN_ERROR_ACTIVE;
 
 	// MON ... 
 	CX__VAR_STRING_CTRL  sCH__MON_ACT_NAME;

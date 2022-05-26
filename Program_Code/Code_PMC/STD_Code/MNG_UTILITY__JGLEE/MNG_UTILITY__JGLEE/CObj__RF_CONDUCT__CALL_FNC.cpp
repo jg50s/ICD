@@ -144,9 +144,9 @@ int CObj__RF_CONDUCT
 		p_rf_set  = aEXT_CH__SET_POWER__RF_X[rf_index].Get__PTR();
 		p_rf_get  = aEXT_CH__GET_POWER__RF_X[rf_index].Get__PTR();
 
-		sEXT_CH__INTERLOCK_SKIP__RF_X[rf_index]->Set__DATA("SKIP");
+		dEXT_CH__INTERLOCK_SKIP__RF_X[rf_index]->Set__DATA(STR__ON);
 
-		sCH__SAVE_ACTIVE_FLAG__RF_X[rf_index]->Set__DATA("LOCK");
+		sCH__SAVE_ACTIVE_FLAG__RF_X[rf_index]->Set__DATA(STR__LOCK);
 		sCH__SAVE_REQ_FLAG__RF_X[rf_index]->Set__DATA("");
 	}
 

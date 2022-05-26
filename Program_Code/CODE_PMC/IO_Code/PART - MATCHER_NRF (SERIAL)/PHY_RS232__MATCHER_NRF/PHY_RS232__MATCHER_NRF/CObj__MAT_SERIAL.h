@@ -61,6 +61,9 @@ private:
 	// ...
 	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;		  
 
+	// CFG : SYSTEM ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_PART_USE;
+
 	// MON ...
 	CX__VAR_DIGITAL_CTRL dCH__MON_COMM_STS;
 

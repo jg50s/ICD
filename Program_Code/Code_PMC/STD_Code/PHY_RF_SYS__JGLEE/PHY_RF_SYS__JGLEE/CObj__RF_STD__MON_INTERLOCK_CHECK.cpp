@@ -36,7 +36,7 @@ int CObj__RF_STD
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		
-		if(sCH__RF_CONDUCTANCE_INTLK_SKIP->Check__DATA("SKIP") > 0)
+		if(dCH__RF_CONDUCTANCE_INTLK_SKIP->Check__DATA(STR__ON) > 0)
 		{
 			continue;
 		}

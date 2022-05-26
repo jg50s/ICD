@@ -83,6 +83,13 @@ int CObj__MAT_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
 	}
 
+	// CFG : SYSTEM ...
+	{
+		str_name = "CFG.PART.USE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PART_USE, str_name);
+	}
+
 	// PARA ...
 	{
  		str_name = "PARA.LOAD_POS";
@@ -270,7 +277,7 @@ int CObj__MAT_SERIAL::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "Matcher Offline.";
 
 		l_act.RemoveAll();
-		l_act.Add(ACT__RETRY);
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}

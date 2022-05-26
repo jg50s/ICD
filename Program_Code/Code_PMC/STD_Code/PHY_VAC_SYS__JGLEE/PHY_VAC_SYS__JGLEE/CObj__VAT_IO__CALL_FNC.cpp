@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "CObj__VAT_IO.h"
+#include "CObj__VAT_IO__DEF.h"
 
 #include "CCommon_Utility.h"
 
@@ -182,12 +183,32 @@ int CObj__VAT_IO
 	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
 	{
 		sCH__MON_SET_PRESSURE->Set__DATA(ch_pressure);
-		aEXT_CH__VAT__PARA_PRESSURE_TORR->Set__DATA(ch_pressure);
+
+		if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+		{
+			double set_mtorr = set_pressure * 1000.0;
+
+			aEXT_CH__VAT__PARA_PRESSURE_VALUE->Set__VALUE(set_mtorr);
+		}
+		else
+		{
+			aEXT_CH__VAT__PARA_PRESSURE_VALUE->Set__DATA(ch_pressure);
+		}
 
 		if(iActive__SIM_MODE > 0)
 		{
 			sEXT_CH__SIM_PRESSURE_TORR->Set__DATA(ch_pressure);
-			aEXT_CH__VAT__CUR_PRESSURE_TORR->Set__DATA(ch_pressure);
+
+			if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+			{
+				double pressure_mtorr = atof(ch_pressure) * 1000.0;
+
+				aEXT_CH__VAT__CUR_PRESSURE_VALUE->Set__VALUE(pressure_mtorr);
+			}		
+			else
+			{
+				aEXT_CH__VAT__CUR_PRESSURE_VALUE->Set__DATA(ch_pressure);
+			}
 		}
 
 		return pOBJ_CTRL__VAT->Call__OBJECT(sVAT_CMMD__PRESSURE);
@@ -195,7 +216,17 @@ int CObj__VAT_IO
 	else
 	{
 		sCH__MON_SET_PRESSURE->Set__DATA(ch_pressure);
-		aEXT_CH__AO_APC_SETPOINT_DATA->Set__DATA(ch_pressure);
+
+		if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+		{
+			double pressure_mtorr = atof(ch_pressure) * 1000.0;
+
+			aEXT_CH__AO_APC_SETPOINT_DATA->Set__VALUE(pressure_mtorr);
+		}
+		else
+		{
+			aEXT_CH__AO_APC_SETPOINT_DATA->Set__DATA(ch_pressure);
+		}
 
 		dEXT_CH__DO_APC_SETPOINT_TYPE->Set__DATA(STR__PRESSURE);
 		dEXT_CH__DO_APC_CTRL_MODE->Set__DATA(STR__CONTROL);
@@ -203,7 +234,17 @@ int CObj__VAT_IO
 		if(iActive__SIM_MODE > 0)
 		{
 			sEXT_CH__SIM_PRESSURE_TORR->Set__DATA(ch_pressure);
-			aEXT_CH__AI_APC_PRESSURE->Set__DATA(ch_pressure);
+
+			if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+			{
+				double pressure_mtorr = atof(ch_pressure) * 1000.0;
+
+				aEXT_CH__AI_APC_PRESSURE->Set__VALUE(pressure_mtorr);
+			}		
+			else
+			{
+				aEXT_CH__AI_APC_PRESSURE->Set__DATA(ch_pressure);
+			}
 
 			if(bActive__DI_APC_VLV_CLOSE)		dEXT_CH__DI_APC_VLV_CLOSE->Set__DATA(STR__OFF);
 			if(bActive__DI_APC_VLV_OPEN)		dEXT_CH__DI_APC_VLV_OPEN->Set__DATA(STR__OFF);

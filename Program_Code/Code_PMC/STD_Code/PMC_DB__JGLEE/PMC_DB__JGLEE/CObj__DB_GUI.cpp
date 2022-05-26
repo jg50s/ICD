@@ -148,6 +148,9 @@ int CObj__DB_GUI::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "GUI.CONFIG.ETC.SAVE";
 		STD__ADD_DIGITAL(str_name, APP_DSP__CHANGE_FLAG);
 
+		str_name = "GUI.CONFIG.EPD.SAVE";
+		STD__ADD_DIGITAL(str_name, APP_DSP__CHANGE_FLAG);
+
 		// Shower-Head ...
 		str_name = "GUI.CONFIG.HEATER_SH_STABLE.SAVE";
 		STD__ADD_DIGITAL(str_name, APP_DSP__CHANGE_FLAG);

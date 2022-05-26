@@ -13,8 +13,6 @@
 #define  STR__YES							"YES"
 #define  STR__NO							"NO"
 
-#define  STR__SKIP							"SKIP"
-
 
 // ...
 #define  STR__AVERAGE						"AVERAGE"

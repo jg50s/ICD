@@ -54,36 +54,33 @@ int CObj__PMC_OPR
 	}
 
 	// ...
-	int r_flag = 1;
+	int r_flag = p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__INIT);
+	if(r_flag < 0)
+	{
+		return -11;
+	}
 
 	if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA("ATM") > 0)
 	{
 		if(p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__VENT) < 0)
 		{
-			return -1;
+			return -21;
 		}
 	}
 	else
 	{
 		if(p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__PUMP) < 0)
 		{
-			return -11;
-		}
-
-		r_flag = p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__INIT);
-
-		if(p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__PUMP) < 0)
-		{
-			return -12;
+			return -21;
 		}
 	}
 
-	if(r_flag > 0)
+	// ...
 	{
 		sEXT_CH__SYSTEM_SETUP_REQ->Set__DATA("");
 		xCH__OBJ_STATUS->Set__DATA(STR__STANDBY);
 	}
-	return r_flag;	
+	return 1;	
 }
 int CObj__PMC_OPR
 ::Call__TRANSFER_INIT(CII_OBJECT__VARIABLE *p_variable)

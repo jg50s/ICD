@@ -22,14 +22,18 @@ int CObj__ARCTIC_SERIAL
 int CObj__ARCTIC_SERIAL
 ::__Read__STRING(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, CString& read_data)
 {
-	CString s_packet;
+	CString s_cmmd;
+	CString s_op;
+	CString s_data;
 	CString r_data;
 
 	if(siCH__ALL_STATE_GET->Check__VARIABLE_NAME(var_name) > 0)
 	{
-		s_packet = "CMD";
+		s_cmmd = "CMD";
+		s_op   = "";
+		s_data = "";
 
-		int r_flag = _Send__Command(s_packet, &r_data);
+		int r_flag = _Send__Command(s_cmmd,s_op,s_data, &r_data);
 		if(r_flag > 0)
 		{
 			_Update__CMD_INFO(r_data);
@@ -50,17 +54,17 @@ int CObj__ARCTIC_SERIAL
 {
 	CString s_packet;
 	CString s_cmmd;
+	CString s_op;
 	CString s_data;
 	CString r_data;
 
 	if(aoCH__DIGITAL_POWER_SET->Check__VARIABLE_NAME(var_name) > 0)
 	{
-		s_cmmd = "R8 500";
+		s_cmmd = "VSP";
+		s_op   = "=";
 		s_data.Format("%.0f", set_data);
 
-		s_packet.Format("%s %s 0 T", s_cmmd,s_data);
-
-		return _Send__Command(s_packet, &r_data);
+		return _Send__Command(s_cmmd,s_op,s_data, &r_data);
 	}
 
 	return -1;
@@ -73,14 +77,40 @@ int CObj__ARCTIC_SERIAL
 	CString s_cmmd;
 	CString s_data;
 	CString r_data;
+	CString s_op;
 
-	if(doCH__DIGITAL_INITIAL_CTRL->Check__VARIABLE_NAME(var_name) > 0)
+	if(doCH__DIGITAL_POWER_CTRL->Check__VARIABLE_NAME(var_name) > 0)
 	{
-		s_packet = "R5 48 T";
+		s_cmmd = "VSP";
+		s_op   = "";
 
-		if(set_data.CompareNoCase(STR__OFF) != 0)		return 1;
+		if(set_data.CompareNoCase(STR__ON) == 0)		s_data = "1";
+		else											s_data = "0";
 
-		_Send__Command(s_packet, &r_data);		
+		_Send__Command(s_cmmd,s_op,s_data, &r_data);		
+		return 1;
+	}
+
+	if(doCH__PLASMA_ON_ENABLE_TURN_ON->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		s_cmmd = "VPO";
+		s_op   = "";
+
+		if(set_data.CompareNoCase(STR__ON) == 0)		s_data = "1";
+		else											s_data = "0";
+
+		_Send__Command(s_cmmd,s_op,s_data, &r_data);		
+		return 1;
+	}
+	if(doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Check__VARIABLE_NAME(var_name) > 0)
+	{
+		s_cmmd = "VPO";
+		s_op   = "=";
+
+		if(set_data.CompareNoCase(STR__ON) == 0)		s_data = "1";
+		else											s_data = "0";
+
+		_Send__Command(s_cmmd,s_op,s_data, &r_data);		
 		return 1;
 	}
 
@@ -170,19 +200,25 @@ int CObj__ARCTIC_SERIAL
 int CObj__ARCTIC_SERIAL
 ::_Send__Command(const CString& s_packet, CString* p_data)
 {
-	int cfg__line_msec = (int) aCH__CFG_DRV_LINE_SEDN_DELAY_mSEC->Get__VALUE();
-
 	if(bActive__DRV_FNC_START)
 	{
-		while(xTIMER__DRV_LINE->Get__CURRENT_TIME() < cfg__line_msec)
+		double cfg__line_sec = aCH__CFG_DRV_LINE_SEDN_DELAY_SEC->Get__VALUE();
+
+		while(xTIMER__DRV_LINE->Get__CURRENT_TIME() < cfg__line_sec)
 		{
 			Sleep(1);
 		}
+
+		/*
+		int cfg__line_msec = (int) (cfg__line_sec * 1000);
+		Sleep(cfg__line_msec);
+		*/
 	}
 
 	// Send ...
 	{
-		int cfg__char_msec = (int) aCH__CFG_DRV_CHAR_SEDN_DELAY_mSEC->Get__VALUE();
+		double cfg__char_sec = aCH__CFG_DRV_CHAR_SEDN_DELAY_SEC->Get__VALUE();
+		int cfg__char_msec = (int) (cfg__char_sec * 1000);
 
 		CString s_string;
 		s_string  = s_packet;
@@ -276,6 +312,130 @@ int CObj__ARCTIC_SERIAL
 		}
 
 		r_data.Delete(s_index, (s_packet.GetLength() + s_index));
+		p_data->Format("%s", r_data);
+	}
+
+	return p_data->GetLength();
+}
+
+int CObj__ARCTIC_SERIAL
+::_Send__Command(const CString& s_cmmd,const CString& s_op,const CString& s_data, CString* p_data)
+{
+	if(bActive__DRV_FNC_START)
+	{
+		double cfg__line_sec = aCH__CFG_DRV_LINE_SEDN_DELAY_SEC->Get__VALUE();
+
+		while(xTIMER__DRV_LINE->Get__CURRENT_TIME() < cfg__line_sec)
+		{
+			Sleep(1);
+		}
+
+		/*
+		int cfg__line_msec = (int) (cfg__line_sec * 1000);
+		Sleep(cfg__line_msec);
+		*/
+	}
+
+	// Send ...
+	{
+		double cfg__char_sec = aCH__CFG_DRV_CHAR_SEDN_DELAY_SEC->Get__VALUE();
+		int cfg__char_msec = (int) (cfg__char_sec * 1000);
+		// ...
+		CString s_body;
+		s_body.Format("%s%s%s", s_cmmd,s_op,s_data);
+
+		CString s_string;
+		s_string  = s_body;
+		s_string += sEND_SEND;
+
+		if(iActive__SIM_MODE > 0)
+		{
+
+		}
+		else
+		{
+			CString cls_bff;
+			mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+			int s_len = s_string.GetLength();
+			for(int i=0; i<s_len; i++)
+			{
+				unsigned char s_ch = s_string.GetAt(i);;
+				mX_Serial->CHAR__SEND(&s_ch, 1);
+
+				if(cfg__char_msec > 0)		Sleep(cfg__char_msec);
+			}
+		}
+
+		Write__DRV_LOG("SEND", s_body);
+	}
+
+	if(bActive__DRV_FNC_START)
+	{
+		xTIMER__DRV_LINE->START__COUNT_UP(9999);
+	}
+	else
+	{
+		bActive__DRV_FNC_START = true;
+		
+		xTIMER__DRV_LINE->START__COUNT_UP(9999);
+	}
+
+	// Recv ...
+	{
+		CString r_data;
+		int r_len = 0;
+
+		if(iActive__SIM_MODE > 0)
+		{
+			r_data  = s_cmmd;
+			r_data += ",";
+
+			// ...
+			CString s_xxx;
+
+			int k_limit = 17;
+			for(int k=0; k<k_limit; k++)
+			{
+				if(k > 0)		r_data += ",";
+
+					 if(k == 11)		s_xxx = "1";
+				else if(k == 12)		s_xxx = "2";
+				else					s_xxx.Format("%1d", (1000 + k));
+				r_data += s_xxx;
+			}
+
+			r_len = r_data.GetLength();
+		}
+		else
+		{
+			int r_msec = 500;
+
+			r_len = mX_Serial->DATA__RECV(sEND_RECV, &r_data, r_msec);		
+		}
+
+		Write__DRV_LOG("RECV", r_data);
+
+		if(r_len <= 0)		
+		{
+			Write__DRV_LOG("RECV", "ERROR (OFFLINE)");
+
+			dCH__MON_COMM_STS->Set__DATA(STR__OFFLINE);
+			return -1;
+		}
+		else
+		{
+			dCH__MON_COMM_STS->Set__DATA(STR__ONLINE);
+		}
+
+		int s_index = r_data.Find(s_cmmd);
+		if(s_index < 0)
+		{
+			Write__DRV_LOG("RECV", "ERROR (CMMD NO CHECK)");
+			return -11;
+		}
+
+		r_data.Delete(s_index, (s_cmmd.GetLength() + s_index));
 		p_data->Format("%s", r_data);
 	}
 

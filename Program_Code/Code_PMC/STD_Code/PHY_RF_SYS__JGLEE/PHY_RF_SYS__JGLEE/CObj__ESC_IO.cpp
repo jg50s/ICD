@@ -71,6 +71,9 @@ int CObj__ESC_IO::__DEFINE__VERSION_HISTORY(version)
 #define APP_DSP__ESC_VOLT_CTRL_TYPE             \
 "AUTO STEP"
 
+#define APP_DSP__LIGHT_HEAVY                    \
+"LIGHT HEAVY"
+
 
 int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 {
@@ -98,6 +101,26 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "APP.TIMER.COUNT";
 		STD__ADD_STRING(var_name);
 		LINK__VAR_STRING_CTRL(sCH__APP_TIMER_COUNT, var_name);
+	}
+
+	// MON.PART.ACTIVE ...
+	{
+		var_name = "MON.ESC.CTRL.ACTIVE";
+		STD__ADD_DIGITAL(var_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_ESC_CTRL_ACTIVE, var_name);
+
+		var_name = "MON.ESC.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(var_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_ESC_ERROR_ACTIVE, var_name);
+
+		//
+		var_name = "MON.HE_FLOW.CTRL.ACTIVE";
+		STD__ADD_DIGITAL(var_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_HE_FLOW_CTRL_ACTIVE, var_name);
+
+		var_name = "MON.HE_FLOW.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(var_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_HE_FLOW_ERROR_ACTIVE, var_name);
 	}
 
 	// 3WAY_VLV.CENTER ...
@@ -530,7 +553,7 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_ESC_CENTER_VOLTAGE_THRESHOLD, var_name);
 
 			var_name = "CFG.ESC.CENTER.CURRENT_LIMIT";
-			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "mA", 1, 0.3, 1.0, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "mA", 1, 0.3, 50.0, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_ESC_CENTER_CURRENT_LIMIT, var_name);
 
 			var_name = "CFG.ESC.CENTER.VOLTAGE.MAX.SETPOINT.FOR.DECHUCKING";
@@ -552,7 +575,7 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_ESC_EDGE_VOLTAGE_THRESHOLD, var_name);
 
 			var_name = "CFG.ESC.EDGE.CURRENT_LIMIT";
-			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "mA", 1, 0.3, 1.0, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "mA", 1, 0.3, 50.0, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_ESC_EDGE_CURRENT_LIMIT, var_name);
 
 			var_name = "CFG.ESC.EDGE.VOLTAGE.MAX.SETPOINT.FOR.DECHUCKING";
@@ -781,6 +804,10 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "TEST.HE_CENTER.PRESSURE.SETPOINT.START";
 			STD__ADD_STRING(var_name);
 			LINK__VAR_STRING_CTRL(sCH__TEST_HE_CENTER_PRESSURE_SETPOINT_START, var_name);
+
+			var_name = "TEST.HE_EDGE.PRESSURE.SETPOINT.START";
+			STD__ADD_STRING(var_name);
+			LINK__VAR_STRING_CTRL(sCH__TEST_HE_EDGE_PRESSURE_SETPOINT_START, var_name);
 		}
 
 		// RESULT POINT1 ...
@@ -933,9 +960,18 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(var_name);
 		LINK__VAR_STRING_CTRL(sCH__RESULT_HE_CENTER_WAFER_LEAK_CHECK_RESULT, var_name);
 
+		var_name = "RESULT.HE_EDGE.WAFER_LEAK_CHECK.RESULT";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__RESULT_HE_EDGE_WAFER_LEAK_CHECK_RESULT, var_name);
+
+		//
 		var_name = "TEST.HE_CENTER.WAFER_LEAK_CHECK.REF";
 		STD__ADD_STRING(var_name);
 		LINK__VAR_STRING_CTRL(sCH__TEST_HE_CENTER_WAFER_LEAK_CHECK_REF, var_name);
+
+		var_name = "TEST.HE_EDGE.WAFER_LEAK_CHECK.REF";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__TEST_HE_EDGE_WAFER_LEAK_CHECK_REF, var_name);
 	}
 
 	// Config ...
@@ -1101,6 +1137,42 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__RCP_He_EDGE_FLOW_MIN_THRESHOLD, var_name);
 	}
 
+	// CFG Interlock ...
+	{
+		var_name = "CFG.INTERLOCK.LEVEL.ALL";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__LIGHT_HEAVY, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_LEVEL_ALL, var_name);
+
+		var_name = "CFG.INTERLOCK.LEVEL.VACUUM";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__LIGHT_HEAVY, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_LEVEL_VACUUM, var_name);
+
+		var_name = "CFG.INTERLOCK.LEVEL.WAFER";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__LIGHT_HEAVY, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_LEVEL_WAFER, var_name);
+
+		var_name = "CFG.INTERLOCK.LEVEL.CHM_ISO";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__LIGHT_HEAVY, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_LEVEL_CHM_ISO, var_name);
+
+		//
+		var_name = "CFG.INTERLOCK.MODE.ALL";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__ENABLE_DISABLE, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_MODE_ALL, var_name);
+
+		var_name = "CFG.INTERLOCK.MODE.VACUUM";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__ENABLE_DISABLE, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_MODE_VACUUM, var_name);
+
+		var_name = "CFG.INTERLOCK.MODE.WAFER";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__ENABLE_DISABLE, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_MODE_WAFER, var_name);
+
+		var_name = "CFG.INTERLOCK.MODE.CHM_ISO";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__ENABLE_DISABLE, "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_MODE_CHM_ISO, var_name);
+	}
+
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__REQ_CTRL);
@@ -1123,6 +1195,11 @@ l_act.RemoveAll();								\
 l_act.Add(STR__RETRY);							\
 l_act.Add(STR__ABORT);
 
+#define  ACT__YES_NO							\
+l_act.RemoveAll();								\
+l_act.Add(STR__YES);							\
+l_act.Add(STR__NO);
+
 
 int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 {
@@ -1137,9 +1214,13 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__ESC.RemoveAll();
+	iLIST_ALID__HE_FLOW.RemoveAll();
+
 	// ...
 	{
 		alarm_id = ALID__ESC_CHUCK_STATUS__UNKNOWN;
+		iLIST_ALID__ESC.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "ESC Chuck Status is Unknown !";
@@ -1155,6 +1236,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__ESC_CHUCK_ERROR__PRESSURE_NOT_VAC;
+		iLIST_ALID__ESC.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "ESC Chuck Error : Chamber pressure is not vacuum !";
@@ -1169,6 +1251,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__ESC_CHUCK_ERROR__WAFER_NOT_EXIST;
+		iLIST_ALID__ESC.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "ESC Chuck Error : There is no wafer !";
@@ -1186,6 +1269,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_CENTER_CHUCK_VOLTAGE__MIN_ERROR;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC Chuck Center Voltage : MIN. Error !";
@@ -1200,6 +1284,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_CENTER_CHUCK_VOLTAGE__MAX_ERROR;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC Chuck Center Voltage : MAX. Error !";
@@ -1215,6 +1300,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_CENTER_VOLTAGE__WARNING_RANGE;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Center voltage is in warning range !";
@@ -1229,6 +1315,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{	
 			alarm_id = ALID__ESC_CENTER_VOLTAGE__FAULT_RANGE;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Center voltage is in fault range !";
@@ -1244,6 +1331,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_CENTER_VOLTAGE__HIGH_LIMIT;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Center voltage high limit !";
@@ -1258,6 +1346,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_CENTER_CURRENT__HIGH_LIMIT;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Center current high limit !";
@@ -1275,6 +1364,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_EDGE_CHUCK_VOLTAGE__MIN_ERROR;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC Chuck Edge Voltage : MIN. Error !";
@@ -1289,6 +1379,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_EDGE_CHUCK_VOLTAGE__MAX_ERROR;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC Chuck Edge Voltage : MAX. Error !";
@@ -1304,6 +1395,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_EDGE_VOLTAGE__WARNING_RANGE;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Edge voltage is in warning range !";
@@ -1318,6 +1410,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{	
 			alarm_id = ALID__ESC_EDGE_VOLTAGE__FAULT_RANGE;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Edge voltage is in fault range !";
@@ -1333,6 +1426,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_EDGE_VOLTAGE__HIGH_LIMIT;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Edge voltage high limit !";
@@ -1347,6 +1441,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__ESC_EDGE_CURRENT__HIGH_LIMIT;
+			iLIST_ALID__ESC.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "ESC_Edge current high limit !";
@@ -1362,10 +1457,10 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 
 	// He Pressure.Center ...
 	{
-
 		// ...
 		{
 			alarm_id = ALID__HE_CENTER_PRESSURE_WARNING;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Center Pressure Warning !";
@@ -1377,10 +1472,10 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
-
 		// ...
 		{
 			alarm_id = ALID__HE_CENTER_PRESSURE_FAULT;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Center Pressure Fault !";
@@ -1395,10 +1490,10 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	}
 	// He Pressure.Edge ...
 	{
-
 		// ...
 		{
 			alarm_id = ALID__HE_EDGE_PRESSURE_WARNING;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Edge Pressure Warning !";
@@ -1410,10 +1505,10 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
-
 		// ...
 		{
 			alarm_id = ALID__HE_EDGE_PRESSURE_FAULT;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Edge Pressure Fault !";
@@ -1432,6 +1527,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__HE_CENTER_FLOW_MIN_THRESHOLD;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Center Flow Min. Threshold Error !";
@@ -1446,6 +1542,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__HE_CENTER_FLOW_MAX_THREASHOLD;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Center Flow Max. Threshold Error !";
@@ -1463,6 +1560,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		// ...
 		{
 			alarm_id = ALID__HE_EDGE_FLOW_MIN_THRESHOLD;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Edge Flow Min. Threshold Error !";
@@ -1476,7 +1574,8 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		}	
 		// ...
 		{
-			alarm_id = ALID__HE_EDGE_FLOW_MAX_THREASHOLD;
+			alarm_id = ALID__HE_EDGE_FLOW_MAX_THRESHOLD;
+			iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 			alarm_title  = title;
 			alarm_title += "He Edge Flow Max. Threshold Error !";
@@ -1493,6 +1592,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HE_WAFER_MINIMUM_LEAK_SCCM;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Wafer가 Dechuck된 상태가 아닙니다 !";
@@ -1508,6 +1608,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Wafer Maximum Leak Error !";
@@ -1523,6 +1624,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SHUTTER_NOT_CLOSE;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Shutter not close !";
@@ -1537,6 +1639,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SLOT_VALVE_NOT_CLOSE;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Slot-Valve not close !";
@@ -1552,6 +1655,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HE_PRESSURE__MAX_ERROR;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "He pressure Max. error !";
@@ -1567,6 +1671,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HE_CENTER_CONFIG_RANGE_ERROR;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Helium center config range error !";
@@ -1587,6 +1692,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HE_SET__ERROR;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Helium setting error !";
@@ -1595,6 +1701,71 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "ESC 상태가 \"Chucked\"인 상태에서만 가능합니다. \n";
 
 		ACT__CLEAR;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_ALL_DISABLE;
+		iLIST_ALID__ESC.Add(alarm_id);
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "All Interlock Disable !";
+
+		alarm_msg  = "모든 Interlock이 Disable 된 상태입니다. \n";
+		alarm_msg += "계속 진행 할까요? \n";
+
+		ACT__YES_NO;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_VACUUM_DISABLE;
+		iLIST_ALID__ESC.Add(alarm_id);
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Vacuum Interlock Disable !";
+
+		alarm_msg  = "Vacuum Interlock이 Disable 된 상태입니다. \n";
+		alarm_msg += "계속 진행 할까요? \n";
+
+		ACT__YES_NO;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_WAFER_DISABLE;
+		iLIST_ALID__ESC.Add(alarm_id);
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Wafer Interlock Disable !";
+
+		alarm_msg  = "Wafer Interlock이 Disable 된 상태입니다. \n";
+		alarm_msg += "계속 진행 할까요? \n";
+
+		ACT__YES_NO;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_CHM_ISO_DISABLE;
+		iLIST_ALID__ESC.Add(alarm_id);
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Chamber-Isolation Interlock Disable !";
+
+		alarm_msg  = "Chamber-Isolation Interlock이 Disable 된 상태입니다. \n";
+		alarm_msg += "계속 진행 할까요? \n";
+
+		ACT__YES_NO;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1794,15 +1965,31 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Final_Out_Vlv_CENTER, obj_name,var_name);			
 
+				//
 				def_name = "CH__DO_HE_FINAL_DUMP_VLV.CENTER";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Final_Dump_Vlv_CENTER, obj_name,var_name);			
 
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__He_Final_Dump_Vlv_CENTER = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Final_Dump_Vlv_CENTER, obj_name,var_name);			
+				}
+
+				//
 				def_name = "CH__DO_HE_SIDE_DUMP_VLV.CENTER";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Dump_Vlv_CENTER, obj_name,var_name);
+
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__He_Side_Dump_Vlv_CENTER = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Dump_Vlv_CENTER, obj_name,var_name);
+				}
 
 				//
 				def_name = "CH__DO_HE_SIDE_EXHAUST_VLV.CENTER";
@@ -1825,15 +2012,31 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Final_Out_Vlv_EDGE, obj_name,var_name);			
 
+				//
 				def_name = "CH__DO_HE_FINAL_DUMP_VLV.EDGE";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Final_Dump_Vlv_EDGE, obj_name,var_name);			
 
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__He_Final_Dump_Vlv_EDGE = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Final_Dump_Vlv_EDGE, obj_name,var_name);			
+				}
+
+				//
 				def_name = "CH__DO_HE_SIDE_DUMP_VLV.EDGE";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Dump_Vlv_EDGE, obj_name,var_name);
+
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__He_Side_Dump_Vlv_EDGE = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__He_Side_Dump_Vlv_EDGE, obj_name,var_name);
+				}
 
 				//
 				def_name = "CH__DO_HE_SIDE_EXHAUST_VLV.EDGE";
@@ -2040,6 +2243,12 @@ int CObj__ESC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 			sCH__APP_LOG_MSG->Set__DATA(log_msg);
 			sCH__APP_LOG_SUB_MSG->Set__DATA("");
 		}
+	}
+
+	// ...
+	{
+		dCH__MON_ESC_CTRL_ACTIVE->Set__DATA(STR__OFF);
+		dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__OFF);
 	}
 
 	iACTIVE_FLAG = -1;

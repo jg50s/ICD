@@ -120,6 +120,13 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 		}
 	}
 
+	// CFG : SYSTEM ...
+	{
+		str_name = "CFG.PART.USE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PART_USE, str_name);
+	}
+
 	// CFG : ERROR CHECK ...
 	for(i=0; i<iLOOP_SIZE; i++)
 	{
@@ -388,6 +395,17 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 		}
 	}
 
+	// MON.PART ...
+	{
+		str_name = "MON.HTR.CTRL.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_HTR_CTRL_ACTIVE, str_name);
+
+		str_name = "MON.HTR.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_HTR_ERROR_ACTIVE, str_name);
+	}
+
 	// MON.ACTIVE ...
 	{
 		str_name = "MON.HEATING.ACTIVE";
@@ -609,11 +627,15 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	CString str_bff;
 	int i;
 
-	for(i=0; i<CFG__LOOP_SIZE; i++)
+	iLIST_ALID__HTR.RemoveAll();
+
+	// for(i=0; i<CFG__LOOP_SIZE; i++)
+	for(i=0; i<iLOOP_SIZE; i++)
 	{
 		// Loop Warning ...
 		{
 			alarm_id = ALID__WARNING__LOOP_X + i;
+			iLIST_ALID__HTR.Add(alarm_id);
 
 			str_bff.Format("Loop%1d Warning !", i+1);
 
@@ -630,6 +652,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 		// Loop Fault ...
 		{
 			alarm_id = ALID__FAULT__LOOP_X + i;
+			iLIST_ALID__HTR.Add(alarm_id);
 
 			str_bff.Format("Loop%1d Fault !", i+1);
 
@@ -647,6 +670,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 		// DI.OVER_TEMP ...
 		{
 			alarm_id = ALID__DI_OVER_TEMP__LOOP_X + i;
+			iLIST_ALID__HTR.Add(alarm_id);
 
 			str_bff.Format("Loop%1d Over-Temperature (DI) !", i+1);
 
@@ -661,6 +685,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 		// DI.HIGH_LIMIT ...
 		{
 			alarm_id = ALID__DI_HIGH_LIMIT__LOOP_X + i;
+			iLIST_ALID__HTR.Add(alarm_id);
 
 			str_bff.Format("Loop%1d High-Limit (DI) !", i+1);
 
@@ -677,6 +702,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MAX_DIFF_TEMPERATURE;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "Max. Diff Temperature Error !";
 
@@ -692,6 +718,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__TEMPERATURE_HIGH_LIMIT;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "Temperature High Limit !";
 
@@ -707,6 +734,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__POWER_HIGH_LIMIT;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "Output-Power High Limit !";
 
@@ -722,6 +750,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__INITIAL_HEATING_TIMEOUT;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "Initial-Heating Timeout Occurred !";
 
@@ -737,6 +766,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HEATING_TIMEOUT;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "Heating Timeout Occurred !";
 
@@ -752,6 +782,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MAX_DEVIATION_LOOP;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "Max. Deviation Occurred !";
 
@@ -768,6 +799,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 00...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_00;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 00) !";
 
@@ -783,6 +815,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 01...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_01;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 01) !";
 
@@ -798,6 +831,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 02...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_02;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 02) !";
 
@@ -813,6 +847,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 03...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_03;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 03) !";
 
@@ -828,6 +863,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 04...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_04;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 04) !";
 
@@ -843,6 +879,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 05...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_05;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 05) !";
 
@@ -858,6 +895,7 @@ int CObj__MINI8_IO::__DEFINE__ALARM(p_alarm)
 	// BIT : 06...
 	{
 		alarm_id = ALID__HW_ALARM__BIT_06;
+		iLIST_ALID__HTR.Add(alarm_id);
 
 		str_bff = "H/W Alarm Occurred (Bit : 06) !";
 

@@ -78,6 +78,36 @@ int CObj__MINI8_IO
 		loop_count++;
 		if(loop_count > 10)			loop_count = 1;
 
+		//
+		if(loop_count == 1)
+		{
+			bool active__htr_ctrl = false;
+
+			for(i=0; i<iLOOP_SIZE; i++)
+			{
+				bool active__idle_check = false;
+				bool active__proc_check = false;
+
+				if(dCH__MON_IDLE_ERROR_CHECK_ACTIVE__LOOP_X[i]->Check__DATA(STR__ON) > 0)			active__idle_check = true;
+				if(dCH__MON_PROC_ERROR_CHECK_ACTIVE__LOOP_X[i]->Check__DATA(STR__ON) > 0)			active__proc_check = true;
+
+				if((active__idle_check)
+				|| (active__proc_check))
+				{	
+					active__htr_ctrl = true;
+				}
+			}
+
+			if(active__htr_ctrl)			dCH__MON_HTR_CTRL_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_HTR_CTRL_ACTIVE->Set__DATA(STR__OFF);
+
+			//
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__HTR);
+
+			if(active__err_check > 0)		dCH__MON_HTR_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_HTR_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
+
 		// Range Check ...
 		if(loop_count == 1)
 		{
@@ -266,8 +296,14 @@ int CObj__MINI8_IO
 			}
 		}
 
+		// ...
+		bool active__err_check = true;
+
+		if(dCH__CFG_PART_USE->Check__DATA(STR__YES) < 0)			active__err_check = false;
+
 		// Alarm Check : H/W ...
-		if(loop_count == 1)
+		if((loop_count == 1)
+		&& (active__err_check))
 		{
 			for(int i=0; i<CFG__ALARM_BIT_SIZE; i++)
 			{

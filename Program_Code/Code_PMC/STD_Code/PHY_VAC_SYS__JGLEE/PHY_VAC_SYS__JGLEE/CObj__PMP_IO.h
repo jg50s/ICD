@@ -19,9 +19,14 @@ private:
 	
 	// ...
 	SCX__USER_LOG_CTRL xI_LOG_CTRL;
+
+	CUIntArray iLIST_ALID__PART;
 	//
 	
 	//-------------------------------------------------------------------------
+	// MON.PART ...
+	CX__VAR_DIGITAL_CTRL dCH__MON_PART_ERROR_ACTIVE;
+
 	// MON ...
 	CX__VAR_STRING_CTRL  sCH__MON_COMM_STATE;
 	CX__VAR_DIGITAL_CTRL dCH__MON_PUMP_POWER_SNS;

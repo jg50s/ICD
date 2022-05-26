@@ -39,11 +39,15 @@ int  CObj__ESC_IO
 int  CObj__ESC_IO
 ::Call__VENT_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+	dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
+
 	return Fnc__VENT_READY(p_variable, p_alarm);
 }
 int  CObj__ESC_IO
 ::Call__PUMP_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+	dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
+
 	return Fnc__PUMP_READY(p_variable, p_alarm);
 }
 

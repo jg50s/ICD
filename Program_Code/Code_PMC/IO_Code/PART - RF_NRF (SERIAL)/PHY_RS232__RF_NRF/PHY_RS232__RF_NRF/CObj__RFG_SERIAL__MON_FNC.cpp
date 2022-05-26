@@ -13,7 +13,11 @@ int CObj__RFG_SERIAL
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
+		// ...
+		bool active__err_check = true;
+		if(dCH__CFG_PART_USE->Check__DATA("YES") < 0)			active__err_check = false;
 
+		//
 		if(iActive__SIM_MODE > 0)
 		{
 			CString ch_data;
@@ -33,14 +37,17 @@ int CObj__RFG_SERIAL
 
 		if(dCH__MON_COMM_STS->Check__DATA(STR__OFFLINE) > 0)
 		{
-			int alarm_id = ALID__GEN_OFFLINE_ALARM;
-			CString alm_msg;
-			CString	r_act;
+			if(active__err_check)
+			{
+				int alarm_id = ALID__GEN_OFFLINE_ALARM;
+				CString alm_msg;
+				CString	r_act;
 
-			alm_msg = sPROTOCOL_INFO;
-
-			p_alarm->Check__ALARM(alarm_id,r_act);
-			p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+				alm_msg = sPROTOCOL_INFO;
+	
+				p_alarm->Check__ALARM(alarm_id,r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+			}
 		}
 
 		// ...

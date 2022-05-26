@@ -1384,6 +1384,18 @@ public:
 
 	//-------------------------------------------------------------------------
 	virtual int Post__WARNING_With_MESSAGE(const int id,const CString& msg) = 0;
+
+	//-------------------------------------------------------------------------
+	virtual int Check__Posted_Internal_Alarm(const CUIntArray& l_internal_id) = 0;
+	virtual int Get__Posted_Internal_Alarm(CUIntArray& l_internal_id) = 0;
+
+	virtual int Get__Posted_All_Alarm(CUIntArray& l_eqp_id,
+									  CUIntArray& l_sys_id,
+									  CStringArray& l_obj_name,
+									  CUIntArray& l_internal_id) = 0;
+
+	virtual int Delete__Cleared_All_Alarm() = 0;
+	virtual int Get__Posted_Alarm_DB_Size() = 0;
 };
 
 
@@ -1934,6 +1946,10 @@ public:
 	
 	virtual int Get__PARAMETER_SIZE() = 0;
 	virtual int Get__PARAMETER_INFO(const int db_index, CString& para_name,CString& para_data) = 0;
+
+	// ...
+	virtual int Set__DRIVER_DEADLOCK_TIMEOUT(const double cfg_sec) = 0;
+	virtual double Get__DRIVER_DEADLOCK_TIMEOUT() = 0;						// Default : 30.0 sec, Min : 10.0 sec 
 };
 
 class CII_DEFINE__FA_PARAMETER

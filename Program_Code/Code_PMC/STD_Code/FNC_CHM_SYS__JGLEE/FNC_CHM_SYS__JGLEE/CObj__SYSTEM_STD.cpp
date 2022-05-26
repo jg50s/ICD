@@ -21,10 +21,12 @@ int CObj__SYSTEM_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__SYSTEM_INIT,	"SYSTEM_INIT");
+		ADD__CTRL_VAR(sMODE__SYSTEM_INIT,  "SYSTEM_INIT");
 		ADD__CTRL_VAR(sMODE__SYSTEM_MAINT, "SYSTEM_MAINT");
 
 		ADD__CTRL_VAR(sMODE__TRANSFER_INIT, "TRANSFER_INIT");
+
+		ADD__CTRL_VAR(sMODE__WAFER_UPDATE, "WAFER_UPDATE");
 	}
 	return 1;
 }
@@ -159,6 +161,21 @@ int CObj__SYSTEM_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CFG : CHAMBER ...
 	{
+		// SLOT_VALVE ...
+		{
+			str_name = "CFG.SYS_INIT.CHM.SLOT_VALVE_CLOSE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_SYS_INIT_CHM_SLOT_VALVE_CLOSE, str_name);
+
+			str_name = "LINK.OBJ_NAME.CHM.SLOT_VALVE_CLOSE";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__LINK_OBJ_NAME_CHM_SLOT_VALVE_CLOSE, str_name);
+
+			str_name = "LINK.OBJ_ACTIVE.CHM.SLOT_VALVE_CLOSE";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__LINK_OBJ_ACTIVE_CHM_SLOT_VALVE_CLOSE, str_name);
+		}
+
 		// LIFT_PIN ...
 		{
 			str_name = "CFG.SYS_INIT.CHM.LIFT_PIN_DOWN";
@@ -439,6 +456,21 @@ int CObj__SYSTEM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			// 1.
 			{
+				def_name = "OBJ_CHAMBER.SLOT_VALVE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+				bool def_check = x_utility.Check__Link(obj_name);
+				bACTIVE_CHM__SLOT_VALVE = def_check;
+
+				if(def_check)
+				{
+					pOBJ_CTRL__CHM_SLOT_VALVE = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+				}
+
+				sCH__LINK_OBJ_NAME_CHM_SLOT_VALVE_CLOSE->Set__DATA(obj_name);
+			}
+			// 2.
+			{
 				def_name = "OBJ_CHAMBER.LIFT_PIN";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
@@ -476,15 +508,17 @@ int CObj__SYSTEM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__SYSTEM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	DECLARE__EXT_CTRL(p_variable);
+
+	int flag = -1;
+
 	// ...
 	{
 		CString log_msg;
+		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
-		log_msg.Format("Start ... :  [%s]",mode);
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
-
-	int flag = -1;
 
 	// ...
 	{
@@ -499,6 +533,10 @@ int CObj__SYSTEM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_INIT)
 		{
 			flag = Call__TRANSFER_INIT(p_variable, p_alarm);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__WAFER_UPDATE)
+		{
+			flag = Call__WAFER_UPDATE(p_variable, p_alarm);
 		}
 	}
 

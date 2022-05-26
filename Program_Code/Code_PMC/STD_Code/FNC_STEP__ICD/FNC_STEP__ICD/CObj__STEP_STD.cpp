@@ -75,6 +75,10 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "INFO.STEP.CUR_NUM";
 		STD__ADD_STRING(var_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_STEP_CUR_NUM, var_name);
+
+		var_name = "INFO.STEP.PRE_TIME";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_STEP_PRE_TIME, var_name);
 	}
 
 	// MON ...
@@ -178,6 +182,10 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.STEP.TIME";
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 9999, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_STEP_TIME, var_name);
+
+			var_name = "RCP.STEP.OVERETCH.PERCENT";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 1, 0, 100, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_STEP_OVERETCH_PERCENT, var_name);
 		}
 
 		// APC ...
@@ -203,6 +211,13 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.APC.HOLD.DELAY";
 			STD__ADD_STRING_WITH_OPTION(var_name, 0, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_APC_HOLD_DELAY, var_name);
+		}
+
+		// DGF ...
+		{
+			var_name = "RCP.DGF.CENTER.PERCENT";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 1, 0.0, 100.0, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_DGF_CENTER_PERCENT, var_name);
 		}
 
 		// MFC ...
@@ -326,6 +341,64 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_DIGITAL_WITH_OPTION(var_name, "Down Middle Up", -1, "E", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_LIFT_PIN_MODE, var_name);
 		}
+
+		// EPD ...
+		{
+			list_item = "Idle OverValue.Check UnderValue.Check OverValue.Slope UnderValue.Slope Error.Check ValueChange ValueSlope PercentChange PercentSlope";
+
+			var_name = "RCP.EPD.EPD_MODE";
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, list_item, -1, "E", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__RCP_EPD_EPD_MODE, var_name);
+
+			//
+			var_name = "RCP.EPD.VALUE_TO_CHANGE";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 1, -1000, 1000, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_VALUE_TO_CHANGE, var_name);
+
+			var_name = "RCP.EPD.PERCENT_TO_CHANGE";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 1, -100, 100, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_PERCENT_TO_CHANGE, var_name);
+
+			//
+			var_name = "RCP.EPD.DELAY_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0.0, 30, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_DELAY_TIME, var_name);
+
+			var_name = "RCP.EPD.NORMALIZE_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0.0, 10, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_NORMALIZE_TIME, var_name);
+
+			//
+			var_name = "RCP.EPD.MIN_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0.0, 100, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_MIN_TIME, var_name);
+
+			var_name = "RCP.EPD.MAX_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0.0, 100, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_MAX_TIME, var_name);
+
+			//
+			var_name = "RCP.EPD.MIN_THRESHOLD";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 0, 1.0, 1000, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_MIN_THRESHOLD, var_name);
+
+			var_name = "RCP.EPD.MAX_THRESHOLD";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 0, 1.0, 1000, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_MAX_THRESHOLD, var_name);
+
+			//
+			var_name = "RCP.EPD.SLOPE_VALUE";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "slope", 1, 0.1, 1.0, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_SLOPE_VALUE, var_name);
+
+			var_name = "RCP.EPD.SLOPE_TYPE";
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, "Up Down Flat UpToFlat DownToFlat", -1, "E", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__RCP_EPD_SLOPE_TYPE, var_name);
+
+			var_name = "RCP.EPD.SLOPE_VALID_TIME";
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0.5, 5.0, -1, "E", "");
+			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_SLOPE_VALID_TIME, var_name);
+		}
 	}
 
 	return 1;
@@ -411,6 +484,21 @@ int CObj__STEP_STD::__DEFINE__ALARM(p_alarm)
 		alarm_title += "Temperature stable timeout warning In the step preparation.";
 
 		alarm_msg = "Please, check the current temperature of system and temperature parameter in 1st step recipe ! \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__STEP_PARAMETER__SETTING_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "Step parameter setting error !";
+
+		alarm_msg = "Please, check the step parameter in recipe. \n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CLEAR);
@@ -532,6 +620,24 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PT_X__MON_ABORT_ACTIVE[i], obj_name,var_name);
+		}
+	}
+
+	// OBJ.DGF ...
+	{
+		def_name = "OBJ__DGF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__DGF = def_check;
+
+		if(def_check)
+		{
+			pOBJ_CTRL__DGF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			var_name = "CENTER.Wt.SETPOINT";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__DGF_OBJ__CENTER_Wt_SETPOINT, obj_name,var_name);
 		}
 	}
 
@@ -842,6 +948,66 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				var_name.Format("MON.IDLE.ABORT.ACTIVE.LOOP.%02d", id);
 				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__HTR_WALL__MON_IDLE_ABORT_ACTIVE_X[i], obj_name,var_name);
 			}
+		}
+	}
+
+	// OBJ.EPD ...
+	{
+		def_name = "OBJ__EPD";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__EPD = def_check;
+
+		if(def_check)
+		{
+			pOBJ_CTRL__EPD = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			var_name = "PARA.EPD.MODE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__EPD__PARA_EPD_MODE, obj_name,var_name);
+
+			//
+			var_name = "PARA.VALUE_TO_CHANGE";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_VALUE_TO_CHANGE, obj_name,var_name);
+
+			var_name = "PARA.PERCENT_TO_CHANGE";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_PERCENT_TO_CHANGE, obj_name,var_name);
+
+			//
+			var_name = "PARA.DELAY.TIME";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__EPD__PARA_DELAY_TIME, obj_name,var_name);
+
+			var_name = "PARA.NORMALIZE_TIME";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_NORMALIZE_TIME, obj_name,var_name);
+
+			//
+			var_name = "PARA.EPD.TIMEOUT.MINIMUM";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__EPD__PARA_EPD_TIMEOUT_MINIMUM, obj_name,var_name);
+
+			var_name = "PARA.EPD.TIMEOUT.MAXIMUM";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__EPD__PARA_EPD_TIMEOUT_MAXIMUM, obj_name,var_name);
+
+			//
+			var_name = "PARA.EPD.THRESHOLD.MIN";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_EPD_THRESHOLD_MIN, obj_name,var_name);
+
+			var_name = "PARA.EPD.THRESHOLD.MAX";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_EPD_THRESHOLD_MAX, obj_name,var_name);
+
+			//
+			var_name = "PARA.SLOPE_COUNT";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_SLOPE_COUNT, obj_name,var_name);
+
+			var_name = "PARA.SLOPE_DIRECTION";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_SLOPE_DIRECTION, obj_name,var_name);
+
+			var_name = "PARA.VALID_TIME";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__EPD__PARA_VALID_TIME, obj_name,var_name);
+
+			//
+			var_name = "MON.IDLE.INTENSITY.ERROR.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__EPD__MON_ERROR_ACTIVE, obj_name,var_name);
 		}
 	}
 

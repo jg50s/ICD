@@ -72,13 +72,13 @@ int CObj__ARCTIC_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CFG ...
 	{
-		str_name = "CFG.DRV_CHAR_SEDN_DELAY.mSEC";
-		STD__ADD_ANALOG_WITH_OPTION(str_name, "msec", 0, 0, 100, -1, "L", "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_CHAR_SEDN_DELAY_mSEC, str_name);
+		str_name = "CFG.DRV_CHAR_SEDN_DELAY.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 3, 0.01, 1.0, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_CHAR_SEDN_DELAY_SEC, str_name);
 
-		str_name = "CFG.DRV_LINE_SEDN_DELAY.mSEC";
-		STD__ADD_ANALOG_WITH_OPTION(str_name, "msec", 0, 0, 100, -1, "L", "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_LINE_SEDN_DELAY_mSEC, str_name);
+		str_name = "CFG.DRV_LINE_SEDN_DELAY.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 3, 0.01, 1.0, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_LINE_SEDN_DELAY_SEC, str_name);
 
 		//
 		str_name = "CFG.DRV_LOG.ENABLE";
@@ -103,14 +103,9 @@ int CObj__ARCTIC_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_POWER_SETPOINT, str_name);
 
-		//
-		str_name = "INFO.FORWARD_POWER";
+		str_name = "INFO.REFLECTED_POWER";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__INFO_FORWARD_POWER, str_name);
-
-		str_name = "INFO.REFLECT_POWER";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__INFO_REFLECT_POWER, str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_REFLECTED_POWER, str_name);
 
 		//
 		str_name = "INFO.RF_VOLTAGE";
@@ -291,6 +286,10 @@ int CObj__ARCTIC_SERIAL::__DEFINE__VARIABLE_IO(p_io_variable)
 		str_name = "ao.DIGITAL_POWER.SET";
 		IO__ADD_ANALOG_WRITE(str_name, "watt", 0, 0.0, 7000.0);
 		LINK__IO_VAR_ANALOG_CTRL(aoCH__DIGITAL_POWER_SET, str_name);
+
+		str_name = "do.DIGITAL_POWER.CTRL";
+		IO__ADD_DIGITAL_WRITE(str_name, APP_DSP__OFF_ON);	
+		LINK__IO_VAR_DIGITAL_CTRL(doCH__DIGITAL_POWER_CTRL, str_name);
 
 		//
 		str_name = "do.PLASMA_ON_ENABLE.TURN_ON";
@@ -523,7 +522,7 @@ int CObj__ARCTIC_SERIAL::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm
 
 	// ...
 	{
-		IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
+			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__LOCAL)			flag = Call__CTRL_MODE(p_variable, p_alarm, false);
 		ELSE_IF__CTRL_MODE(sMODE__REMOTE)			flag = Call__CTRL_MODE(p_variable, p_alarm, true);

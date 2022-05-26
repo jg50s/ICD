@@ -37,6 +37,11 @@ int CObj__DGF_FLEX
 		dEXT_CH__BRANCH2_EDGE_VALVE->Set__DATA(STR__CLOSE);
 	}
 
+	// ...
+	{
+		sCH__CUR_CENTER_SETPOINT->Set__DATA("__");
+		dCH__MON_ALL_CLOSE_ACTIVE->Set__DATA(STR__ON);
+	}
 	return 1;
 }
 
@@ -48,8 +53,13 @@ int CObj__DGF_FLEX
 	int level = -1;
 
 	// 1. DGF Current Set Point Reading
-	aCH__CENTER_Wt_SET_POINT->Get__DATA(str_data);
-	set_point = atof(str_data);
+	{
+		aCH__CENTER_Wt_SET_POINT->Get__DATA(str_data);
+		set_point = atof(str_data);
+
+		sCH__CUR_CENTER_SETPOINT->Set__DATA(str_data);
+		dCH__MON_ALL_CLOSE_ACTIVE->Set__DATA(STR__OFF);
+	}
 
 	// 2. DGF Function Table Reading
 	for(int i=0; i<_CFG__MAX_DGF_LEVEL; i++)

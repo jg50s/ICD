@@ -68,16 +68,16 @@ int  CObj__ESC_IO
 				center__delay_check__final_vlv = doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				center__delay_check__final_vlv = doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 			}
@@ -89,16 +89,16 @@ int  CObj__ESC_IO
 				edge__delay_check__final_vlv = doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				edge__delay_check__final_vlv = doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 			}
@@ -128,6 +128,11 @@ int  CObj__ESC_IO
 int  CObj__ESC_IO
 ::Fnc__HW_CHECK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+	// ...
+	{
+		dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
+	}
+
 	// Pressure Setting ...
 	{
 		sCH__APP_LOG_SUB_MSG->Set__DATA("Pressure Setting ...");
@@ -139,17 +144,17 @@ int  CObj__ESC_IO
 		{
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 			}
@@ -158,17 +163,17 @@ int  CObj__ESC_IO
 		{
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 			}
@@ -265,17 +270,17 @@ int  CObj__ESC_IO
 		{
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);	
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);	
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);	
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);	
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);	
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);	
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 			}
@@ -284,17 +289,17 @@ int  CObj__ESC_IO
 		{
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);	
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);	
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);	
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);	
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);	
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);	
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 			}
@@ -315,6 +320,12 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 {
 	if(chuck_mode <  0)							return -1;
 	if(chuck_mode >= DEF__CHUCK_MODE_SIZE)		return -2;
+
+	// ...
+	{
+		dCH__MON_ESC_CTRL_ACTIVE->Set__DATA(STR__ON);
+		dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
+	}
 
 	// ...
 	SCX__ASYNC_TIMER_CTRL x_app_timer;
@@ -363,7 +374,7 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			 if(chuck_mode == 0)		sCH__RESULT_CHUCK_CHART_TEST_MODE->Set__DATA("CHUCK");
 		else if(chuck_mode == 1)		sCH__RESULT_CHUCK_CHART_TEST_MODE->Set__DATA("CHUCK1");
 		else if(chuck_mode == 2)		sCH__RESULT_CHUCK_CHART_TEST_MODE->Set__DATA("CHUCK2");
-		else							sCH__RESULT_CHUCK_CHART_TEST_MODE->Set__DATA("Unkown !!!");
+		else							sCH__RESULT_CHUCK_CHART_TEST_MODE->Set__DATA("Unknown !!!");
 
 		sCH__RESULT_CHUCK_CHART_TEST_RESULT->Set__DATA("???");
 	}
@@ -473,35 +484,69 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 		}
 	}
 
+	// Test Data Init ...
+	{
+		// RESULT POINT1 ...
+		if((chuck_mode == 0)
+		|| (chuck_mode == 1))
+		{
+			sCH__RESULT_CH1_ESC_CHUCKING_VOLTAGE_READING_POINT1->Set__DATA("");
+			sCH__RESULT_CH1_ESC_CHUCKING_CURRENT_READING_POINT1->Set__DATA("");
+
+			sCH__RESULT_CH2_ESC_CHUCKING_VOLTAGE_READING_POINT1->Set__DATA("");
+			sCH__RESULT_CH2_ESC_CHUCKING_CURRENT_READING_POINT1->Set__DATA("");
+
+			sCH__RESULT_HE_CENTER_PRESSURE_READING_POINT1->Set__DATA("");
+			sCH__RESULT_HE_CENTER_FLOW_READING_POINT1->Set__DATA("");
+
+			sCH__RESULT_HE_EDGE_PRESSURE_READING_POINT1->Set__DATA("");
+			sCH__RESULT_HE_EDGE_FLOW_READING_POINT1->Set__DATA("");
+		}
+		// RESULT POINT2 ...
+		{
+			sCH__RESULT_CH1_ESC_CHUCKING_VOLTAGE_READING_POINT2->Set__DATA("");
+			sCH__RESULT_CH1_ESC_CHUCKING_CURRENT_READING_POINT2->Set__DATA("");
+
+			sCH__RESULT_CH2_ESC_CHUCKING_VOLTAGE_READING_POINT2->Set__DATA("");
+			sCH__RESULT_CH2_ESC_CHUCKING_CURRENT_READING_POINT2->Set__DATA("");
+
+			sCH__RESULT_HE_CENTER_PRESSURE_READING_POINT2->Set__DATA("");
+			sCH__RESULT_HE_CENTER_FLOW_READING_POINT2->Set__DATA("");
+
+			sCH__RESULT_HE_EDGE_PRESSURE_READING_POINT2->Set__DATA("");
+			sCH__RESULT_HE_EDGE_FLOW_READING_POINT2->Set__DATA("");
+		}
+	}
+
 	// Interlock Check ...
 	{
 		sCH__APP_LOG_SUB_MSG->Set__DATA("Interlock Checking");
 		sCH__RESULT_CHUCK_CHART_MAIN_MSG->Set__DATA("Interlock Checking ...");
 
-		// ESC Voltage : Interlock Check ...
+		if(dCH__CFG_INTERLOCK_MODE_ALL->Check__DATA(STR__DISABLE) > 0)
 		{
-			int err_check = -1;
+			int alarm_id = ALID__INTERLOCK_ALL_DISABLE;
+			CString r_act;
 
+			p_alarm->Popup__ALARM(alarm_id, r_act);
+
+			if(r_act.CompareNoCase(STR__YES) != 0)		return -101;
+		}
+		else
+		{
 			if(Fnc__HV_SENSOR_INTERLOCK_CHECK(p_alarm) < 0)
 			{
-				err_check = 1;
+				return -201;
 			}
+
 			if(Fnc__HV_SETPOINT_INTERLOCK_CHECK(p_alarm, para__set_volt_center,para__set_volt_edge) < 0)
 			{
-				err_check = 1;
+				return -202;
 			}
 
-			if(err_check > 0)
-			{
-				return -11;
-			}
-		}
-
-		// He Pressure : Interlock Check ...
-		{
 			if(Fnc__HE_SETPOINT_INTERLOCK_CHECK(p_alarm, para__set_press_center,para__set_press_edge) < 0)
 			{
-				return -12;
+				return -203;
 			}
 		}
 	}
@@ -515,24 +560,28 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 
 	x_chart_timer->START__COUNT_UP(9999);
 	
-
 	// TEST Parameter : Save ...
 	{
 		// control setting ...
 		{
 			// Center ...
+			if(bActive__CENTER_USE)
 			{
 				var_data.Format("%.1f", para__set_volt_center);
 				sCH__TEST_CH1_ESC_CHUCKING_VOLTAGE_SETPOINT_START->Set__DATA(var_data);
+
+				var_data.Format("%.1f", para__set_press_center);
+				sCH__TEST_HE_CENTER_PRESSURE_SETPOINT_START->Set__DATA(var_data);
 			}
 			// Edge ...
+			if(bActive__EDGE_USE)
 			{
 				var_data.Format("%.1f", para__set_volt_edge);
 				sCH__TEST_CH2_ESC_CHUCKING_VOLTAGE_SETPOINT_START->Set__DATA(var_data);
-			}
 
-			var_data.Format("%.1f", para__set_press_center);
-			sCH__TEST_HE_CENTER_PRESSURE_SETPOINT_START->Set__DATA(var_data);
+				var_data.Format("%.1f", para__set_press_edge);
+				sCH__TEST_HE_EDGE_PRESSURE_SETPOINT_START->Set__DATA(var_data);
+			}
 		}
 
 		// time (sec) ...
@@ -552,9 +601,14 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 				else if(i == 5)		var_data.Format("%.1f", cfg_sec_final_flow_stable);
 				else				continue;	
 
-				if(chuck_mode == 2)
+				if((chuck_mode == 0)
+				|| (chuck_mode == 1))
 				{
-					if(i >= 3)		sCH__RESULT_CHUCK_CHART_TIME[i]->Set__DATA("--");
+					sCH__RESULT_CHUCK_CHART_TIME[i]->Set__DATA("");
+				}
+				else if(chuck_mode == 2)
+				{
+					if(i > 3)		sCH__RESULT_CHUCK_CHART_TIME[i]->Set__DATA("--");
 				}
 
 				if(i > 0)
@@ -620,12 +674,11 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 	if((chuck_mode == 0)
 	|| (chuck_mode == 1))
 	{
-		SCX__TIMER_CTRL x_timer;
+		SCX__ASYNC_TIMER_CTRL x_timer__hv_on_delay;
 	
-		x_timer->REGISTER__ABORT_OBJECT(sObject_Name);
-		x_timer->REGISTER__COUNT_CHANNEL(sCH__RESULT_CHUCK_CHART_TIME[DEF_CHUCK_CHART__HV_ON]->Get__CHANNEL_NAME());
-		x_timer->SET__DECIMAL_POINT(2);
-		x_timer->INIT__COUNT_UP();
+		x_timer__hv_on_delay->REGISTER__COUNT_CHANNEL_NAME(sCH__RESULT_CHUCK_CHART_TIME[DEF_CHUCK_CHART__HV_ON]->Get__CHANNEL_NAME());
+		x_timer__hv_on_delay->START__COUNT_UP(9999);
+
 		x_app_timer->START__COUNT_UP(9999);
 
 		// He Bypass Flow ...  
@@ -638,17 +691,17 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 				{
 					if(doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Close) < 0)			delay_check = 1;
 			
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					if(doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Close) < 0)			delay_check = 1;
 
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 					if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 				}
@@ -659,17 +712,17 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 				{
 					if(doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Close) < 0)			delay_check = 1;
 
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					if(doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Close) < 0)			delay_check = 1;
 
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 					if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 				}
@@ -683,10 +736,13 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			}
 
 			// ---------------------------------------------------------------------------
-			double cfg_off_delay = cfg_sec__hv_off;
+			SCX__ASYNC_TIMER_CTRL x_timer__hv_off;
+
+			x_timer__hv_off->REGISTER__COUNT_CHANNEL_NAME(sCH__RESULT_CHUCK_CHART_TIME[DEF_CHUCK_CHART__HV_OFF]->Get__CHANNEL_NAME());
+			x_timer__hv_off->START__COUNT_UP(9999);
 
 			// HV Off ...
-			if(cfg_off_delay > 0.0)
+			if(cfg_sec__hv_off > 0.0)
 			{
 				if(bActive__CENTER_USE)			aoEXT_CH__ESC_Voltage_CENTER->Set__VALUE(0.0);
 				if(bActive__EDGE_USE)			aoEXT_CH__ESC_Voltage_EDGE->Set__VALUE(0.0);
@@ -696,18 +752,21 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 
 			if(delay_check > 0)
 			{
-				Sleep(900);
+				// ...
+				{
+					log_msg  = "Fnc__CHUCK() : Valve Delay (0.9 sec) ... \n";
+					log_msg += " * He_Final_Out_Vlv_Center (Open -> Close) \n";
+					log_msg += " * He_Final_Out_Vlv_Edge   (Open -> Close) \n";
+					log_msg += " * He_Side_Supply_Vlv      (Close -> Open) \n";
 
-				cfg_off_delay -= 1.0;
+					xLOG_CTRL->WRITE__LOG(log_msg);	
+				}
+
+				Sleep(900);
 			}
 
-			if(cfg_off_delay > 0.0)
+			if(cfg_sec__hv_off > 0.0)
 			{
-				SCX__TIMER_CTRL x_timer_off;
-
-				x_timer_off->REGISTER__ABORT_OBJECT(sObject_Name);
-				x_app_timer->START__COUNT_UP(9999);
-
 				// ...
 				{
 					log_msg.Format("Fnc__CHUCK() : HV Off Delay Started ...");	
@@ -718,15 +777,19 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 					sCH__RESULT_CHUCK_CHART_MAIN_MSG->Set__DATA(log_msg);
 				}
 
-				if(x_timer_off->POLL(cfg_off_delay) < 0)
+				while(x_timer__hv_off->Get__CURRENT_TIME() < cfg_sec__hv_off)
 				{
-					sCH__RESULT_CHUCK_CHART_SUB_MSG->Set__DATA("HV Off Delay Aborted ...");
-					return -11;
+					Sleep(1);
+
+					if(p_variable->Check__CTRL_ABORT() > 0)
+					{
+						sCH__RESULT_CHUCK_CHART_SUB_MSG->Set__DATA("HV Off Delay Aborted ...");
+						return -11;
+					}
 				}
 			}
 
-			var_data.Format("%.1f", cfg_sec__hv_off);
-			sCH__RESULT_CHUCK_CHART_TIME[DEF_CHUCK_CHART__HV_OFF]->Set__DATA(var_data);
+			x_timer__hv_off->STOP();
 			// ---------------------------------------------------------------------------
 
 			if(bActive__CENTER_USE)			aoEXT_CH__He_Pressure_CENTER->Set__VALUE(para__set_press_center);				
@@ -742,7 +805,7 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 		// HV On ...
 		{
 			if(bActive__CENTER_USE)			aoEXT_CH__ESC_Voltage_CENTER->Set__VALUE(para__set_volt_center);
-			if(bActive__EDGE_USE)			aoEXT_CH__ESC_Voltage_EDGE->Set__VALUE(para__set_volt_center);
+			if(bActive__EDGE_USE)			aoEXT_CH__ESC_Voltage_EDGE->Set__VALUE(para__set_volt_edge);
 
 			doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
 		}
@@ -761,13 +824,19 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 				sCH__RESULT_CHUCK_CHART_MAIN_MSG->Set__DATA(log_msg);
 			}
 
-			if(x_timer->POLL(cfg_sec__hv_on) < 0)
+			while(x_timer__hv_on_delay->Get__CURRENT_TIME() < cfg_sec__hv_on)
 			{
-				sCH__RESULT_CHUCK_CHART_SUB_MSG->Set__DATA("HV On Aborted ...");
-				return -11;
+				Sleep(1);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					sCH__RESULT_CHUCK_CHART_SUB_MSG->Set__DATA("HV On Aborted ...");
+					return -11;
+				}
 			}
 		}
 
+		x_timer__hv_on_delay->STOP();
 		x_app_timer->STOP();
 	}
 
@@ -785,9 +854,21 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 
 		// HV Stable ...
 		{
-			log_msg.Format("Center_Volt(%.0f V) & HV Stable (%.0f sec)", 
-							para__set_volt_center,
-							cfg_sec__hv_stable);
+			if((bActive__CENTER_USE)
+			&& (bActive__EDGE_USE))
+			{
+				log_msg.Format("Center_Volt(%.0f V) & Edge_Volt(%.0f V) & HV Stable (%.0f sec)", 
+								para__set_volt_center,
+								para__set_volt_edge,
+								cfg_sec__hv_stable);
+			}
+			else if(bActive__CENTER_USE)
+			{
+
+				log_msg.Format("Center_Volt(%.0f V) & HV Stable (%.0f sec)", 
+								para__set_volt_center,
+								cfg_sec__hv_stable);
+			}
 
 			sCH__APP_LOG_SUB_MSG->Set__DATA(log_msg);
 			sCH__RESULT_CHUCK_CHART_MAIN_MSG->Set__DATA(log_msg);
@@ -975,15 +1056,15 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			{
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 					if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 				}
@@ -992,15 +1073,15 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			{
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 					if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 				}
@@ -1129,27 +1210,43 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			}
 		}
 
-		// ...
+		if(bActive__CENTER_USE)
 		{
 			aCH__CFG_HE_CENTER_WAFER_MAX_LEAK->Get__DATA(var_data);
 			sCH__TEST_HE_CENTER_WAFER_LEAK_CHECK_REF->Set__DATA(var_data);
 		}
-
-		// ...
+		if(bActive__EDGE_USE)
 		{
-			double pt1_flow = 0.0;
-			double pt2_flow = 0.0;
+			aCH__CFG_HE_EDGE_WAFER_MAX_LEAK->Get__DATA(var_data);
+			sCH__TEST_HE_EDGE_WAFER_LEAK_CHECK_REF->Set__DATA(var_data);
+		}
 
-			// Center Flow Leak Check ...
+		// Flow Leak Check ...
+		{
+			// Center ...
+			if(bActive__CENTER_USE)
 			{
 				sCH__RESULT_HE_CENTER_FLOW_READING_POINT2->Get__DATA(var_data);
-				pt2_flow = atof(var_data);
+				double pt2_flow = atof(var_data);
 			
 				sCH__RESULT_HE_CENTER_FLOW_READING_POINT1->Get__DATA(var_data);
-				pt1_flow = atof(var_data);
+				double pt1_flow = atof(var_data);
 
 				var_data.Format("%.1f", pt2_flow - pt1_flow);
 				sCH__RESULT_HE_CENTER_WAFER_LEAK_CHECK_RESULT->Set__DATA(var_data);
+			}
+
+			// Edge ...
+			if(bActive__EDGE_USE)
+			{
+				sCH__RESULT_HE_EDGE_FLOW_READING_POINT2->Get__DATA(var_data);
+				double pt2_flow = atof(var_data);
+
+				sCH__RESULT_HE_EDGE_FLOW_READING_POINT1->Get__DATA(var_data);
+				double pt1_flow = atof(var_data);
+
+				var_data.Format("%.1f", pt2_flow - pt1_flow);
+				sCH__RESULT_HE_EDGE_WAFER_LEAK_CHECK_RESULT->Set__DATA(var_data);
 			}
 		}
 	}
@@ -1164,6 +1261,13 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			sCH__APP_LOG_SUB_MSG->Set__DATA(log_msg);
 
 			// ...
+			bool active__err_leak = false;
+
+			CString alm_msg;
+			CString alm_bff;
+
+			// Center ...
+			if(bActive__CENTER_USE)
 			{
 				sCH__TEST_HE_CENTER_WAFER_LEAK_CHECK_REF->Get__DATA(var_data);
 				double cfg_center__max_leak = atof(var_data);
@@ -1173,28 +1277,47 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 
 				if(cur_center__leak_flow > cfg_center__max_leak)
 				{
-					// Alarm ...
-					{
-						int alm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM;
-						CString alm_msg;
-						CString alm_bff;
-						CString r_act;
+					active__err_leak = true;
 
-						if(cur_center__leak_flow > cfg_center__max_leak)
-						{
-							alm_bff.Format("Current center wafer leak flow is %.1f sccm. \n", cur_center__leak_flow);
-							alm_msg += alm_bff;
+					alm_bff.Format("Current center wafer leak flow is %.1f sccm. \n", cur_center__leak_flow);
+					alm_msg += alm_bff;
 
-							alm_bff.Format("Config center wafer Max. leak is %.1f sccm. \n", cfg_center__max_leak);
-							alm_msg += alm_bff;
-							alm_msg += "\n";
-						}
-
-						p_alarm->Check__ALARM(alm_id, r_act);
-						p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-					}
-					return -101;
+					alm_bff.Format("Config center wafer Max. leak is %.1f sccm. \n", cfg_center__max_leak);
+					alm_msg += alm_bff;
+					alm_msg += "\n";
 				}
+			}			
+
+			// Edge ...
+			if(bActive__EDGE_USE)
+			{
+				sCH__TEST_HE_EDGE_WAFER_LEAK_CHECK_REF->Get__DATA(var_data);
+				double cfg_edge__max_leak = atof(var_data);
+
+				sCH__RESULT_HE_EDGE_WAFER_LEAK_CHECK_RESULT->Get__DATA(var_data);
+				double cur_edge__leak_flow = atof(var_data);
+
+				if(cur_edge__leak_flow > cfg_edge__max_leak)
+				{
+					active__err_leak = true;
+
+					alm_bff.Format("Current edge wafer leak flow is %.1f sccm. \n", cur_edge__leak_flow);
+					alm_msg += alm_bff;
+
+					alm_bff.Format("Config edge wafer Max. leak is %.1f sccm. \n", cfg_edge__max_leak);
+					alm_msg += alm_bff;
+					alm_msg += "\n";
+				}
+			}
+
+			if(active__err_leak)
+			{
+				int alm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM;
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+				return -101;
 			}
 
 			// ...
@@ -1364,15 +1487,15 @@ Fnc__HE_SET_OF_PROC(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm
 
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 			}
@@ -1383,15 +1506,15 @@ Fnc__HE_SET_OF_PROC(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm
 
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 			}
@@ -1416,17 +1539,17 @@ Fnc__HE_SET_OF_PROC(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm
 			{
 				if(doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Close) < 0)			active__close_delay = true;
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);		
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);		
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				if(doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Close) < 0)			active__close_delay = true;
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);		
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);		
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 			}
@@ -1437,17 +1560,17 @@ Fnc__HE_SET_OF_PROC(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm
 			{
 				if(doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Close) < 0)			active__close_delay = true;
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);		
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);		
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				if(doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Close) < 0)			active__close_delay = true;
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);		
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);		
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 			}
@@ -1482,48 +1605,74 @@ Fnc__HV_SENSOR_INTERLOCK_CHECK(CII_OBJECT__ALARM* p_alarm)
 {
 	int err_check = -1;
 
-	if(sEXT_CH__CHM_PRESSURE_STATUS->Check__DATA(STR__VAC) < 0)
+	if(dCH__CFG_INTERLOCK_MODE_VACUUM->Check__DATA(STR__ENABLE) > 0)
 	{
-		err_check = 1;
-
-		// ...
+		if(sEXT_CH__CHM_PRESSURE_STATUS->Check__DATA(STR__VAC) < 0)
 		{
-			CString log_msg = "Chamber pressure is not Vacuum !!!";						
-			xLOG_CTRL->WRITE__LOG(log_msg);	
-		}
+			err_check = 1;
 
-		// Alarm ...
-		{
-			int alm_id = ALID__ESC_CHUCK_ERROR__PRESSURE_NOT_VAC;
-			CString alm_msg;
-			CString alm_bff;
-			CString r_act;
+			// ...
+			{
+				CString log_msg = "Chamber pressure is not Vacuum !!!";						
+				xLOG_CTRL->WRITE__LOG(log_msg);	
+			}
 
-			p_alarm->Check__ALARM(alm_id,r_act);
-			p_alarm->Post__ALARM(alm_id);
+			// Alarm ...
+			{
+				int alm_id = ALID__ESC_CHUCK_ERROR__PRESSURE_NOT_VAC;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id,r_act);
+				p_alarm->Post__ALARM(alm_id);
+			}
 		}
 	}
-
-	if(dEXT_CH__WAFER_STATUS->Check__DATA(STR__NONE) > 0)
+	else
 	{
-		err_check = 1;
+		int alarm_id = ALID__INTERLOCK_VACUUM_DISABLE;
+		CString r_act;
 
-		// ...
+		p_alarm->Popup__ALARM(alarm_id, r_act);
+
+		if(r_act.CompareNoCase(STR__YES) == 0)		return 1;
+		return -11;
+	}
+
+	if(dCH__CFG_INTERLOCK_MODE_WAFER->Check__DATA(STR__ENABLE) > 0)
+	{
+		if(dEXT_CH__WAFER_STATUS->Check__DATA(STR__NONE) > 0)
 		{
-			CString log_msg = "Wafer does not exist !!!";						
-			xLOG_CTRL->WRITE__LOG(log_msg);	
-		}
+			err_check = 1;
 
-		// Alarm ...
-		{
-			int alm_id = ALID__ESC_CHUCK_ERROR__WAFER_NOT_EXIST;
-			CString alm_msg;
-			CString alm_bff;
-			CString r_act;
+			// ...
+			{
+				CString log_msg = "Wafer does not exist !!!";						
+				xLOG_CTRL->WRITE__LOG(log_msg);	
+			}
 
-			p_alarm->Check__ALARM(alm_id,r_act);
-			p_alarm->Post__ALARM(alm_id);
+			// Alarm ...
+			{
+				int alm_id = ALID__ESC_CHUCK_ERROR__WAFER_NOT_EXIST;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id,r_act);
+				p_alarm->Post__ALARM(alm_id);
+			}
 		}
+	}
+	else
+	{
+		int alarm_id = ALID__INTERLOCK_WAFER_DISABLE;
+		CString r_act;
+
+		p_alarm->Popup__ALARM(alarm_id, r_act);
+
+		if(r_act.CompareNoCase(STR__YES) == 0)		return 1;
+		return -21;
 	}
 
 	if(err_check > 0)
@@ -1633,68 +1782,80 @@ Fnc__HV_SETPOINT_INTERLOCK_CHECK(CII_OBJECT__ALARM* p_alarm, const double set_vo
 	}
 
 	// Shutter Close Check ...
-	bool active__shutter_error  = false;
-	bool active__slot_vlv_error = false;
-	
-	if(bActive__SHUTTER_STATUS)
+	if(dCH__CFG_INTERLOCK_MODE_CHM_ISO->Check__DATA(STR__DISABLE) > 0)
 	{
-		if(sEXT_CH__SHUTTER_STATUS->Check__DATA(STR__Close) < 0)			active__shutter_error = true;
-	}
-	if(bActive__SLOT_VALVE_STATE)
-	{
-		if(sEXT_CH__SLOT_VALVE_STATE->Check__DATA(STR__Close) < 0)			active__slot_vlv_error = true;
-	}
+		int alarm_id = ALID__INTERLOCK_CHM_ISO_DISABLE;
+		CString r_act;
 
-	if(active__slot_vlv_error)
-	{
-		err_check = 1;
+		p_alarm->Popup__ALARM(alarm_id, r_act);
 
-		// ...
+		if(r_act.CompareNoCase(STR__YES) != 0)			return -21;
+	}
+	else
+	{
+		bool active__shutter_error  = false;
+		bool active__slot_vlv_error = false;
+		
+		if(bActive__SHUTTER_STATUS)
 		{
-			int alm_id = ALID__SHUTTER_NOT_CLOSE;
-			CString alm_msg;
-			CString alm_bff;
-			CString r_act;
-
-			if(bActive__CENTER_USE)
-			{
-				alm_bff.Format("ESC Center에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_center);
-				alm_msg += alm_bff;
-			}
-			if(bActive__EDGE_USE)
-			{
-				alm_bff.Format("ESC Edge에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_edge);
-				alm_msg += alm_bff;
-			}
-
-			p_alarm->Check__ALARM(alm_id,r_act);
-			p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+			if(sEXT_CH__SHUTTER_STATUS->Check__DATA(STR__Close) < 0)			active__shutter_error = true;
 		}
-	}
-	if(active__slot_vlv_error)
-	{
-		err_check = 1;
-
-		// ...
+		if(bActive__SLOT_VALVE_STATE)
 		{
-			int alm_id = ALID__SLOT_VALVE_NOT_CLOSE;
-			CString alm_msg;
-			CString alm_bff;
-			CString r_act;
+			if(sEXT_CH__SLOT_VALVE_STATE->Check__DATA(STR__Close) < 0)			active__slot_vlv_error = true;
+		}
 
-			if(bActive__CENTER_USE)
-			{
-				alm_bff.Format("ESC Center에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_center);
-				alm_msg += alm_bff;
-			}
-			if(bActive__EDGE_USE)
-			{
-				alm_bff.Format("ESC Edge에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_edge);
-				alm_msg += alm_bff;
-			}
+		if(active__slot_vlv_error)
+		{
+			err_check = 1;
 
-			p_alarm->Check__ALARM(alm_id,r_act);
-			p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+			// ...
+			{
+				int alm_id = ALID__SHUTTER_NOT_CLOSE;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				if(bActive__CENTER_USE)
+				{
+					alm_bff.Format("ESC Center에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_center);
+					alm_msg += alm_bff;
+				}
+				if(bActive__EDGE_USE)
+				{
+					alm_bff.Format("ESC Edge에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_edge);
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Check__ALARM(alm_id,r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+			}
+		}
+		if(active__slot_vlv_error)
+		{
+			err_check = 1;
+
+			// ...
+			{
+				int alm_id = ALID__SLOT_VALVE_NOT_CLOSE;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				if(bActive__CENTER_USE)
+				{
+					alm_bff.Format("ESC Center에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_center);
+					alm_msg += alm_bff;
+				}
+				if(bActive__EDGE_USE)
+				{
+					alm_bff.Format("ESC Edge에 Voltage(%.1f V)를 인가 할 수 없습니다.\n", set_volt_edge);
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Check__ALARM(alm_id,r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+			}
 		}
 	}
 
@@ -2221,13 +2382,6 @@ Fnc__HE_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 			aCH__MON_HE_CENTER_FLOW_MAX_THRESHOLD->Get__DATA(var_data);
 			cfg__flow_max = atof(var_data);
 		}
-
-		if(iActive__SIM_MODE > 0)
-		{
-			check_flow = (cfg__flow_min + cfg__flow_max) * 0.5;
-
-			aiEXT_CH__He_Flow_CENTER_IO->Set__VALUE(check_flow);
-		}
 	}
 	else if(he_type == HE_TYPE__EDGE)
 	{
@@ -2235,7 +2389,7 @@ Fnc__HE_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 		alm_id__pressure_fault   = ALID__HE_EDGE_PRESSURE_FAULT;
 
 		alm_id__flow_min_threshold = ALID__HE_EDGE_FLOW_MIN_THRESHOLD;
-		alm_id__flow_max_threshold = ALID__HE_EDGE_FLOW_MAX_THREASHOLD;
+		alm_id__flow_max_threshold = ALID__HE_EDGE_FLOW_MAX_THRESHOLD;
 
 		if(check_point == CHECK_POINT__1)
 		{
@@ -2286,13 +2440,6 @@ Fnc__HE_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 
 			aCH__MON_HE_EDGE_FLOW_MAX_THRESHOLD->Get__DATA(var_data);
 			cfg__flow_max = atof(var_data);
-		}
-
-		if(iActive__SIM_MODE > 0)
-		{
-			check_flow = (cfg__flow_min + cfg__flow_max) * 0.5;
-
-			aiEXT_CH__He_Flow_EDGE_IO->Set__VALUE(check_flow);
 		}
 	}
 	else
@@ -2418,6 +2565,11 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 	if(dechuck_mode >= DEF__DECHUCK_MODE_SIZE)		return -102;
 
 	// ...
+	{
+		dCH__MON_ESC_CTRL_ACTIVE->Set__DATA(STR__ON);
+	}
+
+	// ...
 	SCX__ASYNC_TIMER_CTRL x_app_timer;
 	x_app_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__APP_TIMER_COUNT->Get__CHANNEL_NAME());
 	x_app_timer->STOP_ZERO();
@@ -2454,16 +2606,16 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 			}
@@ -2473,16 +2625,16 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 			}
@@ -2500,38 +2652,38 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 			{
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 					
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 			}
 			if(bActive__EDGE_USE)
 			{
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 			}
 			
@@ -2578,9 +2730,21 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 		return 1;
 	}
 
-	if(Fnc__HV_SENSOR_INTERLOCK_CHECK(p_alarm) < 0)
+	if(dCH__CFG_INTERLOCK_MODE_ALL->Check__DATA(STR__DISABLE) > 0)
 	{
-		return -1;
+		int alarm_id = ALID__INTERLOCK_ALL_DISABLE;
+		CString r_act;
+
+		p_alarm->Popup__ALARM(alarm_id, r_act);
+
+		if(r_act.CompareNoCase(STR__YES) != 0)		return -101;
+	}
+	else
+	{
+		if(Fnc__HV_SENSOR_INTERLOCK_CHECK(p_alarm) < 0)
+		{
+			return -1;
+		}
 	}
 
 	dCH__MON_CHUCK_STATUS->Set__DATA(STR__DECHUCKING);
@@ -2784,16 +2948,16 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 					if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 				}
@@ -2803,16 +2967,16 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 					
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 					if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 				}
@@ -2827,6 +2991,11 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 int  CObj__ESC_IO
 ::Fnc__DECHUCK_VERIFY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
+	// ...
+	{
+		dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
+	}
+
 	// Pressure Setting ...
 	{
 		sCH__APP_LOG_SUB_MSG->Set__DATA("Pressure Setting ...");
@@ -2839,16 +3008,16 @@ int  CObj__ESC_IO
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 			}
@@ -2858,16 +3027,16 @@ int  CObj__ESC_IO
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 			}
@@ -2923,16 +3092,16 @@ int  CObj__ESC_IO
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Close);
 			}
@@ -2942,16 +3111,16 @@ int  CObj__ESC_IO
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Close);
 			}
@@ -2986,8 +3155,8 @@ int  CObj__ESC_IO
 
 		CString var_data;
 
-		double cur__center_flow;
-		double cur__edge_flow;
+		double cur__center_flow = 0;
+		double cur__edge_flow = 0;
 
 		if(bActive__CENTER_USE)
 		{
@@ -3079,38 +3248,38 @@ int  CObj__ESC_IO
 		{
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 			}
 		}
 		if(bActive__EDGE_USE)
 		{
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			}
 		}
 	}
@@ -3183,7 +3352,7 @@ Fnc__ESC_ABORT(CII_OBJECT__VARIABLE *p_variable,
 
 		// ...
 		{
-			doEXT_CH__He_Side_Supply_Vlv->Set__DATA(STR__Open);
+			doEXT_CH__He_Side_Supply_Vlv->Set__DATA(STR__Close);
 
 			if(bActive__CENTER_USE)			aoEXT_CH__He_Pressure_CENTER->Set__VALUE(0.0);
 			if(bActive__EDGE_USE)			aoEXT_CH__He_Pressure_EDGE->Set__VALUE(0.0);
@@ -3192,38 +3361,38 @@ Fnc__ESC_ABORT(CII_OBJECT__VARIABLE *p_variable,
 			{
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 					
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 			}
 			if(bActive__EDGE_USE)
 			{
 				if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 				{
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 				else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 				{
 					if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-					doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 					
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 			}
 		}
@@ -3290,19 +3459,19 @@ He_REQ_Fnc__Init(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 
 			if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 			{
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);		
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				
 				doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);		
-				doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
+				if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
 			}
 		}
 		if(bActive__EDGE_USE)
@@ -3313,18 +3482,18 @@ He_REQ_Fnc__Init(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 			{
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);		
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
 			}
 			else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 			{
 				if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+				if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 
 				doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);		
-				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
+				if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
 			}
 		}
 
@@ -3339,14 +3508,14 @@ He_REQ_Fnc__Open_Supply(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_al
 	{
 		if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 
-		doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+		if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 		aoEXT_CH__He_Pressure_CENTER->Set__VALUE(set_press);
 	}
 	if(bActive__EDGE_USE)
 	{
 		if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-		doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+		if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 		aoEXT_CH__He_Pressure_EDGE->Set__VALUE(set_press);
 	}
 
@@ -3377,38 +3546,38 @@ He_REQ_Fnc__Close_Supply(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_a
 	{
 		if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 		{
-			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+			if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 
 			doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);		
-			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
+			if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
 		}
 		else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 		{
 			if(bActive__He_Side_Exhaust_Vlv_CENTER)			doEXT_CH__He_Side_Exhaust_Vlv_CENTER->Set__DATA(STR__Open);
 
-			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+			if(bActive__He_Side_Dump_Vlv_CENTER)			doEXT_CH__He_Side_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 
 			doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);		
-			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
+			if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);		
 		}
 	}
 	if(bActive__EDGE_USE)
 	{
 		if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 		{
-			doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+			if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 
 			doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);		
-			doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
+			if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
 		}
 		else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 		{
 			if(bActive__He_Side_Exhaust_Vlv_EDGE)			doEXT_CH__He_Side_Exhaust_Vlv_EDGE->Set__DATA(STR__Open);
 
-			doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+			if(bActive__He_Side_Dump_Vlv_EDGE)				doEXT_CH__He_Side_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 			
 			doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);		
-			doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
+			if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);		
 		}
 	}
 
@@ -3422,12 +3591,12 @@ He_REQ_Fnc__Open_Final(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_ala
 		if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 		{
 			doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+			if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 		}
 		else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 		{
 			doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+			if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 		}
 	}
 	if(bActive__EDGE_USE)
@@ -3435,12 +3604,12 @@ He_REQ_Fnc__Open_Final(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_ala
 		if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 		{
 			doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-			doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+			if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 		}
 		else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 		{
 			doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-			doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+			if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 		}
 	}
 
@@ -3454,12 +3623,12 @@ He_REQ_Fnc__Close_Final(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_al
 		if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)
 		{
 			doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+			if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 		}
 		else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)
 		{
 			doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+			if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 		}
 	}
 	if(bActive__EDGE_USE)
@@ -3467,12 +3636,12 @@ He_REQ_Fnc__Close_Final(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_al
 		if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__STD)		
 		{
 			doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-			doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+			if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 		}
 		else if(iDATA__HE_LINE_TYPE == _HE_LINE_TYPE__ICD)		
 		{
 			doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-			doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+			if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 		}
 	}
 

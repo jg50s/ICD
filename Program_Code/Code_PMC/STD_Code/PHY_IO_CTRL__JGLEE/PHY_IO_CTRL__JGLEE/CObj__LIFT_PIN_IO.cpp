@@ -77,6 +77,13 @@ int CObj__LIFT_PIN_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIMER, str_name);
 	}
 
+	// MON.PART ... 
+	{
+		str_name = "MON.PIN.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PIN_ERROR_ACTIVE, str_name);
+	}
+
 	// MON ...
 	{
 		// ACT.NAME ...
@@ -293,10 +300,12 @@ int CObj__LIFT_PIN_IO::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__PIN.RemoveAll();
 
 	// ...
 	{
 		alarm_id = ALID__PIN_LIFTER_ALARM;
+		iLIST_ALID__PIN.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " PIN LIFTER - Action Timeout ALARM.";
@@ -313,6 +322,7 @@ int CObj__LIFT_PIN_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PIN_LIFTER_ALARM__TRANSFER;
+		iLIST_ALID__PIN.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " PIN LIFTER - Action Timeout ALARM.";
@@ -330,6 +340,7 @@ int CObj__LIFT_PIN_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHUCKING_STATUS_ALARM;
+		iLIST_ALID__PIN.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " PIN LIFTER - Chuck Status ALARM.";
@@ -346,6 +357,8 @@ int CObj__LIFT_PIN_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__ESC_VOLT_PIN_UP_ALARM;
+		iLIST_ALID__PIN.Add(alarm_id);
+
 		alarm_title  = title;
 		alarm_title += " PIN LIFTER - ESC VOLTAGE PIN UP THRESHOLD ALARM.";
 

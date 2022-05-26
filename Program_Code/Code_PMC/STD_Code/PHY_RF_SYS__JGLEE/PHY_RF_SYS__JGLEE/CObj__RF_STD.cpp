@@ -125,6 +125,26 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_RCP_CTRL_ACTIVE, str_name);
 	}
 
+	// MON.PART ...
+	{
+		str_name = "MON.RF.CTRL.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_RF_CTRL_ACTIVE, str_name);
+
+		str_name = "MON.RF.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_RF_ERROR_ACTIVE, str_name);
+
+		//
+		str_name = "MON.RF.POWER.STABLE.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_RF_POWER_STABLE_ACTIVE, str_name);
+
+		str_name = "MON.RF.POWER.ABORT.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_RF_POWER_ABORT_ACTIVE, str_name);
+	}
+
 	// MON : IO ...
 	{
 		str_name = "MON.IO.SET.POWER";
@@ -465,9 +485,9 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// RF Conductance Interlock Skip ...
 	{
-		str_name.Format("RF.CONDUCTANCE.INTLK.SKIP");
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__RF_CONDUCTANCE_INTLK_SKIP, str_name);
+		str_name = "RF.CONDUCTANCE.INTLK.SKIP";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__RF_CONDUCTANCE_INTLK_SKIP, str_name);
 	}
 
 	// ...
@@ -493,10 +513,12 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__RF.RemoveAll();
 
 	// ...
 	{
 		alarm_id = ALID__PART_NOT_USE;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Generator Not Use !";
@@ -512,6 +534,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PART_CTRL_ABORTED;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - Control Aborted.";
@@ -527,6 +550,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORWARD_POWER__PROCESS_WARNING_RANGE;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - FORWARD.POWER PROCESS WARNING.RANGE.";
@@ -541,6 +565,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORWARD_POWER__PROCESS_ABORT_RANGE;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - FORWARD.POWER PROCESS ABORT.RANGE.";
@@ -556,6 +581,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORWARD_POWER__IDLE_WARNING_RANGE;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - FORWARD.POWER IDLE WARNING.RANGE.";
@@ -570,6 +596,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORWARD_POWER__IDLE_ABORT_RANGE;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - FORWARD.POWER IDLE ABORT.RANGE.";
@@ -585,6 +612,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VACUUM_SWITCH_ALARM;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Power Control Alarm.";
@@ -600,6 +628,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__ATM_SWITCH_ALARM;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Power Control Alarm.";
@@ -616,6 +645,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHAMBER_LID_INTLK_ALARM;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Power Control Alarm.";
@@ -631,6 +661,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHAMBER_SHUTTER_NOT_CLOSE;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Power Control Alarm.";
@@ -647,6 +678,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__INTERLOCK_SENSOR_ALARM;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Power Control Alarm.";
@@ -663,6 +695,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__REFLECTED_POWER_OVER;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - REFLECTED POWER OVER.";
@@ -677,6 +710,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = 	ALID__REFLECTED_COEFF_OVER;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - REFLECTED Coefficient OVER.";
@@ -692,6 +726,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__REFLECTED_POWER_WARNING;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - REFLECTED POWER WARNING.";
@@ -706,6 +741,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__REFLECTED_POWER_ALARM;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - REFLECTED POWER ALARM.";
@@ -721,6 +757,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_MAX_POWER_OVER_WHITOUT_WAFER;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - MAX POWER OVER WITHOUT WAFER.";
@@ -736,6 +773,7 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_MAX_ALLOWED_POWER_OVER;
+		iLIST_ALID__RF.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += " RF SYSTEM - PLASMA ALLOWED POWER OVER ALARM.";

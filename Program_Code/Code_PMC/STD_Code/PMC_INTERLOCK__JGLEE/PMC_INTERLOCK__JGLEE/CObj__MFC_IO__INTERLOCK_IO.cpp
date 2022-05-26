@@ -276,7 +276,7 @@ int CObj__MFC_IO::SetPoint__MFCx_Purge_Valve_Open(const int mfc_id)
 			alarm_id = ALID__GAS_BOX_NOT_CLOSED_INTERLOCK;
 		}
 
-		err_msg.Format("MFC%1d's Purge Valve Open Interlock !");
+		err_msg.Format("MFC%1d's Purge Valve Open Interlock !", mfc_id);
 
 		Post_Alarm(alarm_id,err_msg);
 		return -1;
@@ -561,7 +561,7 @@ int CObj__MFC_IO::SetPoint__MFCx_Secondary_Valve_Open(const int mfc_id)
 			alarm_id = ALID__GAS_BOX_NOT_CLOSED_INTERLOCK;
 		}
 
-		err_msg.Format("MFC%1d's Secondary Valve Open Interlock ! \n");
+		err_msg.Format("MFC%1d's Secondary Valve Open Interlock ! \n", mfc_id);
 
 		Post_Alarm(alarm_id,err_msg);
 		return -1;

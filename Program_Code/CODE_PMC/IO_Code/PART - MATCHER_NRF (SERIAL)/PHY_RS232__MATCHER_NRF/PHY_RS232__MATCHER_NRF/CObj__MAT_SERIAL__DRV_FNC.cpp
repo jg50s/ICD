@@ -182,10 +182,10 @@ int CObj__MAT_SERIAL
 			}
 			// 4 Byte Input ...
 			else if((active__vrms_lrms)
-				|| (active__start_stop_swr))
+				 || (active__start_stop_swr))
 			{
-				if(active__vrms_lrms)			_Updata__MAT_VRMS_IRMS(r_data[4], r_data[5], r_data[6], r_data[7]);
-				else if(active__start_stop_swr)	_Updata__MAT_START_STOP_SWR(r_data[4], r_data[5], r_data[6], r_data[7]);
+					 if(active__vrms_lrms)			_Updata__MAT_VRMS_IRMS(r_data[4], r_data[5], r_data[6], r_data[7]);
+				else if(active__start_stop_swr)		_Updata__MAT_START_STOP_SWR(r_data[4], r_data[5], r_data[6], r_data[7]);
 
 				read_data.Format("%02X %02X %02X %02X", r_data[4],r_data[5],r_data[6],r_data[7]);
 			}

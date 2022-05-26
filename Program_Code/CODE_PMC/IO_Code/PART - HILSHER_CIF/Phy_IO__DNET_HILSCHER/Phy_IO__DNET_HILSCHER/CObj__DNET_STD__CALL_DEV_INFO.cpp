@@ -190,6 +190,7 @@ int  CObj__DNET_STD
 			}
 		}
 
+		/*
 		// VendorID ...
 		if(active_update)
 		{
@@ -277,6 +278,7 @@ int  CObj__DNET_STD
 				err_check__id = 5;
 			}
 		}
+		*/
 
 		// get the produced and consumed connection size
 		{

@@ -48,17 +48,28 @@ void CObj__DNET_STD
 	if((bActive__DNET_INIT)
 	|| (iActive__SIM_MODE > 0))
 	{
-		double cfg_sec = aCH__CFG_DRV_INT_STABLE_SEC->Get__VALUE();
-		double cfg_msec = cfg_sec * 1000.0;
-		Sleep(cfg_msec);   // NDet 안정화
+		diCH__COMM_STS->Set__DATA(STR__OFFLINE);
+
+		// ...
+		{
+			double cfg_sec = aCH__CFG_DRV_INT_STABLE_SEC->Get__VALUE();
+			double cfg_msec = cfg_sec * 1000.0;
+		
+			Sleep(cfg_msec);   // NDet 안정화
+		}
 
 		Call__DEV_INFO(p_variable, p_alarm);
 	}
 
 	if(iActive__SIM_MODE > 0)
 	{
+		bActive__DNET_INIT = true;
+
 		diCH__COMM_STS->Set__DATA(STR__ONLINE);
 	}
+
+	if(bActive__DNET_INIT)			diCH__COMM_STS->Set__DATA(STR__ONLINE);
+	else							diCH__COMM_STS->Set__DATA(STR__OFFLINE);
 
 	while(1)
 	{
@@ -152,17 +163,29 @@ void CObj__DNET_STD
 		{
 			EnterCriticalSection(&mLOCK_DNET);
 
-			_DNet__UPDATE_INFO();
+			if(iActive__SIM_MODE > 0)
+			{
+
+			}
+			else
+			{
+				_DNet__UPDATE_INFO();
+			}
 
 			LeaveCriticalSection(&mLOCK_DNET);
 		}	
 		else
 		{
-			int alm_id = ALID__DNET_INIT_ERROR;
-			CString r_act;
+			diCH__COMM_STS->Set__DATA(STR__OFFLINE);
 
-			p_alarm->Check__ALARM(alm_id, r_act);
-			p_alarm->Post__ALARM(alm_id);
+			// ...
+			{
+				int alm_id = ALID__DNET_INIT_ERROR;
+				CString r_act;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM(alm_id);
+			}
 		}
 	}
 

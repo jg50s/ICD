@@ -1,0 +1,6 @@
+; IO_USB__SPECTROMETER.def : Declares the module parameters for the DLL.
+
+LIBRARY      "IO_USB__SPECTROMETER"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -66,12 +66,18 @@
 #define  STR__ABORT							"ABORT"
 #define  STR__CLEAR							"CLEAR"
 
+#define  STR__YES							"YES"
+#define  STR__NO							"NO"
+
 // ...
 #define  STR__ENABLE						"ENABLE"
 #define  STR__DISABLE						"DISABLE"
 
 #define  STR__AUTO							"AUTO"
 #define  STR__STEP							"STEP"
+
+#define  STR__LIGHT							"LIGHT"
+#define  STR__HEAVY							"HEAVY"
 
 // ...
 #define  STR__NONE							"NONE"

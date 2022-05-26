@@ -111,6 +111,13 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIMER, str_name);
 	}
 
+	// MON PART ...
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
+	}
+
 	// MON PARAMETER ...
 	{
 		str_name = "MON.PUMPING.STATE";
@@ -147,11 +154,26 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_REF_PRESSURE, str_name);
 	}
 
+	// SENSOR PARAMETER ...
+	{
+		str_name = "CFG.ATM_SNS.REF.PRESSURE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 1, 700, 800, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_SNS_REF_PRESSURE, str_name);
+
+		str_name = "CFG.VAC_SNS.REF.PRESSURE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 1, 1, 300, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_SNS_REF_PRESSURE, str_name);
+	}
+
 	// FAST-VENTING PARAMETER ...
 	{
 		str_name = "CFG.FAST_VENT.PRESSURE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 600, 800, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 1, 600, 800, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_PRESSURE, str_name);
+
+		str_name = "CFG.FAST_VENT.GAUGE.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES  NO","");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_FAST_VENT_GAUGE_CHECK, str_name);
 
 		str_name.Format("CFG.FAST_VENT.TIMEOUT");
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 300, "");
@@ -169,7 +191,7 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 	// SOFT-VENTING PARAMETER ...
 	{
 		str_name = "CFG.SOFT_VENT.PRESSURE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 0, 600, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 1, 0, 600, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_PRESSURE, str_name);
 
 		str_name = "CFG.SOFT_VENT.TIMEOUT";
@@ -411,9 +433,12 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	CString	alarm_msg;
 	CStringArray l_act;
 
+	iLIST_ALID__PART.RemoveAll();
+
 	// ...
 	{
 		alarm_id = ALID__ATM_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "ATM Pressure Time-Out !";
@@ -430,6 +455,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SOFT_VENT_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Soft Venting Time-Out !";
@@ -446,6 +472,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SOFT_PUMP_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Soft Pumping Time-Out !";
@@ -462,6 +489,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LOW_VAC_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Low Vacuum Time-Out !";
@@ -478,6 +506,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HIGH_VAC_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "High Vacuum Time-Out !";
@@ -494,6 +523,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORELINE_PUMP_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Foreline Pumping Time-Out !";
@@ -510,6 +540,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORELINE_OVER_PUMP_DELAY;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Foreline Over-Pumping Time-Out !";
@@ -526,6 +557,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__FORELINE_SENSOR_AND_VALUE_CHECK_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Foreline Pressure Sensor and Value Check Timeout";
@@ -542,6 +574,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PREPARE_FAST_PUMP_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Vacuum Sensor & Foreline Pressure Sensor Check Timeout";
@@ -558,6 +591,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LOW_VAC_CHECK_COMPLETE_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Chamber Pressure Sensor Check Timeout";
@@ -574,6 +608,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__HI_VAC_CHECK_COMPLETE_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Process Pressure Sensor Check TImeout";
@@ -590,6 +625,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VENT_CHECK_COMPLETE_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "ATM Sensor Check timeout";
@@ -606,6 +642,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHM_SLOT_VALVE_NOT_CLOSE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "PMC's slot valve is not closed !";
@@ -623,6 +660,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SHUTTER_VALVE_NOT_CLOSE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "PMC's shutter valve is not closed !";
@@ -639,6 +677,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_CONTACT_ENABLE_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Contact Enable Timeout";
@@ -655,6 +694,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__APC_VALVE_CLOSE_CONDITION_OCCUR;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "APC Valve Close Condition Occur.";
@@ -671,6 +711,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MANO_ISO_VALVE_CLOSE_CONDITION_OCCUR;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Manometer Isolation Valve Close Condition Occur.";
@@ -687,6 +728,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VACUUM_SNS_OFF_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Venting, Vacuum Sensor Off Timeout.";
@@ -704,6 +746,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__ATM_SNS_ON_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Venting, ATM Sensor On Timeout.";
@@ -721,6 +764,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LEAK_CHECK_MAX_PRESSURE_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Leak Check, Max Pressure Alarm";
@@ -737,6 +781,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LEAK_CHECK_RESULT_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Leak Check Result Value is abnormal Alarm";
@@ -753,6 +798,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LEAK_CHECK__VAT_MOVE__START_PRESSURE_OVER;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Leak Check with VAT valve position moving is start pressure over !";
@@ -769,6 +815,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MAIN_WATER_LEAK_DETECT_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Main Water Leak Detect Alarm";
@@ -784,6 +831,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_CONTACT_OFF_CONDITION__RF_MATCHER_OFFLINE_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Contactor Automatically Off Condition Occur.";
@@ -799,6 +847,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_CONTACT_OFF_CONDITION__NOT_VAC_STS_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Contactor Automatically Off Condition Occur.";
@@ -814,6 +863,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_CONTACT_OFF_CONDITION__DRYPUMP_POWER_STS_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Contactor Automatically Off Condition Occur.";
@@ -829,6 +879,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_CONTACT_OFF_CONDITION__RF_MATCHER_NOT_NORMAL_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF Matcher Alarm Not Normal Status.";
@@ -844,6 +895,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAC_SENSOR_CHECKING_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "VAC Sensor Checking Timeout.";
@@ -859,6 +911,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__DRY_PUMP_STATE_NOT_ON;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The state of Dry-Pump is not On !";
@@ -874,6 +927,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PLATE_TEMP_INTERLOCK_FOR_VENTING;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Top Plate Temperature must be less than 60 C.";
@@ -890,6 +944,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PMC_STATUS__ATM_MAINT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Current PMC's status is \"ATM MAINT\".";
@@ -906,6 +961,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHM_SLOT_VLV_NOT_CLOSE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The slot-valve of chamber is not closed !";
@@ -921,6 +977,7 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHM_LID_NOT_CLOSE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The lid of chamber is not closed !";
@@ -1266,6 +1323,8 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	DECLARE__EXT_CTRL(p_variable);
+
 	int flag = -1;
 
 	pOBJ_CTRL__GAS_VLV->Link__UPPER_OBJECT();
@@ -1273,7 +1332,7 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	// ...
 	{
 		CString log_msg;
-		log_msg.Format("[%s] Started ...",mode);
+		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
 		xLOG_CTRL->WRITE__LOG(log_msg);
 		sCH__OBJ_MSG->Set__DATA(log_msg);

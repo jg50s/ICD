@@ -15,6 +15,9 @@ Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
+		//
+		bool active__err_check = true;
+		if(dCH__CFG_PART_USE->Check__DATA("YES") < 0)		active__err_check = false;
 
 		if(iACTIVE_SIM > 0)
 		{
@@ -30,7 +33,7 @@ Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 			{
 				sCH__COMM_STS->Set__DATA(STR__OFFLINE);
 
-				// ...
+				if(active__err_check)
 				{
 					CString r_act;
 					int alarm_id = ALID__OFFLINE_ALARM;

@@ -7,6 +7,7 @@ int CObj__ARCTIC_SERIAL
 ::Mon__STATE_CHECK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	CString pre__digital_power_set;
+	CString ch_data;
 
 	if(iActive__SIM_MODE > 0)
 	{
@@ -21,8 +22,6 @@ int CObj__ARCTIC_SERIAL
 
 		if(iActive__SIM_MODE > 0)
 		{
-			CString ch_data;
-
 			aoCH__DIGITAL_POWER_SET->Get__DATA(ch_data);
 			if(pre__digital_power_set != ch_data)
 			{
@@ -31,6 +30,19 @@ int CObj__ARCTIC_SERIAL
 				sCH__INFO_DELIVERED_POWER->Set__DATA(ch_data);
 				sCH__INFO_POWER_SETPOINT->Set__DATA(ch_data);
 			}
+		}
+
+		// ...
+		{
+			ch_data = sCH__INFO_DELIVERED_POWER->Get__STRING();
+			double cur__dev_pwr = atof(ch_data);
+
+			ch_data = sCH__INFO_POWER_SETPOINT->Get__STRING();
+			double cur__set_pwr = atof(ch_data);
+
+			double cur__ref_pwr = cur__set_pwr - cur__dev_pwr;
+			ch_data.Format("%.1f", cur__ref_pwr);
+			sCH__INFO_REFLECTED_POWER->Set__DATA(ch_data);
 		}
 
 		if(dCH__MON_COMM_STS->Check__DATA(STR__OFFLINE) > 0)

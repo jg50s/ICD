@@ -364,7 +364,7 @@ int CObj__RF_CONDUCT::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__SET_POWER__RF_X[x], obj_name,var_name);
 
 				var_name = "RF.CONDUCTANCE.INTLK.SKIP";
-				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__INTERLOCK_SKIP__RF_X[x], obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__INTERLOCK_SKIP__RF_X[x], obj_name,var_name);
 			}
 
 			//
@@ -432,7 +432,7 @@ int CObj__RF_CONDUCT::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
-		sCH__OFFSET_CAL_ACTIVE_FLAG->Check__DATA(STR__LOCK);
+		sCH__OFFSET_CAL_ACTIVE_FLAG->Set__DATA(STR__LOCK);
 
 		for(int x=0; x<iRF_SIZE; x++)
 		{
@@ -522,7 +522,7 @@ int CObj__RF_CONDUCT::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 			if(rf_index >= 0)
 			{
-				sEXT_CH__INTERLOCK_SKIP__RF_X[rf_index]->Set__DATA("");
+				dEXT_CH__INTERLOCK_SKIP__RF_X[rf_index]->Set__DATA(STR__OFF);
 			}
 		}
 

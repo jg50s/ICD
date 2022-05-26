@@ -119,6 +119,9 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	DECLARE__ALARM;
 
 	// ...
+	CString title;
+	title.Format("%s - ",sObject_Name);
+
 	int	alarm_id;
 	CString	alarm_title;
 	CString	alarm_msg;
@@ -131,7 +134,10 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	{
 		alarm_id = ALID__MFCx_FLOW_INTERLOCK + i;
 
-		alarm_title.Format("Interlock: MFC%1d Flow Setting", i+1);	
+		alarm_bff.Format("Interlock: MFC%1d Flow Setting", i+1);	
+		alarm_title  = title;
+		alarm_title += alarm_bff;
+
 		alarm_msg.Format("Can not set MFC%1d's flow. \n", i+1);
 
 		l_act.RemoveAll();
@@ -145,7 +151,10 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	{
 		alarm_id = ALID__MFCx_PRIMARY_VLV_OPEN_INTERLOCK + i;
 
-		alarm_title.Format("Interlock: MFC%1d's Primary Valve Open", i+1);	
+		alarm_bff.Format("Interlock: MFC%1d's Primary Valve Open", i+1);	
+		alarm_title  = title;
+		alarm_title += alarm_bff;
+
 		alarm_msg.Format("MFC%1d의 primary-valve를 Open 할 수 없습니다. \n", i+1);
 
 		l_act.RemoveAll();
@@ -159,7 +168,10 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	{
 		alarm_id = ALID__MFCx_SECONDARY_VLV_OPEN_INTERLOCK + i;
 
-		alarm_title.Format("Interlock: MFC%1d's Secondary Valve Open", i+1);	
+		alarm_bff.Format("Interlock: MFC%1d's Secondary Valve Open", i+1);	
+		alarm_title  = title;
+		alarm_title += alarm_bff;
+
 		alarm_msg.Format("Can not open MFC%1d's secondary valve. \n", i+1);
 
 		l_act.RemoveAll();
@@ -173,7 +185,10 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	{
 		alarm_id = ALID__MFCx_PURGE_VLV_OPEN_INTERLOCK + i;
 
-		alarm_title.Format("Interlock: MFC%1d's Purge Valve Open", i+1);	
+		alarm_bff.Format("Interlock: MFC%1d's Purge Valve Open", i+1);	
+		alarm_title  = title;
+		alarm_title += alarm_bff;
+
 		alarm_msg.Format("MFC%1d의 purge-valve를 Open 할 수 없습니다. \n", i+1);
 
 		l_act.RemoveAll();
@@ -187,7 +202,10 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	{
 		alarm_id = ALID__MFCx_VALUE_INTERLOCK + i;
 
-		alarm_title.Format("Value Interlock: MFC%1d's Valve Open Interlock !", i+1);	
+		alarm_bff.Format("Value Interlock: MFC%1d's Valve Open Interlock !", i+1);	
+		alarm_title  = title;
+		alarm_title += alarm_bff;
+
 		alarm_msg.Format("MFC%1d's all valve will be closed ! \n", i+1);
 
 		l_act.RemoveAll();
@@ -201,7 +219,10 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	{
 		alarm_id = ALID__GAS_BOX_NOT_CLOSED_INTERLOCK + i;
 
-		alarm_title.Format("Gas Box Door Not Closed - Interlock: MFC%1d's Valve Open Interlock !", i+1);	
+		alarm_bff.Format("Gas Box Door Not Closed - Interlock: MFC%1d's Valve Open Interlock !", i+1);	
+		alarm_title  = title;
+		alarm_title += alarm_bff;
+
 		alarm_msg.Format("MFC%1d's all valve will be closed ! \n", i+1);
 
 		l_act.RemoveAll();

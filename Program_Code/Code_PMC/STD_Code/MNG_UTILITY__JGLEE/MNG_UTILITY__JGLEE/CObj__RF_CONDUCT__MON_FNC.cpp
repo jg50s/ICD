@@ -40,9 +40,9 @@ void CObj__RF_CONDUCT
 		}
 
 		// ...
-		dCH_PARA__RF_TYPE->Get__DATA(var_data);
+		CString para__rf_type = dCH_PARA__RF_TYPE->Get__STRING();
 
-		if(var_data.CompareNoCase(pre__rf_type) != 0)
+		if(para__rf_type.CompareNoCase(pre__rf_type) != 0)
 		{
 			if(iFLAG__RF_CHECK > 0)
 			{
@@ -67,10 +67,10 @@ void CObj__RF_CONDUCT
 			}
 		}
 
-		if((var_data.CompareNoCase(pre__rf_type) != 0)
+		if((para__rf_type.CompareNoCase(pre__rf_type) != 0)
 		|| (update_flag > 0))	
 		{
-			CString cur__rf_type = var_data;		
+			CString cur__rf_type = para__rf_type;
 
 			CII__VAR_ANALOG_CTRL*  p__set_power  = NULL;
 
@@ -82,16 +82,12 @@ void CObj__RF_CONDUCT
 			CII__VAR_STRING_CTRL*  p__now_meter  = NULL;
 			CII__VAR_STRING_CTRL*  p__now_offset = NULL;
 
+			// View -> RFx
 			for(x=0; x<iRF_SIZE; x++)
 			{
 				CString rf_title = sTITLE__RF_X[x];
+				if(pre__rf_type.CompareNoCase(rf_title) != 0)		continue;
 
-				if(pre__rf_type.CompareNoCase(rf_title) != 0)
-				{
-					continue;
-				}
-
-				// View -> RFx
 				for(i=0; i<CFG__TEST_LIST; i++)
 				{
 					p__set_power  = aEXT_CH__CAL_CFG_SET_POWER__RF_X[x][i].Get__PTR();
@@ -128,8 +124,14 @@ void CObj__RF_CONDUCT
 					sCH_PARA__NOW_OFFSET_LIST[i]->Get__DATA(var_data);								
 					p__now_offset->Set__DATA(var_data);
 				}
+			}
 
-				// RFx -> View ...
+			// RFx -> View ...
+			for(x=0; x<iRF_SIZE; x++)
+			{
+				CString rf_title = sTITLE__RF_X[x];
+				if(cur__rf_type.CompareNoCase(rf_title) != 0)		continue;
+
 				for(i=0; i<CFG__TEST_LIST; i++)
 				{
 					p__set_power  = aEXT_CH__CAL_CFG_SET_POWER__RF_X[x][i].Get__PTR();
@@ -261,7 +263,7 @@ void CObj__RF_CONDUCT
 
 				if(rf_type.CompareNoCase(rf_title) != 0)		continue;
 
-				sCH__SAVE_ACTIVE_FLAG__RF_X[x]->Set__DATA("YES");
+				sCH__SAVE_ACTIVE_FLAG__RF_X[x]->Set__DATA(STR__YES);
 				
 				Fnc__RFx_CAL(x);
 				break;
@@ -391,7 +393,7 @@ void CObj__RF_CONDUCT::Fnc__RFx_SAVE(const int rf_index)
 	SCX__SEQ_INFO x_seq_info;
 	CString str_date = x_seq_info->Get__DATE_TIME_STRING();
 
-	sCH__SAVE_ACTIVE_FLAG__RF_X[rf_index]->Set__DATA(STR__OK);
+	sCH__SAVE_ACTIVE_FLAG__RF_X[rf_index]->Set__DATA(STR__LOCK);
 	sEXT_CH__CAL_OFFSET_SAVE_DATE__RF_X[rf_index]->Set__DATA(str_date);
 
 	// ...

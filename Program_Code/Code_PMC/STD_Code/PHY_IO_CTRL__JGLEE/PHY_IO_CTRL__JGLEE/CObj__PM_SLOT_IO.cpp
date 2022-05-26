@@ -49,7 +49,7 @@ int CObj__PM_SLOT_IO::__DEFINE__VARIABLE_STD(p_variable)
 	CString str_name;
 	CString item_list;
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.STATUS";
 		STD__ADD_STRING(str_name);
@@ -64,7 +64,14 @@ int CObj__PM_SLOT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIME_COUNT, str_name);
 	}
 
-	// ...
+	// MON.PART ... 
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
+	}
+
+	// CFG ...
 	{
 		str_name = "CFG.OPEN.TIMEOUT";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 3.0, 10.0, "");
@@ -102,9 +109,12 @@ int CObj__PM_SLOT_IO::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__PART.RemoveAll();
+
 	// ...
 	{
 		alarm_id = ALID__DOOR_OPEN_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Slot.Door Open-Timeout !";
@@ -121,6 +131,7 @@ int CObj__PM_SLOT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__DOOR_CLOSE_TIMEOUT;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Slot.Door Close-Timeout !";
@@ -138,6 +149,7 @@ int CObj__PM_SLOT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RF_POWER_STS;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "RF POWER STATUS ALARM";

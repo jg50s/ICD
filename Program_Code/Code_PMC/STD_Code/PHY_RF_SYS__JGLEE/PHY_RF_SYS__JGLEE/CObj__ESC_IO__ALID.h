@@ -25,7 +25,7 @@
 #define  ALID__HE_CENTER_FLOW_MIN_THRESHOLD 						21
 #define  ALID__HE_CENTER_FLOW_MAX_THREASHOLD						22
 #define  ALID__HE_EDGE_FLOW_MIN_THRESHOLD 							23
-#define  ALID__HE_EDGE_FLOW_MAX_THREASHOLD							24
+#define  ALID__HE_EDGE_FLOW_MAX_THRESHOLD							24
 
 // ...
 #define  ALID__HE_CENTER_PRESSURE_WARNING							25
@@ -49,4 +49,10 @@
 
 // ...
 #define  ALID__HE_SET__ERROR										41
+
+// ...
+#define  ALID__INTERLOCK_ALL_DISABLE								51
+#define  ALID__INTERLOCK_VACUUM_DISABLE								52
+#define  ALID__INTERLOCK_WAFER_DISABLE								53
+#define  ALID__INTERLOCK_CHM_ISO_DISABLE							54
 //

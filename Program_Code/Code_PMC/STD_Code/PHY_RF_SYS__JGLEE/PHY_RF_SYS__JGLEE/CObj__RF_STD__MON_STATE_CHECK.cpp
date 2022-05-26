@@ -28,6 +28,71 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 		loop_count++;
 		if(loop_count > 10)			loop_count = 1;
 
+		//
+		if(loop_count == 1)
+		{
+			bool active__idle_check = false;
+			bool active__proc_check = false;
+
+			if(dCH__MON_IDLE_POWER_CHECK_ACTIVE->Check__DATA(STR__ON) > 0)			active__idle_check = true;
+			if(dCH__MON_PROC_POWER_CHECK_ACTIVE->Check__DATA(STR__ON) > 0)			active__proc_check = true;
+
+			if((active__idle_check)
+			|| (active__proc_check))
+			{
+				bool active__idle_error = false;
+				bool active__proc_error = false;
+
+				if(active__idle_check)
+				{
+					if(dCH__MON_IDLE_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)			active__idle_error = true;
+				}
+				if(active__proc_check)
+				{
+					if(dCH__MON_PROC_POWER_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)			active__proc_error = true;
+				}
+
+				if((active__idle_error)
+				|| (active__proc_error))
+				{
+					dCH__MON_RF_POWER_ABORT_ACTIVE->Set__DATA(STR__ON);
+					dCH__MON_RF_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);
+				}
+				else
+				{
+					dCH__MON_RF_POWER_ABORT_ACTIVE->Set__DATA(STR__OFF);
+
+					if(active__proc_check)
+					{
+						if(dCH__MON_PROC_POWER_STABLE_ACTIVE->Check__DATA(STR__ON) > 0)		
+							dCH__MON_RF_POWER_STABLE_ACTIVE->Set__DATA(STR__ON);
+						else
+							dCH__MON_RF_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);
+					}
+					else if(active__idle_check)
+					{
+						if(dCH__MON_IDLE_POWER_STABLE_ACTIVE->Check__DATA(STR__ON) > 0)
+							dCH__MON_RF_POWER_STABLE_ACTIVE->Set__DATA(STR__ON);
+						else
+							dCH__MON_RF_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);
+					}
+				}
+
+				dCH__MON_RF_CTRL_ACTIVE->Set__DATA(STR__ON);
+			}
+			else
+			{
+				dCH__MON_RF_CTRL_ACTIVE->Set__DATA(STR__OFF);
+				dCH__MON_RF_POWER_ABORT_ACTIVE->Set__DATA(STR__OFF);
+				dCH__MON_RF_POWER_STABLE_ACTIVE->Set__DATA(STR__OFF);
+			}
+
+			//
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__RF);
+
+			if(active__err_check > 0)		dCH__MON_RF_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_RF_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
 
 		// Range : Power ...
 		{			

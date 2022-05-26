@@ -252,6 +252,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__DB_INF__CALL_FNC.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__DB_INF__MON_FNC.cpp"
 					>
 				</File>

@@ -14,6 +14,8 @@ private:
 
 	SCX__USER_LOG_CTRL xI_LOG_CTRL;
 	int iActive__SIM_MODE;
+
+	CUIntArray iLIST_ALID__PART;
 	//
 
 	//-------------------------------------------------------------------------
@@ -21,6 +23,10 @@ private:
 	CX__VAR_STRING_CTRL   sCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL   sCH__OBJ_TIME_COUNT;
 
+	// MON.PART ... 
+	CX__VAR_DIGITAL_CTRL dCH__MON_PART_ERROR_ACTIVE;
+
+	// CFG ...
 	CX__VAR_ANALOG_CTRL   aCH__CFG_OPEN_TIMEOUT;
 	CX__VAR_ANALOG_CTRL   aCH__CFG_CLOSE_TIMEOUT;
 	//

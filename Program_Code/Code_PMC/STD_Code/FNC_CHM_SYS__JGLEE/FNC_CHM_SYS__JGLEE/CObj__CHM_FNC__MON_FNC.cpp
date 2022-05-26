@@ -22,12 +22,23 @@ Mon__PRESSURE_STATUS(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alar
 			dEXT_CH__CHM_LID_STATE->Set__DATA(sCHM_LID__CLOSE_STATE);
 		}
 	}
-
+	
+	int loop_count = 0;
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);	
 
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__PART);
+
+			if(active__err_check > 0)		dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
 
 		if(bActive__VAT_OBJ)
 		{

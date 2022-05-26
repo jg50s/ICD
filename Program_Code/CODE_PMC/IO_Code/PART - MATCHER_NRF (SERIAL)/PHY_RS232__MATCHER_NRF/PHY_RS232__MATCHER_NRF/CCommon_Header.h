@@ -23,6 +23,9 @@ union _DATA__3BYTE_INT
 #define ACT__ABORT					"ABORT"
 #define ACT__IGNORE					"IGNORE"
 
+#define ACT__CHECK					"CHECK"
+#define ACT__CLEAR					"CLEAR"
+
 
 // ...
 #define  STR__ONLINE				"ONLINE"

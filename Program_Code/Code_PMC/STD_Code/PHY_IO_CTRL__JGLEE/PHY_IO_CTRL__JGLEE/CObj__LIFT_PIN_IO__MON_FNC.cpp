@@ -9,12 +9,23 @@ int CObj__LIFT_PIN_IO
 	CString var_data;
 	CString cur_data;
 
-	int loop_count = 1;
-	int link_count = 1;
+	int loop_count = 0;
+	int link_count = 0;
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__PIN);
+
+			if(active__err_check > 0)		dCH__MON_PIN_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_PIN_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
 
 		// PIN.STATE  ...
 		{
@@ -98,28 +109,17 @@ int CObj__LIFT_PIN_IO
 			}
 		}
 
-		// ...
+		if(loop_count == 1)
 		{
-			loop_count++;
+			link_count++;
+			if(link_count > 10)			link_count = 1;
 
-			if(loop_count > 10)
-			{
-				loop_count = 1;
+			//
+			sCH__MON_LIFT_STATE->Get__DATA(cur_data);
+			var_data.Format("%s.%1d", cur_data,link_count);
 
-				//
-				link_count++;
-				if(link_count > 9)
-				{
-					link_count = 1;
-				}
-
-				//
-				sCH__MON_LIFT_STATE->Get__DATA(cur_data);
-				var_data.Format("%s.%1d", cur_data,link_count);
-				
-				sCH__LIFT_STS_LINK->Set__DATA(var_data);
-				sEXT_CH__LIFT_PIN_STATE->Set__DATA(var_data);
-			}
+			sCH__LIFT_STS_LINK->Set__DATA(var_data);
+			sEXT_CH__LIFT_PIN_STATE->Set__DATA(var_data);
 		}
 	}
 }

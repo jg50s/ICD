@@ -68,7 +68,7 @@ int CObj__MFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.MSG";
 		STD__ADD_STRING(str_name);
@@ -99,6 +99,13 @@ int CObj__MFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "INFO.LINK_DATA.MAX_DEFAULT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_LINK_DATA__MAX_DEFAULT, str_name);
+	}
+
+	// MON.PART.ACTIVE ...
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
 	}
 
 	// MON.MFC ...
@@ -384,9 +391,12 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__PART.RemoveAll();
+
 	// ...
 	{
 		alarm_id = ALID__MFC_NOT_USE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "In MFC config page, MFC's use is selected to \"YES\".";
@@ -402,6 +412,7 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MFC_FLOW__CONTROL_ABORTED;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "MFC Flow Control Aborted !.";
@@ -418,6 +429,7 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MFC_FLOW__CONTROL_WARNING_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "MFC Flow Control Warning Range Alarm.";
@@ -432,6 +444,7 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MFC_FLOW__CONTROL_ABORT_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "MFC Flow Control Abort Range Alarm.";
@@ -448,6 +461,7 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MFC_FLOW__CONTROL_IDLE_WARNING_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Idle, MFC Flow Control Warning Range Alarm.";
@@ -462,6 +476,7 @@ int CObj__MFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__MFC_FLOW__CONTROL_IDLE_ABORT_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Idle, MFC Flow Control Abort Range Alarm.";

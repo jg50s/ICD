@@ -17,6 +17,12 @@ int CObj__STEP_STD
 	// ...
 	{
 		sCH__INFO_STEP_CUR_NUM->Set__DATA("");
+		sCH__INFO_STEP_PRE_TIME->Set__DATA("");
+	}
+
+	// EPD.INIT ...
+	{
+		EPD_OBJ__Call_INIT();
 	}
 
 	return _Fnc__END();
@@ -59,6 +65,11 @@ int CObj__STEP_STD
 int CObj__STEP_STD::_Fnc__END()
 {
 	int i;
+
+	// EPD.IDLE ...
+	{
+		EPD_OBJ__Start_IDLE();
+	}
 
 	// RF.RPS ...
 	{

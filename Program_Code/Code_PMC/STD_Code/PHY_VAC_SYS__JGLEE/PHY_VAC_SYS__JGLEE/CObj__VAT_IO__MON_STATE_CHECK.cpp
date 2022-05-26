@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "CObj__VAT_IO.h"
 #include "CObj__VAT_IO__ALID.h"
+#include "CObj__VAT_IO__DEF.h"
 
 
 // ...
@@ -23,13 +24,17 @@ int CObj__VAT_IO
 		}
 	}
 
+	int loop_count = 0;
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
+		loop_count++;
+		if(loop_count > 10)		loop_count = 1;
 
 		// Range : Pressure ...
+		if(loop_count == 1)
 		{			
 			aCH__CFG_PRESSURE_MIN_VALUE->Get__DATA(ch_data);
 			double min_value = atof(ch_data);
@@ -37,10 +42,78 @@ int CObj__VAT_IO
 			aCH__CFG_PRESSURE_MAX_VALUE->Get__DATA(ch_data);
 			double max_value = atof(ch_data);
 
+			ch_data.Format("%.0f", max_value * 1000.0);
+			sCH__CFG_PRESSURE_MAX_mTORR->Set__DATA(ch_data);
+
 			aCH__CFG_PRESSURE_DEC_VALUE->Get__DATA(ch_data);
 			int i_dec = atoi(ch_data);
 
 			aCH__PARA_PRESSURE->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+		}
+
+		if(loop_count == 1)
+		{
+			bool active__idle_check = false;
+			bool active__proc_check = false;
+
+			if(dCH__MON_IDLE_PRESSURE_CHECK_ACTIVE->Check__DATA(STR__ON) > 0)			active__idle_check = true;
+			if(dCH__MON_PROC_PRESSURE_CHECK_ACTIVE->Check__DATA(STR__ON) > 0)			active__proc_check = true;
+
+			if((active__idle_check)
+			|| (active__proc_check))
+			{
+				bool active__idle_error = false;
+				bool active__proc_error = false;
+
+				if(active__idle_check)
+				{
+					if(dCH__MON_IDLE_PRESSURE_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)			active__idle_error = true;
+				}
+				if(active__proc_check)
+				{
+					if(dCH__MON_PROC_PRESSURE_ABORT_ACTIVE->Check__DATA(STR__ON) > 0)			active__proc_error = true;
+				}
+
+				if((active__idle_error)
+				|| (active__proc_error))
+				{
+					dCH__MON_VAT_PRESSURE_ABORT_ACTIVE->Set__DATA(STR__ON);
+					dCH__MON_VAT_PRESSURE_STABLE_ACTIVE->Set__DATA(STR__OFF);
+				}
+				else
+				{
+					dCH__MON_VAT_PRESSURE_ABORT_ACTIVE->Set__DATA(STR__OFF);
+
+					if(active__proc_check)
+					{
+						if(dCH__MON_PROC_PRESSURE_STABLE_ACTIVE->Check__DATA(STR__ON) > 0)		
+							dCH__MON_VAT_PRESSURE_STABLE_ACTIVE->Set__DATA(STR__ON);
+						else
+							dCH__MON_VAT_PRESSURE_STABLE_ACTIVE->Set__DATA(STR__OFF);
+					}
+					else if(active__idle_check)
+					{
+						if(dCH__MON_IDLE_PRESSURE_STABLE_ACTIVE->Check__DATA(STR__ON) > 0)
+							dCH__MON_VAT_PRESSURE_STABLE_ACTIVE->Set__DATA(STR__ON);
+						else
+							dCH__MON_VAT_PRESSURE_STABLE_ACTIVE->Set__DATA(STR__OFF);
+					}
+				}
+
+				dCH__MON_VAT_CTRL_ACTIVE->Set__DATA(STR__ON);
+			}
+			else
+			{
+				dCH__MON_VAT_CTRL_ACTIVE->Set__DATA(STR__OFF);
+				dCH__MON_VAT_PRESSURE_ABORT_ACTIVE->Set__DATA(STR__OFF);
+				dCH__MON_VAT_PRESSURE_STABLE_ACTIVE->Set__DATA(STR__OFF);
+			}
+
+			//
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__VAT);
+
+			if(active__err_check > 0)		dCH__MON_VAT_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_VAT_ERROR_ACTIVE->Set__DATA(STR__OFF);
 		}
 
 		if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
@@ -50,10 +123,25 @@ int CObj__VAT_IO
 				if(iActive__SIM_MODE > 0)
 				{
 					ch_data = sEXT_CH__SIM_PRESSURE_TORR->Get__STRING();
-					aEXT_CH__VAT__CUR_PRESSURE_TORR->Set__DATA(ch_data);
+
+					if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+					{
+						double pressure_mtorr = atof(ch_data) * 1000.0;
+
+						aEXT_CH__VAT__CUR_PRESSURE_VALUE->Set__VALUE(pressure_mtorr);
+					}
+					else
+					{
+						aEXT_CH__VAT__CUR_PRESSURE_VALUE->Set__DATA(ch_data);
+					}
 				}
 
-				double cur_pressure = aEXT_CH__VAT__CUR_PRESSURE_TORR->Get__VALUE();
+				double cur_pressure = aEXT_CH__VAT__CUR_PRESSURE_VALUE->Get__VALUE();
+
+				if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+				{
+					cur_pressure = cur_pressure / 1000.0;
+				}
 
 				ch_data.Format("%.3f", cur_pressure);
 				sCH__MON_PRESSURE_TORR->Set__DATA(ch_data);
@@ -86,10 +174,25 @@ int CObj__VAT_IO
 				if(iActive__SIM_MODE > 0)
 				{
 					ch_data = sEXT_CH__SIM_PRESSURE_TORR->Get__STRING();
-					aEXT_CH__AI_APC_PRESSURE->Set__DATA(ch_data);
+					
+					if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+					{
+						double pressure_mtorr = atof(ch_data) * 1000.0;
+
+						aEXT_CH__AI_APC_PRESSURE->Set__VALUE(pressure_mtorr);
+					}
+					else
+					{
+						aEXT_CH__AI_APC_PRESSURE->Set__DATA(ch_data);
+					}
 				}
 
 				double cur_pressure = aEXT_CH__AI_APC_PRESSURE->Get__VALUE();
+
+				if(iPARA__PRESSURE_UNIT == _PRESSURE_UNIT__mTORR)
+				{
+					cur_pressure = cur_pressure / 1000.0;
+				}
 
 				ch_data.Format("%.3f", cur_pressure);
 				sCH__MON_PRESSURE_TORR->Set__DATA(ch_data);

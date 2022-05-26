@@ -33,6 +33,12 @@ int  CObj__RPS_SERIAL
 
 		flag = doCH__DIGITAL_POWER_CTRL->Set__DATA(STR__ON);
 
+		if(flag > 0)
+			flag = doCH__PLASMA_ON_ENABLE_TURN_ON->Set__DATA(STR__ON);
+
+		if(flag > 0)
+			flag = doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Set__DATA(STR__ON);
+
 		// ...
 		{
 			CString log_msg;
@@ -58,11 +64,26 @@ int  CObj__RPS_SERIAL
 							ch_data);
 			log_msg += log_bff;
 
+			ch_data = doCH__PLASMA_ON_ENABLE_TURN_ON->Get__STRING();
+			log_bff.Format(" * %s <- %s \n",
+							doCH__PLASMA_ON_ENABLE_TURN_ON->Get__VARIABLE_NAME(),
+							ch_data);
+			log_msg += log_bff;
+
+			ch_data = doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Get__STRING();
+			log_bff.Format(" * %s <- %s \n",
+							doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Get__VARIABLE_NAME(),
+							ch_data);
+			log_msg += log_bff;
+
 			Write__APP_LOG(log_msg);
 		}
 	}
 	else
 	{
+		doCH__PLASMA_ON_ENABLE_TURN_ON->Set__DATA(STR__OFF);
+		doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Set__DATA(STR__OFF);
+
 		flag = doCH__DIGITAL_POWER_CTRL->Set__DATA(STR__OFF);
 
 		aoCH__DIGITAL_POWER_SET->Set__DATA("0");

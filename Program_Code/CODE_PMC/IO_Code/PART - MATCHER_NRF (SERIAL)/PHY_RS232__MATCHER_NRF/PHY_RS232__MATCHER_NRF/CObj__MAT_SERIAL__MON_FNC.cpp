@@ -15,7 +15,11 @@ int CObj__MAT_SERIAL
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
+		// ...
+		bool active__err_check = true;
+		if(dCH__CFG_PART_USE->Check__DATA("YES") < 0)			active__err_check = false;
 
+		//
 		if(iActive__SIM_MODE > 0)
 		{
 			/*
@@ -52,16 +56,19 @@ int CObj__MAT_SERIAL
 			siCH__PHASE_SHIFT->Get__STRING();
 		}
 
-		if(dCH__MON_COMM_STS->Check__DATA(STR__OFFLINE) > 0)
+		if(active__err_check)
 		{
-			int alarm_id = ALID__MAT_OFFLINE_ALARM;
-			CString alm_msg;
-			CString	r_act;
+			if(dCH__MON_COMM_STS->Check__DATA(STR__OFFLINE) > 0)
+			{
+				int alarm_id = ALID__MAT_OFFLINE_ALARM;
+				CString alm_msg;
+				CString	r_act;
 
-			alm_msg = sPROTOCOL_INFO;
+				alm_msg = sPROTOCOL_INFO;
 
-			p_alarm->Check__ALARM(alarm_id,r_act);
-			p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+				p_alarm->Check__ALARM(alarm_id,r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+			}
 		}
 
 		// ...

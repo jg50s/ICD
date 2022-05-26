@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "CObj__VAT_IO.h"
 #include "CObj__VAT_IO__ALID.h"
+#include "CObj__VAT_IO__DEF.h"
 
 #include "CCommon_Utility.h"
 
@@ -84,6 +85,26 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.HOLD.SEC";
 		STD__ADD_ANALOG(str_name, "sec", 1, 0.0, 5.0);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_HOLD_SEC, str_name);
+	}
+
+	// MON.PART ...
+	{
+		str_name = "MON.VAT.CTRL.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_VAT_CTRL_ACTIVE, str_name);
+
+		str_name = "MON.VAT.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_VAT_ERROR_ACTIVE, str_name);
+
+		//
+		str_name = "MON.VAT.PRESSURE.STABLE.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_VAT_PRESSURE_STABLE_ACTIVE, str_name);
+
+		str_name = "MON.VAT.PRESSURE.ABORT.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_VAT_PRESSURE_ABORT_ACTIVE, str_name);
 	}
 
 	// MON.PRESSURE ...
@@ -260,6 +281,10 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 3, 0.1, 500, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_PRESSURE_MAX_VALUE, str_name);
 
+		str_name = "CFG.PRESSURE.MAX.mTORR";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CFG_PRESSURE_MAX_mTORR, str_name);
+
 		str_name = "CFG.PRESSURE.DEC.VALUE";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "dec", 0, 0, 5, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_PRESSURE_DEC_VALUE, str_name);
@@ -385,9 +410,12 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__VAT.RemoveAll();
+
 	// ...
 	{
 		alarm_id = ALID__VAT__CONTROL_WARNING_RANGE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "VAT Control Warning Range Alarm.";
@@ -402,6 +430,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT__CONTROL_ABORT_RANGE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "VAT Control Abort Range Alarm.";
@@ -418,6 +447,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT__CONTROL_IDLE_WARNING_RANGE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Idle, VAT Control Warning Range Alarm.";
@@ -432,6 +462,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT__CONTROL_IDLE_ABORT_RANGE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Idle, VAT Control Abort Range Alarm.";
@@ -448,6 +479,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__TRANSFER_BALLAST_PRESSURE_WAIT;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"Transfer ballast pressure wait\" occurred !";
@@ -462,6 +494,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__TRANSFER_BALLAST_OVER_PRESSURE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"Transfer ballast over pressure\" occurred !";
@@ -477,6 +510,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHAMBER_BALLAST_PRESSURE_WAIT;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"Chamber ballast pressure wait\" occurred !";
@@ -491,6 +525,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__CHAMBER_BALLAST_OVER_PRESSURE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"Chamber ballast over pressure\" occurred !";
@@ -506,6 +541,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT_CONTROL_ABORTED;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "VAT Control Aborted !.";
@@ -522,6 +558,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT_NOT_USE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "In VAT config page, VAT's use is selected to \"NOT USE\".";
@@ -537,6 +574,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__TV_INTERLOCK_STATE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "TV Interlock 관련 Digital Output이 \"ON\" 되어 있습니다.";
@@ -552,6 +590,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT_OPEN_TIMEOUT;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"VAT open timeout\" occurred !";
@@ -567,6 +606,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT_CLOSE_TIMEOUT;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"VAT close timeout\" occurred !";
@@ -582,6 +622,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT_ENABLE_SENSOR_ERROR;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"VAT,Enable Sensor Error\" occurred !";
@@ -596,6 +637,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__VAT_READY_ERROR;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "\"VAT,Ready Error\" occurred !";
@@ -611,6 +653,7 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__OPEN_INTERLOCK_OVER_PRESSURE;
+		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Open Interlock !";
@@ -687,6 +730,15 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
 	}
 
+	// PARA.PRESSURE_UNIT ...
+	{
+		def_name = "DATA.PRESSURE_UNIT";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if(def_data.CompareNoCase("mTORR") == 0)			iPARA__PRESSURE_UNIT = _PRESSURE_UNIT__mTORR;
+		else  												iPARA__PRESSURE_UNIT = _PRESSURE_UNIT__TORR;
+	}
+
 	// VAT_CTRL.TYPE ...
 	def_name = "DATA.CONTROL_TYPE";
 	p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
@@ -726,9 +778,9 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		// PARA.INFO ...
 		{
-			def_name = "VAR__PARA_PRESSURE_TORR";
+			def_name = "VAR__PARA_PRESSURE_VALUE";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__VAT__PARA_PRESSURE_TORR, obj_name,var_name);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__VAT__PARA_PRESSURE_VALUE, obj_name,var_name);
 			
 			def_name = "VAR__PARA_POSITION_PERCENT";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
@@ -736,9 +788,9 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 		// CUR.INFO ...
 		{
-			def_name = "VAR__CUR_PRESSURE_TORR";
+			def_name = "VAR__CUR_PRESSURE_VALUE";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__VAT__CUR_PRESSURE_TORR, obj_name,var_name);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__VAT__CUR_PRESSURE_VALUE, obj_name,var_name);
 
 			def_name = "VAR__CUR_POSITION_PERCENT";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
@@ -858,6 +910,8 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	DECLARE__EXT_CTRL(p_variable);
+
 	int flag = -1;
 
 	CString log_msg;
@@ -865,7 +919,7 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-		log_msg.Format("Start ... :  [%s]", mode);
+		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 

@@ -165,6 +165,13 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__WIN_CTRL_LOCK_ACTIVE_ABORT, var_name);
 	}
 
+	// MON.PART ...
+	{
+		var_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(var_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, var_name);
+	}
+
 	// MON ...
 	{
 		var_name = "MON.LOCK.ACTIVE.ABORT";
@@ -315,9 +322,12 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int i;
 
+	iLIST_ALID__PART.RemoveAll();
+
 	// Process Recipe does not exist ...
 	{
 		alarm_id = ALID__PROCESS_RECIPE_NOT_EXIST;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Process recipe does not exist.";
@@ -334,6 +344,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// Process Recovery Action With Wafer ...
 	{
 		alarm_id = ALID__PROCESS_RECOVERY_CHECK_WITH_WAFER;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Check Process Recovery Action !";
@@ -359,6 +370,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// Process Recovery Action ...
 	{
 		alarm_id = ALID__PROCESS_RECOVERY_CHECK_NO_WAFER;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Check Process Recovery Action !";
@@ -383,6 +395,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// Process Plasma Dechuck Recipe does not exist ...
 	{
 		alarm_id = ALID__PLSAMA_DECHUCK_RECIPE_NOT_EXIST;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Process [Plasma Dechuck] recipe does not exist.";
@@ -401,6 +414,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 		CString str_temp;
 
 		alarm_id = ALID__PLSAMA_DECHUCK_PROCESS_FAILED;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Process [Plasma Dechuck] Sequence Failed.";
@@ -418,6 +432,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PROCESS_RECIPE_FILE_CHANGING_NOW;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Process recipe file is being changed, now. \n";
@@ -434,6 +449,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__WAFER_STATUS_CONVERT_TO_PROCESSED;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Do you want to convert the status of wafer ? \n";
@@ -451,6 +467,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__WAFER_ALREADY_PROCESSED;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Do you want to proceed the re-processing of wafer ?";
@@ -468,6 +485,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__RECIPE_STEP_SIZE_ERROR;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The step size of process recipe is not correct !";
@@ -484,6 +502,7 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PROCESS_NOT_READY;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Process를 진행할 상태가 아닙니다.";

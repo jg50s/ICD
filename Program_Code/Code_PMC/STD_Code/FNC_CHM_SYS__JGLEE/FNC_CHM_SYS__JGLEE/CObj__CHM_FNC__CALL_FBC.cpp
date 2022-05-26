@@ -63,6 +63,7 @@ int CObj__CHM_FNC
 	}
 
 	// HIGH_VAC.PUMPING ...
+	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
 		int flag = Fnc__HIGH_VAC_PUMP(p_variable,p_alarm);
 

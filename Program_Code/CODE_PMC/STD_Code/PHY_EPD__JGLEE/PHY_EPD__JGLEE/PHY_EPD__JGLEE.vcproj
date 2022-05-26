@@ -124,7 +124,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\PHY_EPD__JGLEE;..\..\CCommon_Error"
+				AdditionalIncludeDirectories="..\PHY_EPD__JGLEE;..\..\CCommon_Error;..\..\CCommon_Utility"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -267,6 +267,70 @@
 				</File>
 				<File
 					RelativePath=".\Interface_Code.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CObj__EPD_SINGLE"
+				>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__ALARM_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__CALL_VALUE_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__CALL_VALUE_SLOPE.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__MON_ERROR_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__EPD_SINGLE__SUB_FNC.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CCommon_Utility"
+				>
+				<File
+					RelativePath="..\..\CCommon_Utility\CCommon_Utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\CCommon_Utility\CCommon_Utility.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CClass__Error_Timer"
+				>
+				<File
+					RelativePath=".\CClass__Error_Timer.h"
 					>
 				</File>
 			</Filter>

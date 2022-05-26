@@ -13,6 +13,7 @@
 #define STR__TEST							"TEST"
 
 #define STR__EXIST							"EXIST"
+#define STR__NONE							"NONE"
 #define STR__CHECK							"CHECK"
 
 

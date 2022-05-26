@@ -5,13 +5,12 @@
 // ...
 int CObj__GAS_VLV_FNC::Get__MFC_INDEX(const CString& gas_name)
 {
-	CString str_name;
-	int i;
+	int i_limit = sList__GAS_TYPE.GetSize();
 
-	for(i=0; i<iMFC_SIZE; i++)
+	for(int i=0; i<i_limit; i++)
 	{
-		str_name.Format("GAS%02d", i+1);
-		if(str_name.CompareNoCase(gas_name) != 0)		continue;
+		if(sList__GAS_TYPE[i].CompareNoCase(gas_name) != 0)			
+			continue;
 
 		return i;
 	}

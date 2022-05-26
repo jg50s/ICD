@@ -91,7 +91,7 @@ int CObj__RPS_SERIAL
 
 	if(doCH__PLASMA_ON_ENABLE_TURN_ON->Check__VARIABLE_NAME(var_name) > 0)
 	{
-		s_cmmd = "VP";
+		s_cmmd = "VPO";
 		s_op   = "";
 
 		if(set_data.CompareNoCase(STR__ON) == 0)		s_data = "1";
@@ -198,19 +198,25 @@ int CObj__RPS_SERIAL
 int CObj__RPS_SERIAL
 ::_Send__Command(const CString& s_cmmd,const CString& s_op,const CString& s_data, CString* p_data)
 {
-	int cfg__line_msec = (int) aCH__CFG_DRV_LINE_SEDN_DELAY_mSEC->Get__VALUE();
-
 	if(bActive__DRV_FNC_START)
 	{
-		while(xTIMER__DRV_LINE->Get__CURRENT_TIME() < cfg__line_msec)
+		double cfg__line_sec = aCH__CFG_DRV_LINE_SEDN_DELAY_SEC->Get__VALUE();
+
+		while(xTIMER__DRV_LINE->Get__CURRENT_TIME() < cfg__line_sec)
 		{
 			Sleep(1);
 		}
+
+		/*
+		int cfg__line_msec = (int) (cfg__line_sec * 1000);
+		Sleep(cfg__line_msec);
+		*/
 	}
 
 	// Send ...
 	{
-		int cfg__char_msec = (int) aCH__CFG_DRV_CHAR_SEDN_DELAY_mSEC->Get__VALUE();
+		double cfg__char_sec = aCH__CFG_DRV_CHAR_SEDN_DELAY_SEC->Get__VALUE();
+		int cfg__char_msec = (int) (cfg__char_sec * 1000);
 
 		// ...
 		CString s_body;

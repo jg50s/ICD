@@ -9,11 +9,14 @@ int CObj__STEP_STD
 {
 	CString log_msg;
 	CString log_bff;
+
+	CString ch_data;
 	int i;
 
 	CString rcp__step_msg;
 	CString rcp__step_mode;
 	CString rcp__step_time;
+	CString rcp__step_overetch_per;
 
 	CString rcp__apc_mode;
 	CString rcp__apc_pressure_torr;
@@ -21,6 +24,8 @@ int CObj__STEP_STD
 	CString rcp__apc_learned_pos;
 	CString rcp__apc_hold_sec;
 
+	CString rcp__dgf_center;
+	
 	CString rcp__mfc_x_flow[_CFG__MFC_SIZE];
 
 	CString rcp__rf_rps_power;
@@ -55,7 +60,26 @@ int CObj__STEP_STD
 	CString rcp__dpc_edge_pressure;
 
 	CString rcp__lift_pin_mode;
+
 	//
+	CString rcp__epd_mode;
+	CString rcp__epd_value_to_change;
+	CString rcp__epd_percent_to_change;
+
+	CString rcp__epd_delay_time;
+	CString rcp__epd_normalize_time;
+
+	CString rcp__epd_min_time;
+	CString rcp__epd_max_time;
+
+	CString rcp__epd_min_threshold;
+	CString rcp__epd_max_threshold;
+
+	CString rcp__epd_slope_value;
+	CString rcp__epd_slope_type;
+	CString rcp__epd_valid_time;
+	//
+
 
 	// ...
 	bool active__rcp_log = false;
@@ -78,6 +102,7 @@ int CObj__STEP_STD
 		sCH__RCP_STEP_MESSAGE->Get__DATA(rcp__step_msg);
 		dCH__RCP_STEP_MODE->Get__DATA(rcp__step_mode);
 		aCH__RCP_STEP_TIME->Get__DATA(rcp__step_time);
+		aCH__RCP_STEP_OVERETCH_PERCENT->Get__DATA(rcp__step_overetch_per);
 
 		// APC ...
 		dCH__RCP_APC_MODE->Get__DATA(rcp__apc_mode);
@@ -88,6 +113,9 @@ int CObj__STEP_STD
 		aCH__RCP_APC_POSITION->Get__DATA(rcp__apc_position);
 		sCH__RCP_APC_LEARNED_POS->Get__DATA(rcp__apc_learned_pos);
 		sCH__RCP_APC_HOLD_DELAY->Get__DATA(rcp__apc_hold_sec);
+
+		// DGF ...
+		rcp__dgf_center = aCH__RCP_DGF_CENTER_PERCENT->Get__STRING();
 
 		// MFC ...
 		for(i=0; i<iDATA__MFC_SIZE; i++)
@@ -138,6 +166,25 @@ int CObj__STEP_STD
 
 		//
 		dCH__RCP_LIFT_PIN_MODE->Get__DATA(rcp__lift_pin_mode);
+
+		//
+		rcp__epd_mode = dCH__RCP_EPD_EPD_MODE->Get__STRING();
+
+		rcp__epd_value_to_change   = aCH__RCP_EPD_VALUE_TO_CHANGE->Get__STRING();
+		rcp__epd_percent_to_change = aCH__RCP_EPD_PERCENT_TO_CHANGE->Get__STRING();
+
+		rcp__epd_delay_time = aCH__RCP_EPD_DELAY_TIME->Get__STRING();
+		rcp__epd_normalize_time = aCH__RCP_EPD_NORMALIZE_TIME->Get__STRING();
+
+		rcp__epd_min_time = aCH__RCP_EPD_MIN_TIME->Get__STRING();
+		rcp__epd_max_time = aCH__RCP_EPD_MAX_TIME->Get__STRING();
+
+		rcp__epd_min_threshold = aCH__RCP_EPD_MIN_THRESHOLD->Get__STRING();
+		rcp__epd_max_threshold = aCH__RCP_EPD_MAX_THRESHOLD->Get__STRING();
+
+		rcp__epd_slope_value = aCH__RCP_EPD_SLOPE_VALUE->Get__STRING();
+		rcp__epd_slope_type  = dCH__RCP_EPD_SLOPE_TYPE->Get__STRING();
+		rcp__epd_valid_time  = aCH__RCP_EPD_SLOPE_VALID_TIME->Get__STRING();
 	}
 
 	// LOG ...
@@ -145,6 +192,42 @@ int CObj__STEP_STD
 	{
 		_Fnc__PROC_LOG();
 	}
+
+
+	// ...
+	bool active__stable_mode = false;
+	bool active__fast_vac  = false;
+	bool active__end_point = false;
+	bool active__over_etch = false;
+
+	if(rcp__step_mode.CompareNoCase(STR__Stable) == 0)
+	{
+		active__stable_mode = true;
+	}
+	else if(rcp__step_mode.CompareNoCase(STR__High_Vac) == 0)
+	{
+		active__fast_vac = true;
+	}
+	else if(rcp__step_mode.CompareNoCase(STR__EndPT) == 0)
+	{
+		active__end_point = true;
+	}
+	else if(rcp__step_mode.CompareNoCase(STR__OverEtch) == 0)
+	{
+		active__over_etch = true;
+
+		ch_data = sCH__INFO_STEP_PRE_TIME->Get__STRING();
+		double cur__step_sec = atof(ch_data);
+		double cur__over_per = atof(rcp__step_overetch_per);
+
+		rcp__step_time.Format("%.1f", (cur__step_sec * cur__over_per) * 0.01);
+		aCH__RCP_STEP_TIME->Set__DATA(rcp__step_time);
+	}
+	else if(rcp__step_mode.CompareNoCase(STR__End) == 0)
+	{
+		return 1;
+	}
+
 
 	// APC.CTRL ...
 	if(bActive__OBJ_CTRL__APC)
@@ -171,6 +254,11 @@ int CObj__STEP_STD
 
 			APC_OBJ__Start_MODE(obj_mode,para_data, value__hold_sec,value__hold_pos);
 		}
+	}
+
+	// DGF.CTRL ...
+	{
+		DGF_OBJ__Start_CONTROL(rcp__dgf_center);
 	}
 
 	// MFC_X.CTRL ...
@@ -383,32 +471,105 @@ int CObj__STEP_STD
 	}
 
 	// LIFT_PIN.CTRL ...
+	bool active__pin_ctrl = false;
+
 	if(bActive__OBJ_CTRL__LIFT_PIN)
 	{
 		CString obj_mode;
 
-			 if(rcp__lift_pin_mode.CompareNoCase(STR__Down)   == 0)			obj_mode  = _PIN_CMD__DOWN;
+		if(rcp__lift_pin_mode.CompareNoCase(STR__Down)   == 0)			obj_mode  = _PIN_CMD__DOWN;
 		else if(rcp__lift_pin_mode.CompareNoCase(STR__Middle) == 0)			obj_mode  = _PIN_CMD__MIDDLE;
 		else if(rcp__lift_pin_mode.CompareNoCase(STR__Up)     == 0)			obj_mode  = _PIN_CMD__UP;
 
 		if(obj_mode.GetLength() > 0)
 		{
 			LIFT_PIN_OBJ__Start_MODE(obj_mode);
+
+			if(active__end_point)
+			{
+				if(obj_mode.CompareNoCase(_PIN_CMD__DOWN) != 0)
+				{
+					active__pin_ctrl  = true;
+					active__end_point = false;
+				}
+			}
 		}
 	}
 
-	// ...
-	bool active__stable_mode = false;
-	bool active__fast_vac = false;
+	// EPD ...
+	{
+		bool active__epd_idle   = false;
+		bool active__epd_check  = false;
+		bool active__epd_detect = false;
+		bool active__err_check  = false;
 
-	if(rcp__step_mode.CompareNoCase(STR__Stable) == 0)
-	{
-		active__stable_mode = true;
+		if(rcp__epd_mode.CompareNoCase("Idle") == 0)
+		{
+			if(active__end_point)			active__err_check = true;
+			else							active__epd_idle  = true;
+		}
+		else if(rcp__epd_mode.CompareNoCase("Error.Check") == 0)
+		{
+			if(active__end_point)			active__err_check = true;
+			else							active__epd_check = true;
+		}
+		else
+		{
+			if(active__end_point)
+			{
+				active__epd_detect = true;
+
+				//
+				dEXT_CH__EPD__PARA_EPD_MODE->Set__DATA(rcp__epd_mode);
+
+				sEXT_CH__EPD__PARA_VALUE_TO_CHANGE->Set__DATA(rcp__epd_value_to_change);
+				sEXT_CH__EPD__PARA_PERCENT_TO_CHANGE->Set__DATA(rcp__epd_percent_to_change);
+
+				aEXT_CH__EPD__PARA_DELAY_TIME->Set__DATA(rcp__epd_delay_time);
+				sEXT_CH__EPD__PARA_NORMALIZE_TIME->Set__DATA(rcp__epd_normalize_time);
+
+				aEXT_CH__EPD__PARA_EPD_TIMEOUT_MINIMUM->Set__DATA(rcp__epd_min_time);
+				aEXT_CH__EPD__PARA_EPD_TIMEOUT_MAXIMUM->Set__DATA(rcp__epd_max_time);
+
+				sEXT_CH__EPD__PARA_EPD_THRESHOLD_MIN->Set__DATA(rcp__epd_min_threshold);
+				sEXT_CH__EPD__PARA_EPD_THRESHOLD_MAX->Set__DATA(rcp__epd_max_threshold);
+
+				sEXT_CH__EPD__PARA_SLOPE_COUNT->Set__DATA(rcp__epd_slope_value);
+				sEXT_CH__EPD__PARA_SLOPE_DIRECTION->Set__DATA(rcp__epd_slope_type);
+				sEXT_CH__EPD__PARA_VALID_TIME->Set__DATA(rcp__epd_valid_time);
+			}
+			else
+			{
+				active__epd_idle = true;
+			}
+		}
+
+		if(active__err_check)
+		{
+			int alm_id = ALID__STEP_PARAMETER__SETTING_ERROR;
+
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+
+			alm_bff.Format("Current Step.No <- %s \n", sCH__INFO_STEP_CUR_NUM->Get__STRING());
+			alm_msg += alm_bff;
+
+			alm_bff.Format("  Step.Mode <- %s \n", rcp__step_mode);
+			alm_msg += alm_bff;
+			alm_bff.Format("  EPD.Mode  <- %s \n", rcp__epd_mode);
+			alm_msg += alm_bff;
+
+			p_alarm->Check__ALARM(alm_id, r_act);
+			p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			return -101;
+		}
+
+			 if(active__epd_idle)			EPD_OBJ__Start_IDLE();
+		else if(active__epd_check)			EPD_OBJ__Start_CHECK();
+		else if(active__epd_detect)			EPD_OBJ__Start_DETECT();
 	}
-	else if(rcp__step_mode.CompareNoCase(STR__High_Vac) == 0)
-	{
-		active__fast_vac = true;
-	}
+
 
 	// ...
 	double cfg__stable_min_sec = aCH__CFG_STEP_STABLE_MIN_SEC->Get__VALUE();
@@ -593,6 +754,11 @@ int CObj__STEP_STD
 				if(HTR_SH_OBJ__Check_ERROR()   > 0)		return -141;
 				if(HTR_WALL_OBJ__Check_ERROR() > 0)		return -142;
 			}
+
+			// if(active__over_etch)
+			{
+				if(EPD_OBJ__Check_ERROR() > 0)			return -151;
+			}
 		}
 		// ABORTEDR CHECK ...
 		{
@@ -608,6 +774,8 @@ int CObj__STEP_STD
 			if(MAT_HF_OBJ__Check_ABORTED() > 0)			return -232;
 
 			if(ESC_OBJ__Check_ABORTED() > 0)			return -241;
+			
+			if(LIFT_PIN_OBJ__Check_ABORTED() > 0)		return -251;
 		}
 
 		if(active__stable_mode)
@@ -633,13 +801,29 @@ int CObj__STEP_STD
 				}
 			}
 		}
+		else if(active__end_point)
+		{
+			if(EPD_OBJ__Is_BUSY() < 0)
+			{
+				break;
+			}
+		}
+		else if(active__pin_ctrl)
+		{
+			if(LIFT_PIN_OBJ__Is_BUSY() < 0)
+			{
+				break;
+			}
+		}
 
 		if(cur_ctrl == _CMD_ID__START)
 		{
 			if(x_step_timer->Check__CURRENT_TIME(para__step_sec, cur_sec))
 			{
 				if((active__stable_mode)
-					|| (active__fast_vac))
+				|| (active__fast_vac)
+				|| (active__end_point)
+				|| (active__pin_ctrl))
 				{
 					int alm_id = ALID__STABLE_OVERTIME;
 					CString alm_msg;
@@ -656,6 +840,12 @@ int CObj__STEP_STD
 		}
 	}
 
+	// ...
+	{
+		ch_data.Format("%.1f", x_step_timer->Get__CURRENT_SEC());
+		sCH__INFO_STEP_PRE_TIME->Set__DATA(ch_data);
+	}
+
 	// Object Over-Time Check ...
 	double cur__obj_delay_sec = Fnc__OBJ_OVERTIME_CHECK(p_variable, p_alarm);
 
@@ -664,6 +854,13 @@ int CObj__STEP_STD
 		log_msg.Format("Step(%s) End - Object Delay (%.2f sec)", cur__step_ud, cur__obj_delay_sec);
 
 		xLOG_CTRL->WRITE__LOG(log_msg);		
+	}
+
+	// OBJ.Abort Check ...
+	{
+		if(ESC_OBJ__Check_ABORTED() > 0)						return -301;
+		if(LIFT_PIN_OBJ__Check_ABORTED() > 0)					return -302;
+		if(EPD_OBJ__Check_ABORTED() > 0)						return -303;
 	}
 	return 1;
 }
@@ -676,6 +873,7 @@ double CObj__STEP_STD
 
 	bool active__esc_obj = false;
 	bool active__pin_obj = false;
+	bool active__epd_obj = false;
 
 	while(1)
 	{
@@ -690,6 +888,11 @@ double CObj__STEP_STD
 		{
 			active__obj_budy = true;
 			active__pin_obj = true;
+		}
+		if(EPD_OBJ__Is_BUSY() > 0)
+		{
+			active__obj_budy = true;
+			active__epd_obj  = true;
 		}
 
 		if(active__obj_budy)
@@ -719,8 +922,9 @@ double CObj__STEP_STD
 		//
 		CString cur__step_time = aCH__RCP_STEP_TIME->Get__STRING();
 		CString cur__step_mode = dCH__RCP_STEP_MODE->Get__STRING();
-		CString cur__esc_mode = dCH__RCP_ESC_CTRL_MODE->Get__STRING();
-		CString cur__pin_mode = dCH__RCP_LIFT_PIN_MODE->Get__STRING();
+		CString cur__esc_mode  = dCH__RCP_ESC_CTRL_MODE->Get__STRING();
+		CString cur__pin_mode  = dCH__RCP_LIFT_PIN_MODE->Get__STRING();
+		CString cur__epd_mode  = dCH__RCP_EPD_EPD_MODE->Get__STRING();
 
 		//
 		alm_bff.Format(" Object over-time is %.1f (sec). \n", x_obj_timer_ctrl->Get__CURRENT_TIME());
@@ -753,6 +957,11 @@ double CObj__STEP_STD
 			alm_bff.Format("   * Lift-pin control is \"%s\". \n", cur__pin_mode);
 			alm_msg += alm_bff;
 		}
+		if(active__epd_obj)
+		{
+			alm_bff.Format("   * EPD control is \"%s\". \n", cur__epd_mode);
+			alm_msg += alm_bff;
+		}
 
 		alm_msg += "\n";
 
@@ -764,6 +973,11 @@ double CObj__STEP_STD
 		if(active__pin_obj)
 		{
 			alm_bff.Format(" Please, check the actual operation time of lift-pin (%s). \n", cur__pin_mode);
+			alm_msg += alm_bff;
+		}
+		if(active__epd_obj)
+		{
+			alm_bff.Format(" Please, check the actual operation time of EPD (%s). \n", cur__epd_mode);
 			alm_msg += alm_bff;
 		}
 

@@ -12,11 +12,26 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 	CString cur_req;
 	CString var_data;
 
+	int loop_count = 0;
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.05);
 
+		loop_count++;
+		if(loop_count > 20)		loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			int check__err_esc     = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__ESC);
+			int check__err_he_flow = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__HE_FLOW);
+
+			if(check__err_esc > 0)			dCH__MON_ESC_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_ESC_ERROR_ACTIVE->Set__DATA(STR__OFF);
+
+			if(check__err_he_flow > 0)		dCH__MON_HE_FLOW_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_HE_FLOW_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
 		
 		// REQ : 3WAY.VLV - CENTER ...
 		if(bActive__CENTER_3WAY_VLV)
@@ -31,22 +46,22 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 				if(cur_req.CompareNoCase("CLOSE") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 				}
 				else if(cur_req.CompareNoCase("OPEN") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Close);
 				}
 				else if(cur_req.CompareNoCase("DUMP") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 				else if(cur_req.CompareNoCase("AL.OP") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_CENTER->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_CENTER)			doEXT_CH__He_Final_Dump_Vlv_CENTER->Set__DATA(STR__Open);
 				}
 			}
 
@@ -55,12 +70,18 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 			if(doEXT_CH__He_Final_Out_Vlv_CENTER->Check__DATA(STR__Open) > 0)
 			{
-				if(doEXT_CH__He_Final_Dump_Vlv_CENTER->Check__DATA(STR__Open) > 0)		cur_sts = "AL.OP";
-				else																	cur_sts = "OPEN";
+				if(bActive__He_Final_Dump_Vlv_CENTER)			
+				{
+					if(doEXT_CH__He_Final_Dump_Vlv_CENTER->Check__DATA(STR__Open) > 0)		cur_sts = "AL.OP";
+					else																	cur_sts = "OPEN";
+				}
 			}
 			else
 			{
-				if(doEXT_CH__He_Final_Dump_Vlv_CENTER->Check__DATA(STR__Open) > 0)		cur_sts = "DUMP";
+				if(bActive__He_Final_Dump_Vlv_CENTER)			
+				{
+					if(doEXT_CH__He_Final_Dump_Vlv_CENTER->Check__DATA(STR__Open) > 0)		cur_sts = "DUMP";
+				}
 			}
 
 			sCH__MON_HE_FINAL_CENTER__3WAY_VLV->Set__DATA(cur_sts);
@@ -78,22 +99,22 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 				if(cur_req.CompareNoCase("CLOSE") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 				}
 				else if(cur_req.CompareNoCase("OPEN") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Close);
 				}
 				else if(cur_req.CompareNoCase("DUMP") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Close);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 				else if(cur_req.CompareNoCase("AL.OP") == 0)
 				{
 					doEXT_CH__He_Final_Out_Vlv_EDGE->Set__DATA(STR__Open);
-					doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
+					if(bActive__He_Final_Dump_Vlv_EDGE)				doEXT_CH__He_Final_Dump_Vlv_EDGE->Set__DATA(STR__Open);
 				}
 			}
 
@@ -102,12 +123,18 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 			if(doEXT_CH__He_Final_Out_Vlv_EDGE->Check__DATA(STR__Open) > 0)
 			{
-				if(doEXT_CH__He_Final_Dump_Vlv_EDGE->Check__DATA(STR__Open) > 0)		cur_sts = "AL.OP";
-				else																	cur_sts = "OPEN";
+				if(bActive__He_Final_Dump_Vlv_EDGE)				
+				{
+					if(doEXT_CH__He_Final_Dump_Vlv_EDGE->Check__DATA(STR__Open) > 0)		cur_sts = "AL.OP";
+					else																	cur_sts = "OPEN";
+				}
 			}
 			else
 			{
-				if(doEXT_CH__He_Final_Dump_Vlv_EDGE->Check__DATA(STR__Open) > 0)		cur_sts = "DUMP";
+				if(bActive__He_Final_Dump_Vlv_EDGE)				
+				{
+					if(doEXT_CH__He_Final_Dump_Vlv_EDGE->Check__DATA(STR__Open) > 0)		cur_sts = "DUMP";
+				}
 			}
 
 			sCH__MON_HE_FINAL_EDGE__3WAY_VLV->Set__DATA(cur_sts);
@@ -769,10 +796,14 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 				continue;
 			}
 
-			// ...
+			//
+			if((cur__esc_setpoint > 0.1) || (cur__esc_setpoint < -0.1))
 			{
-				if(cur__esc_setpoint > 0.1)			pch_esc_ctrl_check->Set__DATA(STR__YES);
-				else								pch_esc_ctrl_check->Set__DATA(STR__NO);
+				pch_esc_ctrl_check->Set__DATA(STR__YES);
+			}
+			else
+			{
+				pch_esc_ctrl_check->Set__DATA(STR__NO);
 			}
 
 			if(*p_pre__esc_setpoint != cur__esc_setpoint)

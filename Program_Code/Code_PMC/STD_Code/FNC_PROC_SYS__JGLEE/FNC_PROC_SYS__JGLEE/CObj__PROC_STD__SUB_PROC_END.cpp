@@ -23,7 +23,7 @@ int CObj__PROC_STD
 
 		// Start ...
 		{
-			pOBJ_CTRL__STEP->Run__OBJECT(_STEP_CMD__END);
+			pOBJ_CTRL__STEP->Call__OBJECT(_STEP_CMD__END);
 			pOBJ_CTRL__CHM->Run__OBJECT(_CHM_CMD__HIGH_VAC_PUMP);
 		}
 

@@ -56,8 +56,12 @@ int CObj__CHM_FNC
 int CObj__CHM_FNC
 ::Fnc__ALL_GAS_LINE_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	pOBJ_CTRL__GAS_VLV->Dislink__UPPER_OBJECT();
+
 	int flag = pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__ALL_CLOSE);
-	
+
+	pOBJ_CTRL__GAS_VLV->Link__UPPER_OBJECT();
+
 	if(flag < 0)
 	{
 		CString log_msg;
@@ -283,9 +287,20 @@ LOOP_RETRY:
 
 		while(1)
 		{
-			if(dEXT_CH__CHM_ATM_SNS->Check__DATA(STR__OFF) > 0)
+			// ATM.SNS Check ...
 			{
-				break;
+				double cur__chm_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+				double cfg__ref_press = aCH__CFG_ATM_SNS_REF_PRESSURE->Get__VALUE();
+
+				if(cur__chm_press > cfg__ref_press)
+				{
+					break;
+				}
+
+				if(dEXT_CH__CHM_ATM_SNS->Check__DATA(STR__OFF) > 0)
+				{
+					break;
+				}
 			}
 
 			Sleep(100);
@@ -421,7 +436,8 @@ RETRY_LOOP:
 
 		while(1)
 		{
-			if(dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__ON) > 0)
+			if((dEXT_CH__CHM_ATM_SNS->Check__DATA(STR__OFF) > 0)
+			&& (dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__ON)  > 0))
 			{
 				break;
 			}
@@ -1115,7 +1131,8 @@ int CObj__CHM_FNC
 			return -1;
 		}
 	}
-	return 1;
+
+	return pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__FV_CLOSE);
 }
 
 int CObj__CHM_FNC
@@ -1235,16 +1252,6 @@ RETRY_LOOP:
 		x_asyc_timer->STOP();
 		x_asyc_timer->START__COUNT_UP(99999);
 
-		// ...
-		bool active__vac_sns_check = true;
-
-		if(purge_flag > 0)
-		{
-			double cfg__up_press = aCH__CFG_PURGE_UP_PRESSURE->Get__VALUE();
-
-			if(cfg__up_press < 10.0)		active__vac_sns_check = false;
-		}
-
 		do
 		{
 			if(p_variable->Check__CTRL_ABORT() > 0)
@@ -1253,16 +1260,20 @@ RETRY_LOOP:
 				return -163;
 			}
 
-			if(active__vac_sns_check)
+			// VAC.SNS Check ...
 			{
+				double cur__chm_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+				double cfg__ref_press = aCH__CFG_VAC_SNS_REF_PRESSURE->Get__VALUE();
+
+				if(cur__chm_press < cfg__ref_press)
+				{
+					break;
+				}
+
 				if(dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__ON) < 0)
 				{
 					break;
 				}
-			}
-			else
-			{
-				break;
 			}
 
 			// Alarm Check ...
@@ -1386,17 +1397,28 @@ RETRY_LOOP:
 				return -173;
 			}
 
-			// Pressure Check ...
-			double cfg__ref_press;
-
-			if(purge_flag < 0)		cfg__ref_press = aCH__CFG_FAST_VENT_PRESSURE->Get__VALUE();
-			else					cfg__ref_press = aCH__CFG_PURGE_UP_PRESSURE->Get__VALUE();
-
-			double cur__chm_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
-
-			if(cur__chm_press >= cfg__ref_press)
+			if(dCH__CFG_FAST_VENT_GAUGE_CHECK->Check__DATA(STR__NO) > 0)
 			{
-				break;
+				if((dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__OFF) > 0)
+				&& (dEXT_CH__CHM_ATM_SNS->Check__DATA(STR__ON)  > 0))
+				{
+					break;
+				}
+			}
+			else
+			{
+				// Pressure Check ...
+				double cfg__ref_press = 0;
+
+				if(purge_flag < 0)		cfg__ref_press = aCH__CFG_FAST_VENT_PRESSURE->Get__VALUE();
+				else					cfg__ref_press = aCH__CFG_PURGE_UP_PRESSURE->Get__VALUE();
+
+				double cur__chm_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+
+				if(cur__chm_press >= cfg__ref_press)
+				{
+					break;
+				}
 			}
 
 			// Alarm Check ...
@@ -1409,6 +1431,13 @@ RETRY_LOOP:
 
 				if(sim_sec <= x_asyc_timer->Get__CURRENT_TIME())
 				{
+					double cfg__ref_press = 0;
+					
+					if(purge_flag < 0)		cfg__ref_press = aCH__CFG_FAST_VENT_PRESSURE->Get__VALUE();
+					else					cfg__ref_press = aCH__CFG_PURGE_UP_PRESSURE->Get__VALUE();
+
+					double cur__chm_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+
 					ch_data.Format("%.1f", cfg__ref_press + 1.0);
 					sEXT_CH__SIM_PRESSURE_TORR->Set__DATA(ch_data);
 
@@ -1431,8 +1460,28 @@ RETRY_LOOP:
 					CString alm_bff;
 					CString r_act;
 				
-					// ...
+					if(dCH__CFG_FAST_VENT_GAUGE_CHECK->Check__DATA(STR__NO) > 0)
 					{
+						alm_bff.Format("  * %s <- %s \n",
+										dEXT_CH__CHM_VAC_SNS->Get__CHANNEL_NAME(),
+										dEXT_CH__CHM_VAC_SNS->Get__STRING());
+						alm_msg += alm_bff;
+
+						alm_bff.Format("  * %s <- %s \n",
+										dEXT_CH__CHM_ATM_SNS->Get__CHANNEL_NAME(),
+										dEXT_CH__CHM_ATM_SNS->Get__STRING());
+						alm_msg += alm_bff;
+					}
+					else
+					{
+						double cfg__ref_press = 0;
+
+						if(purge_flag < 0)		cfg__ref_press = aCH__CFG_FAST_VENT_PRESSURE->Get__VALUE();
+						else					cfg__ref_press = aCH__CFG_PURGE_UP_PRESSURE->Get__VALUE();
+
+						double cur__chm_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+
+						//
 						alm_bff.Format("Current chamber pressure is %.3f (torr).\n", cur__chm_press);
 						alm_msg += alm_bff;
 				
@@ -1460,7 +1509,7 @@ RETRY_LOOP:
 
 	x_asyc_timer->STOP();
 	
-	return pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__FV_CLOSE);
+	return 1;
 }
 
 int CObj__CHM_FNC

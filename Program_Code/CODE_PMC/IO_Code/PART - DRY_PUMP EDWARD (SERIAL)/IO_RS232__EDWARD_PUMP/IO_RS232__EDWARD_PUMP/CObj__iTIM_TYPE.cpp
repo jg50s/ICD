@@ -55,6 +55,13 @@ int CObj__iTIM_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 	CString str_name;
 	CString dsc_item_list;
 
+	// CFG : SYSTEM ...
+	{
+		str_name = "CFG.PART.USE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PART_USE, str_name);
+	}
+
 	// ...
 	{
 		p_variable->Get__STD_DESCRIPTION("STD_OBJ_STATUS",dsc_item_list);

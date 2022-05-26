@@ -147,11 +147,11 @@ int CObj__RF_STD
 	CString log_msg;
 	CString str_data;
 
-	if(sCH__RF_CONDUCTANCE_INTLK_SKIP->Check__DATA(STR__SKIP) < 0)
+	if(dCH__RF_CONDUCTANCE_INTLK_SKIP->Check__DATA(STR__ON) < 0)
 	{
 		if(Fnc__INTLK_CHECK(p_variable, p_alarm) < 0)
 		{
-			dCH__RF_ABORT_FLAG->Set__DATA("ON");
+			dCH__RF_ABORT_FLAG->Set__DATA(STR__ON);
 			return -11;
 		}
 	}

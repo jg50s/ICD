@@ -22,7 +22,9 @@ int CObj__GAS_VLV_FNC::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__ALL_CLOSE,	 "ALL_CLOSE");
+		ADD__CTRL_VAR(sMODE__ALL_CLOSE,	"ALL_CLOSE");
+		ADD__CTRL_VAR(sMODE__MFC_ALL_CLOSE,	"MFC.ALL_CLOSE");
+
 		ADD__CTRL_VAR(sMODE__PROC_READY, "PROC_READY");
 
 		ADD__CTRL_VAR(sMODE__SV_OPEN,  "SV_OPEN");
@@ -53,15 +55,7 @@ int CObj__GAS_VLV_FNC::__DEFINE__VERSION_HISTORY(version)
 
 
 // ...
-#define MON_ID__STATE_CHECK					1
-
-// ...
-#define ASP_DSP__GAS_TYPE					\
-"ALL										\
-GAS01 GAS02 GAS03 GAS04 GAS05				\
-GAS06 GAS07 GAS08 GAS09 GAS10				\
-GAS11 GAS12 GAS13 GAS14 GAS15				\
-GAS16"
+#define MON_ID__STATE					1
 
 
 int CObj__GAS_VLV_FNC::__DEFINE__VARIABLE_STD(p_variable)
@@ -168,9 +162,13 @@ int CObj__GAS_VLV_FNC::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, list_gas, "");
 			LINK__VAR_DIGITAL_CTRL(dCH__CFG_TRANSFER_BALLAST_GAS_ID, str_name);
 
-			str_name.Format("CFG.TRANSFER.BALLAST.GAS.FLOW");
+			str_name = "CFG.TRANSFER.BALLAST.GAS.FLOW";
 			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sccm", 0, 0, 10000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_TRANSFER_BALLAST_GAS_FLOW, str_name);
+
+			str_name = "CUR.TRANSFER.BALLAST.GAS.NAME";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__CUR_TRANSFER_BALLAST_GAS_NAME, str_name);
 		}
 		// Chamber ...
 		{
@@ -181,13 +179,14 @@ int CObj__GAS_VLV_FNC::__DEFINE__VARIABLE_STD(p_variable)
 			str_name = "CFG.CHAMBER.BALLAST.GAS.FLOW";
 			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sccm", 0, 0, 10000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_CHAMBER_BALLAST_GAS_FLOW, str_name);
+
+			str_name = "CUR.CHAMBER.BALLAST.GAS.NAME";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__CUR_CHAMBER_BALLAST_GAS_NAME, str_name);
 		}
 	}
 
-	// ...
-	{
-		p_variable->Add__MONITORING_PROC(1, MON_ID__STATE_CHECK);
-	}
+	p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATE);
 	return 1;
 }
 
@@ -329,12 +328,22 @@ int CObj__GAS_VLV_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			iMFC_SIZE = _MAX__MFC_OBJ;
 		}
 
+		sList__GAS_TYPE.RemoveAll();
+
 		for(i=0; i<iMFC_SIZE; i++)
 		{
 			def_name.Format("OBJ.MFC%1d", i+1);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
 			pOBJ_CTRL__MFC[i] = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			def_name.Format("OBJ.ID%1d", i+1);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			sList__GAS_TYPE.Add(def_data);
+			l_mfc_type.Add(def_data);
+			l_ballast_mfc_type.Add(def_data);
 
 			//
 			var_name = "CFG.MFC.USE";
@@ -355,11 +364,6 @@ int CObj__GAS_VLV_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			//
 			var_name = "PARA.SET.FLOW";
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PARA_SET_FLOW[i],  obj_name,var_name);
-
-			//
-			var_name.Format("GAS%02d", i+1);
-			l_mfc_type.Add(var_name);
-			l_ballast_mfc_type.Add(var_name);
 		}
 	}
 
@@ -368,8 +372,8 @@ int CObj__GAS_VLV_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		var_name = STR__N2_Ballast;
 		l_ballast_mfc_type.InsertAt(0, var_name);
 
-		p_variable->Change__DIGITAL_LIST(dCH__PARA_MFC_TYPE->Get__VARIABLE_NAME(),             l_mfc_type);
-		p_variable->Change__DIGITAL_LIST(dCH__CFG_WAP_AUTO_LEARN_GAS->Get__VARIABLE_NAME(),    l_mfc_type);
+		p_variable->Change__DIGITAL_LIST(dCH__PARA_MFC_TYPE->Get__VARIABLE_NAME(),          l_mfc_type);
+		p_variable->Change__DIGITAL_LIST(dCH__CFG_WAP_AUTO_LEARN_GAS->Get__VARIABLE_NAME(), l_mfc_type);
 		
 		p_variable->Change__DIGITAL_LIST(dCH__CFG_CHAMBER_BALLAST_GAS_ID->Get__VARIABLE_NAME(),  l_ballast_mfc_type);
 		p_variable->Change__DIGITAL_LIST(dCH__CFG_TRANSFER_BALLAST_GAS_ID->Get__VARIABLE_NAME(), l_ballast_mfc_type);
@@ -414,7 +418,10 @@ LOOP_RETRY:
 	{
 		if((mode.CompareNoCase(sMODE__GAS_LINE_PURGE)     == 0)
 		|| (mode.CompareNoCase(sMODE__CHM_LINE_PURGE)     == 0)
-		|| (mode.CompareNoCase(sMODE__LINE_PURGE_WITH_N2) == 0))
+		|| (mode.CompareNoCase(sMODE__LINE_PURGE_WITH_N2) == 0)
+		|| (mode.CompareNoCase(sMODE__MFC_CONTROL)        == 0)
+		|| (mode.CompareNoCase(sMODE__CHM_BALLAST_FLOW)   == 0)
+		|| (mode.CompareNoCase(sMODE__TRANS_BALLAST_FLOW) == 0))
 		{
 			int alm_id = ALID__CHM_STATE__NOT_PUMPING;
 			CString alm_msg;
@@ -451,6 +458,8 @@ LOOP_RETRY:
 	if(flag > 0)
 	{
 			 IF__CTRL_MODE(sMODE__ALL_CLOSE)				flag = Call__ALL_CLOSE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__MFC_ALL_CLOSE)			flag = Call__MFC_ALL_CLOSE(p_variable);
+
 	    ELSE_IF__CTRL_MODE(sMODE__PROC_READY)				flag = Call__PROC_READY(p_variable);
 
 		ELSE_IF__CTRL_MODE(sMODE__SV_OPEN)					flag = Call__SV_OPEN(p_variable);
@@ -493,7 +502,10 @@ LOOP_RETRY:
 
 int CObj__GAS_VLV_FNC::__CALL__MONITORING(id,p_variable,p_alarm)
 {
-	if(id == MON_ID__STATE_CHECK)			Mon__STATE_CHECK(p_variable);
+	if(id == MON_ID__STATE)
+	{
+		Mon__STATE(p_variable, p_alarm);
+	}
 
 	return 1;
 }

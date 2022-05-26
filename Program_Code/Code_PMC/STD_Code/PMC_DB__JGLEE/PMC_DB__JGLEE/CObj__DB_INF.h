@@ -83,6 +83,19 @@ private:
 	//-------------------------------------------------------------------------
 	//  EXTERNAL PROPERTY
 
+
+	//-------------------------------------------------------------------------
+	// OBJ.MODE ...
+
+	CString sMODE__POST_ALARM_LIST;
+	int Call__POST_ALARM_LIST(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	CString sMODE__POST_ALARM_CLEAR;
+	int Call__POST_ALARM_CLEAR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	CString sMODE__POST_ALARM_DB_SIZE;
+	int Call__POST_ALARM_DB_SIZE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
 	// ...
 	void Mon__UPDATE_INFO(CII_OBJECT__VARIABLE *p_variable);
 	//

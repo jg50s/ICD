@@ -73,6 +73,13 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIMER, str_name);
 	}
 
+	// MON.PART ...
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
+	}
+
 	// MON ...
 	{
 		str_name = "MON.TMP.TYPE";
@@ -153,9 +160,12 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 	CStringArray l_act;
 	int alarm_id;
 
+	iLIST_ALID__PART.RemoveAll();
+
 	// ...
 	{
 		alarm_id = ALID__FORLINE_PRESSURE_UNSTABLE_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Forline Pressure Unstable Alarm !";
@@ -173,6 +183,7 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PCW_UNSTABLE_ALARM;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "PCW Unstable Alarm !";
@@ -190,6 +201,7 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PUMP_STATE_ERROR;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The state of TMP is error !";
@@ -205,6 +217,7 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__TMP_ON_ERROR;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "TMP를 On 할 수 없습니다 !";
@@ -220,6 +233,7 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PUMP_ALARM_STATE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The state of TMP is alarm !";
@@ -234,6 +248,7 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__PUMP_WARNING_STATE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "The state of TMP is warning !";
@@ -649,12 +664,14 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__TMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	DECLARE__EXT_CTRL(p_variable);
+
 	int flag = -1;
 
 	// ...
 	{
 		CString log_msg;
-		log_msg.Format("Start ... :  [%s]",mode);
+		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xI_LOG_CTRL->WRITE__LOG(log_msg);

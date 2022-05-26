@@ -40,6 +40,10 @@ private:
 	//-------------------------------------------------------------------------
 	//  INTERNAL PROPERTY
 
+	// CFG : SYSTEM ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_PART_USE;
+
+	//
 	CX__VAR_DIGITAL_CTRL dCH__OBJ_STATUS;
 	CX__VAR_DIGITAL_CTRL dCH__DRV_LOG_PARAM_START_STOP;
 

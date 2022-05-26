@@ -81,7 +81,7 @@ int CObj__EPD_STD
 
 			//
 			sCH__CFG_PARAMETER_VALUE_TO_CHANGE->Get__DATA(var_data);
-			log_bff.Format("Parameter Valve_To_Change <- [%s] \n", var_data);
+			log_bff.Format("Parameter Value_To_Change <- [%s] \n", var_data);
 			log_msg += log_bff;
 
 			sCH__CFG_PARAMETER_PERCENT_TO_CHANGE->Get__DATA(var_data);
