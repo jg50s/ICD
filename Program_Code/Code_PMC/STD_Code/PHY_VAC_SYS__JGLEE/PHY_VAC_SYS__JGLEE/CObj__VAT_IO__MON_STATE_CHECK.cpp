@@ -3,26 +3,35 @@
 #include "CObj__VAT_IO__ALID.h"
 #include "CObj__VAT_IO__DEF.h"
 
+#include "CCommon_Utility.h"
+
 
 // ...
 int CObj__VAT_IO
 ::Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	CString ch_data;
-
 	if(iActive__SIM_MODE > 0)
 	{
-		sCH__MON_SET_PRESSURE->Set__DATA("0");
-
 		if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
 		{
 
 		}
+		else if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__HEXA)
+		{
+			sEXT_CH__SI_APC_STATE_HEXA->Set__DATA("80");
+		}
 		else
 		{
-			dEXT_CH__DI_APC_STATE->Set__DATA(STR__NORMAL);
+			if(bActive__DI_APC_STATE_IO)		dEXT_CH__DI_APC_STATE_IO->Set__DATA(STR__NORMAL);
+			if(bActive__SI_APC_STATE_IO)		sEXT_CH__SI_APC_STATE_IO->Set__DATA("80");
 		}
+
+		Fnc__PRESSURE(p_variable,p_alarm, 0.0);
 	}
+
+	// ...
+	CCommon_Utility x_utility;
+	CString ch_data;
 
 	int loop_count = 0;
 
@@ -33,6 +42,7 @@ int CObj__VAT_IO
 		loop_count++;
 		if(loop_count > 10)		loop_count = 1;
 
+
 		// Range : Pressure ...
 		if(loop_count == 1)
 		{			
@@ -40,15 +50,29 @@ int CObj__VAT_IO
 			double min_value = atof(ch_data);
 
 			aCH__CFG_PRESSURE_MAX_VALUE->Get__DATA(ch_data);
-			double max_value = atof(ch_data);
+			double max_value_torr = atof(ch_data);
+			double max_value_mtorr = max_value_torr * 1000.0;
 
-			ch_data.Format("%.0f", max_value * 1000.0);
+			ch_data.Format("%.1f", max_value_mtorr);
 			sCH__CFG_PRESSURE_MAX_mTORR->Set__DATA(ch_data);
 
 			aCH__CFG_PRESSURE_DEC_VALUE->Get__DATA(ch_data);
 			int i_dec = atoi(ch_data);
 
-			aCH__PARA_PRESSURE->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+			aCH__PARA_PRESSURE->Change__MIN_MAX_DEC(min_value,max_value_torr,i_dec);
+			aCH__PARA_PRESSURE_mTORR->Change__MIN_MAX_DEC(min_value,max_value_mtorr,1);
+
+			//
+			if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
+			{
+				aEXT_CH__VAT__PARA_PRESSURE_VALUE->Change__MIN_MAX_DEC(min_value,max_value_torr,i_dec);
+				aEXT_CH__VAT__CUR_PRESSURE_VALUE->Change__MIN_MAX_DEC(min_value,max_value_torr,i_dec);
+			}
+			else if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__IO)
+			{
+				aEXT_CH__AO_APC_SETPOINT_DATA->Change__MIN_MAX_DEC(0, 100, 3);
+				aEXT_CH__AI_APC_PRESSURE->Change__MIN_MAX_DEC(min_value,max_value_torr,i_dec);
+			}
 		}
 
 		if(loop_count == 1)
@@ -155,6 +179,139 @@ int CObj__VAT_IO
 				sCH__MON_POSITION->Set__DATA(ch_data);
 			}
 		}
+		else if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__HEXA)
+		{
+			CString str_hexa;
+			int i_hexa;
+
+			// MON SET.DATA ...
+			{
+				str_hexa = sEXT_CH__SO_APC_CTRL_MODE->Get__STRING();
+				i_hexa = x_utility.Get__Hexa_From_String(str_hexa);
+
+					 if(i_hexa == 0)			sCH__MON_DO_APC_CTRL_MODE->Set__DATA(STR__CONTROL);
+				else if(i_hexa == 1)			sCH__MON_DO_APC_CTRL_MODE->Set__DATA(STR__CLOSE);
+				else if(i_hexa == 2)			sCH__MON_DO_APC_CTRL_MODE->Set__DATA(STR__OPEN);
+				else							sCH__MON_DO_APC_CTRL_MODE->Set__DATA(STR__UNKNOWN);
+
+				//
+				str_hexa = sEXT_CH__SO_APC_SETPOINT_DATA->Get__STRING();
+				i_hexa = x_utility.Get__Hexa_From_String(str_hexa);
+				
+				ch_data.Format("%.2f", i_hexa * (100.0 / iLINK_HEXA__MAX_VALUE));
+				sCH__MON_AO_APC_SETPOINT_DATA->Set__DATA(ch_data);
+
+				//
+				str_hexa = sEXT_CH__SO_APC_SETPOINT_TYPE->Get__STRING();
+				i_hexa = x_utility.Get__Hexa_From_String(str_hexa);
+
+					 if(i_hexa == 0)			sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__PRESSURE);
+				else if(i_hexa == 1)			sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__POSITION);
+				else							sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__UNKNOWN);
+			}
+
+			// SI.STATE ...
+			{
+				str_hexa = sEXT_CH__SI_APC_STATE_HEXA->Get__STRING();
+				i_hexa = x_utility.Get__Hexa_From_String(str_hexa);
+
+					 if(i_hexa == 0x80)			sCH__MON_DI_APC_STATE->Set__DATA(STR__NORMAL);
+				else if(i_hexa == 0xC0)			sCH__MON_DI_APC_STATE->Set__DATA(STR__WARNING);
+				else if(i_hexa == 0x84)			sCH__MON_DI_APC_STATE->Set__DATA(STR__ALARM);
+				else							sCH__MON_DI_APC_STATE->Set__DATA(STR__UNKNOWN);
+			}
+			// SI.PRESSURE ...
+			{
+				double cfg_max = aCH__CFG_PRESSURE_MAX_VALUE->Get__VALUE();
+
+				if(iActive__SIM_MODE > 0)
+				{
+					UNION_2_BYTE__UINT x_data;
+
+					unsigned char uch_data[101];
+					memset(uch_data, 0, 101);
+
+					ch_data = sEXT_CH__SIM_PRESSURE_TORR->Get__STRING();
+					double cur_value = atof(ch_data);
+
+					i_hexa = (cur_value / cfg_max) * iLINK_HEXA__MAX_VALUE;
+					x_data.uiDATA = 0x0ffff & i_hexa;;
+					
+					ch_data.Format("%02X %02X", (0x0ff & x_data.cBYTE[0]), (0x0ff & x_data.cBYTE[1]));
+					sEXT_CH__SI_APC_PRESSURE->Set__DATA(ch_data);
+				}
+
+				// ...
+				UNION_2_BYTE__UINT m_pressure;
+
+				// ...
+				{
+					byte uch_data[21];
+					memset(uch_data, 0, 21);
+
+					str_hexa = sEXT_CH__SI_APC_PRESSURE->Get__STRING();
+
+					// ...
+					{
+						CStringArray l_data;
+						x_utility.Get__StringArrray_From_String(str_hexa, " ", l_data);
+
+						int i_limit = l_data.GetSize();
+						if(i_limit > 20)		i_limit = 20;
+
+						for(int i=0; i<i_limit; i++)
+						{
+							uch_data[i] = 0x0ff & x_utility.Get__Hexa_From_String(l_data[i]);
+						}
+					}
+
+					m_pressure.cBYTE[0] = 0x0ff & uch_data[0];
+					m_pressure.cBYTE[1] = 0x0ff & uch_data[1];
+				}
+
+				double cur_pressure = (cfg_max * m_pressure.uiDATA) / iLINK_HEXA__MAX_VALUE;
+
+				ch_data.Format("%.3f", cur_pressure);
+				sCH__MON_PRESSURE_TORR->Set__DATA(ch_data);
+
+				ch_data.Format("%.1f", cur_pressure * 1000.0);
+				sCH__MON_PRESSURE_mTORR->Set__DATA(ch_data);
+			}
+			// SI.POSITION ...
+			{
+				UNION_2_BYTE__UINT m_pos;
+
+				// ...
+				{
+					byte uch_data[21];
+					memset(uch_data, 0, 21);
+
+					str_hexa = sEXT_CH__SI_APC_POSITION->Get__STRING();
+
+					// ...
+					{
+						CStringArray l_data;
+						x_utility.Get__StringArrray_From_String(str_hexa, " ", l_data);
+
+						int i_limit = l_data.GetSize();
+						if(i_limit > 20)		i_limit = 20;
+
+						for(int i=0; i<i_limit; i++)
+						{
+							uch_data[i] = 0x0ff & x_utility.Get__Hexa_From_String(l_data[i]);
+						}
+					}
+
+					m_pos.cBYTE[0] = 0x0ff & uch_data[0];
+					m_pos.cBYTE[1] = 0x0ff & uch_data[1];
+				}
+
+				double cur_pos = (100.0 * m_pos.uiDATA) / iLINK_HEXA__MAX_VALUE;
+
+				ch_data.Format("%.1f", cur_pos);
+				sCH__MON_POSITION->Set__DATA(ch_data);
+			}
+		}
 		else
 		{
 			// MON SET.DATA ...
@@ -206,11 +363,22 @@ int CObj__VAT_IO
 				sCH__MON_POSITION->Set__DATA(ch_data);
 			}
 
-			// DI.APC_STATE ...
+			if(bActive__DI_APC_STATE_IO)
 			{
-				dEXT_CH__DI_APC_STATE->Get__DATA(ch_data);
+				dEXT_CH__DI_APC_STATE_IO->Get__DATA(ch_data);
 				sCH__MON_DI_APC_STATE->Set__DATA(ch_data);
 			}
+			else if(bActive__SI_APC_STATE_IO)
+			{
+				sEXT_CH__SI_APC_STATE_IO->Get__DATA(ch_data);
+				int i_data = x_utility.Get__Hexa_From_String(ch_data);
+
+					 if(i_data == 0x80)			sCH__MON_DI_APC_STATE->Set__DATA(STR__NORMAL);
+				else if(i_data == 0xC0)			sCH__MON_DI_APC_STATE->Set__DATA(STR__WARNING);
+				else if(i_data == 0x84)			sCH__MON_DI_APC_STATE->Set__DATA(STR__ALARM);
+				else							sCH__MON_DI_APC_STATE->Set__DATA(STR__UNKNOWN);
+			}
+
 			if(bActive__DI_APC_VLV_CLOSE)
 			{
 				dEXT_CH__DI_APC_VLV_CLOSE->Get__DATA(ch_data);

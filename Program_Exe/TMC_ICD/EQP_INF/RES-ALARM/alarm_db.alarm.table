@@ -35,6 +35,7 @@
 #ALARM   21513   85   "PHY__VAC_ROBOT - There is no material in LLx."
 #ALARM   21514   85   "PHY__VAC_ROBOT - There is no material in PMx."
 #ALARM   21515   85   "PHY__VAC_ROBOT - STN does not exist."
+#ALARM   21516   85   "PHY__VAC_ROBOT - LLx Slot_ID Error !"
 #ALARM   21521   85   "PHY__VAC_ROBOT - LLx's valve status is not open."
 #ALARM   21522   85   "PHY__VAC_ROBOT - PMx's valve status is not open."
 #ALARM   21523   85   "PHY__VAC_ROBOT - TMC_CHM's Pressure is not ATM."
@@ -90,6 +91,8 @@
 #ALARM   23525   85   "PHY__ATM_ROBOT - There is material in side storage(1)."
 #ALARM   23526   85   "PHY__ATM_ROBOT - There is material in side storage(2)."
 #ALARM   23531   85   "PHY__ATM_ROBOT - There is material in PMC."
+#ALARM   23532   85   "PHY__ATM_ROBOT - ALx Slot_ID Error !"
+#ALARM   23533   85   "PHY__ATM_ROBOT - LLx Slot_ID Error !"
 #ALARM   23541   85   "PHY__ATM_ROBOT - There is no material on Robot's A-Arm."
 #ALARM   23542   85   "PHY__ATM_ROBOT - There is no material on Robot's B-Arm."
 #ALARM   23551   85   "PHY__ATM_ROBOT - There is no material in LP1."
@@ -117,10 +120,11 @@
 
 
 
-#ALARM   23811   85   "PHY_IO__ATM_ROBOT - Offline."
-#ALARM   23812   85   "PHY_IO__ATM_ROBOT - Error Code !"
-#ALARM   23813   85   "PHY_IO__ATM_ROBOT - Align and Pick Action Timeout Occur."
-#ALARM   23814   85   "PHY_IO__ATM_ROBOT - Config Option, Mapping Disable Alarm."
+#ALARM   23801   85   "PHY_IO__ATM_ROBOT - Offline."
+#ALARM   23802   85   "PHY_IO__ATM_ROBOT - Error Code !"
+#ALARM   23803   85   "PHY_IO__ATM_ROBOT - Align and Pick Action Timeout Occur."
+#ALARM   23804   85   "PHY_IO__ATM_ROBOT - Config Option, Mapping Disable Alarm."
+#ALARM   23805   85   "PHY_IO__ATM_ROBOT - System State Error !"
 #ALARM   23831   85   "PHY_IO__ATM_ROBOT - LP1's door status is not open."
 #ALARM   23841   85   "PHY_IO__ATM_ROBOT - LP1's foup does not exist."
 #ALARM   23846   85   "PHY_IO__ATM_ROBOT - LP1's foup does not clamp."
@@ -192,6 +196,7 @@
 #ALARM   26906   85   "PHY__TMC_CHM - Dry Pump is Offline or Not Run Status !"
 #ALARM   26907   85   "PHY__TMC_CHM - Exhaust Pressure Timeout !"
 #ALARM   26908   85   "PHY__TMC_CHM - Chamber's lid is not closed !"
+#ALARM   26909   85   "PHY__TMC_CHM - ATM High Pressure limit !"
 
 
 
@@ -232,7 +237,7 @@
 #ALARM   29926   85   "PHY__LBA - VAC Robot's Arm not retracted sts."
 #ALARM   29927   85   "PHY__LBA - ATM Robot's Arm not retracted sts."
 #ALARM   29907   85   "PHY__LBA - Can't SV Open, Max Difference Press Alarm Occur !"
-#ALARM   29908   85   "PHY__LBA - After Venting Complete, Atm High Press Alarm !"
+#ALARM   29908   85   "PHY__LBA - ATM High Pressure limit !"
 #ALARM   29928   85   "PHY__LBA - Exhaust Pressure Timeout !"
 #ALARM   29929   85   "PHY__LBA - LLx's lid is not closed !"
 
@@ -260,7 +265,7 @@
 #ALARM   30026   85   "PHY__LBB - VAC Robot's Arm not retracted sts."
 #ALARM   30027   85   "PHY__LBB - ATM Robot's Arm not retracted sts."
 #ALARM   30007   85   "PHY__LBB - Can't SV Open, Max Difference Press Alarm Occur !"
-#ALARM   30008   85   "PHY__LBB - After Venting Complete, Atm High Press Alarm !"
+#ALARM   30008   85   "PHY__LBB - ATM High Pressure limit !"
 #ALARM   30028   85   "PHY__LBB - Exhaust Pressure Timeout !"
 #ALARM   30029   85   "PHY__LBB - LLx's lid is not closed !"
 
@@ -388,7 +393,10 @@
 #ALARM   34733   85   "PHY_OHT__LP3 - Foup Logic Error Occur."
 #ALARM   34734   85   "PHY_OHT__LP3 - Foup Violation Error Occur."
 
-#ALARM   51111   85   "IO - Offline !"
+#ALARM   51101   85   "IO - Offline !"
+#ALARM   51102   85   "IO - Last Error Code !"
+#ALARM   51103   85   "IO - Device-Net Node Error !"
+#ALARM   51104   85   "IO - Device-Net Initial Error !"
 
 #ALARM   51401   85   "IO_LBA__CHM_GAUGE - Offline !"
 #ALARM   51422   85   "IO_LBA__CHM_GAUGE - Control Timeout !"

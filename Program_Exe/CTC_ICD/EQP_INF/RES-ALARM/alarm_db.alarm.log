@@ -1693,6 +1693,36 @@ OBJECT_NAME : FNC_VAC_ROBOT   (OffsetID:1200) (ToolID:) (UnitID:)
 #OPTION2    
 #OPTION3    
 
+#INTERNAL_ID   51 
+#EXTERNAL_ID   1251 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Deadlock condition !"
+#MESSAGE 
+"Please, check PM state or route recipe. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
+#INTERNAL_ID   52 
+#EXTERNAL_ID   1252 
+#LEVEL   LIGHT 
+#HOST_REPORT   YES
+#TITLE 
+"FNC_VAC_ROBOT : Abnormal wafer moving !"
+#MESSAGE 
+"Please, check PM state or route recipe. 
+"
+#RECOVERY_ACTION 
+     CHECK   ""
+#OPTION1    
+#OPTION2    
+#OPTION3    
+
 
 //------------------------------------------------------------
 OBJECT_NAME : FNC_TMC_SYS   (OffsetID:1300) (ToolID:) (UnitID:) 

@@ -119,6 +119,8 @@
 #ALARM   1247   85   "FNC_VAC_ROBOT : JOB Error : Material and PMC's process type is not mismatched."
 #ALARM   1248   85   "FNC_VAC_ROBOT : Maint Pick Error : Vacuum Robot Paused !"
 #ALARM   1249   85   "FNC_VAC_ROBOT : Maint Place Error : Vacuum Robot Paused !"
+#ALARM   1251   85   "FNC_VAC_ROBOT : Deadlock condition !"
+#ALARM   1252   85   "FNC_VAC_ROBOT : Abnormal wafer moving !"
 
 
 

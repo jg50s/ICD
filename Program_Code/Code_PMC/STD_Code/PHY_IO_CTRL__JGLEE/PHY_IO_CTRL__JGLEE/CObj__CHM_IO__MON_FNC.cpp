@@ -8,6 +8,8 @@
 int CObj__CHM_IO
 ::Mon__STATUS(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	bool active__btw_check = false;
+
 	CString ch_data;
 	int i;
 
@@ -17,8 +19,11 @@ int CObj__CHM_IO
 		dEXT_CH__DI_ATM_SNS->Set__DATA(STR__OFF);
 
 		//
-		if(bActive__DI_SLOT_VLV_OPEN)		dEXT_CH__DI_SLOT_VLV_OPEN->Set__DATA(STR__OFF);
-		if(bActive__DI_SLOT_VLV_CLOSE)		dEXT_CH__DI_SLOT_VLV_CLOSE->Set__DATA(STR__ON);
+		if(bActive__DI_SLOT_VLV_OPEN)			dEXT_CH__DI_SLOT_VLV_OPEN->Set__DATA(STR__OFF);
+		if(bActive__DI_SLOT_VLV_CLOSE)			dEXT_CH__DI_SLOT_VLV_CLOSE->Set__DATA(STR__ON);
+
+		//
+		if(bActive__AI_FORELINE_GAUGE_TORR)		aEXT_CH__AI_FORELINE_GAUGE_TORR->Set__DATA("0.0");
 	}
 
 
@@ -61,7 +66,8 @@ int CObj__CHM_IO
 				aEXT_CH__AI_PRC_GAUGE_TORR_X[i]->Set__DATA(ch_data);
 			}
 
-			aEXT_CH__AI_CHM_GAUGE_TORR->Set__DATA(ch_data);
+			if(bActive__AI_CHM_GAUGE_TORR)
+				aEXT_CH__AI_CHM_GAUGE_TORR->Set__DATA(ch_data);
 		}
 
 		// SLOT.VLV SNS ...
@@ -114,11 +120,34 @@ int CObj__CHM_IO
 
 			if(interlock__do_iso_vlv > 0)
 			{
+				bool active__interlock_pressure = false;
+
+				if(bActive__AI_CHM_GAUGE_TORR)
+				{
+					double cur__chm_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+					double cfg__interlock_press = aCH__CFG_INTERLOCK_HIGH_LIMIT_PRESSURE->Get__VALUE();
+
+					if(cur__chm_press >= cfg__interlock_press)		active__interlock_pressure = true;
+				}
+
 				for(i=0; i<iSIZE__PRC_GUAGE; i++)
 				{
-					if(vac_flag > 0)		dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__OPEN);
-					else					dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+					if(active__interlock_pressure)
+					{
+						dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+					}
+					else
+					{
+						if(vac_flag > 0)		dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__OPEN);
+						else					dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+					}
 				}
+			}
+
+			if(bActive__DO_CHM_CHECK_VLV)
+			{
+				if(vac_flag > 0)			dEXT_CH__DO_CHM_CHECK_VLV->Set__DATA(STR__CLOSE);
+				else						dEXT_CH__DO_CHM_CHECK_VLV->Set__DATA(STR__OPEN);
 			}
 
 			if(vac_flag > 0)			
@@ -126,14 +155,17 @@ int CObj__CHM_IO
 				sEXT_CH__CHM_VAC_SNS->Set__DATA(STR__ON);
 				sEXT_CH__CHM_ATM_SNS->Set__DATA(STR__OFF);
 
+				active__btw_check = false;
+
 				// ...
-				double cur_press = 0.0;
+				double cur_press = 300.0;
 
 				for(i=0; i<iSIZE__PRC_GUAGE; i++)
 				{
 					if(dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Check__DATA(STR__OPEN) < 0)
 					{
-						cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+						if(bActive__AI_CHM_GAUGE_TORR)		cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+
 						continue;
 					}
 
@@ -142,9 +174,11 @@ int CObj__CHM_IO
 					cfg_max_torr = cfg_max_torr * 0.001;
 
 					double cur__prc_press = aEXT_CH__AI_PRC_GAUGE_TORR_X[i]->Get__VALUE();
-					double cur__chm_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+					double cur__chm_press = 500.0;
+
+					if(bActive__AI_CHM_GAUGE_TORR)			cur__chm_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
 						
-					if(cur__prc_press <= cfg_max_torr)		cur_press = cur__prc_press;
+					if(cur__prc_press < cfg_max_torr)		cur_press = cur__prc_press;
 					else									cur_press = cur__chm_press;
 
 					break;
@@ -164,8 +198,13 @@ int CObj__CHM_IO
 				sEXT_CH__CHM_VAC_SNS->Set__DATA(STR__OFF);
 				sEXT_CH__CHM_ATM_SNS->Set__DATA(STR__ON);
 
+				active__btw_check = false;
+
 				// ...
-				double cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+				double cur_press = 7600;
+					
+				if(bActive__AI_CHM_GAUGE_TORR)
+					cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
 
 				// ...
 				{
@@ -182,10 +221,19 @@ int CObj__CHM_IO
 				sEXT_CH__CHM_ATM_SNS->Set__DATA(STR__OFF);
 
 				// ...
-				double cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+				double cur_press = 550.0;
 
-				// ...
+				if(bActive__AI_CHM_GAUGE_TORR)
 				{
+					active__btw_check = false;
+					
+					cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+				}
+
+				if(!active__btw_check)
+				{
+					active__btw_check = true;
+
 					ch_data.Format("%.1f", cur_press);
 					sEXT_CH__CHM_PRESSURE_VALUE->Set__DATA(ch_data);
 
@@ -215,7 +263,9 @@ int CObj__CHM_IO
 
 		// ...
 		{
-			aEXT_CH__AI_FORELINE_GAUGE_TORR->Get__DATA(ch_data);
+			if(bActive__AI_FORELINE_GAUGE_TORR)			aEXT_CH__AI_FORELINE_GAUGE_TORR->Get__DATA(ch_data);
+			else										ch_data = "0.000";
+			
 			sEXT_CH__PMP_PRESSURE_VALUE->Set__DATA(ch_data);
 			double cur_pmp_press = atof(ch_data);
 

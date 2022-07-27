@@ -15,6 +15,8 @@
 #define STR__NO						"NO"
 #define STR__NONE					"NONE"
 
+#define STR__UNKNOWN				"UNKNOWN"
+
 // ...
 #define STR__CONTROL				"CONTROL"
 #define STR__CLOSE					"CLOSE"

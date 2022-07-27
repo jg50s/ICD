@@ -142,6 +142,17 @@ int CObj__PMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 			
 			pOBJ_CTRL__PUMP = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			// ...
+			{
+				def_name = "PUMP_MODE.ON";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sPUMP_MODE__ON = def_data;
+
+				def_name = "PUMP_MODE.OFF";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sPUMP_MODE__OFF = def_data;
+			}
 		}		
 		else if(iPUMP__CTRL_TYPE == _PMP_CTRL_TYPE__IO)
 		{

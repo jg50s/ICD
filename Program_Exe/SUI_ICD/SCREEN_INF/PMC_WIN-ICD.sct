@@ -123,6 +123,17 @@ WINDOW_NAME PMC_BTM_UTILITY
 
 
 // Bottom => Config
+WINDOW_NAME PMC_CONFIG_MODULE-SYSTEM
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint 
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.MODULE_SYSTEM.SAVE
+}
+
 WINDOW_NAME PMC_CONFIG_MODULE-PRESSURE
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
@@ -737,7 +748,7 @@ WINDOW_NAME APP_POPUP_EPD
 	WIDTH                           530
 	HEIGHT                          542 
 	
-	CTRL_CHANNEL                    GUI.PMC.EPD.POPUP
+	SEQ_CTRL_CHANNEL               	DB_GUI+GUI.PMC.ESC.POPUP
 	USER_LEVEL                      Maint
 }
 

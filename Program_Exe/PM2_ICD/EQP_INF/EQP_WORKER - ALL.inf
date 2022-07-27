@@ -1,0 +1,136 @@
+
+===========================================================================
+#OBJECT_STD     PMC_DB__JGLEE                  DB.INF                    DB_INF
+#OBJECT_STD     PMC_DB__JGLEE                  DB.SYS                    DB_SYS
+#OBJECT_STD     PMC_DB__JGLEE                  DB.GUI                    DB_GUI
+
+#OBJECT_STD     PMC_DB__JGLEE                  DB.ETCHER                 DB_ETCHER
+
+===========================================================================
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_SYSTEM_INIT
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_SYSTEM_MAINT
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_CHM
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_PROCESS
+
+#OBJECT_STD     EQP__Page_OBJ                  LOCK.TYPE                 PAGE_RF_PULSE
+
+===========================================================================
+#OBJECT_STD     MNG_UTILITY__JGLEE             AUTO.PM                   MNG_AUTO_PM
+#OBJECT_STD     MNG_UTILITY__JGLEE             MFC.FLOW.CHECK            MNG_MFC_FLOW
+#OBJECT_STD     MNG_UTILITY__JGLEE             APC.POS.CONDUCT           MNG_VAT_CONDUCTANCE
+#OBJECT_STD     MNG_UTILITY__JGLEE             GAUGE.CHECK               MNG_GAUGE_CHECK
+#OBJECT_STD     MNG_UTILITY__JGLEE             DGF.CHECK                 MNG_DGF_CHECK
+#OBJECT_STD     MNG_UTILITY__JGLEE             RF.CONDUCT                MNG_RF_CHECK
+
+===========================================================================
+#OBJECT_STD		  PHY_MTC__ICD					         MTC.FNC					PHY_MTC
+
+===========================================================================
+#OBJECT_STD     FNC_CHM_SYS__JGLEE             PMC.INF                   INF_PMC
+#OBJECT_STD     FNC_CHM_SYS__JGLEE             ACTIVE_HANDOFF.INF        INF_ACTIVE_HANDOFF
+
+#OBJECT_STD     FNC_CHM_SYS__JGLEE             PMC.OPR                   OPR_PMC
+#OBJECT_STD     FNC_CHM_SYS__JGLEE             SYSTEM.STD                FNC_SYSTEM
+
+#OBJECT_STD     FNC_CHM_SYS__JGLEE             CHM.FNC                   FNC_CHM
+#OBJECT_STD     FNC_CHM_SYS__JGLEE             TRANSFER.FNC              FNC_TRANSFER
+
+===========================================================================
+#OBJECT_STD     EQP__STD_OBJ                   PM_Datalog_Ex             FNC_PM_DATALOG
+
+#OBJECT_STD     FNC_PROC_SYS__JGLEE            MANUAL.PROC               MNT_PROCESS
+#OBJECT_STD     FNC_PROC_SYS__JGLEE            PROC.STD                  FNC_PROC
+#OBJECT_STD     FNC_STEP__ICD                  STEP.STD                  FNC_STEP
+
+===========================================================================
+#OBJECT_STD     PHY_IO_CTRL__JGLEE             CHM.IO                    PHY_CHM_IO
+#OBJECT_STD     PHY_IO_CTRL__JGLEE             LIFT_PIN.IO               PHY_LIFT_PIN
+
+#OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.IO              DI_GAS_BOX
+#OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.IO              DI_CHM
+#OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.IO              DI_RF_SYS
+
+
+===========================================================================
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             GAS_VLV.FNC               FNC_GAS_VLV_CTRL
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             GAS_VLV.PHY               PHY_GAS_VLV
+
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             PT.IO                     PHY_PT
+
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC1
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC2
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC3
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC4
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC5
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC6
+
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC7
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC8
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC9
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC10
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC11
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC12
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             MFC.IO                    PHY_MFC17
+
+#OBJECT_IO      PHY_RS485__MFC_UNIT            UNIT.TYPE                 PHY_IO__MFC_PART01
+#OBJECT_IO      PHY_RS485__MFC_UNIT            UNIT.TYPE                 PHY_IO__MFC_PART02
+
+
+===========================================================================
+#OBJECT_STD     PHY_GAS_BOX__JGLEE             DGF.FLEX                  PHY_DGF
+
+
+===========================================================================
+#OBJECT_STD     PHY_VAC_SYS__JGLEE             VAC_VLV.PHY               PHY_VAC_VLV
+
+#OBJECT_STD     PHY_VAC_SYS__JGLEE             VAT.IO                    PHY_VAT
+#OBJECT_STD     PHY_VAC_SYS__JGLEE             TMP.IO                    PHY_TMP
+#OBJECT_STD     PHY_VAC_SYS__JGLEE             PMP.IO                    PHY_DRY
+
+#OBJECT_IO      IO_RS232__VAT_APC              VAT650.TYPE               PHY_IO__APC_VLV
+
+#OBJECT_IO      PHY_IO__EDWARDS_TMP            STP.SERIAL                PHY_IO__TMP
+// #OBJECT_IO      IO_RS232__ALCATEL_PUMP         STD.TYPE                  PHY_IO__TMP
+
+#OBJECT_IO      IO_RS232__EDWARD_PUMP          iTIM.TYPE                 PHY_IO__DRY_PMP
+
+
+===========================================================================
+#OBJECT_STD     PHY_RF_SYS__JGLEE              ESC.IO                    PHY_ESC
+
+#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_RPS
+#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_LF
+#OBJECT_STD     PHY_RF_SYS__JGLEE          	   RF.STD                    PHY_RF_HF
+
+#OBJECT_IO      PHY_RS232__ESC_ZEFA            ZEFA.SERIAL               PHY_IO__ESC
+
+#OBJECT_IO      PHY_RS232__RF_EN2RA            RPS.SERIAL                PHY_IO__RF_RPS
+#OBJECT_IO      PHY_RS232__RF_NRF              RFG.SERIAL                PHY_IO__RF_400KHZ
+#OBJECT_IO      PHY_RS232__RF_NRF              RFG.SERIAL                PHY_IO__RF_40MHZ
+#OBJECT_IO      PHY_RS232__RF_NRF              NXA.PULSE                 PHY_IO__RF_PULSE
+
+// #OBJECT_IO      PHY_IO__MATCHER_AE             NAVII.SERIAL              PHY_IO__MATCHER
+#OBJECT_IO      PHY_RS232__MATCHER_NRF         MAT.SERIAL                PHY_IO__MAT_LF
+#OBJECT_IO      PHY_RS232__MATCHER_NRF         MAT.SERIAL                PHY_IO__MAT_HF
+
+
+===========================================================================
+#OBJECT_STD     PHY_HEATER__JGLEE              MINI8.IO                  PHY_HTR_SH
+#OBJECT_STD     PHY_HEATER__JGLEE              MINI8.IO                  PHY_HTR_WALL
+
+
+===========================================================================
+#OBJECT_STD     PHY_EPD__JGLEE                 EPD.STD                   PHY_EPD
+
+#OBJECT_IO      IO_USB__SPECTROMETER           ADC1000                   PHY_IO__OES
+
+
+===========================================================================
+#OBJECT_IO      Phy_IO__DNET_HILSCHER          DNET.STD                  IO
+// #OBJECT_IO      PMC__VIRTUAL_IO                IO.VIRTUAL                IO
+
+
+===========================================================================
+#OBJECT_INTERLOCK   PMC_INTERLOCK__JGLEE       MFC.IO                    INTERLOCK_MFC
+#OBJECT_INTERLOCK   PMC_INTERLOCK__JGLEE 		   SYS.IO                    INTERLOCK_SYS
+

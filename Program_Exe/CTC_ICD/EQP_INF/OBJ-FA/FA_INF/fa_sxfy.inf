@@ -42,7 +42,7 @@
   //-----------------------------------------------
 
   //-----------------------------------------------
-  #DEFINE_VARIABLE   MDLN	      "ANA-SOFT"     // Equipment model type, 6 bytes max
+  #DEFINE_VARIABLE   MDLN	      "ICD"         // Equipment model type, 6 bytes max
   #DEFINE_VARIABLE   SOFTREV	  "1.0 Ver"      // Software revision code, 6 bytes max
   //-----------------------------------------------
 

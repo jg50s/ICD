@@ -33,9 +33,12 @@ int  CObj__VAC_VLV_PHY
 				if(cur_pos >= 10.0)			active__fr_open = true;
 			}
 
-			if((dEXT_CH__DO_SR_VALVE_CTRL->Check__DATA(STR__OPEN) > 0) || (active__fr_open))
+			if(bActive__DO_SR_VALVE_CTRL)
 			{
-				active__pumping = 1;
+				if((dEXT_CH__DO_SR_VALVE_CTRL->Check__DATA(STR__OPEN) > 0) || (active__fr_open))
+				{
+					active__pumping = 1;
+				}
 			}
 		}
 

@@ -46,7 +46,7 @@
 #OBJECT_STD     PHY_IO_CTRL__JGLEE             CHM.IO                    PHY_CHM_IO
 #OBJECT_STD     PHY_IO_CTRL__JGLEE             LIFT_PIN.IO               PHY_LIFT_PIN
 
-#OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.IO              DI_GAS_BOX
+#OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.GAS_BOX         DI_GAS_BOX
 #OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.IO              DI_CHM
 #OBJECT_STD     PHY_IO_CTRL__JGLEE             INTERLOCK.IO              DI_RF_SYS
 

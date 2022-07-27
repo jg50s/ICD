@@ -37,6 +37,11 @@ RETRY_ACTION:
 		if(bActive__DO_MIDDLE_PIN_DOWN)			dEXT_CH__DO_MIDDLE_PIN_DOWN->Set__DATA(STR__OFF);
 	}
 
+	if(dCH__CFG_LIFT_PIN_SENSOR_CHECK->Check__DATA(STR__NO) > 0)
+	{
+		return 1;
+	}
+
 	if(iActive__SIM_MODE > 0)
 	{
 		_Fnc__SIM_PIN_POD(true, false, false);
@@ -122,6 +127,11 @@ RETRY_ACTION:
 		}
 	}
 
+	if(dCH__CFG_LIFT_PIN_SENSOR_CHECK->Check__DATA(STR__NO) > 0)
+	{
+		return 1;
+	}
+
 	if(iActive__SIM_MODE > 0)
 	{
 		if(active__middle_up)		_Fnc__SIM_PIN_POD(false, false, true);
@@ -201,6 +211,11 @@ RETRY_ACTION:
 		if(bActive__DO_MIDDLE_PIN_DOWN)			dEXT_CH__DO_MIDDLE_PIN_DOWN->Set__DATA(STR__OFF);
 	}
 
+	if(dCH__CFG_LIFT_PIN_SENSOR_CHECK->Check__DATA(STR__NO) > 0)
+	{
+		return 1;
+	}
+
 	if(iActive__SIM_MODE > 0)
 	{
 		_Fnc__SIM_PIN_POD(true, false, false);
@@ -277,6 +292,11 @@ RETRY_ACTION:
 		if(bActive__DO_MIDDLE_PIN_DOWN)			dEXT_CH__DO_MIDDLE_PIN_DOWN->Set__DATA(STR__OFF);
 	}	
 	
+	if(dCH__CFG_LIFT_PIN_SENSOR_CHECK->Check__DATA(STR__NO) > 0)
+	{
+		return 1;
+	}
+
 	if(iActive__SIM_MODE > 0)
 	{
 		_Fnc__SIM_PIN_POD(false, true, false);
@@ -335,6 +355,11 @@ RETRY_ACTION:
 
 		if(bActive__DO_MIDDLE_PIN_UP)			dEXT_CH__DO_MIDDLE_PIN_UP->Set__DATA(STR__OFF);
 		if(bActive__DO_MIDDLE_PIN_DOWN)			dEXT_CH__DO_MIDDLE_PIN_DOWN->Set__DATA(STR__OFF);
+	}
+
+	if(dCH__CFG_LIFT_PIN_SENSOR_CHECK->Check__DATA(STR__NO) > 0)
+	{
+		return 1;
 	}
 
 	if(iActive__SIM_MODE > 0)

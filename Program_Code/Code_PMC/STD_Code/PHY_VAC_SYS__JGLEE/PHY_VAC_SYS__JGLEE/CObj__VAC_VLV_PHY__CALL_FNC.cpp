@@ -8,7 +8,10 @@ int CObj__VAC_VLV_PHY
 ::Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable,
 				  CII_OBJECT__ALARM *p_alarm)
 {
-	dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	if(bActive__DO_SR_VALVE_CTRL)
+	{
+		dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	}
 
 	if(bActive__DO_FR_VALVE)
 	{
@@ -45,9 +48,12 @@ int CObj__VAC_VLV_PHY
 		if(r_flag < 0)			return -101;
 	}
 
-	if(dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__OPEN) < 0)
+	if(bActive__DO_SR_VALVE_CTRL)
 	{
-		return -1;
+		if(dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__OPEN) < 0)
+		{
+			return -1;
+		}
 	}
 
 	if(Check__SR_OPEN_SENSOR_TIMEOUT(p_alarm) < 0)
@@ -60,7 +66,10 @@ int CObj__VAC_VLV_PHY
 ::Call__SR_CLOSE(CII_OBJECT__VARIABLE *p_variable,
 				 CII_OBJECT__ALARM *p_alarm)
 {
-	dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	if(bActive__DO_SR_VALVE_CTRL)
+	{
+		dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	}
 
 	if(Check__SR_CLOSE_SENSOR_TIMEOUT(p_alarm) < 0)
 	{
@@ -73,7 +82,10 @@ int CObj__VAC_VLV_PHY
 ::Call__FR_OPEN(CII_OBJECT__VARIABLE *p_variable,
 				CII_OBJECT__ALARM *p_alarm)
 {
-	dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	if(bActive__DO_SR_VALVE_CTRL)
+	{
+		dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	}
 
 	if(bActive__DO_FR_VALVE)
 	{

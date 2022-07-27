@@ -1,1 +1,1 @@
-ONLY_OUTPUT
+ALL

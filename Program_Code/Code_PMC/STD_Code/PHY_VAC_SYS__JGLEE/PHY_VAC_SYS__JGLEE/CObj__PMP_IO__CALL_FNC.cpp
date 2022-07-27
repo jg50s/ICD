@@ -3,8 +3,6 @@
 
 
 #define CMMD__INIT				"INIT"
-#define CMMD__ON				"ON"
-#define CMMD__OFF				"OFF"
 
 
 // ...
@@ -15,6 +13,7 @@ int CObj__PMP_IO
 	{
 		return pOBJ_CTRL__PUMP->Call__OBJECT(CMMD__INIT);
 	}
+	
 	if(iPUMP__CTRL_TYPE = _PMP_CTRL_TYPE__IO)
 	{
 		return dEXT_CH__DO_PUMP_SET->Set__DATA(STR__ON);
@@ -27,8 +26,9 @@ int CObj__PMP_IO
 {
 	if(iPUMP__CTRL_TYPE = _PMP_CTRL_TYPE__OBJECT)
 	{
-		return pOBJ_CTRL__PUMP->Call__OBJECT(CMMD__ON);
+		return pOBJ_CTRL__PUMP->Call__OBJECT(sPUMP_MODE__ON);
 	}
+	
 	if(iPUMP__CTRL_TYPE = _PMP_CTRL_TYPE__IO)
 	{
 		return dEXT_CH__DO_PUMP_SET->Set__DATA(STR__ON);
@@ -40,8 +40,9 @@ int CObj__PMP_IO
 {
 	if(iPUMP__CTRL_TYPE = _PMP_CTRL_TYPE__OBJECT)
 	{
-		return pOBJ_CTRL__PUMP->Call__OBJECT(CMMD__OFF);
+		return pOBJ_CTRL__PUMP->Call__OBJECT(sPUMP_MODE__OFF);
 	}
+	
 	if(iPUMP__CTRL_TYPE = _PMP_CTRL_TYPE__IO)
 	{
 		return dEXT_CH__DO_PUMP_SET->Set__DATA(STR__ON);

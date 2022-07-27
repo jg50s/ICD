@@ -4,3 +4,5 @@
 #ID=4	4	LIGHT	PHY_MTC - Pumping Time-Out !
 #ID=5	5	LIGHT	PHY_MTC - Gate Open Time-Out !
 #ID=6	6	LIGHT	PHY_MTC - Gate Close Time-Out !
+#ID=8	8	LIGHT	PHY_MTC - Gate's valve is not close !
+#ID=9	9	LIGHT	PHY_MTC - MTC & Chamber pressure error !

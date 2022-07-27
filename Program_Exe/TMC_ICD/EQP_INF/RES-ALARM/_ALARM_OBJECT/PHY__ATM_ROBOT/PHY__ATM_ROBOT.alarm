@@ -13,6 +13,8 @@
 #ID=25	23525	LIGHT	PHY__ATM_ROBOT - There is material in side storage(1).
 #ID=26	23526	LIGHT	PHY__ATM_ROBOT - There is material in side storage(2).
 #ID=31	23531	LIGHT	PHY__ATM_ROBOT - There is material in PMC.
+#ID=32	23532	LIGHT	PHY__ATM_ROBOT - ALx Slot_ID Error !
+#ID=33	23533	LIGHT	PHY__ATM_ROBOT - LLx Slot_ID Error !
 #ID=41	23541	LIGHT	PHY__ATM_ROBOT - There is no material on Robot's A-Arm.
 #ID=42	23542	LIGHT	PHY__ATM_ROBOT - There is no material on Robot's B-Arm.
 #ID=51	23551	LIGHT	PHY__ATM_ROBOT - There is no material in LP1.

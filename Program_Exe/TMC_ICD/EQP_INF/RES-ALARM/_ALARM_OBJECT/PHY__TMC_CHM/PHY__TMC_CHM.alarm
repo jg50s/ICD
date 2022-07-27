@@ -6,3 +6,4 @@
 #ID=6	26906	LIGHT	PHY__TMC_CHM - Dry Pump is Offline or Not Run Status !
 #ID=7	26907	LIGHT	PHY__TMC_CHM - Exhaust Pressure Timeout !
 #ID=8	26908	LIGHT	PHY__TMC_CHM - Chamber's lid is not closed !
+#ID=9	26909	LIGHT	PHY__TMC_CHM - ATM High Pressure limit !

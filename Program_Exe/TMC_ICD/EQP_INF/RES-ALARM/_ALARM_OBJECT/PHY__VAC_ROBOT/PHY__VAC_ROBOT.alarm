@@ -7,6 +7,7 @@
 #ID=13	21513	LIGHT	PHY__VAC_ROBOT - There is no material in LLx.
 #ID=14	21514	LIGHT	PHY__VAC_ROBOT - There is no material in PMx.
 #ID=15	21515	LIGHT	PHY__VAC_ROBOT - STN does not exist.
+#ID=16	21516	LIGHT	PHY__VAC_ROBOT - LLx Slot_ID Error !
 #ID=21	21521	LIGHT	PHY__VAC_ROBOT - LLx's valve status is not open.
 #ID=22	21522	LIGHT	PHY__VAC_ROBOT - PMx's valve status is not open.
 #ID=23	21523	LIGHT	PHY__VAC_ROBOT - TMC_CHM's Pressure is not ATM.

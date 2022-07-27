@@ -130,6 +130,8 @@ OK,1245,FNC_VAC_ROBOT : VAC Robot's moving is paused by user.,Please	 check the 
 OK,1247,FNC_VAC_ROBOT : JOB Error : Material and PMC's process type is not mismatched.,Please	 check LPx's process type on config's page. <\n>,CHECK	,
 OK,1248,FNC_VAC_ROBOT : Maint Pick Error : Vacuum Robot Paused !,Please	 check "VAC Robot - PAUSE"'s button on CTC operate page. <\n>,ABORT	RETRY	,
 OK,1249,FNC_VAC_ROBOT : Maint Place Error : Vacuum Robot Paused !,Please	 check "VAC Robot - PAUSE"'s button on CTC operate page. <\n>,ABORT	RETRY	,
+OK,1251,FNC_VAC_ROBOT : Deadlock condition !,Please	 check PM state or route recipe. <\n>,CHECK	,
+OK,1252,FNC_VAC_ROBOT : Abnormal wafer moving !,Please	 check PM state or route recipe. <\n>,CHECK	,
 
 OBJECT_NAME : FNC_TMC_SYS,
 

@@ -124,6 +124,13 @@ int CObj__LIFT_PIN_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CFG ...
 	{
+		// SENSOR.CHECK ...
+		{
+			str_name = "CFG.LIFT_PIN.SENSOR.CHECK";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_LIFT_PIN_SENSOR_CHECK, str_name);
+		}
+
 		// TIMEOUT ...
 		{
 			str_name = "CFG.LIFT.PIN.ACTION.TIMEOUT";
@@ -617,6 +624,7 @@ int CObj__LIFT_PIN_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
+	dCH__CFG_LIFT_PIN_SENSOR_CHECK->Set__DATA(STR__YES);
 	return flag;
 }
 

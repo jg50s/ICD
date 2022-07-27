@@ -6,7 +6,7 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE  ##DB_CFG		           DB_CFG
 #DEFINE  ##SIGNAL_TOWER		     MNG_SIGNAL_TOWER
 
-#DEFINE  ##PM_SIZE             6
+#DEFINE  ##PM_SIZE             4
 #DEFINE  ##LP_SIZE						 3
 #DEFINE  ##LL_SIZE             2
 
@@ -192,6 +192,15 @@ try catch 문을 사용하면 안됩니다.
 #DEFINE_CONSTANT    OBJ__LP1            PHY_LP1
 #DEFINE_CONSTANT    OBJ__LP2            PHY_LP2
 #DEFINE_CONSTANT    OBJ__LP3            PHY_LP3
+
+#DEFINE_CONSTANT    PM_SIZE             ##PM_SIZE
+#DEFINE_CONSTANT    OBJ__PM1            PHY_PM1
+#DEFINE_CONSTANT    OBJ__PM2            PHY_PM2
+#DEFINE_CONSTANT    OBJ__PM3            PHY_PM3
+#DEFINE_CONSTANT    OBJ__PM4            PHY_PM4
+#DEFINE_CONSTANT    OBJ__PM5            PHY_PM5
+#DEFINE_CONSTANT    OBJ__PM6            PHY_PM6
+
 
 //-------------------------------------------------
 #OBJECT_PROPERTY    FNC_VAC_ROBOT

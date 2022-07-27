@@ -27,3 +27,5 @@
 #ID=47	1247	LIGHT	FNC_VAC_ROBOT : JOB Error : Material and PMC's process type is not mismatched.
 #ID=48	1248	LIGHT	FNC_VAC_ROBOT : Maint Pick Error : Vacuum Robot Paused !
 #ID=49	1249	LIGHT	FNC_VAC_ROBOT : Maint Place Error : Vacuum Robot Paused !
+#ID=51	1251	LIGHT	FNC_VAC_ROBOT : Deadlock condition !
+#ID=52	1252	LIGHT	FNC_VAC_ROBOT : Abnormal wafer moving !

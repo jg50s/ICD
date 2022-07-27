@@ -1,7 +1,8 @@
-#ID=11	23811	LIGHT	PHY_IO__ATM_ROBOT - Offline.
-#ID=12	23812	LIGHT	PHY_IO__ATM_ROBOT - Error Code !
-#ID=13	23813	LIGHT	PHY_IO__ATM_ROBOT - Align and Pick Action Timeout Occur.
-#ID=14	23814	LIGHT	PHY_IO__ATM_ROBOT - Config Option, Mapping Disable Alarm.
+#ID=1	23801	LIGHT	PHY_IO__ATM_ROBOT - Offline.
+#ID=2	23802	LIGHT	PHY_IO__ATM_ROBOT - Error Code !
+#ID=3	23803	LIGHT	PHY_IO__ATM_ROBOT - Align and Pick Action Timeout Occur.
+#ID=4	23804	LIGHT	PHY_IO__ATM_ROBOT - Config Option, Mapping Disable Alarm.
+#ID=5	23805	LIGHT	PHY_IO__ATM_ROBOT - System State Error !
 #ID=31	23831	LIGHT	PHY_IO__ATM_ROBOT - LP1's door status is not open.
 #ID=41	23841	LIGHT	PHY_IO__ATM_ROBOT - LP1's foup does not exist.
 #ID=46	23846	LIGHT	PHY_IO__ATM_ROBOT - LP1's foup does not clamp.

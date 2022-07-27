@@ -42,6 +42,7 @@ private:
 	CX__VAR_STRING_CTRL   sEXT_CH__VAT__MON_POSITION;
 
 	//
+	bool bActive__DO_SR_VALVE_CTRL;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_SR_VALVE_CTRL;
 
 	//

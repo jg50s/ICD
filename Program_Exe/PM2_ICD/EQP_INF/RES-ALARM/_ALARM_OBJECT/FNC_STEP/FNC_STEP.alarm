@@ -1,2 +1,6 @@
 #ID=1	1	LIGHT	FNC_STEP - STEP OVERTIME ALARM.
 #ID=2	2	LIGHT	FNC_STEP - STABLE OVERTIME ALARM.
+#ID=3	3	LIGHT	FNC_STEP - OBJECT OVERTIME ALARM.
+#ID=4	4	LIGHT	FNC_STEP - Temperature stable timeout error In the step preparation.
+#ID=5	5	LIGHT	FNC_STEP - Temperature stable timeout warning In the step preparation.
+#ID=6	6	LIGHT	FNC_STEP - Step parameter setting error !

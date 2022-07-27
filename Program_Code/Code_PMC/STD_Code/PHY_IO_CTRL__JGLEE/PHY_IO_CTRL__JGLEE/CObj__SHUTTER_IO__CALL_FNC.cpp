@@ -38,10 +38,10 @@ LOOP_RETRY:
 		aCH__CFG_OPEN_TIMEOUT->Get__DATA(ch_data);
 		double cfg_sec = atof(ch_data);
 
-		x_timer_ctrl->REGISTER__COUNT_CHANNEL_NAME(sCH__APP_ACT_TIME_COUNT->Get__CHANNEL_NAME());
+		x_timer_ctrl->REGISTER__COUNT_CHANNEL_NAME(sCH__MON_ACT_TIME_COUNT->Get__CHANNEL_NAME());
 		x_timer_ctrl->START__COUNT_DOWN(cfg_sec);
 
-		if(iSIM_MODE > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(1000);
 
@@ -74,13 +74,13 @@ LOOP_RETRY:
 				alm_msg.Format("Config Open-Timeout <- %.1f sec \n", cfg_sec);
 
 				alm_bff.Format("%s <- %s \n", 
-					dEXT_CH__DI_SHUTTER_OPEN->Get__VARIABLE_NAME(),
-					dEXT_CH__DI_SHUTTER_OPEN->Get__STRING());
+								dEXT_CH__DI_SHUTTER_OPEN->Get__VARIABLE_NAME(),
+								dEXT_CH__DI_SHUTTER_OPEN->Get__STRING());
 				alm_msg += alm_bff;
 
 				alm_bff.Format("%s <- %s \n", 
-					dEXT_CH__DI_SHUTTER_CLOSE->Get__VARIABLE_NAME(),
-					dEXT_CH__DI_SHUTTER_CLOSE->Get__STRING());
+								dEXT_CH__DI_SHUTTER_CLOSE->Get__VARIABLE_NAME(),
+								dEXT_CH__DI_SHUTTER_CLOSE->Get__STRING());
 				alm_msg += alm_bff;
 
 				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
@@ -123,10 +123,10 @@ LOOP_RETRY:
 		aCH__CFG_CLOSE_TIMEOUT->Get__DATA(ch_data);
 		double cfg_sec = atof(ch_data);
 
-		x_timer_ctrl->REGISTER__COUNT_CHANNEL_NAME(sCH__APP_ACT_TIME_COUNT->Get__CHANNEL_NAME());
+		x_timer_ctrl->REGISTER__COUNT_CHANNEL_NAME(sCH__MON_ACT_TIME_COUNT->Get__CHANNEL_NAME());
 		x_timer_ctrl->START__COUNT_DOWN(cfg_sec);
 
-		if(iSIM_MODE > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			Sleep(1000);
 
@@ -144,7 +144,7 @@ LOOP_RETRY:
 			}
 
 			if((dEXT_CH__DI_SHUTTER_OPEN->Check__DATA(STR__OFF) > 0)
-				&& (dEXT_CH__DI_SHUTTER_CLOSE->Check__DATA(STR__ON) > 0))
+			&& (dEXT_CH__DI_SHUTTER_CLOSE->Check__DATA(STR__ON) > 0))
 			{
 				break;
 			}

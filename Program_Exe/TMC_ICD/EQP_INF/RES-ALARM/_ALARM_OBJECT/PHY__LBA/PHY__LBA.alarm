@@ -22,6 +22,6 @@
 #ID=26	29926	LIGHT	PHY__LBA - VAC Robot's Arm not retracted sts.
 #ID=27	29927	LIGHT	PHY__LBA - ATM Robot's Arm not retracted sts.
 #ID=7	29907	LIGHT	PHY__LBA - Can't SV Open, Max Difference Press Alarm Occur !
-#ID=8	29908	LIGHT	PHY__LBA - After Venting Complete, Atm High Press Alarm !
+#ID=8	29908	LIGHT	PHY__LBA - ATM High Pressure limit !
 #ID=28	29928	LIGHT	PHY__LBA - Exhaust Pressure Timeout !
 #ID=29	29929	LIGHT	PHY__LBA - LLx's lid is not closed !

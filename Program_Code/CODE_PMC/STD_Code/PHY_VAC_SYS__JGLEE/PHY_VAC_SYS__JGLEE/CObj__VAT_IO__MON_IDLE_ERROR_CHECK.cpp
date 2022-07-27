@@ -41,7 +41,7 @@ int  CObj__VAT_IO
 		{
 			error__idle_warning.Disable__MAX_RANGE();
 
-			error__idle_warning.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE);
+			error__idle_warning.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE_TORR);
 			error__idle_warning.Link__REF_IN_CHANNEL(sCH__MON_PRESSURE_TORR);
 			error__idle_warning.Link__REF_RANGE_CHANNEL(aCH__PARA_PRESSURE);
 
@@ -78,7 +78,7 @@ int  CObj__VAT_IO
 		{
 			error__idle_abort.Disable__MAX_RANGE();
 
-			error__idle_abort.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE);
+			error__idle_abort.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE_TORR);
 			error__idle_abort.Link__REF_IN_CHANNEL(sCH__MON_PRESSURE_TORR);
 			error__idle_abort.Link__REF_RANGE_CHANNEL(aCH__PARA_PRESSURE);
 

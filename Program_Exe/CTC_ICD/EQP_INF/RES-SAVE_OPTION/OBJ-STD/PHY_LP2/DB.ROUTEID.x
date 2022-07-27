@@ -1,1 +1,1 @@
-BMx_Test
+BMx_All_Test

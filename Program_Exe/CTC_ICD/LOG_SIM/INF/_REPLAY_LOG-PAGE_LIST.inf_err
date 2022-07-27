@@ -1,4 +1,5 @@
 Error List ... 
+   Error : [FNC_VAC_ROBOT+CFG.SCH.PMC_RECIPE_TYPE] (8,-1,-1) 
    Error : [PHY_LBC+CTRL] (-1,-1,-1001) 
    Error : [PHY_LBC+PRESSURE.VALUE] (-1,-1,-1) 
    Error : [PHY_LBC+SCH.IN_COUNT] (-1,-1,-1) 
@@ -8,4 +9,7 @@ Error List ...
    Error : [PHY_LBD+PRESSURE.VALUE] (-1,-1,-1) 
    Error : [PHY_LBD+SCH.IN_COUNT] (-1,-1,-1) 
    Error : [PHY_LBD+SCH.IN_OUT.FLAG] (-1,-1,-1) 
+   Error : [PHY_LP1+PIO.COMM.READY.STS] (22,-1,-1) 
+   Error : [PHY_LP2+PIO.COMM.READY.STS] (23,-1,-1) 
+   Error : [PHY_LP3+PIO.COMM.READY.STS] (24,-1,-1) 
 

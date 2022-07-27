@@ -259,8 +259,15 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		//
 		def_name = "CH__DO_SR_VLV";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_SR_VALVE_CTRL, obj_name,var_name);
+
+		def_check = x_utility.Check__Link(ch_name);
+		bActive__DO_SR_VALVE_CTRL = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_SR_VALVE_CTRL, obj_name,var_name);
+		}
 
 		//
 		def_name = "CH__DO_EXHAUST_VLV";

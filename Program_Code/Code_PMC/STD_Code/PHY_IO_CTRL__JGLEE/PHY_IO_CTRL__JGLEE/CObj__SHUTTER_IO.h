@@ -10,18 +10,29 @@ private:
 	//-------------------------------------------------------------------------
 	CString	sObject_Name;
 
+	// ...
 	SCX__USER_LOG_CTRL xI_LOG_CTRL;
-	int iSIM_MODE;
+	int iActive__SIM_MODE;
 
+	CUIntArray iLIST_ALID__PIN;
+	//
 
 	//-------------------------------------------------------------------------
+	
+	// OBJ ...
 	CX__VAR_STRING_CTRL   sCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL   sCH__OBJ_STATUS;
 
+	// CFG ...
 	CX__VAR_ANALOG_CTRL   aCH__CFG_OPEN_TIMEOUT;
 	CX__VAR_ANALOG_CTRL   aCH__CFG_CLOSE_TIMEOUT;
-	CX__VAR_STRING_CTRL   sCH__APP_ACT_TIME_COUNT;
 
+	// MON.PART ... 
+	CX__VAR_DIGITAL_CTRL  dCH__MON_PART_ERROR_ACTIVE;
+
+	// MON ...
+	CX__VAR_STRING_CTRL   sCH__MON_ACT_TIME_COUNT;
+	//
 
 	//-------------------------------------------------------------------------
 	CX__VAR_STRING_CTRL   sEXT_CH__SHUTTER_STATE;
@@ -31,7 +42,7 @@ private:
 
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__DI_SHUTTER_CLOSE;
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__DI_SHUTTER_OPEN;
-
+	//
 
 	//-------------------------------------------------------------------------
 	CString sMODE__INIT;
@@ -45,7 +56,7 @@ private:
 
 	// ...
 	int Mon__STATUS(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
-
+	//
 
 public:
 	CObj__SHUTTER_IO();

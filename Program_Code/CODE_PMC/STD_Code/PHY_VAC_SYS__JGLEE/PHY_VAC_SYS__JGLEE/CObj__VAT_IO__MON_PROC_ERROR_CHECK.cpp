@@ -41,7 +41,7 @@ int  CObj__VAT_IO
 		{
 			error__proc_warning.Disable__MAX_RANGE();
 
-			error__proc_warning.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE);
+			error__proc_warning.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE_TORR);
 			error__proc_warning.Link__REF_IN_CHANNEL(sCH__MON_PRESSURE_TORR);
 			error__proc_warning.Link__REF_RANGE_CHANNEL(aCH__PARA_PRESSURE);
 
@@ -78,7 +78,7 @@ int  CObj__VAT_IO
 		{
 			error__proc_abort.Disable__MAX_RANGE();
 
-			error__proc_abort.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE);
+			error__proc_abort.Link__REF_OUT_CHANNEL(sCH__MON_SET_PRESSURE_TORR);
 			error__proc_abort.Link__REF_IN_CHANNEL(sCH__MON_PRESSURE_TORR);
 			error__proc_abort.Link__REF_RANGE_CHANNEL(aCH__PARA_PRESSURE);
 

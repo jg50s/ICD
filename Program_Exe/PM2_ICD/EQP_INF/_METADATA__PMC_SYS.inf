@@ -42,6 +42,8 @@
 //------------------------------------------------
 #OBJECT_PROPERTY     INF_PMC
 
+#DEFINE_CONSTANT    OBJ__DB_INF							            DB_INF
+
 #FNC_MODE     OBJ_MODE__SYSTEM_INIT	    			  OPR_PMC   			SYSTEM_INIT
 #FNC_MODE     OBJ_MODE__SYSTEM_MAINT				    OPR_PMC   			SYSTEM_MAINT
 #FNC_MODE     OBJ_MODE__PUMP								    OPR_PMC   			PUMP
@@ -97,11 +99,10 @@
 #DEFINE_CONSTANT    OBJ__DB_SYS							            DB_SYS
 #DEFINE_CONSTANT    OBJ__DB_INF							            DB_INF
 
-#DEFINE_CONSTANT    OBJ__AUTO_PM						            NULL
-/*
+#DEFINE_CONSTANT    CH__TOTAL_WAFER_COUNT               FNC_PROC+MON.WAFER_INFO.TOTAL_COUNT.VALUE
+
 #DEFINE_CONSTANT    OBJ__AUTO_PM						            Mng_AUTO_PM
 #DEFINE_CONSTANT    AUTO_PM.INIT                        AUTO_PM
-*/
 
 #DEFINE_CONSTANT    OBJ__LIFT_PIN  					            PHY_LIFT_PIN
 #DEFINE_CONSTANT    LIFT_PIN.TRANSFER_READY             TRANSFER_DOWN

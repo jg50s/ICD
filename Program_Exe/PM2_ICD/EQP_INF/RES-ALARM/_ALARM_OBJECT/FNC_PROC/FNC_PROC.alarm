@@ -10,3 +10,4 @@
 #ID=8	8	LIGHT	FNC_PROC - Do you want to proceed the re-processing of wafer ?
 #ID=9	9	LIGHT	FNC_PROC - The step size of process recipe is not correct !
 #ID=10	10	LIGHT	FNC_PROC - Process를 진행할 상태가 아닙니다.
+#ID=11	11	LIGHT	FNC_PROC - DI Sensor 관련 Heavy Error가 발생 했습니다.

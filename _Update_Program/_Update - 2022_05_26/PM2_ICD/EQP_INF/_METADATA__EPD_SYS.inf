@@ -1,7 +1,0 @@
-
-//-------------------------------------------------
-#OBJECT_PROPERTY	  PHY_EPD
-
-#DEFINE_CONSTANT		CH.EPD_SIGNAL		              PHY_IO__OES+SPEC.IB1.FILTERED.DATA
-
-

@@ -22,8 +22,8 @@ int CObj__SHUTTER_IO::__DEFINE__CONTROL_MODE(obj,l_mode)
 	{
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 
-		ADD__CTRL_VAR(sMODE__SHUTTER_CLOSE,  "SHUTTER.CLOSE");
-		ADD__CTRL_VAR(sMODE__SHUTTER_OPEN,   "SHUTTER.OPEN");
+		ADD__CTRL_VAR(sMODE__SHUTTER_CLOSE, "SHUTTER.CLOSE");
+		ADD__CTRL_VAR(sMODE__SHUTTER_OPEN,  "SHUTTER.OPEN");
 	}
 	return 1;
 }
@@ -49,18 +49,18 @@ int CObj__SHUTTER_IO::__DEFINE__VARIABLE_STD(p_variable)
 	CString str_name;
 	CString item_list;
 
-	// ...
+	// OBJ ...
 	{
-		str_name = "APP.OBJ.MSG";
+		str_name = "OBJ.MSG";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
 
-		str_name = "APP.OBJ.STATUS";
+		str_name = "OBJ.STATUS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_STATUS, str_name);
 	}
 
-	// ...
+	// CFG ...
 	{
 		str_name = "CFG.OPEN.TIMEOUT";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 3.0, 10.0, "");
@@ -69,18 +69,27 @@ int CObj__SHUTTER_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.CLOSE.TIMEOUT";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 3.0, 10.0, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_CLOSE_TIMEOUT, str_name);
+	}
 
-		str_name = "APP.ACT.TIME_COUNT";
+	// MON.PART ... 
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
+	}
+
+	// MON ...
+	{
+		str_name = "MON.ACT.TIME_COUNT";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__APP_ACT_TIME_COUNT, str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_ACT_TIME_COUNT, str_name);
 	}
 
 	// ...
 	{
 		SCX__SEQ_INFO seq_info;
 
-		if(seq_info->Is__SIMULATION_MODE() > 0)			iSIM_MODE =  1;
-		else											iSIM_MODE = -1;
+		iActive__SIM_MODE = seq_info->Is__SIMULATION_MODE();
 	}
 
 	// ...
@@ -106,6 +115,7 @@ int CObj__SHUTTER_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SHUTTER_OPEN_TIMEOUT;
+		iLIST_ALID__PIN.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Shutter Open-Timeout !";
@@ -123,6 +133,7 @@ int CObj__SHUTTER_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__SHUTTER_CLOSE_TIMEOUT;
+		iLIST_ALID__PIN.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Shutter Close-Timeout !";
@@ -217,16 +228,9 @@ int CObj__SHUTTER_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-		IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
+			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__SHUTTER_CLOSE)	flag = Call__SHUTTER_CLOSE(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__SHUTTER_OPEN)		flag = Call__SHUTTER_OPEN(p_variable, p_alarm);
-
-		else									
-		{
-			CString log_msg;
-			log_msg.Format("Invalid Mode: [%s]", mode);
-			flag = -1;
-		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
