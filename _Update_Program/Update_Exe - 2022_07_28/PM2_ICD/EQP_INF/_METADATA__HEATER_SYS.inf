@@ -1,0 +1,51 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_HTR_SH
+
+#DEFINE_CONSTANT    OBJ__DB_SYS							           DB_SYS
+
+#DEFINE_CONSTANT    ACTIVE.PROC_ERROR_CHECK            NO
+
+#DEFINE_CONSTANT    DATA.LOOP_SIZE                     1
+
+#DEFINE_CONSTANT    DATA__CTRL_ACTIVE.1                YES
+#DEFINE_CONSTANT    CH__AO_TEMPERATURE_SET.1           IO+ao.Shower_Head.Temp.Set
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_READ.1          IO+ai.Shower_Head.Temp.Read
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_SET.1           NULL
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_POWER.1         NULL
+#DEFINE_CONSTANT    CH__AI_PV_OFFSET.1                 NULL
+#DEFINE_CONSTANT    CH__AI_OP_HIGH_LIMIT.1             NULL
+#DEFINE_CONSTANT    CH__AI_OP_FORWARD.1                NULL
+#DEFINE_CONSTANT    CH__DO_HEATER_POWER.1              IO+do.Heater.MC.SH
+#DEFINE_CONSTANT    CH__DI_OVER_TEMP.1                 IO+di.Heater.Over.SH
+#DEFINE_CONSTANT    CH__DI_HIGH_LIMIT.1                NULL
+
+#DEFINE_CONSTANT    CH__SI_ALARM_STATE.HEXA            IO+si.Shower_Head.Alarm.Hexa
+#DEFINE_CONSTANT    CH__SO_ALARM_RESET.HEXA            NULL
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_HTR_WALL
+
+#DEFINE_CONSTANT    OBJ__DB_SYS							           DB_SYS
+
+#DEFINE_CONSTANT    ACTIVE.PROC_ERROR_CHECK            NO
+
+#DEFINE_CONSTANT    DATA.LOOP_SIZE                     1
+
+#DEFINE_CONSTANT    DATA__CTRL_ACTIVE.1                YES
+#DEFINE_CONSTANT    CH__AO_TEMPERATURE_SET.1           IO+ao.Wall.Temp.Set
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_READ.1          IO+ai.Wall.Temp.Read
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_SET.1           NULL
+#DEFINE_CONSTANT    CH__AI_TEMPERATURE_POWER.1         NULL
+#DEFINE_CONSTANT    CH__AI_PV_OFFSET.1                 NULL
+#DEFINE_CONSTANT    CH__AI_OP_HIGH_LIMIT.1             NULL
+#DEFINE_CONSTANT    CH__AI_OP_FORWARD.1                NULL
+#DEFINE_CONSTANT    CH__DO_HEATER_POWER.1              IO+do.Heater.MC.Wall
+#DEFINE_CONSTANT    CH__DI_OVER_TEMP.1                 IO+di.Heater.Over.Wall
+#DEFINE_CONSTANT    CH__DI_HIGH_LIMIT.1                NULL
+
+#DEFINE_CONSTANT    CH__SI_ALARM_STATE.HEXA            IO+si.Wall.Alarm.Hexa
+#DEFINE_CONSTANT    CH__SO_ALARM_RESET.HEXA            NULL
+
