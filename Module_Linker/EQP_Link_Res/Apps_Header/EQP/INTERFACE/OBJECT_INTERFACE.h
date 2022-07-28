@@ -1950,6 +1950,8 @@ public:
 	// ...
 	virtual int Set__DRIVER_DEADLOCK_TIMEOUT(const double cfg_sec) = 0;
 	virtual double Get__DRIVER_DEADLOCK_TIMEOUT() = 0;						// Default : 30.0 sec, Min : 10.0 sec 
+
+	virtual CString Get__IO_FILE() = 0;
 };
 
 class CII_DEFINE__FA_PARAMETER
