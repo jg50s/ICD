@@ -1,0 +1,4 @@
+#ID=1	1	LIGHT	PHY_EPD - EPD Detect Maximum Timeout !
+#ID=2	2	LIGHT	PHY_EPD - EPD Detect : Unknown Slope Direction !
+#ID=3	3	LIGHT	PHY_EPD - EPD Detect : Minimum Timeout !
+#ID=5	5	LIGHT	PHY_EPD - EPD Error Range !

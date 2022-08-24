@@ -270,8 +270,10 @@ int  CObj__MFC_IO
 
 		if(iLINK_DATA__TYPE == _DATA_TYPE__HEXA)
 		{
+			CCommon_Utility m_fnc;
+
 			CString ch_data = sEXT_CH__IO_MFC_SET_HEXA->Get__STRING();
-			ref_value = atof(ch_data);
+			ref_value = m_fnc.Get__Hexa_From_String(ch_data);
 		}
 		else
 		{
@@ -329,31 +331,84 @@ int  CObj__MFC_IO
 	ch_data.Format("%.2f", set_flow);
 	aCH__MON_MFC_SET_FLOW->Set__DATA(ch_data);
 
-	if(iActive__SIM_MODE > 0)
-	{
-		aCH__MON_MFC_READ_FLOW->Set__VALUE(set_flow);
-	}
-
 	if(iLINK_DATA__TYPE == _DATA_TYPE__HEXA)
 	{
-		int max_hexa = iLINK_DATA__MAX_FLOW;
+		CString str__hexa_type = dCH__CFG_HEXA_TYPE_FLOW->Get__STRING();
 
-		double set_ratio = set_flow / max_value;
-		int set_hexa = (int)(max_hexa * set_ratio);
-
-		if(set_hexa > 0x7fff)		set_hexa = 0x7fff;
-		if(set_hexa < 0)			set_hexa = 0;
-
-		ch_data.Format("%.1f", set_ratio*100.0);
-		sCH__MON_MFC_SET_PERCENT->Set__DATA(ch_data);
-
-		ch_data.Format("%1d", set_hexa);
-		sEXT_CH__IO_MFC_SET_HEXA->Set__DATA(ch_data);
-
-		if(iActive__SIM_MODE > 0)
+		if(str__hexa_type.CompareNoCase(STR__REAL) == 0)
 		{
-			sEXT_CH__IO_MFC_READ_HEXA->Set__DATA(ch_data);
+			double set_ratio = set_flow / max_value;
+
+			// ...
+			{
+				ch_data.Format("%.1f", set_ratio*100.0);
+				sCH__MON_MFC_SET_PERCENT->Set__DATA(ch_data);
+			}
+
+			// ...
+			{
+				UNION_4_BYTE__FLOAT m_float;
+				m_float.fDATA = set_flow;
+
+				CString ch_hexa;
+				ch_data = "";
+
+				int i_limit = 4;
+				for(int i=0; i<i_limit; i++)
+				{
+					ch_hexa.Format("%02X ", 0x0ff & m_float.cBYTE[i]);
+					ch_data += ch_hexa;
+				}
+			
+				sEXT_CH__IO_MFC_SET_HEXA->Set__DATA(ch_data);
+
+				if(iActive__SIM_MODE > 0)
+				{
+					sEXT_CH__IO_MFC_READ_HEXA->Set__DATA(ch_data);
+				}
+			}
 		}
+		else
+		{
+			int max_hexa = iLINK_DATA__MAX_FLOW;
+
+			double set_ratio = set_flow / max_value;
+			int set_hexa = (int)(max_hexa * set_ratio);
+
+			if(set_hexa > 0x7fff)		set_hexa = 0x7fff;
+			if(set_hexa < 0)			set_hexa = 0;
+
+			// ...
+			{
+				ch_data.Format("%.1f", set_ratio*100.0);
+				sCH__MON_MFC_SET_PERCENT->Set__DATA(ch_data);
+			}
+
+			// ...
+			{
+				UNION_2_BYTE__UINT m_uint;
+				m_uint.uiDATA = 0xffff & set_hexa;
+
+				CString ch_hexa;
+				ch_data = "";
+
+				int i_limit = 2;
+				for(int i=0; i<i_limit; i++)
+				{
+					ch_hexa.Format("%02X ", 0x0ff & m_uint.cBYTE[i]);
+					ch_data += ch_hexa;
+				}
+
+				sEXT_CH__IO_MFC_SET_HEXA->Set__DATA(ch_data);
+
+				if(iActive__SIM_MODE > 0)
+				{
+					sEXT_CH__IO_MFC_READ_HEXA->Set__DATA(ch_data);
+				}
+			}
+		}
+
+		// ...
 	}
 	else
 	{

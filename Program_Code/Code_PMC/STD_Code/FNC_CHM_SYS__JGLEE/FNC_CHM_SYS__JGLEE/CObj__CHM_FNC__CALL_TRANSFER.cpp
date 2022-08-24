@@ -108,6 +108,11 @@ Call__PLACE_X_COMPLETE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_ala
 int CObj__CHM_FNC::
 Fnc__TRANSFER_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	if(dEXT_CH__SYSTEM_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+	{
+		return 11;
+	}
+
 	sCH__TRANSFER_BALLAST_FLAG->Set__DATA(STR__YES);
 
 	if(Fnc__TRANS_BALLAST_START(p_variable,p_alarm) > 0)
@@ -121,6 +126,11 @@ Fnc__TRANSFER_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 int CObj__CHM_FNC::
 Fnc__TRANSFER_END(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	if(dEXT_CH__SYSTEM_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+	{
+		return 11;
+	}
+
 	sCH__TRANSFER_BALLAST_FLAG->Set__DATA("");
 
 	if(Fnc__CHM_BALLAST_START(p_variable,p_alarm) > 0)

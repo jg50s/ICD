@@ -1,0 +1,596 @@
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    FNC_GAS_VLV_CTRL
+
+#DEFINE_CONSTANT    OBJ__DB_INF                         DB_INF
+
+#DEFINE_CONSTANT    CH__CHM_PUMPING_STATE               FNC_CHM+MON.PUMPING.STATE
+
+#DEFINE_CONSTANT    OBJ__GAS_VLV                        PHY_GAS_VLV
+
+#DEFINE_CONSTANT    OBJ.FRC_SIZE                        0
+#DEFINE_CONSTANT    OBJ.FRC1                            ...
+
+#DEFINE_CONSTANT    OBJ__DGF_VLV                        NULL
+
+#DEFINE_CONSTANT   	OBJ.MFC_SIZE                        ##MFC_SIZE
+#DEFINE_CONSTANT    OBJ.MFC1                            PHY_MFC1
+#DEFINE_CONSTANT    OBJ.ID1                             GAS01
+#DEFINE_CONSTANT    OBJ.MFC2                            PHY_MFC2
+#DEFINE_CONSTANT    OBJ.ID2                             GAS02
+#DEFINE_CONSTANT    OBJ.MFC3                            PHY_MFC3
+#DEFINE_CONSTANT    OBJ.ID3                             GAS03
+#DEFINE_CONSTANT    OBJ.MFC4                            PHY_MFC4
+#DEFINE_CONSTANT    OBJ.ID4                             GAS04
+#DEFINE_CONSTANT    OBJ.MFC5                            PHY_MFC5
+#DEFINE_CONSTANT    OBJ.ID5                             GAS05
+#DEFINE_CONSTANT    OBJ.MFC6                            PHY_MFC6
+#DEFINE_CONSTANT    OBJ.ID6                             GAS06
+#DEFINE_CONSTANT    OBJ.MFC7                            PHY_MFC7
+#DEFINE_CONSTANT    OBJ.ID7                             GAS07
+#DEFINE_CONSTANT    OBJ.MFC8                            PHY_MFC8
+#DEFINE_CONSTANT    OBJ.ID8                             GAS08
+#DEFINE_CONSTANT    OBJ.MFC9                            PHY_MFC9
+#DEFINE_CONSTANT    OBJ.ID9                             GAS09
+#DEFINE_CONSTANT    OBJ.MFC10                           PHY_MFC10
+#DEFINE_CONSTANT    OBJ.ID10                            GAS10
+#DEFINE_CONSTANT    OBJ.MFC11                           PHY_MFC11
+#DEFINE_CONSTANT    OBJ.ID11                            GAS11
+#DEFINE_CONSTANT    OBJ.MFC12                           PHY_MFC12
+#DEFINE_CONSTANT    OBJ.ID12                            GAS12
+#DEFINE_CONSTANT    OBJ.MFC13                           PHY_MFC13
+#DEFINE_CONSTANT    OBJ.ID13                            GAS13
+#DEFINE_CONSTANT    OBJ.MFC14                           PHY_MFC14
+#DEFINE_CONSTANT    OBJ.ID14                            GAS14
+#DEFINE_CONSTANT    OBJ.MFC15                           PHY_MFC15
+#DEFINE_CONSTANT    OBJ.ID15                            GAS15
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_GAS_VLV
+
+#DEFINE_CONSTANT    DATA.GAS_LINE.VLV_PURGE             3
+#DEFINE_CONSTANT    CH.GAS_LINE.VLV_PURGE.1             IO+do.IGS.GV47
+#DEFINE_CONSTANT    CH.GAS_LINE.VLV_PURGE.2             IO+do.IGS.GV52
+#DEFINE_CONSTANT    CH.GAS_LINE.VLV_PURGE.3             IO+do.IGS.CV01b
+
+#DEFINE_CONSTANT    DATA.CHM_LINE.VLV_PURGE             5
+#DEFINE_CONSTANT    CH.CHM_LINE.VLV_PURGE.1             IO+do.IGS.GV52
+#DEFINE_CONSTANT    CH.CHM_LINE.VLV_PURGE.2             IO+do.IGS.CV01b
+#DEFINE_CONSTANT    CH.CHM_LINE.VLV_PURGE.3             IO+do.IGS.CV02b
+#DEFINE_CONSTANT    CH.CHM_LINE.VLV_PURGE.4             IO+do.IGS.GV53
+#DEFINE_CONSTANT    CH.CHM_LINE.VLV_PURGE.5             IO+do.IGS.GV51
+
+#DEFINE_CONSTANT    DATA.MFC.VLV_PURGE                  1
+#DEFINE_CONSTANT    CH.MFC.VLV_PURGE.1                  IO+do.IGS.GV01
+
+#DEFINE_CONSTANT    DATA.TOP_CHM.VLV_PROC               5
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PROC.1               IO+do.IGS.CV01a
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PROC.2               IO+do.IGS.CV02a
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PROC.3               IO+do.IGS.GV53
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PROC.4               IO+do.IGS.GV50
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PROC.5               IO+do.IGS.GV52
+
+#DEFINE_CONSTANT    DATA.TOP_CHM.VLV_PURGE              2
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PURGE.1              IO+do.IGS.CV01b
+#DEFINE_CONSTANT    CH.TOP_CHM.VLV_PURGE.2              IO+do.IGS.CV02b
+
+#DEFINE_CONSTANT    DATA.SOFT_VENT_VLV.OPEN             4
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.OPEN.1             IO+do.IGS.GV01
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.OPEN.2             IO+do.IGS.GV48
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.OPEN.3             IO+do.IGS.GV53
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.OPEN.4             IO+do.IGS.CV02a
+
+#DEFINE_CONSTANT    DATA.SOFT_VENT_VLV.CLOSE            3
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.CLOSE.1            IO+do.IGS.GV48
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.CLOSE.2            IO+do.IGS.GV53
+#DEFINE_CONSTANT    CH.SOFT_VENT_VLV.CLOSE.3            IO+do.IGS.CV02a
+
+#DEFINE_CONSTANT    DATA.FAST_VENT_VLV.OPEN             7
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.1             IO+do.IGS.GV01
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.2             IO+do.IGS.GV48
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.3             IO+do.IGS.GV53
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.4             IO+do.IGS.CV02a
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.5             IO+do.IGS.GV47
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.6             IO+do.IGS.GV52
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.OPEN.7             IO+do.IGS.CV01a
+
+#DEFINE_CONSTANT    DATA.FAST_VENT_VLV.CLOSE            7
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.1            IO+do.IGS.GV01
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.2            IO+do.IGS.GV48
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.3            IO+do.IGS.GV53
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.4            IO+do.IGS.CV02a
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.5            IO+do.IGS.GV47
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.6            IO+do.IGS.GV52
+#DEFINE_CONSTANT    CH.FAST_VENT_VLV.CLOSE.7            IO+do.IGS.CV01a
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_PT
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    DATA__PT_SIZE                       1
+#DEFINE_CONSTANT    CH__IO_PT.1                         IO+ai.Gas01.PT.Value
+
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC1
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC01.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC01.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC01.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV01
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV01
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV01
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV01
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC2
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC02.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC02.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC02.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV02
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV02
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV02
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV02
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC3
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC03.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC03.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC03.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV03
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV03
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV03
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV03
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC4
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC04.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC04.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC04.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV04
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV04
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV04
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV04
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC5
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC05.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC05.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC05.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV05
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV05
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV05
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV05
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC6
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC06.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC06.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC06.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV06
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV06
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV06
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV06
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC7
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC07.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC07.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC07.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV07
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV07
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV07
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV07
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC8
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC08.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC08.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC08.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV08
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV08
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV08
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV08
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC9
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC09.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC09.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC09.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV09
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV09
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV09
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV09
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC10
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC10.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC10.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC10.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV10
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV10
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV10
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV10
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC11
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC11.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC11.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC11.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV11
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV11
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV11
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV11
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC12
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC12.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC12.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC12.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV12
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV12
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV12
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV12
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC13
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC13.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC13.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC13.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV13
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV13
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV13
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV13
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC14
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC14.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC14.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC14.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV14
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV14
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    1
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV14
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV14
+
+//------------------------------------------------
+#OBJECT_PROPERTY    PHY_MFC15
+
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
+#DEFINE_CONSTANT    LINK_DATA__TYPE                     HEXA
+#DEFINE_CONSTANT    LINK_DATA__MAX_FLOW                 Ox603D
+#DEFINE_CONSTANT    LINK_DATA__MAX_DEFAULT              Ox6000
+
+#DEFINE_CONSTANT    CH__IO_MFC_SET                      IO+so.MFC15.SET
+
+#DEFINE_CONSTANT    CH__IO_MFC_READ                     IO+si.MFC15.FLOW
+#DEFINE_CONSTANT    CH__IO_MFC_STATE                    IO+si.MFC15.STATE
+#DEFINE_CONSTANT    CH__IO_MFC_VALVE_VOLTAGE 			      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_PRESSURE						      NULL
+#DEFINE_CONSTANT    CH__IO_MFC_TEMPERATURE					    NULL
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_IN                   1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_IN.1               IO+do.GAS.PV15
+
+#DEFINE_CONSTANT    DATA.VLV_IN                         1
+#DEFINE_CONSTANT    CH__IO_VLV_IN.1                     IO+do.GAS.IV15
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_ALL                    2
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.1                IO+do.GAS.OV15
+#DEFINE_CONSTANT    CH__IO_VLV_OUT_ALL.2                IO+do.IGS.GV49
+
+#DEFINE_CONSTANT    DATA.VLV_OUT_CENTER                 0
+#DEFINE_CONSTANT    DATA.VLV_OUT_EDGE                   0
+
+#DEFINE_CONSTANT    DATA.VLV_PURGE_OUT                  1
+#DEFINE_CONSTANT    CH__IO_VLV_PURGE_OUT.1              IO+do.GAS.PV15

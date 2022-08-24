@@ -9,3 +9,7 @@
 // ...
 #define _CFG_MFC_VLV__SIZE				5
 
+
+// ...
+#define STR__2_UINT					"2.UINT"
+#define STR__REAL					"REAL"

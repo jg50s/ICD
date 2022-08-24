@@ -29,6 +29,9 @@ private:
 	//------------------------------------------------------------
 	// EXTERNAL PROPERTY
 
+	// OBJ_DB ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__ACTIVE_CALL_BY_CTC;
+
 	// STEP.INFO ...
 	CX__VAR_STRING_CTRL xEXT_CH__STEP_START;
 	CX__VAR_STRING_CTRL xEXT_CH__STEP_END;

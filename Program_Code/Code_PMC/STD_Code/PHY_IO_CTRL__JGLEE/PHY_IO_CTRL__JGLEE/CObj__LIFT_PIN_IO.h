@@ -8,6 +8,10 @@
 #include "CObj__LIFT_PIN_IO__DEF.h"
 
 
+#define _CTRL_TYPE__IO					1
+#define _CTRL_TYPE__OBJ					2
+
+
 class CObj__LIFT_PIN_IO : public __IOBJ__STD_TYPE
 {
 private:
@@ -52,7 +56,18 @@ private:
 	int iDATA__ESC_CH_SIZE;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__ESC_AI_VOLTAGE_X[_CFG__ESC_CH_SIZE];
 
-	//
+	// CONTROL.TYPE ...
+	int iActive__CONTROL_TYPE;
+
+	// LINK.OBJ 
+	CII_EXT_OBJECT__CTRL* pLINK_OBJ__CTRL;
+
+	CString sLINK_MODE__INIT;
+	CString sLINK_MODE__PIN_UP;
+	CString sLINK_MODE__PIN_DOWN;
+	CString sLINK_MODE__PIN_MIDDLE;
+
+	// LINK.IO 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_TRANSFER_PIN_UP;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_TRANSFER_PIN_DOWN;
 

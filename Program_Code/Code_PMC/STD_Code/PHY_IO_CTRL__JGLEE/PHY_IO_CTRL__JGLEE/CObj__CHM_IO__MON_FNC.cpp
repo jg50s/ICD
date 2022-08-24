@@ -8,7 +8,7 @@
 int CObj__CHM_IO
 ::Mon__STATUS(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	bool active__btw_check = false;
+	CString pre__sim_pressure = "~";
 
 	CString ch_data;
 	int i;
@@ -24,6 +24,7 @@ int CObj__CHM_IO
 
 		//
 		if(bActive__AI_FORELINE_GAUGE_TORR)		aEXT_CH__AI_FORELINE_GAUGE_TORR->Set__DATA("0.0");
+		if(bActive__AI_FORELINE_GAUGE_mTORR)	aEXT_CH__AI_FORELINE_GAUGE_mTORR->Set__DATA("0.0");
 	}
 
 
@@ -60,14 +61,28 @@ int CObj__CHM_IO
 		if(iActive__SIM_MODE > 0)
 		{
 			ch_data = sEXT_CH__SIM_PRESSURE_TORR->Get__STRING();
-
-			for(i=0; i<iSIZE__PRC_GUAGE; i++)
+			if(pre__sim_pressure.CompareNoCase(ch_data) != 0)
 			{
-				aEXT_CH__AI_PRC_GAUGE_TORR_X[i]->Set__DATA(ch_data);
-			}
+				pre__sim_pressure = ch_data;
 
-			if(bActive__AI_CHM_GAUGE_TORR)
-				aEXT_CH__AI_CHM_GAUGE_TORR->Set__DATA(ch_data);
+				for(i=0; i<iSIZE__PROC_GAUGE; i++)
+				{
+					if(bActive__AI_PROC_GAUGE_TORR_X[i])
+					{
+						aEXT_CH__AI_PROC_GAUGE_TORR_X[i]->Set__DATA(ch_data);
+					}
+					if(bActive__AI_PROC_GAUGE_mTORR_X[i])
+					{
+						CString str_mtorr;
+						
+						str_mtorr.Format("%.1f", atof(ch_data) * 1000.0);
+						aEXT_CH__AI_PROC_GAUGE_mTORR_X[i]->Set__DATA(str_mtorr);
+					}
+				}
+
+				if(bActive__AI_CHM_GAUGE_TORR)
+					aEXT_CH__AI_CHM_GAUGE_TORR->Set__DATA(ch_data);
+			}
 		}
 
 		// SLOT.VLV SNS ...
@@ -130,16 +145,61 @@ int CObj__CHM_IO
 					if(cur__chm_press >= cfg__interlock_press)		active__interlock_pressure = true;
 				}
 
-				for(i=0; i<iSIZE__PRC_GUAGE; i++)
+				for(i=0; i<iSIZE__PROC_GAUGE; i++)
 				{
 					if(active__interlock_pressure)
 					{
-						dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+						dEXT_CH__DO_PROC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
 					}
 					else
 					{
-						if(vac_flag > 0)		dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__OPEN);
-						else					dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+						bool active__vlv_open = false;
+
+						if(vac_flag > 0)
+						{
+							double cfg__limit_mtorr = aCH__CFG_PROCESS_MANOMETER_LIMIT_PRESSURE_mTORR_X[i]->Get__VALUE();
+
+							if(cfg__limit_mtorr > 0.1)
+							{
+								if(i > 0)
+								{
+									double cur__press_mtorr = 0;
+	
+									if(bActive__AI_PROC_GAUGE_mTORR_X[i-1])
+									{
+										cur__press_mtorr = aEXT_CH__AI_PROC_GAUGE_mTORR_X[i-1]->Get__VALUE();
+									}
+									else if(bActive__AI_PROC_GAUGE_TORR_X[i-1])
+									{
+										double cur__press_torr = aEXT_CH__AI_PROC_GAUGE_TORR_X[i-1]->Get__VALUE();
+										cur__press_mtorr = cur__press_torr * 1000.0;
+									}
+
+									if(cur__press_mtorr < cfg__limit_mtorr)			active__vlv_open = true;
+								}
+								else
+								{
+									if(bActive__AI_CHM_GAUGE_TORR)
+									{
+										double cur__chm_torr  = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+										double cur__chm_mtorr = cur__chm_torr * 1000.0;
+
+										if(cur__chm_mtorr < cfg__limit_mtorr)		active__vlv_open = true;
+									}
+									else
+									{
+										active__vlv_open = true;
+									}
+								}
+							}
+							else
+							{
+								active__vlv_open = true;
+							}
+						}
+
+						if(active__vlv_open)		dEXT_CH__DO_PROC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__OPEN);
+						else						dEXT_CH__DO_PROC_GAUGE_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
 					}
 				}
 			}
@@ -155,41 +215,50 @@ int CObj__CHM_IO
 				sEXT_CH__CHM_VAC_SNS->Set__DATA(STR__ON);
 				sEXT_CH__CHM_ATM_SNS->Set__DATA(STR__OFF);
 
-				active__btw_check = false;
-
 				// ...
-				double cur_press = 300.0;
+				double cur__press_mtorr = 300.0 * 1000.0;
 
-				for(i=0; i<iSIZE__PRC_GUAGE; i++)
+				if(bActive__AI_CHM_GAUGE_TORR)
 				{
-					if(dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i]->Check__DATA(STR__OPEN) < 0)
-					{
-						if(bActive__AI_CHM_GAUGE_TORR)		cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+					double cur__chm_torr = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+					cur__press_mtorr = cur__chm_torr * 1000.0;
+				}
 
+				for(i=0; i<iSIZE__PROC_GAUGE; i++)
+				{
+					if(dEXT_CH__DO_PROC_GAUGE_ISO_VLV_X[i]->Check__DATA(STR__OPEN) < 0)
+					{
 						continue;
 					}
 
 					// ...
-					double cfg_max_torr = aCH__CFG_PROCESS_MANOMETER_MAX_PRESSURE_mTORR_X[i]->Get__VALUE();
-					cfg_max_torr = cfg_max_torr * 0.001;
+					double cfg__max_mtorr   = aCH__CFG_PROCESS_MANOMETER_MAX_PRESSURE_mTORR_X[i]->Get__VALUE();			
+					double cur__gauge_mtorr = cfg__max_mtorr;
 
-					double cur__prc_press = aEXT_CH__AI_PRC_GAUGE_TORR_X[i]->Get__VALUE();
-					double cur__chm_press = 500.0;
+					if(bActive__AI_PROC_GAUGE_mTORR_X[i])
+					{
+						cur__gauge_mtorr = aEXT_CH__AI_PROC_GAUGE_mTORR_X[i]->Get__VALUE();
+					}
+					else if(bActive__AI_PROC_GAUGE_TORR_X[i])
+					{
+						double cur__gauge_torr = aEXT_CH__AI_PROC_GAUGE_TORR_X[i]->Get__VALUE();
+						cur__gauge_mtorr = cur__gauge_torr * 1000.0;
+					}
 
-					if(bActive__AI_CHM_GAUGE_TORR)			cur__chm_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
-						
-					if(cur__prc_press < cfg_max_torr)		cur_press = cur__prc_press;
-					else									cur_press = cur__chm_press;
-
-					break;
+					if(cur__gauge_mtorr < cfg__max_mtorr)
+					{
+						cur__press_mtorr = cur__gauge_mtorr;
+					}
 				}
 
 				// ...
 				{
-					ch_data.Format("%.3f", cur_press);
+					double cur__press_torr = cur__press_mtorr * 0.001;
+
+					ch_data.Format("%.3f", cur__press_torr);
 					sEXT_CH__CHM_PRESSURE_VALUE->Set__DATA(ch_data);
 
-					ch_data.Format("%.1f", cur_press*1000.0);
+					ch_data.Format("%.1f", cur__press_mtorr);
 					sEXT_CH__CHM_PRESSURE_mTORR->Set__DATA(ch_data);
 				}
 			}
@@ -198,13 +267,13 @@ int CObj__CHM_IO
 				sEXT_CH__CHM_VAC_SNS->Set__DATA(STR__OFF);
 				sEXT_CH__CHM_ATM_SNS->Set__DATA(STR__ON);
 
-				active__btw_check = false;
-
 				// ...
-				double cur_press = 7600;
+				double cur_press = 760;
 					
 				if(bActive__AI_CHM_GAUGE_TORR)
+				{
 					cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
+				}
 
 				// ...
 				{
@@ -225,15 +294,11 @@ int CObj__CHM_IO
 
 				if(bActive__AI_CHM_GAUGE_TORR)
 				{
-					active__btw_check = false;
-					
 					cur_press = aEXT_CH__AI_CHM_GAUGE_TORR->Get__VALUE();
 				}
 
-				if(!active__btw_check)
+				// ...
 				{
-					active__btw_check = true;
-
 					ch_data.Format("%.1f", cur_press);
 					sEXT_CH__CHM_PRESSURE_VALUE->Set__DATA(ch_data);
 
@@ -263,18 +328,27 @@ int CObj__CHM_IO
 
 		// ...
 		{
-			if(bActive__AI_FORELINE_GAUGE_TORR)			aEXT_CH__AI_FORELINE_GAUGE_TORR->Get__DATA(ch_data);
-			else										ch_data = "0.000";
-			
+			double cur__foreline_torr = 300.0;
+
+			if(bActive__AI_FORELINE_GAUGE_TORR)
+			{
+				cur__foreline_torr = aEXT_CH__AI_FORELINE_GAUGE_TORR->Get__VALUE();
+			}
+			if(bActive__AI_FORELINE_GAUGE_mTORR)
+			{
+				double cur__foreline_mtorr = aEXT_CH__AI_FORELINE_GAUGE_mTORR->Get__VALUE();
+				cur__foreline_torr = cur__foreline_mtorr * 0.001;
+			}
+	
+			ch_data.Format("%.3f", cur__foreline_torr);
 			sEXT_CH__PMP_PRESSURE_VALUE->Set__DATA(ch_data);
-			double cur_pmp_press = atof(ch_data);
 
-			     if(cur_pmp_press < 10.0)		sEXT_CH__PMP_PRESSURE_STATE->Set__DATA("VAC");
-			else if(cur_pmp_press < 730)		sEXT_CH__PMP_PRESSURE_STATE->Set__DATA("BTW");
-			else								sEXT_CH__PMP_PRESSURE_STATE->Set__DATA("ATM");
+			     if(cur__foreline_torr < 10.0)		sEXT_CH__PMP_PRESSURE_STATE->Set__DATA(STR__VAC);
+			else if(cur__foreline_torr < 730)		sEXT_CH__PMP_PRESSURE_STATE->Set__DATA(STR__BTW);
+			else									sEXT_CH__PMP_PRESSURE_STATE->Set__DATA(STR__ATM);
 
-			if(cur_pmp_press < 10.0)			sEXT_CH__PMP_VAC_SNS->Set__DATA(STR__ON);
-			else								sEXT_CH__PMP_VAC_SNS->Set__DATA(STR__OFF);
+			if(cur__foreline_torr < 10.0)			sEXT_CH__PMP_VAC_SNS->Set__DATA(STR__ON);
+			else									sEXT_CH__PMP_VAC_SNS->Set__DATA(STR__OFF);
 		}
 
 		// RF INFO ...

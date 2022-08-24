@@ -114,73 +114,9 @@ int CObj__DGF_FLEX::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CFG ...
 	{
-		str_name = "CFG.DGF.DEFAULT.CENTER.WEIGHT";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "", 1, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_DEFAULT_CENTER_WEIGHT, str_name);
-
-		str_name = "CFG.DGF.TEST.ROUTINE.GAS.NUMBER";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "", 0, 0, 24, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TEST_ROUTINE_GAS_NUMBER, str_name);
-
-		str_name = "CFG.DGF.TEST.ROUTINE.LOW.FLOW.GAS.NUMBER";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "", 0, 0, 24, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TEST_ROUTINE_LOW_FLOW_GAS_NUMBER, str_name);
-
-		str_name = "CFG.DGF.TEST.ROUTINE.LOW.FLOW.ORIFICE.FLOWRATE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sccm", 0, 0, 9999, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TEST_ROUTINE_LOW_FLOW_ORIFICE_FLOWRATE, str_name);
-
-		str_name = "CFG.DGF.TEST.ROUTINE.HIGH.FLOW.ORIFICE.FLOWRATE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sccm", 0, 0, 9999, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TEST_ROUTINE_HIGH_FLOW_ORIFICE_FLOWRATE, str_name);
-
-		str_name = "CFG.DGF.TEST.ROUTINE.FLOW.TIME";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 10, 120, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TEST_ROUTINE_FLOW_TIME, str_name);
-
-		str_name = "CFG.DGF.TEST.ROUTINE.BASELINE.TOLERANCE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TEST_ROUTINE_BASELINE_TOLERANCE, str_name);
-
-		str_name = "CFG.DGF.INLET.PRESSURE.SAVE.TO.RECIPE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "False True", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DGF_INLET_PRESSURE_SAVE_TO_RECIPE, str_name);
-
-		str_name = "CFG.DGF.INLET.PRESSURE.CHECK";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "False True", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DGF_INLET_PRESSURE_CHECK, str_name);
-
-		str_name = "CFG.DGF.TOLERANCE.CHECK.DELAY";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_TOLERANCE_CHECK_DELAY, str_name);
-
-		str_name = "CFG.DGF.SOFT.TOLERANCE.TIMEOUT";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_SOFT_TOLERANCE_TIMEOUT, str_name);
-
-		str_name = "CFG.DGF.HARD.TOLERANCE.TIMEOUT";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 20, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_HARD_TOLERANCE_TIMEOUT, str_name);
-
-		str_name = "CFG.DGF.WAFER.300M.PARTION";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "", 0, 0, 2, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_WAFER_300M_PARTION, str_name);
-
-		str_name = "CFG.DGF.SOFT.TOLERANCE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_SOFT_TOLERANCE, str_name);
-
-		str_name = "CFG.DGF.HARD.TOLERANCE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 0, 0, 100, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_HARD_TOLERANCE, str_name);
-
-		str_name = "CFG.DGF.DELAY.TIMER";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "msec", 0, 0, 2000, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_DELAY_TIMER, str_name);
-
-		str_name = "CFG.DGF.MANOMETER.TYPE";
-		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-		LINK__VAR_STRING_CTRL(sCH__CFG_DGF_MANOMETER_TYPE, str_name);
+		str_name = "CFG.DGF.INITIAL.CENTER.WEIGHT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 1, 0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_DGF_INITIAL_CENTER_WEIGHT, str_name);
 	}
 
 	// ...
@@ -286,45 +222,6 @@ int CObj__DGF_FLEX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__IO_VAC_SNS, obj_name,var_name);
-
-		//  For Simulator Interlock Channel Initialize ...
-		/*
-		str_name.Format("di.GasPerchg.ManVac.PSH2");		// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GasPerchg_ManVac_PSH2, obj_name, str_name);		
-
-		str_name.Format("di.Chamber.DeliverVac.PSH3");		// True		
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__Chamber_DeliverVac_PSH3, obj_name, str_name);			
-
-		str_name.Format("di.TunningGas.DeliverVac.PSH4");	// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TunningGas_DeliverVac_PSH4, obj_name, str_name);	
-
-		str_name.Format("di.Scrubber.Switch.PSH8");			// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__Scrubber_Switch_PSH8, obj_name, str_name);		
-
-		str_name.Format("di.N2Purge.Supply.PSH9");			// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__N2Purge_Supply_PSH9, obj_name, str_name);
-
-		str_name.Format("di.CDAPress.Switch.Sts");			// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CDAPress_Switch_Sts, obj_name, str_name);
-
-		str_name.Format("di.Customer.GasDetect.Switch");	// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__Customer_GasDetect_Switch, obj_name, str_name);
-
-		str_name.Format("di.Customer.Intlk.Switch");		// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__Customer_Intlk_Switch, obj_name, str_name);
-
-		str_name.Format("di.H2.Intlk.Switch");				// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__H2_Intlk_Switch, obj_name, str_name);
-
-		str_name.Format("di.H2.Intlk.Switch.Installed");	// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__H2_Intlk_Switch_Installed, obj_name, str_name);
-
-		str_name.Format("di.Conver.Intlk");					// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__Conver_Intlk, obj_name, str_name);
-
-		str_name.Format("di.WaterLeak.Detection.Sts");		// True
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__WaterLeak_Detection_Sts, obj_name, str_name);
-		*/
 	}
 
 	// ...

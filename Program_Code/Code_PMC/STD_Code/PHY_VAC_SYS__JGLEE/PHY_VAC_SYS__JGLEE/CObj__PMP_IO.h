@@ -25,6 +25,8 @@ private:
 	
 	//-------------------------------------------------------------------------
 	// MON.PART ...
+	CX__VAR_STRING_CTRL  sCH__MON_PART_DEF_TYPE;
+
 	CX__VAR_DIGITAL_CTRL dCH__MON_PART_ERROR_ACTIVE;
 
 	// MON ...
@@ -45,6 +47,8 @@ private:
 	CString sPUMP_MODE__ON;
 	CString sPUMP_MODE__OFF;
 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PUMP_OBJ__MON_COMM_STATE;
+
 	// IO.TYPE 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_PUMP_SET;
 
@@ -55,8 +59,12 @@ private:
 	bool bActive__DI_PUMP_VAC_SNS;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DI_PUMP_VAC_SNS;
 
+	//
 	bool bActive__AI_PUMP_PRESSURE_TORR;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__AI_PUMP_PRESSURE_TORR;
+
+	bool bActive__AI_PUMP_PRESSURE_mTORR;
+	CX__VAR_ANALOG_CTRL  aEXT_CH__AI_PUMP_PRESSURE_mTORR;
 	//
 	
 	//-------------------------------------------------------------------------

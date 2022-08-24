@@ -151,29 +151,29 @@ int CObj__LIFT_PIN_IO::__DEFINE__VARIABLE_STD(p_variable)
 			int id = i + 1;
 
 			str_name.Format("CFG.DOWN_POS.MIN.PIN.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 0, 0, 4000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 2, -100, 4000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_DOWN_POS_MIN__PIN_X[i], str_name);
 
 			str_name.Format("CFG.DOWN_POS.MAX.PIN.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 0, 0, 4000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 2, -100, 4000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_DOWN_POS_MAX__PIN_X[i], str_name);
 
 			//
 			str_name.Format("CFG.UP_POS.MIN.PIN.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 0, 0, 4000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 2, -100, 4000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_UP_POS_MIN__PIN_X[i], str_name);
 
 			str_name.Format("CFG.UP_POS.MAX.PIN.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 0, 0, 4000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 2, -100, 4000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_UP_POS_MAX__PIN_X[i], str_name);
 
 			//
 			str_name.Format("CFG.MIDDLE_POS.MIN.PIN.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 0, 0, 4000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 2, -100, 4000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_MIDDLE_POS_MIN__PIN_X[i], str_name);
 
 			str_name.Format("CFG.MIDDLE_POS.MAX.PIN.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 0, 0, 4000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mm", 2, -100, 4000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_MIDDLE_POS_MAX__PIN_X[i], str_name);
 		}
 	}
@@ -459,7 +459,40 @@ int CObj__LIFT_PIN_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
-	// DO_PIN ...
+	// DATA.TYPE ...
+	{
+		def_name = "DATA__PIN_CTRL_TYPE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if(def_data.CompareNoCase("OBJECT") == 0)			iActive__CONTROL_TYPE = _CTRL_TYPE__OBJ;
+		else												iActive__CONTROL_TYPE = _CTRL_TYPE__IO;
+	}
+
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		def_name = "LINK__OBJ_NAME";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		pLINK_OBJ__CTRL = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+		//
+		def_name = "OBJ_MODE.INIT";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sLINK_MODE__INIT = def_data;
+
+		def_name = "OBJ_MODE.UP";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sLINK_MODE__PIN_UP = def_data;
+
+		def_name = "OBJ_MODE.DOWN";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sLINK_MODE__PIN_DOWN = def_data;
+
+		def_name = "OBJ_MODE.MIDDLE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sLINK_MODE__PIN_MIDDLE = def_data;
+	}
+	else 	// IO
 	{
 		// TRANSFER.PIN_UP ...
 		{

@@ -32,6 +32,9 @@ int CObj__CHM_FNC::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__HIGH_VAC_PUMP,	   "HIGH_VAC_PUMP");
 
 		//
+		ADD__CTRL_VAR(sMODE__PROC_READY,       "PROC_READY");
+
+		//
 		ADD__CTRL_VAR(sMODE__CLOSE_VAC_LINE,   "CLOSE.VAC_LINE");
 
 		//
@@ -143,6 +146,13 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__ACTIVE_VENTING_STATE, str_name);
 	}
 
+	// CFG ...
+	{
+		str_name = "CFG.PROCESS_READY_CTRL.AFTER_CHM_PUMPING";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES","");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING, str_name);
+	}
+
 	// REFERENCE PRESSURE ...
 	{
 		str_name = "CFG.ATM.REF.PRESSURE";
@@ -176,18 +186,17 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_FAST_VENT_GAUGE_CHECK, str_name);
 
 		str_name.Format("CFG.FAST_VENT.TIMEOUT");
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 300, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 600, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_TIMEOUT, str_name);
+
+		str_name = "CFG.FAST_VENT.ATM_SNS_ON.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_ATM_SNS_ON_TIMEOUT, str_name);
 
 		str_name = "CFG.FAST_VENT.OVER.TIME";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 60, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_OVER_TIME, str_name);
-
-		str_name = "CFG.FAST_VENT.ATM_SNS_ON.TIMEOUT";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 600, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_ATM_SNS_ON_TIMEOUT, str_name);
 	}
-
 	// SOFT-VENTING PARAMETER ...
 	{
 		str_name = "CFG.SOFT_VENT.PRESSURE";
@@ -195,16 +204,16 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_PRESSURE, str_name);
 
 		str_name = "CFG.SOFT_VENT.TIMEOUT";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 300, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 600, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_TIMEOUT, str_name);
+
+		str_name = "CFG.SOFT_VENT.VAC_SNS_OFF.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_VAC_SNS_OFF_TIMEOUT, str_name);
 
 		str_name = "CFG.SOFT_VENT.OVER.TIME";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 60, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_OVER_TIME, str_name);
-
-		str_name = "CFG.SOFT_VENT.VAC_SNS_OFF.TIMEOUT";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 10, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_VAC_SNS_OFF_TIMEOUT, str_name);
 	}
 
 	// SOFT-PUMPING PARAMETER ...
@@ -213,15 +222,18 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 1, 600, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_PRESSURE, str_name);
 
-		str_name = "CFG.SOFT_PUMP.OVER.TIME";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 60, "");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_OVER_TIME, str_name);
-
 		str_name = "CFG.SOFT_PUMP.TIMEOUT";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 300, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_TIMEOUT, str_name);
-	}
 
+		str_name = "CFG.SOFT_PUMP.ATM_SNS_OFF.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_ATM_SNS_OFF_TIMEOUT, str_name);
+
+		str_name = "CFG.SOFT_PUMP.OVER.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 60, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_OVER_TIME, str_name);
+	}
 	// FAST-PUMPING PARAMETER ...
 	{
 		str_name = "CFG.FAST_PUMP.PRESSURE";
@@ -231,6 +243,10 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.FAST_PUMP.TIMEOUT";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 300, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_TIMEOUT, str_name);
+
+		str_name = "CFG.FAST_PUMP.VAC_SNS_ON.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_VAC_SNS_ON_TIMEOUT, str_name);
 	}
 
 	// HIGH_VAC-PUMPING PARAMETER ...
@@ -282,6 +298,11 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 
 	// LEAK-CHECK PARAMETER ...
 	{
+		str_name = "LEAK_CHECK.ACTIVE.CALL_BY_CTC";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK__ACTIVE_CALL_BY_CTC, str_name);
+
+		//
 		str_name = "CUR.LEAK_CHECK.TIME_COUNT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK__CUR_TIME_COUNT, str_name);
@@ -299,9 +320,14 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "min", 0, 1, 7, "");
 		LINK__VAR_ANALOG_CTRL(aCH__LEAK_CHECK__CFG_TIME_MIN, str_name);
 
+		//
 		str_name = "CFG.LEAK_CHECK.VAT_VLV_POS_MOVING";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE  ENABLE", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__LEAK_CHECK__CFG_VAT_VLV_POS_MOVING, str_name);
+
+		str_name = "ACTIVE.LEAK_CHECK.VAT_VLV_POS_MOVING";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__LEAK_CHECK__ACTIVE_VAT_VLV_POS_MOVING, str_name);
 
 		//
 		str_name = "APP.LEAK_CHECK.DATE.FDC.MONTH";
@@ -1040,6 +1066,10 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
 		//
+		var_name = "ACTIVE.CALL_BY_CTC";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ACTIVE_CALL_BY_CTC, obj_name,var_name);
+
+		//
 		var_name = "CFG.TRANSFER.MODE";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__SYSTEM_TRANSFER_MODE, obj_name,var_name);
 
@@ -1474,6 +1504,8 @@ LOOP_RETRY:
 		ELSE_IF__CTRL_MODE(sMODE__PUMPING)					flag = Call__HIGH_VAC_PUMP(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__LOW_VAC_PUMP)				flag = Call__LOW_VAC_PUMP(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__HIGH_VAC_PUMP)			flag = Call__HIGH_VAC_PUMP(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__PROC_READY)				flag = Call__PROC_READY(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__CLOSE_VAC_LINE)			flag = Call__CLOSE_VAC_LINE(p_variable,p_alarm);
 

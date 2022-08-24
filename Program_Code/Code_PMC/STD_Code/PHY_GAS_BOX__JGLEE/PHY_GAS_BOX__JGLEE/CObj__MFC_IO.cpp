@@ -354,12 +354,40 @@ int CObj__MFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 		// Temperature
 		str_name = "CFG.RANGE.MAX.TEMPERATURE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 0, 999999, "");	
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "K", 0, 0, 999999, "");	
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_RANGE_MAX_TEMPERATURE, str_name);
 
 		str_name = "CFG.RANGE.DEC.TEMPERATURE";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "dec", 0, 0, 5, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_RANGE_DEC_TEMPERATURE, str_name);
+
+		// Voltage
+		str_name = "CFG.RANGE.MAX.VOLTAGE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "V", 0, 0, 999999, "");	
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_RANGE_MAX_VOLTAGE, str_name);
+
+		str_name = "CFG.RANGE.DEC.VOLTAGE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "dec", 0, 0, 5, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_RANGE_DEC_VOLTAGE, str_name);
+	}
+
+	// CFG - HEXA.TYPE ...
+	{
+		str_name = "CFG.HEXA_TYPE.FLOW";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "2.UINT  REAL", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HEXA_TYPE_FLOW, str_name);
+
+		str_name = "CFG.HEXA_TYPE.PRESSURE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "2.UINT  REAL", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HEXA_TYPE_PRESSURE, str_name);
+
+		str_name = "CFG.HEXA_TYPE.TEMPERATURE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "2.UINT  REAL", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HEXA_TYPE_TEMPERATURE, str_name);
+
+		str_name = "CFG.HEXA_TYPE.VOLTAGE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "2.UINT  REAL", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HEXA_TYPE_VOLTAGE, str_name);
 	}
 
 	// ...
@@ -589,39 +617,35 @@ int CObj__MFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			sCH__INFO_LINK_DATA__TYPE->Set__DATA(ch_data);
 		}
 		
-		// MAX.FLOW ...
 		if(iLINK_DATA__TYPE == _DATA_TYPE__HEXA)
 		{
-			def_name = "LINK_DATA__MAX_FLOW";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-
-			if(m_fnc.Check__Hexa_Type(def_data) > 0)
+			// MAX.FLOW ...
 			{
-				iLINK_DATA__MAX_FLOW = m_fnc.Get__Hexa_From_String(def_data);
+				def_name = "LINK_DATA__MAX_FLOW";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+				if(m_fnc.Check__Hexa_Type(def_data) > 0)		iLINK_DATA__MAX_FLOW = m_fnc.Get__Hexa_From_String(def_data);
+				else											iLINK_DATA__MAX_FLOW = atoi(def_data);
+
+				if(iLINK_DATA__MAX_FLOW < 1)					iLINK_DATA__MAX_FLOW = 0x6000;
+
+				ch_data.Format("%02X", iLINK_DATA__MAX_FLOW);
+				sCH__INFO_LINK_DATA__MAX_FLOW->Set__DATA(ch_data);
 			}
-			else
+
+			// MAX.DEFAULT ...
 			{
-				iLINK_DATA__MAX_FLOW = atoi(def_data);
+				def_name = "LINK_DATA__MAX_DEFAULT";	
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+				if(m_fnc.Check__Hexa_Type(def_data) > 0)		iLINK_DATA__MAX_DEFAULT = m_fnc.Get__Hexa_From_String(def_data);
+				else											iLINK_DATA__MAX_DEFAULT = atoi(def_data);
+
+				if(iLINK_DATA__MAX_DEFAULT < 1)					iLINK_DATA__MAX_DEFAULT = 0x6000;
+			
+				ch_data.Format("%02X", iLINK_DATA__MAX_DEFAULT);
+				sCH__INFO_LINK_DATA__MAX_DEFAULT->Set__DATA(ch_data);
 			}
-
-			if(iLINK_DATA__MAX_FLOW < 1)			iLINK_DATA__MAX_FLOW = 0x6000;
-
-			ch_data.Format("%02X", iLINK_DATA__MAX_FLOW);
-			sCH__INFO_LINK_DATA__MAX_FLOW->Set__DATA(ch_data);
-		}
-		// MAX.DEFAULT ...
-		if(iLINK_DATA__TYPE == _DATA_TYPE__HEXA)
-		{
-			def_name = "LINK_DATA__MAX_DEFAULT";	
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-
-			if(m_fnc.Check__Hexa_Type(def_data) > 0)		iLINK_DATA__MAX_DEFAULT = m_fnc.Get__Hexa_From_String(def_data);
-			else											iLINK_DATA__MAX_DEFAULT = atoi(def_data);
-
-			if(iLINK_DATA__MAX_DEFAULT < 1)			iLINK_DATA__MAX_DEFAULT = 0x6000;
-		
-			ch_data.Format("%02X", iLINK_DATA__MAX_DEFAULT);
-			sCH__INFO_LINK_DATA__MAX_DEFAULT->Set__DATA(ch_data);
 		}
 	}
 
@@ -629,7 +653,7 @@ int CObj__MFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		// MFC ...
 		{
-			// SET & READ ...
+			// FLOW.SET ...
 			{
 				def_name = "CH__IO_MFC_SET";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
@@ -637,8 +661,10 @@ int CObj__MFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				
 				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__IO_MFC_SET_HEXA, obj_name,var_name);
 				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__IO_MFC_SET_DEC, obj_name,var_name);
-
-				//
+			}
+			
+			// FLOW.READ ...
+			{
 				def_name = "CH__IO_MFC_READ";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
@@ -831,19 +857,25 @@ int CObj__MFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__MFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
-	int flag = 1;
-	CString log_msg;
+	DECLARE__EXT_CTRL(p_variable);
 
-	// ...	
+	int flag = 1;
+
+	CString log_msg;
+	CString log_bff;
+
 	CString var_gas_name = sCH__CFG_GAS_NAME->Get__STRING();
 
 	// ...
 	{
-		log_msg.Format("Start ... :  [%s], Gas_Name:[%s]",mode,var_gas_name);
-
-		xLOG_CTRL->WRITE__LOG(log_msg);
+		log_msg.Format("Start [%s] ... By %s", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 
+		log_msg += "\n";
+		log_bff.Format(" * Gas_Name:<- [%s] \n", var_gas_name);
+		log_msg += log_bff;
+
+		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
 	if(dCH__CFG_MFC_USE->Check__DATA(STR__YES) < 0)
@@ -1013,7 +1045,7 @@ int CObj__MFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		// ...
 		{
-			log_msg.Format("Aborted ... :  [%s], Gas_Name:[%s]",mode,var_gas_name);
+			log_msg.Format("Aborted (%1d) ... :  [%s], Gas_Name:[%s]", flag, mode,var_gas_name);
 
 			xLOG_CTRL->WRITE__LOG(log_msg);
 			sCH__OBJ_MSG->Set__DATA(log_msg);

@@ -7,8 +7,12 @@
 int CObj__DGF_FLEX
 ::Call__INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	CString ch_data;
 
-	return 1;
+	aCH__CFG_DGF_INITIAL_CENTER_WEIGHT->Get__DATA(ch_data);
+	aCH__CENTER_Wt_SET_POINT->Set__DATA(ch_data);
+
+	return Call__CONTROL(p_variable, p_alarm);
 }
 
 int CObj__DGF_FLEX
@@ -271,12 +275,12 @@ int CObj__DGF_FLEX
 	CString log_msg;
 	CString log_bff;
 
-	int i_limmit = _CFG__MAX_DGF_LEVEL;
-	int i;
+	log_msg = "\n";
 
-	for(i=0; i<i_limmit; i++)
+	int i_limmit = _CFG__MAX_DGF_LEVEL;
+	for(int i=0; i<i_limmit; i++)
 	{
-		log_bff.Format("%1d   ", i+1);
+		log_bff.Format("%02d   ", i+1);
 		log_msg += log_bff;
 
 		int k_limit = _CFG__MAX_VALVE;
@@ -284,7 +288,7 @@ int CObj__DGF_FLEX
 
 		for(k=0; k<k_limit; k++)
 		{
-			log_bff.Format("%s   ", dCFG_CH__VALVE_STATUS[i][k]->Get__STRING());
+			log_bff.Format("%5s  ", dCFG_CH__VALVE_STATUS[i][k]->Get__STRING());
 			log_msg += log_bff;
 		}
 

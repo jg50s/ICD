@@ -42,6 +42,12 @@ int CObj__CHM_FNC
 		log_msg.Format("Fnc__LOW_VAC_PUMP() : Failed [%d] ...", flag);	
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
+	else
+	{
+		if(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Check__DATA(STR__YES) > 0)
+			pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY);
+	}
+
 	return flag;
 }
 
@@ -68,6 +74,7 @@ int CObj__CHM_FNC
 		int flag = Fnc__HIGH_VAC_PUMP(p_variable,p_alarm);
 
 		// Gas-Valve <- Proc_Ready
+		if(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Check__DATA(STR__YES) > 0)
 		{
 			pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY);
 		}
@@ -80,6 +87,13 @@ int CObj__CHM_FNC
 		}
 	}
 	return 1;
+}
+
+int CObj__CHM_FNC
+::Call__PROC_READY(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
+{
+
+	return pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY);
 }
 
 // ...
@@ -211,7 +225,22 @@ int CObj__CHM_FNC
 	}
 
 	// ...
-	int	flag = Fnc__LEAK_CHECK(p_variable,p_alarm);
+	bool active__ctc_call = false;
+
+	if((dEXT_CH__ACTIVE_CALL_BY_CTC->Check__DATA(STR__ON) > 0)
+	&& (dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0))
+	{
+		active__ctc_call = true;
+
+		sCH__LEAK_CHECK__ACTIVE_CALL_BY_CTC->Set__DATA("Controlled by CTC");
+	}
+	else
+	{
+		sCH__LEAK_CHECK__ACTIVE_CALL_BY_CTC->Set__DATA("Controlled by PMC");
+	}
+
+	// ...
+	int	flag = Fnc__LEAK_CHECK(p_variable,p_alarm, active__ctc_call);
 
 	if(flag < 0)
 	{
@@ -223,7 +252,11 @@ int CObj__CHM_FNC
 	{
 		if(dCH__LEAK_CHECK__CFG_VAT_VLV_POS_MOVING->Check__DATA(STR__ENABLE) > 0)
 		{
-			flag = Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(p_variable,p_alarm);
+			dCH__LEAK_CHECK__ACTIVE_VAT_VLV_POS_MOVING->Set__DATA(STR__ON);
+
+			flag = Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(p_variable,p_alarm, active__ctc_call);
+
+			dCH__LEAK_CHECK__ACTIVE_VAT_VLV_POS_MOVING->Set__DATA(STR__OFF);
 
 			if(flag < 0)
 			{

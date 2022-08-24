@@ -65,13 +65,17 @@ int CObj__CHM_IO::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 10, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_INTERLOCK_HIGH_LIMIT_PRESSURE, str_name);
 
-		for(i=0; i<_CFG__PRC_GAUGE_SIZE; i++)
+		for(i=0; i<_CFG__PROC_GAUGE_SIZE; i++)
 		{
 			int id = i + 1;
 
 			str_name.Format("CFG.PROCESS_MANOMETER.MAX_PRESSURE.mTORR.%1d", id);
 			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 1, 10000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_MANOMETER_MAX_PRESSURE_mTORR_X[i], str_name);
+
+			str_name.Format("CFG.PROCESS_MANOMETER.LIMIT_PRESSURE.mTORR.%1d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 100000, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_MANOMETER_LIMIT_PRESSURE_mTORR_X[i], str_name);
 		}
 	}
 
@@ -271,48 +275,87 @@ int CObj__CHM_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "DATA.PRC_GAUGE_SIZE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-		iSIZE__PRC_GUAGE = atoi(def_data);
-		if(iSIZE__PRC_GUAGE > _CFG__PRC_GAUGE_SIZE)			iSIZE__PRC_GUAGE = _CFG__PRC_GAUGE_SIZE;
+		iSIZE__PROC_GAUGE = atoi(def_data);
+		if(iSIZE__PROC_GAUGE > _CFG__PROC_GAUGE_SIZE)			iSIZE__PROC_GAUGE = _CFG__PROC_GAUGE_SIZE;
 
-		for(i=0; i<iSIZE__PRC_GUAGE; i++)
+		for(i=0; i<iSIZE__PROC_GAUGE; i++)
 		{
 			int id = i + 1;
 
 			def_name.Format("CH.DO_PRC_GAUGE_VLV.%1d", id);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_PRC_GAUGE_ISO_VLV_X[i], obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_PROC_GAUGE_ISO_VLV_X[i], obj_name,var_name);
 
+			//
 			def_name.Format("CH.AI_PRC_GAUGE_TORR.%1d", id);
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_PRC_GAUGE_TORR_X[i], obj_name,var_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_PROC_GAUGE_TORR_X[i] = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_PROC_GAUGE_TORR_X[i], obj_name,var_name);
+			}
+
+			//
+			def_name.Format("CH.AI_PRC_GAUGE_mTORR.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_PROC_GAUGE_mTORR_X[i] = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_PROC_GAUGE_mTORR_X[i], obj_name,var_name);
+			}
 		}
 
-		//
-		def_name = "CH__AI_CHM_GAUGE_TORR";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-
-		def_check = x_utility.Check__Link(ch_name);
-		bActive__AI_CHM_GAUGE_TORR = def_check;
-
-		if(def_check)
+		// CHAMBER.GAUGE ...
 		{
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_CHM_GAUGE_TORR, obj_name,var_name);
+			def_name = "CH__AI_CHM_GAUGE_TORR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_CHM_GAUGE_TORR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_CHM_GAUGE_TORR, obj_name,var_name);
+			}
+
 		}
 
-		//
-		def_name = "CH__AI_FORELINE_GAUGE_TORR";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-
-		def_check = x_utility.Check__Link(ch_name);
-		bActive__AI_FORELINE_GAUGE_TORR = def_check;
-
-		if(def_check)
+		// FORELINE.GAUGE ...
 		{
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_FORELINE_GAUGE_TORR, obj_name,var_name);
+			def_name = "CH__AI_FORELINE_GAUGE_TORR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_FORELINE_GAUGE_TORR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_FORELINE_GAUGE_TORR, obj_name,var_name);
+			}
+
+			//
+			def_name = "CH__AI_FORELINE_GAUGE_mTORR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_FORELINE_GAUGE_mTORR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_FORELINE_GAUGE_mTORR, obj_name,var_name);
+			}
 		}
 	}
 

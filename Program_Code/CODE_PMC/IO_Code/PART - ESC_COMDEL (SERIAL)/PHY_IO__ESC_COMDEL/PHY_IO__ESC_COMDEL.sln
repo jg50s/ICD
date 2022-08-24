@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PHY_IO__ESC_COMDEL", "PHY_IO__ESC_COMDEL\PHY_IO__ESC_COMDEL.vcproj", "{5EDBE13E-1182-431C-AC56-818D9FE7902A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EDBE13E-1182-431C-AC56-818D9FE7902A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5EDBE13E-1182-431C-AC56-818D9FE7902A}.Debug|Win32.Build.0 = Debug|Win32
+		{5EDBE13E-1182-431C-AC56-818D9FE7902A}.Release|Win32.ActiveCfg = Release|Win32
+		{5EDBE13E-1182-431C-AC56-818D9FE7902A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

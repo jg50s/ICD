@@ -1,0 +1,6 @@
+; PHY_IO__ESC_COMDEL.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PHY_IO__ESC_COMDEL"
+
+EXPORTS
+    ; Explicit exports can go here

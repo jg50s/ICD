@@ -7,6 +7,12 @@
 int CObj__LIFT_PIN_IO
 ::Call__INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		int r_flag = pLINK_OBJ__CTRL->Call__OBJECT(sLINK_MODE__INIT);
+		if(r_flag < 0)			return r_flag;
+	}
+
 	if(Call__TRANSFER_DOWN(p_variable, p_alarm) < 0)
 	{
 		return -1;
@@ -28,7 +34,12 @@ RETRY_ACTION:
 
 	sCH__MON_ACT_NAME->Set__DATA(" -> UP");
 
-	// ...
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		int r_flag = pLINK_OBJ__CTRL->Call__OBJECT(sLINK_MODE__PIN_UP);
+		if(r_flag < 0)			return r_flag;
+	}
+	else
 	{
 		dEXT_CH__DO_TRANSFER_PIN_UP->Set__DATA(STR__ON);		
 		dEXT_CH__DO_TRANSFER_PIN_DOWN->Set__DATA(STR__OFF);		
@@ -110,7 +121,12 @@ RETRY_ACTION:
 
 	sCH__MON_ACT_NAME->Set__DATA(" -> MIDDLE");
 
-	// ...
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		int r_flag = pLINK_OBJ__CTRL->Call__OBJECT(sLINK_MODE__PIN_MIDDLE);
+		if(r_flag < 0)			return r_flag;
+	}
+	else
 	{
 		dEXT_CH__DO_TRANSFER_PIN_UP->Set__DATA(STR__OFF);		
 		dEXT_CH__DO_TRANSFER_PIN_DOWN->Set__DATA(STR__OFF);		
@@ -202,7 +218,12 @@ RETRY_ACTION:
 
 	sCH__MON_ACT_NAME->Set__DATA(" -> TRANSFER.UP");
 
-	// ...
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		int r_flag = pLINK_OBJ__CTRL->Call__OBJECT(sLINK_MODE__PIN_UP);
+		if(r_flag < 0)			return r_flag;
+	}
+	else
 	{
 		dEXT_CH__DO_TRANSFER_PIN_UP->Set__DATA(STR__ON);		
 		dEXT_CH__DO_TRANSFER_PIN_DOWN->Set__DATA(STR__OFF);		
@@ -283,7 +304,12 @@ RETRY_ACTION:
 
 	sCH__MON_ACT_NAME->Set__DATA(" -> DOWN");
 
-	// ...
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		int r_flag = pLINK_OBJ__CTRL->Call__OBJECT(sLINK_MODE__PIN_DOWN);
+		if(r_flag < 0)			return r_flag;
+	}
+	else
 	{
 		dEXT_CH__DO_TRANSFER_PIN_UP->Set__DATA(STR__OFF);		
 		dEXT_CH__DO_TRANSFER_PIN_DOWN->Set__DATA(STR__ON);
@@ -348,7 +374,12 @@ RETRY_ACTION:
 
 	sCH__MON_ACT_NAME->Set__DATA(" -> TRANSFER.DOWN");
 
-	// ...
+	if(iActive__CONTROL_TYPE == _CTRL_TYPE__OBJ)
+	{
+		int r_flag = pLINK_OBJ__CTRL->Call__OBJECT(sLINK_MODE__PIN_DOWN);
+		if(r_flag < 0)			return r_flag;
+	}
+	else
 	{
 		dEXT_CH__DO_TRANSFER_PIN_UP->Set__DATA(STR__OFF);		
 		dEXT_CH__DO_TRANSFER_PIN_DOWN->Set__DATA(STR__ON);		

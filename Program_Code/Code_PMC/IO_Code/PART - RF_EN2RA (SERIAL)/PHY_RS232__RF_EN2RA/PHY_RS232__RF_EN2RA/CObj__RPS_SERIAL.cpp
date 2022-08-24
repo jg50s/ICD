@@ -98,55 +98,55 @@ int CObj__RPS_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 	// INFO.PART ...
 	{
 		str_name = "INFO.DELIVERED_POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DELIVERED_POWER, str_name);
 
 		str_name = "INFO.POWER_SETPOINT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_POWER_SETPOINT, str_name);
 
 		str_name = "INFO.REFLECTED_POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_REFLECTED_POWER, str_name);
 
 		//
 		str_name = "INFO.RF_VOLTAGE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_VOLTAGE, str_name);
 
 		str_name = "INFO.RF_CURRENT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_CURRENT, str_name);
 
 		//
 		str_name = "INFO.DC_VOLTAGE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DC_VOLTAGE, str_name);
 
 		str_name = "INFO.DC_CURRENT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DC_CURRENT, str_name);
 
 		//
 		str_name = "INFO.RF_PHASE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_PHASE, str_name);
 
 		str_name = "INFO.FREQUENCY";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_FREQUENCY, str_name);
 		
 		str_name = "INFO.QFR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_QFR, str_name);
 
 		//
 		str_name = "INFO.PLASMA_IMPEDANCE_R";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PLASMA_IMPEDANCE_R, str_name);
 
 		str_name = "INFO.PLASMA_IMPEDANCE_X";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PLASMA_IMPEDANCE_X, str_name);
 
 		//

@@ -771,19 +771,25 @@ int CObj__LFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__LFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
-	int flag = 1;
-	CString log_msg;
+	DECLARE__EXT_CTRL(p_variable);
 
-	// ...	
+	int flag = 1;
+
+	CString log_msg;
+	CString log_bff;
+
 	CString var_gas_name = sCH__CFG_GAS_NAME->Get__STRING();
 
 	// ...
 	{
-		log_msg.Format("Start ... :  [%s], Gas_Name:[%s]",mode,var_gas_name);
-
-		xLOG_CTRL->WRITE__LOG(log_msg);
+		log_msg.Format("Start [%s] ... By %s", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 
+		log_msg += "\n";
+		log_bff.Format(" * Gas_Name:<- [%s] \n", var_gas_name);
+		log_msg += log_bff;
+
+		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
 	if(dCH__CFG_LFC_USE->Check__DATA(STR__YES) < 0)

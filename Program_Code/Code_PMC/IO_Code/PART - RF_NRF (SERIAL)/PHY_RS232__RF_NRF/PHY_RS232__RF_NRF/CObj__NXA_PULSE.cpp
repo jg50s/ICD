@@ -245,50 +245,50 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "INFO.PARAM_A.FREQ";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_A_FREQ, str_name);
 
 		str_name = "INFO.PARAM_A.DUTY";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_A_DUTY, str_name);
 
 		str_name = "INFO.PARAM_A.ON_TIME";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_A_ON_TIME, str_name);
 
 		str_name = "INFO.PARAM_A.OFF_TIME";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_A_OFF_TIME, str_name);
 
 		//
 		str_name = "INFO.PARAM_B.ON_SHIFT_TIME";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_B_ON_SHIFT_TIME, str_name);
 
 		str_name = "INFO.PARAM_B.OFF_SHIFT_TIME";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_B_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "INFO.PARAM_C.ON_SHIFT_TIME";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_C_ON_SHIFT_TIME, str_name);
 
 		str_name = "INFO.PARAM_C.OFF_SHIFT_TIME";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PARAM_C_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "INFO.CLK_A.CTRL";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_CLK_A_CTRL, str_name);
 
 		str_name = "INFO.CLK_B.CTRL";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_CLK_B_CTRL, str_name);
 
 		str_name = "INFO.CLK_C.CTRL";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_CLK_C_CTRL, str_name);
 	}
 

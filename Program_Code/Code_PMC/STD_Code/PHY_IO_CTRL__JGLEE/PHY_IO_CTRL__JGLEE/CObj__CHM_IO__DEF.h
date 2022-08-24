@@ -2,12 +2,16 @@
 
 
 // ...
-#define _CFG__PRC_GAUGE_SIZE		3
-#define _CFG__RF_SIZE				3
+#define _CFG__PROC_GAUGE_SIZE			3
+#define _CFG__RF_SIZE					3
 
 
 // ...
 #define STR__STANDBY				"STANDBY"
+
+#define STR__VAC					"VAC"
+#define STR__BTW					"BTW"
+#define STR__ATM					"ATM"
 
 #define STR__ON						"ON"
 #define STR__OFF					"OFF"

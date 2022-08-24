@@ -1,0 +1,5 @@
+#ID=1	1	LIGHT	PHY_IO__ESC_TEMP - Offlne !
+#ID=2	2	LIGHT	PHY_IO__ESC_TEMP - Warning Upper Error !
+#ID=3	3	LIGHT	PHY_IO__ESC_TEMP - Warning Lower Error !
+#ID=4	4	LIGHT	PHY_IO__ESC_TEMP - High limit Error !
+#ID=5	5	LIGHT	PHY_IO__ESC_TEMP - High limit Error !

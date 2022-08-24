@@ -16,12 +16,7 @@ int CObj__CHM_FNC
 		dEXT_CH__CHM_VAC_SNS->Set__DATA(STR__ON);
 	}	
 
-	if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
-	{
-		return -11;
-	}
-
-	//
+	// ...
 	bool active__wafer_dechuck = false;
 
 	if(dEXT_CH__WAFER_SLOT01_STATE->Check__DATA(STR__NONE) < 0)
@@ -43,10 +38,6 @@ int CObj__CHM_FNC
 					return -21;
 				}
 			}
-		}
-		else
-		{
-
 		}
 	}
 
@@ -197,7 +188,7 @@ LOOP_RETRY:
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
-		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
+		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__ALL_CLOSE) < 0)
 		{
 			return -11;
 		}
@@ -283,7 +274,11 @@ LOOP_RETRY:
 
 		sCH__OBJ_MSG->Set__DATA("ATM_Sensor.Off Checking ...");
 
-		int check_count = 0;
+		// ...
+		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
+
+		x_asyc_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__OBJ_TIMER->Get__CHANNEL_NAME());
+		x_asyc_timer->START__COUNT_UP(99999);
 
 		while(1)
 		{
@@ -310,12 +305,13 @@ LOOP_RETRY:
 				return -61;
 			}
 
-			check_count++;
-			if(check_count >= 10)
-			{
-				check_count = 0;
+			// ...
+			double cfg__atm_off_sec = aCH__CFG_SOFT_PUMP_ATM_SNS_OFF_TIMEOUT->Get__VALUE();
 
+			if(x_asyc_timer->Get__CURRENT_TIME() >= cfg__atm_off_sec)
+			{
 				int alarm_id = ALID__VAC_SENSOR_CHECKING_TIMEOUT;
+				
 				CString alm_msg;
 				CString alm_bff;
 				CString r_act;
@@ -323,14 +319,39 @@ LOOP_RETRY:
 				alm_msg.Format(" * %s <- %s \n", 
 							   dEXT_CH__CHM_ATM_SNS->Get__CHANNEL_NAME(),
 							   dEXT_CH__CHM_ATM_SNS->Get__STRING());
+				alm_msg += alm_bff;
+
 				alm_bff.Format(" * %s <- %s \n",
 							   dEXT_CH__CHM_VAC_SNS->Get__CHANNEL_NAME(),
 							   dEXT_CH__CHM_VAC_SNS->Get__STRING());
 				alm_msg += alm_bff;
 
+				alm_bff.Format(" * Config timeout of ATM_OFF Sensor is %.1f (sec) \n",
+								cfg__atm_off_sec);
+				alm_msg += alm_bff;
+
 				p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, r_act, alm_msg);
 			}
 		}
+	}
+
+	// Soft-OverPumping.Timeout ...
+	{
+		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
+
+		x_asyc_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__OBJ_TIMER->Get__CHANNEL_NAME());
+		x_asyc_timer->START__COUNT_UP(99999);
+
+		do
+		{
+			if(p_variable->Check__CTRL_ABORT() > 0)					return -71;
+
+			double cfg_sec = aCH__CFG_SOFT_PUMP_OVER_TIME->Get__VALUE();
+			if(x_asyc_timer->Get__CURRENT_TIME() >= cfg_sec)		break;
+
+			Sleep(10);
+		} 
+		while(1);
 	}
 
 RETRY_LOOP:
@@ -357,13 +378,6 @@ RETRY_LOOP:
 
 		while(1)
 		{
-			Sleep(100);
-
-			if(p_variable->Check__CTRL_ABORT() > 0)
-			{
-				return -102;
-			}
-
 			// PRESSURE CHECK ...
 			double cfg_press = aCH__CFG_FAST_PUMP_PRESSURE->Get__VALUE();
 			double cur_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
@@ -371,6 +385,13 @@ RETRY_LOOP:
 			if(cur_press < cfg_press)
 			{
 				break;
+			}
+
+			Sleep(100);
+
+			if(p_variable->Check__CTRL_ABORT() > 0)
+			{
+				return -102;
 			}
 
 			// TIMEOUT CHECK ...
@@ -385,22 +406,26 @@ RETRY_LOOP:
 					if(sim_sec <= x_asyc_timer->Get__CURRENT_TIME())
 					{
 						ch_data.Format("%.3f", cfg_press - 0.1);
+
 						sEXT_CH__SIM_PRESSURE_TORR->Set__DATA(ch_data);
+						aEXT_CH__CHM_PRESSURE_TORR->Set__DATA(ch_data);
 					}
 				}
 
 				if(cfg__timeout_sec <= x_asyc_timer->Get__CURRENT_TIME())
 				{
-					// ...	
 					int alarm_id = ALID__LOW_VAC_CHECK_COMPLETE_TIMEOUT;
+
 					CString alarm_msg;
 					CString msg_bff;
 					CString r_act;
 
 					msg_bff.Format("Current chamber pressure is %.3f (torr).\n", cur_press);
 					alarm_msg += msg_bff;
+					
 					msg_bff.Format("Config fast-vacuum pressure is %.3f (torr).\n", cfg_press);
 					alarm_msg += msg_bff;
+					
 					msg_bff.Format("Config time-out is %.0f (sec).\n", cfg__timeout_sec);
 					alarm_msg += msg_bff;
 
@@ -432,7 +457,11 @@ RETRY_LOOP:
 
 		sCH__OBJ_MSG->Set__DATA("VAC_Sensor.On Checking ...");
 
-		int check_count = 0;
+		// ...
+		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
+
+		x_asyc_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__OBJ_TIMER->Get__CHANNEL_NAME());
+		x_asyc_timer->START__COUNT_UP(99999);
 
 		while(1)
 		{
@@ -449,12 +478,13 @@ RETRY_LOOP:
 				return -61;
 			}
 
-			check_count++;
-			if(check_count >= 10)
-			{
-				check_count = 0;
+			// ...
+			double cfg__vac_on_sec = aCH__CFG_FAST_PUMP_VAC_SNS_ON_TIMEOUT->Get__VALUE();
 
+			if(x_asyc_timer->Get__CURRENT_TIME() >= cfg__vac_on_sec)
+			{
 				int alarm_id = ALID__VAC_SENSOR_CHECKING_TIMEOUT;
+
 				CString alm_msg;
 				CString alm_bff;
 				CString r_act;
@@ -462,9 +492,15 @@ RETRY_LOOP:
 				alm_msg.Format(" * %s <- %s \n", 
 								dEXT_CH__CHM_ATM_SNS->Get__CHANNEL_NAME(),
 								dEXT_CH__CHM_ATM_SNS->Get__STRING());
+				alm_msg += alm_bff;
+
 				alm_bff.Format(" * %s <- %s \n",
 								dEXT_CH__CHM_VAC_SNS->Get__CHANNEL_NAME(),
 								dEXT_CH__CHM_VAC_SNS->Get__STRING());
+				alm_msg += alm_bff;
+
+				alm_bff.Format(" * Config timeout of VAC_ON Sensor is %.1f (sec) \n",
+								cfg__vac_on_sec);
 				alm_msg += alm_bff;
 
 				p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, r_act, alm_msg);
@@ -480,20 +516,6 @@ int CObj__CHM_FNC
 {
 	CString log_msg;
 	int flag;
-
-	// Gas-Valve : Proc_Ready ...
-	{
-		// ...
-		{
-			log_msg = "GAS-Valve <- Proc_Ready";
-			xLOG_CTRL->WRITE__LOG(log_msg);
-		}
-
-		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
-		{
-			return -11;
-		}
-	}
 
 	// Turbo_Pump On : Check 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
@@ -610,6 +632,21 @@ RETRY_LOOP:
 					return -205;
 				}
 			}
+		}
+	}
+
+	// Gas-Valve : Proc_Ready ...
+	if(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Check__DATA(STR__YES) > 0)
+	{
+		// ...
+		{
+			log_msg = "GAS-Valve <- Proc_Ready";
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
+		{
+			return -11;
 		}
 	}
 
@@ -972,7 +1009,9 @@ RETRY_LOOP:
 				if(sim_sec <= x_asyc_timer->Get__CURRENT_TIME())
 				{
 					ch_data.Format("%.3f", cfg__ref_press - 0.001);
+					
 					sEXT_CH__SIM_PRESSURE_TORR->Set__DATA(ch_data);
+					aEXT_CH__CHM_PRESSURE_TORR->Set__DATA(ch_data);
 
 					dEXT_CH__CHM_ATM_SNS->Set__DATA(STR__OFF);
 				}
@@ -1011,7 +1050,7 @@ RETRY_LOOP:
 		} 
 		while(1);
 	}
-	
+
 	return 1;
 }
 
@@ -1270,7 +1309,7 @@ RETRY_LOOP:
 					break;
 				}
 
-				if(dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__ON) < 0)
+				if(dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__OFF) > 0)
 				{
 					break;
 				}
@@ -1513,7 +1552,7 @@ RETRY_LOOP:
 }
 
 int CObj__CHM_FNC
-::Fnc__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+::Fnc__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const bool active__ctc_call)
 {
 	CString log_msg;
 	CString log_bff;
@@ -1572,9 +1611,19 @@ int CObj__CHM_FNC
 
 	// ...
 	{
-		sCH__OBJ_MSG->Set__DATA("1.1 LOW VAC PUMPING ...");
-	
-		flag = Call__LOW_VAC_PUMP(p_variable,p_alarm);
+		if(bActive__OBJ_CTRL__TURBO_PUMP)
+		{
+			sCH__OBJ_MSG->Set__DATA("1.1 HIGH VAC PUMPING ...");
+
+			flag = Call__HIGH_VAC_PUMP(p_variable,p_alarm);
+		}
+		else
+		{
+			sCH__OBJ_MSG->Set__DATA("1.1 LOW VAC PUMPING ...");
+
+			flag = Call__LOW_VAC_PUMP(p_variable,p_alarm);
+		}
+
 		if(flag < 0)
 		{
 			return -1002;
@@ -1592,7 +1641,7 @@ int CObj__CHM_FNC
 		{
 			sCH__OBJ_MSG->Set__DATA("1.2 OVER PUMPING ...");
 			
-			if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
+			if(active__ctc_call)
 			{
 				wait_sec = aEXT_CH__CTC_LEAK_CHECK_OVER_PUMPING_TIME->Get__VALUE();
 			}
@@ -1641,7 +1690,7 @@ int CObj__CHM_FNC
 		// ...
 		sCH__OBJ_MSG->Set__DATA("3. STABLE TIME WAIT ...");
 
-		if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
+		if(active__ctc_call)
 		{
 			wait_sec = aEXT_CH__CTC_LEAK_CHECK_STABLE_TIME->Get__VALUE();
 		}
@@ -1726,10 +1775,8 @@ int CObj__CHM_FNC
 		{
 			double cfg__min_sec;
 
-			if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
-				cfg__min_sec = aEXT_CH__CTC_LEAK_CHECK_TIME_MIN->Get__VALUE();
-			else
-				cfg__min_sec = aCH__LEAK_CHECK__CFG_TIME_MIN->Get__VALUE();
+			if(active__ctc_call)		cfg__min_sec = aEXT_CH__CTC_LEAK_CHECK_TIME_MIN->Get__VALUE();
+			else						cfg__min_sec = aCH__LEAK_CHECK__CFG_TIME_MIN->Get__VALUE();
 
 			wait_sec = cfg__min_sec * 60.0;
 
@@ -1950,10 +1997,8 @@ int CObj__CHM_FNC
 
 			// ...
 			{
-				if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
-					aEXT_CH__CTC_LEAK_CHECK_OVER_PUMPING_TIME->Get__DATA(var_data);		
-				else
-					aCH__LEAK_CHECK__CFG_OVER_PUMPING_TIME->Get__DATA(var_data);
+				if(active__ctc_call)		aEXT_CH__CTC_LEAK_CHECK_OVER_PUMPING_TIME->Get__DATA(var_data);		
+				else						aCH__LEAK_CHECK__CFG_OVER_PUMPING_TIME->Get__DATA(var_data);
 
 				log_bff.Format("#OVER_PUMPING_TIME	%s", var_data);
 				log_msg += log_bff;
@@ -1962,10 +2007,8 @@ int CObj__CHM_FNC
 
 			// ...
 			{
-				if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
-					aEXT_CH__CTC_LEAK_CHECK_STABLE_TIME->Get__DATA(var_data);			
-				else
-					aCH__LEAK_CHECK__CFG_STABLE_TIME->Get__DATA(var_data);
+				if(active__ctc_call)		aEXT_CH__CTC_LEAK_CHECK_STABLE_TIME->Get__DATA(var_data);			
+				else						aCH__LEAK_CHECK__CFG_STABLE_TIME->Get__DATA(var_data);
 
 				log_bff.Format("#STABLE_TIME	%s", var_data);
 				log_msg += log_bff;
@@ -2063,7 +2106,7 @@ int CObj__CHM_FNC
 
 				if(p_log != NULL)
 				{
-					fputs(log_msg,p_log);
+					fputs(log_msg, p_log);
 					fclose(p_log);
 				}
 			}
@@ -2080,12 +2123,13 @@ int CObj__CHM_FNC
 		}
 	}
 
-	return Call__LOW_VAC_PUMP(p_variable,p_alarm);
+	return 1;
 }
 
 int CObj__CHM_FNC::
 Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
-								  CII_OBJECT__ALARM *p_alarm)
+								  CII_OBJECT__ALARM *p_alarm,
+								  const bool active__ctc_call)
 {
 	CString log_msg;
 	CString log_bff;
@@ -2097,7 +2141,6 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 	double cur_press_mtorr   = 0.0;
 	
 	int i;
-
 	
 	// ...
 	{
@@ -2155,10 +2198,8 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 		{
 			sCH__OBJ_MSG->Set__DATA("1.2 OVER PUMPING ...");
 
-			if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
-				wait_sec = aEXT_CH__CTC_LEAK_CHECK_OVER_PUMPING_TIME->Get__VALUE();
-			else
-				wait_sec = aCH__LEAK_CHECK__CFG_OVER_PUMPING_TIME->Get__VALUE();
+			if(active__ctc_call)		wait_sec = aEXT_CH__CTC_LEAK_CHECK_OVER_PUMPING_TIME->Get__VALUE();
+			else						wait_sec = aCH__LEAK_CHECK__CFG_OVER_PUMPING_TIME->Get__VALUE();
 	
 			if(timer_ctrl->WAIT(wait_sec) < 0)
 			{
@@ -2167,14 +2208,14 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 		}
 	}
 
-	// VAT.CLOSE ...
+	// VAT.OPEN ...
 	{
 		if(p_variable->Check__CTRL_ABORT() > 0)
 		{
 			return -2021;
 		}
 	
-		sCH__OBJ_MSG->Set__DATA("2. TH/V CLOSE ...");
+		sCH__OBJ_MSG->Set__DATA("2. TH/V OPEN ...");
 	
 		if(Call__VAC_VLV__APC_OPEN() < 0)
 		{
@@ -2194,10 +2235,8 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 		// ...
 		sCH__OBJ_MSG->Set__DATA("3. STABLE TIME WAIT ...");
 
-		if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
-			wait_sec = aEXT_CH__CTC_LEAK_CHECK_STABLE_TIME->Get__VALUE();
-		else
-			wait_sec = aCH__LEAK_CHECK__CFG_STABLE_TIME->Get__VALUE();
+		if(active__ctc_call)		wait_sec = aEXT_CH__CTC_LEAK_CHECK_STABLE_TIME->Get__VALUE();
+		else						wait_sec = aCH__LEAK_CHECK__CFG_STABLE_TIME->Get__VALUE();
 			
 		if(timer_ctrl->WAIT(wait_sec) < 0)
 		{
@@ -2216,30 +2255,17 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 
 		// ...
 		{
-			double cfg__min_sec;
-
-			if(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG->Check__DATA(STR__ENABLE) > 0)
-				cfg__min_sec = aEXT_CH__CTC_LEAK_CHECK_TIME_MIN->Get__VALUE();
-			else
-				cfg__min_sec = aCH__LEAK_CHECK__CFG_TIME_MIN->Get__VALUE();
-
-			wait_sec = cfg__min_sec * 60.0;
-
-			async_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__LEAK_CHECK__CUR_TIME_COUNT->Get__CHANNEL_NAME());
-			async_timer->START__COUNT_UP(wait_sec+1.0);
-
-			// ...
 			start_press_mtorr = aEXT_CH__CHM_PRESSURE_mTORR->Get__VALUE();
-				
+			
+			var_data.Format("%.3f", start_press_mtorr);
 			sCH__LEAK_CHECK__VAT_MOVE__START_PRESSURE_mTORR->Set__DATA(var_data);
-			sCH__LEAK_CHECK__VAT_MOVE__RESULT_PRESSURE_mTORR->Set__DATA(var_data);
 	
 			// ...
-			int i_limit = (int) cfg__min_sec;
+			int i_limit = 9;
 
 			for(i=0; i<i_limit; i++)
 			{
-				double apc__trg_pos = 1000.0 * (1.0 - ((i+1.0) / i_limit));				
+				double apc__trg_pos = 90.0 - (i * 10.0);				
 
 				// VAT-POS Move ...
 				if(Call__VAC_VLV__APC_POSITION(apc__trg_pos) < 0)
@@ -2247,12 +2273,20 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 					return -2051;
 				}
 
-				if(timer_ctrl->WAIT(60.0) < 0)
+				// ...
+				double wait_sec = 60.0;
+
+				async_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__LEAK_CHECK__CUR_TIME_COUNT->Get__CHANNEL_NAME());
+				async_timer->START__COUNT_UP(wait_sec + 1.0);
+
+				timer_ctrl->INIT__COUNT_DOWN();
+				if(timer_ctrl->WAIT(wait_sec) < 0)
 				{
 					async_timer->STOP();
 					return -2052;
 				}
 
+				// ...
 				cur_press_mtorr = aEXT_CH__CHM_PRESSURE_mTORR->Get__VALUE();
 
 				var_data.Format("%.3f", cur_press_mtorr);
@@ -2278,7 +2312,7 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 							alarm_bff.Format("현재 Checking Time은 \"%1d min\" 입니다. \n", i+1);
 							alarm_msg += alarm_bff;
 							
-							alarm_bff.Format("현재 VAT-Position Count는 \"%.1f\" 입니다. \n", apc__trg_pos);
+							alarm_bff.Format("현재 VAT-Position은 \"%.1f %%\" 입니다. \n", apc__trg_pos);
 							alarm_msg += alarm_bff;
 						}
 
@@ -2750,6 +2784,12 @@ int CObj__CHM_FNC
 int CObj__CHM_FNC
 ::Fnc__BALLAST_END(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	if(dEXT_CH__SYSTEM_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+	{
+		return 11;
+	}
+
+	// ...
 	CString log_msg;
 
 	// ...

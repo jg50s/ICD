@@ -182,53 +182,53 @@ int CObj__ZEFA_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "CUR.VOLT_SET.CH1";
-		STD__ADD_ANALOG(str_name, "V", 0, -2500, 2500);
+		STD__ADD_ANALOG_WITH_OPTION(str_name, "V", 0, -2500, 2500, -1, "L", "");
 		LINK__VAR_ANALOG_CTRL(aCH__CUR_VOLT_SET_CH1, str_name);
 
 		str_name = "CUR.VOLT_SET.CH2";
-		STD__ADD_ANALOG(str_name, "V", 0, -2500, 2500);
+		STD__ADD_ANALOG_WITH_OPTION(str_name, "V", 0, -2500, 2500, -1, "L", "");
 		LINK__VAR_ANALOG_CTRL(aCH__CUR_VOLT_SET_CH2, str_name);
 
 		//
 		str_name = "CUR.CURRENT_LIMIT.CH1";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__CUR_CURRENT_LIMIT_CH1, str_name);
 
 		str_name = "CUR.CURRENT_LIMIT.CH2";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__CUR_CURRENT_LIMIT_CH2, str_name);
 	}
 
 	// INFO.STS ...
 	{
 		str_name = "INFO_STS.VOLT.CH1";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_VOLT_CH1, str_name);
 
 		str_name = "INFO_STS.VOLT.CH2";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_VOLT_CH2, str_name);
 
 		//
 		str_name = "INFO_STS.CURRENT.CH1";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_CURRENT_CH1, str_name);
 
 		str_name = "INFO_STS.CURRENT.CH2";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_CURRENT_CH2, str_name);
 
 		//
 		str_name = "INFO_STS.OUTPUT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_OUTPUT, str_name);
 
 		str_name = "INFO_STS.TOGGLE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_TOGGLE, str_name);
 
 		str_name = "INFO_STS.REMOTE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STS_REMOTE, str_name);
 	}
 

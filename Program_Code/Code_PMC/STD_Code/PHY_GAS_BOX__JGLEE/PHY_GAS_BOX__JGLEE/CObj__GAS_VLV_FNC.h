@@ -33,6 +33,9 @@ private:
 	CX__VAR_STRING_CTRL	 sCH__OBJ_STATUS;
 	CX__VAR_STRING_CTRL	 sCH__OBJ_MSG;
 
+	// PARA.INTERLOCK ...
+	CX__VAR_DIGITAL_CTRL dCH__PARA_INTERLOCK_SKIP;
+
 	// PARA ...
 	CX__VAR_DIGITAL_CTRL dCH__PARA_MFC_TYPE;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_MFC_FLOW;
@@ -68,7 +71,10 @@ private:
 	//------------------------------------------------------------
 	// EXTERNAL PROPERTY
 
-	// ...
+	// OBJ.DB_INF ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_TRANSFER_MODE;
+
+	// CH.PUMPING_STATE ...
 	CX__VAR_STRING_CTRL  sEXT_CH__CHM_PUMPING_STATE;
 
 	// OBJ.MFC ...

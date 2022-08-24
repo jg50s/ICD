@@ -151,63 +151,63 @@ int CObj__MAT_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "INFO.LOAD_PRESET";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_LOAD_PRESET, str_name);
 
 		str_name = "INFO.TUNE_PRESET";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_TUNE_PRESET, str_name);
 
 		str_name = "INFO.CUR_LOAD_POSITION";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_CUR_LOAD_POSITION, str_name);
 
 		str_name = "INFO.CUR_TUNE_POSITION";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_CUR_TUNE_POSITION, str_name);
 
 		str_name = "INFO.VPP_VALUE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_VPP_VALUE, str_name);
 
 		str_name = "INFO.VRMS";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_VRMS, str_name);
 
 		str_name = "INFO.IRMS";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_IRMS, str_name);
 
 		str_name = "INFO.REAL_IMPEDANCE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_REAL_IMPEDANCE, str_name);
 
 		str_name = "INFO.IMAGE_IMPEDANCE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_IMAGE_IMPEDANCE, str_name);
 
 		str_name = "INFO.FORWARD_PWR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_FORWARD_PWR, str_name);
 
 		str_name = "INFO.REF_PWR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_REF_PWR, str_name);
 
 		str_name = "INFO.START_SWR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_START_SWR, str_name);
 
 		str_name = "INFO.STOP_SWR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_STOP_SWR, str_name);
 
 		str_name = "INFO.CUR_SWR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_CUR_SWR, str_name);
 
 		str_name = "INFO.PHASE_SHIFT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PHASE_SHIFT, str_name);
 	}
 

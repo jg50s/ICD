@@ -36,6 +36,13 @@ private:
 	CString sLINK_MODE__SHUTTER__OPEN;
 	CString sLINK_MODE__SHUTTER__CLOSE;
 
+	// OBJ.LIFT_PIN ...
+	bool bActive__OBJ_CTRL__LIFT_PIN;
+	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__LIFT_PIN;
+
+	CString sLINK_MODE__LIFT_PIN_UP;
+	CString sLIST_MODE__LIFT_PIN_DOWN;
+
 	// LINK.SX & RX ...
 	CString sEXT_MODE__S1;
 	CString sEXT_MODE__S2;
@@ -49,6 +56,13 @@ private:
 	//-------------------------------------------------------------------------
 	CString sMODE__INIT;
 	int Call__INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+
+	// ...
+	CString	sMODE__TRANSFER_READY;
+	int Call__TRANSFER_READY(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+
+	CString	sMODE__TRANSFER_END;
+	int Call__TRANSFER_END(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	// ...
 	CString	sMODE__S1;

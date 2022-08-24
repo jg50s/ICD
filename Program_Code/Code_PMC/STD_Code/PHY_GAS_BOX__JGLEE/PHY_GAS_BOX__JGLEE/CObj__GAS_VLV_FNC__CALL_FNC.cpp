@@ -19,6 +19,7 @@
 #define FRC_CMMD__CONTROL_CFG				"CONTROL.CFG"
 #define FRC_CMMD__GASLINE_PUMP				"GASLINE_PUMP"
 
+#define DGF_CMMD__INIT						"INIT"
 #define DGF_CMMD__ALL_CLOSE					"ALL_CLOSE"
 #define DGF_CMMD__CONTROL					"CONTROL"
 
@@ -146,7 +147,7 @@ int CObj__GAS_VLV_FNC::Call__PROC_READY(CII_OBJECT__VARIABLE *p_variable)
 	// OBJ.DGF ...
 	if(bActive__DGF_VLV)
 	{
-		pOBJ_CTRL__DGF_VLV->Call__OBJECT(DGF_CMMD__CONTROL);
+		pOBJ_CTRL__DGF_VLV->Call__OBJECT(DGF_CMMD__INIT);
 	}
 
 	pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__PROC_OPEN);
@@ -648,8 +649,18 @@ int CObj__GAS_VLV_FNC::Call__CHM_BALLAST_FLOW(CII_OBJECT__VARIABLE *p_variable)
 						dCH__CFG_CHAMBER_BALLAST_GAS_ID->Get__CHANNEL_NAME(),
 						dCH__CFG_CHAMBER_BALLAST_GAS_ID->Get__STRING());
 		log_msg += log_bff;
-		
+
+		log_bff.Format(" * %s <- %s \n", 
+						dEXT_CH__CFG_TRANSFER_MODE->Get__CHANNEL_NAME(),
+						dEXT_CH__CFG_TRANSFER_MODE->Get__STRING());
+		log_msg += log_bff;
+
 		Fnc__WRITE_LOG(log_msg);
+
+		if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+		{
+			return 1;
+		}
 	}
 
 	// Ballast Gas Select ...
@@ -720,12 +731,22 @@ int CObj__GAS_VLV_FNC::Call__TRANS_BALLAST_FLOW(CII_OBJECT__VARIABLE *p_variable
 		log_msg = "\n";
 		log_msg = " * Ballast.Transfer Parameter ... \n";
 
-		log_bff.Format(" * %s <- %s ", 
+		log_bff.Format(" * %s <- %s \n", 
 						dCH__CFG_TRANSFER_BALLAST_GAS_ID->Get__CHANNEL_NAME(),
 						dCH__CFG_TRANSFER_BALLAST_GAS_ID->Get__STRING());
 		log_msg += log_bff;
-	
+
+		log_bff.Format(" * %s <- %s \n", 
+						dEXT_CH__CFG_TRANSFER_MODE->Get__CHANNEL_NAME(),
+						dEXT_CH__CFG_TRANSFER_MODE->Get__STRING());
+		log_msg += log_bff;
+
 		Fnc__WRITE_LOG(log_msg);
+
+		if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+		{
+			return 1;
+		}
 	}
 
 	// Ballast Gas Select ...
@@ -807,6 +828,12 @@ int CObj__GAS_VLV_FNC::Call__BALLAST_CLOSE(CII_OBJECT__VARIABLE *p_variable)
 	}
 
 	if(pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__ALL_CLOSE) < 0)				return -21;
+
+	if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+	{
+		return 1;
+	}
+
 	if(pOBJ_CTRL__GAS->Call__OBJECT(GAS_CMMD__PROC_OPEN) < 0)				return -22;
 	
 	for(i=0; i<iFRC_SIZE; i++)

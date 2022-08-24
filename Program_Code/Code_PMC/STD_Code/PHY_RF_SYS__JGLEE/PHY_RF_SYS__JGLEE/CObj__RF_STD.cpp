@@ -148,15 +148,15 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 	// MON : IO ...
 	{
 		str_name = "MON.IO.SET.POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__MON_IO_SET_POWER, str_name);
 
 		str_name = "MON.IO.FORWARD.POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__MON_IO_FORWARD_POWER, str_name);
 
 		str_name = "MON.IO.REFLECT.POWER"; 
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__MON_IO_REFLECT_POWER, str_name);
 
 		//

@@ -96,91 +96,91 @@ int CObj__ARCTIC_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 	// INFO.PART ...
 	{
 		str_name = "INFO.DELIVERED_POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DELIVERED_POWER, str_name);
 
 		str_name = "INFO.POWER_SETPOINT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_POWER_SETPOINT, str_name);
 
 		str_name = "INFO.REFLECTED_POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_REFLECTED_POWER, str_name);
 
 		//
 		str_name = "INFO.RF_VOLTAGE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_VOLTAGE, str_name);
 
 		str_name = "INFO.RF_CURRENT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_CURRENT, str_name);
 
 		//
 		str_name = "INFO.DC_VOLTAGE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DC_VOLTAGE, str_name);
 
 		str_name = "INFO.DC_CURRENT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DC_CURRENT, str_name);
 
 		//
 		str_name = "INFO.RF_PHASE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RF_PHASE, str_name);
 
 		str_name = "INFO.FREQUENCY";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_FREQUENCY, str_name);
 
 		str_name = "INFO.QFR";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_QFR, str_name);
 
 		//
 		str_name = "INFO.PLASMA_IMPEDANCE_R";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PLASMA_IMPEDANCE_R, str_name);
 
 		str_name = "INFO.PLASMA_IMPEDANCE_X";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PLASMA_IMPEDANCE_X, str_name);
 
 		//
 		str_name = "INFO.RUN_MODE_STATE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RUN_MODE_STATE, str_name);
 
 		str_name = "INFO.RUN_MODE_DATA";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_RUN_MODE_DATA, str_name);
 
 		//
 		str_name = "INFO.INTERLOCK_STATE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_INTERLOCK_STATE, str_name);
 
 		str_name = "INFO.INTERLOCK_DATA";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_INTERLOCK_DATA, str_name);
 
 		//
 		str_name = "INFO.PLASMA_ON_ENABLE.TURN_ON.STATE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PLASMA_ON_ENABLE_TURN_ON_STATE, str_name);
 
 		str_name = "INFO.PLASMA_ON_ENABLE.OUTPUT_HIGH.STATE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_PLASMA_ON_ENABLE_OUTPUT_HIGH_STATE, str_name);
 
 		//
 		str_name = "INFO.DIGITAL_SET_POWER.STATE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DIGITAL_SET_POWER_STATE, str_name);
 
 		str_name = "INFO.DIGITAL_SET_POWER.VALUE";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_DIGITAL_SET_POWER_VALUE, str_name);
 	}
 

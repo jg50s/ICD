@@ -23,6 +23,9 @@ int CObj__ACTIVE_HANDOFF_INF::__DEFINE__CONTROL_MODE(obj,l_mode)
 	{
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 
+		ADD__CTRL_VAR(sMODE__TRANSFER_READY, "TRANSFER.READY");
+		ADD__CTRL_VAR(sMODE__TRANSFER_END,   "TRANSFER.END");
+
 		ADD__CTRL_VAR(sMODE__S1, "S1");
 		ADD__CTRL_VAR(sMODE__S2, "S2");
 		ADD__CTRL_VAR(sMODE__S3, "S3");
@@ -189,6 +192,29 @@ int CObj__ACTIVE_HANDOFF_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// OBJ.LIFT_PIN ...
+	{
+		def_name = "OBJ__LIFT_PIN";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__OBJ_CTRL__LIFT_PIN = def_check;
+
+		if(def_check)
+		{
+			pOBJ_CTRL__LIFT_PIN = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			//
+			def_name = "LIFT_PIN.UP";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sLINK_MODE__LIFT_PIN_UP = def_data;
+
+			def_name = "LIFT_PIN.DOWN";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			sLIST_MODE__LIFT_PIN_DOWN = def_data;
+		}
+	}
+
 	return 1;
 }
 
@@ -214,6 +240,9 @@ LOOP_RETRY:
 	// ...
 	{
 		     IF__CTRL_MODE(sMODE__INIT)		flag = Call__INIT(p_variable, p_alarm);
+		
+		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_READY)		flag = Call__TRANSFER_READY(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_END)			flag = Call__TRANSFER_END(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__S1)		flag = Call__S1(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__S2)		flag = Call__S2(p_variable, p_alarm);

@@ -1,0 +1,778 @@
+
+
+#DEFINE    ##DCOP_PM1+       INF.PM1_DCOP.
+#DEFINE    ##DCOP_PM2+       INF.PM2_DCOP.
+#DEFINE    ##DCOP_PM3+       INF.PM3_DCOP.
+#DEFINE    ##DCOP_PM4+       INF.PM4_DCOP.
+
+
+//-------------------------------------------------------------------------------------------------------
+#OBJECT_PROPERTY    MNG_PMx_INFO
+
+
+#DEFINE_CONSTANT    OBJ__DB	          ##DB_CFG
+
+
+#DEFINE_CONSTANT    PM_SIZE               0
+#DEFINE_CONSTANT    OBJ__PM1              ##PHY_PM1
+#DEFINE_CONSTANT    OBJ__PM2              ##PHY_PM2
+#DEFINE_CONSTANT    OBJ__PM3              ##PHY_PM3
+#DEFINE_CONSTANT    OBJ__PM4              ##PHY_PM4
+
+
+// =================================================================================
+
+// MFC ITEM -------------------------------------
+#DEFINE_CONSTANT    1.CH.MFC1.NAME                                      ##DCOP_PM1+MFC01.NAME         
+#DEFINE_CONSTANT    1.CH.MFC1.FLOW_GET                                  ##DCOP_PM1+MFC01.C4F8		
+#DEFINE_CONSTANT    1.CH.MFC1.FLOW_SET                                  ##DCOP_PM1+MFC01.C4F8.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC2.NAME                                      ##DCOP_PM1+MFC02.NAME         
+#DEFINE_CONSTANT    1.CH.MFC2.FLOW_GET                                  ##DCOP_PM1+MFC02.N2		
+#DEFINE_CONSTANT    1.CH.MFC2.FLOW_SET                                  ##DCOP_PM1+MFC02.N2.SET		
+                              
+#DEFINE_CONSTANT    1.CH.MFC3.NAME                                      ##DCOP_PM1+MFC03.NAME         
+#DEFINE_CONSTANT    1.CH.MFC3.FLOW_GET                                  ##DCOP_PM1+MFC03.O2.50		
+#DEFINE_CONSTANT    1.CH.MFC3.FLOW_SET                                  ##DCOP_PM1+MFC03.O2.50.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC4.NAME                                      ##DCOP_PM1+MFC04.NAME         
+#DEFINE_CONSTANT    1.CH.MFC4.FLOW_GET                                  ##DCOP_PM1+MFC04.CF4		
+#DEFINE_CONSTANT    1.CH.MFC4.FLOW_SET                                  ##DCOP_PM1+MFC04.CF4.SET	
+                    
+#DEFINE_CONSTANT    1.CH.MFC5.NAME                                      ##DCOP_PM1+MFC05.NAME         
+#DEFINE_CONSTANT    1.CH.MFC5.FLOW_GET                                  ##DCOP_PM1+MFC05.O2.3000	
+#DEFINE_CONSTANT    1.CH.MFC5.FLOW_SET                                  ##DCOP_PM1+MFC05.O2.3000.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC6.NAME                                      ##DCOP_PM1+MFC06.NAME         
+#DEFINE_CONSTANT    1.CH.MFC6.FLOW_GET                                  ##DCOP_PM1+MFC06.CHF3		
+#DEFINE_CONSTANT    1.CH.MFC6.FLOW_SET                                  ##DCOP_PM1+MFC06.CHF3.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC7.NAME                                      ##DCOP_PM1+MFC07.NAME         
+#DEFINE_CONSTANT    1.CH.MFC7.FLOW_GET                                  ##DCOP_PM1+MFC07.AR		
+#DEFINE_CONSTANT    1.CH.MFC7.FLOW_SET                                  ##DCOP_PM1+MFC07.AR.SET		
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC8.NAME                                      ##DCOP_PM1+MFC08.NAME         
+#DEFINE_CONSTANT    1.CH.MFC8.FLOW_GET                                  ##DCOP_PM1+MFC08.XE		
+#DEFINE_CONSTANT    1.CH.MFC8.FLOW_SET                                  ##DCOP_PM1+MFC08.XE.SET		
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC9.NAME                                      ##DCOP_PM1+MFC09.NAME         
+#DEFINE_CONSTANT    1.CH.MFC9.FLOW_GET                                  ##DCOP_PM1+MFC09.CH2F2		
+#DEFINE_CONSTANT    1.CH.MFC9.FLOW_SET                                  ##DCOP_PM1+MFC09.CH2F2.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC10.NAME                                     ##DCOP_PM1+MFC10.NAME         
+#DEFINE_CONSTANT    1.CH.MFC10.FLOW_GET                                 ##DCOP_PM1+MFC10.C4F6		
+#DEFINE_CONSTANT    1.CH.MFC10.FLOW_SET                                 ##DCOP_PM1+MFC10.C4F6.Set	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC11.NAME                                     ##DCOP_PM1+MFC11.NAME         
+#DEFINE_CONSTANT    1.CH.MFC11.FLOW_GET                                 ##DCOP_PM1+MFC11.SF6		
+#DEFINE_CONSTANT    1.CH.MFC11.FLOW_SET                                 ##DCOP_PM1+MFC11.SF6.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC12.NAME                                     ##DCOP_PM1+MFC12.NAME         
+#DEFINE_CONSTANT    1.CH.MFC12.FLOW_GET                                 ##DCOP_PM1+MFC12.C3F8		
+#DEFINE_CONSTANT    1.CH.MFC12.FLOW_SET                                 ##DCOP_PM1+MFC12.C3F8.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC13.NAME                                     ##DCOP_PM1+MFC13.NAME         
+#DEFINE_CONSTANT    1.CH.MFC13.FLOW_GET                                 ##DCOP_PM1+MFC13.FLOW.GET	
+#DEFINE_CONSTANT    1.CH.MFC13.FLOW_SET                                 ##DCOP_PM1+MFC13.FLOW.SET	
+                    
+#DEFINE_CONSTANT    1.CH.MFC14.NAME                                     ##DCOP_PM1+MFC14.NAME         
+#DEFINE_CONSTANT    1.CH.MFC14.FLOW_GET                                 ##DCOP_PM1+MFC14.FLOW.GET	
+#DEFINE_CONSTANT    1.CH.MFC14.FLOW_SET                                 ##DCOP_PM1+MFC14.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC15.NAME                                     ##DCOP_PM1+MFC15.NAME         
+#DEFINE_CONSTANT    1.CH.MFC15.FLOW_GET                                 ##DCOP_PM1+MFC15.FLOW.GET	
+#DEFINE_CONSTANT    1.CH.MFC15.FLOW_SET                                 ##DCOP_PM1+MFC15.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC16.NAME                                     ##DCOP_PM1+MFC16.NAME         
+#DEFINE_CONSTANT    1.CH.MFC16.FLOW_GET                                 ##DCOP_PM1+MFC16.FLOW.GET	
+#DEFINE_CONSTANT    1.CH.MFC16.FLOW_SET                                 ##DCOP_PM1+MFC16.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    1.CH.MFC17.NAME                                     ##DCOP_PM1+MFC17.NAME         
+#DEFINE_CONSTANT    1.CH.MFC17.FLOW_GET                                 ##DCOP_PM1+TUNNING.GAS.FLOW	
+#DEFINE_CONSTANT    1.CH.MFC17.FLOW_SET                                 ##DCOP_PM1+TUNNING.GAS.SET	
+
+
+// RF ITEM --------------------------------------
+#DEFINE_CONSTANT    1.CH.RF.AC_CONTACTOR_SET				##DCOP_PM1+RF.AC.CONTACTOR.SET
+#DEFINE_CONSTANT    1.CH.RF.AC_CONTACTOR_GET				##DCOP_PM1+RF.AC.CONTACTOR.GET
+
+// 2MHz ...
+#DEFINE_CONSTANT    1.CH.RF1.ON_STATUS_SET              		##DCOP_PM1+RF.2MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    1.CH.RF1.ON_STATUS_GET               		##DCOP_PM1+RF.2MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    1.CH.RF1.POWER_SET                   		##DCOP_PM1+RF.2MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    1.CH.RF1.RAMP_SET                    		##DCOP_PM1+RF.2MHz.RAMP_TIME            
+#DEFINE_CONSTANT    1.CH.RF1.FORWARD_POWER_GET           		##DCOP_PM1+RF.2MHz.FORWARD.PWR
+#DEFINE_CONSTANT    1.CH.RF1.REFLECT_POWER_GET           		##DCOP_PM1+RF.2MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    1.CH.RF1.MONITORING_STATUS          		##DCOP_PM1+RF.2MHz.MON_FLAG             
+#DEFINE_CONSTANT    1.CH.RF1.FREQUENCY_START_SET        		##DCOP_PM1+RF.2MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    1.CH.RF1.FREQUENCY_POWER_SET       			##DCOP_PM1+RF.2MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    1.CH.RF1.FREQUENCY_POWER_GET       			##DCOP_PM1+RF.2MHz.FREQUENCY
+
+// 27MHz ...
+#DEFINE_CONSTANT    1.CH.RF2.ON_STATUS_SET              		##DCOP_PM1+RF.27MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    1.CH.RF2.ON_STATUS_GET               		##DCOP_PM1+RF.27MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    1.CH.RF2.POWER_SET                   		##DCOP_PM1+RF.27MHz.FWD.PWR.SET
+#DEFINE_CONSTANT    1.CH.RF2.RAMP_SET                    		##DCOP_PM1+RF.27MHz.RAMP_TIME            
+#DEFINE_CONSTANT    1.CH.RF2.FORWARD_POWER_GET           		##DCOP_PM1+RF.27MHz.FWD.PWR
+#DEFINE_CONSTANT    1.CH.RF2.REFLECT_POWER_GET           		##DCOP_PM1+RF.27MHz.REFLECT.PWR
+#DEFINE_CONSTANT    1.CH.RF2.MONITORING_STATUS          		##DCOP_PM1+RF.27MHz.MON_FLAG             
+#DEFINE_CONSTANT    1.CH.RF2.FREQUENCY_START_SET        		##DCOP_PM1+RF.27MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    1.CH.RF2.FREQUENCY_POWER_SET       			##DCOP_PM1+RF.27MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    1.CH.RF2.FREQUENCY_POWER_GET       			##DCOP_PM1+RF.27MHz.FREQUENCY
+
+// 60MHz ...
+#DEFINE_CONSTANT    1.CH.RF3.ON_STATUS_SET              		##DCOP_PM1+RF.60MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    1.CH.RF3.ON_STATUS_GET               		##DCOP_PM1+RF.60MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    1.CH.RF3.POWER_SET                   		##DCOP_PM1+RF.60MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    1.CH.RF3.RAMP_SET                    		##DCOP_PM1+RF.60MHz.RAMP_TIME            
+#DEFINE_CONSTANT    1.CH.RF3.FORWARD_POWER_GET           		##DCOP_PM1+RF.60MHz.FORWARD.PWR
+#DEFINE_CONSTANT    1.CH.RF3.REFLECT_POWER_GET           		##DCOP_PM1+RF.60MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    1.CH.RF3.MONITORING_STATUS          		##DCOP_PM1+RF.60MHz.MON_FLAG             
+#DEFINE_CONSTANT    1.CH.RF3.FREQUENCY_START_SET        		##DCOP_PM1+RF.60MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    1.CH.RF3.FREQUENCY_POWER_SET       			##DCOP_PM1+RF.60MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    1.CH.RF3.FREQUENCY_POWER_GET       			##DCOP_PM1+RF.60MHz.FREQUENCY
+
+								
+// MATCHER ITEM ---------------------------------
+
+// 2MHz ...
+#DEFINE_CONSTANT    1.CH.MAT.RF1.ON_STATUS				##DCOP_PM1+2MHz.ON_STATUS       
+#DEFINE_CONSTANT    1.CH.MAT.RF1.TUNE_STATUS				##DCOP_PM1+2MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    1.CH.MAT.RF1.CONTROL_MODE				##DCOP_PM1+2MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    1.CH.MAT.RF1.CUR_LOAD_POS				##DCOP_PM1+2MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    1.CH.MAT.RF1.CUR_TUNE_POS				##DCOP_PM1+2MHz.TUNE_CUR_POS    
+
+// 27MHz ...
+#DEFINE_CONSTANT    1.CH.MAT.RF2.ON_STATUS				##DCOP_PM1+27MHz.ON_STATUS       
+#DEFINE_CONSTANT    1.CH.MAT.RF2.TUNE_STATUS				##DCOP_PM1+27MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    1.CH.MAT.RF2.CONTROL_MODE				##DCOP_PM1+27MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    1.CH.MAT.RF2.CUR_LOAD_POS				##DCOP_PM1+27MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    1.CH.MAT.RF2.CUR_TUNE_POS				##DCOP_PM1+27MHz.TUNE_CUR_POS    
+
+// 60MHz ...
+#DEFINE_CONSTANT    1.CH.MAT.RF3.ON_STATUS				##DCOP_PM1+60MHz.ON_STATUS       
+#DEFINE_CONSTANT    1.CH.MAT.RF3.TUNE_STATUS				##DCOP_PM1+60MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    1.CH.MAT.RF3.CONTROL_MODE				##DCOP_PM1+60MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    1.CH.MAT.RF3.CUR_LOAD_POS				##DCOP_PM1+60MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    1.CH.MAT.RF3.CUR_TUNE_POS				##DCOP_PM1+60MHz.TUNE_CUR_POS    
+
+
+// WAP ITEM -------------------------------------
+
+#DEFINE_CONSTANT    1.CH.WAP.POSITION_SET				##DCOP_PM1+CONFINEMENT.RING.POSITION.SET	
+#DEFINE_CONSTANT    1.CH.WAP.POSITION_GET				##DCOP_PM1+WAP.CUR_COUNT_GET		
+#DEFINE_CONSTANT    1.CH.WAP.PRESSURE_SET				##DCOP_PM1+WAP.CUR_PRESSURE_SET		
+#DEFINE_CONSTANT    1.CH.WAP.PRESSURE_GET				##DCOP_PM1+CHAMBER.PRESS
+
+
+// TEMPERATURE ITEM  ----------------------------
+
+#DEFINE_CONSTANT    1.CH.TOP_CHILLER.TEMP_SET				##DCOP_PM1+TOP.TEMP.SET
+#DEFINE_CONSTANT    1.CH.TOP_CHILLER.TEMP_GET				##DCOP_PM1+TOP.TEMP	
+
+#DEFINE_CONSTANT    1.CH.ESC.TEMP_SET					##DCOP_PM1+ESC.TEMP.SET
+#DEFINE_CONSTANT    1.CH.ESC.TEMP_GET					##DCOP_PM1+BTM.TEMPERATURE
+
+#DEFINE_CONSTANT    1.CH.TOP_PLATE.TEMP_SET				##DCOP_PM1+TOP.PLATE.TEMP.SET
+#DEFINE_CONSTANT    1.CH.TOP_PLATE.TEMP_GET				##DCOP_PM1+TOP.PLATE.TEMP	
+                    
+#DEFINE_CONSTANT    1.CH.ANAFAZER.TOP_TEMP_GET				##DCOP_PM1+ANAFAZER.TOP.TEMP.GET
+#DEFINE_CONSTANT    1.CH.ANAFAZER.TOP_BOTTOM_GET			##DCOP_PM1+BTM.TEMP
+
+
+// ESC ITEM  ------------------------------------
+
+#DEFINE_CONSTANT    1.CH.ESC.TOTAL_VOLT_SET				##DCOP_PM1+ESC.VOLTAGE.SET	
+#DEFINE_CONSTANT    1.CH.ESC.TOTAL_VOLT_GET				##DCOP_PM1+ESC.VOLTAGE		
+	
+#DEFINE_CONSTANT    1.CH.ESC.BIAS_VOLT_SET				##DCOP_PM1+ESC.COOLANT_FLOW_GET
+#DEFINE_CONSTANT    1.CH.ESC.BIAS_VOLT_GET				##DCOP_PM1+DCBIAS.VOLTAGE
+
+#DEFINE_CONSTANT    1.CH.ESC.COOLANT_GET				##DCOP_PM1+CHAMBER.FLOW
+
+#DEFINE_CONSTANT    1.CH.ESC.POWER_ON_STATUS				##DCOP_PM1+ESC.POWER_ON_STATUS		
+#DEFINE_CONSTANT    1.CH.ESC.REVERSE_POLARITY_STATUS			##DCOP_PM1+ESC.REVERSE_POWER_STATUS	
+#DEFINE_CONSTANT    1.CH.ESC.COOLANT_FLOW_STATUS			##DCOP_PM1+ESC.COOLANT_FLOW_STATUS	
+
+
+// He Inner / Outer ITEM  -----------------------
+
+#DEFINE_CONSTANT    1.CH.He_1.PRESSURE_SET                              ##DCOP_PM1+HE.INNER.PRESS.SET	
+#DEFINE_CONSTANT    1.CH.He_1.PRESSURE_GET                              ##DCOP_PM1+HE.INNER.PRESS	
+#DEFINE_CONSTANT    1.CH.He_1.FLOW_GET                                  ##DCOP_PM1+HE.INNER.FLOW	
+
+#DEFINE_CONSTANT    1.CH.He_2.PRESSURE_SET                              ##DCOP_PM1+HE.OUTER.PRESS.SET	
+#DEFINE_CONSTANT    1.CH.He_2.PRESSURE_GET                              ##DCOP_PM1+HE.OUTER.PRESS	
+#DEFINE_CONSTANT    1.CH.He_2.FLOW_GET                                  ##DCOP_PM1+HE.OUTER.FLOW	
+
+
+// =================================================================================
+
+// MFC ITEM -------------------------------------
+#DEFINE_CONSTANT    2.CH.MFC1.NAME                                      ##DCOP_PM2+MFC01.NAME         
+#DEFINE_CONSTANT    2.CH.MFC1.FLOW_GET                                  ##DCOP_PM2+MFC01.C4F8		
+#DEFINE_CONSTANT    2.CH.MFC1.FLOW_SET                                  ##DCOP_PM2+MFC01.C4F8.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC2.NAME                                      ##DCOP_PM2+MFC02.NAME         
+#DEFINE_CONSTANT    2.CH.MFC2.FLOW_GET                                  ##DCOP_PM2+MFC02.N2		
+#DEFINE_CONSTANT    2.CH.MFC2.FLOW_SET                                  ##DCOP_PM2+MFC02.N2.SET		
+                              
+#DEFINE_CONSTANT    2.CH.MFC3.NAME                                      ##DCOP_PM2+MFC03.NAME         
+#DEFINE_CONSTANT    2.CH.MFC3.FLOW_GET                                  ##DCOP_PM2+MFC03.O2.50		
+#DEFINE_CONSTANT    2.CH.MFC3.FLOW_SET                                  ##DCOP_PM2+MFC03.O2.50.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC4.NAME                                      ##DCOP_PM2+MFC04.NAME         
+#DEFINE_CONSTANT    2.CH.MFC4.FLOW_GET                                  ##DCOP_PM2+MFC04.CF4		
+#DEFINE_CONSTANT    2.CH.MFC4.FLOW_SET                                  ##DCOP_PM2+MFC04.CF4.SET	
+                    
+#DEFINE_CONSTANT    2.CH.MFC5.NAME                                      ##DCOP_PM2+MFC05.NAME         
+#DEFINE_CONSTANT    2.CH.MFC5.FLOW_GET                                  ##DCOP_PM2+MFC05.O2.3000	
+#DEFINE_CONSTANT    2.CH.MFC5.FLOW_SET                                  ##DCOP_PM2+MFC05.O2.3000.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC6.NAME                                      ##DCOP_PM2+MFC06.NAME         
+#DEFINE_CONSTANT    2.CH.MFC6.FLOW_GET                                  ##DCOP_PM2+MFC06.CHF3		
+#DEFINE_CONSTANT    2.CH.MFC6.FLOW_SET                                  ##DCOP_PM2+MFC06.CHF3.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC7.NAME                                      ##DCOP_PM2+MFC07.NAME         
+#DEFINE_CONSTANT    2.CH.MFC7.FLOW_GET                                  ##DCOP_PM2+MFC07.AR		
+#DEFINE_CONSTANT    2.CH.MFC7.FLOW_SET                                  ##DCOP_PM2+MFC07.AR.SET		
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC8.NAME                                      ##DCOP_PM2+MFC08.NAME         
+#DEFINE_CONSTANT    2.CH.MFC8.FLOW_GET                                  ##DCOP_PM2+MFC08.XE		
+#DEFINE_CONSTANT    2.CH.MFC8.FLOW_SET                                  ##DCOP_PM2+MFC08.XE.SET		
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC9.NAME                                      ##DCOP_PM2+MFC09.NAME         
+#DEFINE_CONSTANT    2.CH.MFC9.FLOW_GET                                  ##DCOP_PM2+MFC09.CH2F2		
+#DEFINE_CONSTANT    2.CH.MFC9.FLOW_SET                                  ##DCOP_PM2+MFC09.CH2F2.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC10.NAME                                     ##DCOP_PM2+MFC10.NAME         
+#DEFINE_CONSTANT    2.CH.MFC10.FLOW_GET                                 ##DCOP_PM2+MFC10.C4F6		
+#DEFINE_CONSTANT    2.CH.MFC10.FLOW_SET                                 ##DCOP_PM2+MFC10.C4F6.Set	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC11.NAME                                     ##DCOP_PM2+MFC11.NAME         
+#DEFINE_CONSTANT    2.CH.MFC11.FLOW_GET                                 ##DCOP_PM2+MFC11.SF6		
+#DEFINE_CONSTANT    2.CH.MFC11.FLOW_SET                                 ##DCOP_PM2+MFC11.SF6.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC12.NAME                                     ##DCOP_PM2+MFC12.NAME         
+#DEFINE_CONSTANT    2.CH.MFC12.FLOW_GET                                 ##DCOP_PM2+MFC12.C3F8		
+#DEFINE_CONSTANT    2.CH.MFC12.FLOW_SET                                 ##DCOP_PM2+MFC12.C3F8.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC13.NAME                                     ##DCOP_PM2+MFC13.NAME         
+#DEFINE_CONSTANT    2.CH.MFC13.FLOW_GET                                 ##DCOP_PM2+MFC13.FLOW.GET	
+#DEFINE_CONSTANT    2.CH.MFC13.FLOW_SET                                 ##DCOP_PM2+MFC13.FLOW.SET	
+                    
+#DEFINE_CONSTANT    2.CH.MFC14.NAME                                     ##DCOP_PM2+MFC14.NAME         
+#DEFINE_CONSTANT    2.CH.MFC14.FLOW_GET                                 ##DCOP_PM2+MFC14.FLOW.GET	
+#DEFINE_CONSTANT    2.CH.MFC14.FLOW_SET                                 ##DCOP_PM2+MFC14.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC15.NAME                                     ##DCOP_PM2+MFC15.NAME         
+#DEFINE_CONSTANT    2.CH.MFC15.FLOW_GET                                 ##DCOP_PM2+MFC15.FLOW.GET	
+#DEFINE_CONSTANT    2.CH.MFC15.FLOW_SET                                 ##DCOP_PM2+MFC15.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC16.NAME                                     ##DCOP_PM2+MFC16.NAME         
+#DEFINE_CONSTANT    2.CH.MFC16.FLOW_GET                                 ##DCOP_PM2+MFC16.FLOW.GET	
+#DEFINE_CONSTANT    2.CH.MFC16.FLOW_SET                                 ##DCOP_PM2+MFC16.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    2.CH.MFC17.NAME                                     ##DCOP_PM2+MFC17.NAME         
+#DEFINE_CONSTANT    2.CH.MFC17.FLOW_GET                                 ##DCOP_PM2+TUNNING.GAS.FLOW	
+#DEFINE_CONSTANT    2.CH.MFC17.FLOW_SET                                 ##DCOP_PM2+TUNNING.GAS.SET	
+
+
+// RF ITEM --------------------------------------
+#DEFINE_CONSTANT    2.CH.RF.AC_CONTACTOR_SET				##DCOP_PM2+RF.AC.CONTACTOR.SET
+#DEFINE_CONSTANT    2.CH.RF.AC_CONTACTOR_GET				##DCOP_PM2+RF.AC.CONTACTOR.GET
+
+// 2MHz ...
+#DEFINE_CONSTANT    2.CH.RF1.ON_STATUS_SET              		##DCOP_PM2+RF.2MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    2.CH.RF1.ON_STATUS_GET               		##DCOP_PM2+RF.2MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    2.CH.RF1.POWER_SET                   		##DCOP_PM2+RF.2MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    2.CH.RF1.RAMP_SET                    		##DCOP_PM2+RF.2MHz.RAMP_TIME            
+#DEFINE_CONSTANT    2.CH.RF1.FORWARD_POWER_GET           		##DCOP_PM2+RF.2MHz.FORWARD.PWR
+#DEFINE_CONSTANT    2.CH.RF1.REFLECT_POWER_GET           		##DCOP_PM2+RF.2MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    2.CH.RF1.MONITORING_STATUS          		##DCOP_PM2+RF.2MHz.MON_FLAG             
+#DEFINE_CONSTANT    2.CH.RF1.FREQUENCY_START_SET        		##DCOP_PM2+RF.2MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    2.CH.RF1.FREQUENCY_POWER_SET       			##DCOP_PM2+RF.2MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    2.CH.RF1.FREQUENCY_POWER_GET       			##DCOP_PM2+RF.2MHz.FREQUENCY
+
+// 27MHz ...
+#DEFINE_CONSTANT    2.CH.RF2.ON_STATUS_SET              		##DCOP_PM2+RF.27MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    2.CH.RF2.ON_STATUS_GET               		##DCOP_PM2+RF.27MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    2.CH.RF2.POWER_SET                   		##DCOP_PM2+RF.27MHz.FWD.PWR.SET
+#DEFINE_CONSTANT    2.CH.RF2.RAMP_SET                    		##DCOP_PM2+RF.27MHz.RAMP_TIME            
+#DEFINE_CONSTANT    2.CH.RF2.FORWARD_POWER_GET           		##DCOP_PM2+RF.27MHz.FWD.PWR
+#DEFINE_CONSTANT    2.CH.RF2.REFLECT_POWER_GET           		##DCOP_PM2+RF.27MHz.REFLECT.PWR
+#DEFINE_CONSTANT    2.CH.RF2.MONITORING_STATUS          		##DCOP_PM2+RF.27MHz.MON_FLAG             
+#DEFINE_CONSTANT    2.CH.RF2.FREQUENCY_START_SET        		##DCOP_PM2+RF.27MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    2.CH.RF2.FREQUENCY_POWER_SET       			##DCOP_PM2+RF.27MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    2.CH.RF2.FREQUENCY_POWER_GET       			##DCOP_PM2+RF.27MHz.FREQUENCY
+
+// 60MHz ...
+#DEFINE_CONSTANT    2.CH.RF3.ON_STATUS_SET              		##DCOP_PM2+RF.60MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    2.CH.RF3.ON_STATUS_GET               		##DCOP_PM2+RF.60MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    2.CH.RF3.POWER_SET                   		##DCOP_PM2+RF.60MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    2.CH.RF3.RAMP_SET                    		##DCOP_PM2+RF.60MHz.RAMP_TIME            
+#DEFINE_CONSTANT    2.CH.RF3.FORWARD_POWER_GET           		##DCOP_PM2+RF.60MHz.FORWARD.PWR
+#DEFINE_CONSTANT    2.CH.RF3.REFLECT_POWER_GET           		##DCOP_PM2+RF.60MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    2.CH.RF3.MONITORING_STATUS          		##DCOP_PM2+RF.60MHz.MON_FLAG             
+#DEFINE_CONSTANT    2.CH.RF3.FREQUENCY_START_SET        		##DCOP_PM2+RF.60MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    2.CH.RF3.FREQUENCY_POWER_SET       			##DCOP_PM2+RF.60MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    2.CH.RF3.FREQUENCY_POWER_GET       			##DCOP_PM2+RF.60MHz.FREQUENCY
+
+								
+// MATCHER ITEM ---------------------------------
+
+// 2MHz ...
+#DEFINE_CONSTANT    2.CH.MAT.RF1.ON_STATUS				##DCOP_PM2+2MHz.ON_STATUS       
+#DEFINE_CONSTANT    2.CH.MAT.RF1.TUNE_STATUS				##DCOP_PM2+2MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    2.CH.MAT.RF1.CONTROL_MODE				##DCOP_PM2+2MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    2.CH.MAT.RF1.CUR_LOAD_POS				##DCOP_PM2+2MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    2.CH.MAT.RF1.CUR_TUNE_POS				##DCOP_PM2+2MHz.TUNE_CUR_POS    
+
+// 27MHz ...
+#DEFINE_CONSTANT    2.CH.MAT.RF2.ON_STATUS				##DCOP_PM2+27MHz.ON_STATUS       
+#DEFINE_CONSTANT    2.CH.MAT.RF2.TUNE_STATUS				##DCOP_PM2+27MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    2.CH.MAT.RF2.CONTROL_MODE				##DCOP_PM2+27MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    2.CH.MAT.RF2.CUR_LOAD_POS				##DCOP_PM2+27MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    2.CH.MAT.RF2.CUR_TUNE_POS				##DCOP_PM2+27MHz.TUNE_CUR_POS    
+
+// 60MHz ...
+#DEFINE_CONSTANT    2.CH.MAT.RF3.ON_STATUS				##DCOP_PM2+60MHz.ON_STATUS       
+#DEFINE_CONSTANT    2.CH.MAT.RF3.TUNE_STATUS				##DCOP_PM2+60MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    2.CH.MAT.RF3.CONTROL_MODE				##DCOP_PM2+60MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    2.CH.MAT.RF3.CUR_LOAD_POS				##DCOP_PM2+60MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    2.CH.MAT.RF3.CUR_TUNE_POS				##DCOP_PM2+60MHz.TUNE_CUR_POS    
+
+
+// WAP ITEM -------------------------------------
+
+#DEFINE_CONSTANT    2.CH.WAP.POSITION_SET				##DCOP_PM2+CONFINEMENT.RING.POSITION.SET	
+#DEFINE_CONSTANT    2.CH.WAP.POSITION_GET				##DCOP_PM2+WAP.CUR_COUNT_GET		
+#DEFINE_CONSTANT    2.CH.WAP.PRESSURE_SET				##DCOP_PM2+WAP.CUR_PRESSURE_SET		
+#DEFINE_CONSTANT    2.CH.WAP.PRESSURE_GET				##DCOP_PM2+CHAMBER.PRESS
+
+
+// TEMPERATURE ITEM  ----------------------------
+
+#DEFINE_CONSTANT    2.CH.TOP_CHILLER.TEMP_SET				##DCOP_PM2+TOP.TEMP.SET
+#DEFINE_CONSTANT    2.CH.TOP_CHILLER.TEMP_GET				##DCOP_PM2+TOP.TEMP	
+
+#DEFINE_CONSTANT    2.CH.ESC.TEMP_SET					##DCOP_PM2+ESC.TEMP.SET
+#DEFINE_CONSTANT    2.CH.ESC.TEMP_GET					##DCOP_PM2+BTM.TEMPERATURE
+
+#DEFINE_CONSTANT    2.CH.TOP_PLATE.TEMP_SET				##DCOP_PM2+TOP.PLATE.TEMP.SET
+#DEFINE_CONSTANT    2.CH.TOP_PLATE.TEMP_GET				##DCOP_PM2+TOP.PLATE.TEMP	
+                    
+#DEFINE_CONSTANT    2.CH.ANAFAZER.TOP_TEMP_GET				##DCOP_PM2+ANAFAZER.TOP.TEMP.GET
+#DEFINE_CONSTANT    2.CH.ANAFAZER.TOP_BOTTOM_GET			##DCOP_PM2+BTM.TEMP
+
+
+// ESC ITEM  ------------------------------------
+
+#DEFINE_CONSTANT    2.CH.ESC.TOTAL_VOLT_SET				##DCOP_PM2+ESC.VOLTAGE.SET	
+#DEFINE_CONSTANT    2.CH.ESC.TOTAL_VOLT_GET				##DCOP_PM2+ESC.VOLTAGE		
+	
+#DEFINE_CONSTANT    2.CH.ESC.BIAS_VOLT_SET				##DCOP_PM2+ESC.COOLANT_FLOW_GET
+#DEFINE_CONSTANT    2.CH.ESC.BIAS_VOLT_GET				##DCOP_PM2+DCBIAS.VOLTAGE
+
+#DEFINE_CONSTANT    2.CH.ESC.COOLANT_GET				##DCOP_PM2+CHAMBER.FLOW
+
+#DEFINE_CONSTANT    2.CH.ESC.POWER_ON_STATUS				##DCOP_PM2+ESC.POWER_ON_STATUS		
+#DEFINE_CONSTANT    2.CH.ESC.REVERSE_POLARITY_STATUS			##DCOP_PM2+ESC.REVERSE_POWER_STATUS	
+#DEFINE_CONSTANT    2.CH.ESC.COOLANT_FLOW_STATUS			##DCOP_PM2+ESC.COOLANT_FLOW_STATUS	
+
+
+// He Inner / Outer ITEM  -----------------------
+
+#DEFINE_CONSTANT    2.CH.He_1.PRESSURE_SET                              ##DCOP_PM2+HE.INNER.PRESS.SET	
+#DEFINE_CONSTANT    2.CH.He_1.PRESSURE_GET                              ##DCOP_PM2+HE.INNER.PRESS	
+#DEFINE_CONSTANT    2.CH.He_1.FLOW_GET                                  ##DCOP_PM2+HE.INNER.FLOW	
+
+#DEFINE_CONSTANT    2.CH.He_2.PRESSURE_SET                              ##DCOP_PM2+HE.OUTER.PRESS.SET	
+#DEFINE_CONSTANT    2.CH.He_2.PRESSURE_GET                              ##DCOP_PM2+HE.OUTER.PRESS	
+#DEFINE_CONSTANT    2.CH.He_2.FLOW_GET                                  ##DCOP_PM2+HE.OUTER.FLOW	
+
+
+// =================================================================================
+
+// MFC ITEM -------------------------------------
+#DEFINE_CONSTANT    3.CH.MFC1.NAME                                      ##DCOP_PM3+MFC01.NAME         
+#DEFINE_CONSTANT    3.CH.MFC1.FLOW_GET                                  ##DCOP_PM3+MFC01.C4F8		
+#DEFINE_CONSTANT    3.CH.MFC1.FLOW_SET                                  ##DCOP_PM3+MFC01.C4F8.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC2.NAME                                      ##DCOP_PM3+MFC02.NAME         
+#DEFINE_CONSTANT    3.CH.MFC2.FLOW_GET                                  ##DCOP_PM3+MFC02.N2		
+#DEFINE_CONSTANT    3.CH.MFC2.FLOW_SET                                  ##DCOP_PM3+MFC02.N2.SET		
+                              
+#DEFINE_CONSTANT    3.CH.MFC3.NAME                                      ##DCOP_PM3+MFC03.NAME         
+#DEFINE_CONSTANT    3.CH.MFC3.FLOW_GET                                  ##DCOP_PM3+MFC03.O2.50		
+#DEFINE_CONSTANT    3.CH.MFC3.FLOW_SET                                  ##DCOP_PM3+MFC03.O2.50.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC4.NAME                                      ##DCOP_PM3+MFC04.NAME         
+#DEFINE_CONSTANT    3.CH.MFC4.FLOW_GET                                  ##DCOP_PM3+MFC04.CF4		
+#DEFINE_CONSTANT    3.CH.MFC4.FLOW_SET                                  ##DCOP_PM3+MFC04.CF4.SET	
+                    
+#DEFINE_CONSTANT    3.CH.MFC5.NAME                                      ##DCOP_PM3+MFC05.NAME         
+#DEFINE_CONSTANT    3.CH.MFC5.FLOW_GET                                  ##DCOP_PM3+MFC05.O2.3000	
+#DEFINE_CONSTANT    3.CH.MFC5.FLOW_SET                                  ##DCOP_PM3+MFC05.O2.3000.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC6.NAME                                      ##DCOP_PM3+MFC06.NAME         
+#DEFINE_CONSTANT    3.CH.MFC6.FLOW_GET                                  ##DCOP_PM3+MFC06.CHF3		
+#DEFINE_CONSTANT    3.CH.MFC6.FLOW_SET                                  ##DCOP_PM3+MFC06.CHF3.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC7.NAME                                      ##DCOP_PM3+MFC07.NAME         
+#DEFINE_CONSTANT    3.CH.MFC7.FLOW_GET                                  ##DCOP_PM3+MFC07.AR		
+#DEFINE_CONSTANT    3.CH.MFC7.FLOW_SET                                  ##DCOP_PM3+MFC07.AR.SET		
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC8.NAME                                      ##DCOP_PM3+MFC08.NAME         
+#DEFINE_CONSTANT    3.CH.MFC8.FLOW_GET                                  ##DCOP_PM3+MFC08.XE		
+#DEFINE_CONSTANT    3.CH.MFC8.FLOW_SET                                  ##DCOP_PM3+MFC08.XE.SET		
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC9.NAME                                      ##DCOP_PM3+MFC09.NAME         
+#DEFINE_CONSTANT    3.CH.MFC9.FLOW_GET                                  ##DCOP_PM3+MFC09.CH2F2		
+#DEFINE_CONSTANT    3.CH.MFC9.FLOW_SET                                  ##DCOP_PM3+MFC09.CH2F2.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC10.NAME                                     ##DCOP_PM3+MFC10.NAME         
+#DEFINE_CONSTANT    3.CH.MFC10.FLOW_GET                                 ##DCOP_PM3+MFC10.C4F6		
+#DEFINE_CONSTANT    3.CH.MFC10.FLOW_SET                                 ##DCOP_PM3+MFC10.C4F6.Set	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC11.NAME                                     ##DCOP_PM3+MFC11.NAME         
+#DEFINE_CONSTANT    3.CH.MFC11.FLOW_GET                                 ##DCOP_PM3+MFC11.SF6		
+#DEFINE_CONSTANT    3.CH.MFC11.FLOW_SET                                 ##DCOP_PM3+MFC11.SF6.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC12.NAME                                     ##DCOP_PM3+MFC12.NAME         
+#DEFINE_CONSTANT    3.CH.MFC12.FLOW_GET                                 ##DCOP_PM3+MFC12.C3F8		
+#DEFINE_CONSTANT    3.CH.MFC12.FLOW_SET                                 ##DCOP_PM3+MFC12.C3F8.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC13.NAME                                     ##DCOP_PM3+MFC13.NAME         
+#DEFINE_CONSTANT    3.CH.MFC13.FLOW_GET                                 ##DCOP_PM3+MFC13.FLOW.GET	
+#DEFINE_CONSTANT    3.CH.MFC13.FLOW_SET                                 ##DCOP_PM3+MFC13.FLOW.SET	
+                    
+#DEFINE_CONSTANT    3.CH.MFC14.NAME                                     ##DCOP_PM3+MFC14.NAME         
+#DEFINE_CONSTANT    3.CH.MFC14.FLOW_GET                                 ##DCOP_PM3+MFC14.FLOW.GET	
+#DEFINE_CONSTANT    3.CH.MFC14.FLOW_SET                                 ##DCOP_PM3+MFC14.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC15.NAME                                     ##DCOP_PM3+MFC15.NAME         
+#DEFINE_CONSTANT    3.CH.MFC15.FLOW_GET                                 ##DCOP_PM3+MFC15.FLOW.GET	
+#DEFINE_CONSTANT    3.CH.MFC15.FLOW_SET                                 ##DCOP_PM3+MFC15.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC16.NAME                                     ##DCOP_PM3+MFC16.NAME         
+#DEFINE_CONSTANT    3.CH.MFC16.FLOW_GET                                 ##DCOP_PM3+MFC16.FLOW.GET	
+#DEFINE_CONSTANT    3.CH.MFC16.FLOW_SET                                 ##DCOP_PM3+MFC16.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    3.CH.MFC17.NAME                                     ##DCOP_PM3+MFC17.NAME         
+#DEFINE_CONSTANT    3.CH.MFC17.FLOW_GET                                 ##DCOP_PM3+TUNNING.GAS.FLOW	
+#DEFINE_CONSTANT    3.CH.MFC17.FLOW_SET                                 ##DCOP_PM3+TUNNING.GAS.SET	
+
+
+// RF ITEM --------------------------------------
+#DEFINE_CONSTANT    3.CH.RF.AC_CONTACTOR_SET				##DCOP_PM3+RF.AC.CONTACTOR.SET
+#DEFINE_CONSTANT    3.CH.RF.AC_CONTACTOR_GET				##DCOP_PM3+RF.AC.CONTACTOR.GET
+
+// 2MHz ...
+#DEFINE_CONSTANT    3.CH.RF1.ON_STATUS_SET              		##DCOP_PM3+RF.2MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    3.CH.RF1.ON_STATUS_GET               		##DCOP_PM3+RF.2MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    3.CH.RF1.POWER_SET                   		##DCOP_PM3+RF.2MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    3.CH.RF1.RAMP_SET                    		##DCOP_PM3+RF.2MHz.RAMP_TIME            
+#DEFINE_CONSTANT    3.CH.RF1.FORWARD_POWER_GET           		##DCOP_PM3+RF.2MHz.FORWARD.PWR
+#DEFINE_CONSTANT    3.CH.RF1.REFLECT_POWER_GET           		##DCOP_PM3+RF.2MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    3.CH.RF1.MONITORING_STATUS          		##DCOP_PM3+RF.2MHz.MON_FLAG             
+#DEFINE_CONSTANT    3.CH.RF1.FREQUENCY_START_SET        		##DCOP_PM3+RF.2MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    3.CH.RF1.FREQUENCY_POWER_SET       			##DCOP_PM3+RF.2MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    3.CH.RF1.FREQUENCY_POWER_GET       			##DCOP_PM3+RF.2MHz.FREQUENCY
+
+// 27MHz ...
+#DEFINE_CONSTANT    3.CH.RF2.ON_STATUS_SET              		##DCOP_PM3+RF.27MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    3.CH.RF2.ON_STATUS_GET               		##DCOP_PM3+RF.27MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    3.CH.RF2.POWER_SET                   		##DCOP_PM3+RF.27MHz.FWD.PWR.SET
+#DEFINE_CONSTANT    3.CH.RF2.RAMP_SET                    		##DCOP_PM3+RF.27MHz.RAMP_TIME            
+#DEFINE_CONSTANT    3.CH.RF2.FORWARD_POWER_GET           		##DCOP_PM3+RF.27MHz.FWD.PWR
+#DEFINE_CONSTANT    3.CH.RF2.REFLECT_POWER_GET           		##DCOP_PM3+RF.27MHz.REFLECT.PWR
+#DEFINE_CONSTANT    3.CH.RF2.MONITORING_STATUS          		##DCOP_PM3+RF.27MHz.MON_FLAG             
+#DEFINE_CONSTANT    3.CH.RF2.FREQUENCY_START_SET        		##DCOP_PM3+RF.27MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    3.CH.RF2.FREQUENCY_POWER_SET       			##DCOP_PM3+RF.27MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    3.CH.RF2.FREQUENCY_POWER_GET       			##DCOP_PM3+RF.27MHz.FREQUENCY
+
+// 60MHz ...
+#DEFINE_CONSTANT    3.CH.RF3.ON_STATUS_SET              		##DCOP_PM3+RF.60MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    3.CH.RF3.ON_STATUS_GET               		##DCOP_PM3+RF.60MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    3.CH.RF3.POWER_SET                   		##DCOP_PM3+RF.60MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    3.CH.RF3.RAMP_SET                    		##DCOP_PM3+RF.60MHz.RAMP_TIME            
+#DEFINE_CONSTANT    3.CH.RF3.FORWARD_POWER_GET           		##DCOP_PM3+RF.60MHz.FORWARD.PWR
+#DEFINE_CONSTANT    3.CH.RF3.REFLECT_POWER_GET           		##DCOP_PM3+RF.60MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    3.CH.RF3.MONITORING_STATUS          		##DCOP_PM3+RF.60MHz.MON_FLAG             
+#DEFINE_CONSTANT    3.CH.RF3.FREQUENCY_START_SET        		##DCOP_PM3+RF.60MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    3.CH.RF3.FREQUENCY_POWER_SET       			##DCOP_PM3+RF.60MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    3.CH.RF3.FREQUENCY_POWER_GET       			##DCOP_PM3+RF.60MHz.FREQUENCY
+
+								
+// MATCHER ITEM ---------------------------------
+
+// 2MHz ...
+#DEFINE_CONSTANT    3.CH.MAT.RF1.ON_STATUS				##DCOP_PM3+2MHz.ON_STATUS       
+#DEFINE_CONSTANT    3.CH.MAT.RF1.TUNE_STATUS				##DCOP_PM3+2MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    3.CH.MAT.RF1.CONTROL_MODE				##DCOP_PM3+2MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    3.CH.MAT.RF1.CUR_LOAD_POS				##DCOP_PM3+2MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    3.CH.MAT.RF1.CUR_TUNE_POS				##DCOP_PM3+2MHz.TUNE_CUR_POS    
+
+// 27MHz ...
+#DEFINE_CONSTANT    3.CH.MAT.RF2.ON_STATUS				##DCOP_PM3+27MHz.ON_STATUS       
+#DEFINE_CONSTANT    3.CH.MAT.RF2.TUNE_STATUS				##DCOP_PM3+27MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    3.CH.MAT.RF2.CONTROL_MODE				##DCOP_PM3+27MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    3.CH.MAT.RF2.CUR_LOAD_POS				##DCOP_PM3+27MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    3.CH.MAT.RF2.CUR_TUNE_POS				##DCOP_PM3+27MHz.TUNE_CUR_POS    
+
+// 60MHz ...
+#DEFINE_CONSTANT    3.CH.MAT.RF3.ON_STATUS				##DCOP_PM3+60MHz.ON_STATUS       
+#DEFINE_CONSTANT    3.CH.MAT.RF3.TUNE_STATUS				##DCOP_PM3+60MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    3.CH.MAT.RF3.CONTROL_MODE				##DCOP_PM3+60MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    3.CH.MAT.RF3.CUR_LOAD_POS				##DCOP_PM3+60MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    3.CH.MAT.RF3.CUR_TUNE_POS				##DCOP_PM3+60MHz.TUNE_CUR_POS    
+
+
+// WAP ITEM -------------------------------------
+
+#DEFINE_CONSTANT    3.CH.WAP.POSITION_SET				##DCOP_PM3+CONFINEMENT.RING.POSITION.SET	
+#DEFINE_CONSTANT    3.CH.WAP.POSITION_GET				##DCOP_PM3+WAP.CUR_COUNT_GET		
+#DEFINE_CONSTANT    3.CH.WAP.PRESSURE_SET				##DCOP_PM3+WAP.CUR_PRESSURE_SET		
+#DEFINE_CONSTANT    3.CH.WAP.PRESSURE_GET				##DCOP_PM3+CHAMBER.PRESS
+
+
+// TEMPERATURE ITEM  ----------------------------
+
+#DEFINE_CONSTANT    3.CH.TOP_CHILLER.TEMP_SET				##DCOP_PM3+TOP.TEMP.SET
+#DEFINE_CONSTANT    3.CH.TOP_CHILLER.TEMP_GET				##DCOP_PM3+TOP.TEMP	
+
+#DEFINE_CONSTANT    3.CH.ESC.TEMP_SET					##DCOP_PM3+ESC.TEMP.SET
+#DEFINE_CONSTANT    3.CH.ESC.TEMP_GET					##DCOP_PM3+BTM.TEMPERATURE
+
+#DEFINE_CONSTANT    3.CH.TOP_PLATE.TEMP_SET				##DCOP_PM3+TOP.PLATE.TEMP.SET
+#DEFINE_CONSTANT    3.CH.TOP_PLATE.TEMP_GET				##DCOP_PM3+TOP.PLATE.TEMP	
+                    
+#DEFINE_CONSTANT    3.CH.ANAFAZER.TOP_TEMP_GET				##DCOP_PM3+ANAFAZER.TOP.TEMP.GET
+#DEFINE_CONSTANT    3.CH.ANAFAZER.TOP_BOTTOM_GET			##DCOP_PM3+BTM.TEMP
+
+
+// ESC ITEM  ------------------------------------
+
+#DEFINE_CONSTANT    3.CH.ESC.TOTAL_VOLT_SET				##DCOP_PM3+ESC.VOLTAGE.SET	
+#DEFINE_CONSTANT    3.CH.ESC.TOTAL_VOLT_GET				##DCOP_PM3+ESC.VOLTAGE		
+	
+#DEFINE_CONSTANT    3.CH.ESC.BIAS_VOLT_SET				##DCOP_PM3+ESC.COOLANT_FLOW_GET
+#DEFINE_CONSTANT    3.CH.ESC.BIAS_VOLT_GET				##DCOP_PM3+DCBIAS.VOLTAGE
+
+#DEFINE_CONSTANT    3.CH.ESC.COOLANT_GET				##DCOP_PM3+CHAMBER.FLOW
+
+#DEFINE_CONSTANT    3.CH.ESC.POWER_ON_STATUS				##DCOP_PM3+ESC.POWER_ON_STATUS		
+#DEFINE_CONSTANT    3.CH.ESC.REVERSE_POLARITY_STATUS			##DCOP_PM3+ESC.REVERSE_POWER_STATUS	
+#DEFINE_CONSTANT    3.CH.ESC.COOLANT_FLOW_STATUS			##DCOP_PM3+ESC.COOLANT_FLOW_STATUS	
+
+
+// He Inner / Outer ITEM  -----------------------
+
+#DEFINE_CONSTANT    3.CH.He_1.PRESSURE_SET                              ##DCOP_PM3+HE.INNER.PRESS.SET	
+#DEFINE_CONSTANT    3.CH.He_1.PRESSURE_GET                              ##DCOP_PM3+HE.INNER.PRESS	
+#DEFINE_CONSTANT    3.CH.He_1.FLOW_GET                                  ##DCOP_PM3+HE.INNER.FLOW	
+
+#DEFINE_CONSTANT    3.CH.He_2.PRESSURE_SET                              ##DCOP_PM3+HE.OUTER.PRESS.SET	
+#DEFINE_CONSTANT    3.CH.He_2.PRESSURE_GET                              ##DCOP_PM3+HE.OUTER.PRESS	
+#DEFINE_CONSTANT    3.CH.He_2.FLOW_GET                                  ##DCOP_PM3+HE.OUTER.FLOW	
+
+
+// =================================================================================
+
+// MFC ITEM -------------------------------------
+#DEFINE_CONSTANT    4.CH.MFC1.NAME                                      ##DCOP_PM4+MFC01.NAME         
+#DEFINE_CONSTANT    4.CH.MFC1.FLOW_GET                                  ##DCOP_PM4+MFC01.C4F8		
+#DEFINE_CONSTANT    4.CH.MFC1.FLOW_SET                                  ##DCOP_PM4+MFC01.C4F8.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC2.NAME                                      ##DCOP_PM4+MFC02.NAME         
+#DEFINE_CONSTANT    4.CH.MFC2.FLOW_GET                                  ##DCOP_PM4+MFC02.N2		
+#DEFINE_CONSTANT    4.CH.MFC2.FLOW_SET                                  ##DCOP_PM4+MFC02.N2.SET		
+                              
+#DEFINE_CONSTANT    4.CH.MFC3.NAME                                      ##DCOP_PM4+MFC03.NAME         
+#DEFINE_CONSTANT    4.CH.MFC3.FLOW_GET                                  ##DCOP_PM4+MFC03.O2.50		
+#DEFINE_CONSTANT    4.CH.MFC3.FLOW_SET                                  ##DCOP_PM4+MFC03.O2.50.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC4.NAME                                      ##DCOP_PM4+MFC04.NAME         
+#DEFINE_CONSTANT    4.CH.MFC4.FLOW_GET                                  ##DCOP_PM4+MFC04.CF4		
+#DEFINE_CONSTANT    4.CH.MFC4.FLOW_SET                                  ##DCOP_PM4+MFC04.CF4.SET	
+                    
+#DEFINE_CONSTANT    4.CH.MFC5.NAME                                      ##DCOP_PM4+MFC05.NAME         
+#DEFINE_CONSTANT    4.CH.MFC5.FLOW_GET                                  ##DCOP_PM4+MFC05.O2.3000	
+#DEFINE_CONSTANT    4.CH.MFC5.FLOW_SET                                  ##DCOP_PM4+MFC05.O2.3000.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC6.NAME                                      ##DCOP_PM4+MFC06.NAME         
+#DEFINE_CONSTANT    4.CH.MFC6.FLOW_GET                                  ##DCOP_PM4+MFC06.CHF3		
+#DEFINE_CONSTANT    4.CH.MFC6.FLOW_SET                                  ##DCOP_PM4+MFC06.CHF3.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC7.NAME                                      ##DCOP_PM4+MFC07.NAME         
+#DEFINE_CONSTANT    4.CH.MFC7.FLOW_GET                                  ##DCOP_PM4+MFC07.AR		
+#DEFINE_CONSTANT    4.CH.MFC7.FLOW_SET                                  ##DCOP_PM4+MFC07.AR.SET		
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC8.NAME                                      ##DCOP_PM4+MFC08.NAME         
+#DEFINE_CONSTANT    4.CH.MFC8.FLOW_GET                                  ##DCOP_PM4+MFC08.XE		
+#DEFINE_CONSTANT    4.CH.MFC8.FLOW_SET                                  ##DCOP_PM4+MFC08.XE.SET		
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC9.NAME                                      ##DCOP_PM4+MFC09.NAME         
+#DEFINE_CONSTANT    4.CH.MFC9.FLOW_GET                                  ##DCOP_PM4+MFC09.CH2F2		
+#DEFINE_CONSTANT    4.CH.MFC9.FLOW_SET                                  ##DCOP_PM4+MFC09.CH2F2.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC10.NAME                                     ##DCOP_PM4+MFC10.NAME         
+#DEFINE_CONSTANT    4.CH.MFC10.FLOW_GET                                 ##DCOP_PM4+MFC10.C4F6		
+#DEFINE_CONSTANT    4.CH.MFC10.FLOW_SET                                 ##DCOP_PM4+MFC10.C4F6.Set	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC11.NAME                                     ##DCOP_PM4+MFC11.NAME         
+#DEFINE_CONSTANT    4.CH.MFC11.FLOW_GET                                 ##DCOP_PM4+MFC11.SF6		
+#DEFINE_CONSTANT    4.CH.MFC11.FLOW_SET                                 ##DCOP_PM4+MFC11.SF6.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC12.NAME                                     ##DCOP_PM4+MFC12.NAME         
+#DEFINE_CONSTANT    4.CH.MFC12.FLOW_GET                                 ##DCOP_PM4+MFC12.C3F8		
+#DEFINE_CONSTANT    4.CH.MFC12.FLOW_SET                                 ##DCOP_PM4+MFC12.C3F8.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC13.NAME                                     ##DCOP_PM4+MFC13.NAME         
+#DEFINE_CONSTANT    4.CH.MFC13.FLOW_GET                                 ##DCOP_PM4+MFC13.FLOW.GET	
+#DEFINE_CONSTANT    4.CH.MFC13.FLOW_SET                                 ##DCOP_PM4+MFC13.FLOW.SET	
+                    
+#DEFINE_CONSTANT    4.CH.MFC14.NAME                                     ##DCOP_PM4+MFC14.NAME         
+#DEFINE_CONSTANT    4.CH.MFC14.FLOW_GET                                 ##DCOP_PM4+MFC14.FLOW.GET	
+#DEFINE_CONSTANT    4.CH.MFC14.FLOW_SET                                 ##DCOP_PM4+MFC14.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC15.NAME                                     ##DCOP_PM4+MFC15.NAME         
+#DEFINE_CONSTANT    4.CH.MFC15.FLOW_GET                                 ##DCOP_PM4+MFC15.FLOW.GET	
+#DEFINE_CONSTANT    4.CH.MFC15.FLOW_SET                                 ##DCOP_PM4+MFC15.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC16.NAME                                     ##DCOP_PM4+MFC16.NAME         
+#DEFINE_CONSTANT    4.CH.MFC16.FLOW_GET                                 ##DCOP_PM4+MFC16.FLOW.GET	
+#DEFINE_CONSTANT    4.CH.MFC16.FLOW_SET                                 ##DCOP_PM4+MFC16.FLOW.SET	
+                                                                        
+#DEFINE_CONSTANT    4.CH.MFC17.NAME                                     ##DCOP_PM4+MFC17.NAME         
+#DEFINE_CONSTANT    4.CH.MFC17.FLOW_GET                                 ##DCOP_PM4+TUNNING.GAS.FLOW	
+#DEFINE_CONSTANT    4.CH.MFC17.FLOW_SET                                 ##DCOP_PM4+TUNNING.GAS.SET	
+
+
+// RF ITEM --------------------------------------
+#DEFINE_CONSTANT    4.CH.RF.AC_CONTACTOR_SET				##DCOP_PM4+RF.AC.CONTACTOR.SET
+#DEFINE_CONSTANT    4.CH.RF.AC_CONTACTOR_GET				##DCOP_PM4+RF.AC.CONTACTOR.GET
+
+// 2MHz ...
+#DEFINE_CONSTANT    4.CH.RF1.ON_STATUS_SET              		##DCOP_PM4+RF.2MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    4.CH.RF1.ON_STATUS_GET               		##DCOP_PM4+RF.2MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    4.CH.RF1.POWER_SET                   		##DCOP_PM4+RF.2MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    4.CH.RF1.RAMP_SET                    		##DCOP_PM4+RF.2MHz.RAMP_TIME            
+#DEFINE_CONSTANT    4.CH.RF1.FORWARD_POWER_GET           		##DCOP_PM4+RF.2MHz.FORWARD.PWR
+#DEFINE_CONSTANT    4.CH.RF1.REFLECT_POWER_GET           		##DCOP_PM4+RF.2MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    4.CH.RF1.MONITORING_STATUS          		##DCOP_PM4+RF.2MHz.MON_FLAG             
+#DEFINE_CONSTANT    4.CH.RF1.FREQUENCY_START_SET        		##DCOP_PM4+RF.2MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    4.CH.RF1.FREQUENCY_POWER_SET       			##DCOP_PM4+RF.2MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    4.CH.RF1.FREQUENCY_POWER_GET       			##DCOP_PM4+RF.2MHz.FREQUENCY
+
+// 27MHz ...
+#DEFINE_CONSTANT    4.CH.RF2.ON_STATUS_SET              		##DCOP_PM4+RF.27MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    4.CH.RF2.ON_STATUS_GET               		##DCOP_PM4+RF.27MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    4.CH.RF2.POWER_SET                   		##DCOP_PM4+RF.27MHz.FWD.PWR.SET
+#DEFINE_CONSTANT    4.CH.RF2.RAMP_SET                    		##DCOP_PM4+RF.27MHz.RAMP_TIME            
+#DEFINE_CONSTANT    4.CH.RF2.FORWARD_POWER_GET           		##DCOP_PM4+RF.27MHz.FWD.PWR
+#DEFINE_CONSTANT    4.CH.RF2.REFLECT_POWER_GET           		##DCOP_PM4+RF.27MHz.REFLECT.PWR
+#DEFINE_CONSTANT    4.CH.RF2.MONITORING_STATUS          		##DCOP_PM4+RF.27MHz.MON_FLAG             
+#DEFINE_CONSTANT    4.CH.RF2.FREQUENCY_START_SET        		##DCOP_PM4+RF.27MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    4.CH.RF2.FREQUENCY_POWER_SET       			##DCOP_PM4+RF.27MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    4.CH.RF2.FREQUENCY_POWER_GET       			##DCOP_PM4+RF.27MHz.FREQUENCY
+
+// 60MHz ...
+#DEFINE_CONSTANT    4.CH.RF3.ON_STATUS_SET              		##DCOP_PM4+RF.60MHz.ON_POWER_SET         
+#DEFINE_CONSTANT    4.CH.RF3.ON_STATUS_GET               		##DCOP_PM4+RF.60MHz.ON_STATUS            
+
+#DEFINE_CONSTANT    4.CH.RF3.POWER_SET                   		##DCOP_PM4+RF.60MHz.FORWARD.PWR.SET
+#DEFINE_CONSTANT    4.CH.RF3.RAMP_SET                    		##DCOP_PM4+RF.60MHz.RAMP_TIME            
+#DEFINE_CONSTANT    4.CH.RF3.FORWARD_POWER_GET           		##DCOP_PM4+RF.60MHz.FORWARD.PWR
+#DEFINE_CONSTANT    4.CH.RF3.REFLECT_POWER_GET           		##DCOP_PM4+RF.60MHz.REFLECTED.PWR
+#DEFINE_CONSTANT    4.CH.RF3.MONITORING_STATUS          		##DCOP_PM4+RF.60MHz.MON_FLAG             
+#DEFINE_CONSTANT    4.CH.RF3.FREQUENCY_START_SET        		##DCOP_PM4+RF.60MHz.START_FREQUENCY_SET  
+#DEFINE_CONSTANT    4.CH.RF3.FREQUENCY_POWER_SET       			##DCOP_PM4+RF.60MHz.OUTPUT_FREQUENCY_SET 
+#DEFINE_CONSTANT    4.CH.RF3.FREQUENCY_POWER_GET       			##DCOP_PM4+RF.60MHz.FREQUENCY
+
+								
+// MATCHER ITEM ---------------------------------
+
+// 2MHz ...
+#DEFINE_CONSTANT    4.CH.MAT.RF1.ON_STATUS				##DCOP_PM4+2MHz.ON_STATUS       
+#DEFINE_CONSTANT    4.CH.MAT.RF1.TUNE_STATUS				##DCOP_PM4+2MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    4.CH.MAT.RF1.CONTROL_MODE				##DCOP_PM4+2MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    4.CH.MAT.RF1.CUR_LOAD_POS				##DCOP_PM4+2MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    4.CH.MAT.RF1.CUR_TUNE_POS				##DCOP_PM4+2MHz.TUNE_CUR_POS    
+
+// 27MHz ...
+#DEFINE_CONSTANT    4.CH.MAT.RF2.ON_STATUS				##DCOP_PM4+27MHz.ON_STATUS       
+#DEFINE_CONSTANT    4.CH.MAT.RF2.TUNE_STATUS				##DCOP_PM4+27MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    4.CH.MAT.RF2.CONTROL_MODE				##DCOP_PM4+27MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    4.CH.MAT.RF2.CUR_LOAD_POS				##DCOP_PM4+27MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    4.CH.MAT.RF2.CUR_TUNE_POS				##DCOP_PM4+27MHz.TUNE_CUR_POS    
+
+// 60MHz ...
+#DEFINE_CONSTANT    4.CH.MAT.RF3.ON_STATUS				##DCOP_PM4+60MHz.ON_STATUS       
+#DEFINE_CONSTANT    4.CH.MAT.RF3.TUNE_STATUS				##DCOP_PM4+60MHz.TUNE_STATUS     
+#DEFINE_CONSTANT    4.CH.MAT.RF3.CONTROL_MODE				##DCOP_PM4+60MHz.CONTROL_MODE    
+#DEFINE_CONSTANT    4.CH.MAT.RF3.CUR_LOAD_POS				##DCOP_PM4+60MHz.LOAD_CUR_POS    
+#DEFINE_CONSTANT    4.CH.MAT.RF3.CUR_TUNE_POS				##DCOP_PM4+60MHz.TUNE_CUR_POS    
+
+
+// WAP ITEM -------------------------------------
+
+#DEFINE_CONSTANT    4.CH.WAP.POSITION_SET				##DCOP_PM4+CONFINEMENT.RING.POSITION.SET	
+#DEFINE_CONSTANT    4.CH.WAP.POSITION_GET				##DCOP_PM4+WAP.CUR_COUNT_GET		
+#DEFINE_CONSTANT    4.CH.WAP.PRESSURE_SET				##DCOP_PM4+WAP.CUR_PRESSURE_SET		
+#DEFINE_CONSTANT    4.CH.WAP.PRESSURE_GET				##DCOP_PM4+CHAMBER.PRESS
+
+
+// TEMPERATURE ITEM  ----------------------------
+
+#DEFINE_CONSTANT    4.CH.TOP_CHILLER.TEMP_SET				##DCOP_PM4+TOP.TEMP.SET
+#DEFINE_CONSTANT    4.CH.TOP_CHILLER.TEMP_GET				##DCOP_PM4+TOP.TEMP	
+
+#DEFINE_CONSTANT    4.CH.ESC.TEMP_SET					##DCOP_PM4+ESC.TEMP.SET
+#DEFINE_CONSTANT    4.CH.ESC.TEMP_GET					##DCOP_PM4+BTM.TEMPERATURE
+
+#DEFINE_CONSTANT    4.CH.TOP_PLATE.TEMP_SET				##DCOP_PM4+TOP.PLATE.TEMP.SET
+#DEFINE_CONSTANT    4.CH.TOP_PLATE.TEMP_GET				##DCOP_PM4+TOP.PLATE.TEMP	
+                    
+#DEFINE_CONSTANT    4.CH.ANAFAZER.TOP_TEMP_GET				##DCOP_PM4+ANAFAZER.TOP.TEMP.GET
+#DEFINE_CONSTANT    4.CH.ANAFAZER.TOP_BOTTOM_GET			##DCOP_PM4+BTM.TEMP
+
+
+// ESC ITEM  ------------------------------------
+
+#DEFINE_CONSTANT    4.CH.ESC.TOTAL_VOLT_SET				##DCOP_PM4+ESC.VOLTAGE.SET	
+#DEFINE_CONSTANT    4.CH.ESC.TOTAL_VOLT_GET				##DCOP_PM4+ESC.VOLTAGE		
+	
+#DEFINE_CONSTANT    4.CH.ESC.BIAS_VOLT_SET				##DCOP_PM4+ESC.COOLANT_FLOW_GET
+#DEFINE_CONSTANT    4.CH.ESC.BIAS_VOLT_GET				##DCOP_PM4+DCBIAS.VOLTAGE
+
+#DEFINE_CONSTANT    4.CH.ESC.COOLANT_GET				##DCOP_PM4+CHAMBER.FLOW
+
+#DEFINE_CONSTANT    4.CH.ESC.POWER_ON_STATUS				##DCOP_PM4+ESC.POWER_ON_STATUS		
+#DEFINE_CONSTANT    4.CH.ESC.REVERSE_POLARITY_STATUS			##DCOP_PM4+ESC.REVERSE_POWER_STATUS	
+#DEFINE_CONSTANT    4.CH.ESC.COOLANT_FLOW_STATUS			##DCOP_PM4+ESC.COOLANT_FLOW_STATUS	
+
+
+// He Inner / Outer ITEM  -----------------------
+
+#DEFINE_CONSTANT    4.CH.He_1.PRESSURE_SET                              ##DCOP_PM4+HE.INNER.PRESS.SET	
+#DEFINE_CONSTANT    4.CH.He_1.PRESSURE_GET                              ##DCOP_PM4+HE.INNER.PRESS	
+#DEFINE_CONSTANT    4.CH.He_1.FLOW_GET                                  ##DCOP_PM4+HE.INNER.FLOW	
+
+#DEFINE_CONSTANT    4.CH.He_2.PRESSURE_SET                              ##DCOP_PM4+HE.OUTER.PRESS.SET	
+#DEFINE_CONSTANT    4.CH.He_2.PRESSURE_GET                              ##DCOP_PM4+HE.OUTER.PRESS	
+#DEFINE_CONSTANT    4.CH.He_2.FLOW_GET                                  ##DCOP_PM4+HE.OUTER.FLOW	
+
+

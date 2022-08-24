@@ -11,6 +11,17 @@ int CObj__PMC_OPR
 {
 	DECLARE__EXT_CTRL(p_variable);
 
+	// ...
+	int r_flag;
+
+	//
+	if(dEXT_CH__CFG_SYSTEM_INITIAL_DI_SENSOR_INTERLOCK_CHECK->Check__DATA(STR__YES) > 0)
+	{
+		r_flag = _Check__DI_INTERLOCK(p_variable, p_alarm);
+		if(r_flag < 0)			return r_flag;
+	}
+
+	//
 	if(sEXT_CH__SYSTEM_SETUP_REQ->Check__DATA(STR__YES) > 0)
 	{
 		CString box_title;
@@ -54,7 +65,7 @@ int CObj__PMC_OPR
 	}
 
 	// ...
-	int r_flag = p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__INIT);
+	r_flag = p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__INIT);
 	if(r_flag < 0)
 	{
 		return -11;
@@ -72,6 +83,63 @@ int CObj__PMC_OPR
 		if(p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__PUMP) < 0)
 		{
 			return -21;
+		}
+
+		if(dEXT_CH__CFG_SYSTEM_INITIAL_AUTO_PM_CHECK->Check__DATA(STR__YES) > 0)
+		{
+			if(bActive__OBJ_CTRL__AUTO_PM)
+			{
+				r_flag = pOBJ_CTRL__AUTO_PM->Call__OBJECT(sLINK_MODE__AUTO_PM);
+				if(r_flag < 0)			return -22;
+			}
+		}
+	}
+
+	// Check : Total Wafer Count ...
+	{
+		int cur__total_count = (int) aEXT_CH__TOTAL_WAFER_COUNT->Get__VALUE();
+
+		if(dEXT_CH__CFG_WAFER_COUNT_WARNING_APPLY->Check__DATA(STR__YES) > 0)
+		{
+			int ref__warning_count = aEXT_CH__CFG_WAFER_COUNT_WARNING_REF->Get__VALUE();
+
+			if(cur__total_count >= ref__warning_count)
+			{
+				int alm_id = ALID__TOTAL_WAFER_COUNT__WARNNING;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				alm_bff.Format("The current total-wafer-count is %1d \n", cur__total_count);
+				alm_msg += alm_bff;
+				alm_bff.Format("The warning total-wafer-count is %1d \n", ref__warning_count);
+				alm_msg += alm_bff;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			}
+		}
+
+		if(dEXT_CH__CFG_WAFER_COUNT_SYSTEM_DOWN_APPLY->Check__DATA(STR__YES) > 0)
+		{
+			int ref__system_count = (int) aEXT_CH__CFG_WAFER_COUNT_SYSTEM_DOWN_REF->Get__VALUE();
+
+			if(cur__total_count >= ref__system_count)
+			{
+				int alm_id = ALID__TOTAL_WAFER_COUNT__SYSTEM_DOWN;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				alm_bff.Format("The current total-wafer-count is %1d \n", cur__total_count);
+				alm_msg += alm_bff;
+				alm_bff.Format("The system-down total-wafer-count is %1d \n", ref__system_count);
+				alm_msg += alm_bff;
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+				return -32;
+			}
 		}
 	}
 

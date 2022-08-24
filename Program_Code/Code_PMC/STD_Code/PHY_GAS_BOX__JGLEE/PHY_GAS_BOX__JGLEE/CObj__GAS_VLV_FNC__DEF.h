@@ -13,6 +13,10 @@
 #define GAS_CMMD__FV_CLOSE					"FV_CLOSE"
 
 // ...
+#define STR__ATM							"ATM"
+
+
+// ...
 #define _MAX__MFC_OBJ						20
 #define _MAX__FRC_OBJ						2
 

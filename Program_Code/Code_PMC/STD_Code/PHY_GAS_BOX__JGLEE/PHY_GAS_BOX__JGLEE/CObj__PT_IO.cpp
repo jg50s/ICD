@@ -341,17 +341,19 @@ int CObj__PT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__PT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
-	int flag = -1;
-	CString log_msg;
+	DECLARE__EXT_CTRL(p_variable);
 
+	int flag = -1;
+
+	CString log_msg;
+	CString log_bff;
 
 	// ...
 	{
-		log_msg.Format("Start ... :  [%s]", mode);
+		log_msg.Format("Start [%s] ... By %s", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
-		xLOG_CTRL->WRITE__LOG(log_msg);
 		sCH__OBJ_MSG->Set__DATA(log_msg);
-
+		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
 	// ...
@@ -361,7 +363,6 @@ int CObj__PT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 			flag = Call__INIT(p_variable,p_alarm);
 		}
 	}
-
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{

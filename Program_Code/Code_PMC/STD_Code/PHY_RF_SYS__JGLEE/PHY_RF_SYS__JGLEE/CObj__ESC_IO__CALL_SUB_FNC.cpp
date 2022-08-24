@@ -128,10 +128,7 @@ int  CObj__ESC_IO
 int  CObj__ESC_IO
 ::Fnc__HW_CHECK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	// ...
-	{
-		dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
-	}
+	dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
 
 	// Pressure Setting ...
 	{

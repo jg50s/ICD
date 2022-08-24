@@ -583,16 +583,33 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 						aCH__CFG_He_PRESSURE_MAX_SETPOINT->Change__MIN_MAX_DEC(0,cfg_range_max,0);
 
-						aoEXT_CH__He_Pressure_CENTER->Change__MIN_MAX_DEC(0,cfg_range_max,1);
-						aiEXT_CH__He_Pressure_CENTER_IO->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						if(bActive__CENTER_USE)
+						{
+							aoEXT_CH__He_Pressure_CENTER->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+							aiEXT_CH__He_Pressure_CENTER_IO->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						}
+						if(bActive__EDGE_USE)
+						{
+							aoEXT_CH__He_Pressure_EDGE->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+							aiEXT_CH__He_Pressure_EDGE_IO->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						}
 					}
 
 					//
 					cfg_range_max = aCH__CFG_He_PRESSURE_MAX_SETPOINT->Get__VALUE();
 
-					aCH__CFG_HE_CENTER_PRESSURE_SETPOINT->Change__MIN_MAX_DEC(0,cfg_range_max,1);
-					aCH__CFG_HE_CENTER_PRESSURE_DURING_DECHUCK_VERIFY->Change__MIN_MAX_DEC(0,cfg_range_max,1);
-					aCH__CFG_HE_CENTER_PRESSURE_FOR_HW_CHECK->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+					if(bActive__CENTER_USE)
+					{
+						aCH__CFG_HE_CENTER_PRESSURE_SETPOINT->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						aCH__CFG_HE_CENTER_PRESSURE_DURING_DECHUCK_VERIFY->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						aCH__CFG_HE_CENTER_PRESSURE_FOR_HW_CHECK->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+					}
+					if(bActive__EDGE_USE)
+					{
+						aCH__CFG_HE_EDGE_PRESSURE_SETPOINT->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						aCH__CFG_HE_EDGE_PRESSURE_DURING_DECHUCK_VERIFY->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						aCH__CFG_HE_EDGE_PRESSURE_FOR_HW_CHECK->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+					}
 				}
 
 				// Flow Range ...
@@ -603,10 +620,20 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 					{
 						pre_range__cfg_he_flow_max = cfg_range_max;
 
-						aiEXT_CH__He_Flow_CENTER_IO->Change__MIN_MAX_DEC(0,cfg_range_max,1);
-						aCH__CFG_HE_CENTER_BYPASS_FLOW_FOR_HW_CHECK->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						if(bActive__CENTER_USE)
+						{
+							aiEXT_CH__He_Flow_CENTER_IO->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+							aCH__CFG_HE_CENTER_BYPASS_FLOW_FOR_HW_CHECK->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						}
+						if(bActive__EDGE_USE)
+						{
+							aiEXT_CH__He_Flow_EDGE_IO->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+							aCH__CFG_HE_EDGE_BYPASS_FLOW_FOR_HW_CHECK->Change__MIN_MAX_DEC(0,cfg_range_max,1);
+						}
 					}
 				}
+
+				// ...
 			}
 		}
 

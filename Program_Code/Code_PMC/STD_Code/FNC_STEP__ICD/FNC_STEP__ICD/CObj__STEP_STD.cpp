@@ -379,11 +379,11 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 			//
 			var_name = "RCP.EPD.MIN_THRESHOLD";
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 0, 1.0, 1000, -1, "E", "");
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 1, 0.0, 1000, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_MIN_THRESHOLD, var_name);
 
 			var_name = "RCP.EPD.MAX_THRESHOLD";
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 0, 1.0, 1000, -1, "E", "");
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "intensity", 1, 0.0, 1000, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_EPD_MAX_THRESHOLD, var_name);
 
 			//

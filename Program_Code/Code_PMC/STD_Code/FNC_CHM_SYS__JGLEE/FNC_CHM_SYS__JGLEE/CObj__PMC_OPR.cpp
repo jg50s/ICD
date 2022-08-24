@@ -143,6 +143,53 @@ int CObj__PMC_OPR::__DEFINE__ALARM(p_alarm)
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
+
+	// ...
+	{
+		alarm_id = ALID__TOTAL_WAFER_COUNT__WARNNING;
+
+		alarm_title  = title;
+		alarm_title += "Total Wafer Count Warning !";
+
+		alarm_msg = "Please, check state of PMC. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__TOTAL_WAFER_COUNT__SYSTEM_DOWN;
+
+		alarm_title  = title;
+		alarm_title += "Total Wafer Count & System Down  !";
+
+		alarm_msg  = "The state of PMC can't be converted to \"STANDBY\" state. \n";
+		alarm_msg += "Please, check state of PMC. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__DI_SENSOR__HEAVY_ERRPR;
+
+		alarm_title  = title;
+		alarm_title += "DI Sensor 관련 Heavy Error가 발생 했습니다.";
+
+		alarm_msg = "System Initial을 진행 할 수 없습니다.\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -186,6 +233,7 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
 	CString def_name;
 	CString def_data;
+	CString ch_name;
 	CString obj_name;
 	CString var_name;
 
@@ -287,6 +335,64 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			var_name = "SYSTEM.SETUP.REQ";
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SYSTEM_SETUP_REQ, obj_name,var_name);
 		}
+
+		// INTERLOCK : DI_SENSOR ...
+		{
+			// INTERLOCK.GAS_BOX
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.GAS_BOX";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.HEAVY.MSG.GAS_BOX";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_INTERLOCK_HEAVY_MSG_GAS_BOX, obj_name,var_name);
+
+			// INTERLOCK.CHMABER
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.HEAVY.MSG.CHAMBER";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_INTERLOCK_HEAVY_MSG_CHAMBER, obj_name,var_name);
+
+			// INTERLOCK.RF_SYS
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.RF_SYS";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_RF_SYS, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.HEAVY.MSG.RF_SYS";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_INTERLOCK_HEAVY_MSG_RF_SYS, obj_name,var_name);
+		}
+
+		// CFG : SYSTEM_INITIAL ...
+		{
+			var_name = "CFG.SYSTEM_INITIAL.DI_SENSOR_INTERLOCK.CHECK";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_SYSTEM_INITIAL_DI_SENSOR_INTERLOCK_CHECK, obj_name,var_name);
+
+			var_name = "CFG.SYSTEM_INITIAL.AUTO_PM.CHECK";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_SYSTEM_INITIAL_AUTO_PM_CHECK, obj_name,var_name);
+		}
+
+		// CFG : WAFER_COUNT ...
+		{
+			var_name = "CFG.WAFER_COUNT.WARNING.APPLY";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_WAFER_COUNT_WARNING_APPLY, obj_name,var_name);
+
+			var_name = "CFG.WAFER_COUNT.WARNING.REF";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_WAFER_COUNT_WARNING_REF, obj_name,var_name);
+
+			//
+			var_name = "CFG.WAFER_COUNT.SYSTEM_DOWN.APPLY";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_WAFER_COUNT_SYSTEM_DOWN_APPLY, obj_name,var_name);
+
+			var_name = "CFG.WAFER_COUNT.SYSTEM_DOWN.REF";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_WAFER_COUNT_SYSTEM_DOWN_REF, obj_name,var_name);
+		}
+	}
+
+	// CH LINK ...
+	{
+		def_name = "CH__TOTAL_WAFER_COUNT";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TOTAL_WAFER_COUNT, obj_name,var_name);
 	}
 
 	// OBJ.AUTO_PM ...

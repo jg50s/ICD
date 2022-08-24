@@ -52,6 +52,10 @@ int CObj__PMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 	// MON.PART ...
 	{
+		str_name = "MON.PART.DEF_TYPE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PART_DEF_TYPE, str_name);
+
 		str_name = "MON.PART.ERROR.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "OFF ON");
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
@@ -138,12 +142,15 @@ int CObj__PMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		//
 		if(iPUMP__CTRL_TYPE == _PMP_CTRL_TYPE__OBJECT)
 		{
+			sCH__MON_PART_DEF_TYPE->Set__DATA("OBJECT");
+
+			//
 			def_name = "OBJ__PUMP";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 			
 			pOBJ_CTRL__PUMP = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
-			// ...
+			// LINK_OBJ.MODE...
 			{
 				def_name = "PUMP_MODE.ON";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
@@ -153,13 +160,26 @@ int CObj__PMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 				sPUMP_MODE__OFF = def_data;
 			}
+
+			// MON ...
+			{
+				var_name = "MON.COMM.STS";
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PUMP_OBJ__MON_COMM_STATE, obj_name,var_name);
+			}
 		}		
 		else if(iPUMP__CTRL_TYPE == _PMP_CTRL_TYPE__IO)
 		{
+			sCH__MON_PART_DEF_TYPE->Set__DATA("IO");
+
 			def_name = "CH__DO_PUMP_SET";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_PUMP_SET, obj_name,var_name);
+		}
+		else
+		{
+			sCH__MON_PART_DEF_TYPE->Set__DATA("MANUAL");
+
 		}
 	}
 	
@@ -207,6 +227,20 @@ int CObj__PMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			{
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_PUMP_PRESSURE_TORR, obj_name,var_name);
+			}
+		}
+		// AI.PUMP_PRESSURE_mTORR
+		{
+			def_name = "CH__AI_PUMP_PRESSURE_mTORR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_PUMP_PRESSURE_mTORR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_PUMP_PRESSURE_mTORR, obj_name,var_name);
 			}
 		}
 	}

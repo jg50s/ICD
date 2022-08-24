@@ -146,10 +146,10 @@ int CObj__PMC_INF::__Define__USER_FUNCTION(CII_DEFINE__FUNCTION *p_fnc_ctrl)
 //-------------------------------------------------------------------------
 int CObj__PMC_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	CString str_name;
 	CString def_name;
-	CString def_value;
+	CString def_data;
 	CString obj_name;
+	CString var_name;
 
 	// ...
 	{
@@ -178,6 +178,17 @@ int CObj__PMC_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_STRING_CTRL(xEXT_CH__STEP_START, obj_name,"##PMC.STEP.START");
 		LINK__EXT_VAR_STRING_CTRL(xEXT_CH__STEP_END,   obj_name,"##PMC.STEP.END");
 	}
+
+	// OBJ_DB_INF ...
+	{
+		def_name = "OBJ__DB_INF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		//
+		var_name = "ACTIVE.CALL_BY_CTC";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ACTIVE_CALL_BY_CTC, obj_name,var_name);
+	}
+
 	return 1;
 }
 
@@ -195,6 +206,8 @@ int CObj__PMC_INF::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	}
 
 	int flag = -1;
+
+	dEXT_CH__ACTIVE_CALL_BY_CTC->Set__DATA("ON");
 
 	// ...
 	{
@@ -258,6 +271,7 @@ int CObj__PMC_INF::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
+	dEXT_CH__ACTIVE_CALL_BY_CTC->Set__DATA("OFF");
 	return flag;
 }
 

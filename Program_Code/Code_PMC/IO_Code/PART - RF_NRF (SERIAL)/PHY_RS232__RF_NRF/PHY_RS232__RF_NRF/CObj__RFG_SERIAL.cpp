@@ -118,15 +118,15 @@ int CObj__RFG_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "INFO.POWER_SETPOINT";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_POWER_SETPOINT, str_name);
 
 		str_name = "INFO.FORWARD_POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_FORWARD_POWER, str_name);
 
 		str_name = "INFO.REFLECT_POWER";
-		STD__ADD_STRING(str_name);
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__INFO_REFLECT_POWER, str_name);
 	}
 

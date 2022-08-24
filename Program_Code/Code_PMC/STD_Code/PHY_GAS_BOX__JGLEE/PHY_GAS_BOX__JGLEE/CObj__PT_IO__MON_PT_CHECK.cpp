@@ -100,10 +100,17 @@ int  CObj__PT_IO
 		dCH__MON_ERROR_CHECK_ACTIVE__PT_X[i]->Set__DATA(STR__READY);
 	}
 
+	// Stable Time ...
+	{
+		Sleep(500);
+	}
+
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(inc_sec);
 
+		//
 		for(i=0; i<iPT_SIZE; i++)
 		{
 			if(dCH__CFG_USE__PT_X[i]->Check__DATA(STR__YES) < 0)
