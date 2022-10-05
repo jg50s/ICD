@@ -4,6 +4,7 @@
 // ...
 #define _CFG__PROC_GAUGE_SIZE			3
 #define _CFG__RF_SIZE					3
+#define _CFG__MFC_SIZE					20
 
 
 // ...

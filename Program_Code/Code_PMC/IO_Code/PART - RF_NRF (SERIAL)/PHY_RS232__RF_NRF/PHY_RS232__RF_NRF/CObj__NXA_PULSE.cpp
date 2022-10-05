@@ -7,7 +7,7 @@
 CObj__NXA_PULSE::CObj__NXA_PULSE()
 {
 	m_Rcv_Time	 = 250;
-	m_RetryCnt	 = 3;
+	m_RetryCnt	 = 2;
 
 	//
 	dUNIT__FREQ = 0.01;		// Hz
@@ -81,50 +81,50 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 	// PARA.USER ...
 	{
 		str_name = "PARA.A.USER.FREQ";
-		STD__ADD_ANALOG(str_name, "Hz", 2, 0, 10000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "Hz", 2, 0, 10000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_FREQ, str_name);
 
 		str_name = "PARA.A.USER.DUTY";
-		STD__ADD_ANALOG(str_name, "%", 2, 0, 100);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "%", 2, 0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_DUTY, str_name);
 
 		str_name = "PARA.A.USER.ON_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "usec", 0, 0, 1000000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_ON_TIME, str_name);
 
 		str_name = "PARA.A.USER.OFF_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "usec", 0, 0, 1000000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_A_USER_OFF_TIME, str_name);
 
 		//
 		str_name = "PARA.B.USER.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "usec", 0, -1000000, 1000000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_USER_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.B.USER.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "usec", 0, -1000000, 1000000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_USER_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "PARA.C.USER.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "usec", 0, -1000000, 1000000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_USER_ON_SHIFT_TIME, str_name);
 		
 		str_name = "PARA.C.USER.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "usec", 0, -1000000, 1000000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_USER_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "PARA.A.USER.CLK.CTRL";
-		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NORMAL  INVERSE  HIGH  LOW", "");	
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_A_USER_CLK_CTRL, str_name);
 		
 		str_name = "PARA.B.USER.CLK.CTRL";
-		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NORMAL  INVERSE  HIGH  LOW", "");	
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_B_USER_CLK_CTRL, str_name);
 		
 		str_name = "PARA.C.USER.CLK.CTRL";
-		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NORMAL  INVERSE  HIGH  LOW", "");	
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_C_USER_CLK_CTRL, str_name);
 	}
 	// PARA.RCP ...
@@ -147,11 +147,11 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "PARA.RCP.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, -1000000, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.RCP.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, -1000000, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RCP_OFF_SHIFT_TIME, str_name);
 
 		//
@@ -179,20 +179,20 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "PARA.B.DRV.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, -1000000, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_DRV_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.B.DRV.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, -1000000, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_B_DRV_OFF_SHIFT_TIME, str_name);
 
 		//
 		str_name = "PARA.C.DRV.ON_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, -1000000, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_DRV_ON_SHIFT_TIME, str_name);
 
 		str_name = "PARA.C.DRV.OFF_SHIFT_TIME";
-		STD__ADD_ANALOG(str_name, "usec", 0, 0, 1000000);
+		STD__ADD_ANALOG(str_name, "usec", 0, -1000000, 1000000);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_C_DRV_OFF_SHIFT_TIME, str_name);
 
 		//
@@ -226,6 +226,19 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.DRV.LOG.ENABLE";
 		STD__ADD_DIGITAL(str_name,  APP_DSP__OFF_ON);
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DRV_LOG_ENABLE, str_name);
+
+		//
+		str_name = "CFG.UNIT.FREQ";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "0.01", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_UNIT__FREQ, str_name);
+
+		str_name = "CFG.UNIT.DUTY";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "0.01", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_UNIT__DUTY, str_name);
+
+		str_name = "CFG.UNIT.uSEQ";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "0.01", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_UNIT__uSEQ, str_name);
 	}
 
 	// INFO ...
@@ -452,6 +465,32 @@ int CObj__NXA_PULSE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			xI__DRV_LOG_CTRL->ENABLE__TIME_LOG();
 			xI__DRV_LOG_CTRL->WRITE__LOG("   START   \n");
+		}
+	}
+
+	// Shift_Time <- 0.0 ...
+	{
+		// PARA.USE ...
+		{
+			aCH__PARA_B_USER_ON_SHIFT_TIME->Set__VALUE(0.0);
+			aCH__PARA_B_USER_OFF_SHIFT_TIME->Set__VALUE(0.0);
+
+			aCH__PARA_C_USER_ON_SHIFT_TIME->Set__VALUE(0.0);
+			aCH__PARA_C_USER_OFF_SHIFT_TIME->Set__VALUE(0.0);
+		}
+		// PARA.RCP ...
+		{
+			aCH__PARA_RCP_ON_SHIFT_TIME->Set__VALUE(0.0);
+			aCH__PARA_RCP_OFF_SHIFT_TIME->Set__VALUE(0.0);
+		}
+		
+		// PARA.DRV ...
+		{
+			aCH__PARA_B_DRV_ON_SHIFT_TIME->Set__VALUE(0.0);
+			aCH__PARA_B_DRV_OFF_SHIFT_TIME->Set__VALUE(0.0);
+
+			aCH__PARA_C_DRV_ON_SHIFT_TIME->Set__VALUE(0.0);
+			aCH__PARA_C_DRV_OFF_SHIFT_TIME->Set__VALUE(0.0);
 		}
 	}
 

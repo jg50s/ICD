@@ -256,25 +256,18 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 0, 0, 100, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_DUTY, var_name);
 
+			//
 			var_name = "RCP.RF.PULSE.EXEC";
-			STD__ADD_DIGITAL_WITH_OPTION(var_name, "LOW NORMAL REVERSE", -1, "E", "");
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, "LOW  NORMAL  INVERSE", -1, "E", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_PULSE_EXEC, var_name);
 
 			//
-			var_name = "RCP.RF.PULSE.ON_TIME";
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
-			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_ON_TIME, var_name);
-
-			var_name = "RCP.RF.PULSE.OFF_TIME";
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
-			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_OFF_TIME, var_name);
-
 			var_name = "RCP.RF.PULSE.ON_SHIFT_TIME";
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "usec", 0, -1000, 1000, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_ON_SHIFT_TIME, var_name);
 
 			var_name = "RCP.RF.PULSE.OFF_SHIFT_TIME";
-			STD__ADD_ANALOG_WITH_OPTION(var_name, "sec", 1, 0, 10, -1, "E", "");
+			STD__ADD_ANALOG_WITH_OPTION(var_name, "usec", 0, -1000, 1000, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_OFF_SHIFT_TIME, var_name);
 		}
 

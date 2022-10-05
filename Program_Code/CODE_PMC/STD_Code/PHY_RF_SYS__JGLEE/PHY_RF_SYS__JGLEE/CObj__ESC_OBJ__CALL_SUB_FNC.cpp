@@ -1939,8 +1939,8 @@ Fnc__HV_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 
 		aCH__CFG_ESC_EDGE_CHUCKING_VOLTAGE_FAULT->Get__DATA(var_data);
 		cfg_fault__vol_per = atof(var_data);
-		ref_fault__vol_min = hv_set__center * (1.0 - cfg_fault__vol_per / 100.0);
-		ref_fault__vol_max = hv_set__center * (1.0 + cfg_fault__vol_per / 100.0);			
+		ref_fault__vol_min = hv_set__edge * (1.0 - cfg_fault__vol_per / 100.0);
+		ref_fault__vol_max = hv_set__edge * (1.0 + cfg_fault__vol_per / 100.0);			
 
 		aCH__CFG_ESC_EDGE_VOLTAGE_THRESHOLD->Get__DATA(var_data);
 		cfg__vol_high_limit = atof(var_data);

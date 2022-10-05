@@ -167,10 +167,36 @@ int CObj__TMP_IO
 int CObj__TMP_IO
 ::Call__ON(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	// TMP Exhaust Valve Close ...
-	if(bActive__DO_TMP_EXHAUST_VALVE)
+	// Interlock.Check ...
 	{
-		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+		bool active__interllock_check = false;
+
+		// TMP Exhaust Valve Close ...
+		if(bActive__DO_TMP_EXHAUST_VALVE)
+		{
+			if(dEXT_CH__DO_TMP_EXHAUST_VALVE->Check__DATA(STR__OPEN) < 0)			active__interllock_check = true;
+		}
+
+		if(active__interllock_check)
+		{
+			// Alarm 
+			{
+				int alm_id = ALID__FORELINE_NOT_OPEN__TMP_START;
+				CString alm_msg;
+				CString r_act;
+
+				if(bActive__DO_TMP_EXHAUST_VALVE)
+				{
+					alm_msg.Format(" * %s <- %s \n", 
+									dEXT_CH__DO_TMP_EXHAUST_VALVE->Get__CHANNEL_NAME(),
+									dEXT_CH__DO_TMP_EXHAUST_VALVE->Get__STRING());
+				}
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			}
+			return -1;
+		}
 	}
 
 	// Backing.Pump Check ...
@@ -219,8 +245,24 @@ int CObj__TMP_IO
 
 	if(iDATA__TMP_TYPE == _TMP_TYPE__OBJ)
 	{
+		// OBJ.PARA ...
+		{
+			CString ch_data;
+	
+			aCH__CFG_TARGET_SPEED_RPM->Get__DATA(ch_data);
+			aEXT_CH__TMP__PARA_TARGET_SPEED_RPM->Set__DATA(ch_data);
+
+			aCH__CFG_ACCELERATION_TIMEOUT_SEC->Get__DATA(ch_data);
+			aEXT_CH__TMP__PARA_AACCELERATION_TIMEOUT->Set__DATA(ch_data);
+
+			aCH__CFG_TARGET_SPEED_TIMEOUT_SEC->Get__DATA(ch_data);
+			aEXT_CH__TMP__PARA_TARGET_SPEED_TIMEOUT->Set__DATA(ch_data);
+		}
+		
 		if(pOBJ_CTRL__TMP->Call__OBJECT(sTMP_MODE__START) < 0)
+		{
 			return -31;
+		}
 	}
 	else if(iDATA__TMP_TYPE == _TMP_TYPE__IO)
 	{
@@ -256,12 +298,10 @@ int CObj__TMP_IO
 
 	return 1;
 }
+
 int CObj__TMP_IO
 ::Call__OFF(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active__no_wait)
 {
-	bActive__FORELINE_VLV_CHECK = false;
-
-	// ...
 	SCX__TIMER_CTRL x_timer;
 	x_timer->REGISTER__ABORT_OBJECT(sObject_Name);
 
@@ -275,12 +315,48 @@ int CObj__TMP_IO
 	// VAT.Valve Close ...
 	if(bActive__VAT_USE)
 	{
-		pOBJ_CTRL__VAT->Run__OBJECT(STR__CLOSE);
+		if(pOBJ_CTRL__VAT->Call__OBJECT(STR__CLOSE) < 0)			return -11;
 	}
 
-	// TMP.OBJ Stop ...
+	// TMP Purge.Valve Close ...
+	if(bActive__DO_TMP_PURGE_VALVE)
+	{
+		dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
+
+		double cfg_sec = aCH__CFG_TURBO_N2_PURGE_CLOSE_DELAY->Get__VALUE();
+		if(x_timer->WAIT(cfg_sec) < 0)			return -21;
+	}
+
+	// TMP Stop ...
+	{
+		int r_flag = _Fnc__OFF(p_variable,p_alarm, active__no_wait);
+		if(r_flag < 0)							return -41;
+	}
+
+	// TMP Exhaust Valve Close ...
+	if(bActive__DO_TMP_EXHAUST_VALVE)
+	{
+		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+
+		double cfg_sec = aCH__CFG_TURBO_EXHAUST_VALVE_CLOSE_DELAY->Get__VALUE();
+		if(x_timer->WAIT(cfg_sec) < 0)			return -101;
+	}
+
+	return 1;
+}
+int CObj__TMP_IO
+::_Fnc__OFF(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active__no_wait)
+{
 	if(iDATA__TMP_TYPE == _TMP_TYPE__OBJ)
 	{
+		// OBJ.PARA ...
+		{
+			CString ch_data;
+
+			aCH__CFG_STOP_TIMEOUT_SEC->Get__DATA(ch_data);
+			aEXT_CH__TMP__PARA_STOP_TIMEOUT->Set__DATA(ch_data);
+		}
+
 		if(active__no_wait)
 		{
 			if(pOBJ_CTRL__TMP->Run__OBJECT(sTMP_MODE__STOP_NO_WAIT) < 0)		return -11;
@@ -305,7 +381,7 @@ int CObj__TMP_IO
 
 		if(active__no_wait)
 		{
-			
+
 		}
 		else
 		{
@@ -326,22 +402,66 @@ int CObj__TMP_IO
 		}
 	}
 
-	// TMP Purge.Valve Close ...
-	if(bActive__DO_TMP_PURGE_VALVE)
-	{
-		dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
+	return 1;
+}
 
-		double cfg_sec = aCH__CFG_TURBO_N2_PURGE_CLOSE_DELAY->Get__VALUE();
-		if(x_timer->WAIT(cfg_sec) < 0)			return -21;
+int CObj__TMP_IO::Fnc_Interlock__TMP_OFF(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	Fnc_Interlock__TMP_ISO(p_variable, p_alarm);
+
+	if(dCH__MON_PUMP_ON_SNS->Set__DATA(STR__OFF) < 0)
+	{
+		_Fnc__OFF(p_variable,p_alarm, false);
+	}
+	return 1;
+}
+int CObj__TMP_IO::Fnc_Interlock__TMP_ISO(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	// Gate.Valve Close ...
+	if(bActive__GV_USE)
+	{
+		dEXT_CH__GV_DO_OPEN->Set__DATA(STR__OFF);
+		dEXT_CH__GV_DO_CLOSE->Set__DATA(STR__ON);
 	}
 
-	// TMP Exhaust Valve Close ...
+	// ...
+	{
+		CString ch_data = sEXT_CH__VAT_MON_POSITION->Get__STRING();
+		double cur__vat_pos = atof(ch_data);
+		
+		if(cur__vat_pos > 0.1)
+		{
+			pOBJ_CTRL__VAT->Abort__OBJECT();
+			pOBJ_CTRL__VAT->Run__OBJECT("CLOSE");
+
+			Sleep(1000);
+		}
+	}
+
+	// ...
+	{
+		if(bActive__DO_TMP_PURGE_VALVE)			dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
+		if(bActive__DO_TMP_EXHAUST_VALVE)		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+	}
+
+	return 1;
+}
+
+int CObj__TMP_IO::Check__TMP_LINE_READY(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
 	if(bActive__DO_TMP_EXHAUST_VALVE)
 	{
-		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+		if(dEXT_CH__DO_TMP_EXHAUST_VALVE->Check__DATA(STR__OPEN) < 0)		return -11;
+	}
 
-		double cfg_sec = aCH__CFG_TURBO_EXHAUST_VALVE_CLOSE_DELAY->Get__VALUE();
-		if(x_timer->WAIT(cfg_sec) < 0)			return -31;
+	// Error.Check ...
+	{
+		if(dCH__MON_ERROR_ON_SNS->Check__DATA(STR__OFF) < 0)				return -21;
+	}
+
+	// Pump State ...
+	{
+		if(sCH__MON_PUMP_STATE->Check__DATA(STR__NORMAL) < 0)				return -31;
 	}
 
 	return 1;

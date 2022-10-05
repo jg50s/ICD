@@ -24,11 +24,51 @@ LOOP_RETRY:
 
 	// Interlock Check ...
 	{
+		// TMC & PMx Pressure
+		{
+			bool active__press_err = true;
+
+			CString ch__chm_sts = sEXT_CH__CHM_PRESSURE_STATE->Get__STRING();
+			CString ch__tmc_sts = dEXT_CH__TMC_PRESSURE_STATE->Get__STRING();
+			
+			if((ch__chm_sts.CompareNoCase(STR__ATM) == 0)
+			&& (ch__tmc_sts.CompareNoCase(STR__ATM) == 0))
+			{
+				active__press_err = false;
+			}
+			else if((ch__chm_sts.CompareNoCase(STR__VAC) == 0)
+				 && (ch__tmc_sts.CompareNoCase(STR__VAC) == 0))
+			{
+				active__press_err = false;
+			}
+
+			if(active__press_err)
+			{
+				int alm_id = ALID__SLOT_VALVE_OPEN_INTERLOCK;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				alm_msg.Format("Interlock condition is as follows; \n");
+
+				alm_bff.Format("  PMC pressure state is \"%s\". \n", ch__chm_sts);
+				alm_msg += alm_bff;
+				alm_bff.Format("  TMC pressure state is \"%s\". \n", ch__tmc_sts);
+				alm_msg += alm_bff;
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY)  == 0)		goto LOOP_RETRY;	
+				if(r_act.CompareNoCase(ACT__IGNORE) != 0)		return -101;
+			}
+		}
+
+		// RF
 		for(int i=0; i<iDATA__RF_SIZE; i++)
 		{
 			if(Check__RF_POWER(p_alarm, i) < 0)
 			{
-				return -101;
+				return -102;
 			}
 		}
 	}
@@ -115,7 +155,33 @@ LOOP_RETRY:
 
 	// Interlock Check ...
 	{
+		// Robot.Arm State ...
+		{
+			CString cur__arm_sts = dEXT_CH__TMC_ROBOT_ARM_STATE->Get__STRING();
 
+			if(cur__arm_sts.CompareNoCase(STR__EXEND) == 0)
+			{
+				int alm_id = ALID__SLOT_VALVE_CLOSE_INTERLOCK;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				alm_msg.Format("Interlock condition is as follows; \n");
+
+				alm_bff.Format("  Arm-state is \"%s\". \n", cur__arm_sts);
+				alm_msg += alm_bff;
+				
+				alm_bff.Format("  * %s <- %s. \n",
+							   dEXT_CH__TMC_ROBOT_ARM_STATE->Get__CHANNEL_NAME(),
+							   cur__arm_sts);
+				alm_msg += alm_bff;
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+				if(r_act.CompareNoCase(ACT__RETRY)  == 0)		goto LOOP_RETRY;	
+				if(r_act.CompareNoCase(ACT__IGNORE) != 0)		return -101;
+			}
+		}
 	}
 
 	// Close ...
@@ -218,8 +284,8 @@ int CObj__PM_SLOT_IO
 				log_msg.Format("RF(%s) Power Status Error ... \n", rf_name);
 
 				log_bff.Format(" * %s <- %s \n",
-					dEXT_CH__RFx_ON_STS[rf_index]->Get__CHANNEL_NAME(),
-					dEXT_CH__RFx_ON_STS[rf_index]->Get__STRING());
+								dEXT_CH__RFx_ON_STS[rf_index]->Get__CHANNEL_NAME(),
+								dEXT_CH__RFx_ON_STS[rf_index]->Get__STRING());
 				log_msg += log_bff;
 
 				xI_LOG_CTRL->WRITE__LOG(log_msg);

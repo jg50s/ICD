@@ -2042,65 +2042,90 @@ Fnc__HV_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 
 		// ...
 		double abs__cur_vol = check_vol__center;
-		double abs__min_vol = ref_warning__vol_min;
-		double abs__max_vol = ref_warning__vol_max;
 
 		if(abs__cur_vol < 0)		abs__cur_vol = -abs__cur_vol;
-		if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
-		if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
 
-		if((abs__cur_vol > abs__max_vol)
-		|| (abs__cur_vol < abs__min_vol))
+		// Warning.Check ...
+		if(cfg_warning__vol_per > 0.01)
 		{
-			err_check = 1;
+			double abs__min_vol = ref_warning__vol_min;
+			double abs__max_vol = ref_warning__vol_max;
 
-			if(alm_report > 0)
+			if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
+			if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
+
+			if((abs__cur_vol > abs__max_vol)
+			|| (abs__cur_vol < abs__min_vol))
 			{
-				int alm_id = ALID__ESC_CENTER_VOLTAGE__WARNING_RANGE;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				err_check = 1;
 
-				alm_bff.Format("current center voltage <- %.1f (V) \n", check_vol__center);
-				alm_msg += alm_bff;
-				alm_bff.Format("config warning min. center voltage <- %.1f (V) \n", ref_warning__vol_min);
-				alm_msg += alm_bff;
-				alm_bff.Format("config warning max. center voltage <- %.1f (V) \n", ref_warning__vol_max);
-				alm_msg += alm_bff;
+				if(alm_report > 0)
+				{
+					int alm_id = ALID__ESC_CENTER_VOLTAGE__WARNING_RANGE;
+					CString alm_msg;
+					CString alm_bff;
+					CString r_act;
 
-				p_alarm->Check__ALARM(alm_id,r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+					alm_bff.Format("current center voltage <- %.1f (V) \n", check_vol__center);
+					alm_msg += alm_bff;
+					alm_bff.Format("config warning min. center voltage <- %.1f (V) \n", ref_warning__vol_min);
+					alm_msg += alm_bff;
+					alm_bff.Format("config warning max. center voltage <- %.1f (V) \n", ref_warning__vol_max);
+					alm_msg += alm_bff;
+
+					alm_msg += "\n";
+					alm_bff.Format(" * abs__cur_vol <- %.1f (V) \n", abs__cur_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__min_vol <- %.1f (V) \n", abs__min_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__max_vol <- %.1f (V) \n", abs__max_vol);
+					alm_msg += alm_bff;
+
+					p_alarm->Check__ALARM(alm_id,r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+				}
 			}
 		}
 
-		// ...
-		abs__min_vol = ref_fault__vol_min;
-		abs__max_vol = ref_fault__vol_max;
-
-		if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
-		if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
-
-		if((abs__cur_vol > abs__max_vol)
-		|| (abs__cur_vol < abs__min_vol))
+		// Fault.Check ...
+		if(cfg_fault__vol_per > 0.01)
 		{
-			err_check = 1;
+			double abs__min_vol = ref_fault__vol_min;
+			double abs__max_vol = ref_fault__vol_max;
 
-			if(alm_report > 0)
+			if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
+			if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
+
+			if((abs__cur_vol > abs__max_vol)
+			|| (abs__cur_vol < abs__min_vol))
 			{
-				int alm_id = ALID__ESC_CENTER_VOLTAGE__FAULT_RANGE;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				err_check = 1;
 
-				alm_bff.Format("current center voltage <- %.1f (V) \n", check_vol__center);
-				alm_msg += alm_bff;
-				alm_bff.Format("config fault min. center voltage <- %.1f (V) \n", ref_fault__vol_min);
-				alm_msg += alm_bff;
-				alm_bff.Format("config fault max. center voltage <- %.1f (V) \n", ref_fault__vol_max);
-				alm_msg += alm_bff;
+				if(alm_report > 0)
+				{
+					int alm_id = ALID__ESC_CENTER_VOLTAGE__FAULT_RANGE;
+					CString alm_msg;
+					CString alm_bff;
+					CString r_act;
 
-				p_alarm->Check__ALARM(alm_id,r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+					alm_bff.Format("current center voltage <- %.1f (V) \n", check_vol__center);
+					alm_msg += alm_bff;
+					alm_bff.Format("config fault min. center voltage <- %.1f (V) \n", ref_fault__vol_min);
+					alm_msg += alm_bff;
+					alm_bff.Format("config fault max. center voltage <- %.1f (V) \n", ref_fault__vol_max);
+					alm_msg += alm_bff;
+
+					alm_msg += "\n";
+					alm_bff.Format(" * abs__cur_vol <- %.1f (V) \n", abs__cur_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__min_vol <- %.1f (V) \n", abs__min_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__max_vol <- %.1f (V) \n", abs__max_vol);
+					alm_msg += alm_bff;
+
+					p_alarm->Check__ALARM(alm_id,r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+				}
 			}
 		}
 
@@ -2161,8 +2186,8 @@ Fnc__HV_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 
 		aCH__CFG_ESC_EDGE_CHUCKING_VOLTAGE_FAULT->Get__DATA(var_data);
 		cfg_fault__vol_per = atof(var_data);
-		ref_fault__vol_min = hv_set__center * (1.0 - cfg_fault__vol_per / 100.0);
-		ref_fault__vol_max = hv_set__center * (1.0 + cfg_fault__vol_per / 100.0);			
+		ref_fault__vol_min = hv_set__edge * (1.0 - cfg_fault__vol_per / 100.0);
+		ref_fault__vol_max = hv_set__edge * (1.0 + cfg_fault__vol_per / 100.0);			
 
 		aCH__CFG_ESC_EDGE_VOLTAGE_THRESHOLD->Get__DATA(var_data);
 		cfg__vol_high_limit = atof(var_data);
@@ -2172,65 +2197,90 @@ Fnc__HV_ERROR_CHECK(CII_OBJECT__ALARM* p_alarm,
 
 		// ...
 		double abs__cur_vol = check_vol__edge;
-		double abs__min_vol = ref_warning__vol_min;
-		double abs__max_vol = ref_warning__vol_max;
 
 		if(abs__cur_vol < 0)		abs__cur_vol = -abs__cur_vol;
-		if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
-		if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
 
-		if((abs__cur_vol > abs__max_vol)
-		|| (abs__cur_vol < abs__min_vol))
+		// Warning.Check ...
+		if(cfg_warning__vol_per > 0.01)
 		{
-			err_check = 1;
+			double abs__min_vol = ref_warning__vol_min;
+			double abs__max_vol = ref_warning__vol_max;
 
-			if(alm_report > 0)
+			if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
+			if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
+
+			if((abs__cur_vol > abs__max_vol)
+			|| (abs__cur_vol < abs__min_vol))
 			{
-				int alm_id = ALID__ESC_EDGE_VOLTAGE__WARNING_RANGE;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				err_check = 1;
 
-				alm_bff.Format("current edge voltage <- %.1f (V) \n", check_vol__edge);
-				alm_msg += alm_bff;
-				alm_bff.Format("config warning min. edge voltage <- %.1f (V) \n", ref_warning__vol_min);
-				alm_msg += alm_bff;
-				alm_bff.Format("config warning max. edge voltage <- %.1f (V) \n", ref_warning__vol_max);
-				alm_msg += alm_bff;
+				if(alm_report > 0)
+				{
+					int alm_id = ALID__ESC_EDGE_VOLTAGE__WARNING_RANGE;
+					CString alm_msg;
+					CString alm_bff;
+					CString r_act;
 
-				p_alarm->Check__ALARM(alm_id,r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+					alm_bff.Format("current edge voltage <- %.1f (V) \n", check_vol__edge);
+					alm_msg += alm_bff;
+					alm_bff.Format("config warning min. edge voltage <- %.1f (V) \n", ref_warning__vol_min);
+					alm_msg += alm_bff;
+					alm_bff.Format("config warning max. edge voltage <- %.1f (V) \n", ref_warning__vol_max);
+					alm_msg += alm_bff;
+
+					alm_msg += "\n";
+					alm_bff.Format(" * abs__cur_vol <- %.1f (V) \n", abs__cur_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__min_vol <- %.1f (V) \n", abs__min_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__max_vol <- %.1f (V) \n", abs__max_vol);
+					alm_msg += alm_bff;
+
+					p_alarm->Check__ALARM(alm_id,r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+				}
 			}
 		}
 
-		// ...
-		abs__min_vol = ref_fault__vol_min;
-		abs__max_vol = ref_fault__vol_max;
-
-		if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
-		if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
-
-		if((abs__cur_vol > abs__max_vol)
-		|| (abs__cur_vol < abs__min_vol))
+		// Fault.Check ...
+		if(cfg_fault__vol_per > 0.01)
 		{
-			err_check = 1;
+			double abs__min_vol = ref_fault__vol_min;
+			double abs__max_vol = ref_fault__vol_max;
 
-			if(alm_report > 0)
+			if(abs__min_vol < 0)		abs__min_vol = -abs__min_vol;
+			if(abs__max_vol < 0)		abs__max_vol = -abs__max_vol;
+
+			if((abs__cur_vol > abs__max_vol)
+			|| (abs__cur_vol < abs__min_vol))
 			{
-				int alm_id = ALID__ESC_EDGE_VOLTAGE__FAULT_RANGE;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				err_check = 1;
 
-				alm_bff.Format("current edge voltage <- %.1f (V) \n", check_vol__edge);
-				alm_msg += alm_bff;
-				alm_bff.Format("config fault min. edge voltage <- %.1f (V) \n", ref_fault__vol_min);
-				alm_msg += alm_bff;
-				alm_bff.Format("config fault max. edge voltage <- %.1f (V) \n", ref_fault__vol_max);
-				alm_msg += alm_bff;
+				if(alm_report > 0)
+				{
+					int alm_id = ALID__ESC_EDGE_VOLTAGE__FAULT_RANGE;
+					CString alm_msg;
+					CString alm_bff;
+					CString r_act;
 
-				p_alarm->Check__ALARM(alm_id,r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+					alm_bff.Format("current edge voltage <- %.1f (V) \n", check_vol__edge);
+					alm_msg += alm_bff;
+					alm_bff.Format("config fault min. edge voltage <- %.1f (V) \n", ref_fault__vol_min);
+					alm_msg += alm_bff;
+					alm_bff.Format("config fault max. edge voltage <- %.1f (V) \n", ref_fault__vol_max);
+					alm_msg += alm_bff;
+
+					alm_msg += "\n";
+					alm_bff.Format(" * abs__cur_vol <- %.1f (V) \n", abs__cur_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__min_vol <- %.1f (V) \n", abs__min_vol);
+					alm_msg += alm_bff;
+					alm_bff.Format(" * abs__max_vol <- %.1f (V) \n", abs__max_vol);
+					alm_msg += alm_bff;
+
+					p_alarm->Check__ALARM(alm_id,r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
+				}
 			}
 		}
 

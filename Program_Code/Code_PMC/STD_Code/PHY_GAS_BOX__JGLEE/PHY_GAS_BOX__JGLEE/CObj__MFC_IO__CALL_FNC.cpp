@@ -222,26 +222,34 @@ int  CObj__MFC_IO
 	}
 	else
 	{
-		for(i=0; i<iSIZE__VLV_IN; i++)
-		{
-			dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
-		}
-		
-		for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
-		{
-			dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
-		}
-		for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
-		{
-			dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
-		}
-		for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
-		{
-			dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
-		}
+		_Close__ALL_VALVE();
 	}
 
 	Fnc__SET_FLOW(set_flow);
+	return 1;
+}
+int  CObj__MFC_IO
+::_Close__ALL_VALVE()
+{
+	int i;
+
+	for(i=0; i<iSIZE__VLV_IN; i++)
+	{
+		dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
+	}
+
+	for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
+	}
+	for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
+	{
+		dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
+	}
 	return 1;
 }
 

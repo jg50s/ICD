@@ -11,6 +11,11 @@ int CObj__NXA_PULSE
 
 	if(active_on)
 	{
+		// PARA.CLK <- LOW ...
+		{
+			doCH__SET_EXEC->Set__DATA(STR__OFF);
+		}
+
 		// PARA.A1
 		{
 			ch_data = aCH__PARA_A_USER_FREQ->Get__STRING();
@@ -21,6 +26,7 @@ int CObj__NXA_PULSE
 
 			doCH__PARAM_A1->Set__DATA(STR__ON);
 		}
+		/*
 		// PARA.A2
 		{
 			ch_data = aCH__PARA_A_USER_ON_TIME->Get__STRING();
@@ -31,6 +37,7 @@ int CObj__NXA_PULSE
 
 			doCH__PARAM_A2->Set__DATA(STR__ON);
 		}
+		*/
 
 		// PARA.B
 		{
@@ -43,6 +50,7 @@ int CObj__NXA_PULSE
 			doCH__PARAM_B->Set__DATA(STR__ON);
 		}
 
+		/*
 		// PARA.C
 		{
 			ch_data = aCH__PARA_C_USER_ON_SHIFT_TIME->Get__STRING();
@@ -53,6 +61,7 @@ int CObj__NXA_PULSE
 
 			doCH__PARAM_C->Set__DATA(STR__ON);
 		}
+		*/
 
 		// PARA.CLK
 		{
@@ -77,6 +86,7 @@ int CObj__NXA_PULSE
 
 			doCH__PARAM_A1->Set__DATA(STR__ON);
 		}
+		/*
 		// PARA.A2
 		{
 			aCH__PARA_A_DRV_ON_TIME->Set__VALUE(0.0);
@@ -84,6 +94,7 @@ int CObj__NXA_PULSE
 
 			doCH__PARAM_A2->Set__DATA(STR__ON);
 		}
+		*/
 
 		// PARA.B
 		{
@@ -93,6 +104,7 @@ int CObj__NXA_PULSE
 			doCH__PARAM_B->Set__DATA(STR__ON);
 		}
 
+		/*
 		// PARA.C
 		{
 			aCH__PARA_C_DRV_ON_SHIFT_TIME->Set__VALUE(0.0);
@@ -100,7 +112,9 @@ int CObj__NXA_PULSE
 
 			doCH__PARAM_C->Set__DATA(STR__ON);
 		}
+		*/
 
+		/*
 		// PARA.CLK
 		{
 			ch_data = STR__LOW;
@@ -110,6 +124,7 @@ int CObj__NXA_PULSE
 
 			doCH__SET_EXEC->Set__DATA(STR__ON);
 		}
+		*/
 
 		doCH__SET_EXEC->Set__DATA(STR__OFF);
 	}

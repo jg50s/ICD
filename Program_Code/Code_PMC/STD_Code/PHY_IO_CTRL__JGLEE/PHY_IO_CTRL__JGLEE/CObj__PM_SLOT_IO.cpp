@@ -163,6 +163,41 @@ int CObj__PM_SLOT_IO::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__SLOT_VALVE_OPEN_INTERLOCK;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Slot vale open interlock !";
+
+		alarm_msg = "Currently, slot valve can't be opened. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__IGNORE);
+		l_act.Add(ACT__RETRY);
+		l_act.Add(ACT__ABORT);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__SLOT_VALVE_CLOSE_INTERLOCK;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Slot vale close interlock !";
+
+		alarm_msg = "Currently, slot valve can't be cloed. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__IGNORE);
+		l_act.Add(ACT__RETRY);
+		l_act.Add(ACT__ABORT);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -196,6 +231,23 @@ int CObj__PM_SLOT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 	int i;
+
+	// OBJ DB_INF ...
+	{
+		def_name = "OBJ__DB_INF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		//
+		var_name = "CHM.PRESSURE.STATUS";
+		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__CHM_PRESSURE_STATE, obj_name,var_name);
+
+		//
+		var_name = "TMC.ROBOT.ARM.STATE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_ROBOT_ARM_STATE, obj_name,var_name);
+
+		var_name = "TMC.PRESSURE.STATE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_PRESSURE_STATE, obj_name,var_name);
+	}
 
 	// LINK : IO Chammel ...
 	{

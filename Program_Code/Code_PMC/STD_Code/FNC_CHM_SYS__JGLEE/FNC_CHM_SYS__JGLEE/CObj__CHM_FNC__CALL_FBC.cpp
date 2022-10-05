@@ -11,6 +11,11 @@ int CObj__CHM_FNC
 ::Call__INIT(CII_OBJECT__VARIABLE *p_variable,
 			 CII_OBJECT__ALARM *p_alarm)
 {
+	if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+	{
+		return 1;
+	}
+
 	if(Fnc__INIT(p_variable,p_alarm) < 0)
 	{
 		sCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
@@ -56,7 +61,16 @@ int CObj__CHM_FNC
 {
 	CString log_msg;
 
+	// ...
+	bool active__low_vac = true;
+
+	if(bActive__OBJ_CTRL__TURBO_PUMP)
+	{
+		if(Check__LOW_VAC_PUMP() > 0)		active__low_vac = false;
+	}
+
 	// LOW_VAC.PUMPING ...
+	if(active__low_vac)
 	{
 		int flag = Fnc__LOW_VAC_PUMP(p_variable,p_alarm, 1, -1);
 
@@ -65,6 +79,19 @@ int CObj__CHM_FNC
 			log_msg.Format("Fnc__LOW_VAC_PUMP() : Failed [%d] ...", flag);	
 			xLOG_CTRL->WRITE__LOG(log_msg);
 			return flag;
+		}
+	}
+	else
+	{
+		// Gas-Valve <- Proc_Ready
+		{
+			if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__ALL_CLOSE) < 0)		return -101;
+		}
+
+		// ESC Pump_Ready ...
+		if(bActive__ESC_OBJ)
+		{
+			if(pOBJ_CTRL__ESC->Call__OBJECT(_ESC_CMMD__PUMP_READY) < 0)			return -102;
 		}
 	}
 
@@ -86,6 +113,7 @@ int CObj__CHM_FNC
 			return flag;
 		}
 	}
+
 	return 1;
 }
 

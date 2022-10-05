@@ -29,6 +29,8 @@ private:
 
 	//-------------------------------------------------------------------------
 	// OBJ : DB_SYS ...
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
+
 	CX__VAR_STRING_CTRL  sEXT_CH__SYSTEM_MSG;
 	CX__VAR_STRING_CTRL  sEXT_CH__FNC_MSG;
 

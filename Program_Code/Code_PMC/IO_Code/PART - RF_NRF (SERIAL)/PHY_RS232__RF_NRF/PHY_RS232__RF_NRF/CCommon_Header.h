@@ -2,15 +2,21 @@
 
 
 // ...
-union _DATA__2BYTE_INT
+union _DATA__4BYTE_INT
 {
-	unsigned char _byte[2];
+	unsigned char _byte[4];
+	int  _hexa;
+};
+union _DATA__4BYTE_UINT
+{
+	unsigned char _byte[4];
 	unsigned int  _hexa;
 };
-union _DATA__3BYTE_INT
+
+union _DATA__2BYTE_UINT
 {
-	unsigned char _byte[3];
-	unsigned int  _hexa;
+	unsigned char _byte[2];
+	unsigned short int  _hexa;
 };
 
 

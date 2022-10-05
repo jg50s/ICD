@@ -132,6 +132,21 @@ int CObj__VAC_VLV_PHY::__DEFINE__ALARM(p_alarm)
 
 	// ...
 	{
+		alarm_id = ALID__INTERLOCK_ATM_MAINT;
+
+		alarm_title  = title;
+		alarm_title += "ATM.Maint selected!";
+
+		alarm_msg = "Please, check \"Maint Mode\" setting. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
 		alarm_id = ALID__FR_OPEN_SENSOR_TIMEOUT;
 
 		alarm_title  = title;
@@ -223,6 +238,19 @@ int CObj__VAC_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	CCommon_Utility x_utility;
 	bool def_check;
+
+
+	// OBJ.DB_SYS ...
+	{
+		def_name = "OBJ__DB_SYS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
+		}
+	}
 
 	// DO VLV ...
 	{
@@ -357,7 +385,7 @@ int CObj__VAC_VLV_PHY::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
-	int flag = -1;
+	int flag = 11;
 
 	// ...
 	{
@@ -368,7 +396,7 @@ int CObj__VAC_VLV_PHY::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 
-	// ...
+	if(flag > 0)
 	{
 			 IF__CTRL_MODE(sMODE__ALL_CLOSE)		flag = Call__ALL_CLOSE(p_variable, p_alarm);
 

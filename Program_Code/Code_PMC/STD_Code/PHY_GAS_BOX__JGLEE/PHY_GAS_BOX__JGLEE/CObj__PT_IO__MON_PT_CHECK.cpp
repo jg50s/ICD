@@ -113,7 +113,12 @@ int  CObj__PT_IO
 		//
 		for(i=0; i<iPT_SIZE; i++)
 		{
-			if(dCH__CFG_USE__PT_X[i]->Check__DATA(STR__YES) < 0)
+			bool active__check_skip = false;
+
+			if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)			active__check_skip = true;
+			if(dCH__CFG_USE__PT_X[i]->Check__DATA(STR__YES) < 0)					active__check_skip = true;
+
+			if(active__check_skip)
 			{
 				if(iActive__SIM_MODE > 0)
 				{

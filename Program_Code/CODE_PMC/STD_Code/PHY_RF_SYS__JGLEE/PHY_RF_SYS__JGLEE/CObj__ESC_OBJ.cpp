@@ -63,16 +63,16 @@ int CObj__ESC_OBJ::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define APP_DSP__ENABLE_DISABLE                 \
-	"ENABLE DISABLE"
+"ENABLE DISABLE"
 
 #define APP_DSP__DISABLE_ENABLE                 \
-	"DISABLE ENABLE"
+"DISABLE ENABLE"
 
 #define APP_DSP__ESC_VOLT_CTRL_TYPE             \
-	"AUTO STEP"
+"AUTO STEP"
 
 #define APP_DSP__LIGHT_HEAVY                    \
-	"LIGHT HEAVY"
+"LIGHT HEAVY"
 
 
 int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
@@ -1165,19 +1165,23 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 
 
 // ...
-#define  ACT__CLEAR								\
-	l_act.RemoveAll();								\
-	l_act.Add(STR__CLEAR);
+#define  _LALM__ABORT							\
+l_act.RemoveAll();								\
+l_act.Add(ACT__ABORT);
 
-#define  ACT__RETRY_ABORT						\
-	l_act.RemoveAll();								\
-	l_act.Add(STR__RETRY);							\
-	l_act.Add(STR__ABORT);
+#define  _LALM__CLEAR							\
+l_act.RemoveAll();								\
+l_act.Add(ACT__CLEAR);
 
-#define  ACT__YES_NO							\
-	l_act.RemoveAll();								\
-	l_act.Add(STR__YES);							\
-	l_act.Add(STR__NO);
+#define  _LALM__RETRY_ABORT						\
+l_act.RemoveAll();								\
+l_act.Add(ACT__RETRY);							\
+l_act.Add(ACT__ABORT);
+
+#define  _LALM__YES_NO							\
+l_act.RemoveAll();								\
+l_act.Add(STR__YES);							\
+l_act.Add(STR__NO);
 
 
 int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
@@ -1207,7 +1211,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Please, check current chuck-status ! \n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1223,7 +1227,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Please, check pressure in chamber ! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1238,7 +1242,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Please, check wafer in chamber ! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1256,7 +1260,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check esc center config ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1271,7 +1275,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check esc center config ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1287,7 +1291,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Center voltage ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1302,7 +1306,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Center voltage ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1318,7 +1322,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Center voltage ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1333,7 +1337,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Center current ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1351,7 +1355,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check esc edge config ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1366,7 +1370,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check esc edge config ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1382,7 +1386,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Edge voltage ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1397,7 +1401,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Edge voltage ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1413,7 +1417,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Edge voltage ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1428,7 +1432,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check ESC_Edge current ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}
@@ -1447,7 +1451,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he center pressure ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1462,7 +1466,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he center pressure ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1480,7 +1484,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he edge pressure ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1495,7 +1499,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he edge pressure ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1514,7 +1518,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he center flow ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1529,7 +1533,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he center flow ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1547,7 +1551,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he edge flow ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1562,7 +1566,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 			alarm_msg  = "";
 			alarm_msg += "Please, check he edger flow ! \n";
 
-			ACT__CLEAR;
+			_LALM__CLEAR;
 
 			ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 		}	
@@ -1580,7 +1584,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Wafer Minimum Leak Error ! \n";
 		alarm_msg += "Please, check He flow! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}	
@@ -1595,7 +1599,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Please, check He flow ! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}	
@@ -1611,7 +1615,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Shutter가 닫힌 상태인지? 확인 바랍니다 ! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1626,7 +1630,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Slot-Valve가 닫힌 상태인지? 확인 바랍니다 ! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1642,7 +1646,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Please, check he pressure ! \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1663,7 +1667,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "   2. Get the flow of helium center bypass. \n";
 		alarm_msg += "   3. The flow of helium center bypass must be in (3.1 ~ 3.6) sccm range. \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1679,7 +1683,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "Process 중에 Helium 설정 값을 변경하는 작업을 할 수 없습니다. \n";
 		alarm_msg += "ESC 상태가 \"Chucked\"인 상태에서만 가능합니다. \n";
 
-		ACT__CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1696,7 +1700,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "모든 Interlock이 Disable 된 상태입니다. \n";
 		alarm_msg += "계속 진행 할까요? \n";
 
-		ACT__YES_NO;
+		_LALM__YES_NO;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1712,7 +1716,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "Vacuum Interlock이 Disable 된 상태입니다. \n";
 		alarm_msg += "계속 진행 할까요? \n";
 
-		ACT__YES_NO;
+		_LALM__YES_NO;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1728,7 +1732,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "Wafer Interlock이 Disable 된 상태입니다. \n";
 		alarm_msg += "계속 진행 할까요? \n";
 
-		ACT__YES_NO;
+		_LALM__YES_NO;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1744,7 +1748,22 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "Chamber-Isolation Interlock이 Disable 된 상태입니다. \n";
 		alarm_msg += "계속 진행 할까요? \n";
 
-		ACT__YES_NO;
+		_LALM__YES_NO;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_ATM_MAINT;
+		iLIST_ALID__ESC.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "ATM.Maint selected!";
+
+		alarm_msg = "Please, check \"Maint Mode\" setting. \n";
+
+		_LALM__ABORT;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -1768,9 +1787,9 @@ int CObj__ESC_OBJ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	bool def_check;
 
 
-	// DB OBJ ...
+	// OBJ.DB_INF ...
 	{	
-		def_name = "OBJ__DB";
+		def_name = "OBJ__DB_INF";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
 		// ...
@@ -1783,6 +1802,17 @@ int CObj__ESC_OBJ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			var_name = "CFG.DECHUCK.CTRL.MODE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_DECHUCK_CTRL_MODE, obj_name,var_name);
+		}
+	}
+	// OBJ.DB_SYS ...
+	{	
+		def_name = "OBJ__DB_SYS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
 		}
 	}
 
@@ -2057,7 +2087,7 @@ int CObj__ESC_OBJ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 int CObj__ESC_OBJ::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
 	CString log_msg;
-	int flag = -1;
+	int flag = 1;
 
 	iACTIVE_FLAG = 1;
 	iACTIVE__WAFER_LEAK_CHECK = -1;
@@ -2072,7 +2102,30 @@ int CObj__ESC_OBJ::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		sCH__APP_LOG_SUB_MSG->Set__DATA("");
 	}
 
-	// ...
+	if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+	{
+		if(mode.CompareNoCase(sMODE__VENT_READY) != 0)
+		{
+			int alm_id = ALID__INTERLOCK_ATM_MAINT;
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+
+			alm_msg.Format(" Action.Mode <- %s \n", mode);
+			alm_msg += "\n";
+
+			alm_bff.Format(" * %s <- %s \n", 
+							dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Get__CHANNEL_NAME(),
+							dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Get__STRING());
+			alm_msg += alm_bff;
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+			flag = -1;
+		}
+	}
+
+	if(flag > 0)
 	{
 			 IF__CTRL_MODE(sMODE__INIT)			    flag = Call__INIT(p_variable,p_alarm);
 	
@@ -2112,7 +2165,14 @@ int CObj__ESC_OBJ::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
-		// ...
+		if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+		{
+			if(dCH__MON_CHUCK_STATUS->Check__DATA(STR__DECHUCKED) > 0)
+			{
+				Call__HE_CLOSE(p_variable,p_alarm);
+			}
+		}
+		else
 		{
 			CString err_msg;
 			err_msg.Format("Flag(%1d)", flag);

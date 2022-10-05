@@ -323,6 +323,12 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		// ...
 		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
+		}
+
+		// ...
+		{
 			var_name = "SYSTEM.MSG";
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SYSTEM_MSG, obj_name,var_name);
 

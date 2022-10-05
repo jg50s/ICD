@@ -1129,8 +1129,8 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		var_name = "SYSTEM.INTERLOCK.FLAG";
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SYSTEM_INTERLOCK_FLAG, obj_name,var_name);
 
-		var_name = "CFG.PMC.ATM_MAINT.FLAG";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_FLAG, obj_name,var_name);
+		var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
 
 		//
 		var_name = "CFG.aCHM.MANOMETER.PRESS.SW1.SETTING";
@@ -1355,8 +1355,6 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
-	int flag = -1;
-
 	pOBJ_CTRL__GAS_VLV->Link__UPPER_OBJECT();
 
 	// ...
@@ -1368,135 +1366,10 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 	}
 
-LOOP_RETRY:
-
 	// ...
-	int check__pumping_condition = -1;
-	int check__venting_condition = -1;
+	int flag = _Check__CONTROL_INTERLOCK(mode, p_variable,p_alarm);
 
-	if((mode.CompareNoCase(sMODE__INIT)          == 0) 
-	|| (mode.CompareNoCase(sMODE__PUMPING)       == 0) 
-	|| (mode.CompareNoCase(sMODE__LOW_VAC_PUMP)  == 0) 
-	|| (mode.CompareNoCase(sMODE__HIGH_VAC_PUMP) == 0) 
-	|| (mode.CompareNoCase(sMODE__LEAK_CHECK)    == 0) 
-	|| (mode.CompareNoCase(sMODE__PURGE)         == 0))
-	// || (mode.CompareNoCase(sMODE__PURGE_PUMP)    == 0))
-	{
-		check__pumping_condition = 1;
-	}
-
-	if((mode.CompareNoCase(sMODE__VENT)       == 0))
-	// || (mode.CompareNoCase(sMODE__PURGE_VENT) == 0))
-	{
-		check__venting_condition = 1;
-	}
-
-	if(check__pumping_condition > 0)
-	{
-		if(dEXT_CH__CFG_PMC_ATM_MAINT_FLAG->Check__DATA(STR__YES) > 0)
-		{
-			// ...
-			{
-				int alarm_id = ALID__PMC_STATUS__ATM_MAINT;
-				CString log_msg;
-				CString r_act;
-
-				log_msg.Format("Can't execute the \"%s\" mode.\n", mode);
-
-				p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, log_msg, r_act);			// Error
-			}
-			return OBJ_ABORT;
-		}
-	}
-
-	if((check__pumping_condition > 0)
-	|| (check__venting_condition > 0))
-	{
-		if(bActive__CHM_SLOT_VLV_STATE)
-		{
-			int retry_count = 0;
-
-			while(1)
-			{
-				if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) < 0)
-				{
-					if(retry_count < 50)
-					{
-						retry_count++;
-
-						Sleep(100);
-						continue;
-					}
-
-					// ...
-					{
-						int alarm_id = ALID__CHM_SLOT_VALVE_NOT_CLOSE;
-
-						CString log_msg;
-						CString r_act;
-
-						log_msg.Format("Can't execute the \"%s\" mode.\n", mode);
-
-						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, log_msg, r_act);			// Error
-
-						if(r_act.CompareNoCase("RETRY") == 0)
-						{
-							goto LOOP_RETRY;
-						}
-						if(r_act.CompareNoCase("IGNORE") == 0)
-						{
-							break;
-						}
-						return OBJ_ABORT;
-					}
-				}
-
-				break;
-			}
-		}
-
-		if(bActive__CHM_SHUTTER_STATE)
-		{
-			int retry_count = 0;
-
-			while(1)
-			{
-				if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) < 0)
-				{
-					if(retry_count < 50)
-					{
-						retry_count++;
-
-						Sleep(100);
-						continue;
-					}
-
-					// ...
-					{
-						int alarm_id = ALID__SHUTTER_VALVE_NOT_CLOSE;
-						CString log_msg;
-						CString r_act;
-
-						log_msg.Format("Can't execute the \"%s\" mode.\n", mode);
-
-						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, log_msg, r_act);			// Error
-
-						if(r_act.CompareNoCase("RETRY") == 0)
-						{
-							return OBJ_RETRY;
-						}
-						return OBJ_ABORT;
-					}
-				}
-
-				break;
-			}
-		}
-
-		// ...
-	}
-
-	// ...
+	if(flag > 0)
 	{
 		     IF__CTRL_MODE(sMODE__INIT)						flag = Call__INIT(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__MAINT)					flag = Call__MAINTMODE(p_variable,p_alarm);
@@ -1574,6 +1447,136 @@ LOOP_RETRY:
 	}
 
 	return flag;
+}
+int CObj__CHM_FNC::_Check__CONTROL_INTERLOCK(const CString& mode, CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	int flag = -1;
+
+LOOP_RETRY:
+
+	// ...
+	int check__pumping_condition = -1;
+	int check__venting_condition = -1;
+
+	if((mode.CompareNoCase(sMODE__PUMPING)       == 0) 
+	|| (mode.CompareNoCase(sMODE__LOW_VAC_PUMP)  == 0) 
+	|| (mode.CompareNoCase(sMODE__HIGH_VAC_PUMP) == 0) 
+	|| (mode.CompareNoCase(sMODE__LEAK_CHECK)    == 0) 
+	|| (mode.CompareNoCase(sMODE__PURGE)         == 0))
+	// || (mode.CompareNoCase(sMODE__PURGE_PUMP)    == 0))
+	{
+		check__pumping_condition = 1;
+	}
+
+	if((mode.CompareNoCase(sMODE__VENT) == 0))
+	// || (mode.CompareNoCase(sMODE__PURGE_VENT) == 0))
+	{
+		check__venting_condition = 1;
+	}
+
+	if(check__pumping_condition > 0)
+	{
+		if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+		{
+			int alarm_id = ALID__PMC_STATUS__ATM_MAINT;
+			CString log_msg;
+			CString r_act;
+
+			log_msg.Format("Can't execute the \"%s\" mode.\n", mode);
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, log_msg, r_act);			// Error
+			return -101;
+		}
+	}
+
+	if((check__pumping_condition > 0)
+	|| (check__venting_condition > 0))
+	{
+		if(bActive__CHM_SLOT_VLV_STATE)
+		{
+			int retry_count = 0;
+
+			while(1)
+			{
+				if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) < 0)
+				{
+					if(retry_count < 50)
+					{
+						retry_count++;
+
+						Sleep(100);
+						continue;
+					}
+
+					// ...
+					{
+						int alarm_id = ALID__CHM_SLOT_VALVE_NOT_CLOSE;
+
+						CString log_msg;
+						CString r_act;
+
+						log_msg.Format("Can't execute the \"%s\" mode.\n", mode);
+
+						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, log_msg, r_act);			// Error
+
+						if(r_act.CompareNoCase("RETRY") == 0)
+						{
+							goto LOOP_RETRY;
+						}
+						if(r_act.CompareNoCase("IGNORE") == 0)
+						{
+							break;
+						}
+						return -201;
+					}
+				}
+
+				break;
+			}
+		}
+
+		if(bActive__CHM_SHUTTER_STATE)
+		{
+			int retry_count = 0;
+
+			while(1)
+			{
+				if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) < 0)
+				{
+					if(retry_count < 50)
+					{
+						retry_count++;
+
+						Sleep(100);
+						continue;
+					}
+
+					// ...
+					{
+						int alarm_id = ALID__SHUTTER_VALVE_NOT_CLOSE;
+						CString log_msg;
+						CString r_act;
+
+						log_msg.Format("Can't execute the \"%s\" mode.\n", mode);
+
+						p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, log_msg, r_act);			// Error
+
+						if(r_act.CompareNoCase("RETRY") == 0)
+						{
+							goto LOOP_RETRY;
+						}
+						return -301;
+					}
+				}
+
+				break;
+			}
+		}
+
+		// ...
+	}
+
+	return 1;
 }
 
 int CObj__CHM_FNC::__CALL__MONITORING(id,p_variable,p_alarm)

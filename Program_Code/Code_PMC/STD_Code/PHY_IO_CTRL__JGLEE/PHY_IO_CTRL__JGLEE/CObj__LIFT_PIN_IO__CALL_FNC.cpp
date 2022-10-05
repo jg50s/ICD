@@ -513,6 +513,18 @@ int CObj__LIFT_PIN_IO
 				  CII_OBJECT__ALARM *p_alarm, 
 				  const int i_cycle_mode)
 {
+	{
+		CString file_name;
+		CString log_msg;
+		file_name.Format("%s_Cycle_Test.csv", sObject_Name);
+		xCYCLE_LOG_CTRL->CREATE__SUB_DIRECTORY(sObject_Name);
+		xCYCLE_LOG_CTRL->SET__PROPERTY(file_name,12*1,60);
+		xCYCLE_LOG_CTRL->DISABLE__TIME_LOG();
+		log_msg ="TIME,COUNT,ACTION,ACTION_TIME";
+		xCYCLE_LOG_CTRL->WRITE__LOG(log_msg);
+		xCYCLE_LOG_CTRL->ENABLE__TIME_LOG();
+	}
+
 	SCX__TIMER_CTRL x_timer_ctrl;
 	CString var_data;
 	
@@ -622,6 +634,13 @@ int CObj__LIFT_PIN_IO
 
 						Fnc__Check_MIN_MAX_DATA(n_count,p_ch_min,p_ch_max,cur_sec);
 					}
+					// ...
+					{
+						CString log_msg;
+
+						log_msg.Format(",%1d,UP,%.2f",n_count,cur_sec);
+						xCYCLE_LOG_CTRL->WRITE__LOG(log_msg);
+					}
 				}
 				else if(i_cycle_mode == CYCLE_MODE__MiddleToDown)
 				{
@@ -703,6 +722,13 @@ int CObj__LIFT_PIN_IO
 						CII__VAR_STRING_CTRL* p_ch_max = sCH__RESULT_MOVE_DOWN_UP_MAX_DOWN.Get__PTR();
 						
 						Fnc__Check_MIN_MAX_DATA(n_count,p_ch_min,p_ch_max,cur_sec);
+					}
+					// ...
+					{
+						CString log_msg;
+
+						log_msg.Format(",%1d,DOWN,%.2f",n_count,cur_sec);
+						xCYCLE_LOG_CTRL->WRITE__LOG(log_msg);
 					}
 				}
 				else if(i_cycle_mode == CYCLE_MODE__MiddleToDown)

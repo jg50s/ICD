@@ -164,7 +164,52 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_INTERLOCK_LIGHT_MSG_RF_SYS, str_name);
 	}
 
-	// ...
+	// CFG : GAS_BOX ...
+	{
+		str_name = "CFG.GAS_BOX.DIFF_PRESSURE.LOW_PRESSURE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "pa", 1, 0, 500, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_GAS_BOX_DIFF_PRESSURE_LOW_PRESSURE, str_name);
+	}
+
+	// CFG : WAFER_COUNT ...
+	{
+		str_name = "CFG.WAFER_COUNT.WARNING.APPLY";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_WAFER_COUNT_WARNING_APPLY, str_name);
+
+		str_name = "CFG.WAFER_COUNT.WARNING.REF";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "count", 0, 0, 999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_WAFER_COUNT_WARNING_REF, str_name);
+
+		//
+		str_name = "CFG.WAFER_COUNT.SYSTEM_DOWN.APPLY";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_WAFER_COUNT_SYSTEM_DOWN_APPLY, str_name);
+
+		str_name = "CFG.WAFER_COUNT.SYSTEM_DOWN.REF";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "count", 0, 0, 999999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_WAFER_COUNT_SYSTEM_DOWN_REF, str_name);
+	}
+
+	// CFG : SYSTEM_INITIAL ...
+	{
+		str_name = "CFG.SYSTEM_INITIAL.DI_SENSOR_INTERLOCK.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_SYSTEM_INITIAL_DI_SENSOR_INTERLOCK_CHECK, str_name);
+
+		str_name = "CFG.SYSTEM_INITIAL.AUTO_PM.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_SYSTEM_INITIAL_AUTO_PM_CHECK, str_name);
+	}
+
+	// CFG : BEFORE_PROCESS ...
+	{
+		str_name = "CFG.BEFORE_PROCESS.DI_SENSOR_INTERLOCK.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_BEFORE_PROCESS_DI_SENSOR_INTERLOCK_CHECK, str_name);
+	}
+
+	// CFG ...
 	{
 		str_name = "CFG.PMC.NAME";
 		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
@@ -201,7 +246,7 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name, "NO YES");
 		LINK__VAR_STRING_CTRL(sCH__CUR_NEXT_PROCESS, str_name);
 
-		// CFG ...
+		//
 		str_name = "CFG.SCH_TEST.SIM.ALARM_REPORT.MODE";
 		STD__ADD_DIGITAL(str_name, "ENABLE DISABLE");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_SCH_TEST_SIM_ALARM_REPORT_MODE, str_name);
@@ -638,11 +683,11 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MFC_485_CONTROL_TIMEOUT_ALARM_USE, str_name);
 	}
 
-	// ...
+	// CFG ...
 	{
-		str_name = "CFG.PMC.ATM_MAINT.FLAG";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PMC_ATM_MAINT_FLAG, str_name);
+		str_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "OFF ON", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PMC_ATM_MAINT_ACTIVE, str_name);
 	}
 
 	// RECIPE CONFIG ...
@@ -702,7 +747,6 @@ int CObj__DB_SYS::__DEFINE__ALARM(p_alarm)
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
-
 	// ...
 	{
 		alarm_id = ALID__SETPOINT_AND_MONITORING_INTERLOCK__DISABLE;
@@ -712,6 +756,22 @@ int CObj__DB_SYS::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg  = "Config Page에서 Setpoint & Monitoring Interlock를 Disable 설정했습니다.\n";
 		alarm_msg += "정상적인 설비 운영시에는 반드시 Enable로 전환 바랍니다.\n";
+
+		l_act.RemoveAll();
+		l_act.Add("CHECK");
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__ATM_MAINT_MODE_ACTIVE;
+
+		alarm_title  = title;
+		alarm_title += "\"Maint Mode\" is active !";
+
+		alarm_msg  = "ATM Mode mode가 선택 되었습니다.\n";
+		alarm_msg += "정상적인 설비 운영시에는 반드시 No로 전환 바랍니다.\n";
 
 		l_act.RemoveAll();
 		l_act.Add("CHECK");

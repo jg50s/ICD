@@ -305,9 +305,15 @@ int CObj__PT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__DB_SYS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		//
-		var_name = "MON.SYSTEM.PROCESS.ACTIVE";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
+
+			//
+			var_name = "MON.SYSTEM.PROCESS.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+		}
 	}
 
 	// PT ...

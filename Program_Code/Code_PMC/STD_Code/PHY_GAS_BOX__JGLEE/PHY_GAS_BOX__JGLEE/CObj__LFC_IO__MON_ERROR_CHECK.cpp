@@ -160,7 +160,21 @@ int  CObj__LFC_IO
 		p_variable->Wait__SINGLE_OBJECT(inc_sec);
 
 
+		// ...
+		bool active__check_skip = false;
+
+		if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+		{
+			active__check_skip = true;
+
+			_Close__ALL_VALVE();
+		}
 		if(dCH__CFG_LFC_USE->Check__DATA(STR__YES) < 0)
+		{
+			active__check_skip = true;
+		}
+
+		if(active__check_skip)
 		{
 			dCH__MON_ERROR_CHECK_ACTIVE->Set__DATA(STR__OFF);
 			dCH__MON_LFC_STABLE_ACTIVE->Set__DATA(STR__OFF);	

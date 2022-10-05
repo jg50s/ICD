@@ -31,15 +31,6 @@ int  CObj__ARCTIC_SERIAL
 		aCH__PARA_SET_POWER->Get__DATA(ch_data);
 		aoCH__DIGITAL_POWER_SET->Set__DATA(ch_data);
 
-		//flag = doCH__DIGITAL_INITIAL_CTRL->Set__DATA(STR__ON);
-		flag = doCH__DIGITAL_POWER_CTRL->Set__DATA(STR__ON);
-
-		if(flag > 0)
-			flag = doCH__PLASMA_ON_ENABLE_TURN_ON->Set__DATA(STR__ON);
-
-		if(flag > 0)
-			flag = doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Set__DATA(STR__ON);
-
 		// ...
 		{
 			CString log_msg;
@@ -59,24 +50,6 @@ int  CObj__ARCTIC_SERIAL
 							ch_data);
 			log_msg += log_bff;
 
-			ch_data = doCH__DIGITAL_POWER_CTRL->Get__STRING();
-			log_bff.Format(" * %s <- %s \n",
-							doCH__DIGITAL_POWER_CTRL->Get__VARIABLE_NAME(),
-							ch_data);
-			log_msg += log_bff;
-
-			ch_data = doCH__PLASMA_ON_ENABLE_TURN_ON->Get__STRING();
-			log_bff.Format(" * %s <- %s \n",
-							doCH__PLASMA_ON_ENABLE_TURN_ON->Get__VARIABLE_NAME(),
-							ch_data);
-			log_msg += log_bff;
-
-			ch_data = doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Get__STRING();
-			log_bff.Format(" * %s <- %s \n",
-							doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Get__VARIABLE_NAME(),
-							ch_data);
-			log_msg += log_bff;
-
 			Write__APP_LOG(log_msg);
 		}
 	}
@@ -88,8 +61,52 @@ int  CObj__ARCTIC_SERIAL
 		//flag = doCH__DIGITAL_INITIAL_CTRL->Set__DATA(STR__OFF);
 		flag = doCH__DIGITAL_POWER_CTRL->Set__DATA(STR__OFF);
 
+		aCH__PARA_SET_POWER->Set__DATA("0");
 		aoCH__DIGITAL_POWER_SET->Set__DATA("0");
 	}
 	return flag;
 }
 
+int  CObj__ARCTIC_SERIAL
+::Call__POWER_ON(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	CString ch_data;
+	int	flag;
+
+	flag = doCH__DIGITAL_POWER_CTRL->Set__DATA(STR__ON);
+
+	if(flag > 0)
+		flag = doCH__PLASMA_ON_ENABLE_TURN_ON->Set__DATA(STR__ON);
+
+	if(flag > 0)
+		flag = doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Set__DATA(STR__ON);
+
+	// ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg = "\n";
+
+		ch_data = doCH__DIGITAL_POWER_CTRL->Get__STRING();
+		log_bff.Format(" * %s <- %s \n",
+						doCH__DIGITAL_POWER_CTRL->Get__VARIABLE_NAME(),
+						ch_data);
+		log_msg += log_bff;
+
+		ch_data = doCH__PLASMA_ON_ENABLE_TURN_ON->Get__STRING();
+		log_bff.Format(" * %s <- %s \n",
+						doCH__PLASMA_ON_ENABLE_TURN_ON->Get__VARIABLE_NAME(),
+						ch_data);
+		log_msg += log_bff;
+
+		ch_data = doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Get__STRING();
+		log_bff.Format(" * %s <- %s \n",
+					   doCH__PLASMA_ON_ENABLE_OUTPUT_HIGH->Get__VARIABLE_NAME(),
+					   ch_data);
+		log_msg += log_bff;
+
+		Write__APP_LOG(log_msg);
+	}
+	return flag;
+}

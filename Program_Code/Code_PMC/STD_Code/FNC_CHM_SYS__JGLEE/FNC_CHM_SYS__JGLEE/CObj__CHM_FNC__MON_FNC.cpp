@@ -46,7 +46,7 @@ Mon__PRESSURE_STATUS(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alar
 
 			double cur_pos = aEXT_CH__VAT_CUR_POSITION->Get__VALUE();
 
-			if(cur_pos >= 50)
+			if(cur_pos > 0)
 			{
 				active_pumping = 1;
 			}

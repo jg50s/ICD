@@ -207,12 +207,12 @@ CString CObj__RF_STD
 	CString str_msg;
 	CString str_bff;
 
-	str_bff.Format(" * Pressure range <- (%.3f, %.3f) \n",
+	str_bff.Format(" *  range <- (%.3f, %.3f) \n",
 					x_report.dRange_MIN,
 					x_report.dRange_MAX);
 	str_msg += str_bff;
 
-	str_bff.Format(" * Set.pressure <- [%.3f] torr \n", 
+	str_bff.Format(" * Set.power <- [%.3f] torr \n", 
 					x_report.dSet_VALUE);
 	str_msg += str_bff;
 
@@ -224,12 +224,12 @@ CString CObj__RF_STD
 					x_report.dError_SEC);
 	str_msg += str_bff;
 
-	str_bff.Format(" * So, valid range is [%.3f] torr < current pressure < [%.3f] torr. \n", 
+	str_bff.Format(" * So, valid range is [%.3f] W < current power < [%.3f] W. \n", 
 					x_report.dError_MIN,
 					x_report.dError_MAX);
 	str_msg += str_bff;
 
-	str_bff.Format(" * But, current pressure is [%.3f] torr. \n", 
+	str_bff.Format(" * But, current power is [%.3f] W. \n", 
 					x_report.dCUrrent_VALUE);
 	str_msg += str_bff;
 

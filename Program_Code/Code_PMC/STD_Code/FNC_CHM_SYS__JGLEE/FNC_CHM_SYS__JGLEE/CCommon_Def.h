@@ -17,6 +17,7 @@
 #define STR__ON							"ON"
 #define STR__OFF						"OFF"
 
+#define STR__CTCINUSE					"CTCINUSE"
 #define STR__STANDBY					"STANDBY"
 #define STR__MAINTMODE					"MAINTMODE"
 

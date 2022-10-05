@@ -257,6 +257,7 @@ int CObj__INTERLOCK_GAS_BOX
 					count__err_heavy++;
 					msg__err_heavy = "All valve of DGF are closed !";
 
+					/*
 					// ...
 					int alm_id = ALID__DGF_ALL_VALVE_CLOSE;
 
@@ -270,7 +271,8 @@ int CObj__INTERLOCK_GAS_BOX
 					alm_msg += alm_bff;
 
 					p_alarm->Check__ALARM(alm_id, r_act);
-					p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);					
+					p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);	
+					*/
 				}
 			}
 

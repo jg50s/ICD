@@ -48,3 +48,11 @@ union _DATA__3BYTE_INT
 
 #define STR__NOT_MATCHED			"NOTMATCHED"
 #define STR__MATCHED				"MATCDED"
+
+#define STR__INTERNAL				"INTERNAL"
+#define STR__EXTERNAL				"EXTERNAL"
+#define STR__NOT_USE				"NOT.USE"
+
+#define STR__DISABLE				"DISABLE"
+#define STR__ENABLE					"ENABLE"
+

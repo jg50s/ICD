@@ -38,7 +38,7 @@
 #define  _MFC_CMD__RAMP_CTRL			"RAMP.CTRL"
 #define  _MFC_CMD__CLOSE				"CLOSE"
 
-#define  _RF_CMD__SET_POWER				"SET_POWER"
+#define  _RF_CMD__PROC_SET				"PROC_SET"
 #define  _RF_CMD__OFF					"OFF"
 
 #define  _PULSE_CMD__PARA_RCP_ON		"PARA_RCP.ON"

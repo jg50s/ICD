@@ -62,7 +62,7 @@ int CObj__CHM_IO::__DEFINE__VARIABLE_STD(p_variable)
 	// CFG ...
 	{
 		str_name = "CFG.PROCESS_MANOMETER.INTERLOCK.HIGH.LIMIT.PRESSURE";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 10, 100, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 1, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_INTERLOCK_HIGH_LIMIT_PRESSURE, str_name);
 
 		for(i=0; i<_CFG__PROC_GAUGE_SIZE; i++)
@@ -379,6 +379,29 @@ int CObj__CHM_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_ON_STATE_X[i], obj_name,var_name);
+		}
+	}
+
+	// MFC INFO ...
+	{
+		def_name = "CH__MFC_TOTAL_FLOW_SET";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MFC_TOTAL_FLOW_SET, obj_name,var_name);
+
+		//
+		def_name = "DATA.MFC_SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		iDATA__MFC_SIZE = atoi(def_data);
+
+		if(iDATA__MFC_SIZE > _CFG__MFC_SIZE)		iDATA__MFC_SIZE = _CFG__MFC_SIZE;
+
+		for(i=0; i<iDATA__MFC_SIZE; i++)
+		{
+			def_name.Format("CH__MFC_FLOW_SET.%1d", i+1);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MFC_FLOW_SET_X[i], obj_name,var_name);
 		}
 	}
 

@@ -54,6 +54,14 @@ int CObj__DB_INF::__DEFINE__VARIABLE_STD(p_variable)
 	CString dsp_list;
 	int i;
 
+
+	// ...
+	{
+		str_name = "ACTIVE.CALL_BY_CTC";
+		STD__ADD_DIGITAL_WITH_COMMENT(str_name, "OFF ON", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__ACTIVE_CALL_BY_CTC, str_name);
+	}
+
 	//  PMC -> CTC
 	{
 		str_name = "CHM.PRC.STS";
@@ -101,6 +109,13 @@ int CObj__DB_INF::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "RF.ON.STS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(xCH__RF_ON_STS, str_name);
+
+		//
+		str_name = "MFC.TOTAL.FLOW_SET";
+		STD__ADD_STRING(str_name);
+
+		str_name = "MFC.TOTAL.FLOW_READ";
+		STD__ADD_STRING(str_name);
 
 		//
 		str_name = "CHM.STATE.REPORT_TO_CTC";
@@ -245,9 +260,27 @@ int CObj__DB_INF::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(xCH__TMC_LINK_TEST_FLAG, str_name);
 
+		//
 		str_name = "TMC.ROBOT.ARM.STATE";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(xCH__TMC_ROBOT_ARM_STATE, str_name);
+		LINK__VAR_STRING_CTRL(sCH__TMC_ROBOT_ARM_STATE, str_name);
+
+		str_name = "TMC.PRESSURE.STATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__TMC_PRESSURE_STATE, str_name);
+
+		//
+		str_name = "TMC_LINK.DA_REPORT.RESULT.WAFER";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__TMC_LINK_DA_REPORT_RESULT_WAFER, str_name);
+
+		str_name = "TMC_LINK.DA_REPORT.R_OFFSET.WAFER";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__TMC_LINK_DA_REPORT_R_OFFSET_WAFER, str_name);
+
+		str_name = "TMC_LINK.DA_REPORT.T_OFFSET.WAFER";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__TMC_LINK_DA_REPORT_T_OFFSET_WAFER, str_name);
 	}
 
 	// ...

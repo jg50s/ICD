@@ -71,7 +71,8 @@ int CObj__PMC_OPR
 		return -11;
 	}
 
-	if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA("ATM") > 0)
+	if((dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+	|| (dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0))
 	{
 		if(p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__VENT) < 0)
 		{

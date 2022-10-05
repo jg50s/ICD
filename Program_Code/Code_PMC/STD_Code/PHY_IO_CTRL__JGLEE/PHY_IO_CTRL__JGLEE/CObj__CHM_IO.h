@@ -96,6 +96,12 @@ private:
 
 	int iDATA__RF_SIZE;
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__RF_ON_STATE_X[_CFG__RF_SIZE];
+
+	// MFC INFO ...
+	CX__VAR_STRING_CTRL   sEXT_CH__MFC_TOTAL_FLOW_SET;
+
+	int iDATA__MFC_SIZE;
+	CX__VAR_ANALOG_CTRL   aEXT_CH__MFC_FLOW_SET_X[_CFG__MFC_SIZE];
 	//
 
 
@@ -103,10 +109,9 @@ private:
 	CString sMODE__INIT;
 	int Call__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
-
 	// ...
 	int Mon__STATUS(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
-
+	//
 
 public:
 	CObj__CHM_IO();

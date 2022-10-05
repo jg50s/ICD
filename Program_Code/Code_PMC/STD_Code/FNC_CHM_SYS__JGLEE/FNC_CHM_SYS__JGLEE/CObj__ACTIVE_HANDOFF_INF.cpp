@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "CObj__ACTIVE_HANDOFF_INF.h"
 
+#include "CCommon_Def.h"
 #include "CCommon_Utility.h"
 
 
@@ -66,13 +67,26 @@ int CObj__ACTIVE_HANDOFF_INF::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.MSG";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
 	}
 
+	// CFG ...
+	{
+		str_name = "CFG.TRANSFER_END.LIFT_PIN_DOWN";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_TRANSFER_END_LIFT_PIN_DOWN, str_name);
+	}
+
+	// LINK.TEST ...
+	{
+		str_name = "LINK.TEST.USE.LIFT_PIN_DOWN";
+		STD__ADD_DIGITAL(str_name, "YES NO");
+		LINK__VAR_DIGITAL_CTRL(dCH__LINK_TEST_USE_LIFT_PIN_DOWN, str_name);
+	}
 	return 1;
 }
 
@@ -145,6 +159,18 @@ int CObj__ACTIVE_HANDOFF_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	CCommon_Utility x_utility;
 	bool def_check;
+
+	// OBJ.OPR_PMC ...
+	{
+		def_name = "OBJ__OPR_PMC";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		pOBJ_CTRL__OPR_PMC = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+		//
+		var_name = "OBJ.STATUS";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__OPR_OBJ_STATE, obj_name,var_name);
+	}
 
 	// OBJ.PM_SLOT ...
 	{
@@ -269,19 +295,32 @@ LOOP_RETRY:
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
-		CString log_msg;
-		log_msg.Format("Aborted ... :  [%s]",mode);
+		// ...
+		{
+			CString log_msg;
+			log_msg.Format("Aborted ... :  [%s]",mode);
 
-		sCH__OBJ_MSG->Set__DATA(log_msg);
-		xLOG_CTRL->WRITE__LOG(log_msg);
+			sCH__OBJ_MSG->Set__DATA(log_msg);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		dEXT_CH__OPR_OBJ_STATE->Set__DATA(STR__MAINTMODE);
 	}
 	else
 	{
-		CString log_msg;
-		log_msg.Format("Completed ... :  [%s]",mode);
+		// ...
+		{
+			CString log_msg;
+			log_msg.Format("Completed ... :  [%s]",mode);
 
-		sCH__OBJ_MSG->Set__DATA(log_msg);
-		xLOG_CTRL->WRITE__LOG(log_msg);
+			sCH__OBJ_MSG->Set__DATA(log_msg);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		if(dEXT_CH__OPR_OBJ_STATE->Check__DATA(STR__CTCINUSE) > 0)
+		{
+			dEXT_CH__OPR_OBJ_STATE->Set__DATA(STR__STANDBY);
+		}
 	}
 
 	return flag;

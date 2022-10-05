@@ -34,6 +34,10 @@ private:
 	CX__VAR_ANALOG_CTRL  aCH__CFG_USE_FR_CLOSE_TIMEOUT;
 
 	//------------------------------------------------------------
+	// DB_SYS ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
+
+	// LINK.IO ...
 	bool bActive__DO_FR_VALVE;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_FR_VALVE_CTRL;
 
@@ -70,6 +74,9 @@ private:
 	//------------------------------------------------------------
 	CString sMODE__ALL_CLOSE;
 	int Call__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	
+	int Check__ALL_CLOSE();
+	int Fnc__ALL_CLOSE();
 
 	CString sMODE__SR_OPEN;
 	int Call__SR_OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);

@@ -35,6 +35,35 @@ int CObj__VAC_VLV_PHY
 }
 
 int CObj__VAC_VLV_PHY
+::Check__ALL_CLOSE()
+{
+	if(bActive__DO_SR_VALVE_CTRL)
+	{
+		if(dEXT_CH__DO_SR_VALVE_CTRL->Check__DATA(STR__CLOSE) < 0)			return -11;
+	}
+	if(bActive__DO_FR_VALVE)
+	{
+		if(dEXT_CH__DO_FR_VALVE_CTRL->Check__DATA(STR__CLOSE) < 0)			return -21;
+	}
+
+	return 1;
+}
+int CObj__VAC_VLV_PHY
+::Fnc__ALL_CLOSE()
+{
+	if(bActive__DO_SR_VALVE_CTRL)
+	{
+		dEXT_CH__DO_SR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	}
+	if(bActive__DO_FR_VALVE)
+	{
+		dEXT_CH__DO_FR_VALVE_CTRL->Set__DATA(STR__CLOSE);
+	}
+
+	return 1;
+}
+
+int CObj__VAC_VLV_PHY
 ::Call__SR_OPEN(CII_OBJECT__VARIABLE *p_variable,
 				CII_OBJECT__ALARM *p_alarm)
 {

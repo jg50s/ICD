@@ -174,7 +174,7 @@ private:
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CTC_LEAK_CHECK_TIME_MIN;
 
 	CX__VAR_STRING_CTRL  sEXT_CH__SYSTEM_INTERLOCK_FLAG;
-	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_PMC_ATM_MAINT_FLAG;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
 
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_CHM_MANOMETER_PRESS_SW1_SETTING;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_CHM_MANOMETER_PRESS_SW2_SETTING;
@@ -192,7 +192,7 @@ private:
 	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__TRANSFER;
 
 	// VAC.VLV INFO ...
-	int Call__VAC_VLV__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+	int Call__VAC_VLV__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active__exhaust_vlv = true, const bool active__apc_vlv = true);
 	int Call__VAC_VLV__SR_OPEN(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 	int Call__VAC_VLV__FR_OPEN(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 	
@@ -260,6 +260,8 @@ private:
 
 
 	//------------------------------------------------------------
+	int _Check__CONTROL_INTERLOCK(const CString& mode, CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+
 	// ...
 	CString sMODE__INIT;
 	int Call__INIT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
@@ -277,7 +279,9 @@ private:
 	CString sMODE__LOW_VAC_PUMP;
 	int Call__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
+	int Check__LOW_VAC_PUMP();
 	int Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag);
+	
 	int _Fnc__SOFT_LOW_VAC(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int purge_flag);
 
 	//

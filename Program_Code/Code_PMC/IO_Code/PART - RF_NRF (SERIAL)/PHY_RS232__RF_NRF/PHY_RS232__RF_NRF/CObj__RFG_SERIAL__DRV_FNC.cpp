@@ -62,7 +62,7 @@ int CObj__RFG_SERIAL
 			}
 			else
 			{
-				_DATA__2BYTE_INT data_pwr;
+				_DATA__2BYTE_UINT data_pwr;
 				data_pwr._byte[0] = data_0;
 				data_pwr._byte[1] = data_1;
 
@@ -100,6 +100,23 @@ int CObj__RFG_SERIAL
 int CObj__RFG_SERIAL
 ::__Write__ANALOG(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const double set_data)
 {
+	// Log ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg  = "_Write__ANALOG() \n";
+
+		log_bff.Format(" * var_name <- %s \n", var_name);
+		log_msg += log_bff;
+
+		log_bff.Format(" * set_data <- %.3f \n", set_data);
+		log_msg += log_bff;
+
+		Write__DRV_LOG(log_msg);
+	}
+
+	// ...
 	unsigned char r_data[MAX_CHAR] = {0,};
 	CString ch_data;
 	
@@ -113,7 +130,7 @@ int CObj__RFG_SERIAL
 	
 		int set_hexa = (int) ((set_data / dVALUE__PWR_MAX) * iHEXA__PWR_MAX);
 		
-		_DATA__2BYTE_INT data_pwr;
+		_DATA__2BYTE_UINT data_pwr;
 		data_pwr._hexa = (int) set_hexa;
 		data_00 = data_pwr._byte[0];
 		data_01 = data_pwr._byte[1];
@@ -127,6 +144,23 @@ int CObj__RFG_SERIAL
 int CObj__RFG_SERIAL
 ::__Write__DIGITAL(const CString& var_name, const CDS_IO__CHANNEL_INFO& io_info, const CString& set_data,const int item_index)
 {
+	// Log ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg  = "_Write__DIGITAL() \n";
+
+		log_bff.Format(" * var_name <- %s \n", var_name);
+		log_msg += log_bff;
+
+		log_bff.Format(" * set_data (%1d) <- %s \n", item_index, set_data);
+		log_msg += log_bff;
+
+		Write__DRV_LOG(log_msg);
+	}
+
+	// ...
 	unsigned char r_data[MAX_CHAR] = {0,};
 	CString ch_data;
 

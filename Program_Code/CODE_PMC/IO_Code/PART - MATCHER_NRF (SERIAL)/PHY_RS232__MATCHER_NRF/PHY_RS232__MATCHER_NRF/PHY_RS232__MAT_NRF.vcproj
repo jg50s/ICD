@@ -291,6 +291,46 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="CObj__NODA_SERIAL"
+				>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__DRV_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__LOG_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__MON_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__NODA_SERIAL__SUB_FNC.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

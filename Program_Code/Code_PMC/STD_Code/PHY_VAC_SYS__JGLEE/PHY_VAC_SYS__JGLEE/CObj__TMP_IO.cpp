@@ -110,9 +110,40 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_ERROR_STATE, str_name);
 
 		//
-		str_name = "MON.PUMP.RPM.VALUE";
-		STD__ADD_ANALOG(str_name, "rpm", 1, 0.0, 50000.0);
-		LINK__VAR_ANALOG_CTRL(aCH__MON_PUMP_RPM_VALUE, str_name);
+		str_name = "MON.ROT_SPEED.RPM.READ";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_ROT_SPEED_RPM_READ, str_name);
+
+		str_name = "MON.PUMP.TEMPERATURE.READ";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PUMP_TEMPERATURE_READ, str_name);
+
+		//
+		str_name = "MON.ROT_SPEED.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "IDLE  OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_ROT_SPEED_ERROR_ACTIVE, str_name);
+		
+		str_name = "MON.MOTOR_TEMPERATURE.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "IDLE  OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_MOTOR_TEMPERATURE_ERROR_ACTIVE, str_name);
+
+		//
+		str_name = "MON.SPEED.CHECK.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH___MON_SPEED_CHECK_ACTIVE, str_name);
+
+		str_name = "MON.SPEED.STABLE.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH___MON_SPEED_STABLE_ACTIVE, str_name);
+
+		str_name = "MON.SPEED.ABORT.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH___MON_SPEED_ABORT_ACTIVE, str_name);
+
+		//
+		str_name = "MON.TMP_LINE_NOT_READY.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH___MON_TMP_LINE_NOT_READY_ACTIVE, str_name);
 	}
 
 	// CFG ...
@@ -139,6 +170,48 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_TURBO_N2_PURGE_CLOSE_DELAY, str_name);
 	}
+	// CFG.SPEED ...
+	{
+		str_name = "CFG.TARGET.SPEED.RPM";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "rpm", 0, 1000, 100000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TARGET_SPEED_RPM, str_name);
+
+		str_name = "CFG.HIGH_LIMIT.SPEED.RPM";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "rpm", 0, 1000, 100000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_HIGH_LIMIT_SPEED_RPM, str_name);
+
+		str_name = "CFG.LOW_LIMIT.SPEED.RPM";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "rpm", 0, 0, 100000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_LOW_LIMIT_SPEED_RPM, str_name);
+
+		//
+		str_name = "CFG.ACCELERATION.TIMEOUT.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 60, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_ACCELERATION_TIMEOUT_SEC, str_name);
+
+		str_name = "CFG.TARGET.SPEED.TIMEOUT.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 60, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TARGET_SPEED_TIMEOUT_SEC, str_name);
+
+		str_name = "CFG.STOP.TIMEOUT.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 60, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_STOP_TIMEOUT_SEC, str_name);
+
+		//
+		str_name = "CFG.SPEED_ERR_CHECK.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SPEED_ERR_CHECK_SEC, str_name);
+	}
+	// CFG.TEMPERATURE ...
+	{
+		str_name = "CFG.HIGH_LIMIT.TEMPERATURE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 50, 200, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_HIGH_LIMIT_TEMPERATURE, str_name);
+
+		str_name = "CFG.TEMPERATURE_ERR_CHECK.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TEMPERATURE_ERR_CHECK_SEC, str_name);
+	}
 
 	// ...
 	{
@@ -164,15 +237,50 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 
 	// ...
 	{
+		alarm_id = ALID__TMP_OFFLINE;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "TMP Offline !";
+
+		alarm_msg  = "TMP(IO) Offline. \n";
+		alarm_msg += "Please, check the state of TMP (IO) ! \n";
+		alarm_msg += "Now, Turbo pump line will be isolated.";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__TMP_ERROR_DETECTED;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "TMP Error가 감지 되었습니다 !";
+
+		alarm_msg += "Please, check the state of TMP (IO) ! \n";
+		alarm_msg += "Now, Turbo pump line will be isolated.";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
 		alarm_id = ALID__FORLINE_PRESSURE_UNSTABLE_ALARM;
 		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Forline Pressure Unstable Alarm !";
 
-		alarm_msg  = "Forline Pressure Unstable Status\n";
-		alarm_msg += "Check the Forline Vac Switch and Dry Pump On Status!\n";
-		alarm_msg += "Now... Turbo Pump will be off..";
+		alarm_msg  = "Forline Pressure Unstable Status \n";
+		alarm_msg += "Check the Forline Vac Switch and Dry Pump On Status ! \n";
+		alarm_msg += "Now, Turbo pump line will be isolated.";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CHECK);
@@ -190,7 +298,7 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg  = "PCW Unstable Status \n";
 		alarm_msg += "Check the state of PCW ! \n";
-		alarm_msg += "Now, Turbo Pump will be off..";
+		alarm_msg += "Now, Turbo pump will be off..";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CHECK);
@@ -261,6 +369,79 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__FORELINE_NOT_OPEN__VAT_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "Foreline Valve Interlock (Not Open) !";
+
+		alarm_msg = "Close VAT-Object !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__FORELINE_NOT_OPEN__TMP_START;
+
+		alarm_title  = title;
+		alarm_title += "Foreline Valve Interlock (Not Open) !";
+
+		alarm_msg = "TMP를 Start 시킬 수 없습니다 !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__HIGH_LIMIT_SPEED_RPM;
+
+		alarm_title  = title;
+		alarm_title += "High-Limit Speed Error !";
+
+		alarm_msg = "Please, check the rotation speed (rpm) !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__LOW_LIMIT_SPEED_RPM;
+
+		alarm_title  = title;
+		alarm_title += "Low-Limit Speed Error !";
+
+		alarm_msg = "Please, check the rotation speed (rpm) !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__HIGH_LIMIT_TEMPERATURE;
+
+		alarm_title  = title;
+		alarm_title += "High-Limit Temperature Error !";
+
+		alarm_msg = "Please, check the temperature (C) of TMP !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -311,7 +492,8 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		bActive__TMP_DI_ALARM_STATE   = false;
 		bActive__TMP_DI_WARNING_STATE = false;
 
-		bActive__TMP_AI_ROT_RPM = false;
+		bActive__TMP_AI_ROT_SPEED_RPM = false;
+		bActive__TMP_AI_TEMPERATURE   = false;
 
 		//
 		bActive__GV_USE  = false;
@@ -409,18 +591,33 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 		}
 
-		// AI.ROT_RPM ...
+		// AI.ROT_SPEED_RPM ...
 		{
-			def_name = "LINK_TMP.AI_ROT_RPM";
+			def_name = "LINK_TMP.AI_ROT_SPEED_RPM";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
 			def_check = x_utility.Check__Link(ch_name);
-			bActive__TMP_AI_ROT_RPM = def_check;
+			bActive__TMP_AI_ROT_SPEED_RPM = def_check;
 
 			if(def_check)
 			{
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP_AI_ROT_RPM, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP_AI_ROT_SPEED_RPM, obj_name,var_name);
+			}
+		}
+
+		// AI.TEMPERATURE ...
+		{
+			def_name = "LINK_TMP.AI_TEMPERATURE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__TMP_AI_TEMPERATURE = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP_AI_TEMPERATURE, obj_name,var_name);
 			}
 		}
 	}
@@ -498,6 +695,22 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
 			sTMP_MODE__STOP_NO_WAIT = def_data;
+		}
+
+		// OBJ.PARA ...
+		{
+			var_name = "PARA.TARGET_SPEED.RPM";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP__PARA_TARGET_SPEED_RPM, obj_name,var_name);
+
+			var_name = "PARA.ACCELERATION.TIMEOUT";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP__PARA_AACCELERATION_TIMEOUT, obj_name,var_name);
+
+			var_name = "PARA.TARGET_SPEED.TIMEOUT";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP__PARA_TARGET_SPEED_TIMEOUT, obj_name,var_name);
+
+			//
+			var_name = "PARA.STOP.TIMEOUT";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMP__PARA_STOP_TIMEOUT, obj_name,var_name);
 		}
 	}
 
@@ -645,6 +858,21 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// REF.MFC_TOTAL_FLOW ...
+	{
+		def_name = "CH__REF_MFC_TOTAL_FLOW";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+		def_check = x_utility.Check__Link(ch_name);
+		bActive__REF_MFC_TOTAL_FLOW = def_check;
+		
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__REF_MFC_TOTAL_FLOW, obj_name,var_name);
+		}
+	}
+
 	// ...
 	{
 		SCX__SEQ_INFO x_seq_info;
@@ -654,8 +882,6 @@ int CObj__TMP_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
-		bActive__FORELINE_VLV_CHECK = true;
-
 		sCH__OBJ_STATUS->Set__DATA("STANDBY");
 	}
 	return 1;
@@ -677,9 +903,19 @@ int CObj__TMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 
+	if((mode.CompareNoCase(sMODE__INIT) == 0)
+	|| (mode.CompareNoCase(sMODE__ON)   == 0)
+	|| (mode.CompareNoCase(sMODE__OFF)	== 0)
+	|| (mode.CompareNoCase(sMODE__OFF_NO_WAIT) == 0))
+	{
+		dCH___MON_SPEED_CHECK_ACTIVE->Set__DATA(STR__OFF);
+		dCH___MON_SPEED_STABLE_ACTIVE->Set__DATA(STR__OFF);
+		dCH___MON_SPEED_ABORT_ACTIVE->Set__DATA(STR__OFF);
+	}
+
 	// ...
 	{
-		     IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
+			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__FULL_CLOSE)		flag = Call__FULL_CLOSE(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__FULL_OPEN)		flag = Call__FULL_OPEN(p_variable, p_alarm);
@@ -687,12 +923,15 @@ int CObj__TMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__EXHAUST_CLOSE)	flag = Call__EXHAUST_CLOSE(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__EXHAUST_OPEN)		flag = Call__EXHAUST_OPEN(p_variable, p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__ON)				flag = Call__ON(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__ON)
+		{
+			flag = Call__ON(p_variable, p_alarm);
+
+			if(flag > 0)		dCH___MON_SPEED_CHECK_ACTIVE->Set__DATA(STR__ON);
+		}
 
 		ELSE_IF__CTRL_MODE(sMODE__OFF)				flag = Call__OFF(p_variable, p_alarm, false);
 		ELSE_IF__CTRL_MODE(sMODE__OFF_NO_WAIT)		flag = Call__OFF(p_variable, p_alarm, true);
-
-		bActive__FORELINE_VLV_CHECK = true;
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

@@ -22,6 +22,7 @@ private:
 	CCommon_Error__USER_FNC mERROR__USER_FNC;	
 
 	SCX__USER_LOG_CTRL xLOG_CTRL;
+	SCX__USER_LOG_CTRL xCYCLE_LOG_CTRL;
 	int iActive__SIM_MODE;
 
 	CUIntArray iLIST_ALID__PIN;

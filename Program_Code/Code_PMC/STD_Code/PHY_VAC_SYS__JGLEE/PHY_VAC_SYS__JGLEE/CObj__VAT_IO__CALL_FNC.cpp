@@ -26,7 +26,8 @@ int CObj__VAT_IO
 {
 	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
 	{
-		return pOBJ_CTRL__VAT->Call__OBJECT(sVAT_CMMD__CLOSE);
+		int r_flag = pOBJ_CTRL__VAT->Call__OBJECT(sVAT_CMMD__CLOSE);
+		if(r_flag < 0)			return r_flag;
 	}
 	else if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__HEXA)
 	{
@@ -51,6 +52,19 @@ int CObj__VAT_IO
 		}
 	}
 
+	while(1)
+	{
+		if(p_variable->Check__CTRL_ABORT() > 0)
+		{
+			return -101;
+		}
+
+		CString ch_data = sCH__MON_POSITION->Get__STRING();
+		double cur_pos = atof(ch_data);
+		if(cur_pos < 0.1)		break;
+
+		Sleep(10);
+	}
 	return 1;
 }
 int CObj__VAT_IO
@@ -58,7 +72,8 @@ int CObj__VAT_IO
 {
 	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
 	{
-		return pOBJ_CTRL__VAT->Call__OBJECT(sVAT_CMMD__OPEN);
+		int r_flag = pOBJ_CTRL__VAT->Call__OBJECT(sVAT_CMMD__OPEN);
+		if(r_flag < 0)			return r_flag;
 	}
 	else if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__HEXA)
 	{
@@ -89,6 +104,19 @@ int CObj__VAT_IO
 		}
 	}
 
+	while(1)
+	{
+		if(p_variable->Check__CTRL_ABORT() > 0)
+		{
+			return -101;
+		}
+
+		CString ch_data = sCH__MON_POSITION->Get__STRING();
+		double cur_pos = atof(ch_data);
+		if(cur_pos > 99.0)		break;
+
+		Sleep(10);
+	}
 	return 1;
 }
 

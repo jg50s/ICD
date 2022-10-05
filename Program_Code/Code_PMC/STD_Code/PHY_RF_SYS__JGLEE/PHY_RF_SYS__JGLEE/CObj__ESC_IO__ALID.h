@@ -2,6 +2,14 @@
 
 
 // ...
+#define ACT__CLEAR												"CLEAR"
+#define ACT__CHECK												"CHECK"
+
+#define ACT__ABORT												"ABORT"
+#define ACT__RETRY												"RETRY"
+
+
+// ...
 #define  ALID__ESC_CHUCK_STATUS__UNKNOWN							1
 #define  ALID__ESC_CHUCK_ERROR__PRESSURE_NOT_VAC					2
 #define  ALID__ESC_CHUCK_ERROR__WAFER_NOT_EXIST						3
@@ -55,4 +63,4 @@
 #define  ALID__INTERLOCK_VACUUM_DISABLE								52
 #define  ALID__INTERLOCK_WAFER_DISABLE								53
 #define  ALID__INTERLOCK_CHM_ISO_DISABLE							54
-//
+#define  ALID__INTERLOCK_ATM_MAINT									55

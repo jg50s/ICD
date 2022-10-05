@@ -17,6 +17,9 @@ private:
 	//-------------------------------------------------------------------------
 	//  INTERNAL PROPERTY
 
+	//  
+	CX__VAR_DIGITAL_CTRL dCH__ACTIVE_CALL_BY_CTC;
+
 	//  PMC --> CTC
 	CX__VAR_DIGITAL_CTRL dCH__CHM_PRC_STS;
 	CX__VAR_STRING_CTRL  sCH__CHM_PRC_TOTAL_TIME_TO_CTC;
@@ -77,8 +80,13 @@ private:
 	// PMC <-- TMC
 	CX__VAR_STRING_CTRL  xCH__TMC_LINK_TEST_FLAG;
 
-	CX__VAR_STRING_CTRL  xCH__TMC_ROBOT_ARM_STATE;
+	CX__VAR_STRING_CTRL  sCH__TMC_ROBOT_ARM_STATE;
+	CX__VAR_STRING_CTRL  sCH__TMC_PRESSURE_STATE;
 
+	CX__VAR_STRING_CTRL  sCH__TMC_LINK_DA_REPORT_RESULT_WAFER;
+	CX__VAR_STRING_CTRL  sCH__TMC_LINK_DA_REPORT_R_OFFSET_WAFER;
+	CX__VAR_STRING_CTRL  sCH__TMC_LINK_DA_REPORT_T_OFFSET_WAFER;
+	//
 
 	//-------------------------------------------------------------------------
 	//  EXTERNAL PROPERTY

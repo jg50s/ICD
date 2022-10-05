@@ -32,6 +32,12 @@ private:
 	//
 
 	//-------------------------------------------------------------------------
+	// OBJ : DB_INF ...
+	CX__VAR_STRING_CTRL   sEXT_CH__CHM_PRESSURE_STATE;
+
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__TMC_ROBOT_ARM_STATE;
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__TMC_PRESSURE_STATE;
+
 	// OBJ : IO Channel ...
 	CX__VAR_STRING_CTRL   sEXT_CH__MON_DOOR_STATE;
 

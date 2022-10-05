@@ -52,5 +52,17 @@ void CObj__DB_SYS
 			p_alarm->Check__ALARM(alm_id, r_act);
 			p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
 		}
+
+		if(dCH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+		{
+			alm_id = ALID__ATM_MAINT_MODE_ACTIVE;
+
+			alm_msg.Format("%s <- %s\n", 
+							dCH__CFG_PMC_ATM_MAINT_ACTIVE->Get__CHANNEL_NAME(),
+							dCH__CFG_PMC_ATM_MAINT_ACTIVE->Get__STRING());
+
+			p_alarm->Check__ALARM(alm_id, r_act);
+			p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+		}
 	}
 }

@@ -144,9 +144,12 @@ private:
 	CString sMODE__LOCAL;
 	int  Call__CTRL_MODE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_remote);
 
-	CString sMODE__ON;
+	CString sMODE__POWER_SET;
 	CString sMODE__OFF;
 	int  Call__POWER_SET(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_power);
+
+	CString sMODE__POWER_ON;
+	int  Call__POWER_ON(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	int  _Send__Command(const CString& s_packet, CString* r_data);

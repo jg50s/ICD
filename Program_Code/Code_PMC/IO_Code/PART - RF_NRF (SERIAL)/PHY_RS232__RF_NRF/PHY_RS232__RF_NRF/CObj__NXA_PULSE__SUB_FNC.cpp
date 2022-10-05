@@ -46,6 +46,19 @@ int CObj__NXA_PULSE
 {
 	int	n_cnt = 1;
 
+	// Clear.Data ...
+	{
+		CString cls_bff;
+		mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+		CString r_msg;
+
+		r_msg  = "Clear.Data ... \n";
+		r_msg += cls_bff;
+
+		Write__DRV_LOG(r_msg);
+	}
+
 	do 
 	{
 		unsigned char s_cmmd[MAX_CHAR] = {0,};
@@ -86,17 +99,6 @@ int CObj__NXA_PULSE
 			return 1;
 		}
 
-		// Send.Data ...
-		{
-			CString cls_bff;
-			mX_Serial->CLEAR__BUFFER(&cls_bff);
-
-			mX_Serial->CHAR__SEND(s_cmmd, s_len);
-		}
-
-		// Recv.Data ...
-		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _ETX, &r_len, m_Rcv_Time);
-
 		// Send.Log ...
 		{
 			CString s_msg;
@@ -112,6 +114,18 @@ int CObj__NXA_PULSE
 
 			Write__DRV_LOG(s_msg);
 		}
+
+		// Send.Data ...
+		{
+			CString cls_bff;
+			mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+			mX_Serial->CHAR__SEND(s_cmmd, s_len);
+		}
+
+		// Recv.Data ...
+		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _ETX, &r_len, m_Rcv_Time);
+
 		// Recv.Log ...
 		{
 			CString r_msg;
@@ -123,6 +137,27 @@ int CObj__NXA_PULSE
 			{
 				r_bff.Format("%02X ", r_data[i]);
 				r_msg += r_bff;
+			}
+
+			if(r_len < 3)
+			{
+				CString cls_bff;
+				mX_Serial->CLEAR__BUFFER(&cls_bff);
+			
+				if(r_bff.GetLength() > 0)
+				{
+					int bff_len = cls_bff.GetLength();
+
+					r_msg += "\n";
+					r_bff.Format("Buffer_Data (%1d) \n", bff_len);
+					r_msg += r_bff;
+
+					for(int i=0; i<bff_len; i++)
+					{
+						r_bff.Format("%02X ", cls_bff.GetAt(i));
+						r_msg += r_bff;
+					}
+				}
 			}
 
 			Write__DRV_LOG(r_msg);
@@ -137,7 +172,39 @@ int CObj__NXA_PULSE
 
 			if(r_len > 3)		err_code = r_data[3];
 
-			return _Check_ErrorCode(err_code);
+			r_flag = _Check_ErrorCode(err_code);
+			if(r_flag > 0)
+			{
+				CString r_msg;
+				CString r_bff;
+
+				r_msg  = "Send OK !";
+				r_msg += "\n";
+
+				r_bff.Format(" * err_code <- %02X \n", err_code);
+				r_msg += r_bff;
+
+				Write__DRV_LOG(r_msg);
+			}
+			else
+			{
+				CString r_msg;
+				CString r_bff;
+
+				r_msg  = "Send ERROR !!!";
+				r_msg += "\n";
+
+				r_bff.Format(" * err_code <- %02X \n", err_code);
+				r_msg += r_bff;
+
+				r_bff.Format(" * %s <- %s \n", 
+							 sCH__INFO_LAST_ERROR_CODE->Get__VARIABLE_NAME(),
+							 sCH__INFO_LAST_ERROR_CODE->Get__STRING());
+				r_msg += r_bff;
+
+				Write__DRV_LOG(r_msg);
+			}
+			return r_flag;
 		}
 
 		Sleep(100);
@@ -149,9 +216,22 @@ int CObj__NXA_PULSE
 }
 
 int CObj__NXA_PULSE
-::_Recv__Command(const unsigned char cmmd_id, unsigned char* r_data)
+::_Recv__Command(const unsigned char cmmd_id, unsigned char* recv_data)
 {
 	int	n_cnt = 1;
+
+	// Clear.Data ...
+	{
+		CString cls_bff;
+		mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+		CString r_msg;
+
+		r_msg  = "Clear.Data ... \n";
+		r_msg += cls_bff;
+
+		Write__DRV_LOG(r_msg);
+	}
 
 	do 
 	{
@@ -171,17 +251,6 @@ int CObj__NXA_PULSE
 			s_cmmd[s_len++] = _ETX;
 		}
 
-		// Send Data ...
-		{
-			CString cls_bff;
-			mX_Serial->CLEAR__BUFFER(&cls_bff);
-
-			mX_Serial->CHAR__SEND(s_cmmd, s_len);
-		}
-
-		// Recv Data ...
-		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _ETX, &r_len, m_Rcv_Time);
-
 		// Send Log ...
 		{
 			CString s_msg;
@@ -197,6 +266,35 @@ int CObj__NXA_PULSE
 
 			Write__DRV_LOG(s_msg);
 		}
+
+		// Send Data ...
+		{
+			CString cls_bff;
+			mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+			mX_Serial->CHAR__SEND(s_cmmd, s_len);
+		}
+
+		// Recv Data ...
+		int r_flag;
+
+		if((cmmd_id == _NXA_CMD__GET_PARAM_A1)
+		|| (cmmd_id == _NXA_CMD__GET_PARAM_A2)
+		|| (cmmd_id == _NXA_CMD__GET_PARAM_B)
+		|| (cmmd_id == _NXA_CMD__GET_PARAM_C)
+		|| (cmmd_id == _NXA_CMD__GET_EXEC))
+		{
+				 if(cmmd_id == _NXA_CMD__GET_PARAM_A1)		r_len = 10;
+			else if(cmmd_id == _NXA_CMD__GET_EXEC)			r_len = 7;
+			else											r_len = 11;
+
+			r_flag = mX_Serial->OnlyRecv__CHAR(r_data, &r_len, m_Rcv_Time);
+		}
+		else
+		{
+			r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _ETX, &r_len, m_Rcv_Time);
+		}
+
 		// Recv Log ...
 		{
 			CString r_msg;
@@ -204,10 +302,35 @@ int CObj__NXA_PULSE
 
 			r_msg.Format("Recv_Data (%1d) ... \n", r_flag);
 
+			if(r_len > MAX_CHAR)		r_len = MAX_CHAR - 1;
+
 			for(int i=0; i<r_len; i++)
 			{
 				r_bff.Format("%02X ", r_data[i]);
 				r_msg += r_bff;
+
+				recv_data[i] = r_data[i];
+			}
+
+			if(r_len < 3)
+			{
+				CString cls_bff;
+				mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+				if(r_bff.GetLength() > 0)
+				{
+					int bff_len = cls_bff.GetLength();
+
+					r_msg += "\n";
+					r_bff.Format("Buffer_Data (%1d) \n", bff_len);
+					r_msg += r_bff;
+
+					for(int i=0; i<bff_len; i++)
+					{
+						r_bff.Format("%02X ", cls_bff.GetAt(i));
+						r_msg += r_bff;
+					}
+				}
 			}
 
 			Write__DRV_LOG(r_msg);
@@ -222,7 +345,37 @@ int CObj__NXA_PULSE
 				int s_cmmd = 0x0ff & (cmmd_id + 0x80);
 				int r_cmmd = 0x0ff & r_data[2];
 
-				if(s_cmmd == r_cmmd)		return r_len;
+				if(s_cmmd == r_cmmd)
+				{
+					CString r_msg;
+					CString r_bff;
+
+					r_msg  = "Recv OK !";
+					r_msg += "\n";
+
+					r_bff.Format(" * s_cmmd <- [%02X] \n", s_cmmd);
+					r_msg += r_bff;
+					r_bff.Format(" * r_cmmd <- [%02X] \n", r_cmmd);
+					r_msg += r_bff;
+
+					Write__DRV_LOG(r_msg);
+					return r_len;
+				}
+				else
+				{
+					CString r_msg;
+					CString r_bff;
+
+					r_msg  = "Recv ERROR !";
+					r_msg += "\n";
+
+					r_bff.Format(" * s_cmmd <- [%02X] \n", s_cmmd);
+					r_msg += r_bff;
+					r_bff.Format(" * r_cmmd <- [%02X] \n", r_cmmd);
+					r_msg += r_bff;
+
+					Write__DRV_LOG(r_msg);
+				}
 			}
 			return -1;
 		}

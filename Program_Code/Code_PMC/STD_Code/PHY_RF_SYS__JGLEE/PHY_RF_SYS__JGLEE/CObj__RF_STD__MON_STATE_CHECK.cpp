@@ -20,6 +20,10 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 		sCH__MON_RF_ON_TIME_START_DATE->Set__DATA(ch_data);
 	}
 
+	// ...
+	{
+		sCH__MON_DO_POWER_SET->Set__DATA("??");
+	}
 	
 	while(1)
 	{
@@ -131,15 +135,39 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 			// SET.POWER ...
 			{
-				ch_data = sEXT_CH__RF_AO_SET_POWER->Get__STRING();
-				double io_set   = atof(ch_data);
-				double io_value = io_set + set_offset;
+				bool active__rf_pwr = false;
+				double io_power_set = 0.0;
 
-				ch_data.Format("%.1f", io_value);
-				sCH__MON_IO_SET_POWER->Set__DATA(ch_data);
+				// ...
+				{
+					ch_data = sEXT_CH__RF_AO_SET_POWER->Get__STRING();
+					io_power_set = atof(ch_data);
+					
+					double io_value = io_power_set + set_offset;
 
-				if(io_set > 0.1)		dCH__MON_IO_POWER_STATE->Set__DATA(STR__ON);
-				else					dCH__MON_IO_POWER_STATE->Set__DATA(STR__OFF);
+					ch_data.Format("%.1f", io_value);
+					sCH__MON_IO_SET_POWER->Set__DATA(ch_data);
+				}
+
+				if(bActive__RF_DO_POWER_CTRL)
+				{
+					ch_data = dEXT_CH__RF_DO_POWER_CTRL->Get__STRING();
+					sCH__MON_DO_POWER_SET->Set__DATA(ch_data);
+
+					if(ch_data.CompareNoCase(STR__ON) == 0)			active__rf_pwr = true;
+				}
+				else
+				{
+					if(io_power_set > 0.1)		active__rf_pwr = true;
+				}
+
+				if(bActive__DO_RF_POWER_CONNECTOR)
+				{
+					if(dEXT_CH__DO_RF_POWER_CONNECTOR->Check__DATA(STR__ON) < 0)		active__rf_pwr = false;
+				}
+
+				if(active__rf_pwr)			dCH__MON_IO_POWER_STATE->Set__DATA(STR__ON);
+				else						dCH__MON_IO_POWER_STATE->Set__DATA(STR__OFF);
 			}
 
 			// FORWARD.POWER ...

@@ -63,7 +63,7 @@ int CObj__LFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.MSG";
 		STD__ADD_STRING(str_name);
@@ -94,6 +94,13 @@ int CObj__LFC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "INFO.LINK_DATA.MAX_DEFAULT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__INFO_LINK_DATA__MAX_DEFAULT, str_name);
+	}
+
+	// MON.PART.ACTIVE ...
+	{
+		str_name = "MON.PART.ERROR.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PART_ERROR_ACTIVE, str_name);
 	}
 
 	// MON.LFC ...
@@ -388,6 +395,7 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LFC_NOT_USE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "In LFC config page, LFC's use is selected to \"YES\".";
@@ -403,6 +411,7 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LFC_FLOW__CONTROL_ABORTED;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "LFC Flow Control Aborted !.";
@@ -419,6 +428,7 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LFC_FLOW__CONTROL_WARNING_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "LFC Flow Control Warning Range Alarm.";
@@ -433,6 +443,7 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LFC_FLOW__CONTROL_ABORT_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "LFC Flow Control Abort Range Alarm.";
@@ -449,6 +460,7 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LFC_FLOW__CONTROL_IDLE_WARNING_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Idle, LFC Flow Control Warning Range Alarm.";
@@ -463,6 +475,7 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 	// ...
 	{
 		alarm_id = ALID__LFC_FLOW__CONTROL_IDLE_ABORT_RANGE;
+		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "During Idle, LFC Flow Control Abort Range Alarm.";
@@ -472,6 +485,68 @@ int CObj__LFC_IO::__DEFINE__ALARM(p_alarm)
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_SENSOR__SYSTEM;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "System interlock sensor detected !";
+
+		alarm_msg = "Please, check system interlock sensors. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_SENSOR__CHMABER;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Chamber interlock sensor detected !";
+
+		alarm_msg = "Please, check chamber interlock sensors. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_SENSOR__GAS_BOX;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Gas box interlock sensor detected !";
+
+		alarm_msg = "Please, check gas box interlock sensors. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_ATM_MAINT;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "ATM.Maint selected!";
+
+		alarm_msg = "Please, check \"Maint Mode\" setting. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -527,30 +602,36 @@ int CObj__LFC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__DB_SYS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		//
-		var_name = "MON.SYSTEM.PROCESS.ACTIVE";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
+			//
+			var_name = "MON.SYSTEM.PROCESS.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.GAS_BOX";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX, obj_name,var_name);
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.GAS_BOX";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_GAS_BOX, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.GAS_BOX";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.GAS_BOX";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_GAS_BOX, obj_name,var_name);
+		}
 	}
 
 	// LINK.DATA ...
@@ -797,83 +878,120 @@ int CObj__LFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		if((mode.CompareNoCase(sMODE__INIT)  != 0)
 		&& (mode.CompareNoCase(sMODE__CLOSE) != 0))
 		{
-			flag = -1;
-
 			// ...
 			{
 				int alarm_id = ALID__LFC_NOT_USE;
+				CString alm_msg;
+				CString alm_bff;
 				CString r_act;
 
+				alm_msg.Format(" Action.Mode <- %s \n", mode);
+				alm_msg += "\n";
+
 				p_alarm->Check__ALARM(alarm_id,r_act);
-				p_alarm->Post__ALARM(alarm_id);
+				p_alarm->Post__ALARM_With_MESSAGE(alarm_id, alm_msg);
 			}
+
+			flag = -1;
 		}
 	}
 	else
 	{
-		bool active__interlock_system  = false;
-		bool active__interlock_chamber = false;
-		bool active__interlock_gas_box = false;
-
-		if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM->Check__DATA(STR__ON)  > 0)		active__interlock_system  = true;
-		if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER->Check__DATA(STR__ON) > 0)		active__interlock_chamber = true;
-		if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Check__DATA(STR__ON) > 0)		active__interlock_gas_box = true;
-
 		if((mode.CompareNoCase(sMODE__OPEN)      == 0)
 		|| (mode.CompareNoCase(sMODE__CONTROL)   == 0)
 		|| (mode.CompareNoCase(sMODE__RAMP_CTRL) == 0)
 		|| (mode.CompareNoCase(sMODE__SET_FLOW)  == 0))
 		{
-			flag = -1;
+			int check_count = 0;
 
-			if(active__interlock_system)
+			while(1)
 			{
-				int alm_id = ALID__INTERLOCK_SENSOR__SYSTEM;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				bool active__interlock_system  = false;
+				bool active__interlock_chamber = false;
+				bool active__interlock_gas_box = false;
 
-				alm_bff.Format(" * %s <- %s \n", 
-								dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM->Get__CHANNEL_NAME(),
-								dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM->Get__STRING());
-				alm_msg += alm_bff;
+				if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM->Check__DATA(STR__ON)  > 0)		active__interlock_system  = true;
+				if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER->Check__DATA(STR__ON) > 0)		active__interlock_chamber = true;
+				if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Check__DATA(STR__ON) > 0)		active__interlock_gas_box = true;
 
-				p_alarm->Check__ALARM(alm_id, r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-			}
-			else if(active__interlock_system)
-			{
-				int alm_id = ALID__INTERLOCK_SENSOR__CHMABER;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				// Interlock.Check ...
+				{
+					if((active__interlock_system)
+					|| (active__interlock_chamber)
+					|| (active__interlock_gas_box))
+					{
 
-				alm_bff.Format(" * %s <- %s \n", 
-								dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER->Get__CHANNEL_NAME(),
-								dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER->Get__STRING());
-				alm_msg += alm_bff;
+					}
+					else
+					{
+						flag = 1;
+						break;
+					}
+				}
 
-				p_alarm->Check__ALARM(alm_id, r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-			}
-			else if(active__interlock_gas_box)
-			{
-				int alm_id = ALID__INTERLOCK_SENSOR__GAS_BOX;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				if(check_count >= 10)
+				{
+					if(active__interlock_system)
+					{
+						int alm_id = ALID__INTERLOCK_SENSOR__SYSTEM;
+						CString alm_msg;
+						CString alm_bff;
+						CString r_act;
 
-				alm_bff.Format(" * %s <- %s \n", 
-								dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Get__CHANNEL_NAME(),
-								dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Get__STRING());
-				alm_msg += alm_bff;
+						alm_msg.Format(" Action.Mode <- %s \n", mode);
+						alm_msg += "\n";
 
-				p_alarm->Check__ALARM(alm_id, r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-			}
-			else
-			{
-				flag = 1;
+						alm_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM->Get__CHANNEL_NAME(),
+										dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM->Get__STRING());
+						alm_msg += alm_bff;
+
+						p_alarm->Check__ALARM(alm_id, r_act);
+						p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+					}
+					else if(active__interlock_system)
+					{
+						int alm_id = ALID__INTERLOCK_SENSOR__CHMABER;
+						CString alm_msg;
+						CString alm_bff;
+						CString r_act;
+
+						alm_msg.Format(" Action.Mode <- %s \n", mode);
+						alm_msg += "\n";
+
+						alm_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER->Get__CHANNEL_NAME(),
+										dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER->Get__STRING());
+						alm_msg += alm_bff;
+
+						p_alarm->Check__ALARM(alm_id, r_act);
+						p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+					}
+					else if(active__interlock_gas_box)
+					{
+						int alm_id = ALID__INTERLOCK_SENSOR__GAS_BOX;
+						CString alm_msg;
+						CString alm_bff;
+						CString r_act;
+
+						alm_msg.Format(" Action.Mode <- %s \n", mode);
+						alm_msg += "\n";
+
+						alm_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Get__CHANNEL_NAME(),
+										dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Get__STRING());
+						alm_msg += alm_bff;
+
+						p_alarm->Check__ALARM(alm_id, r_act);
+						p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+					}
+
+					flag = -1;
+					break;
+				}
+
+				check_count++;
+				Sleep(50);
 			}
 		}
 	}

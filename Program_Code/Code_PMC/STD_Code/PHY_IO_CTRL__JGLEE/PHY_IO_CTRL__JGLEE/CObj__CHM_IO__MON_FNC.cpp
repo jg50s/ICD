@@ -372,7 +372,23 @@ int CObj__CHM_IO
 			sEXT_CH__RF_TOTAL_ON_STATE->Set__DATA(STR__OFF);
 		}
 
-		// ...
+		// MFC INFO ...
+		if(iDATA__MFC_SIZE > 0)
+		{
+			double cur__total_flow = 0.0;
+
+			for(i=0; i<iDATA__MFC_SIZE; i++)
+			{
+				cur__total_flow += aEXT_CH__MFC_FLOW_SET_X[i]->Get__VALUE();
+			}
+
+				 if(cur__total_flow >= 1000.0)		ch_data.Format("%.0f", cur__total_flow);
+			else if(cur__total_flow >= 100.0)		ch_data.Format("%.1f", cur__total_flow);
+			else if(cur__total_flow >= 10.0)		ch_data.Format("%.2f", cur__total_flow);
+			else									ch_data.Format("%.3f", cur__total_flow);
+
+			sEXT_CH__MFC_TOTAL_FLOW_SET->Set__DATA(ch_data);
+		}
 	}
 
 	return 1;

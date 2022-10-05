@@ -21,16 +21,21 @@ int  CObj__RFG_SERIAL
 	{
 		aCH__PARA_SET_POWER->Get__DATA(ch_data);
 		aoCH__POWER_SET->Set__DATA(ch_data);
-
-		flag = doCH__POWER_MODE->Set__DATA(STR__ON);
 	}
 	else
 	{
 		flag = doCH__POWER_MODE->Set__DATA(STR__OFF);
 
+		aCH__PARA_SET_POWER->Set__DATA("0.0");
 		aoCH__POWER_SET->Set__DATA("0.0");
 	}
 	return flag;
+}
+int  CObj__RFG_SERIAL
+::Call__POWER_ON(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+
+	return doCH__POWER_MODE->Set__DATA(STR__ON);
 }
 
 int  CObj__RFG_SERIAL

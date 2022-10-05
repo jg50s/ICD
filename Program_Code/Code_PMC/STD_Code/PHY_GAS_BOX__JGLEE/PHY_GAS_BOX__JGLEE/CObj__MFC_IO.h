@@ -143,6 +143,8 @@ private:
 	// EXTERNAL PROPERTY
 
 	// DB_SYS ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
+
 	CX__VAR_DIGITAL_CTRL dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE;
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM;
@@ -215,6 +217,7 @@ private:
 	CString sMODE__CONTROL;
 	int  Call__CONTROL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_ma);
+	int  _Close__ALL_VALVE();
 
 	CString sMODE__RAMP_CTRL;
 	int  Call__RAMP_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);

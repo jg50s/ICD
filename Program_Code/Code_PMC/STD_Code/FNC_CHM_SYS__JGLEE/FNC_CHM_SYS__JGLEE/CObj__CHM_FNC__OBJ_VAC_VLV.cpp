@@ -8,26 +8,35 @@
 
 // ...
 int CObj__CHM_FNC
-::Call__VAC_VLV__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
+::Call__VAC_VLV__ALL_CLOSE(CII_OBJECT__VARIABLE *p_variable, 
+						   CII_OBJECT__ALARM *p_alarm, 
+						   const bool active__exhaust_vlv, 
+						   const bool active__apc_vlv)
 {
 	int r_flag = 1;
+
+	if(active__apc_vlv)
+	{
+		if(bActive__VAT_OBJ)
+		{
+			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)		r_flag = -11;
+		}
+	}
 
 	if(bActive__PHY_VAC_VLV)
 	{
 		if(r_flag > 0)
 		{
-			if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__ALL_CLOSE) < 0)			r_flag = -11;
+			if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__ALL_CLOSE) < 0)		r_flag = -21;
 		}
 
-		if(r_flag > 0)
+		if(active__exhaust_vlv)
 		{
-			if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__EXHAUST_CLOSE) < 0)		r_flag = -12;
+			if(r_flag > 0)
+			{
+				if(pOBJ_CTRL__PHY_VAC_VLV->Call__OBJECT(CMMD_VAC__EXHAUST_CLOSE) < 0)		r_flag = -22;
+			}
 		}
-	}
-
-	if(bActive__VAT_OBJ)
-	{
-		if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)			r_flag = -21;
 	}
 
 	return r_flag;
@@ -49,7 +58,7 @@ int CObj__CHM_FNC
 	{
 		if(bActive__VAT_OBJ)
 		{
-			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__OPEN) < 0)			r_flag = -11;
+			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)			r_flag = -11;
 		}
 	}
 

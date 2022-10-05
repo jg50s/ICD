@@ -35,8 +35,6 @@ int CObj__STEP_STD
 	CString rcp__rf_pulse_frequency;
 	CString rcp__rf_pulse_duty;
 	CString rcp__rf_pulse_exec;
-	CString rcp__rf_pulse_on_time;
-	CString rcp__rf_pulse_off_time;
 	CString rcp__rf_pulse_on_shift_time;
 	CString rcp__rf_pulse_off_shift_time;
 
@@ -136,8 +134,6 @@ int CObj__STEP_STD
 		rcp__rf_pulse_frequency = aCH__RCP_RF_PULSE_FREQUENCY->Get__STRING();
 		rcp__rf_pulse_duty = aCH__RCP_RF_PULSE_DUTY->Get__STRING();
 		rcp__rf_pulse_exec = dCH__RCP_RF_PULSE_EXEC->Get__STRING();
-		rcp__rf_pulse_on_time  = aCH__RCP_RF_PULSE_ON_TIME->Get__STRING();
-		rcp__rf_pulse_off_time = aCH__RCP_RF_PULSE_OFF_TIME->Get__STRING();
 		rcp__rf_pulse_on_shift_time  = aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Get__STRING();
 		rcp__rf_pulse_off_shift_time = aCH__RCP_RF_PULSE_OFF_SHIFT_TIME->Get__STRING();
 
@@ -303,7 +299,7 @@ int CObj__STEP_STD
 		CString obj_mode;
 		double set_power = atof(rcp__rf_rps_power);
 
-		if(set_power > 0.1)				obj_mode = _RF_CMD__SET_POWER;
+		if(set_power > 0.1)				obj_mode = _RF_CMD__PROC_SET;
 		else							obj_mode = _RF_CMD__OFF;
 
 		if(active__rfx_delay_off)
@@ -311,8 +307,6 @@ int CObj__STEP_STD
 			if(obj_mode.CompareNoCase(_RF_CMD__OFF) != 0)
 			{
 				RF_RPS_OBJ__Start_MODE(obj_mode, rcp__rf_rps_power);
-
-				RF_PULSE_OBJ__Start_ON();
 
 				// ...
 				{
@@ -328,9 +322,6 @@ int CObj__STEP_STD
 		else
 		{
 			RF_RPS_OBJ__Start_MODE(obj_mode, rcp__rf_rps_power);
-
-			if(obj_mode.CompareNoCase(_RF_CMD__OFF) != 0)			RF_PULSE_OBJ__Start_ON();
-			else													RF_PULSE_OBJ__Start_OFF();
 		}
 	}
 	// RF.LF ...
@@ -339,7 +330,7 @@ int CObj__STEP_STD
 		CString obj_mode;
 		double set_power = atof(rcp__rf_lf_power);
 
-		if(set_power > 0.1)				obj_mode = _RF_CMD__SET_POWER;
+		if(set_power > 0.1)				obj_mode = _RF_CMD__PROC_SET;
 		else							obj_mode = _RF_CMD__OFF;
 
 		if(active__rfx_delay_off)
@@ -370,7 +361,7 @@ int CObj__STEP_STD
 		CString obj_mode;
 		double set_power = atof(rcp__rf_hf_power);
 
-		if(set_power > 0.1)				obj_mode = _RF_CMD__SET_POWER;
+		if(set_power > 0.1)				obj_mode = _RF_CMD__PROC_SET;
 		else							obj_mode = _RF_CMD__OFF;
 
 		if(active__rfx_delay_off)
@@ -393,6 +384,25 @@ int CObj__STEP_STD
 		else
 		{
 			RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power);
+		}
+	}
+
+	// RF.PULSE ...
+	if(bActive__OBJ_CTRL__RF_PULSE)
+	{
+		double rcp__rf_pulse = aCH__RCP_RF_PULSE_FREQUENCY->Get__VALUE();
+
+		if(rcp__rf_pulse < 1.0)				RF_PULSE_OBJ__Start_OFF();
+		else								RF_PULSE_OBJ__Start_ON();
+
+		if(dCH__CFG_RCP_PART_USE_RFx_PULSE->Check__DATA(STR__YES) > 0)
+		{
+			log_msg = "RF.PULSE Control ... \n";
+
+			log_bff.Format("  * RF.PULSE Control(%.3f Hz) \n",  rcp__rf_pulse);
+			log_msg += log_bff;
+
+			xLOG_CTRL->WRITE__LOG(log_msg);		
 		}
 	}
 
@@ -477,7 +487,7 @@ int CObj__STEP_STD
 	{
 		CString obj_mode;
 
-		if(rcp__lift_pin_mode.CompareNoCase(STR__Down)   == 0)			obj_mode  = _PIN_CMD__DOWN;
+			 if(rcp__lift_pin_mode.CompareNoCase(STR__Down)   == 0)			obj_mode  = _PIN_CMD__DOWN;
 		else if(rcp__lift_pin_mode.CompareNoCase(STR__Middle) == 0)			obj_mode  = _PIN_CMD__MIDDLE;
 		else if(rcp__lift_pin_mode.CompareNoCase(STR__Up)     == 0)			obj_mode  = _PIN_CMD__UP;
 
@@ -682,7 +692,6 @@ int CObj__STEP_STD
 						if(set_power < 0.001)
 						{
 							RF_RPS_OBJ__Start_OFF();
-							RF_PULSE_OBJ__Start_OFF();
 
 							// ...
 							{
@@ -1150,16 +1159,6 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 		log_bff.Format(" * %s <- %s \n", 
 						dCH__RCP_RF_PULSE_EXEC->Get__CHANNEL_NAME(),
 						dCH__RCP_RF_PULSE_EXEC->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						aCH__RCP_RF_PULSE_ON_TIME->Get__CHANNEL_NAME(),
-						aCH__RCP_RF_PULSE_ON_TIME->Get__STRING());
-		log_msg += log_bff;
-
-		log_bff.Format(" * %s <- %s \n", 
-						aCH__RCP_RF_PULSE_OFF_TIME->Get__CHANNEL_NAME(),
-						aCH__RCP_RF_PULSE_OFF_TIME->Get__STRING());
 		log_msg += log_bff;
 
 		log_bff.Format(" * %s <- %s \n", 

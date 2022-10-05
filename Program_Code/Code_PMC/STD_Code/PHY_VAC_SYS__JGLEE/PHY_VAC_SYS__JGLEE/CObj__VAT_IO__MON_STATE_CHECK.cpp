@@ -412,6 +412,94 @@ int CObj__VAT_IO
 			}
 		}
 
+		// High Limit Interlock ...
+		{
+			bool active__high_limit = false;
+			CString err_msg;
+			CString err_bff;
+
+			if(dCH__CFG_HIGH_LIMIT_ATM_SENSOR_APPLY->Check__DATA(STR__YES) > 0)
+			{
+				if(bActive__DI_ATM_SENSOR)
+				{
+					if(dEXT_CH__DI_ATM_SENSOR->Check__DATA(STR__ON) > 0)
+					{
+						active__high_limit = true;
+
+						err_bff.Format("ATM Sensor가 감지된 상태입니다. \n");
+						err_msg += err_bff;
+
+						err_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__DI_ATM_SENSOR->Get__CHANNEL_NAME(),
+										dEXT_CH__DI_ATM_SENSOR->Get__STRING());
+						err_msg += err_bff;
+						err_msg += "\n";
+					}
+				}			
+			}
+
+			if(dCH__CFG_HIGH_LIMIT_VAC_SENSOR_APPLY->Check__DATA(STR__YES) > 0)
+			{
+				if(bActive__DI_VAC_SENSOR)
+				{
+					if(dEXT_CH__DI_VAC_SENSOR->Check__DATA(STR__ON) < 0)
+					{
+						active__high_limit = true;
+
+						err_bff.Format("VAC Sensor가 감지되지 않고 있습니다. \n");
+						err_msg += err_bff;
+
+						err_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__DI_VAC_SENSOR->Get__CHANNEL_NAME(),
+										dEXT_CH__DI_VAC_SENSOR->Get__STRING());
+						err_msg += err_bff;
+						err_msg += "\n";
+					}
+				}
+			}
+
+			if(dCH__CFG_HIGH_LIMIT_CHM_PRESSURE_APPLY->Check__DATA(STR__YES) > 0)
+			{
+				if(bActive__AI_CHM_PRESSURE_TORR)
+				{
+					double cfg__high_limit   = aCH__CFG_HIGH_LIMIT_CHM_PRESSURE_TORR->Get__VALUE();
+					double cur__chm_pressure = aEXT_CH__AI_CHM_PRESSURE_TORR->Get__VALUE();
+
+					if(cur__chm_pressure >= cfg__high_limit)
+					{
+						active__high_limit = true;
+
+						err_bff.Format("현재 Chamber 압력이 %.3f torr 입니다.\n", cur__chm_pressure);
+						err_msg += err_bff;
+
+						err_bff.Format("Config에 설정된 high-limit pressure 는 %.3f torr 입니다.\n", cfg__high_limit);
+						err_msg += err_bff;
+						err_msg += "\n";
+					}
+				}
+			}
+
+			if(active__high_limit)
+			{
+				ch_data = sCH__MON_POSITION->Get__STRING();
+				double cur_pos = atof(ch_data);
+
+				if(cur_pos > 0.1)
+				{
+					// ...
+					{
+						int alarm_id = ALID__HIGH_LIMIT_CHM_PRESSURE_INTERLOCK;
+						CString r_act;
+
+						p_alarm->Check__ALARM(alarm_id, r_act);
+						p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
+					}
+
+					Call__CLOSE(p_variable, p_alarm);
+				}
+			}
+		}
+
 		// ...
 	}
 

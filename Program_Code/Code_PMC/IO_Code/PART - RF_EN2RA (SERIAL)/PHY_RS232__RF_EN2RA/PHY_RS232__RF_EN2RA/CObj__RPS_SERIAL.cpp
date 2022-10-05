@@ -24,8 +24,9 @@ int CObj__RPS_SERIAL::__DEFINE__CONTROL_MODE(obj, l_mode)
 		ADD__CTRL_VAR(sMODE__LOCAL,	   "LOCAL");
 		ADD__CTRL_VAR(sMODE__REMOTE,   "REMOTE");
 
-		ADD__CTRL_VAR(sMODE__ON,	   "ON");
-		ADD__CTRL_VAR(sMODE__OFF,	   "OFF");
+		ADD__CTRL_VAR(sMODE__POWER_SET,	"POWER.SET");
+		ADD__CTRL_VAR(sMODE__POWER_ON,	"POWER.ON");
+		ADD__CTRL_VAR(sMODE__OFF,	    "OFF");
 
 		ADD__CTRL_VAR(sMODE__DRV_TEST, "DRV.TEST");
 	}
@@ -525,8 +526,10 @@ int CObj__RPS_SERIAL::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__LOCAL)			flag = Call__CTRL_MODE(p_variable, p_alarm, false);
 		ELSE_IF__CTRL_MODE(sMODE__REMOTE)			flag = Call__CTRL_MODE(p_variable, p_alarm, true);
 
-		ELSE_IF__CTRL_MODE(sMODE__ON)				flag = Call__POWER_SET(p_variable, p_alarm, true);
+		ELSE_IF__CTRL_MODE(sMODE__POWER_SET)		flag = Call__POWER_SET(p_variable, p_alarm, true);
 		ELSE_IF__CTRL_MODE(sMODE__OFF)				flag = Call__POWER_SET(p_variable, p_alarm, false);
+
+		ELSE_IF__CTRL_MODE(sMODE__POWER_ON)			flag = Call__POWER_ON(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__DRV_TEST)			flag = Call__DRV_TEST(p_variable, p_alarm);
 	}

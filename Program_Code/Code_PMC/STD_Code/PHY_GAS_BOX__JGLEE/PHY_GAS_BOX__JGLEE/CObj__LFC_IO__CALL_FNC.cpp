@@ -117,15 +117,22 @@ int  CObj__LFC_IO
 		}
 		else
 		{
-			if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
-
-			dEXT_CH__IO_VLV_OUT->Set__DATA(STR__CLOSE);
-
-			if(bActive__3WAY_VLV)		sCH__REQ_3WAY_VLV->Set__DATA(STR__CLOSE);
+			_Close__ALL_VALVE();
 		}
 	}
 
 	Fnc__SET_FLOW(set_flow);
+	return 1;
+}
+int  CObj__LFC_IO
+::_Close__ALL_VALVE()
+{
+	if(bActive__VLV_IN)			dEXT_CH__IO_VLV_IN->Set__DATA(STR__CLOSE);
+
+	dEXT_CH__IO_VLV_OUT->Set__DATA(STR__CLOSE);
+
+	if(bActive__3WAY_VLV)		sCH__REQ_3WAY_VLV->Set__DATA(STR__CLOSE);
+
 	return 1;
 }
 

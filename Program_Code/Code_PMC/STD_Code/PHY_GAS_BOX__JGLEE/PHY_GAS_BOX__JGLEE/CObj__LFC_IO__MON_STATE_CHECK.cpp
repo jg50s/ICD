@@ -9,7 +9,7 @@
 int  CObj__LFC_IO
 ::Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	int loop_count = 1000;
+	int loop_count = 0;
 	CString ch_data;
 
 
@@ -17,10 +17,17 @@ int  CObj__LFC_IO
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.01);
 
-
 		loop_count++;
-		if(loop_count >= 100)		loop_count = 0;
+		if(loop_count > 100)		loop_count = 1;
 
+
+		if(loop_count == 1)
+		{
+			int active__err_check = p_alarm->Check__Posted_Internal_Alarm(iLIST_ALID__PART);
+
+			if(active__err_check > 0)		dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__ON);
+			else							dCH__MON_PART_ERROR_ACTIVE->Set__DATA(STR__OFF);
+		}
 
 		// Range : Flow ...
 		if(loop_count == 0)

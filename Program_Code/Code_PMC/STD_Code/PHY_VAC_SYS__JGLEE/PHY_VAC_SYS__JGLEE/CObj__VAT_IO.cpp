@@ -346,6 +346,26 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_OPEN_INTERLOCK_OVER_PRESSURE, str_name);
 	}
 
+	// HIGH.LIMIT CHAMBER PRESSURE ...
+	{
+		str_name = "CFG.HIGH_LIMIT.ATM_SENSOR.APPLY";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HIGH_LIMIT_ATM_SENSOR_APPLY, str_name);
+		
+		str_name = "CFG.HIGH_LIMIT.VAC_SENSOR.APPLY";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HIGH_LIMIT_VAC_SENSOR_APPLY, str_name);
+
+		//
+		str_name = "CFG.HIGH_LIMIT.CHM_PRESSURE.APPLY";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HIGH_LIMIT_CHM_PRESSURE_APPLY, str_name);
+
+		str_name = "CFG.HIGH_LIMIT.CHM_PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 1, 300, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_HIGH_LIMIT_CHM_PRESSURE_TORR, str_name);
+	}
+
 	// Transfer.Ballast Config ...
 	{
 		str_name = "CFG.TRANSFER.BALLAST.CTRL_MODE";
@@ -423,6 +443,22 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 	int alarm_id;
 
 	iLIST_ALID__VAT.RemoveAll();
+
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_ATM_MAINT;
+		iLIST_ALID__VAT.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "ATM.Maint selected!";
+
+		alarm_msg = "Please, check \"Maint Mode\" setting. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
 
 	// ...
 	{
@@ -664,13 +700,44 @@ int CObj__VAT_IO::__DEFINE__ALARM(p_alarm)
 
 	// ...
 	{
-		alarm_id = ALID__OPEN_INTERLOCK_OVER_PRESSURE;
+		alarm_id = ALID__OPEN_INTERLOCK_OVER_PRESSURE_ACT;
 		iLIST_ALID__VAT.Add(alarm_id);
 
 		alarm_title  = title;
 		alarm_title += "Open Interlock !";
 
-		alarm_msg = "Open 명령을 수행 할 수 없습니다. \n";
+		alarm_msg = "\"Open\" 명령을 수행 할 수 없습니다. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__HIGH_LIMIT_CHM_PRESSURE_INTERLOCK;
+		iLIST_ALID__VAT.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "High limit chamber pressure Interlock !";
+
+		alarm_msg  = "VAT 상태가 \"Close\" 상태가 아닙니다.\n";
+		alarm_msg += "VAT 상태를 \"Close\" 상태로 전환 합니다.\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CLEAR);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__OPEN_INTERLOCK_TMP_LINE_NOT_READY;
+		iLIST_ALID__VAT.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Open Interlock (TMP line not ready) !";
+
+		alarm_msg = "\"Open\" 명령을 수행 할 수 없습니다. \n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CLEAR);
@@ -719,27 +786,33 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__DB_SYS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		//
-		var_name = "SIM.PRESSURE.TORR";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SIM_PRESSURE_TORR, obj_name,var_name);
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
 
-		//
-		var_name = "MON.SYSTEM.PROCESS.ACTIVE";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+			//
+			var_name = "SIM.PRESSURE.TORR";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SIM_PRESSURE_TORR, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
+			//
+			var_name = "MON.SYSTEM.PROCESS.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
+		}
 	}
 
 	// PARA.PRESSURE_UNIT ...
@@ -981,6 +1054,69 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// LINK.IO ...
+	{
+		// DI.ATM_SENSOR ...
+		{
+			def_name = "CH__DI_ATM_SENSOR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			bool def_check = x_utility.Check__Link(ch_name);
+			bActive__DI_ATM_SENSOR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_ATM_SENSOR, obj_name,var_name);
+			}
+		}
+
+		// DI.VAC_SENSOR ...
+		{
+			def_name = "CH__DI_VAC_SENSOR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			bool def_check = x_utility.Check__Link(ch_name);
+			bActive__DI_VAC_SENSOR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_VAC_SENSOR, obj_name,var_name);
+			}
+		}
+
+		// AU.CHM_PRESSURE_TORR ...
+		{
+			def_name = "CH__AI_CHM_PRESSURE_TORR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			bool def_check = x_utility.Check__Link(ch_name);
+			bActive__AI_CHM_PRESSURE_TORR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_CHM_PRESSURE_TORR, obj_name,var_name);
+			}
+		}
+	}
+
+	// LINK_INTERLOCK ...
+	{
+		def_name = "CH__DI_TMP_LINE_ACTIVE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+		bool def_check = x_utility.Check__Link(ch_name);
+		bActive__DI_TMP_LINE_ACTIVE = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DI_TMP_LINE_ACTIVE, obj_name,var_name);
+		}
+	}
+
 	// ...
 	{
 		SCX__SEQ_INFO x_seq_info;
@@ -995,7 +1131,8 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
-	int flag = -1;
+	// ...
+	int flag = 1;
 
 	CString log_msg;
 	CString log_bff;
@@ -1032,21 +1169,160 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	if(dCH__CFG_USE->Check__DATA(STR__YES) < 0)
 	{
-		int alm_id = ALID__VAT_NOT_USE;
-		CString alm_msg;
-		CString r_act;
+		// ...
+		{
+			int alm_id = ALID__VAT_NOT_USE;
+			CString alm_msg;
+			CString r_act;
 
-		alm_msg.Format("VAT [%s] command is aborted !.\n", mode);
+			alm_msg.Format("VAT [%s] command is aborted !.\n", mode);
 
-		p_alarm->Check__ALARM(alm_id,r_act);
-		p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			p_alarm->Check__ALARM(alm_id,r_act);
+			p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+		}
+
+		flag = -1;
 	}
-	else
+	else if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
-		flag = 1;
+		flag = -1;
+
+		if(mode.CompareNoCase(sMODE__CLOSE) != 0)
+		{
+			int alm_id = ALID__INTERLOCK_ATM_MAINT;
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+
+			alm_msg.Format(" Action.Mode <- %s \n", mode);
+			alm_msg += "\n";
+
+			alm_bff.Format(" * %s <- %s \n", 
+							dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Get__CHANNEL_NAME(),
+							dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Get__STRING());
+			alm_msg += alm_bff;
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+		}
+		else
+		{
+			flag = 1;
+		}
+	}
+	else if(mode.CompareNoCase(sMODE__CLOSE) != 0)
+	{
+		if(flag > 0)
+		{
+			bool active__high_limit = false;
+			CString err_msg;
+			CString err_bff;
+
+			if(dCH__CFG_HIGH_LIMIT_ATM_SENSOR_APPLY->Check__DATA(STR__YES) > 0)
+			{
+				if(bActive__DI_ATM_SENSOR)
+				{
+					if(dEXT_CH__DI_ATM_SENSOR->Check__DATA(STR__ON) > 0)
+					{
+						active__high_limit = true;
+
+						err_bff.Format("ATM Sensor가 감지된 상태입니다. \n");
+						err_msg += err_bff;
+
+						err_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__DI_ATM_SENSOR->Get__CHANNEL_NAME(),
+										dEXT_CH__DI_ATM_SENSOR->Get__STRING());
+						err_msg += err_bff;
+					}
+				}			
+			}
+
+			if(dCH__CFG_HIGH_LIMIT_VAC_SENSOR_APPLY->Check__DATA(STR__YES) > 0)
+			{
+				if(bActive__DI_VAC_SENSOR)
+				{
+					if(dEXT_CH__DI_VAC_SENSOR->Check__DATA(STR__ON) < 0)
+					{
+						active__high_limit = true;
+
+						err_bff.Format("VAC Sensor가 감지되지 않고 있습니다. \n");
+						err_msg += err_bff;
+
+						err_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__DI_VAC_SENSOR->Get__CHANNEL_NAME(),
+										dEXT_CH__DI_VAC_SENSOR->Get__STRING());
+						err_msg += err_bff;
+					}
+				}
+			}
+
+			if(dCH__CFG_HIGH_LIMIT_CHM_PRESSURE_APPLY->Check__DATA(STR__YES) > 0)
+			{
+				if(bActive__AI_CHM_PRESSURE_TORR)
+				{
+					double cfg__high_limit   = aCH__CFG_HIGH_LIMIT_CHM_PRESSURE_TORR->Get__VALUE();
+					double cur__chm_pressure = aEXT_CH__AI_CHM_PRESSURE_TORR->Get__VALUE();
+
+					if(cur__chm_pressure >= cfg__high_limit)
+					{
+						active__high_limit = true;
+
+						err_bff.Format("현재 Chamber 압력이 %.3f torr 입니다.\n", cur__chm_pressure);
+						err_msg += err_bff;
+
+						err_bff.Format("Config에 설정된 high-limit pressure 는 %.3f torr 입니다.\n", cfg__high_limit);
+						err_msg += err_bff;
+					}
+				}
+			}
+
+			if(active__high_limit)
+			{
+				flag = -1;
+
+				// ...
+				{
+					int alarm_id = ALID__OPEN_INTERLOCK_OVER_PRESSURE_ACT;
+					CString r_act;
+
+					p_alarm->Check__ALARM(alarm_id, r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
+				}
+			}
+		}
+
+		if(flag > 0)
+		{
+			if(bActive__DI_TMP_LINE_ACTIVE)
+			{
+				if(dEXT_CH__DI_TMP_LINE_ACTIVE->Check__DATA(STR__ON) < 0)
+				{
+					// ...
+					{
+						int alarm_id = ALID__OPEN_INTERLOCK_TMP_LINE_NOT_READY;
+						CString err_msg;
+						CString err_bff;
+						CString r_act;
+
+						err_bff.Format("TMP Line이 Ready 상태가 아닙니다. \n");
+						err_msg += err_bff;
+
+						err_bff.Format(" * %s <- %s \n", 
+										dEXT_CH__DI_TMP_LINE_ACTIVE->Get__CHANNEL_NAME(),
+										dEXT_CH__DI_TMP_LINE_ACTIVE->Get__STRING());
+						err_msg += err_bff;
+
+						p_alarm->Check__ALARM(alarm_id, r_act);
+						p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
+					}
+
+					flag = -1;
+				}
+			}
+		}
 	}
 
-	// ...
+	
+	if(flag > 0)
 	{
 		IF__CTRL_MODE(sMODE__INIT)
 		{

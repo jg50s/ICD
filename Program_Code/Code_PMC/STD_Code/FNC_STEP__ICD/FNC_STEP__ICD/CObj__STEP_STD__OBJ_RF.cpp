@@ -84,12 +84,6 @@ int CObj__STEP_STD
 		dEXT_CH__RF_PULSE__PARA_RCP_EXEC->Set__DATA(ch_data);
 
 		//
-		ch_data = aCH__RCP_RF_PULSE_ON_TIME->Get__STRING();
-		aEXT_CH__RF_PULSE__PARA_RCP_ON_TIME->Set__DATA(ch_data);
-
-		ch_data = aCH__RCP_RF_PULSE_OFF_TIME->Get__STRING();
-		aEXT_CH__RF_PULSE__PARA_RCP_OFF_TIME->Set__DATA(ch_data);
-
 		ch_data = aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Get__STRING();
 		aEXT_CH__RF_PULSE__PARA_RCP_ON_SHIFT_TIME->Set__DATA(ch_data);
 

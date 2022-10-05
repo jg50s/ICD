@@ -15,3 +15,9 @@
 #define STR__CLOSE				"CLOSE"
 #define STR__UNKNOWN			"UNKNOWN"
 
+#define STR__ATM				"ATM"
+#define STR__VAC				"VAC"
+
+#define STR__EXEND				"EXTEND"
+#define STR__RETRACT			"RETRACT"
+

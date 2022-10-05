@@ -375,7 +375,7 @@ private:
 	//-------------------------------------------------------------------------
 	// EXTERNAL PROPERTY
 
-	// DB OBJ ...
+	// OBJ.DB_INF ...
 	CX__VAR_STRING_CTRL  sEXT_CH__CHM_PRESSURE_STATUS;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__WAFER_STATUS;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_DECHUCK_CTRL_MODE;
@@ -386,9 +386,11 @@ private:
 	bool bActive__SLOT_VALVE_STATE;
 	CX__VAR_STRING_CTRL  sEXT_CH__SLOT_VALVE_STATE;
 
+	// OBJ.DB_SYS ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
+
 	// LINK Channel ...
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CONFIG_SAVE;
-
 
 	// ESC_POWER : CENTER & EDGE  ...
 	bool bActive__ESC_POWER_CENTER_USE;

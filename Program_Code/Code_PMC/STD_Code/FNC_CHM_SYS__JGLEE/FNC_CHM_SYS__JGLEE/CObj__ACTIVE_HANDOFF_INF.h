@@ -16,12 +16,23 @@ private:
 	SCX__USER_LOG_CTRL xLOG_CTRL;
 	//
 
+	//-------------------------------------------------------------------------
+	// OBJ ...
+	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;
+
+	// CFG ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_TRANSFER_END_LIFT_PIN_DOWN;
+
+	// LINK.TEST ...
+	CX__VAR_DIGITAL_CTRL dCH__LINK_TEST_USE_LIFT_PIN_DOWN;
+	//
 
 	//-------------------------------------------------------------------------
-	CX__VAR_STRING_CTRL sCH__OBJ_MSG;
+	// OBJ.OPR_PMC ...
+	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__OPR_PMC;
 
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__OPR_OBJ_STATE;
 
-	//-------------------------------------------------------------------------
 	// OBJ.PM_SLOT ...
 	bool bActive__OBJ_CTRL__PM_SLOT;
 	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__PM_SLOT;

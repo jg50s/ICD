@@ -79,6 +79,68 @@ int CObj__CHM_FNC
 	return 1;
 }
 
+int CObj__CHM_FNC::Check__LOW_VAC_PUMP()
+{
+	// SLOT.VALVE ...
+	{
+		bool active__slot_vlv_open = true;
+
+		if(bActive__CHM_SHUTTER_STATE)
+		{
+			if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+		}
+		else if(bActive__CHM_SLOT_VLV_STATE)
+		{
+			if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) > 0)		active__slot_vlv_open = false;
+		}
+		else
+		{
+			if(dEXT_CH__PMC_SLIT_VLV_STS->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+		}
+
+		if(active__slot_vlv_open)
+		{
+			return -11;
+		}
+	}
+
+	if(bActive__CHM_LID_STATE)
+	{
+		if(dEXT_CH__CHM_LID_STATE->Check__DATA(sCHM_LID__CLOSE_STATE) < 0)
+		{
+			return -12;
+		}
+	}
+
+	// Dry_Pump On Check 
+	if(bActive__DRY_PUMP)
+	{
+		if(dEXT_CH__DRY_PUMP__POWER_SNS->Check__DATA(STR__ON) < 0)
+		{
+			return -13;
+		}
+	}
+
+	// PRESSURE CHECK ...
+	{
+		double cfg_press = aCH__CFG_FAST_PUMP_PRESSURE->Get__VALUE();
+		double cur_press = aEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+
+		if(cur_press > cfg_press)
+		{
+			return -21;
+		}
+	}
+
+	// ATM & VAC.Sensor Check ...
+	if((dEXT_CH__CHM_ATM_SNS->Check__DATA(STR__OFF) < 0)
+	|| (dEXT_CH__CHM_VAC_SNS->Check__DATA(STR__ON)  < 0))
+	{
+		return -31;
+	}
+
+	return 1;
+}
 int CObj__CHM_FNC
 ::Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag)
 {
@@ -517,6 +579,43 @@ int CObj__CHM_FNC
 	CString log_msg;
 	int flag;
 
+	// ...
+	bool active__tmp_on = false;
+
+	if(bActive__OBJ_CTRL__TURBO_PUMP)
+	{
+		if(dEXT_CH__TURBO_PUMP__POWER_SNS->Check__DATA(STR__ON) > 0)
+			active__tmp_on = true;
+	}
+
+	// VAC-Valve : All_Close ...
+	if(active__tmp_on)
+	{
+		// ...
+		{
+			log_msg = "VAC-Valve <- All_Close, In TMP-ON State.";
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm, false, false) < 0)
+		{
+			return -11;
+		}
+	}
+	else
+	{
+		// ...
+		{
+			log_msg = "VAC-Valve <- All_Close";
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm, false) < 0)
+		{
+			return -12;
+		}
+	}
+
 	// Turbo_Pump On : Check 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
@@ -532,20 +631,6 @@ int CObj__CHM_FNC
 			{
 				return -21;
 			}
-		}
-	}
-
-	// VAC-Valve : All_Close ...
-	{
-		// ...
-		{
-			log_msg = "VAC-Valve <- All_Close";
-			xLOG_CTRL->WRITE__LOG(log_msg);
-		}
-
-		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm) < 0)
-		{
-			return -31;
 		}
 	}
 
@@ -701,10 +786,16 @@ RETRY_LOOP:
 		return -201;
 	}
 
-	// 1. Gas Line Close
+	// 1.1 Gas Line Close
 	if(Fnc__ALL_GAS_LINE_CLOSE(p_variable,p_alarm) < 0)
 	{
 		return -202;
+	}
+
+	// 1.2 Soft/Fast Rough Valve Close
+	if(Fnc__ALL_VAC_LINE_CLOSE(p_variable,p_alarm) < 0)
+	{
+		return -203;
 	}
 
 	// 2. Dry Pump Check
@@ -717,19 +808,23 @@ RETRY_LOOP:
 		return flag;
 	}
 
-	// 3. Turbo Pump Status Check
+	// 3.2 Turbo Pump Status Check
 	if(dEXT_CH__TURBO_PUMP__POWER_SNS->Check__DATA(STR__ON)  > 0)
 	{
-		log_msg.Format("Fnc__TURBO_PUMP_ON : TURBO_PUMP Status is ON - Skipped ...");
-		xLOG_CTRL->WRITE__LOG(log_msg);
+		flag = Call__VAC_VLV__EXHAUST_OPEN(p_variable, p_alarm);
+		if(flag < 0)
+		{
+			log_msg.Format("Fnc__TURBO_PUMP_ON : EXHAUST.VAC VALVE OPEN - Failed (%1d) ...", flag);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+			return flag;
+		}
 
+		// ...
+		{
+			log_msg.Format("Fnc__TURBO_PUMP_ON : TURBO_PUMP Status is ON - Skipped ...");
+			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
 		return 1;
-	}
-
-	// 4. Soft/Fast Rough Valve Close
-	if(Fnc__ALL_VAC_LINE_CLOSE(p_variable,p_alarm) < 0)
-	{
-		return -203;
 	}
 
 	// ...
@@ -810,6 +905,14 @@ RETRY_LOOP:
 		{
 			log_msg = "Fnc__TURBO_PUMP_ON() : Check (2) ...";
 			xLOG_CTRL->WRITE__LOG(log_msg);
+		}
+
+		flag = Call__VAC_VLV__EXHAUST_OPEN(p_variable, p_alarm);
+		if(flag < 0)
+		{
+			log_msg.Format("Fnc__TURBO_PUMP_ON : EXHAUST.VAC VALVE OPEN - Failed (%1d) ...", flag);
+			xLOG_CTRL->WRITE__LOG(log_msg);
+			return flag;
 		}
 
 		// ...
@@ -1087,7 +1190,7 @@ int CObj__CHM_FNC
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
-		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm) < 0)
+		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm, false) < 0)
 		{
 			return -162;
 		}
@@ -1672,9 +1775,17 @@ int CObj__CHM_FNC
 
 		sCH__OBJ_MSG->Set__DATA("2. VAC_Line All Close ...");
 
-		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm) < 0)
+		if(Call__VAC_VLV__ALL_CLOSE(p_variable, p_alarm, false) < 0)
 		{
 			return -1022;
+		}
+
+		if(bActive__OBJ_CTRL__TURBO_PUMP)
+		{
+			if(Call__VAC_VLV__EXHAUST_OPEN(p_variable, p_alarm) < 0)
+			{
+				return -1023;
+			}
 		}
 
 		timer_ctrl->WAIT(1.0);

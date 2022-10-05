@@ -551,8 +551,15 @@ int CObj__ZEFA_SERIAL::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
-	// ...
+	// PAra.Init...
 	{
+		aCH__PARA_VOLT_SET_CH1->Set__VALUE(0.0);
+		aCH__PARA_VOLT_SET_CH2->Set__VALUE(0.0);
+
+		aCH__RCP_VOLT_SET_CH1->Set__VALUE(0.0);
+		aCH__RCP_VOLT_SET_CH2->Set__VALUE(0.0);
+
+		//
 		aCH__CUR_VOLT_SET_CH1->Set__VALUE(0.0);
 		aCH__CUR_VOLT_SET_CH2->Set__VALUE(0.0);
 	}
@@ -686,7 +693,7 @@ int CObj__ZEFA_SERIAL::__INITIALIZE__IO(p_io_para)
 
 	if(iActive__SIM_MODE > 0)
 	{
-		return -1;
+		sCH__CUR_REMOTE_STATE->Set__DATA(STR__REMOTE);
 	}
 	else
 	{

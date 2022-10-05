@@ -26,7 +26,10 @@ int CObj__RF_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__OFF,	    "OFF");
 		ADD__CTRL_VAR(sMODE__QUICK_OFF, "QUICK_OFF");
 
-		ADD__CTRL_VAR(sMODE__SET_POWER,	"SET_POWER");
+		ADD__CTRL_VAR(sMODE__POWER_SET,	"POWER_SET");
+		ADD__CTRL_VAR(sMODE__POWER_ON,	"POWER_ON");
+
+		ADD__CTRL_VAR(sMODE__PROC_SET,	"PROC_SET");
 
 		ADD__CTRL_VAR(sMODE__REMOTE,	"REMOTE");
 		ADD__CTRL_VAR(sMODE__LOCAL,		"LOCAL");
@@ -70,20 +73,20 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 	// PARA : COMMON ...
 	{
 		str_name = "PARA.SET.POWER";
-		STD__ADD_ANALOG(str_name, "W", 0, 0, 2500);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "W", 0, 0, 2500, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_SET_POWER, str_name);
 
 		str_name = "PARA.HOLD.TIME";
-		STD__ADD_ANALOG(str_name, "sec", 0, 0, 10000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 10000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_HOLD_TIME, str_name);
 
 		//
 		str_name = "PARA.RAMP.UP.TIME";
-		STD__ADD_ANALOG(str_name, "msec", 0, 0, 30000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "msec", 0, 0, 30000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RAMP_UP_TIME, str_name);
 
 		str_name = "PARA.RAMP.DOWN.TIME";
-		STD__ADD_ANALOG(str_name, "msec", 0, 0, 30000);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "msec", 0, 0, 30000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_RAMP_DOWN_TIME, str_name);
 
 		//
@@ -147,6 +150,11 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// MON : IO ...
 	{
+		str_name = "MON.DO.POWER.SET";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_DO_POWER_SET, str_name);
+
+		//
 		str_name = "MON.IO.SET.POWER";
 		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
 		LINK__VAR_STRING_CTRL(sCH__MON_IO_SET_POWER, str_name);
@@ -691,6 +699,21 @@ int CObj__RF_STD::__DEFINE__ALARM(p_alarm)
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
+	// ...
+	{
+		alarm_id = ALID__INTERLOCK_ATM_MAINT;
+		iLIST_ALID__RF.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "ATM.Maint selected!";
+
+		alarm_msg = "Please, check \"Maint Mode\" setting. \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
 
 	// ...
 	{
@@ -829,23 +852,29 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__DB_SYS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		//
-		var_name = "MON.SYSTEM.PROCESS.ACTIVE";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
+			//
+			var_name = "MON.SYSTEM.PROCESS.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
 
-		//
-		var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
 
-		var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
+			//
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
+		}
 	}
 
 	// Object Link ...
@@ -909,9 +938,13 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 				sLINK__RF_MODE__REMOTE = def_data;
 
-				def_name = "LINK_MODE__SET_POWER";
+				def_name = "LINK_MODE__POWER_SET";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-				sLINK__RF_MODE__SET_POWER = def_data;
+				sLINK__RF_MODE__POWER_SET = def_data;
+
+				def_name = "LINK_MODE__POWER_ON";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sLINK__RF_MODE__POWER_ON = def_data;
 
 				def_name = "LINK_MODE__OFF";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
@@ -996,6 +1029,21 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// IO.DO_RF_POWER_CONNECTOR ...
+	{
+		def_name = "CH__DO_RF_POWER_CONNECTOR";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+		bool def_check = x_utility.Check__Link(ch_name);
+		bActive__DO_RF_POWER_CONNECTOR = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_RF_POWER_CONNECTOR, obj_name,var_name);
+		}
+	}
+
 	// IO Link ...
 	{
 		def_name = "CH__DI_VAC_SENSOR";
@@ -1070,7 +1118,7 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
-	int flag = -1;
+	int flag = 1;
 
 	// ...
 	{
@@ -1079,6 +1127,14 @@ int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xLOG_CTRL->WRITE__LOG(log_msg);
+	}
+
+	// ...
+	bool active__power_on = false;
+
+	if(dCH__MON_IDLE_POWER_CHECK_ACTIVE->Check__DATA(STR__ON) > 0)
+	{
+		active__power_on = true;
 	}
 
 	// ...
@@ -1094,18 +1150,47 @@ int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	if(dCH__CFG_USE_PART->Check__DATA(STR__YES) < 0)
 	{
-		int alarm_id = ALID__PART_NOT_USE;
-		CString alm_msg;
-		CString r_act;
+		flag = -1;
 
-		alm_msg.Format("RF.GEN [%s] command is aborted !.\n", mode);
+		// ...
+		{
+			int alarm_id = ALID__PART_NOT_USE;
+			CString alm_msg;
+			CString r_act;
 
-		p_alarm->Check__ALARM(alarm_id, r_act);
-		p_alarm->Post__ALARM_With_MESSAGE(alarm_id, alm_msg);
+			alm_msg.Format("RF.GEN [%s] command is aborted !.\n", mode);
+	
+			p_alarm->Check__ALARM(alarm_id, r_act);
+			p_alarm->Post__ALARM_With_MESSAGE(alarm_id, alm_msg);
+		}
 	}
-	else
+	else if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
 	{
-		flag = 1;
+		flag = -1;
+
+		if((mode.CompareNoCase(sMODE__INIT) != 0)
+		&& (mode.CompareNoCase(sMODE__OFF)  != 0)
+		&& (mode.CompareNoCase(sMODE__QUICK_OFF) != 0))
+		{
+			int alm_id = ALID__INTERLOCK_ATM_MAINT;
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+
+			alm_msg.Format(" Action.Mode <- %s \n", mode);
+			alm_msg += "\n";
+
+			alm_bff.Format(" * %s <- %s \n", 
+							dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Get__CHANNEL_NAME(),
+							dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Get__STRING());
+			alm_msg += alm_bff;
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+		}
+		else
+		{
+			flag = 1;
+		}
 	}
 
 	if(flag > 0)
@@ -1122,15 +1207,39 @@ int CObj__RF_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		{
 			flag = Call__QUICK_OFF(p_variable, p_alarm);
 		}
-		ELSE_IF__CTRL_MODE(sMODE__SET_POWER)
+		ELSE_IF__CTRL_MODE(sMODE__POWER_SET)
 		{
-			flag = Call__SET_POWER(p_variable, p_alarm);
+			flag = Call__POWER_SET(p_variable, p_alarm);
+
+			if(flag > 0)
+			{
+				if(bActive__RF_DO_POWER_CTRL)	
+				{
+					if(active__power_on)		dCH__MON_IDLE_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
+				}	
+				else
+				{
+					dCH__MON_IDLE_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
+				}
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__POWER_ON)
+		{
+			flag = Call__POWER_ON(p_variable, p_alarm);
 
 			if(flag > 0)
 			{
 				dCH__MON_IDLE_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
-				dCH__MON_PROC_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
 			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__PROC_SET)
+		{
+			flag = Call__PROC_SET(p_variable, p_alarm);
+
+			if(flag > 0)
+			{
+				dCH__MON_PROC_POWER_CHECK_ACTIVE->Set__DATA(STR__READY);
+			}			
 		}
 		ELSE_IF__CTRL_MODE(sMODE__REMOTE)
 		{

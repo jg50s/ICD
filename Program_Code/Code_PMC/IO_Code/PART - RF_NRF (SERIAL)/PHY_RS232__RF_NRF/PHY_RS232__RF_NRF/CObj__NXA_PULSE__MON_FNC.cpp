@@ -16,6 +16,18 @@ int CObj__NXA_PULSE
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		// ...
+		{
+			ch_data = dCH__CFG_UNIT__FREQ->Get__STRING();
+			dUNIT__FREQ = atof(ch_data);
+
+			ch_data = dCH__CFG_UNIT__DUTY->Get__STRING();
+			dUNIT__DUTY = atof(ch_data);
+
+			ch_data = dCH__CFG_UNIT__uSEQ->Get__STRING();
+			dUNIT__uSEQ = atof(ch_data);
+		}
+
+		// ...
 		bool active__err_check = true;
 
 		if(dCH__CFG_PART_USE->Check__DATA("YES") < 0)		active__err_check = false;

@@ -32,15 +32,18 @@ int CObj__RF_STD
 	}
 	else
 	{
-		if(bActive__RF_DO_POWER_CTRL)		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__ON);
-
 		sEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
 	}
 
 	if(bActive__RF_DO_POWER_CTRL)	
 	{
 		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
-	}	
+	}
+
+	if(bActive__DO_RF_POWER_CONNECTOR)
+	{
+		dEXT_CH__DO_RF_POWER_CONNECTOR->Set__DATA(STR__ON);
+	}
 	return 1;
 }
 
@@ -81,9 +84,7 @@ int CObj__RF_STD
 int CObj__RF_STD
 ::Call__OFF(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	if(bActive__RF_DO_POWER_CTRL)	
-		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
-
+	/*
 	// 1. RF Frequency Control ...
 	if(dCH__CFG_FREQUENCY_USE->Check__DATA(STR__YES) > 0)
 	{
@@ -96,6 +97,7 @@ int CObj__RF_STD
 			Fnc__DEFAULT_CONFIG_SET(p_variable, p_alarm);
 		}
 	}
+	*/
 
 	// 2. 
 	if(bActive__RF_IO_OBJ)
@@ -112,6 +114,10 @@ int CObj__RF_STD
 		sEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
 	}
 
+	if(bActive__RF_DO_POWER_CTRL)	
+	{
+		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
+	}
 	return 1;
 }
 
@@ -141,7 +147,7 @@ int CObj__RF_STD
 }
 
 int CObj__RF_STD
-::Call__SET_POWER(CII_OBJECT__VARIABLE *p_variable,
+::Call__POWER_SET(CII_OBJECT__VARIABLE *p_variable,
 				  CII_OBJECT__ALARM *p_alarm)
 {
 	CString log_msg;
@@ -153,6 +159,14 @@ int CObj__RF_STD
 		{
 			dCH__RF_ABORT_FLAG->Set__DATA(STR__ON);
 			return -11;
+		}
+	}
+
+	if(bActive__RF_DO_POWER_CTRL)
+	{
+		if(bActive__DO_RF_POWER_CONNECTOR)
+		{
+			dEXT_CH__DO_RF_POWER_CONNECTOR->Set__DATA(STR__ON);
 		}
 	}
 
@@ -225,14 +239,49 @@ int CObj__RF_STD
 		}
 	}
 
-	// 8. RF Control START ...
+	// 8. RF POWER.SET ...
 	if(bActive__RF_IO_OBJ)
 	{
-		CString obj_mode = sLINK__RF_MODE__SET_POWER;
+		CString obj_mode = sLINK__RF_MODE__POWER_SET;
 
 		if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
 		{
 			return -31;
+		}
+	}
+
+	return 1;
+}
+
+int CObj__RF_STD
+::Call__POWER_ON(CII_OBJECT__VARIABLE *p_variable,
+				 CII_OBJECT__ALARM *p_alarm)
+{
+	CString log_msg;
+	CString str_data;
+
+	if(dCH__RF_CONDUCTANCE_INTLK_SKIP->Check__DATA(STR__ON) < 0)
+	{
+		if(Fnc__INTLK_CHECK(p_variable, p_alarm) < 0)
+		{
+			dCH__RF_ABORT_FLAG->Set__DATA(STR__ON);
+			return -11;
+		}
+	}
+
+	if(bActive__DO_RF_POWER_CONNECTOR)
+	{
+		dEXT_CH__DO_RF_POWER_CONNECTOR->Set__DATA(STR__ON);
+	}
+
+	// RF POWER.ON ...
+	if(bActive__RF_IO_OBJ)
+	{
+		CString obj_mode = sLINK__RF_MODE__POWER_ON;
+
+		if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
+		{
+			return -21;
 		}
 	}
 
@@ -257,7 +306,7 @@ int CObj__RF_STD
 		dCH__RF_CAL__OFFSET_APPLY->Get__DATA(str__apply_mode);
 
 		if((str__apply_mode.CompareNoCase(STR__AVERAGE) != 0)	
-			&& (str__apply_mode.CompareNoCase(STR__LOOKUP)  != 0))
+		&& (str__apply_mode.CompareNoCase(STR__LOOKUP)  != 0))
 		{
 			check_flag = -1;
 		}
@@ -355,6 +404,22 @@ int CObj__RF_STD
 			return 1;
 		}
 	}			
+
+	return 1;
+}
+
+// ...
+int CObj__RF_STD
+::Call__PROC_SET(CII_OBJECT__VARIABLE *p_variable,
+				 CII_OBJECT__ALARM *p_alarm)
+{
+	int r_flag;
+
+	r_flag = Call__POWER_SET(p_variable, p_alarm);
+	if(r_flag < 0)			return r_flag;
+
+	r_flag = Call__POWER_ON(p_variable, p_alarm);
+	if(r_flag < 0)			return r_flag;
 
 	return 1;
 }

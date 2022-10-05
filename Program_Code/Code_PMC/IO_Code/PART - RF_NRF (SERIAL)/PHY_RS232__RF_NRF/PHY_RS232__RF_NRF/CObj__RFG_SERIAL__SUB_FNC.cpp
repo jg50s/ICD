@@ -45,6 +45,19 @@ int CObj__RFG_SERIAL
 {
 	int	n_cnt = 1;
 
+	// Clear.Data ...
+	{
+		CString cls_bff;
+		mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+		CString r_msg;
+
+		r_msg  = "Clear.Data ... \n";
+		r_msg += cls_bff;
+
+		Write__DRV_LOG(r_msg);
+	}
+
 	do 
 	{
 		unsigned char s_cmmd[MAX_CHAR] = {0,};
@@ -85,17 +98,6 @@ int CObj__RFG_SERIAL
 			return 1;
 		}
 
-		// Send.Data ...
-		{
-			CString cls_bff;
-			mX_Serial->CLEAR__BUFFER(&cls_bff);
-
-			mX_Serial->CHAR__SEND(s_cmmd, s_len);
-		}
-
-		// Recv.Data ...
-		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _END, &r_len, m_Rcv_Time);
-		
 		// Send.Log ...
 		{
 			CString s_msg;
@@ -111,6 +113,18 @@ int CObj__RFG_SERIAL
 
 			Write__DRV_LOG(s_msg);
 		}
+
+		// Send.Data ...
+		{
+			CString cls_bff;
+			mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+			mX_Serial->CHAR__SEND(s_cmmd, s_len);
+		}
+
+		// Recv.Data ...
+		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _END, &r_len, m_Rcv_Time);
+		
 		// Recv.Log ...
 		{
 			CString r_msg;
@@ -148,9 +162,22 @@ int CObj__RFG_SERIAL
 }
 
 int CObj__RFG_SERIAL
-::_Recv__Command(const byte addr_id,const byte cmmd_id, unsigned char* r_data)
+::_Recv__Command(const byte addr_id,const byte cmmd_id, unsigned char* recv_data)
 {
 	int	n_cnt = 1;
+
+	// Clear.Data ...
+	{
+		CString cls_bff;
+		mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+		CString r_msg;
+
+		r_msg  = "Clear.Data ... \n";
+		r_msg += cls_bff;
+
+		Write__DRV_LOG(r_msg);
+	}
 
 	do 
 	{
@@ -172,17 +199,6 @@ int CObj__RFG_SERIAL
 			s_cmmd[s_len++] = _END;
 		}
 
-		// Send Data ...
-		{
-			CString cls_bff;
-			mX_Serial->CLEAR__BUFFER(&cls_bff);
-
-			mX_Serial->CHAR__SEND(s_cmmd, s_len);
-		}
-
-		// Recv Data ...
-		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _END, &r_len, m_Rcv_Time);
-
 		// Send Log ...
 		{
 			CString s_msg;
@@ -198,6 +214,18 @@ int CObj__RFG_SERIAL
 
 			Write__DRV_LOG(s_msg);
 		}
+
+		// Send Data ...
+		{
+			CString cls_bff;
+			mX_Serial->CLEAR__BUFFER(&cls_bff);
+
+			mX_Serial->CHAR__SEND(s_cmmd, s_len);
+		}
+
+		// Recv Data ...
+		int r_flag = mX_Serial->OnlyRecv__CHAR(r_data, _END, &r_len, m_Rcv_Time);
+
 		// Recv Log ...
 		{
 			CString r_msg;
@@ -209,6 +237,8 @@ int CObj__RFG_SERIAL
 			{
 				r_bff.Format("%02X ", r_data[i]);
 				r_msg += r_bff;
+
+				recv_data[i] = r_data[i];
 			}
 
 			Write__DRV_LOG(r_msg);

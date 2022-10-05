@@ -33,6 +33,8 @@ private:
 	CString sCH_Name__DO_ROUGH_FAST_VLV;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_ROUGH_FAST_VLV;
 
+	// 
+	bool bActive__DO_ROUGH_SOFT_VLV;
 	CString sCH_Name__DO_ROUGH_SOFT_VLV;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_ROUGH_SOFT_VLV;
 
@@ -48,6 +50,13 @@ private:
 	CString sCH_Name__IO_ATM_SNS;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__IO_ATM_SNS;
 	CString sATM_SNS__ACTIVE_STATE;
+
+	// DRY_PUMP ...
+	bool bActive__DRY_PUMP_POWER_SNS;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__DRY_PUMP_POWER_SNS;
+
+	bool bActive__DRY_PUMP_VAC_SNS;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__DRY_PUMP_VAC_SNS;
 	//
 
 
@@ -71,15 +80,19 @@ private:
 public:
 	// SetPoint Interlock .....
 
-	// 1. VAC-Foreline Valve -> Open
+	// 1.1 VAC-Foreline Valve <- Open
 	int IFnc_SetPoint__VAC_Foreline_Vlv_Open();
 	int SetPoint__VAC_Foreline_Vlv_Open(CString &err_msg);
 
-	// 2. VAC-Fast Valve -> Open
+	// 1.2 VAC-Foreline Valve <- Close
+	int IFnc_SetPoint__VAC_Foreline_Vlv_Close();
+	int SetPoint__VAC_Foreline_Vlv_Close(CString &err_msg);
+
+	// 2. VAC-Fast Valve <- Open
 	int IFnc_SetPoint__VAC_Fast_Vlv_Open();
 	int SetPoint__VAC_Fast_Vlv_Open(CString &err_msg);
 
-	// 3. VAC-Slow Valve -> Open
+	// 3. VAC-Slow Valve <- Open
 	int IFnc_SetPoint__VAC_Slow_Vlv_Open();
 	int SetPoint__VAC_Slow_Vlv_Open(CString &err_msg);
 	//

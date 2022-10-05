@@ -28,9 +28,13 @@ int CObj__RFG_SERIAL::__DEFINE__CONTROL_MODE(obj, l_mode)
 	// ...
 	{
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
-		ADD__CTRL_VAR(sMODE__ON,  "ON");
-		ADD__CTRL_VAR(sMODE__OFF, "OFF");
+
 		ADD__CTRL_VAR(sMODE__ALARM_RESET, "ALARM.RESET");
+
+		ADD__CTRL_VAR(sMODE__OFF, "OFF");
+
+		ADD__CTRL_VAR(sMODE__POWER_SET, "POWER.SET");
+		ADD__CTRL_VAR(sMODE__POWER_ON,  "POWER.ON");
 
 		ADD__CTRL_VAR(sMODE__TEST_DRV, "TEST.DRV");
 	}
@@ -397,8 +401,9 @@ int CObj__RFG_SERIAL::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 	// ...
 	{
 			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__ON)				flag = Call__POWER_SET(p_variable, p_alarm, true);
+		ELSE_IF__CTRL_MODE(sMODE__POWER_SET)		flag = Call__POWER_SET(p_variable, p_alarm, true);
 		ELSE_IF__CTRL_MODE(sMODE__OFF)				flag = Call__POWER_SET(p_variable, p_alarm, false);
+		ELSE_IF__CTRL_MODE(sMODE__POWER_ON)			flag = Call__POWER_ON(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__ALARM_RESET)		flag = Call__ALARM_RESET(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__TEST_DRV)			flag =  Call__TEST_DRV(p_variable, p_alarm);

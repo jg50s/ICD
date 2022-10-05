@@ -21,8 +21,9 @@ private:
 
 	// ...
 	SCX__USER_LOG_CTRL xLOG_CTRL;
-
 	int iActive__SIM_MODE;
+
+	CUIntArray iLIST_ALID__PART;
 	//
 
 
@@ -40,6 +41,9 @@ private:
 	CX__VAR_STRING_CTRL  sCH__INFO_LINK_DATA__TYPE;
 	CX__VAR_STRING_CTRL  sCH__INFO_LINK_DATA__MAX_FLOW;
 	CX__VAR_STRING_CTRL  sCH__INFO_LINK_DATA__MAX_DEFAULT;
+
+	// MON.PART.ACTIVE ...
+	CX__VAR_DIGITAL_CTRL dCH__MON_PART_ERROR_ACTIVE;
 
 	// MON ...
 	CX__VAR_STRING_CTRL  sCH__MON_LFC_STATE;
@@ -132,6 +136,8 @@ private:
 	// EXTERNAL PROPERTY
 
 	// DB_SYS ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
+
 	CX__VAR_DIGITAL_CTRL dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE;
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM;
@@ -201,6 +207,7 @@ private:
 	CString sMODE__CONTROL;
 	int  Call__CONTROL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_max, const bool active__purge_vlv = false);
+	int  _Close__ALL_VALVE();
 
 	CString sMODE__RAMP_CTRL;
 	int  Call__RAMP_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);

@@ -36,6 +36,13 @@ int CObj__RF_STD
 		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		
+		// ...
+		if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+		{
+			Call__QUICK_OFF(p_variable, p_alarm);
+			continue;
+		}
+
 		if(dCH__RF_CONDUCTANCE_INTLK_SKIP->Check__DATA(STR__ON) > 0)
 		{
 			continue;

@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "CObj__ACTIVE_HANDOFF_INF.h"
 
+#include "CCommon_Def.h"
+
 
 // ...
 int CObj__ACTIVE_HANDOFF_INF
@@ -35,13 +37,6 @@ int CObj__ACTIVE_HANDOFF_INF
 {
 	DECLARE__EXT_CTRL(p_variable);
 
-	// OBJ.LIFT_PIN ...
-	if(bActive__OBJ_CTRL__LIFT_PIN)
-	{
-		int r_flag = pOBJ_CTRL__LIFT_PIN->Run__OBJECT(sLIST_MODE__LIFT_PIN_DOWN);
-		if(r_flag < 0)		return -11;		
-	}
-
 	// OBJ.PM_SLOT ...
 	if(bActive__OBJ_CTRL__PM_SLOT)
 	{
@@ -53,6 +48,21 @@ int CObj__ACTIVE_HANDOFF_INF
 	{
 		int r_flag = pOBJ_CTRL__SHUTTER->Call__OBJECT(sLINK_MODE__SHUTTER__CLOSE);
 		if(r_flag < 0)		return -21;
+	}
+
+	// OBJ.LIFT_PIN ...
+	if(bActive__OBJ_CTRL__LIFT_PIN)
+	{
+		bool active__lift_pin = true;
+
+		if(dCH__CFG_TRANSFER_END_LIFT_PIN_DOWN->Check__DATA(STR__YES) < 0)			active__lift_pin = false;
+		if(dCH__LINK_TEST_USE_LIFT_PIN_DOWN->Check__DATA(STR__YES) < 0)				active__lift_pin = false;
+
+		if(active__lift_pin)
+		{
+			int r_flag = pOBJ_CTRL__LIFT_PIN->Call__OBJECT(sLIST_MODE__LIFT_PIN_DOWN);
+			if(r_flag < 0)		return -11;		
+		}
 	}
 
 	return 1;
