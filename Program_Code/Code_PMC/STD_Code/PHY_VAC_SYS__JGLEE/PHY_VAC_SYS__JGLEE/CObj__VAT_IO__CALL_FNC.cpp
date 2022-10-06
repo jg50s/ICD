@@ -68,6 +68,44 @@ int CObj__VAT_IO
 	return 1;
 }
 int CObj__VAT_IO
+::Interlock__CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
+	{
+		if(pOBJ_CTRL__VAT->Is__OBJ_BUSY() > 0)		pOBJ_CTRL__VAT->Abort__OBJECT();
+
+		pOBJ_CTRL__VAT->Call__OBJECT(sVAT_CMMD__CLOSE);
+		return 11;
+	}
+
+	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__HEXA)
+	{
+		sEXT_CH__SO_APC_CTRL_MODE->Set__DATA("01");
+
+		if(iActive__SIM_MODE > 0)
+		{
+			sEXT_CH__SI_APC_POSITION->Set__DATA("00 00");
+		}
+		return 12;
+	}
+
+	// ...
+	{
+		dEXT_CH__DO_APC_CTRL_MODE->Set__DATA(STR__CLOSE);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			aEXT_CH__AI_APC_POSITION->Set__DATA("0.0");
+
+			if(bActive__DI_APC_VLV_CLOSE)		dEXT_CH__DI_APC_VLV_CLOSE->Set__DATA(STR__ON);
+			if(bActive__DI_APC_VLV_OPEN)		dEXT_CH__DI_APC_VLV_OPEN->Set__DATA(STR__OFF);
+			if(bActive__DI_APC_VLV_STATE)		dEXT_CH__DI_APC_VLV_STATE->Set__DATA(STR__CLOSE);
+		}
+	}
+	return 1;
+}
+
+int CObj__VAT_IO
 ::Call__OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
 	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)

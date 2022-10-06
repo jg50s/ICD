@@ -63,41 +63,74 @@ int CObj__SYS_IO::__DEFINE__VARIABLE_STD(p_variable)
 
 	// IO Channel ...
 	{
-		def_name = "CH__DO_ROUGH_FORELINE_VLV";
-		p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+		// DO.VENT_VLV ...
+		{
+			// FAST.VLV ...
+			{
+				def_name = "CH__DO_VENT_FAST_VLV";
+				p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+				sCH_Name__DO_VENT_FAST_VLV = ch_name;
+			}			
+			// SOFT.VLV ...
+			{
+				def_name = "CH__DO_VENT_SOFT_VLV";
+				p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		sCH_Name__DO_ROUGH_FORELINE_VLV = ch_name;
+				sCH_Name__DO_VENT_SOFT_VLV = ch_name;
 
-		def_check = x_utility.Check__Link(ch_name);
-		bActive__DO_ROUGH_FORELINE_VLV = def_check;
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__DO_VENT_SOFT_VLV = def_check;
+			}
+		}
 
-		//
-		def_name = "CH__DO_ROUGH_FAST_VLV";
-		p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
-		sCH_Name__DO_ROUGH_FAST_VLV = ch_name;
+		// DO.ROUGH_VLV ...
+		{
+			// FORELINE.VLV ...
+			{
+				def_name = "CH__DO_ROUGH_FORELINE_VLV";
+				p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		//
-		def_name = "CH__DO_ROUGH_SOFT_VLV";
-		p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+				sCH_Name__DO_ROUGH_FORELINE_VLV = ch_name;
+	
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__DO_ROUGH_FORELINE_VLV = def_check;
+			}
+			
+			// FAST.VLV ...
+			{
+				def_name = "CH__DO_ROUGH_FAST_VLV";
+				p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+				sCH_Name__DO_ROUGH_FAST_VLV = ch_name;
+			}			
+			// SOFT.VLV ...
+			{
+				def_name = "CH__DO_ROUGH_SOFT_VLV";
+				p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		sCH_Name__DO_ROUGH_SOFT_VLV = ch_name;
+				sCH_Name__DO_ROUGH_SOFT_VLV = ch_name;
+	
+				def_check = x_utility.Check__Link(ch_name);
+				bActive__DO_ROUGH_SOFT_VLV = def_check;
+			}
+		}
 
-		def_check = x_utility.Check__Link(ch_name);
-		bActive__DO_ROUGH_SOFT_VLV = def_check;
+		// DI.SENSOR ...
+		{
+			def_name = "CH__IO_VAC_SNS";
+			p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+			sCH_Name__IO_VAC_SNS = ch_name;
 
-		//
-		def_name = "CH__IO_VAC_SNS";
-		p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
-		sCH_Name__IO_VAC_SNS = ch_name;
+			def_name = "CH__IO_ATM_SNS";
+			p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+			sCH_Name__IO_ATM_SNS = ch_name;
+		}
 
-		def_name = "CH__IO_ATM_SNS";
-		p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
-		sCH_Name__IO_ATM_SNS = ch_name;
-
-		//
-		def_name = "CH__APC_VLV_CUR_POS";
-		p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
-		sCH_Name__APC_VLV_CUR_POS = ch_name;
+		// APC ...
+		{
+			def_name = "CH__APC_VLV_CUR_POS";
+			p_variable->Get__DEF_CONST_DATA(def_name, ch_name);
+			sCH_Name__APC_VLV_CUR_POS = ch_name;
+		}
 	}
 
 	// ...
@@ -139,7 +172,6 @@ int CObj__SYS_IO::__DEFINE__ALARM(p_alarm)
 		//
 		ADD__ALARM_EX(alarm_id, alm_title,alm_msg, l_act);
 	}
-
 	// ...
 	{
 		alarm_id = ALID__VAC_Foreline_Valve__CLOSE;
@@ -165,7 +197,7 @@ int CObj__SYS_IO::__DEFINE__ALARM(p_alarm)
 		alarm_id = ALID__VAC_Fast_Valve__OPEN;
 
 		// 
-		alm_title = "Setpoint Interlock : VAC-Fast Valve -> Open";
+		alm_title = "Setpoint Interlock : VAC-Fast Valve <- Open";
 
 		// 
 		alm_msg  = "Interlock Condition \n";	
@@ -180,13 +212,12 @@ int CObj__SYS_IO::__DEFINE__ALARM(p_alarm)
 		//
 		ADD__ALARM_EX(alarm_id, alm_title,alm_msg, l_act);
 	}
-
 	// ...
 	{
 		alarm_id = ALID__VAC_Slow_Valve__OPEN;
 
 		// 
-		alm_title = "Setpoint Interlock : VAC-Slow Valve -> Open";
+		alm_title = "Setpoint Interlock : VAC-Slow Valve <- Open";
 
 		// 
 		alm_msg  = "Interlock Condition \n";	
@@ -200,6 +231,48 @@ int CObj__SYS_IO::__DEFINE__ALARM(p_alarm)
 		//
 		ADD__ALARM_EX(alarm_id, alm_title,alm_msg, l_act);
 	}
+
+	// ...
+	{
+		alarm_id = ALID__VENT_Fast_Valve__OPEN;
+
+		// 
+		alm_title = "Setpoint Interlock : VENT-Fast Valve <- Open";
+
+		// 
+		alm_msg  = "Interlock Condition \n";	
+
+		alm_msg += "1. All vacuum valve are closed \n";
+		alm_msg += "2. APC valve is closed. \n";
+
+		//
+		l_act.RemoveAll();
+		l_act.Add("CHECK");
+
+		//
+		ADD__ALARM_EX(alarm_id, alm_title,alm_msg, l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__VENT_Soft_Valve__OPEN;
+
+		// 
+		alm_title = "Setpoint Interlock : VENT-Soft Valve <- Open";
+
+		// 
+		alm_msg  = "Interlock Condition \n";	
+
+		alm_msg += "1. All vacuum valve are closed \n";
+		alm_msg += "2. APC valve is closed. \n";
+
+		//
+		l_act.RemoveAll();
+		l_act.Add("CHECK");
+
+		//
+		ADD__ALARM_EX(alarm_id, alm_title,alm_msg, l_act);
+	}
+
 	return 1;
 }
 
@@ -248,6 +321,28 @@ int CObj__SYS_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	
 	// IO Channel ...
 	{
+		// VENT.FAST.VLV ...
+		{
+			def_name = "CH__DO_VENT_FAST_VLV";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__DO_VENT_FAST_VLV, obj_name,var_name);
+		}
+		// VENT.SOFT.VLV ...
+		{
+			def_name = "CH__DO_VENT_SOFT_VLV";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			def_check = x_utility.Check__Link(ch_name);
+			bActive__DO_VENT_SOFT_VLV = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__DO_VENT_SOFT_VLV, obj_name,var_name);
+			}
+		}
+
 		// FORELINE.VLV ...
 		{
 			def_name = "CH__DO_ROUGH_FORELINE_VLV";

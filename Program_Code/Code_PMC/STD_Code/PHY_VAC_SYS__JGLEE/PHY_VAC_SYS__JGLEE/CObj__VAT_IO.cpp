@@ -72,6 +72,11 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "OBJ.STATUS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_STATUS, str_name);
+
+		//
+		str_name = "CUR.MODE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CUR_MODE, str_name);
 	}
 
 	// PARA ...
@@ -1294,28 +1299,41 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		{
 			if(bActive__DI_TMP_LINE_ACTIVE)
 			{
-				if(dEXT_CH__DI_TMP_LINE_ACTIVE->Check__DATA(STR__ON) < 0)
+				int count__error_check = 0;
+
+				while(1)
 				{
-					// ...
+					if(dEXT_CH__DI_TMP_LINE_ACTIVE->Check__DATA(STR__ON) > 0)
 					{
-						int alarm_id = ALID__OPEN_INTERLOCK_TMP_LINE_NOT_READY;
-						CString err_msg;
-						CString err_bff;
-						CString r_act;
-
-						err_bff.Format("TMP Line이 Ready 상태가 아닙니다. \n");
-						err_msg += err_bff;
-
-						err_bff.Format(" * %s <- %s \n", 
-										dEXT_CH__DI_TMP_LINE_ACTIVE->Get__CHANNEL_NAME(),
-										dEXT_CH__DI_TMP_LINE_ACTIVE->Get__STRING());
-						err_msg += err_bff;
-
-						p_alarm->Check__ALARM(alarm_id, r_act);
-						p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
+						break;
 					}
 
-					flag = -1;
+					count__error_check++;
+					if(count__error_check >= 10)
+					{
+						flag = -1;
+
+						// ...
+						{
+							int alarm_id = ALID__OPEN_INTERLOCK_TMP_LINE_NOT_READY;
+							CString err_msg;
+							CString err_bff;
+							CString r_act;
+
+							err_bff.Format("TMP Line이 Ready 상태가 아닙니다. \n");
+							err_msg += err_bff;
+
+							err_bff.Format(" * %s <- %s \n", 
+											dEXT_CH__DI_TMP_LINE_ACTIVE->Get__CHANNEL_NAME(),
+											dEXT_CH__DI_TMP_LINE_ACTIVE->Get__STRING());
+							err_msg += err_bff;
+
+							p_alarm->Check__ALARM(alarm_id, r_act);
+							p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
+						}
+					}
+
+					Sleep(90);
 				}
 			}
 		}
@@ -1324,6 +1342,8 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	
 	if(flag > 0)
 	{
+		sCH__CUR_MODE->Set__DATA(mode);
+
 		IF__CTRL_MODE(sMODE__INIT)
 		{
 			flag = Call__INIT(p_variable, p_alarm);

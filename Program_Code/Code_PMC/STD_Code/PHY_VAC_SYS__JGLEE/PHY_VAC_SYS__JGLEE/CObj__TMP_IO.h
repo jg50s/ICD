@@ -79,6 +79,9 @@ private:
 	CX__VAR_ANALOG_CTRL  aCH__CFG_HIGH_LIMIT_TEMPERATURE;
 
 	CX__VAR_ANALOG_CTRL  aCH__CFG_TEMPERATURE_ERR_CHECK_SEC;
+
+	// ACTIVE.INTERLOCK_SKIP ...
+	CX__VAR_DIGITAL_CTRL dCH___ACTIVE_INTERLOCK_SKIP_FORELINE_VAC;
 	//
 	
 	//-------------------------------------------------------------------------
@@ -208,6 +211,7 @@ private:
 	int Fnc_Interlock__TMP_OFF(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 	int Fnc_Interlock__TMP_ISO(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
+	int Update__TMP_LINE_READY(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 	int Check__TMP_LINE_READY(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 	//
 

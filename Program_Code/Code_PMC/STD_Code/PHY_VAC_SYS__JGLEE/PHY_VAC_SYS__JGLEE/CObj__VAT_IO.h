@@ -32,6 +32,8 @@ private:
 	CX__VAR_STRING_CTRL   sCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL   sCH__OBJ_STATUS;
 
+	CX__VAR_STRING_CTRL   sCH__CUR_MODE;
+
 	// PARA ...
 	CX__VAR_ANALOG_CTRL   aCH__PARA_PRESSURE;
 	CX__VAR_ANALOG_CTRL   aCH__PARA_PRESSURE_mTORR;
@@ -247,6 +249,7 @@ private:
 
 	CString sMODE__CLOSE;
 	int Call__CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	int Interlock__CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	//
 	CString sMODE__POSITION;

@@ -59,17 +59,17 @@ void CObj__PMP_IO
 
 		// DI.VAC_SNS ...
 		{
-			bool active__vac_sns = false;
+			bool active__vac_sns = true;
 
 			if(bActive__DI_PUMP_VAC_SNS)
 			{
-				if(dEXT_CH__DI_PUMP_VAC_SNS->Check__DATA(STR__ON) > 0)		active__vac_sns = true;
+				if(dEXT_CH__DI_PUMP_VAC_SNS->Check__DATA(STR__ON) < 0)			active__vac_sns = false;
 			}
 
-			// ...
+			if(active__vac_sns)
 			{
 				double cfg__limit_torr = aCH__CFG_PUMP_PRESSURE_HIGH_LIMIT->Get__VALUE();
-				double cur__press_torr = cfg__limit_torr;
+				double cur__press_torr = cfg__limit_torr + 0.1;
 
 				if(bActive__AI_PUMP_PRESSURE_TORR)
 				{
@@ -80,8 +80,13 @@ void CObj__PMP_IO
 					double cur__press_mtorr = aEXT_CH__AI_PUMP_PRESSURE_mTORR->Get__VALUE();
 					cur__press_torr = cur__press_mtorr * 0.001;
 				}
+				else
+				{
+					if(dCH__MON_PUMP_POWER_SNS->Check__DATA(STR__ON) > 0)		cur__press_torr = 0.0;
+					else														active__vac_sns = false;
+				}
 
-				if(cur__press_torr < cfg__limit_torr)						active__vac_sns = true;
+				if(cur__press_torr >= cfg__limit_torr)							active__vac_sns = false;
 			}
 
 			if(active__vac_sns)			dCH__MON_VAC_ON_SNS->Set__DATA(STR__ON);

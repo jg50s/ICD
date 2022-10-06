@@ -1,0 +1,8 @@
+
+1. High.Vac Function 수행시에는 Foreline Vacuum 상태 무시하도록 수정함.
+
+2. Fast & Soft Vent Valve Open 관련 Setpoint Interlock 추가함
+  1) 조건 : Slow.Vac Valve Close
+  2) 조건 : Fast.Vac Valve Close
+  3) 조건 : APC.Valve Close
+

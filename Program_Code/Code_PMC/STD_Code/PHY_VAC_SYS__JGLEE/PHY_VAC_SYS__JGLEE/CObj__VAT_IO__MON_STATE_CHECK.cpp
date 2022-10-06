@@ -495,7 +495,7 @@ int CObj__VAT_IO
 						p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
 					}
 
-					Call__CLOSE(p_variable, p_alarm);
+					Interlock__CLOSE(p_variable, p_alarm);
 				}
 			}
 		}

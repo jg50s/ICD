@@ -139,6 +139,8 @@ int CObj__TMP_IO
 		if(x_timer_ctrl->WAIT(cfg_sec) < 0)			return -21;
 	}
 
+	Update__TMP_LINE_READY(p_variable,p_alarm);
+
 	if(pOBJ_CTRL__VAT->Call__OBJECT(CMMD_VAT__OPEN) < 0)
 	{
 		return -31;
@@ -315,31 +317,38 @@ int CObj__TMP_IO
 	// VAT.Valve Close ...
 	if(bActive__VAT_USE)
 	{
-		if(pOBJ_CTRL__VAT->Call__OBJECT(STR__CLOSE) < 0)			return -11;
-	}
-
-	// TMP Purge.Valve Close ...
-	if(bActive__DO_TMP_PURGE_VALVE)
-	{
-		dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
-
-		double cfg_sec = aCH__CFG_TURBO_N2_PURGE_CLOSE_DELAY->Get__VALUE();
-		if(x_timer->WAIT(cfg_sec) < 0)			return -21;
+		if(pOBJ_CTRL__VAT->Call__OBJECT(STR__CLOSE) < 0)		return -11;
 	}
 
 	// TMP Stop ...
 	{
 		int r_flag = _Fnc__OFF(p_variable,p_alarm, active__no_wait);
-		if(r_flag < 0)							return -41;
+		if(r_flag < 0)			return -41;
 	}
 
-	// TMP Exhaust Valve Close ...
-	if(bActive__DO_TMP_EXHAUST_VALVE)
+	if(active__no_wait)
 	{
-		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
 
-		double cfg_sec = aCH__CFG_TURBO_EXHAUST_VALVE_CLOSE_DELAY->Get__VALUE();
-		if(x_timer->WAIT(cfg_sec) < 0)			return -101;
+	}
+	else
+	{
+		// TMP Purge.Valve Close ...
+		if(bActive__DO_TMP_PURGE_VALVE)
+		{
+			dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
+
+			double cfg_sec = aCH__CFG_TURBO_N2_PURGE_CLOSE_DELAY->Get__VALUE();
+			if(x_timer->WAIT(cfg_sec) < 0)			return -21;
+		}
+
+		// TMP Exhaust Valve Close ...
+		if(bActive__DO_TMP_EXHAUST_VALVE)
+		{
+			dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+
+			double cfg_sec = aCH__CFG_TURBO_EXHAUST_VALVE_CLOSE_DELAY->Get__VALUE();
+			if(x_timer->WAIT(cfg_sec) < 0)			return -101;
+		}
 	}
 
 	return 1;
@@ -385,6 +394,8 @@ int CObj__TMP_IO
 		}
 		else
 		{
+			CString ch_data;
+
 			while(1)
 			{
 				Sleep(90);
@@ -392,6 +403,14 @@ int CObj__TMP_IO
 				if(p_variable->Check__CTRL_ABORT() > 0)
 				{
 					return -11;
+				}
+
+				// RPM CHECK ...
+				{
+					ch_data = sCH__MON_ROT_SPEED_RPM_READ->Get__STRING();
+					double cur_speed = atof(ch_data);
+
+					if(cur_speed > 0.1)		continue;
 				}
 
 				if(sCH__MON_PUMP_STATE->Check__DATA(STR__STOP) > 0)

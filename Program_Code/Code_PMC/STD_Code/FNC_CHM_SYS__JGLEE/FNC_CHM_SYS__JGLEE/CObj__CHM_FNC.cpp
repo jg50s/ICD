@@ -1256,6 +1256,13 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			//
 			var_name = "MON.PUMP.ON.SNS";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TURBO_PUMP__POWER_SNS, obj_name,var_name);
+
+			var_name = "MON.PUMP.STATE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TURBO_PUMP__MON_PUMP_STATE, obj_name,var_name);
+
+			//
+			var_name = "ACTIVE.INTERLOCK_SKIP.FORELINE_VAC";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC, obj_name,var_name);
 		}
 	}
 
@@ -1422,6 +1429,11 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	// ...
 	{
 		sCH__PARA_XFER_BALLAST_WAIT_SKIP_FLAG->Set__DATA("");
+
+		if(bActive__OBJ_CTRL__TURBO_PUMP)
+		{			
+			dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
+		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

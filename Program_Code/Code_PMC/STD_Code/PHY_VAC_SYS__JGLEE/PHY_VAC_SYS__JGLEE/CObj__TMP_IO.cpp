@@ -213,6 +213,13 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_TEMPERATURE_ERR_CHECK_SEC, str_name);
 	}
 
+	// ACTIVE.INTERLOCK ...
+	{
+		str_name = "ACTIVE.INTERLOCK_SKIP.FORELINE_VAC";
+		STD__ADD_DIGITAL(str_name, "OFF  ON");
+		LINK__VAR_DIGITAL_CTRL(dCH___ACTIVE_INTERLOCK_SKIP_FORELINE_VAC, str_name);
+	}
+
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATE_CHECK);
@@ -901,16 +908,6 @@ int CObj__TMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
-	}
-
-	if((mode.CompareNoCase(sMODE__INIT) == 0)
-	|| (mode.CompareNoCase(sMODE__ON)   == 0)
-	|| (mode.CompareNoCase(sMODE__OFF)	== 0)
-	|| (mode.CompareNoCase(sMODE__OFF_NO_WAIT) == 0))
-	{
-		dCH___MON_SPEED_CHECK_ACTIVE->Set__DATA(STR__OFF);
-		dCH___MON_SPEED_STABLE_ACTIVE->Set__DATA(STR__OFF);
-		dCH___MON_SPEED_ABORT_ACTIVE->Set__DATA(STR__OFF);
 	}
 
 	// ...

@@ -149,17 +149,16 @@ int CObj__TMP_IO
 		// SPEED CHECK ...
 		if(bActive__TMP_AI_ROT_SPEED_RPM)
 		{
-			if(active__tmp_init_check)
+			if(sCH__MON_PUMP_STATE->Check__DATA(STR__NORMAL) > 0)
 			{
-				ch_data = sCH__MON_ROT_SPEED_RPM_READ->Get__STRING();
-				double cur__rot_speed = atof(ch_data);
-
-				if(cur__rot_speed > 1000.0)
-				{
-					dCH___MON_SPEED_CHECK_ACTIVE->Set__DATA(STR__ON);
-
-					active__tmp_init_check = false;
-				}
+				dCH___MON_SPEED_CHECK_ACTIVE->Set__DATA(STR__ON);
+			}
+			else
+			{
+				dCH___MON_SPEED_CHECK_ACTIVE->Set__DATA(STR__OFF);
+				
+				dCH___MON_SPEED_STABLE_ACTIVE->Set__DATA(STR__OFF);
+				dCH___MON_SPEED_ABORT_ACTIVE->Set__DATA(STR__OFF);
 			}
 
 			if(dCH___MON_SPEED_CHECK_ACTIVE->Check__DATA(STR__ON) > 0)
@@ -322,9 +321,7 @@ int CObj__TMP_IO
 		}
 
 		// Error.Check ...
-		if((dCH__MON_ROT_SPEED_ERROR_ACTIVE->Check__DATA(STR__ON) > 0)
-		|| (dCH__MON_MOTOR_TEMPERATURE_ERROR_ACTIVE->Check__DATA(STR__ON) > 0)
-		|| (sCH__MON_COMM_STATE->Check__DATA(STR__ONLINE) < 0)
+		if((dCH__MON_MOTOR_TEMPERATURE_ERROR_ACTIVE->Check__DATA(STR__ON) > 0)
 		|| (sCH__MON_ERROR_STATE->Check__DATA(STR__OK) < 0))
 		{
 			dCH__MON_ERROR_ON_SNS->Set__DATA(STR__ON);
@@ -416,9 +413,12 @@ int CObj__TMP_IO
 		{
 			bool active__err_sns = false;
 
-			if(bActive__DI_FORELINE_VAC_SNS)
+			if(dCH___ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Check__DATA(STR__ON) < 0)
 			{
-				if(dEXT_CH__DI_FORELINE_VAC_SNS->Check__DATA(STR__ON) < 0)			active__err_sns = true;
+				if(bActive__DI_FORELINE_VAC_SNS)
+				{
+					if(dEXT_CH__DI_FORELINE_VAC_SNS->Check__DATA(STR__ON) < 0)			active__err_sns = true;
+				}
 			}
 			if(bActive__DI_BACKING_PUMP_ON)
 			{
@@ -517,7 +517,7 @@ int CObj__TMP_IO
 						p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
 					}
 
-					Fnc_Interlock__TMP_OFF(p_variable,p_alarm);
+					// Fnc_Interlock__TMP_OFF(p_variable,p_alarm);
 				}
 			}
 			else
@@ -545,6 +545,7 @@ int CObj__TMP_IO
 				// ...
 				bool active__n2_purge_vlv_open = true;
 
+				/*
 				if(bActive__REF_MFC_TOTAL_FLOW)
 				{
 					double ref__mfc_total_flow = aEXT_CH__REF_MFC_TOTAL_FLOW->Get__VALUE();
@@ -552,6 +553,7 @@ int CObj__TMP_IO
 					if(ref__mfc_total_flow > 0.0)			active__n2_purge_vlv_open = true;
 					else									active__n2_purge_vlv_open = false;
 				}
+				*/
 
 				if(bActive__DO_TMP_PURGE_VALVE)
 				{
@@ -599,13 +601,18 @@ int CObj__TMP_IO
 			}
 		}
 
-		// TMP.LINE CHECK ...
-		{
-			int r_flag = Check__TMP_LINE_READY(p_variable, p_alarm);
-
-			if(r_flag > 0)			dCH___MON_TMP_LINE_NOT_READY_ACTIVE->Set__DATA(STR__ON);
-			else					dCH___MON_TMP_LINE_NOT_READY_ACTIVE->Set__DATA(STR__OFF);
-		}
+		Update__TMP_LINE_READY(p_variable,p_alarm);
 	}
+}
+
+int CObj__TMP_IO
+::Update__TMP_LINE_READY(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	int r_flag = Check__TMP_LINE_READY(p_variable, p_alarm);
+
+	if(r_flag > 0)			dCH___MON_TMP_LINE_NOT_READY_ACTIVE->Set__DATA(STR__ON);
+	else					dCH___MON_TMP_LINE_NOT_READY_ACTIVE->Set__DATA(STR__OFF);
+
+	return 1;
 }
 

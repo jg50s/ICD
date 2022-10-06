@@ -70,7 +70,7 @@ int CObj__CHM_IO::__DEFINE__VARIABLE_STD(p_variable)
 			int id = i + 1;
 
 			str_name.Format("CFG.PROCESS_MANOMETER.MAX_PRESSURE.mTORR.%1d", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 1, 10000, "");
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 1, 20000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_MANOMETER_MAX_PRESSURE_mTORR_X[i], str_name);
 
 			str_name.Format("CFG.PROCESS_MANOMETER.LIMIT_PRESSURE.mTORR.%1d", id);

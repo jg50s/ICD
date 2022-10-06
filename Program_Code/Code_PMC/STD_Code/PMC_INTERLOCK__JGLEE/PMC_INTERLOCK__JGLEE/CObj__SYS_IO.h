@@ -25,6 +25,16 @@ private:
 	//  EXTERNAL PROPERTY
 
 	// IO Channel ...
+
+	//
+	CString sCH_Name__DO_VENT_FAST_VLV;
+	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_VENT_FAST_VLV;
+
+	bool bActive__DO_VENT_SOFT_VLV;
+	CString sCH_Name__DO_VENT_SOFT_VLV;
+	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_VENT_SOFT_VLV;
+
+	//
 	bool bActive__DO_ROUGH_FORELINE_VLV;
 	CString sCH_Name__DO_ROUGH_FORELINE_VLV;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_ROUGH_FORELINE_VLV;
@@ -33,7 +43,6 @@ private:
 	CString sCH_Name__DO_ROUGH_FAST_VLV;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_ROUGH_FAST_VLV;
 
-	// 
 	bool bActive__DO_ROUGH_SOFT_VLV;
 	CString sCH_Name__DO_ROUGH_SOFT_VLV;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__DO_ROUGH_SOFT_VLV;
@@ -80,19 +89,27 @@ private:
 public:
 	// SetPoint Interlock .....
 
-	// 1.1 VAC-Foreline Valve <- Open
+	// VENT-Fast Valve <- Open
+	int IFnc_SetPoint__VENT_Fast_Vlv_Open();
+	int SetPoint__VENT_Fast_Vlv_Open(CString &err_msg);
+
+	// VENT-Soft Valve <- Open
+	int IFnc_SetPoint__VENT_Soft_Vlv_Open();
+	int SetPoint__VENT_Soft_Vlv_Open(CString &err_msg);
+
+	// VAC-Foreline Valve <- Open
 	int IFnc_SetPoint__VAC_Foreline_Vlv_Open();
 	int SetPoint__VAC_Foreline_Vlv_Open(CString &err_msg);
 
-	// 1.2 VAC-Foreline Valve <- Close
+	// VAC-Foreline Valve <- Close
 	int IFnc_SetPoint__VAC_Foreline_Vlv_Close();
 	int SetPoint__VAC_Foreline_Vlv_Close(CString &err_msg);
 
-	// 2. VAC-Fast Valve <- Open
+	// VAC-Fast Valve <- Open
 	int IFnc_SetPoint__VAC_Fast_Vlv_Open();
 	int SetPoint__VAC_Fast_Vlv_Open(CString &err_msg);
 
-	// 3. VAC-Slow Valve <- Open
+	// VAC-Slow Valve <- Open
 	int IFnc_SetPoint__VAC_Slow_Vlv_Open();
 	int SetPoint__VAC_Slow_Vlv_Open(CString &err_msg);
 	//
