@@ -16,6 +16,14 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_USER_CFG()
 {
 	bActive__DNET_INIT = false;
 
+	// ...
+	{
+		CString ch_data = "0";
+
+		sCH__DNET_INFO__TOTAL_OUT_BYTE->Set__DATA(ch_data);
+		sCH__DNET_INFO__TOTAL_IN_BYTE->Set__DATA(ch_data);
+	}
+
 	if(mDNet_Mng.Call__BOARD_OPEN() < 0)
 	{
 		return -1;
@@ -79,6 +87,15 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 
 	CString ch_data;
 	short s_ret;
+
+
+	// ...
+	{
+		ch_data = "0";
+
+		sCH__DNET_INFO__TOTAL_OUT_BYTE->Set__DATA(ch_data);
+		sCH__DNET_INFO__TOTAL_IN_BYTE->Set__DATA(ch_data);
+	}
 
 	// open driver first
 	if((s_ret = DevOpenDriver(dev_id)) != DRV_NO_ERROR) 
@@ -365,10 +382,10 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 
 				// get the name of the Device from the network
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_IDENTITY_CLASS, 
-					1 , 
-					DNM_IDOBJ_NAME, 
-					&abResponseData[0]);
+											DNM_IDENTITY_CLASS, 
+											1 , 
+											DNM_IDOBJ_NAME, 
+											&abResponseData[0]);
 
 				if(bLen != 0)
 				{
@@ -388,40 +405,40 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 				}
 
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_IDENTITY_CLASS, 
-					1 , 
-					DNM_IDOBJ_VENDOR_ID, 
-					&abResponseData[0]);
+											DNM_IDENTITY_CLASS, 
+											1 , 
+											DNM_IDOBJ_VENDOR_ID, 
+											&abResponseData[0]);
 				if(bLen != 0)
 				{
 					usVendorID = *((unsigned short*)&abResponseData[0]);
 				}
 
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_IDENTITY_CLASS, 
-					1 , 
-					DNM_IDOBJ_DEV_TYPE, 
-					&abResponseData[0]);
+											DNM_IDENTITY_CLASS, 
+											1 , 
+											DNM_IDOBJ_DEV_TYPE, 
+											&abResponseData[0]);
 				if(bLen != 0)
 				{
 					usDeviceType = *((unsigned short*)&abResponseData[0]);
 				}
 
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_IDENTITY_CLASS, 
-					1 , 
-					DNM_IDOBJ_PROD_CODE, 
-					&abResponseData[0]);
+											DNM_IDENTITY_CLASS, 
+											1 , 
+											DNM_IDOBJ_PROD_CODE, 
+											&abResponseData[0]);
 				if(bLen != 0)
 				{
 					usProductCode = *((unsigned short*)&abResponseData[0]);
 				}
 
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_IDENTITY_CLASS, 
-					1 , 
-					DNM_IDOBJ_REV, 
-					&abResponseData[0]);
+											DNM_IDENTITY_CLASS, 
+											1 , 
+											DNM_IDOBJ_REV, 
+											&abResponseData[0]);
 				if(bLen != 0)
 				{
 					bMajorRevision  = abResponseData[0];
@@ -456,10 +473,10 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 				}
 
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_CNXN_CLASS, 
-					usInstance, 
-					DNM_CNXN_PSIZE_ATTR_ID, 
-					&abResponseData[0]);
+											DNM_CNXN_CLASS, 
+											2,							// usInstance, 
+											DNM_CNXN_PSIZE_ATTR_ID, 
+											&abResponseData[0]);
 				if( bLen != 0 )
 				{
 					bProducedSize = abResponseData[0];
@@ -470,10 +487,10 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 				}
 
 				bLen = DNet__ReadDeviceData((unsigned char) i,
-					DNM_CNXN_CLASS, 
-					usInstance, 
-					DNM_CNXN_CSIZE_ATTR_ID, 
-					&abResponseData[0]);
+											DNM_CNXN_CLASS, 
+											2,							// usInstance, 
+											DNM_CNXN_CSIZE_ATTR_ID, 
+											&abResponseData[0]);
 				if(bLen != 0)
 				{
 					bConsumedSize = abResponseData[0];
@@ -500,10 +517,10 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 				if(index < CFG__SLAVE_SIZE)
 				{
 					ch_data.Format("%1d", bConsumedSize);
-					sCH__DNET_INFO__SLAVE_X__OUT_SIZE[index]->Set__DATA(ch_data);
+					sCH__DNET_INFO__SLAVE_X__OUT_SIZE_USE[index]->Set__DATA(ch_data);
 
 					ch_data.Format("%1d", bProducedSize);
-					sCH__DNET_INFO__SLAVE_X__IN_SIZE[index]->Set__DATA(ch_data);
+					sCH__DNET_INFO__SLAVE_X__IN_SIZE_USE[index]->Set__DATA(ch_data);
 				}
 
 				// load device data set now         
@@ -741,6 +758,15 @@ int CObj__DNET_STD::_Init__DNET_MASTER_BY_AUTO_CFG()
 
 	// ...
 	{
+		ch_data.Format("%1d", usOutputOffset);
+		sCH__DNET_INFO__TOTAL_OUT_BYTE->Set__DATA(ch_data);
+
+		ch_data.Format("%1d", usInputOffset);
+		sCH__DNET_INFO__TOTAL_IN_BYTE->Set__DATA(ch_data);
+	}
+
+	// ...
+	{
 		FILE *pf = fopen("D:\\DNet_Info.txt", "w");
 
 		if(pf != NULL)
@@ -803,9 +829,9 @@ unsigned char CObj__DNET_STD
 	tMsgExt.data_type  = 0;
 	tMsgExt.function   = TASK_TFC_READ;
 
-	if((s_ret = DevPutMessage(iDNet_BoardNumber, (MSG_STRUC *)&tMsgExt, 500L)) == DRV_NO_ERROR) 
+	if((s_ret = DevPutMessage(iDNet_BoardNumber, (MSG_STRUC *)&tMsgExt, 10000L)) == DRV_NO_ERROR) 
 	{
-		if((s_ret = DevGetMessage(iDNet_BoardNumber, sizeof(tMsgExt), (MSG_STRUC *)&tMsgExt, 500L)) == DRV_NO_ERROR) 
+		if((s_ret = DevGetMessage(iDNet_BoardNumber, sizeof(tMsgExt), (MSG_STRUC *)&tMsgExt, 10000L)) == DRV_NO_ERROR) 
 		{
 			if(tMsgExt.f == TASK_F_OK)
 			{

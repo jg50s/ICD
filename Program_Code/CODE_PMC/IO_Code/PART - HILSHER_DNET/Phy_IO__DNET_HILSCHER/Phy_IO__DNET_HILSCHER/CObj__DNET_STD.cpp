@@ -70,7 +70,7 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	CString str_name;
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.MSG";
 		STD__ADD_STRING(str_name);
@@ -79,12 +79,17 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// Config ...
 	{
+		str_name = "CFG.SLAVE_INFO.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_SLAVE_INFO_CHECK, str_name);
+
+		//
 		str_name = "CFG.DRV_INT.STABLE.SEC";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 10, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_INT_STABLE_SEC, str_name);
 
 		str_name = "CFG.DRV_INT.DELAY.mSEC";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "msec", 0, 200, 1000, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "msec", 0, 10, 500, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_DRV_INT_DELAY_mSEC, str_name);
 
 		str_name = "CFG.DRV_INT.RETRY.CHECK";
@@ -129,23 +134,37 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__BAUD_RATE, str_name);
 
-		//
-		str_name = "DNET.INFO.TOTAL_OUT_BYTE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__TOTAL_OUT_BYTE, str_name);
+		// DNET.INFO ...
+		{
+			str_name = "DNET.INFO.TOTAL_OUT_BYTE";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__DNET_INFO__TOTAL_OUT_BYTE, str_name);
 
-		str_name = "DNET.INFO.TOTAL_IN_BYTE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__TOTAL_IN_BYTE, str_name);
+			str_name = "DNET.INFO.TOTAL_IN_BYTE";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__DNET_INFO__TOTAL_IN_BYTE, str_name);
+		}
 
-		//
-		str_name = "DNET.CFG.TOTAL_OUT_BYTE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_OUT_BYTE, str_name);
+		// CFG.MAX ...
+		{
+			str_name = "DNET.CFG.TOTAL_OUT_BYTE.MAX";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_OUT_BYTE_MAX, str_name);
 
-		str_name = "DNET.CFG.TOTAL_IN_BYTE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_IN_BYTE, str_name);
+			str_name = "DNET.CFG.TOTAL_IN_BYTE.MAX";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_IN_BYTE_MAX, str_name);
+		}
+		// CFG.USE ...
+		{
+			str_name = "DNET.CFG.TOTAL_OUT_BYTE.USE";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_OUT_BYTE_USE, str_name);
+
+			str_name = "DNET.CFG.TOTAL_IN_BYTE.USE";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__DNET_CFG__TOTAL_IN_BYTE_USE, str_name);
+		}
 
 		//
 		{
@@ -185,13 +204,13 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 				STD__ADD_STRING(str_name);
 				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__NAME[i], str_name);
 
-				str_name.Format("DNET.INFO.SLAVE.%1d.IN_SIZE", id);
+				str_name.Format("DNET.INFO.SLAVE.%1d.IN_SIZE.USE", id);
 				STD__ADD_STRING(str_name);
-				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__IN_SIZE[i], str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__IN_SIZE_USE[i], str_name);
 
-				str_name.Format("DNET.INFO.SLAVE.%1d.OUT_SIZE", id);
+				str_name.Format("DNET.INFO.SLAVE.%1d.OUT_SIZE.USE", id);
 				STD__ADD_STRING(str_name);
-				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__OUT_SIZE[i], str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_INFO__SLAVE_X__OUT_SIZE_USE[i], str_name);
 
 				//
 				str_name.Format("DNET.INFO.SLAVE.%1d.COMM_STATE", id);
@@ -223,18 +242,26 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 				STD__ADD_STRING(str_name);
 				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__IN_OFFSET[i], str_name);
 
-				str_name.Format("DNET.CFG.SLAVE.%1d.IN_SIZE", id);
+				str_name.Format("DNET.CFG.SLAVE.%1d.IN_SIZE.MAX", id);
 				STD__ADD_STRING(str_name);
-				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__IN_SIZE[i], str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__IN_SIZE_MAX[i], str_name);
+
+				str_name.Format("DNET.CFG.SLAVE.%1d.IN_SIZE.USE", id);
+				STD__ADD_STRING(str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__IN_SIZE_USE[i], str_name);
 
 				//
 				str_name.Format("DNET.CFG.SLAVE.%1d.OUT_OFFSET", id);
 				STD__ADD_STRING(str_name);
 				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__OUT_OFFSET[i], str_name);
 
-				str_name.Format("DNET.CFG.SLAVE.%1d.OUT_SIZE", id);
+				str_name.Format("DNET.CFG.SLAVE.%1d.OUT_SIZE.MAX", id);
 				STD__ADD_STRING(str_name);
-				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i], str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__OUT_SIZE_MAX[i], str_name);
+
+				str_name.Format("DNET.CFG.SLAVE.%1d.OUT_SIZE.USE", id);
+				STD__ADD_STRING(str_name);
+				LINK__VAR_STRING_CTRL(sCH__DNET_CFG__SLAVE_X__OUT_SIZE_USE[i], str_name);
 			}
 		}
 
@@ -250,10 +277,6 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		int i;
 
-		str_name = "DNET.INFO.OUT.BYTE.SIZE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__OUT_BYTE_SIZE, str_name);
-
 		str_name = "DNET.INFO.OUT.BYTE.CHECK.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "NO YES");
 		LINK__VAR_DIGITAL_CTRL(dCH__DNET_INFO__OUT_BYTE_CHECK_ACTIVE, str_name);
@@ -266,10 +289,6 @@ int CObj__DNET_STD::__DEFINE__VARIABLE_STD(p_variable)
 		}
 
 		//
-		str_name = "DNET.INFO.IN.BYTE.SIZE";
-		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__DNET_INFO__IN_BYTE_SIZE, str_name);
-
 		str_name = "DNET.INFO.IN.BYTE.CHECK.ACTIVE";
 		STD__ADD_DIGITAL(str_name, "NO YES");
 		LINK__VAR_DIGITAL_CTRL(dCH__DNET_INFO__IN_BYTE_CHECK_ACTIVE, str_name);
@@ -583,18 +602,26 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 			p_io_para->Get__PARAMETER_DATA(para_name, para_data);
 			sCH__DNET_CFG__SLAVE_X__IN_OFFSET[i]->Set__DATA(para_data);
 
-			para_name.Format("NODE.%1d.IN_BYTE",  id);
+			para_name.Format("NODE.%1d.IN_BYTE.MAX",  id);
 			p_io_para->Get__PARAMETER_DATA(para_name, para_data);
-			sCH__DNET_CFG__SLAVE_X__IN_SIZE[i]->Set__DATA(para_data);
+			sCH__DNET_CFG__SLAVE_X__IN_SIZE_MAX[i]->Set__DATA(para_data);
+
+			para_name.Format("NODE.%1d.IN_BYTE.USE",  id);
+			p_io_para->Get__PARAMETER_DATA(para_name, para_data);
+			sCH__DNET_CFG__SLAVE_X__IN_SIZE_USE[i]->Set__DATA(para_data);
 
 			//
 			para_name.Format("NODE.%1d.OUT_OFFSET", id);
 			p_io_para->Get__PARAMETER_DATA(para_name, para_data);
 			sCH__DNET_CFG__SLAVE_X__OUT_OFFSET[i]->Set__DATA(para_data);
 
-			para_name.Format("NODE.%1d.OUT_BYTE", id);
+			para_name.Format("NODE.%1d.OUT_BYTE.MAX", id);
 			p_io_para->Get__PARAMETER_DATA(para_name, para_data);
-			sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i]->Set__DATA(para_data);
+			sCH__DNET_CFG__SLAVE_X__OUT_SIZE_MAX[i]->Set__DATA(para_data);
+
+			para_name.Format("NODE.%1d.OUT_BYTE.USE", id);
+			p_io_para->Get__PARAMETER_DATA(para_name, para_data);
+			sCH__DNET_CFG__SLAVE_X__OUT_SIZE_USE[i]->Set__DATA(para_data);
 		}
 	}
 
@@ -618,16 +645,18 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 			sCH__DNET_CFG__SLAVE_X__NAME[i]->Get__DATA(ch_data);
 			node_info.sNAME = ch_data;
 
+			//
 			sCH__DNET_CFG__SLAVE_X__IN_OFFSET[i]->Get__DATA(ch_data);
 			node_info.iIN_OFFSET = atoi(ch_data);
 
-			sCH__DNET_CFG__SLAVE_X__IN_SIZE[i]->Get__DATA(ch_data);
+			sCH__DNET_CFG__SLAVE_X__IN_SIZE_MAX[i]->Get__DATA(ch_data);
 			node_info.iIN_SIZE = atoi(ch_data);
 
+			//
 			sCH__DNET_CFG__SLAVE_X__OUT_OFFSET[i]->Get__DATA(ch_data);
 			node_info.iOUT_OFFSET = atoi(ch_data);
 
-			sCH__DNET_CFG__SLAVE_X__OUT_SIZE[i]->Get__DATA(ch_data);
+			sCH__DNET_CFG__SLAVE_X__OUT_SIZE_MAX[i]->Get__DATA(ch_data);
 			node_info.iOUT_SIZE = atoi(ch_data);
 
 			mCtrl__DNet_Node.Load__Node_Info(&node_info);
@@ -644,43 +673,67 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		}
 	}
 
+	printf("==================================================================== \n");
 	printf("%s : Initial Starting ... \n", sObject_Name);
 
-	// ...
-	int r_ret = _Init__DNET_MASTER_BY_USER_CFG();
-
-	if(r_ret > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		diCH__COMM_STS->Set__DATA(STR__ONLINE);
 
-		printf("%s : Initial Completed ... \n", sObject_Name);
+		printf("%s : Simulation.Initial Completed !!! \n", sObject_Name);
+
+		//
+		CString ch_data;
+
+		usOutputOffset = mCtrl__DNet_Node.Get__TOTAL_OUT_BYTE();
+		usInputOffset  = mCtrl__DNet_Node.Get__TOTAL_IN_BYTE();
 	}
 	else
 	{
-		usInputOffset  = 0;
-		usOutputOffset = 0;
+		int r_ret = _Init__DNET_MASTER_BY_USER_CFG();
 
-		diCH__COMM_STS->Set__DATA(STR__OFFLINE);
+		if(r_ret < 0)
+		{
+			diCH__COMM_STS->Set__DATA(STR__OFFLINE);
 
-		printf("%s : Initial Aborted ... \n", sObject_Name);
+			printf("%s : Initial Aborted ... \n", sObject_Name);
+
+			//
+			usInputOffset  = 0;
+			usOutputOffset = 0;
+		}
+		else
+		{
+			diCH__COMM_STS->Set__DATA(STR__ONLINE);
+
+			printf("%s : Initial Completed ... \n", sObject_Name);
+
+			//
+			CString ch_data;
+
+			usOutputOffset = mCtrl__DNet_Node.Get__TOTAL_OUT_BYTE();
+			usInputOffset  = mCtrl__DNet_Node.Get__TOTAL_IN_BYTE();
+		}
 	}
+	printf("==================================================================== \n");
 
 	// ...
 	{
 		CString ch_data;
-		int cur_byte;
 
-		cur_byte = mCtrl__DNet_Node.Get__TOTAL_OUT_BYTE();
-		usOutputOffset = cur_byte;
-		ch_data.Format("%1d", cur_byte);
-		sCH__DNET_CFG__TOTAL_OUT_BYTE->Set__DATA(ch_data);
+		// ...
+		{
+			_Check__CFG_SLAVE_INFO();
 
-		cur_byte = mCtrl__DNet_Node.Get__TOTAL_IN_BYTE();
-		usInputOffset = cur_byte;
-		ch_data.Format("%1d", cur_byte);
-		sCH__DNET_CFG__TOTAL_IN_BYTE->Set__DATA(ch_data);
+			//
+			ch_data.Format("%1d", usOutputOffset);
+			sCH__DNET_CFG__TOTAL_OUT_BYTE_MAX->Set__DATA(ch_data);
 
-		//
+			ch_data.Format("%1d", usInputOffset);
+			sCH__DNET_CFG__TOTAL_IN_BYTE_MAX->Set__DATA(ch_data);
+		}
+
+		// ...
 		iDNet_BoardNumber = mDNet_Mng.Get__BOARD_ID();
 		ch_data.Format("%1d", iDNet_BoardNumber);
 		sCH__DNET_INFO__MASTER_BOARD_ID->Set__DATA(ch_data);
@@ -691,22 +744,34 @@ int CObj__DNET_STD::__INITIALIZE__IO(p_io_para)
 		ch_data.Format("%1d", iDNet_Board_Out_Offset);
 		sCH__DNET_INFO__MASTER_BOARD_OUT_BYTE_OFFSET->Set__DATA(ch_data);
 
-		// ...
-		{
-			if(iActive__SIM_MODE > 0)		ch_data = "DNM   12345 67890  ";
-			else							ch_data = mDNet_Mng.Get__FIRMWARE_INFO();
+		//
+		if(iActive__SIM_MODE > 0)		ch_data = "DNM   12345 67890  ";
+		else							ch_data = mDNet_Mng.Get__FIRMWARE_INFO();
 		
-			int s_index = ch_data.Find("DNM");
-			if(s_index >= 0)		ch_data.Delete(0, s_index+3);
+		int s_index = ch_data.Find("DNM");
+		if(s_index >= 0)		ch_data.Delete(0, s_index+3);
 
-			ch_data.TrimLeft();
-			ch_data.TrimRight();
+		ch_data.TrimLeft();
+		ch_data.TrimRight();
 			
-			sCH__DNET_INFO__MASTER_BOARD_NAME->Set__DATA(ch_data);
-		}
+		sCH__DNET_INFO__MASTER_BOARD_NAME->Set__DATA(ch_data);
 
-		ch_data = mDNet_Mng.Get__DRIVER_VERSION();
-		sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION->Set__DATA(ch_data);
+		//
+		if(iActive__SIM_MODE > 0)
+		{
+			sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION->Set__DATA("???");
+		}
+		else
+		{
+			ch_data = mDNet_Mng.Get__DRIVER_VERSION();
+			sCH__DNET_INFO__MASTER_BOARD_DRIVER_VERSION->Set__DATA(ch_data);
+		}
+	}
+
+	// ...
+	{
+		_Fnc__DEV_INFO( true );
+		_Check__DEV_TOTAL_MEMORY( );
 	}
 	return 1;
 }

@@ -274,22 +274,6 @@ int CObj__DNET_STD
 				}
 
 				read_data.Format("%f", m_float.fDATA);
-
-				/*
-				CString str_hexa;
-				read_data = "";
-
-				int i_len = byte_size;
-				if(i_len > 100)		i_len = 100;
-
-				for(int i=0; i<i_len; i++)
-				{
-					str_hexa.Format("%02X ", 0x0ff & uch_data[i]);
-					read_data += str_hexa;
-				}
-
-				read_data = Get__HEXA_TO_FLOAT(read_data);
-				*/
 			}
 			else
 			{

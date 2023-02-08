@@ -1,8 +1,8 @@
 #pragma once
 
 
-#define CFG__DNET_NODE_DATA_IN_BYTE_MAX				200
-#define CFG__DNET_NODE_DATA_OUT_BYTE_MAX			200
+#define CFG__DNET_NODE_DATA_IN_BYTE_MAX				300
+#define CFG__DNET_NODE_DATA_OUT_BYTE_MAX			300
 
 
 // ...

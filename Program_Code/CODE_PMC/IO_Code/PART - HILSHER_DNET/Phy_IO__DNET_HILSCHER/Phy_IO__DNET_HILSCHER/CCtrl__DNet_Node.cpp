@@ -141,7 +141,7 @@ CString CCtrl__DNet_Node::Get__All_Node_Info()
 			l_macid.Add(p_node->iMAC_ID);
 
 			//
-			str_bff.Format("%1d) ... \n", i+1);
+			str_bff.Format("%02d) ... \n", i+1);
 			str_info += str_bff;
 			
 			str_bff.Format("     MAC_ID : %1d \n", p_node->iMAC_ID);
@@ -195,7 +195,7 @@ CString CCtrl__DNet_Node::Get__All_Node_Info()
 			int out_index = _Get__OUT_BYTE_INDEX_OF_MACID(mac_id);
 
 			//
-			str_bff.Format("%1d)  MacID(%1d)  IN_Index(%1d)  OUT_Index(%1d) \n", 
+			str_bff.Format("%02d)  MacID(%3d)  IN_Index(%3d)  OUT_Index(%3d) \n", 
 				           i+1, mac_id, in_index, out_index);
 			str_info += str_bff;
 		}
@@ -472,27 +472,24 @@ int CCtrl__DNet_Node::Update__ALL_OUT_BYTE(unsigned char* p_data,const unsigned 
 
 	int out_size = iSize__OUT_BYTE;
 
-	// ...
+	int n_limit = pList_Node.GetSize();
+	int n;
+
+	for(n=0; n<n_limit; n++)
 	{
-		int n_limit = pList_Node.GetSize();
-		int n;
+		CInfo__DNet_Node *p_node = (CInfo__DNet_Node*) pList_Node[n];
 
-		for(n=0; n<n_limit; n++)
+		// ...
 		{
-			CInfo__DNet_Node *p_node = (CInfo__DNet_Node*) pList_Node[n];
+			int io_index = p_node->iDATA__OUT_INDEX;
+			int i_limit = p_node->iOUT_SIZE;
+			int s_i = p_node->iOUT_OFFSET;
 
-			// ...
-			{
-				int io_index = p_node->iDATA__OUT_INDEX;
-				int i_limit = p_node->iOUT_SIZE;
-				int s_i = p_node->iOUT_OFFSET;
-
-				for( ; s_i<i_limit; s_i++)
-				{	
-					if(io_index < data_size)
-					{
-						p_data[io_index++] = 0x0ff & p_node->usDATA__OUT_BYTE[s_i];
-					}
+			for( ; s_i<i_limit; s_i++)
+			{	
+				if(io_index < data_size)
+				{
+					p_data[io_index++] = 0x0ff & p_node->usDATA__OUT_BYTE[s_i];
 				}
 			}
 		}
