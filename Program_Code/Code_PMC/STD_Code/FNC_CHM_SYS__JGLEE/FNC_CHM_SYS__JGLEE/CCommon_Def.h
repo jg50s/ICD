@@ -29,6 +29,11 @@
 #define STR__YES						"YES"
 #define STR__NO							"NO"
 
+#define  STR__UNKNOWN					"UNKNOWN"
+#define  STR__CHECK						"CHECK"
+#define  STR__NG						"NG"
+#define  STR__OK						"OK"
+
 #define STR__OFFLINE					"Offline"
 #define STR__ONLINE						"Online"
 #define STR__ALARM						"Alarm"

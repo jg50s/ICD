@@ -71,6 +71,27 @@ int CObj__MINI8_IO
 		}
 	}
 
+	if(iActive__SIM_MODE > 0)
+	{
+		sCH__MON_IO_GET_ALARM_STATUS_ACTIVE->Set__DATA(STR__OFF);
+
+		sCH__MON_TEMP_HIGH_LIMIT_ACTIVE__LOOP_ALL->Set__DATA(STR__OFF);
+		sCH__MON_OP_HIGH_LIMIT_ACTIVE__LOOP_ALL->Set__DATA(STR__OFF);
+		sCH__MON_MAX_DEVIATION_ACTIVE__LOOP_ALL->Set__DATA(STR__OFF);
+		sCH__MON_DI_OVER_TEMP_STATE_LOOP_ALL->Set__DATA(STR__OFF);
+		sCH__MON_DI_HIGH_LIMIT_STATE_LOOP_ALL->Set__DATA(STR__OFF);
+
+		//
+		for(i=0; i<iLOOP_SIZE; i++)
+		{
+			if(dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0)			continue;
+
+			if(bActive__DI_OVER_TEMP__LOOP_X[i])		dEXT_CH__DI_OVER_TEMP__LOOP_X[i]->Set__DATA(STR__OFF);
+			if(bActive__DI_HIGH_LIMIT__LOOP_X[i])		dEXT_CH__DI_HIGH_LIMIT__LOOP_X[i]->Set__DATA(STR__OFF);
+		}
+	}
+
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
@@ -299,7 +320,8 @@ int CObj__MINI8_IO
 		// ...
 		bool active__err_check = true;
 
-		if(dCH__CFG_PART_USE->Check__DATA(STR__YES) < 0)			active__err_check = false;
+		if(dCH__CFG_PART_USE->Check__DATA(STR__YES) < 0)					active__err_check = false;
+		if(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)		active__err_check = false;
 
 		// Alarm Check : H/W ...
 		if((loop_count == 1)
@@ -328,11 +350,12 @@ int CObj__MINI8_IO
 
 					p_alarm->Check__ALARM(alm_id, r_act);
 					p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-				}
-			}	
+				}	
+			}
 		}
 
 		// Alarm Check : Max. Diff Temperature ...
+		if(active__err_check)
 		{
 			double cur_min = 0.0;
 			double cur_max = 0.0;
@@ -416,6 +439,7 @@ int CObj__MINI8_IO
 		}
 
 		// Alarm Check : Loop.x - MAx.Deviation ...
+		if(active__err_check)
 		{
 			bool active__err_msg = false;
 			CString err_msg = "";
@@ -528,6 +552,7 @@ int CObj__MINI8_IO
 		}
 
 		// Alarm Check : Loop.x - High Limit Temperature ...
+		if(active__err_check)
 		{
 			bool active__high_limit = false;
 
@@ -640,6 +665,7 @@ int CObj__MINI8_IO
 		}
 
 		// Alarm Check : Loop.x - High Limit Power ...
+		if(active__err_check)
 		{
 			bool active__high_limit = false;
 
@@ -752,6 +778,7 @@ int CObj__MINI8_IO
 		}
 
 		// DI.CHECK ...
+		if(active__err_check)
 		{
 			bool active__di_over_temp  = false;
 			bool active__di_high_limit = false;

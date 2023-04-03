@@ -71,6 +71,13 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIMER, var_name);
 	}
 
+	// CFG ...
+	{
+		var_name = "CFG.DA_OFFSET_CHECK_BEFORE_PROCESSING";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "NO  YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DA_OFFSET_CHECK_BEFORE_PROCESSING, var_name);
+	}
+
 	// CTC REPORT ...
 	{
 		var_name = "sPRC.TOTAL.TIME.TO.CTC";
@@ -507,12 +514,45 @@ int CObj__PROC_STD::__DEFINE__ALARM(p_alarm)
 		alarm_title  = title;
 		alarm_title += "Process를 진행할 상태가 아닙니다.";
 
-		alarm_msg = "PM Slot은 Close 상태이어야 합니다. \n";
-		alarm_msg = "Lift_Pin은 Down 상태이어야 합니다. \n";
+		alarm_msg  = "PM Slot은 Close 상태이어야 합니다. \n";
+		alarm_msg += "Lift_Pin은 Down 상태이어야 합니다. \n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__RETRY);
 		l_act.Add(ACT__ABORT);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__DI_SENSOR__HEAVY_ERRPR;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "DI Sensor 관련 Heavy Error가 발생 했습니다.";
+
+		alarm_msg = "Process를 진행 할 수 없습니다.\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__PROCESS_INTERLOCK__DA_OFFSET_ERROR;
+		iLIST_ALID__PART.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Process Interlock (DA Offset Error) !";
+
+		alarm_msg = "Process를 진행 할 수 없습니다.\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__ABORT);
+		l_act.Add(ACT__IGNORE);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -607,6 +647,16 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			var_name = "CFG.DECHUCK.RECIPE.ABORT";
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__CFG_DECHUCK_RECIPE_ABORT, obj_name,var_name);
+
+			//
+			var_name = "TMC_LINK.DA_REPORT.RESULT.WAFER";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_LINK_DA_REPORT_RESULT_WAFER, obj_name,var_name);
+
+			var_name = "TMC_LINK.DA_REPORT.R_OFFSET.WAFER";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_LINK_DA_REPORT_R_OFFSET_WAFER, obj_name,var_name);
+
+			var_name = "TMC_LINK.DA_REPORT.T_OFFSET.WAFER";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_LINK_DA_REPORT_T_OFFSET_WAFER, obj_name,var_name);
 		}
 	}
 
@@ -620,19 +670,32 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			var_name = "MON.SYSTEM.PROCESS.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
 
-			//
-			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.SYSTEM";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_SYSTEM, obj_name,var_name);
+			// INTERLOCK.GAS_BOX
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.GAS_BOX";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX, obj_name,var_name);
+			
+			var_name = "MON.INTERLOCK.HEAVY.MSG.GAS_BOX";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_INTERLOCK_HEAVY_MSG_GAS_BOX, obj_name,var_name);
 
-			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.SYSTEM";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_SYSTEM, obj_name,var_name);
-
-			//
+			// INTERLOCK.CHMABER
 			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.CHAMBER";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_CHAMBER, obj_name,var_name);
 
-			var_name = "MON.INTERLOCK.LIGHT.ACTIVE.CHAMBER";
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_LIGHT_ACTIVE_CHAMBER, obj_name,var_name);
+			var_name = "MON.INTERLOCK.HEAVY.MSG.CHAMBER";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_INTERLOCK_HEAVY_MSG_CHAMBER, obj_name,var_name);
+
+			// INTERLOCK.RF_SYS
+			var_name = "MON.INTERLOCK.HEAVY.ACTIVE.RF_SYS";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_RF_SYS, obj_name,var_name);
+
+			var_name = "MON.INTERLOCK.HEAVY.MSG.RF_SYS";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_INTERLOCK_HEAVY_MSG_RF_SYS, obj_name,var_name);
+		}
+
+		// CFG : BEFORE_PROCESS ...
+		{
+			var_name = "CFG.BEFORE_PROCESS.DI_SENSOR_INTERLOCK.CHECK";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_BEFORE_PROCESS_DI_SENSOR_INTERLOCK_CHECK, obj_name,var_name);
 		}
 	}
 
@@ -687,6 +750,9 @@ int CObj__PROC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			var_name = "LOG.SLOTID";
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PROC_LOG__SLOTID, obj_name,var_name);
+
+			var_name = "LOG.DA_REPORT.RESULT";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PROC_LOG_DA_REPORT_RESULT, obj_name,var_name);
 
 			//
 			var_name = "sVAR.SUB_DIR";

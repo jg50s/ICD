@@ -95,20 +95,12 @@ int CObj__MINI8_IO
 int CObj__MINI8_IO
 ::Call__HEATING_IDLE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	if(Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__IDLE) < 0)
-	{
-		return -1;
-	}
-	return 1;
+	return Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__IDLE);
 }
 int CObj__MINI8_IO
 ::Call__HEATING_PROC(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	if(Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__PROC) < 0)
-	{
-		return -1;
-	}
-	return 1;
+	return Fnc__HEATING(p_variable,p_alarm, HTR_TYPE__PROC);
 }
 
 int CObj__MINI8_IO

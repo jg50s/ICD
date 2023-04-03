@@ -181,6 +181,8 @@ private:
 
 	//-------------------------------------------------------------------------
 	// DB_SYS ...
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE;
+
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE;
 
 	//

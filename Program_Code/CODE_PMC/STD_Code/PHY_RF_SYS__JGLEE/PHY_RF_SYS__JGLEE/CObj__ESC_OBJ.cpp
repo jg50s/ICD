@@ -402,6 +402,11 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "MON.FAULT.HE.CENTER.TIME";
 			STD__ADD_STRING(var_name);
 			LINK__VAR_STRING_CTRL(sCH__MON_FAULT_HE_CENTER_TIME, var_name);
+
+			//
+			var_name = "MON.FAULT.HE_LEAK.CENTER.STATE";
+			STD__ADD_STRING(var_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_FAULT_HE_LEAK_CENTER_STATE, var_name);
 		}
 		// He Edge ...
 		{
@@ -435,6 +440,11 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "MON.FAULT.HE.EDGE.TIME";
 			STD__ADD_STRING(var_name);
 			LINK__VAR_STRING_CTRL(sCH__MON_FAULT_HE_EDGE_TIME, var_name);
+
+			//
+			var_name = "MON.FAULT.HE_LEAK.EDGE.STATE";
+			STD__ADD_STRING(var_name);
+			LINK__VAR_STRING_CTRL(sCH__MON_FAULT_HE_LEAK_EDGE_STATE, var_name);
 		}
 	}
 
@@ -959,6 +969,11 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 1, 0.0, 60.0, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_He_DUMP_TIME_BEFORE_DECHUCK, var_name);
 
+		var_name = "CFG.He_DUMP_VALVE_CLOSE.DURING_DECHUCK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_He_DUMP_VALVE_CLOSE_DURING_DECHUCK, var_name);
+
+		//
 		var_name = "CFG.ESC.POWER.ZERO.VOLTAGE.READING.NOISE.RANGE";
 		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "V", 1, 0.0, 100.0, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_ESC_POWER_ZERO_VOLTAGE_READING_NOISE_RANGE, var_name);
@@ -1009,6 +1024,10 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_DIGITAL_WITH_X_OPTION(var_name, APP_DSP__DISABLE_ENABLE, "");
 			LINK__VAR_DIGITAL_CTRL(dCH__CFG_He_DECHUCK_CHECK_APPLY, var_name);
 
+			var_name = "CFG.DECHUCK_VERIFY_CHECK_COUNT";
+			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "Count", 0, 1, 5, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_DECHUCK_VERIFY_CHECK_COUNT, var_name);
+
 			var_name = "CFG.HE.MINIMUM_LEAK.FOR.DECHUCK_VERIFY";
 			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sccm", 1, 0.0, 100.0, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_HE_MINIMUM_LEAK_FOR_DECHUCK_VERIFY, var_name);
@@ -1057,6 +1076,11 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 					STD__ADD_ANALOG_WITH_X_OPTION(var_name, "V", 0, -1000, 1000, "");
 					LINK__VAR_ANALOG_CTRL(aCH__CFG_EDGE_DECHUCK_X__STEPx_VOLT[k][i], var_name);
 
+					//
+					var_name.Format("CFG.DECHUCK%1d.STEP%1d.HE", k,i+1);
+					STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sccm", 0, 0.0, 100, "");
+					LINK__VAR_ANALOG_CTRL(aCH__CFG_DECHUCK_X__STEPx_HE[k][i], var_name);
+
 					var_name.Format("CFG.DECHUCK%1d.STEP%1d.TIME", k,i+1);
 					STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 1, 0.0, 10, "");
 					LINK__VAR_ANALOG_CTRL(aCH__CFG_DECHUCK_X__STEPx_TIME[k][i], var_name);
@@ -1071,6 +1095,11 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 					var_name.Format("CFG.EDGE.DECHUCK%1d.LAST.VOLT", k);
 					STD__ADD_ANALOG_WITH_X_OPTION(var_name, "V", 0, -100.0, 100.0, "");
 					LINK__VAR_ANALOG_CTRL(aCH__CFG_EDGE_DECHUCK_X__LAST_VOLT[k], var_name);
+
+					//
+					var_name.Format("CFG.DECHUCK%1d.LAST.HE", k);
+					STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sccm", 0, 0.0, 100.0, "");
+					LINK__VAR_ANALOG_CTRL(aCH__CFG_DECHUCK_X__LAST_HE[k], var_name);
 
 					var_name.Format("CFG.DECHUCK%1d.LAST.TIME", k);
 					STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 1, 0.0, 100.0, "");
@@ -1152,6 +1181,17 @@ int CObj__ESC_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_MODE_CHM_ISO, var_name);
 	}
 
+	// CFG Option ...
+	{
+		var_name = "CFG.HE_VALVE_CLOSE_WHEN_ERROR";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HE_VALVE_CLOSE_WHEN_ERROR, var_name);
+
+		var_name = "CFG.HE_DONOT_CHECK_DURING_ON_RF";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF, var_name);
+	}
+
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__REQ_CTRL);
@@ -1171,6 +1211,11 @@ l_act.Add(ACT__ABORT);
 
 #define  _LALM__CLEAR							\
 l_act.RemoveAll();								\
+l_act.Add(ACT__CLEAR);
+
+#define  _LALM__RETRY_CLEAR						\
+l_act.RemoveAll();								\
+l_act.Add(ACT__RETRY);							\
 l_act.Add(ACT__CLEAR);
 
 #define  _LALM__RETRY_ABORT						\
@@ -1574,7 +1619,7 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 
 	// ...
 	{
-		alarm_id = ALID__HE_WAFER_MINIMUM_LEAK_SCCM;
+		alarm_id = ALID__HE_WAFER_MINIMUM_LEAK_SCCM_ACT;
 		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
@@ -1584,13 +1629,13 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 		alarm_msg += "Wafer Minimum Leak Error ! \n";
 		alarm_msg += "Please, check He flow! \n";
 
-		_LALM__CLEAR;
+		_LALM__RETRY_CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}	
 	// ...
 	{
-		alarm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM;
+		alarm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM_ACT;
 		iLIST_ALID__HE_FLOW.Add(alarm_id);
 
 		alarm_title  = title;
@@ -1598,6 +1643,37 @@ int CObj__ESC_OBJ::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg  = "";
 		alarm_msg += "Please, check He flow ! \n";
+
+		_LALM__RETRY_CLEAR;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}	
+
+	// ...
+	{
+		alarm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM_CENTER_MON;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Wafer Maximum Center Leak Error (Monitoring) !";
+
+		alarm_msg  = "";
+		alarm_msg += "Please, check He center leak-flow ! \n";
+
+		_LALM__CLEAR;
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}	
+	// ...
+	{
+		alarm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM_EDGE_MON;
+		iLIST_ALID__HE_FLOW.Add(alarm_id);
+
+		alarm_title  = title;
+		alarm_title += "Wafer Maximum Edge Leak Error (Monitoring) !";
+
+		alarm_msg  = "";
+		alarm_msg += "Please, check He edge leak-flow ! \n";
 
 		_LALM__CLEAR;
 
@@ -2036,6 +2112,14 @@ int CObj__ESC_OBJ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_ANALOG_CTRL(aiEXT_CH__He_Flow_EDGE_IO, obj_name,var_name);
 			}
+		}
+
+		// RF ON STATUS ...
+		{
+			def_name = "CH__DI_RF_ON_STATUS";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_ON_STATUS, obj_name,var_name);
 		}
 	}
 

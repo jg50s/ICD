@@ -112,6 +112,8 @@ private:
 	// OBJ - GAS_VLV ...
 	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__GAS_VLV;
 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP;
+
 	CX__VAR_DIGITAL_CTRL dEXT_CH__GAS_VLV__PARA_MFC_TYPE;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__GAS_VLV__PARA_MFC_FLOW;
 
@@ -151,7 +153,10 @@ private:
 
 	// ...
 	int  Get__Gas_Type_Index(const CString& str_gas_type);
+
 	void Update__CHECK_TYPE(const CString& cur__check_type, const CString& pre__check_type);
+	void Update__REF_STRING();
+
 	void Save__CHECK_TYPE(const CString& str__check_type);
 	void Copy__CURRENT_REF(const CString& str__check_type);
 	//

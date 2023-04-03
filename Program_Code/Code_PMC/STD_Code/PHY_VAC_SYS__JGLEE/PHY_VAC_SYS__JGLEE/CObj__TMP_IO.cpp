@@ -146,8 +146,24 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH___MON_TMP_LINE_NOT_READY_ACTIVE, str_name);
 	}
 
+	// CFG.DI_CHECK ...
+	{
+		str_name = "CFG.DI_ALARM.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_ALARM_CHECK, str_name);
+
+		str_name = "CFG.DI_WARNING.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_WARNING_CHECK, str_name);
+	}
+
 	// CFG ...
 	{
+		str_name = "CFG.INTERLOCK.VAT.CLOSE";
+		STD__ADD_DIGITAL(str_name, "YES  NO");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_VAT_CLOSE, str_name);
+
+		//
 		str_name = "CFG.VAT_OPEN_DELAY.SEC";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 1, 10, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_VAT_OPEN_DELAY_SEC, str_name);
@@ -442,6 +458,21 @@ int CObj__TMP_IO::__DEFINE__ALARM(p_alarm)
 		alarm_title += "High-Limit Temperature Error !";
 
 		alarm_msg = "Please, check the temperature (C) of TMP !\n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__TMP_STATE_NOT_NORMAL;
+
+		alarm_title  = title;
+		alarm_title += "TM 상태가 Normal 아닙니다 !";
+
+		alarm_msg = "TMP 상부의 모든 Valve들을 Close 시킵니다. \n";
 
 		l_act.RemoveAll();
 		l_act.Add(ACT__CHECK);

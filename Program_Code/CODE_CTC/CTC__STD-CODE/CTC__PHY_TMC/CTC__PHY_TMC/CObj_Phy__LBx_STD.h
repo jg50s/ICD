@@ -14,6 +14,14 @@
 #define  ALID__VENT_ERROR							13
 #define  ALID__PUMP_ERROR							14
 
+#define  ALID__DOOR_VALVE_OPEN_ERROR				15
+#define  ALID__SLOT_VALVE_OPEN_ERROR				16
+
+// ...
+#define _ACT__ABORT					"ABORT"
+#define _ACT__RETRY					"RETRY"
+
+
 
 class CObj_Phy__LBx_STD : public __IOBJ__STD_TYPE
 {
@@ -29,6 +37,8 @@ private:
 	
 	SCX__USER_LOG_CTRL xI_LOG_CTRL;
 	CString sDir_ROOT;
+
+	int iActive__SIM_MODE;
 	//
 
 	//-----------------------------------------------------
@@ -50,22 +60,35 @@ private:
 	CX__VAR_STRING_CTRL sCH__NEXT_CTRL_REQ;
 
 	//  CONTROL  
-	CX__VAR_DIGITAL_CTRL xCH__OBJ_CTRL;
-	CString dVAR__MODE;
+	CX__VAR_DIGITAL_CTRL xCH__LBx_CTRL;
+	CX__VAR_DIGITAL_CTRL xCH__LBx_MODE;
 
+	CX__VAR_DIGITAL_CTRL xCH__LBx_SLOT_ID;
+
+	//
 	CX__VAR_STRING_CTRL xCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL xCH__OBJ_FNC_MSG;
 	
 	CX__VAR_STRING_CTRL sCH__UPPER_OBJ_MSG;
 
 	CX__VAR_DIGITAL_CTRL xCH__CFG_USE_FLAG;
+	
 	CX__VAR_DIGITAL_CTRL xCH__MOVE_FLAG;
+	CX__VAR_DIGITAL_CTRL xCH__ACTIVE_VAC_AREA_CTRL;
+	CX__VAR_DIGITAL_CTRL xCH__ACTIVE_ATM_AREA_CTRL;
+
 	CString sVAR_SCH__IN_OUT_FLAG;
 	CString sVAR_SCH__IN_COUNT;
 	CString sVAR_SCH__OUT_COUNT;
 	CString sVAR_SCH__CR_REQ;
 
 	CX__VAR_STRING_CTRL sCH__SCH_IDLE_COUNT;
+
+	// PARA ...
+	CX__VAR_DIGITAL_CTRL dCH__PARA_SLOT_ID;
+
+	CX__VAR_ANALOG_CTRL  aCH__PARA_VENT_COOLING_SEC;
+	CX__VAR_STRING_CTRL  sCH__COUNT_VENT_COOLING_SEC;
 
 	//  STATUS   
 	CX__VAR_DIGITAL_CTRL xCH__OBJ_VIRTUAL_STATUS;
@@ -118,6 +141,8 @@ private:
 	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_INIT_SEC;
 	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_PUMP_SEC;
 	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_VENT_SEC;
+	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_DOOR_SEC;
+	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_SLOT_SEC;
 	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_PREPMATER_SEC;
 	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_MAP_SEC;
 	CX__VAR_ANALOG_CTRL  aCH__SCH_TEST_CFG_COMPMATER_SEC;
@@ -165,10 +190,9 @@ private:
 	// OBJ : DB ...
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC;
 
-	CII__VAR_DIGITAL_CTRL *xEXT_CH_CFG__TRANSFER_MODE;
-
-	CII__VAR_ANALOG_CTRL  *aEXT_CH_CFG__REF_ATM_PRESSURE;
-	CII__VAR_ANALOG_CTRL  *aEXT_CH_CFG__REF_VAC_PRESSURE;
+	CX__VAR_DIGITAL_CTRL  xEXT_CH_CFG__TRANSFER_MODE;
+	CX__VAR_ANALOG_CTRL   aEXT_CH_CFG__REF_ATM_PRESSURE;
+	CX__VAR_ANALOG_CTRL   aEXT_CH_CFG__REF_VAC_PRESSURE;
 
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__CFG_LL_SLOT_X_STATUS[CFG_LLx__SLOT_MAX];
 	//
@@ -186,30 +210,51 @@ private:
 
 	// ...
 	CString sMODE__INIT;
-	int Call__INIT(CII_OBJECT__VARIABLE* p_variable);
+	int Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__MAINT;
-	int Call__MAINT(CII_OBJECT__VARIABLE* p_variable);
+	int Call__MAINT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__PUMP;
-	int Call__PUMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+	int Call__PUMP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__VENT;
-	int Call__VENT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+	int Call__VENT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
+
+	//
+	CString sMODE__DOOR_OPEN;
+	int Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__DOOR_CLOSE;
+	int Call__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	//
+	CString sMODE__SLOT_OPEN;
+	int Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__SLOT_CLOSE;
+	int Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	//
+	CString sMODE__PIN_UP;
+	int Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
+
+	CString sMODE__PIN_DOWN;
+	int Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	//
 	CString sMODE__PREPMATER;
-	int Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable);
+	int Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__MAP;
-	int Call__MAP(CII_OBJECT__VARIABLE* p_variable);
+	int Call__MAP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__COMPMATER;
 	CString sMODE__COMPMATER_EX;
-	int Call__COMPMATER(CII_OBJECT__VARIABLE* p_variable, const int ex_mode);
+	int Call__COMPMATER(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm, const int ex_mode);
 
 	CString sMODE__ISOLATE;
-	int Call__ISOLATE(CII_OBJECT__VARIABLE* p_variable);
+	int Call__ISOLATE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	// 
 	CString sMODE__PROC_MAIN;
@@ -231,13 +276,15 @@ private:
 
 	// SCH_TEST : CONFIG ...
 	CString sMODE__SCH_TEST_CFG;
-	int  Call__SCH_TEST_CFG(CII_OBJECT__VARIABLE* p_variable);
+	int  Call__SCH_TEST_CFG(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	//
 
 	// ...
 	int Fnc__MODULE_OBJ(CII_OBJECT__VARIABLE* p_variable,
+						CII_OBJECT__ALARM* p_alarm,
 						const CString obj_mode);
 	int Sim__MODULE_OBJ(CII_OBJECT__VARIABLE* p_variable,
+						CII_OBJECT__ALARM* p_alarm,
 						const CString obj_mode);
 
 	int Fnc__WAIT_SEC(CII_OBJECT__VARIABLE* p_variable,

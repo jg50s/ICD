@@ -8,13 +8,17 @@
 
 // SCH_TEST : CONFIG ...
 int CObj_Phy__LBx_STD
-::Call__SCH_TEST_CFG(CII_OBJECT__VARIABLE* p_variable)
+::Call__SCH_TEST_CFG(CII_OBJECT__VARIABLE* p_variable,
+					 CII_OBJECT__ALARM* p_alarm)
 {
 
 	aCH__SCH_TEST_CFG_INIT_SEC->Set__VALUE(5.0);
 
 	aCH__SCH_TEST_CFG_PUMP_SEC->Set__VALUE(5.0);
 	aCH__SCH_TEST_CFG_VENT_SEC->Set__VALUE(5.0);
+
+	aCH__SCH_TEST_CFG_DOOR_SEC->Set__VALUE(1.0);
+	aCH__SCH_TEST_CFG_SLOT_SEC->Set__VALUE(1.0);
 
 	aCH__SCH_TEST_CFG_PREPMATER_SEC->Set__VALUE(1.0);
 	aCH__SCH_TEST_CFG_MAP_SEC->Set__VALUE(1.0);
@@ -33,6 +37,7 @@ int CObj_Phy__LBx_STD
 // ...
 int CObj_Phy__LBx_STD
 ::Fnc__MODULE_OBJ(CII_OBJECT__VARIABLE* p_variable,
+				  CII_OBJECT__ALARM* p_alarm,
 				  const CString obj_mode)
 {
 	SCX__ASYNC_TIMER_CTRL x_timer_ctrl;
@@ -59,7 +64,7 @@ int CObj_Phy__LBx_STD
 
 	if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
 	{
-		flag = Sim__MODULE_OBJ(p_variable, obj_mode);
+		flag = Sim__MODULE_OBJ(p_variable,p_alarm, obj_mode);
 	}
 	else
 	{
@@ -84,8 +89,11 @@ int CObj_Phy__LBx_STD
 }
 int CObj_Phy__LBx_STD
 ::Sim__MODULE_OBJ(CII_OBJECT__VARIABLE* p_variable,
+				  CII_OBJECT__ALARM* p_alarm,
 				  const CString obj_mode)
 {
+LOOP_RETRY:
+
 	CII__VAR_ANALOG_CTRL* pch_analog_cfg = NULL;
 	bool active_check = true;
 
@@ -104,6 +112,122 @@ int CObj_Phy__LBx_STD
 	else if(obj_mode.CompareNoCase(_CMMD__PUMP) == 0)
 	{
 		pch_analog_cfg = aCH__SCH_TEST_CFG_PUMP_SEC.Get__PTR();
+	}
+	else if((obj_mode.CompareNoCase(_CMMD__DOOR_OPEN)  == 0)
+		 || (obj_mode.CompareNoCase(_CMMD__DOOR_CLOSE) == 0))
+	{
+		// Interlock Check ...
+		if(obj_mode.CompareNoCase(_CMMD__DOOR_OPEN) == 0)
+		{
+			bool active__err_check = false;
+
+			double cur__pressure_torr = xCH__PRESSURE_VALUE->Get__VALUE();
+			double cfg__pressure_torr = 0.0;
+
+			if(xEXT_CH_CFG__TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+			{
+				cfg__pressure_torr = aEXT_CH_CFG__REF_ATM_PRESSURE->Get__VALUE();
+
+				if(cur__pressure_torr < cfg__pressure_torr)
+				{
+					active__err_check = true;
+				}
+			}
+			else
+			{
+				cfg__pressure_torr = aEXT_CH_CFG__REF_VAC_PRESSURE->Get__VALUE();
+
+				if(cur__pressure_torr > cfg__pressure_torr)
+				{
+					active__err_check = true;
+				}
+			}
+
+			if(active__err_check)
+			{
+				int alm_id = ALID__DOOR_VALVE_OPEN_ERROR;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				// ...
+				{
+					alm_bff.Format("Current pressure is %.3f torr \n", cur__pressure_torr);
+					alm_msg += alm_bff;
+
+					alm_bff.Format("Config pressure is %.3f torr \n", cfg__pressure_torr);
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+	
+				if(r_act.CompareNoCase(_ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
+				return -101;
+			}
+		}
+
+		pch_analog_cfg = aCH__SCH_TEST_CFG_DOOR_SEC.Get__PTR();
+	}
+	else if((obj_mode.CompareNoCase(_CMMD__SLOT_OPEN)  == 0)
+		 || (obj_mode.CompareNoCase(_CMMD__SLOT_CLOSE) == 0))
+	{
+		// Interlock Check ...
+		if(obj_mode.CompareNoCase(_CMMD__SLOT_OPEN) == 0)
+		{
+			bool active__err_check = false;
+
+			double cur__pressure_torr = xCH__PRESSURE_VALUE->Get__VALUE();
+			double cfg__pressure_torr = 0.0;
+
+			if(xEXT_CH_CFG__TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+			{
+				double cfg__pressure_torr = aEXT_CH_CFG__REF_ATM_PRESSURE->Get__VALUE();
+
+				if(cur__pressure_torr < cfg__pressure_torr)
+				{
+					active__err_check = true;
+				}
+			}
+			else
+			{
+				double cfg__pressure_torr = aEXT_CH_CFG__REF_VAC_PRESSURE->Get__VALUE();
+
+				if(cur__pressure_torr > cfg__pressure_torr)
+				{
+					active__err_check = true;
+				}
+			}
+
+			if(active__err_check)
+			{
+				int alm_id = ALID__SLOT_VALVE_OPEN_ERROR;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
+
+				// ...
+				{
+					alm_bff.Format("Current pressure is %.3f torr \n", cur__pressure_torr);
+					alm_msg += alm_bff;
+
+					alm_bff.Format("Config pressure is %.3f torr \n", cfg__pressure_torr);
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+				if(r_act.CompareNoCase(_ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
+				return -201;
+			}
+		}
+
+		pch_analog_cfg = aCH__SCH_TEST_CFG_SLOT_SEC.Get__PTR();
 	}
 	else if(obj_mode.CompareNoCase(_CMMD__PREPMATER) == 0)
 	{
@@ -222,6 +346,38 @@ int CObj_Phy__LBx_STD
 		xCH__PRESSURE_VALUE->Set__DATA("0.000");
 		xCH__PRESSURE_mTORR->Set__DATA("0.0");
 		xCH__VAC_SNS->Set__DATA("ON");
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__DOOR_OPEN) == 0)
+	{
+		CString ch_data = dCH__PARA_SLOT_ID->Get__STRING();
+		int slot_index = atoi(ch_data) - 1;
+
+		dCH__DOOR_STS_X->Set__DATA(STR__OPEN);
+		dCH__DOOR_STS_SLOT[slot_index]->Set__DATA(STR__OPEN);
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__DOOR_CLOSE) == 0)
+	{
+		CString ch_data = dCH__PARA_SLOT_ID->Get__STRING();
+		int slot_index = atoi(ch_data) - 1;
+
+		dCH__DOOR_STS_X->Set__DATA(STR__CLOSE);
+		dCH__DOOR_STS_SLOT[slot_index]->Set__DATA(STR__CLOSE);
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__SLOT_OPEN) == 0)
+	{
+		CString ch_data = dCH__PARA_SLOT_ID->Get__STRING();
+		int slot_index = atoi(ch_data) - 1;
+
+		dCH__SLIT_VLV_STS_X->Set__DATA(STR__OPEN);
+		dCH__SLIT_VLV_STS_SLOT[slot_index]->Set__DATA(STR__OPEN);
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__SLOT_CLOSE) == 0)
+	{
+		CString ch_data = dCH__PARA_SLOT_ID->Get__STRING();
+		int slot_index = atoi(ch_data) - 1;
+
+		dCH__SLIT_VLV_STS_X->Set__DATA(STR__CLOSE);
+		dCH__SLIT_VLV_STS_SLOT[slot_index]->Set__DATA(STR__CLOSE);
 	}
 	else if(obj_mode.CompareNoCase(_CMMD__PREPMATER) == 0)
 	{

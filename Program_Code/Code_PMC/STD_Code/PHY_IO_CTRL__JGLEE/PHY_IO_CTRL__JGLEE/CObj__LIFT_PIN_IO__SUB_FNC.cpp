@@ -65,10 +65,10 @@ int CObj__LIFT_PIN_IO
 			CString alm_msg;
 			CString alm_bff;
 
-			alm_bff.Format("ESC current voltage : %d \n", cur__ai_esc_voltage);
+			alm_bff.Format("ESC current voltage : %.0f \n", cur__ai_esc_voltage);
 			alm_msg += alm_bff;
 
-			alm_bff.Format("PIN-UP threshold voltage : %d \n", cfg__esc_pin_up_volt);
+			alm_bff.Format("PIN-UP threshold voltage : %.0f \n", cfg__esc_pin_up_volt);
 			alm_msg += alm_bff;
 
 			Alarm__POST_CHECK(p_alarm, alm_msg, alm_id);
@@ -103,7 +103,7 @@ int CObj__LIFT_PIN_IO
 void CObj__LIFT_PIN_IO
 ::_Fnc__SIM_PIN_POD(const bool active_up, const bool active_down, const bool active_middle)
 {
-	Sleep(1000);
+	Sleep(500);
 
 	if(iDATA__PIN_SNS_TYPE == _PIN_TYPE__DI_SNS)
 	{
@@ -111,9 +111,35 @@ void CObj__LIFT_PIN_IO
 		dEXT_CH__DI_PIN_DOWN->Set__DATA(STR__OFF);
 		dEXT_CH__DI_PIN_MIDDLE->Set__DATA(STR__OFF);
 
-		if(active_up)			dEXT_CH__DI_PIN_UP->Set__DATA(STR__ON);
-		if(active_down)			dEXT_CH__DI_PIN_DOWN->Set__DATA(STR__ON);
-		if(active_middle)		dEXT_CH__DI_PIN_MIDDLE->Set__DATA(STR__ON);
+		Sleep(500);
+
+		if(iDATA__PIN_SNS_CHECK_MODE == _PIN_CHECK_MODE__TOP)
+		{
+			if(active_up)
+			{
+				dEXT_CH__DI_PIN_UP->Set__DATA(STR__ON);
+				dEXT_CH__DI_PIN_MIDDLE->Set__DATA(STR__ON);
+				dEXT_CH__DI_PIN_DOWN->Set__DATA(STR__ON);
+			}
+			if(active_middle)
+			{
+				dEXT_CH__DI_PIN_UP->Set__DATA(STR__OFF);
+				dEXT_CH__DI_PIN_MIDDLE->Set__DATA(STR__ON);
+				dEXT_CH__DI_PIN_DOWN->Set__DATA(STR__ON);
+			}
+			if(active_down)
+			{
+				dEXT_CH__DI_PIN_UP->Set__DATA(STR__OFF);
+				dEXT_CH__DI_PIN_MIDDLE->Set__DATA(STR__OFF);
+				dEXT_CH__DI_PIN_DOWN->Set__DATA(STR__ON);
+			}
+		}
+		else
+		{
+			if(active_up)			dEXT_CH__DI_PIN_UP->Set__DATA(STR__ON);
+			if(active_down)			dEXT_CH__DI_PIN_DOWN->Set__DATA(STR__ON);
+			if(active_middle)		dEXT_CH__DI_PIN_MIDDLE->Set__DATA(STR__ON);
+		}
 	}
 	else
 	{

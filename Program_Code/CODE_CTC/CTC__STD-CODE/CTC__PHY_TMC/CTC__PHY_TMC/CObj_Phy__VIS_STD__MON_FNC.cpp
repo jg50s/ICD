@@ -13,8 +13,9 @@ void CObj_Phy__VIS_STD
 
 	while(1)
 	{
-		Sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
+		
 		loop_count++;
 		if(loop_count >= 5)			loop_count = 0;
 

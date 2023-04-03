@@ -162,6 +162,20 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.INTERLOCK.LIGHT.MSG.RF_SYS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_INTERLOCK_LIGHT_MSG_RF_SYS, str_name);
+
+		//
+		str_name = "MON.ACTIVE.PROCESS.VALVE.READY.STATE";
+		STD__ADD_DIGITAL(str_name, APP_DSP__OFF_ON);
+
+		//
+		str_name = "CFG.DI_INTERLOCK_HEAVY_CHECK.SYSTEM";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+
+		str_name = "CFG.DI_INTERLOCK_HEAVY_CHECK.CHAMBER";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+
+		str_name = "CFG.DI_INTERLOCK_HEAVY_CHECK.GAS_BOX";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
 	}
 
 	// CFG : GAS_BOX ...
@@ -263,6 +277,10 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "SYSTEM.INTERLOCK.MSG";
 		STD__ADD_STRING_WITH_COMMENT(str_name,"");
 		LINK__VAR_STRING_CTRL(sCH__SYSTEM_INTERLOCK_MSG,str_name);
+
+		//
+		str_name = "CFG.USE.SHUTTER_CLOSE.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
 	}
 
 	// INTERLOCK ...
@@ -415,6 +433,10 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__ALARM_LEVEL, "");
 			LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_USE__INTERLOCK_SNS_HEATER2_INTERLOCK, str_name);
 		}
+
+		//
+		str_name = "ACTIVE.INTERLOCK.CHAMBER.VENT";
+		STD__ADD_DIGITAL(str_name, "ON  OFF");
 
 		//
 		str_name = "CFG.INTERLOCK.CHECK.SEC";
@@ -608,79 +630,115 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__CHM_PM_ITEM__WAP_CONDUCTANCE_FLAG, str_name);
 	}
 
-	// LOG.LEAKCHECK ...
+	// LEAKCHECK.CHAMBER ...
 	{
-		//
-		str_name = "LEAK_CHECK.CHECK.START_DATE";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_CHECK_START_DATE, str_name);
-
-		str_name = "LEAK_CHECK.CHECK.LOG_DAY";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_CHECK_LOG_DAY, str_name);
-
-		str_name = "LEAK_CHECK.CHECK.LOG_REQ";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_CHECK_LOG_REQ, str_name);
-
-		//
-		str_name = "LEAK_CHECK.LOG.CHECK_TIME";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_CHECK_TIME, str_name);
-
-		str_name = "LEAK_CHECK.LOG.BASE_PRESSURE";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_BASE_PRESSURE, str_name);
-
-		str_name = "LEAK_CHECK.LOG.START_PRESSURE";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_START_PRESSURE, str_name);
-
-		for(i=0;i<CFG_SIZE__LOG_LEAKCHECK;i++)
+		// PARA ...
 		{
-			str_name.Format("LEAK_CHECK.LOG.PRESSURE.%1d", i+1);
+			str_name = "LEAK_CHECK.CHECK.START_DATE";
 			STD__ADD_STRING_WITH_COMMENT(str_name,"");
-			LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_PRESSURE[i], str_name);
 
-			str_name.Format("LEAK_CHECK.LOG.LEAKRATE.%1d", i+1);
+			str_name = "LEAK_CHECK.CHECK.LOG_DAY";
 			STD__ADD_STRING_WITH_COMMENT(str_name,"");
-			LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_LEAKRATE[i], str_name);
+
+			str_name = "LEAK_CHECK.CHECK.LOG_REQ";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
 		}
 
-		str_name = "LEAK_CHECK.LOG.LEAKRATE.RESULT";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_LEAKRATE_RESULT, str_name);
+		// LOG ...
+		{
+			str_name = "LEAK_CHECK.LOG.CHECK_TIME";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
 
-		//
-		str_name = "LEAK_CHECK.LOG.GRAPH.CUR_DATA";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_GRAPH_CUR_DATA, str_name);
+			str_name = "LEAK_CHECK.LOG.BASE_PRESSURE";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
 
-		str_name = "LEAK_CHECK.LOG.GRAPH.REF_ALARM";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__LEAK_CHECK_LOG_GRAPH_REF_ALARM, str_name);
+			str_name = "LEAK_CHECK.LOG.START_PRESSURE";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
 
-		// ...
+			for(i=0;i<CFG_SIZE__LOG_LEAKCHECK;i++)
+			{
+				str_name.Format("LEAK_CHECK.LOG.PRESSURE.%1d", i+1);
+				STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+				str_name.Format("LEAK_CHECK.LOG.LEAKRATE.%1d", i+1);
+				STD__ADD_STRING_WITH_COMMENT(str_name,"");
+			}
+
+			str_name = "LEAK_CHECK.LOG.LEAKRATE.RESULT";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			//
+			str_name = "LEAK_CHECK.LOG.GRAPH.CUR_DATA";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			str_name = "LEAK_CHECK.LOG.GRAPH.REF_ALARM";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		}
+	}
+
+	// LEAKCHECK.GAS_LINE ...
+	{
+		// PARA ...
+		{
+			str_name = "LEAK_CHECK.GAS_CHECK.START_DATE";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			str_name = "LEAK_CHECK.GAS_CHECK.LOG_DAY";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			str_name = "LEAK_CHECK.GAS_CHECK.LOG_REQ";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		}
+
+		// LOG ...
+		{
+			str_name = "LEAK_CHECK.GAS_LOG.CHECK_TIME";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			str_name = "LEAK_CHECK.GAS_LOG.BASE_PRESSURE";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			str_name = "LEAK_CHECK.GAS_LOG.START_PRESSURE";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			for(i=0;i<CFG_SIZE__LOG_LEAKCHECK;i++)
+			{
+				str_name.Format("LEAK_CHECK.GAS_LOG.PRESSURE.%1d", i+1);
+				STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+				str_name.Format("LEAK_CHECK.GAS_LOG.LEAKRATE.%1d", i+1);
+				STD__ADD_STRING_WITH_COMMENT(str_name,"");
+			}
+
+			str_name = "LEAK_CHECK.GAS_LOG.LEAKRATE.RESULT";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			//
+			str_name = "LEAK_CHECK.GAS_LOG.GRAPH.CUR_DATA";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+
+			str_name = "LEAK_CHECK.GAS_LOG.GRAPH.REF_ALARM";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		}
+	}
+
+	// MFC ...
+	{
 		str_name = "CFG.MFC_FLOW_WARNING.TIMEOUT_SEC";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.3,1.0,"");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_MFC_FLOW_WARNING_TIMEOUT_SEC, str_name);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.3, 1.0, "");
 
 		str_name = "CFG.MFC_CLOSE_WARNING.TIMEOUT_SEC";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0.3,1.0,"");
-		LINK__VAR_ANALOG_CTRL(aCH__CFG_MFC_CLOSE_WARNING_TIMEOUT_SEC, str_name);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.3, 1.0, "");
 
 		//
 		str_name = "CFG.MFC_485.SETPOINT_READ.CONFIRM_USE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ENABLE DISABLE", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MFC_485_SETPOINT_READ_CONFIRM_USE, str_name);
 
 		str_name = "CFG.MFC_485.COMM_OFFLINE_ALARM.USE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ENABLE DISABLE", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MFC_485_COMM_OFFLINE_ALARM_USE, str_name);
 
 		str_name = "CFG.MFC_485.CONTROL_TIMEOUT_ALARM.USE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ENABLE DISABLE", "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MFC_485_CONTROL_TIMEOUT_ALARM_USE, str_name);
 	}
 
 	// CFG ...

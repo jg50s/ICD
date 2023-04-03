@@ -31,9 +31,24 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__PARA_MODULE;
 	CX__VAR_DIGITAL_CTRL dCH__PARA_SLOT;
 
-	CX__VAR_STRING_CTRL  sCH__WAC_USE;
-	CX__VAR_STRING_CTRL  sCH__WAC_DELAY_SEC;
+	//
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_USE_X[CFG_PM_LIMIT];
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_PICK_CHECK_X[CFG_PM_LIMIT];
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_PLACE_CHECK_X[CFG_PM_LIMIT];
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_POS_ID_X[CFG_PM_LIMIT];
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_POS_SLOT_X[CFG_PM_LIMIT];
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_DELAY_SEC_X[CFG_PM_LIMIT];
+	CX__VAR_STRING_CTRL  sCH__FROM_CTC_WAC_PM_WAFER_TYPE;
 
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_ACTIVE;
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_STATE;
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_ARM_TYPE;
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_WFR_INFO;
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_POS_ID;
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_POS_SLOT;
+	CX__VAR_STRING_CTRL  sCH__INFO_WAC_PMC_DELAY_COUNT;
+
+	//
 	CX__VAR_DIGITAL_CTRL dCH__CFG_LLx_CLOSE_SEQUENCE_MODE;
 	CX__VAR_DIGITAL_CTRL dCH__CFG_PMx_CLOSE_SEQUENCE_MODE;
 
@@ -62,19 +77,26 @@ private:
 	// VAC_ROBOT -----
 	CII_EXT_OBJECT__CTRL *pROBOT__OBJ_CTRL;
 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_ROBOT__MON_ACT_ARM;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_ROBOT__MON_TRG_ROT;
+
 	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_STATUS;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_STATUS;
 	CX__VAR_STRING_CTRL  sEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_TITLE;
 	CX__VAR_STRING_CTRL  sEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_TITLE;
 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_REQ;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_ACT;
+
 	// PMx ...
 	int iSIZE__PMx;
 
 	bool bActive__Single_Handoff;
+	bool bActive__PMx_Passive_Use;
 
 	CX__VAR_ANALOG_CTRL  aEXT_CH__PARA_PMC_ID;
-	CII_EXT_OBJECT__CTRL *pOPR_PMx_HANDOFF;
-	CII_EXT_OBJECT__CTRL *pOPR_PMC_HANDOFF[CFG_PM_LIMIT];
+	CII_EXT_OBJECT__CTRL *pOPR_PMx_HANDOFF_CTRL;
+	CII_EXT_OBJECT__CTRL *pOPR_PMC_HANDOFF_X[CFG_PM_LIMIT];
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__PMx_CFG_HANDSHAKE_MODE[CFG_PM_LIMIT];
 
@@ -91,6 +113,8 @@ private:
 
 	// VAC_CHM ...
 	CII_EXT_OBJECT__CTRL *pVAC_CHM__OBJ_CTRL;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PARA_BALLAST_CTRL_ACTIVE;
 
 	CX__VAR_STRING_CTRL  sEXT_CH__VAC_CHM__PRESSURE_STATUS;
 	CX__VAR_STRING_CTRL  sEXT_CH__ROBOT_MATERIAL_TRANSFER_FLAG;
@@ -121,19 +145,20 @@ private:
 	//------------------------------------------------------------------------------
 	// Home -----
 	CString sMODE__HOME;
-	int  Call__HOME(CII_OBJECT__VARIABLE* p_variable,
-		CII_OBJECT__ALARM* p_alarm);
+	int  Call__HOME(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// Map -----
 	CString sMODE__MAP;
-	int  Call__MAP(CII_OBJECT__VARIABLE* p_variable,
-				   CII_OBJECT__ALARM* p_alarm);
+	int  Call__MAP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	CString sMODE__INIT;
-	int  Call__INIT(CII_OBJECT__VARIABLE* p_variable,
-					CII_OBJECT__ALARM* p_alarm);
+	int  Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
+	CString sMODE__SET_PARA;
+	int  Call__SET_PARA(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+
+	//
 	CString sMODE__PICK;
 	int  Call__PICK(CII_OBJECT__VARIABLE* p_variable,
 					CII_OBJECT__ALARM* p_alarm,
@@ -210,6 +235,21 @@ private:
 						const CString& para_slot,
 						const int ex_flag,
 						const int handoff_mode);
+
+	//
+	int  Fnc__WAC_ACT(CII_OBJECT__VARIABLE* p_variable,
+					  CII_OBJECT__ALARM* p_alarm,
+					  const CString& wac_arm,
+					  const CString& para_arm,
+					  const CString& para_module,
+					  const CString& para_slot);
+
+	int  _Fnc__WAC_ACT(CII_OBJECT__VARIABLE* p_variable,
+					   CII_OBJECT__ALARM* p_alarm,
+					   const CString& wac_arm,
+					   const CString& para_arm,
+					   const CString& para_module,
+					   const CString& para_slot);
 
 	//
 	CString sMODE__ROTATE;
@@ -306,14 +346,15 @@ private:
 						const int pm_index);
 
 	int Is__TRANSFER_READY_TO_PLACE(CII_OBJECT__ALARM* p_alarm, 
+									const bool active__active_handoff,
 									const CString str_pick_place,
 									const CString str_ext_ret,
 									const int pm_index);
 
-	int Is__PIN_DOWN_STS(CII_OBJECT__ALARM* p_alarm, 
-						 const CString str_pick_place,
-						 const CString str_ext_ret,
-						 const int pm_index);
+	int Is__PIN_DOWN_OR_MIDDLE_STS(CII_OBJECT__ALARM* p_alarm, 
+								   const CString str_pick_place,
+								   const CString str_ext_ret,
+								   const int pm_index);
 
 	int  Fnc__CALL_PICK(CII_OBJECT__VARIABLE* p_variable,
 						CII_OBJECT__ALARM* p_alarm,
@@ -326,6 +367,10 @@ private:
 						 const CString& para_arm,
 						 const CString& para_module,
 						 const CString& para_slot);
+
+	//
+	int  Fnc__PASSIVE_TRANSFER_READY(const int pm_index);
+	int  Fnc__PASSIVE_TRANSFER_END(const int pm_index);
 
 	//
 	int  Sub_OBJCALL_PMC_ACT_HANDOFF(const int pmc_id, const CString obj_mode);

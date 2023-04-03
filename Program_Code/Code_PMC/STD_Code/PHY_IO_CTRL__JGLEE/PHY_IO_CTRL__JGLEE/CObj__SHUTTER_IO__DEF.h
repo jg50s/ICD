@@ -3,6 +3,8 @@
 
 #define STR__STANDBY        "STANDBY"
 
+#define STR__YES			"YES"
+
 #define STR__ON				"ON"
 #define STR__OFF			"OFF"
 

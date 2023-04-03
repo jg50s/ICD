@@ -164,30 +164,17 @@ CString CObj__EPD_SINGLE
 	CString str_msg;
 	CString str_bff;
 
-	str_bff.Format(" * Pressure range <- (%.3f, %.3f) \n",
-					x_report.dRange_MIN,
-					x_report.dRange_MAX);
-	str_msg += str_bff;
-
-	str_bff.Format(" * Set.pressure <- [%.3f] torr \n", 
-					x_report.dSet_VALUE);
-	str_msg += str_bff;
-
-	str_bff.Format(" * Config abort.band <- [%.2f] %% \n", 
-					x_report.dError_PERCENT);
-	str_msg += str_bff;
-
-	str_bff.Format(" * Checking time <- [%.0f] sec \n\n", 
-					x_report.dError_SEC);
-	str_msg += str_bff;
-
-	str_bff.Format(" * So, valid range is [%.3f] torr < current pressure < [%.3f] torr. \n", 
+	str_bff.Format(" * Valid range : %.1f < current intensity < %.1f. \n", 
 					x_report.dError_MIN,
 					x_report.dError_MAX);
 	str_msg += str_bff;
 
-	str_bff.Format(" * But, current pressure is [%.3f] torr. \n", 
+	str_bff.Format(" * But, current intensity is %.1f. \n", 
 					x_report.dCUrrent_VALUE);
+	str_msg += str_bff;
+
+	str_bff.Format(" * Checking time is %.1f (sec). \n\n", 
+					x_report.dError_SEC);
 	str_msg += str_bff;
 
 	return str_msg;

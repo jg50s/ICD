@@ -268,7 +268,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj__CHM_FNC__CALL_FBC.cpp"
+					RelativePath=".\CObj__CHM_FNC__CALL_FNC.cpp"
 					>
 				</File>
 				<File
@@ -285,6 +285,10 @@
 				</File>
 				<File
 					RelativePath=".\CObj__CHM_FNC__OBJ_VAC_VLV.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__CHM_FNC__OBJ_VAT_CTRL.cpp"
 					>
 				</File>
 				<File
@@ -404,7 +408,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__PMC_INF__ALID.h"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__PMC_INF__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__PMC_INF__MON_FNC.cpp"
 					>
 				</File>
 			</Filter>

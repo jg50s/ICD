@@ -87,9 +87,13 @@ int CObj__CHM_FNC::Check__LOW_VAC_PUMP()
 
 		if(bActive__CHM_SHUTTER_STATE)
 		{
-			if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+			if(dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK->Check__DATA(STR__YES) > 0)
+			{
+				if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+			}
 		}
-		else if(bActive__CHM_SLOT_VLV_STATE)
+		
+		if(bActive__CHM_SLOT_VLV_STATE)
 		{
 			if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) > 0)		active__slot_vlv_open = false;
 		}
@@ -144,6 +148,16 @@ int CObj__CHM_FNC::Check__LOW_VAC_PUMP()
 int CObj__CHM_FNC
 ::Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag)
 {
+	if(bActive__OBJ_CTRL__TURBO_PUMP)		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__ON);
+
+	int r_flag = _Fnc__LOW_VAC_PUMP(p_variable,p_alarm, high_vac_flag,purge_flag);
+
+	if(bActive__OBJ_CTRL__TURBO_PUMP)		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
+	return r_flag;
+}
+int CObj__CHM_FNC
+::_Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag)
+{
 LOOP_RETRY:
 
 	CString ch_data;
@@ -156,9 +170,13 @@ LOOP_RETRY:
 
 		if(bActive__CHM_SHUTTER_STATE)
 		{
-			if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+			if(dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK->Check__DATA(STR__YES) > 0)
+			{
+				if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) > 0)			active__slot_vlv_open = false;
+			}
 		}
-		else if(bActive__CHM_SLOT_VLV_STATE)
+		
+		if(bActive__CHM_SLOT_VLV_STATE)
 		{
 			if(dEXT_CH__CHM_SLOT_VLV_STATE->Check__DATA(STR__CLOSE) > 0)		active__slot_vlv_open = false;
 		}
@@ -181,6 +199,14 @@ LOOP_RETRY:
 					alm_bff.Format(" * %s <- %s",
 									dEXT_CH__CHM_SHUTTER_STATE->Get__CHANNEL_NAME(),
 									dEXT_CH__CHM_SHUTTER_STATE->Get__STRING());
+					alm_msg += alm_bff;
+				}
+
+				if(bActive__CHM_SLOT_VLV_STATE)
+				{
+					alm_bff.Format(" * %s <- %s",
+									dEXT_CH__CHM_SLOT_VLV_STATE->Get__CHANNEL_NAME(),
+									dEXT_CH__CHM_SLOT_VLV_STATE->Get__STRING());
 					alm_msg += alm_bff;
 				}
 				else
@@ -233,6 +259,8 @@ LOOP_RETRY:
 		// ...
 		{
 			log_msg = "ESC <- Pump_Ready";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
@@ -242,11 +270,18 @@ LOOP_RETRY:
 		}
 	}
 
-	// Gas-Valve <- Proc_Ready
+	// Gas-Valve <- Close
+	if(bActive__GAS_CLOSE_SKIP)
+	{
+
+	}
+	else
 	{
 		// ...
 		{
-			log_msg = "GAS-Valve <- Proc_Ready";
+			log_msg = "GAS-Valve <- Close";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
@@ -261,6 +296,8 @@ LOOP_RETRY:
 		// ...
 		{
 			log_msg = "VAC-Valve <- All_Close";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 		
@@ -276,6 +313,8 @@ LOOP_RETRY:
 		// ...
 		{
 			log_msg = "Dry_Pump On Check";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
@@ -300,6 +339,8 @@ LOOP_RETRY:
 		// ...
 		{
 			log_msg = "Soft_Pumping : Started ...";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
@@ -331,10 +372,10 @@ LOOP_RETRY:
 		// ...
 		{
 			log_msg = "ATM_Sensor.Off Checking ...";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
-
-		sCH__OBJ_MSG->Set__DATA("ATM_Sensor.Off Checking ...");
 
 		// ...
 		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
@@ -399,6 +440,9 @@ LOOP_RETRY:
 
 	// Soft-OverPumping.Timeout ...
 	{
+		sCH__OBJ_MSG->Set__DATA("Soft-OverPumping");
+
+		// ...
 		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
 
 		x_asyc_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__OBJ_TIMER->Get__CHANNEL_NAME());
@@ -420,6 +464,9 @@ RETRY_LOOP:
 
 	// SR CLOSE & FR OPEN ...
 	{
+		sCH__OBJ_MSG->Set__DATA("SR Close & FR Open");
+
+		// ...
 		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
 
 		x_asyc_timer->REGISTER__COUNT_CHANNEL_NAME(sCH__OBJ_TIMER->Get__CHANNEL_NAME());
@@ -433,10 +480,10 @@ RETRY_LOOP:
 		// ...
 		{
 			log_msg = "Fast.Vacuum Checking ...";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
-
-		sCH__OBJ_MSG->Set__DATA("Fast.Vacuum Checking ...");
 
 		while(1)
 		{
@@ -514,10 +561,10 @@ RETRY_LOOP:
 		// ...
 		{
 			log_msg = "VAC_Sensor.On Checking ...";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
-
-		sCH__OBJ_MSG->Set__DATA("VAC_Sensor.On Checking ...");
 
 		// ...
 		SCX__ASYNC_TIMER_CTRL x_asyc_timer;
@@ -576,6 +623,16 @@ RETRY_LOOP:
 int CObj__CHM_FNC
 ::Fnc__HIGH_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	if(bActive__OBJ_CTRL__TURBO_PUMP)		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__ON);
+
+	int r_flag = _Fnc__HIGH_VAC_PUMP(p_variable,p_alarm);
+
+	if(bActive__OBJ_CTRL__TURBO_PUMP)		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
+	return r_flag;
+}
+int CObj__CHM_FNC
+::_Fnc__HIGH_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
 	CString log_msg;
 	int flag;
 
@@ -584,8 +641,7 @@ int CObj__CHM_FNC
 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
-		if((dEXT_CH__TURBO_PUMP__POWER_SNS->Check__DATA(STR__ON) > 0)
-		&& (dEXT_CH__TURBO_PUMP__MON_PUMP_STATE->Check__DATA(STR__NORMAL) > 0))
+		if(dEXT_CH__TURBO_PUMP__MON_PUMP_STATE->Check__DATA(STR__NORMAL) > 0)
 		{
 			active__tmp_on = true;
 		}
@@ -597,6 +653,8 @@ int CObj__CHM_FNC
 		// ...
 		{
 			log_msg = "VAC-Valve <- All_Close, In TMP-ON State.";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
@@ -610,6 +668,8 @@ int CObj__CHM_FNC
 		// ...
 		{
 			log_msg = "VAC-Valve <- All_Close";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
@@ -621,23 +681,21 @@ int CObj__CHM_FNC
 
 RETRY_LOOP:
 
-	if(bActive__OBJ_CTRL__TURBO_PUMP)
-	{
-		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
-	}
-
 	// Turbo_Pump On : Check 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
 		// ...
 		{
 			log_msg = "Turbo_Pump On Check";
+
+			sCH__OBJ_MSG->Set__DATA(log_msg);
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
 
-		if((dEXT_CH__TURBO_PUMP__POWER_SNS->Check__DATA(STR__ON) < 0)
-		|| (dEXT_CH__TURBO_PUMP__MON_PUMP_STATE->Check__DATA(STR__NORMAL) < 0))
+		if(dEXT_CH__TURBO_PUMP__MON_PUMP_STATE->Check__DATA(STR__NORMAL) < 0)
 		{
+			sCH__OBJ_MSG->Set__DATA("TMP.On");
+
 			if(Fnc__TURBO_PUMP_ON(p_variable, p_alarm) < 0)
 			{
 				return -21;
@@ -662,11 +720,6 @@ RETRY_LOOP:
 		}
 	}
 
-	if(bActive__OBJ_CTRL__TURBO_PUMP)
-	{
-		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__ON);
-	}
-
 	// High-Vacuum Pumping ...
 	{
 		CString ch_data;
@@ -678,9 +731,12 @@ RETRY_LOOP:
 
 		if(bActive__OBJ_CTRL__TURBO_PUMP)
 		{
-			if(pOBJ_CTRL__TURBO_PUMP->Call__OBJECT(CMMD_TMP__FULL_OPEN) < 0)
-				return -101;
+			sCH__OBJ_MSG->Set__DATA("TMP Full Open");
+
+			if(pOBJ_CTRL__TURBO_PUMP->Call__OBJECT(CMMD_TMP__FULL_OPEN) < 0)		return -101;
 		}
+
+		sCH__OBJ_MSG->Set__DATA("Fast.Vac Pressure Checking");
 
 		while(1)
 		{
@@ -720,12 +776,6 @@ RETRY_LOOP:
 
 				if(ref_timeout <= x_asyc_timer->Get__CURRENT_TIME())
 				{
-					if(bActive__OBJ_CTRL__TURBO_PUMP)
-					{
-						dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
-					}
-
-					// ...	
 					int alarm_id = ALID__LOW_VAC_CHECK_COMPLETE_TIMEOUT;
 					CString alarm_msg;
 					CString msg_bff;
@@ -756,23 +806,27 @@ RETRY_LOOP:
 		}
 	}
 
-	if(bActive__OBJ_CTRL__TURBO_PUMP)
-	{
-		dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
-	}
-
 	// Gas-Valve : Proc_Ready ...
-	if(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Check__DATA(STR__YES) > 0)
+	if(bActive__GAS_CLOSE_SKIP)
 	{
-		// ...
-		{
-			log_msg = "GAS-Valve <- Proc_Ready";
-			xLOG_CTRL->WRITE__LOG(log_msg);
-		}
 
-		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
+	}
+	else
+	{
+		if(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Check__DATA(STR__YES) > 0)
 		{
-			return -11;
+			// ...
+			{
+				log_msg = "GAS-Valve <- Proc_Ready";
+
+				sCH__OBJ_MSG->Set__DATA(log_msg);
+				xLOG_CTRL->WRITE__LOG(log_msg);
+			}
+
+			if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__PROC_READY) < 0)
+			{
+				return -11;
+			}
 		}
 	}
 
@@ -850,8 +904,7 @@ RETRY_LOOP:
 	}
 
 	// 3.2 Turbo Pump Status Check
-	if((dEXT_CH__TURBO_PUMP__POWER_SNS->Check__DATA(STR__ON) > 0)
-	&& (dEXT_CH__TURBO_PUMP__MON_PUMP_STATE->Check__DATA(STR__NORMAL) > 0))
+	if(dEXT_CH__TURBO_PUMP__MON_PUMP_STATE->Check__DATA(STR__NORMAL) > 0)
 	{
 		flag = Call__VAC_VLV__EXHAUST_OPEN(p_variable, p_alarm);
 		if(flag < 0)
@@ -991,7 +1044,8 @@ int CObj__CHM_FNC
 			{
 				if(dEXT_CH__DRY_PUMP__POWER_SNS->Check__DATA(STR__ON) < 0)
 				{
-					pOBJ_CTRL__DRY_PUMP->Abort__OBJECT();
+					if(pOBJ_CTRL__DRY_PUMP->Is__OBJ_BUSY() > 0)
+						pOBJ_CTRL__DRY_PUMP->Abort__OBJECT();
 
 					if(pOBJ_CTRL__DRY_PUMP->Call__OBJECT(CMMD_TMP__PUMP_ON) < 0)
 					{
@@ -1009,7 +1063,8 @@ int CObj__CHM_FNC
 			{
 				if(dEXT_CH__DRY_PUMP__POWER_SNS->Check__DATA(STR__OFF) < 0)
 				{
-					pOBJ_CTRL__DRY_PUMP->Abort__OBJECT();
+					if(pOBJ_CTRL__DRY_PUMP->Is__OBJ_BUSY() > 0)
+						pOBJ_CTRL__DRY_PUMP->Abort__OBJECT();
 
 					if(pOBJ_CTRL__DRY_PUMP->Call__OBJECT(CMMD_TMP__PUMP_OFF) < 0)
 					{
@@ -1024,34 +1079,17 @@ int CObj__CHM_FNC
 
 		// Turbo-Pump ...
 		case MODE__TMP_ON:
-			if(iActive__SIM_MODE > 0)
+			if(bActive__OBJ_CTRL__TURBO_PUMP)
 			{
-				if(bActive__OBJ_CTRL__TURBO_PUMP)
-				{
-					pOBJ_CTRL__TURBO_PUMP->Abort__OBJECT();
-
-					if(pOBJ_CTRL__TURBO_PUMP->Call__OBJECT(CMMD_TMP__PUMP_ON) < 0)
-					{
-						log_msg.Format("Fnc__PUMP_CTRL - Turbo Pump On Failed");
-						xLOG_CTRL->WRITE__LOG(log_msg);
-						
-						return -113;
-					}
-				}
-			}
-			else
-			{
-				if(bActive__OBJ_CTRL__TURBO_PUMP)
-				{
+				if(pOBJ_CTRL__TURBO_PUMP->Is__OBJ_BUSY() > 0)
 					pOBJ_CTRL__TURBO_PUMP->Abort__OBJECT();
 					
-					if(pOBJ_CTRL__TURBO_PUMP->Call__OBJECT(CMMD_TMP__PUMP_ON) < 0)
-					{
-						log_msg.Format("Fnc__PUMP_CTRL - Turbo Pump On Failed");
-						xLOG_CTRL->WRITE__LOG(log_msg);
+				if(pOBJ_CTRL__TURBO_PUMP->Call__OBJECT(CMMD_TMP__PUMP_ON) < 0)
+				{
+					log_msg.Format("Fnc__PUMP_CTRL - Turbo Pump On Failed");
+					xLOG_CTRL->WRITE__LOG(log_msg);
 
-						return -113;
-					}
+					return -113;
 				}
 			}
 			break;
@@ -1059,7 +1097,8 @@ int CObj__CHM_FNC
 		case MODE__TMP_OFF:
 			if(bActive__OBJ_CTRL__TURBO_PUMP)
 			{
-				pOBJ_CTRL__TURBO_PUMP->Abort__OBJECT();
+				if(pOBJ_CTRL__TURBO_PUMP->Is__OBJ_BUSY() > 0)
+					pOBJ_CTRL__TURBO_PUMP->Abort__OBJECT();
 
 				if(pOBJ_CTRL__TURBO_PUMP->Call__OBJECT(CMMD_TMP__PUMP_OFF) < 0)
 				{
@@ -1707,7 +1746,11 @@ RETRY_LOOP:
 }
 
 int CObj__CHM_FNC
-::Fnc__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const bool active__ctc_call)
+::Fnc__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,
+				  CII_OBJECT__ALARM *p_alarm, 
+				  const bool active__ctc_call, 
+				  const bool active__gas_leak,
+				  const int mfc_index)
 {
 	CString log_msg;
 	CString log_bff;
@@ -1764,7 +1807,7 @@ int CObj__CHM_FNC
 		return -1001;
 	}
 
-	// ...
+	// Pumping ...
 	{
 		if(bActive__OBJ_CTRL__TURBO_PUMP)
 		{
@@ -1779,9 +1822,41 @@ int CObj__CHM_FNC
 			flag = Call__LOW_VAC_PUMP(p_variable,p_alarm);
 		}
 
-		if(flag < 0)
+		if(flag < 0)		return -1002;
+	}
+
+	if(active__gas_leak)
+	{
+		// MFC.OPEN ...
 		{
-			return -1002;
+			var_data.Format("%1d", mfc_index);
+			sEXT_CH__GAS_VLV__PARA_MFC_INDEX->Set__DATA(var_data);
+
+			flag = pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_GAS__MFC_OPEN);
+
+			if(flag < 0)		return -1011;
+		}
+
+		// Pumping ...
+		{
+			bActive__GAS_CLOSE_SKIP = true;
+
+			if(bActive__OBJ_CTRL__TURBO_PUMP)
+			{
+				sCH__OBJ_MSG->Set__DATA("1.1 HIGH VAC PUMPING ...");
+
+				flag = Call__HIGH_VAC_PUMP(p_variable,p_alarm);
+			}
+			else
+			{
+				sCH__OBJ_MSG->Set__DATA("1.1 LOW VAC PUMPING ...");
+
+				flag = Call__LOW_VAC_PUMP(p_variable,p_alarm);
+			}
+
+			bActive__GAS_CLOSE_SKIP = false;
+
+			if(flag < 0)		return -1012;
 		}
 	}
 
@@ -1877,7 +1952,15 @@ int CObj__CHM_FNC
 
 		// ...
 		{
-			sCH__OBJ_MSG->Set__DATA("4. LEAK CHECK ...");
+			if(active__gas_leak)
+			{
+				var_data.Format("4. MFC%1d(%s) - LEAK_CHECK", mfc_index+1, sEXT_CH__CFG_GAS_NAME_X[mfc_index]->Get__STRING());
+				sCH__OBJ_MSG->Set__DATA(var_data);
+			}
+			else
+			{
+				sCH__OBJ_MSG->Set__DATA("4. LEAK_CHECK (CHAMBER)");
+			}
 
 			// ...
 			{
@@ -2220,6 +2303,12 @@ int CObj__CHM_FNC
 
 		// ...
 		{
+			CString ref__leak_dir;
+
+			if(active__gas_leak)			ref__leak_dir = "LEAK_CHECK_GAS";
+			else							ref__leak_dir = "LEAK_CHECK_LOG";
+
+			// ...
 			SCX__SEQ_INFO x_seq_info;
 
 			CString dir_root;
@@ -2227,10 +2316,11 @@ int CObj__CHM_FNC
 			CString dir_log;
 			CString path_log;
 
-			// LEAK_CHECK_LOG ...
+			// LEAK_CHECK LOG_DIR ...
 			{
 				x_seq_info->Get__DIR_ROOT(dir_root);
-				sub_dir = "LEAK_CHECK_LOG";
+
+				sub_dir  = ref__leak_dir;
 				sub_dir += "\\";
 
 				dir_log  = dir_root;
@@ -2258,7 +2348,8 @@ int CObj__CHM_FNC
 				int i_hour,i_min,i_sec,i_msec;
 				x_seq_info->Get__TIME(i_hour,i_min,i_sec,i_msec);
 				
-				sub_dir.Format("Result-%002d%002d%002d.log", i_hour,i_min,i_sec);
+				if(active__gas_leak)		sub_dir.Format("MFC%1d-%002d%002d%002d.log", mfc_index+1, i_hour,i_min,i_sec);
+				else						sub_dir.Format("Result-%002d%002d%002d.log", i_hour,i_min,i_sec);
 				
 				path_log.Format("%s\\%s", dir_log,sub_dir);				
 			}
@@ -2279,7 +2370,7 @@ int CObj__CHM_FNC
 				SCX__FILE_CTRL x_file_ctrl;
 				CString check_dir;
 
-				check_dir.Format("%s\\%s\\", dir_root,"LEAK_CHECK_LOG");
+				check_dir.Format("%s\\%s\\", dir_root, ref__leak_dir);
 
 				x_file_ctrl->Delete__LOG_DIR(check_dir,30);
 			}
@@ -2380,7 +2471,7 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 	
 		sCH__OBJ_MSG->Set__DATA("2. TH/V OPEN ...");
 	
-		if(Call__VAC_VLV__APC_OPEN() < 0)
+		if(Call__VAC_VLV__APC_OPEN(p_variable, p_alarm) < 0)
 		{
 			return -2022;
 		}
@@ -2431,7 +2522,7 @@ Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,
 				double apc__trg_pos = 90.0 - (i * 10.0);				
 
 				// VAT-POS Move ...
-				if(Call__VAC_VLV__APC_POSITION(apc__trg_pos) < 0)
+				if(Call__VAC_VLV__APC_POSITION(p_variable, p_alarm, apc__trg_pos) < 0)
 				{
 					return -2051;
 				}
@@ -2829,8 +2920,6 @@ int CObj__CHM_FNC
 		
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
-
-		Fnc__BALLAST_END(p_variable, p_alarm);
 		return 1;
 	}
 	else
@@ -2849,7 +2938,7 @@ int CObj__CHM_FNC
 	//  4. APC Ballast Pressure Control
 
 	// APC.OPEN ...
-	if(Call__VAC_VLV__APC_OPEN() < 0)
+	if(Call__VAC_VLV__APC_OPEN(p_variable, p_alarm) < 0)
 	{
 		log_msg = " * APC-OPEN is Aborted ...";
 
@@ -2867,7 +2956,7 @@ int CObj__CHM_FNC
 	}
 
 	// APC.BALLAST_POS - START ...
-	if(Call__VAC_VLV__APC_BALLAST_CTRL(active_xfer) < 0)
+	if(Call__VAC_VLV__APC_BALLAST_CTRL(p_variable, p_alarm, active_xfer) < 0)
 	{
 		log_msg = " * APC Ballast-Control is Aborted ... ";
 
@@ -2895,9 +2984,7 @@ int CObj__CHM_FNC
 
 			xLOG_CTRL->WRITE__LOG(log_msg);
 		}
-
-		Fnc__BALLAST_END(p_variable, p_alarm);
-		return 1;
+		return -1;
 	}
 	else
 	{
@@ -2915,7 +3002,7 @@ int CObj__CHM_FNC
 	//  4. APC Ballast Pressure Control
 	
 	// APC.OPEN ...
-	if(Call__VAC_VLV__APC_OPEN() < 0)
+	if(Call__VAC_VLV__APC_OPEN(p_variable, p_alarm) < 0)
 	{
 		log_msg = " * APC-OPEN is Failed ... ";
 			
@@ -2933,7 +3020,7 @@ int CObj__CHM_FNC
 	}
 
 	// APC.BALLAST POST ...
-	if(Call__VAC_VLV__APC_BALLAST_CTRL(active_xfer) < 0)
+	if(Call__VAC_VLV__APC_BALLAST_CTRL(p_variable, p_alarm, active_xfer) < 0)
 	{
 		log_msg = " * APC Ballast-Control is Aborted ... ";
 
@@ -2969,7 +3056,7 @@ int CObj__CHM_FNC
 
 	sCH__TRANSFER_BALLAST_FLAG->Set__DATA("");
 
-	if(Call__VAC_VLV__APC_OPEN() < 0)
+	if(Call__VAC_VLV__APC_OPEN(p_variable, p_alarm) < 0)
 	{
 		return -11;
 	}

@@ -22,10 +22,10 @@ void CObj_Phy__LBx_STD
 
 
 		loop_count++;
-		if(loop_count >= 5)			loop_count = 0;
+		if(loop_count > 10)			loop_count = 1;
 
 		// DA Offset ...
-		if(loop_count == 1)
+		if((loop_count == 1) || (loop_count == 6))
 		{
 			CString r_offset;
 			CString t_offset;
@@ -38,7 +38,7 @@ void CObj_Phy__LBx_STD
 		}
 
 		// Process Time ...
-		if(loop_count == 1)
+		if((loop_count == 1) || (loop_count == 6))
 		{
 			if(iActive__PROC_STS > 0)
 			{
@@ -123,7 +123,7 @@ void CObj_Phy__LBx_STD
 
 			if(iActive__CTRL_STS < 0)
 			{
-				xCH__OBJ_CTRL->Get__DATA(obj_ctrl);
+				xCH__LBx_CTRL->Get__DATA(obj_ctrl);
 
 				if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
 				{

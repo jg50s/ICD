@@ -5,6 +5,8 @@
 #include "CCommon_Error.h"
 #include "CCommon_Def.h"
 
+#include "CObj__CHM_FNC__DEF.h"
+
 
 #define  LEAK_CHECK__ITEM_SIZE						7
 
@@ -22,16 +24,22 @@ private:
 	int iActive__SIM_MODE;
 
 	CUIntArray iLIST_ALID__PART;
+
+	bool bActive__GAS_CLOSE_SKIP;
 	//
 
 
 	//------------------------------------------------------------
 	// INTERNAL PROPERTY
 
+	CX__VAR_DIGITAL_CTRL dCH__OBJ_CTRL;
+
 	// OBJ PARAMETER ...
 	CX__VAR_STRING_CTRL	 sCH__OBJ_STATUS;
 	CX__VAR_STRING_CTRL	 sCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL  sCH__OBJ_TIMER;
+
+	CX__VAR_STRING_CTRL	 sCH__CUR_OBJ_MODE;
 
 	// MON PART ...
 	CX__VAR_DIGITAL_CTRL dCH__MON_PART_ERROR_ACTIVE;
@@ -46,6 +54,8 @@ private:
 
 	// CFG ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING;
+	
+	CX__VAR_DIGITAL_CTRL dCH__CFG_USE_HIGH_VAC_PUMPING;
 
 	// REFERENCE PRESSURE ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_ATM_REF_PRESSURE;
@@ -151,6 +161,8 @@ private:
 	// OBJ - DB_INF ...
 	CX__VAR_DIGITAL_CTRL dEXT_CH__ACTIVE_CALL_BY_CTC;
 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK;
+
 	CX__VAR_DIGITAL_CTRL dEXT_CH__SYSTEM_TRANSFER_MODE;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__PMC_SLIT_VLV_STS;
 
@@ -199,11 +211,11 @@ private:
 	int Call__VAC_VLV__EXHAUST_OPEN(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 	int Call__VAC_VLV__EXHAUST_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 
-	int Call__VAC_VLV__APC_CLOSE();
-	int Call__VAC_VLV__APC_OPEN();
-	int Call__VAC_VLV__APC_POSITION(const double set_pos);
+	int Call__VAC_VLV__APC_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+	int Call__VAC_VLV__APC_OPEN(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+	int Call__VAC_VLV__APC_POSITION(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const double set_pos);
 
-	int Call__VAC_VLV__APC_BALLAST_CTRL(const bool active_xfer);
+	int Call__VAC_VLV__APC_BALLAST_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active_xfer);
 	int Run__VAC_VLV__APC_BALLAST_CTRL(const bool active_xfer);
 
 	// OBJ : PHY_VAC_VLV ...
@@ -223,6 +235,17 @@ private:
 
 	// OBJ : GAS_VLV ...
 	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__GAS_VLV;
+
+	CX__VAR_STRING_CTRL sEXT_CH__GAS_VLV__PARA_MFC_INDEX;
+
+	// OBJ : MFCx ...
+	int iDATA__MFC_SIZE;
+
+	CX__VAR_STRING_CTRL  sEXT_CH__CFG_GAS_NAME_X[_CFG__MFC_SIZE];
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_MFC_USE_X[_CFG__MFC_SIZE];
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LEAK_CHECK_USE_X[_CFG__MFC_SIZE];
+	CX__VAR_DIGITAL_CTRL dEXT_CH__REPORT_LEAK_CHECK_STATE_X[_CFG__MFC_SIZE];
 
 	// OBJ : ESC ...
 	bool bActive__ESC_OBJ;
@@ -283,6 +306,7 @@ private:
 
 	int Check__LOW_VAC_PUMP();
 	int Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag);
+	int _Fnc__LOW_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int high_vac_flag,const int purge_flag);
 	
 	int _Fnc__SOFT_LOW_VAC(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int purge_flag);
 
@@ -291,6 +315,7 @@ private:
 	int Call__HIGH_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	int Fnc__HIGH_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	int _Fnc__HIGH_VAC_PUMP(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
 	//
 	CString sMODE__PROC_READY;
@@ -309,9 +334,11 @@ private:
 	int _Fnc__FAST_VENT(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const int purge_flag);
 
 	//
-	CString sMODE__LEAK_CHECK;
-	int Call__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
-	int Fnc__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const bool active__ctc_call);
+	CString sMODE__LEAK_CHECK_CHM;
+	CString sMODE__LEAK_CHECK_GAS;
+	int Call__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const bool active__gas_leak);
+
+	int Fnc__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const bool active__ctc_call, const bool active__gas_leak,const int mfc_index = -1);
 	int Fnc__LEAK_CHECK__VAT_VLV_POS_MOVE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm, const bool active__ctc_call);
 
 	//
@@ -389,6 +416,11 @@ private:
 
 	// MON Function .....
 	void Mon__PRESSURE_STATUS(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+
+
+	// OBJ_VAT.CTRL ...
+	int VAT__CALL_OBJECT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const CString& obj_mode);
+	int VAT__RUN_OBJECT(const CString& obj_mode);
 	//
 
 

@@ -574,6 +574,10 @@ int CObj__MFC_FLOW_CHECK::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		pOBJ_CTRL__GAS_VLV = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 		//
+		var_name = "PARA.INTERLOCK.SKIP";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP, obj_name,var_name);
+
+		//
 		var_name = "PARA.MFC.TYPE";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_VLV__PARA_MFC_TYPE, obj_name,var_name);
 

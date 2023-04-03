@@ -30,14 +30,14 @@ LOOP_RETRY:
 
 			CString ch__chm_sts = sEXT_CH__CHM_PRESSURE_STATE->Get__STRING();
 			CString ch__tmc_sts = dEXT_CH__TMC_PRESSURE_STATE->Get__STRING();
-			
+
 			if((ch__chm_sts.CompareNoCase(STR__ATM) == 0)
-			&& (ch__tmc_sts.CompareNoCase(STR__ATM) == 0))
+				&& (ch__tmc_sts.CompareNoCase(STR__ATM) == 0))
 			{
 				active__press_err = false;
 			}
 			else if((ch__chm_sts.CompareNoCase(STR__VAC) == 0)
-				 && (ch__tmc_sts.CompareNoCase(STR__VAC) == 0))
+				&& (ch__tmc_sts.CompareNoCase(STR__VAC) == 0))
 			{
 				active__press_err = false;
 			}
@@ -107,7 +107,7 @@ LOOP_RETRY:
 			}
 
 			if((dEXT_CH__DI_DOOR_OPEN->Check__DATA(STR__ON)   > 0)
-			&& (dEXT_CH__DI_DOOR_CLOSE->Check__DATA(STR__OFF) > 0))
+				&& (dEXT_CH__DI_DOOR_CLOSE->Check__DATA(STR__OFF) > 0))
 			{
 				break;
 			}
@@ -122,13 +122,13 @@ LOOP_RETRY:
 				alm_msg.Format("Config Open-Timeout <- %.1f sec \n", cfg_sec);
 
 				alm_bff.Format("%s <- %s \n", 
-								dEXT_CH__DI_DOOR_OPEN->Get__VARIABLE_NAME(),
-								dEXT_CH__DI_DOOR_OPEN->Get__STRING());
+					dEXT_CH__DI_DOOR_OPEN->Get__VARIABLE_NAME(),
+					dEXT_CH__DI_DOOR_OPEN->Get__STRING());
 				alm_msg += alm_bff;
 
 				alm_bff.Format("%s <- %s \n", 
-								dEXT_CH__DI_DOOR_CLOSE->Get__VARIABLE_NAME(),
-								dEXT_CH__DI_DOOR_CLOSE->Get__STRING());
+					dEXT_CH__DI_DOOR_CLOSE->Get__VARIABLE_NAME(),
+					dEXT_CH__DI_DOOR_CLOSE->Get__STRING());
 				alm_msg += alm_bff;
 
 				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
@@ -155,32 +155,65 @@ LOOP_RETRY:
 
 	// Interlock Check ...
 	{
-		// Robot.Arm State ...
+		int check_count = 0;
+
+		while(1)
 		{
-			CString cur__arm_sts = dEXT_CH__TMC_ROBOT_ARM_STATE->Get__STRING();
-
-			if(cur__arm_sts.CompareNoCase(STR__EXEND) == 0)
+			// Robot.Arm State ...
 			{
-				int alm_id = ALID__SLOT_VALVE_CLOSE_INTERLOCK;
-				CString alm_msg;
-				CString alm_bff;
-				CString r_act;
+				CString cur__arm_sts = dEXT_CH__TMC_ROBOT_ARM_STATE->Get__STRING();
 
-				alm_msg.Format("Interlock condition is as follows; \n");
+				if(cur__arm_sts.Find(STR__EXEND) == 0)
+				{
+					check_count++;
+					if(check_count > 10)
+					{
+						int alm_id = ALID__SLOT_VALVE_CLOSE_INTERLOCK;
+						CString alm_msg;
+						CString alm_bff;
+						CString r_act;
 
-				alm_bff.Format("  Arm-state is \"%s\". \n", cur__arm_sts);
-				alm_msg += alm_bff;
-				
-				alm_bff.Format("  * %s <- %s. \n",
-							   dEXT_CH__TMC_ROBOT_ARM_STATE->Get__CHANNEL_NAME(),
-							   cur__arm_sts);
-				alm_msg += alm_bff;
+						alm_msg.Format("Interlock condition is as follows; \n");
 
-				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+						alm_bff.Format("  Arm-state is \"%s\". \n", cur__arm_sts);
+						alm_msg += alm_bff;
 
-				if(r_act.CompareNoCase(ACT__RETRY)  == 0)		goto LOOP_RETRY;	
-				if(r_act.CompareNoCase(ACT__IGNORE) != 0)		return -101;
+						alm_bff.Format("  * %s <- %s. \n",
+							dEXT_CH__TMC_ROBOT_ARM_STATE->Get__CHANNEL_NAME(),
+							cur__arm_sts);
+						alm_msg += alm_bff;
+
+						alm_bff.Format("  * check_count <- %1d. \n", check_count);
+						alm_msg += alm_bff;
+
+						p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+						if(r_act.CompareNoCase(ACT__RETRY)  == 0)		continue;
+						if(r_act.CompareNoCase(ACT__IGNORE) == 0)		break;
+
+						return -101;
+					}
+					else
+					{
+						CString log_msg;
+						CString log_bff;
+
+						log_msg.Format("Check_Count <- %1d \n", check_count);
+						log_bff.Format(" * %s <- %s \n",
+							dEXT_CH__TMC_ROBOT_ARM_STATE->Get__CHANNEL_NAME(),
+							dEXT_CH__TMC_ROBOT_ARM_STATE->Get__STRING());
+						log_msg += log_bff;
+
+						xI_LOG_CTRL->WRITE__LOG(log_msg);
+					}
+				}
+				else
+				{
+					break;
+				}
 			}
+
+			Sleep(100);
 		}
 	}
 
@@ -233,13 +266,13 @@ LOOP_RETRY:
 				alm_msg.Format("Config Close-Timeout <- %.1f sec \n", cfg_sec);
 
 				alm_bff.Format("%s <- %s \n", 
-								dEXT_CH__DI_DOOR_OPEN->Get__VARIABLE_NAME(),
-								dEXT_CH__DI_DOOR_OPEN->Get__STRING());
+					dEXT_CH__DI_DOOR_OPEN->Get__VARIABLE_NAME(),
+					dEXT_CH__DI_DOOR_OPEN->Get__STRING());
 				alm_msg += alm_bff;
 
 				alm_bff.Format("%s <- %s \n", 
-								dEXT_CH__DI_DOOR_CLOSE->Get__VARIABLE_NAME(),
-								dEXT_CH__DI_DOOR_CLOSE->Get__STRING());
+					dEXT_CH__DI_DOOR_CLOSE->Get__VARIABLE_NAME(),
+					dEXT_CH__DI_DOOR_CLOSE->Get__STRING());
 				alm_msg += alm_bff;
 
 				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
@@ -284,8 +317,8 @@ int CObj__PM_SLOT_IO
 				log_msg.Format("RF(%s) Power Status Error ... \n", rf_name);
 
 				log_bff.Format(" * %s <- %s \n",
-								dEXT_CH__RFx_ON_STS[rf_index]->Get__CHANNEL_NAME(),
-								dEXT_CH__RFx_ON_STS[rf_index]->Get__STRING());
+					dEXT_CH__RFx_ON_STS[rf_index]->Get__CHANNEL_NAME(),
+					dEXT_CH__RFx_ON_STS[rf_index]->Get__STRING());
 				log_msg += log_bff;
 
 				xI_LOG_CTRL->WRITE__LOG(log_msg);

@@ -13,7 +13,7 @@ void CObj_Phy__ROBOT_ATM
 
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
 
 		if(iPRC_STS < 0)
 		{
@@ -192,16 +192,30 @@ void CObj_Phy__ROBOT_ATM
 void CObj_Phy__ROBOT_ATM
 ::Report__MATERIAL_INFO(const CString& mode)
 {
-	CString para_arm    = dCH__PARA_ARM_TYPE->Get__STRING();
+	CString para_arm  = dCH__PARA_ARM_TYPE->Get__STRING();
+
+	if(para_arm.CompareNoCase(_ARM__AB) == 0)
+	{
+		_Report__MATERIAL_INFO(mode, _ARM__A);
+		_Report__MATERIAL_INFO(mode, _ARM__B);
+	}
+	else
+	{
+		_Report__MATERIAL_INFO(mode, para_arm);
+	}
+}
+void CObj_Phy__ROBOT_ATM
+::_Report__MATERIAL_INFO(const CString& mode, const CString& para_arm)
+{
 	CString para_module = dCH__PARA_MODULE->Get__STRING();
 	CString para_slot   = dCH__PARA_SLOT->Get__STRING();
 
 	// ...
 	int arm_i = -1;
 
-		 if(para_arm.CompareNoCase("A") == 0)		arm_i = 0;
-	else if(para_arm.CompareNoCase("B") == 0)		arm_i = 1;
-	else											return;
+		 if(para_arm.CompareNoCase(_ARM__A) == 0)		arm_i = 0;
+	else if(para_arm.CompareNoCase(_ARM__B) == 0)		arm_i = 1;
+	else												return;
 
 	// ...
 	bool active_wfr = false;
@@ -215,14 +229,18 @@ void CObj_Phy__ROBOT_ATM
 		active_wfr = true;
 
 		if(Macro__Get_Wafer_Info(wfr_title, lp_id,lp_slot) < 0)
+		{
 			return;
+		}
 	}
 	else
 	{
 		IDS__SCH_MATERIAL_INFO ds_info;
-		
+
 		if(xI_SCH_MATERIAL_CTRL->Get__MATERIAL_INFO(para_arm, ds_info) < 0)
+		{
 			return;
+		}
 
 		lp_id   = ds_info.iSRC__PTN;
 		lp_slot = ds_info.iSRC__STN;
@@ -395,6 +413,9 @@ void CObj_Phy__ROBOT_ATM
 		CString log_bff;
 
 		log_bff.Format("#ALIGN.LLx_NAME=%s\n",  sCH__TARGET_LLx_NAME_GET->Get__STRING());
+		act_log += log_bff;
+
+		log_bff.Format("#ALIGN.LLx_SLOT=%s\n",  sCH__TARGET_LLx_SLOT_GET->Get__STRING());
 		act_log += log_bff;
 
 		log_bff.Format("#ALIGN.LLx_ANGLE=%s\n", sCH__TARGET_LLx_ANGLE_GET->Get__STRING());

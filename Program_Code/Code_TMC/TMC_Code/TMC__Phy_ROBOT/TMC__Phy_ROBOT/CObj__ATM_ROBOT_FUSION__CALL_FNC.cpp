@@ -22,6 +22,7 @@ int  CObj__ATM_ROBOT_FUSION
 
 int  CObj__ATM_ROBOT_FUSION
 ::Interlock__AL1_SLOT_CHECK(CII_OBJECT__ALARM* p_alarm,
+							const CString& arm_type,
 							const CString& stn_name,
 							const CString& para_slot,
 							CString& trg_slot)
@@ -34,20 +35,43 @@ LOOP_RETRY:
 	}
 
 	// ...
-	CString ch_data = dEXT_CH__CFG_AL1_SLOT_MAX->Get__STRING();
-	int cfg_slot = atoi(ch_data);
-
-	if(cfg_slot < 2)
-	{
-		trg_slot = "1";
-		return 1;
-	}
+	CUIntArray l__slot_id;
 
 	// ...
 	{
-		int i_slot = atoi(para_slot);
+		int slot_id = atoi(para_slot);
+		l__slot_id.Add(slot_id);
 
-		if(i_slot > cfg_slot)
+		if(arm_type.CompareNoCase(_ARM_AB) == 0)
+		{
+			slot_id = slot_id + 1;
+			l__slot_id.Add(slot_id);
+		}
+	}
+
+	// ...
+	CString ch_data = dEXT_CH__CFG_AL1_SLOT_MAX->Get__STRING();
+	int cfg_slot = atoi(ch_data);
+
+	if((arm_type.CompareNoCase(_ARM_A) == 0)
+	|| (arm_type.CompareNoCase(_ARM_B) == 0))
+	{
+		if(cfg_slot < 2)
+		{
+			trg_slot = "1";
+			return 1;
+		}
+	}
+
+	// ...
+	int slot_size = l__slot_id.GetSize();
+
+	for(int k=0; k<slot_size; k++)
+	{
+		int slot_id = l__slot_id[k];
+		int slot_index = slot_id - 1;
+
+		if(slot_id > cfg_slot)
 		{
 			CString log_msg;
 
@@ -56,7 +80,7 @@ LOOP_RETRY:
 				CString log_bff;
 
 				log_msg = " * Error : Aligner Slot_MAX ... \n";
-				log_bff.Format(" * para_slot : %1d \n", i_slot);
+				log_bff.Format(" * para_slot : %1d \n", slot_id);
 				log_msg += log_bff;
 				log_bff.Format(" * cfg_slot : %1d \n", cfg_slot);
 				log_msg += log_bff;
@@ -85,6 +109,7 @@ LOOP_RETRY:
 }
 int  CObj__ATM_ROBOT_FUSION
 ::Interlock__LLx_SLOT_CHECK(CII_OBJECT__ALARM* p_alarm,
+							const CString& arm_type,
 							const CString& stn_name,
 							const CString& para_slot,
 							CString& trg_slot)
@@ -92,20 +117,38 @@ int  CObj__ATM_ROBOT_FUSION
 LOOP_RETRY:
 
 	int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
+
 	if(ll_i <  0)				return  1;
 	if(ll_i >= iSIZE_LLx)		return -1;
+
+	// ...
+	CUIntArray l__slot_id;
+
+	// ...
+	{
+		int slot_id = atoi(para_slot);
+		l__slot_id.Add(slot_id);
+
+		if(arm_type.CompareNoCase(_ARM_AB) == 0)
+		{
+			slot_id = slot_id + 1;
+			l__slot_id.Add(slot_id);
+		}
+	}
 
 	// ...
 	CString ch_data = dEXT_CH__CFG_LLx_SLOT_MAX[ll_i]->Get__STRING();
 	int cfg__slot_max = atoi(ch_data);
 
-	// Check ...
+	int slot_limit = l__slot_id.GetSize();
+	for(int k=0; k<slot_limit; k++)
 	{
-		int i_slot = atoi(para_slot);
+		int slot_id = l__slot_id[k];
+		int slot_index = slot_id - 1;
 
 		// CFG.MAX ...
-		if((i_slot > cfg__slot_max)
-		|| (i_slot < 1))
+		if((slot_id > cfg__slot_max)
+		|| (slot_id < 1))
 		{
 			CString log_msg;
 
@@ -114,7 +157,7 @@ LOOP_RETRY:
 				CString log_bff;
 
 				log_msg.Format(" * Error : %s's Slot_MAX ... \n", stn_name);
-				log_bff.Format(" * para_slot : %1d \n", i_slot);
+				log_bff.Format(" * para_slot : %1d \n", slot_id);
 				log_msg += log_bff;
 				log_bff.Format(" * cfg_slot : %1d \n", cfg__slot_max);
 				log_msg += log_bff;
@@ -138,8 +181,6 @@ LOOP_RETRY:
 		}
 
 		// CFG.USE ...
-		int slot_index = i_slot - 1;
-
 		if(dEXT_CH__CFG_LLx_SLOT_USE_X[ll_i][slot_index]->Check__DATA(STR__YES) < 0)
 		{
 			CString log_msg;
@@ -149,7 +190,7 @@ LOOP_RETRY:
 				CString log_bff;
 
 				log_msg.Format(" * Error : %s's Slot_USE ... \n", stn_name);
-				log_bff.Format(" * para_slot : %1d \n", i_slot);
+				log_bff.Format(" * para_slot : %1d \n", slot_id);
 				log_msg += log_bff;
 				log_bff.Format(" * %s <- %s \n",
 								dEXT_CH__CFG_LLx_SLOT_USE_X[ll_i][slot_index]->Get__CHANNEL_NAME(),
@@ -192,11 +233,11 @@ int  CObj__ATM_ROBOT_FUSION
 
 	// Slot Check ...
 	{
-		if(Interlock__AL1_SLOT_CHECK(p_alarm, stn_name, para_slot, stn_slot) < 0)
+		if(Interlock__AL1_SLOT_CHECK(p_alarm, arm_type, stn_name, para_slot, stn_slot) < 0)
 		{
 			return -11;
 		}
-		if(Interlock__LLx_SLOT_CHECK(p_alarm, stn_name, para_slot, stn_slot) < 0)
+		if(Interlock__LLx_SLOT_CHECK(p_alarm, arm_type, stn_name, para_slot, stn_slot) < 0)
 		{
 			return -12;
 		}
@@ -208,7 +249,7 @@ int  CObj__ATM_ROBOT_FUSION
 		Fnc__APP_LOG(act_name);
 
 		// Door Check -----
-		if(Interlock__CHECK_DOOR_OPEN(p_alarm, stn_name,stn_slot, act_name) < 0)
+		if(Interlock__CHECK_DOOR_OPEN(p_alarm, arm_type, stn_name,stn_slot, act_name) < 0)
 		{
 			Fnc__APP_LOG("Interlock__CHECK_DOOR_OPEN.. ret:-1");
 			return -1;
@@ -231,18 +272,70 @@ int  CObj__ATM_ROBOT_FUSION
 	// ...
 	int r_flag;
 
-	if(active__align_pick)		r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__ALIGN_PICK);
-	else						r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
+	if(active__align_pick)
+	{
+		if(iDATA__ALIGN_TYPE == ALIGN_TYPE__ROBOT)			
+		{
+			r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__ALIGN_PICK);
+		}			
+		else
+		{
+			r_flag = Call__ALGN(p_variable,p_alarm);
+
+			if(r_flag > 0)		r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
+		}			
+	}
+	else
+	{
+		r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
+	}
 
 	if(r_flag > 0)
 	{
-		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		bool active__err_check = false;
+
+		if((arm_type.CompareNoCase(_ARM_A)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
-			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		return -11;
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__EXIST) < 0)		active__err_check = true;
 		}
-		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		if((arm_type.CompareNoCase(_ARM_B)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
-			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		return -12;
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__EXIST) < 0)		active__err_check = true;
+		}
+
+		if(active__err_check)
+		{
+			int alm_id = ALID__PICK__MATERIAL_ERROR;
+			CString err_msg;
+			CString err_bff;
+			CString r_act;
+
+			CString act_info;
+			act_info.Format("%s <- %s(%s)", arm_type, stn_name,para_slot);
+
+			err_msg.Format("Pick : %s \n", act_info);
+
+			if((arm_type.CompareNoCase(_ARM_A)  == 0)
+			|| (arm_type.CompareNoCase(_ARM_AB) == 0))
+			{
+				err_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+			if((arm_type.CompareNoCase(_ARM_B)  == 0)			
+			|| (arm_type.CompareNoCase(_ARM_AB) == 0))
+			{
+				err_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, err_msg, r_act);
+			return -11;
 		}
 
 		Fnc__CHANGE_MATERIAL_INFO(-1,arm_type, stn_name,stn_slot);
@@ -252,13 +345,15 @@ int  CObj__ATM_ROBOT_FUSION
 	{
 		bool active__wfr_exchange = false;
 
-		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		if((arm_type.CompareNoCase(_ARM_A)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
-			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__wfr_exchange = true;
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__EXIST) > 0)		active__wfr_exchange = true;
 		}
-		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		if((arm_type.CompareNoCase(_ARM_B)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
-			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__wfr_exchange = true;
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__EXIST) > 0)		active__wfr_exchange = true;
 		}
 
 		if(active__wfr_exchange)
@@ -508,11 +603,11 @@ int  CObj__ATM_ROBOT_FUSION
 
 	// Slot Check ...
 	{
-		if(Interlock__AL1_SLOT_CHECK(p_alarm, stn_name, para_slot, stn_slot) < 0)
+		if(Interlock__AL1_SLOT_CHECK(p_alarm, arm_type, stn_name, para_slot, stn_slot) < 0)
 		{
 			return -11;
 		}
-		if(Interlock__LLx_SLOT_CHECK(p_alarm, stn_name, para_slot, stn_slot) < 0)
+		if(Interlock__LLx_SLOT_CHECK(p_alarm, arm_type, stn_name, para_slot, stn_slot) < 0)
 		{
 			return -12;
 		}
@@ -524,7 +619,7 @@ int  CObj__ATM_ROBOT_FUSION
 		Fnc__APP_LOG(act_name);
 
 		// Door Check -----
-		if(Interlock__CHECK_DOOR_OPEN(p_alarm, stn_name,stn_slot, act_name) < 0)
+		if(Interlock__CHECK_DOOR_OPEN(p_alarm, arm_type, stn_name,stn_slot, act_name) < 0)
 		{
 			Fnc__APP_LOG("Interlock__CHECK_DOOR_OPEN.. ret:-1");
 			return -21;
@@ -546,13 +641,50 @@ int  CObj__ATM_ROBOT_FUSION
 
 	if(r_flag > 0)
 	{
-		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		bool active__err_check = false;
+
+		if((arm_type.CompareNoCase(_ARM_A)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
-			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		return -11;
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__err_check = true;
 		}
-		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		if((arm_type.CompareNoCase(_ARM_B)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
-			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		return -12;
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__err_check = true;
+		}
+
+		if(active__err_check)
+		{
+			int alm_id = ALID__PLACE__MATERIAL_ERROR;
+			CString err_msg;
+			CString err_bff;
+			CString r_act;
+
+			CString act_info;
+			act_info.Format("%s -> %s(%s)", arm_type, stn_name,para_slot);
+
+			err_msg.Format("Place : %s \n", act_info);
+
+			if((arm_type.CompareNoCase(_ARM_A)  == 0)			
+			|| (arm_type.CompareNoCase(_ARM_AB) == 0))
+			{
+				err_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+			if((arm_type.CompareNoCase(_ARM_B)  == 0)
+			|| (arm_type.CompareNoCase(_ARM_AB) == 0))
+			{
+				err_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, err_msg, r_act);
+			return -11;
 		}
 
 		Fnc__CHANGE_MATERIAL_INFO(1,arm_type, stn_name,stn_slot);
@@ -562,11 +694,13 @@ int  CObj__ATM_ROBOT_FUSION
 	{
 		bool active__wfr_exchange = false;
 
-		if(arm_type.CompareNoCase(ARM_A) == 0)			
+		if((arm_type.CompareNoCase(_ARM_A)  == 0)			
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
 			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		active__wfr_exchange = true;
 		}
-		else if(arm_type.CompareNoCase(ARM_B) == 0)			
+		if((arm_type.CompareNoCase(_ARM_B)  == 0)
+		|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 		{
 			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		active__wfr_exchange = true;
 		}
@@ -682,7 +816,7 @@ int  CObj__ATM_ROBOT_FUSION
 	Fnc__APP_LOG(act_name);
 
 	// Door Check -----
-	if(Interlock__CHECK_DOOR_OPEN(p_alarm, stn_name,stn_slot, act_name) < 0)
+	if(Interlock__CHECK_DOOR_OPEN(p_alarm, arm_type, stn_name,stn_slot, act_name) < 0)
 	{
 		return -1;
 	}
@@ -690,14 +824,16 @@ int  CObj__ATM_ROBOT_FUSION
 	// Material Check -----
 	int place_flag = -1;
 
-	if(arm_type.CompareNoCase(ARM_A) == 0)
+	if((arm_type.CompareNoCase(_ARM_A)  == 0)
+	|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 	{
 		if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)
 		{
 			place_flag = 1;
 		}
 	}
-	else if(arm_type.CompareNoCase(ARM_B) == 0)
+	if((arm_type.CompareNoCase(_ARM_B)  == 0)
+	|| (arm_type.CompareNoCase(_ARM_AB) == 0))
 	{
 		if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)
 		{

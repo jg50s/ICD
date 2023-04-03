@@ -57,15 +57,15 @@ void CObj_Opr__AUTO_MODE
 int  CObj_Opr__AUTO_MODE
 ::Fnc__IDLE_LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	//.....
+	// ...
 	{
 		CTime time = CTime::GetCurrentTime();
 		CString str_date;
 
 		str_date.Format("%00004d.%002d.%002d",
-			time.GetYear(),
-			time.GetMonth(),
-			time.GetDay());
+						time.GetYear(),
+						time.GetMonth(),
+						time.GetDay());
 
 		if(xCH__LEAK_CHECK__IDLE_PRE_DATE->Check__DATA(str_date) < 0)
 		{
@@ -77,7 +77,7 @@ int  CObj_Opr__AUTO_MODE
 		}
 	}
 
-	//.....
+	// ...
 	CString var_data;
 	int ref_count;
 	int cur_count;

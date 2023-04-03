@@ -11,6 +11,10 @@
 #define  STR__NONE				"NONE"
 #define  STR__IDLE				"IDLE"
 
+#define  STR__UNKNOWN			"UNKNOWN"
+#define  STR__CHECK				"CHECK"
+#define  STR__NG				"NG"
+#define  STR__OK				"OK"
 
 // ...
 #define  STR__INIT				"INIT"

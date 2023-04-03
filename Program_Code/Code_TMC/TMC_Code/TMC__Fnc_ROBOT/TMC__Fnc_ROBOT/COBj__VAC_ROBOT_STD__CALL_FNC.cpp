@@ -732,21 +732,6 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 	}
 
 	// ...
-	CString str_from_ctc_wac_use;
-	CString str_from_ctc_wac_delay;
-	double dbl_wac_delay;
-
-	SCX__TIMER_CTRL xTimer_Wac_Delay;
-	xTimer_Wac_Delay->REGISTER__ABORT_OBJECT(sObject_Name);
-
-	// ...
-	{
-		sCH__WAC_USE->Get__DATA(str_from_ctc_wac_use);
-		sCH__WAC_DELAY_SEC->Get__DATA(str_from_ctc_wac_delay);
-		dbl_wac_delay = atof(str_from_ctc_wac_delay);
-	}
-
-	// ...
 	int cfg__auto_pumping = 1;
 
 	if((dEXT_CH__CFG_SETUP_TEST_MODE->Check__DATA(STR__ENABLE) > 0)
@@ -763,62 +748,7 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 		}
 	}
 
-	if((str_from_ctc_wac_use.CompareNoCase("YES") == 0) 
-	&& (Macro__CHECK_PMx_INDEX(para_module) > 0))
-	{
-		// SV OPEN -> START ...
-		{
-			act_name.Format("Start SV Open : (%s)", para_module);
-			Fnc__APP_LOG(act_name);
-	
-			if(Fnc__RUN_SV_OPEN(para_module) < 0)
-			{
-				return OBJ_ABORT;
-			}
-		}
-
-		/*
-		if(xTimer_Wac_Delay->WAIT(dbl_wac_delay) < 0)
-		{
-			return OBJ_ABORT;
-		}
-		*/
-
-		// ROBOT ROTATE ...
-		{
-			act_name.Format("Call Rotate - Started");
-			Fnc__APP_LOG(act_name);
-
-			if(Fnc__RUN_ROTATE(p_variable,
-							   p_alarm,
-							   para_arm,
-							   para_module,
-							   para_slot) < 0)
-			{
-				return OBJ_ABORT;
-			}
-
-			if(pROBOT__OBJ_CTRL->When__OBJECT() < 0)
-			{
-				return -111;
-			}
-
-			act_name.Format("Call Rotate - Completed");
-			Fnc__APP_LOG(act_name);
-		}
-
-		// SV OPEN -> WAIT ...
-		{			
-			if(Fnc__WAIT_SV_OPEN(para_module) < 0)
-			{
-				return OBJ_ABORT;
-			}
-
-			act_name.Format("Wait SV Open : (%s)", para_module);
-			Fnc__APP_LOG(act_name);
-		}
-	}
-	else
+	// ...
 	{
 		act_name.Format("Run_SV_OPEN[%s] : Start ...", para_module);
 		Fnc__APP_LOG(act_name);
@@ -910,17 +840,33 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 
 	// ...
 	CString str_from_ctc_wac_use;
+	CString str_from_ctc_wac_pos;
 	CString str_from_ctc_wac_delay;
-	double dbl_wac_delay;
-	
-	SCX__TIMER_CTRL xTimer_Wac_Delay;
-	xTimer_Wac_Delay->REGISTER__ABORT_OBJECT(sObject_Name);
+	double cfg__wac_delay;
 
-	// ...
+	SCX__TIMER_CTRL x_timer__wac_delay;
+	x_timer__wac_delay->REGISTER__ABORT_OBJECT(sObject_Name);
+
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index >= 0)
 	{
-		sCH__WAC_USE->Get__DATA(str_from_ctc_wac_use);
-		sCH__WAC_DELAY_SEC->Get__DATA(str_from_ctc_wac_delay);
-		dbl_wac_delay = atof(str_from_ctc_wac_delay);
+		sCH__FROM_CTC_WAC_PM_USE_X[pm_index]->Get__DATA(str_from_ctc_wac_use);
+
+		if(str_from_ctc_wac_use.CompareNoCase(STR__YES) == 0)
+		{
+			sCH__FROM_CTC_WAC_PM_POS_X[pm_index]->Get__DATA(str_from_ctc_wac_pos);
+
+			sCH__FROM_CTC_WAC_PM_DELAY_SEC_X[pm_index]->Get__DATA(str_from_ctc_wac_delay);
+			cfg__wac_delay = atof(str_from_ctc_wac_delay);
+
+			//
+			sCH__INFO_WAC_PMC_STATE->Set__DATA(para_module);
+			sCH__INFO_WAC_PMC_POS->Set__DATA(str_from_ctc_wac_pos);
+
+			//
+			x_timer__wac_delay->REGISTER__COUNT_CHANNEL(sCH__INFO_WAC_PMC_DELAY_COUNT->Get__CHANNEL_NAME());
+			x_timer__wac_delay->INIT__COUNT_DOWN();
+		}
 	}
 
 	// ...
@@ -934,7 +880,6 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 
 	if(cfg__auto_pumping > 0)
 	{
-
 		// ...
 		{
 			act_name.Format("Transfer Auto Pumping - Started ...");		
@@ -953,8 +898,8 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 		}
 	}
 
-	if((str_from_ctc_wac_use.CompareNoCase("YES") == 0) 
-	&& (Macro__CHECK_PMx_INDEX(para_module) > 0))
+	if((str_from_ctc_wac_use.CompareNoCase(STR__YES) == 0) 
+	&& (pm_index >= 0))
 	{
 		// SV OPEN -> START ...
 		{
@@ -974,11 +919,11 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 		{
 			// ...
 			{
-				act_name.Format("WAC Delay - Started : (%.1f)", dbl_wac_delay);
+				act_name.Format("WAC Delay - Started : (%.1f)", cfg__wac_delay);
 				Fnc__APP_LOG(act_name);
 			}
 	
-			if(xTimer_Wac_Delay->WAIT(dbl_wac_delay) < 0)
+			if(x_timer__wac_delay->WAIT(cfg__wac_delay) < 0)
 			{
 				return OBJ_ABORT;
 			}
@@ -988,7 +933,7 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 		{
 			// ...
 			{
-				act_name.Format("Call Rotate - Started : (%.1f)", dbl_wac_delay);
+				act_name.Format("Call Rotate - Started : (%.1f)", cfg__wac_delay);
 				Fnc__APP_LOG(act_name);
 			}
 
@@ -1003,7 +948,7 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 
 			// ...
 			{
-				act_name.Format("Call Rotate - Completed : (%.1f)", dbl_wac_delay);
+				act_name.Format("Call Rotate - Completed : (%.1f)", cfg__wac_delay);
 				Fnc__APP_LOG(act_name);
 			}
 		}

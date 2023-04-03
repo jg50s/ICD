@@ -80,6 +80,7 @@ private:
 
 	//
 	int iDATA__PIN_SNS_TYPE;
+	int iDATA__PIN_SNS_CHECK_MODE;
 
 	// DI.SNS ...
 	CX__VAR_DIGITAL_CTRL dEXT_CH__DI_PIN_UP;

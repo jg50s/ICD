@@ -296,6 +296,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="CObj__HEATER_MDx_LINK"
+				>
+				<File
+					RelativePath=".\CObj__HEATER_MDx_LINK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__HEATER_MDx_LINK.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__HEATER_MDx_LINK__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__HEATER_MDx_LINK__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__HEATER_MDx_LINK__DEF.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

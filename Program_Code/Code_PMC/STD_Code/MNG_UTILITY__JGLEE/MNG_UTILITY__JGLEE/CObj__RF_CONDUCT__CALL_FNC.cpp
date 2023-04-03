@@ -60,7 +60,7 @@ _Call__RF_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 		for(i=0;i<CFG__TEST_LIST;i++)
 		{
 			sCH_PARA__NEW_POWER_LIST[i]->Set__DATA("");
-			sCH_PARA__NEW_METER_LIST[i]->Set__DATA("");
+			aCH_PARA__NEW_METER_LIST[i]->Set__DATA("");
 			sCH_PARA__NEW_OFFSET_LIST[i]->Set__DATA("");
 		}
 
@@ -248,20 +248,35 @@ Fnc__LOWER_RF_CHECK(CII_OBJECT__VARIABLE *p_variable,
 		msg.Format("RF Check : %s",str_msg);
 		sEXT_CH__FNC_MSG->Set__DATA(msg);
 
-		//
-		p_rf_set->Set__DATA(str_set_pwr);
-
-		if(p_rf_ctrl->Call__OBJECT(CMMD_MODE__RF__SET_POWER) < 0)
+		// Power_Set ... 
 		{
-			str_msg = "RF Control - Aborted ...";
-			xCH__OBJ_MSG->Set__DATA(str_msg);
+			p_rf_set->Set__DATA(str_set_pwr);
 
-			msg.Format("RF Check : %s",str_msg);
-			sEXT_CH__FNC_MSG->Set__DATA(msg);
-			return -2;
+			if(p_rf_ctrl->Call__OBJECT(CMMD_MODE__RF__POWER_SET) < 0)
+			{
+				str_msg = "RF Control (Power_Set) - Aborted ...";
+				xCH__OBJ_MSG->Set__DATA(str_msg);
+
+				msg.Format("RF Check : %s",str_msg);
+				sEXT_CH__FNC_MSG->Set__DATA(msg);
+				return -11;
+			}
+		}
+		// Power_On ... 
+		{
+			p_rf_set->Set__DATA(str_set_pwr);
+
+			if(p_rf_ctrl->Call__OBJECT(CMMD_MODE__RF__POWER_ON) < 0)
+			{
+				str_msg = "RF Control (Power_On) - Aborted ...";
+				xCH__OBJ_MSG->Set__DATA(str_msg);
+
+				msg.Format("RF Check : %s",str_msg);
+				sEXT_CH__FNC_MSG->Set__DATA(msg);
+				return -12;
+			}
 		}
 
-		//
 		str_msg = "RF Control - Completed ...";
 		xCH__OBJ_MSG->Set__DATA(str_msg);
 
@@ -296,7 +311,7 @@ Fnc__LOWER_RF_CHECK(CII_OBJECT__VARIABLE *p_variable,
 
 			msg.Format("RF Check : %s",str_msg);
 			sEXT_CH__FNC_MSG->Set__DATA(msg);
-			return -3;
+			return -21;
 		}
 	}
 

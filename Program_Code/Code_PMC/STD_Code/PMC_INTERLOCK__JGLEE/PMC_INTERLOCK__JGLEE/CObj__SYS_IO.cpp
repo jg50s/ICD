@@ -319,6 +319,18 @@ int CObj__SYS_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	bool def_check;
 
 	
+	// OBJ DB_SUS ...
+	{
+		def_name = "OBJ__DB_SYS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		// ...
+		{
+			var_name = "ACTIVE.INTERLOCK.CHAMBER.VENT";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ACTIVE_INTERLOCK_CHAMBER_VENT, obj_name,var_name);
+		}
+	}
+
 	// IO Channel ...
 	{
 		// VENT.FAST.VLV ...
@@ -444,7 +456,20 @@ int CObj__SYS_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 		}
 
-		// ...
+		// LINK_OBJ.TMP ...
+		{
+			def_name = "LINK_OBJ.TMP";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+			def_check = x_utility.Check__Link(obj_name);
+			bActive__TMP_LINK = def_check;
+			
+			if(def_check)
+			{
+				var_name = "ACTIVE.INTERLOCK_SKIP.FORELINE_VAC";
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMP_LINK__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC, obj_name,var_name);
+			}
+		}
 	}
 	
 	return 1;

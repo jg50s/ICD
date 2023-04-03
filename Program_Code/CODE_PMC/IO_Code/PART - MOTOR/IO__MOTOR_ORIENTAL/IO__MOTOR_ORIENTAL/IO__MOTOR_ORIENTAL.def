@@ -1,0 +1,6 @@
+; IO__MOTOR_ORIENTAL.def : Declares the module parameters for the DLL.
+
+LIBRARY      "IO__MOTOR_ORIENTAL"
+
+EXPORTS
+    ; Explicit exports can go here

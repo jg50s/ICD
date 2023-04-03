@@ -24,7 +24,18 @@ private:
 	//------------------------------------------------------------
 	// INTERNAL PROPERTY
 
-	CX__VAR_STRING_CTRL xCH__MODULE_TIME;
+	// TIME ...
+	CX__VAR_STRING_CTRL  sCH__MODULE_TIME;
+	CX__VAR_STRING_CTRL  sCH__LINK_NET_IP;
+	CX__VAR_STRING_CTRL  sCH__LINK_TIME_ACTIVE;
+
+	// INFO ...
+	CX__VAR_STRING_CTRL  sCH__INFO_EQP_ID;
+	CX__VAR_STRING_CTRL  sCH__INFO_EQP_NAME;
+
+	CX__VAR_STRING_CTRL  sCH__INFO_EQP_NET_IP;
+	CX__VAR_STRING_CTRL  sCH__INFO_EQP_NET_PORT;
+	//
 
 	//------------------------------------------------------------
 	// EXTERNAL PROPERTY
@@ -35,6 +46,7 @@ private:
 	// STEP.INFO ...
 	CX__VAR_STRING_CTRL xEXT_CH__STEP_START;
 	CX__VAR_STRING_CTRL xEXT_CH__STEP_END;
+
 
 	// LINK.OBJ_MODE ...
 	CString sEXT_MODE__SYSTEM_INIT;
@@ -76,16 +88,17 @@ private:
 	//-------------------------------------------------------------------------
 	// ...
 	CString sMODE__AUTO_INIT;
-	int  Call__AUTO_INIT(CII_OBJECT__VARIABLE* p_variable);
+	int  Call__AUTO_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__TIME_INIT;
-	int  Call__TIME_INIT(CII_OBJECT__VARIABLE* p_variable);
+	int  Call__TIME_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
+	int  Fnc__TIME_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__SYSTEM_INIT;
-	int  Call__SYSTEM_INIT(CII_OBJECT__VARIABLE* p_variable);
+	int  Call__SYSTEM_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__SYSTEM_MAINT;
-	int  Call__SYSTEM_MAINT(CII_OBJECT__VARIABLE* p_variable);
+	int  Call__SYSTEM_MAINT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	// ...
 	CString sMODE__PUMP;
@@ -179,6 +192,9 @@ private:
 	int  Call__JOB_END_READY(CII_OBJECT__VARIABLE* p_variable);
 	//
 
+	//-------------------------------------------------------------------------
+	void Mon__STATUS(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
+	//
 
 public:
 	CObj__PMC_INF();

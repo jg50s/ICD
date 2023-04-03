@@ -92,6 +92,9 @@ int CObj__PROC_STD
 			// Process Recovery Check ...
 			if(r_step <  0)		
 			{
+				// jglee : 2023.01.28
+				sEXT_CH__PMC_PROCESS_STATUS->Set__DATA(STR__Alarm);
+
 				sCH__CUR_LEARNED_RESULT->Set__DATA(STR__ERROR);
 
 				int r_check = Check__ALARM_RECOVERY(p_variable, p_alarm);

@@ -11,9 +11,11 @@ void CObj_Phy__SYS_STD
 	CString obj_ctrl;
 	int r_count = 0;
 
+	
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
+
 
 		if(iPRC_STS < 0)
 		{

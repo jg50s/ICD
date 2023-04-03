@@ -254,6 +254,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj_Phy__ROBOT_VAC__CALL_QUERY.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj_Phy__ROBOT_VAC__DEF.h"
 					>
 				</File>
@@ -299,6 +303,10 @@
 				</File>
 				<File
 					RelativePath=".\CObj_Phy__ROBOT_ATM__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj_Phy__ROBOT_ATM__CALL_QUERY.cpp"
 					>
 				</File>
 				<File

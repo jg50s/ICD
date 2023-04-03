@@ -32,7 +32,9 @@ int CObj__PMC_OPR::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 		ADD__CTRL_VAR(sMODE__PUMP,				"PUMP");
 		ADD__CTRL_VAR(sMODE__VENT,				"VENT");
+
 		ADD__CTRL_VAR(sMODE__LEAK_CHECK,		"LEAK_CHECK");
+
 		ADD__CTRL_VAR(sMODE__AUTO_PM,		    "AUTO_PM");
 		ADD__CTRL_VAR(sMODE__PURGE,				"PURGE");
 
@@ -50,6 +52,7 @@ int CObj__PMC_OPR::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__PLACE_X_READY,		"PLACE_X_READY");
 		ADD__CTRL_VAR(sMODE__PLACE_COMPLETE,	"PLACE_COMPLETE");
 		ADD__CTRL_VAR(sMODE__PLACE_X_COMPLETE,	"PLACE_X_COMPLETE");
+
 		ADD__CTRL_VAR(sMODE__PRO_READY,			"PRO_READY");
 		ADD__CTRL_VAR(sMODE__PRO_START,			"PRO_START");
 		ADD__CTRL_VAR(sMODE__CLN_READY,			"CLN_READY");
@@ -204,6 +207,7 @@ int CObj__PMC_OPR::__Define__USER_FUNCTION(CII_DEFINE__FUNCTION *p_fnc_ctrl)
 
 		ADD__EXT_FNC_MODE_WITH_COMMENT(sEXT_MODE__PUMP,			"OBJ_MODE__PUMP",  "");
 		ADD__EXT_FNC_MODE_WITH_COMMENT(sEXT_MODE__VENT,			"OBJ_MODE__VENT",  "");
+
 		ADD__EXT_FNC_MODE_WITH_COMMENT(sEXT_MODE__LEAK_CHECK,	"OBJ_MODE__LEAK_CHECK", "");
 
 		ADD__EXT_FNC_MODE_WITH_COMMENT(sEXT_MODE__PURGE,		"OBJ_MODE__PURGE", "");
@@ -432,18 +436,37 @@ int CObj__PMC_OPR::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			pOBJ_CTRL__LIFT_PIN = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
-			//
-			def_name = "LIFT_PIN.TRANSFER_READY";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK_MODE__LIFT_PIN__TRANSFER_READY = def_data;
+			// ACTIVE.PICK_READY ...
+			{
+				def_name = "LIFT_PIN.PICK_READY";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-			def_name = "LIFT_PIN.TRANSFER_COMPLETE";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK_MODE__LIFT_PIN__TRANSFER_COMPLETE = def_data;
+				bActive__LIFT_PIN__PICK_READY = x_utility.Check__Link(def_data);
+				sLINK_MODE__LIFT_PIN__PICK_READY = def_data;
+			}
+			// ACTIVE.PLACE_READY ...
+			{
+				def_name = "LIFT_PIN.PLACE_READY";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-			def_name = "LIFT_PIN.PROCESS_READY";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
-			sLINK_MODE__LIFT_PIN__PROCESS_READY = def_data;
+				bActive__LIFT_PIN__PLACE_READY = x_utility.Check__Link(def_data);
+				sLINK_MODE__LIFT_PIN__PLACE_READY = def_data;
+			}
+
+			// ACTIVE.TRANSFER_COMPLETE ...
+			{
+				def_name = "LIFT_PIN.TRANSFER_COMPLETE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+			
+				sLINK_MODE__LIFT_PIN__TRANSFER_COMPLETE = def_data;
+			}
+			// ACTIVE.PROCESS_READY ...
+			{
+				def_name = "LIFT_PIN.PROCESS_READY";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+				sLINK_MODE__LIFT_PIN__PROCESS_READY = def_data;
+			}
 		}
 	}
 

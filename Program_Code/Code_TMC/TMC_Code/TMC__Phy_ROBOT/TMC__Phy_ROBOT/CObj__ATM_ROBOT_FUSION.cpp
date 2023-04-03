@@ -78,7 +78,7 @@ AL1 AL2												\
 BUFF1 BUFF2 FULL_BUFF"
 
 #define APP_DSP__ARM_TYPE							\
-"A B"
+"A  B  AB"
 
 #define APP_DSP__ARM_STS_ANI						\
 "UNKNOWN RETRACT EXTEND"
@@ -117,11 +117,104 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__VARIABLE_STD(p_variable)
 		else											bActive__LLx_MULTI_DOOR_VALVE = false;
 	}
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.STATUS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_STATUS,str_name);
+	}
+
+	// MON.ACTIVE ...
+	{
+		// ROBOT ...
+		{
+			str_name = "MON.ACTIVE.ROBOT_ACTION_BUSY";
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_ROBOT_ACTION_BUSY, str_name);
+		}
+		
+		// LPx
+		for(i=0; i<CFG_LPx__SIZE; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("MON.ACTIVE.INTERLOCK_BY_LP.%1d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i], str_name);
+
+			str_name.Format("MON.ACTIVE.WAIT_BY_LP.%1d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_IWAIT_BY_LPx[i], str_name);
+
+			//
+			str_name.Format("MON.ACTIVE.ROBOT_ACTION_TO_LP.%1d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_ROBOT_ACTION_TO_LPx[i], str_name);
+		}
+		
+		// LLx
+		for(i=0; i<CFG_LLx__SIZE; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("MON.ACTIVE.ROBOT_ACTION_TO_LL.%1d", id);
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_ROBOT_ACTION_TO_LLx[i], str_name);
+		}
+
+		// ALx
+		{
+			str_name = "MON.ACTIVE.ROBOT_ACTION_TO_AL.1";
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_ROBOT_ACTION_TO_AL1, str_name);
+		}
+		
+		// STx
+		{
+			str_name = "MON.ACTIVE.ROBOT_ACTION_TO_ST.1";
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST1, str_name);
+
+			str_name = "MON.ACTIVE.ROBOT_ACTION_TO_ST.2";
+			STD__ADD_DIGITAL(str_name, "OFF ON");
+			LINK__VAR_DIGITAL_CTRL(dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST2, str_name);
+		}
+	}
+
+	// SIM ...
+	{
+		str_name = "SIM.PAUSE.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__SIM_PAUSE_ACTIVE, str_name);
+	}
+
+	// CFG ...
+	{
+		str_name = "CFG.ACTION.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ACTION_CHECK, str_name);
+
+		//
+		str_name = "CFG.ARM_A.USE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ARM_A_USE, str_name);
+
+		str_name = "CFG.ARM_B.USE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ARM_B_USE, str_name);
+
+		//
+		str_name = "CFG.DUALARM.USE.LPx";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_USE_LPx, str_name);
+
+		str_name = "CFG.DUALARM.USE.STx";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_USE_STx, str_name);
+
+		str_name = "CFG.DUALARM.USE.LLx";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_USE_LLx, str_name);
 	}
 
 	// PARA CHANNEL -----
@@ -190,7 +283,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__VARIABLE_STD(p_variable)
 	// Wafer Present Check [NO/YES]
 	{
 		str_name = "CFG.dWAFER.PRESENT.CHECK";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		STD__ADD_DIGITAL(str_name, "YES NO");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG__WAFER_PRESENT_CHECK, str_name);
 
 		str_name = "CFG.dWAFER.CROSSED.CHECK.AFTER.MAPPING";
@@ -417,12 +510,16 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__VARIABLE_STD(p_variable)
 
 
 // ...
-#define  ACT__RETRY_ABORT						\
+#define  _LALM__ABORT							\
+l_act.RemoveAll();								\
+l_act.Add("ABORT");
+
+#define  _LALM__RETRY_ABORT						\
 l_act.RemoveAll();								\
 l_act.Add("RETRY");								\
 l_act.Add("ABORT");
 
-#define  ACT__IGNORE_ABORT						\
+#define  _LALM__IGNORE_ABORT					\
 l_act.RemoveAll();								\
 l_act.Add("IGNORE");							\
 l_act.Add("ABORT");
@@ -445,6 +542,70 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 	// ...
 	{
+		alarm_id = ALID__PICK__MATERIAL_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "Pick action error !";
+
+		alarm_msg = "Please, check the wafer on robot-arm. \n";
+		alarm_msg = "Or check the state response of robot-driver. \n";
+
+		_LALM__ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__PLACE__MATERIAL_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "Place action error !";
+
+		alarm_msg = "Please, check the wafer on robot-arm. \n";
+		alarm_msg = "Or check the state response of robot-driver. \n";
+
+		_LALM__ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__ARM_A__NOT_USE;
+
+		alarm_title  = title;
+		alarm_title += "You can't use Arm-A.";
+
+		alarm_msg = "Please, check robot-config page.\n";
+
+		_LALM__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__ARM_B__NOT_USE;
+
+		alarm_title  = title;
+		alarm_title += "You can't use Arm-B.";
+
+		alarm_msg = "Please, check robot-config page.\n";
+
+		_LALM__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__ARM_AB__NOT_USE;
+
+		alarm_title  = title;
+		alarm_title += "You can't use Arm-AB.";
+
+		alarm_msg = "Please, check robot-config page.\n";
+
+		_LALM__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
 		alarm_id = ALID__ARM_A__MATERIAL_EXIST_ERROR;
 
 		alarm_title  = title;
@@ -452,7 +613,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material on Robot's A-Arm.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -464,7 +625,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material on Robot's B-Arm.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -477,7 +638,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check Wafer Status.\n";
 
-		ACT__IGNORE_ABORT;
+		_LALM__IGNORE_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -491,7 +652,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg.Format("Please, check material in LP%1d.\n",i+1);
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -504,7 +665,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in AL1.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -517,7 +678,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in LBA.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -529,7 +690,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in LBB.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -542,7 +703,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in VIS1.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -555,7 +716,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in side storage(1).\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// SIDE STORAGE 2 ...
@@ -567,7 +728,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in side storage(2).\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}	
 
@@ -580,7 +741,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in PMC.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	//.....
@@ -592,7 +753,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check the ALx slot parameter of command. \n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	//.....
@@ -604,7 +765,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check the LLx slot parameter of command. \n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -617,7 +778,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material on Robot's A-Arm.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	//.....
@@ -629,7 +790,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material on Robot's B-Arm.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -643,7 +804,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg.Format("Please, check material in LP%1d.\n",i+1);
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -656,7 +817,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in AL1.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -669,7 +830,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in LBA.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	//.....
@@ -681,7 +842,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in LBB.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -694,7 +855,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in VIS1.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -707,7 +868,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in side storage(1).\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// SIDE STORAGE 2
@@ -719,7 +880,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in side storage(2).\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -732,7 +893,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check material in PMC.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -745,7 +906,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check config page.\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -758,7 +919,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check LBA's door status !\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	//.....
@@ -770,7 +931,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "Please, check LBB's door status !\n";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -783,7 +944,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -795,7 +956,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -807,7 +968,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -819,7 +980,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -832,7 +993,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "So... Robot Can't do any command.\n";
 		alarm_msg += "Please..., Check EFEM Side Door Status";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -845,7 +1006,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "So... Robot Can't do Mapping Action.\n";
 		alarm_msg += "Please..., Check Robot's Arm Status";
 
-		ACT__RETRY_ABORT;
+		_LALM__RETRY_ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 	// ...
@@ -857,7 +1018,7 @@ int CObj__ATM_ROBOT_FUSION::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg = "So, Robot Can't do Mapping Action.\n";
 
-		ACT__ABORT;
+		_LALM__ABORT;
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
@@ -1111,6 +1272,30 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CUR_LLx_POST_POSITION_INCREMENT_ANGLE[i], def_data,str_name);
 			}
 		}
+
+		// PMx ...
+		for(i=0; i<CFG_PMx__SIZE; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("CFG.PM%1d.ALIGN.POS", id);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_ALIGN_ANGLE[i], def_data,str_name);
+
+			str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT", id);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT[i], def_data,str_name);
+
+			str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.RANGE", id);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_RANGE[i], def_data,str_name);
+
+			str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.START.ANGLE", id);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_START_ANGLE[i], def_data,str_name);
+
+			str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.APPLY", id);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_APPLY[i], def_data,str_name);
+
+			str_name.Format("CUR.PM%1d.POST.POSITION.INCREMENT.ANGLE", id);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CUR_PMx_POST_POSITION_INCREMENT_ANGLE[i], def_data,str_name);
+		}
 	}
 
 	// IO ...
@@ -1137,6 +1322,10 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		str_name = "MON.ARM_B.MATERIAL.STATUS";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS, obj_name,str_name);
 
+		// AL ...
+		str_name = "MON.AL.MATERIAL.STATUS";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_AL_MATERIAL_STATUS, obj_name,str_name);
+
 		// Angle Value
 		str_name = "PARA.AL1.CCD.POS";
 		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__ALIGNER_ANGLE_PARA, obj_name,str_name);
@@ -1145,6 +1334,13 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// AL1 ...
 	{
+		def_name = "DATA.ALIGN_TYPE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if(def_data.CompareNoCase("ROBOT") == 0)		iDATA__ALIGN_TYPE = ALIGN_TYPE__ROBOT;
+		else											iDATA__ALIGN_TYPE = ALIGN_TYPE__ALIGNER;
+
+		// ...
 		def_name = "OBJ__AL1";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
@@ -1175,12 +1371,20 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		for(i=0;i<iLPx_SIZE;i++)	
 		{
-			def_name.Format("OBJ__LP%1d",i+1);
+			int lp_id = i + 1;
+
+			def_name.Format("OBJ__LP%1d", lp_id);
 			p_variable->Get__DEF_CONST_DATA(def_name,def_data);
 
 			pLPx__OBJ_CTRL[i] = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 
-			for(j=0;j<CFG_LPx__SLOT_SIZE;j++)
+			// CFG ...
+			{
+				str_name = "CFG.MAX.SLOT.COUNT";
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LPx_CFG_MAX_SLOT_COUNT[i], def_data,str_name);
+			}
+
+			for(j=0; j<CFG_LPx__SLOT_SIZE; j++)
 			{
 				// Status
 				str_name.Format("OTR.OUT.MON.dSLOT%002d.STATUS",j+1);
@@ -1222,6 +1426,9 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__SIDE_STORAGE1";
 		p_variable->Get__DEF_CONST_DATA(def_name,def_data);
 
+		str_name = "CFG.SLOT.MAX";
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__SIDE_STORAGE1_CFG_SLOT_MAX, def_data,str_name);
+	
 		for(i=0;i<CFG_LPx__SLOT_SIZE;i++)
 		{
 			str_name.Format("SLOT%002d.STATUS", i+1);
@@ -1235,6 +1442,9 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		def_name = "OBJ__SIDE_STORAGE2";
 		p_variable->Get__DEF_CONST_DATA(def_name,def_data);
+
+		str_name = "CFG.SLOT.MAX";
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__SIDE_STORAGE2_CFG_SLOT_MAX, def_data,str_name);
 
 		for(i=0;i<CFG_LPx__SLOT_SIZE;i++)
 		{
@@ -1312,7 +1522,7 @@ int CObj__ATM_ROBOT_FUSION::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //--------------------------------------------------------------------------------
 int CObj__ATM_ROBOT_FUSION::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 {
-	int flag = -1;
+	int flag = 1;
 
 	CString para__arm_type;
 	CString para__stn_name;
@@ -1375,570 +1585,1043 @@ int CObj__ATM_ROBOT_FUSION::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_al
 
 		dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS->Get__DATA(var_data);
 		dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Set__DATA(var_data);
+
+		//
+		var_data = dEXT_CH__AL1_SLOT01_STATUS->Get__STRING();
+		dEXT_CH__ROBOT_AL_MATERIAL_STATUS->Set__DATA(var_data);
 	}
 
-	// ...
-	bool active__align_pick = false;
-
-	if(para__stn_name.CompareNoCase(STR__AL1) == 0)
+	// LPx.INTERLOCK - CHECK ...
 	{
-		if(mode.CompareNoCase(sMODE__PICK) == 0)
-		{
-			active__align_pick = true;
-		}
-	}
-
-	if(active__align_pick)
-	{
-		CString log_msg;
-		CString log_bff;
-
-		CString llx_name;
-		CString llx_slot;
-		CString al_angle;
-
-		if(sCH__OBJ_STATUS->Check__DATA(STR__MAINTMODE) > 0)
-		{
-			dEXT_CH__MAINT_TARGT_LLx_NAME->Get__DATA(llx_name);
-			dEXT_CH__MAINT_TARGT_LLx_SLOT->Get__DATA(llx_slot);
-		}
-		else
-		{
-			sEXT_CH__MODULE_LINK_TARGT_LLx_NAME->Get__DATA(llx_name);	
-			if(llx_name == "")		llx_name = _MODULE__LBA;
-
-			sEXT_CH__MODULE_LINK_TARGT_LLx_SLOT->Get__DATA(llx_slot);	
-			if(llx_slot == "")		llx_slot = "1";
-		}
-
-		int ll_i = Macro__CHECK_LLx_INDEX(llx_name);
-		if(ll_i >= 0)
-		{
-			// ...
-			{
-				log_msg = "\n";
-
-				log_bff.Format("%s(%s) Align Info ... \n", llx_name,llx_slot);
-				log_msg += log_bff;
-			}
-
-			if(bActive__LLx_MULTI_DOOR_VALVE)
-			{
-				int slot_index = atoi(llx_slot) - 1;
-				if(slot_index <  0)						return -11;
-				if(slot_index >= CFG_LLx__SLOT_SIZE)	return -12;
-
-				if(dEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT_APPLY[ll_i][slot_index]->Check__DATA(STR__ENABLE) > 0)
-				{
-					aEXT_CH__CUR_LLx_X_POST_POSITION_INCREMENT_ANGLE[ll_i][slot_index]->Get__DATA(var_data);
-					double cur_angle = atof(var_data);
-
-					aEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT[ll_i][slot_index]->Get__DATA(var_data);
-					double cfg_inc = atof(var_data);
-
-					aEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT_RANGE[ll_i][slot_index]->Get__DATA(var_data);
-					double max_angle = atof(var_data);
-
-					if(cur_angle > max_angle)		cur_angle = 0;
-
-					// ...
-					aEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT_START_ANGLE[ll_i][slot_index]->Get__DATA(var_data);
-					double start_angle = atof(var_data);
-
-					al_angle.Format("%.0f", (start_angle+cur_angle));
-
-					// ...
-					{
-						double next_angle = cur_angle + cfg_inc;
-						if(next_angle > max_angle)		next_angle = 0;
-
-						var_data.Format("%.0f", next_angle);
-						aEXT_CH__CUR_LLx_X_POST_POSITION_INCREMENT_ANGLE[ll_i][slot_index]->Set__DATA(var_data);
-					}
-
-					// ...
-					{
-						log_bff.Format("   CFG Increment Apply <- [%s] \n", STR__ENABLE);
-						log_msg += log_bff;
-
-						log_bff.Format("   Current Increment Angle <- [%.0f] \n", cur_angle);
-						log_msg += log_bff;
-
-						log_bff.Format("   CFG Increment Start Angle <- [%.0f] \n", start_angle);
-						log_msg += log_bff;
-
-						log_bff.Format("   CFG Increment Angle <- [%.0f] \n", cfg_inc);
-						log_msg += log_bff;
-
-						log_bff.Format("   CFG Increment Range <- [%.0f] \n", max_angle);
-						log_msg += log_bff;
-
-						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
-						log_msg += log_bff;
-					}
-				}	
-				else
-				{
-					aEXT_CH__CFG_LLx_X_ALIGN_ANGLE[ll_i][slot_index]->Get__DATA(al_angle);
-
-					// ...
-					{
-						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
-						log_msg += log_bff;
-					}
-				}
-			}
-			else
-			{
-				if(dEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_APPLY[ll_i]->Check__DATA(STR__ENABLE) > 0)
-				{
-					aEXT_CH__CUR_LLx_POST_POSITION_INCREMENT_ANGLE[ll_i]->Get__DATA(var_data);
-					double cur_angle = atof(var_data);
-
-					aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT[ll_i]->Get__DATA(var_data);
-					double cfg_inc = atof(var_data);
-
-					aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_RANGE[ll_i]->Get__DATA(var_data);
-					double max_angle = atof(var_data);
-
-					if(cur_angle > max_angle)		cur_angle = 0;
-
-					// ...
-					aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_START_ANGLE[ll_i]->Get__DATA(var_data);
-					double start_angle = atof(var_data);
-
-					al_angle.Format("%.0f", (start_angle+cur_angle));
-					
-					// ...
-					{
-						double next_angle = cur_angle + cfg_inc;
-						if(next_angle > max_angle)		next_angle = 0;
-
-						var_data.Format("%.0f", next_angle);
-						aEXT_CH__CUR_LLx_POST_POSITION_INCREMENT_ANGLE[ll_i]->Set__DATA(var_data);
-					}
-
-					// ...
-					{
-						log_bff.Format("   CFG Increment Apply <- [%s] \n", STR__ENABLE);
-						log_msg += log_bff;
-
-						log_bff.Format("   Current Increment Angle <- [%.0f] \n", cur_angle);
-						log_msg += log_bff;
-
-						log_bff.Format("   CFG Increment Start Angle <- [%.0f] \n", start_angle);
-						log_msg += log_bff;
-
-						log_bff.Format("   CFG Increment Angle <- [%.0f] \n", cfg_inc);
-						log_msg += log_bff;
-
-						log_bff.Format("   CFG Increment Range <- [%.0f] \n", max_angle);
-						log_msg += log_bff;
-
-						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
-						log_msg += log_bff;
-					}
-				}	
-				else
-				{
-					aEXT_CH__CFG_LLx_ALIGN_ANGLE[ll_i]->Get__DATA(al_angle);
-				
-					// ...
-					{
-						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
-						log_msg += log_bff;
-					}
-				}
-			}
-		}
-
-		if(dEXT_CH__CFG_ALIGN_DEVICE->Check__DATA(STR__ATM_RB) > 0)
-		{
-			sEXT_CH__CUR_AL1_TARGET_LLx_NAME->Set__DATA(llx_name);
-			sEXT_CH__CUR_AL1_TARGET_LLx_SLOT->Set__DATA(llx_slot);
-
-			aEXT_CH__ALIGNER_ANGLE_PARA->Set__DATA(al_angle);
-			sEXT_CH__CUR_AL1_CCD_POS->Set__DATA(al_angle);
-		}
-		else
-		{
-			active__align_pick = false;
-		}
-
-		Fnc__APP_LOG(log_msg);
-	}
-
-	if(mode.CompareNoCase(sMODE__PICK) == 0)
-	{
-		int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
-
-		if((lp_index <  iLPx_SIZE)	
-		&& (lp_index >= 0))
-		{
-			sEXT_CH__LPx_MAP_SEQ_LOCK[lp_index]->Set__DATA("YES");
-		}
-	}
-
-	IF__CTRL_MODE(sMODE__INIT)
-	{
-		CString pre_sts__arm_a;
-		CString pre_sts__arm_b;
-		CString pre_sts__al;
+		dCH__MON_ACTIVE_ROBOT_ACTION_BUSY->Set__DATA(STR__ON);
 
 		// ...
-		{
-			dCH__OTR_OUT_MON__ARM_A_MATERIAL_STATUS->Get__DATA(pre_sts__arm_a);
-			dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS->Get__DATA(pre_sts__arm_b);
+		int count__lp_interlock = 0;
 
-			dEXT_CH__AL1_SLOT01_STATUS->Get__DATA(pre_sts__al);
+		while(1)
+		{
+			if(p_variable->Check__CTRL_ABORT() > 0)
+			{
+				flag = -1001;
+				break;
+			}
+
+			// ...
+			bool active__lp_interlock = false;
+
+			for(int i=0; i<iLPx_SIZE; i++)
+			{
+				if(dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Check__DATA(STR__ON) < 0)		continue;
+				if(dCH__MON_ACTIVE_IWAIT_BY_LPx[i]->Check__DATA(STR__ON) > 0)			continue;
+
+				active__lp_interlock = true;
+				break;
+			}
+
+			if(!active__lp_interlock)
+			{
+				break;
+			}
+
+			count__lp_interlock++;
+			if(count__lp_interlock == 1)
+			{
+				CString log_msg;
+				CString log_bff;
+
+				log_msg = "LPx.Wait - Start \n";
+
+				for(int i=0; i<iLPx_SIZE; i++)
+				{
+					if(dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Check__DATA(STR__ON) < 0)		continue;
+
+					log_bff.Format(" LP%1d.Info \n", i+1);
+					log_msg += log_bff;
+
+					log_bff.Format("  * %s <- %s \n",
+									dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Get__CHANNEL_NAME(),
+									dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Get__STRING());
+					log_msg += log_bff;
+
+					log_bff.Format("  * %s <- %s \n",
+									dCH__MON_ACTIVE_IWAIT_BY_LPx[i]->Get__CHANNEL_NAME(),
+									dCH__MON_ACTIVE_IWAIT_BY_LPx[i]->Get__STRING());
+					log_msg += log_bff;
+
+					Fnc__APP_LOG(log_msg);
+				}
+			}
+
+			Sleep(90);
 		}
 
-		flag = Call__INIT(p_variable,p_alarm);
-
-		if(flag > 0)
+		if(count__lp_interlock > 1)
 		{
-			CString cur_sts__arm_a;
-			CString cur_sts__arm_b;
-			CString cur_sts__al;
+			CString log_msg;
 
-			// Interlock Check ...
+			log_msg = "LPx.Wait - End \n";
+			Fnc__APP_LOG(log_msg);
+		}
+	}
+
+	// ACTION.CHECK ...
+	if(flag > 0)
+	{
+		if((mode.CompareNoCase(sMODE__PICK)    == 0)
+		|| (mode.CompareNoCase(sMODE__PLACE)   == 0)
+		|| (mode.CompareNoCase(sMODE__RETRACT) == 0)
+		|| (mode.CompareNoCase(sMODE__EXTEND)  == 0)
+		|| (mode.CompareNoCase(sMODE__GOUP)    == 0)
+		|| (mode.CompareNoCase(sMODE__GODOWN)  == 0))	
+		{	
+			if(flag > 0)
 			{
-				// Arm-A
-				dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__DATA(cur_sts__arm_a);
-
-				// Arm-B
-				dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__DATA(cur_sts__arm_b);
-
-				// AL-1
-				dEXT_CH__AL1_SLOT01_STATUS->Get__DATA(cur_sts__al);
-
-				// ...
-				int check_flag = 1;
-
-				if((cur_sts__arm_a.CompareNoCase("NONE") == 0)
-				&& (pre_sts__arm_a.CompareNoCase("NONE") != 0))
+				while(1)
 				{
-					check_flag = -1;
-				}	
-				if((cur_sts__arm_b.CompareNoCase("NONE") == 0)
-				&& (pre_sts__arm_b.CompareNoCase("NONE") != 0))
+					if((para__arm_type.CompareNoCase(_ARM_A)  == 0)
+					|| (para__arm_type.CompareNoCase(_ARM_AB) == 0))
+					{
+						if(dCH__CFG_ARM_A_USE->Check__DATA(STR__YES) > 0)			break;
+
+						// ...
+						{
+							int alm_id = ALID__ARM_A__NOT_USE;
+							CString alm_msg;
+							CString r_act;
+
+							alm_msg.Format(" * %s <- %s \n", 
+											dCH__CFG_ARM_A_USE->Get__CHANNEL_NAME(),
+											dCH__CFG_ARM_A_USE->Get__STRING());
+
+							p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+							if(r_act.CompareNoCase(ACT__RETRY) == 0)		continue;
+						}
+
+						flag = -10001;
+						break;
+					}
+
+					if((para__arm_type.CompareNoCase(_ARM_B)  == 0)
+					|| (para__arm_type.CompareNoCase(_ARM_AB) == 0))
+					{
+						if(dCH__CFG_ARM_B_USE->Check__DATA(STR__YES) > 0)			break;
+
+						// ...
+						{
+							int alm_id = ALID__ARM_B__NOT_USE;
+							CString alm_msg;
+							CString r_act;
+
+							alm_msg.Format(" * %s <- %s \n", 
+											dCH__CFG_ARM_A_USE->Get__CHANNEL_NAME(),
+											dCH__CFG_ARM_A_USE->Get__STRING());
+
+							p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+							if(r_act.CompareNoCase(ACT__RETRY) == 0)		continue;
+						}
+
+						flag = -10002;
+						break;
+					}
+
+					flag = -10003;
+					break;
+				}
+			}
+
+			if(flag > 0)
+			{
+				if(para__arm_type.CompareNoCase(_ARM_AB) == 0)
 				{
-					check_flag = -1;
-				}	
-
-				if((cur_sts__al.CompareNoCase("NONE") == 0)
-				&& (pre_sts__al.CompareNoCase("NONE") != 0))
-				{
-					check_flag = -1;
-				}	
-
-				if(check_flag < 0)
-				{
-					CString msg_title;
-					CString msg_body;
-					CString msg_bff;
-					CStringArray l_act;
-					CString r_act;
-
-					//
-					msg_title = "Wafer Check Error !";
-
-					//
-					msg_body  = "GUI상의 Wafer 정보와 Initialize를 통한 Wafer 정보가 일치하지 않습니다. \n";
-					msg_bff.Format("Arm A : [%s] -> [%s] \n", pre_sts__arm_a,cur_sts__arm_a);
-					msg_body += msg_bff;
-					msg_bff.Format("Arm B : [%s] -> [%s] \n", pre_sts__arm_b,cur_sts__arm_b);
-					msg_body += msg_bff;
-					msg_bff.Format("AL : [%s] -> [%s] \n", pre_sts__al,cur_sts__al);
-					msg_body += msg_bff;
-
-					msg_body += "실제 ATM Robot에 있는 Wafer 정보가 다음과 같은지 확인 바랍니다.\n";
-
-					// Arm-A
-					if(cur_sts__arm_a.CompareNoCase("NONE") != 0)
+					while(1)
 					{
-						msg_body += "ATM Robot의 A Arm에 Wafer가 있습니까? \n";
-					}
-					else
-					{
-						msg_body += "ATM Robot의 A Arm에 Wafer가 없습니까? \n";
-					}
+						int check__err_count = 0;
+						CString err_msg;
 
-					// Arm-B
-					if(cur_sts__arm_b.CompareNoCase("NONE") != 0)
-					{
-						msg_body += "ATM Robot의 B Arm에 Wafer가 있습니까? \n";
-					}
-					else
-					{
-						msg_body += "ATM Robot의 B Arm에 Wafer가 없습니까? \n";
-					}
+						if(check__err_count == 0)
+						{
+							int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+							if(lp_index >= 0)
+							{
+								if(dCH__CFG_DUAL_ARM_USE_LPx->Check__DATA(STR__YES) > 0)		break;
+	
+								err_msg.Format(" * %s <- %s \n",
+												dCH__CFG_DUAL_ARM_USE_LPx->Get__CHANNEL_NAME(),
+												dCH__CFG_DUAL_ARM_USE_LPx->Get__STRING());
 
-					// AL-1
-					if(cur_sts__al.CompareNoCase("NONE") != 0)
-					{
-						msg_body += "Aligner 위에 Wafer가 있습니까? \n";
-					}
-					else
-					{
-						msg_body += "Aligner 위에 Wafer가 없습니까? \n";
-					}
+								check__err_count++;
+							}
+						}
 
-					msg_body += "위의 질문이 맞다면, \"YES\"를 아니면 \"NO\"를 선택하십시요.\n";
+						if(check__err_count == 0)
+						{
+							int st_index = Macro__CHECK_STx_INDEX(para__stn_name);
+							if(st_index >= 0)
+							{
+								if(dCH__CFG_DUAL_ARM_USE_STx->Check__DATA(STR__YES) > 0)		break;
 
-					//
-					l_act.RemoveAll();
-					l_act.Add(STR__YES);
-					l_act.Add(STR__NO);
+								err_msg.Format(" * %s <- %s \n",
+												dCH__CFG_DUAL_ARM_USE_STx->Get__CHANNEL_NAME(),
+												dCH__CFG_DUAL_ARM_USE_STx->Get__STRING());
 
-					//
-					p_alarm->Popup__MESSAGE_BOX(msg_title,msg_body,l_act,r_act);
+								check__err_count++;
+							}
+						}
 
-					if(r_act.CompareNoCase(STR__YES) != 0)
-					{
-						flag = -1;
+						if(check__err_count == 0)
+						{
+							int ll_index = Macro__CHECK_LLx_INDEX(para__stn_name);
+							if(ll_index >= 0)
+							{
+								if(dCH__CFG_DUAL_ARM_USE_LLx->Check__DATA(STR__YES) > 0)		break;
 
-						dEXT_CH__AL1_SLOT01_STATUS->Set__DATA(pre_sts__al);
+								err_msg.Format(" * %s <- %s \n",
+												dCH__CFG_DUAL_ARM_USE_LLx->Get__CHANNEL_NAME(),
+												dCH__CFG_DUAL_ARM_USE_LLx->Get__STRING());
+
+								check__err_count++;
+							}
+						}
+
+						if(check__err_count > 0)
+						{
+							int alm_id = ALID__ARM_AB__NOT_USE;
+							CString alm_msg;
+							CString alm_bff;
+							CString r_act;
+
+							alm_msg = "Command Parameter \n";
+
+							alm_bff.Format(" arm_type <- %s \n", para__arm_type);
+							alm_msg += alm_bff;
+							alm_bff.Format(" stn_name <- %s \n", para__stn_name);
+							alm_msg += alm_bff;
+							alm_bff.Format(" stn_slot <- %s \n", para__stn_slot);
+							alm_msg += alm_bff;
+
+							alm_msg += "\n";
+							alm_msg += err_msg;
+
+							p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+							if(r_act.CompareNoCase(ACT__RETRY) == 0)		continue;
+						}
+
+						flag = -10011;
+						break;
 					}
 				}
 			}
 
 			if(flag > 0)
 			{
-				// Arm-A
-				dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__DATA(var_data);
-				dCH__OTR_OUT_MON__ARM_A_MATERIAL_STATUS->Set__DATA(var_data);
-
-				// Arm-B
-				dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__DATA(var_data);
-				dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS->Set__DATA(var_data);
-
-				// AL-1
-				dEXT_CH__AL1_SLOT01_STATUS->Set__DATA(cur_sts__al);
-			}
-		}	
-	}	
-	ELSE_IF__CTRL_MODE(sMODE__PICK)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
-		{
-			int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
-
-			if(lp_index >= 0)
-			{
-				if((dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Check__DATA(STR__LOAD) > 0)
-				&& (dEXT_CH__LPx_DOOR_STATUS[lp_index]->Check__DATA(STR__OPEN)     < 0))
-				{	
-					flag = pLPx__OBJ_CTRL[lp_index]->Call__OBJECT(CMMD__LP_OPENDOOR);
-
-					// ...
-					{
-						CString log_msg;
-						CString log_bff;
-
-						CString obj_mode;
-						CString lp_pos_sts;
-						CString lp_door_sts;
-
-						pLPx__OBJ_CTRL[lp_index]->Get__OBJ_MODE(obj_mode);
-						dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Get__DATA(lp_pos_sts);
-						dEXT_CH__LPx_DOOR_STATUS[lp_index]->Get__DATA(lp_door_sts);
-
-						//
-						log_msg.Format("Sub LP%1d - Called ... \n", lp_index+1);
-
-						log_bff.Format("   obj_mode    <- [%s] \n", obj_mode);
-						log_msg += log_bff;
-
-						log_bff.Format("   lp_pos_sts  <- [%s] \n", lp_pos_sts);
-						log_msg += log_bff;
-
-						log_bff.Format("   lp_door_sts <- [%s] \n", lp_door_sts);
-						log_msg += log_bff;
-
-						Fnc__APP_LOG(log_msg);
-					}
-				}
-			}
-		}
-
-		if(flag > 0)
-		{
-			flag = Call__PICK(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot, active__align_pick);
-		}
-	}
-	ELSE_IF__CTRL_MODE(sMODE__PLACE)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
-		{
-			int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
-
-			if(lp_index >= 0)
-			{
-				if((dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Check__DATA(STR__LOAD) > 0)
-				&& (dEXT_CH__LPx_DOOR_STATUS[lp_index]->Check__DATA(STR__OPEN)     < 0))
-				{	
-					flag = pLPx__OBJ_CTRL[lp_index]->Call__OBJECT(CMMD__LP_OPENDOOR);
-
-					// ...
-					{
-						CString log_msg;
-						CString log_bff;
-
-						CString obj_mode;
-						CString lp_pos_sts;
-						CString lp_door_sts;
-
-						pLPx__OBJ_CTRL[lp_index]->Get__OBJ_MODE(obj_mode);
-						dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Get__DATA(lp_pos_sts);
-						dEXT_CH__LPx_DOOR_STATUS[lp_index]->Get__DATA(lp_door_sts);
-
-						//
-						log_msg.Format("Sub LP%1d - Called ... \n", lp_index+1);
-
-						log_bff.Format("   obj_mode    <- [%s] \n", obj_mode);
-						log_msg += log_bff;
-
-						log_bff.Format("   lp_pos_sts  <- [%s] \n", lp_pos_sts);
-						log_msg += log_bff;
-
-						log_bff.Format("   lp_door_sts <- [%s] \n", lp_door_sts);
-						log_msg += log_bff;
-
-						Fnc__APP_LOG(log_msg);
-					}
-				}
-			}
-		}
-
-		if(flag > 0)
-		{
-			flag = Call__PLACE(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
-		}
-	}
-	ELSE_IF__CTRL_MODE(sMODE__ROTATE)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
-		{
-			flag = Call__ROTATE(p_variable,
-								p_alarm,
-								para__arm_type,
-								para__stn_name,
-								para__stn_slot);
-		}
-	}
-	ELSE_IF__CTRL_MODE(sMODE__MAP)
-	{
-		flag = Call__MAP(p_variable,p_alarm);
-
-		if(flag > 0)
-		{
-			int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
-
-			if(lp_index >= 0)
-			{
-				if(dEXT_CH__CFG_LPx_CLOSE_MOVE_AFTER_MAPPING[lp_index]->Check__DATA(STR__ENABLE) > 0)
+				if(dCH__CFG_ACTION_CHECK->Check__DATA(STR__YES) > 0)
 				{
-					sEXT_CH__LPx_MAP_SEQ_LOCK[lp_index]->Set__DATA("");
-					pLPx__OBJ_CTRL[lp_index]->Call__OBJECT(CMMD__LP_CLOSEDOOR);
+					CString box_title;
+					CString box_msg;
+					CString r_act;
+
+					box_title = "Action Check !";
+					box_msg.Format(" \"%s\" ?", mode);
+
+					CStringArray l_act;
+					l_act.Add(STR__YES);
+					l_act.Add(STR__NO);
+
+					p_alarm->Popup__MESSAGE_BOX(box_title,box_msg, l_act,r_act);
+
+					if(r_act.CompareNoCase(STR__YES) == 0)			flag =  1;
+					else											flag = -1;
 				}
 			}
+		}
+	}
+
+	if(flag > 0)
+	{
+		bool active__align_pick = false;
+
+		if(para__stn_name.CompareNoCase(STR__AL1) == 0)
+		{
+			if(mode.CompareNoCase(sMODE__PICK) == 0)
+			{
+				active__align_pick = true;
+			}
+		}
+
+		if(active__align_pick)
+		{
+			CString log_msg;
+			CString log_bff;
+
+			CString llx_name;
+			CString llx_slot;
+			CString al_angle;
+
+			if(sCH__OBJ_STATUS->Check__DATA(STR__MAINTMODE) > 0)
+			{
+				llx_name = dEXT_CH__MAINT_TARGT_LLx_NAME->Get__STRING();
+				llx_slot = dEXT_CH__MAINT_TARGT_LLx_SLOT->Get__STRING();
+			}
+			else
+			{
+				llx_name = sEXT_CH__MODULE_LINK_TARGT_LLx_NAME->Get__STRING();
+				if(llx_name == "")		llx_name = _MODULE__LBA;
+
+				llx_slot = sEXT_CH__MODULE_LINK_TARGT_LLx_SLOT->Get__STRING();
+				if(llx_slot == "")		llx_slot = "1";
+			}
+
+			int ll_i = Macro__CHECK_LLx_INDEX(llx_name);
+			if(ll_i >= 0)
+			{
+				// ...
+				{
+					log_msg = "\n";
+
+					log_bff.Format("%s(%s) Align Info ... \n", llx_name,llx_slot);
+					log_msg += log_bff;
+				}
+
+				if(bActive__LLx_MULTI_DOOR_VALVE)
+				{
+					int slot_index = atoi(llx_slot) - 1;
+					if(slot_index <  0)						return -11;
+					if(slot_index >= CFG_LLx__SLOT_SIZE)	return -12;
+
+					if(dEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT_APPLY[ll_i][slot_index]->Check__DATA(STR__ENABLE) > 0)
+					{
+						aEXT_CH__CUR_LLx_X_POST_POSITION_INCREMENT_ANGLE[ll_i][slot_index]->Get__DATA(var_data);
+						double cur_angle = atof(var_data);
+
+						aEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT[ll_i][slot_index]->Get__DATA(var_data);
+						double cfg_inc = atof(var_data);
+
+						aEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT_RANGE[ll_i][slot_index]->Get__DATA(var_data);
+						double max_angle = atof(var_data);
+
+						if(cur_angle > max_angle)		cur_angle = 0;
+
+						// ...
+						aEXT_CH__CFG_LLx_X_POST_POSITION_INCREMENT_START_ANGLE[ll_i][slot_index]->Get__DATA(var_data);
+						double start_angle = atof(var_data);
+
+						al_angle.Format("%.0f", (start_angle+cur_angle));
+
+						// ...
+						{
+							double next_angle = cur_angle + cfg_inc;
+							if(next_angle > max_angle)		next_angle = 0;
+
+							var_data.Format("%.0f", next_angle);
+							aEXT_CH__CUR_LLx_X_POST_POSITION_INCREMENT_ANGLE[ll_i][slot_index]->Set__DATA(var_data);
+						}
+
+						// ...
+						{
+							log_bff.Format("   CFG Increment Apply <- [%s] \n", STR__ENABLE);
+							log_msg += log_bff;
+
+							log_bff.Format("   Current Increment Angle <- [%.0f] \n", cur_angle);
+							log_msg += log_bff;
+
+							log_bff.Format("   CFG Increment Start Angle <- [%.0f] \n", start_angle);
+							log_msg += log_bff;
+
+							log_bff.Format("   CFG Increment Angle <- [%.0f] \n", cfg_inc);
+							log_msg += log_bff;
+
+							log_bff.Format("   CFG Increment Range <- [%.0f] \n", max_angle);
+							log_msg += log_bff;
+
+							log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+							log_msg += log_bff;
+						}
+					}	
+					else
+					{
+						aEXT_CH__CFG_LLx_X_ALIGN_ANGLE[ll_i][slot_index]->Get__DATA(al_angle);
+
+						// ...
+						{
+							log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+							log_msg += log_bff;
+						}
+					}
+				}
+				else
+				{
+					if(dEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_APPLY[ll_i]->Check__DATA(STR__ENABLE) > 0)
+					{
+						aEXT_CH__CUR_LLx_POST_POSITION_INCREMENT_ANGLE[ll_i]->Get__DATA(var_data);
+						double cur_angle = atof(var_data);
+
+						aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT[ll_i]->Get__DATA(var_data);
+						double cfg_inc = atof(var_data);
+
+						aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_RANGE[ll_i]->Get__DATA(var_data);
+						double max_angle = atof(var_data);
+
+						if(cur_angle > max_angle)		cur_angle = 0;
+
+						// ...
+						aEXT_CH__CFG_LLx_POST_POSITION_INCREMENT_START_ANGLE[ll_i]->Get__DATA(var_data);
+						double start_angle = atof(var_data);
+
+						al_angle.Format("%.0f", (start_angle+cur_angle));
+						
+						// ...
+						{
+							double next_angle = cur_angle + cfg_inc;
+							if(next_angle > max_angle)		next_angle = 0;
+
+							var_data.Format("%.0f", next_angle);
+							aEXT_CH__CUR_LLx_POST_POSITION_INCREMENT_ANGLE[ll_i]->Set__DATA(var_data);
+						}
+
+						// ...
+						{
+							log_bff.Format("   CFG Increment Apply <- [%s] \n", STR__ENABLE);
+							log_msg += log_bff;
+
+							log_bff.Format("   Current Increment Angle <- [%.0f] \n", cur_angle);
+							log_msg += log_bff;
+
+							log_bff.Format("   CFG Increment Start Angle <- [%.0f] \n", start_angle);
+							log_msg += log_bff;
+
+							log_bff.Format("   CFG Increment Angle <- [%.0f] \n", cfg_inc);
+							log_msg += log_bff;
+
+							log_bff.Format("   CFG Increment Range <- [%.0f] \n", max_angle);
+							log_msg += log_bff;
+
+							log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+							log_msg += log_bff;
+						}
+					}	
+					else
+					{
+						aEXT_CH__CFG_LLx_ALIGN_ANGLE[ll_i]->Get__DATA(al_angle);
+					
+						// ...
+						{
+							log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+							log_msg += log_bff;
+						}
+					}
+				}
+			}
+
+			int pm_i = Macro__CHECK_PMx_INDEX(llx_name);
+			if(pm_i >= 0)
+			{
+				// ...
+				{
+					log_msg = "\n";
+
+					log_bff.Format("%s(%s) Align Info ... \n", llx_name,llx_slot);
+					log_msg += log_bff;
+				}
+
+				if(dEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_APPLY[pm_i]->Check__DATA(STR__ENABLE) > 0)
+				{
+					aEXT_CH__CUR_PMx_POST_POSITION_INCREMENT_ANGLE[pm_i]->Get__DATA(var_data);
+					double cur_angle = atof(var_data);
+
+					aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT[pm_i]->Get__DATA(var_data);
+					double cfg_inc = atof(var_data);
+
+					aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_RANGE[pm_i]->Get__DATA(var_data);
+					double max_angle = atof(var_data);
+
+					if(cur_angle > max_angle)		cur_angle = 0;
+
+					// ...
+					aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_START_ANGLE[pm_i]->Get__DATA(var_data);
+					double start_angle = atof(var_data);
+
+					al_angle.Format("%.0f", (start_angle+cur_angle));
+
+					// ...
+					{
+						double next_angle = cur_angle + cfg_inc;
+						if(next_angle > max_angle)		next_angle = 0;
+
+						var_data.Format("%.0f", next_angle);
+						aEXT_CH__CUR_PMx_POST_POSITION_INCREMENT_ANGLE[pm_i]->Set__DATA(var_data);
+					}
+
+					// ...
+					{
+						log_bff.Format("   CFG Increment Apply <- [%s] \n", STR__ENABLE);
+						log_msg += log_bff;
+
+						log_bff.Format("   Current Increment Angle <- [%.0f] \n", cur_angle);
+						log_msg += log_bff;
+
+						log_bff.Format("   CFG Increment Start Angle <- [%.0f] \n", start_angle);
+						log_msg += log_bff;
+
+						log_bff.Format("   CFG Increment Angle <- [%.0f] \n", cfg_inc);
+						log_msg += log_bff;
+
+						log_bff.Format("   CFG Increment Range <- [%.0f] \n", max_angle);
+						log_msg += log_bff;
+
+						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+						log_msg += log_bff;
+					}
+				}	
+				else
+				{
+					aEXT_CH__CFG_PMx_ALIGN_ANGLE[pm_i]->Get__DATA(al_angle);
+
+					// ...
+					{
+						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+						log_msg += log_bff;
+					}
+				}
+			}
+
+			if(dEXT_CH__CFG_ALIGN_DEVICE->Check__DATA(STR__ATM_RB) > 0)
+			{
+				sEXT_CH__CUR_AL1_TARGET_LLx_NAME->Set__DATA(llx_name);
+				sEXT_CH__CUR_AL1_TARGET_LLx_SLOT->Set__DATA(llx_slot);
+
+				aEXT_CH__ALIGNER_ANGLE_PARA->Set__DATA(al_angle);
+				sEXT_CH__CUR_AL1_CCD_POS->Set__DATA(al_angle);
+			}
+			else
+			{
+				active__align_pick = false;
+			}
+
+			Fnc__APP_LOG(log_msg);
+		}
+
+		if(iActive__SIM_MODE > 0)
+		{
+			while(dCH__SIM_PAUSE_ACTIVE->Check__DATA(STR__ON) > 0)
+			{
+				Sleep(90);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)			break;
+			}
+		}
+
+		if(mode.CompareNoCase(sMODE__PICK) == 0)
+		{
+			int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+
+			if((lp_index <  iLPx_SIZE)	
+			&& (lp_index >= 0))
+			{
+				sEXT_CH__LPx_MAP_SEQ_LOCK[lp_index]->Set__DATA(STR__YES);
+			}
+		}
+
+		// ACTIVE.ROBOT.ACTION ...
+		{
+			// LPx.CHECK ...
+			{
+				int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+				if(lp_index >= 0)		dCH__MON_ACTIVE_ROBOT_ACTION_TO_LPx[lp_index]->Set__DATA(STR__ON);
+			}						
+			// LLx.CHECK ...
+			{
+				int ll_index = Macro__CHECK_LLx_NAME(para__stn_name);
+				if(ll_index >= 0)		dCH__MON_ACTIVE_ROBOT_ACTION_TO_LLx[ll_index]->Set__DATA(STR__ON);
+			}
+			
+			// ALx.CHECK ...
+			if(para__stn_name.CompareNoCase(STR__AL1) == 0)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_AL1->Set__DATA(STR__ON);
+			}
+			else if(para__stn_name.CompareNoCase(STR__ST1) == 0)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST1->Set__DATA(STR__ON);
+			}
+			else if(para__stn_name.CompareNoCase(STR__ST2) == 0)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST2->Set__DATA(STR__ON);
+			}
+		}
+	
+		IF__CTRL_MODE(sMODE__INIT)
+		{
+			CString pre_sts__arm_a;
+			CString pre_sts__arm_b;
+			CString pre_sts__al;
+
+			// ...
+			{
+				dCH__OTR_OUT_MON__ARM_A_MATERIAL_STATUS->Get__DATA(pre_sts__arm_a);
+				dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS->Get__DATA(pre_sts__arm_b);
+
+				dEXT_CH__AL1_SLOT01_STATUS->Get__DATA(pre_sts__al);
+			}
+
+			flag = Call__INIT(p_variable,p_alarm);
+
+			if(flag > 0)
+			{
+				CString cur_sts__arm_a;
+				CString cur_sts__arm_b;
+				CString cur_sts__al;
+
+				// Interlock Check ...
+				{
+					// Arm-A
+					dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__DATA(cur_sts__arm_a);
+
+					// Arm-B
+					dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__DATA(cur_sts__arm_b);
+
+					// AL-1
+					dEXT_CH__AL1_SLOT01_STATUS->Get__DATA(cur_sts__al);
+
+					// ...
+					int check_flag = 1;
+
+					if((cur_sts__arm_a.CompareNoCase("NONE") == 0)
+					&& (pre_sts__arm_a.CompareNoCase("NONE") != 0))
+					{
+						check_flag = -1;
+					}	
+					if((cur_sts__arm_b.CompareNoCase("NONE") == 0)
+					&& (pre_sts__arm_b.CompareNoCase("NONE") != 0))
+					{
+						check_flag = -1;
+					}	
+
+					if((cur_sts__al.CompareNoCase("NONE") == 0)
+					&& (pre_sts__al.CompareNoCase("NONE") != 0))
+					{
+						check_flag = -1;
+					}	
+
+					if(check_flag < 0)
+					{
+						CString msg_title;
+						CString msg_body;
+						CString msg_bff;
+						CStringArray l_act;
+						CString r_act;
+
+						//
+						msg_title = "Wafer Check Error !";
+
+						//
+						msg_body  = "GUI상의 Wafer 정보와 Initialize를 통한 Wafer 정보가 일치하지 않습니다. \n";
+						msg_bff.Format("Arm A : [%s] -> [%s] \n", pre_sts__arm_a,cur_sts__arm_a);
+						msg_body += msg_bff;
+						msg_bff.Format("Arm B : [%s] -> [%s] \n", pre_sts__arm_b,cur_sts__arm_b);
+						msg_body += msg_bff;
+						msg_bff.Format("AL : [%s] -> [%s] \n", pre_sts__al,cur_sts__al);
+						msg_body += msg_bff;
+
+						msg_body += "실제 ATM Robot에 있는 Wafer 정보가 다음과 같은지 확인 바랍니다.\n";
+
+						// Arm-A
+						if(cur_sts__arm_a.CompareNoCase("NONE") != 0)
+						{
+							msg_body += "ATM Robot의 A Arm에 Wafer가 있습니까? \n";
+						}
+						else
+						{
+							msg_body += "ATM Robot의 A Arm에 Wafer가 없습니까? \n";
+						}
+
+						// Arm-B
+						if(cur_sts__arm_b.CompareNoCase("NONE") != 0)
+						{
+							msg_body += "ATM Robot의 B Arm에 Wafer가 있습니까? \n";
+						}
+						else
+						{
+							msg_body += "ATM Robot의 B Arm에 Wafer가 없습니까? \n";
+						}
+
+						// AL-1
+						if(cur_sts__al.CompareNoCase("NONE") != 0)
+						{
+							msg_body += "Aligner 위에 Wafer가 있습니까? \n";
+						}
+						else
+						{
+							msg_body += "Aligner 위에 Wafer가 없습니까? \n";
+						}
+
+						msg_body += "위의 질문이 맞다면, \"YES\"를 아니면 \"NO\"를 선택하십시요.\n";
+
+						//
+						l_act.RemoveAll();
+						l_act.Add(STR__YES);
+						l_act.Add(STR__NO);
+
+						//
+						p_alarm->Popup__MESSAGE_BOX(msg_title,msg_body,l_act,r_act);
+
+						if(r_act.CompareNoCase(STR__YES) != 0)
+						{
+							flag = -1;
+
+							dEXT_CH__AL1_SLOT01_STATUS->Set__DATA(pre_sts__al);
+						}
+					}
+				}
+
+				if(flag > 0)
+				{
+					// Arm-A
+					dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__DATA(var_data);
+					dCH__OTR_OUT_MON__ARM_A_MATERIAL_STATUS->Set__DATA(var_data);
+
+					// Arm-B
+					dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__DATA(var_data);
+					dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS->Set__DATA(var_data);
+
+					// AL-1
+					dEXT_CH__AL1_SLOT01_STATUS->Set__DATA(cur_sts__al);
+				}
+			}	
 		}	
-	}
-	ELSE_IF__CTRL_MODE(sMODE__HOME)
-	{
-		flag = Call__HOME(p_variable,p_alarm, -1);
-	}
-	ELSE_IF__CTRL_MODE(sMODE__VACOFF_HOME)
-	{
-		flag = Call__HOME(p_variable,p_alarm, 1);
-	}
-	ELSE_IF__CTRL_MODE(sMODE__VACON)
-	{
-		flag = Call__VACON(p_variable,p_alarm,para__arm_type);
-	}
-	ELSE_IF__CTRL_MODE(sMODE__VACOFF)
-	{
-		flag = Call__VACOFF(p_variable,p_alarm,para__arm_type);
-	}
-	ELSE_IF__CTRL_MODE(sMODE__RETRACT)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
+		ELSE_IF__CTRL_MODE(sMODE__PICK)
 		{
-			flag = Call__RETRACT(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+
+				if(lp_index >= 0)
+				{
+					if((dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Check__DATA(STR__LOAD) > 0)
+					&& (dEXT_CH__LPx_DOOR_STATUS[lp_index]->Check__DATA(STR__OPEN)     < 0))
+					{	
+						flag = pLPx__OBJ_CTRL[lp_index]->Call__OBJECT(CMMD__LP_OPENDOOR);
+
+						// ...
+						{
+							CString log_msg;
+							CString log_bff;
+
+							CString obj_mode;
+							CString lp_pos_sts;
+							CString lp_door_sts;
+
+							pLPx__OBJ_CTRL[lp_index]->Get__OBJ_MODE(obj_mode);
+							dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Get__DATA(lp_pos_sts);
+							dEXT_CH__LPx_DOOR_STATUS[lp_index]->Get__DATA(lp_door_sts);
+
+							//
+							log_msg.Format("Sub LP%1d - Called ... \n", lp_index+1);
+
+							log_bff.Format("   obj_mode    <- [%s] \n", obj_mode);
+							log_msg += log_bff;
+
+							log_bff.Format("   lp_pos_sts  <- [%s] \n", lp_pos_sts);
+							log_msg += log_bff;
+
+							log_bff.Format("   lp_door_sts <- [%s] \n", lp_door_sts);
+							log_msg += log_bff;
+
+							Fnc__APP_LOG(log_msg);
+						}
+					}
+				}
+			}
+
+			if(flag > 0)
+			{
+				flag = Call__PICK(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot, active__align_pick);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__PLACE)
+		{
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+
+				if(lp_index >= 0)
+				{
+					if((dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Check__DATA(STR__LOAD) > 0)
+					&& (dEXT_CH__LPx_DOOR_STATUS[lp_index]->Check__DATA(STR__OPEN)     < 0))
+					{	
+						flag = pLPx__OBJ_CTRL[lp_index]->Call__OBJECT(CMMD__LP_OPENDOOR);
+
+						// ...
+						{
+							CString log_msg;
+							CString log_bff;
+
+							CString obj_mode;
+							CString lp_pos_sts;
+							CString lp_door_sts;
+
+							pLPx__OBJ_CTRL[lp_index]->Get__OBJ_MODE(obj_mode);
+							dEXT_CH__LPx_FOUP_POS_STATUS[lp_index]->Get__DATA(lp_pos_sts);
+							dEXT_CH__LPx_DOOR_STATUS[lp_index]->Get__DATA(lp_door_sts);
+
+							//
+							log_msg.Format("Sub LP%1d - Called ... \n", lp_index+1);
+
+							log_bff.Format("   obj_mode    <- [%s] \n", obj_mode);
+							log_msg += log_bff;
+
+							log_bff.Format("   lp_pos_sts  <- [%s] \n", lp_pos_sts);
+							log_msg += log_bff;
+
+							log_bff.Format("   lp_door_sts <- [%s] \n", lp_door_sts);
+							log_msg += log_bff;
+
+							Fnc__APP_LOG(log_msg);
+						}
+					}
+				}
+			}
+
+			if(flag > 0)
+			{
+				flag = Call__PLACE(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__ROTATE)
+		{
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				flag = Call__ROTATE(p_variable,
+									p_alarm,
+									para__arm_type,
+									para__stn_name,
+									para__stn_slot);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__MAP)
+		{
+			flag = Call__MAP(p_variable,p_alarm);
+
+			if(flag > 0)
+			{
+				int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+
+				if(lp_index >= 0)
+				{
+					if(dEXT_CH__CFG_LPx_CLOSE_MOVE_AFTER_MAPPING[lp_index]->Check__DATA(STR__ENABLE) > 0)
+					{
+						sEXT_CH__LPx_MAP_SEQ_LOCK[lp_index]->Set__DATA("");
+						pLPx__OBJ_CTRL[lp_index]->Call__OBJECT(CMMD__LP_CLOSEDOOR);
+					}
+				}
+			}	
+		}
+		ELSE_IF__CTRL_MODE(sMODE__HOME)
+		{
+			flag = Call__HOME(p_variable,p_alarm, -1);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__VACOFF_HOME)
+		{
+			flag = Call__HOME(p_variable,p_alarm, 1);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__VACON)
+		{
+			flag = Call__VACON(p_variable,p_alarm,para__arm_type);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__VACOFF)
+		{
+			flag = Call__VACOFF(p_variable,p_alarm,para__arm_type);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__RETRACT)
+		{
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				flag = Call__RETRACT(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__EXTEND)
+		{
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				flag = Call__EXTEND(p_variable,	p_alarm, para__arm_type,para__stn_name,para__stn_slot);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__GOUP)
+		{
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				flag = Call__GOUP(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__GODOWN)
+		{
+			flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
+
+			if(flag > 0)
+			{
+				flag = Call__GODOWN(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
+			}
+		}
+		ELSE_IF__CTRL_MODE(sMODE__ALGN)
+		{
+			flag = Call__ALGN(p_variable,p_alarm);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__LP_MAP)
+		{
+			flag = Call__LP_MAP(p_variable,p_alarm);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__TIME_TEST)
+		{
+			flag = Call__TIME_TEST(p_variable,p_alarm);
 		}
 	}
-	ELSE_IF__CTRL_MODE(sMODE__EXTEND)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
-		{
-			flag = Call__EXTEND(p_variable,	p_alarm, para__arm_type,para__stn_name,para__stn_slot);
-		}
-	}
-	ELSE_IF__CTRL_MODE(sMODE__GOUP)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
-		{
-			flag = Call__GOUP(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
-		}
-	}
-	ELSE_IF__CTRL_MODE(sMODE__GODOWN)
-	{
-		flag = Check__STN_EXIST(p_alarm, para__stn_name,para__stn_slot);
-
-		if(flag > 0)
-		{
-			flag = Call__GODOWN(p_variable,p_alarm, para__arm_type,para__stn_name,para__stn_slot);
-		}
-	}
-	ELSE_IF__CTRL_MODE(sMODE__ALGN)
-	{
-		flag = Call__ALGN(p_variable,p_alarm);
-	}
-	ELSE_IF__CTRL_MODE(sMODE__LP_MAP)
-	{
-		flag = Call__LP_MAP(p_variable,p_alarm);
-	}
-	ELSE_IF__CTRL_MODE(sMODE__TIME_TEST)
-	{
-		flag = Call__TIME_TEST(p_variable,p_alarm);
-	}
-
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
-		CString log_msg;
+		// ...
+		{
+			CString log_msg;
 
-		log_msg.Format("Aborted ... :  [%s] [Flag : %1d]",mode,flag);
-		Fnc__APP_LOG(log_msg);
+			log_msg.Format("Aborted ... :  [%s] [Flag : %1d]",mode,flag);
+			Fnc__APP_LOG(log_msg);
+		}
 	}
 	else
 	{
-		CString log_msg;
-
-		log_msg.Format("Completed ... :  [%s]",mode);
-		Fnc__APP_LOG(log_msg);
-	}
-
-	// ...
-	{
-		int i;
-
-		for(i=0;i<iLPx_SIZE;i++)
+		// ...
 		{
-			sEXT_CH__LPx_MAP_SEQ_LOCK[i]->Set__DATA("");
+			CString log_msg;
+
+			log_msg.Format("Completed ... :  [%s]",mode);
+			Fnc__APP_LOG(log_msg);
+		}
+
+		// ACTIVE.ROBOT.ACTION ...
+		if((mode.CompareNoCase(sMODE__INIT) == 0)
+		|| (mode.CompareNoCase(sMODE__HOME) == 0)
+		|| (mode.CompareNoCase(sMODE__VACOFF_HOME) == 0))
+		{
+			for(int i=0; i<iLPx_SIZE; i++)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_LPx[i]->Set__DATA(STR__OFF);
+			}
+			for(int i=0; i<iSIZE_LLx; i++)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_LLx[i]->Set__DATA(STR__OFF);
+			}
+
+			dCH__MON_ACTIVE_ROBOT_ACTION_TO_AL1->Set__DATA(STR__OFF);
+			dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST1->Set__DATA(STR__OFF);
+			dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST2->Set__DATA(STR__OFF);
+		}
+		else
+		{
+			// LPx.CHECK ...
+			int lp_index = Macro__CHECK_LPx_INDEX(para__stn_name);
+			if(lp_index >= 0)		dCH__MON_ACTIVE_ROBOT_ACTION_TO_LPx[lp_index]->Set__DATA(STR__OFF);
+
+			// LLx.CHECK ...
+			int ll_index = Macro__CHECK_LLx_NAME(para__stn_name);
+			if(ll_index >= 0)		dCH__MON_ACTIVE_ROBOT_ACTION_TO_LLx[ll_index]->Set__DATA(STR__OFF);
+
+			// ALx.CHECK ...
+			if(para__stn_name.CompareNoCase(STR__AL1) == 0)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_AL1->Set__DATA(STR__OFF);
+			}
+			else if(para__stn_name.CompareNoCase(STR__ST1) == 0)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST1->Set__DATA(STR__OFF);
+			}
+			else if(para__stn_name.CompareNoCase(STR__ST2) == 0)
+			{
+				dCH__MON_ACTIVE_ROBOT_ACTION_TO_ST2->Set__DATA(STR__OFF);
+			}
+		}
+
+		// LPx.MAP.LOCK - CLEAR ...
+		{
+			for(int i=0; i<iLPx_SIZE; i++)
+			{
+				sEXT_CH__LPx_MAP_SEQ_LOCK[i]->Set__DATA("");
+			}
+		}
+
+		dCH__MON_ACTIVE_ROBOT_ACTION_BUSY->Set__DATA(STR__OFF);
+
+		// LPx.INTERLOCK - CHECK ...
+		{
+			int count__lp_interlock = 0;
+
+			while(1)
+			{
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					flag = -1001;
+					break;
+				}
+
+				// ...
+				bool active__lp_interlock = false;
+
+				for(int i=0; i<iLPx_SIZE; i++)
+				{
+					if(dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Check__DATA(STR__ON) < 0)		continue;
+	
+					active__lp_interlock = true;
+					break;
+				}
+
+				if(!active__lp_interlock)
+				{
+					break;
+				}
+
+				count__lp_interlock++;
+				if(count__lp_interlock == 1)
+				{
+					CString log_msg;
+					CString log_bff;
+
+					log_msg = "LPx.Wait - Start \n";
+
+					for(int i=0; i<iLPx_SIZE; i++)
+					{
+						if(dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Check__DATA(STR__ON) < 0)		continue;
+
+						log_bff.Format(" * %s <- %s \n",
+										dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Get__CHANNEL_NAME(),
+										dCH__MON_ACTIVE_INTERLOCK_BY_LPx[i]->Get__STRING());
+						log_msg += log_bff;
+					}
+
+					Fnc__APP_LOG(log_msg);
+				}
+
+				Sleep(90);
+			}
+
+			if(count__lp_interlock > 2)
+			{
+				CString log_msg;
+
+				log_msg = "LPx.Wait - End \n";
+				Fnc__APP_LOG(log_msg);		
+			}
 		}
 	}
 
@@ -1947,11 +2630,7 @@ int CObj__ATM_ROBOT_FUSION::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_al
 
 int CObj__ATM_ROBOT_FUSION::__CALL__MONITORING(id, p_variable, p_alarm)
 {
-	switch(id)
-	{
-		case MON_ID__STATE_MONITOR:
-			Mon__STATE_MONITOR(p_variable,p_alarm);
-			break;
-	}	
+	if(id == MON_ID__STATE_MONITOR)			Mon__STATE_MONITOR(p_variable,p_alarm);
+
 	return 1;
 }

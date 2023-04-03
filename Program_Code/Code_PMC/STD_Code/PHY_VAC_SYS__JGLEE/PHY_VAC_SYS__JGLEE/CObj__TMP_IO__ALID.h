@@ -24,4 +24,5 @@
 #define ALID__LOW_LIMIT_SPEED_RPM						12
 
 #define ALID__HIGH_LIMIT_TEMPERATURE					13
+#define ALID__TMP_STATE_NOT_NORMAL						14
 

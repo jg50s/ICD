@@ -2,9 +2,6 @@
 #include "CObj_Opr__AUTO_MODE.h"
 #include "CObj_Opr__AUTO_MODE__DEF.h"
 
-#include "CMacro_LOG.h"
-extern CMacro_LOG  mMacro_LOG;
-
 
 // ...
 CString CObj_Opr__AUTO_MODE::Get__LLx_NAME(const int ll_i)
@@ -520,9 +517,6 @@ int  CObj_Opr__AUTO_MODE::
 Update__ADD_LLx_DB_TO_SCH_DB(SCI__CTC__JOB_FILE_CTRL *p_job_file,
 							 const int slot_id)
 {
-	printf("* Update__ADD_LLx_DB_TO_SCH_DB() ... \n");
-
-	// ...
 	int active__ll_in  = -1;
 	int active__ll_out = -1;
 
@@ -548,15 +542,11 @@ Update__ADD_LLx_DB_TO_SCH_DB(SCI__CTC__JOB_FILE_CTRL *p_job_file,
 
 			if(kk_i == 0)				// LLx_IN ...
 			{
-				printf(" * LLx_IN ... \n");
-				
 				active__in_check = 1;
 				p_job_file->Get__LLx_IN_OF_EDIT_TYPE(slot_id, l_id,l_mode,l_slot);
 			}
 			else if(kk_i == 1)			// LLx_OUT ...
 			{
-				printf(" * LLx_OUT ... \n");
-
 				active__out_check = 1;
 				p_job_file->Get__LLx_OUT_OF_EDIT_TYPE(slot_id, l_id,l_mode,l_slot);
 			}
@@ -572,14 +562,9 @@ Update__ADD_LLx_DB_TO_SCH_DB(SCI__CTC__JOB_FILE_CTRL *p_job_file,
 					continue;
 				}
 
-				// ...
 				int ll_id = atoi(l_id[index_ll]);
 				CString str_mode = l_mode[index_ll];
 				CString str_slot = l_slot[index_ll];
-
-				printf("  ** ll_id    <- [%1d] \n", ll_id);
-				printf("  ** str_mode <- [%s]  \n", str_mode);
-				printf("  ** str_slot <- [%s]  \n", str_slot);
 
 				// ...
 				int ll_i = ll_id - 1;
@@ -811,7 +796,7 @@ _Check__ADD_LLx_OF_SCH_DB(const int ll_in_check,
 
 		if(xEXT_CH__SCH_DB_LLx_USE_FLAG[ll_i]->Check__DATA(STR__DISABLE) > 0)
 		{
-			return 1;
+			// return 1;
 		}
 		else
 		{

@@ -31,6 +31,7 @@ int CObj__STEP_STD
 	CString rcp__rf_rps_power;
 	CString rcp__rf_lf_power;
 	CString rcp__rf_hf_power;
+	CString rcp__rf_hf_mode;
 
 	CString rcp__rf_pulse_frequency;
 	CString rcp__rf_pulse_duty;
@@ -129,6 +130,7 @@ int CObj__STEP_STD
 
 		// RF.HF ...
 		sCH__RCP_RF_HF_POWER->Get__DATA(rcp__rf_hf_power);
+		dCH__RCP_RF_HF_MODE->Get__DATA(rcp__rf_hf_mode);
 
 		// RF.PULSE ...
 		rcp__rf_pulse_frequency = aCH__RCP_RF_PULSE_FREQUENCY->Get__STRING();
@@ -368,7 +370,7 @@ int CObj__STEP_STD
 		{
 			if(obj_mode.CompareNoCase(_RF_CMD__OFF) != 0)
 			{
-				RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power);
+				RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power, rcp__rf_hf_mode);
 
 				// ...
 				{
@@ -383,7 +385,7 @@ int CObj__STEP_STD
 		}
 		else
 		{
-			RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power);
+			RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power, rcp__rf_hf_mode);
 		}
 	}
 
@@ -487,9 +489,9 @@ int CObj__STEP_STD
 	{
 		CString obj_mode;
 
-			 if(rcp__lift_pin_mode.CompareNoCase(STR__Down)   == 0)			obj_mode  = _PIN_CMD__DOWN;
-		else if(rcp__lift_pin_mode.CompareNoCase(STR__Middle) == 0)			obj_mode  = _PIN_CMD__MIDDLE;
-		else if(rcp__lift_pin_mode.CompareNoCase(STR__Up)     == 0)			obj_mode  = _PIN_CMD__UP;
+			 if(rcp__lift_pin_mode.CompareNoCase(STR__Down)   == 0)			obj_mode  = sDATA__LIFT_PIN__DOWN;
+		else if(rcp__lift_pin_mode.CompareNoCase(STR__Middle) == 0)			obj_mode  = sDATA__LIFT_PIN__MIDDLE;
+		else if(rcp__lift_pin_mode.CompareNoCase(STR__Up)     == 0)			obj_mode  = sDATA__LIFT_PIN__UP;
 
 		if(obj_mode.GetLength() > 0)
 		{

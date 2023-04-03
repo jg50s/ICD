@@ -92,7 +92,10 @@ Call__PLACE_COMPLETE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm
 {
 	if(!bActive__TRANSFER_OBJ)			return -11;
 
-	Fnc__BALLAST_END(p_variable,p_alarm);
+	if(dCH__CFG_TRANSFER_BALLAST_ENABLED->Check__DATA(STR__YES) > 0)
+	{
+		Fnc__BALLAST_END(p_variable,p_alarm);
+	}
 
 	return pOBJ_CTRL__TRANSFER->Call__OBJECT(CMMD__PLACE_COMPLETE);
 }
@@ -120,7 +123,6 @@ Fnc__TRANSFER_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 		return 1;
 	}
 
-	Fnc__BALLAST_END(p_variable,p_alarm);
 	return 1;
 }
 int CObj__CHM_FNC::
@@ -138,7 +140,10 @@ Fnc__TRANSFER_END(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 		return 1;
 	}
 	
-	Fnc__BALLAST_END(p_variable,p_alarm);
+	if(dCH__CFG_TRANSFER_BALLAST_ENABLED->Check__DATA(STR__YES) > 0)
+	{
+		Fnc__BALLAST_END(p_variable,p_alarm);
+	}
 	return 1;
 }
 

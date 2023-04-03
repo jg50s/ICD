@@ -18,8 +18,3 @@
 #define _CMMD__SWAP_LBx				"SWAP_LBx"
 
 
-// ...
-#define _ARM__AB					"AB"
-#define _ARM__A						"A"
-#define _ARM__B						"B"
-

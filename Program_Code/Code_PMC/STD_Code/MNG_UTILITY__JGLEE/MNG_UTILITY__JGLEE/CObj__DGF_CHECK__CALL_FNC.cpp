@@ -1,11 +1,28 @@
 #include "StdAfx.h"
 #include "CObj__DGF_CHECK.h"
 
+#include "CCommon_Def.h"
+
 
 extern void Macro__Get_Date(CString& date, CString& time);
 
 
-//-------------------------------------------------------------------------
+// ...
+int CObj__DGF_CHECK::
+Call__COPY_NEW_TO_BASELINE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	CString ch_data;
+	int i;
+
+	for(i=0;i<CFG__TEST_LIST;i++)
+	{
+		ch_data = sCH_PARA__NEW_RESULT_mTORR_LIST[i]->Get__STRING();
+		aCH_CFG__BASELINE_mTORR[i]->Set__DATA(ch_data);
+	}
+
+	return 1;
+}
+
 int CObj__DGF_CHECK::
 Call__ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 					CII_OBJECT__ALARM *p_alarm)
@@ -17,15 +34,15 @@ Call__ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 
 		for(i=0;i<CFG__TEST_LIST;i++)
 		{
-			// New -> Current
-			sCH_PARA__NEW_RESULT_LIST[i]->Get__DATA(var_data);
-			sCH_PARA__CUR_RESULT_LIST[i]->Set__DATA(var_data);
-
 			// New List
-			sCH_PARA__NEW_RESULT_LIST[i]->Set__DATA("");
+			sCH_PARA__NEW_RESULT_mTORR_LIST[i]->Set__DATA("");
+
+			sCH_PARA__NEW_RESULT_START_mTORR_LIST[i]->Set__DATA("");
+			sCH_PARA__NEW_RESULT_END_mTORR_LIST[i]->Set__DATA("");
 
 			// Delta List
-			sCH_PARA__DELTA_RESULT_LIST[i]->Set__DATA("");
+			sCH_PARA__DELTA_RESULT_mTORR_LIST[i]->Set__DATA("");
+			sCH_PARA__DELTA_RESULT_PER_LIST[i]->Set__DATA("");
 		}
 
 		sCH_PARA__TEST_DATE->Set__DATA("");
@@ -52,9 +69,9 @@ Call__ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			sEXT_CH__FNC_MSG->Set__DATA(msg);
 
 			//
-			pOBJ_CTRL__FNC_MFC->Dislink__UPPER_OBJECT();
-			pOBJ_CTRL__FNC_MFC->Call__OBJECT(CMMD_MODE__FNC_MFC__ALL_CLOSE);
-			pOBJ_CTRL__FNC_MFC->Link__UPPER_OBJECT();
+			pOBJ_CTRL__GAS_VLV->Dislink__UPPER_OBJECT();
+			pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_MODE__FNC_MFC__ALL_CLOSE);
+			pOBJ_CTRL__GAS_VLV->Link__UPPER_OBJECT();
 		}
 
 		//
@@ -104,8 +121,8 @@ int CObj__DGF_CHECK::
 Fnc__ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 				   CII_OBJECT__ALARM *p_alarm)
 {	
-	sCH_RESULT__START_PRESSURE->Set__DATA("");
-	sCH_RESULT__END_PRESSURE->Set__DATA("");
+	sCH_RESULT__START_PRESSURE_mTORR->Set__DATA("");
+	sCH_RESULT__END_PRESSURE_mTORR->Set__DATA("");
 
 	// ...
 	int flag;
@@ -117,13 +134,14 @@ Fnc__ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 		{
 			flag = Fnc__LOWER_ORIFICE_CHECK(p_variable,p_alarm,i);
 			if(flag < 0)		return flag;
-
-			//.....
+		
+			// ...
 			{
-				if(pOBJ_CTRL__FNC_MFC->Call__OBJECT(CMMD_MODE__FNC_MFC__ALL_CLOSE) < 0)
+				if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_MODE__FNC_MFC__ALL_CLOSE) < 0)
 				{
 					return -1;
 				}
+
 				if(pOBJ_CTRL__DGF->Call__OBJECT(CMMD_MODE__DGF_ALL_CLOSE) < 0)
 				{
 					return -1;
@@ -138,12 +156,13 @@ Fnc__ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			flag = Fnc__LOWER_ORIFICE_CHECK(p_variable,p_alarm,i);
 			if(flag < 0)		return flag;		
 
-			//.....
+			// ...
 			{
-				if(pOBJ_CTRL__FNC_MFC->Call__OBJECT(CMMD_MODE__FNC_MFC__ALL_CLOSE) < 0)
+				if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_MODE__FNC_MFC__ALL_CLOSE) < 0)
 				{
 					return -1;
 				}
+
 				if(pOBJ_CTRL__DGF->Call__OBJECT(CMMD_MODE__DGF_ALL_CLOSE) < 0)
 				{
 					return -1;
@@ -229,8 +248,9 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			aCH_CFG__HIGH_FLOW_GAS_SET->Get__DATA(gas_flow);
 		}
 
-		dEXT_CH__FNC_MFC__PARA_MFC_TYPE->Set__DATA(gas_name);
-		aEXT_CH__FNC_MFC__PARA_MFC_FLOW->Set__DATA(gas_flow);
+		//
+		dEXT_CH__GAS_VLV__PARA_MFC_TYPE->Set__DATA(gas_name);
+		aEXT_CH__GAS_VLV__PARA_MFC_FLOW->Set__DATA(gas_flow);
 
 		//
 		{
@@ -241,7 +261,8 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			sEXT_CH__FNC_MSG->Set__DATA(msg);
 		}
 
-		if(pOBJ_CTRL__FNC_MFC->Call__OBJECT(CMMD_MODE__FNC_MFC__MFC_CONTROL) < 0)
+		dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP->Set__DATA(STR__YES);
+		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_MODE__FNC_MFC__MFC_CONTROL) < 0)
 		{
 			str_msg = "MFC Control - Aborted ...";
 			xCH__OBJ_MSG->Set__DATA(str_msg);
@@ -316,9 +337,14 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 
 		//
 		{
-			sEXT_CH__PRESSURE->Get__DATA(var_data);
-			sCH_RESULT__START_PRESSURE->Set__DATA(var_data);
-			sCH_RESULT__END_PRESSURE->Set__DATA("");
+			sEXT_CH__PRESSURE->Get__DATA(var_data);			
+			double cur__press_torr  = atof(var_data);
+			double cur__press_mtorr = cur__press_torr * 1000.0;
+
+			var_data.Format("%.0f", cur__press_mtorr);
+			sCH_RESULT__START_PRESSURE_mTORR->Set__DATA(var_data);
+
+			sCH_RESULT__END_PRESSURE_mTORR->Set__DATA("");
 		}
 	}
 
@@ -335,7 +361,7 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 
 		//
 		{
-			str_msg.Format("Check Delay Time Started ... - (%s) sec", var_data);
+			str_msg.Format("Check Delay Time Started ... (%s) sec", var_data);
 			xCH__OBJ_MSG->Set__DATA(str_msg);
 
 			msg.Format("Orifice Check : %s",str_msg);
@@ -352,9 +378,20 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			return -5;
 		}
 
-		//
-		sEXT_CH__PRESSURE->Get__DATA(var_data);
-		sCH_RESULT__END_PRESSURE->Set__DATA(var_data);
+		if(iActive__SIM_MODE > 0)
+		{
+			aCH_CFG__BASELINE_mTORR[db_index]->Get__DATA(var_data);
+			sCH_RESULT__END_PRESSURE_mTORR->Set__DATA(var_data);
+		}
+		else
+		{
+			sEXT_CH__PRESSURE->Get__DATA(var_data);
+			double cur__press_torr  = atof(var_data);
+			double cur__press_mtorr = cur__press_torr * 1000.0;
+			
+			var_data.Format("%.0f", cur__press_mtorr);
+			sCH_RESULT__END_PRESSURE_mTORR->Set__DATA(var_data);
+		}
 	}
 
 	// 6. Result Check
@@ -362,30 +399,38 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 		double new_value;
 		double base_value;
 
-		double s_press = 0;
-		double e_press = 0;
+		double s_press_mtorr = 0;
+		double e_press_mtorr = 0;
 
-		sCH_RESULT__START_PRESSURE->Get__DATA(var_data);
-		s_press = atof(var_data);
+		// Start.Pressure
+		sCH_RESULT__START_PRESSURE_mTORR->Get__DATA(var_data);
+		s_press_mtorr = atof(var_data);
 
-		sCH_RESULT__END_PRESSURE->Get__DATA(var_data);
-		e_press = atof(var_data);
+		var_data.Format("%.0f", s_press_mtorr);
+		sCH_PARA__NEW_RESULT_START_mTORR_LIST[db_index]->Set__DATA(var_data);
+
+		// End.Pressure
+		sCH_RESULT__END_PRESSURE_mTORR->Get__DATA(var_data);
+		e_press_mtorr = atof(var_data);
+
+		var_data.Format("%.0f", e_press_mtorr);
+		sCH_PARA__NEW_RESULT_END_mTORR_LIST[db_index]->Set__DATA(var_data);
 
 		// New
-		new_value = e_press - s_press;
-		var_data.Format("%.4f", new_value);
-		sCH_PARA__NEW_RESULT_LIST[db_index]->Set__DATA(var_data);
+		new_value = e_press_mtorr - s_press_mtorr;
+		var_data.Format("%.0f", new_value);
+		sCH_PARA__NEW_RESULT_mTORR_LIST[db_index]->Set__DATA(var_data);
 
 		// Delta  = (Baseline - New)
-		aCH_CFG__BASELINE[db_index]->Get__DATA(var_data);
+		aCH_CFG__BASELINE_mTORR[db_index]->Get__DATA(var_data);
 		base_value = atof(var_data);
 
 		//
 		double delta_value = (base_value - new_value);
 		if(delta_value < 0)		delta_value = -delta_value;
 
-		var_data.Format("%.1f", delta_value);
-		sCH_PARA__DELTA_RESULT_LIST[db_index]->Set__DATA(var_data);
+		var_data.Format("%.0f", delta_value);
+		sCH_PARA__DELTA_RESULT_mTORR_LIST[db_index]->Set__DATA(var_data);
 
 		//
 		double err_per = 0.0;
@@ -395,11 +440,13 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			err_per = (delta_value / base_value) * 100.0;
 		}
 
-		//
-		aCH_CFG__BASELINE_TOLERANCE->Get__DATA(var_data);
-		double cfg_err = atof(var_data);
+		var_data.Format("%.1f", err_per);
+		sCH_PARA__DELTA_RESULT_PER_LIST[db_index]->Set__DATA(var_data);
 
-		if(cfg_err < err_per)
+		//
+		double cfg_err = aCH_CFG__BASELINE_TOLERANCE->Get__VALUE();
+
+		if(err_per > cfg_err)
 		{
 			int alarm_id = ALID__BASELINE_TOLERANCE_ERROR;
 			CString alm_msg;
@@ -408,6 +455,7 @@ Fnc__LOWER_ORIFICE_CHECK(CII_OBJECT__VARIABLE *p_variable,
 
 			p_alarm->Check__ALARM(alarm_id,r_act);
 			p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+			return -1;
 		}
 	}
 

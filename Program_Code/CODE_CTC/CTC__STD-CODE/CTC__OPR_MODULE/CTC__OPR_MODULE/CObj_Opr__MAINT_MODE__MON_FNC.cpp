@@ -13,146 +13,170 @@ void CObj_Opr__MAINT_MODE
 
 	while(1)
 	{
-		Sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
-		// ...
+		//
+		if(sCH__MACRO_MOVE__LOG_STATUS->Check__DATA(STR__START) > 0)
 		{
-			if(sCH__MACRO_MOVE__LOG_STATUS->Check__DATA(STR__START) > 0)
+			if(pre__log_status.CompareNoCase(STR__START) != 0)
 			{
-				if(pre__log_status.CompareNoCase(STR__START) != 0)
-				{
-					pre__log_status = STR__START;
-
-					// ...
-					{
-						mMacro_Log.Clear__ALL_HISTORY();
-					}
-
-					// ...
-					{
-						SCX__SEQ_INFO x_seq_info;
-						int i_year,i_mon,i_day;
-						int i_hour,i_min,i_sec,i_msec;
-						CString file_name;
-
-						x_seq_info->Get__DAY(i_year,i_mon,i_day);
-						x_seq_info->Get__TIME(i_hour,i_min,i_sec,i_msec);
-
-						file_name.Format("MOVE-%00004d%002d%002d_%002d%002d%002d", 
-										i_year,i_mon,i_day,
-										i_hour,i_min,i_sec);
-
-						sCH__MACRO_MOVE__LOG_FILE_NAME->Set__DATA(file_name);
-					}
-				}
-			}
-			else
-			{
-				pre__log_status = "";	
-			}
-		}
-
-		// ...
-		{
-			if(sCH__MACRO_MOVE__LOG_VIEW_REQ->Check__DATA(STR__YES) > 0)
-			{
-				sCH__MACRO_MOVE__SCR_NAME->Set__DATA(SCR_NAME__POPUP_MACRO_MOVE_HISTORY_VIEW);
-
-				sCH__MACRO_MOVE__LOG_VIEW_REQ->Set__DATA("");
-			}
-		}
-
-		// ...
-		{
-			if(sCH__MACRO_MOVE__LOG_SAVE_REQ->Check__DATA(STR__YES) > 0)
-			{
-				sCH__MACRO_MOVE__LOG_SAVE_REQ->Set__DATA("");
-				Sleep(100);
+				pre__log_status = STR__START;
 
 				// ...
 				{
-					CString cmmd_name;
-					CString src_module;
-					CString src_slot;
-					CString trg_module;
-					CString trg_slot;
-
-					CString var_data;
-					int i;
-
-					sCH__MACRO_MOVE__LOG_COUNT->Get__DATA(var_data);
-
-					int limit = atoi(var_data);
-					if(limit > CFG_SIZE__MOVE_HISTORY)
-					{
-						limit = CFG_SIZE__MOVE_HISTORY;
-					}
-
 					mMacro_Log.Clear__ALL_HISTORY();
 
-					for(i=0;i<limit;i++)
-					{						
-						CString str__cmmd_line;
-						sCH__MACRO_MOVE__HISTORY[i]->Get__DATA(str__cmmd_line);
-
-						CString str_cmmd = str__cmmd_line;
-						str_cmmd.MakeUpper();
-
-						// ...
-						int cmmd_type;
-						CString str__para_1 = "";
-						CString str__para_2 = "";
-						CString str__para_3 = "";
-						CString str__para_4 = "";
-
-						if(str_cmmd.Find("TOOL_CLEAR") == 0)
-						{
-							cmmd_type = _CMMD__MACRO_MOVE__TOOL_CLEAR;
-						}
-						else if(str_cmmd.Find("MOVE") == 0)
-						{
-							cmmd_type = _CMMD__MACRO_MOVE__MANUAL_MOVE;
-						}
-						else if(str_cmmd.Find("PROCESS") == 0)
-						{
-							cmmd_type = _CMMD__MACRO_MOVE__PROCESS;
-						}
-						else if(str_cmmd.Find("REPEAT") == 0)
-						{
-							cmmd_type = _CMMD__MACRO_MOVE__LOOP;
-						}
-						else
-						{
-							cmmd_type = _CMMD__MACRO_MOVE__ERROR;
-							str__para_1 = str__cmmd_line;
-						}
-
-						if((cmmd_type != _CMMD__MACRO_MOVE__TOOL_CLEAR)
-						&& (cmmd_type != _CMMD__MACRO_MOVE__ERROR))
-						{
-							CStringArray l_para;
-							Macro__Get_Para_List_From_String(str_cmmd, l_para);
-
-							int k_limit = l_para.GetSize();
-							int k;
-
-							for(k=0; k<k_limit; k++)
-							{
-								CString str_para = l_para[k];
-
-								     if(k == 0)			str__para_1 = str_para;
-								else if(k == 1)			str__para_2 = str_para;
-								else if(k == 2)			str__para_3 = str_para;
-								else if(k == 3)			str__para_4 = str_para;
-							}
-						}
-
-						mMacro_Log.Load__MOVE_INFO(cmmd_type, str__para_1,str__para_2,str__para_3,str__para_4);
+					for(int i=0;i<CFG_SIZE__MOVE_HISTORY;i++)
+					{
+						sCH__MACRO_MOVE__HISTORY[i]->Set__DATA("");
 					}
+					sCH__MACRO_MOVE__LOG_COUNT->Set__DATA("__");
+				}
+	
+				// ...
+				{
+					SCX__SEQ_INFO x_seq_info;
+					int i_year,i_mon,i_day;
+					int i_hour,i_min,i_sec,i_msec;
+					CString file_name;
+
+					x_seq_info->Get__DAY(i_year,i_mon,i_day);
+					x_seq_info->Get__TIME(i_hour,i_min,i_sec,i_msec);
+
+					file_name.Format("MOVE-%00004d%002d%002d_%002d%002d%002d", 
+									i_year,i_mon,i_day,
+									i_hour,i_min,i_sec);
+
+					sCH__MACRO_MOVE__LOG_FILE_NAME->Set__DATA(file_name);
+				}
+			}
+		}
+		else
+		{
+			if(sCH__MACRO_MOVE__LOG_STATUS->Check__DATA(STR__SAVE) > 0)
+			{
+				sCH__MACRO_MOVE__LOG_STATUS->Set__DATA("");
+
+				Sleep(500);
+
+				printf(" * log_state <- save ! \n");
+			}
+
+			if(pre__log_status.CompareNoCase(STR__START) == 0)
+			{
+				pre__log_status = "";	
+
+				// ...
+				{
+					mMacro_Log.Clear__ALL_HISTORY();
+
+					for(int i=0;i<CFG_SIZE__MOVE_HISTORY;i++)
+					{
+						sCH__MACRO_MOVE__HISTORY[i]->Set__DATA("");
+					}
+					sCH__MACRO_MOVE__LOG_COUNT->Set__DATA("__");
 				}
 
-				Fnc__MOVE_HISTORY_TO_SCR();
+				printf(" * log_end ! \n");
 			}
+		}
+
+		//
+		if(sCH__MACRO_MOVE__LOG_VIEW_REQ->Check__DATA(STR__YES) > 0)
+		{
+			sCH__MACRO_MOVE__LOG_VIEW_REQ->Set__DATA("");
+
+			sCH__MACRO_MOVE__SCR_NAME->Set__DATA(SCR_NAME__POPUP_MACRO_MOVE_HISTORY_VIEW);
+		}
+
+		//
+		if(sCH__MACRO_MOVE__LOG_SAVE_REQ->Check__DATA(STR__YES) > 0)
+		{
+			printf(" * log_save_req ! \n");
+
+			Sleep(500);
+			
+			sCH__MACRO_MOVE__LOG_SAVE_REQ->Set__DATA("");
+			sCH__MACRO_MOVE__LOG_STATUS->Set__DATA("");
+
+			mMacro_Log.Clear__ALL_HISTORY();
+
+			// ...
+			{
+				CString cmmd_name;
+				CString src_module;
+				CString src_slot;
+				CString trg_module;
+				CString trg_slot;
+
+				CString var_data = sCH__MACRO_MOVE__LOG_COUNT->Get__STRING();
+				int i_limit = atoi(var_data);
+				if(i_limit > CFG_SIZE__MOVE_HISTORY)		i_limit = CFG_SIZE__MOVE_HISTORY;
+
+				for(int i=0; i<i_limit; i++)
+				{						
+					CString str__cmmd_line;
+					sCH__MACRO_MOVE__HISTORY[i]->Get__DATA(str__cmmd_line);
+
+					CString str_cmmd = str__cmmd_line;
+					str_cmmd.MakeUpper();
+
+					// ...
+					int cmmd_type;
+
+					CString str__para_1 = "";
+					CString str__para_2 = "";
+					CString str__para_3 = "";
+					CString str__para_4 = "";
+
+					if(str_cmmd.Find("TOOL_CLEAR") == 0)
+					{
+						cmmd_type = _CMMD__MACRO_MOVE__TOOL_CLEAR;
+					}
+					else if(str_cmmd.Find("MOVE") == 0)
+					{
+						cmmd_type = _CMMD__MACRO_MOVE__MANUAL_MOVE;
+					}
+					else if(str_cmmd.Find("PROCESS") == 0)
+					{
+						cmmd_type = _CMMD__MACRO_MOVE__PROCESS;
+					}
+					else if(str_cmmd.Find("REPEAT") == 0)
+					{
+						cmmd_type = _CMMD__MACRO_MOVE__LOOP;
+					}
+					else
+					{
+						cmmd_type = _CMMD__MACRO_MOVE__ERROR;
+						str__para_1 = str__cmmd_line;
+					}
+
+					if((cmmd_type != _CMMD__MACRO_MOVE__TOOL_CLEAR)
+					&& (cmmd_type != _CMMD__MACRO_MOVE__ERROR))
+					{
+						CStringArray l_para;
+						Macro__Get_Para_List_From_String(str_cmmd, l_para);
+
+						int k_limit = l_para.GetSize();
+						int k;
+
+						for(k=0; k<k_limit; k++)
+						{
+							CString str_para = l_para[k];
+
+							     if(k == 0)			str__para_1 = str_para;
+							else if(k == 1)			str__para_2 = str_para;
+							else if(k == 2)			str__para_3 = str_para;
+							else if(k == 3)			str__para_4 = str_para;
+						}
+					}
+
+					//
+					mMacro_Log.Load__MOVE_INFO(cmmd_type, str__para_1,str__para_2,str__para_3,str__para_4, str__cmmd_line);
+				}
+			}
+
+			Fnc__MOVE_HISTORY_TO_SCR();		
 		}
 
 		// EDITOR ...
@@ -360,9 +384,7 @@ void CObj_Opr__MAINT_MODE
 {
 	// ...
 	{
-		int i;
-
-		for(i=0;i<CFG_SIZE__MOVE_HISTORY;i++)
+		for(int i=0;i<CFG_SIZE__MOVE_HISTORY;i++)
 		{
 			sCH__MACRO_MOVE__HISTORY[i]->Set__DATA("");
 		}
@@ -527,7 +549,7 @@ void CObj_Opr__MAINT_MODE
 		// BUFFER1 ...
 		if(check_flag < 0)
 		{
-			if(src_module.CompareNoCase("BUFF1") == 0)
+			if(src_module.CompareNoCase(STR__BUFF1) == 0)
 			{
 				check_flag = 1;
 
@@ -551,7 +573,7 @@ void CObj_Opr__MAINT_MODE
 		// BUFFER2 ...
 		if(check_flag < 0)
 		{
-			if(src_module.CompareNoCase("BUFF2") == 0)
+			if(src_module.CompareNoCase(STR__BUFF2) == 0)
 			{
 				check_flag = 1;
 
@@ -734,7 +756,7 @@ void CObj_Opr__MAINT_MODE
 		// BUFFER1 ...
 		if(check_flag < 0)
 		{
-			if(trg_module.CompareNoCase("BUFF1") == 0)
+			if(trg_module.CompareNoCase(STR__BUFF1) == 0)
 			{
 				check_flag = 1;
 
@@ -755,7 +777,7 @@ void CObj_Opr__MAINT_MODE
 		// BUFFER2 ...
 		if(check_flag < 0)
 		{
-			if(trg_module.CompareNoCase("BUFF2") == 0)
+			if(trg_module.CompareNoCase(STR__BUFF2) == 0)
 			{
 				check_flag = 1;
 

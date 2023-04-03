@@ -10,8 +10,8 @@ private:
 
 	// ...
 	CX_FA_300mm_LINK xFA_300mm_Link;
-
 	int iInit_Flag;
+
 	int Fnc_Init();
 	int Check__Address(const void* p_addr,const CString& msg);
 

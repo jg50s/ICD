@@ -16,10 +16,7 @@ CObj_Phy__LBx_STD::~CObj_Phy__LBx_STD()
 //-------------------------------------------------------------------------
 int CObj_Phy__LBx_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 {
-	// ...
-	{
-		sObject_Name = obj;
-	}
+	sObject_Name = obj;
 
 	// ...
 	{
@@ -28,6 +25,15 @@ int CObj_Phy__LBx_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 		ADD__CTRL_VAR(sMODE__PUMP, "PUMP");
 		ADD__CTRL_VAR(sMODE__VENT, "VENT");
+
+		ADD__CTRL_VAR(sMODE__DOOR_OPEN,  "DOOR.OPEN");
+		ADD__CTRL_VAR(sMODE__DOOR_CLOSE, "DOOR.CLOSE");
+
+		ADD__CTRL_VAR(sMODE__SLOT_OPEN,  "SLOT.OPEN");
+		ADD__CTRL_VAR(sMODE__SLOT_CLOSE, "SLOT.CLOSE");
+
+		ADD__CTRL_VAR(sMODE__PIN_UP,   "PIN.UP");
+		ADD__CTRL_VAR(sMODE__PIN_DOWN, "PIN.DOWN");
 
 		ADD__CTRL_VAR(sMODE__PREPMATER, "PREPMATER");
 		ADD__CTRL_VAR(sMODE__MAP,       "MAP");
@@ -61,6 +67,9 @@ int CObj_Phy__LBx_STD::__DEFINE__VERSION_HISTORY(version)
 #define  DSP__MODE										\
 "INIT  MAINT											\
  PUMP  VENT												\
+ DOOR.OPEN  DOOR.CLOSE									\
+ SLOT.OPEN  SLOT.CLOSE									\
+ PIN.UP  PIN.DOWN    									\
  PREPMATER  MAP											\
  COMPMATER  COMPMATER.EX  ISOLATE						\
  LOAD  UNLOAD											\
@@ -135,10 +144,16 @@ int CObj_Phy__LBx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		{
 			str_name = "LBx.CTRL";
 			STD__ADD_DIGITAL(str_name,dsp_item);
-			LINK__VAR_DIGITAL_CTRL(xCH__OBJ_CTRL,str_name);
+			LINK__VAR_DIGITAL_CTRL(xCH__LBx_CTRL, str_name);
 
-			dVAR__MODE = "LBx.MODE";
-			STD__ADD_DIGITAL(dVAR__MODE, DSP__MODE);
+			str_name = "LBx.MODE";
+			STD__ADD_DIGITAL(str_name, DSP__MODE);
+			LINK__VAR_DIGITAL_CTRL(xCH__LBx_MODE, str_name);
+
+			//
+			str_name = "LBx.SLOT.ID";
+			STD__ADD_DIGITAL(str_name, "1 2");
+			LINK__VAR_DIGITAL_CTRL(xCH__LBx_SLOT_ID, str_name);
 		}
 		
 		// ...
@@ -166,9 +181,18 @@ int CObj_Phy__LBx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name, DSP__ENABLE_DISABLE,"");
 		LINK__VAR_DIGITAL_CTRL(xCH__CFG_USE_FLAG,str_name);
 
+		//
 		str_name = "MOVE.FLAG";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,DSP__NO_YES,"");
-		LINK__VAR_DIGITAL_CTRL(xCH__MOVE_FLAG,str_name);
+		LINK__VAR_DIGITAL_CTRL(xCH__MOVE_FLAG, str_name);
+
+		str_name = "ACTIVE.VAC_AREA.CTRL";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(xCH__ACTIVE_VAC_AREA_CTRL, str_name);
+
+		str_name = "ACTIVE.ATM_AREA.CTRL";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(xCH__ACTIVE_ATM_AREA_CTRL, str_name);
 
 		//
 		sVAR_SCH__IN_OUT_FLAG = "SCH.IN_OUT.FLAG";
@@ -186,6 +210,22 @@ int CObj_Phy__LBx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "SCH.IDLE_COUNT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__SCH_IDLE_COUNT, str_name);
+	}
+
+	// PARA ...
+	{
+		str_name = "PARA.SLOT_ID";
+		STD__ADD_DIGITAL(str_name, "1 2");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_SLOT_ID, str_name);
+
+		//
+		str_name = "PARA.VENT_COOLING_SEC";
+		STD__ADD_ANALOG(str_name, "sec", 0, 0, 9999);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_VENT_COOLING_SEC, str_name);
+
+		str_name = "COUNT.VENT_COOLING_SEC";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__COUNT_VENT_COOLING_SEC, str_name);
 	}
 
 	// ...
@@ -389,6 +429,7 @@ int CObj_Phy__LBx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_INIT_SEC, str_name);
 
+		//
 		str_name = "SCH_TEST.CFG.PUMP.SEC";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_PUMP_SEC, str_name);
@@ -397,6 +438,16 @@ int CObj_Phy__LBx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_VENT_SEC, str_name);
 		
+		//
+		str_name = "SCH_TEST.CFG.DOOR.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 1.0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_DOOR_SEC, str_name);
+
+		str_name = "SCH_TEST.CFG.SLOT.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 1.0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_SLOT_SEC, str_name);
+
+		//
 		str_name = "SCH_TEST.CFG.PREPMATER.SEC";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_PREPMATER_SEC, str_name);
@@ -557,7 +608,7 @@ int CObj_Phy__LBx_STD::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "";
 
 		l_act.RemoveAll();
-		l_act.Add("ABORT");
+		l_act.Add(_ACT__ABORT);
 
 		ADD__ALARM_EX(alarm_id, alarm_title,alarm_msg,l_act);
 	}
@@ -572,12 +623,11 @@ int CObj_Phy__LBx_STD::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "";
 
 		l_act.RemoveAll();
-		l_act.Add("ABORT");
-		l_act.Add("RETRY");
+		l_act.Add(_ACT__ABORT);
+		l_act.Add(_ACT__RETRY);
 
 		ADD__ALARM_EX(alarm_id, alarm_title,alarm_msg,l_act);
 	}
-
 	// ...
 	{
 		alarm_id = ALID__PUMP_ERROR;
@@ -588,8 +638,39 @@ int CObj_Phy__LBx_STD::__DEFINE__ALARM(p_alarm)
 		alarm_msg = "";
 
 		l_act.RemoveAll();
-		l_act.Add("ABORT");
-		l_act.Add("RETRY");
+		l_act.Add(_ACT__ABORT);
+		l_act.Add(_ACT__RETRY);
+
+		ADD__ALARM_EX(alarm_id, alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__DOOR_VALVE_OPEN_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "DOOR VALVE OPEN ERROR";
+
+		alarm_msg = "";
+
+		l_act.RemoveAll();
+		l_act.Add(_ACT__ABORT);
+		l_act.Add(_ACT__RETRY);
+
+		ADD__ALARM_EX(alarm_id, alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__SLOT_VALVE_OPEN_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "SLOT VALVE OPEN ERROR";
+
+		alarm_msg = "";
+
+		l_act.RemoveAll();
+		l_act.Add(_ACT__ABORT);
+		l_act.Add(_ACT__RETRY);
 
 		ADD__ALARM_EX(alarm_id, alarm_title,alarm_msg,l_act);
 	}
@@ -628,10 +709,15 @@ int CObj_Phy__LBx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		var_name = "SCH_TEST.CFG.TMC_DUMMY_BY_CTC";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC, cfg_db_name,var_name);
 
-		xEXT_CH_CFG__TRANSFER_MODE = p_ext_obj_create->Get__VAR_DIGITAL_CTRL(cfg_db_name,"TRANSFER.MODE");
+		//
+		var_name = "TRANSFER.MODE";
+		LINK__EXT_VAR_DIGITAL_CTRL(xEXT_CH_CFG__TRANSFER_MODE, cfg_db_name,var_name);
 
-		aEXT_CH_CFG__REF_ATM_PRESSURE = p_ext_obj_create->Get__VAR_ANALOG_CTRL(cfg_db_name,"REF.ATM.PRESSURE");
-		aEXT_CH_CFG__REF_VAC_PRESSURE = p_ext_obj_create->Get__VAR_ANALOG_CTRL(cfg_db_name,"REF.VAC.PRESSURE");
+		var_name = "REF.ATM.PRESSURE";
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH_CFG__REF_ATM_PRESSURE, cfg_db_name,var_name);
+
+		var_name = "REF.VAC.PRESSURE";
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH_CFG__REF_VAC_PRESSURE, cfg_db_name,var_name);
 
 		//
 		for(i=0; i<CFG_LLx__SLOT_MAX; i++)
@@ -651,8 +737,8 @@ int CObj_Phy__LBx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xI_Module_Obj->Link__Object_Name(sObject_Name);
 
 		xI_Module_Obj->Register__Module_Status_Channel(xCH__OBJ_STATUS->Get__VARIABLE_NAME());
-		xI_Module_Obj->Register__Module_Mode_Channel(dVAR__MODE);
-		xI_Module_Obj->Register__Module_Ctrl_Channel(xCH__OBJ_CTRL->Get__VARIABLE_NAME());
+		xI_Module_Obj->Register__Module_Mode_Channel(xCH__LBx_MODE->Get__VARIABLE_NAME());
+		xI_Module_Obj->Register__Module_Ctrl_Channel(xCH__LBx_CTRL->Get__VARIABLE_NAME());
 
 		xI_Module_Obj->Disable__CTCINUSE_TO_STANDBY();
 
@@ -708,6 +794,8 @@ int CObj_Phy__LBx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		SCX__SEQ_INFO x_seq_info;
 		x_seq_info->Get__DIR_ROOT(sDir_ROOT);
+
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 	return 1;
 }
@@ -892,6 +980,27 @@ LOOP_RETRY:
 
 	// ...
 	{
+		CString para__slot_id = dCH__PARA_SLOT_ID->Get__STRING();
+		xCH__LBx_SLOT_ID->Set__DATA(para__slot_id);
+
+		// 
+		CString log_msg;
+		CString log_bff;
+
+		log_msg.Format(" * %s <- %s \n",
+						dCH__PARA_SLOT_ID->Get__CHANNEL_NAME(),
+						dCH__PARA_SLOT_ID->Get__STRING());
+
+		log_bff.Format(" * %s <- %s \n",
+						aCH__PARA_VENT_COOLING_SEC->Get__CHANNEL_NAME(),
+						aCH__PARA_VENT_COOLING_SEC->Get__STRING());
+		log_msg += log_bff;
+
+		xI_LOG_CTRL->WRITE__LOG(log_msg);
+	}
+
+	// ...
+	{
 		CString msg;
 
 		msg.Format("%s ...",mode);
@@ -904,18 +1013,18 @@ LOOP_RETRY:
 	{
 		IF__CTRL_MODE(sMODE__INIT)
 		{
-			flag = Call__INIT(p_variable);
+			flag = Call__INIT(p_variable, p_alarm);
 		}
 		ELSE_IF__CTRL_MODE(sMODE__MAINT)
 		{
-			flag = Call__MAINT(p_variable);
+			flag = Call__MAINT(p_variable, p_alarm);
 		}
 		ELSE_IF__CTRL_MODE(sMODE__PUMP)
 		{
 			xCH__PUMPING_FLAG->Set__DATA("YES");
 			xCH__PUMPING_COMP_FLAG->Set__DATA("CHECK");
 
-			flag = Call__PUMP(p_variable,p_alarm);
+			flag = Call__PUMP(p_variable, p_alarm);
 
 			xCH__PUMPING_FLAG->Set__DATA("");
 			xCH__PUMPING_COMP_FLAG->Set__DATA("");
@@ -925,17 +1034,27 @@ LOOP_RETRY:
 			xCH__VENTING_FLAG->Set__DATA("YES");
 			xCH__VENTING_COMP_FLAG->Set__DATA("CHECK");
 
-			flag = Call__VENT(p_variable,p_alarm);
+			flag = Call__VENT(p_variable, p_alarm);
 
 			xCH__VENTING_FLAG->Set__DATA("");
 			xCH__VENTING_COMP_FLAG->Set__DATA("");
 		}
-		ELSE_IF__CTRL_MODE(sMODE__PREPMATER)		flag = Call__PREPMATER(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__MAP)				flag = Call__MAP(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__COMPMATER)		flag = Call__COMPMATER(p_variable, -1);
-		ELSE_IF__CTRL_MODE(sMODE__COMPMATER_EX)		flag = Call__COMPMATER(p_variable,  1);
-		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)			flag = Call__ISOLATE(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__SCH_TEST_CFG)		flag = Call__SCH_TEST_CFG(p_variable);
+
+		ELSE_IF__CTRL_MODE(sMODE__DOOR_OPEN)		flag = Call__DOOR_OPEN(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__DOOR_CLOSE)		flag = Call__DOOR_CLOSE(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)		flag = Call__SLOT_OPEN(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_CLOSE)		flag = Call__SLOT_CLOSE(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__PIN_UP)			flag = Call__PIN_UP(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__PIN_DOWN)			flag = Call__PIN_DOWN(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__PREPMATER)		flag = Call__PREPMATER(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__MAP)				flag = Call__MAP(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__COMPMATER)		flag = Call__COMPMATER(p_variable,p_alarm, -1);
+		ELSE_IF__CTRL_MODE(sMODE__COMPMATER_EX)		flag = Call__COMPMATER(p_variable,p_alarm,  1);
+		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)			flag = Call__ISOLATE(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SCH_TEST_CFG)		flag = Call__SCH_TEST_CFG(p_variable,p_alarm);
 		
 		ELSE_IF__CTRL_MODE(sMODE__PROC_MAIN)		flag = Call__PROC_MAIN(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__PROC_PRE)			flag = Call__PROC_PRE(p_variable, p_alarm);
@@ -1126,6 +1245,8 @@ LOOP_RETRY:
 		}
 	}
 
+	aCH__PARA_VENT_COOLING_SEC->Set__VALUE(0.0);
+	
 	xI_Sync_Ctrl.Thread__UNLOCK();
 	return flag;
 }

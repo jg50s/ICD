@@ -1,68 +1,142 @@
 #include "StdAfx.h"
 #include "CObj__PMC_INF.h"
+#include "CObj__PMC_INF__ALID.h"
 
 
 // ...
 int  CObj__PMC_INF
-::Call__AUTO_INIT(CII_OBJECT__VARIABLE* p_variable)
+::Call__AUTO_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	Call__TIME_INIT(p_variable);
+	Call__TIME_INIT(p_variable, p_alarm);
 
-	return Call__SYSTEM_INIT(p_variable);
+	return Call__SYSTEM_INIT(p_variable, p_alarm);
 }
 
 int  CObj__PMC_INF
-::Call__TIME_INIT(CII_OBJECT__VARIABLE* p_variable)
+::Call__TIME_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
-	CString time;
+	// ...
+	bool active__time_change = true;
 
-	xCH__MODULE_TIME->Get__DATA(time);
-	if(time.GetLength() >= 14)
+	CString str__net_ip = sCH__INFO_EQP_NET_IP->Get__STRING();
+	if(str__net_ip.CompareNoCase("127.0.0.1") == 0)			active__time_change = false;
+
+	CString str__link_ip = sCH__LINK_NET_IP->Get__STRING();
+	if(str__net_ip.CompareNoCase(str__link_ip) == 0)		active__time_change = false;
+
+	// ...
+	int result__time_change = -1;
+
+	if(active__time_change)
 	{
-		CString year, month, date, hour, minute, second;
+		CString str_time = sCH__MODULE_TIME->Get__STRING();
+		
+		if(str_time.GetLength() >= 14)
+		{
+			CString year, month, date, hour, minute, second;
 
-		year   = time.Mid(0,4);
-		month  = time.Mid(4,2);
-		date   = time.Mid(6,2);
-		hour   = time.Mid(8,2);
-		minute = time.Mid(10,2);
-		second = time.Mid(12,2);
+			year   = str_time.Mid(0,4);
+			month  = str_time.Mid(4,2);
+			date   = str_time.Mid(6,2);
+			hour   = str_time.Mid(8,2);
+			minute = str_time.Mid(10,2);
+			second = str_time.Mid(12,2);
 
-		//
-		SYSTEMTIME	sys_time;
-		GetLocalTime(&sys_time);
+			//
+			SYSTEMTIME	sys_time;
+			GetLocalTime(&sys_time);
 
-		sys_time.wYear   = atoi(year);
-		sys_time.wMonth  = atoi(month); 
-		sys_time.wDay	 = atoi(date);
-		sys_time.wHour   = atoi(hour);
-		sys_time.wMinute = atoi(minute); 
-		sys_time.wSecond = atoi(second); 
+			sys_time.wYear   = atoi(year);
+			sys_time.wMonth  = atoi(month); 
+			sys_time.wDay	 = atoi(date);
+			sys_time.wHour   = atoi(hour);
+			sys_time.wMinute = atoi(minute); 
+			sys_time.wSecond = atoi(second); 
 
-		SetLocalTime(&sys_time);
+			result__time_change = SetLocalTime(&sys_time);
+
+			if(result__time_change < 1)
+			{
+				int alm_id = ALID__SYSTEM_TIME_CHANGE_ERROR;
+				CString alm_msg;
+				CString r_act;
+
+				alm_msg.Format("CHANGE REQUEST TIME <- %s \n", sCH__MODULE_TIME->Get__STRING());
+
+				p_alarm->Check__ALARM(alm_id, r_act);
+				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+			}
+		}
+		else
+		{
+			int alm_id = ALID__SYSTEM_TIME_CHANGE_ERROR;
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+
+			alm_msg  = "TIME FORMAT ERROR (YYYYMMDDhhmmss)";
+			alm_msg += "\n";
+			
+			alm_bff.Format(" * CHANGE REQUEST TIME <- %s \n", sCH__MODULE_TIME->Get__STRING());
+			alm_msg += alm_bff;
+
+			p_alarm->Check__ALARM(alm_id, r_act);
+			p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+		}
 	}			
+
+	// ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg = "Time Change Report ... \n";
+
+		log_bff.Format(" * active__time_change <- [%1d] \n", active__time_change);
+		log_msg += log_bff;
+
+		log_bff.Format(" * result__time_change <- [%1d] \n", result__time_change);
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n",
+						sCH__INFO_EQP_NET_IP->Get__CHANNEL_NAME(),
+						sCH__INFO_EQP_NET_IP->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n",
+						sCH__LINK_NET_IP->Get__CHANNEL_NAME(),
+						sCH__LINK_NET_IP->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n",
+						sCH__MODULE_TIME->Get__CHANNEL_NAME(),
+						sCH__MODULE_TIME->Get__STRING());
+		log_msg += log_bff;
+
+		xLOG_CTRL->WRITE__LOG(log_msg);
+	}
 	return 1;
 }
 
-
 // ...
 int  CObj__PMC_INF
-::Call__SYSTEM_INIT(CII_OBJECT__VARIABLE* p_variable)
+::Call__SYSTEM_INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
 	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__SYSTEM_INIT);
 }
 int  CObj__PMC_INF
-::Call__SYSTEM_MAINT(CII_OBJECT__VARIABLE* p_variable)
+::Call__SYSTEM_MAINT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	DECLARE__EXT_CTRL(p_variable);
 
 	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__SYSTEM_MAINT);
 }
 
+// ...
 int  CObj__PMC_INF
 ::Call__PUMP(CII_OBJECT__VARIABLE* p_variable)
 {

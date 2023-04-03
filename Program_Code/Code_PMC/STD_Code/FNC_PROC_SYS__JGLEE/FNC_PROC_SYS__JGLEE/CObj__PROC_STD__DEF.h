@@ -10,3 +10,5 @@
 #define  STR__RESET                         "RESET"
 #define  STR__RETURN                        "RETURN"
 
+#define  STR__NONE							"NONE"
+

@@ -224,24 +224,27 @@ int CObj__TMP_IO
 	}
 
 	// Foreline.Pressure Check ...
-	if(bActive__DI_FORELINE_VAC_SNS)
+	if(dCH___ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Check__DATA(STR__ON) < 0)
 	{
-		if(dEXT_CH__DI_FORELINE_VAC_SNS->Check__DATA(STR__ON) < 0)
+		if(bActive__DI_FORELINE_VAC_SNS)
 		{
-			// Alarm ...
+			if(dEXT_CH__DI_FORELINE_VAC_SNS->Check__DATA(STR__ON) < 0)
 			{
-				int alm_id = ALID__TMP_ON_ERROR;
-				CString alm_msg;
-				CString r_act;
+				// Alarm ...
+				{
+					int alm_id = ALID__TMP_ON_ERROR;
+					CString alm_msg;
+					CString r_act;
 
-				alm_msg.Format(" * %s <- %s \n",
-								dEXT_CH__DI_FORELINE_VAC_SNS->Get__CHANNEL_NAME(),
-								dEXT_CH__DI_FORELINE_VAC_SNS->Get__STRING());
+					alm_msg.Format(" * %s <- %s \n",
+									dEXT_CH__DI_FORELINE_VAC_SNS->Get__CHANNEL_NAME(),
+									dEXT_CH__DI_FORELINE_VAC_SNS->Get__STRING());
 
-				p_alarm->Check__ALARM(alm_id, r_act);
-				p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+					p_alarm->Check__ALARM(alm_id, r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+				}
+				return -21;
 			}
-			return -21;
 		}
 	}
 
@@ -461,6 +464,25 @@ int CObj__TMP_IO::Fnc_Interlock__TMP_ISO(CII_OBJECT__VARIABLE *p_variable,CII_OB
 	{
 		if(bActive__DO_TMP_PURGE_VALVE)			dEXT_CH__DO_TMP_PURGE_VALVE->Set__DATA(STR__CLOSE);
 		if(bActive__DO_TMP_EXHAUST_VALVE)		dEXT_CH__DO_TMP_EXHAUST_VALVE->Set__DATA(STR__CLOSE);
+	}
+
+	return 1;
+}
+int CObj__TMP_IO::Fnc_Interlock__APC_CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	// Gate.Valve Close ...
+	if(bActive__GV_USE)
+	{
+		dEXT_CH__GV_DO_OPEN->Set__DATA(STR__OFF);
+		dEXT_CH__GV_DO_CLOSE->Set__DATA(STR__ON);
+	}
+
+	// ...
+	{
+		pOBJ_CTRL__VAT->Abort__OBJECT();
+		pOBJ_CTRL__VAT->Run__OBJECT("CLOSE");
+
+		Sleep(1000);
 	}
 
 	return 1;

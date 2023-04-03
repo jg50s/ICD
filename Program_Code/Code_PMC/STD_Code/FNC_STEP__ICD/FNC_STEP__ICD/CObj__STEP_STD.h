@@ -63,6 +63,8 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__CFG_RCP_PART_USE_MATx_HF;	
 	CX__VAR_DIGITAL_CTRL dCH__CFG_RCP_PART_USE_MATx_LF;	
 
+	CX__VAR_DIGITAL_CTRL dCH__CFG_RCP_PART_USE_APC;	
+
 	// RCP ...
 	CX__VAR_STRING_CTRL  sCH__RCP_STEP_MESSAGE;		
 	CX__VAR_DIGITAL_CTRL dCH__RCP_STEP_MODE;	
@@ -84,7 +86,9 @@ private:
 	CX__VAR_STRING_CTRL  sCH__RCP_RF_RPS_POWER;
 
 	CX__VAR_STRING_CTRL  sCH__RCP_RF_LF_POWER;
+
 	CX__VAR_STRING_CTRL  sCH__RCP_RF_HF_POWER;
+	CX__VAR_DIGITAL_CTRL dCH__RCP_RF_HF_MODE;
 
 	// 
 	CX__VAR_ANALOG_CTRL  aCH__RCP_RF_PULSE_FREQUENCY;
@@ -145,6 +149,7 @@ private:
 	// OBJ APC ...
 	int APC_OBJ__Start_MODE(const CString& obj_mode,const CString& para_data, const double para_hold_sec,const double para_hold_pos);
 	int APC_OBJ__Start_OPEN();	
+	int APC_OBJ__Call_OPEN();	
 	int APC_OBJ__Check_ERROR();
 	int APC_OBJ__Check_ABORTED();
 	int APC_OBJ__Check_STABLE();
@@ -229,7 +234,7 @@ private:
 	CX__VAR_DIGITAL_CTRL dEXT_CH__RF_LF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE;
 
 	// OBJ RF.HF ...
-	int RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data);
+	int RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data, const CString& para_pulse_mode);
 	int RF_HF_OBJ__Start_OFF();
 	int RF_HF_OBJ__Check_ERROR();
 	int RF_HF_OBJ__Check_ABORTED();
@@ -245,6 +250,9 @@ private:
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__RF_HF__MON_REFLECT_HIGH_LIMIT_ACTIVE;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__RF_HF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE;
+
+	// CH__DO_HF_PULSE_SET
+	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_RF_PULSE_SET;
 
 	// OBJ RF.PULSE ...
 	int RF_PULSE_OBJ__Start_ON();
@@ -313,6 +321,10 @@ private:
 
 	bool bActive__OBJ_CTRL__LIFT_PIN;
 	CII_EXT_OBJECT__CTRL *pOBJ_CTRL__LIFT_PIN;
+
+	CString sDATA__LIFT_PIN__UP;
+	CString sDATA__LIFT_PIN__DOWN;
+	CString sDATA__LIFT_PIN__MIDDLE;
 
 	// OBJ.SHOWER_HEAD ...
 	int HTR_SH_OBJ__Check_ERROR();

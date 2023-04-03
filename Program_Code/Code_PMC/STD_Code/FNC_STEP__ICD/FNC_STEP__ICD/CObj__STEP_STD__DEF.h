@@ -92,8 +92,14 @@
 #define  STR__Up						"Up"
 
 // ...
+#define  STR__OFF						"OFF"
 #define  STR__ON						"ON"
 #define  STR__ENABLE					"ENABLE"
 
 #define  STR__YES						"YES"
 #define  STR__NO						"NO"
+
+// ...
+#define  STR__Pulse						"Pulse"
+#define  STR__CW						"CW"
+

@@ -455,3 +455,45 @@ int  CObj__VAC_ROBOT_STD
 
 	return 1;
 }
+
+int  CObj__VAC_ROBOT_STD::_Update__MATERIAL_INFO()
+{
+	// ARM_A ...
+	{
+		CII__VAR_DIGITAL_CTRL* p_ch__phy_wfr = dCH__OTR_OUT_MON__ARM_A_MATERIAL_STATUS.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__io_wfr  = dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS.Get__PTR();
+
+		CString pre__wfr_sts = p_ch__phy_wfr->Get__STRING();
+
+		if(p_ch__io_wfr->Check__DATA(STR__NONE) > 0)
+		{
+			p_ch__phy_wfr->Set__DATA(STR__NONE);
+		}
+		else
+		{
+			if(pre__wfr_sts.CompareNoCase(STR__NONE) == 0)			p_ch__phy_wfr->Set__DATA(STR__UNKNOWN);
+			else													p_ch__phy_wfr->Set__DATA(pre__wfr_sts);
+		}
+	}
+
+	// ARM_B ...
+	{
+		CII__VAR_DIGITAL_CTRL* p_ch__phy_wfr = dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS.Get__PTR();
+		CII__VAR_DIGITAL_CTRL* p_ch__io_wfr  = dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS.Get__PTR();
+
+		CString pre__wfr_sts = p_ch__phy_wfr->Get__STRING();
+
+		if(p_ch__io_wfr->Check__DATA(STR__NONE) > 0)
+		{
+			p_ch__phy_wfr->Set__DATA(STR__NONE);
+		}
+		else
+		{
+			if(pre__wfr_sts.CompareNoCase(STR__NONE) == 0)			p_ch__phy_wfr->Set__DATA(STR__UNKNOWN);
+			else													p_ch__phy_wfr->Set__DATA(pre__wfr_sts);
+		}
+	}
+
+	return 1;
+}
+

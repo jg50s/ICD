@@ -16,6 +16,12 @@ int  CObj__SYS_IO
 int  CObj__SYS_IO
 ::Check__Interlock_Use(const int lock_id)
 {
+	if((lock_id == ALID__VENT_Fast_Valve__OPEN)
+	|| (lock_id == ALID__VENT_Soft_Valve__OPEN))
+	{
+		if(dEXT_CH__ACTIVE_INTERLOCK_CHAMBER_VENT->Check__DATA(STR__OFF) > 0)			return -1;
+
+	}
 
 	return 1;
 }

@@ -2,10 +2,6 @@
 #include "CObj_Opr__AUTO_MODE.h"
 
 
-#include "CMacro_LOG.h"
-extern CMacro_LOG  mMacro_LOG;
-
-
 //-------------------------------------------------------------------------
 CObj_Opr__AUTO_MODE::CObj_Opr__AUTO_MODE()
 {
@@ -756,9 +752,6 @@ int CObj_Opr__AUTO_MODE::__Define__USER_FUNCTION(CII_DEFINE__FUNCTION *p_fnc_ctr
 //-------------------------------------------------------------------------
 int CObj_Opr__AUTO_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	mMacro_LOG.Init_LOG();
-
-	// ...
 	int i;
 
 	// ...
@@ -775,23 +768,6 @@ int CObj_Opr__AUTO_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		iSIM_MODE = xSEQ_INFO->Is__SIMULATION_MODE();
 	}
-
-	/*
-	// ...
-	{
-		CString dir_root;
-		xSEQ_INFO->Get__DIR_ROOT(dir_root);
-
-		CString dir_log;
-		dir_log.Format("%s\\%s", dir_root,"LOT_LOG");
-
-		xLOT_LOG_CTRL->Set__DIR_LOG(dir_log);
-		xLOT_LOG_CTRL->Set__DATE_LIMIT(90);
-
-		xLOT_LOG_CTRL->Init__LOG_CTRL();
-		xLOT_LOG_CTRL->Enable__LOG_CTRL();
-	}
-	*/
 
 	// ...
 	{
@@ -1106,6 +1082,9 @@ int CObj_Opr__AUTO_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			str_name = "CFG.BUFFER.OUT_MODE.BUFFER_TO_LPo";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_DB_STx_OUT_MODE_BUFFER_TO_LPo, def_data,str_name);
+
+			str_name = "CFG.BUFFER.LOTID.CHECK";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_DB_STx_LOTID_CHECK, def_data,str_name);
 		}
 
 		// ...
@@ -1167,6 +1146,8 @@ int CObj_Opr__AUTO_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			LINK__EXT_VAR_DIGITAL_CTRL(xCH__PORT_CFG_SLOT_MAX[i], def_data,"CFG.SLOT.MAX");
 
 			LINK__EXT_VAR_DIGITAL_CTRL(xCH__PORT_CST_STATUS[i], def_data,"CST.STATUS");
+
+			LINK__EXT_VAR_STRING_CTRL(sCH__PORT_HOQ_REQ[i], def_data,"LPx.HOQ.REQ");
 
 			//
 			LINK__EXT_VAR_ANALOG_CTRL(xCH__PORT_LAST_PICK_SLOT[i],    def_data,"APP.LAST.PICK.SLOT");
@@ -1514,7 +1495,7 @@ int CObj_Opr__AUTO_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
-		xEXT_CH__SCH_CONCURRENT_ALWAYS_APPLY->Set__DATA("PPID_CHECK");
+		xEXT_CH__SCH_CONCURRENT_ALWAYS_APPLY->Set__DATA(STR__PPID_CHECK);
 	}
 	return 1;
 }

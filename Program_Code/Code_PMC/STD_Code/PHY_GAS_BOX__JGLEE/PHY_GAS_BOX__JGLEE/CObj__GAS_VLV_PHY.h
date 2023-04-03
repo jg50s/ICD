@@ -32,12 +32,13 @@ private:
 	SCX__USER_LOG_CTRL xI_LOG_CTRL;
 	//
 
-
 	//------------------------------------------------------------
 	CX__VAR_STRING_CTRL sCH__OBJ_MSG;
 
-
 	//------------------------------------------------------------
+	// OBJ : DB_SYS ...
+	CX__VAR_DIGITAL_CTRL dEXT_CH__MON_ACTIVE_PROCESS_VALVE_READY_STATE;
+
 	// ...
 	int iSIZE__GAS_LINE__VLV_PURGE;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__GAS_LINE__VLV_PURGE[CFG_SIZE__MFC__VLV_PURGE];
@@ -103,6 +104,10 @@ private:
 	// ...
 	CString sMODE__PROC_OPEN;
 	int Call__PROC_OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
+	//
+
+	// ...
+	int  Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 	//
 
 

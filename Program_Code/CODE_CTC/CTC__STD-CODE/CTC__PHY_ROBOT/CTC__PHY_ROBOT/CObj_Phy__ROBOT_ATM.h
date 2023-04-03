@@ -15,6 +15,8 @@ private:
 	//-------------------------------------------------------------------
 	CString sObject_Name;
 
+	int iACTIVE__SIM_MODE;
+
 	// ...
 	CCommon_Error__MODULE_OBJ   mERROR__MODULE_OBJ;
 	CCommon_Error__DEF_VARIABLE mERROR__DEF_VAR;
@@ -61,6 +63,11 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__PARA_POS;
 
 	//
+	CX__VAR_ANALOG_CTRL  aCH__CFG_ALIGN_RETRY;
+	CX__VAR_STRING_CTRL  sCH__CUR_ALIGN_RETRY;
+
+	CX__VAR_DIGITAL_CTRL dCH__TARGET_PMx_MODE;
+
 	CX__VAR_DIGITAL_CTRL dCH__TARGET_LLx_MODE;
 	CX__VAR_DIGITAL_CTRL dCH__TARGET_LLx_SLOT_CHECK;
 
@@ -70,8 +77,8 @@ private:
 	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_NAME_SET_OF_ARM_B;
 	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_SLOT_SET_OF_ARM_B;
 
-	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_NAME_SET;
-	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_SLOT_SET;
+	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_NAME_SET_AL;
+	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_SLOT_SET_AL;
 
 	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_NAME_GET;
 	CX__VAR_STRING_CTRL  sCH__TARGET_LLx_SLOT_GET;
@@ -112,7 +119,12 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__ANI_ARM_D_ACT;
 
 	// LLx : Scheduler - Dual Only Input & Output ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_LLx_CTRL_ONLY_INPUT_OUTPUT_MODE;
+
 	CX__VAR_DIGITAL_CTRL dCH__CFG_DUAL_ARM_MOVING_AT_THE_SAME_TIME;
+	CX__VAR_DIGITAL_CTRL dCH__CFG_DUAL_ARM_MOVING_AT_LPx;
+	CX__VAR_DIGITAL_CTRL dCH__CFG_DUAL_ARM_MOVING_AT_STx;
+	CX__VAR_DIGITAL_CTRL dCH__CFG_DUAL_ARM_MOVING_AT_LLx;
 
 	// LLx : CONTRAINT ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_LL_CONSTRAINT_1;
@@ -121,11 +133,8 @@ private:
 	// CFG : WAFER PICK PARAMETER ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_PICK_WAFER_CONDITION;
 
-	// CONFIG 
-	CString dVAR__CFG_A_ARM_USE_FLAG;
-	CString dVAR__CFG_B_ARM_USE_FLAG;
-	CString dVAR__CFG_C_ARM_USE_FLAG;
-	CString dVAR__CFG_D_ARM_USE_FLAG;
+	// CONFIG ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_ARM_USE_FLAG_X[CFG_ROBOT__ARM_SIZE];
 
 	// SIM CFG ...
 	CX__VAR_ANALOG_CTRL aCH__SCH_TEST_CFG_PICK_LPx_SEC;
@@ -149,6 +158,9 @@ private:
 	CX__VAR_STRING_CTRL sCH__TIME_ACT_END;
 	CX__VAR_STRING_CTRL sCH__TIME_ACT_TACK;
 	CX__VAR_STRING_CTRL sCH__TIME_ACT_RESULT;
+
+	// INFO.LLx ...
+	CX__VAR_DIGITAL_CTRL dCH__INFO_LL_RESERVE_X[CFG_LLx_LIMIT];
 
 	// ...
 	SCI__THREAD_SYNC_CTRL xI_Sync_Ctrl;
@@ -278,6 +290,7 @@ private:
 	void Update__MATERIAL_INFO();
 
 	void Report__MATERIAL_INFO(const CString& mode);
+	void _Report__MATERIAL_INFO(const CString& mode, const CString& arm_type);
 	void _Report__LPx_MATERIAL_INFO(const CString& mode, const CString& arm_type,const int lp_id,const int lp_slot, const bool active_wfr);
 	void _Report__ALx_MATERIAL_INFO(const CString& mode, const CString& arm_type,const int al_id,const int al_slot, const int lp_id,const int lp_slot);
 	void _Report__MDx_MATERIAL_INFO(const CString& mode, const CString& arm_type,const CString& md_id,const CString& md_slot, const int lp_id,const int lp_slot);
@@ -286,6 +299,9 @@ private:
 	void _Save__MATERIAL_INFO(const int lp_id,
 							  const int lp_slot, 
 							  const CString& wfr_info);
+
+	// ...
+	int _Query__GET_EMPTY_ARM(const CString& query_name,CStringArray& l_data);
 	//
 
 
@@ -308,4 +324,11 @@ public:
 	//-------------------------------------------------------------------------
 	int __CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm);
 	int __CALL__MONITORING(id,p_variable,p_alarm);
+
+	//-------------------------------------------------------------------------
+	int __Define__QUERY(CStringArray& l_query);
+
+	int __Call__QUERY_LIST(const CString& query_name,CStringArray& l_data);
+	int __Call__QUERY_LIST(const CString& query_name,const CStringArray& l_sub_query, CStringArray& l_data);
 };
+

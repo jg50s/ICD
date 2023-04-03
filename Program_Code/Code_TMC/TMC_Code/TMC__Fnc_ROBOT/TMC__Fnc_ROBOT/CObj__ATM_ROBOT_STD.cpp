@@ -60,7 +60,7 @@ int CObj__ATM_ROBOT_STD::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define APP_DSP__PARA_ARM				\
-"A  B"
+"A  B  AB"
 
 #define APP_DSP__PARA_MODULE			\
 "LP1  LP2  LP3  LP4  LP5				\
@@ -109,6 +109,46 @@ int CObj__ATM_ROBOT_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL(str_name,APP_DSP__PARA_SLOT);
 		LINK__VAR_DIGITAL_CTRL(xCH__PARA_SLOT,str_name);
 	}
+
+	// CFG ...
+	{
+		str_name = "CFG.PLACE_FRONT_TO_LLx_DOOR";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CFG_PLACE_FRONT_TO_LLx_DOOR, str_name);
+
+		str_name = "CFG.PICK_FRONT_TO_LLx_DOOR";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CFG_PICK_FRONT_TO_LLx_DOOR, str_name);
+
+		//
+		str_name = "CFG.MOVE_TO_LLx.DELAY.SEC";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CFG_MOVE_TO_LLx_DELAY_SEC, str_name);
+
+		str_name = "CFG.FRONT_LPx_ID";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CFG_FRONT_LPx_ID, str_name);
+
+		str_name = "CFG.FRONT_LPx_SLOT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CFG_FRONT_LPx_SLOT, str_name);
+	}
+
+	// INFO ...
+	{
+		str_name = "INFO.FUME_CLEAR.STATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_FUME_CLEAR_STATE, str_name);
+
+		str_name = "INFO.FUME_CLEAR.POS";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_FUME_CLEAR_POS, str_name);
+
+		str_name = "INFO.FUME_CLEAR.DELAY.COUNT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_FUME_CLEAR_DELAY_COUNT, str_name);
+	}
+
 	return 1;
 }
 int CObj__ATM_ROBOT_STD::__DEFINE__ALARM(p_alarm)

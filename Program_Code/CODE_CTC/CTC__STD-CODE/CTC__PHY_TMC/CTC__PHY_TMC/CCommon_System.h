@@ -36,4 +36,5 @@
 
 #define  STR__NONE                  "NONE"
 #define  STR__CLOSE                 "CLOSE"
+#define  STR__OPEN                  "OPEN"
 

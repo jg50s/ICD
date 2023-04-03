@@ -27,6 +27,7 @@ private:
 
 	// PARA ...
 	CX__VAR_STRING_CTRL  sCH__PARA_RECIPE_NAME;
+	CX__VAR_STRING_CTRL  sCH__PARA_DECHUCK_LIST;
 
 	// CFG ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_AGING_COUNT;
@@ -64,6 +65,9 @@ private:
 
 	CString sMODE__ABORT_DECHUCK;
 	int Call__ABORTL_DECHUCK(CII_OBJECT__VARIABLE* p_variable);
+
+	CString sMODE__DECHUCK_LIST;
+	int Call__DECHUCK_LIST(CII_OBJECT__VARIABLE* p_variable);
 	//
 
 

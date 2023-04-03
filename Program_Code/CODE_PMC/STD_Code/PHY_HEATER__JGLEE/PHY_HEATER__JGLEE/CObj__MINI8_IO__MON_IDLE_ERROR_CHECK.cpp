@@ -127,7 +127,8 @@ int  CObj__MINI8_IO
 			}
 
 			//
-			if(dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0)
+			if((dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE->Check__DATA(STR__ON) > 0)
+			|| (dCH__CFG_USE__LOOP_X[i]->Check__DATA(STR__YES) < 0))
 			{
 				if(iActive__SIM_MODE > 0)
 				{

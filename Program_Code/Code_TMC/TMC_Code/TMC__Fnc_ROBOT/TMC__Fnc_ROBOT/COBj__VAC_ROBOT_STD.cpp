@@ -87,6 +87,7 @@ int CObj__VAC_ROBOT_STD::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 	CString dsc_item_list;
+	int i;
 
 	// ...
 	{
@@ -114,15 +115,40 @@ int CObj__VAC_ROBOT_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.SLOT";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PARA_SLOT,"");
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_SLOT,str_name);
+	}
+
+	// WAC ...
+	{
+		// FROM_CTC.WAC.PMX ...
+		for(i=0; i<CFG_PM_LIMIT; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.USE", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_USE_X[i], str_name);
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.POS", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_POS_X[i], str_name);
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.DELAY.SEC", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_DELAY_SEC_X[i], str_name);
+		}
 
 		//
-		str_name = "sWAC.USE";
+		str_name = "INFO.WAC.PMC.STATE";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__WAC_USE,str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_STATE, str_name);
 
-		str_name = "sWAC.DELAY.SEC";
+		str_name = "INFO.WAC.PMC.POS";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__WAC_DELAY_SEC,str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_POS, str_name);
+
+		str_name = "INFO.WAC.PMC.DELAY.COUNT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_DELAY_COUNT, str_name);
 	}
 
 	// ...
@@ -624,7 +650,6 @@ int CObj__VAC_ROBOT_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		else 		
 		{
 			int pm_i = Macro__CHECK_PMx_INDEX(para_module);
-
 			if(pm_i >= 0)
 			{
 				if(dEXT_CH__PMx_CFG_HANDSHAKE_MODE[pm_i]->Check__DATA(STR__PASSIVE) > 0)

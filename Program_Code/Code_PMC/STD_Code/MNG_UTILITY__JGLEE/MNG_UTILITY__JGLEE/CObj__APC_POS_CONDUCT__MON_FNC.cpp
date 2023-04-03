@@ -13,10 +13,20 @@ void CObj__APC_POS_CONDUCT
 	CString var_data;
 	int i;
 
+	bool active__chart_update = false;
+	int loop_count = 0;
+
 
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
+		loop_count++;
+		if(loop_count > 10)
+		{
+			loop_count = 1;
+			active__chart_update = true;
+		}
 
 
 		// ...
@@ -64,10 +74,11 @@ void CObj__APC_POS_CONDUCT
 			if(update_flag > 0)
 			{
 				if((pre__check_type.CompareNoCase(STR__Ar_80)       == 0)
-					|| (pre__check_type.CompareNoCase(STR__N2_5PER)     == 0)
-					|| (pre__check_type.CompareNoCase(STR__User_Define) == 0))
+				|| (pre__check_type.CompareNoCase(STR__N2_5PER)     == 0)
+				|| (pre__check_type.CompareNoCase(STR__User_Define) == 0))
 				{
 					Update__CHECK_TYPE(pre__check_type, str__pre_type);	
+					active__chart_update = false;
 				}
 			}
 		}
@@ -243,27 +254,9 @@ void CObj__APC_POS_CONDUCT
 			}
 		}
 
-		// ...
+		if(active__chart_update)
 		{
-			CString str_data;
-			CString add_data;
-
-			double x_value = 0.0;
-			double y_value = 0.0;
-
-			for(i=0; i<CFG__TEST_LIST; i++)	
-			{
-				aCH_PARA__VLV_POS_LIST[i]->Get__DATA(var_data);
-				x_value = atof(var_data);
-
-				aCH_PARA__VLV_REF_LIST[i]->Get__DATA(var_data);
-				y_value = atof(var_data);
-
-				add_data.Format("%.1f/%.1f,", x_value,y_value);
-				str_data += add_data;
-			}
-
-			sCH__REF_STRING->Set__DATA(str_data);
+			Update__REF_STRING();
 		}
 	}
 
@@ -442,31 +435,70 @@ Update__CHECK_TYPE(const CString& cur__check_type, const CString& pre__check_typ
 		}
 	}
 
-	// Now Result String ...
+	// Update.Chart ...
 	{
-		sCH__RESULT_STRING->Set__DATA("");
+		CString chart__new_data = "";
+		CString chart__cur_data = "";
 
-		// ...
-		int limit = CFG__TEST_LIST;
-
-		for(int i=0; i<limit; i++)
+		// Now Result String ...
 		{
-			CString vlv_pos;
-			CString vlv_data;
+			int i_limit = CFG__TEST_LIST;
+			for(int i=0; i<i_limit; i++)
+			{
+				CString vlv_pos;
+				CString vlv_data;
 
-			aCH_PARA__VLV_POS_LIST[i]->Get__DATA(vlv_pos);
-			sCH_PARA__CONDUCT_RESULT[i]->Get__DATA(vlv_data);
+				aCH_PARA__VLV_POS_LIST[i]->Get__DATA(vlv_pos);
+				sCH_PARA__CONDUCT_RESULT[i]->Get__DATA(vlv_data);
 
-			CString add_data;
-			add_data.Format("%.1f/%.1f,", atof(vlv_pos),atof(vlv_data));
+				CString add_data;
+				add_data.Format("%.1f/%.1f,", atof(vlv_pos),atof(vlv_data));
 
-			CString cur_data;
-			sCH__RESULT_STRING->Get__DATA(cur_data);
-			cur_data += add_data;
-			sCH__RESULT_STRING->Set__DATA(cur_data);
+				chart__new_data += add_data;
+			}
 		}
+		// Now Current String ...
+		{
+			int i_limit = CFG__TEST_LIST;
+			for(int i=0; i<i_limit; i++)
+			{
+				CString vlv_pos;
+				CString vlv_data;
+
+				sCH__CUR_VLV_POS_LIST[i]->Get__DATA(vlv_pos);
+				sCH__CUR_CONDUCT_RESULT[i]->Get__DATA(vlv_data);
+
+				CString add_data;
+				add_data.Format("%.1f/%.1f,", atof(vlv_pos),atof(vlv_data));
+
+				chart__cur_data += add_data;
+			}
+		}
+
+		sCH__RESULT_STRING->Set__DATA(chart__new_data);
+		sCH__CUR_STRING->Set__DATA(chart__cur_data);
+
+		Update__REF_STRING();
 	}
 }
+void CObj__APC_POS_CONDUCT::
+Update__REF_STRING()
+{
+	CString chart_data;
+	CString add_data;
+
+	for(int i=0; i<CFG__TEST_LIST; i++)	
+	{
+		double x_value = aCH_PARA__VLV_POS_LIST[i]->Get__VALUE();
+		double y_value = aCH_PARA__VLV_REF_LIST[i]->Get__VALUE();
+
+		add_data.Format("%.1f/%.1f,", x_value,y_value);
+		chart_data += add_data;
+	}
+
+	sCH__REF_STRING->Set__DATA(chart_data);
+}
+
 void CObj__APC_POS_CONDUCT::
 Save__CHECK_TYPE(const CString& str__check_type)
 {

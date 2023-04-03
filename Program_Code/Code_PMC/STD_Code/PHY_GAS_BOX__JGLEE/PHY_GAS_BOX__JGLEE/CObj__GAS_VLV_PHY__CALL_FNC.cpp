@@ -202,15 +202,10 @@ int CObj__GAS_VLV_PHY
 {
 	int i;
 
-	for(i=0; i<iSIZE__CHM_LINE__VLV_PURGE; i++)
-	{
-		dEXT_CH__CHM_LINE__VLV_PURGE[i]->Set__DATA(STR__OPEN);
-	}
 	for(i=0; i<iSIZE__MFC__VLV_PURGE; i++)
 	{
 		dEXT_CH__MFC__VLV_PURGE[i]->Set__DATA(STR__OPEN);
 	}
-
 	return 1;
 }
 int CObj__GAS_VLV_PHY

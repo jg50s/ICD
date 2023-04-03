@@ -233,6 +233,7 @@ int CObj__PMC_OPR
 
 	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__LEAK_CHECK);
 }
+
 int CObj__PMC_OPR
 ::Call__AUTO_PM(CII_OBJECT__VARIABLE *p_variable)
 {
@@ -343,7 +344,6 @@ int CObj__PMC_OPR
 
 	return 1;
 }
-
 int CObj__PMC_OPR
 ::Call__CLN_START(CII_OBJECT__VARIABLE *p_variable)
 {
@@ -383,24 +383,86 @@ int CObj__PMC_OPR
 int CObj__PMC_OPR
 ::Call__MNT_READY(CII_OBJECT__VARIABLE *p_variable)
 {
+
 	return 1;
 }
-
 int CObj__PMC_OPR
 ::Call__MNT_START(CII_OBJECT__VARIABLE *p_variable)
 {
+
 	return 1;
 }
 
 int CObj__PMC_OPR
 ::Call__JOB_START_READY(CII_OBJECT__VARIABLE *p_variable)
 {
-	return 1;
-}
+	DECLARE__EXT_CTRL(p_variable);
 
+	if(bActive__OBJ_CTRL__SHUTTER)
+	{
+		pOBJ_CTRL__SHUTTER->Run__OBJECT(sLINK_MODE__SHUTTER__CLOSE);
+	}
+	if(bActive__OBJ_CTRL__LIFT_PIN)
+	{
+		pOBJ_CTRL__LIFT_PIN->Run__OBJECT(sLINK_MODE__LIFT_PIN__PROCESS_READY);
+	}
+
+	if(bActive__OBJ_CTRL__SHUTTER)
+	{
+		if(pOBJ_CTRL__SHUTTER->When__OBJECT() < 0)			return -11;
+	}
+	if(bActive__OBJ_CTRL__LIFT_PIN)
+	{
+		if(pOBJ_CTRL__LIFT_PIN->When__OBJECT() < 0)			return -21;
+	}
+
+	return Fnc__JOB_READY(p_variable, sEXT_MODE__JOB_START_READY);
+}
 int CObj__PMC_OPR
 ::Call__JOB_END_READY(CII_OBJECT__VARIABLE *p_variable)
 {
-	return 1;
+	DECLARE__EXT_CTRL(p_variable);
+
+	if(bActive__OBJ_CTRL__SHUTTER)
+	{
+		pOBJ_CTRL__SHUTTER->Run__OBJECT(sLINK_MODE__SHUTTER__CLOSE);
+	}
+	if(bActive__OBJ_CTRL__LIFT_PIN)
+	{
+		pOBJ_CTRL__LIFT_PIN->Run__OBJECT(sLINK_MODE__LIFT_PIN__PROCESS_READY);
+	}
+
+	if(bActive__OBJ_CTRL__SHUTTER)
+	{
+		if(pOBJ_CTRL__SHUTTER->When__OBJECT() < 0)			return -11;
+	}
+	if(bActive__OBJ_CTRL__LIFT_PIN)
+	{
+		if(pOBJ_CTRL__LIFT_PIN->When__OBJECT() < 0)			return -21;
+	}
+
+	return Fnc__JOB_READY(p_variable, sEXT_MODE__JOB_END_READY);
+}
+int CObj__PMC_OPR
+::Fnc__JOB_READY(CII_OBJECT__VARIABLE *p_variable, const CString& fnc_mode)
+{
+	DECLARE__EXT_CTRL(p_variable);
+
+	// ...
+	{
+		dEXT_CH__CHM_PRC_STS->Set__DATA("PROCESSING");
+	}
+
+	int r_flag = p_ext_mode_ctrl->Call__FNC_MODE(fnc_mode);
+
+	// ...
+	{
+		sEXT_CH__CHM_PRC_TOTAL_TIME_TO_CTC->Set__DATA("");
+		sEXT_CH__CHM_PRC_CHANGE_TIME_TO_CTC->Set__DATA("");
+
+		dEXT_CH__CHM_PRC_STS->Set__DATA("IDLE");
+	}
+
+	return r_flag;
 }
 

@@ -10,5 +10,5 @@
 
 // ...
 #define  CMMD_MODE__RF__OFF							"OFF"
-#define  CMMD_MODE__RF__SET_POWER					"SET_POWER"
-//
+#define  CMMD_MODE__RF__POWER_SET					"POWER_SET"
+#define  CMMD_MODE__RF__POWER_ON					"POWER_ON"

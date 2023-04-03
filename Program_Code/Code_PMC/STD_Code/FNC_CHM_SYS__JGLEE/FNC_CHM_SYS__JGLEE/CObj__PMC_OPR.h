@@ -90,12 +90,19 @@ private:
 	CString sLINK_MODE__SHUTTER__CLOSE;
 	CString sLINK_MODE__SHUTTER__OPEN;
 
+	//
 	bool bActive__OBJ_CTRL__LIFT_PIN;
 	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__LIFT_PIN;
-	CString sLINK_MODE__LIFT_PIN__TRANSFER_READY;
+
+	bool bActive__LIFT_PIN__PICK_READY;
+	CString sLINK_MODE__LIFT_PIN__PICK_READY;
+	bool bActive__LIFT_PIN__PLACE_READY;
+	CString sLINK_MODE__LIFT_PIN__PLACE_READY;
+
 	CString sLINK_MODE__LIFT_PIN__TRANSFER_COMPLETE;
 	CString sLINK_MODE__LIFT_PIN__PROCESS_READY;
 
+	//
 	bool bActive__OBJ_CTRL__PM_SLOT;
 	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__PM_SLOT;
 	CString sLINK_MODE__PM_SLOT__CLOSE;
@@ -109,6 +116,7 @@ private:
 	CString sEXT_MODE__MAINT;
 	CString sEXT_MODE__PUMP;
 	CString sEXT_MODE__VENT;
+	
 	CString sEXT_MODE__LEAK_CHECK;
 	CString sEXT_MODE__PURGE;
 
@@ -146,9 +154,11 @@ private:
 	CString sMODE__VENT;
 	int Call__VENT(CII_OBJECT__VARIABLE *p_variable);
 
+	//
 	CString sMODE__LEAK_CHECK;
 	int Call__LEAK_CHECK(CII_OBJECT__VARIABLE *p_variable);
 
+	//
 	CString sMODE__AUTO_PM;
 	int Call__AUTO_PM(CII_OBJECT__VARIABLE *p_variable);
 
@@ -194,6 +204,7 @@ private:
 	CString sMODE__PLACE_X_COMPLETE;
 	int Call__PLACE_X_COMPLETE(CII_OBJECT__VARIABLE *p_variable);
 
+	//
 	CString sMODE__PRO_READY;
 	int Call__PRO_READY(CII_OBJECT__VARIABLE *p_variable);
 
@@ -212,19 +223,23 @@ private:
 	CString sMODE__MNT_START;
 	int Call__MNT_START(CII_OBJECT__VARIABLE *p_variable);
 
+	//
 	CString sMODE__JOB_START_READY;
 	int Call__JOB_START_READY(CII_OBJECT__VARIABLE *p_variable);
 
 	CString sMODE__JOB_END_READY;
 	int Call__JOB_END_READY(CII_OBJECT__VARIABLE *p_variable);
 
+	int Fnc__JOB_READY(CII_OBJECT__VARIABLE *p_variable, const CString& fnc_mode);
+
+	// ...
 	int _Check__DI_INTERLOCK(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	void Mon__STATUS(CII_OBJECT__VARIABLE *p_variable);
 
 	// ...
-	int Fnc__TRANSFER_READY(CII_OBJECT__VARIABLE *p_variable);
+	int Fnc__TRANSFER_READY(CII_OBJECT__VARIABLE *p_variable, const bool active__pick_ready);
 	int Fnc__TRANSFER_COMPLETE(CII_OBJECT__VARIABLE *p_variable);
 	//
 

@@ -20,7 +20,9 @@ int CObj__MANUAL_PROC::__DEFINE__CONTROL_MODE(obj,l_mode)
 	// ...
 	{
 		ADD__CTRL_VAR(sMODE__MANUAL_PROCESS, "MANUAL_PROCESS");
+
 		ADD__CTRL_VAR(sMODE__ABORT_DECHUCK,  "ABORT_DECHUCK");
+		ADD__CTRL_VAR(sMODE__DECHUCK_LIST,   "DECHUCK_LIST");
 	}
 	return 1;
 }
@@ -53,6 +55,10 @@ int CObj__MANUAL_PROC::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.RECIPE.NAME";
 		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
 		LINK__VAR_STRING_CTRL(sCH__PARA_RECIPE_NAME, str_name);
+
+		str_name = "PARA.DECHUCK.LIST";
+		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+		LINK__VAR_STRING_CTRL(sCH__PARA_DECHUCK_LIST, str_name);
 
 		str_name = "CFG.MANUAL.STEP.CTRL";
 		STD__ADD_DIGITAL(str_name, "DISABLE  ENABLE");
@@ -220,6 +226,12 @@ int CObj__MANUAL_PROC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 			dEXT_CH__PARA_MANUAL_PROCESS_DECHUCK_ACTIVE->Set__DATA(STR__ON);
 
 			flag = Call__ABORTL_DECHUCK(p_variable);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__DECHUCK_LIST)
+		{
+			dEXT_CH__PARA_MANUAL_PROCESS_DECHUCK_ACTIVE->Set__DATA(STR__ON);
+
+			flag = Call__DECHUCK_LIST(p_variable);
 		}
 	}
 

@@ -39,9 +39,11 @@ int CObj__CHM_FNC::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 		//
 		ADD__CTRL_VAR(sMODE__VENT,			   "VENTING");
-
-		ADD__CTRL_VAR(sMODE__LEAK_CHECK,	   "LEAK_CHECK");
 		ADD__CTRL_VAR(sMODE__PURGE,			   "PURGE");
+
+		//
+		ADD__CTRL_VAR(sMODE__LEAK_CHECK_CHM,   "LEAK_CHECK.CHM");
+		ADD__CTRL_VAR(sMODE__LEAK_CHECK_GAS,   "LEAK_CHECK.GAS");
 
 		//
 		ADD__CTRL_VAR(sMODE__SLOT_OPEN,        "SLOT.OPEN");
@@ -112,6 +114,11 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "OBJ.TIMER";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_TIMER, str_name);
+
+		//
+		str_name = "CUR.OBJ.MODE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CUR_OBJ_MODE, str_name);
 	}
 
 	// MON PART ...
@@ -151,6 +158,10 @@ int CObj__CHM_FNC::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.PROCESS_READY_CTRL.AFTER_CHM_PUMPING";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES","");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING, str_name);
+
+		str_name = "CFG.USE.HIGH_VAC.PUMPING";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES  NO","");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_USE_HIGH_VAC_PUMPING, str_name);
 	}
 
 	// REFERENCE PRESSURE ...
@@ -719,14 +730,13 @@ int CObj__CHM_FNC::__DEFINE__ALARM(p_alarm)
 
 	// ...
 	{
-		alarm_id = ALID__APC_VALVE_CLOSE_CONDITION_OCCUR;
+		alarm_id = ALID__APC_VALVE_CLOSE_TIMEOUT;
 		iLIST_ALID__PART.Add(alarm_id);
 
 		alarm_title  = title;
-		alarm_title += "APC Valve Close Condition Occur.";
+		alarm_title += "APC Valve Close Error !.";
 
-		alarm_msg  = "Now.. Chamber Pressure is higher than (CM2 SW1) or (CM2 SW2) Config Value..\n";
-		alarm_msg += "For Safety, APC Valve Will be Closed !!\n";
+		alarm_msg = "APC's valve가 Close 상태인지? 확인하세요. \n";
 
 		l_act.RemoveAll();
 		l_act.Add("CHECK");
@@ -1113,6 +1123,10 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SIM_PRESSURE_TORR, obj_name,var_name);
 
 		//
+		var_name = "CFG.USE.SHUTTER_CLOSE.CHECK";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK, obj_name,var_name);
+
+		//
 		var_name = "CTC.LEAK_CHECK.USE.FLAG";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CTC_LEAK_CHECK_USE_FLAG, obj_name,var_name);
 
@@ -1221,6 +1235,41 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
 		pOBJ_CTRL__GAS_VLV = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+		//
+		var_name = "PARA.MFC.INDEX";
+		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__GAS_VLV__PARA_MFC_INDEX, obj_name,var_name);
+	}
+
+	// OBJ : MFC_SIZE ...
+	{
+		def_name = "OBJ__MFC_SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		iDATA__MFC_SIZE = atoi(def_data);
+		if(iDATA__MFC_SIZE > _CFG__MFC_SIZE)			iDATA__MFC_SIZE = _CFG__MFC_SIZE;
+
+		for(int i=0; i<iDATA__MFC_SIZE; i++)
+		{
+			int id = i + 1;
+
+			def_name.Format("OBJ__MFC%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+			//
+			var_name = "CFG.GAS.NAME";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__CFG_GAS_NAME_X[i], obj_name,var_name);
+
+			var_name = "CFG.MFC.USE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_MFC_USE_X[i], obj_name,var_name);
+
+			//
+			var_name = "CFG.LEAK_CHECK.USE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_LEAK_CHECK_USE_X[i], obj_name,var_name);
+	
+			var_name = "REPORT.LEAK_CHECK.STATE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__REPORT_LEAK_CHECK_STATE_X[i], obj_name,var_name);
+		}
 	}
 
 	// OBJ : ESC
@@ -1354,6 +1403,14 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		sCH__LEAK_CHECK__BASE_PRESSURE_mTORR->Set__DATA("0.0");
 	}
+
+	// ...
+	{
+		var_name = "CTRL";
+		LINK__EXT_VAR_DIGITAL_CTRL(dCH__OBJ_CTRL, sObject_Name,var_name);
+
+		bActive__GAS_CLOSE_SKIP = false;
+	}
 	return 1;
 }
 
@@ -1367,11 +1424,45 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	// ...
 	{
 		CString log_msg;
+		CString log_bff;
+
 		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
-		xLOG_CTRL->WRITE__LOG(log_msg);
 		sCH__OBJ_MSG->Set__DATA(log_msg);
+
+		// ...
+		{
+			log_bff.Format(" * %s <- %s \n",
+							dEXT_CH__SYSTEM_TRANSFER_MODE->Get__CHANNEL_NAME(),
+							dEXT_CH__SYSTEM_TRANSFER_MODE->Get__STRING());
+			log_msg += log_bff;
+
+			log_bff.Format("   * %s <- %s \n",
+							aCH__CFG_ATM_REF_PRESSURE->Get__CHANNEL_NAME(),
+							aCH__CFG_ATM_REF_PRESSURE->Get__STRING());
+			log_msg += log_bff;
+
+			log_bff.Format("   * %s <- %s \n",
+							aCH__CFG_VAC_REF_PRESSURE->Get__CHANNEL_NAME(),
+							aCH__CFG_VAC_REF_PRESSURE->Get__STRING());
+			log_msg += log_bff;
+
+			//
+			log_bff.Format(" * %s <- %s \n",
+							dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Get__CHANNEL_NAME(),
+							dCH__CFG_PROCESS_READY_CTRL_AFTER_CHM_PUMPING->Get__STRING());
+			log_msg += log_bff;
+
+			log_bff.Format(" * %s <- %s \n",
+							dCH__CFG_USE_HIGH_VAC_PUMPING->Get__CHANNEL_NAME(),
+							dCH__CFG_USE_HIGH_VAC_PUMPING->Get__STRING());
+			log_msg += log_bff;
+		}
+
+		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
+
+	sCH__CUR_OBJ_MODE->Set__DATA(mode);
 
 	// ...
 	int flag = _Check__CONTROL_INTERLOCK(mode, p_variable,p_alarm);
@@ -1397,9 +1488,11 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 			sCH__ACTIVE_VENTING_STATE->Set__DATA("OFF");
 		}
-
-		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK)				flag = Call__LEAK_CHECK(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__PURGE)					flag = Call__PURGE(p_variable, p_alarm);
+
+		//
+		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK_CHM)			flag = Call__LEAK_CHECK(p_variable, p_alarm, false);
+		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK_GAS)			flag = Call__LEAK_CHECK(p_variable, p_alarm, true);
 
 		//
 		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)				flag = Call__SLOT_OPEN(p_variable, p_alarm);
@@ -1429,11 +1522,6 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	// ...
 	{
 		sCH__PARA_XFER_BALLAST_WAIT_SKIP_FLAG->Set__DATA("");
-
-		if(bActive__OBJ_CTRL__TURBO_PUMP)
-		{			
-			dEXT_CH__TURBO_PUMP__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Set__DATA(STR__OFF);
-		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
@@ -1458,6 +1546,7 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 	}
 
+	bActive__GAS_CLOSE_SKIP = false;
 	return flag;
 }
 int CObj__CHM_FNC::_Check__CONTROL_INTERLOCK(const CString& mode, CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
@@ -1470,11 +1559,12 @@ LOOP_RETRY:
 	int check__pumping_condition = -1;
 	int check__venting_condition = -1;
 
-	if((mode.CompareNoCase(sMODE__PUMPING)       == 0) 
-	|| (mode.CompareNoCase(sMODE__LOW_VAC_PUMP)  == 0) 
-	|| (mode.CompareNoCase(sMODE__HIGH_VAC_PUMP) == 0) 
-	|| (mode.CompareNoCase(sMODE__LEAK_CHECK)    == 0) 
-	|| (mode.CompareNoCase(sMODE__PURGE)         == 0))
+	if((mode.CompareNoCase(sMODE__PUMPING)        == 0) 
+	|| (mode.CompareNoCase(sMODE__LOW_VAC_PUMP)   == 0) 
+	|| (mode.CompareNoCase(sMODE__HIGH_VAC_PUMP)  == 0) 
+	|| (mode.CompareNoCase(sMODE__LEAK_CHECK_CHM) == 0) 
+	|| (mode.CompareNoCase(sMODE__LEAK_CHECK_GAS) == 0) 
+	|| (mode.CompareNoCase(sMODE__PURGE)          == 0))
 	// || (mode.CompareNoCase(sMODE__PURGE_PUMP)    == 0))
 	{
 		check__pumping_condition = 1;
@@ -1553,6 +1643,11 @@ LOOP_RETRY:
 
 			while(1)
 			{
+				if(dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK->Check__DATA(STR__YES) < 0)
+				{
+					break;
+				}
+
 				if(dEXT_CH__CHM_SHUTTER_STATE->Check__DATA(STR__CLOSE) < 0)
 				{
 					if(retry_count < 50)

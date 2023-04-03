@@ -100,9 +100,10 @@ void CObj_Phy__ROBOT_VAC::Fnc__SET_TIME()
 
 void CObj_Phy__ROBOT_VAC::Fnc__SET_ANI_ARM(CII_OBJECT__VARIABLE* p_variable)
 {
-		 if(sPara0__Arm_Type.CompareNoCase("A")  == 0)				dCH__ANI_ROTE_ARM->Set__DATA("A");
-	else if(sPara0__Arm_Type.CompareNoCase("B")  == 0)				dCH__ANI_ROTE_ARM->Set__DATA("B");
-	else if(sPara0__Arm_Type.CompareNoCase("AB") == 0)				dCH__ANI_ROTE_ARM->Set__DATA("AB");
-	
-	return;
+	if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
+	{
+			 if(sPara0__Arm_Type.CompareNoCase("A")  == 0)				dCH__ANI_ROTE_ARM->Set__DATA("A");
+		else if(sPara0__Arm_Type.CompareNoCase("B")  == 0)				dCH__ANI_ROTE_ARM->Set__DATA("B");
+		else if(sPara0__Arm_Type.CompareNoCase("AB") == 0)				dCH__ANI_ROTE_ARM->Set__DATA("AB");
+	}
 }

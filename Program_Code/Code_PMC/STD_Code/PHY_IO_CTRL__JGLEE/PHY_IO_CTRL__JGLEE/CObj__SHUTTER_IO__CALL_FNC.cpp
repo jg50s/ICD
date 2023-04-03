@@ -105,6 +105,12 @@ int CObj__SHUTTER_IO
 
 LOOP_RETRY:
 
+	if(dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK->Check__DATA(STR__YES) < 0)
+	{
+		return 11;
+	}
+
+
 	// Interlock Check ...
 	{
 
@@ -159,13 +165,13 @@ LOOP_RETRY:
 				alm_msg.Format("Config Close-Timeout <- %.1f sec \n", cfg_sec);
 
 				alm_bff.Format("%s <- %s \n", 
-					dEXT_CH__DI_SHUTTER_OPEN->Get__VARIABLE_NAME(),
-					dEXT_CH__DI_SHUTTER_OPEN->Get__STRING());
+								dEXT_CH__DI_SHUTTER_OPEN->Get__VARIABLE_NAME(),
+								dEXT_CH__DI_SHUTTER_OPEN->Get__STRING());
 				alm_msg += alm_bff;
 
 				alm_bff.Format("%s <- %s \n", 
-					dEXT_CH__DI_SHUTTER_CLOSE->Get__VARIABLE_NAME(),
-					dEXT_CH__DI_SHUTTER_CLOSE->Get__STRING());
+								dEXT_CH__DI_SHUTTER_CLOSE->Get__VARIABLE_NAME(),
+								dEXT_CH__DI_SHUTTER_CLOSE->Get__STRING());
 				alm_msg += alm_bff;
 
 				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);

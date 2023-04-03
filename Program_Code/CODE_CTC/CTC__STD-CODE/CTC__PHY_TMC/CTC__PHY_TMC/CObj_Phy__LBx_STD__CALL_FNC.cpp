@@ -7,14 +7,30 @@
 
 // ...
 int CObj_Phy__LBx_STD
-::Call__INIT(CII_OBJECT__VARIABLE* p_variable)
+::Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__INIT);
+	int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__INIT);
+
+	if(r_flag > 0)
+	{
+		if(iActive__SIM_MODE > 0)
+		{
+			if(xEXT_CH_CFG__TRANSFER_MODE->Check__DATA(STR__VAC) > 0)
+			{
+				Call__PUMP(p_variable, p_alarm);
+			}
+			else
+			{
+				Call__VENT(p_variable, p_alarm);
+			}
+		}
+	}
+	return r_flag;
 }
 int CObj_Phy__LBx_STD
-::Call__MAINT(CII_OBJECT__VARIABLE* p_variable)
+::Call__MAINT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__MAINT);
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__MAINT);
 }
 
 int CObj_Phy__LBx_STD
@@ -84,7 +100,7 @@ int CObj_Phy__LBx_STD
 			break;
 		}
 
-		flag = Fnc__MODULE_OBJ(p_variable, _CMMD__PUMP);
+		flag = Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__PUMP);
 
 		if(flag > 0)
 		{
@@ -100,8 +116,18 @@ int CObj_Phy__LBx_STD
 				aEXT_CH_CFG__REF_VAC_PRESSURE->Get__DATA(var_data);
 				ref_press = atof(var_data);
 
-				xCH__PRESSURE_VALUE->Get__DATA(var_data);
-				cur_press = atof(var_data);
+				if(iActive__SIM_MODE > 0)
+				{
+					cur_press = ref_press * 0.9;
+
+					var_data.Format("%.3f", cur_press);
+					xCH__PRESSURE_VALUE->Set__DATA(var_data);
+				}
+				else
+				{
+					xCH__PRESSURE_VALUE->Get__DATA(var_data);
+					cur_press = atof(var_data);
+				}
 
 				if(cur_press > ref_press)
 				{
@@ -155,6 +181,12 @@ int CObj_Phy__LBx_STD
 	bool active__door_open = false;
 	CString ch__door_name;
 	CString ch__door_data;
+
+	// Dummy_Test ...
+	if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
+	{
+		sCH__COUNT_VENT_COOLING_SEC->Set__DATA("__");
+	}
 
 	// ...
 	{
@@ -260,7 +292,7 @@ int CObj_Phy__LBx_STD
 		}
 
 		loop = -1;
-		flag = Fnc__MODULE_OBJ(p_variable, _CMMD__VENT);
+		flag = Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__VENT);
 
 		if(flag > 0)
 		{
@@ -275,8 +307,18 @@ int CObj_Phy__LBx_STD
 				aEXT_CH_CFG__REF_ATM_PRESSURE->Get__DATA(var_data);
 				ref_press = atof(var_data);
 
-				xCH__PRESSURE_VALUE->Get__DATA(var_data);
-				cur_press = atof(var_data);
+				if(iActive__SIM_MODE > 0)
+				{
+					cur_press = ref_press * 1.01;
+
+					var_data.Format("%.1f", cur_press);
+					xCH__PRESSURE_VALUE->Set__DATA(var_data);
+				}
+				else
+				{
+					xCH__PRESSURE_VALUE->Get__DATA(var_data);
+					cur_press = atof(var_data);
+				}
 
 				if(cur_press < ref_press)
 				{
@@ -311,6 +353,56 @@ int CObj_Phy__LBx_STD
 	}
 	while(loop > 0);
 
+	// Dummy_Test ...
+	if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
+	{
+		double para__cooloing_sec = aCH__PARA_VENT_COOLING_SEC->Get__VALUE();
+
+		// COOLING ...
+		if(para__cooloing_sec >= 1.0)
+		{
+			SCX__ASYNC_TIMER_CTRL x_timer_ctrl;
+
+			x_timer_ctrl->REGISTER__COUNT_CHANNEL_NAME(sCH__COUNT_VENT_COOLING_SEC->Get__CHANNEL_NAME());
+			x_timer_ctrl->START__COUNT_UP(99999);
+
+			// Cooling.Start ...
+			{
+				CString log_msg;
+				CString log_bff;
+
+				log_msg = "Cooling Start \n";
+
+				log_bff.Format("  * Cooling (sec) <- %.0f \n", para__cooloing_sec);
+				log_msg += log_bff;
+
+				xI_LOG_CTRL->WRITE__LOG(log_msg);
+			}
+
+			while(1)
+			{
+				Sleep(10);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					flag = -11;
+					break;
+				}
+
+				if(x_timer_ctrl->Get__CURRENT_TIME() >=  para__cooloing_sec)			break;
+			}
+
+			// Cooling.End ...
+			{
+				CString log_msg;
+
+				log_msg = "Cooling End \n";
+
+				xI_LOG_CTRL->WRITE__LOG(log_msg);
+			}
+		}
+	}
+
 	if(sSCH_NAME.GetLength() > 0)
 	{
 		int limit = l_sch_name.GetSize();
@@ -326,33 +418,68 @@ int CObj_Phy__LBx_STD
 
 //
 int CObj_Phy__LBx_STD
-::Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable)
+::Call__DOOR_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__DOOR_OPEN);
+}
+int CObj_Phy__LBx_STD
+::Call__DOOR_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__DOOR_CLOSE);
+}
+
+int CObj_Phy__LBx_STD
+::Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__SLOT_OPEN);
+}
+int CObj_Phy__LBx_STD
+::Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__SLOT_CLOSE);
+}
+
+int CObj_Phy__LBx_STD
+::Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__PIN_UP);
+}
+int CObj_Phy__LBx_STD
+::Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__PIN_DOWN);
+}
+
+//
+int CObj_Phy__LBx_STD
+::Call__PREPMATER(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
 {
 	Set__SLOT_PARAMETER(p_variable);
 
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__PREPMATER);
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__PREPMATER);
 }
 int CObj_Phy__LBx_STD
-::Call__COMPMATER(CII_OBJECT__VARIABLE* p_variable, 
+::Call__COMPMATER(CII_OBJECT__VARIABLE* p_variable,
+				  CII_OBJECT__ALARM *p_alarm,
 				  const int ex_mode)
 {
 	Set__SLOT_PARAMETER(p_variable);
 
 	if(ex_mode > 0)
 	{
-		return Fnc__MODULE_OBJ(p_variable, _CMMD__COMPMATER_EX);
+		return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__COMPMATER_EX);
 	}
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__COMPMATER);
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__COMPMATER);
 }
 
 //
-int CObj_Phy__LBx_STD::Call__MAP(CII_OBJECT__VARIABLE* p_variable)
+int CObj_Phy__LBx_STD::Call__MAP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__MAP);
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__MAP);
 }
-int CObj_Phy__LBx_STD::Call__ISOLATE(CII_OBJECT__VARIABLE* p_variable)
+int CObj_Phy__LBx_STD::Call__ISOLATE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__ISOLATE);
+	return Fnc__MODULE_OBJ(p_variable,p_alarm, _CMMD__ISOLATE);
 }
 
 //

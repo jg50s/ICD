@@ -266,7 +266,7 @@ int CObj__MINI8_IO::__DEFINE__VARIABLE_STD(p_variable)
 		
 		//
 		str_name = "CFG.TEMPERATURE.DIFF.MAX";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 1, 50, "");
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "C", 0, 1, 300, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_TEMPERATURE_DIFF_MAX, str_name);
 
 		//
@@ -952,9 +952,14 @@ int CObj__MINI8_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ__DB_SYS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		//
-		var_name = "MON.SYSTEM.PROCESS.ACTIVE";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+		// ...
+		{
+			var_name = "CFG.PMC.ATM_MAINT.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMC_ATM_MAINT_ACTIVE, obj_name,var_name);
+
+			var_name = "MON.SYSTEM.PROCESS.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_SYSTEM_PROCESS_ACTIVE, obj_name,var_name);
+		}
 	}
 
 	// LINK : IO_Chammel
@@ -1237,7 +1242,7 @@ int CObj__MINI8_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
 		CString log_msg;
-		log_msg.Format("Aborted ... :  [%s]",mode);
+		log_msg.Format("Aborted (%1d) ... :  [%s]", flag,mode);
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xI_LOG_CTRL->WRITE__LOG(log_msg);		
@@ -1245,7 +1250,7 @@ int CObj__MINI8_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	else
 	{
 		CString log_msg;
-		log_msg.Format("Completed ... :  [%s]",mode);
+		log_msg.Format("Completed ... :  [%s]", mode);
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xI_LOG_CTRL->WRITE__LOG(log_msg);

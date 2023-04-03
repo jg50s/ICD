@@ -385,6 +385,10 @@ int CObj__APC_POS_CONDUCT::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		pOBJ_CTRL__GAS_VLV = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 		//
+		var_name = "PARA.INTERLOCK.SKIP";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP, obj_name,var_name);
+
+		//
 		var_name = "PARA.MFC.TYPE";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_VLV__PARA_MFC_TYPE, obj_name,var_name);
 
@@ -464,21 +468,37 @@ int CObj__APC_POS_CONDUCT::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 //-------------------------------------------------------------------------
 int CObj__APC_POS_CONDUCT::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 {
+	CString obj_msg;
+
+	// ...
+	{
+		obj_msg.Format("%s Started ...", mode);
+
+		xCH__OBJ_MSG->Set__DATA(obj_msg);
+	}
+
+	//
 	if(sEXT_CH__SYS_FNC_NAME->Check__DATA("") < 0)
 	{
-		int alarm_id = ALID__FNC_CANNOT_RUN;
-		CString alm_msg;
-		CString alm_bff;
-		CString r_act;
-		CString var_data;
+		obj_msg.Format("%s Interlocked ...", mode);
+		xCH__OBJ_MSG->Set__DATA(obj_msg);
 
-		sEXT_CH__SYS_FNC_NAME->Get__DATA(var_data);
-		alm_msg.Format("Now, %s is running.\n",var_data);
-		alm_bff.Format("Please, after %s is finished, run APC Utility Program.\n",var_data);
-		alm_msg += alm_bff;
+		// ...
+		{
+			int alarm_id = ALID__FNC_CANNOT_RUN;
+			CString alm_msg;
+			CString alm_bff;
+			CString r_act;
+			CString var_data;
 
-		p_alarm->Check__ALARM(alarm_id,r_act);
-		p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+			sEXT_CH__SYS_FNC_NAME->Get__DATA(var_data);
+			alm_msg.Format("Now, %s is running.\n",var_data);
+			alm_bff.Format("Please, after %s is finished, run APC Utility Program.\n",var_data);
+			alm_msg += alm_bff;
+
+			p_alarm->Check__ALARM(alarm_id,r_act);
+			p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
+		}
 		return -1;
 	}
 
@@ -488,7 +508,7 @@ int CObj__APC_POS_CONDUCT::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		CString fnc_msg;
 
 		fnc_name.Format("%s's %s",sObject_Name,mode);
-		fnc_msg.Format("%s : Started ...",mode);
+		fnc_msg.Format("%s Started ...", mode);
 
 		sEXT_CH__SYS_FNC_NAME->Set__DATA(fnc_name);
 		sEXT_CH__SYS_FNC_MSG->Set__DATA(fnc_msg);
@@ -506,6 +526,19 @@ int CObj__APC_POS_CONDUCT::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		{
 			flag = Call__POS_CONDUCT(p_variable,p_alarm);
 		}
+	}
+
+	if((flag < 0) || (p_variable->Check__CTRL_ABORT() > 0))
+	{
+		obj_msg.Format("%s Aborted ...", mode);
+
+		xCH__OBJ_MSG->Set__DATA(obj_msg);
+	}
+	else
+	{
+		obj_msg.Format("%s Completed ...", mode);
+
+		xCH__OBJ_MSG->Set__DATA(obj_msg);
 	}
 
 	// ...

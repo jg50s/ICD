@@ -8,15 +8,13 @@
 
 //----------------------------------------------------------------------------------------------------
 int  CObj__VAC_ROBOT_EX::
-Call__HOME(CII_OBJECT__VARIABLE* p_variable,
-		   CII_OBJECT__ALARM* p_alarm)
+Call__HOME(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	return pROBOT__OBJ_CTRL->Call__OBJECT(CMMD__HOME);
 }
 
 int  CObj__VAC_ROBOT_EX::
-Call__MAP(CII_OBJECT__VARIABLE* p_variable,
-		  CII_OBJECT__ALARM* p_alarm)
+Call__MAP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	return pROBOT__OBJ_CTRL->Call__OBJECT(CMMD__MAP);
 }
@@ -24,10 +22,15 @@ Call__MAP(CII_OBJECT__VARIABLE* p_variable,
 
 // ...
 int  CObj__VAC_ROBOT_EX::
-Call__INIT(CII_OBJECT__VARIABLE* p_variable,
-		   CII_OBJECT__ALARM* p_alarm)
+Call__INIT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	return pROBOT__OBJ_CTRL->Call__OBJECT(CMMD__INIT);
+}
+
+int  CObj__VAC_ROBOT_EX::
+Call__SET_PARA(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	return pROBOT__OBJ_CTRL->Call__OBJECT(CMMD__SET_PARA);
 }
 
 //
@@ -279,6 +282,9 @@ Fnc__LBx_PICK(CII_OBJECT__VARIABLE* p_variable,
 
 			// ROBOT : RETRACT
 			{
+				dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_REQ->Set__DATA(STR__ON);
+				dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_ACT->Set__DATA(STR__PICK);
+
 				if(pROBOT__OBJ_CTRL->Call__OBJ_MODE(CMMD__RETRACT,l_para) < 0)
 				{
 					str_log.Format("Lower Object Retract Aborted..");
@@ -474,6 +480,11 @@ Fnc__PMx_PICK(CII_OBJECT__VARIABLE* p_variable,
 	}
 	else
 	{
+		if(Fnc__PASSIVE_TRANSFER_READY(pm_index) < 0)
+		{
+			return -111;
+		}
+
 		if(Fnc__CALL_PICK(p_variable,
 						  p_alarm,
 						  para_arm,
@@ -481,6 +492,14 @@ Fnc__PMx_PICK(CII_OBJECT__VARIABLE* p_variable,
 						  para_slot) < 0)
 		{
 			return -112;
+		}
+
+		if(ex_flag < 0)
+		{
+			if(Fnc__PASSIVE_TRANSFER_END(pm_index) < 0)
+			{
+				return -113;
+			}
 		}
 	}
 
@@ -686,6 +705,9 @@ int  CObj__VAC_ROBOT_EX
 
 			// ROBOT : RETRACT
 			{
+				dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_REQ->Set__DATA(STR__ON);
+				dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_ACT->Set__DATA(STR__PLACE);
+				
 				if(pROBOT__OBJ_CTRL->Call__OBJ_MODE(CMMD__RETRACT, l_para) < 0)
 				{
 					str_log.Format("Lower Object Retract Aborted..");
@@ -870,8 +892,8 @@ int  CObj__VAC_ROBOT_EX
 	}
 
 	// ...
-	int check_index = Macro__CHECK_PMx_INDEX(para_module);
-	if(check_index < 0)
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index < 0)
 	{
 		return -11;
 	}
@@ -918,13 +940,26 @@ int  CObj__VAC_ROBOT_EX
 	}
 	else
 	{
+		if(Fnc__PASSIVE_TRANSFER_READY(pm_index) < 0)
+		{
+			return -111;
+		}
+
 		if(Fnc__CALL_PLACE(p_variable,
 						  p_alarm,
 						  para_arm,
 						  para_module,
 						  para_slot) < 0)
 		{
-			return -15;
+			return -112;
+		}
+
+		if(ex_flag < 0)
+		{
+			if(Fnc__PASSIVE_TRANSFER_END(pm_index) < 0)
+			{
+				return -113;
+			}
 		}
 	}
 	
@@ -989,6 +1024,188 @@ int  CObj__VAC_ROBOT_EX
 
 //----------------------------------------------------------------------------------------------------
 int  CObj__VAC_ROBOT_EX::
+Fnc__WAC_ACT(CII_OBJECT__VARIABLE* p_variable,
+			 CII_OBJECT__ALARM* p_alarm,
+			 const CString& wac_arm,
+			 const CString& para_arm,
+			 const CString& para_module,
+			 const CString& para_slot)
+{
+	sCH__INFO_WAC_PMC_ACTIVE->Set__DATA("ON");
+
+	int r_flag = _Fnc__WAC_ACT(p_variable,p_alarm, wac_arm, para_arm,para_module,para_slot);
+
+	sCH__INFO_WAC_PMC_ACTIVE->Set__DATA("OFF");
+	return r_flag;
+}
+int  CObj__VAC_ROBOT_EX::
+_Fnc__WAC_ACT(CII_OBJECT__VARIABLE* p_variable,
+			  CII_OBJECT__ALARM* p_alarm,
+			  const CString& wac_arm,
+			  const CString& act_arm,
+			  const CString& para_module,
+			  const CString& para_slot)
+{
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index < 0)		return -11;
+
+	CString act_name;
+
+	// ...
+	SCX__TIMER_CTRL x_timer__wac_delay;
+
+	x_timer__wac_delay->REGISTER__ABORT_OBJECT(sObject_Name);
+	x_timer__wac_delay->REGISTER__COUNT_CHANNEL(sCH__INFO_WAC_PMC_DELAY_COUNT->Get__CHANNEL_NAME());
+	x_timer__wac_delay->INIT__COUNT_DOWN();
+
+	// ...
+	CString arm__wfr_info = "??";
+
+		 if(wac_arm.CompareNoCase(_ARM_A) == 0)		arm__wfr_info = sEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_TITLE->Get__STRING();
+	else if(wac_arm.CompareNoCase(_ARM_B) == 0)		arm__wfr_info = sEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_TITLE->Get__STRING();
+
+	sCH__INFO_WAC_PMC_ARM_TYPE->Set__DATA(wac_arm);
+	sCH__INFO_WAC_PMC_WFR_INFO->Set__DATA(arm__wfr_info);
+
+	// PARAMETER ...
+	CString para__wac_pos_id   = sCH__FROM_CTC_WAC_PM_POS_ID_X[pm_index]->Get__STRING();
+	CString para__wac_pos_slot = sCH__FROM_CTC_WAC_PM_POS_SLOT_X[pm_index]->Get__STRING();
+
+	CString para__wac_delay_sec = sCH__FROM_CTC_WAC_PM_DELAY_SEC_X[pm_index]->Get__STRING();
+	double cfg__wac_delay_sec = atof(para__wac_delay_sec);
+
+	sCH__INFO_WAC_PMC_STATE->Set__DATA(para_module);
+
+	// ...
+	bool active__rot_check = true;
+
+	CString cur__rot_arm = dEXT_CH__PHY_ROBOT__MON_ACT_ARM->Get__STRING();
+	CString cur__rot_pos = dEXT_CH__PHY_ROBOT__MON_TRG_ROT->Get__STRING();
+
+	if(para__wac_pos_id.CompareNoCase("LLx") == 0)
+	{
+		if(wac_arm.CompareNoCase(cur__rot_arm) == 0)
+		{
+			int s_index = cur__rot_pos.Find("LB");
+			if(s_index == 0)		active__rot_check = false;
+		}
+	}
+
+	// ROBOT ROTATE ...
+	if(active__rot_check)
+	{
+		CString wac__rot_pos_id   = _MODULE_LBA;
+		CString wac__rot_pos_slot = para__wac_pos_slot;
+
+			 if(para__wac_pos_id.CompareNoCase("LL2") == 0)			wac__rot_pos_id = _MODULE_LBB;
+		else if(para__wac_pos_id.CompareNoCase("LL3") == 0)			wac__rot_pos_id = _MODULE_LBC;
+		else if(para__wac_pos_id.CompareNoCase("LL4") == 0)			wac__rot_pos_id = _MODULE_LBD;
+
+		sCH__INFO_WAC_PMC_POS_ID->Set__DATA(wac__rot_pos_id);
+		sCH__INFO_WAC_PMC_POS_SLOT->Set__DATA(wac__rot_pos_slot);
+
+		// ...
+		{
+			act_name.Format("WAC.Rotate - Start : (%s-%s) Arm_%s(%s)", 
+							para__wac_pos_id,
+							para__wac_pos_slot,
+							wac_arm,
+							arm__wfr_info);
+
+			Fnc__APP_LOG(act_name);
+		}
+
+		if(Fnc__CALL_ROTATE(p_variable,
+							p_alarm,
+							wac_arm,
+							wac__rot_pos_id,
+							wac__rot_pos_slot) < 0)
+		{
+			return -21;
+		}
+
+		// ...
+		{
+			act_name.Format("WAC.Rotate - End");
+			Fnc__APP_LOG(act_name);
+		}
+	}
+	else
+	{
+		sCH__INFO_WAC_PMC_POS_ID->Set__DATA(cur__rot_pos);
+		sCH__INFO_WAC_PMC_POS_SLOT->Set__DATA("__");
+	}
+
+	// SV OPEN -> START ...
+	{
+		// ...
+		{
+			act_name.Format("Start SV Open : %s(%s)", para_module,para_slot);
+			Fnc__APP_LOG(act_name);
+		}
+
+		if(Fnc__RUN_SV_OPEN(act_arm, para_module, para_slot) < 0)
+		{
+			return -31;
+		}
+	}
+
+	// WAC.DELAY ...
+	{
+		// ...
+		{
+			act_name.Format("WAC Delay (sec) - Started : (%.1f)", cfg__wac_delay_sec);
+			Fnc__APP_LOG(act_name);
+		}
+
+		if(x_timer__wac_delay->WAIT(cfg__wac_delay_sec) < 0)
+		{
+			return -41;
+		}
+	}
+
+	// ROBOT ROTATE ...
+	{
+		// ...
+		{
+			act_name.Format("Call Rotate - Started : (%.1f)", cfg__wac_delay_sec);
+			Fnc__APP_LOG(act_name);
+		}
+
+		if(Fnc__CALL_ROTATE(p_variable,
+							p_alarm,
+							act_arm,
+							para_module,
+							para_slot) < 0)
+		{
+			return -51;
+		}
+
+		// ...
+		{
+			act_name.Format("Call Rotate - Completed : (%.1f)", cfg__wac_delay_sec);
+			Fnc__APP_LOG(act_name);
+		}
+	}
+
+	// SV OPEN -> WAIT ...
+	{
+		if(Fnc__WAIT_SV_OPEN(act_arm, para_module, para_slot) < 0)
+		{
+			return -61;
+		}
+
+		// ...
+		{
+			act_name.Format("Wait SV Open : %s(%s)", para_module,para_slot);
+			Fnc__APP_LOG(act_name);
+		}
+	}
+
+	return 1;
+}
+
+int  CObj__VAC_ROBOT_EX::
 Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 		  CII_OBJECT__ALARM* p_alarm,
 		  const CString& para_arm,
@@ -1015,21 +1232,6 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 	}
 
 	// ...
-	CString str_from_ctc_wac_use;
-	CString str_from_ctc_wac_delay;
-	double dbl_wac_delay;
-
-	SCX__TIMER_CTRL xTimer_Wac_Delay;
-	xTimer_Wac_Delay->REGISTER__ABORT_OBJECT(sObject_Name);
-
-	// ...
-	{
-		sCH__WAC_USE->Get__DATA(str_from_ctc_wac_use);
-		sCH__WAC_DELAY_SEC->Get__DATA(str_from_ctc_wac_delay);
-		dbl_wac_delay = atof(str_from_ctc_wac_delay);
-	}
-
-	// ...
 	int cfg__auto_pumping = 1;
 
 	if((dEXT_CH__CFG_SETUP_TEST_MODE->Check__DATA(STR__ENABLE) > 0)
@@ -1046,56 +1248,53 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 		}
 	}
 
-	if((str_from_ctc_wac_use.CompareNoCase("YES") == 0) 
-	&& (Macro__CHECK_PMx_INDEX(para_module) >= 0))
+	// WAC.CHeck ...
+	CString str_from_ctc_wac_use;
+
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index >= 0)
 	{
-		// SV OPEN -> START ...
+		str_from_ctc_wac_use = sCH__FROM_CTC_WAC_PM_USE_X[pm_index]->Get__STRING();
+	}
+
+	bool active__wfr_wac_check = false;
+
+	if((str_from_ctc_wac_use.CompareNoCase(STR__YES) == 0) 
+	&& (pm_index >= 0))
+	{
+		if(sCH__FROM_CTC_WAC_PM_PICK_CHECK_X[pm_index]->Check__DATA(STR__YES) > 0)
 		{
-			act_name.Format("Start SV Open : Arm(%s) %s(%s)", para_arm,para_module,para_slot);
-			Fnc__APP_LOG(act_name);
-	
-			if(Fnc__RUN_SV_OPEN(para_arm, para_module, para_slot) < 0)
+			CString arm_a__wfr = dEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_STATUS->Get__STRING();
+			CString arm_b__wfr = dEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_STATUS->Get__STRING();
+
+			if(sCH__FROM_CTC_WAC_PM_WAFER_TYPE->Check__DATA(STR__ALL) > 0)
 			{
-				return OBJ_ABORT;
+				if((arm_a__wfr.CompareNoCase(STR__NONE) != 0)
+				|| (arm_b__wfr.CompareNoCase(STR__NONE) != 0))
+				{
+					active__wfr_wac_check = true;
+				}
+			}
+			else if(sCH__FROM_CTC_WAC_PM_WAFER_TYPE->Check__DATA(STR__UNPROCESSED) > 0)
+			{
+				if((arm_a__wfr.CompareNoCase(STR__MAPPED) == 0)
+				|| (arm_b__wfr.CompareNoCase(STR__MAPPED) == 0))
+				{
+					active__wfr_wac_check = true;
+				}
 			}
 		}
+	}
 
-		/*
-		if(xTimer_Wac_Delay->WAIT(dbl_wac_delay) < 0)
-		{
-			return OBJ_ABORT;
-		}
-		*/
+	if(active__wfr_wac_check)
+	{
+		CString wfr_arm = para_arm;
 
-		// ROBOT ROTATE ...
-		{
-			act_name.Format("Call Rotate - Started");
-			Fnc__APP_LOG(act_name);
+			 if(para_arm.CompareNoCase(_ARM_A) == 0)		wfr_arm = _ARM_B;
+		else if(para_arm.CompareNoCase(_ARM_B) == 0)		wfr_arm = _ARM_A;
 
-			if(Fnc__RUN_ROTATE(p_variable,p_alarm, para_arm,para_module,para_slot) < 0)
-			{
-				return OBJ_ABORT;
-			}
-
-			if(pROBOT__OBJ_CTRL->When__OBJECT() < 0)
-			{
-				return -111;
-			}
-
-			act_name.Format("Call Rotate - Completed");
-			Fnc__APP_LOG(act_name);
-		}
-
-		// SV OPEN -> WAIT ...
-		{			
-			if(Fnc__WAIT_SV_OPEN(para_arm, para_module, para_slot) < 0)
-			{
-				return OBJ_ABORT;
-			}
-
-			act_name.Format("Wait SV Open : %s(%s)", para_module,para_slot);
-			Fnc__APP_LOG(act_name);
-		}
+		int r_act = Fnc__WAC_ACT(p_variable,p_alarm, wfr_arm, para_arm,para_module,para_slot);
+		if(r_act < 0)			return r_act;
 	}
 	else
 	{
@@ -1122,9 +1321,33 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 		act_name.Format("TMC_VLV : Checking ...");
 		Fnc__APP_LOG(act_name);
 
-		if(pTMC_VLV__OBJ_CTRL->When__OBJECT() < 0)
+		// ...
 		{
-			return -222;
+			bool active__tmc_vlv__obj_ctrl = true;
+
+			int ll_i = Macro__CHECK_LLx_INDEX(para_module);
+			if(ll_i >= 0)
+			{
+				if(bActive__LLx_MANIFOLD_X)
+				{
+					if(ll_i < iSIZE__LLx)			active__tmc_vlv__obj_ctrl = false;
+				}
+			}
+
+			if(active__tmc_vlv__obj_ctrl)
+			{
+				if(pTMC_VLV__OBJ_CTRL->When__OBJECT() < 0)
+				{
+					return -222;
+				}
+			}
+			else
+			{
+				if(pLLx__OBJ_CTRL[ll_i]->When__OBJECT() < 0)
+				{
+					return -223;
+				}
+			}
 		}
 
 		act_name.Format("ROBOT : Checking ...");
@@ -1187,17 +1410,11 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 
 	// ...
 	CString str_from_ctc_wac_use;
-	CString str_from_ctc_wac_delay;
-	double dbl_wac_delay;
 	
-	SCX__TIMER_CTRL xTimer_Wac_Delay;
-	xTimer_Wac_Delay->REGISTER__ABORT_OBJECT(sObject_Name);
-
-	// ...
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index >= 0)
 	{
-		sCH__WAC_USE->Get__DATA(str_from_ctc_wac_use);
-		sCH__WAC_DELAY_SEC->Get__DATA(str_from_ctc_wac_delay);
-		dbl_wac_delay = atof(str_from_ctc_wac_delay);
+		str_from_ctc_wac_use = sCH__FROM_CTC_WAC_PM_USE_X[pm_index]->Get__STRING();
 	}
 
 	// ...
@@ -1229,74 +1446,45 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 		}
 	}
 
-	if((str_from_ctc_wac_use.CompareNoCase("YES") == 0) 
-	&& (Macro__CHECK_PMx_INDEX(para_module) > 0))
+	// WAC.CHeck ...
+	bool active__wfr_wac_check = false;
+
+	if((str_from_ctc_wac_use.CompareNoCase(STR__YES) == 0) 
+	&& (pm_index >= 0))
 	{
-		// SV OPEN -> START ...
+		if(sCH__FROM_CTC_WAC_PM_PLACE_CHECK_X[pm_index]->Check__DATA(STR__YES) > 0)
 		{
-			// ...
-			{
-				act_name.Format("Start SV Open : %s(%s)", para_module,para_slot);
-				Fnc__APP_LOG(act_name);
-			}
+			CString arm_a__wfr = dEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_STATUS->Get__STRING();
+			CString arm_b__wfr = dEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_STATUS->Get__STRING();
 
-			if(Fnc__RUN_SV_OPEN(para_arm, para_module, para_slot) < 0)
+			if(sCH__FROM_CTC_WAC_PM_WAFER_TYPE->Check__DATA(STR__ALL) > 0)
 			{
-				return OBJ_ABORT;
+				if((arm_a__wfr.CompareNoCase(STR__NONE) != 0)
+				|| (arm_b__wfr.CompareNoCase(STR__NONE) != 0))
+				{
+					active__wfr_wac_check = true;
+				}
+			}
+			else if(sCH__FROM_CTC_WAC_PM_WAFER_TYPE->Check__DATA(STR__UNPROCESSED) > 0)
+			{
+				if(para_arm.CompareNoCase(_ARM_A) == 0)
+				{
+					if(arm_a__wfr.CompareNoCase(STR__MAPPED) == 0)
+						active__wfr_wac_check = true;
+				}
+				else if(para_arm.CompareNoCase(_ARM_B) == 0)
+				{
+					if(arm_b__wfr.CompareNoCase(STR__MAPPED) == 0)
+						active__wfr_wac_check = true;
+				}
 			}
 		}
+	}
 
-		// WAC DELAY ...
-		{
-			// ...
-			{
-				act_name.Format("WAC Delay - Started : (%.1f)", dbl_wac_delay);
-				Fnc__APP_LOG(act_name);
-			}
-	
-			if(xTimer_Wac_Delay->WAIT(dbl_wac_delay) < 0)
-			{
-				return OBJ_ABORT;
-			}
-		}
-
-		// ROBOT ROTATE ...
-		{
-			// ...
-			{
-				act_name.Format("Call Rotate - Started : (%.1f)", dbl_wac_delay);
-				Fnc__APP_LOG(act_name);
-			}
-
-			if(Fnc__CALL_ROTATE(p_variable,
-							    p_alarm,
-							    para_arm,
-							    para_module,
-							    para_slot) < 0)
-			{
-				return OBJ_ABORT;
-			}
-
-			// ...
-			{
-				act_name.Format("Call Rotate - Completed : (%.1f)", dbl_wac_delay);
-				Fnc__APP_LOG(act_name);
-			}
-		}
-
-		// SV OPEN -> WAIT ...
-		{
-			if(Fnc__WAIT_SV_OPEN(para_arm, para_module, para_slot) < 0)
-			{
-				return OBJ_ABORT;
-			}
-
-			// ...
-			{
-				act_name.Format("Wait SV Open : %s(%s)", para_module,para_slot);
-				Fnc__APP_LOG(act_name);
-			}
-		}
+	if(active__wfr_wac_check)
+	{		
+		int r_act = Fnc__WAC_ACT(p_variable,p_alarm, para_arm, para_arm,para_module,para_slot);
+		if(r_act < 0)			return r_act;
 	}
 	else
 	{
@@ -1320,9 +1508,33 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 			return -112;
 		}
 
-		if(pTMC_VLV__OBJ_CTRL->When__OBJECT() < 0)
+		// ...
 		{
-			return -113;
+			bool active__tmc_vlv__obj_ctrl = true;
+
+			int ll_i = Macro__CHECK_LLx_INDEX(para_module);
+			if(ll_i >= 0)
+			{
+				if(bActive__LLx_MANIFOLD_X)
+				{
+					if(ll_i < iSIZE__LLx)			active__tmc_vlv__obj_ctrl = false;
+				}
+			}
+
+			if(active__tmc_vlv__obj_ctrl)
+			{
+				if(pTMC_VLV__OBJ_CTRL->When__OBJECT() < 0)
+				{
+					return -1130;
+				}
+			}
+			else
+			{
+				if(pLLx__OBJ_CTRL[ll_i]->When__OBJECT() < 0)
+				{
+					return -1131;
+				}
+			}
 		}
 
 		if(pROBOT__OBJ_CTRL->When__OBJECT() < 0)

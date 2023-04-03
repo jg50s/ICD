@@ -54,19 +54,19 @@ int CObj__DB_CFG::__DEFINE__VERSION_HISTORY(version)
 #define APP_DSP__ENABLE_DISABLE     "ENABLE  DISABLE"
 
 #define APP_DSP__LBx_IDLE_STATUS	"NONE  ATM  VAC"
-#define APP_DSP__CID_FORMAT			"ONLY_TIME  Bypass&ReadFail"
+#define APP_DSP__CID_FORMAT			"ONLY_TIME  Bypass&ReadFail  USER "
 
 #define APP_DSP__CONCURRENT_ALWAYS_APPLY     "DISABLE  ENABLE  PPID_CHECK"
 
 
 // ...
-#define LINK__VAR(VAR_NAME,CH_NAME)								\
-str_name = CH_NAME;												\
+#define LINK__VAR(VAR_NAME,CH_NAME)					\
+str_name = CH_NAME;									\
 VAR_NAME = CH_NAME;
 
 
 // ...
-#define MON_ID__CFG_PORT							1
+#define MON_ID__INFO_REPORT							1
 
 
 int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
@@ -92,6 +92,11 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 	LINK__VAR_STRING_CTRL(sCH_SYS__USER_ID,str_name);
 
 	//
+	str_name = "SERVER.NET_IP";
+	STD__ADD_STRING(str_name);
+	LINK__VAR_STRING_CTRL(sCH__SERVER_NET_IP, str_name);
+
+	//
 	str_name = "SYS.MSG";
 	STD__ADD_STRING_WITH_COMMENT(str_name,"");
 	sVAR__SYS_MSG = str_name;
@@ -101,14 +106,17 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 	sVAR__FNC_MSG = str_name;
 
 	//
-	LINK__VAR(sVAR_SYS__VAC_AREA__MATERIAL_COUNT,"VAC_AREA.MATERIAL.COUNT");
-	STD__ADD_STRING_WITH_X_OPTION(str_name,"");
+	LINK__VAR(sVAR_SYS__VAC_AREA__MATERIAL_COUNT, "VAC_AREA.MATERIAL.COUNT");
+	STD__ADD_STRING(str_name);
 
-	LINK__VAR(sVAR_SYS__VAC_ROBOT__OUT_MATERIAL_COUNT,"VAC_ROBOT.OUT_MATERIAL.COUNT");
-	STD__ADD_STRING_WITH_X_OPTION(str_name,"");
+	LINK__VAR(sVAR_SYS__VAC_ROBOT__OUT_MATERIAL_COUNT, "VAC_ROBOT.OUT_MATERIAL.COUNT");
+	STD__ADD_STRING(str_name);
+
+	str_name = "PMC.MATERIAL.COUNT";
+	STD__ADD_STRING(str_name);
 
 	LINK__VAR(sVAR_SYS__TOTAL_MATERIAL_COUNT_IN_SYSTEM, "TOTAL.MATERIAL.COUNT.IN.SYSTEM");
-	STD__ADD_STRING_WITH_COMMENT(str_name,"");
+	STD__ADD_STRING(str_name);
 
 	//
 	LINK__VAR(sVAR_SYS__SYSTEM_LEAK_CHECK_REQ, "SYSTEM.LEAK_CHECK.REQ");
@@ -128,9 +136,15 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 
 	for(i=0;i<CFG_PM_LIMIT;i++)
 	{
-		str_name.Format("SYS_INFO.PM%1d_ID",i+1);
-		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
+		int id = i + 1;
+
+		str_name.Format("SYS_INFO.PM%1d_ID", id);
+		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
 		LINK__VAR_STRING_CTRL(sCH_SYS_INFO__PMC_ID[i], str_name);
+
+		str_name.Format("SYS_INFO.PM%1d_PROCESS", id);
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "METAL  STRIP", "");
+		LINK__VAR_DIGITAL_CTRL(dCH_SYS_INFO__PMC_PROCESS[i], str_name);
 	}
 
 	//
@@ -239,6 +253,29 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 
 			str_name.Format("PM%1d.CUR.POST_COUNT", pm_id);
 			STD__ADD_STRING_WITH_COMMENT(str_name, "");
+
+			str_name.Format("PM%1d.CUR.MAIN_COUNT", pm_id);
+			STD__ADD_STRING_WITH_COMMENT(str_name, "");
+		}
+	}
+
+	// PMC.MARATHON_TEST ...
+	{
+		// ...
+		{
+			str_name = "PMx.MARATHON_TEST.USE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE  ENABLE", "");
+		}
+
+		for(i=0; i<CFG_PM_LIMIT; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("PM%1d.MARATHON_TEST.USE", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+
+			str_name.Format("PM%1d.MARATHON_TEST.WAIT.SEC", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 1, 100, "");
 		}
 	}
 
@@ -699,53 +736,100 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		sVAR__SCH_CONCURRENT_ALWAYS_APPLY == str_name;
 
 		//
-		str_name = "SCH.LBx.MATERIAL.OUT.REQ";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		sVAR__SCH_LBx_MATERIAL_OUT_REQ = str_name;
+		{
+			str_name = "SCH.LBx.MATERIAL.OUT.REQ";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+			sVAR__SCH_LBx_MATERIAL_OUT_REQ = str_name;
+	
+			str_name = "SCH.LBx.EMPTY.REQ";
+			STD__ADD_STRING_WITH_COMMENT(str_name,"");
+			sVAR__SCH_LBx_EMPTY_REQ = str_name;
 
-		str_name = "SCH.LBx.EMPTY.REQ";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		sVAR__SCH_LBx_EMPTY_REQ = str_name;
-
-		str_name = "SCH.LBx.VERTICAL.PLACE.MODE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"DISABLE ENABLE","");
-		sVAR__SCH_LBx_VERTICAL_PLACE_MODE = str_name;
-
-		// 
-		str_name = "SCH.MAP.DEVICE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"LP ATM_RB ROBOT.MANUAL","");
-		sVAR__SCH_MAP_DEVICE = str_name;
-
-		str_name = "SCH.ALIGN.DEVICE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"AL ATM_RB","");
-		sVAR__SCH_ALIGN_DEVICE = str_name;
-
-		str_name = "SCH.POST.ALIGN.MODE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"DISABLE ENABLE","");
-		sVAR__SCH_POST_ALIGN_MODE = str_name;
+			str_name = "SCH.LBx.VERTICAL.PLACE.MODE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"DISABLE ENABLE","");
+			sVAR__SCH_LBx_VERTICAL_PLACE_MODE = str_name;
+		}
 
 		// 
-		str_name = "SCH.WAC.WAFER.POSITION";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"PMx LLx CENTER","");
-		sVAR__SCH_WAC_WAFER_POSITION = str_name;
+		{
+			str_name = "SCH.MAP.DEVICE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"LP ATM_RB","");
+			sVAR__SCH_MAP_DEVICE = str_name;
 
-		str_name = "SCH.WAC.WAFER.APPLY";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		sVAR__SCH_WAC_WAFER_APPLY = str_name;
+			str_name = "SCH.ALIGN.DEVICE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"AL ATM_RB","");
+			sVAR__SCH_ALIGN_DEVICE = str_name;
 
-		str_name = "SCH.WAC.WAFER.DELAY.SEC";
-		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",1,0,3,"");
-		aVAR__SCH_WAC_WAFER_DELAY_SEC = str_name;
+			str_name = "SCH.POST.ALIGN.MODE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"DISABLE ENABLE","");
+			sVAR__SCH_POST_ALIGN_MODE = str_name;
+		}
 
-		str_name = "SCH.WAC.WAFER.DELAY.COUNT";
-		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
-		sVAR__SCH_WAC_WAFER_DELAY_COUNT = str_name;
+		// WAC.PMx ...
+		{
+			// INFO ...
+			{
+				str_name = "INFO.WAC.PMC.ACTIVE.FROM_TMC";
+				STD__ADD_STRING(str_name);
 
+				str_name = "INFO.WAC.PMC.STATE.FROM_TMC";
+				STD__ADD_STRING(str_name);
+
+				str_name = "INFO.WAC.PMC.ARM.TYPE.FROM_TMC";
+				STD__ADD_STRING(str_name);
+
+				str_name = "INFO.WAC.PMC.WFR.INFO.FROM_TMC";
+				STD__ADD_STRING(str_name);
+
+				str_name = "INFO.WAC.PMC.POS.ID.FROM_TMC";
+				STD__ADD_STRING(str_name);
+
+				str_name = "INFO.WAC.PMC.POS.SLOT.FROM_TMC";
+				STD__ADD_STRING(str_name);
+
+				str_name = "INFO.WAC.PMC.DELAY.COUNT.FROM_TMC";
+				STD__ADD_STRING(str_name);
+			}
+
+			// CFG ...
+			{
+				str_name = "SCH.WAC.PMC.WAFER.TYPE.TO_TMC";
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE  ALL  UNPROCESSED", "");
+			}
+
+			for(i=0; i<CFG_PM_LIMIT; i++)
+			{
+				int id = i + 1;
+
+				str_name.Format("SCH.WAC.PM%1d.USE.TO_TMC", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+
+				str_name.Format("SCH.WAC.PM%1d.PICK.CHECK.TO_TMC", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+
+				str_name.Format("SCH.WAC.PM%1d.PLACE.CHECK.TO_TMC", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+
+				str_name.Format("SCH.WAC.PM%1d.PRE_FRONT", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+
+				//
+				str_name.Format("SCH.WAC.PM%1d.POS.ID.TO_TMC", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "LLx LL1 LL2", "");
+
+				str_name.Format("SCH.WAC.PM%1d.POS.SLOT.TO_TMC", id);
+				STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "1 2", "");
+
+				str_name.Format("SCH.WAC.PM%1d.DELAY.SEC.TO_TMC", id);
+				STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0, 5, "");
+			}
+		}
+
+		// JOB.LPx ...
 		for(i=0; i<CFG_LP_LIMIT; i++)
 		{
 			str_name.Format("SCH.LP_JOB_LIST.%1d", i+1);
 			STD__ADD_STRING(str_name);
-			sVAR__SCH_LP_JOB_LIST[i] = str_name;
 		}
 	}
 
@@ -767,6 +851,42 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LPx_ACCESS_MODE_AUTO_CTRL_FLAG, str_name);
 	}
 
+	// LINK_TIME ...
+	{
+		// SYNC ...
+		{
+			str_name = "SYNC.LINK_TIME.ACTIVE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "OFF  ON", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__SYNC_LINK_TIME_ACTIVE, str_name);
+
+			str_name = "SYNC.LINK_TIME.REQ";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__SYNC_LINK_TIME_REQ ,str_name);
+		}
+
+		// CFG ...
+		{
+			str_name = "SYNC.LINK_TIME.CFG.USE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO  YES", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__SYNC_LINK_TIME_CFG_USE, str_name);
+
+			str_name = "SYNC.LINK_TIME.CFG.REF_TYPE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "HOUR  MINUTE", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__SYNC_LINK_TIME_CFG__REF_TYPE, str_name);
+
+			str_name = "SYNC.LINK_TIME.CFG.REF_TIME";
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "Hour or Min", 0, 1, 60, "");
+			LINK__VAR_ANALOG_CTRL(aCH__SYNC_LINK_TIME_CFG__REF_TIME, str_name);
+		}
+
+		// INFO ...
+		{
+			str_name = "SYNC.LINK_TIME.INFO";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__SYNC_LINK_TIME_INFO, str_name);
+		}
+	}
+
 	// ...
 	{
 		str_name = "TEST.RANGE.MINUS";
@@ -775,7 +895,7 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 
 	// ...
 	{
-		p_variable->Add__MONITORING_PROC(1.0, MON_ID__CFG_PORT);
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__INFO_REPORT);
 	}
 	return 1;
 }
@@ -855,6 +975,7 @@ int CObj__DB_CFG::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		p_variable->Set__VARIABLE_DATA(sVAR__ANI_PRESSURE_STATUS__ATM,"ATM");
 	}
 
+
 	// ...
 	{
 		CString var_data;
@@ -866,6 +987,51 @@ int CObj__DB_CFG::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// OBJ_PMx ...
+	{
+		CString def_name;
+		CString def_data;
+		CString ch_name;
+		CString obj_name;
+		CString var_name;
+
+		def_name = "DATA.PMx_SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		int pm_size = atoi(def_data);
+		if(pm_size > CFG_PM_LIMIT)			pm_size = CFG_PM_LIMIT;
+		
+		iDATA__PMx_SIZE = pm_size;
+	
+		for(int pm_i=0; pm_i<iDATA__PMx_SIZE; pm_i++)
+		{
+			int id = pm_i + 1;
+
+			def_name.Format("OBJ__PM%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+	
+			var_name = "MODULE.TIME";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PMx_MODULE_TIME_X[pm_i], obj_name,var_name);
+		}
+	}
+
+	// ..
+	{
+		SCX__SEQ_INFO x_seq_info;
+
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
+
+		// ...
+		int eqp_id;
+		CString eqp_name;
+		CString net_ip;
+		int net_port;
+
+		x_seq_info->Get__SEQ_INFO(eqp_name, eqp_id);
+		x_seq_info->Get__IP_PORT_INFO_OF_SEQ_ID(eqp_id, net_ip, net_port);
+
+		sCH__SERVER_NET_IP->Set__DATA(net_ip);
+	}
 	return 1;
 }
 
@@ -877,12 +1043,7 @@ int CObj__DB_CFG::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 }
 int CObj__DB_CFG::__CALL__MONITORING(id,p_variable,p_alarm)
 {
-	switch(id)
-	{
-		case MON_ID__CFG_PORT:
-			Mon__INFO_REPORT(p_alarm);
-			break;
-	}
+	if(id == MON_ID__INFO_REPORT)			Mon__INFO_REPORT(p_variable, p_alarm);
 
 	return 1;
 }

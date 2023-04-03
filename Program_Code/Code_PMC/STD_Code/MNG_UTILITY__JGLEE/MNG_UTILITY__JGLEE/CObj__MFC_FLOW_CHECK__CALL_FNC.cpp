@@ -609,6 +609,7 @@ Fnc__LOWER_PARTIAL_CHECK(CII_OBJECT__VARIABLE *p_variable,
 			sEXT_CH__FNC_MSG->Set__DATA(msg);
 		}
 
+		dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP->Set__DATA(STR__YES);
 		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_MODE__FNC_MFC__MFC_CONTROL) < 0)
 		{
 			CString str_msg;
@@ -1119,6 +1120,7 @@ Fnc__LOWER_MFC_CAL_CHECK(CII_OBJECT__VARIABLE *p_variable,
 				aEXT_CH__GAS_VLV__PARA_MFC_FLOW->Get__VALUE());
 		}
 
+		dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP->Set__DATA(STR__YES);
 		if(pOBJ_CTRL__GAS_VLV->Call__OBJECT(CMMD_MODE__FNC_MFC__MFC_CONTROL) < 0)
 		{
 			str_msg = "MFC Control - Aborted ...";

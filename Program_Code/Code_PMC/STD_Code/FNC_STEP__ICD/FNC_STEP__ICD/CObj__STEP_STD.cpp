@@ -165,6 +165,11 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "CFG.RCP.PART.USE.MATx_LF";	
 		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_MATx_LF, var_name);
+
+		//
+		var_name = "CFG.RCP.PART.USE.APC";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_APC, var_name);
 	}
 
 	// RCP ...
@@ -245,6 +250,10 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.RF.HF.POWER";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_RF_HF_POWER, var_name);
+
+			var_name = "RCP.RF.HF.MODE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "CW  Pulse", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_HF_MODE, var_name);
 		}
 		// RF.PULSE ...
 		{
@@ -806,6 +815,14 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// CH__DO_HF_PULSE_SET
+	{
+		def_name = "CH__DO_HF_PULSE_SET";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_RF_PULSE_SET, obj_name,var_name);
+	}
+
 	// OBJ MAT_LF ...
 	{
 		def_name = "OBJ__MAT_LF";
@@ -896,6 +913,21 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		if(def_check)
 		{
 			pOBJ_CTRL__LIFT_PIN = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			// ...
+			{
+				def_name = "DATA.LIFT_PIN.UP";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LIFT_PIN__UP = def_data;
+
+				def_name = "DATA.LIFT_PIN.DOWN";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LIFT_PIN__DOWN = def_data;
+			
+				def_name = "DATA.LIFT_PIN.MIDDLE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sDATA__LIFT_PIN__MIDDLE = def_data;
+			}
 		}
 	}
 

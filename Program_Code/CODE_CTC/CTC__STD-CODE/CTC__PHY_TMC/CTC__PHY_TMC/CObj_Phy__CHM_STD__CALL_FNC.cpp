@@ -8,7 +8,23 @@ int CObj_Phy__CHM_STD
 ::Call__INIT(CII_OBJECT__VARIABLE* p_variable,
 			 CII_OBJECT__ALARM *p_alarm)
 {
-	return Fnc__MODULE_OBJ(p_variable, _CMMD__INIT);
+	int r_flag = Fnc__MODULE_OBJ(p_variable, _CMMD__INIT);
+
+	if(r_flag > 0)
+	{
+		if(iActive__SIM_MODE > 0)
+		{
+			if(dEXT_CH_CFG__TRANSFER_MODE->Check__DATA(STR__VAC) > 0)
+			{
+				Call__PUMP(p_variable, p_alarm);
+			}
+			else
+			{
+				Call__VENT(p_variable, p_alarm);
+			}
+		}
+	}
+	return r_flag;
 }
 int CObj_Phy__CHM_STD
 ::Call__MAINT(CII_OBJECT__VARIABLE* p_variable,
@@ -38,8 +54,18 @@ int CObj_Phy__CHM_STD
 			aEXT_CH_CFG__REF_VAC_PRESSURE->Get__DATA(var_data);
 			ref_press = atof(var_data);
 
-			xCH__PRESSURE_VALUE->Get__DATA(var_data);
-			cur_press = atof(var_data);
+			if(iActive__SIM_MODE > 0)
+			{
+				cur_press = ref_press * 0.9;
+
+				var_data.Format("%.3f", cur_press);
+				xCH__PRESSURE_VALUE->Set__DATA(var_data);
+			}
+			else
+			{
+				xCH__PRESSURE_VALUE->Get__DATA(var_data);
+				cur_press = atof(var_data);
+			}
 
 			if(cur_press > ref_press)
 			{
@@ -85,8 +111,18 @@ int CObj_Phy__CHM_STD::Call__VENT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__A
 			aEXT_CH_CFG__REF_ATM_PRESSURE->Get__DATA(var_data);
 			ref_press = atof(var_data);
 
-			xCH__PRESSURE_VALUE->Get__DATA(var_data);
-			cur_press = atof(var_data);
+			if(iActive__SIM_MODE > 0)
+			{
+				cur_press = ref_press * 1.01;
+
+				var_data.Format("%.1f", cur_press);
+				xCH__PRESSURE_VALUE->Set__DATA(var_data);
+			}
+			else
+			{
+				xCH__PRESSURE_VALUE->Get__DATA(var_data);
+				cur_press = atof(var_data);
+			}
 
 			if(cur_press < ref_press)
 			{
@@ -119,4 +155,21 @@ int CObj_Phy__CHM_STD::Call__ISOLATE(CII_OBJECT__VARIABLE* p_variable)
 int CObj_Phy__CHM_STD::Call__PURGE(CII_OBJECT__VARIABLE* p_variable)
 {
 	return Fnc__MODULE_OBJ(p_variable, _CMMD__PURGE);
+}
+
+
+// ...
+int CObj_Phy__CHM_STD::Call__PMx_SV_OPEN(CII_OBJECT__VARIABLE* p_variable)
+{
+	CString ch_data = dCH__PARA_PMx_ID->Get__STRING();
+	xCH__TMC_CHM_PARA_PMx_ID->Set__DATA(ch_data);
+
+	return Fnc__MODULE_OBJ(p_variable, _CMMD__PMx_SV_OPEN);
+}
+int CObj_Phy__CHM_STD::Call__PMx_SV_CLOSE(CII_OBJECT__VARIABLE* p_variable)
+{
+	CString ch_data = dCH__PARA_PMx_ID->Get__STRING();
+	xCH__TMC_CHM_PARA_PMx_ID->Set__DATA(ch_data);
+
+	return Fnc__MODULE_OBJ(p_variable, _CMMD__PMx_SV_CLOSE);
 }

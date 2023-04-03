@@ -970,7 +970,7 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				{
 					def_name = "VAR__RF_AO_SET_POWER";
 					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, var_name);
-					LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AO_SET_POWER, obj_name,var_name);
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_AO_SET_POWER, obj_name,var_name);
 				}
 
 				// AI.FORWARD_POWER ...
@@ -1009,7 +1009,7 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				def_name = "CH__RF_AO_SET_POWER";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__RF_AO_SET_POWER, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_AO_SET_POWER, obj_name,var_name);
 			}
 
 			// AI.FORWARD_POWER ...

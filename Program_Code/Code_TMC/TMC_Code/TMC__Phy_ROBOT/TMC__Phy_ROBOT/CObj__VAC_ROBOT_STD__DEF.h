@@ -9,6 +9,7 @@ enum {NORMAL, ACTIVE_HANDOFF};
 
 // ...
 #define  CMMD__INIT					"INIT"
+#define  CMMD__SET_PARA				"SET.PARA"
 
 #define  CMMD__PICK					"PICK"
 #define  CMMD__PLACE				"PLACE"
@@ -50,6 +51,9 @@ enum {NORMAL, ACTIVE_HANDOFF};
 #define  STR__NO					"NO"
 #define  STR__NULL					"NULL"
 
+#define  STR__ON					"ON"
+#define  STR__OFF					"OFF"
+
 #define  STR__CLAMP					"CLAMP"
 #define  STR__UNCLAMP				"UNCLAMP"
 
@@ -59,16 +63,17 @@ enum {NORMAL, ACTIVE_HANDOFF};
 #define  STR__Extend				"Extend"
 #define  STR__None					"None"
 
+#define  STR__OK					"OK"
+#define  STR__HARD_ERROR			"HARD.ERROR"
+#define  STR__SOFT_ERROR			"SOFT.ERROR"
+#define  STR__NOT_USE				"NOT.USE"
+
+#define  STR__PICK					"PICK"
+#define  STR__PLACE					"PLACE"
+
 
 // ...
 #define  _ARM_A						"A"
 #define  _ARM_B						"B"
 #define  _ARM_AB					"AB"
 
-// ...
-#define  STR__PM1					"PM1"
-#define  STR__PM2					"PM2"
-#define  STR__PM3					"PM3"
-#define  STR__PM4					"PM4"
-#define  STR__PM5					"PM5"
-#define  STR__PM5					"PM6"

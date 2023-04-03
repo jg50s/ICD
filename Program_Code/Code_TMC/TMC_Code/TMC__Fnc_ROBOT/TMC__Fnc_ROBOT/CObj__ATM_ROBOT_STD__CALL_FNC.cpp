@@ -157,6 +157,20 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 	}
 	else if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 	{
+		CUIntArray l__slot_id;
+
+		// ...
+		{
+			int slot_id = atoi(para_slot);
+			l__slot_id.Add(slot_id);
+
+			if(para_arm.CompareNoCase(_ARM_AB) == 0)
+			{
+				slot_id = slot_id + 1;
+				l__slot_id.Add(slot_id);
+			}
+		}
+
 		// ...
 		{
 			str_log.Format("LL%1d : Call__%s", ll_index+1, LLx_CMMD__VENT);
@@ -171,11 +185,18 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 		}
 
 		// ...
+		CString para__ll_slot;
+
+		int slot_size = l__slot_id.GetSize();
+		for(int k=0; k<slot_size; k++)
 		{
-			str_log.Format("LL%1d(%s) : Call__DV_OPEN", ll_index+1,para_slot);
+			int slot_id = l__slot_id[k];
+			para__ll_slot.Format("%1d", slot_id);
+
+			str_log.Format("LL%1d (%s) : Call__DV_OPEN", ll_index+1, para__ll_slot);
 			xLOG_CTRL->WRITE__LOG(str_log);
 
-			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
+			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
 	
 			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.OPEN") < 0)
 			{
@@ -211,14 +232,38 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 	{
 		if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 		{
-			str_log.Format("LL%1d : CALL_DV_CLOSE --> ", ll_index+1);
-			xLOG_CTRL->WRITE__LOG(str_log);
+			CUIntArray l__slot_id;
 
-			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
-
-			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+			// ...
 			{
-				return -201;
+				int slot_id = atoi(para_slot);
+				l__slot_id.Add(slot_id);
+
+				if(para_arm.CompareNoCase(_ARM_AB) == 0)
+				{
+					slot_id = slot_id + 1;
+					l__slot_id.Add(slot_id);
+				}
+			}
+
+			// ...
+			CString para__ll_slot;
+
+			int slot_size = l__slot_id.GetSize();
+			for(int k=0; k<slot_size; k++)
+			{
+				int slot_id = l__slot_id[k];
+				para__ll_slot.Format("%1d", slot_id);
+
+				str_log.Format("LL%1d (%s) : CALL_DV_CLOSE --> ", ll_index+1, para__ll_slot);
+				xLOG_CTRL->WRITE__LOG(str_log);
+
+				aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
+
+				if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+				{
+					return -201;
+				}
 			}
 		}
 	}
@@ -297,6 +342,20 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 	}
 	else if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 	{
+		CUIntArray l__slot_id;
+
+		// ...
+		{
+			int slot_id = atoi(para_slot);
+			l__slot_id.Add(slot_id);
+
+			if(para_arm.CompareNoCase(_ARM_AB) == 0)
+			{
+				slot_id = slot_id + 1;
+				l__slot_id.Add(slot_id);
+			}
+		}
+
 		// ...
 		{
 			str_log.Format("LL%1d : Call__%s", ll_index+1, LLx_CMMD__VENT);
@@ -311,11 +370,18 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 		}
 
 		// ...
+		CString para__ll_slot;
+
+		int slot_size = l__slot_id.GetSize();
+		for(int k=0; k<slot_size; k++)
 		{
-			str_log.Format("LL%1d : Call__DV_OPEN", ll_index+1);
+			int slot_id = l__slot_id[k];
+			para__ll_slot.Format("%1d", slot_id);
+
+			str_log.Format("LL%1d (%s) : Call__DV_OPEN", ll_index+1, para__ll_slot);
 			xLOG_CTRL->WRITE__LOG(str_log);
 
-			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
+			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
 
 			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.OPEN") < 0)
 			{
@@ -351,14 +417,38 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 	{
 		if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 		{
-			str_log.Format("LL%1d : CALL_DV_CLOSE --> ", ll_index+1);
-			xLOG_CTRL->WRITE__LOG(str_log);
+			CUIntArray l__slot_id;
 
-			aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para_slot);
-
-			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+			// ...
 			{
-				return -201;
+				int slot_id = atoi(para_slot);
+				l__slot_id.Add(slot_id);
+
+				if(para_arm.CompareNoCase(_ARM_AB) == 0)
+				{
+					slot_id = slot_id + 1;
+					l__slot_id.Add(slot_id);
+				}
+			}
+
+			// ...
+			CString para__ll_slot;
+
+			int slot_size = l__slot_id.GetSize();
+			for(int k=0; k<slot_size; k++)
+			{
+				int slot_id = l__slot_id[k];
+				para__ll_slot.Format("%1d", slot_id);
+
+				str_log.Format("LL%1d (%s) : CALL_DV_CLOSE --> ", ll_index+1, para__ll_slot);
+				xLOG_CTRL->WRITE__LOG(str_log);
+
+				aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
+
+				if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+				{
+					return -201;
+				}
 			}
 		}
 	}

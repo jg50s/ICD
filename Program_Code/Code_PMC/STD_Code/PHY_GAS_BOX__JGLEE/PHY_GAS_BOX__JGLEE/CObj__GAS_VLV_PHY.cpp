@@ -42,6 +42,9 @@ int CObj__GAS_VLV_PHY::__DEFINE__VERSION_HISTORY(version)
 	return 1;
 }
 
+// ...
+#define  MON_ID__STATE_CHECK			1
+
 
 int CObj__GAS_VLV_PHY::__DEFINE__VARIABLE_STD(p_variable)
 {
@@ -58,6 +61,11 @@ int CObj__GAS_VLV_PHY::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "OBJ.MSG";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
+	}
+
+	// ...
+	{
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATE_CHECK);
 	}
 	return 1;
 }
@@ -99,6 +107,14 @@ int CObj__GAS_VLV_PHY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 
+	// OBJ : DB_SYS ...
+	{
+		def_name = "OBJ__DB_SYS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		var_name = "MON.ACTIVE.PROCESS.VALVE.READY.STATE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__MON_ACTIVE_PROCESS_VALVE_READY_STATE, obj_name,var_name);
+	}
 	
 	// GAS_LINE : PURGE VLV ...
 	{
@@ -328,5 +344,7 @@ int CObj__GAS_VLV_PHY::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 int CObj__GAS_VLV_PHY::__CALL__MONITORING(id,p_variable,p_alarm)
 {
+	if(id == MON_ID__STATE_CHECK)		Mon__STATE_CHECK(p_variable,p_alarm);
+
 	return 1;
 }

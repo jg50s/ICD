@@ -341,6 +341,10 @@
 					RelativePath=".\CObj__GAS_VLV_PHY__CALL_FNC.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\CObj__GAS_VLV_PHY__MON_STATE.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="CCommon_Def"

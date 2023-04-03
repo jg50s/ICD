@@ -13,7 +13,7 @@ void CObj_Phy__ROBOT_VAC
 
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
 
 		if(iPRC_STS < 0)
 		{
@@ -105,48 +105,68 @@ void CObj_Phy__ROBOT_VAC
 }
 
 void CObj_Phy__ROBOT_VAC
-::Update__MATERIAL_INFO()
+::Update__MATERIAL_INFO_TO_MODULE_LINK(const bool active__place_act,
+									   const bool active__data_reset)
 {
-	CString ch_data;
+	CString arm_type = sPara0__Arm_Type;
+	int arm_index = -1;
 
-	CString arm_type;
-	int i;
+		 if(arm_type.CompareNoCase(_ARM__A) == 0)			arm_index = 0;
+	else if(arm_type.CompareNoCase(_ARM__B) == 0)			arm_index = 1;
+	else													return;
 
-	for(i=0; i<CFG_ROBOT__ARM_SIZE; i++)
+	// ...
 	{
-		if(xCH__SLOT_STATUS[i]->Check__DATA(STR__NONE) > 0)
+		CString sch_name;
+
+		if(active__place_act)
 		{
-			continue;
-		}
-
-			 if(i == 0)		arm_type = "A";
-		else if(i == 1)		arm_type = "B";
-		else				continue;
-
-		// ...
-		IDS__SCH_MATERIAL_INFO db_info;
-
-		if(xI_SCH_MATERIAL_CTRL->Get__MATERIAL_INFO(arm_type,db_info) > 0)
-		{
-			xCH__SLOT_LOTID[i]->Set__DATA(db_info.sLOT_ID);
-			xCH__SLOT_MATERIALID[i]->Set__DATA(db_info.sMATERIAL_ID);
-
-			ch_data.Format("%1d", db_info.iSRC__PTN);
-			xCH__SLOT_LPx_PTN[i]->Set__DATA(ch_data);
-
-			ch_data.Format("%1d", db_info.iSRC__STN);
-			xCH__SLOT_LPx_STN[i]->Set__DATA(ch_data);
-
-			xCH__SLOT_PPID[i]->Set__DATA(db_info.sPPID);
+			sch_name = arm_type;
 		}
 		else
 		{
-			xCH__SLOT_LOTID[i]->Set__DATA("");
-			xCH__SLOT_MATERIALID[i]->Set__DATA("");
+			sch_name.Format("%s-%s", sPara1__Module, sPara2__Slot);
+		}
 
-			xCH__SLOT_LPx_PTN[i]->Set__DATA("");
-			xCH__SLOT_LPx_STN[i]->Set__DATA("");
-			xCH__SLOT_PPID[i]->Set__DATA("");
+		// ...
+		bool active__data_clear = false;
+
+		if(active__data_reset)
+		{
+			active__data_clear = true;
+		}
+		else
+		{
+			IDS__SCH_MATERIAL_INFO db_info;
+			CString ch_data;
+
+			if(xI_SCH_MATERIAL_CTRL->Get__MATERIAL_INFO(sch_name, db_info) > 0)
+			{
+				xCH__SLOT_LOTID[arm_index]->Set__DATA(db_info.sLOT_ID);
+				xCH__SLOT_MATERIALID[arm_index]->Set__DATA(db_info.sMATERIAL_ID);
+
+				ch_data.Format("%1d", db_info.iSRC__PTN);
+				xCH__SLOT_LPx_PTN[arm_index]->Set__DATA(ch_data);
+	
+				ch_data.Format("%1d", db_info.iSRC__STN);
+				xCH__SLOT_LPx_STN[arm_index]->Set__DATA(ch_data);
+
+				xCH__SLOT_PPID[arm_index]->Set__DATA(db_info.sPPID);
+			}
+			else
+			{
+				active__data_clear = true;
+			}
+		}
+
+		if(active__data_clear)
+		{
+			xCH__SLOT_LOTID[arm_index]->Set__DATA("");
+			xCH__SLOT_MATERIALID[arm_index]->Set__DATA("");
+
+			xCH__SLOT_LPx_PTN[arm_index]->Set__DATA("");
+			xCH__SLOT_LPx_STN[arm_index]->Set__DATA("");
+			xCH__SLOT_PPID[arm_index]->Set__DATA("");
 		}
 
 		// ...
@@ -155,32 +175,43 @@ void CObj_Phy__ROBOT_VAC
 			CString log_bff;
 			
 			log_msg = "\n";
+
 			log_bff.Format("Material Info - Arm(%s) ... \n", arm_type);
 			log_msg += log_bff;
 
+			if(active__data_clear)
+			{
+				log_msg += " * DATA.CLEAR \n";
+			}
+			else
+			{
+				if(active__place_act)		log_msg += " * PLACE.ACTION \n";
+				else						log_msg += " * PICK.ACTION \n";
+			}
+
 			log_bff.Format(" * %s <- %s \n",
-						   xCH__SLOT_LOTID[i]->Get__CHANNEL_NAME(),
-						   xCH__SLOT_LOTID[i]->Get__STRING());
+						   xCH__SLOT_LOTID[arm_index]->Get__CHANNEL_NAME(),
+						   xCH__SLOT_LOTID[arm_index]->Get__STRING());
 			log_msg += log_bff;
 
 			log_bff.Format(" * %s <- %s \n",
-						   xCH__SLOT_MATERIALID[i]->Get__CHANNEL_NAME(),
-						   xCH__SLOT_MATERIALID[i]->Get__STRING());
+						   xCH__SLOT_MATERIALID[arm_index]->Get__CHANNEL_NAME(),
+						   xCH__SLOT_MATERIALID[arm_index]->Get__STRING());
 			log_msg += log_bff;
 
 			log_bff.Format(" * %s <- %s \n",
-						   xCH__SLOT_LPx_PTN[i]->Get__CHANNEL_NAME(),
-						   xCH__SLOT_LPx_PTN[i]->Get__STRING());
+						   xCH__SLOT_LPx_PTN[arm_index]->Get__CHANNEL_NAME(),
+						   xCH__SLOT_LPx_PTN[arm_index]->Get__STRING());
 			log_msg += log_bff;
 
 			log_bff.Format(" * %s <- %s \n",
-						   xCH__SLOT_LPx_STN[i]->Get__CHANNEL_NAME(),
-						   xCH__SLOT_LPx_STN[i]->Get__STRING());
+						   xCH__SLOT_LPx_STN[arm_index]->Get__CHANNEL_NAME(),
+						   xCH__SLOT_LPx_STN[arm_index]->Get__STRING());
 			log_msg += log_bff;
 
 			log_bff.Format(" * %s <- %s \n",
-						   xCH__SLOT_PPID[i]->Get__CHANNEL_NAME(),
-						   xCH__SLOT_PPID[i]->Get__STRING());
+						   xCH__SLOT_PPID[arm_index]->Get__CHANNEL_NAME(),
+						   xCH__SLOT_PPID[arm_index]->Get__STRING());
 			log_msg += log_bff;
 
 			xI_LOG_CTRL->WRITE__LOG(log_msg);
@@ -198,9 +229,9 @@ void CObj_Phy__ROBOT_VAC
 	// ...
 	int arm_i = -1;
 
-		 if(para_arm.CompareNoCase("A") == 0)		arm_i = 0;
-	else if(para_arm.CompareNoCase("B") == 0)		arm_i = 1;
-	else											return;
+		 if(para_arm.CompareNoCase(_ARM__A) == 0)		arm_i = 0;
+	else if(para_arm.CompareNoCase(_ARM__B) == 0)		arm_i = 1;
+	else												return;
 
 	// ...
 	int lp_id;
@@ -213,11 +244,17 @@ void CObj_Phy__ROBOT_VAC
 		CString wfr_ttile = xCH__SLOT_TITLE[arm_i]->Get__STRING();
 
 		if(Macro__Get_Wafer_Info(wfr_ttile, lp_id,lp_slot) < 0)			
+		{
 			return;
+		}
 
+		// ...
 		IDS__SCH_MATERIAL_INFO ds_info;
+
 		if(xI_SCH_MATERIAL_CTRL->Get__MATERIAL_INFO(lp_id,lp_slot, ds_info) < 0)			
+		{
 			return;
+		}
 
 		wfr_lotid = ds_info.sLOT_ID;
 	}
@@ -226,9 +263,11 @@ void CObj_Phy__ROBOT_VAC
 		IDS__SCH_MATERIAL_INFO ds_info;
 
 		if(xI_SCH_MATERIAL_CTRL->Get__MATERIAL_INFO(para_arm, ds_info) < 0)			
+		{
 			return;
+		}
 		
-		lp_id = ds_info.iSRC__PTN;
+		lp_id   = ds_info.iSRC__PTN;
 		lp_slot = ds_info.iSRC__STN;
 
 		wfr_lotid = ds_info.sLOT_ID;

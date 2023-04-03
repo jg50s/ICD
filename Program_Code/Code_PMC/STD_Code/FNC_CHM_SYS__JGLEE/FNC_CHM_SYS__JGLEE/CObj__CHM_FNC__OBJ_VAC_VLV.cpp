@@ -17,10 +17,7 @@ int CObj__CHM_FNC
 
 	if(active__apc_vlv)
 	{
-		if(bActive__VAT_OBJ)
-		{
-			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)		r_flag = -11;
-		}
+		if(VAT__CALL_OBJECT(p_variable,p_alarm, _APC_CMMD__CLOSE) < 0)		r_flag = -11;
 	}
 
 	if(bActive__PHY_VAC_VLV)
@@ -49,17 +46,11 @@ int CObj__CHM_FNC
 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
-		if(bActive__VAT_OBJ)
-		{
-			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)			r_flag = -11;
-		}
+		if(VAT__CALL_OBJECT(p_variable,p_alarm, _APC_CMMD__CLOSE) < 0)		r_flag = -11;
 	}
 	else 
 	{
-		if(bActive__VAT_OBJ)
-		{
-			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)			r_flag = -11;
-		}
+		if(VAT__CALL_OBJECT(p_variable,p_alarm, _APC_CMMD__CLOSE) < 0)		r_flag = -12;
 	}
 
 	if(bActive__PHY_VAC_VLV)
@@ -76,17 +67,11 @@ int CObj__CHM_FNC
 
 	if(bActive__OBJ_CTRL__TURBO_PUMP)
 	{
-		if(bActive__VAT_OBJ)
-		{
-			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE) < 0)			r_flag = -11;
-		}
+		if(VAT__CALL_OBJECT(p_variable,p_alarm, _APC_CMMD__CLOSE) < 0)		r_flag = -11;
 	}
 	else 
 	{
-		if(bActive__VAT_OBJ)
-		{
-			if(pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__OPEN) < 0)			r_flag = -11;
-		}
+		if(VAT__CALL_OBJECT(p_variable,p_alarm, _APC_CMMD__OPEN) < 0)		r_flag = -12;
 	}
 
 	if(bActive__PHY_VAC_VLV)
@@ -119,42 +104,42 @@ int CObj__CHM_FNC
 }
 
 int CObj__CHM_FNC
-::Call__VAC_VLV__APC_CLOSE()
+::Call__VAC_VLV__APC_CLOSE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	if(bActive__VAT_OBJ)
 	{
-		return pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__CLOSE);
+		return VAT__CALL_OBJECT(p_variable, p_alarm, _APC_CMMD__CLOSE);
 	}
 	return -1;
 }
 int CObj__CHM_FNC
-::Call__VAC_VLV__APC_OPEN()
+::Call__VAC_VLV__APC_OPEN(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
 	if(bActive__VAT_OBJ)
 	{
-		return pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__OPEN);
+		return VAT__CALL_OBJECT(p_variable, p_alarm, _APC_CMMD__OPEN);
 	}
 	return -1;
 }
 int CObj__CHM_FNC
-::Call__VAC_VLV__APC_POSITION(const double set_pos)
+::Call__VAC_VLV__APC_POSITION(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const double set_pos)
 {
 	if(bActive__VAT_OBJ)
 	{
 		aEXT_CH__VAT_PARA_POSITION->Set__VALUE(set_pos);
 
-		return pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__POSITION);
+		return VAT__CALL_OBJECT(p_variable, p_alarm, _APC_CMMD__POSITION);
 	}
 	return -1;
 }
 
 int CObj__CHM_FNC
-::Call__VAC_VLV__APC_BALLAST_CTRL(const bool active_xfer)
+::Call__VAC_VLV__APC_BALLAST_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active_xfer)
 {
 	if(bActive__VAT_OBJ)
 	{
-		if(active_xfer)			return pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__BALLAST_TRANSFER);
-		else					return pOBJ_CTRL__VAT->Call__OBJECT(_APC_CMMD__BALLAST_CHAMBER);
+		if(active_xfer)			return VAT__CALL_OBJECT(p_variable, p_alarm, _APC_CMMD__BALLAST_TRANSFER);
+		else					return VAT__CALL_OBJECT(p_variable, p_alarm, _APC_CMMD__BALLAST_CHAMBER);
 	}
 	return -1;
 }
@@ -163,8 +148,8 @@ int CObj__CHM_FNC
 {
 	if(bActive__VAT_OBJ)
 	{
-		if(active_xfer)			return pOBJ_CTRL__VAT->Run__OBJECT(_APC_CMMD__BALLAST_TRANSFER);
-		else					return pOBJ_CTRL__VAT->Run__OBJECT(_APC_CMMD__BALLAST_CHAMBER);
+		if(active_xfer)			return VAT__RUN_OBJECT(_APC_CMMD__BALLAST_TRANSFER);
+		else					return VAT__RUN_OBJECT(_APC_CMMD__BALLAST_CHAMBER);
 	}
 	return -1;
 }

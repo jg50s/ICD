@@ -87,6 +87,20 @@ void CObj__PMP_IO
 				}
 
 				if(cur__press_torr >= cfg__limit_torr)							active__vac_sns = false;
+
+				// ...
+				{
+					ch_data.Format("%.3f", cur__press_torr);
+					sCH__MON_PRESSURE_TORR->Set__DATA(ch_data);
+
+					//
+					double cur__press_mtorr = cur__press_torr * 1000.0;
+
+					if(cur__press_torr > 1)			ch_data.Format("%.0f", cur__press_mtorr);
+					else							ch_data.Format("%.1f", cur__press_mtorr);
+
+					sCH__MON_PRESSURE_mTORR->Set__DATA(ch_data);
+				}
 			}
 
 			if(active__vac_sns)			dCH__MON_VAC_ON_SNS->Set__DATA(STR__ON);

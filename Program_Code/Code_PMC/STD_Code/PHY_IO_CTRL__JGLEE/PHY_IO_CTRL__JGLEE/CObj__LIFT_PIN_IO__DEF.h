@@ -27,3 +27,6 @@
 #define  _PIN_TYPE__DI_SNS						1
 #define  _PIN_TYPE__AI_SNS						2
 
+#define _PIN_CHECK_MODE__STD					1
+#define _PIN_CHECK_MODE__TOP					2
+

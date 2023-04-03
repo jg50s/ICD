@@ -211,19 +211,35 @@ int CObj__VAT_IO
 				else							sCH__MON_DO_APC_CTRL_MODE->Set__DATA(STR__UNKNOWN);
 
 				//
-				str_hexa = sEXT_CH__SO_APC_SETPOINT_DATA->Get__STRING();
-				i_hexa = x_utility.Get__Hexa_From_String(str_hexa);
-				
-				ch_data.Format("%.2f", i_hexa * (100.0 / iLINK_HEXA__MAX_VALUE));
-				sCH__MON_AO_APC_SETPOINT_DATA->Set__DATA(ch_data);
-
-				//
 				str_hexa = sEXT_CH__SO_APC_SETPOINT_TYPE->Get__STRING();
 				i_hexa = x_utility.Get__Hexa_From_String(str_hexa);
 
-					 if(i_hexa == 0)			sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__PRESSURE);
-				else if(i_hexa == 1)			sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__POSITION);
-				else							sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__UNKNOWN);
+				if(i_hexa == 0)
+				{
+					sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__PRESSURE);
+
+					//
+					str_hexa = sEXT_CH__SO_APC_PRESSURE_DATA->Get__STRING();
+					int set_hexa = x_utility.Get__Hexa_From_String(str_hexa);
+
+					ch_data.Format("%.2f", i_hexa * (100.0 / iLINK_HEXA__MAX_VALUE));
+					sCH__MON_AO_APC_SETPOINT_DATA->Set__DATA(ch_data);
+				}
+				else if(i_hexa == 1)
+				{
+					sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__POSITION);
+
+					//
+					str_hexa = sEXT_CH__SO_APC_POSITION_DATA->Get__STRING();
+					int set_hexa = x_utility.Get__Hexa_From_String(str_hexa);
+
+					ch_data.Format("%.2f", i_hexa * (100.0 / iLINK_HEXA__MAX_VALUE));
+					sCH__MON_AO_APC_SETPOINT_DATA->Set__DATA(ch_data);
+				}
+				else
+				{
+					sCH__MON_DO_APC_SETPOINT_TYPE->Set__DATA(STR__UNKNOWN);
+				}
 			}
 
 			// SI.STATE ...

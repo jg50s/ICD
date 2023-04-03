@@ -16,7 +16,7 @@ int  CObj__MFC_IO::
 Call__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	double cfg_max  = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
-	double set_flow = aCH__MON_MFC_SET_FLOW->Get__VALUE();
+	double set_flow = cfg_max;
 
 	return Fnc__CONTROL(set_flow, 1, cfg_max);
 }
@@ -35,16 +35,11 @@ Call__PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	int i;
 
-	if(iSIZE__VLV_IN < 1)
+	if(iSIZE__VLV_PURGE_IN < 1)
 	{
-		return -1;
+		return 0;
 	}
 
-	for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
-	{
-		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__OPEN);
-	}
-	
 	for(i=0; i<iSIZE__VLV_IN; i++)
 	{
 		dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
@@ -67,8 +62,12 @@ Call__PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 	{
 		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__OPEN);
 	}
+	for(i=0; i<iSIZE__VLV_PURGE_IN; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__OPEN);
+	}
 
-	//
+	// ...
 	double cfg_max = aCH__CFG_MFC_MAX_VALUE->Get__VALUE();
 
 	return Fnc__SET_FLOW(cfg_max);
@@ -78,9 +77,9 @@ Call__GAS_LINE_PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alar
 {
 	int i;
 
-	if(iSIZE__VLV_IN < 1)
+	if(iSIZE__VLV_PURGE_IN < 1)
 	{
-		return -1;
+		return 0;
 	}
 
 	for(i=0; i<iSIZE__VLV_IN; i++)
@@ -124,15 +123,16 @@ Call__CHM_LINE_PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alar
 		dEXT_CH__IO_VLV_PURGE_IN_X[i]->Set__DATA(STR__CLOSE);
 	}
 
+	for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
+	{
+		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__CLOSE);
+	}
+
 	for(i=0; i<iSIZE__VLV_IN; i++)
 	{
 		dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__CLOSE);
 	}
-	
-	for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
-	{
-		dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__CLOSE);
-	}
+
 	for(i=0; i<iSIZE__VLV_OUT_CENTER; i++)
 	{
 		dEXT_CH__IO_VLV_OUT_CENTER_X[i]->Set__DATA(STR__CLOSE);
@@ -141,13 +141,11 @@ Call__CHM_LINE_PURGE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alar
 	{
 		dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
 	}
-
-	for(i=0; i<iSIZE__VLV_PURGE_OUT; i++)
+	for(i=0; i<iSIZE__VLV_OUT_ALL; i++)
 	{
-		dEXT_CH__IO_VLV_PURGE_OUT_X[i]->Set__DATA(STR__OPEN);
+		dEXT_CH__IO_VLV_OUT_ALL_X[i]->Set__DATA(STR__OPEN);
 	}
 
-	//
 	return Fnc__SET_FLOW(0.0);
 }
 
@@ -160,6 +158,14 @@ int  CObj__MFC_IO::Call__CONTROL(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__A
 }
 int  CObj__MFC_IO
 ::Fnc__CONTROL(const double set_flow, const int open_mode, const double cfg_max)
+{
+	_Open__VALVE(set_flow, open_mode, cfg_max);
+
+	Fnc__SET_FLOW(set_flow);
+	return 1;
+}
+int  CObj__MFC_IO
+::_Open__VALVE(const double set_flow, const int open_mode, const double cfg_max)
 {
 	int i;
 
@@ -179,7 +185,7 @@ int  CObj__MFC_IO
 
 		CString cfg__flow_mode = dCH__CFG_FLOW_MODE->Get__STRING();
 
-			 if(cfg__flow_mode.CompareNoCase("CENTER") == 0)		active__flow_center = true;
+		if(cfg__flow_mode.CompareNoCase("CENTER") == 0)		active__flow_center = true;
 		else if(cfg__flow_mode.CompareNoCase("EDGE")   == 0)		active__flow_edge   = true;
 		else
 		{
@@ -214,7 +220,7 @@ int  CObj__MFC_IO
 			for(i=0; i<iSIZE__VLV_OUT_EDGE; i++)
 				dEXT_CH__IO_VLV_OUT_EDGE_X[i]->Set__DATA(STR__CLOSE);
 		}
-		
+
 		for(i=0; i<iSIZE__VLV_IN; i++)
 		{
 			dEXT_CH__IO_VLV_IN_X[i]->Set__DATA(STR__OPEN);
@@ -225,7 +231,6 @@ int  CObj__MFC_IO
 		_Close__ALL_VALVE();
 	}
 
-	Fnc__SET_FLOW(set_flow);
 	return 1;
 }
 int  CObj__MFC_IO
@@ -269,6 +274,9 @@ int  CObj__MFC_IO
 int  CObj__MFC_IO
 ::Fnc__RAMP_CTRL(CII_OBJECT__VARIABLE* p_variable, const double set_flow, const int open_mode, const double cfg_max)
 {
+	_Open__VALVE(set_flow, open_mode, cfg_max);
+
+	// ...
 	double para__ramp_sec = aCH__PARA_RAMP_SEC->Get__VALUE();
 
 	if(para__ramp_sec > 0.1)
@@ -281,7 +289,12 @@ int  CObj__MFC_IO
 			CCommon_Utility m_fnc;
 
 			CString ch_data = sEXT_CH__IO_MFC_SET_HEXA->Get__STRING();
-			ref_value = m_fnc.Get__Hexa_From_String(ch_data);
+
+			CStringArray l_data;
+			m_fnc.Get__StringArrray_From_String(ch_data, " ", l_data);
+
+			double ref_hexa = (double) m_fnc.Get__Hexa_From_String(l_data, true);
+			ref_value = cfg_max * (ref_hexa / iLINK_DATA__MAX_FLOW);
 		}
 		else
 		{
@@ -289,26 +302,67 @@ int  CObj__MFC_IO
 		}
 
 		int loop_size = (int) para__ramp_sec / ref__loop_sec;
-		double inc_set = (set_flow - ref_value) / loop_size;
+		double dif_set = set_flow - ref_value;
+		double inc_set = dif_set / loop_size;
 		double set_value = ref_value;
 
-		Fnc__SET_FLOW(0.0);
-
-		// ...
-		SCX__TIMER_CTRL x_timer_ctrl;
-
-		while(loop_size > 0)
+		double inc_min = cfg_max * 0.01;
+		if(abs(dif_set) < inc_min)
 		{
-			loop_size--;
-			x_timer_ctrl->POLL(ref__loop_sec);
+			sCH__OBJ_TIMER->Set__DATA("__");
+		}
+		else
+		{
+			SCX__TIMER_CTRL x_timer_ctrl;
 
-			if(p_variable->Check__CTRL_ABORT() > 0)
+			SCX__ASYNC_TIMER_CTRL x_timer_count;
+			x_timer_count->REGISTER__COUNT_CHANNEL_NAME(sCH__OBJ_TIMER->Get__CHANNEL_NAME());
+			x_timer_count->START__COUNT_UP(9999);
+
+			while(loop_size > 0)
 			{
-				return -1;
-			}
+				loop_size--;
+				x_timer_ctrl->POLL(ref__loop_sec);
 
-			set_value += inc_set;
-			Fnc__SET_FLOW(set_value);
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					return -1;
+				}
+
+				// ...
+				bool active__trg_set = false;
+
+				set_value += inc_set;
+				
+				if(inc_set > 0)		
+				{
+					if(set_value > set_flow)
+					{
+						set_value = set_flow;
+
+						active__trg_set = true;
+					}
+				}
+				else  if(inc_set < 0)
+				{
+					if(set_value < set_flow)
+					{
+						set_value = set_flow;
+			
+						active__trg_set = true;
+					}
+				}
+				else
+				{
+					set_value = set_flow;
+
+					active__trg_set = true;
+				}
+
+				Fnc__SET_FLOW(set_value);
+
+				if(active__trg_set)			break;
+			}
 		}
 	}
 

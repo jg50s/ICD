@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "CObj_Phy__ROBOT_ATM.h"
 
+#include "Macro_Function.h"
+
 
 //-------------------------------------------------------------------------
 CObj_Phy__ROBOT_ATM::CObj_Phy__ROBOT_ATM()
@@ -230,6 +232,20 @@ int CObj_Phy__ROBOT_ATM::__DEFINE__VARIABLE_STD(p_variable)
 
 	// ALIGN PARAMETER ...
 	{
+		str_name = "CFG.ALIGN.RETRY";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "count", 0, 1, 5, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_ALIGN_RETRY, str_name);
+
+		str_name = "CUR.ALIGN.RETRY";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__CUR_ALIGN_RETRY, str_name);
+
+		//
+		str_name = "TARGET.PMx.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE  ENABLE","");
+		LINK__VAR_DIGITAL_CTRL(dCH__TARGET_PMx_MODE, str_name);
+
+		//
 		str_name = "TARGET.LLx.MODE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE  ENABLE","");
 		LINK__VAR_DIGITAL_CTRL(dCH__TARGET_LLx_MODE, str_name);
@@ -259,11 +275,11 @@ int CObj_Phy__ROBOT_ATM::__DEFINE__VARIABLE_STD(p_variable)
 		//
 		str_name = "TARGET.LLx.NAME.SET";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__TARGET_LLx_NAME_SET, str_name);
+		LINK__VAR_STRING_CTRL(sCH__TARGET_LLx_NAME_SET_AL, str_name);
 
 		str_name = "TARGET.LLx.SLOT.SET";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__TARGET_LLx_SLOT_SET, str_name);
+		LINK__VAR_STRING_CTRL(sCH__TARGET_LLx_SLOT_SET_AL, str_name);
 
 		//
 		str_name = "TARGET.LLx.NAME.GET";
@@ -371,7 +387,7 @@ int CObj_Phy__ROBOT_ATM::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "ANI.ROTE.ARM";
-		STD__ADD_DIGITAL(str_name, "A B");
+		STD__ADD_DIGITAL(str_name, "A  B  AB");
 		LINK__VAR_DIGITAL_CTRL(dCH__ANI_ROTE_ARM, str_name);
 
 		//
@@ -394,9 +410,26 @@ int CObj_Phy__ROBOT_ATM::__DEFINE__VARIABLE_STD(p_variable)
 
 	// LLx : Scheduler - Dual Only Input & Output ...
 	{
+		str_name = "CFG.LLx_CTRL.ONLY_INPUT_OUTPUT.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "SINGLE DUAL", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_CTRL_ONLY_INPUT_OUTPUT_MODE, str_name);
+
+		//
 		str_name = "CFG.DUAL_ARM_MOVING_AT_THE_SAME_TIME";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_MOVING_AT_THE_SAME_TIME, str_name);
+
+		str_name = "CFG.DUAL_ARM_MOVING_AT_LPx";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_MOVING_AT_LPx, str_name);
+
+		str_name = "CFG.DUAL_ARM_MOVING_AT_STx";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_MOVING_AT_STx, str_name);
+
+		str_name = "CFG.DUAL_ARM_MOVING_AT_LLx";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DUAL_ARM_MOVING_AT_LLx, str_name);
 	}
 
 	// LLx : CONTRAINT ...
@@ -418,18 +451,17 @@ int CObj_Phy__ROBOT_ATM::__DEFINE__VARIABLE_STD(p_variable)
 	}
 
 	// CONFIG ...
+	for(i=0; i<CFG_ROBOT__ARM_SIZE; i++)
 	{
-		dVAR__CFG_A_ARM_USE_FLAG = "CFG.A.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_A_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
+		CString arm_name;
 
-		dVAR__CFG_B_ARM_USE_FLAG = "CFG.B.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_B_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
+			 if(i == 0)			arm_name = "A";
+		else if(i == 1)			arm_name = "B";
+		else					continue;
 
-		dVAR__CFG_C_ARM_USE_FLAG = "CFG.C.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_C_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
-
-		dVAR__CFG_D_ARM_USE_FLAG = "CFG.D.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_D_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
+		str_name.Format("CFG.%s.ARM.USE.FLAG", arm_name);
+		STD__ADD_DIGITAL(str_name, DSP__ENABLE_DISABLE);
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ARM_USE_FLAG_X[i], str_name);
 	}
 
 	// SIM CFG ...
@@ -524,6 +556,16 @@ int CObj_Phy__ROBOT_ATM::__DEFINE__VARIABLE_STD(p_variable)
 		x_file_ctrl->Create__LOG_DIR(ref_root);
 
 		sDir_WFR_DATA = ref_root;
+	}
+
+	// INFO.LLx ...
+	for(i=0; i<CFG_LLx_LIMIT; i++)
+	{
+		int id = i + 1;
+
+		str_name.Format("INFO.LL%1d.RESERVE", id);
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__INFO_LL_RESERVE_X[i], str_name);
 	}
 
 	// ...
@@ -778,6 +820,12 @@ int CObj_Phy__ROBOT_ATM::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
+		SCX__SEQ_INFO x_seq_info;
+		iACTIVE__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
+	}
+
+	// ...
+	{
 		xCH__UPPER_OBJ__PARA_MODULE->Set__DATA("LBA");
 
 		xCH__UPPER_OBJ__PARA_PLACE_ARM->Set__DATA("A");
@@ -945,8 +993,8 @@ int CObj_Phy__ROBOT_ATM
 	CString str__trg_llx_name;
 	CString str__trg_llx_slot;
 
-	sCH__TARGET_LLx_NAME_SET->Get__DATA(str__trg_llx_name);
-	sCH__TARGET_LLx_SLOT_SET->Get__DATA(str__trg_llx_slot);
+	sCH__TARGET_LLx_NAME_SET_AL->Get__DATA(str__trg_llx_name);
+	sCH__TARGET_LLx_SLOT_SET_AL->Get__DATA(str__trg_llx_slot);
 
 	if(mode.CompareNoCase(sMODE__LP_MAP) == 0)
 	{
@@ -1126,14 +1174,113 @@ int CObj_Phy__ROBOT_ATM
 	}
 
 
-	if((mode.CompareNoCase(sMODE__PICK)   == 0)
-	|| (mode.CompareNoCase(sMODE__XPICK)  == 0)
-	|| (mode.CompareNoCase(sMODE__PLACE)  == 0)
-	|| (mode.CompareNoCase(sMODE__XPLACE) == 0))
+	// ...
+	bool active__pick_act  = false;
+	bool active__place_act = false;
+
+	if((mode.CompareNoCase(sMODE__PICK)  == 0)		
+	|| (mode.CompareNoCase(sMODE__XPICK) == 0))
+	{
+		active__pick_act = true;
+	}
+	else if((mode.CompareNoCase(sMODE__PLACE)  == 0)		
+		 || (mode.CompareNoCase(sMODE__XPLACE) == 0))
+	{
+		active__place_act = true;
+	}
+
+	if(active__pick_act)
+	{
+		// ALx ...
+		{
+			int al_id = Macro__ALx_ID(sPara1__Module);
+			int al_slot = atoi(sPara2__Slot);
+
+			if(al_id > 0)
+			{
+				CString arm_type = sPara0__Arm_Type;
+
+				CString str__trg_name = sCH__TARGET_LLx_NAME_SET_AL->Get__STRING();
+				CString str__trg_slot = sCH__TARGET_LLx_SLOT_SET_AL->Get__STRING();
+
+				if(arm_type.CompareNoCase(_ARM__A) == 0)
+				{
+					if(xCH__SLOT_STATUS[0]->Check__DATA(STR__NONE) < 0)
+					{
+						sCH__TARGET_LLx_NAME_SET_OF_ARM_A->Set__DATA(str__trg_name);
+						sCH__TARGET_LLx_SLOT_SET_OF_ARM_A->Set__DATA(str__trg_slot);
+					}
+				}
+				else if(arm_type.CompareNoCase(_ARM__B) == 0)
+				{
+					if(xCH__SLOT_STATUS[1]->Check__DATA(STR__NONE) < 0)
+					{
+						sCH__TARGET_LLx_NAME_SET_OF_ARM_B->Set__DATA(str__trg_name);
+						sCH__TARGET_LLx_SLOT_SET_OF_ARM_B->Set__DATA(str__trg_slot);
+					}
+				}
+			}
+		}	
+	}
+	else if(active__place_act)
+	{
+		CString arm_type = sPara0__Arm_Type;
+
+		if(arm_type.CompareNoCase(_ARM__A) == 0)
+		{
+			if(xCH__SLOT_STATUS[0]->Check__DATA(STR__NONE) > 0)
+			{
+				sCH__TARGET_LLx_NAME_SET_OF_ARM_A->Set__DATA("");
+				sCH__TARGET_LLx_SLOT_SET_OF_ARM_A->Set__DATA("");
+			}
+		}
+		else if(arm_type.CompareNoCase(_ARM__B) == 0)
+		{
+			if(xCH__SLOT_STATUS[1]->Check__DATA(STR__NONE) > 0)
+			{
+				sCH__TARGET_LLx_NAME_SET_OF_ARM_B->Set__DATA("");
+				sCH__TARGET_LLx_SLOT_SET_OF_ARM_B->Set__DATA("");
+			}
+		}	
+	}
+
+	if((active__pick_act)
+	|| (active__place_act))
 	{
 		Report__MATERIAL_INFO(mode);
 	}
 
+	if(active__place_act)
+	{
+		// LL.Index ...
+		int ll_index = Macro__Get_LLx_INDEX(sPara1__Module);
+		if(ll_index >= 0)
+		{
+			dCH__INFO_LL_RESERVE_X[ll_index]->Set__DATA(STR__OFF);
+		}
+
+		// Wafer.Count ...
+		int wfr_count = 0;
+		int i;
+
+		for(i=0; i<CFG_ROBOT__ARM_SIZE; i++)
+		{
+			if(dCH__CFG_ARM_USE_FLAG_X[i]->Check__DATA(STR__ENABLE) < 0)	continue;
+			if(xCH__SLOT_STATUS[i]->Check__DATA(STR__NONE) > 0)				continue;
+
+			wfr_count++;
+		}
+
+		if(wfr_count < 1)
+		{
+			for(i=0; i<CFG_LLx_LIMIT; i++)
+			{
+				dCH__INFO_LL_RESERVE_X[i]->Set__DATA(STR__OFF);	
+			}
+		}
+	}
+
+	//
 	if(mode.CompareNoCase(sMODE__LP_MAP) == 0)
 	{
 		CString log_string;
@@ -1273,6 +1420,87 @@ int CObj_Phy__ROBOT_ATM
 		log_string += bff_log;
 
 		xI_LOG_CTRL->WRITE__LOG(log_string);
+	}
+
+	// ALx Result ...
+	{
+		if((mode.CompareNoCase(sMODE__PICK) == 0)
+		&& ((sPara1__Module.CompareNoCase("AL1") == 0) || (sPara1__Module.CompareNoCase("AL2") == 0)))
+		{
+			CString log_msg;
+			CString log_bff;
+
+			log_msg  = "\n";
+			log_msg += " Align Result ... \n";
+
+			// ...
+			int arm_index = -1;
+
+				 if(sPara0__Arm_Type.CompareNoCase(_ARM__A) == 0)		arm_index = 0;
+			else if(sPara0__Arm_Type.CompareNoCase(_ARM__B) == 0)		arm_index = 1;
+
+			if(arm_index >= 0)
+			{
+				log_bff.Format(" * %s [%s : %s] -> ARM(%s) \n", 
+								sPara1__Module,
+								xCH__SLOT_STATUS[arm_index]->Get__STRING(),
+								xCH__SLOT_TITLE[arm_index]->Get__STRING(),
+								sPara0__Arm_Type);
+				log_msg += log_bff;
+			}
+			else
+			{
+				log_bff.Format(" * %s [?? : ??] -> ARM(%s) \n", 
+								sPara1__Module,
+								sPara0__Arm_Type);
+				log_msg += log_bff;
+			}
+
+			// ...
+			{
+				log_bff.Format("  ** %s <- %s \n", 
+								dCH__TARGET_PMx_MODE->Get__CHANNEL_NAME(), 
+								dCH__TARGET_PMx_MODE->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								dCH__TARGET_LLx_MODE->Get__CHANNEL_NAME(), 
+								dCH__TARGET_LLx_MODE->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								dCH__TARGET_LLx_SLOT_CHECK->Get__CHANNEL_NAME(),
+								dCH__TARGET_LLx_SLOT_CHECK->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								sCH__TARGET_LLx_NAME_SET_AL->Get__CHANNEL_NAME(),
+								sCH__TARGET_LLx_NAME_SET_AL->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								sCH__TARGET_LLx_SLOT_SET_AL->Get__CHANNEL_NAME(),
+								sCH__TARGET_LLx_SLOT_SET_AL->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								sCH__TARGET_LLx_NAME_GET->Get__CHANNEL_NAME(),
+								sCH__TARGET_LLx_NAME_GET->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								sCH__TARGET_LLx_SLOT_GET->Get__CHANNEL_NAME(),
+								sCH__TARGET_LLx_SLOT_GET->Get__STRING());
+				log_msg += log_bff;
+
+				log_bff.Format("  ** %s <- %s \n", 
+								sCH__TARGET_LLx_ANGLE_GET->Get__CHANNEL_NAME(),
+								sCH__TARGET_LLx_ANGLE_GET->Get__STRING());
+				log_msg += log_bff;
+			}
+
+			xI_LOG_CTRL->WRITE__LOG(log_msg);
+		}
 	}
 
 	// ...

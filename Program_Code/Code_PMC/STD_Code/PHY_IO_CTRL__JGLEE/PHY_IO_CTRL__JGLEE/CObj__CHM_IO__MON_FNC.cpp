@@ -375,19 +375,69 @@ int CObj__CHM_IO
 		// MFC INFO ...
 		if(iDATA__MFC_SIZE > 0)
 		{
-			double cur__total_flow = 0.0;
-
-			for(i=0; i<iDATA__MFC_SIZE; i++)
+			// MFC - TOTAL SET FLOW ...
 			{
-				cur__total_flow += aEXT_CH__MFC_FLOW_SET_X[i]->Get__VALUE();
+				double cur__total_flow = 0.0;
+
+				for(i=0; i<iDATA__MFC_SIZE; i++)
+				{
+					cur__total_flow += aEXT_CH__MFC_FLOW_SET_X[i]->Get__VALUE();
+				}
+
+					 if(cur__total_flow >= 1000.0)		ch_data.Format("%.0f", cur__total_flow);
+				else if(cur__total_flow >= 100.0)		ch_data.Format("%.1f", cur__total_flow);
+				else if(cur__total_flow >= 10.0)		ch_data.Format("%.2f", cur__total_flow);
+				else									ch_data.Format("%.3f", cur__total_flow);
+
+				sEXT_CH__MFC_TOTAL_FLOW_SET->Set__DATA(ch_data);
 			}
 
-				 if(cur__total_flow >= 1000.0)		ch_data.Format("%.0f", cur__total_flow);
-			else if(cur__total_flow >= 100.0)		ch_data.Format("%.1f", cur__total_flow);
-			else if(cur__total_flow >= 10.0)		ch_data.Format("%.2f", cur__total_flow);
-			else									ch_data.Format("%.3f", cur__total_flow);
+			// Chamber Interlock ...
+			if((sEXT_CH__CHM_VAC_SNS->Check__DATA(STR__ON) < 0)
+			&& (dCH__CFG_ALL_MFC_CLOSE_WHEN_VAC_SNS_OFF->Check__DATA(STR__YES) > 0))
+			{
+				bool active__err_check = false;
+				CString err_msg;
+				CString err_bff;
 
-			sEXT_CH__MFC_TOTAL_FLOW_SET->Set__DATA(ch_data);
+				for(i=0; i<iDATA__MFC_SIZE; i++)
+				{
+					double cur__mfc_flow = aEXT_CH__MFC_FLOW_SET_X[i]->Get__VALUE();
+					if(cur__mfc_flow > 0.001)
+					{
+						active__err_check = true;
+					
+						err_bff.Format(" MFC%02d \n", i+1);
+						err_msg += err_bff;
+
+						pOBJ__NFC_CTRL_X[i]->Call__OBJECT("CLOSE");
+					}
+				}
+
+				if(active__err_check)
+				{
+					int alarm_id = ALID__ALL_MFC_CLOSE_WHEN_VAC_SNS_OFF;
+					CString alm_msg;
+					CString r_act;
+					
+					alm_msg  = "All of the MFCs below are closed. \n";
+					alm_msg += err_msg;
+
+					p_alarm->Check__ALARM(alarm_id, r_act);
+					p_alarm->Post__ALARM_With_MESSAGE(alarm_id, alm_msg);
+				}
+			}
+		}
+
+		// REVERSE_VALVE ...
+		{
+			for(i=0; i<iDATA__REVERSE_VALVE_SIZE; i++)
+			{
+				ch_data = dEXT_CH__REVERSE_VALVE_REF_X[i]->Get__STRING();
+
+				if(ch_data.CompareNoCase(STR__OPEN) == 0)		dEXT_CH__REVERSE_VALVE_SUB_X[i]->Set__DATA(STR__CLOSE);
+				else											dEXT_CH__REVERSE_VALVE_SUB_X[i]->Set__DATA(STR__OPEN);
+			}
 		}
 	}
 

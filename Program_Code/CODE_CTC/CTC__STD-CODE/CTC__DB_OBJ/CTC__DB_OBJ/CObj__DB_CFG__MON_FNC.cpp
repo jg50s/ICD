@@ -3,18 +3,28 @@
 #include "CObj__DB_CFG__ALID.h"
 
 
-#define STR__YES          "YES"
+#define STR__YES			"YES"
+#define STR__NO				"NO"
+
+#define STR__OFF			"OFF"
+#define STR__ON				"ON"
+
+#define STR__HOUR			"HOUR"
+#define STR__MINUTE			"MINUTE"
 
 
 // ...
-void CObj__DB_CFG::Mon__INFO_REPORT(CII_OBJECT__ALARM *p_alarm)
+void CObj__DB_CFG::Mon__INFO_REPORT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	SCX__SEQ_INFO x_seq_info;
-	int sim_mode = x_seq_info->Is__SIMULATION_MODE();
+	// ...
+	{
+		xFA_300mm_Link->Open("");	
+		xI_SCH_MATERIAL_CTRL->Link__SERVICE_DB("");
+	}
 
 	// ...
-	xFA_300mm_Link->Open("");	
-	xI_SCH_MATERIAL_CTRL->Link__SERVICE_DB("");
+	int link__ref_time;
+	int link__time_count = 0;
 
 	// ...
 	CI_FA_VARIABLE_CTRL *p_var_ctrl = xFA_300mm_Link->Get_FA_VARIABLE_CTRL();
@@ -22,13 +32,16 @@ void CObj__DB_CFG::Mon__INFO_REPORT(CII_OBJECT__ALARM *p_alarm)
 	CString main_name;
 	CString sub_name;
 	CString var_data;
+
 	CStringArray l_data;
 	int i;
 
 
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(1.0);
+		link__time_count++;
+
 
 		if(p_var_ctrl != NULL)
 		{
@@ -66,7 +79,7 @@ void CObj__DB_CFG::Mon__INFO_REPORT(CII_OBJECT__ALARM *p_alarm)
 			}
 		}
 
-		if(sim_mode > 0)
+		if(iActive__SIM_MODE > 0)
 		{
 			if(dCH__SCH_TEST_CFG_SIM_ALARM_REPORT->Check__DATA(STR__YES) > 0)
 			{
@@ -95,7 +108,7 @@ void CObj__DB_CFG::Mon__INFO_REPORT(CII_OBJECT__ALARM *p_alarm)
 					p_alarm->Post__ALARM_With_MESSAGE(alarm_id, alm_msg);
 				}
 
-				for(i=0; i<CFG_PM_LIMIT; i++)
+				for(i=0; i<iDATA__PMx_SIZE; i++)
 				{
 					if(dCH__SCH_TEST_CFG_PMX_DUMMY_BY_CTC[i]->Check__DATA(STR__YES) > 0)
 					{
@@ -113,21 +126,105 @@ void CObj__DB_CFG::Mon__INFO_REPORT(CII_OBJECT__ALARM *p_alarm)
 		}
 		else
 		{
-			if(dCH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA("NO") < 0)
+			if(dCH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__NO) < 0)
 			{
-				dCH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Set__DATA("NO");
+				dCH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Set__DATA(STR__NO);
 			}
 
-			//
-			for(i=0; i<CFG_PM_LIMIT; i++)
+			for(i=0; i<iDATA__PMx_SIZE; i++)
 			{
-				if(dCH__SCH_TEST_CFG_PMX_DUMMY_BY_CTC[i]->Check__DATA("NO") < 0)
+				if(dCH__SCH_TEST_CFG_PMX_DUMMY_BY_CTC[i]->Check__DATA(STR__NO) < 0)
 				{
-					dCH__SCH_TEST_CFG_PMX_DUMMY_BY_CTC[i]->Set__DATA("NO");
+					dCH__SCH_TEST_CFG_PMX_DUMMY_BY_CTC[i]->Set__DATA(STR__NO);
 				}
 			}
 		}
 
-		// ...
+		// LINK_TIME ...
+		{
+			bool active__time_change = false;
+
+			if(dCH__SYNC_LINK_TIME_REQ->Check__DATA(STR__YES) > 0)
+			{
+				dCH__SYNC_LINK_TIME_REQ->Set__DATA(STR__NO);
+
+				active__time_change = true;
+			}
+
+			if(dCH__SYNC_LINK_TIME_CFG_USE->Check__DATA(STR__YES) > 0)
+			{
+				int cfg_data = (int) aCH__SYNC_LINK_TIME_CFG__REF_TIME->Get__VALUE();
+
+				if(dCH__SYNC_LINK_TIME_CFG__REF_TYPE->Check__DATA(STR__HOUR) > 0)
+				{
+					link__ref_time = cfg_data * 3600;
+				}
+				else
+				{
+					link__ref_time = cfg_data * 60;
+				}
+
+				if(link__time_count >= link__ref_time)
+				{
+					active__time_change = true;
+				}
+			}
+			else
+			{
+				link__time_count = 0;
+			}
+
+			if(active__time_change)
+			{
+				Fnc__Set_Module_Time();
+
+				link__time_count = 0;
+			}
+
+			// ...
+			{
+				int cur_sec  = link__time_count % 60;
+				int cur_min  = link__time_count / 60;
+				int cur_hour = cur_min / 60;
+
+				cur_min = cur_min - (cur_hour * 60);
+
+				var_data.Format("%02d:%02d:%02d", cur_hour,cur_min,cur_sec);
+				sCH__SYNC_LINK_TIME_INFO->Set__DATA(var_data);
+			}	
+		}
 	}
 }
+
+void CObj__DB_CFG::Fnc__Set_Module_Time()
+{
+	// ...
+	{
+		SYSTEMTIME cur_time;
+		GetLocalTime(&cur_time);
+
+		CString	str_time;
+		str_time.Format("%00004d%002d%002d%002d%002d%002d",
+						cur_time.wYear,
+						cur_time.wMonth, 
+						cur_time.wDay,
+						cur_time.wHour,
+						cur_time.wMinute,
+						cur_time.wSecond);
+
+		for(int i=0; i<iDATA__PMx_SIZE; i++)
+		{
+			sEXT_CH__PMx_MODULE_TIME_X[i]->Set__DATA(str_time);
+		}
+	}
+
+	// ...
+	{
+		dCH__SYNC_LINK_TIME_ACTIVE->Set__DATA(STR__ON);
+	
+		Sleep(1000);	
+
+		dCH__SYNC_LINK_TIME_ACTIVE->Set__DATA(STR__OFF);
+	}
+}
+

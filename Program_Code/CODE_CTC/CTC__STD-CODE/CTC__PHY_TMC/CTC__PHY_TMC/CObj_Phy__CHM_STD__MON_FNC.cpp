@@ -20,7 +20,8 @@ Mon__All_State(CII_OBJECT__VARIABLE *p_variable,
 	
 	while(1)
 	{
-		Sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
+
 
 		loop_count++;
 		if(loop_count >= 5)			loop_count = 0;
@@ -30,7 +31,7 @@ Mon__All_State(CII_OBJECT__VARIABLE *p_variable,
 		{
 			if(iPRC_STS < 0)
 			{
-				CString obj_ctrl = xCH__OBJ_CTRL->Get__STRING();
+				CString obj_ctrl = xCH__TMC_CHM_CTRL->Get__STRING();
 
 				if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
 				{

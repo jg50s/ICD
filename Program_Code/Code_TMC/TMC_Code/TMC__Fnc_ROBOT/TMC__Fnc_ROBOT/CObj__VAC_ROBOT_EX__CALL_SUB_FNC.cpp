@@ -47,6 +47,48 @@ Fnc__RUN_ROTATE(CII_OBJECT__VARIABLE* p_variable,
 }
 
 
+// ...
+int  CObj__VAC_ROBOT_EX::
+Fnc__PASSIVE_TRANSFER_READY(const int pm_index)
+{
+	if(!bActive__PMx_Passive_Use)
+	{
+		return 1;
+	}
+
+	if(bActive__Single_Handoff)
+	{
+		CString ch_data;
+
+		ch_data.Format("%1d", pm_index + 1);
+		aEXT_CH__PARA_PMC_ID->Set__DATA(ch_data);
+
+		return pOPR_PMx_HANDOFF_CTRL->Call__OBJECT(CMMD__TRANSFER_READY);
+	}
+
+	return pOPR_PMC_HANDOFF_X[pm_index]->Call__OBJECT(CMMD__TRANSFER_READY);
+}
+int  CObj__VAC_ROBOT_EX::
+Fnc__PASSIVE_TRANSFER_END(const int pm_index)
+{
+	if(!bActive__PMx_Passive_Use)
+	{
+		return 1;
+	}
+
+	if(bActive__Single_Handoff)
+	{
+		CString ch_data;
+
+		ch_data.Format("%1d", pm_index + 1);
+		aEXT_CH__PARA_PMC_ID->Set__DATA(ch_data);
+
+		return pOPR_PMx_HANDOFF_CTRL->Call__OBJECT(CMMD__TRANSFER_END);
+	}
+
+	return pOPR_PMC_HANDOFF_X[pm_index]->Call__OBJECT(CMMD__TRANSFER_END);
+}
+
 int  CObj__VAC_ROBOT_EX::
 Fnc__CALL_PICK(CII_OBJECT__VARIABLE* p_variable,
 			   CII_OBJECT__ALARM* p_alarm,
@@ -54,6 +96,19 @@ Fnc__CALL_PICK(CII_OBJECT__VARIABLE* p_variable,
 			   const CString& para_module,
 			   const CString& para_slot)
 {
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index >= 0)
+	{
+		if(dEXT_CH__PMx_CFG_HANDSHAKE_MODE[pm_index]->Check__DATA(STR__PASSIVE) > 0)
+		{	
+			if(Is__TRANSFER_READY_TO_PICK(p_alarm, "TRANSFER.READY", "PICK", pm_index) < 0)
+			{
+				return -101;
+			}
+		}
+	}
+
+	// ...
 	CStringArray l_para;
 
 	l_para.Add(para_arm);
@@ -70,6 +125,19 @@ Fnc__CALL_PLACE(CII_OBJECT__VARIABLE* p_variable,
 				const CString& para_module,
 				const CString& para_slot)
 {
+	int pm_index = Macro__CHECK_PMx_INDEX(para_module);
+	if(pm_index >= 0)
+	{
+		if(dEXT_CH__PMx_CFG_HANDSHAKE_MODE[pm_index]->Check__DATA(STR__PASSIVE) > 0)
+		{	
+			if(Is__TRANSFER_READY_TO_PLACE(p_alarm, false, "TRANSFER.READY", "PLACE", pm_index) < 0)
+			{
+				return -101;
+			}
+		}
+	}
+
+	// ...
 	CStringArray l_para;
 
 	l_para.Add(para_arm);
@@ -85,17 +153,17 @@ int  CObj__VAC_ROBOT_EX::
 Fnc__PMx_SV_CLOSE(const int pmc_id)
 {
 	if((dEXT_CH__CFG_SETUP_TEST_MODE->Check__DATA(STR__ENABLE) > 0)
-		&& (dEXT_CH__CFG_SETUP_LLx_DOOR_SLOT_VLV_CONTROL->Check__DATA(STR__DISABLE) > 0))
+	&& (dEXT_CH__CFG_SETUP_LLx_DOOR_SLOT_VLV_CONTROL->Check__DATA(STR__DISABLE) > 0))
 	{
 		return 1;
 	}
 
 	// ...
-	CString var_data;
-	var_data.Format("%1d", pmc_id);
+	CString para__pm_data;
+	para__pm_data.Format("%1d", pmc_id);
 	
 	CStringArray l__pmc_id;
-	l__pmc_id.Add(var_data);
+	l__pmc_id.Add(para__pm_data);
 
 	return pTMC_VLV__OBJ_CTRL->Call__OBJ_MODE("PMC_SV_CLOSE", l__pmc_id);
 }
@@ -103,17 +171,17 @@ int  CObj__VAC_ROBOT_EX::
 Run__PMx_SV_CLOSE(const int pmc_id)
 {
 	if((dEXT_CH__CFG_SETUP_TEST_MODE->Check__DATA(STR__ENABLE) > 0)
-		&& (dEXT_CH__CFG_SETUP_LLx_DOOR_SLOT_VLV_CONTROL->Check__DATA(STR__DISABLE) > 0))
+	&& (dEXT_CH__CFG_SETUP_LLx_DOOR_SLOT_VLV_CONTROL->Check__DATA(STR__DISABLE) > 0))
 	{
 		return 1;
 	}
 
 	// ...
-	CString var_data;
-	var_data.Format("%1d", pmc_id);
+	CString para__pm_data;
+	para__pm_data.Format("%1d", pmc_id);
 
 	CStringArray l__pmc_id;
-	l__pmc_id.Add(var_data);
+	l__pmc_id.Add(para__pm_data);
 
 	return pTMC_VLV__OBJ_CTRL->Run__OBJ_MODE("PMC_SV_CLOSE", l__pmc_id);
 }
@@ -128,11 +196,11 @@ Fnc__PMx_SV_TRANSFER_OPEN(const int pmc_id)
 	}
 
 	// ...
-	CString var_data;
-	var_data.Format("%1d", pmc_id);
+	CString para__pm_id;
+	para__pm_id.Format("%1d", pmc_id);
 
 	CStringArray l__pmc_id;
-	l__pmc_id.Add(var_data);
+	l__pmc_id.Add(para__pm_id);
 
 	return pTMC_VLV__OBJ_CTRL->Call__OBJ_MODE("PMC_SV_TRANSFER_OPEN", l__pmc_id);
 }
@@ -146,17 +214,17 @@ Fnc__Run_PMx_SV_TRANSFER_OPEN(const int pmc_id)
 	}
 
 	// ...
-	CString var_data;
-	var_data.Format("%1d", pmc_id);
+	CString para__pm_id;
+	para__pm_id.Format("%1d", pmc_id);
 
 	CStringArray l__pmc_id;
-	l__pmc_id.Add(var_data);
+	l__pmc_id.Add(para__pm_id);
 
 	return pTMC_VLV__OBJ_CTRL->Run__OBJ_MODE("PMC_SV_TRANSFER_OPEN", l__pmc_id);
 }
 int  CObj__VAC_ROBOT_EX::
 Fnc__Wait_PMx_SV_TRANSFER_OPEN(const int pmc_id)
-{
+{	
 
 	return pTMC_VLV__OBJ_CTRL->When__OBJECT();
 }
@@ -230,7 +298,7 @@ Sub_OBJCALL_PMC_ACT_HANDOFF(const int pmc_index, const CString obj_mode)
 			double pmc_id = pmc_index + 1.0;
 			aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
 
-			int retVal = pOPR_PMx_HANDOFF->Call__OBJECT(obj_mode);
+			int retVal = pOPR_PMx_HANDOFF_CTRL->Call__OBJECT(obj_mode);
 			if(retVal != OBJ_AVAILABLE)
 			{
 				str_log.Format("[Call__ACT_HOFF] TMC->PM%1d Call Mode: %s Failed, retVal : %d", pmc_index+1, obj_mode, retVal);
@@ -243,7 +311,7 @@ Sub_OBJCALL_PMC_ACT_HANDOFF(const int pmc_index, const CString obj_mode)
 		}
 		else
 		{
-			int retVal = pOPR_PMC_HANDOFF[pmc_index]->Call__OBJECT(obj_mode);
+			int retVal = pOPR_PMC_HANDOFF_X[pmc_index]->Call__OBJECT(obj_mode);
 			if(retVal != OBJ_AVAILABLE)
 			{
 				str_log.Format("[Call__ACT_HOFF] TMC->PM%1d Call Mode: %s Failed, retVal : %d", pmc_index+1, obj_mode, retVal);
@@ -280,7 +348,7 @@ Sub_OBJRUN_PMC_ACT_HANDOFF(const int pmc_index, const CString obj_mode)
 			double pmc_id = pmc_index + 1.0;
 			aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
 
-			int retVal = pOPR_PMx_HANDOFF->Run__OBJECT(obj_mode);
+			int retVal = pOPR_PMx_HANDOFF_CTRL->Run__OBJECT(obj_mode);
 			if(retVal != OBJ_AVAILABLE)
 			{
 				str_log.Format("[Run__ACT_HOFF] TMC->PM[%1d] Call Mode: %s Failed, retVal : %d", pmc_index+1, obj_mode, retVal);
@@ -293,7 +361,7 @@ Sub_OBJRUN_PMC_ACT_HANDOFF(const int pmc_index, const CString obj_mode)
 		}
 		else
 		{
-			int retVal = pOPR_PMC_HANDOFF[pmc_index]->Run__OBJECT(obj_mode);
+			int retVal = pOPR_PMC_HANDOFF_X[pmc_index]->Run__OBJECT(obj_mode);
 			if(retVal != OBJ_AVAILABLE)
 			{
 				str_log.Format("[Run__ACT_HOFF] TMC->PMC Call Mode: %s Failed, retVal : %d", obj_mode, retVal);
@@ -347,7 +415,7 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 			if(bActive__Single_Handoff)
 			{
 				CString pm_status;
-				pOPR_PMx_HANDOFF->Get__OBJECT_STATUS(pm_status);
+				pOPR_PMx_HANDOFF_CTRL->Get__OBJECT_STATUS(pm_status);
 
 				str_log.Format("[Fnc__ACT_HOFF_PICK] : PMC_HANDOFF Status : %s", pm_status);
 				Fnc__APP_LOG(str_log);
@@ -362,11 +430,11 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 					CStringArray l__para_id;
 					l__para_id.Add(para_id);
 
-					pOPR_PMx_HANDOFF->Call__OBJ_MODE("INIT", l__para_id);
+					pOPR_PMx_HANDOFF_CTRL->Call__OBJ_MODE("INIT", l__para_id);
 				};
 	
 				// ...
-				int r_flag = pOPR_PMx_HANDOFF->When__OBJECT();
+				int r_flag = pOPR_PMx_HANDOFF_CTRL->When__OBJECT();
 
 				str_log.Format("[Fnc__ACT_HOFF_PICK] TMC->PMC Call Mode: When retVal : %d", r_flag);
 				Fnc__APP_LOG(str_log);
@@ -381,18 +449,18 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 			else
 			{
 				CString pm_status;
-				pOPR_PMC_HANDOFF[p_index]->Get__OBJECT_STATUS(pm_status);
+				pOPR_PMC_HANDOFF_X[p_index]->Get__OBJECT_STATUS(pm_status);
 	
 				str_log.Format("[Fnc__ACT_HOFF_PICK] : PMC_HANDOFF Status : %s", pm_status);
 				Fnc__APP_LOG(str_log);
 
 				if(pm_status.CompareNoCase("AVAILABLE") != 0)
 				{
-					pOPR_PMC_HANDOFF[p_index]->Call__OBJECT("INIT");
+					pOPR_PMC_HANDOFF_X[p_index]->Call__OBJECT("INIT");
 				}
 
 				// ...
-				int r_flag = pOPR_PMC_HANDOFF[p_index]->When__OBJECT();
+				int r_flag = pOPR_PMC_HANDOFF_X[p_index]->When__OBJECT();
 	
 				str_log.Format("[Fnc__ACT_HOFF_PICK] TMC->PMC Call Mode: When retVal : %d", r_flag);
 				Fnc__APP_LOG(str_log);
@@ -503,7 +571,7 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 		}
 	}
 
-	// CHECK : PIN UP ...
+	// CHECK : PIN DOWN ...
 	{
 		int k_limit = l__stn_name.GetSize();
 
@@ -515,7 +583,7 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 			if(p_index <  0)				return -101;
 			if(p_index >= iSIZE__PMx)		return -102;
 
-			if(Is__PIN_DOWN_STS(p_alarm, "PICK", "RETRACT", p_index) < 0)
+			if(Is__PIN_DOWN_OR_MIDDLE_STS(p_alarm, "PICK", "RETRACT", p_index) < 0)
 			{
 				return -16;
 			}	
@@ -524,31 +592,6 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 
 	Fnc__CHANGE_MATERIAL_INFO(-1,arm_type,stn_name,stn_slot);
 
-	/*
-	// ROBOT: RETRACT
-	{
-		int k_limit = l__arm_type.GetSize();
-
-		for(int k=0; k<k_limit; k++)
-		{
-			CString cur__arm_type = l__arm_type[k];
-			CString cur__stn_name = l__stn_name[k];
-			CString cur__stn_slot = l__stn_slot[k];
-
-			// ...
-			CStringArray l_para;
-
-			l_para.Add(cur__arm_type);
-			l_para.Add(cur__stn_name);
-			l_para.Add(cur__stn_slot);
-
-			if(pROBOT__OBJ_CTRL->Call__OBJ_MODE(CMMD__RETRACT, l_para) < 0)
-			{
-				return -22;
-			}
-		}
-	}
-	*/
 	// ROBOT: RETRACT
 	{
 		CStringArray l_para;
@@ -556,6 +599,9 @@ Fnc__ACT_HOFF_PICK(CII_OBJECT__VARIABLE* p_variable,
 		l_para.Add(arm_type);
 		l_para.Add(stn_name);
 		l_para.Add(stn_slot);
+
+		dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_REQ->Set__DATA(STR__ON);
+		dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_ACT->Set__DATA(STR__PICK);
 
 		if(pROBOT__OBJ_CTRL->Call__OBJ_MODE(CMMD__RETRACT, l_para) < 0)
 		{
@@ -602,7 +648,7 @@ Fnc__ACT_HOFF_PLACE(CII_OBJECT__VARIABLE* p_variable,
 			if(bActive__Single_Handoff)
 			{
 				CString pm_status;
-				pOPR_PMx_HANDOFF->Get__OBJECT_STATUS(pm_status);
+				pOPR_PMx_HANDOFF_CTRL->Get__OBJECT_STATUS(pm_status);
 
 				str_log.Format("[Fnc__ACT_HOFF_PLACE] : PMC_HANDOFF Status : %s", pm_status);
 				Fnc__APP_LOG(str_log);
@@ -612,11 +658,11 @@ Fnc__ACT_HOFF_PLACE(CII_OBJECT__VARIABLE* p_variable,
 					int pmc_id = p_index + 1;
 					aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
 
-					pOPR_PMx_HANDOFF->Call__OBJECT("INIT");
+					pOPR_PMx_HANDOFF_CTRL->Call__OBJECT("INIT");
 				}	
 
 				// ...
-				int r_flag = pOPR_PMx_HANDOFF->When__OBJECT();
+				int r_flag = pOPR_PMx_HANDOFF_CTRL->When__OBJECT();
 
 				str_log.Format("[Fnc__ACT_HOFF_PLACE] TMC->PMC Call Mode: When retVal : %d", r_flag);
 				Fnc__APP_LOG(str_log);
@@ -631,18 +677,18 @@ Fnc__ACT_HOFF_PLACE(CII_OBJECT__VARIABLE* p_variable,
 			else
 			{
 				CString pm_status;
-				pOPR_PMC_HANDOFF[p_index]->Get__OBJECT_STATUS(pm_status);
+				pOPR_PMC_HANDOFF_X[p_index]->Get__OBJECT_STATUS(pm_status);
 
 				str_log.Format("[Fnc__ACT_HOFF_PLACE] : PMC_HANDOFF Status : %s", pm_status);
 				Fnc__APP_LOG(str_log);
 
 				if(pm_status.CompareNoCase("AVAILABLE") != 0)
 				{
-					pOPR_PMC_HANDOFF[p_index]->Call__OBJECT("INIT");
+					pOPR_PMC_HANDOFF_X[p_index]->Call__OBJECT("INIT");
 				}	
 
 				// ...
-				int r_flag = pOPR_PMC_HANDOFF[p_index]->When__OBJECT();
+				int r_flag = pOPR_PMC_HANDOFF_X[p_index]->When__OBJECT();
 
 				str_log.Format("[Fnc__ACT_HOFF_PLACE] TMC->PMC Call Mode: When retVal : %d", r_flag);
 				Fnc__APP_LOG(str_log);
@@ -668,7 +714,7 @@ Fnc__ACT_HOFF_PLACE(CII_OBJECT__VARIABLE* p_variable,
 			int p_index = Macro__CHECK_PMx_INDEX(cur__stn_name);
 			if(p_index < 0)			return -11;
 
-			if(Is__TRANSFER_READY_TO_PLACE(p_alarm, "PLACE", "EXTEND", p_index) < 0)
+			if(Is__TRANSFER_READY_TO_PLACE(p_alarm, true, "PLACE", "EXTEND", p_index) < 0)
 			{
 				return -101;
 			}
@@ -755,34 +801,6 @@ Fnc__ACT_HOFF_PLACE(CII_OBJECT__VARIABLE* p_variable,
 
 	Fnc__CHANGE_MATERIAL_INFO(1,arm_type,stn_name,stn_slot);
 
-	/*
-	// ROBOT : RETRACT
-	{
-		int k_limit = l__arm_type.GetSize();
-
-		for(int k=0; k<k_limit; k++)
-		{
-			CString cur__arm_type = l__arm_type[k];
-			CString cur__stn_name = l__stn_name[k];
-			CString cur__stn_slot = l__stn_slot[k];
-
-			int p_index = Macro__CHECK_PMx_INDEX(cur__stn_name);
-			if(p_index < 0)			return -141;
-
-			// ...
-			CStringArray l__cmmd_para;
-
-			l__cmmd_para.Add(cur__arm_type);
-			l__cmmd_para.Add(cur__stn_name);
-			l__cmmd_para.Add(cur__stn_slot);
-
-			if(pROBOT__OBJ_CTRL->Call__OBJ_MODE(CMMD__RETRACT, l__cmmd_para) < 0)
-			{
-				return -142;
-			}
-		}
-	}
-	*/
 	// ROBOT : RETRACT
 	{
 		CStringArray l__cmmd_para;
@@ -790,6 +808,9 @@ Fnc__ACT_HOFF_PLACE(CII_OBJECT__VARIABLE* p_variable,
 		l__cmmd_para.Add(arm_type);
 		l__cmmd_para.Add(stn_name);
 		l__cmmd_para.Add(stn_slot);
+
+		dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_REQ->Set__DATA(STR__ON);
+		dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_ACT->Set__DATA(STR__PLACE);
 
 		if(pROBOT__OBJ_CTRL->Call__OBJ_MODE(CMMD__RETRACT, l__cmmd_para) < 0)
 		{
@@ -809,16 +830,64 @@ Is__TRANSFER_READY_TO_PICK(CII_OBJECT__ALARM* p_alarm,
 	CString str_shutter;
 	CString str_pin;
 	CString str_cr_pos;
-	int r_cnt = 0;
-
-	SCX__TIMER_CTRL xTimer;
-	xTimer->REGISTER__ABORT_OBJECT(sObject_Name);
-
 
 LOOP_RETRY:
 
+	if(iSIM__PMC_DUMMY_MODE < 0)
+	{
+		// Shutter ...
+		if(dEXT_CH__PMx_CFG_USE_SHUTTER[pm_index]->Check__DATA(STR__YES) > 0)
+		{
+			sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__DATA(str_shutter);
+		}
+		else
+		{
+			str_shutter = STR__OPEN;
+		}
+
+		// Pin Up ...
+		if(dEXT_CH__PMx_CFG_USE_LIFT_PIN[pm_index]->Check__DATA(STR__YES) > 0)
+		{
+			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
+		}
+		else
+		{
+			str_pin = STR__UP;
+		}
+
+		// CR Position ...
+		if(dEXT_CH__PMx_CFG_USE_CR_POSITION[pm_index]->Check__DATA(STR__YES) > 0)
+		{
+			sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__DATA(str_cr_pos);
+		}
+		else
+		{
+			str_cr_pos = STR__UP;
+		}
+	}
+	else
+	{
+		// Shutter ...
+		{
+			str_shutter = STR__OPEN;
+			sEXT_CH__PMx_SHUTTER_STS[pm_index]->Set__DATA(str_shutter);
+		}
+
+		// Pin Up ...
+		{
+			str_pin = STR__UP;
+			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Set__DATA(str_pin);
+		}
+
+		// CR Position ...
+		{
+			str_cr_pos = STR__UP;
+			sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Set__DATA(str_cr_pos);
+		}
+	}
+
 	// ...
-	int check_count = 10;
+	int check_count = 100;
 
 	while(1)
 	{
@@ -858,25 +927,159 @@ LOOP_RETRY:
 
 		if(ok_flag > 0)
 		{
+			return 1;
+		}
+
+		check_count--;
+		if(check_count < 0)
+		{
 			break;
 		}
 
-		// ...
-		{
-			check_count--;
-			if(check_count < 0)
-			{
-				break;
-			}
-		}
-
-		Sleep(100);
+		Sleep(20);
 	}
 
+	// ...
+	{
+		int alarm_id = ALID__PMx__NOT_TRANSFER_READY_TO_PICK;
+		CString err_msg;
+		CString err_bff;
+		CString r_act;
+
+		// ...
+		{
+			err_msg.Format("PM%1d(으)로 [%s : %s] Action 수행 중입니다. \n", 
+							pm_index+1,
+							str_pick_place,
+							str_ext_ret); 
+
+			if(str_shutter.Find(STR__OPEN) != 0)
+			{
+				err_msg += " Shutter State ... \n";
+
+				err_bff.Format("  *  %s <- %s \n",
+								sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__CHANNEL_NAME(),
+								sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__STRING());
+				err_msg += err_bff;
+			}
+			if(str_pin.Find(STR__UP) != 0)
+			{
+				err_msg += " Lift_Pin State ... \n";
+
+				err_bff.Format("  *  %s <- %s \n",
+								sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__CHANNEL_NAME(),
+								sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__STRING());
+				err_msg += err_bff;
+			}
+			if(str_cr_pos.Find(STR__UP) != 0)
+			{
+				err_msg += " CRing Position State ... \n";
+
+				err_bff.Format("  *  %s <- %s \n",
+								sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__CHANNEL_NAME(),
+								sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__STRING());
+				err_msg += err_bff;
+			}
+
+			Fnc__APP_LOG(err_msg);
+		}
+
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
+
+		if(r_act.CompareNoCase(CHECK__RETRY) == 0)
+		{
+			goto LOOP_RETRY;
+		}
+	}
+
+	return -1;
+}
+
+int  CObj__VAC_ROBOT_EX::
+Is__PIN_UP_STS(CII_OBJECT__ALARM* p_alarm, 
+			   const CString str_pick_place,
+			   const CString str_ext_ret,
+			   const int pm_index)
+{
+	CString str_pin;
+
+LOOP_RETRY:
 
 	if(iSIM__PMC_DUMMY_MODE < 0)
 	{
-		// Shutter ...
+		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
+	}
+	else
+	{
+		str_pin = STR__UP;
+		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Set__DATA(str_pin);
+	}
+
+	// ...
+	int check_count = 100;
+
+	while(1)
+	{
+		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
+
+		if(str_pin.Find(STR__UP) == 0)
+		{
+			return 1;
+		}
+
+		check_count--;
+		if(check_count < 0)
+		{
+			break;
+		}
+
+		Sleep(20);
+	}
+
+	// ...
+	{
+		int alarm_id = ALID__PMx__NOT_PIN_UP_ERROR;
+		CString err_msg;
+		CString r_act;
+
+		// ...
+		{
+			err_msg.Format("During [%s] Action, Before VAC Robot %s, PM%d's PIN[%s].\n", 
+						   str_pick_place, 
+						   str_ext_ret, 
+						   pm_index+1,
+						  str_pin);
+
+			Fnc__APP_LOG(err_msg);
+		}
+
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
+
+		if(r_act.CompareNoCase(CHECK__RETRY) == 0)
+		{
+			goto LOOP_RETRY;
+		}
+	}
+
+	return -1;
+}
+
+int  CObj__VAC_ROBOT_EX
+::Is__TRANSFER_READY_TO_PLACE(CII_OBJECT__ALARM* p_alarm, 
+							  const bool active__active_handoff,
+							  const CString str_pick_place,
+							  const CString str_ext_ret,
+							  const int pm_index)
+{
+	CString str_shutter;
+	CString str_pin;
+	CString str_cr_pos;
+
+LOOP_RETRY:
+
+	if(iSIM__PMC_DUMMY_MODE < 0)
+	{
+		// Shutter Open ...
 		if(dEXT_CH__PMx_CFG_USE_SHUTTER[pm_index]->Check__DATA(STR__YES) > 0)
 		{
 			sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__DATA(str_shutter);
@@ -886,14 +1089,15 @@ LOOP_RETRY:
 			str_shutter = STR__OPEN;
 		}
 
-		// Pin Up ...
+		// Pin Down ...
 		if(dEXT_CH__PMx_CFG_USE_LIFT_PIN[pm_index]->Check__DATA(STR__YES) > 0)
 		{
 			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
 		}
 		else
 		{
-			str_pin = STR__UP;
+			if(active__active_handoff)		str_pin = STR__DOWN;
+			else							str_pin = STR__UP;
 		}
 
 		// CR Position ...
@@ -908,15 +1112,15 @@ LOOP_RETRY:
 	}
 	else
 	{
-		// Shutter ...
+		// Shutter Open ...
 		{
 			str_shutter = STR__OPEN;
 			sEXT_CH__PMx_SHUTTER_STS[pm_index]->Set__DATA(str_shutter);
 		}
 
-		// Pin Up ...
+		// Pin Down ...
 		{
-			str_pin = STR__UP;
+			str_pin = STR__DOWN;
 			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Set__DATA(str_pin);
 		}
 
@@ -927,199 +1131,8 @@ LOOP_RETRY:
 		}
 	}
 
-	if((str_shutter.Find(STR__OPEN) != 0)
-		|| (str_pin.Find(STR__UP) != 0)
-		|| (str_cr_pos.Find(STR__UP) != 0))
-	{
-		if(xTimer->WAIT(2.0) < 0)
-		{
-			return OBJ_ABORT;
-		}
-
-		// ...
-		{
-			r_cnt++;
-			if(r_cnt <= 1)
-			{
-				Fnc__APP_LOG("Goto Retry...");
-				goto LOOP_RETRY;
-			}
-		}
-
-		// ...
-		{
-			int alarm_id = ALID__PMx__NOT_TRANSFER_READY_TO_PICK;
-			CString err_msg;
-			CString err_bff;
-			CString r_act;
-
-			// ...
-			{
-				err_msg.Format("PM%1d(으)로 [%s : %s] Action 수행 중입니다. \n", 
-					pm_index+1,
-					str_pick_place,
-					str_ext_ret); 
-
-				if(str_shutter.Find(STR__OPEN) != 0)
-				{
-					err_msg += " Shutter State ... \n";
-
-					err_bff.Format("  *  %s <- %s \n",
-						sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__CHANNEL_NAME(),
-						sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__STRING());
-					err_msg += err_bff;
-				}
-				if(str_pin.Find(STR__UP) != 0)
-				{
-					err_msg += " Lift_Pin State ... \n";
-
-					err_bff.Format("  *  %s <- %s \n",
-						sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__CHANNEL_NAME(),
-						sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__STRING());
-					err_msg += err_bff;
-				}
-				if(str_cr_pos.Find(STR__UP) != 0)
-				{
-					err_msg += " CRing Position State ... \n";
-
-					err_bff.Format("  *  %s <- %s \n",
-						sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__CHANNEL_NAME(),
-						sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__STRING());
-					err_msg += err_bff;
-				}
-
-				Fnc__APP_LOG(err_msg);
-			}
-
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
-
-			if(r_act.CompareNoCase(CHECK__RETRY) == 0)
-			{
-				goto LOOP_RETRY;
-			}
-		}
-
-		return -1;
-	}
-
-	return OBJ_AVAILABLE;
-}
-
-int  CObj__VAC_ROBOT_EX::
-Is__PIN_UP_STS(CII_OBJECT__ALARM* p_alarm, 
-			   const CString str_pick_place,
-			   const CString str_ext_ret,
-			   const int pm_index)
-{
-	CString str_pin;
-	int nRtyCnt = 0;
-
-	SCX__TIMER_CTRL xTimer;
-	xTimer->REGISTER__ABORT_OBJECT(sObject_Name);
-
-
-LOOP_RETRY:
-
 	// ...
-	int check_count = 10;
-
-	while(1)
-	{
-		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
-
-		if(str_pin.Find(STR__UP) == 0)
-		{
-			break;
-		}
-
-		// ...
-		{
-			check_count--;
-			if(check_count < 0)
-			{
-				break;
-			}
-		}
-
-		Sleep(100);
-	}
-
-	if(iSIM__PMC_DUMMY_MODE < 0)
-	{
-		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
-	}
-	else
-	{
-		str_pin = STR__UP;
-		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Set__DATA(str_pin);
-	}
-
-	if(str_pin.Find(STR__UP) != 0)
-	{
-		if(xTimer->WAIT(2.0) < 0)
-		{
-			return OBJ_ABORT;
-		}
-
-		// ...
-		{
-			nRtyCnt++;
-			if(nRtyCnt <= 1)
-			{
-				Fnc__APP_LOG("Goto Retry...");
-				goto LOOP_RETRY;
-			}
-		}		
-
-		// ...
-		{
-			int alarm_id = ALID__PMx__NOT_PIN_UP_ERROR;
-			CString err_msg;
-			CString r_act;
-
-			// ...
-			{
-				err_msg.Format("During [%s] Action, Before VAC Robot %s, PM%d's PIN[%s].\n", 
-					str_pick_place, 
-					str_ext_ret, 
-					pm_index+1,
-					str_pin);
-
-				Fnc__APP_LOG(err_msg);
-			}
-
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
-
-			if(r_act.CompareNoCase(CHECK__RETRY) == 0)
-			{
-				goto LOOP_RETRY;
-			}
-		}
-
-		return -1;
-	}
-
-	return OBJ_AVAILABLE;
-}
-
-int  CObj__VAC_ROBOT_EX
-::Is__TRANSFER_READY_TO_PLACE(CII_OBJECT__ALARM* p_alarm, 
-							  const CString str_pick_place,
-							  const CString str_ext_ret,
-							  const int pm_index)
-{
-	CString str_shutter;
-	CString str_pin;
-	CString str_cr_pos;
-	int nRtyCnt = 0;
-
-	SCX__TIMER_CTRL xTimer;
-	xTimer->REGISTER__ABORT_OBJECT(sObject_Name);
-
-LOOP_RETRY:
-
-	// ...
-	int check_count = 10;
+	int check_count = 100;
 
 	while(1)
 	{
@@ -1141,9 +1154,20 @@ LOOP_RETRY:
 		{
 			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
 
-			if(str_pin.Find(STR__DOWN) != 0)
+			if(active__active_handoff)
 			{
-				ok_flag = -1;
+				if((str_pin.Find(STR__DOWN)   != 0)
+				&& (str_pin.Find(STR__MIDDLE) != 0))
+				{
+					ok_flag = -1;
+				}
+			}
+			else
+			{
+				if(str_pin.Find(STR__UP) != 0)
+				{
+					ok_flag = -1;
+				}
 			}
 		}
 
@@ -1160,7 +1184,7 @@ LOOP_RETRY:
 
 		if(ok_flag > 0)
 		{
-			break;
+			return 1;
 		}
 
 		check_count--;
@@ -1169,179 +1193,74 @@ LOOP_RETRY:
 			break;
 		}
 
-		Sleep(100);
+		Sleep(20);
 	}
 
-
-	if(iSIM__PMC_DUMMY_MODE < 0)
+	// ...
 	{
-		// Shutter Open ...
-		if(dEXT_CH__PMx_CFG_USE_SHUTTER[pm_index]->Check__DATA(STR__YES) > 0)
-		{
-			sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__DATA(str_shutter);
-		}
-		else
-		{
-			str_shutter = STR__OPEN;
-		}
-
-		// Pin Down ...
-		if(dEXT_CH__PMx_CFG_USE_LIFT_PIN[pm_index]->Check__DATA(STR__YES) > 0)
-		{
-			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
-		}
-		else
-		{
-			str_pin = STR__DOWN;
-		}
-
-		// CR Position ...
-		if(dEXT_CH__PMx_CFG_USE_CR_POSITION[pm_index]->Check__DATA(STR__YES) > 0)
-		{
-			sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__DATA(str_cr_pos);
-		}
-		else
-		{
-			str_cr_pos = STR__UP;
-		}
-	}
-	else
-	{
-		// Shutter Open ...
-		{
-			str_shutter = STR__OPEN;
-			sEXT_CH__PMx_SHUTTER_STS[pm_index]->Set__DATA(str_shutter);
-		}
-
-		// Pin Down ...
-		{
-			str_pin = STR__DOWN;
-			sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Set__DATA(str_pin);
-		}
-
-		// CR Position ...
-		{
-			str_cr_pos = STR__UP;
-			sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Set__DATA(str_cr_pos);
-		}
-	}
-
-	if((str_shutter.Find(STR__OPEN) != 0)
-		|| (str_pin.Find(STR__DOWN) != 0)
-		|| (str_cr_pos.Find(STR__UP) != 0))
-	{
-		if(xTimer->WAIT(2.0) < 0)	
-		{
-			return OBJ_ABORT;
-		}
+		int alarm_id = ALID__PMx__NOT_TRANSFER_READY_TO_PLACE;
+		CString err_msg;
+		CString err_bff;
+		CString r_act;
 
 		// ...
 		{
-			nRtyCnt++;
-			if(nRtyCnt <= 1)
+			err_msg.Format("PM%1d(으)로 [%s : %s] Action 수행 중입니다. \n", 
+							pm_index+1,
+							str_pick_place,
+							str_ext_ret); 
+
+			if(str_shutter.Find(STR__OPEN) != 0)
 			{
-				Fnc__APP_LOG("Goto Retry...");
-				goto LOOP_RETRY;
+				err_msg += " * Shutter State ... \n";
+
+				err_bff.Format("  %s <- %s \n", 
+								sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__CHANNEL_NAME(),
+								str_shutter);
+				err_msg += err_bff;
 			}
+			if(str_pin.Find(STR__DOWN) != 0)
+			{
+				err_msg += " * Lift_Pin State ... \n";
+
+				err_bff.Format("  %s <- %s \n", 
+								sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__CHANNEL_NAME(),
+								str_pin);
+				err_msg += err_bff;
+			}
+			if(str_cr_pos.Find(STR__UP) != 0)
+			{
+				err_msg += " * CRing State ... \n";
+
+				err_bff.Format("  %s <- %s \n", 
+								sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__CHANNEL_NAME(),
+								str_pin);
+				err_msg += err_bff;
+			}
+
+			Fnc__APP_LOG(err_msg);
 		}
 
-		// ...
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
+
+		if(r_act.CompareNoCase(CHECK__RETRY) == 0)
 		{
-			int alarm_id = ALID__PMx__NOT_TRANSFER_READY_TO_PLACE;
-			CString err_msg;
-			CString err_bff;
-			CString r_act;
-
-			// ...
-			{
-				err_msg.Format("PM%1d(으)로 [%s : %s] Action 수행 중입니다. \n", 
-					pm_index+1,
-					str_pick_place,
-					str_ext_ret); 
-
-				if(str_shutter.Find(STR__OPEN) != 0)
-				{
-					err_msg += " * Shutter State ... \n";
-
-					err_bff.Format("  %s <- %s \n", 
-						sEXT_CH__PMx_SHUTTER_STS[pm_index]->Get__CHANNEL_NAME(),
-						str_shutter);
-					err_msg += err_bff;
-				}
-				if(str_pin.Find(STR__DOWN) != 0)
-				{
-					err_msg += " * Lift_Pin State ... \n";
-
-					err_bff.Format("  %s <- %s \n", 
-						sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__CHANNEL_NAME(),
-						str_pin);
-					err_msg += err_bff;
-				}
-				if(str_cr_pos.Find(STR__UP) != 0)
-				{
-					err_msg += " * CRing State ... \n";
-
-					err_bff.Format("  %s <- %s \n", 
-						sEXT_CH__PMx_CR_POSITION_STS[pm_index]->Get__CHANNEL_NAME(),
-						str_pin);
-					err_msg += err_bff;
-				}
-
-				Fnc__APP_LOG(err_msg);
-			}
-
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
-
-			if(r_act.CompareNoCase(CHECK__RETRY) == 0)
-			{
-				goto LOOP_RETRY;
-			}
+			goto LOOP_RETRY;
 		}
-
-		return -1;
 	}
 
-	return OBJ_AVAILABLE;
+	return -1;
 }
 
 int CObj__VAC_ROBOT_EX::
-Is__PIN_DOWN_STS(CII_OBJECT__ALARM* p_alarm, 
-				 const CString str_pick_place,
-				 const CString str_ext_ret,
-				 const int pm_index)
+Is__PIN_DOWN_OR_MIDDLE_STS(CII_OBJECT__ALARM* p_alarm, 
+						   const CString str_pick_place,
+						   const CString str_ext_ret,
+						   const int pm_index)
 {
 	CString  str_pin;
-	int nRtyCnt = 0;
-
-	SCX__TIMER_CTRL xTimer;
-	xTimer->REGISTER__ABORT_OBJECT(sObject_Name);
-
 
 LOOP_RETRY:
-
-	// ...
-	int check_count = 10;
-
-	while(1)
-	{
-		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
-
-		if(str_pin.Find(STR__DOWN) == 0)
-		{
-			break;
-		}
-
-		// ...
-		{
-			check_count--;
-			if(check_count < 0)
-			{
-				break;
-			}
-		}
-
-		Sleep(100);
-	}
 
 	if(iSIM__PMC_DUMMY_MODE < 0)
 	{
@@ -1353,52 +1272,54 @@ LOOP_RETRY:
 		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Set__DATA(str_pin);
 	}
 
-	if(str_pin.Find(STR__DOWN) != 0)
+	// ...
+	int check_count = 100;
+
+	while(1)
 	{
-		if(xTimer->WAIT(2.0) < 0)
+		sEXT_CH__PMx_LIFT_PIN_POS_STS[pm_index]->Get__DATA(str_pin);
+
+		if((str_pin.Find(STR__DOWN)   == 0)
+		|| (str_pin.Find(STR__MIDDLE) == 0))
 		{
-			return OBJ_ABORT;
+			return 1;
 		}
 
-		// ...
+		check_count--;
+		if(check_count < 0)
 		{
-			nRtyCnt++;
-			if(nRtyCnt <= 1)
-			{
-				Fnc__APP_LOG("Goto Retry...");
-				goto LOOP_RETRY;
-			}
+			break;
 		}
 
-		// ...
-		{
-			int alarm_id = ALID__PMx__NOT_PIN_DOWN_ERROR;
-			CString err_msg;
-			CString r_act;
-
-			// ...
-			{
-				err_msg.Format("During [%s] Action, Before VAC Robot %s, PM%d's PIN[%s] Sts .\n", 
-					str_pick_place, 
-					str_ext_ret, 
-					pm_index+1, 
-					str_pin);
-
-				Fnc__APP_LOG(err_msg);
-			}
-
-			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
-
-			if(r_act.CompareNoCase(CHECK__RETRY) == 0)
-			{
-				goto LOOP_RETRY;
-			}
-		}
-
-		return -1;
+		Sleep(20);
 	}
 
-	return OBJ_AVAILABLE;
+	// ...
+	{
+		int alarm_id = ALID__PMx__NOT_PIN_DOWN_ERROR;
+		CString err_msg;
+		CString r_act;
+
+		// ...
+		{
+			err_msg.Format("During [%s] Action, Before VAC Robot %s, PM%d's PIN[%s] Sts .\n", 
+						   str_pick_place, 
+						   str_ext_ret, 
+						   pm_index+1, 
+						   str_pin);
+
+			Fnc__APP_LOG(err_msg);
+		}
+
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,err_msg,r_act);
+
+		if(r_act.CompareNoCase(CHECK__RETRY) == 0)
+		{
+			goto LOOP_RETRY;
+		}
+	}
+
+	return -1;
 }
 
 int  CObj__VAC_ROBOT_EX
@@ -1409,6 +1330,8 @@ int  CObj__VAC_ROBOT_EX
 		// VAC_CHM - PUMP
 		if(sEXT_CH__VAC_CHM__PRESSURE_STATUS->Check__DATA(STR__VAC) < 0)
 		{
+			dEXT_CH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__ON);
+
 			pVAC_CHM__OBJ_CTRL->Call__OBJECT(CMMD__PUMP);
 		}
 

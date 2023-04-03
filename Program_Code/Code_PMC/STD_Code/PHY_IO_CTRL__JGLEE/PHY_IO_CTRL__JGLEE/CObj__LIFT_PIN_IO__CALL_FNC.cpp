@@ -370,6 +370,8 @@ int CObj__LIFT_PIN_IO
 ::Call__TRANSFER_DOWN(CII_OBJECT__VARIABLE *p_variable,
 					  CII_OBJECT__ALARM *p_alarm)
 {
+	int count__retry_action = 0;
+
 RETRY_ACTION:
 
 	sCH__MON_ACT_NAME->Set__DATA(" -> TRANSFER.DOWN");
@@ -425,9 +427,26 @@ RETRY_ACTION:
 
 		// ...
 		CString log_msg;
-		log_msg.Format("During Transfer_Down, Check the sensor of Lift-Down.");
+		CString log_bff;
+
+		log_msg.Format("During Transfer_Down, check the sensor of Lift-Down. \n");
+		log_bff.Format(" * Retry_count : %1d \n", count__retry_action);
+		log_msg += log_bff;
 	
 		Fnc__WRITE_LOG(log_msg);
+
+		if(iActive__SIM_MODE > 0)
+		{
+			if(count__retry_action < 1)
+			{
+				log_msg.Format("Simulation - Auto_Retry !!! \n");
+
+				Fnc__WRITE_LOG(log_msg);				
+			}
+
+			count__retry_action++;
+			goto RETRY_ACTION;
+		}
 
 		// ...
 		{
@@ -438,6 +457,7 @@ RETRY_ACTION:
 		
 			if(r_act.CompareNoCase("RETRY") == 0)
 			{
+				count__retry_action++;
 				goto RETRY_ACTION;
 			}
 		}

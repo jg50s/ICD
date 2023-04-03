@@ -24,6 +24,9 @@ private:
 	//
 	
 	//-------------------------------------------------------------------------
+	// OBJ ...
+	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;
+
 	// MON.PART ...
 	CX__VAR_STRING_CTRL  sCH__MON_PART_DEF_TYPE;
 
@@ -33,6 +36,9 @@ private:
 	CX__VAR_STRING_CTRL  sCH__MON_COMM_STATE;
 	CX__VAR_DIGITAL_CTRL dCH__MON_PUMP_POWER_SNS;
 	CX__VAR_DIGITAL_CTRL dCH__MON_VAC_ON_SNS;
+
+	CX__VAR_STRING_CTRL  sCH__MON_PRESSURE_TORR;
+	CX__VAR_STRING_CTRL  sCH__MON_PRESSURE_mTORR;
 
 	// CFG ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_PUMP_PRESSURE_HIGH_LIMIT;
@@ -71,6 +77,14 @@ private:
 	CString sMODE__INIT;
 	int Call__INIT(CII_OBJECT__VARIABLE *p_variable);
 
+	//
+	CString sMODE__LOCAL;
+	int Call__LOCAL(CII_OBJECT__VARIABLE *p_variable);
+
+	CString sMODE_REMOTE;
+	int Call__REMOTE(CII_OBJECT__VARIABLE *p_variable);
+
+	//
 	CString sMODE__PUMP_ON;
 	int Call__PUMP_ON(CII_OBJECT__VARIABLE *p_variable);
 

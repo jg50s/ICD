@@ -6,6 +6,8 @@
 #define  STR__MAINT					"MAINT"
 #define  STR__PROCESS				"PROCESS"
 #define  STR__END					"END"
+#define  STR__RESERVE				"RESERVE"
+#define  STR__BUSY					"BUSY"
 
 #define  STR__AVAILABLE				"Available"
 #define  STR__ABORTED				"Aborted"

@@ -21,10 +21,13 @@ int CObj__PMP_IO::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__INIT,		"INIT");
+		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 
-		ADD__CTRL_VAR(sMODE__PUMP_ON,	"ON");
-		ADD__CTRL_VAR(sMODE__PUMP_OFF,	"OFF");
+		ADD__CTRL_VAR(sMODE__LOCAL, "LOCAL");
+		ADD__CTRL_VAR(sMODE_REMOTE, "REMOTE");
+
+		ADD__CTRL_VAR(sMODE__PUMP_ON,  "ON");
+		ADD__CTRL_VAR(sMODE__PUMP_OFF, "OFF");
 	}
 	return 1;
 }
@@ -50,6 +53,13 @@ int CObj__PMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 
+	// OBJ ...
+	{
+		str_name = "OBJ.MSG";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__OBJ_MSG, str_name);
+	}
+
 	// MON.PART ...
 	{
 		str_name = "MON.PART.DEF_TYPE";
@@ -74,6 +84,15 @@ int CObj__PMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.VAC.ON.SNS";
 		STD__ADD_DIGITAL(str_name, "OFF ON");
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_VAC_ON_SNS, str_name);
+
+		//
+		str_name = "MON.PRESSURE.TORR";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PRESSURE_TORR, str_name);
+
+		str_name = "MON.PRESSURE.mTORR";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PRESSURE_mTORR, str_name);
 	}
 
 	// CFG ...
@@ -257,14 +276,24 @@ int CObj__PMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	// ...
 	{
 		CString log_msg;
-		log_msg.Format("Start [%s] ... By %s \n", mode, p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
+		CString upper_obj_name = p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME();
+
+		if(upper_obj_name.GetLength() > 0)			log_msg.Format("Start [%s] ... by %s", mode, upper_obj_name);
+		else										log_msg.Format("Start [%s] ... ", mode);
+		
+		sCH__OBJ_MSG->Set__DATA(log_msg);
+
+		log_msg += "\n";
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 
 	// ...
 	{
 		     IF__CTRL_MODE(sMODE__INIT)			flag = Call__INIT(p_variable);
+
+		ELSE_IF__CTRL_MODE(sMODE__LOCAL)		flag = Call__LOCAL(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE_REMOTE)		flag = Call__REMOTE(p_variable);
 
 		ELSE_IF__CTRL_MODE(sMODE__PUMP_ON)		flag = Call__PUMP_ON(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PUMP_OFF)		flag = Call__PUMP_OFF(p_variable);
@@ -275,6 +304,7 @@ int CObj__PMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		CString log_msg;
 		log_msg.Format("Aborted ... :  [%s]",mode);
 
+		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xI_LOG_CTRL->WRITE__LOG(log_msg);	
 	}
 	else
@@ -282,6 +312,7 @@ int CObj__PMP_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		CString log_msg;
 		log_msg.Format("Completed ... :  [%s]",mode);
 
+		sCH__OBJ_MSG->Set__DATA(log_msg);
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 

@@ -2,6 +2,8 @@
 #include "CObj_Phy__ROBOT_VAC.h"
 #include "CObj_Phy__ROBOT_VAC__DEF.h"
 
+#include "Macro_Function.h"
+
 
 //-------------------------------------------------------------------------
 CObj_Phy__ROBOT_VAC::CObj_Phy__ROBOT_VAC()
@@ -69,15 +71,15 @@ ABCD													\
 UPPER  A_UPPER"
 
 #define  DSP__STATION									\
-"AL1  AL2  AL1_AL2										\
-SUSCEPTOR1  SUSCEPTOR2									\
-LBA  LBB  LBC  LBD										\
+"LBA  LBB  LBC  LBD										\
 LL_TOP  LL_BTM											\
 CL1  CL2  CL3  CL4										\
 LP1  LP2  LP3  LP4  LP5									\
 LA  LB													\
 PM1  PM2  PM3  PM4  PM5  PM6  PM7  PM8  PM9  PM10		\
 PM12 PM34 PM56											\
+AL1  AL2  AL1_AL2										\
+SUSCEPTOR1  SUSCEPTOR2									\
 VIS1  VIS1_BUF											\
 BUF1  BUF2												\
 BUFF1 BUFF2												\
@@ -138,6 +140,9 @@ LP1 LP2 LP3 LP4 VIS1 VIS1_BUF"
 
 #define  DSP__DISABLE_ENABLE							\
 "DISABLE  ENABLE"
+
+#define  DSP__OFF_ON									\
+"OFF  ON"
 
 
 int CObj_Phy__ROBOT_VAC::__DEFINE__VARIABLE_STD(p_variable)
@@ -380,6 +385,17 @@ int CObj_Phy__ROBOT_VAC::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ALL ODD EVEN", "");
 			LINK__VAR_DIGITAL_CTRL(dCH_CFG__B_ARM_CONSTRAINT_PM, str_name);
 		}
+		// PMx To PMx ...
+		{
+			str_name = "CFG.PMx_To_PMx.CONSTRAINT";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ALL  SAME.PROCESS  SAME.PATH", "");
+
+			str_name = "CFG.PMx_To_PMx.MOVE_PATH";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ALL  ODD.EVEN", "");
+
+			str_name = "CFG.PMx_To_PMx.PICK_CONDITION";
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ALL  ODD.EVEN", "");
+		}
 	}
 
 	// CFG : WAFER PICK PARAMETER ...
@@ -394,18 +410,17 @@ int CObj_Phy__ROBOT_VAC::__DEFINE__VARIABLE_STD(p_variable)
 	}
 
 	// CONFIG ...
+	for(i=0; i<CFG_ROBOT__ARM_SIZE; i++)
 	{
-		dVAR__CFG_A_ARM_USE_FLAG = "CFG.A.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_A_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
+		CString arm_name;
 
-		dVAR__CFG_B_ARM_USE_FLAG = "CFG.B.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_B_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
+			 if(i == 0)			arm_name = "A";
+		else if(i == 1)			arm_name = "B";
+		else					continue;
 
-		dVAR__CFG_C_ARM_USE_FLAG = "CFG.C.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_C_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
-
-		dVAR__CFG_D_ARM_USE_FLAG = "CFG.D.ARM.USE.FLAG";
-		STD__ADD_DIGITAL(dVAR__CFG_D_ARM_USE_FLAG, DSP__ENABLE_DISABLE);
+		str_name.Format("CFG.%s.ARM.USE.FLAG", arm_name);
+		STD__ADD_DIGITAL(str_name, DSP__ENABLE_DISABLE);
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ARM_USE_FLAG_X[i], str_name);
 	}
 
 	// SIM CFG ...
@@ -459,6 +474,16 @@ int CObj_Phy__ROBOT_VAC::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "TIME.ACT.RESULT";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__TIME_ACT_RESULT, str_name);
+	}
+
+	// INFO.PMx ...
+	for(i=0; i<CFG_PM_LIMIT; i++)
+	{
+		int id = i + 1;
+
+		str_name.Format("INFO.PM%1d.RESERVE", id);
+		STD__ADD_DIGITAL(str_name, DSP__OFF_ON);
+		LINK__VAR_DIGITAL_CTRL(dCH__INFO_PM_RESERVE_X[i], str_name);
 	}
 
 	// ...
@@ -681,6 +706,12 @@ int CObj_Phy__ROBOT_VAC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xI_Upper_Obj->Register__Module_Status_Channel(xCH__UPPER_OBJ__STATUS->Get__VARIABLE_NAME());
 		xI_Upper_Obj->Register__Module_Mode_Channel(xCH__UPPER_OBJ__MODE->Get__VARIABLE_NAME());
 		xI_Upper_Obj->Register__Module_Ctrl_Channel(xCH__UPPER_OBJ__CTRL->Get__VARIABLE_NAME());
+	}
+
+	// ...
+	{
+		SCX__SEQ_INFO x_seq_info;
+		iACTIVE__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
 	// ...
@@ -960,7 +991,26 @@ int CObj_Phy__ROBOT_VAC
 		xI_LOG_CTRL->WRITE__LOG(log_string);
 	}
 
-	Update__MATERIAL_INFO();
+	// ...
+	bool active__pick_act  = false;
+	bool active__place_act = false;
+
+	if((mode.CompareNoCase(sMODE__PICK)  == 0)		
+	|| (mode.CompareNoCase(sMODE__XPICK) == 0))
+	{
+		active__pick_act = true;
+	}
+	else if((mode.CompareNoCase(sMODE__PLACE)  == 0)		
+		 || (mode.CompareNoCase(sMODE__XPLACE) == 0))
+	{
+		active__place_act = true;
+	}
+
+	if((active__pick_act)
+	|| (active__place_act))
+	{
+		Update__MATERIAL_INFO_TO_MODULE_LINK(active__place_act, false);
+	}
 
 	// ...
 	int flag = -1;
@@ -1002,17 +1052,46 @@ int CObj_Phy__ROBOT_VAC
 		}
 	}
 
-	if(flag > 0)
+	if((active__pick_act)
+	|| (active__place_act))
 	{
-		if((mode.CompareNoCase(sMODE__PLACE)  == 0)		
-		|| (mode.CompareNoCase(sMODE__XPLACE) == 0)
-		|| (mode.CompareNoCase(sMODE__PICK)   == 0)		
-		|| (mode.CompareNoCase(sMODE__XPICK)  == 0))
+		if(flag > 0)
 		{
 			Report__MATERIAL_INFO(mode);
 		}
 	}
 
+	if(active__place_act)
+	{
+		// PM.Index ...
+		int pm_index = Macro__Get_PMx_INDEX(sPara1__Module);
+		if(pm_index >= 0)
+		{
+			dCH__INFO_PM_RESERVE_X[pm_index]->Set__DATA(STR__OFF);
+		}
+
+		// Wafer.Count ...
+		int wfr_count = 0;
+		int i;
+
+		for(i=0; i<CFG_ROBOT__ARM_SIZE; i++)
+		{
+			if(dCH__CFG_ARM_USE_FLAG_X[i]->Check__DATA(STR__ENABLE) < 0)	continue;
+			if(xCH__SLOT_STATUS[i]->Check__DATA(STR__NONE) > 0)				continue;
+
+			wfr_count++;
+		}
+	
+		if(wfr_count < 1)
+		{
+			for(i=0; i<CFG_PM_LIMIT; i++)
+			{
+				dCH__INFO_PM_RESERVE_X[i]->Set__DATA(STR__OFF);	
+			}
+		}
+	}
+
+	//
 	if(mode.CompareNoCase(sMODE__SWAP_LBx) == 0)
 	{
 		CString log_string;
@@ -1135,6 +1214,12 @@ int CObj_Phy__ROBOT_VAC
 		xI_LOG_CTRL->WRITE__LOG(log_string);
 	}
 
+	if((active__pick_act)
+	|| (active__place_act))
+	{
+		Update__MATERIAL_INFO_TO_MODULE_LINK(active__place_act, true);
+	}
+
 	// ...
 	{
 		iPRC_STS = -1;
@@ -1142,6 +1227,7 @@ int CObj_Phy__ROBOT_VAC
 	}
 	return flag;
 }
+
 int CObj_Phy__ROBOT_VAC::__CALL__MONITORING(id,p_variable,p_alarm)
 {
 	switch(id)

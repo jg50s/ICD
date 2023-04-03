@@ -56,6 +56,22 @@ int CObj_Phy__ROBOT_ATM
 	if(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
 	{
 		flag = Sim__MODULE_OBJ(p_variable, obj_mode);
+
+		if(iACTIVE__SIM_MODE > 0)
+		{
+			CString cur_md = dCH__PARA_MODULE->Get__STRING();
+
+			if(cur_md.Find("AL1") == 0)
+			{
+				CString ch_data;
+
+				ch_data = sCH__TARGET_LLx_NAME_SET_AL->Get__STRING();
+				sCH__TARGET_LLx_NAME_GET->Set__DATA(ch_data);
+
+				ch_data = sCH__TARGET_LLx_SLOT_SET_AL->Get__STRING();
+				sCH__TARGET_LLx_SLOT_GET->Set__DATA(ch_data);
+			}
+		}
 	}
 	else
 	{
@@ -386,8 +402,16 @@ int CObj_Phy__ROBOT_ATM
 	}
 
 	// ...
+	CUIntArray l__arm_index;
+
+	Get__ARMx_INDEX_LIST(sPara0__Arm_Type, l__arm_index);
+
+	int k_limit = l__arm_index.GetSize();
+	int k;
+
+	for(k=0; k<k_limit; k++)
 	{
-		int arm_index = Get__ARMx_INDEX(sPara0__Arm_Type);
+		int arm_index = l__arm_index[k];
 		if(arm_index < 0)
 		{
 			return -11;
@@ -411,7 +435,9 @@ int CObj_Phy__ROBOT_ATM
 
 		int md_index   = -1;
 		int active_lp  = -1;
+
 		int slot_index = atoi(sPara2__Slot) - 1;
+		if(sPara0__Arm_Type.CompareNoCase(_ARM__AB) == 0)			slot_index += k;
 
 		if(md_index < 0)
 		{
@@ -654,8 +680,16 @@ int CObj_Phy__ROBOT_ATM
 	}
 
 	// ...
+	CUIntArray l__arm_index;
+
+	Get__ARMx_INDEX_LIST(sPara0__Arm_Type, l__arm_index);
+
+	int k_limit = l__arm_index.GetSize();
+	int k;
+
+	for(k=0; k<k_limit; k++)
 	{
-		int arm_index = Get__ARMx_INDEX(sPara0__Arm_Type);
+		int arm_index = l__arm_index[k];
 		if(arm_index < 0)
 		{
 			return -11;
@@ -677,7 +711,9 @@ int CObj_Phy__ROBOT_ATM
 
 		int active_lp  = -1;
 		int md_index   = -1;
-		int slot_index = atoi(sPara2__Slot) - 1;
+		
+		int slot_index = atoi(sPara2__Slot) - 1;	
+		if(sPara0__Arm_Type.CompareNoCase(_ARM__AB) == 0)			slot_index += k;
 
 		if(md_index < 0)
 		{
@@ -890,8 +926,8 @@ int CObj_Phy__ROBOT_ATM
 int CObj_Phy__ROBOT_ATM
 ::Get__ARMx_INDEX(const CString& str_arm)
 {
-	if(str_arm.CompareNoCase("A") == 0)				return 0;
-	if(str_arm.CompareNoCase("B") == 0)				return 1;
+	if(str_arm.CompareNoCase(_ARM__A) == 0)			return 0;
+	if(str_arm.CompareNoCase(_ARM__B) == 0)			return 1;
 
 	return -1;
 }
@@ -900,17 +936,17 @@ int CObj_Phy__ROBOT_ATM
 {
 	l_arm_index.RemoveAll();
 
-	if(str_arm.CompareNoCase("A")  == 0) 
+	if(str_arm.CompareNoCase(_ARM__A)  == 0) 
 	{
 		l_arm_index.Add(0);
 		return 11;
 	}
-	if(str_arm.CompareNoCase("B")  == 0) 
+	if(str_arm.CompareNoCase(_ARM__B)  == 0) 
 	{
 		l_arm_index.Add(1);
 		return 12;
 	}
-	if(str_arm.CompareNoCase("AB") == 0) 
+	if(str_arm.CompareNoCase(_ARM__AB) == 0) 
 	{
 		l_arm_index.Add(0);
 		l_arm_index.Add(1);

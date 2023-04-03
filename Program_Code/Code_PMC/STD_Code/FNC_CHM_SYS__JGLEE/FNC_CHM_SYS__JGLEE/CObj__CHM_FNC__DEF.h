@@ -6,6 +6,10 @@ enum { MODE__DRY_PUMP_ON, MODE__DRY_PUMP_OFF, MODE__TMP_ON, MODE__TMP_OFF };
 
 
 // ...
+#define _CFG__MFC_SIZE						20
+
+
+// ...
 #define CMMD__PHY_APC__GOTO_POSITION		"GOTO_POSITION"
 
 // ...
@@ -15,6 +19,8 @@ enum { MODE__DRY_PUMP_ON, MODE__DRY_PUMP_OFF, MODE__TMP_ON, MODE__TMP_OFF };
 #define CMMD_GAS__FV_CLOSE					"FV_CLOSE"
 #define CMMD_GAS__SV_OPEN					"SV_OPEN"
 #define CMMD_GAS__SV_CLOSE					"SV_CLOSE"
+
+#define CMMD_GAS__MFC_OPEN					"MFC_OPEN"
 
 // ...
 #define CMMD_FRC__CONTROL					"CONTROL"

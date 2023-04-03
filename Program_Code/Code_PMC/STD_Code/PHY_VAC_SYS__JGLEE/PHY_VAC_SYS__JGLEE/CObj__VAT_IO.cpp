@@ -283,6 +283,17 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__MON_PROC_PRESSURE_ABORT_CHECK_TIME, str_name);
 	}
 
+	// CFG : TIMEOUT ...
+	{
+		str_name = "CFG.TIMEOUT.OPEN";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 10, 60, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TIMEOUT_OPEN, str_name);
+
+		str_name = "CFG.TIMEOUT.CLOSE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 10, 60, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TIMEOUT_CLOSE, str_name);
+	}
+
 	// CFG : SYSTEM ...
 	{
 		str_name = "CFG.USE";
@@ -422,6 +433,13 @@ int CObj__VAT_IO::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.CHAMBER.BALLAST.TOL.TIMEOUT";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.1, 10, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_CHAMBER_BALLAST_TOL_TIMEOUT, str_name);
+	}
+
+	// CFG.INTERLOCK ...
+	{
+		str_name = "CFG.INTERLOCK.TMP.LINE.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_TMP_LINE_CHECK, str_name);
 	}
 
 	// ...
@@ -837,6 +855,8 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	else if(def_data.CompareNoCase("HEXA") == 0)		iDATA__VAT_CTRL_TYPE = _VAT_CTRL_TYPE__HEXA;
 	else												iDATA__VAT_CTRL_TYPE = _VAT_CTRL_TYPE__IO;
 
+	iDATA__VAT_HEXA_TYPE = -1;
+
 	// LINK OBJ ...
 	if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__OBJ)
 	{
@@ -892,6 +912,40 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// LINK HEXA ...
 	else if(iDATA__VAT_CTRL_TYPE == _VAT_CTRL_TYPE__HEXA)		
 	{
+		// LINK_HEXA.TYPE ...
+		{
+			def_name = "LINK_HEXA.TYPE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			if(def_data.CompareNoCase("USER") == 0)				iDATA__VAT_HEXA_TYPE = _VAT_HEXA_TYPE__USER;
+			else												iDATA__VAT_HEXA_TYPE = _VAT_HEXA_TYPE__STD;
+
+			if(iDATA__VAT_HEXA_TYPE == _VAT_HEXA_TYPE__USER)
+			{
+				// HEXA.CLOSE ...
+				{
+					def_name = "LINK_USER.HEXA_CLOSE";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+					sDATA__HEXA_CLOSE = def_data;
+				}
+				// HEXA.OPEN ...
+				{
+					def_name = "LINK_USER.HEXA_OPEN";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+					sDATA__HEXA_OPEN = def_data;
+				}
+				// HEXA.CONTROL ...
+				{
+					def_name = "LINK_USER.HEXA_CONTROL";
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+					sDATA__HEXA_CONTROL = def_data;
+				}
+			}
+		}
+
 		// LINK_HEXA.MAX_VALUE ...
 		{
 			def_name = "LINK_HEXA.MAX_VALUE";
@@ -910,12 +964,19 @@ int CObj__VAT_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name,    obj_name,var_name);
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SO_APC_CTRL_MODE, obj_name,var_name);
 		}
-		// SO.APC_SETPOINT_DATA ...
+		// SO.APC_PRESSURE_DATA ...
 		{
-			def_name = "CH__SO_APC_SETPOINT_DATA";
+			def_name = "CH__SO_APC_PRESSURE_DATA";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name,       obj_name,var_name);
-			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SO_APC_SETPOINT_DATA, obj_name,var_name);
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SO_APC_PRESSURE_DATA, obj_name,var_name);
+		}
+		// SO.APC_POSITION_DATA ...
+		{
+			def_name = "CH__SO_APC_POSITION_DATA";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name,       obj_name,var_name);
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__SO_APC_POSITION_DATA, obj_name,var_name);
 		}
 		// SO.APC_SETPOINT_TYPE ...
 		{
@@ -1297,7 +1358,8 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		if(flag > 0)
 		{
-			if(bActive__DI_TMP_LINE_ACTIVE)
+			if((bActive__DI_TMP_LINE_ACTIVE)
+			&& (dCH__CFG_INTERLOCK_TMP_LINE_CHECK->Check__DATA(STR__YES) > 0))
 			{
 				int count__error_check = 0;
 
@@ -1331,6 +1393,7 @@ int CObj__VAT_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 							p_alarm->Check__ALARM(alarm_id, r_act);
 							p_alarm->Post__ALARM_With_MESSAGE(alarm_id, err_msg);
 						}
+						break;
 					}
 
 					Sleep(90);

@@ -23,7 +23,8 @@ int CObj__VAC_ROBOT_EX::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__INIT,    "INIT");
+		ADD__CTRL_VAR(sMODE__INIT,     "INIT");
+		ADD__CTRL_VAR(sMODE__SET_PARA, "SET.PARA");
 
 		ADD__CTRL_VAR(sMODE__PICK,    "PICK");
 		ADD__CTRL_VAR(sMODE__XPICK,   "XPICK");
@@ -116,15 +117,74 @@ int CObj__VAC_ROBOT_EX::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.SLOT";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PARA_SLOT,"");
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_SLOT,str_name);
+	}
+
+	// WAC ...
+	{
+		// FROM_CTC.WAC.PMX ...
+		for(i=0; i<CFG_PM_LIMIT; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.USE", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_USE_X[i], str_name);
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.PICK.CHECK", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_PICK_CHECK_X[i], str_name);
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.PLACE.CHECK", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_PLACE_CHECK_X[i], str_name);
+
+			//
+			str_name.Format("FROM_CTC.WAC.PM%1d.POS.ID", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_POS_ID_X[i], str_name);
+
+			str_name.Format("FROM_CTC.WAC.PM%1d.POS.SLOT", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_POS_SLOT_X[i], str_name);
+
+			//
+			str_name.Format("FROM_CTC.WAC.PM%1d.DELAY.SEC", id);
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_DELAY_SEC_X[i], str_name);
+		}
+
+		str_name = "FROM_CTC.WAC.PMC.WAFER.TYPE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__FROM_CTC_WAC_PM_WAFER_TYPE, str_name);
 
 		//
-		str_name = "sWAC.USE";
+		str_name = "INFO.WAC.PMC.ACTIVE";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__WAC_USE,str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_ACTIVE, str_name);
 
-		str_name = "sWAC.DELAY.SEC";
+		str_name = "INFO.WAC.PMC.STATE";
 		STD__ADD_STRING(str_name);
-		LINK__VAR_STRING_CTRL(sCH__WAC_DELAY_SEC,str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_STATE, str_name);
+
+		str_name = "INFO.WAC.PMC.ARM.TYPE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_ARM_TYPE, str_name);
+
+		str_name = "INFO.WAC.PMC.WFR.INFO";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_WFR_INFO, str_name);
+
+		str_name = "INFO.WAC.PMC.POS.ID";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_POS_ID, str_name);
+
+		str_name = "INFO.WAC.PMC.POS.SLOT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_POS_SLOT, str_name);
+
+		str_name = "INFO.WAC.PMC.DELAY.COUNT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_WAC_PMC_DELAY_COUNT, str_name);
 	}
 
 	// ...
@@ -138,18 +198,21 @@ int CObj__VAC_ROBOT_EX::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PMx_CLOSE_SEQUENCE_MODE,str_name);
 	}
 
-	// CFG : LLx ...
-	for(i=0; i<CFG_LLx_LIMIT; i++)
+	// CFG ...
 	{
-		int id = i + 1;
+		// LLx ...
+		for(i=0; i<CFG_LLx_LIMIT; i++)
+		{
+			int id = i + 1;
 
-		str_name.Format("CFG.LL%1d.HANDSHAKE.MODE", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__PASSIVE_ACTIVE, "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_HANDSHAKE_MODE[i], str_name);
+			str_name.Format("CFG.LL%1d.HANDSHAKE.MODE", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__PASSIVE_ACTIVE, "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_HANDSHAKE_MODE[i], str_name);
 
-		str_name.Format("CFG.LL%1d.ROBOT_Z_MOVE", id);
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__YES_NO, "");
-		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_ROBOT_Z_MOVE[i], str_name);
+			str_name.Format("CFG.LL%1d.ROBOT_Z_MOVE", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__YES_NO, "");
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_LLx_ROBOT_Z_MOVE[i], str_name);
+		}
 	}
 
 	return 1;
@@ -422,19 +485,40 @@ int CObj__VAC_ROBOT_EX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		pROBOT__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 
-		// Material Status
-		str_name = "OTR.OUT.MON.dARM_A.MATERIAL.STATUS";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_STATUS,def_data,str_name);
+		// ANI ...
+		{
+			str_name = "OTR.OUT.MON.dACT.ARM";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__MON_ACT_ARM, def_data,str_name);
+			
+			str_name = "OTR.OUT.MON.dTRG.ROTATE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__MON_TRG_ROT, def_data,str_name);
+		}
 
-		str_name = "OTR.OUT.MON.dARM_B.MATERIAL.STATUS";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_STATUS,def_data,str_name);
+		// Material Status ...
+		{
+			str_name = "OTR.OUT.MON.dARM_A.MATERIAL.STATUS";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_STATUS, def_data,str_name);
 
-		// Material Title
-		str_name = "OTR.OUT.MON.sARM_A.MATERIAL.TITLE";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_TITLE,def_data,str_name);
+			str_name = "OTR.OUT.MON.dARM_B.MATERIAL.STATUS";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_STATUS, def_data,str_name);
+		}
+		// Material Title ...
+		{
+			str_name = "OTR.OUT.MON.sARM_A.MATERIAL.TITLE";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PHY_ROBOT__ARM_A_MATERIAL_TITLE, def_data,str_name);
 
-		str_name = "OTR.OUT.MON.sARM_B.MATERIAL.TITLE";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_TITLE,def_data,str_name);
+			str_name = "OTR.OUT.MON.sARM_B.MATERIAL.TITLE";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PHY_ROBOT__ARM_B_MATERIAL_TITLE, def_data,str_name);
+		}
+
+		// PARA.ACTIVE_HANDOFF ...
+		{
+			str_name = "PARA.ACTIVE_HANDOFF.REQ";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_REQ, def_data,str_name);
+
+			str_name = "PARA.ACTIVE_HANDOFF.ACT";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_ROBOT__PARA_ACTIVE_HANDOFF_ACT, def_data,str_name);
+		}
 	}
 
 	// PMx SIZE ...
@@ -447,18 +531,29 @@ int CObj__VAC_ROBOT_EX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	}
 	// PMx HANDOFF ...
 	{
-		def_name = "DATA.PMx_HANDOFF.TYPE";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		// ...
+		{
+			def_name = "DATA.PMx_HANDOFF.TYPE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-		if(def_data.CompareNoCase("SINGLE") == 0)			bActive__Single_Handoff = true;
-		else												bActive__Single_Handoff = false;
+			if(def_data.CompareNoCase("SINGLE") == 0)			bActive__Single_Handoff = true;
+			else												bActive__Single_Handoff = false;
+		}
+		// ...
+		{
+			def_name = "DATA.PMx_HANDOFF.PASSIVE_USE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			if(def_data.CompareNoCase("YES") == 0)				bActive__PMx_Passive_Use = true;
+			else												bActive__PMx_Passive_Use = false;
+		}
 
 		if(bActive__Single_Handoff)
 		{
 			def_name = "OBJ__PMx_ACTIVE_HANDOFF";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-			pOPR_PMx_HANDOFF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+			pOPR_PMx_HANDOFF_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
 			str_name = "PARA.PMx.ID";
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PARA_PMC_ID, obj_name,str_name);
@@ -470,7 +565,7 @@ int CObj__VAC_ROBOT_EX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				def_name.Format("OBJ__PM%1d_ACTIVE_HANDOFF", i+1);
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
-				pOPR_PMC_HANDOFF[i] = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
+				pOPR_PMC_HANDOFF_X[i] = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 			}
 		}
 	}
@@ -520,12 +615,19 @@ int CObj__VAC_ROBOT_EX::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		pVAC_CHM__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 
-		//
-		str_name = "OTR.OUT.MON.dPRESSURE.STATUS";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__VAC_CHM__PRESSURE_STATUS, def_data,str_name);
+		// PARA ...
+		{
+			str_name = "PARA.BALLAST_CTRL.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PARA_BALLAST_CTRL_ACTIVE, def_data,str_name);
+		}
+		// MON ...
+		{
+			str_name = "OTR.OUT.MON.dPRESSURE.STATUS";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__VAC_CHM__PRESSURE_STATUS, def_data,str_name);
 
-		str_name = "OTR.IN.MON.sROBOT.MATERIAL.TRANSFER.FLAG";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ROBOT_MATERIAL_TRANSFER_FLAG, def_data,str_name);
+			str_name = "OTR.IN.MON.sROBOT.MATERIAL.TRANSFER.FLAG";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ROBOT_MATERIAL_TRANSFER_FLAG, def_data,str_name);
+		}
 	}
 
 	// LLx ...
@@ -651,13 +753,7 @@ int CObj__VAC_ROBOT_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		int pm_i = Macro__CHECK_PMx_INDEX(para_module);
 		if(pm_i >= 0)
 		{
-			if(dEXT_CH__PMx_CFG_HANDSHAKE_MODE[pm_i]->Check__DATA(STR__PASSIVE) > 0)
-			{
-				if(Is__TRANSFER_READY_TO_PICK(p_alarm, "TRANSFER.READY", "EXTEND", pm_i) < 0)
-				{
-					return -1;
-				}
-			}
+
 		}
 	}
 
@@ -692,6 +788,10 @@ int CObj__VAC_ROBOT_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		IF__CTRL_MODE(sMODE__INIT)
 		{
 			flag = Call__INIT(p_variable,p_alarm);
+		}
+		ELSE_IF__CTRL_MODE(sMODE__SET_PARA)
+		{
+			flag = Call__SET_PARA(p_variable,p_alarm);
 		}
 		ELSE_IF__CTRL_MODE(sMODE__PICK)
 		{

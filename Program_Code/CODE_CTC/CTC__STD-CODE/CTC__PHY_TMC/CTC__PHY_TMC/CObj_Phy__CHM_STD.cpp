@@ -26,6 +26,9 @@ int CObj_Phy__CHM_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__VENT,    "VENT");
 		ADD__CTRL_VAR(sMODE__ISOLATE, "ISOLATE");
 		ADD__CTRL_VAR(sMODE__PURGE,   "PURGE");
+
+		ADD__CTRL_VAR(sMODE__PMx_SV_OPEN,  "PMx.SV_OPEN");
+		ADD__CTRL_VAR(sMODE__PMx_SV_CLOSE, "PMx.SV_CLOSE");
 	}
 	return 1;
 }
@@ -40,7 +43,8 @@ int CObj_Phy__CHM_STD::__DEFINE__VERSION_HISTORY(version)
 #define  MON_ID__ALL_STATE						1
 
 #define  DSP__MODE								\
-"INIT  MAINT  PUMP  VENT  ISOLATE  PURGE"
+"INIT  MAINT  PUMP  VENT  ISOLATE  PURGE		\
+ PMx.SV_OPEN  PMx.SV_CLOSE"
 
 
 int CObj_Phy__CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
@@ -50,16 +54,30 @@ int CObj_Phy__CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
 	CString str_name;
 	CString dsp_item;
 
-	// ...
+
+	// PARA ...
+	{
+		str_name = "PARA.PMx.ID";
+		STD__ADD_DIGITAL(str_name, "1 2 3 4 5 6 7 8 9 10");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_PMx_ID, str_name);
+	}
+
+	// TMC_CHM ...
 	{
 		p_variable->Get__STD_DESCRIPTION("STD_OBJ_CTRL",dsp_item);
 
 		str_name = "TMC_CHM.CTRL";
 		STD__ADD_DIGITAL(str_name,dsp_item);
-		LINK__VAR_DIGITAL_CTRL(xCH__OBJ_CTRL,str_name);
+		LINK__VAR_DIGITAL_CTRL(xCH__TMC_CHM_CTRL, str_name);
 
-		dVAR__MODE = "TMC_CHM.MODE";
-		STD__ADD_DIGITAL(dVAR__MODE,DSP__MODE);
+		str_name = "TMC_CHM.MODE";
+		STD__ADD_DIGITAL(str_name, DSP__MODE);
+		LINK__VAR_DIGITAL_CTRL(xCH__TMC_CHM_MODE, str_name);
+
+		//
+		str_name = "TMC_CHM.PARA.PMx.ID";
+		STD__ADD_DIGITAL(str_name, "1 2 3 4 5 6 7 8 9 10");
+		LINK__VAR_DIGITAL_CTRL(xCH__TMC_CHM_PARA_PMx_ID, str_name);
 	}
 
 	// ...
@@ -211,14 +229,41 @@ int CObj_Phy__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
+		CString file_name;
+		CString log_msg;
+
+		file_name.Format("%s.log", sObject_Name);
+
+		log_msg  = "\n\n";
+		log_msg += "//------------------------------------------------------------------------";
+
+		xI_LOG_CTRL->CREATE__SUB_DIRECTORY(sObject_Name);
+		xI_LOG_CTRL->SET__PROPERTY(file_name,24*7,60);
+
+		xI_LOG_CTRL->DISABLE__TIME_LOG();
+		xI_LOG_CTRL->WRITE__LOG(log_msg);
+
+		xI_LOG_CTRL->ENABLE__TIME_LOG();
+		xI_LOG_CTRL->WRITE__LOG("   START   \n");
+	}
+
+	// ...
+	{
 		p_ext_obj_create->Get__DEF_CONST_DATA("DB_CFG_NAME",cfg_db_name);
 
 		//
 		str_name = "SCH_TEST.CFG.TMC_DUMMY_BY_CTC";
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__SCH_TEST_CFG_TMC_DUMMY_BY_CTC, cfg_db_name,str_name);
 
-		aEXT_CH_CFG__REF_ATM_PRESSURE = p_ext_obj_create->Get__VAR_ANALOG_CTRL(cfg_db_name, "REF.ATM.PRESSURE");
-		aEXT_CH_CFG__REF_VAC_PRESSURE = p_ext_obj_create->Get__VAR_ANALOG_CTRL(cfg_db_name, "REF.VAC.PRESSURE");
+		//
+		str_name = "REF.ATM.PRESSURE";
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH_CFG__REF_ATM_PRESSURE, cfg_db_name,str_name);
+
+		str_name = "REF.VAC.PRESSURE";
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH_CFG__REF_VAC_PRESSURE, cfg_db_name,str_name);
+
+		str_name = "TRANSFER.MODE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH_CFG__TRANSFER_MODE, cfg_db_name,str_name);
 	}
 
 	// ...
@@ -250,8 +295,8 @@ int CObj_Phy__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		xI_Module_Obj->Link__Object_Name(sObject_Name);
 
 		xI_Module_Obj->Register__Module_Status_Channel(xCH__OBJ_STATUS->Get__VARIABLE_NAME());
-		xI_Module_Obj->Register__Module_Mode_Channel(dVAR__MODE);
-		xI_Module_Obj->Register__Module_Ctrl_Channel(xCH__OBJ_CTRL->Get__VARIABLE_NAME());
+		xI_Module_Obj->Register__Module_Mode_Channel(xCH__TMC_CHM_MODE->Get__VARIABLE_NAME());
+		xI_Module_Obj->Register__Module_Ctrl_Channel(xCH__TMC_CHM_CTRL->Get__VARIABLE_NAME());
 
 		xI_Module_Obj->Disable__CTCINUSE_TO_STANDBY();
 
@@ -269,22 +314,9 @@ int CObj_Phy__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// ...
 	{
-		CString file_name;
-		CString log_msg;
-
-		file_name.Format("%s.log", sObject_Name);
-
-		log_msg  = "\n\n";
-		log_msg += "//------------------------------------------------------------------------";
-
-		xI_LOG_CTRL->CREATE__SUB_DIRECTORY(sObject_Name);
-		xI_LOG_CTRL->SET__PROPERTY(file_name,24*7,60);
-
-		xI_LOG_CTRL->DISABLE__TIME_LOG();
-		xI_LOG_CTRL->WRITE__LOG(log_msg);
-
-		xI_LOG_CTRL->ENABLE__TIME_LOG();
-		xI_LOG_CTRL->WRITE__LOG("   START   \n");
+		SCX__SEQ_INFO x_seq_info;
+		
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
 	iPRC_STS = -1;
@@ -304,13 +336,16 @@ int CObj_Phy__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable,p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__MAINT)			flag = Call__MAINT(p_variable,p_alarm);
+			 IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__MAINT)				flag = Call__MAINT(p_variable,p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__PUMP)				flag = Call__PUMP(p_variable,p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__VENT)				flag = Call__VENT(p_variable,p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)			flag = Call__ISOLATE(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__PURGE)			flag = Call__PURGE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PUMP)					flag = Call__PUMP(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__VENT)					flag = Call__VENT(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)				flag = Call__ISOLATE(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PURGE)				flag = Call__PURGE(p_variable);
+
+		ELSE_IF__CTRL_MODE(sMODE__PMx_SV_OPEN)			flag = Call__PMx_SV_OPEN(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__PMx_SV_CLOSE)			flag = Call__PMx_SV_CLOSE(p_variable);
 
 		else
 		{

@@ -77,6 +77,11 @@ int CObj__CHM_IO::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 100000, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_MANOMETER_LIMIT_PRESSURE_mTORR_X[i], str_name);
 		}
+
+		//
+		str_name = "CFG.ALL_MFC_CLOSE_WHEN_VAC_SNS_OFF";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ALL_MFC_CLOSE_WHEN_VAC_SNS_OFF, str_name);
 	}
 
 	// MON ...
@@ -115,6 +120,21 @@ int CObj__CHM_IO::__DEFINE__ALARM(p_alarm)
 
 		alarm_msg  = "Config Page에서 Monitoring Interlock를 Disable 설정했습니다.\n";
 		alarm_msg += "이 Object에서 관리하는 모든 Monitoring Alarm들이 정지 됩니다.\n";
+
+		l_act.RemoveAll();
+		l_act.Add("CHECK");
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__ALL_MFC_CLOSE_WHEN_VAC_SNS_OFF;
+
+		alarm_title  = title;
+		alarm_title += "All MFC will close !";
+
+		alarm_msg = "Vaccum sensor is not \"ON\". \n";
 
 		l_act.RemoveAll();
 		l_act.Add("CHECK");
@@ -402,6 +422,32 @@ int CObj__CHM_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__MFC_FLOW_SET_X[i], obj_name,var_name);
+
+			pOBJ__NFC_CTRL_X[i] = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		}
+	}
+
+	// REVERSE_VALVE ...
+	{
+		def_name = "DATA_SIZE.REVERSE_VALVE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		iDATA__REVERSE_VALVE_SIZE = atoi(def_data);
+		if(iDATA__REVERSE_VALVE_SIZE > _CFG__REVERSE_VALVE_SIZE)		iDATA__REVERSE_VALVE_SIZE = _CFG__REVERSE_VALVE_SIZE;
+
+		for(i=0; i<iDATA__REVERSE_VALVE_SIZE; i++)
+		{
+			int id = i + 1;
+
+			def_name.Format("CH.REVERSE_VALVE.%1d.REF",  id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__REVERSE_VALVE_REF_X[i], obj_name,var_name);
+			
+			def_name.Format("CH.REVERSE_VALVE.%1d.SUB",  id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__REVERSE_VALVE_SUB_X[i], obj_name,var_name);
 		}
 	}
 

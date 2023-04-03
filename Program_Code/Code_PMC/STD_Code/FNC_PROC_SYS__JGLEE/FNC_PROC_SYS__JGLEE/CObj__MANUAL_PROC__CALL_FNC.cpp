@@ -88,3 +88,20 @@ int CObj__MANUAL_PROC::Call__ABORTL_DECHUCK(CII_OBJECT__VARIABLE* p_variable)
 
 	return flag;
 }
+
+int CObj__MANUAL_PROC::Call__DECHUCK_LIST(CII_OBJECT__VARIABLE* p_variable)
+{
+	// ...
+	{
+		CString var_data = sCH__PARA_DECHUCK_LIST->Get__STRING();
+		sEXT_CH__RCP_NAME->Set__DATA(var_data);
+	}
+
+	int flag = pOBJ_CTRL__PROC->Call__OBJECT(_PROC_CMMD__MANUAL_READY);
+	if(flag < 0)		return -11;
+
+	flag = pOBJ_CTRL__PROC->Call__OBJECT(_PROC_CMMD__MANUAL_START);
+	if(flag < 0)		return -12;
+
+	return flag;
+}

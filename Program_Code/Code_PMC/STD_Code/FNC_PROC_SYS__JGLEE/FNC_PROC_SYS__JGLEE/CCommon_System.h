@@ -34,8 +34,9 @@
 #define  STR__CLOSE						"CLOSE"
 #define  STR__OPEN						"OPEN"
 
-#define  STR__Processing				"Processing"
 #define  STR__Idle						"Idle"
+#define  STR__Processing				"Processing"
+#define  STR__Alarm						"Alarm"
 
 
 // ...
@@ -70,6 +71,7 @@
 #define  _STEP_CMD__END					"END"
 
 #define  _CHM_CMD__HIGH_VAC_PUMP		"HIGH_VAC_PUMP"
+#define  _CMD_CHM__PROC_READY			"PROC_READY"
 
 
 // ...

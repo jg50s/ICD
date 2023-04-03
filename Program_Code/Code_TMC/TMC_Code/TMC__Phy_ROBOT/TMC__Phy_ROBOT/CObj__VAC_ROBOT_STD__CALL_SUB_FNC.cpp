@@ -61,11 +61,13 @@ _Set_ANI__ROBOT_EXTEND(const CString& arm_type,
 		 if(arm_type.CompareNoCase(_ARM_A) == 0)		active__arm_a = true;
 	else if(arm_type.CompareNoCase(_ARM_B) == 0)		active__arm_b = true;
 
-	// ...
-	dCH__OTR_OUT_MON__ACT_ARM->Set__DATA(arm_type);
+	// Arm ...
+	{
+		dCH__OTR_OUT_MON__ACT_ARM->Set__DATA(arm_type);
 
-		 if(active__arm_a)			dCH__OTR_OUT_MON__ARM_A_ACT->Set__DATA(STR__EXTEND);
-	else if(active__arm_b)			dCH__OTR_OUT_MON__ARM_B_ACT->Set__DATA(STR__EXTEND);
+			 if(active__arm_a)			dCH__OTR_OUT_MON__ARM_A_ACT->Set__DATA(STR__EXTEND);
+		else if(active__arm_b)			dCH__OTR_OUT_MON__ARM_B_ACT->Set__DATA(STR__EXTEND);
+	}
 
 	// PM Check ...
 	{
@@ -73,7 +75,7 @@ _Set_ANI__ROBOT_EXTEND(const CString& arm_type,
 
 		if((pm_index >= 0) && (pm_index < m_nPM_LIMIT))
 		{
-			dCH__OTR_OUT_MON__PMx_ARM_STATE[pm_index]->Set__DATA(STR__EXTEND);
+			sCH__OTR_OUT_MON__PMx_ARM_STATE[pm_index]->Set__DATA(STR__EXTEND);
 
 				 if(active__arm_a)		dCH__OTR_OUT_MON__PMx_ARM_A_ACT[pm_index]->Set__DATA(STR__EXTEND);
 			else if(active__arm_b)		dCH__OTR_OUT_MON__PMx_ARM_B_ACT[pm_index]->Set__DATA(STR__EXTEND);
@@ -86,6 +88,8 @@ _Set_ANI__ROBOT_EXTEND(const CString& arm_type,
 
 		if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 		{
+			dCH__OTR_OUT_MON__LLx_ARM_STATE[ll_index]->Set__DATA(STR__EXTEND);
+
 				 if(active__arm_a)		dCH__OTR_OUT_MON__LBx_ARM_A_ACT[ll_index]->Set__DATA(STR__EXTEND);
 			else if(active__arm_b)		dCH__OTR_OUT_MON__LBx_ARM_B_ACT[ll_index]->Set__DATA(STR__EXTEND);
 		}
@@ -103,13 +107,16 @@ void  CObj__VAC_ROBOT_STD
 
 	for(i=0; i<m_nPM_LIMIT; i++)
 	{
-		dCH__OTR_OUT_MON__PMx_ARM_STATE[i]->Set__DATA(STR__RETRACT);
+		sCH__OTR_OUT_MON__PMx_ARM_STATE[i]->Set__DATA(STR__RETRACT);
+		
 		dCH__OTR_OUT_MON__PMx_ARM_A_ACT[i]->Set__DATA(STR__RETRACT);
 		dCH__OTR_OUT_MON__PMx_ARM_B_ACT[i]->Set__DATA(STR__RETRACT);
 	}
 
 	for(i=0; i<iSIZE__LLx; i++)
 	{
+		dCH__OTR_OUT_MON__LLx_ARM_STATE[i]->Set__DATA(STR__RETRACT);
+
 		dCH__OTR_OUT_MON__LBx_ARM_A_ACT[i]->Set__DATA(STR__RETRACT);
 		dCH__OTR_OUT_MON__LBx_ARM_B_ACT[i]->Set__DATA(STR__RETRACT);
 	}
@@ -174,7 +181,7 @@ void  CObj__VAC_ROBOT_STD
 	int pm_index = Macro__CHECK_PMx_INDEX(stn_name);
 	if((pm_index >= 0) && (pm_index < m_nPM_LIMIT))
 	{
-		dCH__OTR_OUT_MON__PMx_ARM_STATE[pm_index]->Set__DATA(STR__RETRACT);
+		sCH__OTR_OUT_MON__PMx_ARM_STATE[pm_index]->Set__DATA(STR__RETRACT);
 
 			 if(active__arm_a)		dCH__OTR_OUT_MON__PMx_ARM_A_ACT[pm_index]->Set__DATA(STR__RETRACT);
 		else if(active__arm_b)		dCH__OTR_OUT_MON__PMx_ARM_B_ACT[pm_index]->Set__DATA(STR__RETRACT);
@@ -184,6 +191,8 @@ void  CObj__VAC_ROBOT_STD
 	int ll_index = Macro__CHECK_LLx_INDEX(stn_name);
 	if((ll_index >= 0) && (ll_index < iSIZE__LLx))
 	{
+		dCH__OTR_OUT_MON__LLx_ARM_STATE[ll_index]->Set__DATA(STR__RETRACT);
+
 			 if(active__arm_a)		dCH__OTR_OUT_MON__LBx_ARM_A_ACT[ll_index]->Set__DATA(STR__RETRACT);
 		else if(active__arm_b)		dCH__OTR_OUT_MON__LBx_ARM_B_ACT[ll_index]->Set__DATA(STR__RETRACT);
 	}
@@ -235,11 +244,10 @@ void  CObj__VAC_ROBOT_STD
 	}
 	else
 	{
-		int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
-
-		if(ll_i >= 0)
+		if(bActive__LLx_MULTI_SLOT_VALVE)
 		{
-			ani_str.Format("%s-%s", stn_name,stn_slot);
+			int ll_i = Macro__CHECK_LLx_INDEX(stn_name);
+			if(ll_i >= 0)		ani_str.Format("%s-%s", stn_name,stn_slot);
 		}
 	}
 

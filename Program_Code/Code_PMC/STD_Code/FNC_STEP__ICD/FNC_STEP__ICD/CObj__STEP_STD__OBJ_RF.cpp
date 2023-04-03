@@ -196,8 +196,14 @@ int CObj__STEP_STD
 
 // RF.HF ...
 int CObj__STEP_STD
-::RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
+::RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data, const CString& para_pulse_mode)
 {
+	// ...
+	{
+		if(para_pulse_mode.CompareNoCase(STR__Pulse) == 0)					dEXT_CH__DO_RF_PULSE_SET->Set__DATA(STR__ON);
+		else																dEXT_CH__DO_RF_PULSE_SET->Set__DATA(STR__OFF);
+	}
+
 	if(!bActive__OBJ_CTRL__RF_HF)										return 1;
 	if(dCH__CFG_RCP_PART_USE_RFx_HF->Check__DATA(STR__YES) < 0)			return 2;
 

@@ -324,6 +324,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__PROC_STD__CHECK_IINTERLOCK.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__PROC_STD__DEF.h"
 					>
 				</File>
@@ -393,6 +397,22 @@
 				>
 				<File
 					RelativePath=".\CCommon_LEARNED_ITEM.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CObj__PROC_SIM"
+				>
+				<File
+					RelativePath=".\CObj__PROC_SIM.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__PROC_SIM.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__PROC_SIM__CALL_FNC.cpp"
 					>
 				</File>
 			</Filter>

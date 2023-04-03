@@ -99,6 +99,7 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 		}
 
 		// Range : Power ...
+		if(loop_count == 1)
 		{			
 			double min_value = aCH__CFG_POWER_MIN_VALUE->Get__VALUE();
 			double max_value = aCH__CFG_POWER_MAX_VALUE->Get__VALUE();
@@ -107,6 +108,13 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			aCH__PARA_SET_POWER->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
 			aCH__CFG_MAX_ALLOWED_POWER->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
 			aCH__CFG_MAX_POWER_WITHOUT_WAFER->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+
+			aEXT_CH__RF_AO_SET_POWER->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+
+			if(bActive__RF_IO_OBJ)
+			{
+				aEXT_CH__RF_PARA_SET_POWER->Change__MIN_MAX_DEC(min_value,max_value,i_dec);
+			}
 		}
 
 		// Range : Frequency ...
@@ -123,7 +131,7 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 		{
 			if(iActive__SIM_MODE > 0)
 			{
-				ch_data = sEXT_CH__RF_AO_SET_POWER->Get__STRING();
+				ch_data = aEXT_CH__RF_AO_SET_POWER->Get__STRING();
 				
 				sEXT_CH__RF_AI_FORWARD_POWER->Set__DATA(ch_data);
 				sEXT_CH__RF_AI_REFLECT_POWER->Set__DATA("0.0");
@@ -140,10 +148,10 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 				// ...
 				{
-					ch_data = sEXT_CH__RF_AO_SET_POWER->Get__STRING();
+					ch_data = aEXT_CH__RF_AO_SET_POWER->Get__STRING();
 					io_power_set = atof(ch_data);
 					
-					double io_value = io_power_set + set_offset;
+					double io_value = io_power_set - set_offset;
 
 					ch_data.Format("%.1f", io_value);
 					sCH__MON_IO_SET_POWER->Set__DATA(ch_data);

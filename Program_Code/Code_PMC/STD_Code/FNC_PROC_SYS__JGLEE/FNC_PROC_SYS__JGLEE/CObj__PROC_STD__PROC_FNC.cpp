@@ -56,6 +56,11 @@ int CObj__PROC_STD
 		{
 			return -11;
 		}
+
+		if(pOBJ_CTRL__CHM->Call__OBJECT(_CMD_CHM__PROC_READY) < 0)
+		{
+			return -12;
+		}
 	}
 
 	return Sub__PROC_READY(p_variable, p_alarm, active_dechuck);

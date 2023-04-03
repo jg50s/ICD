@@ -17,8 +17,7 @@ private:
 	CUIntArray iLIST_ALID__PIN;
 	//
 
-	//-------------------------------------------------------------------------
-	
+	//-------------------------------------------------------------------------	
 	// OBJ ...
 	CX__VAR_STRING_CTRL   sCH__OBJ_MSG;
 	CX__VAR_STRING_CTRL   sCH__OBJ_STATUS;
@@ -35,6 +34,10 @@ private:
 	//
 
 	//-------------------------------------------------------------------------
+	// OBJ__DB_SYS ...
+	CX__VAR_DIGITAL_CTRL  dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK;
+
+	// LINK_CHANNEL ...
 	CX__VAR_STRING_CTRL   sEXT_CH__SHUTTER_STATE;
 
 	CX__VAR_DIGITAL_CTRL  dEXT_CH__DO_SHUTTER_CLOSE;

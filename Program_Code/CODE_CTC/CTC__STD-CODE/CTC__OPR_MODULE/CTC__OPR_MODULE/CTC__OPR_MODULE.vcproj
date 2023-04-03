@@ -227,18 +227,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="CMacro_LOG"
-				>
-				<File
-					RelativePath=".\CMacro_LOG.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CMacro_LOG.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="CCommon_System"
 				>
 				<File
@@ -298,10 +286,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\CObj_Opr__AUTO_MODE__LOG_FNC.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\CObj_Opr__AUTO_MODE__MON__ALL_STATE.cpp"
 					>
 				</File>
@@ -354,7 +338,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj_Opr__MAINT_MODE__CALL_CHECK.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj_Opr__MAINT_MODE__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj_Opr__MAINT_MODE__CALL_PARTICLE_CHECK.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj_Opr__MAINT_MODE__CALL_PARTICLE_PART.cpp"
 					>
 				</File>
 				<File

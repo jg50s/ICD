@@ -291,7 +291,7 @@ int CObj__MFC_IO::SetPoint__MFCx_Purge_Valve_Open(const int mfc_id)
 	}
 	if(err_check < 0)
 	{
-		if((mfc_id > 0) && (mfc_id < iSIZE__MFC_OBJ))
+		if((mfc_id > 0) && (mfc_id <= iSIZE__MFC_OBJ))
 		{
 			int db_index = mfc_id - 1;
 
@@ -427,7 +427,7 @@ int CObj__MFC_IO::SetPoint__MFCx_Primary_Valve_Open(const int mfc_id)
 	}
 	if(err_check < 0)
 	{
-		if((mfc_id > 0) && (mfc_id < iSIZE__MFC_OBJ))
+		if((mfc_id > 0) && (mfc_id <= iSIZE__MFC_OBJ))
 		{
 			int db_index = mfc_id - 1;
 

@@ -7,7 +7,6 @@
 
 
 //-------------------------------------------------------------------------	
-// Init -----
 int  CObj__VAC_ROBOT_STD
 ::Call__INIT(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
@@ -20,6 +19,11 @@ int  CObj__VAC_ROBOT_STD
 	return flag;
 }
 
+int  CObj__VAC_ROBOT_STD
+::Call__SET_PARA(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+{
+	return pROBOT__OBJ_CTRL->Call__OBJECT(CMMD__SET_PARA);
+}
 
 // Pick -----
 int  CObj__VAC_ROBOT_STD::
@@ -30,16 +34,18 @@ Call__PICK(CII_OBJECT__VARIABLE* p_variable,
 		   const CString& stn_slot,
 		   const int handoff_mode)
 {
-	_Active__DA_STS(arm_type, stn_name,stn_slot, false);
+	_Active__DA_STS(false, arm_type, stn_name,stn_slot, false);
 
 	int r_flag = Fnc__PICK(p_variable,p_alarm, arm_type,stn_name,stn_slot,handoff_mode);
 	if(r_flag > 0)
 	{
-		// _Report__DA_OFFSET(p_alarm, arm_type,stn_name,stn_slot);
-		// _Save__DA_OFFSET(arm_type,stn_name,stn_slot);
+		bool active__place_act = false;
+
+		r_flag = _Report__DA_OFFSET(p_alarm, arm_type,stn_name,stn_slot, active__place_act);
+		_Save__DA_OFFSET(arm_type,stn_name,stn_slot, active__place_act);
 	}
 
-	_Clear__DA_STS(arm_type,stn_name,stn_slot);
+	_Clear__DA_STS(false, arm_type,stn_name,stn_slot);
 	_Clear__DA_RT_OFFSET(stn_name,stn_slot);
 	return r_flag;
 }
@@ -84,15 +90,75 @@ Fnc__PICK(CII_OBJECT__VARIABLE* p_variable,
 	Set_ANI__ROBOT_EXTEND(arm_type,stn_name,stn_slot);
 
 	// ...
-	int flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
+	int r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PICK);
 
-	if(flag > 0)
+	if(r_flag > 0)
 	{
+		bool active__err_check = false;
+
+		if(arm_type.CompareNoCase(_ARM_A) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		active__err_check = true;
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		active__err_check = true;
+		}
+
+		if(active__err_check)
+		{
+			int alm_id = ALID__PICK__MATERIAL_ERROR;
+			CString err_msg;
+			CString err_bff;
+			CString r_act;
+
+			CString act_info;
+			act_info.Format("%s <- %s(%s)", arm_type, stn_name,stn_slot);
+
+			err_msg.Format("Pick : %s \n", act_info);
+
+			if(arm_type.CompareNoCase(_ARM_A) == 0)			
+			{
+				err_bff.Format(" * %s <- %s \n", 
+							   dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+							   dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+			else if(arm_type.CompareNoCase(_ARM_B) == 0)			
+			{
+				err_bff.Format(" * %s <- %s \n", 
+							   dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+							   dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, err_msg, r_act);
+			return -11;
+		}
+
 		Fnc__CHANGE_MATERIAL_INFO(-1,arm_type,stn_name,stn_slot);
+		Set_ANI__ROBOT_RETRACT(arm_type,stn_name,stn_slot);
+	}
+	else
+	{
+		bool active__wfr_exchange = false;
+
+		if(arm_type.CompareNoCase(_ARM_A) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__wfr_exchange = true;
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__wfr_exchange = true;
+		}
+
+		if(active__wfr_exchange)
+		{
+			Fnc__CHANGE_MATERIAL_INFO(-1,arm_type, stn_name,stn_slot);
+		}
 	}
 
-	Set_ANI__ROBOT_RETRACT(arm_type,stn_name,stn_slot);
-	return flag;
+	return r_flag;
 }
 
 int  CObj__VAC_ROBOT_STD::
@@ -206,6 +272,7 @@ Fnc__ACTION(const CString& arm_type,
 			}
 		}
 	}
+
 	return flag;
 }
 int  CObj__VAC_ROBOT_STD::
@@ -282,16 +349,18 @@ Call__PLACE(CII_OBJECT__VARIABLE* p_variable,
 			const CString& stn_slot,
 			const int handoff_mode)
 {
-	_Active__DA_STS(arm_type, stn_name,stn_slot, true);
+	_Active__DA_STS(true, arm_type, stn_name,stn_slot, true);
 
 	int r_flag = Fnc__PLACE(p_variable,p_alarm, arm_type,stn_name,stn_slot,handoff_mode);
 	if(r_flag > 0)
 	{
-		r_flag = _Report__DA_OFFSET(p_alarm, arm_type,stn_name,stn_slot);
-		_Save__DA_OFFSET(arm_type,stn_name,stn_slot, true);
+		bool active__place_act = true;
+
+		r_flag = _Report__DA_OFFSET(p_alarm, arm_type,stn_name,stn_slot, active__place_act);
+		_Save__DA_OFFSET(arm_type,stn_name,stn_slot, active__place_act);
 	}
 
-	_Clear__DA_STS(arm_type,stn_name,stn_slot);
+	_Clear__DA_STS(true, arm_type,stn_name,stn_slot);
 	_Set__DA_RT_OFFSET(stn_name,stn_slot);
 	return r_flag;
 }
@@ -332,14 +401,75 @@ Fnc__PLACE(CII_OBJECT__VARIABLE* p_variable,
 	Set_ANI__ROBOT_EXTEND(arm_type,stn_name,stn_slot);
 
 	// ...
-	int flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PLACE);
-
-	if(flag > 0)
+	int r_flag = Fnc__ACTION(arm_type,stn_name,stn_slot, CMMD__PLACE);
+	
+	if(r_flag > 0)
 	{
+		bool active__err_check = false;
+
+		if(arm_type.CompareNoCase(_ARM_A) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__err_check = true;
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)		active__err_check = true;
+		}
+
+		if(active__err_check)
+		{
+			int alm_id = ALID__PLACE__MATERIAL_ERROR;
+			CString err_msg;
+			CString err_bff;
+			CString r_act;
+
+			CString act_info;
+			act_info.Format("%s -> %s(%s)", arm_type, stn_name,stn_slot);
+
+			err_msg.Format("Place : %s \n", act_info);
+
+			if(arm_type.CompareNoCase(_ARM_A) == 0)			
+			{
+				err_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+			else if(arm_type.CompareNoCase(_ARM_B) == 0)			
+			{
+				err_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Get__STRING());
+				err_msg += err_bff;
+			}
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, err_msg, r_act);
+			return -11;
+		}
+
 		Fnc__CHANGE_MATERIAL_INFO(1,arm_type,stn_name,stn_slot);
 		Set_ANI__ROBOT_RETRACT(arm_type,stn_name,stn_slot);
 	}
-	return flag;
+	else
+	{
+		bool active__wfr_exchange = false;
+
+		if(arm_type.CompareNoCase(_ARM_A) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		active__wfr_exchange = true;
+		}
+		else if(arm_type.CompareNoCase(_ARM_B) == 0)			
+		{
+			if(dEXT_CH__ROBOT_ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) > 0)		active__wfr_exchange = true;
+		}
+
+		if(active__wfr_exchange)
+		{
+			Fnc__CHANGE_MATERIAL_INFO(1,arm_type, stn_name,stn_slot);
+		}
+	}
+
+	return r_flag;
 }
 
 // Swap -----
@@ -402,7 +532,18 @@ Call__EXTEND(CII_OBJECT__VARIABLE* p_variable,
 			 const CString& stn_name, 
 			 const CString& stn_slot)
 {
-	_Active__DA_STS(arm_type, stn_name,stn_slot, true);
+	bool actove__place_act = false;
+
+	if(arm_type.CompareNoCase(_ARM_A) == 0)
+	{
+		if(dCH__OTR_OUT_MON__ARM_A_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)			actove__place_act = true;
+	}
+	else if(arm_type.CompareNoCase(_ARM_B) == 0)
+	{
+		if(dCH__OTR_OUT_MON__ARM_B_MATERIAL_STATUS->Check__DATA(STR__NONE) < 0)			actove__place_act = true;
+	}
+
+	_Active__DA_STS(actove__place_act, arm_type, stn_name,stn_slot, true);
 
 	return Fnc__EXTEND(p_variable,p_alarm, arm_type,stn_name,stn_slot);
 }
@@ -521,15 +662,13 @@ Call__RETRACT(CII_OBJECT__VARIABLE* p_variable,
 	int r_flag = Fnc__RETRACT(p_variable,p_alarm, arm_type,stn_name,stn_slot);
 	if(r_flag > 0)
 	{
-		if(active_place)
-		{
-			r_flag = _Report__DA_OFFSET(p_alarm, arm_type,stn_name,stn_slot);
-			_Save__DA_OFFSET(arm_type,stn_name,stn_slot, true);
-		}
+		r_flag = _Report__DA_OFFSET(p_alarm, arm_type,stn_name,stn_slot, active_place);
+		_Save__DA_OFFSET(arm_type,stn_name,stn_slot, active_place);
 	}
 
-	_Clear__DA_STS(arm_type,stn_name,stn_slot);
+	_Clear__DA_STS(active_place, arm_type,stn_name,stn_slot);
 	_Set__DA_RT_OFFSET(stn_name,stn_slot);
+
 	return r_flag;
 
 }
@@ -815,5 +954,86 @@ Call__TIME_TEST(CII_OBJECT__VARIABLE* p_variable,
 		// ...
 	}
 
+	return 1;
+}
+
+
+// ...
+#define  _DEF__PI						3.141592
+
+
+int  CObj__VAC_ROBOT_STD::
+Call__TEST_RT_TO_XY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	CString ch_data;
+
+	ch_data = sCH__TEST_R_OFFSET_MM->Get__STRING();
+	double para_mm = atof(ch_data);
+
+	ch_data = sCH__TEST_T_OFFSET_DEG->Get__STRING();
+	double para_deg = atof(ch_data);
+
+	double theta_deg = para_deg * _DEF__PI / 180.0;
+	double x_pos = para_mm * cos(theta_deg);
+	double y_pos = para_mm * sin(theta_deg);
+
+	ch_data.Format("%.3f", x_pos);	
+	sCH__TEST_X_OFFSET_MM->Set__DATA(ch_data);
+
+	ch_data.Format("%.3f", y_pos);	
+	sCH__TEST_Y_OFFSET_MM->Set__DATA(ch_data);
+
+	// ...
+	CString log_msg;
+	CString log_bff;
+
+	log_msg = "Call__TEST_RT_TO_XY() ... \n";
+
+	log_bff.Format(" (%s, %s) -> (%s, %s) \n",
+				   sCH__TEST_R_OFFSET_MM->Get__STRING(),
+				   sCH__TEST_T_OFFSET_DEG->Get__STRING(),
+				   sCH__TEST_X_OFFSET_MM->Get__STRING(),
+				   sCH__TEST_Y_OFFSET_MM->Get__STRING());
+	log_msg += log_bff;
+	log_msg += "\n";
+
+	printf(log_msg);
+	return 1;
+}
+int  CObj__VAC_ROBOT_STD::
+Call__TEST_XY_TO_RT(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
+{
+	CString ch_data;
+
+	ch_data = sCH__TEST_X_OFFSET_MM->Get__STRING();
+	double x_mm = atof(ch_data);
+
+	ch_data = sCH__TEST_Y_OFFSET_MM->Get__STRING();
+	double y_mm = atof(ch_data);
+
+	double r_mm  = sqrt(pow(x_mm,2)+pow(y_mm,2));
+	double t_deg = atan2(y_mm,x_mm) * 180 / _DEF__PI;
+
+	ch_data.Format("%.3f", r_mm);	
+	sCH__TEST_R_OFFSET_MM->Set__DATA(ch_data);
+
+	ch_data.Format("%.3f", t_deg);	
+	sCH__TEST_T_OFFSET_DEG->Set__DATA(ch_data);
+
+	// ...
+	CString log_msg;
+	CString log_bff;
+
+	log_msg = "Call__TEST_XY_TO_RT() ... \n";
+
+	log_bff.Format(" (%s, %s) -> (%s, %s) \n",
+					sCH__TEST_X_OFFSET_MM->Get__STRING(),
+					sCH__TEST_Y_OFFSET_MM->Get__STRING(),
+					sCH__TEST_R_OFFSET_MM->Get__STRING(),
+					sCH__TEST_T_OFFSET_DEG->Get__STRING());
+	log_msg += log_bff;
+	log_msg += "\n";
+
+	printf(log_msg);
 	return 1;
 }

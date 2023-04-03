@@ -12,9 +12,11 @@ int CObj__LIFT_PIN_IO
 	int loop_count = 0;
 	int link_count = 0;
 
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
 
 		loop_count++;
 		if(loop_count > 10)			loop_count = 1;
@@ -87,25 +89,43 @@ int CObj__LIFT_PIN_IO
 				}
 			}
 
-			if(active__unknown_pos)
+			if(iDATA__PIN_SNS_CHECK_MODE == _PIN_CHECK_MODE__TOP)
 			{
-				sCH__MON_LIFT_STATE->Set__DATA(STR__UNKNOWN);
-			}
-			else if((active__up_pos) && (!active__down_pos) && (!active__middle_pos))
-			{
-				sCH__MON_LIFT_STATE->Set__DATA(STR__UP);
-			}
-			else if((!active__up_pos) && (active__down_pos) && (!active__middle_pos))
-			{
-				sCH__MON_LIFT_STATE->Set__DATA(STR__DOWN);
-			}
-			else if((!active__up_pos) && (!active__down_pos) && (active__middle_pos))
-			{
-				sCH__MON_LIFT_STATE->Set__DATA(STR__MIDDLE);
+				if((active__up_pos) && (active__middle_pos) && (active__down_pos))
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__UP);
+				}
+				else if((!active__up_pos) && (active__middle_pos) && (active__down_pos))
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__MIDDLE);
+				}
+				else if((!active__up_pos) && (!active__middle_pos)&& (active__down_pos))
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__DOWN);
+				}
+				else
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__UNKNOWN);
+				}
 			}
 			else
 			{
-				sCH__MON_LIFT_STATE->Set__DATA(STR__UNKNOWN);
+				if((active__up_pos) && (!active__down_pos) && (!active__middle_pos))
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__UP);
+				}
+				else if((!active__up_pos) && (active__down_pos) && (!active__middle_pos))
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__DOWN);
+				}
+				else if((!active__up_pos) && (!active__down_pos) && (active__middle_pos))
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__MIDDLE);
+				}
+				else
+				{
+					sCH__MON_LIFT_STATE->Set__DATA(STR__UNKNOWN);
+				}
 			}
 		}
 
@@ -113,8 +133,10 @@ int CObj__LIFT_PIN_IO
 		{
 			link_count++;
 			if(link_count > 10)			link_count = 1;
+		}
 
-			//
+		// ...
+		{
 			sCH__MON_LIFT_STATE->Get__DATA(cur_data);
 			var_data.Format("%s.%1d", cur_data,link_count);
 

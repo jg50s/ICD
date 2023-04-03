@@ -7,8 +7,9 @@
 #define  MODULE_VIS1				"VIS1"
 
 // ...
-#define  ARM_A						"A"
-#define  ARM_B						"B"
+#define  _ARM_A						"A"
+#define  _ARM_B						"B"
+#define  _ARM_AB					"AB"
 
 // ...
 #define  STR__ENABLE				"ENABLE"

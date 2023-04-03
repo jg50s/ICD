@@ -14,6 +14,13 @@
 #define  ALID__ARM_B__MATERIAL_EXIST_ERROR						2
 #define  ALID__AFTER_MAPPING_CROSSED_WAFER_DETECTED				3
 
+#define  ALID__ARM_A__NOT_USE									4
+#define  ALID__ARM_B__NOT_USE									5
+#define  ALID__ARM_AB__NOT_USE									6
+
+#define  ALID__PICK__MATERIAL_ERROR								7
+#define  ALID__PLACE__MATERIAL_ERROR							8
+
 #define  ALID__LP1__MATERIAL_EXIST_ERROR						11
 #define  ALID__LP2__MATERIAL_EXIST_ERROR						12
 #define  ALID__LP3__MATERIAL_EXIST_ERROR						13

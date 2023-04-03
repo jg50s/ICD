@@ -75,7 +75,7 @@ int  CObj__SYS_IO
 		p_interlock->REGISTER__VARIABLE_NAME(obj_name,var_name,var_data, Fnc_SetPoint__VAC_Fast_Vlv_Open);
 	}
 
-	// 3. Slow Valve <- Open
+	// Slow Valve <- Open
 	if(bActive__DO_ROUGH_SOFT_VLV)
 	{
 		ch_name = sCH_Name__DO_ROUGH_SOFT_VLV;
@@ -142,7 +142,13 @@ SetPoint__VENT_Fast_Vlv_Open(CString &err_msg)
 
 		if(cur__vlv_pos > 0.0)
 		{
+			CString err_bff;
+
 			err_msg = "APC's current valve position is not closed ! \n"; 
+
+			err_bff.Format(" * APC's current valve position is %.1f %% \n.", cur__vlv_pos);
+			err_msg += err_bff;
+
 			return -13;
 		}
 	}
@@ -200,7 +206,13 @@ SetPoint__VENT_Soft_Vlv_Open(CString &err_msg)
 
 		if(cur__vlv_pos > 0.0)
 		{
+			CString err_bff;
+
 			err_msg = "APC's current valve position is not closed ! \n"; 
+
+			err_bff.Format(" * APC's current valve position is %.1f %% \n.", cur__vlv_pos);
+			err_msg += err_bff;
+
 			return -13;
 		}
 	}
@@ -274,10 +286,20 @@ SetPoint__VAC_Foreline_Vlv_Open(CString &err_msg)
 	}
 	if(bActive__DRY_PUMP_VAC_SNS)
 	{
-		if(dEXT_CH__DRY_PUMP_VAC_SNS->Check__DATA(STR__ON) < 0)
+		bool active__vac_check = true;
+
+		if(bActive__TMP_LINK)
 		{
-			err_msg = "Roughing-Line is not \"VAC\". \n";
-			return -22;
+			if(dEXT_CH__TMP_LINK__ACTIVE_INTERLOCK_SKIP_FORELINE_VAC->Check__DATA(STR__ON) > 0)			active__vac_check = false;
+		}
+
+		if(active__vac_check)
+		{
+			if(dEXT_CH__DRY_PUMP_VAC_SNS->Check__DATA(STR__ON) < 0)
+			{
+				err_msg = "Roughing-Line is not \"VAC\". \n";
+				return -22;
+			}
 		}
 	}
 

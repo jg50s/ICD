@@ -19,6 +19,14 @@ int  CObj__PROC_STD::Fnc__PRC_LOG__ENABLE(CII_OBJECT__VARIABLE *p_variable)
 
 		ch_data = sEXT_CH__SLOT01_SLOTID->Get__STRING();
 		sEXT_CH__PROC_LOG__SLOTID->Set__DATA(ch_data);
+
+		//
+		ch_data.Format("DA_REPORT(%s)(%s mm & %s deg)", 
+						dEXT_CH__TMC_LINK_DA_REPORT_RESULT_WAFER->Get__STRING(),
+						sEXT_CH__TMC_LINK_DA_REPORT_R_OFFSET_WAFER->Get__STRING(),
+						sEXT_CH__TMC_LINK_DA_REPORT_T_OFFSET_WAFER->Get__STRING());
+
+		sEXT_CH__PROC_LOG_DA_REPORT_RESULT->Set__DATA(ch_data);
 	}
 
 	// ...

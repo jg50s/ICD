@@ -6,6 +6,8 @@
 #define _CFG__RF_SIZE					3
 #define _CFG__MFC_SIZE					20
 
+#define _CFG__REVERSE_VALVE_SIZE		5
+
 
 // ...
 #define STR__STANDBY				"STANDBY"

@@ -541,6 +541,13 @@ int CObj__LIFT_PIN_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// PIN.SENSOR ...
 	{
+		def_name = "DATA__PIN_SENSOR_CHECK_MODE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if(def_data.CompareNoCase("TOP") == 0)				iDATA__PIN_SNS_CHECK_MODE = _PIN_CHECK_MODE__TOP;
+		else												iDATA__PIN_SNS_CHECK_MODE = _PIN_CHECK_MODE__STD;
+
+		//
 		def_name = "DATA__DI_PIN_SENSOR";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 

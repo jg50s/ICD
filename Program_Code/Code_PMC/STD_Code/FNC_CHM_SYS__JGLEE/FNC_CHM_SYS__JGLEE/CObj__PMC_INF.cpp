@@ -1,5 +1,8 @@
 #include "StdAfx.h"
 #include "CObj__PMC_INF.h"
+#include "CObj__PMC_INF__ALID.h"
+
+#include "Macro_Function.h"
 
 
 //-------------------------------------------------------------------------
@@ -19,22 +22,22 @@ int CObj__PMC_INF::__DEFINE__CONTROL_MODE(obj,l_mode)
 
 	// ...
 	{
-		ADD__CTRL_VAR(sMODE__AUTO_INIT,			"AUTO_INIT");
-		ADD__CTRL_VAR(sMODE__TIME_INIT,			"TIME_INIT");
-		ADD__CTRL_VAR(sMODE__SYSTEM_INIT,		"SYSTEM_INIT");
-		ADD__CTRL_VAR(sMODE__SYSTEM_MAINT,		"SYSTEM_MAINT");
+		ADD__CTRL_VAR(sMODE__AUTO_INIT,    "AUTO_INIT");
+		ADD__CTRL_VAR(sMODE__TIME_INIT,	   "TIME_INIT");
+		ADD__CTRL_VAR(sMODE__SYSTEM_INIT,  "SYSTEM_INIT");
+		ADD__CTRL_VAR(sMODE__SYSTEM_MAINT, "SYSTEM_MAINT");
 
-		ADD__CTRL_VAR(sMODE__PUMP,				"PUMP");
-		ADD__CTRL_VAR(sMODE__VENT,				"VENT");
-		ADD__CTRL_VAR(sMODE__LEAK_CHECK,		"LEAK_CHECK");
-		ADD__CTRL_VAR(sMODE__AUTO_PM,		    "AUTO_PM");
-		ADD__CTRL_VAR(sMODE__PURGE,				"PURGE");
+		ADD__CTRL_VAR(sMODE__PUMP,	  "PUMP");
+		ADD__CTRL_VAR(sMODE__VENT,	  "VENT");
+		ADD__CTRL_VAR(sMODE__LEAK_CHECK, "LEAK_CHECK");
+		ADD__CTRL_VAR(sMODE__AUTO_PM, "AUTO_PM");
+		ADD__CTRL_VAR(sMODE__PURGE,	  "PURGE");
 
-		ADD__CTRL_VAR(sMODE__SLOT_OPEN,			"SLOT.OPEN");
-		ADD__CTRL_VAR(sMODE__SLOT_CLOSE,		"SLOT.CLOSE");
+		ADD__CTRL_VAR(sMODE__SLOT_OPEN,	 "SLOT.OPEN");
+		ADD__CTRL_VAR(sMODE__SLOT_CLOSE, "SLOT.CLOSE");
 
-		ADD__CTRL_VAR(sMODE__PIN_UP,			"PIN.UP");
-		ADD__CTRL_VAR(sMODE__PIN_DOWN,			"PIN.DOWN");
+		ADD__CTRL_VAR(sMODE__PIN_UP,   "PIN.UP");
+		ADD__CTRL_VAR(sMODE__PIN_DOWN, "PIN.DOWN");
 
 		ADD__CTRL_VAR(sMODE__PICK_READY,		"PICK_READY");
 		ADD__CTRL_VAR(sMODE__PICK_X_READY,		"PICK_X_READY");
@@ -67,6 +70,11 @@ int CObj__PMC_INF::__DEFINE__VERSION_HISTORY(version)
 	return 1;
 }
 
+
+// ...
+#define MON_ID__STATUS							1
+
+
 int CObj__PMC_INF::__DEFINE__VARIABLE_STD(p_variable)
 {
 	DECLARE__STD_VARIABLE;
@@ -78,17 +86,75 @@ int CObj__PMC_INF::__DEFINE__VARIABLE_STD(p_variable)
 	CString str_name;
 	CString dsp_list;
 
-	// ...
+	// LINK ...
 	{
 		str_name = "MODULE.TIME";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(xCH__MODULE_TIME,str_name);
+		STD__ADD_STRING_WITH_COMMENT(str_name, "");
+		LINK__VAR_STRING_CTRL(sCH__MODULE_TIME, str_name);
+
+		str_name = "LINK.NET_IP";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__LINK_NET_IP, str_name);
+
+		str_name = "LINK.TIME.ACTIVE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__LINK_TIME_ACTIVE, str_name);
 	}
 
+	// INFO ...
+	{
+		str_name = "INFO.EQP.ID";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_EQP_ID, str_name);
+
+		str_name = "INFO.EQP.NAME";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_EQP_NAME, str_name);
+
+		//
+		str_name = "INFO.EQP.NET_IP";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_EQP_NET_IP, str_name);
+		
+		str_name = "INFO.EQP.NET_PORT";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__INFO_EQP_NET_PORT, str_name);
+	}
+
+	// ...
+	{
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__STATUS);
+	}
 	return 1;
 }
 int CObj__PMC_INF::__DEFINE__ALARM(p_alarm)
 {
+	DECLARE__ALARM;
+
+	// ...
+	CString title;
+	title.Format("%s - ", sObject_Name);
+
+	// ...
+	int alarm_id;
+	CString	alarm_title;
+	CString	alarm_msg;
+	CStringArray l_act;
+
+	// ...
+	{
+		alarm_id = ALID__SYSTEM_TIME_CHANGE_ERROR;
+	
+		alarm_title  = title;
+		alarm_title += "System Time Change Error !";
+
+		alarm_msg = "Please, check the execution permission.";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
+
+		ADD__ALARM_EX(alarm_id, alarm_title, alarm_msg, l_act);
+	}
 
 	return 1;
 }
@@ -189,6 +255,33 @@ int CObj__PMC_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ACTIVE_CALL_BY_CTC, obj_name,var_name);
 	}
 
+	// ...
+	{
+		SCX__SEQ_INFO x_seq_info;
+
+		CString device_name;
+		int eqp_id;
+		CString eqp__net_ip;
+		int eqp__net_port;
+
+		x_seq_info->Get__SEQ_INFO(device_name, eqp_id);
+		x_seq_info->Get__IP_PORT_INFO_OF_SEQ_ID(eqp_id, eqp__net_ip,eqp__net_port);
+
+		// ...
+		CString ch_data;
+
+		ch_data.Format("%1d", eqp_id);
+		sCH__INFO_EQP_ID->Set__DATA(ch_data);
+		
+		ch_data = device_name;
+		sCH__INFO_EQP_NAME->Set__DATA(ch_data);
+
+		ch_data = eqp__net_ip;
+		sCH__INFO_EQP_NET_IP->Set__DATA(ch_data);
+		
+		ch_data.Format("%1d", eqp__net_port);
+		sCH__INFO_EQP_NET_PORT->Set__DATA(ch_data);
+	}
 	return 1;
 }
 
@@ -211,10 +304,10 @@ int CObj__PMC_INF::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-			 IF__CTRL_MODE(sMODE__AUTO_INIT)			flag = Call__AUTO_INIT(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__TIME_INIT)			flag = Call__TIME_INIT(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__SYSTEM_INIT)			flag = Call__SYSTEM_INIT(p_variable);
-		ELSE_IF__CTRL_MODE(sMODE__SYSTEM_MAINT)			flag = Call__SYSTEM_MAINT(p_variable);
+			 IF__CTRL_MODE(sMODE__AUTO_INIT)			flag = Call__AUTO_INIT(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__TIME_INIT)			flag = Call__TIME_INIT(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SYSTEM_INIT)			flag = Call__SYSTEM_INIT(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SYSTEM_MAINT)			flag = Call__SYSTEM_MAINT(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__PUMP)					flag = Call__PUMP(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__VENT)					flag = Call__VENT(p_variable);
@@ -267,7 +360,7 @@ int CObj__PMC_INF::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	{
 		CString log_msg;
 
-		log_msg.Format("Completed ... :  [%s]",mode);
+		log_msg.Format("[%s] Completed ... (%1d)", mode, flag);
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
@@ -275,8 +368,9 @@ int CObj__PMC_INF::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	return flag;
 }
 
-int CObj__PMC_INF::__CALL__MONITORING(id,p_variable,p_alarm)
+int CObj__PMC_INF::__CALL__MONITORING(id,p_variable, p_alarm)
 {
+	if(id == MON_ID__STATUS)		Mon__STATUS(p_variable, p_alarm);
 
 	return 1;
 }

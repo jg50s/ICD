@@ -25,14 +25,14 @@ int  CObj_Phy__LBx_STD
 	{
 		CString cmmd_proc = _CMMD__PROC_READY;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 	// PROC_START ...
 	{
 		CString cmmd_proc = _CMMD__PROC_START;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 
@@ -202,14 +202,14 @@ int  CObj_Phy__LBx_STD
 	{
 		CString cmmd_proc = _CMMD__PRE_READY;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 	// PRE_START ...
 	{
 		CString cmmd_proc = _CMMD__PRE_START;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 
@@ -224,14 +224,14 @@ int  CObj_Phy__LBx_STD
 	{
 		CString cmmd_proc = _CMMD__CLN_READY;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 	// POST_START ...
 	{
 		CString cmmd_proc = _CMMD__CLN_START;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 
@@ -251,14 +251,14 @@ int  CObj_Phy__LBx_STD
 	{
 		CString cmmd_proc = _CMMD__MNT_READY;
 
-		int r_flag = Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		int r_flag = Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 		if(r_flag < 0)		return r_flag;
 	}
 	// MAINT_START ...
 	{
 		CString cmmd_proc = _CMMD__MNT_START;
 
-		return Fnc__MODULE_OBJ(p_variable, cmmd_proc);
+		return Fnc__MODULE_OBJ(p_variable,p_alarm, cmmd_proc);
 	}
 
 	return 1;

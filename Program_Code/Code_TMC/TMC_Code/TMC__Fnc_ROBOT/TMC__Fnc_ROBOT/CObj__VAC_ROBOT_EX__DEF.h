@@ -11,6 +11,8 @@ enum {ACT_HOFF__SWAP__PICK_X__PLACE = -1, ACT_HOFF__SWAP__PLACE_X__PICK = 1};
 
 // ...
 #define  CMMD__INIT				"INIT"
+#define  CMMD__SET_PARA			"SET.PARA"
+
 #define  CMMD__ROTATE			"ROTATE"
 #define  CMMD__PICK				"PICK"
 #define  CMMD__XPICK			"XPICK"
@@ -43,10 +45,19 @@ enum {ACT_HOFF__SWAP__PICK_X__PLACE = -1, ACT_HOFF__SWAP__PLACE_X__PICK = 1};
 #define  CMMD__PUMP				"PUMP"
 #define  CMMD__TRANSFER_PUMP	"TRANSFER_PUMP"
 
+// ...
+#define  CMMD__TRANSFER_READY	"TRANSFER.READY"
+#define  CMMD__TRANSFER_END		"TRANSFER.END"
+
+
+// ...
 #define  STR__NONE				"NONE"
 #define  STR__EXIST				"EXIST"
 #define  STR__UNKNOWN			"UNKNOWN"
+#define  STR__MAPPED			"MAPPED"
 
+
+// ...
 #define  ACT__RETRY				"RETRY"
 #define  ACT__IGNORE			"IGNORE"
 #define  CHECK__RETRY			"CHECK_RETRY"
@@ -70,13 +81,22 @@ enum {ACT_HOFF__SWAP__PICK_X__PLACE = -1, ACT_HOFF__SWAP__PLACE_X__PICK = 1};
 
 #define  STR__UP				"UP"
 #define  STR__DOWN				"DOWN"
+#define  STR__MIDDLE			"MIDDLE"
 
 #define  STR__IDLE				"IDLE"
 #define  STR__MAINT				"MAINT"
 
+#define  STR__ALL               "ALL"
+#define  STR__UNPROCESSED		"UNPROCESSED"
+
 #define  STR__YES               "YES"
 #define  STR__NO				"NO"
 
+#define  STR__ON				"ON"
+#define  STR__OFF				"OFF"
+
 #define  STR__PASSIVE			"PASSIVE"
 #define  STR__ACTIVE			"ACTIVE"
-//
+
+#define  STR__PICK				"PICK"
+#define  STR__PLACE				"PLACE"

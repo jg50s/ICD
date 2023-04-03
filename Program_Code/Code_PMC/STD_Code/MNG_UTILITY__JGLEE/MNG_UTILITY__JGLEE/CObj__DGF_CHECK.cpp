@@ -22,6 +22,7 @@ int CObj__DGF_CHECK::__DEFINE__CONTROL_MODE(obj,l_mode)
 	// ...
 	{
 		ADD__CTRL_VAR(sMODE__ORIFICE_CHECK, "ORIFICE.CHECK");
+		ADD__CTRL_VAR(sMODE__COPY_NEW_TO_BASELINE, "COPY_NEW_TO_BASELINE");
 	}
 	return 1;
 }
@@ -82,24 +83,31 @@ int CObj__DGF_CHECK::__DEFINE__VARIABLE_STD(p_variable)
 			LINK__VAR_ANALOG_CTRL(aCH_CFG__ORIFICE_SIZE[i], str_name);
 
 			// BASELINE
-			str_name.Format("CFG.BASELINE.%1d", i+1);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr",1,0,1000,"");
-			LINK__VAR_ANALOG_CTRL(aCH_CFG__BASELINE[i], str_name);
-
-			// CURRENT LIST
-			str_name.Format("PARA.CUR.RESULT.LIST.%1d", i+1);
-			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-			LINK__VAR_STRING_CTRL(sCH_PARA__CUR_RESULT_LIST[i], str_name);
+			str_name.Format("CFG.BASELINE.mTORR.%1d", i+1);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0,0,1000000,"");
+			LINK__VAR_ANALOG_CTRL(aCH_CFG__BASELINE_mTORR[i], str_name);
 
 			// NEW LIST
-			str_name.Format("PARA.NEW.RESULT.LIST.%1d", i+1);
+			str_name.Format("PARA.NEW.RESULT.mTORR.LIST.%1d", i+1);
 			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-			LINK__VAR_STRING_CTRL(sCH_PARA__NEW_RESULT_LIST[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH_PARA__NEW_RESULT_mTORR_LIST[i], str_name);
+
+			str_name.Format("PARA.NEW.RESULT.START.mTORR.LIST.%1d", i+1);
+			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH_PARA__NEW_RESULT_START_mTORR_LIST[i], str_name);
+
+			str_name.Format("PARA.NEW.RESULT.END.mTORR.LIST.%1d", i+1);
+			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH_PARA__NEW_RESULT_END_mTORR_LIST[i], str_name);
 
 			// DELTA LIST
-			str_name.Format("PARA.DELTA.RESULT.LIST.%1d", i+1);
+			str_name.Format("PARA.DELTA.RESULT.mTORR.LIST.%1d", i+1);
 			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-			LINK__VAR_STRING_CTRL(sCH_PARA__DELTA_RESULT_LIST[i], str_name);
+			LINK__VAR_STRING_CTRL(sCH_PARA__DELTA_RESULT_mTORR_LIST[i], str_name);
+
+			str_name.Format("PARA.DELTA.RESULT.PER.LIST.%1d", i+1);
+			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH_PARA__DELTA_RESULT_PER_LIST[i], str_name);
 		}
 
 		// CHECK TIME COUNT
@@ -107,14 +115,14 @@ int CObj__DGF_CHECK::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
 		LINK__VAR_STRING_CTRL(sCH_PARA__CHECK_TIME_COUNT, str_name);
 
-		// START & END - PRESSURE
-		str_name = "RESULT.START.PRESSURE";
+		// START & END - PRESSURE.mTORR
+		str_name = "RESULT.START.PRESSURE.mTORR";
 		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-		LINK__VAR_STRING_CTRL(sCH_RESULT__START_PRESSURE, str_name);
+		LINK__VAR_STRING_CTRL(sCH_RESULT__START_PRESSURE_mTORR, str_name);
 
-		str_name = "RESULT.END.PRESSURE";
+		str_name = "RESULT.END.PRESSURE.mTORR";
 		STD__ADD_STRING_WITH_X_OPTION(str_name, "");
-		LINK__VAR_STRING_CTRL(sCH_RESULT__END_PRESSURE, str_name);
+		LINK__VAR_STRING_CTRL(sCH_RESULT__END_PRESSURE_mTORR, str_name);
 
 
 		// RESULT STRING
@@ -319,17 +327,21 @@ int CObj__DGF_CHECK::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// OBJ - FNC MFCx CTRL .....
 	{
-		def_name = "OBJ.FNC_MFC";
+		def_name = "OBJ.GAS_VLV";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,obj_name);
 
-		pOBJ_CTRL__FNC_MFC = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		pOBJ_CTRL__GAS_VLV = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+		//
+		var_name = "PARA.INTERLOCK.SKIP";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_VLV__PARA_INTERLOCK_SKIP, obj_name,var_name);
 
 		//
 		var_name = "PARA.MFC.TYPE";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__FNC_MFC__PARA_MFC_TYPE, obj_name,var_name);
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__GAS_VLV__PARA_MFC_TYPE, obj_name,var_name);
 
 		var_name = "PARA.MFC.FLOW";
-		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__FNC_MFC__PARA_MFC_FLOW, obj_name,var_name);
+		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__GAS_VLV__PARA_MFC_FLOW, obj_name,var_name);
 	}
 
 	// OBJ - DGF CTRL .....
@@ -344,6 +356,12 @@ int CObj__DGF_CHECK::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PARA_ORIFICE_VLV, obj_name,var_name);
 	}
 
+	// ...
+	{
+		SCX__SEQ_INFO x_seq_info;
+
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
+	}
 	return 1;
 }
 
@@ -394,19 +412,10 @@ int CObj__DGF_CHECK::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		{
 			flag = Call__ORIFICE_CHECK(p_variable,p_alarm);
 		}
-	else
-	{
-		CString bff;
-		CString alarm_msg;
-		CString r_act;
-
-		bff.Format("Object Name : %s\n",sObject_Name);
-		alarm_msg  = bff;
-		bff.Format("Unknown Object Mode : \"%s\"\n",mode);
-		alarm_msg += bff;
-
-		p_alarm->Popup__ALARM_With_MESSAGE(ALID__OBJECT_MODE_UNKNOWN,alarm_msg,r_act);
-	}
+		ELSE_IF__CTRL_MODE(sMODE__COPY_NEW_TO_BASELINE)
+		{
+			flag = Call__COPY_NEW_TO_BASELINE(p_variable,p_alarm);
+		}
 	}
 
 	// ...

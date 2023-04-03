@@ -180,6 +180,15 @@ int CObj__SHUTTER_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 
+	// OBJ : DB_SYS ...
+	{
+		def_name = "OBJ__DB_SYS";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		var_name = "CFG.USE.SHUTTER_CLOSE.CHECK";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_USE_SHUTTER_CLOSE_CHECK, obj_name,var_name);
+	}
+
 	// LINK : IO_Chammel
 	{
 		def_name = "CH__SHUTTER_STATE";
