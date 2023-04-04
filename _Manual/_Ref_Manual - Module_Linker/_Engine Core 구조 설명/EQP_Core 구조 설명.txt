@@ -1,0 +1,134 @@
+
+ 1. EQP__START.exe
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__Core_Link.lib
+      -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__NET_Link.lib
+
+ 2. EQP__Core_Link.dll
+      #include "C:\Module_Linker\EQP_Link_Res\Core_Header\EQP_BODY__Core_Link.h"
+        class CX_SEQ_CORE__QUERY_CTRL
+        class CX_EQP_CORE__SYSTEM_CTRL
+        class CX_II_AWI__OBJECT_UTILITY_CTRL
+        class CX_II_AWI__OBJECT_VARIABLE_CTRL
+        class CX_II_AWI__OBJECT_ALARM_CTRL
+        class CX_SEQ_DB__CTRL
+        class CX_SEQ_DB__RECIPE_ITEM_CTRL
+        class CX_SEQ_DB__CONFIG_ITEM_CTRL
+        class CX_SEQ_DB__OBJECT_CTRL
+        class CX_SEQ_DB__CHANNEL_CTRL
+        class CX_SEQ_DB__SYSTEM_CONFIG_CTRL
+        class CX_SEQ_DB__SYSTEM_DIR_INFO
+        class CX_SEQ_DB__DATALOG_VIEW_CTRL
+        class CX_SEQ_DB__MATERIAL_VIEW_CTRL
+        class CX_SEQ_DB__OBJECT_EDITOR_CTRL
+        class CX_SEQ_DB__OBJECT_INFO_CTRL
+
+      #include "C:\Module_Linker\EQP_Link_Res\Apps_Header\EQP\Interface\Object_Interface.h"
+      #include "C:\Module_Linker\EQP_Link_Res\Apps_Header\EQP\Interface\Object_Interface__body.h"
+        class CX__COMMON_CODE__ERROR_FEEDBACK__USER_FNC
+
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__START.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__NET_Link.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__FA_Link.lib
+ 
+ 3. EQP__NET_Link.dll
+      #include "C:\Module_Linker\EQP_Link_Res\Core_Header\EQP_BODY__NET_Link.h"
+        class CX_SEQ_NET__CTRL
+        class CX_SEQ_NET__MODULE_CTRL
+      #include "C:\Module_Linker\EQP_Link_Res\Core_Header\EQP_BODY__Core_NET_Link.h"
+        class CX_SEQ_DB__INet_CTRL
+
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__Core_Link_D.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__ZIP_Link_D.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__UNZIP_Link_D.lib
+	
+ 6. EQP__Utility_Link.dll
+      #include "C:\Module_Linker\EQP_Link_Res\Apps_Header\EQP\UTILITY\IEQP_BODY__UTILITY_LINK.h"
+        class SCX__FILE_LINK_CTRL
+        class SCX__CHANNEL_CTRL
+        class SCX__DB_CTRL
+        class SCX__SEQ_CORE__QUERY
+        class SCX__CHANNEL_INFO
+        class SCX__DEVICENET_INFO
+        class SCX__CONDITION
+        class SCX__PM_DATALOG
+        class SCX__PM_CSV_LOG
+        class SCX__SEQ_INFO
+        class SCX__FILE_CTRL
+        class SCX__COMMON_FILE_CTRL
+        class SCX__MODULE_INFO
+        class SCX__ANALOG_CHANNEL
+        class SCX__DIGITAL_CHANNEL
+        class SCX__STRING_CHANNEL
+        class SCX__VARIABLE_CTRL
+        class SCX__SCHEDULER_DB_CTRL
+        class SCX__JOB_CTRL
+        class SCX__LOT_SUMMARY
+        class SCX__MATERIAL_LOG
+        class SCX__FILE_ROUTE_INFO
+        class SCX__FILE_ROUTE_INFO__ETCHER_QUAD
+        class SCX__FILE_ROUTE_CTRL
+        class SCX__RECIPE_FILE
+        class SCX__FILE_RCP_CTRL
+        class SCX__FILE_RCP_INFO
+        class SCX__ALARM_CTRL
+        class SCX__STEP_TIMER_CTRL
+        class SCX__TIMER_CTRL
+        class SCX__ASYNC_TIMER_CTRL
+        class SCX__OBJECT_VARIABLE_CTRL
+        class SCX__OBJECT_ALARM_CTRL
+        class SCX__SERIAL
+        class SCX__ASYNC_SERIAL
+        class SCX__SERIAL_JG
+        class SCX__COM_PORT
+        class SCX__ETHERNET_JGLEE
+        class SCX__ETHERNET_SERVER_JGLEE
+        class SCX__USER_LOG_CTRL
+        class SCX__SYSTEM_CTRL
+ 
+      -> pdh.lib
+      -> ws2_32.lib
+      -> C:\\Module_Linker\\EQP_Link_Res\\Core_Header\\Api232.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__FA_Link.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__Core_Link.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__NET_Link.lib
+
+ 7. EQP__PMC_Link.dll
+      #include "C:\Module_Linker\EQP_Link_Res\Apps_Header\EQP\UTILITY\IEQP_BODY__PMC_LINK.h"
+        class SCX__PMC__DCOP_CTRL
+
+ 	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__Core_Link.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__NET_Link.lib
+
+ 8. EQP__CTC_Link.dll
+      #include "C:\Module_Linker\EQP_Link_Res\Apps_Header\EQP\UTILITY\IEQP_BODY__CTC_LINK.h"
+        class SCX__Memory_Check__SC__NET_CTRL
+			  class SCX__Memory_Check__SC_Library__CTC_CTRL
+        class SCX__Memory_Check__SC__DB_CTRL
+        class SCX__LOT_LOG_CTRL
+        class CX__COMMON_CODE__ERROR_FEEDBACK__MODULE_OBJ
+        class SCX__FTP_CTRL
+        class SCX__CTC__SCH_MATERIAL_CTRL
+        class SCX__CTC__JOB_FILE_CTRL
+        class SCX__CTC__MODULE_OBJ
+        class SCX__CTC__LOT_SUMMARY_CTRL
+        class SCX__CTC__MATERIAL_LOG_CTRL
+        class SCX__LCD_DB_CTRL
+
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__Core_Link.lib
+      -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__NET_Link.lib
+
+ 9. EQP__FA_Link.dll
+      #include "C:\Module_Linker\EQP_Link_Res\Core_Header\EQP_BODY__FA_Link.h"
+        class CX_STD_LIB_FA_300mm__CTRL
+        class CX_STD_LIB_FA_300mm__LINK
+        class CX_STD_LIB_FA_300mm__DB_CTRL
+        class CX_STD_LIB_FA_300mm__VARIABLE_CTRL
+        class CX_STD_LIB_FA_300mm__SEQ_INFO
+      #include "C:\Module_Linker\EQP_Link_Res\Core_Header\EQP_BODY__FA_NET_Link.h"
+        class CX_FA_NET__CTRL
+
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__Core_Link.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__NET_Link.lib
+	    -> C:\\Module_Linker\\EQP_Link_Res\\EQP_Lib\\EQP__CTC_Link.lib
+
+

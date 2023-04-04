@@ -1,0 +1,28 @@
+
+# 참고 Page "Config_Scheduler.jpg" 
+
+1. "Select Parameter to optimize Scheduler" Parameter
+
+  1) "Scheduler Mode" Option
+     -> "SEQUENTIAL" :  
+        첫번째 Job의 마지막 Wafer가 해당 Load-Port로 Place 되면,
+        두번째 Job의 첫번째 Wafer를 해당 Load-Port에서 Pick 한다.
+     -> "PIPELINE"   :  
+        첫번째 Job의 마지막 Wafer를 해당 Load-Port에서 Pick 되면,
+        두번째 Job의 첫번째 Wafer를 해당 Load-Port에서 Pick 한다.
+     -> "CONCURRENT" :     // 양산 라인에서 적용
+        아래의 조건에 따라 2개 이상의 Job들이 동시에 진행 된다.
+ 
+  2) "Always Apply" Option
+     -> "DISABLE"    :  Job이 걸린 개별 LP의 공정을 진행할 PM이 하나라도 겹치면 병령 진행이 안됨.
+     -> "PPID_CHECK" :  Job이 걸린 개별 LP의 공정을 진행할 PM이 하나라도 겹치지 않으면 병령 진행이 됨.
+                        만약, 모든 PM이 겹친다면 PIPELINE Mode 처럼 동작함.  
+                        * (양산 라인에서 적용된 Mode)
+     -> "ENABLE"     :  Job이 걸린 개별 LP들은 무조건 병령 진행이 됨.
+     
+  2) "Test Post - Concurrent" Option
+     -> "DISABLE"    :  LP가 "TEST" Mode인 경우에도 공정을 진행할 PM이 하나라도 겹치면 병렬 진행이 안됨.
+     -> "ENABLE"     :  LP가 "TEST" Mode인 경우에 공정을 진행할 PM이 겹치더라도 병렬 진행됨.
+
+
+     

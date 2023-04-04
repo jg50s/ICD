@@ -1,0 +1,22 @@
+
+# 참고 Page "Config_System.jpg" 
+
+1. "VAC Robot-Paramter" Option
+
+  1) "Arm Direction" : 
+     -> "BI_DIRECTION" 일때
+
+    * PM내 Slot이 2개 이상일때, 
+      PM내에 공정할 Wafer를 Place 하고, 
+      PM에서 공정을 마친 Wafer를 Place했던 Arm으로 Pick 한다. 
+
+2. "LPx-Parameter" Option
+  
+  1) "Auto -> Manual (Auto Control)" :
+     -> "ENABLE" 일때
+
+    * "Load-Port의 Process.Type" : "NORMAL" -> "TEST" 전환되면   // LP1 ~ LP3
+       "Operate_Main.jpg" 참고
+    * "Access Mode" : "AUTO" -> "MANUAL" 자동 전환된다.           // LP1 ~ LP3
+       "Host_CMS.jpg" 참고
+
