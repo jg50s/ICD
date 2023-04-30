@@ -21,6 +21,9 @@ int CObj__PMC_EX::__DEFINE__CONTROL_MODE(obj,l_mode)
 	{
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 
+		ADD__CTRL_VAR(sMODE__TRANSFER_READY, "TRANSFER.READY");
+		ADD__CTRL_VAR(sMODE__TRANSFER_END,   "TRANSFER.END");
+
 		ADD__CTRL_VAR(sMODE__S1, "S1");
 		ADD__CTRL_VAR(sMODE__S2, "S2");
 		ADD__CTRL_VAR(sMODE__S3, "S3");
@@ -41,6 +44,7 @@ int CObj__PMC_EX::__DEFINE__VERSION_HISTORY(version)
 // ...
 #define  DSP__OBJ_MODE									\
 "INIT                                                   \
+TRANSFER.READY  TRANSFER.END							\
 S1 S2 S3												\
 R1 R2 R3"
 
@@ -256,6 +260,9 @@ int CObj__PMC_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		// ...
 	    IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable, pm_i);
+
+		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_READY)		flag = Call__TRANSFER_READY(p_variable, pm_i);
+		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_END)			flag = Call__TRANSFER_END(p_variable, pm_i);
 
 		ELSE_IF__CTRL_MODE(sMODE__S1)			flag = Call__S1(p_variable, pm_i);
 		ELSE_IF__CTRL_MODE(sMODE__S2)			flag = Call__S2(p_variable, pm_i);

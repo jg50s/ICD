@@ -104,19 +104,29 @@ int CObj__VAC_ROBOT_EX::__DEFINE__VARIABLE_STD(p_variable)
 
 		str_name = "OBJ.STATUS";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,dsc_item_list,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__OBJ_STATUS,str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__OBJ_STATUS, str_name);
 
+		//
 		str_name = "PARA.ARM";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PARA_ARM,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_ARM,str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_ARM, str_name);
 
 		str_name = "PARA.MODULE";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PARA_MODULE,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_MODULE,str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_MODULE, str_name);
 
 		str_name = "PARA.SLOT";
 		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PARA_SLOT,"");
-		LINK__VAR_DIGITAL_CTRL(dCH__PARA_SLOT,str_name);
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_SLOT, str_name);
+
+		//
+		str_name = "PARA.MANUAL_MOVE.LLx.SLOT_CLOSE.SKIP";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP, str_name);
+
+		str_name = "PARA.MANUAL_MOVE.PMx.SLOT_CLOSE.SKIP";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP, str_name);
 	}
 
 	// WAC ...
@@ -909,6 +919,12 @@ int CObj__VAC_ROBOT_EX::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		{
 			sEXT_CH__LLx__ROBOT_TRANSFER_FLAG[ll_i]->Set__DATA("");
 		}
+	}
+
+	// ...
+	{
+		sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA("END");
+		sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA("END");
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

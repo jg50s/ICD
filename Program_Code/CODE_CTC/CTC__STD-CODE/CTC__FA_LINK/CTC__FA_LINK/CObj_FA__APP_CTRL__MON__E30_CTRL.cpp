@@ -40,7 +40,7 @@ void CObj_FA__APP_CTRL::Mon__E30_CTRL(CII_OBJECT__VARIABLE* p_variable)
 
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
 
 
 		// Heatbeat Control ...

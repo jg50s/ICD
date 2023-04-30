@@ -8,23 +8,25 @@ void CObj__STD_TYPE
 {
 	CString var__data;
 
+
 	while(1)
 	{
-		_sleep(100);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
-		// PRESSURE -----
+
+		// PRESSURE ...
 		{
 			aiEXT_CH__VACLINE_PRESS->Get__DATA(var__data);
 			aCH__PRESSURE_TORR->Set__DATA(var__data);
 		}
 
-		// PUMP IO COMMUNICATION STS -----
+		// PUMP IO COMMUNICATION STS ...
 		{
 			sEXT_CH__PUMP_COMM_STS->Get__DATA(var__data);
 			sCH__MON_PUMP_COMM_STS->Set__DATA(var__data);
 		}
 
-		// PUMP IO RUN STS -----
+		// PUMP IO RUN STS ...
 		{
 			sEXT_CH__PUMP_STS->Get__DATA(var__data);
 			sCH__MON_PUMP_RUN_STS->Set__DATA(var__data);

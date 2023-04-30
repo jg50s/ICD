@@ -19,8 +19,6 @@ extern CMacro_FA mFA_Link;
 void CObj_Phy__PMC_STD
 ::Mon__FA_Report(CII_OBJECT__VARIABLE* p_variable)
 {
-	CI_FA_300mm__E30_CTRL* p_e30_ctrl = mFA_Link.Get__FA_E30_CTRL();
-
 	int cur__rms_id;
 	int pre__rms_id = -100;
 
@@ -30,12 +28,7 @@ void CObj_Phy__PMC_STD
 	CString str__create_time;
 	CString str__update_time;
 
-	int i_data;
-
 	// ...
-	CI_FA_300mm__E40_CTRL *p_fa_e40_ctrl = mFA_Link.Get__FA_E40_CTRL();
-	CI_FA_300mm__E94_CTRL *p_fa_e94_ctrl = mFA_Link.Get__FA_E94_CTRL();
-
 	CString pmc_name;
 	pmc_name.Format("PM%1d-1",iPMx_ID);
 
@@ -47,11 +40,34 @@ void CObj_Phy__PMC_STD
 	int pre_id__step_end = -1;
 
 	CString var_data;
+	int i_data;
+
+	// ...
+	CI_FA_300mm__E30_CTRL* p_e30_ctrl = mFA_Link.Get__FA_E30_CTRL();
+	CI_FA_300mm__E40_CTRL *p_fa_e40_ctrl = mFA_Link.Get__FA_E40_CTRL();
+	CI_FA_300mm__E94_CTRL *p_fa_e94_ctrl = mFA_Link.Get__FA_E94_CTRL();
 
 
 	while(1)
 	{
-		Sleep(3);
+		p_variable->Wait__SINGLE_OBJECT(0.01);
+
+
+		if(p_e30_ctrl == NULL)
+		{
+			p_e30_ctrl = mFA_Link.Get__FA_E30_CTRL();
+			continue;
+		}
+		if(p_fa_e40_ctrl == NULL)
+		{
+			p_fa_e40_ctrl = mFA_Link.Get__FA_E40_CTRL();
+			continue;
+		}
+		if(p_fa_e94_ctrl == NULL)
+		{
+			p_fa_e94_ctrl = mFA_Link.Get__FA_E94_CTRL();
+			continue;
+		}
 
 	
 		// FA RMS Report ...

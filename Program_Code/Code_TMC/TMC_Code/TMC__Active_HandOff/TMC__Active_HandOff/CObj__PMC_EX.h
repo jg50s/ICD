@@ -39,12 +39,6 @@ private:
 
 	// Status ...
 	CX__VAR_STRING_CTRL  xCH__PMx_OBJ_STATUS[_CFG__PMx_SIZE];
-
-	// Link Test ...
-	/*
-	CX__VAR_STRING_CTRL  sCH__PMx_LINK_COUNT_REPORT_SEND[_CFG__PMx_SIZE];;
-	CX__VAR_STRING_CTRL  sCH__PMx_LINK_COUNT_REPORT_RECV[_CFG__PMx_SIZE];;
-	*/
 	//
 
 
@@ -52,6 +46,13 @@ private:
 	// ...
 	CString sMODE__INIT;
 	int  Call__INIT(CII_OBJECT__VARIABLE* p_variable, const int pm_i);
+
+	// ...
+	CString sMODE__TRANSFER_READY;
+	int  Call__TRANSFER_READY(CII_OBJECT__VARIABLE* p_variable, const int pm_i);
+
+	CString sMODE__TRANSFER_END;
+	int  Call__TRANSFER_END(CII_OBJECT__VARIABLE* p_variable, const int pm_i);
 
 	// ...
 	CString sMODE__S1;

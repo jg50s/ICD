@@ -184,6 +184,11 @@ IFnc_SetPoint__VENT_Soft_Vlv_Open()
 int CObj__SYS_IO::
 SetPoint__VENT_Soft_Vlv_Open(CString &err_msg)
 {
+	if(dEXT_CH__PARA_BALLAST_CTRL_ACTIVE->Check__DATA(STR__ON) > 0)
+	{
+		return 11;
+	}
+
 	if(doEXT_CH__DO_ROUGH_FAST_VLV->Check__DATA(STR__Close) < 0)
 	{
 		err_msg = "Vacuum fast-valve is not closed. \n";

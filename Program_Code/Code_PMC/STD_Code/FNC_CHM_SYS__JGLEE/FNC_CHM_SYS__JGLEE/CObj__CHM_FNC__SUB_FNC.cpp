@@ -2905,6 +2905,16 @@ RETRY_LOOP:
 int CObj__CHM_FNC
 ::Fnc__TRANS_BALLAST_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
+	dEXT_CH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__ON);
+
+	int r_flag = _Fnc__TRANS_BALLAST_START(p_variable, p_alarm);
+
+	dEXT_CH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__OFF);
+	return r_flag;
+}
+int CObj__CHM_FNC
+::_Fnc__TRANS_BALLAST_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
 	CString log_msg;
 	CString log_bff;
 
@@ -2966,8 +2976,19 @@ int CObj__CHM_FNC
 
 	return 1;
 }
+
 int CObj__CHM_FNC
 ::Fnc__CHM_BALLAST_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	dEXT_CH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__ON);
+
+	int r_flag = _Fnc__CHM_BALLAST_START(p_variable, p_alarm);
+
+	dEXT_CH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__OFF);
+	return r_flag;
+}
+int CObj__CHM_FNC
+::_Fnc__CHM_BALLAST_START(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
 	CString log_msg;
 	CString log_bff;

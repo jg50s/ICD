@@ -2,9 +2,7 @@
 #include "CObj_Phy__PMC_STD.h"
 #include "CObj_Phy__PMC_STD__ALID.h"
 
-
-#include "CMacro_LOG.h"
-extern CMacro_LOG mMacro_LOG;
+#include "Macro_Function.h"
 
 
 // ...
@@ -20,7 +18,7 @@ void CObj_Phy__PMC_STD
 	CString file;
 	CString bff;
 
-	mMacro_LOG.Get_DateTime(date,time);
+	Macro__Get_Date_Time(date, time);
 
 	// ...
 	{
@@ -78,7 +76,7 @@ void CObj_Phy__PMC_STD
 	CString file;
 	CString bff;
 
-	mMacro_LOG.Get_DateTime(date,time);
+	Macro__Get_Date_Time(date, time);
 
 	sub_dir  = date;
 	sub_dir += "\\";
@@ -173,7 +171,7 @@ void CObj_Phy__PMC_STD
 	CString file;
 	CString bff;
 
-	mMacro_LOG.Get_DateTime(date,time);
+	Macro__Get_Date_Time(date, time);
 
 	sub_dir  = date;
 	sub_dir += "\\";
@@ -232,13 +230,6 @@ void CObj_Phy__PMC_STD
 	}
 
 	pm_log_path = log_file;
-
-	mMacro_LOG.Lot_Slot_Write(lotid,
-							  str_portid,
-							  lp_slotid,
-							  pm_name,
-							  recipe,
-							  log_file);
 }
 void CObj_Phy__PMC_STD
 ::Datalog__Write_Lot_Proc_Slot_End(const int pm_slot_id,
@@ -257,8 +248,6 @@ void CObj_Phy__PMC_STD
 		xCH__SLOT_LOG_SUB_DIRECTORY[pm_slot_index]->Set__DATA("");
 		xCH__SLOT_LOG_FILE_NAME[pm_slot_index]->Set__DATA("");
 	}
-
-	mMacro_LOG.Lot_Slot_End_Write(lotid,portid,slotid);
 }
 
 
@@ -266,20 +255,22 @@ void CObj_Phy__PMC_STD
 void CObj_Phy__PMC_STD
 ::Post__PMx_ALARM(CII_OBJECT__ALARM *p_alarm)
 {
-	int alarm_id = ALID__PROCESS_ALARM;
-	CString r_act;
+	// ...
+	{
+		int alarm_id = ALID__PROCESS_ALARM;
+		CString r_act;
 
-	p_alarm->Check__ALARM(alarm_id,r_act);
-	p_alarm->Post__ALARM(alarm_id);
+		p_alarm->Check__ALARM(alarm_id,r_act);
+		p_alarm->Post__ALARM(alarm_id);
+	}
 
 	// ...
 	CString pm__lotid;
 	CString str__lp_id;
 	CString pm__lp_id;
 	CString pm__lp_slotid;
-	int i;
 
-	for(i=0; i<iPMx_SLOT_MAX; i++)
+	for(int i=0; i<iPMx_SLOT_MAX; i++)
 	{
 		if(xCH__SLOT_STATUS[i]->Check__DATA("NONE") > 0)
 		{
@@ -292,27 +283,18 @@ void CObj_Phy__PMC_STD
 
 		str__lp_id.Format("PORT%s",pm__lp_id);
 
-		mMacro_LOG.Lot_Slot_AlarmPost(pm__lotid,
-			str__lp_id,
-			atoi(pm__lp_slotid),
-			alarm_id);
-
-		xSCH_MATERIAL_CTRL->Post__ALARM_INFO(atoi(pm__lp_id),
-			atoi(pm__lp_slotid));
+		xSCH_MATERIAL_CTRL->Post__ALARM_INFO(atoi(pm__lp_id), atoi(pm__lp_slotid));
 	}
 }
 void CObj_Phy__PMC_STD
 ::Clear__PMx_ALARM(CII_OBJECT__ALARM *p_alarm)
 {
-	int alarm_id = ALID__PROCESS_ALARM;
-
 	CString pm__lotid;
 	CString str__lp_id;
 	CString pm__lp_id;
 	CString pm__lp_slotid;
-	int i;
 
-	for(i=0;i<iPMx_SLOT_MAX;i++)
+	for(int i=0; i<iPMx_SLOT_MAX; i++)
 	{
 		if(xCH__SLOT_STATUS[i]->Check__DATA("NONE") > 0)
 		{
@@ -325,12 +307,6 @@ void CObj_Phy__PMC_STD
 
 		str__lp_id.Format("PORT%s",pm__lp_id);
 
-		mMacro_LOG.Lot_Slot_AlarmClear(pm__lotid,
-			str__lp_id,
-			atoi(pm__lp_slotid),
-			alarm_id);
-
-		xSCH_MATERIAL_CTRL->Clear__ALARM_INFO(atoi(pm__lp_id),
-			atoi(pm__lp_slotid));
+		xSCH_MATERIAL_CTRL->Clear__ALARM_INFO(atoi(pm__lp_id), atoi(pm__lp_slotid));
 	}
 }

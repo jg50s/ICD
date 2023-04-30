@@ -349,10 +349,6 @@
 					RelativePath=".\CObj__ATM_ROBOT_STD__CALL_FNC.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\CObj__ATM_ROBOT_STD__DEF.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="CObj__VAC_ROBOT_STD"
@@ -475,6 +471,34 @@
 				</File>
 				<File
 					RelativePath=".\CObj__TMC_CHM_MainFold_X__MON_FNC.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CObj__ATM_ROBOT_USER"
+				>
+				<File
+					RelativePath=".\CObj__ATM_ROBOT_USER.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ATM_ROBOT_USER.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__ATM_ROBOT_USER__CALL_FNC.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Macro_Function"
+				>
+				<File
+					RelativePath=".\Macro_Function.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Macro_Function.h"
 					>
 				</File>
 			</Filter>

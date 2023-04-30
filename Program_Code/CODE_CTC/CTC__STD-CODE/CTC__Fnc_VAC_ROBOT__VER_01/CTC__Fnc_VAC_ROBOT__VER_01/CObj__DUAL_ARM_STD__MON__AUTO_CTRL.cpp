@@ -10291,7 +10291,7 @@ AUTO_CTRL__LLx_Exception_In_Idle_State(CII_OBJECT__VARIABLE *p_variable, CII_OBJ
 					{
 
 					}
-					else if(xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_OUTPUT) > 0)
+					else
 					{
 						int i_count = 0;
 
@@ -10711,75 +10711,6 @@ AUTO_CTRL__LLx_Exception_Of_All_Mode(CII_OBJECT__VARIABLE *p_variable, CII_OBJEC
 				}
 			}
 
-			if((count__ll_out_empty == 0)
-			&& (xSCH_MATERIAL_CTRL->Check__MATERIAL_TO_PROCESS() < 0))
-			{
-				int count__ll_out = 0;
-
-				for(INT ll_i=0; ll_i<iLLx_LIMIT; ll_i++)
-				{
-					if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
-					|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
-					{
-						continue;
-					}
-
-					if((xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_INPUT)  > 0)
-					|| (xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_OUTPUT) > 0))
-					{
-						continue;
-					}
-
-					if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) < 0)
-					{
-						continue;
-					}
-
-					count__ll_out++;
-				}
-
-				if(count__ll_out < 1)
-				{
-					for(INT ll_i=0; ll_i<iLLx_LIMIT; ll_i++)
-					{
-						if(LLx__Is_Available(ll_i) < 0)
-						{
-							continue;
-						}
-
-						if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
-						|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
-						{
-							continue;
-						}
-
-						if((xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_INPUT)  > 0)
-						|| (xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_OUTPUT) > 0))
-						{
-							continue;
-						}
-
-						if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) > 0)
-						{
-							continue;
-						}
-
-						if(LLx__Is_ATM(ll_i) < 0)						continue;
-						if(LLx__Check_Empty__InSlot(ll_i) < 0)			continue;
-						if(LLx__Check_Empty__OutSlot(ll_i) < 0)			continue;
-
-						// ...
-						{
-							SCH_RUN__LLx_PUMP(ll_i, log_id, "101");
-
-							xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA(STR__OUT);
-						}
-
-						NEXT__LOOP;
-					}
-				}
-			}
-			
 			if(count__ll_out_empty < 2)
 			{
 				int ll_limit = iLLx_LIMIT;
@@ -10830,7 +10761,7 @@ AUTO_CTRL__LLx_Exception_Of_All_Mode(CII_OBJECT__VARIABLE *p_variable, CII_OBJEC
 
 					// ...
 					{
-						SCH_RUN__LLx_VENT(ll_i, log_id, "102");
+						SCH_RUN__LLx_VENT(ll_i, log_id, "33");
 
 						xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA(STR__IN);
 					}

@@ -45,7 +45,7 @@ int CObj__CHM_STD::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define  MON_ID__IO_MONITOR					1
-#define  MON_ID__BALLAST_CONTROL			3
+#define  MON_ID__BALLAST_CONTROL			2
 
 // ...
 #define APP_DSP__CLOSE_OPEN					"UNKNOWN  CLOSE  OPEN"
@@ -63,186 +63,232 @@ int CObj__CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	CString str_name;
 
-	//
-	str_name = "OTR.OUT.MSG";
-	STD__ADD_STRING_WITH_COMMENT(str_name,"");
-	LINK__VAR_STRING_CTRL(sCH__MSG,str_name);
+	// OBJ ...
+	{
+		str_name = "OTR.OUT.MSG";
+		STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		LINK__VAR_STRING_CTRL(sCH__MSG,str_name);
+	}
 
-	//.....
-	str_name = "OTR.OUT.MON.OBJ.STATUS";
-	STD__ADD_STRING_WITH_COMMENT(str_name,"");
-	LINK__VAR_STRING_CTRL(sCH__OBJ_STATUS,str_name);
+	// PARA ...
+	{
+		str_name = "PARA.BALLAST_CTRL.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_BALLAST_CTRL_ACTIVE, str_name);
+	}
 
-	str_name = "OTR.OUT.MON.PUMP.VLV.OPEN.FLAG";
-	STD__ADD_STRING_WITH_COMMENT(str_name,"");
-	LINK__VAR_STRING_CTRL(sCH__PUMP_VLV_OPEN_FLAG,str_name);
+	// MON ...
+	{
+		str_name = "MON.PUMPING_SEQ.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__MON_PUMPING_SEQ_ACTIVE, str_name);
 
-	str_name = "OTR.OUT.MON.PRESSURE.CTRL.FLAG";
-	STD__ADD_STRING_WITH_COMMENT(str_name,"");
-	LINK__VAR_STRING_CTRL(sCH__PRESSURE_CTRL_FLAG,str_name);
+		//
+		str_name = "OTR.OUT.MON.OBJ.STATUS";
+		STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		LINK__VAR_STRING_CTRL(sCH__OBJ_STATUS,str_name);
 
-	//.....
-	str_name = "OTR.OUT.MON.aPRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"torr",3,0,1000,"");
-	LINK__VAR_ANALOG_CTRL(aCH__TMC_CHM_PRESSURE_TORR,str_name);
+		str_name = "OTR.OUT.MON.PUMP.VLV.OPEN.FLAG";
+		STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		LINK__VAR_STRING_CTRL(sCH__PUMP_VLV_OPEN_FLAG,str_name);
 
-	str_name = "OTR.OUT.MON.aPRESSURE.mTORR";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"mtorr",3,0,1000000,"");
-	LINK__VAR_ANALOG_CTRL(aCH__TMC_CHM_PRESSURE_mTORR,str_name);
+		str_name = "OTR.OUT.MON.PRESSURE.CTRL.FLAG";
+		STD__ADD_STRING_WITH_COMMENT(str_name,"");
+		LINK__VAR_STRING_CTRL(sCH__PRESSURE_CTRL_FLAG,str_name);
 
-	str_name = "OTR.OUT.MON.dPRESSURE.STATUS";
-	STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PRESS_STS,"");
-	LINK__VAR_DIGITAL_CTRL(dCH__TMC_CHM_PRESSURE_STATUS, str_name);
+		//
+		str_name = "OTR.OUT.MON.aPRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"torr",3,0,1000,"");
+		LINK__VAR_ANALOG_CTRL(aCH__TMC_CHM_PRESSURE_TORR,str_name);
 
-	str_name = "OTR.OUT.MON.dVAC.SNS";
-	STD__ADD_DIGITAL_WITH_COMMENT(str_name, "OFF ON","");
-	LINK__VAR_DIGITAL_CTRL(dCH__TMC_CMH_VAC_SNS, str_name);
+		str_name = "OTR.OUT.MON.aPRESSURE.mTORR";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"mtorr",3,0,1000000,"");
+		LINK__VAR_ANALOG_CTRL(aCH__TMC_CHM_PRESSURE_mTORR,str_name);
 
-	//
-	str_name = "OTR.IN.CFG.aEXHAUST.PUMP.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 3, 0, 10, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_EXHAUST_PUMP_PRESSURE_TORR, str_name);
+		str_name = "OTR.OUT.MON.dPRESSURE.STATUS";
+		STD__ADD_DIGITAL_WITH_COMMENT(str_name,APP_DSP__PRESS_STS,"");
+		LINK__VAR_DIGITAL_CTRL(dCH__TMC_CHM_PRESSURE_STATUS, str_name);
 
-	str_name = "OTR.IN.CFG.aEXHAUST.PUMP.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_EXHAUST_PUMP_TIMEOUT, str_name);
+		str_name = "OTR.OUT.MON.dVAC.SNS";
+		STD__ADD_DIGITAL_WITH_COMMENT(str_name, "OFF ON","");
+		LINK__VAR_DIGITAL_CTRL(dCH__TMC_CMH_VAC_SNS, str_name);
 
-	//
-	str_name = "OTR.IN.CFG.aSOFT.PUMP.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 3, 0, 1000, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_PRESSURE_TORR, str_name);
+		//
+		str_name = "MON.CHM.PRESSURE.DISPLAY";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_CHM_PRESSURE_DISPLAY, str_name);
+	}
 
-	str_name = "OTR.IN.CFG.aSOFT.PUMP.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_TIMEOUT, str_name);
+	// CFG.CHAMBER_MANOMETER ...
+	{
+		str_name = "CFG.CHAMBER_MANOMETER.INTERLOCK.HIGH.LIMIT.PRESSURE";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"torr", 3, 1,100,"");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_CHAMBER_MANOMETER_INTERLOCK_HIGH_LIMIT_PRESSURE, str_name);
+		
+		for(int i=0; i<_CFG__CHM_GAUGE_SIZE; i++)
+		{
+			int id = i + 1;
 
-	str_name = "OTR.IN.CFG.aSOFT.PUMP.COMPLETE.STABLE.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 100, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_COMPLETE_STABLE_TIME, str_name);
+			str_name.Format("CFG.CHAMBER_MANOMETER.MAX_PRESSURE.mTORR.%1d", id);
+			STD__ADD_ANALOG_WITH_COMMENT(str_name, "mtorr", 1, 1,10000,"");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_CHAMBER_MANOMETER_MAX_PRESSURE_mTORR_X[i], str_name);
+			
+			str_name.Format("CFG.CHAMBER_MANOMETER.LIMIT_PRESSURE.mTORR.%1d", id);
+			STD__ADD_ANALOG_WITH_COMMENT(str_name, "mtorr", 1, 1,10000,"");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_CHAMBER_MANOMETER_LIMIT_PRESSURE_mTORR_X[i], str_name);
+		}
+	}
 
-	str_name = "OTR.IN.CFG.aVAC.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 3, 0, 100, "");	
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_PRESSURE_TORR, str_name);
+	// CFG ...
+	{
+		str_name = "OTR.IN.CFG.aEXHAUST.PUMP.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 3, 0, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_EXHAUST_PUMP_PRESSURE_TORR, str_name);
 
-	str_name = "OTR.IN.CFG.aFAST.PUMP.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_TIMEOUT, str_name);
+		str_name = "OTR.IN.CFG.aEXHAUST.PUMP.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_EXHAUST_PUMP_TIMEOUT, str_name);
 
-	//
-	str_name = "OTR.IN.CFG.aFAST.VENT.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 3, 0, 1000, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_PRESSURE_TORR, str_name);
+		//
+		str_name = "OTR.IN.CFG.aSOFT.PUMP.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 3, 0, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_PRESSURE_TORR, str_name);
 
-	str_name = "OTR.IN.CFG.aSOFT.VENT.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_TIMEOUT, str_name);
+		str_name = "OTR.IN.CFG.aSOFT.PUMP.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_TIMEOUT, str_name);
 
-	str_name = "OTR.IN.CFG.aATM.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 3, 0, 1000, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_PRESSURE_TORR, str_name);
+		str_name = "OTR.IN.CFG.aSOFT.PUMP.COMPLETE.STABLE.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_COMPLETE_STABLE_TIME, str_name);
 
-	str_name = "OTR.IN.CFG.aFAST.VENT.TIMEOUT";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_TIMEOUT, str_name);
+		str_name = "OTR.IN.CFG.aVAC.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 3, 0, 100, "");	
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_PRESSURE_TORR, str_name);
 
-	// 
-	str_name = "CFG.aVAC.LOWER.TOLERANCE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 50, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_LOWER_TOLERANCE,str_name);
+		str_name = "OTR.IN.CFG.aFAST.PUMP.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_TIMEOUT, str_name);
 
-	str_name = "CFG.aVAC.UPPER.TOLERANCE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 50, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_UPPER_TOLERANCE,str_name);
+		//
+		str_name = "OTR.IN.CFG.aFAST.VENT.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 3, 0, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_PRESSURE_TORR, str_name);
 
-	//
-	str_name = "OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 60,"");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_DELAY_TIME, str_name);
+		str_name = "OTR.IN.CFG.aSOFT.VENT.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_TIMEOUT, str_name);
 
-	str_name = "OTR.IN.CFG.aSOFT.VENT.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 60,"");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_DELAY_TIME, str_name);
+		str_name = "OTR.IN.CFG.aATM.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 3, 0, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_PRESSURE_TORR, str_name);
 
-	//
-	str_name = "OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0.3, 5.0,"");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_VALVE_CLOSE_DELAY_TIME, str_name);
+		str_name = "OTR.IN.CFG.aFAST.VENT.TIMEOUT";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 9999, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_VENT_TIMEOUT, str_name);
 
-	//
-	str_name = "aTIME.COUNT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
-	LINK__VAR_ANALOG_CTRL(aCH__TIME_COUNT,str_name);
+		// 
+		str_name = "CFG.aVAC.LOWER.TOLERANCE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 500, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_LOWER_TOLERANCE,str_name);
 
-	str_name = "CFG.aUPC.SETPOINT";
-	STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,10,150,"recommand : 90");
-	LINK__VAR_ANALOG_CTRL(CFG_aCH__UPC_SETPOINT,str_name);
+		str_name = "CFG.aVAC.UPPER.TOLERANCE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 500, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_UPPER_TOLERANCE,str_name);
 
-	//
-	str_name = "OTR.IN.CFG.aOVER.VENT.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",0,0,100,"rec:10");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_OVER_VENT_TIME, str_name);
+		//
+		str_name = "OTR.IN.CFG.aSOFT.PUMP.DELAY.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 60,"");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_PUMP_DELAY_TIME, str_name);
 
-	//
-	str_name = "CFG.dTM.BALLAST.CTRL";			
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
-	LINK__VAR_DIGITAL_CTRL(dCFG_CH__TM_BALLAST_CONTROL,str_name);
+		str_name = "OTR.IN.CFG.aSOFT.VENT.DELAY.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 60,"");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_SOFT_VENT_DELAY_TIME, str_name);
 
-	str_name = "CFG.dTM.BALLAST.MODE";			
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "VALVE PRESSURE", "");
-	LINK__VAR_DIGITAL_CTRL(dCFG_CH__TM_BALLAST_MODE,str_name);
+		//
+		str_name = "OTR.IN.CFG.aVALVE.CLOSE.DELAY.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0.3, 5.0,"");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_VALVE_CLOSE_DELAY_TIME, str_name);
 
-	str_name = "CFG.dTM.BALLAST.DATALOG";			
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
-	LINK__VAR_DIGITAL_CTRL(dCFG_CH__TM_BALLAST_DATALOG_ENDIS,str_name);
+		//
+		str_name = "aTIME.COUNT";
+		STD__ADD_ANALOG_WITH_COMMENT(str_name,"sec",0,0,9999,"");
+		LINK__VAR_ANALOG_CTRL(aCH__TIME_COUNT,str_name);
 
-	//
-	str_name = "CFG.aTM.BALLAST.N2.VALUE";			// mTorr
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 10, 100, "");
-	LINK__VAR_ANALOG_CTRL(aCFG_CH__TM_BALLAST_N2_VALUE,str_name);
+		//
+		str_name = "OTR.IN.CFG.aOVER.VENT.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",0,0,100,"rec:10");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_OVER_VENT_TIME, str_name);
 
-	str_name = "CFG.aTM.BALLAST.N2.P.GAIN";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,		 "val", 3, 0.001, 100.00, "");
-	LINK__VAR_ANALOG_CTRL(aCFG_CH__TM_BALLAST_N2_P_GAIN,str_name);
+		//
+		str_name = "CFG.aATM.PRESS.STS.TOLERANCE";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 0, -20, 20, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_PRESS_STS_TOLERANCE, str_name);
 
-	str_name = "CFG.aTM.BALLAST.N2.I.GAIN";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,		 "val", 3, 0.001, 100.00, "");
-	LINK__VAR_ANALOG_CTRL(aCFG_CH__TM_BALLAST_N2_I_GAIN,str_name);
+		//
+		str_name = "OTR.IN.CFG.EQUALIZE.VENT.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 10, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_EQUALIZE_VENT_TIME, str_name);
 
-	str_name = "CFG.aTM.BALLAST.N2.D.GAIN";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,		 "val", 3, 0.001, 100.00, "");
-	LINK__VAR_ANALOG_CTRL(aCFG_CH__TM_BALLAST_N2_D_GAIN,str_name);
+		str_name = "OTR.IN.CFG.EQUAL_VLV.OPEN.WHEN_ATM";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_EQUAL_VLV_OPEN_WHEN_ATM, str_name);
 
-	str_name = "sTM.BALLAST.OUTPUT.RESULT";
-	STD__ADD_STRING(str_name);
-	LINK__VAR_STRING_CTRL(sTM_BALLAST_OUTPUT_RESULT,str_name);
+		str_name = "CFG.ATM.HIGH.PRESSURE.TORR";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 0, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_HIGH_PRESSURE_TORR, str_name);
+	}
 
-	str_name = "dTM.BALLAST.CTRL.INIT.FLAG";
-	STD__ADD_DIGITAL(str_name, "NONE INITED");
-	LINK__VAR_DIGITAL_CTRL(dTM_BALLAST_CTRL_INIT_FLAG,str_name);
+	// CFG.BALLAST ...
+	{
+		str_name = "CFG.dTM.BALLAST.CTRL";			
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_TM_BALLAST_CONTROL,str_name);
 
-	str_name = "CFG.aATM.PRESS.STS.TOLERANCE";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr", 0, -20, 20, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_PRESS_STS_TOLERANCE, str_name);
+		str_name = "CFG.dTM.BALLAST.MODE";			
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "VALVE  PRESSURE.SET  PRESSURE.PID", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_TM_BALLAST_MODE,str_name);
 
-	//
-	str_name = "OTR.IN.CFG.EQUALIZE.VENT.TIME";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec", 1, 0, 10, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_EQUALIZE_VENT_TIME, str_name);
+		//
+		str_name = "CFG.aTM.BALLAST.N2.PRESSURE.mTORR";	
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 10, 3000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TM_BALLAST_N2_PRESSURE_mTORR, str_name);
 
-	str_name = "OTR.IN.CFG.EQUAL_VLV.OPEN.WHEN_ATM";
-	STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
-	LINK__VAR_DIGITAL_CTRL(dCH__CFG_EQUAL_VLV_OPEN_WHEN_ATM, str_name);
+		str_name = "CFG.aTM.BALLAST.N2.PRESSURE.MIN";	
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TM_BALLAST_N2_PRESSURE_MIN, str_name);
 
-	str_name = "CFG.ATM.HIGH.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name, "torr", 0, 0, 1000, "");
-	LINK__VAR_ANALOG_CTRL(aCH__CFG_ATM_HIGH_PRESSURE_TORR, str_name);
-	//
+		str_name = "CFG.aTM.BALLAST.N2.PRESSURE.MAX";	
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "mtorr", 0, 0, 10000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TM_BALLAST_N2_PRESSURE_MAX, str_name);
+
+		//
+		str_name = "CFG.aTM.BALLAST.N2.P.GAIN";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "val", 3, 0.001, 100.00, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TM_BALLAST_N2_P_GAIN,str_name);
+
+		str_name = "CFG.aTM.BALLAST.N2.I.GAIN";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,	"val", 3, 0.001, 100.00, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TM_BALLAST_N2_I_GAIN,str_name);
+
+		str_name = "CFG.aTM.BALLAST.N2.D.GAIN";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name,	"val", 3, 0.001, 100.00, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_TM_BALLAST_N2_D_GAIN,str_name);
+
+		//
+		str_name = "CFG.TM.BALLAST.IDLE.FLOW";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_TM_BALLAST_IDLE_FLOW, str_name);
+
+		str_name = "CFG.TM.BALLAST.TRANSFER.FLOW";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_TM_BALLAST_TRANSFER_FLOW, str_name);
+	}
 
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(3.0, MON_ID__IO_MONITOR);
-		
-		// p_variable->Add__MONITORING_PROC(3.0, MON_ID__BALLAST_CONTROL);
+		p_variable->Add__MONITORING_PROC(3.0, MON_ID__BALLAST_CONTROL);
 	}
 	return 1;
 }
@@ -390,18 +436,101 @@ int CObj__CHM_STD::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__SR_VALVE_NOT_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "SR Valve Close Timeout !";
+
+		alarm_msg.Format("Please, check the state of SR valve.\n");
+
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__SR_VALVE_NOT_OPEN;
+
+		alarm_title  = title;
+		alarm_title += "SR Valve Open Timeout !";
+
+		alarm_msg.Format("Please, check the state of SR valve.\n");
+
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__FR_VALVE_NOT_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "FR Valve Close Timeout !";
+
+		alarm_msg.Format("Please, check the state of FR valve.\n");
+
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+	// ...
+	{
+		alarm_id = ALID__FR_VALVE_NOT_OPEN;
+
+		alarm_title  = title;
+		alarm_title += "FR Valve Open Timeout !";
+
+		alarm_msg.Format("Please, check the state of FR valve.\n");
+
+		ACT__RETRY_ABORT;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__BALLAST_VLV_CLOSE;
+
+		alarm_title  = title;
+		alarm_title += "Ballast Open must be closed !";
+
+		alarm_msg.Format("Please, check the state of pumping. \n");
+
+		ACT__CHECK;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
 //-------------------------------------------------------------------------
 int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	m_xI_DATALOG_OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL("FNC_BALLAST_DATALOG");
+	// ...
+	{
+		CString file_name;
+		CString log_msg;
+
+		file_name.Format("%s_APP.log", sObject_Name);
+
+		log_msg  = "\n\n";
+		log_msg += "//------------------------------------------------------------------------";
+
+		xLOG_CTRL->CREATE__SUB_DIRECTORY(sObject_Name);
+		xLOG_CTRL->SET__PROPERTY(file_name,24*5,60);
+
+		xLOG_CTRL->DISABLE__TIME_LOG();
+		xLOG_CTRL->WRITE__LOG(log_msg);
+
+		xLOG_CTRL->ENABLE__TIME_LOG();
+		xLOG_CTRL->WRITE__LOG("   START   \n");
+	}
 
 	// ...
 	CString def_name;
 	CString def_data;
 	CString str_name;
+
+	CString ch_name;
 	CString obj_name;
 	CString var_name;
 
@@ -433,17 +562,31 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_SIM_PUMP_TIME, def_data,str_name);
 	}
 
+	// OBJ : BALLAST_LOG ...
+	{
+		def_name = "OBJ__BALLAST_LOG";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		def_check = x_utility.Check__Link(obj_name);
+		bActive__BALLAST_LOG = def_check;
+
+		if(def_check)
+		{
+			pOBJ__BALLAST_LOG = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+		}
+	}
+
 	// OBJ : IO ...
 	{
 		// VENT VLV ...
 		{
-			def_name = "VAR__IO_DO_FAST_VENT_VLV";
+			def_name = "CH__IO_DO_FAST_VENT_VLV";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__FAST_VENT_VLV__SET, obj_name,var_name);
 
 			//
-			def_name = "VAR__IO_DO_SOFT_VENT_VLV";
+			def_name = "CH__IO_DO_SOFT_VENT_VLV";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
 			def_check = x_utility.Check__Link(def_data);
@@ -456,7 +599,7 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 
 			//
-			def_name = "VAR__IO_DO_EQUAL_VLV";
+			def_name = "CH__IO_DO_EQUAL_VLV";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
 			def_check = x_utility.Check__Link(def_data);
@@ -470,13 +613,13 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 		// PUMP VLV ...
 		{
-			def_name = "VAR__IO_DO_FAST_PUMP_VLV";
+			def_name = "CH__IO_DO_FAST_PUMP_VLV";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__FAST_PUMP_VLV__SET, obj_name,var_name);
 
 			//
-			def_name = "VAR__IO_DO_SOFT_PUMP_VLV";
+			def_name = "CH__IO_DO_SOFT_PUMP_VLV";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
 			def_check = x_utility.Check__Link(def_data);
@@ -488,8 +631,62 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__SOFT_PUMP_VLV__SET, obj_name,var_name);
 			}
 		}
+		// FR.VLV SENSOR ...
+		{
+			def_name = "CH__IO_DI_FR_VLV_OPEN";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
-		// SNS ...
+			def_check = x_utility.Check__Link(def_data);
+			bActive__DI_FR_VLV_OPEN = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_FR_VLV_OPEN, obj_name,var_name);
+			}
+
+			//
+			def_name = "CH__IO_DI_FR_VLV_CLOSE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = x_utility.Check__Link(def_data);
+			bActive__DI_FR_VLV_CLOSE = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_FR_VLV_CLOSE, obj_name,var_name);
+			}
+		}
+		// SR.VLV SENSOR ...
+		{
+			def_name = "CH__IO_DI_SR_VLV_OPEN";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = x_utility.Check__Link(def_data);
+			bActive__DI_SR_VLV_OPEN = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_SR_VLV_OPEN, obj_name,var_name);
+			}
+
+			//
+			def_name = "CH__IO_DI_SR_VLV_CLOSE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = x_utility.Check__Link(def_data);
+			bActive__DI_SR_VLV_CLOSE = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_SR_VLV_CLOSE, obj_name,var_name);
+			}
+		}
+
+		// PRESSURE SENSOR ...
 		{
 			def_name = "DATA.ATM_SNS.VIRTUAL_TYPE";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
@@ -499,7 +696,7 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			// ATM.SNS ...
 			{
-				def_name = "VAR__IO_DI_ATM_SNS";
+				def_name = "CH__IO_DI_ATM_SNS";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__ATM_SENSOR, obj_name,var_name);
@@ -515,7 +712,7 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 			// VAC.SNS ...
 			{
-				def_name = "VAR__IO_DI_VAC_SNS";
+				def_name = "CH__IO_DI_VAC_SNS";
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_SENSOR, obj_name,var_name);
@@ -533,7 +730,7 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		// LID ...
 		{
-			def_name = "VAR__IO_DI_LID_CLOSE_SNS";
+			def_name = "CH__IO_DI_LID_CLOSE_SNS";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
 			def_check = x_utility.Check__Link(def_data);
@@ -546,17 +743,51 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			}
 		}
 
-		// BALLAST ...
+		// BALLAST CONTROL  ...
 		{
-			def_name.Format("VAR__IO_DO_BALLAST_VALVE_SET");
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__BALLAST_VALVE_SET, obj_name,var_name);
+			// DO.VALVE ...
+			{
+				def_name = "CH__IO_DO_BALLAST_VALVE_SET";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
-			def_name.Format("VAR__IO_AO_BALLAST_N2_SET");
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_ANALOG_CTRL(aoEXT_CH__BALLAST_N2_SET, obj_name,var_name);
+				def_check = x_utility.Check__Link(def_data);
+				bActive__DO_BALLAST_VALVE_SET = def_check;
+				
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__DO_BALLAST_VALVE_SET, obj_name,var_name);
+				}	
+			}
+			
+			// AO.PRESSURE ...
+			{
+				def_name = "CH__IO_AO_BALLAST_PRESSURE_TORR";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+				def_check = x_utility.Check__Link(def_data);
+				bActive__AO_BALLAST_PRESSURE_TORR = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+					LINK__EXT_VAR_ANALOG_CTRL(aoEXT_CH__AO_BALLAST_PRESSURE_TORR, obj_name,var_name);
+				}
+			}
+			// AI.PRESSURE ...
+			{
+				def_name = "CH__IO_AI_BALLAST_PRESSURE_TORR";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+				def_check = x_utility.Check__Link(def_data);
+				bActive__AI_BALLAST_PRESSURE_TORR = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+					LINK__EXT_VAR_ANALOG_CTRL(aoEXT_CH__AI_BALLAST_PRESSURE_TORR, obj_name,var_name);
+				}
+			}
 		}
 	}
 
@@ -575,15 +806,68 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_PUMP_RUN_STS, def_data,str_name);
 	}
 
-	// OBJ : GAUGE ...
+	// CH.CGM_PRESSURE_TORR ...
 	{
-		def_name = "VAR__PRESSURE_TORR";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+		def_name = "CH__CHM_PRESSURE_TORR";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
-		LINK__EXT_VAR_ANALOG_CTRL(aiEXT_CH__TMC_CHM__PRESSURE_TORR, obj_name,var_name);
+		LINK__EXT_VAR_ANALOG_CTRL(aiEXT_CH__CHM_PRESSURE_TORR, obj_name,var_name);		
+	}
 
-		//
-		def_name = "VAR__EXHAUST_PRESSURE";
+	// OBJ.CHM_GAUGE ...
+	{
+		def_name = "DATA.CHM_GAUGE_SIZE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		iSIZE__CHM_GAUGE = atoi(def_data);
+		if(iSIZE__CHM_GAUGE > _CFG__CHM_GAUGE_SIZE)		iSIZE__CHM_GAUGE = _CFG__CHM_GAUGE_SIZE;
+
+		for(int i=0; i<iSIZE__CHM_GAUGE; i++)
+		{
+			int id = i + 1;
+
+			// GAUGE.VALVE ...
+			{
+				def_name.Format("CH.DO_CHM_GAUGE_VLV.%1d", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_CHM_ISO_VLV_X[i], obj_name,var_name);
+			}
+
+			// GAUGE.TORR ...
+			{
+				def_name.Format("CH.AI_CHM_GAUGE_TORR.%1d", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+				def_check = x_utility.Check__Link(def_data);
+				bActive__AI_CHM_GAUGE_TORR_X[i] = def_check;
+				
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_CHM_GAUGE_TORR_X[i], obj_name,var_name);
+				}
+			}
+			// GAUGE.mTORR ...
+			{
+				def_name.Format("CH.AI_CHM_GAUGE_mTORR.%1d", id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				
+				def_check = x_utility.Check__Link(def_data);
+				bActive__AI_CHM_GAUGE_mTORR_X[i] = def_check;
+
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AI_CHM_GAUGE_mTORR_X[i], obj_name,var_name);
+				}
+			}
+		}
+	}
+	
+	// CH.EXHAUST_PRESSURE ...
+	{
+		def_name = "CH__EXHAUST_PRESSURE";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
 
 		def_check = x_utility.Check__Link(def_data);
@@ -596,40 +880,57 @@ int CObj__CHM_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// PMx SLOT VALVE ...
+	{
+		def_name = "DATA_SIZE.PMx_SLOT_VLV";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+		iSIZE__PMx_SLOT_VLV = atoi(def_data);
+		if(iSIZE__PMx_SLOT_VLV > _CFG__PMx_SLOT_VLV_SIZE)			iSIZE__PMx_SLOT_VLV = _CFG__PMx_SLOT_VLV_SIZE;
+
+		for(int i=0; i<iSIZE__PMx_SLOT_VLV; i++)
+		{
+			def_name.Format("CH.PMx_SLOT_VLV.%1d", i+1);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PMx_SLOT_VLV_X[i], obj_name,var_name);
+		}
+	}
+	// LLx SLOT VALVE ...
+	{
+		def_name = "DATA_SIZE.LLx_SLOT_VLV";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+		iSIZE__LLx_SLOT_VLV = atoi(def_data);
+		if(iSIZE__LLx_SLOT_VLV > _CFG__LLx_SLOT_VLV_SIZE)			iSIZE__LLx_SLOT_VLV = _CFG__LLx_SLOT_VLV_SIZE;
+
+		for(int i=0; i<iSIZE__LLx_SLOT_VLV; i++)
+		{
+			def_name.Format("CH.LLx_SLOT_VLV.%1d", i+1);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_SLOT_VLV_X[i], obj_name,var_name);
+		}
+	}
+
 	// ...
 	{
 		SCX__SEQ_INFO x_seq_info;
 
-		iSim_Flag = x_seq_info->Is__SIMULATION_MODE();
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 
-	if(iSim_Flag > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		if(bActive__LID_CLOSE)
 			diEXT_CH__CHM_LID_CLOSE_SMS->Set__DATA(STR__ON);
 
 		if(bActive__TMC_CHM__EXHAUST_PRESSURE)
 			aiEXT_CH__TMC_CHM__EXHAUST_PRESSURE->Set__VALUE(0.01);
-	}
-
-	// ...
-	{
-		CString file_name;
-		CString log_msg;
-
-		file_name.Format("%s_APP.log", sObject_Name);
-
-		log_msg  = "\n\n";
-		log_msg += "//------------------------------------------------------------------------";
-
-		xLOG_CTRL->CREATE__SUB_DIRECTORY(sObject_Name);
-		xLOG_CTRL->SET__PROPERTY(file_name,24*5,60);
-
-		xLOG_CTRL->DISABLE__TIME_LOG();
-		xLOG_CTRL->WRITE__LOG(log_msg);
-
-		xLOG_CTRL->ENABLE__TIME_LOG();
-		xLOG_CTRL->WRITE__LOG("   START   \n");
 	}
 
 	return 1;
@@ -641,9 +942,6 @@ int CObj__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	DECLARE__EXT_CTRL(p_variable);
 
 	// ...
-	int flag = -1;
-
-	// ...
 	{
 		CString log_msg;
 		xLOG_CTRL->WRITE__LOG("------------------------------>");
@@ -653,7 +951,22 @@ int CObj__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 					   p_ext_mode_ctrl->Get__UPPER_OBJECT_NAME());
 
 		Fnc__LOG(log_msg);
-		Fnc__MSG(log_msg);
+	}
+
+	// ...
+	{
+		CString obj_msg;
+
+		obj_msg.Format("Start  [%s] ...",  mode);
+		Fnc__MSG(obj_msg);
+	}
+
+	// ...
+	int flag = -1;
+
+	if(dCH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__ON) > 0)
+	{
+		Fnc__BALLAST_CLOSE();
 	}
 
 	// ...
@@ -676,9 +989,12 @@ int CObj__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		}
 		ELSE_IF__CTRL_MODE(sMODE__PUMP)
 		{
+			dCH__MON_PUMPING_SEQ_ACTIVE->Set__DATA(STR__ON);
 			sCH__PRESSURE_CTRL_FLAG->Set__DATA("PUMP");
 
 			flag = Call__PUMP(p_variable,p_alarm);
+
+			dCH__MON_PUMPING_SEQ_ACTIVE->Set__DATA(STR__OFF);
 		}
 		ELSE_IF__CTRL_MODE(sMODE__VENT)
 		{
@@ -692,10 +1008,15 @@ int CObj__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		}
 	}
 
+	// ...
+	{
+		dCH__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__OFF);
+	}
+
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
 		CString log_msg;
-		log_msg.Format("Aborted (%1d) ... : [%s]", flag,mode);
+		log_msg.Format("[%s] Aborted (%1d) ...", mode, flag);
 
 		Fnc__LOG(log_msg);
 		Fnc__MSG(log_msg);
@@ -703,7 +1024,7 @@ int CObj__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	else
 	{
 		CString log_msg;
-		log_msg.Format("Completed ... : [%s]", mode);
+		log_msg.Format("[%s] Completed ...", mode);
 
 		Fnc__LOG(log_msg);
 		Fnc__MSG(log_msg);
@@ -715,6 +1036,7 @@ int CObj__CHM_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 int CObj__CHM_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 {
+
 	switch(id)
 	{
 		case MON_ID__IO_MONITOR:
@@ -722,9 +1044,10 @@ int CObj__CHM_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 			break;
 
 		case MON_ID__BALLAST_CONTROL:
-			Fnc__MON__TM_Purge_PID_Ctrl(p_variable, p_alarm);
+			Mon__BALLAST_CTRL(p_variable, p_alarm);
 			break;
 	}
 
 	return 1;
 }
+

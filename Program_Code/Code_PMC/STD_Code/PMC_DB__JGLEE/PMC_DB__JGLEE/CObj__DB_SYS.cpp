@@ -755,6 +755,12 @@ int CObj__DB_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RF_OFF_RAMP_DOWN_TIME_APPLY, str_name);
 	}
 
+	// BALLAST.PARA ...
+	{
+		str_name = "PARA.BALLAST_CTRL.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF  ON");	
+	}
+
 
 	// ...
 	{

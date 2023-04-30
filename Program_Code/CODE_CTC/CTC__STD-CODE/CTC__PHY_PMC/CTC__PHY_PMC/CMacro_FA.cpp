@@ -11,6 +11,7 @@ CMacro_FA::CMacro_FA()
 	InitializeCriticalSection(&mCS_LOCK);
 
 	iInit_Flag = -1;
+	iCheck_Count = 0;
 }
 CMacro_FA::~CMacro_FA()
 {
@@ -21,13 +22,9 @@ CMacro_FA::~CMacro_FA()
 // ...
 int  CMacro_FA::Fnc_Init()
 {
-	EnterCriticalSection(&mCS_LOCK);
+	if(iInit_Flag > 0)			return 1;
 
-	if(iInit_Flag > 0)
-	{
-		LeaveCriticalSection(&mCS_LOCK);
-		return 1;
-	}
+	EnterCriticalSection(&mCS_LOCK);
 
 	while(1)
 	{
@@ -36,6 +33,11 @@ int  CMacro_FA::Fnc_Init()
 		if(iInit_Flag < 0)
 		{
 			Sleep(100);
+			
+			if(iCheck_Count == 10)		printf("CTC__PHY_PMC.CMacro_FA::Fnc_Init() - Error ! \n");
+			if(iCheck_Count >  10)		break;
+
+			iCheck_Count++;
 			continue;
 		}
 
@@ -55,21 +57,6 @@ int  CMacro_FA::Check__Address(const void* p_addr,const CString& msg)
 }
 
 // ...
-CI_FA_VARIABLE_CTRL* CMacro_FA::Get__FA_VAR_CTRL()
-{
-	if(Fnc_Init() < 0)		return NULL;
-
-	return xFA_300mm_Link->Get_FA_VARIABLE_CTRL();
-}
-CI_FA_DB__ECID_CTRL* CMacro_FA::Get__FA_ECID_CTRL()
-{
-	if(Fnc_Init() < 0)		return NULL;
-
-	CI_FA_DB_CTRL *p_db_ctrl = xFA_300mm_Link->Get_FA_DB_CTRL();
-
-	return p_db_ctrl->Get_ECID_CTRL();
-}
-
 CI_FA_300mm__E30_CTRL* CMacro_FA::Get__FA_E30_CTRL()
 {
 	if(Fnc_Init() < 0)		return NULL;

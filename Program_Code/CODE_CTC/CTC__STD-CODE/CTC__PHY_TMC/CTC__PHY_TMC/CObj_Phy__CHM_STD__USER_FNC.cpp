@@ -54,6 +54,14 @@ int CObj_Phy__CHM_STD
 	{
 		pch_analog_cfg = aCH__SCH_TEST_CFG_PURGE_SEC.Get__PTR();
 	}
+	else if(obj_mode.CompareNoCase(_CMMD__PMx_SV_OPEN) == 0)
+	{
+		pch_analog_cfg = aCH__SCH_TEST_CFG_PM_SV_OPEN_SEC.Get__PTR();
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__PMx_SV_CLOSE) == 0)
+	{
+		pch_analog_cfg = aCH__SCH_TEST_CFG_PM_SV_CLOSE_SEC.Get__PTR();
+	}
 
 	// ...
 	CString log_msg;
@@ -117,6 +125,14 @@ int CObj_Phy__CHM_STD
 
 	}
 	else if(obj_mode.CompareNoCase(_CMMD__PURGE) == 0)
+	{
+
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__PMx_SV_OPEN) == 0)
+	{
+
+	}
+	else if(obj_mode.CompareNoCase(_CMMD__PMx_SV_CLOSE) == 0)
 	{
 
 	}

@@ -1,6 +1,4 @@
 #include "StdAfx.h"
-#include "CMacro_FA.h"
-#include "CMacro_LOG.h"
 
 #include "CObj_Phy__LPx_STD.h"
 #include "CObj_Phy__LPx_STD__DEF.h"
@@ -8,9 +6,8 @@
 
 #include "Macro_Function.h"
 
-
+#include "CMacro_FA.h"
 extern CMacro_FA  mFA_Link;
-extern CMacro_LOG mMacro_LOG;
 
 
 // ...
@@ -322,9 +319,11 @@ int CObj_Phy__LPx_STD
 				// ...
 				CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
 
-				//p_e87_ctrl->Event__ID_READER_UNAVAILABLE(ptn);
-				p_e87_ctrl->Event__CARRIERID_READ_FAIL(iPTN);
-				p_e87_ctrl->Event__UNKNOWN_CARRIERID(iPTN);		
+				if(p_e87_ctrl != NULL)
+				{
+					p_e87_ctrl->Event__CARRIERID_READ_FAIL(iPTN);
+					p_e87_ctrl->Event__UNKNOWN_CARRIERID(iPTN);		
+				}
 			}
 		}
 		else
@@ -360,22 +359,33 @@ int CObj_Phy__LPx_STD
 
 					if(cfg_flag > 0)
 					{
-						CString str_cid;
-						CString str_date;
-						CString str_time;
-
-						Macro__GET_DATE_TIME(str_date,str_time);
-
-						if(xEXT_CH__CFG_LPx_CID_FORMAT->Check__DATA(STR__CID_FORMAT__ONLY_TIME) > 0)
+						if(xEXT_CH__CFG_LPx_CID_FORMAT->Check__DATA(STR__CID_FORMAT__USER) > 0)
 						{
-							str_cid.Format("LP%1d-%s_%s",iPTN,str_date,str_time);
+							if(Popup__WIN_CSTID() < 0)
+							{
+								Cancel__PORT();
+								return 1;
+							}
 						}
 						else
 						{
-							str_cid.Format("LP%1d_Bypass-%s_%s",iPTN,str_date,str_time);
+							CString str_cid;
+							CString str_date;
+							CString str_time;
+
+							Macro__GET_DATE_TIME(str_date,str_time);
+
+							if(xEXT_CH__CFG_LPx_CID_FORMAT->Check__DATA(STR__CID_FORMAT__ONLY_TIME) > 0)
+							{
+								str_cid.Format("LP%1d-%s_%s",iPTN,str_date,str_time);
+							}
+							else
+							{
+								str_cid.Format("LP%1d_Bypass-%s_%s",iPTN,str_date,str_time);
+							}
+								
+							sCH__CID_STRING->Set__DATA(str_cid);
 						}
-							
-						sCH__CID_STRING->Set__DATA(str_cid);
 					}
 					else
 					{
@@ -970,7 +980,7 @@ int CObj_Phy__LPx_STD
 
 	if((sCH__PORT_STATUS->Check__DATA("CANCELED")   > 0)
 	|| (sCH__PORT_STATUS->Check__DATA("ABORTED")    > 0)
-	|| (sCH__PORT_STATUS->Check__DATA("UNLOAD.REQ") > 0))
+	|| (sCH__PORT_STATUS->Check__DATA(STR__UNLOAD_REQ) > 0))
 	{
 		xCH__RELOAD_FLAG->Set__DATA("NO");
 		return -1;
@@ -1025,7 +1035,7 @@ int CObj_Phy__LPx_STD::Resume__PORT(CII_OBJECT__ALARM* p_alarm)
 	xI_SCH_MATERIAL_CTRL->Resume__PORT_ID(iPTN);
 
 	FA_Seq__RESUME();
-	sCH__PORT_STATUS->Set__DATA("BUSY");
+	sCH__PORT_STATUS->Set__DATA(STR__BUSY);
 
 	// ...
 	{
@@ -1111,9 +1121,93 @@ int CObj_Phy__LPx_STD::Return__PORT(CII_OBJECT__ALARM* p_alarm)
 	FA_Seq__ABORT();
 	return 1;
 }
-int CObj_Phy__LPx_STD::Reload__PORT(const int call_flag)
+int CObj_Phy__LPx_STD::Reload__PORT(CII_OBJECT__ALARM* p_alarm, const int call_flag)
 {	
+	if(sCH__PIO_TRANSFER->Check__DATA(STR__YES) > 0)
+	{
+		return -11;
+	}
+
 	xLOG_CTRL->WRITE__LOG("Reload__PORT : START");
+
+	// Process Wafer Check ...
+	{
+		bool active__err_check = false;
+
+		CString err_msg;
+		CString err_bff;
+
+		CString ch_data = dCH__CFG_SLOT_MAX->Get__STRING();
+		int cfg_max = atoi(ch_data);		
+		if(cfg_max > CFG_LP__SLOT_MAX)		cfg_max = CFG_LP__SLOT_MAX;
+
+		for(int i=0; i<cfg_max; i++)
+		{
+			int id = i + 1;
+			ch_data = xCH__SLOT_STATUS[i]->Get__STRING();
+
+			if((ch_data.CompareNoCase(STR__PROCESSING) == 0)
+			|| (ch_data.CompareNoCase(STR__PROCESSED)  == 0)
+			|| (ch_data.CompareNoCase(STR__COMPLETED)  == 0)
+			|| (ch_data.CompareNoCase(STR__ABORTED)    == 0))
+			{
+				active__err_check = true;
+
+				err_bff.Format(" Slot(%02d) - %s \n", id,ch_data);
+				err_msg += err_bff;
+			}
+		}
+
+		if(active__err_check)
+		{
+			CString box_title;
+			CString box_msg;
+			CStringArray l_option;
+			CString r_act;
+
+			box_title.Format("LP%1d - Reload Error !", iPTN);
+
+			box_msg  = "There is a processing or processed wafer in load port. \n";
+			box_msg += "Do you want to reload foup ? \n";
+			box_msg += "\n";
+			box_msg += err_msg;
+
+			l_option.RemoveAll();
+			l_option.Add(ACT__YES);
+			l_option.Add(ACT__NO);
+
+			// ...
+			{
+				CString log_msg;
+
+				log_msg = "\n";
+				log_msg += box_msg;
+
+				xLOG_CTRL->WRITE__LOG(log_msg);
+			}
+
+			p_alarm->Popup__MESSAGE_BOX(box_title, box_msg, l_option, r_act);
+
+			// ...
+			{
+				CString log_msg;
+
+				log_msg.Format("\n User.Selection <- [%s] \n", r_act);
+
+				xLOG_CTRL->WRITE__LOG(log_msg);
+			}
+
+			if(r_act.CompareNoCase(ACT__YES) != 0)			
+			{
+				return -1;
+			}
+		}
+	}
+
+	if(sCH__PIO_TRANSFER->Check__DATA(STR__YES) > 0)
+	{
+		return -21;
+	}
 
 	// ...
 	{
@@ -1146,6 +1240,13 @@ int CObj_Phy__LPx_STD::Verify__CID(CII_OBJECT__ALARM* p_alarm)
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
 	CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
+
+	if((p_e30_ctrl == NULL)
+	|| (p_e87_ctrl == NULL))
+	{
+		sCH__PORT_STATUS->Set__DATA("CID_CONFIRM");
+		return 1;
+	}
 
 	// ...
 	int lp_auto = -1;
@@ -1209,7 +1310,7 @@ int CObj_Phy__LPx_STD::Verify__CID(CII_OBJECT__ALARM* p_alarm)
 		}
 		else
 		{
-			if(sCH__PORT_STATUS->Check__DATA("UNLOAD.REQ") < 0)
+			if(sCH__PORT_STATUS->Check__DATA(STR__UNLOAD_REQ) < 0)
 			{
 				sCH__PORT_STATUS->Set__DATA("CANCELED");
 			}
@@ -1246,6 +1347,13 @@ int CObj_Phy__LPx_STD::Verify__MAP(CII_OBJECT__ALARM* p_alarm)
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
 	CI_FA_300mm__E90_CTRL *p_e90_ctrl = mFA_Link.Get__E90_CTRL();
 
+	if((p_e30_ctrl == NULL)
+	|| (p_e90_ctrl == NULL))
+	{
+		sCH__PORT_STATUS->Set__DATA("MAP_CONFIRM");
+		return 1;
+	}
+
 	// ...
 	int lp_auto = -1;
 
@@ -1272,7 +1380,7 @@ int CObj_Phy__LPx_STD::Verify__MAP(CII_OBJECT__ALARM* p_alarm)
 		}
 		else
 		{
-			if(sCH__PORT_STATUS->Check__DATA("UNLOAD.REQ") < 0)
+			if(sCH__PORT_STATUS->Check__DATA(STR__UNLOAD_REQ) < 0)
 			{
 				sCH__PORT_STATUS->Set__DATA("CANCELED");
 			}
@@ -1294,7 +1402,10 @@ int CObj_Phy__LPx_STD
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
 	CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
 
+	if(p_e30_ctrl == NULL)			return -1;
+	if(p_e87_ctrl == NULL)			return -2;
 
+	//
 	if(p_e87_ctrl->Is__EQUIPMENT_BASED_VERIFICATION(ptn) > 0)
 	{
 		// Equipment Verification
@@ -1441,6 +1552,7 @@ int CObj_Phy__LPx_STD
 ::Fnc__Verify_SlotMap(CII_OBJECT__ALARM* p_alarm,const int ptn)
 {
 	CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
+	if(p_e87_ctrl == NULL)			return -1;
 
 	// ...
 	int flag = -1;
@@ -1574,18 +1686,6 @@ int CObj_Phy__LPx_STD::Set__DUMMY_PORT()
 	return -1;
 }
 
-int CObj_Phy__LPx_STD::Set__LOT_END()
-{
-	CString lotid;
-	CString portid;
-
-	sCH__PORT_LOTID->Get__DATA(lotid);
-	portid = sPORT_NAME;
-	
-	mMacro_LOG.Lot_End_Write(lotid,portid);
-	return 1;
-}
-
 int CObj_Phy__LPx_STD::Clear__PORT_DATA()
 {
 	sCH__PORT_LOTID->Set__DATA("");
@@ -1673,7 +1773,7 @@ int  CObj_Phy__LPx_STD::Check__PORT_STATUS__JOB_READY()
 
 	if(lp_sts.CompareNoCase("RESERVE") == 0)		return 1;
 	if(lp_sts.CompareNoCase("START")   == 0)		return 1;
-	if(lp_sts.CompareNoCase("BUSY")    == 0)		return 1;
+	if(lp_sts.CompareNoCase(STR__BUSY) == 0)		return 1;
 	if(lp_sts.CompareNoCase("PAUSED")  == 0)		return 1;
 
 	return -1;

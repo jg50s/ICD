@@ -139,6 +139,10 @@ int CObj_Opr__MAINT_MODE::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__PARTICLE_CUR_LLx_COOLING_SEC, str_name);
 
+		str_name = "PARTICLE.PARA.LLx_COOL_TYPE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "CTC  TMC", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARTICLE_PARA_LLx_COOL_TYPE, str_name);
+
 		//
 		for(i=0; i<CFG_ST_LIMIT; i++)
 		{
@@ -170,14 +174,27 @@ int CObj_Opr__MAINT_MODE::__DEFINE__VARIABLE_STD(p_variable)
 	}
 	// TRANSFER.PART ...
 	{
+		// ...
+		{
+			str_name = "PARA.MANUAL_MOVE.LLx.DOOR_CLOSE.SKIP";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP, str_name);
+			
+			str_name = "PARA.MANUAL_MOVE.LLx.SLOT_CLOSE.SKIP";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP, str_name);
+		}
+
+		// ...
+		CString act_name;
+
 		for(i=0; i<_ACT__TRANSFER_SIZE; i++)
 		{
-			CString act_name;
-
 				 if(i == _ACT_ID__MOVE_TO_LPx)				act_name = _ACT_MOVE__MOVE_TO_LPx;
 			else if(i == _ACT_ID__MOVE_TO_LLx_IN_ATM)		act_name = _ACT_MOVE__MOVE_TO_LLx_IN_ATM;
 			else if(i == _ACT_ID__LLx_DOOR_VLV_OP_CL)		act_name = _ACT_MOVE__LLx_DOOR_VLV_OP_CL;
 			else if(i == _ACT_ID__LLx_PUMP_VENT)			act_name = _ACT_MOVE__LLx_PUMP_VENT;
+			else if(i == _ACT_ID__LLx_COOLING)				act_name = _ACT_MOVE__LLx_COOLING;
 			else if(i == _ACT_ID__LLx_SLOT_VLV_OP_CL)		act_name = _ACT_MOVE__LLx_SLOT_VLV_OP_CL;
 			else if(i == _ACT_ID__MOVE_TO_LLx_IN_VAC)		act_name = _ACT_MOVE__MOVE_TO_LLx_IN_VAC;
 			else if(i == _ACT_ID__MOVE_TO_AL1)				act_name = _ACT_MOVE__MOVE_TO_AL1;
@@ -214,6 +231,18 @@ int CObj_Opr__MAINT_MODE::__DEFINE__VARIABLE_STD(p_variable)
 	}
 	// PROCESS.PART ...
 	{
+		// ...
+		{
+			str_name = "PARA.MANUAL_MOVE.PMx.SLOT_CLOSE.SKIP";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP, str_name);
+
+			str_name = "PARA.MANUAL_MOVE.PMx.LIFT_PIN.SKIP";
+			STD__ADD_STRING(str_name);
+			LINK__VAR_STRING_CTRL(sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP, str_name);
+		}
+
+		// ...
 		CString str_pm;
 
 		for(int k=0; k<CFG_PM_LIMIT; k++)
@@ -971,6 +1000,9 @@ int CObj_Opr__MAINT_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			var_name = "PARA.MANUAL_MOVE.ALIGN_TARGET.PMx";
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PARA_MANUAL_MOVE_ALIGN_TARGET_PMx, obj_name,var_name);
 
+			var_name = "PARA.MANUAL_MOVE.ALIGN.SKIP";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP, obj_name,var_name);
+
 			//
 			var_name = "CHECK.MODULE";	
 			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__ATM_RB__CHECK_MODULE, obj_name,var_name);
@@ -1050,12 +1082,19 @@ int CObj_Opr__MAINT_MODE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 					var_name = "PARA.SLOT_ID";
 					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_PARA_SLOT_ID[i], obj_name,var_name);
 
+					var_name = "PARA.VENT_COOLING_SEC";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__LLx_PARA_VENT_COOLING_SEC[i], obj_name,var_name);
+
 					//
 					var_name = "PARA.PROC.RECIPE.NAME";
 					LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LLx_PARA_PROC_RECIPE_NAME[i], obj_name,var_name);
 
 					var_name = "PARA.PROC.SCH.NAME";
 					LINK__EXT_VAR_STRING_CTRL(sEXT_CH__LLx_PARA_PROC_SCH_NAME[i], obj_name,var_name);
+
+					//
+					var_name = "PRESSURE.STATUS";
+					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__LLx_PRESSURE_STATUS[i], obj_name,var_name);
 				}
 			}
 		}

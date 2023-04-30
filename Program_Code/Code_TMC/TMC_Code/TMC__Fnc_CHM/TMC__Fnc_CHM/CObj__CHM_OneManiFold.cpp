@@ -58,7 +58,7 @@ int CObj__CHM_OneManiFold::__DEFINE__VARIABLE_STD(p_variable)
 	CString str_name;
 	int i;
 
-	// ...
+	// MON ...
 	{
 		str_name = "OTR.OUT.MON.OBJ.STATUS";
 		STD__ADD_STRING_WITH_COMMENT(str_name,"");
@@ -77,7 +77,14 @@ int CObj__CHM_OneManiFold::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__ROBOT_MATERIAL_TRANSFER_FLAG, str_name);
 	}
 
-	// ...
+	// PARA ...
+	{
+		str_name = "PARA.BALLAST_CTRL.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__PARA_BALLAST_CTRL_ACTIVE, str_name);
+	}
+
+	// CFG ...
 	{
 		str_name = "OTR.IN.CFG.dTMC.LEAK.CHECK";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__DISABLE_ENABLE,"");
@@ -178,18 +185,18 @@ int CObj__CHM_OneManiFold::__DEFINE__VARIABLE_STD(p_variable)
 
 // ...
 #define  ACT__RETRY_ABORT						\
-	l_act.RemoveAll();								\
-	l_act.Add("RETRY");								\
-	l_act.Add("ABORT");
+l_act.RemoveAll();								\
+l_act.Add("RETRY");								\
+l_act.Add("ABORT");
 
 #define  ACT__CHK_RETRY_ABORT					\
-	l_act.RemoveAll();								\
-	l_act.Add("CHECK_RETRY");						\
-	l_act.Add("ABORT");
+l_act.RemoveAll();								\
+l_act.Add("CHECK_RETRY");						\
+l_act.Add("ABORT");
 
 #define  ACT__CHECK								\
-	l_act.RemoveAll();								\
-	l_act.Add("CHECK");								
+l_act.RemoveAll();								\
+l_act.Add("CHECK");								
 
 
 int CObj__CHM_OneManiFold::__DEFINE__ALARM(p_alarm)
@@ -305,21 +312,30 @@ int CObj__CHM_OneManiFold::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		pTMC_CHM_PRESS__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(def_data);
 
-		//
-		str_name = "OTR.OUT.MON.OBJ.STATUS";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_CHM__OBJ_STATUS, def_data,str_name);
+		// PARA ...
+		{
+			str_name = "PARA.BALLAST_CTRL.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_CHM__PARA_BALLAST_CTRL_ACTIVE, def_data,str_name);
+		}
 
-		str_name = "OTR.OUT.MON.PUMP.VLV.OPEN.FLAG";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_CHM__PUMP_VLV_OPEN_FLAG, def_data,str_name);
+		// MON ...
+		{
+			str_name = "OTR.OUT.MON.OBJ.STATUS";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_CHM__OBJ_STATUS, def_data,str_name);
 
-		str_name = "OTR.OUT.MON.PRESSURE.CTRL.FLAG";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_CHM__PRESSURE_CTRL_FLAG, def_data,str_name);
+			//
+			str_name = "OTR.OUT.MON.PUMP.VLV.OPEN.FLAG";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_CHM__PUMP_VLV_OPEN_FLAG, def_data,str_name);
 
-		str_name = "OTR.OUT.MON.aPRESSURE.TORR";
-		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMC_CHM__PRESSURE_TORR, def_data,str_name);
+			str_name = "OTR.OUT.MON.PRESSURE.CTRL.FLAG";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__TMC_CHM__PRESSURE_CTRL_FLAG, def_data,str_name);
 
-		str_name = "OTR.OUT.MON.dPRESSURE.STATUS";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_CHM__PRESSURE_STATUS, def_data,str_name);
+			str_name = "OTR.OUT.MON.aPRESSURE.TORR";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__TMC_CHM__PRESSURE_TORR, def_data,str_name);
+
+			str_name = "OTR.OUT.MON.dPRESSURE.STATUS";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__TMC_CHM__PRESSURE_STATUS, def_data,str_name);
+		}
 	}
 
 	// LLx OBJ ...
@@ -417,6 +433,12 @@ int CObj__CHM_OneManiFold::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
+		CString ch_data = dCH__PARA_BALLAST_CTRL_ACTIVE->Get__STRING();
+		dEXT_CH__TMC_CHM__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(ch_data);
+	}
+
+	// ...
+	{
 			 IF__CTRL_MODE(sMODE__INIT)				flag = Call__INIT(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__ISOLATE)			flag = Call__ISOLATE(p_variable,p_alarm);
 
@@ -425,6 +447,11 @@ int CObj__CHM_OneManiFold::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK)		flag = Call__LEAK_CHECK(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__CYCLE_PURGE)		flag = Call__CYCLE_PURGE(p_alarm,p_variable);
+	}
+
+	// ...
+	{
+		dEXT_CH__TMC_CHM__PARA_BALLAST_CTRL_ACTIVE->Set__DATA(STR__OFF);
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

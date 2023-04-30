@@ -19,7 +19,7 @@ int CObj__HE_PRESSURE
 	// Output.Init ...
 	for(i=0; i<iZONE_SIZE; i++)
 	{
-		Fnc__PRESSURE_SET(i, 0.0);
+		Fnc__PRESSURE_SET(i, 0.0, true);
 	}
 
 
@@ -38,7 +38,7 @@ int CObj__HE_PRESSURE
 				double user_set = aCH__USER_IO_PRESSURE_SET_X[i]->Get__VALUE();
 				double mon_set  = aCH__MON_IO_PRESSURE_SET_X[i]->Get__VALUE();
 
-				if(user_set != mon_set)			Fnc__PRESSURE_SET(i, user_set);
+				if(user_set != mon_set)			Fnc__PRESSURE_SET(i, user_set, true);
 			}
 		}
 

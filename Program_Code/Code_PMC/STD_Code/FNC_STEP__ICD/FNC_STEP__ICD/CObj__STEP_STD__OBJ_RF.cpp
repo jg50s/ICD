@@ -136,8 +136,14 @@ int CObj__STEP_STD
 
 // RF.LF ...
 int CObj__STEP_STD
-::RF_LF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data)
+::RF_LF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data, const CString& para_pulse_mode)
 {
+	// ...
+	{
+		if(para_pulse_mode.CompareNoCase(STR__Pulse) == 0)				dEXT_CH__DO_RF_LF_PULSE_SET->Set__DATA(STR__ON);
+		else															dEXT_CH__DO_RF_LF_PULSE_SET->Set__DATA(STR__OFF);
+	}
+
 	if(!bActive__OBJ_CTRL__RF_LF)										return 1;
 	if(dCH__CFG_RCP_PART_USE_RFx_LF->Check__DATA(STR__YES) < 0)			return 2;
 
@@ -196,18 +202,20 @@ int CObj__STEP_STD
 
 // RF.HF ...
 int CObj__STEP_STD
-::RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_data, const CString& para_pulse_mode)
+::RF_HF_OBJ__Start_MODE(const CString& obj_mode, const CString& para_power, const CString& para_p2, const CString& para_pulse_mode)
 {
 	// ...
 	{
-		if(para_pulse_mode.CompareNoCase(STR__Pulse) == 0)					dEXT_CH__DO_RF_PULSE_SET->Set__DATA(STR__ON);
-		else																dEXT_CH__DO_RF_PULSE_SET->Set__DATA(STR__OFF);
+		if(para_pulse_mode.CompareNoCase(STR__Pulse) == 0)				dEXT_CH__DO_RF_HF_PULSE_SET->Set__DATA(STR__ON);
+		else															dEXT_CH__DO_RF_HF_PULSE_SET->Set__DATA(STR__OFF);
 	}
 
 	if(!bActive__OBJ_CTRL__RF_HF)										return 1;
 	if(dCH__CFG_RCP_PART_USE_RFx_HF->Check__DATA(STR__YES) < 0)			return 2;
 
-	aEXT_CH__RF_HF__PARA_SET_POWER->Set__DATA(para_data);
+	aEXT_CH__RF_HF__PARA_SET_POWER->Set__DATA(para_power);
+	aEXT_CH__RF_HF__PARA_SET_P2->Set__DATA(para_p2);
+
 	aEXT_CH__RF_HF__PARA_HOLD_TIME->Set__VALUE(0.0);
 
 	return pOBJ_CTRL__RF_HF->Run__OBJECT(obj_mode);

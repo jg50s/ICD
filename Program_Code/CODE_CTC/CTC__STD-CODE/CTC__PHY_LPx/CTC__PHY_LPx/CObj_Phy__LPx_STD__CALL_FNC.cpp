@@ -65,12 +65,14 @@ int CObj_Phy__LPx_STD::Call__UNLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT_
 
 int CObj_Phy__LPx_STD::Call__RELOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	if(sCH__PORT_STATUS->Check__DATA("UNLOAD.REQ") < 0)
+	if(sCH__PORT_STATUS->Check__DATA(STR__UNLOAD_REQ) < 0)
 	{
 		return -1;
 	}
 
-	if(Reload__PORT(1) < 0)		return -1;
+	int r_flag = Reload__PORT(p_alarm, 1);
+	if(r_flag < 0)		return -11;
+
 	return Fnc__RELOAD(p_variable, p_alarm);
 }
 

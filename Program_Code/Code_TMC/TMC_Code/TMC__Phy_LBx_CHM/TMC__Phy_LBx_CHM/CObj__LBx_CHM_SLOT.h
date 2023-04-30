@@ -16,22 +16,24 @@ private:
 	//-------------------------------------------------------------------------
 	CString sObject_Name;
 
+	// ...
 	SCX__USER_LOG_CTRL xLOG_CTRL;
-	int  iSim_Flag;
-
+	int iActive__SIM_MODE;
+	//
 
 	//-------------------------------------------------------------------------
 	// INTERNAL PROPERTY
 
-	// ...
+	// OBJ ...
 	CX__VAR_STRING_CTRL  sCH__MSG;
 	CX__VAR_STRING_CTRL  sCH__OBJ_STATUS;
 
+	// MON.STS ...
 	CX__VAR_STRING_CTRL  sCH__PUMP_VLV_OPEN_FLAG;
 	CX__VAR_STRING_CTRL  sCH__PRESSURE_CTRL_FLAG;
 	CX__VAR_STRING_CTRL  sCH__OUTPROC_ACTIVE_FLAG;
 
-	//.....
+	// PARA ...
 	CX__VAR_ANALOG_CTRL  aCH__PARA_SLOT_ID;
 
 	CX__VAR_ANALOG_CTRL  aCH__PARA_PREHEAT_TIME;
@@ -40,6 +42,9 @@ private:
 
 	// SIM.TEST ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_SIM_TEST_ACTIVE__WAIT;
+
+	// CFG ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_AUTO_SV_DV_CLOSE_WHEN_PUMP_VENT;
 
 	// DOOR VALVE ...
 	CX__VAR_ANALOG_CTRL  aCH__CFG_DOOR_1_VALVE_OPEN_TIMEOUT;
@@ -138,6 +143,10 @@ private:
 	CX__VAR_STRING_CTRL  sCH__APP_HEATING_TIMECOUNT;
 	CX__VAR_DIGITAL_CTRL dCH__CFG_HEATER_SOFT_VENT_USE;
 
+	CX__VAR_DIGITAL_CTRL dCH__CFG_N2_COOLING_MODE; // KMS(LL Cooling)
+	CX__VAR_ANALOG_CTRL  aCH__CFG_N2_COOLING_TIME; // KMS(LL Cooling)
+	CX__VAR_ANALOG_CTRL  aCH__VENT_VLV_PRECLOSE_COOLING; // KMS(LL Cooling)
+
 	// TAS Channel ...
 	CX__VAR_STRING_CTRL  sCH__TAS_RESET_REQ_SLOT[CFG_LBx__SLOT_SIZE];
 	CX__VAR_STRING_CTRL  sCH__TAS_ACTION_TIME_NOW_SLOT[CFG_ACT__SIZE][CFG_LBx__SLOT_SIZE];
@@ -151,6 +160,9 @@ private:
 
 	//-------------------------------------------------------------------------
 	// EXTERNAL PROPERTY
+
+	// LINK.LLx_ID ...
+	int iLLx_ID;
 
 	// OBJ NNAME ...
 	CString m_sLBx__MODULE_NAME;
@@ -181,7 +193,20 @@ private:
 	CX__VAR_DIGITAL_CTRL dEXT_CH__CFG_LLx_LIFT_PIN_UP_MODE_AFTER_HEATING;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_LLx_LIFT_PIN_UP_TIMEOUT;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_LLx_LIFT_PIN_DOWN_TIMEOUT;
-	//
+	CX__VAR_ANALOG_CTRL  aEXT_CH__CFG_LLx_COOLING_TIME; //KMS
+	CX__VAR_ANALOG_CTRL  sEXT_CH__CUR_CTC_MODE; //KMS
+
+	// OBJ__ATM_ROBOT ...
+	bool bActive__ATM_RB_OBJ_CTRL;
+	CII_EXT_OBJECT__CTRL *pATM_RB__OBJ_CTRL;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__ATM_RB__MON_ACTIVE_ACTION_TO_LL;
+
+	// OBJ__VAC_ROBOT ...
+	bool bActive__VAC_RB_OBJ_CTRL;
+	CII_EXT_OBJECT__CTRL *pVAC_RB__OBJ_CTRL;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__VAC_RB__MON__LLx_ARM_STATE;
 
 	// LINK OBJECT ...
 	bool bActive__OBJ_GAS;
@@ -204,6 +229,23 @@ private:
 	CX__VAR_DIGITAL_CTRL doEXT_CH__SOFT_PUMP_VLV__SET;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__FAST_PUMP_VLV__SET;
 
+	// DI.FR.VLV 
+	bool bActive__DI_FR_VLV_OPEN;
+	CX__VAR_DIGITAL_CTRL diEXT_CH__DI_FR_VLV_OPEN;
+
+	bool bActive__DI_FR_VLV_CLOSE;
+	CX__VAR_DIGITAL_CTRL diEXT_CH__DI_FR_VLV_CLOSE;
+
+	// DI.SR.VLV 
+	bool bActive__DI_SR_VLV_OPEN;
+	CX__VAR_DIGITAL_CTRL diEXT_CH__DI_SR_VLV_OPEN;
+
+	bool bActive__DI_SR_VLV_CLOSE;
+	CX__VAR_DIGITAL_CTRL diEXT_CH__DI_SR_VLV_CLOSE;
+
+	bool bActive__COOLING_EXHAUST_VLV;
+	CX__VAR_DIGITAL_CTRL doEXT_CH__COOLING_EXHAUST_VLV__SET;
+
 	// SLOT CONTROL ...
 	// SV 
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LLx__SV_OPEN_X[CFG_LBx__SLOT_SIZE];
@@ -224,22 +266,29 @@ private:
 	CX__VAR_DIGITAL_CTRL doEXT_CH__GAUGE_VLV;
 
 	// ROBOT ARM SNS ...
-	int iData__ROBOT_ARM_RNE;
-
+	int iData__VAC_RB_ARM_RNE;
 	CX__VAR_DIGITAL_CTRL diEXT_CH__VAC_RB_RNE_X[_CFG_RBx__ARM_RNE_SIZE];
+
+	int iData__ATM_RB_ARM_RNE;
 	CX__VAR_DIGITAL_CTRL diEXT_CH__ATM_RB_RNE_X[_CFG_RBx__ARM_RNE_SIZE];
 
 	CString sDATA__RNE_ON;
 	CString sDATA__RNE_OFF;
 
+	// WAFER.SLIDE SENSOR ...
+	int iData__WAFER_SLIDE_OUT;
+	CX__VAR_DIGITAL_CTRL diEXT_CH__WAFER_SKIDE_OUT_X[_CFG__WAFER_OUT_SIZE];
+
 	// PUMP OBJECT ...
 	CII_EXT_OBJECT__CTRL *pPUMP__OBJ_CTRL;
 
-	CX__VAR_STRING_CTRL   sEXT_CH__MON_PUMP_COMM_STS;
-	CX__VAR_STRING_CTRL   sEXT_CH__MON_PUMP_RUN_STS;
+	CX__VAR_STRING_CTRL  sEXT_CH__MON_PUMP_COMM_STS;
+	CX__VAR_STRING_CTRL  sEXT_CH__MON_PUMP_RUN_STS;
 
 	// GAUGE OBJECT ...
 	CX__VAR_ANALOG_CTRL  aiEXT_CH__LBx__PRESSURE_TORR;
+
+	bool bActive__LBx__EXHAUST_PRESSURE;
 	CX__VAR_ANALOG_CTRL  aiEXT_CH__LBx__EXHAUST_PRESSURE;
 
 	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_TM__PRESS_STS;
@@ -291,6 +340,11 @@ private:
 	int  Call__PUMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	int  Fnc__PUMP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	
+	// COOLING -----
+	CString sMODE__COOLING;
+	int Call__COOLING(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int FNC__COOLING(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, double dCoolingTime, double dPreVentCloseTime);
 
 	// VENT -----
 	CString sMODE__VENT;
@@ -397,8 +451,11 @@ private:
 	bool Is__SLOT_DV_OPEN();
 	bool Is__SLOT_DV_CLOSE();
 
-	bool Set__SLOT_DV_OPEN();
-	bool Set__SLOT_DV_CLOSE();
+	int  Set_IO__DV_OPEN();
+	int  End_IO__DV_OPEN();
+
+	int  Set_IO__DV_CLOSE();
+	int  End_IO__DV_CLOSE();
 
 	// ...
 	bool Is__ALL_SV_OPEN();
@@ -407,42 +464,46 @@ private:
 	bool Is__SLOT_SV_OPEN();
 	bool Is__SLOT_SV_CLOSE();
 
-	bool Set__SLOT_SV_OPEN();
-	bool Set__SLOT_SV_CLOSE();
+	int  Set_IO__SV_OPEN();
+	int  End_IO__SV_OPEN();
+
+	int  Set_IO__SV_CLOSE();
+	int  End_IO__SV_CLOSE();
 
 	// ...
-	int  Check__PRESSURE_ATM(CII_OBJECT__ALARM* p_alarm,const int alarm_id);
-	int  Check__PRESSURE_ATM_TO_DV_OPEN(CII_OBJECT__ALARM* p_alarm,const int alarm_id);
+	int  Check__PRESSURE_ATM(CII_OBJECT__ALARM* p_alarm, const int alarm_id);
+	int  Check__PRESSURE_ATM_TO_DV_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const int alarm_id);
 
-	int  Check__PRESSURE_VAC(CII_OBJECT__ALARM* p_alarm);
+	int  Check__PRESSURE_VAC(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
-	int  Check__LLx_LID__CLOSE(CII_OBJECT__ALARM* p_alarm,const CString& act_name);
+	int  Check__LLx_LID__CLOSE(CII_OBJECT__ALARM* p_alarm, const CString& act_name);
 	int  Check__TRANSFER_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm,	const CString& act_name);
 
 	int  Check__VENT_ALL_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
-	int  Check__PUMP_ALL_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
+	int  Check__PUMP_ALL_VLV__CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
-	int  Check__PUMP_VLV__OPEN(CII_OBJECT__ALARM* p_alarm);
-	void Update__PUMP_VLV_STS(CII_OBJECT__ALARM* p_alarm);
+	int  Check__FR_VLV__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Check__PUMP_VLV__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	void Update__PUMP_VLV_STS(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
-	int  Is_SV_CLOSE_CONDITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
-	int  Is_DV_CLOSE_CONDITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+	int  Is_SV_CLOSE_CONDITION(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Is_DV_CLOSE_CONDITION(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	int  Fnc__VENT_ALL_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__VENT_ALL_VLV__CLOSE_WITHOUT_EQUAL_VLV(CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__PUMP_ALL_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__PUMP_ALL_VLV__CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
-	int  Fnc__PUMP_SOFT_VLV__OPEN(CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__PUMP_SOFT_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
-	int  Fnc__PUMP_FAST_VLV__OPEN(CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__PUMP_SOFT_VLV__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__PUMP_SOFT_VLV__CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Fnc__PUMP_FAST_VLV__OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	int  Fnc__VENT_SOFT_VLV__OPEN(CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__VENT_SOFT_VLV__CLOSE(CII_OBJECT__ALARM* p_alarm);
 	int  Fnc__VENT_FAST_VLV__OPEN(CII_OBJECT__ALARM* p_alarm);
 
 	// ...
-	int  Sub__SV_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, double dblTimeout);
-	int  Sub__SV_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, double dblTimeout);
+	int  Sub__SV_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double dblTimeout);
+	int  Sub__SV_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const double dblTimeout);
 
 	int  Check__SV_OPEN_MAX_DIFFERENTIAL_PRESS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
@@ -460,9 +521,19 @@ private:
 	void Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	void Fnc__INTERLOCK(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
+	void Update__PRESSURE_STS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	void Update__SV_STS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	void Update__DV_STS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 	void Update__LIFT_PIN_STS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	// ...
+	int  Check__SR_VALVE_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active__wait_check);
+	int  Check__SR_VALVE_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active__wait_check);
+	int  _Check__SR_VALVE_STATE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active__wait_check, const bool active__close_check);
+
+	int  Check__FR_VALVE_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active__wait_check);
+	int  Check__FR_VALVE_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active__wait_check);
+	int  _Check__FR_VALVE_STATE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active__wait_check, const bool active__close_check);
 
 	// ...
 	void Fnc__MSG(const CString &sMsg);		// sCH__MSG

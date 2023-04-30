@@ -244,6 +244,10 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "RCP.RF.LF.POWER";
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_RF_LF_POWER, var_name);
+
+			var_name = "RCP.RF.LF.MODE";
+			STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "CW  Pulse", "");
+			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_LF_MODE, var_name);
 		}
 		// RF.HF ...
 		{
@@ -251,6 +255,11 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
 			LINK__VAR_STRING_CTRL(sCH__RCP_RF_HF_POWER, var_name);
 
+			var_name = "RCP.RF.HF.P2";
+			STD__ADD_STRING_WITH_OPTION(var_name, -1, "E", "");
+			LINK__VAR_STRING_CTRL(sCH__RCP_RF_HF_P2, var_name);
+
+			//
 			var_name = "RCP.RF.HF.MODE";
 			STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "CW  Pulse", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_HF_MODE, var_name);
@@ -267,7 +276,7 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 			//
 			var_name = "RCP.RF.PULSE.EXEC";
-			STD__ADD_DIGITAL_WITH_OPTION(var_name, "LOW  NORMAL  INVERSE", -1, "E", "");
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, "NORMAL  INVERSE  OFF", -1, "E", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_PULSE_EXEC, var_name);
 
 			//
@@ -779,6 +788,14 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			var_name = "MON.REFLECT.MAX_COEFFICIENT.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_LF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
 		}
+
+		// CH__DO_LF_PULSE_SET
+		{
+			def_name = "CH__DO_LF_PULSE_SET";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_RF_LF_PULSE_SET, obj_name,var_name);
+		}
 	}
 	// OBJ RF_HF ...
 	{
@@ -795,6 +812,9 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			//
 			var_name = "PARA.SET.POWER";
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_HF__PARA_SET_POWER, obj_name,var_name);
+
+			var_name = "PARA.SET.P2";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_HF__PARA_SET_P2, obj_name,var_name);
 
 			var_name = "PARA.HOLD.TIME";
 			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_HF__PARA_HOLD_TIME, obj_name,var_name);
@@ -813,14 +833,14 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			var_name = "MON.REFLECT.MAX_COEFFICIENT.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_HF__MON_REFLECT_MAX_COEFFICIENT_ACTIVE, obj_name,var_name);
 		}
-	}
 
-	// CH__DO_HF_PULSE_SET
-	{
-		def_name = "CH__DO_HF_PULSE_SET";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_RF_PULSE_SET, obj_name,var_name);
+		// CH__DO_HF_PULSE_SET
+		{
+			def_name = "CH__DO_HF_PULSE_SET";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_RF_HF_PULSE_SET, obj_name,var_name);
+		}
 	}
 
 	// OBJ MAT_LF ...

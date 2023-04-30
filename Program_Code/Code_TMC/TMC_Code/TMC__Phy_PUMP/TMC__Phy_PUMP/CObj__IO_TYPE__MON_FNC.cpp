@@ -31,9 +31,12 @@ void CObj__IO_TYPE
 				active__pmp_on = 1;
 			}
 
-				 if(active__pmp_err > 0)			sCH__MON_PUMP_RUN_STS->Set__DATA("Error");
-			else if(active__pmp_on  > 0)			sCH__MON_PUMP_RUN_STS->Set__DATA("Running");
-			else									sCH__MON_PUMP_RUN_STS->Set__DATA("Stop");
+				 if(active__pmp_err > 0)			sCH__MON_PUMP_STATE->Set__DATA("Error");
+			else if(active__pmp_on  > 0)			sCH__MON_PUMP_STATE->Set__DATA("Running");
+			else									sCH__MON_PUMP_STATE->Set__DATA("Stop");
+
+			if(active__pmp_on > 0)					sCH__MON_PUMP_RUN_STS->Set__DATA(STR__ON);
+			else									sCH__MON_PUMP_RUN_STS->Set__DATA(STR__OFF);
 		}
 
 		_Check__ALM__PUMP_STATE_RUNNING(p_alarm);

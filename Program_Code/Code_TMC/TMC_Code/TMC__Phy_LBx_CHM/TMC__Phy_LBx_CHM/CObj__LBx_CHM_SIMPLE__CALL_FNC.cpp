@@ -109,12 +109,16 @@ LOOP_RETRY:
 		return -14;
 	}
 
-	Fnc__LOG("APC Valve Open !!");
-	if(_Fnc__OBJ_VAT__OPEN() < 0)
+	if(bActive__OBJ_VAT) // 220930_When Not Use APC Valve_don't have to show
 	{
-		return -15;
+		Fnc__LOG("APC Valve Open !!");
+		if(_Fnc__OBJ_VAT__OPEN() < 0)
+		{
+			return -15;
+		}
 	}
-
+	// EXHAUST PRESSURE NOT USE
+	/** 
 	// CHECK : EXHAUST PRESSURE ...
 	{
 		SCX__ASYNC_TIMER_CTRL x_timer;
@@ -161,8 +165,11 @@ LOOP_RETRY:
 				}
 				return -302;
 			}
+			
 		}
+		
 	}
+	**/
 
 	// ...
 	aiEXT_CH__LBx__PRESSURE_TORR->Get__DATA(var_data);
@@ -181,6 +188,7 @@ LOOP_RETRY:
 	if((cur__press <= cfg__press)
 	&& (dCH__PRESSURE_STATUS->Check__DATA(STR__IO_VAC) > 0))
 	{
+
 		Fnc__PUMP_FAST_VLV__OPEN(p_alarm);
 
 		Fnc__LOG("APC Valve Open !");
@@ -898,10 +906,16 @@ LOOP_RETRY:
 	CString var_data;
 
 	if((diEXT_CH__LBx__DV_OPEN->Check__DATA(STR__OFF) > 0)
-		&& (diEXT_CH__LBx__DV_CLOSE->Check__DATA(STR__ON) > 0))
+	&& (diEXT_CH__LBx__DV_CLOSE->Check__DATA(STR__ON) > 0))
 	{
-		str_log.Format("Already... Close sts.. %s Door Valve.", m_sLBx__MODULE_NAME);
-		Fnc__LOG(str_log);
+		doEXT_CH__LBx__DV_OPEN->Set__DATA(STR__OFF);
+		doEXT_CH__LBx__DV_CLOSE->Set__DATA(STR__ON);
+
+		// ...
+		{
+			str_log.Format("Already... Close sts.. %s Door Valve.", m_sLBx__MODULE_NAME);
+			Fnc__LOG(str_log);
+		}
 		return 1;
 	}
 

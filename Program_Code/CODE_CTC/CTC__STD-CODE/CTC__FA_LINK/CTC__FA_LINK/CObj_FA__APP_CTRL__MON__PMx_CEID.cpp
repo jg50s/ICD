@@ -21,7 +21,7 @@ void CObj_FA__APP_CTRL
 
 	while(1)
 	{
-		Sleep(90);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 
 		for(i=0; i<iPMx_SIZE; i++)
@@ -43,7 +43,7 @@ void CObj_FA__APP_CTRL
 					if(var_data.CompareNoCase("MAINTMODE") == 0)
 					{
 						if((pre_chm_system[i].CompareNoCase("STANDBY")  == 0)
-							|| (pre_chm_system[i].CompareNoCase("CTCINUSE") == 0))
+						|| (pre_chm_system[i].CompareNoCase("CTCINUSE") == 0))
 						{
 							mFA_Link.Event__CHM__DOWN(pmc_id);
 						}

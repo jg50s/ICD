@@ -168,7 +168,15 @@ RETRY_ACTION:
 		Fnc__WRITE_LOG(log_msg); 
 	}
 
-	if(sCH__MON_LIFT_STATE->When__DATA(STR__MIDDLE, cfg__timeout_sec) <= 0)
+	// ...
+	CString ref__pin_sts = STR__DOWN;
+
+	if(active__middle_up)		
+	{
+		ref__pin_sts = STR__MIDDLE;
+	}
+
+	if(sCH__MON_LIFT_STATE->When__DATA(ref__pin_sts, cfg__timeout_sec) <= 0)
 	{
 		if(p_variable->Check__CTRL_ABORT() > 0)
 		{

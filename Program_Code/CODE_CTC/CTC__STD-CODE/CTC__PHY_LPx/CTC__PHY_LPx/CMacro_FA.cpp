@@ -9,6 +9,7 @@ CMacro_FA mFA_Link;
 CMacro_FA::CMacro_FA()
 {
 	InitializeCriticalSection(&mCS_LOCK);
+
 	iInit_Flag = -1;
 }
 CMacro_FA::~CMacro_FA()
@@ -20,13 +21,9 @@ CMacro_FA::~CMacro_FA()
 //.....
 int  CMacro_FA::Fnc_Init()
 {
-	EnterCriticalSection(&mCS_LOCK);
+	if(iInit_Flag > 0)		return 1;
 
-	if(iInit_Flag > 0)
-	{
-		LeaveCriticalSection(&mCS_LOCK);
-		return 1;
-	}
+	EnterCriticalSection(&mCS_LOCK);
 
 	iInit_Flag = xFA_300mm_Link->Open("");
 
@@ -46,18 +43,26 @@ int  CMacro_FA::Check__Address(const void* p_addr,
 //.....
 CI_FA_300mm__E30_CTRL*  CMacro_FA::Get__E30_CTRL()
 {
+	if(Fnc_Init() < 0)		return NULL;
+
 	return xFA_300mm_Link->Get_FA_300mm_CTRL()->Get_E30();
 }
 CI_FA_300mm__E87_CTRL*  CMacro_FA::Get__E87_CTRL()
 {
+	if(Fnc_Init() < 0)		return NULL;
+
 	return xFA_300mm_Link->Get_FA_300mm_CTRL()->Get_E87();
 }
 CI_FA_300mm__E40_CTRL*  CMacro_FA::Get__E40_CTRL()
 {
+	if(Fnc_Init() < 0)		return NULL;
+
 	return xFA_300mm_Link->Get_FA_300mm_CTRL()->Get_E40();
 }
 CI_FA_300mm__E90_CTRL*  CMacro_FA::Get__E90_CTRL()
 {
+	if(Fnc_Init() < 0)		return NULL;
+
 	return xFA_300mm_Link->Get_FA_300mm_CTRL()->Get_E90();
 }
 

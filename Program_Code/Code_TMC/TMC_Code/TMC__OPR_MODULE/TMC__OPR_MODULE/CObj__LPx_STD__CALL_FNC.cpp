@@ -24,6 +24,10 @@ int  CObj__LPx_STD::Call__HOME(CII_OBJECT__VARIABLE* p_variable)
 {
 	return pLPx__OBJ_CTRL->Call__OBJECT("HOME");
 }
+int  CObj__LPx_STD::Call__ALARM_RESET(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pLPx__OBJ_CTRL->Call__OBJECT("ALARM.RESET");
+}
 
 //
 int  CObj__LPx_STD::Call__PREPLOAD(const CString& mode,CII_OBJECT__VARIABLE* p_variable)
@@ -42,7 +46,13 @@ int  CObj__LPx_STD::Call__RLSUNLOAD(const CString& mode,CII_OBJECT__VARIABLE* p_
 }
 int  CObj__LPx_STD::Call__UNLOAD(const CString& mode,CII_OBJECT__VARIABLE* p_variable)
 {
-	return pLPx__OBJ_CTRL->Call__OBJECT("UNLOAD");
+	int r_flag = pLPx__OBJ_CTRL->Call__OBJECT("RLSUNLOAD");
+	if(r_flag < 0)		return -11;
+
+	r_flag = pLPx__OBJ_CTRL->Call__OBJECT("UNLOAD");
+	if(r_flag < 0)		return -21;
+
+	return 1;
 }
 
 int  CObj__LPx_STD::Call__CYCLE(const CString& mode,CII_OBJECT__VARIABLE* p_variable)

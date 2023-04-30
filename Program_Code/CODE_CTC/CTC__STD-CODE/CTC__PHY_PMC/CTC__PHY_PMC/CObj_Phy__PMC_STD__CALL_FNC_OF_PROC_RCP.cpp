@@ -103,7 +103,28 @@ LOOP_CHECK:
 
 	Fnc__SET_TIME();
 
-	return xI_Module_Obj->Connect__Module_Obj("PRO_READY");
+	// ...
+	int r_flag = 1;
+
+	// ...
+	bool active__marathon_test = false;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		active__marathon_test = true;
+	}
+
+	if(active__marathon_test)
+	{
+
+	}
+	else
+	{
+		r_flag = xI_Module_Obj->Connect__Module_Obj("PRO_READY");
+	}
+
+	return r_flag;
 }
 
 int  CObj_Phy__PMC_STD
@@ -354,19 +375,16 @@ LOOP_SEQ:
 					xCH_PRE__LPx_CID->Set__DATA(var_data);
 				}
 
-				// ...
-				{
-					Datalog__Write_Lot_Proc_Slot_Start(i,slot_lot_count++,pmc_slot_id,db_info,pm_log_path);
+				Datalog__Write_Lot_Proc_Slot_Start(i,slot_lot_count++,pmc_slot_id,db_info,pm_log_path);
 
-					if(fa_report_flag > 0)
-					{
-						xSCH_MATERIAL_CTRL->Process_Start__PMC_WITH_SLOT_EX(material_port_id,
-																			material_slot_id,
-																			iPMx_ID,
-																			pmc_slot_id,
-																			material_recipe,
-																			pm_log_path);
-					}
+				if(fa_report_flag > 0)
+				{
+					xSCH_MATERIAL_CTRL->Process_Start__PMC_WITH_SLOT_EX(material_port_id,
+																		material_slot_id,
+																		iPMx_ID,
+																		pmc_slot_id,
+																		material_recipe,
+																		pm_log_path);
 				}
 
 				xCH__SLOT_STATUS[i]->Set__DATA("PROCESSING");
@@ -380,56 +398,10 @@ LOOP_SEQ:
 		xLOG_CTRL->WRITE__LOG(log_msg);
 	}
 
-	/*
-	// ...
-	{
-		CString log_msg;
-		CString log_bff;
-
-		if((l_portid.GetSize() > 0)
-		&& (l_slotid.GetSize() > 0))
-		{
-			CI_FA_300mm__E40_CTRL *p_fa_e40_ctrl = mFA_Link.Get__FA_E40_CTRL();
-			
-			int i_portid = l_portid[0];
-			int i_slotid = l_slotid[0];
-			CString str_pjobid;
-			
-			if(p_fa_e40_ctrl->Get__PJOB_FROM_PTN_And_SLOT(i_portid,i_slotid, str_pjobid) > 0)
-			{
-				CString rcp_info;
-				
-				if(p_fa_e40_ctrl->Get_RecipeInfo_Of_PJobID(str_pjobid,iPMx_ID, rcp_info) > 0)
-				{
-					log_msg.Format("Tunning recipe of PJob(P%1d:%1d's %s) is as followings; \n%s \n", 
-						           i_portid,i_slotid,str_pjobid, rcp_info);
-
-					sCH__PMC_SEND_APC_DATA->Set__DATA(rcp_info);
-					sCH__PMC_SEND_APC_APPLY->Set__DATA(STR__YES);
-				}
-				else
-				{
-					log_msg.Format("Tunning recipe of PJob(P%1d:%1d's %s) does not exist !", i_portid,i_slotid,str_pjobid);
-				}
-			}
-			else
-			{
-				log_msg.Format("PJob of P%1d:%1d does not exist !", i_portid,i_slotid);
-			}
-		}
-		else
-		{
-			log_msg = "Portid & SlotID do not exist !";
-		}
-
-		xLOG_CTRL->WRITE__LOG(log_msg);
-	}
-	*/
-
 	iPRC_ALARM_FLAG = -1;
 
 	// ...
-	int flag;
+	int flag = 1;
 	int retry_count = 0;
 
 	double elapse_sec = 0.0;
@@ -440,10 +412,44 @@ LOOP_SEQ:
 		x_async_timer->START__COUNT_UP(99999);
 
 		// ...
-		flag = xI_Module_Obj->Connect__Module_Obj("PRO_START");
-		if(flag < 0)
+		bool active__marathon_test = false;
+
+		if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+		&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
 		{
-			break;
+			active__marathon_test = true;
+		}
+
+		if(active__marathon_test)
+		{
+			CString ch_data;
+			
+			aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC->Get__DATA(ch_data);
+			xCH__TOTAL_PRC_TIME->Set__DATA(ch_data);
+			
+			double cfg__wait_sec = atoi(ch_data);
+
+			while(1)
+			{
+				Sleep(90);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					flag = -1;
+					break;
+				}
+
+				if(x_async_timer->Get__CURRENT_TIME() >= cfg__wait_sec)
+				{
+					flag = 1;
+					break;
+				}
+			}
+		}
+		else
+		{
+			flag = xI_Module_Obj->Connect__Module_Obj("PRO_START");
+			if(flag < 0)		break;
 		}
 
 		elapse_sec = x_async_timer->Get__CURRENT_TIME();

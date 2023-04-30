@@ -2,6 +2,7 @@
 
 #include "Interface_Code.h"
 #include "CCommon_Error.h"
+#include "CCommon_Utility.h"
 
 #include "CClass__Error_Timer.h"
 
@@ -33,6 +34,7 @@ private:
 	// PARA : COMMON ...
 	CX__VAR_ANALOG_CTRL  aCH__PARA_SET_POWER;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_HOLD_TIME;
+	CX__VAR_ANALOG_CTRL  aCH__PARA_WAIT_POWER_ON;
 
 	CX__VAR_ANALOG_CTRL  aCH__PARA_RAMP_UP_TIME;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_RAMP_DOWN_TIME;
@@ -46,6 +48,7 @@ private:
 	CX__VAR_ANALOG_CTRL  aCH__PARA_FREQ_PRESET;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_FREQ_OUTPUT;
 	CX__VAR_ANALOG_CTRL  aCH__PARA_FREQ_LEARNED;
+	
 
 	// PARA : RCP ...
 	CX__VAR_DIGITAL_CTRL dCH__PARA_RCP_CTRL_ACTIVE;
@@ -218,6 +221,11 @@ private:
 
 	bool bActive__RF_DO_POWER_CTRL;
 	CX__VAR_DIGITAL_CTRL dEXT_CH__RF_DO_POWER_CTRL;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__RF_DO_RESET_CTRL; // IO_TYPE //KMS
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__INFO_DI_RF_POWER; // KMS : IO TYPE 
+	CX__VAR_STRING_CTRL  sEXT_CH__INFO_RF_ALARM; //KMS : IO TYPE 
+	CX__VAR_DIGITAL_CTRL dEXT_CH__RF_ALARM;		 //KMS : IO TYPE 
 
 	CX__VAR_ANALOG_CTRL  aEXT_CH__RF_AO_SET_POWER;
 	CX__VAR_STRING_CTRL  sEXT_CH__RF_AI_FORWARD_POWER;
@@ -290,7 +298,7 @@ private:
 	int Mon__IDLE_ERROR_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 	int Mon__PROC_ERROR_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 	CString Get__ERROR_MSG(CClass__Error_Timer* p_error);
-
+	int Mon__IO_TYPE_ALARM_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm); // KMS
 	// ...
 	int	 Alarm__CHECK_RETRY_ABORT(CII_OBJECT__ALARM* p_alarm, CString msg, const int alarm_id);
 	void Alarm__POST_CHECK(CII_OBJECT__ALARM *p_alarm, CString msg, const int alarm_id);

@@ -39,7 +39,7 @@ LOOP_RETRY:
 		alarm_bff.Format("The pressure of TM is [%s] status.\n", str_TM_prss_sts);
 		alarm_msg += alarm_bff;
 
-		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id,alarm_msg,r_act);
+		p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alarm_msg, r_act);
 
 		if(r_act.CompareNoCase(ACT__RETRY) == 0)
 		{	
@@ -184,47 +184,93 @@ int  CObj__PMC_SIMPLE
 		Fnc_App_Log(str_log);
 		return -1;
 	}
-	if(pm_index > iPM_LIMIT)
+	if(pm_index >= iPM_LIMIT)
 	{
 		str_log.Format("PM index max[%d] limit.. Error [%d] .. Ret -1", iPM_LIMIT, pm_index);
 		Fnc_App_Log(str_log);
 		return -1;
 	}
 
-	diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Link__UPPER_OBJECT_ABORT(sObject_Name);
+	if(bActive__VAC_RB__RNE_PM_X[pm_index])
+	{
+		diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Link__UPPER_OBJECT_ABORT(sObject_Name);
+	}
 
 
 LOOP_RETRY:
 
 	if(iActive__SIM_MODE > 0)
 	{
-		diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Set__DATA(STR__ON);
+		if(bActive__VAC_RB__RNE_PM_X[pm_index])			diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Set__DATA(sDATA__RNE_ON);
 	}
 
-	// 1. VAC Robot Arm Retract Status. !!
-	int r_ret = diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->When__DATA(STR__ON, 2);
-	if(r_ret == 0)
+	if(bActive__VAC_RB__RNE_PM_X[pm_index])
 	{
-		return OBJ_ABORT;
-	}
+		int r_ret = diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->When__DATA(sDATA__RNE_ON, 2);
+		if(r_ret == 0)		return -11;
 
-	if(diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Check__DATA(STR__ON) < 0)
-	{
-		int alarm_id = ALID__VAC_RB_NOT_RETRACTED;
-
-		CString err_msg;
-		CString r_act;
-
-		err_msg.Format("VAC Robot's Arm [%s] Status", var_data);	
-		Fnc_App_Log(err_msg);	
-
-		p_alarm->Popup__ALARM(alarm_id,r_act);
-
-		if(r_act.CompareNoCase(ACT__RETRY) == 0)
+		if(diEXT_CH__VAC_RB__RNE_PM_X[pm_index]->Check__DATA(sDATA__RNE_ON) < 0)
 		{
-			goto LOOP_RETRY;
+			int alarm_id = ALID__VAC_RB_NOT_RETRACTED;
+
+			CString err_msg;
+			CString r_act;
+
+			err_msg.Format("VAC Robot's Arm [%s] Status", var_data);	
+			Fnc_App_Log(err_msg);	
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, err_msg, r_act);
+
+			if(r_act.CompareNoCase(ACT__RETRY) == 0)
+			{
+				goto LOOP_RETRY;
+			}
+			return -1;
 		}
-		return -1;
+	}
+	
+	// CHECK : WAFER_OUT ...
+	{
+		bool active__wafer_out = false;
+
+		// Check ...
+		{
+			int sns_size = iSIZE_PMx__WAFER_OUT_X[pm_index];
+			for(int sns_i = 0; sns_i < sns_size; sns_i++)
+			{
+				if(diEXT_CH__PMx__WAFER_OUT_XY[pm_index][sns_i]->Check__DATA(STR__OFF) > 0)			continue;
+
+				active__wafer_out = true;
+				break;
+			}
+		}
+
+		if(active__wafer_out)
+		{
+			CString alm_msg;
+			CString alm_bff;
+
+			alm_msg  = "Wafer Slide Sensor List";
+			alm_msg += "\n";
+
+			int sns_size = iSIZE_PMx__WAFER_OUT_X[pm_index];
+			for(int sns_i = 0; sns_i < sns_size; sns_i++)
+			{
+				alm_bff.Format("  %1d)  %s <- %s \n",
+							   sns_i + 1,
+							   diEXT_CH__PMx__WAFER_OUT_XY[pm_index][sns_i]->Get__CHANNEL_NAME(),
+							   diEXT_CH__PMx__WAFER_OUT_XY[pm_index][sns_i]->Get__STRING());
+				alm_msg += alm_bff;
+			}
+
+			int alarm_id = ALID__WAFER_SLIDE_SENSOR_DETECTED;
+			CString r_act;
+
+			p_alarm->Popup__ALARM_With_MESSAGE(alarm_id, alm_msg, r_act);
+
+			if(r_act.CompareNoCase(ACT__RETRY) == 0)		goto LOOP_RETRY;
+			if(r_act.CompareNoCase(ACT__ABORT) == 0)		return -1;
+		}
 	}
 
 	return 1;
@@ -264,7 +310,6 @@ int  CObj__PMC_SIMPLE
 
 	return -1;
 }
-
 int  CObj__PMC_SIMPLE
 ::Is__SV_CLOSE(CII_OBJECT__VARIABLE* p_variable,
 			   CII_OBJECT__ALARM* p_alarm,
@@ -300,6 +345,87 @@ int  CObj__PMC_SIMPLE
 	return -1;
 }
 
+int CObj__PMC_SIMPLE::Set_IO__SV_OPEN(const int pmc_id)
+{
+	if(iDATA__PMx_SLOT_VLV_CTRL_TYPE != _DEF__PMx_SLOT_VLV_TYPE__IO)
+	{
+		return 11;
+	}
+
+	// ...
+	int pm_index = pmc_id - 1;
+
+	if(pm_index <  0)				return -1;
+	if(pm_index >= iPM_LIMIT)		return -2;
+
+	// ...
+	{
+		if(bActive__PMx__SV_CLOSE_X[pm_index])		doEXT_CH__PMx__SV_CLOSE_X[pm_index]->Set__DATA(STR__OFF);
+		if(bActive__PMx__SV_OPEN_X[pm_index])		doEXT_CH__PMx__SV_OPEN_X[pm_index]->Set__DATA(STR__ON);
+	}
+	return 1;
+}
+int CObj__PMC_SIMPLE::End_IO__SV_OPEN(const int pmc_id)
+{
+	if(iDATA__PMx_SLOT_VLV_CTRL_TYPE != _DEF__PMx_SLOT_VLV_TYPE__IO)
+	{
+		return 11;
+	}
+
+	// ...
+	int pm_index = pmc_id - 1;
+
+	if(pm_index <  0)				return -1;
+	if(pm_index >= iPM_LIMIT)		return -2;
+
+	if(dCH__CFG_IO_OFF_MODE->Check__DATA(STR__ENABLE) > 0)
+	{
+		if(bActive__PMx__SV_CLOSE_X[pm_index])		doEXT_CH__PMx__SV_CLOSE_X[pm_index]->Set__DATA(STR__OFF);
+		if(bActive__PMx__SV_OPEN_X[pm_index])		doEXT_CH__PMx__SV_OPEN_X[pm_index]->Set__DATA(STR__OFF);
+	}
+	return 1;
+}
+
+int CObj__PMC_SIMPLE::Set_IO__SV_CLOSE(const int pmc_id)
+{
+	if(iDATA__PMx_SLOT_VLV_CTRL_TYPE != _DEF__PMx_SLOT_VLV_TYPE__IO)
+	{
+		return 11;
+	}
+
+	// ...
+	int pm_index = pmc_id - 1;
+
+	if(pm_index <  0)				return -1;
+	if(pm_index >= iPM_LIMIT)		return -2;
+
+	// ...
+	{
+		if(bActive__PMx__SV_OPEN_X[pm_index])		doEXT_CH__PMx__SV_OPEN_X[pm_index]->Set__DATA(STR__OFF);
+		if(bActive__PMx__SV_CLOSE_X[pm_index])		doEXT_CH__PMx__SV_CLOSE_X[pm_index]->Set__DATA(STR__ON);
+	}
+	return 1;
+}
+int CObj__PMC_SIMPLE::End_IO__SV_CLOSE(const int pmc_id)
+{
+	if(iDATA__PMx_SLOT_VLV_CTRL_TYPE != _DEF__PMx_SLOT_VLV_TYPE__IO)
+	{
+		return 11;
+	}
+
+	// ...
+	int pm_index = pmc_id - 1;
+
+	if(pm_index <  0)				return -1;
+	if(pm_index >= iPM_LIMIT)		return -2;
+
+	if(dCH__CFG_IO_OFF_MODE->Check__DATA(STR__ENABLE) > 0)
+	{
+		if(bActive__PMx__SV_CLOSE_X[pm_index])		doEXT_CH__PMx__SV_CLOSE_X[pm_index]->Set__DATA(STR__OFF);
+		if(bActive__PMx__SV_OPEN_X[pm_index])		doEXT_CH__PMx__SV_OPEN_X[pm_index]->Set__DATA(STR__OFF);
+	}
+	return 1;
+}
 
 int  CObj__PMC_SIMPLE
 ::Fnc__SV_CLOSE(CII_OBJECT__VARIABLE* p_variable,
@@ -319,7 +445,7 @@ int  CObj__PMC_SIMPLE
 		Fnc_App_Log(str_log);
 		return -1;
 	}
-	if(pm_index > iPM_LIMIT)
+	if(pm_index >= iPM_LIMIT)
 	{
 		str_log.Format("PM index max[%d] limit.. Error [%d] .. Ret -1", iPM_LIMIT, pm_index);
 		Fnc_App_Log(str_log);
@@ -328,31 +454,84 @@ int  CObj__PMC_SIMPLE
 
 	if(iActive__SIM_MODE > 0)
 	{
-		SCX__TIMER_CTRL sim_timer;
+		if(dEXT_CH__CFG_PMx_CHM_TYPE[pm_index]->Check__DATA(STR__DUMMY) > 0)
+		{
+			if(dCH__CFG_USE_SHUTTER[pm_index]->Check__DATA(STR__YES) > 0)
+			{
+				sCH_SHUTTER_STS[pm_index]->Set__DATA(STR__CLOSE);
+			}
+			if(dCH__CFG_USE_LIFT_PIN[pm_index]->Check__DATA(STR__YES) > 0)
+			{
+				sCH_LIFT_PIN_POS_STS[pm_index]->Set__DATA(STR__DOWN);
+			}
+			if(dCH__CFG_USE_CR_POSITION[pm_index]->Check__DATA(STR__YES) > 0)
+			{
+				sCH_CR_POSITION_STS[pm_index]->Set__DATA(STR__DOWN);
+			}
+		}
+		else
+		{
+			if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__OBJ)
+			{
+				aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
+	
+				int r_flag = pOBJ_CTRL__PMx_HANDOFF->Call__OBJECT(sMODE__PMx_SLOT_VLV__CLOSE);
+				if(r_flag < 0)			return -101;
+			
+				diEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__ON);
+				diEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
+			}
+			else
+			{
+				if((diEXT_CH__PMx__SV_OPEN[pm_index]->Check__DATA(STR__OFF) > 0)
+				&& (diEXT_CH__PMx__SV_CLOSE[pm_index]->Check__DATA(STR__ON) > 0))
+				{
+					Set_IO__SV_CLOSE(pmc_id);
 
-		diEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__OFF);
-		diEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
+					// ...
+					{
+						str_log.Format("Already... PM%d Slot Valve... TM_CLOSE sts.. ", pmc_id);
+						Fnc_App_Log(str_log);
+					}
+					return 1;
+				}
 
-		if(sim_timer->WAIT(0.5) < 0)		return -1;
-
-		diEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__ON);
-		diEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
+				Set_IO__SV_CLOSE(pmc_id);
+			}
+		}
 	}
 	else
 	{
-		if((diEXT_CH__PMx__SV_OPEN[pm_index]->Check__DATA(STR__OFF) > 0)
-		&& (diEXT_CH__PMx__SV_CLOSE[pm_index]->Check__DATA(STR__ON) > 0))
+		if(dEXT_CH__CFG_PMx_CHM_TYPE[pm_index]->Check__DATA(STR__DUMMY) > 0)
 		{
-			str_log.Format("Already... PM%d Slot Valve... TM_CLOSE sts.. ", pmc_id);
-			Fnc_App_Log(str_log);
-			return 1;
-		}
 
-		// ...
+		}
+		else
 		{
-			doEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
-			Sleep(100);
-			doEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__ON);
+			if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__OBJ)
+			{
+				aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
+
+				int r_flag = pOBJ_CTRL__PMx_HANDOFF->Call__OBJECT(sMODE__PMx_SLOT_VLV__CLOSE);
+				if(r_flag < 0)			return -101;
+			}
+			else
+			{
+				if((diEXT_CH__PMx__SV_OPEN[pm_index]->Check__DATA(STR__OFF) > 0)
+				&& (diEXT_CH__PMx__SV_CLOSE[pm_index]->Check__DATA(STR__ON) > 0))
+				{
+					Set_IO__SV_CLOSE(pmc_id);
+
+					// ...
+					{
+						str_log.Format("Already... PM%d Slot Valve... TM_CLOSE sts.. ", pmc_id);
+						Fnc_App_Log(str_log);
+					}
+					return 1;
+				}
+
+				Set_IO__SV_CLOSE(pmc_id);
+			}
 		}
 	}
 
@@ -406,8 +585,6 @@ int  CObj__PMC_SIMPLE
 			break;
 		}
 	}
-
-	doEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__OFF);
 	return r_ret;
 }
 
@@ -429,7 +606,7 @@ int  CObj__PMC_SIMPLE
 		Fnc_App_Log(str_log);
 		return -1;
 	}
-	if(pm_index > iPM_LIMIT)
+	if(pm_index >= iPM_LIMIT)
 	{
 		str_log.Format("PM index max[%d] limit.. Error [%d] .. Ret -1", iPM_LIMIT, pm_index);
 		Fnc_App_Log(str_log);
@@ -438,41 +615,90 @@ int  CObj__PMC_SIMPLE
 
 	if(iActive__SIM_MODE > 0)
 	{
-		SCX__TIMER_CTRL sim_timer;
-
-		diEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__OFF);
-		diEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
-
-		if(sim_timer->WAIT(0.5) < 0)
+		if(dEXT_CH__CFG_PMx_CHM_TYPE[pm_index]->Check__DATA(STR__DUMMY) > 0)
 		{
-			return -1;
+			if(dCH__CFG_USE_SHUTTER[pm_index]->Check__DATA(STR__YES) > 0)
+			{
+				sCH_SHUTTER_STS[pm_index]->Set__DATA(STR__OPEN);
+			}
+			if(dCH__CFG_USE_LIFT_PIN[pm_index]->Check__DATA(STR__YES) > 0)
+			{
+				sCH_LIFT_PIN_POS_STS[pm_index]->Set__DATA(STR__UP);
+			}
+			if(dCH__CFG_USE_CR_POSITION[pm_index]->Check__DATA(STR__YES) > 0)
+			{
+				sCH_CR_POSITION_STS[pm_index]->Set__DATA(STR__UP);
+			}
 		}
+		else
+		{
+			if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__OBJ)
+			{
+				aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
 
-		diEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__OFF);
-		diEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__ON);
+				int r_flag = pOBJ_CTRL__PMx_HANDOFF->Call__OBJECT(sMODE__PMx_SLOT_VLV__OPEN);
+				if(r_flag < 0)			return -101;
+	
+				diEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__OFF);
+				diEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__ON);
+			}
+			else
+			{
+				if((diEXT_CH__PMx__SV_OPEN[pm_index]->Check__DATA(STR__ON)   > 0)
+				&& (diEXT_CH__PMx__SV_CLOSE[pm_index]->Check__DATA(STR__OFF) > 0))
+				{
+					Set_IO__SV_OPEN(pmc_id);
+
+					// ...
+					{
+						str_log.Format("Already, the slot-valve of PM%d is open. ", pmc_id);
+						Fnc_App_Log(str_log);
+					}
+					return 1;
+				}
+
+				Set_IO__SV_OPEN(pmc_id);
+			}
+		}
 	}
 	else
 	{
-		if((diEXT_CH__PMx__SV_OPEN[pm_index]->Check__DATA(STR__ON)   > 0)
-		&& (diEXT_CH__PMx__SV_CLOSE[pm_index]->Check__DATA(STR__OFF) > 0))
+		if(dEXT_CH__CFG_PMx_CHM_TYPE[pm_index]->Check__DATA(STR__DUMMY) > 0)
 		{
-			doEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
 
-			str_log.Format("Already... PM%d Slot Valve... PM_OPEN sts.. ", pmc_id);
-			Fnc_App_Log(str_log);
-			return 1;
 		}
-
-		// ...
+		else
 		{
-			doEXT_CH__PMx__SV_CLOSE[pm_index]->Set__DATA(STR__OFF);
-			Sleep(100);
-			doEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__ON);
+			if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__OBJ)
+			{
+				aEXT_CH__PARA_PMC_ID->Set__VALUE(pmc_id);
+
+				int r_flag = pOBJ_CTRL__PMx_HANDOFF->Call__OBJECT(sMODE__PMx_SLOT_VLV__OPEN);
+				if(r_flag < 0)			return -101;
+			}
+			else
+			{
+				if((diEXT_CH__PMx__SV_OPEN[pm_index]->Check__DATA(STR__ON)   > 0)
+				&& (diEXT_CH__PMx__SV_CLOSE[pm_index]->Check__DATA(STR__OFF) > 0))
+				{
+					Set_IO__SV_OPEN(pmc_id);
+
+					// ...
+					{
+						str_log.Format("Already, the slot-valve of PM%d is open. ", pmc_id);
+						Fnc_App_Log(str_log);
+					}
+					return 1;
+				}
+	
+				Set_IO__SV_OPEN(pmc_id);
+			}
 		}
 	}
 
 	// ...
 	SCX__ASYNC_TIMER_CTRL xI_ASYNC_TIMER_SV;
+
 	double sec_timecount = cfg_timeout + 10.0;
 	int r_ret = -1;
 
@@ -521,7 +747,6 @@ int  CObj__PMC_SIMPLE
 		}
 	}
 
-	doEXT_CH__PMx__SV_OPEN[pm_index]->Set__DATA(STR__OFF);
 	return r_ret;
 }
 

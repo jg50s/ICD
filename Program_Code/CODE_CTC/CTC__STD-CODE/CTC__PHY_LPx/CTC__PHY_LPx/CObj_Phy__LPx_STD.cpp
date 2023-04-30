@@ -1,12 +1,8 @@
 #include "StdAfx.h"
-#include "CMacro_LOG.h"
 
 #include "CObj_Phy__LPx_STD.h"
 #include "CObj_Phy__LPx_STD__DEF.h"
 #include "CObj_Phy__LPx_STD__ALID.h"
-
-
-extern CMacro_LOG  mMacro_LOG;
 
 
 //-------------------------------------------------------------------------
@@ -59,6 +55,7 @@ int CObj_Phy__LPx_STD::__DEFINE__VERSION_HISTORY(version)
 // ...
 #define  MON_ID__ALL_STATE							1
 #define  MON_ID__PORT_CTRL							2
+#define  MON_ID__PORT_EXCEPTION						3
 
 #define  MON_ID__FA_REPORT							11
 #define  MON_ID__FA_ACCESS_And_TRANSFER				13
@@ -127,6 +124,10 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(xCH__SEQ_INFO_MSG,"SEQ_INFO.MSG");
 
+		str_name = "ACTIVE.FOUP.RELOAD";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__ACTIVE_FOUP_RELOAD, str_name);
+
 		//
 		str_name = "CFG.USE";
 		STD__ADD_DIGITAL(str_name,DSP__LPx_MODE);
@@ -136,8 +137,9 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"NORMAL TEST","");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PROCESS_TYPE,str_name);
 
-		dVAR_CFG__SLOT_MAX = "CFG.SLOT.MAX";
-		STD__ADD_DIGITAL(dVAR_CFG__SLOT_MAX,DSP__LPx_SLOT_MAX);
+		str_name = "CFG.SLOT.MAX";
+		STD__ADD_DIGITAL(str_name, DSP__LPx_SLOT_MAX);
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_SLOT_MAX, str_name);
 
 		str_name = "CFG.TYPE";
 		STD__ADD_DIGITAL(str_name,DSP__LPx_TYPE);
@@ -193,9 +195,9 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING_WITH_COMMENT(str_name,"LIST  :  YES NO");
 		sCH__PIO_TRANSFER = p_variable->Get__VAR_STRING_CTRL(str_name);
 
-		str_name = "PIO.COMM.READY.STS";
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		sCH__PIO_COMM_READY_STS = p_variable->Get__VAR_STRING_CTRL(str_name);
+		str_name = "PIO.ERROR.ACTIVE";
+		STD__ADD_STRING_WITH_COMMENT(str_name, "");
+		sCH__PIO_ERROR_ACTIVE = p_variable->Get__VAR_STRING_CTRL(str_name);
 	}
 
 	// ...
@@ -258,6 +260,7 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		p_variable->Get__STD_DESCRIPTION(DSP__OBJ_CTRL, dsp_item);
 
+		//
 		str_name = "APP.PORT.CTRL";
 		STD__ADD_DIGITAL(str_name,dsp_item);
 		dCH__PORT_CTRL = p_variable->Get__VAR_DIGITAL_CTRL(str_name);
@@ -265,6 +268,10 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "APP.PORT.STATUS";
 		STD__ADD_STRING(str_name);
 		sCH__PORT_STATUS = p_variable->Get__VAR_STRING_CTRL(str_name);
+
+		str_name = "APP.RESERVE.ID";
+		STD__ADD_STRING(str_name);
+		sCH__RESERVE_ID = p_variable->Get__VAR_STRING_CTRL(str_name);
 
 		str_name = "APP.PORT.EXCEPTION";
 		STD__ADD_STRING(str_name);
@@ -401,9 +408,14 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_STRING_WITH_COMMENT(str_name,"");
 		LINK__VAR_STRING_CTRL(xCH__RF_YES_NO_FLAG,str_name);
 		
+		//
 		str_name = "SIDE_BUFFER.USE.FLAG";
 		STD__ADD_STRING_WITH_COMMENT(str_name,"");
 		LINK__VAR_STRING_CTRL(xCH__SIDE_BUFFER_USE_FLAG,str_name);
+
+		str_name = "STx.USE.N2_PURGE";
+		STD__ADD_DIGITAL(str_name, "NO  YES");
+		LINK__VAR_DIGITAL_CTRL(dCH__STx_USE_N2_PURGE, str_name);
 
 		//
 		str_name = "DB.LOTID";
@@ -557,13 +569,14 @@ int CObj_Phy__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_RF_PAGE_WRITE_SEC, str_name);
 	}
 
-	//-------------------------------------------------------------------------------
+	// ...
 	{
-		p_variable->Add__MONITORING_PROC(0.5,MON_ID__ALL_STATE);
-		p_variable->Add__MONITORING_PROC(0.5,MON_ID__PORT_CTRL);
+		p_variable->Add__MONITORING_PROC(0.5, MON_ID__ALL_STATE);
+		p_variable->Add__MONITORING_PROC(0.5, MON_ID__PORT_CTRL);
+		p_variable->Add__MONITORING_PROC(0.5, MON_ID__PORT_EXCEPTION);
 
-		p_variable->Add__MONITORING_PROC(3,MON_ID__FA_REPORT);
-		p_variable->Add__MONITORING_PROC(3,MON_ID__FA_ACCESS_And_TRANSFER);
+		p_variable->Add__MONITORING_PROC(3, MON_ID__FA_REPORT);
+		p_variable->Add__MONITORING_PROC(3, MON_ID__FA_ACCESS_And_TRANSFER);
 	}
 	return 1;
 }
@@ -839,9 +852,6 @@ int CObj_Phy__LPx_STD::__DEFINE__ALARM(p_alarm)
 //-------------------------------------------------------------------------
 int CObj_Phy__LPx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	mMacro_LOG.Init_LOG();
-
-	// ...
 	p_ext_obj_create->Link__DEF_VARIABLE__ERROR_FEEDBACK(&mERROR__DEF_VAR);
 
 	// ...
@@ -849,11 +859,12 @@ int CObj_Phy__LPx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		CString file_name;
 		CString log_msg;
 
-		file_name.Format("%s_App",sObject_Name);
+		file_name.Format("%s_App.log",sObject_Name);
 
 		log_msg  = "\n\n";
 		log_msg += "//------------------------------------------------------------------------";
 
+		xLOG_CTRL->Attach__Date_And_Time_To_Log_Name();
 		xLOG_CTRL->CREATE__SUB_DIRECTORY(sObject_Name);
 		xLOG_CTRL->SET__PROPERTY(file_name,24*5,60);
 
@@ -1045,6 +1056,10 @@ int CObj_Phy__LPx_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 
 		case MON_ID__PORT_CTRL:
 			Mon__PORT_CTRL(p_variable,p_alarm);
+			break;
+
+		case MON_ID__PORT_EXCEPTION:
+			Mon__PORT_EXCEPTION(p_variable,p_alarm);
 			break;
 
 		//

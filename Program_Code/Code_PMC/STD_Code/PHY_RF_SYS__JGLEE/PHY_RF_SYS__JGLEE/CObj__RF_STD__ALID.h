@@ -31,3 +31,5 @@
 
 #define ALID__RF_MAX_ALLOWED_POWER_OVER						27
 
+#define ALID__RF_DEVICE_WARNING_EXIST						40 // KMS
+

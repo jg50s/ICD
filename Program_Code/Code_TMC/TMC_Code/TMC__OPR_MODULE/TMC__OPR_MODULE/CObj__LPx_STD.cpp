@@ -23,6 +23,7 @@ int CObj__LPx_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__MAINT, "MAINT");
 
 		ADD__CTRL_VAR(sMODE__HOME,  "HOME");
+		ADD__CTRL_VAR(sMODE__ALARM_RESET, "ALARM.RESET");
 
 		ADD__CTRL_VAR(sMODE__PREPLOAD, "PREPLOAD");
 		ADD__CTRL_VAR(sMODE__LOAD,     "LOAD");
@@ -162,6 +163,7 @@ int CObj__LPx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__MAINT)			flag = Call__MAINT(p_variable);
 
 		ELSE_IF__CTRL_MODE(sMODE__HOME)				flag = Call__HOME(p_variable);
+		ELSE_IF__CTRL_MODE(sMODE__ALARM_RESET)		flag = Call__ALARM_RESET(p_variable);
 
 		ELSE_IF__CTRL_MODE(sMODE__PREPLOAD)			flag = Call__PREPLOAD(mode,p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__LOAD)				flag = Call__LOAD(mode,p_variable);
@@ -196,11 +198,6 @@ int CObj__LPx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__PAGE_READ)		flag = Call__PAGE_READ(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__CID_WRITE)		flag = Call__CID_WRITE(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PAGE_WRITE)		flag = Call__PAGE_WRITE(p_variable);
-
-		else									
-		{
-
-		}
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))

@@ -34,7 +34,19 @@ void CObj_Phy__LPx_STD
 
 	while(1)
 	{
-		Sleep(90);
+		p_variable->Wait__SINGLE_OBJECT(0.01);
+
+		
+		if(p_e30_ctrl == NULL)
+		{
+			p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+			continue;
+		}	
+		if(p_e87_ctrl == NULL)
+		{
+			p_e87_ctrl = mFA_Link.Get__E87_CTRL();
+			continue;
+		}
 
 
 		// FA ONLINE_REPORT ...
@@ -160,7 +172,7 @@ void CObj_Phy__LPx_STD
 						p_e30_ctrl->Event__LP__FOUP_UNCLAMPED(iPTN);
 
 						if((sCH__PORT_STATUS->Check__DATA("RESERVE") > 0)
-							|| (sCH__PORT_STATUS->Check__DATA("BUSY")    > 0))
+						|| (sCH__PORT_STATUS->Check__DATA(STR__BUSY) > 0))
 						{
 							xI_SCH_MATERIAL_CTRL->Clear__JOB(iPTN);
 							Cancel__PORT();
@@ -185,7 +197,7 @@ void CObj_Phy__LPx_STD
 						p_e30_ctrl->Event__LP__FOUP_UNDOCKED(iPTN);
 
 						if((sCH__PORT_STATUS->Check__DATA("RESERVE") > 0)
-						|| (sCH__PORT_STATUS->Check__DATA("BUSY")    > 0))
+						|| (sCH__PORT_STATUS->Check__DATA(STR__BUSY) > 0))
 						{
 							xI_SCH_MATERIAL_CTRL->Clear__JOB(iPTN);
 							Cancel__PORT();
@@ -223,12 +235,6 @@ void CObj_Phy__LPx_STD
 ::Mon__FA_ACCESS_And_TRANSFER(CII_OBJECT__VARIABLE* p_variable,
 							  CII_OBJECT__ALARM* p_alarm)
 {
-	while(mFA_Link.Fnc_Init() < 0)
-	{
-		Sleep(500);
-	}
-
-	// ...
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
 	CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
 
@@ -253,10 +259,24 @@ void CObj_Phy__LPx_STD
 	xCH__FA_LP_ACCESS_REQ->Get__DATA(var_data);
 	xCH__FA_LP_ACCESS_STATUS->Set__DATA(var_data);
 
+
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
 
+
+		if(p_e30_ctrl == NULL)
+		{
+			p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+			continue;;
+		}
+		if(p_e87_ctrl == NULL)
+		{
+			p_e87_ctrl = mFA_Link.Get__E87_CTRL();
+			continue;
+		}
+
+		
 		if(dEXT_CH__CFG_LPx_ACCESS_MODE_AUTO_CTRL_FLAG->Check__DATA(STR__ENABLE) > 0)
 		{
 			if(dCH__CFG_PROCESS_TYPE->Check__DATA(STR__TEST) > 0)
@@ -411,8 +431,8 @@ void CObj_Phy__LPx_STD
 
 				sCH__PORT_STATUS->Get__DATA(var_data);
 
-				if((var_data.CompareNoCase("LOAD.REQ")   == 0)
-				|| (var_data.CompareNoCase("UNLOAD.REQ") == 0))
+				if((var_data.CompareNoCase("LOAD.REQ") == 0)
+				|| (var_data.CompareNoCase(STR__UNLOAD_REQ) == 0))
 				{
 					int lp_ready_flag = 1;
 
@@ -423,7 +443,7 @@ void CObj_Phy__LPx_STD
 							lp_ready_flag = -1;
 						}
 					}
-					else if(var_data.CompareNoCase("UNLOAD.REQ") == 0)
+					else if(var_data.CompareNoCase(STR__UNLOAD_REQ) == 0)
 					{
 						if(dCH__CST_STATUS->Check__DATA("EXIST") < 0)
 						{
@@ -435,7 +455,7 @@ void CObj_Phy__LPx_STD
 					{
 						p_e87_ctrl->Event__LP__TRANSFER_READY(iPTN);
 
-						if(var_data.CompareNoCase("UNLOAD.REQ") == 0)
+						if(var_data.CompareNoCase(STR__UNLOAD_REQ) == 0)
 						{
 							p_e87_ctrl->Event__LP__READY_TO_UNLOAD(iPTN);
 						}
@@ -506,6 +526,7 @@ void CObj_Phy__LPx_STD
 int  CObj_Phy__LPx_STD::FA_Seq__STATUS_CHANGE()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__STATUS_CHANGE(iPTN);
 	return 1;
@@ -518,6 +539,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__TRANSFER_BLOCKED()
 	}
 
 	CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
+	if(p_e87_ctrl == NULL)			return -1;
 
 	p_e87_ctrl->Event__LP__TRANSFER_BLOCKED(iPTN);
 	return 1;
@@ -525,6 +547,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__TRANSFER_BLOCKED()
 int  CObj_Phy__LPx_STD::FA_Seq__LOAD_REQ()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__LOAD_REQUEST(iPTN);
 	return 1;
@@ -534,6 +557,10 @@ int  CObj_Phy__LPx_STD::FA_Seq__UNLOAD_REQ()
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
 	CI_FA_300mm__E87_CTRL *p_e87_ctrl = mFA_Link.Get__E87_CTRL();
 	CI_FA_300mm__E40_CTRL *p_e40_ctrl = mFA_Link.Get__E40_CTRL();
+
+	if(p_e30_ctrl == NULL)			return -1;
+	if(p_e87_ctrl == NULL)			return -2;
+	if(p_e40_ctrl == NULL)			return -3;
 
 	// ...
 	{
@@ -548,6 +575,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__UNLOAD_REQ()
 int  CObj_Phy__LPx_STD::FA_Seq__CID_READ_START()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__CSTID_READ_START(iPTN);
 	return 1;
@@ -555,6 +583,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__CID_READ_START()
 int  CObj_Phy__LPx_STD::FA_Seq__CID_READ_END()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__CSTID_READ_END(iPTN);
 	return 1;
@@ -563,6 +592,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__CID_READ_END()
 int  CObj_Phy__LPx_STD::FA_Seq__MAP_START()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__SLOT_MAP_START(iPTN);
 	return 1;
@@ -570,6 +600,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__MAP_START()
 int  CObj_Phy__LPx_STD::FA_Seq__MAP_END()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__SLOT_MAP_END(iPTN);
 	return 1;
@@ -578,6 +609,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__MAP_END()
 int  CObj_Phy__LPx_STD::FA_Seq__CAMCEL()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__CANCEL(iPTN);
 	return 1;
@@ -585,6 +617,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__CAMCEL()
 int  CObj_Phy__LPx_STD::FA_Seq__PAUSE()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__PAUSE(iPTN);
 	return 1;
@@ -592,6 +625,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__PAUSE()
 int  CObj_Phy__LPx_STD::FA_Seq__RESUME()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__RESUME(iPTN);
 	return 1;
@@ -599,6 +633,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__RESUME()
 int  CObj_Phy__LPx_STD::FA_Seq__ABORT()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__ABORT(iPTN);
 	return 1;
@@ -606,6 +641,7 @@ int  CObj_Phy__LPx_STD::FA_Seq__ABORT()
 int  CObj_Phy__LPx_STD::FA_Seq__COMPLETE()
 {
 	CI_FA_300mm__E30_CTRL *p_e30_ctrl = mFA_Link.Get__E30_CTRL();
+	if(p_e30_ctrl == NULL)			return -1;
 
 	p_e30_ctrl->Event__LP__LOT_DATA_REPORT(iPTN);
 	p_e30_ctrl->Event__LP__COMPLETE(iPTN);

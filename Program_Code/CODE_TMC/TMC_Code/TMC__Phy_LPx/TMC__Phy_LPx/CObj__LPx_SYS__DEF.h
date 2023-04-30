@@ -7,6 +7,9 @@
 
 #define  CMMD__ALARM_RESET		"ALARM.RESET"
 
+#define  CMMD__LOAD				"LOAD"
+#define  CMMD__UNLOAD			"UNLOAD"
+
 #define  CMMD__CLAMP			"CLAMP"
 #define  CMMD__UNCLAMP			"UNCLAMP"
 
@@ -59,6 +62,7 @@
 #define  STR__CLOSE				"CLOSE"
 
 #define  STR__LOAD				"LOAD"
+#define  STR__UNLOAD			"UNLOAD"
 
 #define  STR__CLAMP				"CLAMP"
 #define  STR__DONE				"DONE"

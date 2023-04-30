@@ -178,8 +178,6 @@ Mon__REQ_CTRL(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 void CObj__ESC_OBJ::
 Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
-	CString pre_range__cfg_chuck_type;
-
 	double pre_range__cfg_esc_volt_max = 0.0;
 	double pre_range__cfg_dechuck_volt_max__center = 0.0;
 
@@ -188,9 +186,6 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 	CString pre__chuck_sel = "";
 	CString pre__cfg_save  = "";
-
-	int count__error_center = 0;
-	int count__error_edge   = 0;
 
 	CString var_data;
 	int i;
@@ -230,7 +225,8 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 				aiEXT_CH__ESC_CURRENT_EDGE->Set__DATA(var_data);
 			}
 
-			doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
+			//doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
+			//doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__On); //KMS Voltage ON
 
 			// DPC Center ...
 			if(bActive__HE_CONTROL_CENTER_USE)
@@ -290,7 +286,7 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			double cfg_sec = 0.0;
 			int chuck_mode = -1;
 
-				 if(pre__chuck_sel.CompareNoCase("CHUCK")  == 0)		chuck_mode = 0;
+			if(pre__chuck_sel.CompareNoCase("CHUCK")  == 0)		chuck_mode = 0;
 			else if(pre__chuck_sel.CompareNoCase("CHUCK1") == 0)		chuck_mode = 1;
 			else if(pre__chuck_sel.CompareNoCase("CHUCK2") == 0)		chuck_mode = 2;
 
@@ -343,90 +339,24 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			if(he_flow_check < 0)
 			{
 				sCH__MON_He_LEAK_SCCM_CENTER->Set__DATA("");
-				count__error_center = 0;
-
-				sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Set__DATA(STR__NO);
 			}
 			else 
 			{
 				if((iACTIVE__WAFER_LEAK_CHECK > 0)
 				|| (dCH__MON_CHUCK_STATUS->Check__DATA(STR__CHUCKED) > 0))
 				{
-					double cfg_center__bypass_flow = 0.0;
-
-					if(Check__Stable_Valve_Open_Of_HE_CENTER() > 0)
-					{
-						sCH__RESULT_HE_CENTER_FLOW_READING_POINT1->Get__DATA(var_data);
-						cfg_center__bypass_flow = atof(var_data);
-					}
+					sCH__RESULT_HE_CENTER_FLOW_READING_POINT1->Get__DATA(var_data);
+					double cfg_center__bypass_flow = atof(var_data);
 
 					sCH__MON_He_Flow_CENTER->Get__DATA(var_data);
 					double cur_center__flow = atof(var_data);	
-					double cur__flow_leak = cur_center__flow - cfg_center__bypass_flow;
-					if(cur__flow_leak < 0)			cur__flow_leak = 0.0;
 
-					var_data.Format("%.1f", cur__flow_leak);
+					var_data.Format("%.1f", (cur_center__flow - cfg_center__bypass_flow));
 					sCH__MON_He_LEAK_SCCM_CENTER->Set__DATA(var_data);
-
-					// Error Check ...
-					if(dCH__MON_CHUCK_STATUS->Check__DATA(STR__CHUCKED) > 0)
-					{
-						double cfg__max_leak = aCH__CFG_HE_CENTER_WAFER_MAX_LEAK->Get__VALUE();
-
-						if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)
-						{
-							if(dEXT_CH__RF_ON_STATUS->Check__DATA(STR__ON) > 0)
-							{
-								count__error_center = 0;
-								
-								sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Set__DATA(STR__NO);
-							}
-						}
-
-						if(cur__flow_leak > cfg__max_leak)
-						{
-							count__error_center++;
-						}
-						else
-						{
-							count__error_center = 0;
-
-							sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Set__DATA(STR__NO);
-						}
-
-						if(count__error_center >= 20)
-						{
-							count__error_center = 0;
-
-							// ...
-							{
-								int alm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM_CENTER_MON;
-								CString alm_msg;
-								CString alm_bff;
-								CString r_act;
-
-								alm_bff.Format("Current leak flow (center) is %.1f sccm \n", cur__flow_leak);
-								alm_msg += alm_bff;
-
-								alm_bff.Format("Config Max leak (center) is %.1f sccm \n", cfg__max_leak);
-								alm_msg += alm_bff;
-
-								p_alarm->Check__ALARM(alm_id, r_act);
-								p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-							}
-
-							sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Set__DATA(STR__YES);
-
-							Fnc__ESC_ABORT(p_variable,p_alarm, "Center.Monitoring");
-						}
-					}
 				}
 				else
 				{
 					sCH__MON_He_LEAK_SCCM_CENTER->Set__DATA("__");
-					count__error_center = 0;
-
-					sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Set__DATA(STR__NO);
 				}
 			}
 		}
@@ -438,90 +368,24 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			if(he_flow_check < 0)
 			{
 				sCH__MON_He_LEAK_SCCM_EDGE->Set__DATA("");
-				count__error_edge = 0;
-
-				sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Set__DATA(STR__NO);
 			}
 			else 
 			{
 				if((iACTIVE__WAFER_LEAK_CHECK > 0)
 				|| (dCH__MON_CHUCK_STATUS->Check__DATA(STR__CHUCKED) > 0))
 				{
-					double cfg_edge__bypass_flow = 0.0;
-
-					if(Check__Stable_Valve_Open_Of_HE_EDGE() > 0)
-					{
-						sCH__RESULT_HE_EDGE_FLOW_READING_POINT1->Get__DATA(var_data);
-						cfg_edge__bypass_flow = atof(var_data);
-					}
+					sCH__RESULT_HE_EDGE_FLOW_READING_POINT1->Get__DATA(var_data);
+					double cfg_edge__bypass_flow = atof(var_data);
 
 					sCH__MON_He_Flow_EDGE->Get__DATA(var_data);
 					double cur_edge__flow = atof(var_data);	
-					double cur__flow_leak = cur_edge__flow - cfg_edge__bypass_flow;
-					if(cur__flow_leak < 0)			cur__flow_leak = 0.0;
 
-					var_data.Format("%.1f", cur__flow_leak);
+					var_data.Format("%.1f", (cur_edge__flow - cfg_edge__bypass_flow));
 					sCH__MON_He_LEAK_SCCM_EDGE->Set__DATA(var_data);
-
-					// Error Check ...
-					if(dCH__MON_CHUCK_STATUS->Check__DATA(STR__CHUCKED) > 0)
-					{
-						double cfg__max_leak = aCH__CFG_HE_EDGE_WAFER_MAX_LEAK->Get__VALUE();
-
-						if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)
-						{
-							if(dEXT_CH__RF_ON_STATUS->Check__DATA(STR__ON) > 0)
-							{
-								count__error_edge = 0;
-
-								sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Set__DATA(STR__NO);
-							}
-						}
-
-						if(cur__flow_leak > cfg__max_leak)
-						{
-							count__error_edge++;
-						}
-						else
-						{
-							count__error_edge = 0;
-
-							sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Set__DATA(STR__NO);
-						}
-
-						if(count__error_edge >= 20)
-						{
-							count__error_edge = 0;
-
-							// ...
-							{
-								int alm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM_EDGE_MON;
-								CString alm_msg;
-								CString alm_bff;
-								CString r_act;
-
-								alm_bff.Format("Current leak flow (edge) is %.1f sccm \n", cur__flow_leak);
-								alm_msg += alm_bff;
-
-								alm_bff.Format("Config Max leak (edge) is %.1f sccm \n", cfg__max_leak);
-								alm_msg += alm_bff;
-
-								p_alarm->Check__ALARM(alm_id, r_act);
-								p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
-							}
-
-							sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Set__DATA(STR__YES);
-
-							Fnc__ESC_ABORT(p_variable,p_alarm, "Edge.Monitoring");
-						}
-					}
 				}
 				else
 				{
 					sCH__MON_He_LEAK_SCCM_EDGE->Set__DATA("__");
-					count__error_edge = 0;
-
-					sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Set__DATA(STR__NO);
 				}
 			}
 		}
@@ -533,21 +397,12 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 
 			// ESC Parameter ...
 			{
-				bool active__range_change = false;
-
 				cfg_range_max = aCH__CFG_ESC_VOLTAGE_FULL_SCALE->Get__VALUE();
 
-				if((dCH__CFG_ELECTROSTATIC_CHUCK_TYPE->Check__DATA(pre_range__cfg_chuck_type) < 0)
-				|| (pre_range__cfg_esc_volt_max != cfg_range_max))
+				if(pre_range__cfg_esc_volt_max != cfg_range_max)
 				{
-					active__range_change = true;
-
-					pre_range__cfg_chuck_type = dCH__CFG_ELECTROSTATIC_CHUCK_TYPE->Get__STRING();
 					pre_range__cfg_esc_volt_max = cfg_range_max;
-				}
 
-				if(active__range_change)
-				{
 					double cfg_max = cfg_range_max;
 					double cfg_min = 0.0;
 					int    cfg_dec = 1;
@@ -1055,7 +910,6 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 			if(bActive__HE_CONTROL_CENTER_USE)
 			{
 				if(sCH__MON_FAULT_HE_CENTER_STATE->Check__DATA(STR__YES) > 0)			active__fault_check = true;
-				if(sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Check__DATA(STR__YES) > 0)		active__fault_check = true;
 			}
 
 			// Edge.Check 
@@ -1066,7 +920,6 @@ Mon__ESC_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_ala
 			if(bActive__HE_CONTROL_EDGE_USE)
 			{
 				if(sCH__MON_FAULT_HE_EDGE_STATE->Check__DATA(STR__YES) > 0)				active__fault_check = true;
-				if(sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Check__DATA(STR__YES) > 0)		active__fault_check = true;
 			}
 
 			if(active__fault_check)				dCH__MON_FAULT_ACTIVE->Set__DATA(STR__ON);
@@ -1259,20 +1112,6 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 					p_ch__stable->Set__DATA("");
 
 					continue;
-				}
-
-				//
-				if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)
-				{
-					if(dEXT_CH__RF_ON_STATUS->Check__DATA(STR__ON) > 0)
-					{
-						p_timer__check_delay->STOP_ZERO();
-						p_ch__fault->Set__DATA("");
-
-						p_timer__stable_delay->STOP_ZERO();
-						p_ch__stable->Set__DATA(STR__YES);
-						continue;
-					}
 				}
 
 				if(Fnc__HE_ERROR_CHECK(p_alarm, he_type,CHECK_POINT__IO, -1) < 0)

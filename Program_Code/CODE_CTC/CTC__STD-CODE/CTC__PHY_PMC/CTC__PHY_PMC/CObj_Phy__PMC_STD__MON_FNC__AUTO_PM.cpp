@@ -3,10 +3,6 @@
 #include "CObj_Phy__PMC_STD__ALID.h"
 
 
-#include "CMacro_LOG.h"
-extern CMacro_LOG  mMacro_LOG;
-
-
 // ...
 void CObj_Phy__PMC_STD
 ::Fnc__Auto_PM(CII_OBJECT__VARIABLE *p_variable,

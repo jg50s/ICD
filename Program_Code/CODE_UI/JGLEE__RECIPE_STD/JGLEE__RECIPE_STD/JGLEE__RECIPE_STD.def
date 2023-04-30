@@ -1,0 +1,6 @@
+; JGLEE__RECIPE_STD.def : Declares the module parameters for the DLL.
+
+LIBRARY      "JGLEE__RECIPE_STD"
+
+EXPORTS
+    ; Explicit exports can go here

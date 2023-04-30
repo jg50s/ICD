@@ -390,9 +390,13 @@ LOOP_RETRY:
 	{
 		bool active__ll_align = false;
 
-		if(Update__MAINT_TARGET_ALIGN(p_alarm, para_module,para_slot) > 0)
-		{
-			active__ll_align = true;
+		CString para_skip = sCH__PARA_MANUAL_MOVE_ALIGN_SKIP->Get__STRING();
+		if(para_skip.Find(STR__YES) < 0)
+		{		
+			if(Update__MAINT_TARGET_ALIGN(p_alarm, para_module,para_slot) > 0)
+			{
+				active__ll_align = true;
+			}
 		}
 
 		if(active__ll_align)

@@ -58,8 +58,12 @@ int CObj__ATM_ROBOT_STD::__DEFINE__VERSION_HISTORY(version)
 
 
 // ...
+#define MON_ID__HYPER_TERMINAL_INTERLOCK			1
+
+
+// ...
 #define APP_DSP__PARA_ARM				\
-"A  B"
+"A  B  AB"
 
 #define APP_DSP__PARA_MODULE			\
 "LP1  LP2  LP3  LP4  LP5				\
@@ -114,7 +118,7 @@ int CObj__ATM_ROBOT_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// ...
 	{
-		p_variable->Add__MONITORING_PROC(1.0, 1);
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__HYPER_TERMINAL_INTERLOCK);
 	}
 	return 1;
 }
@@ -248,6 +252,7 @@ int CObj__ATM_ROBOT_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	{
 		     IF__CTRL_MODE(sMODE__INIT)			flag = Call__INIT(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__MAINT)		flag = Call__MAINT(p_variable);
+
 		ELSE_IF__CTRL_MODE(sMODE__PICK)			flag = Call__PICK(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__XPICK)		flag = Call__XPICK(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PLACE)		flag = Call__PLACE(p_variable);
@@ -318,10 +323,30 @@ int CObj__ATM_ROBOT_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 {
 	switch(id)
 	{
-		case 1:
+		case MON_ID__HYPER_TERMINAL_INTERLOCK:
 			Mon__HYPER_TERMINAL_INTERLOCK(p_variable,p_alarm);
 			break;
 	}
 
 	return 1;
+}
+
+
+// ...
+void CObj__ATM_ROBOT_STD::
+Mon__HYPER_TERMINAL_INTERLOCK(CII_OBJECT__VARIABLE* p_variable,
+							  CII_OBJECT__ALARM* p_alarm)
+{
+	SCX__TIMER_CTRL cx_timer_ctrl;
+	cx_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
+
+	while(1)
+	{
+		cx_timer_ctrl->WAIT(0.5);
+
+		if(xCH__OBJ_STATUS->Check__DATA(STR__MAINTMODE) < 0)
+		{
+			dEXT_PHY__IO_CH__HYPER_TERMINAL_LOCK->Set__DATA("YES");
+		}
+	}	
 }

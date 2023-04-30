@@ -1,0 +1,6 @@
+; TMC__MAINT.def : Declares the module parameters for the DLL.
+
+LIBRARY      "TMC__MAINT"
+
+EXPORTS
+    ; Explicit exports can go here

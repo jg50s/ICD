@@ -179,6 +179,10 @@ int CObj__LPx_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.LOAD.MAP.MODE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LOAD_MAP_MODE, str_name);
+
+		str_name = "CFG.LOAD_ACT.AUTO_MAP.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LOAD_ACT_AUTO_MAP_MODE, str_name);
 	}
 
 	// ...

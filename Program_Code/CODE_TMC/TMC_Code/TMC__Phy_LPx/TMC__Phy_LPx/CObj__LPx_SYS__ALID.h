@@ -19,3 +19,4 @@
 #define  ALID__MAP_ERROR__FOUP_NOT_EXIST				12
 #define  ALID__MAP_ERROR__FOUP_POS_NOT_LOAD             13
 
+#define  ALID__EFEM_ROBOT__STATE_ERROR		            14

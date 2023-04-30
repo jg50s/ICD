@@ -87,6 +87,13 @@ int  CObj__LPx_STD
 		{
 			flag = Fnc__MAP(p_variable, p_alarm);
 		}
+		else
+		{
+			if(dCH__CFG_LOAD_ACT_AUTO_MAP_MODE->Check__DATA(STR__ENABLE) > 0)
+			{
+				Update__MAP_INFO(p_variable,p_alarm);
+			}
+		}
 	}
 
 	Update__MAP_INFO(p_variable,p_alarm);

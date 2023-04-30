@@ -83,7 +83,8 @@ int  CObj__ESC_OBJ
 
 		if(bActive__ESC_POWER_CENTER_USE)			aoEXT_CH__ESC_VOLTAGE_CENTER->Set__VALUE(0.0);
 		if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(0.0);
-
+		
+		doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__Off); // KMS
 		doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
 	}	
 
@@ -611,7 +612,7 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			{
 				if(bActive__ESC_POWER_CENTER_USE)			aoEXT_CH__ESC_VOLTAGE_CENTER->Set__VALUE(0.0);
 				if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(0.0);
-
+				doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__Off); // KMS
 				doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
 			}
 
@@ -673,6 +674,7 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 			if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(para__set_volt_edge);
 
 			doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
+			doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__On); //KMS Voltage ON
 		}
 
 		// HV On Delay ...
@@ -1145,7 +1147,7 @@ Fnc__CHUCK(CII_OBJECT__VARIABLE* p_variable,
 
 			if(active__err_leak)
 			{
-				int alm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM_ACT;
+				int alm_id = ALID__HE_WAFER_MAXIMUM_LEAK_SCCM;
 				CString r_act;
 
 				p_alarm->Check__ALARM(alm_id, r_act);
@@ -2394,7 +2396,7 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 			// Edge
 			if(bActive__HE_CONTROL_EDGE_USE)			aoEXT_CH__He_Pressure_EDGE->Set__VALUE(0.0);
 			if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(0.0);
-
+			doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__Off); // KMS
 			doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
 		}
 
@@ -2549,8 +2551,11 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 					if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(cfg_volt__edge);
 
 					doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
+					doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__On); //KMS Voltage ON
 				}
+				
 
+				// He 사용기능 수정
 				if(cfg_he_set > 0)
 				{
 					if(bActive__HE_CONTROL_CENTER_USE)			aoEXT_CH__He_Pressure_CENTER->Set__VALUE(cfg_he_set);
@@ -2640,6 +2645,7 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 				if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(cfg_volt_edge);
 
 				doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
+				doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__On); //KMS Voltage ON
 			}
 
 			if(cfg_he_set > 0)
@@ -2679,7 +2685,7 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 
 		if(bActive__ESC_POWER_CENTER_USE)			aoEXT_CH__ESC_VOLTAGE_CENTER->Set__VALUE(0.0);
 		if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(0.0);
-
+		doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__Off); // KMS
 		doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
 	}
 
@@ -2721,14 +2727,7 @@ Fnc__DECHUCK(CII_OBJECT__VARIABLE* p_variable,
 int  CObj__ESC_OBJ
 ::Fnc__DECHUCK_VERIFY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	int cur__repeat_count = 1;
-
-LOOP_RETRY:
-
-	// ...
-	{
-		dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
-	}
+	dCH__MON_HE_FLOW_CTRL_ACTIVE->Set__DATA(STR__ON);
 
 	// Pressure Setting ...
 	{
@@ -2798,18 +2797,15 @@ LOOP_RETRY:
 			if(bActive__HE_CONTROL_EDGE_USE)			aiEXT_CH__He_Flow_EDGE_IO->Set__VALUE(cfg__min_leak);
 		}
 
-		// ...
+		SCX__TIMER_CTRL x_app_timer;
+		x_app_timer->REGISTER__ABORT_OBJECT(sObject_Name);
+		x_app_timer->REGISTER__COUNT_CHANNEL(sCH__APP_TIMER_COUNT->Get__CHANNEL_NAME());
+
+		double cfg__stable_sec = aCH__CFG_HE_FINAL_FLOW_STABLE_TIME_FOR_DECHUCK_VERIFY->Get__VALUE();
+
+		if(x_app_timer->WAIT(cfg__stable_sec) < 0)
 		{
-			SCX__TIMER_CTRL x_app_timer;
-			x_app_timer->REGISTER__ABORT_OBJECT(sObject_Name);
-			x_app_timer->REGISTER__COUNT_CHANNEL(sCH__APP_TIMER_COUNT->Get__CHANNEL_NAME());
-
-			double cfg__stable_sec = aCH__CFG_HE_FINAL_FLOW_STABLE_TIME_FOR_DECHUCK_VERIFY->Get__VALUE();
-
-			if(x_app_timer->WAIT(cfg__stable_sec) < 0)
-			{
-				return -1;
-			}
+			return -1;
 		}
 	}
 
@@ -2853,18 +2849,9 @@ LOOP_RETRY:
 			if(cur__edge_leak < cfg__min_leak)			active__leak_err = true;
 		}
 
-		if(active__leak_err == true) 
-		{
-			if(aCH__CFG_DECHUCK_VERIFY_CHECK_COUNT->Get__VALUE() > cur__repeat_count)
-			{
-				cur__repeat_count++;
-				goto LOOP_RETRY;
-			}
-		}
-
 		if(active__leak_err)
 		{
-			int alm_id = ALID__HE_WAFER_MINIMUM_LEAK_SCCM_ACT;
+			int alm_id = ALID__HE_WAFER_MINIMUM_LEAK_SCCM;
 
 			CString alm_msg;
 			CString alm_bff;
@@ -2898,19 +2885,9 @@ LOOP_RETRY:
 			}
 
 			alm_bff.Format("config Min. leak <- %.1f sccm \n", cfg__min_leak);
-			alm_msg += alm_bff;
-
-			alm_bff.Format("Repeat Repeat Check Count : %1d \n", cur__repeat_count);
-			alm_msg += alm_bff;
 
 			p_alarm->Check__ALARM(alm_id,r_act);
-			p_alarm->Popup__ALARM_With_MESSAGE(alm_id,alm_msg,r_act);
-
-			if(r_act.CompareNoCase(ACT__RETRY) == 0)
-			{
-				cur__repeat_count++;
-				goto LOOP_RETRY;
-			}
+			p_alarm->Post__ALARM_With_MESSAGE(alm_id,alm_msg);
 			return -1;
 		}
 	}
@@ -3024,7 +3001,7 @@ Fnc__ESC_ABORT(CII_OBJECT__VARIABLE *p_variable,
 		{
 			if(bActive__ESC_POWER_CENTER_USE)			aoEXT_CH__ESC_VOLTAGE_CENTER->Set__VALUE(0.0);
 			if(bActive__ESC_POWER_EDGE_USE)				aoEXT_CH__ESC_VOLTAGE_EDGE->Set__VALUE(0.0);
-
+			doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__Off); // KMS
 			doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
 		}
 
@@ -3053,22 +3030,3 @@ Fnc__ESC_ABORT(CII_OBJECT__VARIABLE *p_variable,
 	return 1;
 }
 
-// ...
-int CObj__ESC_OBJ::Check__Stable_Valve_Open_Of_HE_CENTER()
-{
-	if(bActive__HE_CONTROL_CENTER_USE)
-	{
-		if(doEXT_CH__HE_VALVE_FINAL_OUT_CENTER->Check__DATA(STR__Open) > 0)			return 1;
-	}
-
-	return -1;
-}
-int CObj__ESC_OBJ::Check__Stable_Valve_Open_Of_HE_EDGE()
-{
-	if(bActive__HE_CONTROL_EDGE_USE)
-	{
-		if(doEXT_CH__HE_VALVE_FINAL_OUT_EDGE->Check__DATA(STR__Open) > 0)			return 1;
-	}
-
-	return -1;
-}

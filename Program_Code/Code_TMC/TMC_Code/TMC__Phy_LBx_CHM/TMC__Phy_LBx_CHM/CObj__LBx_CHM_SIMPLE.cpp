@@ -169,8 +169,8 @@ int CObj__LBx_CHM_SIMPLE::__DEFINE__VARIABLE_STD(p_variable)
 	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"sec",0,0,9999,"");
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_FAST_PUMP_TIMEOUT, str_name);
 
-	str_name = "OTR.IN.CFG.aVAC.PRESSURE.TORR";
-	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr",3,0,100,"");	
+	str_name = "OTR.IN.CFG.aVAC.PRESSURE.TORR"; 
+	STD__ADD_ANALOG_WITH_X_OPTION(str_name,"torr",3,0,100,"");	// 200mtorr Base Torr
 	LINK__VAR_ANALOG_CTRL(aCH__CFG_VAC_PRESSURE_TORR, str_name);
 
 	//

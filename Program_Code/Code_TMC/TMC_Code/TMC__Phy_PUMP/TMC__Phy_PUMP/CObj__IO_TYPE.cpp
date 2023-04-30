@@ -87,6 +87,10 @@ int CObj__IO_TYPE::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.PUMP.RUN_STS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_PUMP_RUN_STS, str_name);
+
+		str_name = "MON.PUMP.STATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PUMP_STATE, str_name);
 	}
 
 	// ...

@@ -49,6 +49,9 @@ private:
 	CString sMODE__MAINT;
 	int  Call__MAINT(CII_OBJECT__VARIABLE* p_variable);
 
+	CString sMODE__SET_PARA;
+	int  Call__SET_PARA(CII_OBJECT__VARIABLE* p_variable);
+
 	//
 	CString sMODE__PICK;
 	int  Call__PICK(CII_OBJECT__VARIABLE* p_variable);

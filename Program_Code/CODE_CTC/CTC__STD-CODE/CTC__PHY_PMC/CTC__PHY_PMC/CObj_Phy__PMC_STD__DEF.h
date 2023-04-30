@@ -18,6 +18,7 @@
 #define  STR__ENABLE							"ENABLE"
 #define  STR__DISABLE							"DISABLE"
 
+#define  STR__NO								"NO"
 #define  STR__YES								"YES"
 #define  STR__NONE								"NONE"
 
@@ -39,6 +40,8 @@
 #define  STR__OPEN								"OPEN"
 #define  STR__CLOSE								"CLOSE"
 
+#define  STR__UP								"UP"
+#define  STR__DOWN								"DOWN"
 
 // ...
 #define  STR__INTERVAL							"INTERVAL"

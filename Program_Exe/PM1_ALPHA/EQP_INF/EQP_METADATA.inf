@@ -16,75 +16,6 @@
 
 
 //-----------------------------------------------------------------------------------------------------
-//------------------------------------------------
-#OBJECT_PROPERTY    PHY_CHM_IO
-
-#DEFINE_CONSTANT    OBJ__DB_INF                         DB_INF
-#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
-
-#DEFINE_CONSTANT    CH__DI_VAC_SNS                      IO+di.CHM.VAC.Sns
-#DEFINE_CONSTANT    CH__DI_ATM_SNS                      IO+di.CHM.ATM.Sns
-
-#DEFINE_CONSTANT    CH__DI_SLOT_VLV_OPEN                NULL
-#DEFINE_CONSTANT    CH__DI_SLOT_VLV_CLOSE               IO+di.PM.Slot.Valve.Close
-
-#DEFINE_CONSTANT    CH.DO_CHM_CHECK_VLV 	              IO+do.Check.Vlv
-
-#DEFINE_CONSTANT    DATA.PRC_GAUGE_SIZE     	          1
-#DEFINE_CONSTANT    CH.DO_PRC_GAUGE_VLV.1	              IO+do.Manometer.ISO.Vlv.0_25_torr
-#DEFINE_CONSTANT    CH.AI_PRC_GAUGE_TORR.1              PHY_VAT+MON.PRESSURE.TORR
-
-#DEFINE_CONSTANT    CH__AI_CHM_GAUGE_TORR               NULL
-#DEFINE_CONSTANT    CH__AI_FORELINE_GAUGE_TORR          IO+si.Foreline.Pressure.TORR
-
-#DEFINE_CONSTANT    CH__RF_TOTAL_ON_STATE               DB_INF+RF.ON.STS
-#DEFINE_CONSTANT    DATA.RF_SIZE						            3
-#DEFINE_CONSTANT    CH__RF_ON_STATE.1                   PHY_RF_RPS+MON.IO.POWER.STATE
-#DEFINE_CONSTANT    CH__RF_ON_STATE.2                   PHY_RF_LF+MON.IO.POWER.STATE
-#DEFINE_CONSTANT    CH__RF_ON_STATE.3                   PHY_RF_HF+MON.IO.POWER.STATE
-
-
-//------------------------------------------------
-#OBJECT_PROPERTY    PHY_LIFT_PIN
-
-#DEFINE_CONSTANT    CH__LIFT_PIN_STATE                  DB_INF+LIFT_PIN.STATUS
-
-#DEFINE_CONSTANT    CH__ESC_CHUCK_STATE                 PHY_ESC+MON.CHUCK_STATUS
-
-#DEFINE_CONSTANT    DATA__ESC_CH_SIZE					  		    1
-#DEFINE_CONSTANT    CH__ESC_AI_VOLTAGE.1					  		PHY_IO__ESC_DC+MON.VOLTAGE.READ
-
-#DEFINE_CONSTANT    CH__DO_TRANSFER_PIN_UP              IO+do.Pin.Up
-#DEFINE_CONSTANT    CH__DO_TRANSFER_PIN_DOWN            IO+do.Pin.Down
-#DEFINE_CONSTANT    CH__DO_MIDDLE_PIN_UP                IO+do.Pin.Middle
-#DEFINE_CONSTANT    CH__DO_MIDDLE_PIN_DOWN              NULL
-
-#DEFINE_CONSTANT    DATA__DI_PIN_SENSOR                 YES
-#DEFINE_CONSTANT    CH__DI_PIN_UP                       IO+di.Pin.Up
-#DEFINE_CONSTANT    CH__DI_PIN_MIDDLE                   IO+di.Pin.Middle
-#DEFINE_CONSTANT    CH__DI_PIN_DOWN                     IO+di.Pin.Down
-
-
-//------------------------------------------------
-#OBJECT_PROPERTY    PHY_SHUTTER
-
-#DEFINE_CONSTANT    CH__SHUTTER_STATE                   DB_INF+SHUTTER.STATUS
-
-#DEFINE_CONSTANT    CH__DO_SHUTTER_CLOSE                IO+do.Shutter.Close
-#DEFINE_CONSTANT    CH__DO_SHUTTER_OPEN                 IO+do.Shutter.Open
-#DEFINE_CONSTANT    CH__DI_SHUTTER_CLOSE                IO+di.PM.Shutter.Close
-#DEFINE_CONSTANT    CH__DI_SHUTTER_OPEN                 IO+di.PM.Shutter.Open
-
-
-//-----------------------------------------------------------------------------------------------------
-//-------------------------------------------------
-#OBJECT_PROPERTY    PHY_IO__APC_VLV
-
-#OBJECT_IO_PARA     COM_PORT                  2
-#OBJECT_IO_PARA     BAUD_RATE                 4800
-#OBJECT_IO_PARA     DATA_BIT                  7
-#OBJECT_IO_PARA     PARITY                    EVEN
-
 //-------------------------------------------------
 #OBJECT_PROPERTY    PHY_IO__DRY_PMP
 
@@ -111,12 +42,10 @@
 #OBJECT_IO_PARA     COM_PORT                  8
 
 //-------------------------------------------------
-#OBJECT_PROPERTY    Phy_IO__ESC_TEMP
+#OBJECT_PROPERTY    PHY_IO__ESC_TEMP
 
 #OBJECT_IO_PARA     COM_PORT                  9
 
-
-//-----------------------------------------------------------------------------------------------------
 //-------------------------------------------------
 #OBJECT_PROPERTY    Phy_IO__RF_RPS
 
@@ -127,6 +56,9 @@
 
 #OBJECT_IO_PARA     COM_PORT                  11
 
+#DEFINE_CONSTANT    CH.DO_PULSE_MODE          IO+do.40MHz.RFG.Pulse
+#DEFINE_CONSTANT    CH.AO_LEVEL_VOLT          IO+ao.RF.Setpoint.40MHz
+
 //-------------------------------------------------
 #OBJECT_PROPERTY    Phy_IO__RF_400KHZ
 
@@ -136,7 +68,8 @@
 #OBJECT_PROPERTY    PHY_IO__TMP
 
 #OBJECT_IO_PARA     COM_PORT                  15
-#OBJECT_IO_PARA     DEVICE_ID									0
+#OBJECT_IO_PARA     DEVICE_ID				  0
+
 
 
 //------------------------------------------------
@@ -155,233 +88,241 @@
 #OBJECT_IO_PARA     CHANNEL.ID                          0
 
 //----------------------
-#OBJECT_IO_PARA     NODE.SIZE                           25
+#OBJECT_IO_PARA   NODE.SIZE     26
+	 
+#OBJECT_IO_PARA   NODE.1.MACID    				  1 
+#OBJECT_IO_PARA   NODE.1.NAME    				    NETS-DIO2 
+#OBJECT_IO_PARA   NODE.1.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.1.IN_BYTE.MAX    		16 
+#OBJECT_IO_PARA   NODE.1.IN_BYTE.USE    		16 
+#OBJECT_IO_PARA   NODE.1.OUT_OFFSET    		  0 
+#OBJECT_IO_PARA   NODE.1.OUT_BYTE.MAX    		8 
+#OBJECT_IO_PARA   NODE.1.OUT_BYTE.USE    		8 
+	 
+#OBJECT_IO_PARA   NODE.2.MACID    				  3 
+#OBJECT_IO_PARA   NODE.2.NAME    				    MINI-8 
+#OBJECT_IO_PARA   NODE.2.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.2.IN_BYTE.MAX    		64 
+#OBJECT_IO_PARA   NODE.2.IN_BYTE.USE    		64 
+#OBJECT_IO_PARA   NODE.2.OUT_OFFSET    		  0 
+#OBJECT_IO_PARA   NODE.2.OUT_BYTE.MAX    		32 
+#OBJECT_IO_PARA   NODE.2.OUT_BYTE.USE    		32 
+	 
+#OBJECT_IO_PARA   NODE.3.MACID    				  4 
+#OBJECT_IO_PARA   NODE.3.NAME    				    SS5J3-60SQ2ND-12BS 
+#OBJECT_IO_PARA   NODE.3.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.3.IN_BYTE.MAX    		0 
+#OBJECT_IO_PARA   NODE.3.IN_BYTE.USE    		0 
+#OBJECT_IO_PARA   NODE.3.OUT_OFFSET    		  0 
+#OBJECT_IO_PARA   NODE.3.OUT_BYTE.MAX    		4 
+#OBJECT_IO_PARA   NODE.3.OUT_BYTE.USE    		4
+	 
+#OBJECT_IO_PARA   NODE.4.MACID    				  5 
+#OBJECT_IO_PARA   NODE.4.NAME    				    65050-JHWQ-BJG3 
+#OBJECT_IO_PARA   NODE.4.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.4.IN_BYTE.MAX    		10 
+#OBJECT_IO_PARA   NODE.4.IN_BYTE.USE    		10 
+#OBJECT_IO_PARA   NODE.4.OUT_OFFSET    		  0 
+#OBJECT_IO_PARA   NODE.4.OUT_BYTE.MAX    		8 
+#OBJECT_IO_PARA   NODE.4.OUT_BYTE.USE    		8
+	  
+#OBJECT_IO_PARA   NODE.5.MACID    				  6 
+#OBJECT_IO_PARA   NODE.5.NAME    				    GR-314F_IGS 
+#OBJECT_IO_PARA   NODE.5.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.5.IN_BYTE.MAX    		5 
+#OBJECT_IO_PARA   NODE.5.IN_BYTE.USE    		5 
+#OBJECT_IO_PARA   NODE.5.OUT_OFFSET    		  0 
+#OBJECT_IO_PARA   NODE.5.OUT_BYTE.MAX    		2 
+#OBJECT_IO_PARA   NODE.5.OUT_BYTE.USE    		2 
+	 
+#OBJECT_IO_PARA   NODE.6.MACID    				  7 
+#OBJECT_IO_PARA   NODE.6.NAME    				    GR-314F_IGS 
+#OBJECT_IO_PARA   NODE.6.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.6.IN_BYTE.MAX    		5 
+#OBJECT_IO_PARA   NODE.6.IN_BYTE.USE    		5 
+#OBJECT_IO_PARA   NODE.6.OUT_OFFSET    		  0 
+#OBJECT_IO_PARA   NODE.6.OUT_BYTE.MAX    		2 
+#OBJECT_IO_PARA   NODE.6.OUT_BYTE.USE    		2 
+	 
+#OBJECT_IO_PARA   NODE.7.MACID    				  8 
+#OBJECT_IO_PARA   NODE.7.NAME    				    275620-2-GQ-T 
+#OBJECT_IO_PARA   NODE.7.IN_OFFSET    			0 
+#OBJECT_IO_PARA   NODE.7.IN_BYTE.MAX        5 
+#OBJECT_IO_PARA   NODE.7.IN_BYTE.USE        5 
+#OBJECT_IO_PARA   NODE.7.OUT_OFFSET         0 
+#OBJECT_IO_PARA   NODE.7.OUT_BYTE.MAX       0 
+#OBJECT_IO_PARA   NODE.7.OUT_BYTE.USE       0 
+	 
+#OBJECT_IO_PARA   NODE.8.MACID              10 
+#OBJECT_IO_PARA   NODE.8.NAME               NA-9112 
+#OBJECT_IO_PARA   NODE.8.IN_OFFSET          0 
+#OBJECT_IO_PARA   NODE.8.IN_BYTE.MAX        16 
+#OBJECT_IO_PARA   NODE.8.IN_BYTE.USE        16 
+#OBJECT_IO_PARA   NODE.8.OUT_OFFSET         0 
+#OBJECT_IO_PARA   NODE.8.OUT_BYTE.MAX       0 
+#OBJECT_IO_PARA   NODE.8.OUT_BYTE.USE       0 
 
-#OBJECT_IO_PARA     NODE.1.MACID                        1
-#OBJECT_IO_PARA     NODE.1.NAME                         NETS-DIO2
-#OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.1.IN_BYTE.MAX                  8
-#OBJECT_IO_PARA     NODE.1.IN_BYTE.USE                  8
-#OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.1.OUT_BYTE.MAX                 8
-#OBJECT_IO_PARA     NODE.1.OUT_BYTE.USE                 8
+#OBJECT_IO_PARA   NODE.9.MACID              11 
+#OBJECT_IO_PARA   NODE.9.NAME               SS5J3-60SQ2ND-16BS 
+#OBJECT_IO_PARA   NODE.9.IN_OFFSET          0 
+#OBJECT_IO_PARA   NODE.9.IN_BYTE.MAX        0 
+#OBJECT_IO_PARA   NODE.9.IN_BYTE.USE        0 
+#OBJECT_IO_PARA   NODE.9.OUT_OFFSET         0 
+#OBJECT_IO_PARA   NODE.9.OUT_BYTE.MAX       4 
+#OBJECT_IO_PARA   NODE.9.OUT_BYTE.USE       4 
 
-#OBJECT_IO_PARA     NODE.2.MACID                        3
-#OBJECT_IO_PARA     NODE.2.NAME                         MINI-8
-#OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.2.IN_BYTE.MAX                  36
-#OBJECT_IO_PARA     NODE.2.IN_BYTE.USE                  36
-#OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.2.OUT_BYTE.MAX                 14
-#OBJECT_IO_PARA     NODE.2.OUT_BYTE.USE                 14
+#OBJECT_IO_PARA   NODE.10.MACID             12 
+#OBJECT_IO_PARA   NODE.10.NAME              SS5J3-60SQ2ND-16BS 
+#OBJECT_IO_PARA   NODE.10.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.10.IN_BYTE.MAX       0 
+#OBJECT_IO_PARA   NODE.10.IN_BYTE.USE       0 
+#OBJECT_IO_PARA   NODE.10.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.10.OUT_BYTE.MAX      4 
+#OBJECT_IO_PARA   NODE.10.OUT_BYTE.USE      4 
 
-#OBJECT_IO_PARA     NODE.3.MACID                        4
-#OBJECT_IO_PARA     NODE.3.NAME                         SS5J3-60SQ2ND-12BS
-#OBJECT_IO_PARA     NODE.3.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.3.IN_BYTE.MAX                  0
-#OBJECT_IO_PARA     NODE.3.IN_BYTE.USE                  0
-#OBJECT_IO_PARA     NODE.3.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.3.OUT_BYTE.MAX                 4
-#OBJECT_IO_PARA     NODE.3.OUT_BYTE.USE                 4
+#OBJECT_IO_PARA   NODE.11.MACID             13 
+#OBJECT_IO_PARA   NODE.11.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.11.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.11.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.11.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.11.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.11.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.11.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.4.MACID                        10
-#OBJECT_IO_PARA     NODE.4.NAME                         65050-JHWQ-BJG3
-#OBJECT_IO_PARA     NODE.4.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.4.IN_BYTE.MAX                  5
-#OBJECT_IO_PARA     NODE.4.IN_BYTE.USE                  5
-#OBJECT_IO_PARA     NODE.4.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.4.OUT_BYTE.MAX                 4
-#OBJECT_IO_PARA     NODE.4.OUT_BYTE.USE                 4
+#OBJECT_IO_PARA   NODE.12.MACID             14 
+#OBJECT_IO_PARA   NODE.12.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.12.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.12.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.12.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.12.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.12.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.12.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.5.MACID                        11
-#OBJECT_IO_PARA     NODE.5.NAME                         GR-314F_IGS
-#OBJECT_IO_PARA     NODE.5.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.5.IN_BYTE.MAX                  5
-#OBJECT_IO_PARA     NODE.5.IN_BYTE.USE                  5
-#OBJECT_IO_PARA     NODE.5.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.5.OUT_BYTE.MAX                 2
-#OBJECT_IO_PARA     NODE.5.OUT_BYTE.USE                 2
+#OBJECT_IO_PARA   NODE.13.MACID             15 
+#OBJECT_IO_PARA   NODE.13.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.13.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.13.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.13.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.13.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.13.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.13.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.6.MACID                        12
-#OBJECT_IO_PARA     NODE.6.NAME                         GR-314F_IGS
-#OBJECT_IO_PARA     NODE.6.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.6.IN_BYTE.MAX                  5
-#OBJECT_IO_PARA     NODE.6.IN_BYTE.USE                  5
-#OBJECT_IO_PARA     NODE.6.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.6.OUT_BYTE.MAX                 2
-#OBJECT_IO_PARA     NODE.6.OUT_BYTE.USE                 2
+#OBJECT_IO_PARA   NODE.14.MACID             16 
+#OBJECT_IO_PARA   NODE.14.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.14.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.14.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.14.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.14.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.14.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.14.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.7.MACID                        13
-#OBJECT_IO_PARA     NODE.7.NAME                         275620-2-GQ-T
-#OBJECT_IO_PARA     NODE.7.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.7.IN_BYTE.MAX                  5
-#OBJECT_IO_PARA     NODE.7.IN_BYTE.USE                  5
-#OBJECT_IO_PARA     NODE.7.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.7.OUT_BYTE.MAX                 0
-#OBJECT_IO_PARA     NODE.7.OUT_BYTE.USE                 0
+#OBJECT_IO_PARA   NODE.15.MACID             17 
+#OBJECT_IO_PARA   NODE.15.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.15.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.15.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.15.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.15.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.15.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.15.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.8.MACID                        15
-#OBJECT_IO_PARA     NODE.8.NAME                         NA-9112
-#OBJECT_IO_PARA     NODE.8.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.8.IN_BYTE.MAX                  40
-#OBJECT_IO_PARA     NODE.8.IN_BYTE.USE                  40
-#OBJECT_IO_PARA     NODE.8.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.8.OUT_BYTE.MAX                 0
-#OBJECT_IO_PARA     NODE.8.OUT_BYTE.USE                 0
+#OBJECT_IO_PARA   NODE.16.MACID             18 
+#OBJECT_IO_PARA   NODE.16.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.16.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.16.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.16.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.16.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.16.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.16.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.9.MACID                        16
-#OBJECT_IO_PARA     NODE.9.NAME                         SS5J3-60SQ2ND-16BS
-#OBJECT_IO_PARA     NODE.9.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.9.IN_BYTE.MAX                  0
-#OBJECT_IO_PARA     NODE.9.IN_BYTE.USE                  0
-#OBJECT_IO_PARA     NODE.9.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.9.OUT_BYTE.MAX                 4
-#OBJECT_IO_PARA     NODE.9.OUT_BYTE.USE                 4
+#OBJECT_IO_PARA   NODE.17.MACID             19 
+#OBJECT_IO_PARA   NODE.17.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.17.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.17.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.17.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.17.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.17.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.17.OUT_BYTE.USE      2 
+	 
+#OBJECT_IO_PARA   NODE.18.MACID             20 
+#OBJECT_IO_PARA   NODE.18.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.18.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.18.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.18.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.18.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.18.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.18.OUT_BYTE.USE      2 
+     
+#OBJECT_IO_PARA   NODE.19.MACID             21 
+#OBJECT_IO_PARA   NODE.19.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.19.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.19.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.19.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.19.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.19.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.19.OUT_BYTE.USE      2 
+	 
+#OBJECT_IO_PARA   NODE.20.MACID             22 
+#OBJECT_IO_PARA   NODE.20.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.20.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.20.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.20.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.20.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.20.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.20.OUT_BYTE.USE      2 
+	 
+#OBJECT_IO_PARA   NODE.21.MACID             23 
+#OBJECT_IO_PARA   NODE.21.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.21.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.21.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.21.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.21.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.21.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.21.OUT_BYTE.USE      2 
+	 
+#OBJECT_IO_PARA   NODE.22.MACID             24 
+#OBJECT_IO_PARA   NODE.22.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.22.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.22.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.22.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.22.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.22.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.22.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.10.MACID                       17
-#OBJECT_IO_PARA     NODE.10.NAME                        SS5J3-60SQ2ND-16BS
-#OBJECT_IO_PARA     NODE.10.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.10.IN_BYTE.MAX                 0
-#OBJECT_IO_PARA     NODE.10.IN_BYTE.USE                 0
-#OBJECT_IO_PARA     NODE.10.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.10.OUT_BYTE.MAX                4
-#OBJECT_IO_PARA     NODE.10.OUT_BYTE.USE                4
+#OBJECT_IO_PARA   NODE.23.MACID             25
+#OBJECT_IO_PARA   NODE.23.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.23.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.23.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.23.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.23.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.23.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.23.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.11.MACID                       21
-#OBJECT_IO_PARA     NODE.11.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.11.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.11.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.11.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.11.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.11.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.11.OUT_BYTE.USE                2
+#OBJECT_IO_PARA   NODE.24.MACID             26 
+#OBJECT_IO_PARA   NODE.24.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.24.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.24.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.24.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.24.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.24.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.24.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.12.MACID                       22
-#OBJECT_IO_PARA     NODE.12.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.12.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.12.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.12.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.12.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.12.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.12.OUT_BYTE.USE                2
+#OBJECT_IO_PARA   NODE.25.MACID             27 
+#OBJECT_IO_PARA   NODE.25.NAME              SEC-Z7 
+#OBJECT_IO_PARA   NODE.25.IN_OFFSET         0 
+#OBJECT_IO_PARA   NODE.25.IN_BYTE.MAX       7 
+#OBJECT_IO_PARA   NODE.25.IN_BYTE.USE       7 
+#OBJECT_IO_PARA   NODE.25.OUT_OFFSET        0 
+#OBJECT_IO_PARA   NODE.25.OUT_BYTE.MAX      2 
+#OBJECT_IO_PARA   NODE.25.OUT_BYTE.USE      2 
 
-#OBJECT_IO_PARA     NODE.13.MACID                       23
-#OBJECT_IO_PARA     NODE.13.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.13.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.13.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.13.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.13.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.13.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.13.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.14.MACID                       24
-#OBJECT_IO_PARA     NODE.14.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.14.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.14.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.14.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.14.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.14.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.14.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.15.MACID                       25
-#OBJECT_IO_PARA     NODE.15.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.15.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.15.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.15.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.15.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.15.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.15.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.16.MACID                       26
-#OBJECT_IO_PARA     NODE.16.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.16.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.16.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.16.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.16.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.16.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.16.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.17.MACID                       27
-#OBJECT_IO_PARA     NODE.17.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.17.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.17.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.17.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.17.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.17.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.17.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.18.MACID                       28
-#OBJECT_IO_PARA     NODE.18.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.18.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.18.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.18.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.18.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.18.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.18.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.19.MACID                       29
-#OBJECT_IO_PARA     NODE.19.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.19.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.19.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.19.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.19.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.19.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.19.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.20.MACID                       30
-#OBJECT_IO_PARA     NODE.20.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.20.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.20.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.20.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.20.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.20.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.20.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.21.MACID                       31
-#OBJECT_IO_PARA     NODE.21.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.21.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.21.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.21.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.21.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.21.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.21.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.22.MACID                       32
-#OBJECT_IO_PARA     NODE.22.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.22.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.22.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.22.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.22.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.22.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.22.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.23.MACID                       33
-#OBJECT_IO_PARA     NODE.23.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.23.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.23.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.23.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.23.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.23.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.23.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.24.MACID                       34
-#OBJECT_IO_PARA     NODE.24.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.24.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.24.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.24.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.24.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.24.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.24.OUT_BYTE.USE                2
-
-#OBJECT_IO_PARA     NODE.25.MACID                       35
-#OBJECT_IO_PARA     NODE.25.NAME                        SEC-Z7
-#OBJECT_IO_PARA     NODE.25.IN_OFFSET                   0
-#OBJECT_IO_PARA     NODE.25.IN_BYTE.MAX                 3
-#OBJECT_IO_PARA     NODE.25.IN_BYTE.USE                 3
-#OBJECT_IO_PARA     NODE.25.OUT_OFFSET                  0
-#OBJECT_IO_PARA     NODE.25.OUT_BYTE.MAX                2
-#OBJECT_IO_PARA     NODE.25.OUT_BYTE.USE                2
-
+#OBJECT_IO_PARA   NODE.26.MACID             31
+#OBJECT_IO_PARA   NODE.26.NAME              NA-9211
+#OBJECT_IO_PARA   NODE.26.IN_OFFSET         0
+#OBJECT_IO_PARA   NODE.26.IN_BYTE.MAX       8
+#OBJECT_IO_PARA   NODE.26.IN_BYTE.USE       8
+#OBJECT_IO_PARA   NODE.26.OUT_OFFSET        0
+#OBJECT_IO_PARA   NODE.26.OUT_BYTE.MAX      9
+#OBJECT_IO_PARA   NODE.26.OUT_BYTE.USE      9
 
 //----------------------
 #DEFINE_CONSTANT    LINK.IO_SIZE                        0

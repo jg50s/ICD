@@ -1,6 +1,0 @@
-#pragma once
-
-
-#define  ALID__EPD_DETECT_MAX_TIMEOUT						11
-#define  ALID__EPD_DETECT_UNKNOWN_SLOPE_DIRECTION			12
-#define  ALID__EPD_DETECT_MIN_TIMEOUT						13

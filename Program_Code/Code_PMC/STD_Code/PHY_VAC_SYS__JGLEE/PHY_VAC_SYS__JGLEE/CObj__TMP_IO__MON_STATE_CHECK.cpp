@@ -115,17 +115,11 @@ int CObj__TMP_IO
 
 				if(bActive__TMP_DI_ALARM_STATE)
 				{
-					if(dCH__CFG_DI_ALARM_CHECK->Check__DATA(STR__YES) > 0)
-					{
-						if(dEXT_CH__TMP_DI_ALARM_STATE->Check__DATA(STR__ON) > 0)			active__alarm_sts = true;
-					}
+					if(dEXT_CH__TMP_DI_ALARM_STATE->Check__DATA(STR__ON) > 0)			active__alarm_sts = true;
 				}
 				if(bActive__TMP_DI_WARNING_STATE)
 				{
-					if(dCH__CFG_DI_WARNING_CHECK->Check__DATA(STR__YES) > 0)
-					{
-						if(dEXT_CH__TMP_DI_WARNING_STATE->Check__DATA(STR__ON) > 0)			active__warning_sts = true;
-					}
+					if(dEXT_CH__TMP_DI_WARNING_STATE->Check__DATA(STR__ON) > 0)			active__warning_sts = true;
 				}
 
 				if((active__alarm_sts)

@@ -439,6 +439,10 @@
 					RelativePath=".\CObj__ACTIVE_HANDOFF_INF__CALL_TRANSFER.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\CObj__ACTIVE_HANDOFF_INF__DEF.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

@@ -98,8 +98,8 @@ int CObj__RF_CONDUCT::__DEFINE__VARIABLE_STD(p_variable)
 
 			// NEW METER 
 			str_name.Format("PARA.NEW.METER.%1d", i+1);
-			STD__ADD_ANALOG(str_name, "W", 1, 0, 999999);
-			LINK__VAR_ANALOG_CTRL(aCH_PARA__NEW_METER_LIST[i], str_name);
+			STD__ADD_STRING_WITH_COMMENT(str_name, "");
+			LINK__VAR_STRING_CTRL(sCH_PARA__NEW_METER_LIST[i], str_name);
 
 			// NEW OFFSET 
 			str_name.Format("PARA.NEW.OFFSET.%1d", i+1);

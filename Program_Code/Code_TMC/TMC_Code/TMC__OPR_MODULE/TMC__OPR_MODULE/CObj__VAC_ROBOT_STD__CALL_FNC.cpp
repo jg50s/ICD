@@ -5,6 +5,8 @@
 
 //----------------------------------------------------------------------------------------------------
 #define  CMMD__INIT				"INIT"
+#define  CMMD__SET_PARA			"SET.PARA"
+
 #define  CMMD__ROTATE			"ROTATE"
 #define  CMMD__PICK				"PICK"
 #define  CMMD__PLACE			"PLACE"
@@ -46,12 +48,17 @@ Call__INIT(CII_OBJECT__VARIABLE* p_variable)
 	}
 	return flag;
 }
-
 int  CObj__VAC_ROBOT_STD::
 Call__MAINT(CII_OBJECT__VARIABLE* p_variable)
 {
 	dCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
 	return 1;
+}
+
+int  CObj__VAC_ROBOT_STD::
+Call__SET_PARA(CII_OBJECT__VARIABLE* p_variable)
+{
+	return pVAC_ROBOT__OBJ_CTRL->Call__OBJECT(CMMD__SET_PARA);
 }
 
 //

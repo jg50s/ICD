@@ -2257,7 +2257,6 @@ public:
 #define  OBJ_ABORT								-1
 #define  OBJ_AVAILABLE							1
 #define  OBJ_RETRY								1001
-#define  OBJ_EXIT								throw  -1
 
 
 #define  CTRL_MODE__CHECK(FNC_NAME)																\

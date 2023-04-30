@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "CObj__PMC_SIMPLE.h"
 #include "CObj__PMC_SIMPLE__ALID.h"
+#include "CObj__PMC_SIMPLE__DEF.h"
+
+#include "Macro_Function.h"
 
 
 //-------------------------------------------------------------------------
@@ -23,15 +26,12 @@ int CObj__PMC_SIMPLE::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__INIT, "INIT");
 		ADD__CTRL_VAR(sMODE__INIT_SV_CLOSE, "INIT_SV_CLOSE");
 
-		// 
 		ADD__CTRL_VAR(sMODE__SV_OPEN,      "SV_OPEN");
 		ADD__CTRL_VAR(sMODE__SV_CLOSE,     "SV_CLOSE");
 		ADD__CTRL_VAR(sMODE__SV_ALL_CLOSE, "SV_ALL_CLOSE");
 
-		//
 		ADD__CTRL_VAR(sMODE__CYCLE_TEST, "CYCLE_TEST");
 
-		//
 		ADD__CTRL_VAR(sMODE__TIME_TEST, "TIME_TEST");
 	}
 
@@ -76,7 +76,7 @@ int CObj__PMC_SIMPLE::__DEFINE__VARIABLE_STD(p_variable)
 		if(iPM_LIMIT > CFG_PMx__SIZE)		iPM_LIMIT = CFG_PMx__SIZE;
 	}
 
-	// ...
+	// OBJ ...
 	{
 		str_name = "OBJ.ACTIVE.MODE";
 
@@ -84,12 +84,19 @@ int CObj__PMC_SIMPLE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__OBJ_ACTIVE_MODE, str_name);
 	}
 
-	// ...
+	// PARA ...
 	{
 		str_name = "OTR.IN.PARA.aPMC.ID";
 
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "id", 0, 1, iPM_LIMIT, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_PMC_ID, str_name);
+	}
+
+	// CFG ...
+	{
+		str_name = "CFG.IO_OFF.MODE";
+		STD__ADD_DIGITAL_WITH_COMMENT(str_name, "DISABLE ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_IO_OFF_MODE, str_name);
 	}
 
 	// ...
@@ -126,10 +133,6 @@ int CObj__PMC_SIMPLE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_USE_CR_POSITION[i], str_name);
 
 		//
-		str_name.Format("OTR.OUT.MON.sPM%1d.OBJ.STATUS",i+1);
-		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(sCH__OBJ_STATUS[i], str_name);
-
 		str_name.Format("OTR.OUT.MON.aPM%1d.PRESSURE.TORR",i+1);
 		STD__ADD_ANALOG_WITH_COMMENT(str_name,"torr",3,0,1000,"");
 		LINK__VAR_ANALOG_CTRL(aCH__PRESSURE_TORR[i], str_name);
@@ -161,7 +164,7 @@ int CObj__PMC_SIMPLE::__DEFINE__VARIABLE_STD(p_variable)
 
 		// PMx Process Status 
 		str_name.Format("OTR.OUT.MON.dPM%1d.PRC.STS",i+1);
-		STD__ADD_DIGITAL(str_name,"IDLE PROCESSING");
+		STD__ADD_DIGITAL(str_name,"IDLE PROCESSING ALARM");
 		LINK__VAR_DIGITAL_CTRL(dCH__PRC_STATUS[i],str_name);
 
 		// PMx Pressure Status 
@@ -227,8 +230,17 @@ int CObj__PMC_SIMPLE::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_ANALOG_CTRL(aCH__TIME_COUNT,str_name);
 	}
 
-	// ...
+	// CYCLE_TEST ...
 	{
+		for(i=0; i<iPM_LIMIT; i++)
+		{
+			int id = i + 1;
+
+			str_name.Format("CYCLE_TEST.USE.LIFT_PIN_DOWN.PM%1d", id);
+			STD__ADD_DIGITAL(str_name, "YES NO");
+			LINK__VAR_DIGITAL_CTRL(dCH__CYCLE_TEST_USE_LIFT_PIN_DOWN_PM_X[i], str_name);
+		}
+
 		//
 		str_name = "CYCLE_TEST.CFG.PMC_ID";
 		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
@@ -524,6 +536,19 @@ int CObj__PMC_SIMPLE::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__WAFER_SLIDE_SENSOR_DETECTED;
+
+		alarm_title  = title;
+		alarm_title += "Wafer slide sensor is detected !";
+
+		alarm_msg = "Please, check the state of wafer on SV.";
+
+		ACT__RETRY_ABORT_IGNORE;
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -559,6 +584,8 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString ch_name;
 	CString obj_name;
 	CString var_name;
+
+	bool def_check;
 	int i;
 
 	// DB OBJECT
@@ -601,55 +628,148 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// PHY_TM : TMÀÇ Pressure Status (ATM, VAC, BTW)
 	{
-		str_name.Format("VAR__PHY_TM_PRESS_STS");
+		str_name = "VAR__PHY_TM_PRESS_STS";
 		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PHY_TM__PRESS_STS, obj_name,var_name);
 	}
 	// PHY_TM : TMÀÇ Pressure torr
 	{
-		str_name.Format("VAR__PHY_TM_PRESS_TORR");
+		str_name = "VAR__PHY_TM_PRESS_TORR";
 		p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
 		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PHY_TM__PRESS_TORR, obj_name,var_name);
+	}
+
+	// PMx_SLOT_VLV.CTRL_TYPE ...
+	{
+		def_name = "DATA.PMx_SLOT_VLV.CTRL_TYPE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if(def_data.CompareNoCase("OBJECT") == 0)			iDATA__PMx_SLOT_VLV_CTRL_TYPE = _DEF__PMx_SLOT_VLV_TYPE__OBJ;
+		else												iDATA__PMx_SLOT_VLV_CTRL_TYPE = _DEF__PMx_SLOT_VLV_TYPE__IO;
+
+		// ...
+		def_name = "LINK_OBJ.PMx_HANDOFF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		for(i=0; i<iPM_LIMIT; i++)
+		{
+			int id = i + 1;
+
+			var_name.Format("PM%1d.OBJ.STATUS", id);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PMx_SLOT_VLV__OBJ_STATUS_X[i], obj_name,var_name);
+		}
+
+		if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__OBJ)
+		{
+			pOBJ_CTRL__PMx_HANDOFF = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			// ...
+			{
+				def_name = "PMx_SLOT_VLV.OPEN";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sMODE__PMx_SLOT_VLV__OPEN = def_data;
+
+				def_name = "PMx_SLOT_VLV.CLOSE";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+				sMODE__PMx_SLOT_VLV__CLOSE = def_data;
+			}
+
+			// ...
+			{
+				var_name = "PARA.PMx.ID";
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PARA_PMC_ID, obj_name,var_name);
+			}
+		}
 	}
 
 	// I/O OBJECT ...
 	{
 		for(i=0; i<iPM_LIMIT; i++)
 		{
-			// do
-			str_name.Format("VAR__IO_DO_PM%1d_SV_OPEN",i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__PMx__SV_OPEN[i], obj_name,var_name);
+			int pm_id = i + 1;
 
-			str_name.Format("VAR__IO_DO_PM%1d_SV_CLOSE",i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__PMx__SV_CLOSE[i], obj_name,var_name);
+			// DO.IO ...
+			if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__IO)
+			{
+				str_name.Format("VAR__IO_DO_PM%1d_SV_OPEN", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name, def_data);
+			
+				def_check = MACRO__Check_Def_Data(def_data);
+				bActive__PMx__SV_OPEN_X[i] = def_check;
+			
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__PMx__SV_OPEN_X[i], obj_name,var_name);
+				}
 
-			// di
-			str_name.Format("VAR__IO_DI_PM%1d_SV_OPEN",i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__SV_OPEN[i], obj_name,var_name);
+				//
+				str_name.Format("VAR__IO_DO_PM%1d_SV_CLOSE", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name, def_data);
 
-			str_name.Format("VAR__IO_DI_PM%1d_SV_CLOSE",i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__SV_CLOSE[i], obj_name,var_name);
+				def_check = MACRO__Check_Def_Data(def_data);
+				bActive__PMx__SV_CLOSE_X[i] = def_check;
 
-			// Pressure sns
-			str_name.Format("VAR__IO_DI_PM%d_ATM_SNS",i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__ATM_SNS[i], obj_name,var_name);
+				if(def_check)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__PMx__SV_CLOSE_X[i], obj_name,var_name);
+				}
+			}
+			else
+			{
+				bActive__PMx__SV_OPEN_X[i]  = false;
+				bActive__PMx__SV_CLOSE_X[i] = false;
+			}
 
-			str_name.Format("VAR__IO_DI_PM%d_VAC_SNS",i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__VAC_SNS[i], obj_name,var_name);
+			// DI.IO ...
+			{
+				str_name.Format("VAR__IO_DI_PM%1d_SV_OPEN", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__SV_OPEN[i], obj_name,var_name);
+
+				//
+				str_name.Format("VAR__IO_DI_PM%1d_SV_CLOSE", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__SV_CLOSE[i], obj_name,var_name);
+			}
+
+			// PRESSURE.SNS ...
+			{
+				str_name.Format("VAR__IO_DI_PM%d_ATM_SNS", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__ATM_SNS[i], obj_name,var_name);
+
+				//
+				str_name.Format("VAR__IO_DI_PM%d_VAC_SNS", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__VAC_SNS[i], obj_name,var_name);
+			}
+
+			// WAFER_OUT.SNS ...
+			{
+				str_name.Format("DATA_PM%1d.WAFER_OUT.SIZE", pm_id);
+				p_ext_obj_create->Get__DEF_CONST_DATA(str_name, def_data);
+
+				int sns_size = atoi(def_data);
+				if(sns_size > CFG_WAFER_OUT__SIZE)			sns_size = CFG_WAFER_OUT__SIZE;
+
+				iSIZE_PMx__WAFER_OUT_X[i] = sns_size;
+
+				for(int sns_i = 0; sns_i < sns_size; sns_i++)
+				{
+					def_name.Format("VAR_PM%1d.DI_WAFER_OUT.%1d", pm_id, sns_i + 1);
+					p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name, var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PMx__WAFER_OUT_XY[i][sns_i], obj_name,var_name);
+				}
+			}
 		}
 
 		// VAC_RB ...
@@ -659,8 +779,15 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			str_name.Format("VAR__IO_DI_VAC_RB_RNE_PM%1d", id);	
 			p_ext_obj_create->Get__DEF_CONST_DATA(str_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_RB__RNE_PM_X[i], obj_name,var_name);
+
+			def_check = MACRO__Check_Def_Data(def_data);
+			bActive__VAC_RB__RNE_PM_X[i] = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__VAC_RB__RNE_PM_X[i], obj_name,var_name);
+			}
 		}
 
 		// DATA.ATM & VAC ...
@@ -706,7 +833,7 @@ int CObj__PMC_SIMPLE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		for(i=0; i<iPM_LIMIT; i++)
 		{
-			diEXT_CH__VAC_RB__RNE_PM_X[i]->Set__DATA(sDATA__RNE_ON);
+			if(bActive__VAC_RB__RNE_PM_X[i])		diEXT_CH__VAC_RB__RNE_PM_X[i]->Set__DATA(sDATA__RNE_ON);
 		}
 	}
 	return 1;
@@ -779,7 +906,12 @@ int CObj__PMC_SIMPLE::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		}
 		ELSE_IF__CTRL_MODE(sMODE__CYCLE_TEST)
 		{
+			int pm_index = i__pmc_id - 1;			
+			if((pm_index >= 0) && (pm_index < iPM_LIMIT))		dCH__CYCLE_TEST_USE_LIFT_PIN_DOWN_PM_X[pm_index]->Set__DATA(STR__NO);
+
 			flag = Call__CYCLE_TEST(p_variable,p_alarm);
+
+			if((pm_index >= 0) && (pm_index < iPM_LIMIT))		dCH__CYCLE_TEST_USE_LIFT_PIN_DOWN_PM_X[pm_index]->Set__DATA(STR__YES);
 		}
 		ELSE_IF__CTRL_MODE(sMODE__TIME_TEST)
 		{

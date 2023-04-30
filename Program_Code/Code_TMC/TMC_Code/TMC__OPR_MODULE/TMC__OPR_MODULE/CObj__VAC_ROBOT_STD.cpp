@@ -21,6 +21,8 @@ int CObj__VAC_ROBOT_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 	{
 		ADD__CTRL_VAR(sMODE__INIT,  "INIT");
 		ADD__CTRL_VAR(sMODE__MAINT, "MAINT");
+		
+		ADD__CTRL_VAR(sMODE__SET_PARA, "SET.PARA");
 
 		ADD__CTRL_VAR(sMODE__PICK,  "PICK");
 		ADD__CTRL_VAR(sMODE__XPICK, "XPICK");
@@ -226,6 +228,8 @@ int CObj__VAC_ROBOT_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	{
 		     IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__MAINT)				flag = Call__MAINT(p_variable);
+
+		ELSE_IF__CTRL_MODE(sMODE__SET_PARA)				flag = Call__SET_PARA(p_variable);
 
 		ELSE_IF__CTRL_MODE(sMODE__PICK)					flag = Call__PICK(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__XPICK)				flag = Call__XPICK(p_variable);

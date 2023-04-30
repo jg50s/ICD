@@ -10,7 +10,9 @@ private:
 	CRITICAL_SECTION mCS_LOCK;
 
 	CX_FA_300mm_LINK xFA_300mm_Link;
+
 	int iInit_Flag;
+	int iCheck_Count;
 
 	// ...
 	int Fnc_Init();
@@ -21,9 +23,6 @@ public:
 	~CMacro_FA();
 
 	// ...
-	CI_FA_VARIABLE_CTRL* Get__FA_VAR_CTRL();
-	CI_FA_DB__ECID_CTRL* Get__FA_ECID_CTRL();
-
 	CI_FA_300mm__E30_CTRL* Get__FA_E30_CTRL();
 	CI_FA_300mm__E40_CTRL* Get__FA_E40_CTRL();
 	CI_FA_300mm__E94_CTRL* Get__FA_E94_CTRL();

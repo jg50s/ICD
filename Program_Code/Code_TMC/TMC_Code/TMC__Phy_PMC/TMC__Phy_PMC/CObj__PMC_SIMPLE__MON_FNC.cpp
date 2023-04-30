@@ -3,7 +3,7 @@
 #include "CObj__PMC_SIMPLE__DEF.h"
 
 
-//----------------------------------------------------------------------------------------------------
+// ...
 void CObj__PMC_SIMPLE
 ::Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,
 				  CII_OBJECT__ALARM* p_alarm)
@@ -20,8 +20,8 @@ void CObj__PMC_SIMPLE
 			}
 			else
 			{
-				diEXT_CH__PMx__SV_OPEN[i]->Set__DATA(STR__OFF);
-				diEXT_CH__PMx__SV_CLOSE[i]->Set__DATA(STR__ON);
+				if(bActive__PMx__SV_OPEN_X[i])			doEXT_CH__PMx__SV_OPEN_X[i]->Set__DATA(STR__OFF);
+				if(bActive__PMx__SV_CLOSE_X[i])			doEXT_CH__PMx__SV_CLOSE_X[i]->Set__DATA(STR__ON);
 			}
 		}
 	}
@@ -40,7 +40,8 @@ void CObj__PMC_SIMPLE
 			{
 				for(int i=0; i<iPM_LIMIT; i++)
 				{
-					sCH__OBJ_STATUS[i]->Set__DATA(STR__STANDBY);
+					dEXT_CH__PMx_SLOT_VLV__OBJ_STATUS_X[i]->Set__DATA(STR__STANDBY);
+
 					aCH__PRESSURE_TORR[i]->Set__VALUE(0.0);
 					sCH__PRESSURE_STATUS[i]->Set__DATA("VAC");
 				}
@@ -49,7 +50,7 @@ void CObj__PMC_SIMPLE
 
 		// TAS RESET ...
 		{
-			for(int pm_i=0; pm_i<CFG_PMx__SIZE; pm_i++)
+			for(int pm_i=0; pm_i<iPM_LIMIT; pm_i++)
 			{
 				if(sCH__TAS_RESET_REQ__PMx[pm_i]->Check__DATA("") > 0)
 				{
@@ -85,6 +86,36 @@ void CObj__PMC_SIMPLE
 	CString ch_data;
 	int i;
 
+	// ...
+	bool active__io_off_mode = false;
+	if(dCH__CFG_IO_OFF_MODE->Check__DATA(STR__ENABLE) > 0)			active__io_off_mode = true;
+
+	if(iActive__SIM_MODE > 0)
+	{
+		if(iDATA__PMx_SLOT_VLV_CTRL_TYPE == _DEF__PMx_SLOT_VLV_TYPE__IO)
+		{
+			for(i=0; i<iPM_LIMIT; i++)
+			{
+				if(bActive__PMx__SV_OPEN_X[i])		str__sv_open = doEXT_CH__PMx__SV_OPEN_X[i]->Get__STRING();
+				else								str__sv_open = STR__OFF;
+
+				if(bActive__PMx__SV_CLOSE_X[i])		str__sv_close = doEXT_CH__PMx__SV_CLOSE_X[i]->Get__STRING();
+				else								str__sv_close = STR__OFF;
+
+				if(active__io_off_mode)
+				{
+					if((str__sv_open.CompareNoCase(STR__OFF)  == 0)
+					&& (str__sv_close.CompareNoCase(STR__OFF) == 0))
+					{
+						continue;
+					}
+				}
+
+				diEXT_CH__PMx__SV_OPEN[i]->Set__DATA(str__sv_open);
+				diEXT_CH__PMx__SV_CLOSE[i]->Set__DATA(str__sv_close);
+			}
+		}
+	}
 
 	for(i=0; i<iPM_LIMIT; i++)
 	{
@@ -94,14 +125,22 @@ void CObj__PMC_SIMPLE
 		}
 		else
 		{
-			diEXT_CH__PMx__SV_OPEN[i]->Get__DATA(str__sv_open);
-			diEXT_CH__PMx__SV_CLOSE[i]->Get__DATA(str__sv_close);
+			if(dEXT_CH__CFG_PMx_CHM_TYPE[i]->Check__DATA(STR__DUMMY) > 0)
+			{
+				str__sv_open  = STR__OFF;
+				str__sv_close = STR__ON;
+			}
+			else
+			{
+				diEXT_CH__PMx__SV_OPEN[i]->Get__DATA(str__sv_open);
+				diEXT_CH__PMx__SV_CLOSE[i]->Get__DATA(str__sv_close);
+			}
 
 			// ...
 			int close_flag = -1;
 			int open_flag  = -1;
 
-			if(dEXT_CH__CFG_PMx_SV_USE[i]->Check__DATA("NO") > 0)
+			if(dEXT_CH__CFG_PMx_SV_USE[i]->Check__DATA(STR__NO) > 0)
 			{
 				open_flag = 1;
 			}
@@ -118,30 +157,6 @@ void CObj__PMC_SIMPLE
 					open_flag = 1;
 				}
 			}
-
-			/*
-			// ...
-			{
-				CString log_msg;
-				CString log_bff;
-
-				log_msg = "CObj__PMC_SIMPLE::Update__IO_MONITOR() ... \n";
-				
-				log_bff.Format(" * PM%1d \n", i+1);
-				log_msg += log_bff;
-				log_bff.Format("  ** open_flag  [%1d] \n", open_flag);
-				log_msg += log_bff;
-				log_bff.Format("  ** close_flag [%1d] \n", close_flag);
-				log_msg += log_bff;
-
-				log_bff.Format("  ** %s <- [%s] \n", 
-					           dEXT_CH__CFG_PMx_SV_USE[i]->Get__CHANNEL_NAME(),
-							   dEXT_CH__CFG_PMx_SV_USE[i]->Get__STRING());
-				log_msg += log_bff;
-
-				printf(log_msg);
-			}
-			*/
 
 			if(close_flag > 0)
 			{
@@ -160,20 +175,6 @@ void CObj__PMC_SIMPLE
 		// PMx Pressure State ...
 		diEXT_CH__PMx__ATM_SNS[i]->Get__DATA(str_atm_sns);
 		diEXT_CH__PMx__VAC_SNS[i]->Get__DATA(str_vac_sns);
-
-		if(iActive__SIM_MODE > 0)
-		{
-			if(dEXT_CH__CFG_TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
-			{
-				diEXT_CH__PMx__ATM_SNS[i]->Set__DATA(sDATA__ATM_ON);
-				diEXT_CH__PMx__VAC_SNS[i]->Set__DATA(sDATA__VAC_OFF);
-			}
-			else
-			{
-				diEXT_CH__PMx__ATM_SNS[i]->Set__DATA(sDATA__ATM_OFF);
-				diEXT_CH__PMx__VAC_SNS[i]->Set__DATA(sDATA__VAC_ON);
-			}
-		}
 
 		if(dEXT_CH__CFG_PMx_CHM_TYPE[i]->Check__DATA(STR__DUMMY) > 0)
 		{
@@ -200,7 +201,7 @@ void CObj__PMC_SIMPLE
 				dCH__PRESS_STATUS[i]->Set__DATA(STR__ATM);
 			}
 			else if((str_atm_sns.CompareNoCase(sDATA__ATM_OFF) == 0) 
-				 && (str_vac_sns.CompareNoCase(sDATA__VAC_ON)  == 0) )
+				 && (str_vac_sns.CompareNoCase(sDATA__VAC_ON)  == 0))
 			{
 				dCH__PRESS_STATUS[i]->Set__DATA(STR__VAC);
 			}

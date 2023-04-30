@@ -45,7 +45,6 @@ void CObj__LBx_CHM_SIMPLE
 		aiEXT_CH__LBx__PRESSURE_TORR->Get__DATA(var__data);
 		aCH__PRESSURE_TORR->Set__DATA(var__data);
 
-		// jglee : 2020.10.20
 		if(bActive__ATM_SNS_Virtual_Type)
 		{
 			aiEXT_CH__LBx__PRESSURE_TORR->Get__DATA(var__data);

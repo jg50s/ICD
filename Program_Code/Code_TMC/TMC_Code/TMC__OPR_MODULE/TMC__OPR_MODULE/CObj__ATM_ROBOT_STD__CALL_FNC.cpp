@@ -1,9 +1,23 @@
 #include "StdAfx.h"
 #include "CObj__ATM_ROBOT_STD.h"
-#include "CObj__ATM_ROBOT_STD__DEF.h"
 
 
-//----------------------------------------------------------------------------------------------------
+#define  CMMD__MAP				"MAP"
+#define  CMMD__HOME				"HOME"
+#define  CMMD__VACON			"VACON"
+#define  CMMD__VACOFF			"VACOFF"
+#define  CMMD__RETRACT			"RETRACT"
+#define  CMMD__EXTEND			"EXTEND"
+#define  CMMD__GOUP				"GOUP"
+#define  CMMD__GODOWN			"GODOWN"
+#define  CMMD__ALGN				"ALGN"
+#define  CMMD__ALGNPICK			"ALGNPICK"
+#define  CMMD__PLACE_ALGN_PICK  "PLACE_PICK"
+#define  CMMD__ALGNPLACE		"ALGNPLACE"
+#define  CMMD__LP_MAP			"LP_MAP"
+
+
+// ...
 int  CObj__ATM_ROBOT_STD::
 Call__INIT(CII_OBJECT__VARIABLE* p_variable)
 {
@@ -236,21 +250,3 @@ Call__LP_MAP(CII_OBJECT__VARIABLE* p_variable,
 	return flag;
 }
 
-
-void CObj__ATM_ROBOT_STD::
-Mon__HYPER_TERMINAL_INTERLOCK(CII_OBJECT__VARIABLE* p_variable,
-							  CII_OBJECT__ALARM* p_alarm)
-{
-	SCX__TIMER_CTRL cx_timer_ctrl;
-	cx_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
-
-	while(1)
-	{
-		cx_timer_ctrl->WAIT(0.5);
-
-		if(xCH__OBJ_STATUS->Check__DATA(STR__MAINTMODE) < 0)
-		{
-			dEXT_PHY__IO_CH__HYPER_TERMINAL_LOCK->Set__DATA("YES");
-		}
-	}	
-}

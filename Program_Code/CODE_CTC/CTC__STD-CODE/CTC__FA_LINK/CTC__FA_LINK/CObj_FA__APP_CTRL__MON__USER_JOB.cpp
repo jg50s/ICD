@@ -12,7 +12,7 @@ void CObj_FA__APP_CTRL::Mon__USER_JOB(CII_OBJECT__VARIABLE* p_variable)
 
 	while(1)
 	{
-		Sleep(90);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		Fnc__PJOB_CHECK();
 		Fnc__CJOB_CHECK();

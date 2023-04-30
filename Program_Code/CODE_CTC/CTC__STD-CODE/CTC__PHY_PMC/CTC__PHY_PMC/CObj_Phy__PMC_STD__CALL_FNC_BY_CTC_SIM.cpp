@@ -38,6 +38,27 @@ int  CObj_Phy__PMC_STD
 int  CObj_Phy__PMC_STD
 ::Call__CTC_SIM__SYSTEM_INIT(CII_OBJECT__VARIABLE* p_variable)
 {
+	CString ch_data;
+
+	if(dEXT_CH_CFG__TRANSFER_MODE->Check__DATA(STR__VAC) > 0)
+	{
+		double cfg__pressure_torr = xEXT_CH_CFG__REF_VAC_PRESSURE->Get__VALUE();
+
+		cfg__pressure_torr = cfg__pressure_torr * 0.9;
+
+		ch_data.Format("%.3f", cfg__pressure_torr);
+		xCH__PRESSURE_VALUE->Set__DATA(ch_data);
+	}
+	else
+	{
+		double cfg__pressure_torr = xEXT_CH_CFG__REF_ATM_PRESSURE->Get__VALUE();
+
+		cfg__pressure_torr = cfg__pressure_torr * 1.01;
+
+		ch_data.Format("%.3f", cfg__pressure_torr);
+		xCH__PRESSURE_VALUE->Set__DATA(ch_data);
+	}
+
 	xCH__OBJ_STATUS->Set__DATA(STR__STANDBY);
 	return 1;
 }
@@ -72,6 +93,41 @@ int  CObj_Phy__PMC_STD
 	xCH__PRESSURE_VALUE->Set__DATA("800.0");
 	xCH__PRESSURE_STATUS->Set__DATA(STR__ATM);
 	sCH__VAC_SNS->Set__DATA("OFF");
+	return 1;
+}
+
+
+int  CObj_Phy__PMC_STD
+::Call__CTC_SIM__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
+{
+	Sleep(1000);
+
+	dCH__SLIT_VLV_STS->Set__DATA(STR__OPEN);
+	return 1;
+}
+int  CObj_Phy__PMC_STD
+::Call__CTC_SIM__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
+{
+	Sleep(1000);
+
+	dCH__SLIT_VLV_STS->Set__DATA(STR__CLOSE);
+	return 1;
+}
+
+int  CObj_Phy__PMC_STD
+::Call__CTC_SIM__PIN_UP(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
+{
+	Sleep(1000);
+
+	sCH__LIFT_PIN_STS->Set__DATA(STR__UP);
+	return 1;
+}
+int  CObj_Phy__PMC_STD
+::Call__CTC_SIM__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
+{
+	Sleep(1000);
+
+	sCH__LIFT_PIN_STS->Set__DATA(STR__DOWN);
 	return 1;
 }
 
@@ -243,7 +299,19 @@ int  CObj_Phy__PMC_STD
 		sCH__TIME_ACT_START->Set__DATA(ch_data);
 	}
 
+	xCH__PROC_INFO__PROCESS_STATUS->Set__DATA("Processing");
+
 	int flag = _Fnc__CTC_SIM__PRO_START(p_variable,p_alarm, fa_report_flag);
+
+	while(1)
+	{
+		Sleep(10);
+
+		if(p_variable->Check__CTRL_ABORT() > 0)								break;
+		if(xCH__PROC_INFO__PROCESS_STATUS->Check__DATA("Alarm") < 0)		break;
+	}
+
+	xCH__PROC_INFO__PROCESS_STATUS->Set__DATA("Idle");
 
 	// ...
 	{
@@ -413,19 +481,16 @@ int  CObj_Phy__PMC_STD
 					xCH_PRE__LPx_CID->Set__DATA(var_data);
 				}
 
-				// ...
-				{
-					Datalog__Write_Lot_Proc_Slot_Start(i,slot_lot_count++,pmc_slot_id,db_info,pm_log_path);
+				Datalog__Write_Lot_Proc_Slot_Start(i,slot_lot_count++,pmc_slot_id,db_info,pm_log_path);
 
-					if(fa_report_flag > 0)
-					{
-						xSCH_MATERIAL_CTRL->Process_Start__PMC_WITH_SLOT_EX(material_port_id,
-																			material_slot_id,
-																			iPMx_ID,
-																			pmc_slot_id,
-																			material_recipe,
-																			pm_log_path);
-					}
+				if(fa_report_flag > 0)
+				{
+					xSCH_MATERIAL_CTRL->Process_Start__PMC_WITH_SLOT_EX(material_port_id,
+																		material_slot_id,
+																		iPMx_ID,
+																		pmc_slot_id,
+																		material_recipe,
+																		pm_log_path);
 				}
 
 				xCH__SLOT_STATUS[i]->Set__DATA("PROCESSING");
@@ -449,6 +514,12 @@ int  CObj_Phy__PMC_STD
 
 	double cfg_proc_sec = aCH__SCH_TEST_CFG_PMC_PROC_MAIN_SEC->Get__VALUE();
 	double elapse_sec   = 0.0;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		cfg_proc_sec = aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC->Get__VALUE();
+	}
 
 	CString ch_data;
 	ch_data.Format("%.0f", cfg_proc_sec);
@@ -971,6 +1042,12 @@ int  CObj_Phy__PMC_STD
 	double cfg_proc_sec = aCH__SCH_TEST_CFG_PMC_PROC_POST_SEC->Get__VALUE();
 	double elapse_sec   = 0.0;
 
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		cfg_proc_sec = aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC->Get__VALUE();
+	}
+
 	CString ch_data;
 	ch_data.Format("%.0f", cfg_proc_sec);
 	xCH__TOTAL_PRC_TIME->Set__DATA(ch_data);
@@ -1183,6 +1260,12 @@ int  CObj_Phy__PMC_STD
 	double cfg_proc_sec = aCH__SCH_TEST_CFG_PMC_PROC_PRE_SEC->Get__VALUE();
 	double elapse_sec   = 0.0;
 
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		cfg_proc_sec = aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC->Get__VALUE();
+	}
+
 	CString ch_data;
 	ch_data.Format("%.0f", cfg_proc_sec);
 	xCH__TOTAL_PRC_TIME->Set__DATA(ch_data);
@@ -1309,6 +1392,12 @@ int  CObj_Phy__PMC_STD
 
 	double cfg_proc_sec = aCH__SCH_TEST_CFG_PMC_PROC_PRE_SEC->Get__VALUE();
 	double elapse_sec   = 0.0;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		cfg_proc_sec = aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC->Get__VALUE();
+	}
 
 	CString ch_data;
 	ch_data.Format("%.0f", cfg_proc_sec);

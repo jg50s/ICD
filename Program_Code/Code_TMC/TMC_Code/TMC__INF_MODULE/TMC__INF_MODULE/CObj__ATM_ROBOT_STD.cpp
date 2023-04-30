@@ -46,7 +46,7 @@ int CObj__ATM_ROBOT_STD::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define APP_DSP__PARA_ARM				\
-"A  B"
+"A  B  AB"
 
 #define APP_DSP__PARA_MODULE			\
 "LP1  LP2  LP3  LP4  LP5				\

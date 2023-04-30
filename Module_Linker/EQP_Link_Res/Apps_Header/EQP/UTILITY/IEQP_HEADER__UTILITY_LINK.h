@@ -1883,6 +1883,9 @@ public:
 
 	// ...
 	virtual int Get__IP_PORT_INFO_OF_SEQ_ID(const int seq_id, CString& seq_ip,int& seq_port) = 0;
+
+	// ...
+	virtual int Get__LOG_DB_SIZE() = 0;
 };
 
 

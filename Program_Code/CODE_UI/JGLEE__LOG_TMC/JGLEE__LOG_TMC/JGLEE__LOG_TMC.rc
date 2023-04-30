@@ -1,0 +1,253 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Korean resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+#ifdef _WIN32
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(949)\r\n"
+    "#include ""res\\JGLEE__LOG_TMC.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_DIGITAL_LIST_IMG    BITMAP                  "C:\\Module_Linker\\SUI_Link_Res\\RES_UI\\IMG_RES\\Digital_List_Img.bmp"
+IDB_IMAGE_LIST          BITMAP                  "res\\IMG\\ImageList.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG__DA_LOG_STD DIALOGEX 0, 0, 800, 421
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_BORDER
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Log - Upload",IDC_BTN__UPLOAD_LOG,17,388,103,19
+    CONTROL         "",IDC_LIST__LOG_DATE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,14,7,162,171
+    CONTROL         "",IDC_LIST__LOG_FILE,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,182,7,306,171
+    CONTROL         "",IDC_LIST__LOG_RESULT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,14,179,474,202
+    PUSHBUTTON      "Search",IDC_BTN__WFR_SEARCH,691,388,103,19
+    CONTROL         "",IDC__DA_CHART,"Static",SS_BLACKFRAME,497,34,295,265
+    CONTROL         "__PM1__",IDC__SEARCH_PM1,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,508,310,45,10
+    CONTROL         "__PM2__",IDC__SEARCH_PM2,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,554,310,45,10
+    CONTROL         "__PM3__",IDC__SEARCH_PM3,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,599,310,45,10
+    CONTROL         "__PM4__",IDC__SEARCH_PM4,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,645,310,45,10
+    CONTROL         "__PM5__",IDC__SEARCH_PM5,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,689,310,45,10
+    CONTROL         "__PM6__",IDC__SEARCH_PM6,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,735,310,45,10
+    CONTROL         "__LL1__",IDC__SEARCH_LL1,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,508,324,43,10
+    CONTROL         "__LL2__",IDC__SEARCH_LL2,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,554,324,43,10
+    CONTROL         "__LL3__",IDC__SEARCH_LL3,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,598,324,43,10
+    CONTROL         "__LL4__",IDC__SEARCH_LL4,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,644,324,43,10
+    GROUPBOX        "",IDC_STATIC,497,299,295,40
+    PUSHBUTTON      "Chart - Refresh",IDC_BTN__WFR_REFRESH,689,10,103,19
+    CTEXT           "LotID",IDC_STATIC,535,350,22,8
+    EDITTEXT        IDC__SEARCH_LOTID,561,347,88,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    CTEXT           "PPID",IDC_STATIC,535,366,22,8
+    EDITTEXT        IDC__SEARCH_PPID,561,363,88,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    CTEXT           "PortID",IDC_STATIC,698,350,22,8
+    EDITTEXT        IDC__SEARCH_PORTID,726,347,41,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    CTEXT           "SlotID",IDC_STATIC,698,366,22,8
+    EDITTEXT        IDC__SEARCH_SLOTID,726,363,41,14,ES_CENTER | ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "",IDC_STATIC,498,338,295,45
+    CONTROL         "",IDC_SPIN1,"msctls_updown32",UDS_ARROWKEYS,600,10,14,21
+    CONTROL         " Error_Range",IDC_CHECK__ERROR_RANGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,507,16,44,10
+    EDITTEXT        IDC_EDIT__SOFT_ERROR,563,13,34,15,ES_CENTER | ES_AUTOHSCROLL
+    GROUPBOX        "",IDC_STATIC,497,3,124,30
+    CONTROL         "__Only_Alarm__",IDC__ONLY_ALARM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,300,394,69,10
+    GROUPBOX        "",IDC_STATIC,8,381,481,31
+    PUSHBUTTON      "Result - Refresh",IDC_BTN__RESULT_REFRESH,378,389,103,19
+END
+
+IDD_DLG__DA_WFR_SEARCH DIALOGEX 0, 0, 378, 195
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Wafer Search"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Search",IDC_BTN__WFR_SEARCH,13,163,142,24
+    PUSHBUTTON      "Cancel",IDC_BTN__CANCEL,223,163,142,24
+    PUSHBUTTON      "LotID",IDC_BTN__WFR_LOTID,13,11,83,19
+    PUSHBUTTON      "PPID",IDC_BTN__WFR_PPID,13,32,83,19
+    PUSHBUTTON      "PortID",IDC_BTN__WFR_PORTID,13,56,83,19
+    PUSHBUTTON      "SlotID",IDC_BTN__WFR_SLOTID,13,77,83,19
+    EDITTEXT        IDC_EDIT__WFR_LOTID,98,12,93,17,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT__WFR_PPID,98,33,93,17,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT__WFR_PORTID,98,57,93,17,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT__WFR_SLOTID,98,78,93,17,ES_AUTOHSCROLL
+    CONTROL         "___PM1___",IDC_CHECK__PM1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,227,17,53,10
+    CONTROL         "___PM2___",IDC_CHECK__PM2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,227,30,53,10
+    CONTROL         "___PM3___",IDC_CHECK__PM3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,227,43,53,10
+    CONTROL         "___PM4___",IDC_CHECK__PM4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,227,56,53,10
+    CONTROL         "___PM5___",IDC_CHECK__PM5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,227,69,53,10
+    CONTROL         "___PM6___",IDC_CHECK__PM6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,227,82,53,10
+    CONTROL         "___LL1___",IDC_CHECK__LL1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,303,17,51,10
+    CONTROL         "___LL2___",IDC_CHECK__LL2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,303,30,51,10
+    CONTROL         "___LL3___",IDC_CHECK__LL3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,303,43,51,10
+    CONTROL         "___LL4___",IDC_CHECK__LL4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,303,56,51,10
+    GROUPBOX        "",IDC_STATIC,210,3,161,138
+    PUSHBUTTON      "All",IDC_BTN__MDx_ALL,225,117,65,19
+    PUSHBUTTON      "PMx",IDC_BTN__MDx_PMx,225,97,65,19
+    PUSHBUTTON      "LLx",IDC_BTN__MDx_LLx,294,97,65,19
+    PUSHBUTTON      "Clear",IDC_BTN__MDx_CLEAR,294,117,65,19
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DLG__DA_LOG_STD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 793
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 412
+    END
+
+    IDD_DLG__DA_WFR_SEARCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 371
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 188
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Korean resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "JGLEE__LOG_TMC.dll"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "OriginalFilename", "JGLEE__LOG_TMC.dll"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(949)
+#include "res\JGLEE__LOG_TMC.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

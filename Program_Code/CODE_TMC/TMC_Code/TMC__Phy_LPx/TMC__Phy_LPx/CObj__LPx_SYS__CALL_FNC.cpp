@@ -91,7 +91,10 @@ LOOP_CHECK:
 int  CObj__LPx_SYS
 ::Call__LOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	int r_flag = Fnc__LOAD(p_variable,p_alarm);
+	int r_flag = Alarm_Check__ARM_NOT_RETRACTED(p_alarm);
+	if(r_flag < 0)		return r_flag;
+
+	r_flag = Fnc__LOAD(p_variable,p_alarm);
 
 	if(r_flag > 0)
 	{
@@ -107,6 +110,13 @@ int  CObj__LPx_SYS
 			{
 				r_flag = Fnc__DOOR_CLOSE(p_variable,p_alarm);
 				if(r_flag < 0)		return -31;
+			}
+		}
+		else
+		{
+			if(dCH__CFG_LOAD_ACT_AUTO_MAP_MODE->Check__DATA(STR__ENABLE) > 0)
+			{
+				Update__MAP_INFO(p_variable,p_alarm);
 			}
 		}
 	}
@@ -146,6 +156,7 @@ int  CObj__LPx_SYS
 
 		if(x_timer->WAIT(cfg__delay_sec) < 0)		return -41;
 	}
+
 	return 1;	
 }
 int  CObj__LPx_SYS
@@ -153,12 +164,38 @@ int  CObj__LPx_SYS
 {
 	int r_flag;
 
-	r_flag = Fnc__CLAMP(p_variable,p_alarm);
-	if(r_flag < 0)		return -11;
+	if(dCH__CFG_MACRO_LOAD_USE->Check__DATA(STR__YES) > 0)
+	{
+		// CLAMP : ACTIVE CHECK ...
+		{
+			sCH__ACTIVE_CHECK_CLAMP_DO->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_UNCLAMP_DO->Set__DATA(STR__YES);
 
-	r_flag = Fnc__SHUTTLE_IN(p_variable,p_alarm);
-	if(r_flag < 0)		return -21;
+			sCH__ACTIVE_CHECK_CLAMP_DI->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_UNCLAMP_DI->Set__DATA(STR__YES);
+		}
+		// SHUTTLE_IN : ACTIVE CHECK ...
+		{
+			sCH__ACTIVE_CHECK_SHUTTLE_IN_DO->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_SHUTTLE_OUT_DO->Set__DATA(STR__YES);
 
+			sCH__ACTIVE_CHECK_SHUTTLE_IN_DI->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_SHUTTLE_OUT_DI->Set__DATA(STR__YES);
+		}
+
+		r_flag = pLPx__OBJ_CTRL->Call__OBJECT(CMMD__LOAD);
+		if(r_flag < 0)		return -11;
+	}
+	else
+	{
+		r_flag = Fnc__CLAMP(p_variable,p_alarm);
+		if(r_flag < 0)		return -11;
+
+		r_flag = Fnc__SHUTTLE_IN(p_variable,p_alarm);
+		if(r_flag < 0)		return -21;
+	}
+
+	Update__LOAD_POS_STATE();
 	return 1;	
 }
 
@@ -166,8 +203,10 @@ int  CObj__LPx_SYS
 int  CObj__LPx_SYS
 ::Call__UNLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
+	/*
 	int r_flag = Alarm_Check__ARM_NOT_RETRACTED(p_alarm);
 	if(r_flag < 0)		return r_flag;
+	*/
 
 	return Fnc__UNLOAD(p_variable,p_alarm);
 }
@@ -246,9 +285,10 @@ int  CObj__LPx_SYS
 				active__lp_check = false;
 			}
 
-			if(dEXT_CH__REPORT_PIO_E84_RUN_STATE->Check__DATA(STR__DONE) < 0)		
+			if(bActive__LPx_OHT)
 			{
-				active__lp_check = false;
+				if(dEXT_CH__REPORT_PIO_E84_RUN_STATE->Check__DATA(STR__DONE) < 0)		
+					active__lp_check = false;
 			}
 
 			if(active__lp_check)
@@ -270,6 +310,7 @@ int  CObj__LPx_SYS
 		dCH__MON_SLOT_STATUS[i]->Set__DATA(STR__UNKNOWN);
 	}
 
+	Update__LOAD_POS_STATE();
 	return 1;
 }
 
@@ -357,10 +398,16 @@ int  CObj__LPx_SYS
 		// Auto Mode
 		else
 		{
-			if((dCH__MON_FOUP_STS->Check__DATA(STR__EXIST) > 0) 
-			&& (dEXT_CH__REPORT_PIO_E84_RUN_STATE->Check__DATA(STR__DONE) > 0))
+			if(dCH__MON_FOUP_STS->Check__DATA(STR__EXIST) > 0) 
 			{
-				return 1;
+				if(bActive__LPx_OHT)
+				{
+					if(dEXT_CH__REPORT_PIO_E84_RUN_STATE->Check__DATA(STR__DONE) > 0)			return 1;
+				}
+				else
+				{
+					return 1;
+				}
 			}
 		}
 	} 
@@ -373,22 +420,57 @@ int  CObj__LPx_SYS
 int  CObj__LPx_SYS
 ::Call__RLSUNLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
+	int r_flag = Alarm_Check__ARM_NOT_RETRACTED(p_alarm);
+	if(r_flag < 0)		return r_flag;
+
 	return Fnc__RLSUNLOAD(p_variable,p_alarm);
 }
 int  CObj__LPx_SYS
 ::Fnc__RLSUNLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	int r_flag = Fnc__DOOR_CLOSE(p_variable,p_alarm);
-	if(r_flag < 0)				return -11;
-
-	r_flag = Fnc__SHUTTLE_OUT(p_variable,p_alarm);
-	if(r_flag < 0)				return -21;
-
-	if(dCH__CFG_UNLD_CLAMP_OPT->Check__DATA(STR__AUTO) > 0)	
+	if(dCH__CFG_MACRO_UNLOAD_USE->Check__DATA(STR__YES) > 0)
 	{
-		r_flag = Fnc__UNCLAMP(p_variable,p_alarm);
-		if(r_flag < 0)			return -31;
-	}	
+		// CLAMP : ACTIVE CHECK ...
+		{
+			sCH__ACTIVE_CHECK_CLAMP_DO->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_UNCLAMP_DO->Set__DATA(STR__YES);
+
+			sCH__ACTIVE_CHECK_CLAMP_DI->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_UNCLAMP_DI->Set__DATA(STR__YES);
+		}
+		// SHUTTLE_IN : ACTIVE CHECK ...
+		{
+			sCH__ACTIVE_CHECK_SHUTTLE_IN_DO->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_SHUTTLE_OUT_DO->Set__DATA(STR__YES);
+
+			sCH__ACTIVE_CHECK_SHUTTLE_IN_DI->Set__DATA(STR__YES);
+			sCH__ACTIVE_CHECK_SHUTTLE_OUT_DI->Set__DATA(STR__YES);
+		}
+
+		int r_flag = pLPx__OBJ_CTRL->Call__OBJECT(CMMD__UNLOAD);
+		if(r_flag < 0)		return -11;
+
+		if(dCH__CFG_UNLD_CLAMP_OPT->Check__DATA(STR__AUTO) > 0)	
+		{
+			r_flag = Fnc__UNCLAMP(p_variable,p_alarm);
+			if(r_flag < 0)			return -21;
+		}
+	}
+	else
+	{
+		int r_flag = Fnc__DOOR_CLOSE(p_variable,p_alarm);
+		if(r_flag < 0)				return -11;
+
+		r_flag = Fnc__SHUTTLE_OUT(p_variable,p_alarm);
+		if(r_flag < 0)				return -21;
+
+		if(dCH__CFG_UNLD_CLAMP_OPT->Check__DATA(STR__AUTO) > 0)	
+		{
+			r_flag = Fnc__UNCLAMP(p_variable,p_alarm);
+			if(r_flag < 0)			return -31;
+		}
+	}
+
 	return 1;
 }
 
@@ -517,6 +599,8 @@ int  CObj__LPx_SYS
 ::Fnc__MAP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
 LOOP_RETRY:
+
+	Update__LOAD_POS_STATE();
 
 	// ...
 	CString alm_msg;

@@ -1,0 +1,6 @@
+
+LIBRARY      "TMC__FNC_PROC"
+
+EXPORTS
+    ; Explicit exports can go here
+

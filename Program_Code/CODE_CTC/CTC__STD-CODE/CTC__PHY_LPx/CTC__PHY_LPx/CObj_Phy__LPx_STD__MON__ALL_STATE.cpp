@@ -38,8 +38,20 @@ void CObj_Phy__LPx_STD
 
 	while(1)
 	{
-		Sleep(490);
+		p_variable->Wait__SINGLE_OBJECT(0.5);
 
+
+		if(sCH__PORT_STATUS->Check__DATA(STR__BUSY) > 0)
+		{
+			int check__n2_purge = xI_SCH_MATERIAL_CTRL->Check__STx_N2_PURGE_OF_EDIT_TYPE(iPTN);
+
+			if(check__n2_purge > 0)			dCH__STx_USE_N2_PURGE->Set__DATA(STR__YES);
+			else							dCH__STx_USE_N2_PURGE->Set__DATA(STR__NO);
+		}
+		else
+		{
+			dCH__STx_USE_N2_PURGE->Set__DATA(STR__NO);
+		}
 
 		// PORT STATUS ...
 		{

@@ -30,6 +30,12 @@
 #define STR__END							"END"
 #define STR__ABORT							"ABORT"
 
+#define STR__ATM							"ATM"
+#define STR__VAC							"VAC"
+
+#define STR__CTC							"CTC"
+#define STR__TMC							"TMC"
+
 
 // ...
 #define SCR_NAME__POPUP_MACRO_MOVE_HISTORY_VIEW		"POPUP_MACRO_MOVE_HISTORY_VIEW"

@@ -3,6 +3,7 @@
 
 // ...
 #define  CFG_PMx__SIZE					10
+#define  CFG_WAFER_OUT__SIZE			5
 
 
 // ...

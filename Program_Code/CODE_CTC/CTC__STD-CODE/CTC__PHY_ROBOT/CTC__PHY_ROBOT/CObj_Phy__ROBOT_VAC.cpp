@@ -661,6 +661,24 @@ int CObj_Phy__ROBOT_VAC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		}
 	}
 
+	// OBJ_MAINT ...
+	{
+		CString obj_name;
+		CString var_name;
+
+		def_name = "OBJ_MAINT";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		// ...
+		{
+			var_name = "PARA.MANUAL_MOVE.LLx.SLOT_CLOSE.SKIP";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP, obj_name,var_name);
+
+			var_name = "PARA.MANUAL_MOVE.PMx.SLOT_CLOSE.SKIP";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP, obj_name,var_name);
+		}
+	}
+
 	// ...
 	{
 		xI_Module_Obj->Link__ERROR_FEEDBACK(&mERROR__MODULE_OBJ);

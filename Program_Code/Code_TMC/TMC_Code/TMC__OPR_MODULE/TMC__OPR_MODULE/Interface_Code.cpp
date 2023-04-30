@@ -1,7 +1,9 @@
 #include "StdAfx.h"
 #include "Interface_Code.h"
 
+#include "CObj__ATM_ROBOT_USER.h"
 #include "CObj__ATM_ROBOT_STD.h"
+
 #include "CObj__VAC_ROBOT_STD.h"
 
 #include "CObj__TMC_SYS_STD.h"
@@ -32,7 +34,9 @@ DECLARE_END__DLL_STD_OBJ__GET_VERSION
 
 
 //----------------------------------------------------------
+#define CLS__ATM_ROBOT_USER			"ATM_ROBOT.USER"
 #define CLS__ATM_ROBOT_STD			"ATM_ROBOT.STD"
+
 #define CLS__VAC_ROBOT_STD			"VAC_ROBOT.STD"
 
 #define CLS__TMC_SYS_STD			"TMC_SYS.STD"
@@ -51,7 +55,9 @@ DECLARE_END__DLL_STD_OBJ__GET_VERSION
 
 DECLARE_START__DLL_STD_OBJ__GET_CLASS_LIST
 
+ADD__OBJ_CLS(CLS__ATM_ROBOT_USER);
 ADD__OBJ_CLS(CLS__ATM_ROBOT_STD);
+
 ADD__OBJ_CLS(CLS__VAC_ROBOT_STD);
 
 ADD__OBJ_CLS(CLS__TMC_SYS_STD);
@@ -72,7 +78,9 @@ DECLARE_END__DLL_STD_OBJ__GET_CLASS_LIST
 
 DECLARE_START__DLL_STD_OBJ__CREATE_LINK
 
+IF__OBJ_CLS(CLS__ATM_ROBOT_USER)		return (new CObj__ATM_ROBOT_USER);
 IF__OBJ_CLS(CLS__ATM_ROBOT_STD)			return (new CObj__ATM_ROBOT_STD);
+
 IF__OBJ_CLS(CLS__VAC_ROBOT_STD)			return (new CObj__VAC_ROBOT_STD);
 
 IF__OBJ_CLS(CLS__TMC_SYS_STD)			return (new CObj__TMC_SYS_STD);

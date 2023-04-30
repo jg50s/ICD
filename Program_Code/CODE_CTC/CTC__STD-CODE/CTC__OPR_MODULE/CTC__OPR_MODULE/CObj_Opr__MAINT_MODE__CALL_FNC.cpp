@@ -1119,6 +1119,15 @@ ATM_RB__Pick_Module_With_Arm(CII_OBJECT__VARIABLE *p_variable,
 		int ll_index = Macro__Get_LL_INDEX(str_module);
 		if(ll_index >= 0)
 		{
+			if(dCH__PARTICLE_PARA_LLx_COOL_TYPE->Check__DATA(STR__TMC) > 0)
+			{
+				if(dEXT_CH__LLx_PRESSURE_STATUS[ll_index]->Check__DATA(STR__ATM) < 0)
+				{
+					CString ch_data = aCH__PARTICLE_PARA_LLx_COOLING_SEC->Get__STRING();
+					aEXT_CH__LLx_PARA_VENT_COOLING_SEC[ll_index]->Set__DATA(ch_data);
+				}
+			}
+
 			if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("VENT") < 0)
 			{
 				return -1001;

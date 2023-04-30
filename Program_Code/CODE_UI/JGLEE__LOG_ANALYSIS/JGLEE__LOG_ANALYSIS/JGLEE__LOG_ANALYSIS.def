@@ -1,0 +1,6 @@
+; JGLEE__LOG_ANALYSIS.def : Declares the module parameters for the DLL.
+
+LIBRARY      "JGLEE__LOG_ANALYSIS"
+
+EXPORTS
+    ; Explicit exports can go here

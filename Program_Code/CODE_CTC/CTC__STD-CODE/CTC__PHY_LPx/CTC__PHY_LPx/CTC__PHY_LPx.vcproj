@@ -322,18 +322,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="CMacro_LOG"
-				>
-				<File
-					RelativePath=".\CMacro_LOG.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CMacro_LOG.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

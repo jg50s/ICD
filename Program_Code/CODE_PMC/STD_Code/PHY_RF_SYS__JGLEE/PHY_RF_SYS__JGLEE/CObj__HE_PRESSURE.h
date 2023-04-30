@@ -22,6 +22,10 @@ private:
 	//-------------------------------------------------------------------------
 	// INTERNAL PROPERTY
 
+	// CFG ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_CTRL_MODE[_CFG__ZONE_SIZE];
+	CX__VAR_ANALOG_CTRL	aCH__CFG_RAMP_TIME[_CFG__ZONE_SIZE]; // KMS : He Pressrue Control To Ramping
+
 	// OBJ ...
 	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;
 
@@ -65,7 +69,7 @@ private:
 	CString sMODE__PRESSURE_SET;
 	int Call__PRESSURE_SET(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 
-	int Fnc__PRESSURE_SET(const int zone_index, const double set_pressure);
+	int Fnc__PRESSURE_SET(const int zone_index, const double set_pressure, const bool Log_Flag);
 
 	// ...
 	int Mon__STATUS(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);

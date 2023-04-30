@@ -48,6 +48,7 @@ int CObj__RF_STD::__DEFINE__VERSION_HISTORY(version)
 #define MON_ID__INTERLOCK_CHECK					2
 #define MON_ID__IDLE_ERROR_CHECK				3
 #define MON_ID__PROC_ERROR_CHECK				4
+#define MON_ID__IO_TYPE_ALARM_CHECK				5 //KMS
 
 
 int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
@@ -97,6 +98,10 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.RF.OFFSET.POWER";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__PARA_RF_OFFSET_POWER, str_name);
+
+		str_name = "PARA.WAIT.POWER.ON";
+		STD__ADD_ANALOG(str_name, "msec", 0, 0, 999999);
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_WAIT_POWER_ON, str_name);
 	}
 	// PARA : FREQ ...
 	{
@@ -120,6 +125,7 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.FREQ.LEARNED.VALUE";
 		STD__ADD_ANALOG(str_name, "KHz", 0, 0, 28476);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_FREQ_LEARNED, str_name);
+
 	}
 	// PARA : RCP ...
 	{
@@ -505,6 +511,8 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__IDLE_ERROR_CHECK);
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__PROC_ERROR_CHECK);
+
+		p_variable->Add__MONITORING_PROC(1.0, MON_ID__IO_TYPE_ALARM_CHECK);// KMS : For IO TYPE
 	}
 	return 1;
 }
@@ -1004,6 +1012,47 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				}
 			}
 
+			// DO.GENERATOR_RESET // KMS
+			{
+				def_name = "CH__RF_DO_RESET_CTRL";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+				bool def_check = x_utility.Check__Link(ch_name);
+				bActive__RF_DO_POWER_CTRL = def_check;
+
+				if(bActive__RF_DO_POWER_CTRL)
+				{
+					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_DO_RESET_CTRL, obj_name,var_name);
+				}
+			}
+
+			// DI,ALARM ON ... KMS
+			{
+				def_name = "CH__INFO_DI_ALARM";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_ALARM, obj_name,var_name);
+				
+			}
+
+			// DI.POWER ON, KMS
+			{
+				def_name = "CH__INFO_DI_POWER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__INFO_DI_RF_POWER, obj_name,var_name);
+	
+			}
+
+			// SI.SET_POWER ..., KMS
+			{
+				def_name = "CH__INFO_SI_RF_ALARM";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__INFO_RF_ALARM, obj_name,var_name);
+			}
+
 			// AO.SET_POWER ...
 			{
 				def_name = "CH__RF_AO_SET_POWER";
@@ -1300,6 +1349,7 @@ int CObj__RF_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 	
 	if(id == MON_ID__IDLE_ERROR_CHECK)			Mon__IDLE_ERROR_CHECK(p_variable, p_alarm);
 	if(id == MON_ID__PROC_ERROR_CHECK)			Mon__PROC_ERROR_CHECK(p_variable, p_alarm);
+	if(id == MON_ID__IO_TYPE_ALARM_CHECK)		Mon__IO_TYPE_ALARM_CHECK(p_variable, p_alarm);//KMS
 
 	return 1;
 }

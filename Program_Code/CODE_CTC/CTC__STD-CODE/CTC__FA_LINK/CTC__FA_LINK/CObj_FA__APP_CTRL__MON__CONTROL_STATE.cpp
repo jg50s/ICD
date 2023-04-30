@@ -61,7 +61,7 @@ void CObj_FA__APP_CTRL::Mon__CONTROL_STATE_CTRL(CII_OBJECT__VARIABLE* p_variable
 
 	while(1)
 	{
-		Sleep(90);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 
 		// SPOOLING CTRL ...
@@ -146,7 +146,7 @@ void CObj_FA__APP_CTRL::Mon__CONTROL_STATE_CTRL(CII_OBJECT__VARIABLE* p_variable
 					xCH__FA_CONTROL_STATE->Get__DATA(cur_state);
 
 					if((cur_state.CompareNoCase(STR__LOCAL)  == 0)
-						|| (cur_state.CompareNoCase(STR__REMOTE) == 0))	
+					|| (cur_state.CompareNoCase(STR__REMOTE) == 0))	
 					{
 						if(dCH_ECID__SPOOL_CONTROL->Check__DATA(STR__ENABLE) > 0)
 						{

@@ -60,6 +60,17 @@ int CObj__HE_PRESSURE::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		int id = i + 1;
 
+		// CFG...
+		{
+			str_name.Format("CFG.HE.PRESSURE.CTRL.MODE.%1d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "SET RAMP.%1d", ""); // SET : right away value set, RAMP : ramp Set by Up Time
+			LINK__VAR_DIGITAL_CTRL(dCH__CFG_CTRL_MODE[i], str_name);
+
+			str_name.Format("CFG.HE.PRESSURE.RAMP.UP.TIME.%1d", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 10, "");
+			LINK__VAR_ANALOG_CTRL(aCH__CFG_RAMP_TIME[i], str_name);
+		}
+
 		// PARA ...
 		{
 			str_name.Format("PARA.PRESSURE.SET.%1d", id);

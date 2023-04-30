@@ -328,6 +328,9 @@ int CObj__SYS_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			var_name = "ACTIVE.INTERLOCK.CHAMBER.VENT";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ACTIVE_INTERLOCK_CHAMBER_VENT, obj_name,var_name);
+
+			var_name = "PARA.BALLAST_CTRL.ACTIVE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PARA_BALLAST_CTRL_ACTIVE, obj_name,var_name);
 		}
 	}
 

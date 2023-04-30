@@ -342,6 +342,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Macro_Function"
+				>
+				<File
+					RelativePath=".\Macro_Function.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Macro_Function.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"

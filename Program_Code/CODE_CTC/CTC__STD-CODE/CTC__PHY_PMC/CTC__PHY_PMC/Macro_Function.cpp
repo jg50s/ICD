@@ -2,17 +2,27 @@
 
 
 // ...
-int  Macro__Get_Date_Time(CString &date_time)
+int Macro__Get_Date_Time(CString& date_time)
 {
 	CTime t = CTime::GetCurrentTime();
 
 	date_time.Format("%00004d%002d%002d%002d%002d%002d",
-						t.GetYear(),
-						t.GetMonth(),
-						t.GetDay(),
-						t.GetHour(),
-						t.GetMinute(),
-						t.GetSecond());
+					 t.GetYear(),
+					 t.GetMonth(),
+					 t.GetDay(),
+					 t.GetHour(),
+					 t.GetMinute(),
+					 t.GetSecond());
+	return 1;
+}
+
+int Macro__Get_Date_Time(CString& str_date, CString& str_time)
+{
+	CTime t = CTime::GetCurrentTime();
+
+	str_date.Format("%00004d_%002d_%002d", t.GetYear(),t.GetMonth(),t.GetDay());
+	str_time.Format("%002d%002d%002d", t.GetHour(),t.GetMinute(),t.GetSecond());
+
 	return 1;
 }
 
@@ -55,6 +65,7 @@ CString Macro__Get_Current_Date()
 
 	return str_date;
 }
+
 CString Macro__Get_Current_Time()
 {
 	SYSTEMTIME file__sys_time;

@@ -3,10 +3,6 @@
 #include "CObj_Phy__PMC_STD__ALID.h"
 
 
-#include "CMacro_LOG.h"
-extern CMacro_LOG  mMacro_LOG;
-
-
 //-------------------------------------------------------------------------
 CObj_Phy__PMC_STD::CObj_Phy__PMC_STD()
 {
@@ -39,6 +35,12 @@ int CObj_Phy__PMC_STD::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__PUMP, "PUMP");
 		ADD__CTRL_VAR(sMODE__VENT, "VENT");
 	
+		ADD__CTRL_VAR(sMODE__SLOT_OPEN,  "SLOT.OPEN");
+		ADD__CTRL_VAR(sMODE__SLOT_CLOSE, "SLOT.CLOSE");
+
+		ADD__CTRL_VAR(sMODE__PIN_UP,   "PIN.UP");
+		ADD__CTRL_VAR(sMODE__PIN_DOWN, "PIN.DOWN");
+
 		ADD__CTRL_VAR(sMODE__PICK_READY,      "PICK_READY");
 		ADD__CTRL_VAR(sMODE__PICK_X_READY,    "PICK_X_READY");
 		ADD__CTRL_VAR(sMODE__PICK_COMPLETE,   "PICK_COMPLETE");
@@ -115,6 +117,8 @@ int CObj_Phy__PMC_STD::__DEFINE__VERSION_HISTORY(version)
 #define  DSP__MODE													\
 "TIME_INIT  SYSTEM_INIT   AUTO_INIT									\
 PUMP  VENT															\
+SLOT.OPEN  SLOT.CLOSE												\
+PIN.UP  PIN.DOWN    												\
 PICK_READY   PICK_X_READY   PICK_COMPLETE   PICK_X_COMPLETE			\
 PLACE_READY  PLACE_X_READY  PLACE_COMPLETE  PLACE_X_COMPLETE		\
 PRO_READY  PRO_START												\
@@ -285,7 +289,7 @@ int CObj_Phy__PMC_STD::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		str_name = "MODULE.TIME";
 		STD__ADD_STRING_WITH_COMMENT(str_name,"");
-		LINK__VAR_STRING_CTRL(xCH__MODULE_TIME,str_name);
+		LINK__VAR_STRING_CTRL(sCH__MODULE_TIME,str_name);
 
 		//
 		str_name = "TIME.ACT.START";
@@ -616,6 +620,10 @@ int CObj_Phy__PMC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.CLEAN.RECIPE";
 		STD__ADD_STRING_WITH_X_OPTION(str_name,"");
 		LINK__VAR_STRING_CTRL(xCH_CFG__CLEAN_RECIPE,str_name);
+
+		str_name = "CUR.CLEAN.WAFER_COUNT";
+		STD__ADD_STRING(str_name,"");
+		LINK__VAR_STRING_CTRL(sCH_CUR__CLEAN_WAFER_COUNT, str_name);
 
 		//
 		str_name = "SYSTEM.TOTAL.MATERIAL.COUNT";
@@ -1123,6 +1131,13 @@ int CObj_Phy__PMC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__PARA_TEMPLATE_FILE, str_name);
 	}
 
+	// CFG.ALARM_POST.PMC_DUMMY_BY_CTC
+	{
+		str_name = "CFG.ALARM_POST.PMC_DUMMY_BY_CTC";
+		STD__ADD_DIGITAL(str_name, "NO YES");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_ALARM_POST_PMC_DUMMY_BY_CTC, str_name);
+	}
+
 	// PHY_PMC - PROCESS INFO ...
 	{
 		str_name = "PHY_PMC.PROC.LOTID";
@@ -1502,14 +1517,28 @@ int CObj_Phy__PMC_STD::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__ALARM_POST_PMC_DUMMY_BY_CTC;
+
+		alarm_title  = title;
+		alarm_title += "Alarm Test In PMC_Dummy By CTC !";
+
+		alarm_msg = "\"IGNORE\"를 선택하면, 정상 진행된다. \n";	
+
+		l_act.RemoveAll();
+		l_act.Add("ABORT");
+		l_act.Add("IGNORE");
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
 //-------------------------------------------------------------------------
 int CObj_Phy__PMC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	mMacro_LOG.Init_LOG();
-
 	p_ext_obj_create->Link__DEF_VARIABLE__ERROR_FEEDBACK(&mERROR__DEF_VAR);
 
 	// ...
@@ -1643,9 +1672,16 @@ int CObj_Phy__PMC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(xEXT_CH_CFG__PMC_SLOT_MAX,cfg_db_name,str_name);
 		Check__PMx_Slot_Max();
 
-		LINK__EXT_VAR_ANALOG_CTRL(xEXT_CH_CFG__REF_ATM_PRESSURE,cfg_db_name,"REF.ATM.PRESSURE");
-		LINK__EXT_VAR_ANALOG_CTRL(xEXT_CH_CFG__REF_VAC_PRESSURE,cfg_db_name,"REF.VAC.PRESSURE");
-	
+		//
+		str_name = "REF.ATM.PRESSURE";
+		LINK__EXT_VAR_ANALOG_CTRL(xEXT_CH_CFG__REF_ATM_PRESSURE, cfg_db_name,str_name);
+
+		str_name = "REF.VAC.PRESSURE";
+		LINK__EXT_VAR_ANALOG_CTRL(xEXT_CH_CFG__REF_VAC_PRESSURE, cfg_db_name,str_name);
+
+		str_name = "TRANSFER.MODE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH_CFG__TRANSFER_MODE, cfg_db_name,str_name);
+
 		// LEAK CHECK TIME  ...
 		{
 			str_name = "LEAK_CHECK.SCH.SEQUENCE_MODE.REQ_FLAG";
@@ -1685,6 +1721,19 @@ int CObj_Phy__PMC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			str_name.Format("PM%1d.AUTO_PM.FLAG",iPMx_ID);
 			LINK__EXT_VAR_STRING_CTRL(xEXT_CH__PMC_AUTO_PM_FLAG, cfg_db_name,str_name);
+		}
+
+		// MARATHON_TEST ...
+		{
+			str_name = "PMx.MARATHON_TEST.USE";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ALL_PM_MARATHON_TEST_USE, cfg_db_name,str_name);
+
+			//
+			str_name.Format("PM%1d.MARATHON_TEST.USE", iPMx_ID);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PM_ID_MARATHON_TEST_USE, cfg_db_name,str_name);
+
+			str_name.Format("PM%1d.MARATHON_TEST.WAIT.SEC", iPMx_ID);
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC, cfg_db_name,str_name);
 		}
 	}
 
@@ -1757,6 +1806,7 @@ int CObj_Phy__PMC_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	// ...
 	{
 		SCX__SEQ_INFO x_seq_info;
+
 		x_seq_info->Get__DIR_ROOT(sDir_ROOT);
 
 		iSIM_MODE = x_seq_info->Is__SIMULATION_MODE();
@@ -1848,6 +1898,12 @@ int CObj_Phy__PMC_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__PUMP)					flag = Call__PUMP(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__VENT)					flag = Call__VENT(p_variable,p_alarm);
 
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)			flag = Call__SLOT_OPEN(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_CLOSE)			flag = Call__SLOT_CLOSE(p_variable,p_alarm);
+		
+		ELSE_IF__CTRL_MODE(sMODE__PIN_UP)				flag = Call__PIN_UP(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__PIN_DOWN)				flag = Call__PIN_DOWN(p_variable,p_alarm);
+
 		ELSE_IF__CTRL_MODE(sMODE__PICK_READY)			flag = Call__PICK_READY(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PICK_X_READY)			flag = Call__PICK_X_READY(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PICK_COMPLETE)		flag = Call__PICK_COMPLETE(p_variable);
@@ -1934,6 +1990,12 @@ int CObj_Phy__PMC_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__PUMP)					flag = Call__CTC_SIM__PUMP(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__VENT)					flag = Call__CTC_SIM__VENT(p_variable,p_alarm);
 
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)			flag = Call__CTC_SIM__SLOT_OPEN(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__SLOT_CLOSE)			flag = Call__CTC_SIM__SLOT_CLOSE(p_variable,p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__PIN_UP)				flag = Call__CTC_SIM__PIN_UP(p_variable,p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__PIN_DOWN)				flag = Call__CTC_SIM__PIN_DOWN(p_variable,p_alarm);
+
 		ELSE_IF__CTRL_MODE(sMODE__PICK_READY)			flag = Call__CTC_SIM__PICK_READY(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PICK_X_READY)			flag = Call__CTC_SIM__PICK_X_READY(p_variable);
 		ELSE_IF__CTRL_MODE(sMODE__PICK_COMPLETE)		flag = Call__CTC_SIM__PICK_COMPLETE(p_variable);
@@ -2000,6 +2062,30 @@ int CObj_Phy__PMC_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 			alarm_msg += bff;
 
 			p_alarm->Popup__ALARM_With_MESSAGE(ALID__OBJECT_MODE_UNKNOWN,alarm_msg,r_act);		
+		}
+
+		if(flag > 0)
+		{
+			if(dCH__CFG_ALARM_POST_PMC_DUMMY_BY_CTC->Check__DATA(STR__YES) > 0)
+			{
+				dCH__CFG_ALARM_POST_PMC_DUMMY_BY_CTC->Set__DATA(STR__NO);
+				xCH__PROC_INFO__PROCESS_STATUS->Set__DATA("Alarm");
+
+				// ...
+				{
+					int alm_id = ALID__ALARM_POST_PMC_DUMMY_BY_CTC;
+					CString alm_msg;
+					CString r_act;
+
+					alm_msg.Format("Action.Mode <- %s \n", mode);
+
+					p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+				
+					if(r_act.CompareNoCase("ABORT") == 0)		flag = -1;
+				}
+
+				xCH__PROC_INFO__PROCESS_STATUS->Set__DATA("Idle");
+			}
 		}
 	}
 

@@ -33,6 +33,12 @@ int  CObj_Phy__PMC_STD
 		return 1;
 	}
 
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		return 11;
+	}
+
 	// ...
 	{
 		SCX__SEQ_INFO x_seq_info;

@@ -26,6 +26,8 @@ private:
 	CX__VAR_STRING_CTRL  sCH__PARA_PROCESS_TIME_SEC;
 	CX__VAR_STRING_CTRL  sCH__APP_PROCESS_TIME_COUNT;
 
+	CX__VAR_STRING_CTRL  sCH__PARA_MANUAL_MOVE_SLOT_CLOSE_SKIP;
+	CX__VAR_STRING_CTRL  sCH__PARA_MANUAL_MOVE_LIFT_PIN_SKIP;
 
 	//-------------------------------------------------------------------------
 	// OBJ : DB_SYS ...
@@ -120,8 +122,6 @@ private:
 	CString sEXT_MODE__LEAK_CHECK;
 	CString sEXT_MODE__PURGE;
 
-	CString sEXT_MODE__SLOT_OPEN;
-	CString sEXT_MODE__SLOT_CLOSE;
 	CString sEXT_MODE__PIN_UP;
 	CString sEXT_MODE__PIN_DOWN;
 

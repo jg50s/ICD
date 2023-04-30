@@ -239,6 +239,32 @@ int CObj__ALx_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CUR_LLx_POST_POSITION_INCREMENT_ANGLE[i], def_data,var_name);
 			}
 		}
+
+		// PMx ...
+		{
+			for(int i=0; i<CFG_PMx__SIZE; i++)
+			{
+				int id = i + 1;
+
+				var_name.Format("CFG.PM%1d.ALIGN.POS", id);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_ALIGN_ANGLE[i], def_data,var_name);
+
+				var_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT", id);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT[i], def_data,var_name);
+
+				var_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.RANGE", id);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_RANGE[i], def_data,var_name);
+
+				var_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.START.ANGLE", id);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_START_ANGLE[i], def_data,var_name);
+
+				var_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.APPLY", id);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_APPLY[i], def_data,var_name);
+
+				var_name.Format("CUR.PM%1d.POST.POSITION.INCREMENT.ANGLE", id);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CUR_PMx_POST_POSITION_INCREMENT_ANGLE[i], def_data,var_name);
+			}
+		}
 	}
 
 	// LINK : CHANNEL ...
@@ -354,10 +380,11 @@ int CObj__ALx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		// ...
 		bool active_ll = false;
+		bool active_pm = false;
 
-		int ll_index   = Macro__CHECK_LLx_INDEX(llx_name);
 		int slot_index = -1;
 
+		int ll_index = Macro__CHECK_LLx_INDEX(llx_name);
 		if(ll_index >= 0)
 		{
 			if(bActive__LLx_MULTI_DOOR_VALVE)
@@ -371,6 +398,12 @@ int CObj__ALx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 			{
 				active_ll = true;
 			}
+		}
+
+		int pm_index = Macro__CHECK_PMx_INDEX(llx_name);
+		if(pm_index >= 0)
+		{
+			active_pm = true;
 		}
 
 		if(active_ll)
@@ -497,6 +530,69 @@ int CObj__ALx_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 						log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
 						log_msg += log_bff;
 					}
+				}
+			}
+		}
+
+		if(active_pm)
+		{
+			if(dEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_APPLY[pm_index]->Check__DATA(STR__ENABLE) > 0)
+			{
+				aEXT_CH__CUR_PMx_POST_POSITION_INCREMENT_ANGLE[pm_index]->Get__DATA(var_data);
+				double cur_angle = atof(var_data);
+
+				aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT[pm_index]->Get__DATA(var_data);
+				double cfg_inc = atof(var_data);
+
+				aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_RANGE[pm_index]->Get__DATA(var_data);
+				double max_angle = atof(var_data);
+
+				if(cur_angle > max_angle)		cur_angle = 0;
+
+				// ...
+				aEXT_CH__CFG_PMx_POST_POSITION_INCREMENT_START_ANGLE[pm_index]->Get__DATA(var_data);
+				double start_angle = atof(var_data);
+
+				al_angle.Format("%.0f", (start_angle+cur_angle));
+
+				// ...
+				{
+					double next_angle = cur_angle + cfg_inc;
+					if(next_angle > max_angle)		next_angle = 0;
+
+					var_data.Format("%.0f", next_angle);
+					aEXT_CH__CUR_PMx_POST_POSITION_INCREMENT_ANGLE[pm_index]->Set__DATA(var_data);
+				}
+
+				// ...
+				{
+					log_bff.Format("   CFG Increment Apply <- [%s] \n", STR__ENABLE);
+					log_msg += log_bff;
+
+					log_bff.Format("   Current Increment Angle <- [%.0f] \n", cur_angle);
+					log_msg += log_bff;
+
+					log_bff.Format("   CFG Increment Start Angle <- [%.0f] \n", start_angle);
+					log_msg += log_bff;
+
+					log_bff.Format("   CFG Increment Angle <- [%.0f] \n", cfg_inc);
+					log_msg += log_bff;
+
+					log_bff.Format("   CFG Increment Range <- [%.0f] \n", max_angle);
+					log_msg += log_bff;
+
+					log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+					log_msg += log_bff;
+				}
+			}	
+			else
+			{
+				aEXT_CH__CFG_PMx_ALIGN_ANGLE[pm_index]->Get__DATA(al_angle);
+
+				// ...
+				{
+					log_bff.Format("   Target Align Angle <- [%s] \n", al_angle);
+					log_msg += log_bff;
 				}
 			}
 		}

@@ -51,15 +51,12 @@ void CObj_Phy__PMC_STD
 	CString var_data;
 
 	// ...
-	SCX__TIMER_CTRL cx_timer;
-	cx_timer->INIT__COUNT_DOWN();
-
 	int loop_count = 0;
 
 
 	while(1)
 	{
-		cx_timer->POLL(0.1);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
 
 		loop_count++;
 		if(loop_count > 9)		loop_count = 0;

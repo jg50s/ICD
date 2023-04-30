@@ -44,3 +44,10 @@
 #define  ALID__EXHAUST_PRESSURE_TIMEOUT					28
 #define  ALID__LLx_LID__NOT_CLOSE						29
 
+#define  ALID__SR_VALVE_NOT_CLOSE						31
+#define  ALID__SR_VALVE_NOT_OPEN						32
+
+#define  ALID__FR_VALVE_NOT_CLOSE						33
+#define  ALID__FR_VALVE_NOT_OPEN						34
+
+#define  ALID__WAFER_SLIDE_SENSOR_DETECTED              35

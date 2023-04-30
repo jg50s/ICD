@@ -40,6 +40,9 @@ private:
 	CString sMODE__HOME;
 	int  Call__HOME(CII_OBJECT__VARIABLE* p_variable);
 
+	CString sMODE__ALARM_RESET;
+	int  Call__ALARM_RESET(CII_OBJECT__VARIABLE* p_variable);
+
 	//
 	CString sMODE__PREPLOAD;
 	int  Call__PREPLOAD(const CString& mode,CII_OBJECT__VARIABLE* p_variable);

@@ -29,8 +29,12 @@ int CObj__STEP_STD
 	CString rcp__mfc_x_flow[_CFG__MFC_SIZE];
 
 	CString rcp__rf_rps_power;
+
 	CString rcp__rf_lf_power;
+	CString rcp__rf_lf_mode;
+
 	CString rcp__rf_hf_power;
+	CString rcp__rf_hf_p2;
 	CString rcp__rf_hf_mode;
 
 	CString rcp__rf_pulse_frequency;
@@ -127,9 +131,11 @@ int CObj__STEP_STD
 
 		// RF.LF ...
 		sCH__RCP_RF_LF_POWER->Get__DATA(rcp__rf_lf_power);
+		dCH__RCP_RF_LF_MODE->Get__DATA(rcp__rf_lf_mode);
 
 		// RF.HF ...
 		sCH__RCP_RF_HF_POWER->Get__DATA(rcp__rf_hf_power);
+		sCH__RCP_RF_HF_P2->Get__DATA(rcp__rf_hf_p2);
 		dCH__RCP_RF_HF_MODE->Get__DATA(rcp__rf_hf_mode);
 
 		// RF.PULSE ...
@@ -339,7 +345,7 @@ int CObj__STEP_STD
 		{
 			if(obj_mode.CompareNoCase(_RF_CMD__OFF) != 0)
 			{
-				RF_LF_OBJ__Start_MODE(obj_mode, rcp__rf_lf_power);
+				RF_LF_OBJ__Start_MODE(obj_mode, rcp__rf_lf_power, rcp__rf_lf_mode);
 
 				// ...
 				{
@@ -354,7 +360,7 @@ int CObj__STEP_STD
 		}
 		else
 		{
-			RF_LF_OBJ__Start_MODE(obj_mode, rcp__rf_lf_power);
+			RF_LF_OBJ__Start_MODE(obj_mode, rcp__rf_lf_power, rcp__rf_lf_mode);
 		}
 	}
 	// RF.HF ...
@@ -362,6 +368,7 @@ int CObj__STEP_STD
 	{
 		CString obj_mode;
 		double set_power = atof(rcp__rf_hf_power);
+		double set_p2 = atof(rcp__rf_hf_p2);
 
 		if(set_power > 0.1)				obj_mode = _RF_CMD__PROC_SET;
 		else							obj_mode = _RF_CMD__OFF;
@@ -370,13 +377,13 @@ int CObj__STEP_STD
 		{
 			if(obj_mode.CompareNoCase(_RF_CMD__OFF) != 0)
 			{
-				RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power, rcp__rf_hf_mode);
+				RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power, rcp__rf_hf_p2, rcp__rf_hf_mode);
 
 				// ...
 				{
 					log_msg = "RF.HF Control ... \n";
 
-					log_bff.Format("  * RF.HF Control(%s, %s) \n", obj_mode, rcp__rf_hf_power);
+					log_bff.Format("  * RF.HF Control(%s, %s, %s) \n", obj_mode, rcp__rf_hf_power, rcp__rf_hf_p2);
 					log_msg += log_bff;
 
 					xLOG_CTRL->WRITE__LOG(log_msg);		
@@ -385,7 +392,7 @@ int CObj__STEP_STD
 		}
 		else
 		{
-			RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power, rcp__rf_hf_mode);
+			RF_HF_OBJ__Start_MODE(obj_mode, rcp__rf_hf_power, rcp__rf_hf_p2, rcp__rf_hf_mode);
 		}
 	}
 
@@ -1179,12 +1186,27 @@ int CObj__STEP_STD::_Fnc__PROC_LOG()
 						sCH__RCP_RF_LF_POWER->Get__CHANNEL_NAME(),
 						sCH__RCP_RF_LF_POWER->Get__STRING());
 		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						dCH__RCP_RF_LF_MODE->Get__CHANNEL_NAME(),
+						dCH__RCP_RF_LF_MODE->Get__STRING());
+		log_msg += log_bff;
 	}
 	// RF.HF ...
 	{
 		log_bff.Format(" * %s <- %s \n", 
 						sCH__RCP_RF_HF_POWER->Get__CHANNEL_NAME(),
 						sCH__RCP_RF_HF_POWER->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						sCH__RCP_RF_HF_P2->Get__CHANNEL_NAME(),
+						sCH__RCP_RF_HF_P2->Get__STRING());
+		log_msg += log_bff;
+
+		log_bff.Format(" * %s <- %s \n", 
+						dCH__RCP_RF_HF_MODE->Get__CHANNEL_NAME(),
+						dCH__RCP_RF_HF_MODE->Get__STRING());
 		log_msg += log_bff;
 	}
 

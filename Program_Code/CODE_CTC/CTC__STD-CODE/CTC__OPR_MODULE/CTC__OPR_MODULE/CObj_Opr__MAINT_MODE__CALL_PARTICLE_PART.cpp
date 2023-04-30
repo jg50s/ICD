@@ -44,6 +44,16 @@ int  CObj_Opr__MAINT_MODE
 int  CObj_Opr__MAINT_MODE
 ::Call__PARTICLE_TRANSFER_PART(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	// ...
+	{
+		sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA("");
+
+		sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA("");
+	}
+
 	_Reserve__PARTICLE_TRANSFER_PART(p_variable, p_alarm);
 
 	int r_flag = _Run__PARTICLE_TRANSFER_PART(p_variable, p_alarm);
@@ -56,6 +66,15 @@ int  CObj_Opr__MAINT_MODE
 		}
 	}
 
+	// ...
+	{
+		sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA("");
+		
+		sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA("");
+	}
 	return r_flag;
 }
 int  CObj_Opr__MAINT_MODE
@@ -273,6 +292,12 @@ int  CObj_Opr__MAINT_MODE
 					sCH__MOVE_TRG_MODULE->Set__DATA(para__trg_module);
 					sCH__MOVE_TRG_SLOT->Set__DATA(para__trg_slot);
 
+					// Add Option : DOOR.NOT_CLOSE 
+					{
+						ch_data = STR__YES;
+						sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA(ch_data);
+					}
+
 					if(Call__MANUAL_MOVE(p_variable) < 0)		return -11;
 				}
 
@@ -298,6 +323,14 @@ int  CObj_Opr__MAINT_MODE
 						sCH__MOVE_TRG_MODULE->Set__DATA(para__efem_module);
 						sCH__MOVE_TRG_SLOT->Set__DATA(para__efem_slot);
 
+						// Add Option : DOOR.NOT_CLOSE 
+						{
+							ch_data.Format("YES.%1d_1", cur_count);
+
+							sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA(ch_data);
+							sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA(ch_data);
+						}
+
 						if(Call__MANUAL_MOVE(p_variable) < 0)		return -21;
 
 						Sleep(500);
@@ -310,6 +343,14 @@ int  CObj_Opr__MAINT_MODE
 
 						sCH__MOVE_TRG_MODULE->Set__DATA(para__trg_module);
 						sCH__MOVE_TRG_SLOT->Set__DATA(para__trg_slot);
+
+						// Add Option : DOOR.NOT_CLOSE 
+						{
+							ch_data.Format("YES.%1d_2", cur_count);
+
+							sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA(ch_data);
+							sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA(ch_data);
+						}
 
 						if(Call__MANUAL_MOVE(p_variable) < 0)		return -22;
 
@@ -324,6 +365,14 @@ int  CObj_Opr__MAINT_MODE
 
 					sCH__MOVE_TRG_MODULE->Set__DATA(para__efem_module);
 					sCH__MOVE_TRG_SLOT->Set__DATA(para__efem_slot);
+
+					// ...
+					{
+						ch_data = STR__END;
+
+						sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA(ch_data);
+						sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA(ch_data);
+					}
 
 					if(Call__MANUAL_MOVE(p_variable) < 0)		return -31;
 				}
@@ -393,7 +442,8 @@ int  CObj_Opr__MAINT_MODE
 					if(Call__MANUAL_MOVE(p_variable) < 0)		return -31;
 				}			
 			}
-			else if(i == _ACT_ID__LLx_PUMP_VENT)
+			else if((i == _ACT_ID__LLx_PUMP_VENT)
+			     || (i == _ACT_ID__LLx_COOLING))
 			{
 				// PARA.TRG ...
 				{
@@ -432,7 +482,7 @@ int  CObj_Opr__MAINT_MODE
 					{
 						dEXT_CH__LLx_PARA_SLOT_ID[ll_index]->Set__DATA(para__trg_slot);
 
-						if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("PUMP") < 0)		return -21;
+						if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("PUMP") < 0)			return -21;
 
 						Sleep(500);
 					}
@@ -441,7 +491,37 @@ int  CObj_Opr__MAINT_MODE
 					{
 						dEXT_CH__LLx_PARA_SLOT_ID[ll_index]->Set__DATA(para__trg_slot);
 
-						if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("VENT") < 0)		return -22;
+						if(i == _ACT_ID__LLx_COOLING)
+						{
+							if(dCH__PARTICLE_PARA_LLx_COOL_TYPE->Check__DATA(STR__TMC) > 0)
+							{
+								if(dEXT_CH__LLx_PRESSURE_STATUS[ll_index]->Check__DATA(STR__ATM) < 0)
+								{
+									CString ch_data = aCH__PARTICLE_PARA_LLx_COOLING_SEC->Get__STRING();
+									aEXT_CH__LLx_PARA_VENT_COOLING_SEC[ll_index]->Set__DATA(ch_data);
+								}
+							}
+							else
+							{
+								SCX__TIMER_CTRL x_timer_ctrl;
+
+								x_timer_ctrl->REGISTER__ABORT_OBJECT(sObject_Name);
+								x_timer_ctrl->REGISTER__COUNT_CHANNEL(sCH__PARTICLE_CUR_LLx_COOLING_SEC->Get__CHANNEL_NAME());
+								x_timer_ctrl->INIT__COUNT_DOWN();
+
+								double cfg_sec = aCH__PARTICLE_PARA_LLx_COOLING_SEC->Get__VALUE();
+
+								printf(" * LLx.COOLING - Start \n");
+								printf(" * Time <- %s", Macro__Get_Current_Date_Time());
+
+								if(x_timer_ctrl->WAIT(cfg_sec) < 0)			return -103;
+
+								printf(" * LLx.COOLING - End \n");
+								printf(" * Time <- %s", Macro__Get_Current_Date_Time());
+							}
+						}
+
+						if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("VENT") < 0)			return -22;
 
 						Sleep(500);
 					}
@@ -554,6 +634,12 @@ int  CObj_Opr__MAINT_MODE
 					sCH__MOVE_TRG_MODULE->Set__DATA(para__llx_module);
 					sCH__MOVE_TRG_SLOT->Set__DATA(para__llx_slot);
 
+					// Add Option : DOOR.NOT_CLOSE 
+					{
+						ch_data = STR__YES;
+						sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+					}
+
 					if(Call__MANUAL_MOVE(p_variable) < 0)		return -11;
 				}
 				
@@ -578,6 +664,12 @@ int  CObj_Opr__MAINT_MODE
 						sCH__MOVE_TRG_MODULE->Set__DATA(para__trg_module);
 						sCH__MOVE_TRG_SLOT->Set__DATA(para__trg_slot);
 
+						// Add Option : DOOR.NOT_CLOSE 
+						{
+							ch_data.Format("YES.%1d_1", cur_count);
+							sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+						}
+
 						if(Call__MANUAL_MOVE(p_variable) < 0)		return -21;
 
 						Sleep(500);
@@ -590,6 +682,23 @@ int  CObj_Opr__MAINT_MODE
 
 						sCH__MOVE_TRG_MODULE->Set__DATA(para__llx_module);
 						sCH__MOVE_TRG_SLOT->Set__DATA(para__llx_slot);
+
+						// Add Option : DOOR.NOT_CLOSE 
+						{
+							ch_data = sCH__PARA_TRANSFER_CUR_COUNT_X[i]->Get__STRING();
+							int cur_count = atoi(ch_data);
+						
+							if(cur_count < cfg_count)
+							{
+								ch_data.Format("YES.%1d_2", cur_count);
+								sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+							}
+							else
+							{
+								ch_data = STR__END;
+								sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+							}
+						}
 
 						if(Call__MANUAL_MOVE(p_variable) < 0)		return -22;
 
@@ -719,6 +828,16 @@ int  CObj_Opr__MAINT_MODE
 int  CObj_Opr__MAINT_MODE
 ::Call__PARTICLE_PROCESS_PART(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	// ...
+	{
+		sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA("");
+
+		sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA("");
+	}
+
 	_Reserve__PARTICLE_PROCESS_PART(p_variable, p_alarm);
 
 	int r_flag = _Run__PARTICLE_PROCESS_PART(p_variable, p_alarm);
@@ -734,6 +853,16 @@ int  CObj_Opr__MAINT_MODE
 				}
 			}
 		}
+	}
+
+	// ...
+	{
+		sEXT_CH__PARA_MANUAL_MOVE_ALIGN_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Set__DATA("");
+
+		sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA("");
+		sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA("");
 	}
 	return r_flag;
 }
@@ -940,6 +1069,12 @@ int  CObj_Opr__MAINT_MODE
 						sCH__MOVE_TRG_MODULE->Set__DATA(para__trg_module);
 						sCH__MOVE_TRG_SLOT->Set__DATA(para__trg_slot);
 
+						// Add_Option : SLOT_CLOSE SKIP
+						{
+							ch_data = STR__YES;
+							sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+						}
+
 						if(Call__MANUAL_MOVE(p_variable) < 0)		return -11;
 					}
 
@@ -964,6 +1099,12 @@ int  CObj_Opr__MAINT_MODE
 							sCH__MOVE_TRG_MODULE->Set__DATA(para__arm_module);
 							sCH__MOVE_TRG_SLOT->Set__DATA(para__arm_slot);
 
+							// Add_Option : SLOT_CLOSE SKIP
+							{
+								ch_data.Format("YES.%1d_1", cur_count);
+								sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+							}
+
 							if(Call__MANUAL_MOVE(p_variable) < 0)		return -12;
 
 							Sleep(500);
@@ -976,6 +1117,12 @@ int  CObj_Opr__MAINT_MODE
 
 							sCH__MOVE_TRG_MODULE->Set__DATA(para__trg_module);
 							sCH__MOVE_TRG_SLOT->Set__DATA(para__trg_slot);
+
+							// Add_Option : SLOT_CLOSE SKIP
+							{
+								ch_data.Format("YES.%1d_2", cur_count);
+								sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+							}
 
 							if(Call__MANUAL_MOVE(p_variable) < 0)		return -21;
 
@@ -1020,6 +1167,13 @@ int  CObj_Opr__MAINT_MODE
 
 						// SLOT-VLV.OPEN
 						{
+							// Add_Option : LIFT_PIN SKIP
+							{
+								ch_data.Format("YES.%1d_1", cur_count);
+								sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA(ch_data);
+							}
+
+							// ...
 							ch_data.Format("%1d", i+1);
 							dEXT_CH__TMC_CHM__PARA_PMx_ID->Set__DATA(ch_data);
 							if(pOBJ_CTRL__TMC_CHM->Call__OBJECT("PMx.SV_OPEN") < 0)			return -31;
@@ -1031,6 +1185,13 @@ int  CObj_Opr__MAINT_MODE
 
 						// SLOT-VLV.CLOSE
 						{
+							// Add_Option : LIFT_PIN SKIP
+							{
+								ch_data.Format("YES.%1d_2", cur_count);
+								sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA(ch_data);
+							}
+
+							// ...
 							ch_data.Format("%1d", i+1);
 							dEXT_CH__TMC_CHM__PARA_PMx_ID->Set__DATA(ch_data);
 							if(pOBJ_CTRL__TMC_CHM->Call__OBJECT("PMx.SV_CLOSE") < 0)		return -33;
@@ -1194,6 +1355,15 @@ int  CObj_Opr__MAINT_MODE
 
 						sCH__MOVE_TRG_MODULE->Set__DATA(para__llx_module);
 						sCH__MOVE_TRG_SLOT->Set__DATA(para__llx_slot);
+
+						// ...
+						{
+							ch_data = STR__END;
+
+							sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Set__DATA(ch_data);
+							sCH__PARA_MANUAL_MOVE_PMx_LIFT_PIN_SKIP->Set__DATA(ch_data);
+						}
+
 						if(Call__MANUAL_MOVE(p_variable) < 0)		return -101;
 					}
 
@@ -1208,10 +1378,20 @@ int  CObj_Opr__MAINT_MODE
 						int ll_index = Get__LLx_INDEX(para__llx_module);
 						dEXT_CH__LLx_PARA_SLOT_ID[ll_index]->Set__DATA(para__llx_slot);
 
+						if(dCH__PARTICLE_PARA_LLx_COOL_TYPE->Check__DATA(STR__TMC) > 0)
+						{
+							if(dEXT_CH__LLx_PRESSURE_STATUS[ll_index]->Check__DATA(STR__ATM) < 0)
+							{
+								CString ch_data = aCH__PARTICLE_PARA_LLx_COOLING_SEC->Get__STRING();
+								aEXT_CH__LLx_PARA_VENT_COOLING_SEC[ll_index]->Set__DATA(ch_data);
+							}
+						}
+
 						if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("VENT") < 0)		return -102;
 					}
 
 					// LL.COOLING
+					if(dCH__PARTICLE_PARA_LLx_COOL_TYPE->Check__DATA(STR__CTC) > 0)
 					{
 						SCX__TIMER_CTRL x_timer_ctrl;
 
@@ -1258,6 +1438,7 @@ CString CObj_Opr__MAINT_MODE::_Get__Transfer_Action_Name(const int act_id)
 	if(act_id == _ACT_ID__MOVE_TO_LLx_IN_ATM)		return _ACT_MOVE__MOVE_TO_LLx_IN_ATM;
 	if(act_id == _ACT_ID__LLx_DOOR_VLV_OP_CL)		return _ACT_MOVE__LLx_DOOR_VLV_OP_CL;
 	if(act_id == _ACT_ID__LLx_PUMP_VENT)			return _ACT_MOVE__LLx_PUMP_VENT;
+	if(act_id == _ACT_ID__LLx_COOLING)				return _ACT_MOVE__LLx_COOLING;
 	if(act_id == _ACT_ID__LLx_SLOT_VLV_OP_CL)		return _ACT_MOVE__LLx_SLOT_VLV_OP_CL;
 	if(act_id == _ACT_ID__MOVE_TO_LLx_IN_VAC)		return _ACT_MOVE__MOVE_TO_LLx_IN_VAC;
 	if(act_id == _ACT_ID__MOVE_TO_AL1)				return _ACT_MOVE__MOVE_TO_AL1;

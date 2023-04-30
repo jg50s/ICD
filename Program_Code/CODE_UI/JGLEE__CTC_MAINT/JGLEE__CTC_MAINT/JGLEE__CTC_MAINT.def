@@ -1,0 +1,6 @@
+; JGLEE__CTC_MAINT.def : Declares the module parameters for the DLL.
+
+LIBRARY      "JGLEE__CTC_MAINT"
+
+EXPORTS
+    ; Explicit exports can go here

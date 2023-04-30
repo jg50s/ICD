@@ -63,23 +63,49 @@ private:
 	//-------------------------------------------------------------------------
 	// EXTERNAL PROPERTY
 
-	// I/O OBJECT -----
+	// LIGHT : ON_OFF ...
+	bool bActive__LIGHT_RED__ON_OFF;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_RED__ON_OFF;
+
+	bool bActive__LIGHT_YELLOW__ON_OFF;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_YELLOW__ON_OFF;
+
+	bool bActive__LIGHT_GREEN__ON_OFF;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_GREEN__ON_OFF;
+
+	bool bActive__LIGHT_BLUE__ON_OFF;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_BLUE__ON_OFF;
+
+	bool bActive__LIGHT_WHITE__ON_OFF;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_WHITE__ON_OFF;
 
+	// LIGHT : BLINK ...
+	bool bActive__LIGHT_RED__BLINK;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_RED__BLINK;
+
+	bool bActive__LIGHT_YELLOW__BLINK;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_YELLOW__BLINK;
+
+	bool bActive__LIGHT_GREEN__BLINK;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_GREEN__BLINK;
+
+	bool bActive__LIGHT_BLUE__BLINK;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_BLUE__BLINK;
+
+	bool bActive__LIGHT_WHITE__BLINK;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__LIGHT_WHITE__BLINK;
 
-	CX__VAR_DIGITAL_CTRL doEXT_CH__ALARM_BUZZER;
+	// ALARM_BUZZER ...
+	bool bActive__ALARM_BUZZER_SET;
+	CX__VAR_DIGITAL_CTRL doEXT_CH__ALARM_BUZZER_SET;
+
+	bool bActive__ALARM_BUZZER_RESET;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__ALARM_BUZZER_RESET;
 
+	// MELODY ...
+	int iSIZE_MELODY;
 	CX__VAR_DIGITAL_CTRL doEXT_CH__MELODY[CFG_MELODY_MAX];
+	//
 
 
 	//------------------------------------------------------------------------------
@@ -160,13 +186,15 @@ private:
 	CString sMODE__MELODY_OFF;
 	int  Call__MELODY_OFF();
 
-	//
+	// ...
 	int Seq__SET_BUZZER_ON();
 	int Seq__SET_BUZZER_OFF();
-
+	//
 
 	//------------------------------------------------------------------------------
 	void Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
+
+	bool Check__DEF(const CString& def_data);
 	//
 
 

@@ -1,6 +1,12 @@
 #pragma once
 
 
+// ...
+#define  ACT__YES					"YES"
+#define  ACT__NO					"NO"
+
+
+// ...
 #define  ALID__OBJECT_MODE_UNKNOWN							11
 
 #define  ALID__ACCESS_MODE_VIOLATION						21

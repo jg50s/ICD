@@ -19,8 +19,7 @@ int  CObj__SYS_IO
 	if((lock_id == ALID__VENT_Fast_Valve__OPEN)
 	|| (lock_id == ALID__VENT_Soft_Valve__OPEN))
 	{
-		if(dEXT_CH__ACTIVE_INTERLOCK_CHAMBER_VENT->Check__DATA(STR__OFF) > 0)			return -1;
-
+		if(dEXT_CH__ACTIVE_INTERLOCK_CHAMBER_VENT->Check__DATA(STR__OFF) > 0)		return -1;
 	}
 
 	return 1;

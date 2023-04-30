@@ -167,9 +167,20 @@ int CObj__ACTIVE_HANDOFF_INF::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		pOBJ_CTRL__OPR_PMC = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
-		//
-		var_name = "OBJ.STATUS";
-		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__OPR_OBJ_STATE, obj_name,var_name);
+		// OBJ ...
+		{
+			var_name = "OBJ.STATUS";
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__OPR_OBJ_STATE, obj_name,var_name);
+		}
+
+		// PARA ...
+		{
+			var_name = "PARA.MANUAL_MOVE.SLOT_CLOSE.SKIP";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PARA_MANUAL_MOVE_SLOT_CLOSE_SKIP, obj_name,var_name);
+
+			var_name = "PARA.MANUAL_MOVE.LIFT_PIN.SKIP";
+			LINK__EXT_VAR_STRING_CTRL(sEXT_CH__PARA_MANUAL_MOVE_LIFT_PIN_SKIP, obj_name,var_name);
+		}
 	}
 
 	// OBJ.PM_SLOT ...
@@ -305,6 +316,12 @@ LOOP_RETRY:
 		}
 
 		dEXT_CH__OPR_OBJ_STATE->Set__DATA(STR__MAINTMODE);
+
+		// ...
+		{
+			sEXT_CH__PARA_MANUAL_MOVE_SLOT_CLOSE_SKIP->Set__DATA(STR__END);
+			sEXT_CH__PARA_MANUAL_MOVE_LIFT_PIN_SKIP->Set__DATA(STR__END);
+		}
 	}
 	else
 	{

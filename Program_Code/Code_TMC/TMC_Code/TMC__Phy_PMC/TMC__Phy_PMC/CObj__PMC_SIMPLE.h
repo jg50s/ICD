@@ -6,6 +6,10 @@
 #include "CCommon_Error.h"
 
 
+#define _DEF__PMx_SLOT_VLV_TYPE__IO				1
+#define _DEF__PMx_SLOT_VLV_TYPE__OBJ			2
+
+
 class CObj__PMC_SIMPLE : public __IOBJ__STD_TYPE
 {
 private:
@@ -22,10 +26,14 @@ private:
 	//-------------------------------------------------------------------------
 	// INTERNAL PROPERTY
 
+	// OBJ ...
 	CX__VAR_STRING_CTRL  sCH__OBJ_ACTIVE_MODE;
 
-	//
+	// PARA ...
 	CX__VAR_ANALOG_CTRL  aCH__PARA_PMC_ID;
+
+	// CFG ...
+	CX__VAR_DIGITAL_CTRL dCH__CFG_IO_OFF_MODE;
 
 	//
 	CX__VAR_DIGITAL_CTRL dCH__CFG_HANDSHAKE_MODE[CFG_PMx__SIZE];
@@ -40,7 +48,6 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__CFG_USE_CR_POSITION[CFG_PMx__SIZE];
 
 	// 
-	CX__VAR_STRING_CTRL  sCH__OBJ_STATUS[CFG_PMx__SIZE];
 	CX__VAR_ANALOG_CTRL  aCH__PRESSURE_TORR[CFG_PMx__SIZE];
 	CX__VAR_STRING_CTRL  sCH__PRESSURE_STATUS[CFG_PMx__SIZE];
 
@@ -57,6 +64,8 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__PRESS_STATUS[CFG_PMx__SIZE];
 
 	//
+	CX__VAR_DIGITAL_CTRL dCH__CYCLE_TEST_USE_LIFT_PIN_DOWN_PM_X[CFG_PMx__SIZE];
+	
 	CX__VAR_STRING_CTRL  sCH__CYCLE_TEST_CFG_PMC_ID;
 	CX__VAR_STRING_CTRL  sCH__CYCLE_TEST_CFG_SV_CLOSE_MODE;
 
@@ -126,18 +135,40 @@ private:
 	CX__VAR_DIGITAL_CTRL dEXT_CH__PHY_TM__PRESS_STS;
 	CX__VAR_ANALOG_CTRL  aEXT_CH__PHY_TM__PRESS_TORR;
 
+	// PMx_SLOT_VLV.CTRL_TYPE ...
+	int iDATA__PMx_SLOT_VLV_CTRL_TYPE;
+	
+	CII_EXT_OBJECT__CTRL* pOBJ_CTRL__PMx_HANDOFF;
+	CString sMODE__PMx_SLOT_VLV__OPEN;
+	CString sMODE__PMx_SLOT_VLV__CLOSE;
+
+	CX__VAR_ANALOG_CTRL  aEXT_CH__PARA_PMC_ID;
+
+	CX__VAR_DIGITAL_CTRL dEXT_CH__PMx_SLOT_VLV__OBJ_STATUS_X[CFG_PMx__SIZE];
+
 	// I/O OBJECT -----
 	CX__VAR_DIGITAL_CTRL diEXT_CH__DNET_COMM_STS;
 
-	CX__VAR_DIGITAL_CTRL doEXT_CH__PMx__SV_OPEN[CFG_PMx__SIZE];
-	CX__VAR_DIGITAL_CTRL doEXT_CH__PMx__SV_CLOSE[CFG_PMx__SIZE];
+	//
+	bool bActive__PMx__SV_OPEN_X[CFG_PMx__SIZE];
+	CX__VAR_DIGITAL_CTRL doEXT_CH__PMx__SV_OPEN_X[CFG_PMx__SIZE];
 
+	bool bActive__PMx__SV_CLOSE_X[CFG_PMx__SIZE];
+	CX__VAR_DIGITAL_CTRL doEXT_CH__PMx__SV_CLOSE_X[CFG_PMx__SIZE];
+
+	//
 	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__SV_OPEN[CFG_PMx__SIZE];
 	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__SV_CLOSE[CFG_PMx__SIZE];
 
 	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__ATM_SNS[CFG_PMx__SIZE];
 	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__VAC_SNS[CFG_PMx__SIZE];
 
+	//
+	int iSIZE_PMx__WAFER_OUT_X[CFG_PMx__SIZE];
+	CX__VAR_DIGITAL_CTRL diEXT_CH__PMx__WAFER_OUT_XY[CFG_PMx__SIZE][CFG_WAFER_OUT__SIZE];
+
+	//
+	bool bActive__VAC_RB__RNE_PM_X[CFG_PMx__SIZE];
 	CX__VAR_DIGITAL_CTRL diEXT_CH__VAC_RB__RNE_PM_X[CFG_PMx__SIZE];
 
 	// ATM & VAC STATE ...
@@ -163,9 +194,16 @@ private:
 
 	int  Check__SAME_PRESSURE_FOR_VAC_Or_ATM(CII_OBJECT__ALARM* p_alarm,const int pmc_id, const int alarm_id,const CString& act_msg);
 
+	int  Is__CLOSE_CONDITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id);
+
 	int  Is__SV_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id);
 	int  Is__SV_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id);
-	int  Is__CLOSE_CONDITION(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id);
+
+	int  Set_IO__SV_OPEN(const int pmc_id);
+	int  End_IO__SV_OPEN(const int pmc_id);
+
+	int  Set_IO__SV_CLOSE(const int pmc_id);
+	int  End_IO__SV_CLOSE(const int pmc_id);
 
 	//
 	CString sMODE__INIT_SV_CLOSE;
@@ -180,6 +218,7 @@ private:
 	CString sMODE__SV_OPEN;
 	int  Call__SV_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id);
 
+	int  _Call__SV_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id);
 	int  Fnc__SV_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const int pmc_id,const double cfg_timeout);
 
 	//

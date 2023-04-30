@@ -624,6 +624,30 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "CFG.He_CENTER.PRESSURE_THRESHOLD.MAX.FAULT";
 		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "%", 1, 0.0, 100.0, "");
 		LINK__VAR_ANALOG_CTRL(aCH__CFG_He_CENTER_PRESSURE_THRESHOLD_MAX_FAULT, var_name);
+
+
+		//KMS
+		var_name = "CFG.HE.PRESSURE.CTRL.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "SET RAMP", ""); // SET : right away value set, RAMP : ramp Set by Up Time
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_CTRL_MODE, var_name);
+
+		var_name = "CFG.HE.PRESSURE.RAMP.UP.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 0, 0, 20, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_RAMP_TIME, var_name);
+
+		var_name = "CFG.HE.INIT.HE.PRESSURE";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "torr", 1, 0.0, 50.0, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_INIT_HE_PRESSURE, var_name);
+
+		var_name = "CFG.HE.INIT.HE.STABLE.TIME";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sec", 0, 0, 20, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_INIT_HE_STABLE_TIME, var_name);
+
+		var_name = "CFG.HE.RAMP.UP.STEP";
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "", 0, 0, 5, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_HE_RAMP_STEP, var_name);
+
+
 	}
 
 	// Chuck Step - Parameter ...
@@ -1048,6 +1072,7 @@ int CObj__ESC_IO::__DEFINE__VARIABLE_STD(p_variable)
 			var_name = "CFG.DECHUCK_VERIFY_CHECK_COUNT";
 			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "Count", 0, 1, 5, "");
 			LINK__VAR_ANALOG_CTRL(aCH__CFG_DECHUCK_VERIFY_CHECK_COUNT, var_name);
+
 
 			var_name = "CFG.HE.MINIMUM_LEAK.FOR.DECHUCK_VERIFY";
 			STD__ADD_ANALOG_WITH_X_OPTION(var_name, "sccm", 1, 0.0, 100.0, "");
@@ -1678,7 +1703,7 @@ int CObj__ESC_IO::__DEFINE__ALARM(p_alarm)
 		alarm_msg  = "";
 		alarm_msg += "Please, check He flow ! \n";
 
-		_LALM__RETRY_CLEAR;
+		_LALM__CLEAR;
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}	
@@ -2037,6 +2062,11 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 				LINK__EXT_VAR_ANALOG_CTRL(aiEXT_CH__ESC_Current_CENTER, obj_name,var_name);
+
+				def_name = "CH_PARA_ESC_VOLTAGE_CENTER";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_PARAM_ESC_Voltage_CENTER, obj_name,var_name);
 			}
 			// Edge ...
 			if(bActive__EDGE_USE)
@@ -2243,7 +2273,7 @@ int CObj__ESC_IO::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			def_name = "CH_DI_RF_ON_STATUS";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_ON_STATUS, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_ON_STAUTS, obj_name,var_name);
 		}
 	}
 

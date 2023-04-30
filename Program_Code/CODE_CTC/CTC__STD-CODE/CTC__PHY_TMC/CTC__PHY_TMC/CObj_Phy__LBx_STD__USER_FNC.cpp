@@ -122,25 +122,11 @@ LOOP_RETRY:
 			bool active__err_check = false;
 
 			double cur__pressure_torr = xCH__PRESSURE_VALUE->Get__VALUE();
-			double cfg__pressure_torr = 0.0;
+			double cfg__pressure_torr = aEXT_CH_CFG__REF_ATM_PRESSURE->Get__VALUE();
 
-			if(xEXT_CH_CFG__TRANSFER_MODE->Check__DATA(STR__ATM) > 0)
+			if(cur__pressure_torr < cfg__pressure_torr)
 			{
-				cfg__pressure_torr = aEXT_CH_CFG__REF_ATM_PRESSURE->Get__VALUE();
-
-				if(cur__pressure_torr < cfg__pressure_torr)
-				{
-					active__err_check = true;
-				}
-			}
-			else
-			{
-				cfg__pressure_torr = aEXT_CH_CFG__REF_VAC_PRESSURE->Get__VALUE();
-
-				if(cur__pressure_torr > cfg__pressure_torr)
-				{
-					active__err_check = true;
-				}
+				active__err_check = true;
 			}
 
 			if(active__err_check)

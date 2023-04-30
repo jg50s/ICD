@@ -3,10 +3,6 @@
 #include "CObj_Phy__PMC_DUMMY__ALID.h"
 
 
-#include "CMacro_LOG.h"
-extern CMacro_LOG  mMacro_LOG;
-
-
 //-------------------------------------------------------------------------
 CObj_Phy__PMC_DUMMY::CObj_Phy__PMC_DUMMY()
 {
@@ -639,8 +635,6 @@ int CObj_Phy__PMC_DUMMY::__DEFINE__ALARM(p_alarm)
 //-------------------------------------------------------------------------
 int CObj_Phy__PMC_DUMMY::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
-	mMacro_LOG.Init_LOG();
-
 	p_ext_obj_create->Link__DEF_VARIABLE__ERROR_FEEDBACK(&mERROR__DEF_VAR);
 
 	// ...

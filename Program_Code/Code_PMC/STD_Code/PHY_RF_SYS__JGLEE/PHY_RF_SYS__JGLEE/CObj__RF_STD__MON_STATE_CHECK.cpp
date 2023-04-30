@@ -142,27 +142,28 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			double set_offset = atof(ch_data);
 
 			// SET.POWER ...
+			double io_power_set = 0.0;
 			{
 				bool active__rf_pwr = false;
-				double io_power_set = 0.0;
-
-				// ...
+				double io_value = 0.0;
 				{
 					ch_data = aEXT_CH__RF_AO_SET_POWER->Get__STRING();
 					io_power_set = atof(ch_data);
-					
-					double io_value = io_power_set - set_offset;
-
+					if(io_power_set <= 0) io_value = io_power_set;
+					else io_value = io_power_set + set_offset;
 					ch_data.Format("%.1f", io_value);
 					sCH__MON_IO_SET_POWER->Set__DATA(ch_data);
-				}
 
+				}
+				// ...
 				if(bActive__RF_DO_POWER_CTRL)
 				{
 					ch_data = dEXT_CH__RF_DO_POWER_CTRL->Get__STRING();
 					sCH__MON_DO_POWER_SET->Set__DATA(ch_data);
-
-					if(ch_data.CompareNoCase(STR__ON) == 0)			active__rf_pwr = true;
+					if(ch_data.CompareNoCase(STR__ON) == 0)
+					{
+						active__rf_pwr = true;
+					}
 				}
 				else
 				{
@@ -181,8 +182,11 @@ Mon__STATE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			// FORWARD.POWER ...
 			{
 				ch_data = sEXT_CH__RF_AI_FORWARD_POWER->Get__STRING();
-				double io_value = atof(ch_data) - set_offset;
+				double io_value = 0.0;
+				if(io_power_set <= 0) {io_value = atof(ch_data);} // IO_Set is 0 that will not adapting offset
+				else {io_value = atof(ch_data) - set_offset;} 
 
+				 
 				ch_data.Format("%.1f", io_value);
 				sCH__MON_IO_FORWARD_POWER->Set__DATA(ch_data);
 			}

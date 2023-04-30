@@ -10,32 +10,75 @@ int  CObj__LPx_SYS
 {
 LOOP_RETRY:
 
-	if(bActive__ROBOT_ARM_RNE_SNS)
+	// ...
+	int check_count = 0;
+
+	while(1)
 	{
-		int r_flag = dEXT_CH__ROBOT_ARM_RNE_SNS->When__DATA(sDATA__RNE_ON, 2.0); 
+		bool active__arm_extend = false;
 
-		if(r_flag <= 0)
+		if(bActive__DI_ROBOT_ARM_RNE_SNS)
 		{
-			int alm_id = ALID__ROBOT_ARM__NOT_RETRACTED;
+			CII__VAR_DIGITAL_CTRL* p_ch__arm_retract = dEXT_CH__ROBOT_ARM_RNE_SNS.Get__PTR();
+	
+			if(p_ch__arm_retract->Check__DATA(sDATA__RNE_ON) < 0)		active__arm_extend = true;
+		}
+		if(bActive__ROBOT_OBJ_CTRL)
+		{
+			CII__VAR_DIGITAL_CTRL* p_ch__arm_extend = dEXT_CH__ROBOT__MON_ACTIVE_ACTION_TO_LP.Get__PTR();
 
-			CString alm_msg;
-			CString alm_bff;
-			CString r_act;
+			if(p_ch__arm_extend->Check__DATA(STR__OFF) < 0)				active__arm_extend = true;
+		}
 
-			alm_msg.Format(" * %s <- %s \n", 
-				dEXT_CH__ROBOT_ARM_RNE_SNS->Get__CHANNEL_NAME(),
-				dEXT_CH__ROBOT_ARM_RNE_SNS->Get__STRING());
+		if(active__arm_extend)
+		{
+			check_count++;
+			if(check_count < 50)
+			{
+				Sleep(100);
+				continue;
+			}
 
-			alm_bff.Format(" * RNE_ON.STATE  <- %s \n", sDATA__RNE_ON);
-			alm_msg += alm_bff;
+			// ...
+			{
+				int alm_id = ALID__ROBOT_ARM__NOT_RETRACTED;
 
-			alm_bff.Format(" * RNE_OFF.STATE <- %s \n", sDATA__RNE_OFF);
-			alm_msg += alm_bff;
+				CString alm_msg;
+				CString alm_bff;
+				CString r_act;
 
-			p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+				if(bActive__DI_ROBOT_ARM_RNE_SNS)
+				{
+					alm_bff.Format(" * %s <- %s \n", 
+								dEXT_CH__ROBOT_ARM_RNE_SNS->Get__CHANNEL_NAME(),
+								dEXT_CH__ROBOT_ARM_RNE_SNS->Get__STRING());
+					alm_msg += alm_bff;
+	
+					alm_bff.Format(" * RNE_ON.STATE  <- %s \n", sDATA__RNE_ON);
+					alm_msg += alm_bff;
 
-			if(r_act.CompareNoCase(ACT__RETRY) == 0)		goto LOOP_RETRY;
-			return -1;
+					alm_bff.Format(" * RNE_OFF.STATE <- %s \n", sDATA__RNE_OFF);
+					alm_msg += alm_bff;
+				}
+
+				if(bActive__ROBOT_OBJ_CTRL)
+				{
+					alm_bff.Format(" * %s <- %s \n", 
+									dEXT_CH__ROBOT__MON_ACTIVE_ACTION_TO_LP->Get__CHANNEL_NAME(),
+									dEXT_CH__ROBOT__MON_ACTIVE_ACTION_TO_LP->Get__STRING());
+					alm_msg += alm_bff;
+				}
+
+				p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+	
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)		goto LOOP_RETRY;
+				return -1;
+			}
+		}
+		else
+		{
+			// OK !!!
+			break;
 		}
 	}
 
@@ -83,7 +126,7 @@ Chk_Again:
 
 	if(iActive__SIM_MODE > 0)
 	{
-		diEXT_CH__LPx_WAFER_SLID_OUT->Set__DATA(STR__OFF);
+		if(bActive__DI_SLIDE_OUT_SNS)			diEXT_CH__LPx_WAFER_SLID_OUT->Set__DATA(STR__OFF);
 	}
 
 	if(dCH__CFG_WAFER_SLIDE_SNS_CHECK->Check__DATA(STR__FALSE) > 0)
@@ -91,18 +134,21 @@ Chk_Again:
 		return 1;
 	}
 
-	if(diEXT_CH__LPx_WAFER_SLID_OUT->Check__DATA(STR__OFF) < 0)
+	if(bActive__DI_SLIDE_OUT_SNS)			
 	{
-		int alarm_id = ALID__LP_WFR_SLIDE_SNS_ALARM;
-		CString r_act;
-
-		p_alarm->Popup__ALARM(alarm_id,r_act);
-
-		if(r_act.CompareNoCase(ACT__RETRY) == 0)
+		if(diEXT_CH__LPx_WAFER_SLID_OUT->Check__DATA(STR__OFF) < 0)
 		{
-			goto Chk_Again;
+			int alarm_id = ALID__LP_WFR_SLIDE_SNS_ALARM;
+			CString r_act;
+
+			p_alarm->Popup__ALARM(alarm_id,r_act);
+	
+			if(r_act.CompareNoCase(ACT__RETRY) == 0)
+			{
+				goto Chk_Again;
+			}
+			return -1;
 		}
-		return -1;
 	}
 
 	return 1;

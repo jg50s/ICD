@@ -3,10 +3,6 @@
 #include "CObj_Phy__PMC_DUMMY__ALID.h"
 
 
-#include "CMacro_LOG.h"
-extern CMacro_LOG  mMacro_LOG;
-
-
 // ...
 void CObj_Phy__PMC_DUMMY
 ::Mon__Obj_Status(CII_OBJECT__VARIABLE *p_variable,
@@ -129,20 +125,22 @@ void CObj_Phy__PMC_DUMMY
 void CObj_Phy__PMC_DUMMY
 ::Post__PMx_ALARM(CII_OBJECT__ALARM *p_alarm)
 {
-	int alarm_id = ALID__PROCESS_ALARM;
-	CString r_act;
+	// ...
+	{
+		int alarm_id = ALID__PROCESS_ALARM;
+		CString r_act;
 
-	p_alarm->Check__ALARM(alarm_id,r_act);
-	p_alarm->Post__ALARM(alarm_id);
+		p_alarm->Check__ALARM(alarm_id,r_act);
+		p_alarm->Post__ALARM(alarm_id);
+	}
 
 	// ...
 	CString pm__lotid;
 	CString str__lp_id;
 	CString pm__lp_id;
 	CString pm__lp_slotid;
-	int i;
 
-	for(i=0;i<iPMx_SLOT_MAX;i++)
+	for(int i=0; i<iPMx_SLOT_MAX; i++)
 	{
 		if(xCH__SLOT_STATUS[i]->Check__DATA("NONE") > 0)
 		{
@@ -154,11 +152,6 @@ void CObj_Phy__PMC_DUMMY
 		xCH__SLOT_LPx_SLOT_ID[i]->Get__DATA(pm__lp_slotid);
 
 		str__lp_id.Format("PORT%s",pm__lp_id);
-
-		mMacro_LOG.Lot_Slot_AlarmPost(pm__lotid,
-										str__lp_id,
-										atoi(pm__lp_slotid),
-										alarm_id);
 
 		xSCH_MATERIAL_CTRL->Post__ALARM_INFO(atoi(pm__lp_id),atoi(pm__lp_slotid));
 	}
@@ -166,15 +159,12 @@ void CObj_Phy__PMC_DUMMY
 void CObj_Phy__PMC_DUMMY
 ::Clear__PMx_ALARM(CII_OBJECT__ALARM *p_alarm)
 {
-	int alarm_id = ALID__PROCESS_ALARM;
-
 	CString pm__lotid;
 	CString str__lp_id;
 	CString pm__lp_id;
 	CString pm__lp_slotid;
-	int i;
 
-	for(i=0; i<iPMx_SLOT_MAX; i++)
+	for(int i=0; i<iPMx_SLOT_MAX; i++)
 	{
 		if(xCH__SLOT_STATUS[i]->Check__DATA("NONE") > 0)
 		{
@@ -186,11 +176,6 @@ void CObj_Phy__PMC_DUMMY
 		xCH__SLOT_LPx_SLOT_ID[i]->Get__DATA(pm__lp_slotid);
 
 		str__lp_id.Format("PORT%s",pm__lp_id);
-
-		mMacro_LOG.Lot_Slot_AlarmClear(pm__lotid,
-										str__lp_id,
-										atoi(pm__lp_slotid),
-										alarm_id);
 
 		xSCH_MATERIAL_CTRL->Clear__ALARM_INFO(atoi(pm__lp_id),atoi(pm__lp_slotid));
 	}
@@ -207,9 +192,11 @@ void CObj_Phy__PMC_DUMMY
 	CString str_cur_press;
 	CString var_data;
 
+
 	while(1)
 	{
-		Sleep(90);
+		p_variable->Wait__SINGLE_OBJECT(0.1);
+
 
 		// ...
 		{
@@ -279,8 +266,6 @@ void CObj_Phy__PMC_DUMMY
 void CObj_Phy__PMC_DUMMY
 ::Mon__Process_Time(CII_OBJECT__VARIABLE *p_variable)
 {
-	SCX__TIMER_CTRL cx_timer;
-
 	CString	data;
 	double	cur_time, total_time, percent, time, change_time;
 	double	wait_time;
@@ -289,11 +274,12 @@ void CObj_Phy__PMC_DUMMY
 	percent = 0;
 
 	xCH__CHANGE_PRC_TIME->Set__DATA("0");
-	cx_timer->INIT__COUNT_DOWN();
+
 
 	while(1)
 	{
-		cx_timer->POLL(1.0);
+		p_variable->Wait__SINGLE_OBJECT(1.0);
+
 
 		wait_time = xSCH_MATERIAL_CTRL->Get__PMx_FRONT_TIME();
 
@@ -382,12 +368,11 @@ void CObj_Phy__PMC_DUMMY
 	CString elapse_time;
 	CString cur_time;
 
-	SCX__TIMER_CTRL cx_timer;
-	cx_timer->INIT__COUNT_DOWN();
 
 	while(1)
 	{
-		cx_timer->WAIT(1.0);
+		p_variable->Wait__SINGLE_OBJECT(1.0);
+
 
 		if(xEXT_CH_CFG__PMC_USE->Check__DATA(STR__ENABLE)         < 0)		continue;
 		if(xCH_CFG__AUTO_LEAK_CHECK_USE->Check__DATA(STR__ENABLE) < 0)		continue;
@@ -571,9 +556,11 @@ void CObj_Phy__PMC_DUMMY
 void CObj_Phy__PMC_DUMMY
 ::Mon__GoTo_Maint(CII_OBJECT__VARIABLE *p_variable)
 {
+
 	while(1)
 	{
-		Sleep(300);
+		p_variable->Wait__SINGLE_OBJECT(0.3);
+
 
 		if(xCH__MOVE_FLAG->Check__DATA("NO") < 0)
 		{
@@ -630,9 +617,11 @@ void CObj_Phy__PMC_DUMMY
 	int lp_check_flag;
 	int i;
 
+
 	while(1)
 	{
-		Sleep(290);
+		p_variable->Wait__SINGLE_OBJECT(0.3);
+
 
 		lp_check_flag = -1;
 
@@ -658,12 +647,14 @@ void CObj_Phy__PMC_DUMMY
 ::Mon__Clean_Rcp_Count(CII_OBJECT__VARIABLE *p_variable,
 					   CII_OBJECT__ALARM *p_alarm)
 {
+
 	while(1)
 	{
-		Sleep(290);
+		p_variable->Wait__SINGLE_OBJECT(0.3);
+
 
 		if((xEXT_CH_CFG__PMC_USE->Check__DATA(STR__ENABLE) < 0)
-			|| (xCH_CFG__CLEAN_USE->Check__DATA(STR__ENABLE)   < 0))
+		|| (xCH_CFG__CLEAN_USE->Check__DATA(STR__ENABLE)   < 0))
 		{
 			continue;
 		}

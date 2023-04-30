@@ -101,7 +101,7 @@ int  CObj_Opr__MAINT_MODE::Call__PARTICLE_CHECK(CII_OBJECT__VARIABLE *p_variable
 	bool active__ll = false;
 
 	if((prc_check__pm_index >= 0)
-		|| (prc_check__ll_index >= 0))
+	|| (prc_check__ll_index >= 0))
 	{
 		if(prc_check__pm_index >= 0)			active__pm = true;
 		if(prc_check__ll_index >= 0)			active__ll = true;

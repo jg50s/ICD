@@ -343,50 +343,70 @@ Fnc__LBx_PICK(CII_OBJECT__VARIABLE* p_variable,
 
 		if(ll_i >= 0)
 		{
-			if(bActive__LLx_MANIFOLD_X)
+			CString para_data = sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__STRING();
+
+			if(para_data.Find(STR__YES) >= 0)
 			{
-				if(ll_i < iSIZE__LLx)
+				CString str_bff;
+
+				str_log.Format("LL%1d - NOT SV_VLOSE ! \n", ll_i+1);
+
+				str_bff.Format("  * %s <- %s \n", 
+							   sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__CHANNEL_NAME(),
+							   sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__STRING());
+				str_log += str_bff;
+
+				Fnc__APP_LOG(str_log);
+			}
+			else
+			{
+				if(bActive__LLx_MANIFOLD_X)
 				{
-					int k_limit = l__stn_slot.GetSize();
-
-					for(int k=0; k<k_limit; k++)
+					if(ll_i < iSIZE__LLx)
 					{
-						CString cmmd__sv_close = "SV_TRANSFER.CLOSE";
+						int k_limit = l__stn_slot.GetSize();
 
-						CStringArray l__cmmd_slot;
-						l__cmmd_slot.Add(l__stn_slot[k]);
+						for(int k=0; k<k_limit; k++)
+						{
+							CString cmmd__sv_close = "SV_TRANSFER.CLOSE";
 
-						if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
-						{
-							if(pLLx__OBJ_CTRL[ll_i]->Call__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)		return -301;
+							CStringArray l__cmmd_slot;
+							l__cmmd_slot.Add(l__stn_slot[k]);
+
+							if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
+							{
+								if(pLLx__OBJ_CTRL[ll_i]->Call__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)		return -301;
+							}
+							else
+							{
+								if(pLLx__OBJ_CTRL[ll_i]->Run__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)		return -302;
+							}
 						}
-						else
-						{
-							if(pLLx__OBJ_CTRL[ll_i]->Run__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)		return -302;
-						}
+					}
+					else
+					{
+						return -303;
 					}
 				}
 				else
 				{
-					return -303;
+					CString ll_name = Macro__GET_LLx_NAME(ll_i);
+
+					CString cmmd__sv_close;
+					cmmd__sv_close.Format("%s_SV_CLOSE", ll_name);
+
+					if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
+					{
+						if(pTMC_VLV__OBJ_CTRL->Call__OBJECT(cmmd__sv_close) < 0)			return -201;
+					}
+					else
+					{
+						if(pTMC_VLV__OBJ_CTRL->Run__OBJECT(cmmd__sv_close) < 0)				return -202;
+					}
 				}
 			}
-			else
-			{
-				CString ll_name = Macro__GET_LLx_NAME(ll_i);
 
-				CString cmmd__sv_close;
-				cmmd__sv_close.Format("%s_SV_CLOSE", ll_name);
-
-				if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
-				{
-					if(pTMC_VLV__OBJ_CTRL->Call__OBJECT(cmmd__sv_close) < 0)			return -201;
-				}
-				else
-				{
-					if(pTMC_VLV__OBJ_CTRL->Run__OBJECT(cmmd__sv_close) < 0)				return -202;
-				}
-			}
+			// ...
 		}
 		else
 		{
@@ -509,32 +529,52 @@ Fnc__PMx_PICK(CII_OBJECT__VARIABLE* p_variable,
 	}
 	else
 	{
-		int k_limit = l__stn_name.GetSize();
-		
-		for(int k=0; k<k_limit; k++)
+		CString para_data = sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__STRING();
+
+		if(para_data.CompareNoCase(STR__YES) >= 0)
 		{
-			CString cur__stn_name = l__stn_name[k];
+			CString str_bff;
 
-			int p_index = Macro__CHECK_PMx_INDEX(cur__stn_name);
-			if(p_index < 0)		continue;
+			str_log.Format("PM%1d - NOT SV_CLOSE ! \n", pm_index + 1);
 
-			int pm_id = p_index + 1;
+			str_bff.Format("  * %s <- %s \n", 
+							sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__CHANNEL_NAME(),
+							sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__STRING());
+			str_log += str_bff;
 
-			if(dCH__CFG_PMx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
+			Fnc__APP_LOG(str_log);			
+		}
+		else
+		{
+			int k_limit = l__stn_name.GetSize();
+	
+			for(int k=0; k<k_limit; k++)
 			{
-				if(Fnc__PMx_SV_CLOSE(pm_id) < 0)
+				CString cur__stn_name = l__stn_name[k];
+	
+				int p_index = Macro__CHECK_PMx_INDEX(cur__stn_name);
+				if(p_index < 0)		continue;
+
+				int pm_id = p_index + 1;
+
+				if(dCH__CFG_PMx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
 				{
-					return -203;
+					if(Fnc__PMx_SV_CLOSE(pm_id) < 0)
+					{
+						return -203;
+					}
 				}
-			}
-			else
-			{
-				if(Run__PMx_SV_CLOSE(pm_id) < 0)
+				else
 				{
-					return -213;
+					if(Run__PMx_SV_CLOSE(pm_id) < 0)
+					{
+						return -213;
+					}
 				}
 			}
 		}
+
+		// ...
 	}
 
 	return 1;
@@ -765,70 +805,90 @@ int  CObj__VAC_ROBOT_EX
 
 		if(ll_i >= 0)
 		{
-			if(bActive__LLx_MANIFOLD_X)
+			CString para_data = sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__STRING();
+
+			if(para_data.Find(STR__YES) >= 0)
 			{
-				if(ll_i < iSIZE__LLx)
+				CString str_bff;
+
+				str_log.Format("LL%1d - NOT SV_VLOSE ! \n", ll_i+1);
+
+				str_bff.Format("  * %s <- %s \n", 
+								sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__CHANNEL_NAME(),
+								sCH__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__STRING());
+				str_log += str_bff;
+
+				Fnc__APP_LOG(str_log);
+			}
+			else
+			{
+				if(bActive__LLx_MANIFOLD_X)
 				{
+					if(ll_i < iSIZE__LLx)
+					{
+						int k_limit = l__stn_slot.GetSize();
+
+						for(int k=0; k<k_limit; k++)
+						{
+							CString cmmd__sv_close = "SV_TRANSFER.CLOSE";
+
+							CStringArray l__cmmd_slot;
+							l__cmmd_slot.Add(l__stn_slot[k]);
+
+							if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
+							{
+								if(pLLx__OBJ_CTRL[ll_i]->Call__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
+								{
+									return -301;
+								}
+							}
+							else
+							{
+								if(pLLx__OBJ_CTRL[ll_i]->Run__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
+								{
+									return -302;
+								}
+							}
+						}
+					}
+					else
+					{
+						return -303;
+					}
+				}
+				else
+				{
+					CString ll_name = Macro__GET_LLx_NAME(ll_i);
+					CString cmmd__sv_close;
+
 					int k_limit = l__stn_slot.GetSize();
 
 					for(int k=0; k<k_limit; k++)
 					{
-						CString cmmd__sv_close = "SV_TRANSFER.CLOSE";
+						cmmd__sv_close.Format("%s_SV_CLOSE", ll_name);
 
 						CStringArray l__cmmd_slot;
 						l__cmmd_slot.Add(l__stn_slot[k]);
 
 						if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
 						{
-							if(pLLx__OBJ_CTRL[ll_i]->Call__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
+							if(pTMC_VLV__OBJ_CTRL->Call__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
 							{
-								return -301;
+								return -201;
 							}
-						}
+						}		
 						else
 						{
-							if(pLLx__OBJ_CTRL[ll_i]->Run__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
+							if(pTMC_VLV__OBJ_CTRL->Run__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
 							{
-								return -302;
+								return -202;
 							}
 						}
 					}
 				}
-				else
-				{
-					return -303;
-				}
 			}
-			else
-			{
-				CString ll_name = Macro__GET_LLx_NAME(ll_i);
-				CString cmmd__sv_close;
 
-				int k_limit = l__stn_slot.GetSize();
-
-				for(int k=0; k<k_limit; k++)
-				{
-					cmmd__sv_close.Format("%s_SV_CLOSE", ll_name);
-
-					CStringArray l__cmmd_slot;
-					l__cmmd_slot.Add(l__stn_slot[k]);
-
-					if(dCH__CFG_LLx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
-					{
-						if(pTMC_VLV__OBJ_CTRL->Call__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
-						{
-							return -201;
-						}
-					}		
-					else
-					{
-						if(pTMC_VLV__OBJ_CTRL->Run__OBJ_MODE(cmmd__sv_close, l__cmmd_slot) < 0)
-						{
-							return -202;
-						}
-					}
-				}
-			}
+			// ...
 		}
 		else
 		{
@@ -969,29 +1029,46 @@ int  CObj__VAC_ROBOT_EX
 	}
 	else
 	{
-		int k_limit = l__stn_name.GetSize();
+		CString para_data = sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__STRING();
 
-		for(int k=0; k<k_limit; k++)
+		if(para_data.CompareNoCase(STR__YES) >= 0)
 		{
-			CString cur__stn_name = l__stn_name[k];
+			CString str_bff;
 
-			int p_index = Macro__CHECK_PMx_INDEX(cur__stn_name);
-			if(p_index < 0)			return -201;
+			str_log.Format("PM%1d - NOT SV_CLOSE ! \n", pm_index + 1);
 
-			int pm_id = p_index + 1;
+			str_bff.Format("  * %s <- %s \n", 
+							sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__CHANNEL_NAME(),
+							sCH__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__STRING());
+			str_log += str_bff;
 
-			if(dCH__CFG_PMx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
+			Fnc__APP_LOG(str_log);			
+		}
+		else
+		{
+			int k_limit = l__stn_name.GetSize();
+			for(int k=0; k<k_limit; k++)
 			{
-				if(Fnc__PMx_SV_CLOSE(pm_id) < 0)
+				CString cur__stn_name = l__stn_name[k];
+
+				int p_index = Macro__CHECK_PMx_INDEX(cur__stn_name);
+				if(p_index < 0)			return -201;
+
+				int pm_id = p_index + 1;
+
+				if(dCH__CFG_PMx_CLOSE_SEQUENCE_MODE->Check__DATA(STR__ENABLE) > 0)
 				{
-					return -202;
+					if(Fnc__PMx_SV_CLOSE(pm_id) < 0)
+					{
+						return -202;
+					}
 				}
-			}
-			else
-			{
-				if(Run__PMx_SV_CLOSE(pm_id) < 0)
+				else
 				{
-					return -203;
+					if(Run__PMx_SV_CLOSE(pm_id) < 0)
+					{
+						return -203;
+					}
 				}
 			}
 		}

@@ -2,6 +2,9 @@
 
 
 // ...
+#define _CFG_SIZE__PUMP_LINE_VLV		10
+
+// ...
 #define  STR__ON						"ON"
 #define  STR__OFF						"OFF"
 
@@ -13,14 +16,4 @@
 #define  STR__STANDBY					"STANDBY"
 #define  STR__MAINTMODE					"MAINTMODE"
 
-
-// ...
-#define  _CMMD_PMP__INIT				"INIT"
-
-#define  _CMMD_PMP__LOCAL				"LOCAL"
-#define  _CMMD_PMP__REMOTE				"REMOTE"
-
-#define  _CMMD_PMP__ON					"ON"
-#define  _CMMD_PMP__AUTO_SHUTDOWN		"AUTO_SHUTDOWN"
-#define  _CMMD_PMP__FAST_SHUTDOWN		"FAST_SHUTDOWN"
 

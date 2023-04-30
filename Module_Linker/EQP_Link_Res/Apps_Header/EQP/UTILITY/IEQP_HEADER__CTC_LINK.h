@@ -618,6 +618,8 @@ public:
 
 	virtual int Disable__REPORT_ABORTED_ALARM() = 0;
 	virtual int Enable__REPORT_ABORTED_ALARM() = 0;		// Default
+
+	virtual int Disable__STANDBY_TO_CTCINUSE() = 0;
 };
 
 
@@ -1992,6 +1994,27 @@ public:
 
 	// ...
 	virtual int  Check__Pause_PORT_ID(const int port_id) = 0;
+
+	//.LLx_OUT : INFO ...
+	virtual int  Get__COOLING_SEC_OF_LLx_OUT(const int port_id,const int slot_id,
+											 const int ll_id,
+										     CString& ll_cooling_sec) = 0;
+
+	virtual int  Get__COOLING_SEC_OF_LLx_OUT(const CString& material_pos,
+											 const int ll_id,
+											 CString& ll_cooling_sec) = 0;
+
+	// ...
+	virtual int  Set__USER_DEF_DATA(const CString& main_name,
+									const CString& sub_name,
+									const CString& set_data) = 0;
+	virtual int  Get__USER_DEF_DATA(const CString& main_name,
+									const CString& sub_name,
+									CString& rcv_data) = 0;
+
+	virtual int  Clear__USER_DEF_INFO(const CString& main_name) = 0;
+	virtual int  Clear__USER_DEF_INFO(const CString& main_name,
+									  const CString& sub_name) = 0;
 };
 
 

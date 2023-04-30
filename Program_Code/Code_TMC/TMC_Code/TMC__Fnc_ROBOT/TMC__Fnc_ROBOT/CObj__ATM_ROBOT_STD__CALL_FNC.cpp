@@ -247,24 +247,44 @@ Seq__PICK(CII_OBJECT__VARIABLE* p_variable,
 			}
 
 			// ...
-			CString para__ll_slot;
+			CString para_data = sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__STRING();
 
-			int slot_size = l__slot_id.GetSize();
-			for(int k=0; k<slot_size; k++)
+			if(para_data.Find(STR__YES) >= 0)
 			{
-				int slot_id = l__slot_id[k];
-				para__ll_slot.Format("%1d", slot_id);
+				CString str_bff;
 
-				str_log.Format("LL%1d (%s) : CALL_DV_CLOSE --> ", ll_index+1, para__ll_slot);
+				str_log.Format("LL%1d : NOT DV_CLOSE ! \n", ll_index+1);
+
+				str_bff.Format("  * %s <- %s \n",
+							    sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__CHANNEL_NAME(),
+								sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__STRING());
+				str_log += str_bff;
+
 				xLOG_CTRL->WRITE__LOG(str_log);
+			}
+			else
+			{
+				CString para__ll_slot;
 
-				aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
-
-				if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+				int slot_size = l__slot_id.GetSize();
+				for(int k=0; k<slot_size; k++)
 				{
-					return -201;
+					int slot_id = l__slot_id[k];
+					para__ll_slot.Format("%1d", slot_id);
+
+					str_log.Format("LL%1d (%s) : CALL_DV_CLOSE --> ", ll_index+1, para__ll_slot);
+					xLOG_CTRL->WRITE__LOG(str_log);
+
+					aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
+
+					if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+					{
+						return -201;
+					}
 				}
 			}
+
+			// ...
 		}
 	}
 
@@ -432,24 +452,44 @@ Seq__PLACE(CII_OBJECT__VARIABLE* p_variable,
 			}
 
 			// ...
-			CString para__ll_slot;
+			CString para_data = sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__STRING();
 
-			int slot_size = l__slot_id.GetSize();
-			for(int k=0; k<slot_size; k++)
+			if(para_data.Find(STR__YES) >= 0)
 			{
-				int slot_id = l__slot_id[k];
-				para__ll_slot.Format("%1d", slot_id);
+				CString str_bff;
 
-				str_log.Format("LL%1d (%s) : CALL_DV_CLOSE --> ", ll_index+1, para__ll_slot);
+				str_log.Format("LL%1d : NOT DV_CLOSE ! \n", ll_index+1);
+
+				str_bff.Format("  * %s <- %s \n",
+								sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__CHANNEL_NAME(),
+								sCH__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__STRING());
+				str_log += str_bff;
+
 				xLOG_CTRL->WRITE__LOG(str_log);
+			}
+			else
+			{
+				CString para__ll_slot;
 
-				aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
-
-				if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+				int slot_size = l__slot_id.GetSize();
+				for(int k=0; k<slot_size; k++)
 				{
-					return -201;
+					int slot_id = l__slot_id[k];
+					para__ll_slot.Format("%1d", slot_id);
+
+					str_log.Format("LL%1d (%s) : CALL_DV_CLOSE --> ", ll_index+1, para__ll_slot);
+					xLOG_CTRL->WRITE__LOG(str_log);
+	
+					aEXT_CH__LLx__PARA_SLOT_ID[ll_index]->Set__DATA(para__ll_slot);
+	
+					if(pLLx__OBJ_CTRL[ll_index]->Call__OBJECT("DV_TRANSFER.CLOSE") < 0)
+					{
+						return -201;
+					}
 				}
 			}
+
+			// ...
 		}
 	}
 

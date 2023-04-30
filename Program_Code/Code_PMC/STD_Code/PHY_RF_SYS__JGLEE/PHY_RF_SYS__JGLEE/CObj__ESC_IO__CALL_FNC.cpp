@@ -280,6 +280,6 @@ int  CObj__ESC_IO
 {
 	int r_flag = Fnc__DECHUCK(p_variable, p_alarm, dechuck_mode);
 	doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__Off); // KMS
-	doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
+	//doEXT_CH__ESC_All_Voltage->Set__DATA(STR__Off);
 	return r_flag;
 }

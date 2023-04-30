@@ -428,6 +428,13 @@ WINDOW_NAME  LOG--LEAK_CHECK
 	CTRL_CHANNEL                    SCR.CLIENT 
 	USER_LEVEL                      Operate
 }
+WINDOW_NAME  GAS--LEAK_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Operate
+}
 
 
 // Bottom => Part
@@ -440,7 +447,14 @@ WINDOW_NAME PMC_PART-LIFT_PIN
 	USER_LEVEL                      Maint
 }
 
-WINDOW_NAME PMC_PART-MFC_DNET
+WINDOW_NAME PMC_PART-MFC_DNET_01
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME PMC_PART-MFC_DNET_02
 {
 	#CALL_DEFINE                    DEF__FRAME_CLIENT
 

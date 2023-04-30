@@ -142,3 +142,30 @@ int  CObj_Phy__PMC_STD
 {
 	return xI_Module_Obj->Connect__Module_Obj("READY_TO_UNLOAD");
 }
+
+// ...
+int  CObj_Phy__PMC_STD
+::Call__SLOT_OPEN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return xI_Module_Obj->Connect__Module_Obj("SLOT.OPEN");
+}
+
+int  CObj_Phy__PMC_STD
+::Call__SLOT_CLOSE(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return xI_Module_Obj->Connect__Module_Obj("SLOT.CLOSE");
+}
+
+// ...
+int  CObj_Phy__PMC_STD
+::Call__PIN_UP(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return xI_Module_Obj->Connect__Module_Obj("PIN.UP");
+}
+
+int  CObj_Phy__PMC_STD
+::Call__PIN_DOWN(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM *p_alarm)
+{
+	return xI_Module_Obj->Connect__Module_Obj("PIN.DOWN");
+}
+

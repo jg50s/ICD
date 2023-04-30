@@ -48,12 +48,32 @@ int  CObj_Phy__PMC_STD
 {
 	Fnc__SET_TIME();
 
-	if(xI_Module_Obj->Connect__Module_Obj("JOB_START_READY") > 0)
+	// ...
+	int r_flag = 1;
+
+	// ...
+	bool active__marathon_test = false;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		active__marathon_test = true;
+	}
+
+	if(active__marathon_test)
+	{
+
+	}
+	else
+	{
+		r_flag = xI_Module_Obj->Connect__Module_Obj("JOB_START_READY");
+	}
+
+	if(r_flag > 0)
 	{
 		Save__JOB_START_READY();
-		return 1;
 	}
-	return -1;
+	return r_flag;
 }
 int  CObj_Phy__PMC_STD
 ::Save__JOB_START_READY()
@@ -104,7 +124,28 @@ int  CObj_Phy__PMC_STD
 {
 	Fnc__SET_TIME();
 
-	return xI_Module_Obj->Connect__Module_Obj("JOB_END_READY");
+	// ...
+	int r_flag = 1;
+
+	// ...
+	bool active__marathon_test = false;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		active__marathon_test = true;
+	}
+
+	if(active__marathon_test)
+	{
+
+	}
+	else
+	{
+		r_flag = xI_Module_Obj->Connect__Module_Obj("JOB_END_READY");
+	}
+
+	return r_flag;
 }
 
 int  CObj_Phy__PMC_STD
@@ -112,7 +153,28 @@ int  CObj_Phy__PMC_STD
 {
 	Fnc__SET_TIME();
 
-	return xI_Module_Obj->Connect__Module_Obj("IDLE_START");
+	// ...
+	int r_flag = 1;
+
+	// ...
+	bool active__marathon_test = false;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		active__marathon_test = true;
+	}
+
+	if(active__marathon_test)
+	{
+
+	}
+	else
+	{
+		r_flag = xI_Module_Obj->Connect__Module_Obj("IDLE_START");
+	}
+
+	return r_flag;
 }
 
 
@@ -131,7 +193,7 @@ void CObj_Phy__PMC_STD::Set__Module_Time()
 					cur_time.wMinute,
 					cur_time.wSecond);
 
-	xCH__MODULE_TIME->Set__DATA(str_time);
+	sCH__MODULE_TIME->Set__DATA(str_time);
 }
 void CObj_Phy__PMC_STD::Clear__PMC_Info()
 {
@@ -349,7 +411,7 @@ void CObj_Phy__PMC_STD::Fnc__SET_TIME()
 					cur_time.wMinute,
 					cur_time.wSecond);
 							
-	xCH__MODULE_TIME->Set__DATA(str_time);
+	sCH__MODULE_TIME->Set__DATA(str_time);
 }
 
 
@@ -440,6 +502,13 @@ void CObj_Phy__PMC_STD
 		count = atoi(var_data) + 1;
 		var_data.Format("%1d",count);
 
+		xCH_CFG__CLEAN_COUNT->Set__DATA(var_data);
+	}
+	else
+	{
+		CString var_data;
+
+		var_data = sCH_CUR__CLEAN_WAFER_COUNT->Get__STRING();
 		xCH_CFG__CLEAN_COUNT->Set__DATA(var_data);
 	}
 

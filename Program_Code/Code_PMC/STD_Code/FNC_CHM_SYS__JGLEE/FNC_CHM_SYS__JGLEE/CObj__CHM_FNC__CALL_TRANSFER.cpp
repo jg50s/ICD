@@ -148,25 +148,3 @@ Fnc__TRANSFER_END(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 }
 
 
-// ...
-int CObj__CHM_FNC::
-Call__SLOT_OPEN(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
-{
-	if(iActive__SIM_MODE > 0)
-	{
-		dEXT_CH__PMC_SLIT_VLV_STS->Set__DATA(STR__OPEN);
-	}
-
-	return 1;
-}
-
-int CObj__CHM_FNC::
-Call__SLOT_CLOSE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
-{
-	if(iActive__SIM_MODE > 0)
-	{
-		dEXT_CH__PMC_SLIT_VLV_STS->Set__DATA(STR__CLOSE);
-	}
-
-	return 1;
-}

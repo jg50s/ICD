@@ -45,10 +45,6 @@ int CObj__CHM_FNC::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__LEAK_CHECK_CHM,   "LEAK_CHECK.CHM");
 		ADD__CTRL_VAR(sMODE__LEAK_CHECK_GAS,   "LEAK_CHECK.GAS");
 
-		//
-		ADD__CTRL_VAR(sMODE__SLOT_OPEN,        "SLOT.OPEN");
-		ADD__CTRL_VAR(sMODE__SLOT_CLOSE,       "SLOT.CLOSE");
-
 		// PICK ...
 		ADD__CTRL_VAR(sMODE__PICK_READY,       "PICK_READY");
 		ADD__CTRL_VAR(sMODE__PICK_X_READY,     "PICK_X_READY");
@@ -1152,6 +1148,10 @@ int CObj__CHM_FNC::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		var_name = "CFG.aCHM.MANOMETER.PRESS.SW2.SETTING";
 		LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__CFG_CHM_MANOMETER_PRESS_SW2_SETTING, obj_name,var_name);
+
+		//
+		var_name = "PARA.BALLAST_CTRL.ACTIVE";
+		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__PARA_BALLAST_CTRL_ACTIVE, obj_name,var_name);
 	}
 
 	// OBJ : PMC_LOG
@@ -1493,10 +1493,6 @@ int CObj__CHM_FNC::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		//
 		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK_CHM)			flag = Call__LEAK_CHECK(p_variable, p_alarm, false);
 		ELSE_IF__CTRL_MODE(sMODE__LEAK_CHECK_GAS)			flag = Call__LEAK_CHECK(p_variable, p_alarm, true);
-
-		//
-		ELSE_IF__CTRL_MODE(sMODE__SLOT_OPEN)				flag = Call__SLOT_OPEN(p_variable, p_alarm);
-		ELSE_IF__CTRL_MODE(sMODE__SLOT_CLOSE)				flag = Call__SLOT_CLOSE(p_variable, p_alarm);
 
 		// PICK ...
 		ELSE_IF__CTRL_MODE(sMODE__PICK_READY)				flag = Call__PICK_READY(p_variable, p_alarm);

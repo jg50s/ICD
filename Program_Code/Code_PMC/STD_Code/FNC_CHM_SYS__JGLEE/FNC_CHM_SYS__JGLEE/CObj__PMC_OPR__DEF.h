@@ -16,3 +16,7 @@
 #define STR__PreparingForProcess		"PreparingForProcess"
 
 
+// ...
+#define STR__END						"END"
+#define STR__YES						"YES"
+

@@ -465,14 +465,31 @@ int CObj_Phy__ROBOT_ATM
 				if(slot_index <  0)						return -41;
 				if(slot_index >= CFG_LLx__SLOT_MAX)		return -42;
 
-				if(bActive__LLx_MULTI_SLOT_VALVE)
+				//==============================================================
+				int skip_index = -1;
+
+				if(act_start)
 				{
-					pch__door_status = dEXT_CH__LLx_DOOR_STATUS_X[md_index][slot_index].Get__PTR();
+
 				}
 				else
 				{
-					pch__door_status = dEXT_CH__LLx_DOOR_STATUS[md_index].Get__PTR();
+					CString skip_data = sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__STRING();
+					skip_index = skip_data.Find(STR__YES);
 				}
+
+				if(skip_index < 0)
+				{
+					if(bActive__LLx_MULTI_SLOT_VALVE)
+					{
+						pch__door_status = dEXT_CH__LLx_DOOR_STATUS_X[md_index][slot_index].Get__PTR();
+					}
+					else
+					{
+						pch__door_status = dEXT_CH__LLx_DOOR_STATUS[md_index].Get__PTR();
+					}
+				}
+				//==============================================================
 
 				pch__slot_status = dEXT_CH__LLx_SLOTx_STATUS[md_index][slot_index].Get__PTR();
 				pch__slot_title  = sEXT_CH__LLx_SLOTx_TITLE[md_index][slot_index].Get__PTR();
@@ -741,14 +758,31 @@ int CObj_Phy__ROBOT_ATM
 				if(slot_index <  0)						return -41;
 				if(slot_index >= CFG_LLx__SLOT_MAX)		return -42;
 
-				if(bActive__LLx_MULTI_SLOT_VALVE)
+				//==============================================================
+				int skip_index = -1;
+
+				if(act_start)
 				{
-					pch__door_status = dEXT_CH__LLx_DOOR_STATUS_X[md_index][slot_index].Get__PTR();
+
 				}
 				else
 				{
-					pch__door_status = dEXT_CH__LLx_DOOR_STATUS[md_index].Get__PTR();
+					CString skip_data = sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_LLx_DOOR_CLOSE_SKIP->Get__STRING();
+					skip_index = skip_data.Find(STR__YES);
 				}
+
+				if(skip_index < 0)
+				{
+					if(bActive__LLx_MULTI_SLOT_VALVE)
+					{
+						pch__door_status = dEXT_CH__LLx_DOOR_STATUS_X[md_index][slot_index].Get__PTR();
+					}
+					else
+					{
+						pch__door_status = dEXT_CH__LLx_DOOR_STATUS[md_index].Get__PTR();
+					}
+				}
+				//==============================================================
 
 				pch__slot_status = dEXT_CH__LLx_SLOTx_STATUS[md_index][slot_index].Get__PTR();
 				pch__slot_title  = sEXT_CH__LLx_SLOTx_TITLE[md_index][slot_index].Get__PTR();

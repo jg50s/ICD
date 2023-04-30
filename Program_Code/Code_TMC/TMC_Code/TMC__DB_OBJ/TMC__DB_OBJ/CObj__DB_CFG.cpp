@@ -84,6 +84,40 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,APP_DSP__CFG_STS,"");
 	}
 
+	// PAGE.LPX ...
+	{
+		str_name = "CFG.PAGE.ROBOT.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.PRESSURE.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.SLOT_VALVE.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.FA_INTERFACE.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.SYSTEM.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.LLx.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.DA.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.ACTIVE_HANDOFF.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		//
+		str_name = "CFG.PAGE.LPx_COMMON.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+
+		str_name = "CFG.PAGE.LPx_PURGE.SAVE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, APP_DSP__CFG_STS, "");
+	}
+
 	// ...
 	{
 		str_name = "CFG.HEATER.SAVE";
@@ -182,6 +216,10 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 	{
 		for(i=0;i<CFG_LP_LIMIT;i++)
 		{
+			str_name.Format("LP%1d.STx.USE.N2_PURGE", i+1);
+			STD__ADD_STRING(str_name);
+
+			//
 			str_name.Format("CFG.LP%1d.EXIST.FLAG",i+1);
 			LINK__VAR(dVAR__CFG_LPx_EXIST_FLAG[i],str_name);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,APP_DSP__YES_NO,"");
@@ -239,6 +277,13 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 			str_name.Format("CFG.AL%1d.EXIST.FLAG", id);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,APP_DSP__YES_NO,"");
 
+			str_name.Format("CFG.AL%1d.CCD.POS", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"deg",1,0.0,360.0,"");
+
+			str_name.Format("CFG.AL%1d.OCR.CCD.POS", id);
+			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"deg",1,0.0,360.0,"");
+
+			/*
 			str_name.Format("CFG.AL%1d.MATERIAL.TYPE", id);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,APP_DSP__MATERIAL_TYPE,"");
 
@@ -247,12 +292,7 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 
 			str_name.Format("CFG.AL%1d.OCR.TYPE", id);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name,APP_DSP__OCR_TYPE,"");
-
-			str_name.Format("CFG.AL%1d.CCD.POS", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"deg",1,0.0,360.0,"");
-
-			str_name.Format("CFG.AL%1d.OCR.CCD.POS", id);
-			STD__ADD_ANALOG_WITH_X_OPTION(str_name,"deg",1,0.0,360.0,"");
+			*/
 		}
 	}
 
@@ -340,6 +380,15 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 
 				str_name.Format("CFG.%s.LIFT_PIN.DOWN.TIMEOUT", ll_name);
 				STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 3, 100, "");
+			}
+
+			// LLx.PARA ...
+			{
+				str_name.Format("LL%1d.PARA.VENT.COOLING_SEC", id);
+				STD__ADD_ANALOG(str_name, "sec", 0, 0, 9999);
+
+				str_name.Format("LL%1d.COUNT.VENT.COOLING_SEC", id);
+				STD__ADD_STRING(str_name);
 			}
 		}
 	}
@@ -643,7 +692,7 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 			if(bActive__LLx_MULTI_SLOT_VALVE)
 			{
 				str_name = "MAINT.TARGET.LLx.NAME";
-				STD__ADD_DIGITAL(str_name,"LL1 LL2");
+				STD__ADD_DIGITAL(str_name,"LL1 LL2  PM1 PM2 PM3 PM4 PM5 PM6");
 
 				str_name = "MAINT.TARGET.LLx.SLOT";
 				STD__ADD_DIGITAL(str_name, "1 2");
@@ -651,7 +700,7 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 			else
 			{
 				str_name = "MAINT.TARGET.LLx.NAME";
-				STD__ADD_DIGITAL(str_name,"LBA LBB LBC LBD");
+				STD__ADD_DIGITAL(str_name,"LBA LBB LBC LBD  PM1 PM2 PM3 PM4 PM5 PM6");
 
 				str_name = "MAINT.TARGET.LLx.SLOT";
 				STD__ADD_DIGITAL(str_name, "1");
@@ -751,6 +800,27 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		}
 	}
 
+	// PMx - Align ...
+	for(i=0; i<CFG_PM_LIMIT; i++)
+	{
+		int id = i + 1;
+
+		str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT", id);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,3, "");
+
+		str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.RANGE", id);
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
+
+		str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.START.ANGLE", id); 
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "degree", 0,0,360, "");
+
+		str_name.Format("CFG.PM%1d.POST.POSITION.INCREMENT.APPLY", id);
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name,"DISABLE ENABLE","");
+
+		str_name.Format("CUR.PM%1d.POST.POSITION.INCREMENT.ANGLE", id);
+		STD__ADD_ANALOG(str_name, "degree", 0,0,360);
+	}
+
 	// ...
 	{
 		str_name.Format("CFG.dALLOW.INIT.APM.WHEN.INIT.ALL");
@@ -796,25 +866,31 @@ int CObj__DB_CFG::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_STRING_CTRL(sCH__ANI_PRESSURE_STATUS_ATM, str_name);
 	}
 
-	// LLx .. 
+	// DA.LLx .. 
 	for(i=0; i<CFG_LLx__LIMIT; i++)
 	{
 		int id = i + 1;
 
 		// DA Use ...
 		{
-			str_name.Format("CFG.DA.USE.LL%1d", id);
+			str_name.Format("CFG.DA.PICK.USE.LL%1d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+
+			str_name.Format("CFG.DA.PLACE.USE.LL%1d", id);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
 		}
 	}
-	// PMx ...
+	// DA.PMx ...
 	for(i=0; i<CFG_PM_LIMIT; i++)
 	{
 		int id = i + 1;
 
 		// DA Use ...
 		{
-			str_name.Format("CFG.DA.USE.PM%1d", id);
+			str_name.Format("CFG.DA.PICK.USE.PM%1d", id);
+			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
+
+			str_name.Format("CFG.DA.PLACE.USE.PM%1d", id);
 			STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
 		}
 	}

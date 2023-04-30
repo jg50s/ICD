@@ -134,6 +134,15 @@ int CObj_Phy__CHM_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "SCH_TEST.CFG.PURGE.SEC";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
 		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_PURGE_SEC, str_name);
+
+		//
+		str_name = "SCH_TEST.CFG.PM_SV_OPEN.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_PM_SV_OPEN_SEC, str_name);
+
+		str_name = "SCH_TEST.CFG.PM_SV_CLOSE.SEC";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 1, 0.0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__SCH_TEST_CFG_PM_SV_CLOSE_SEC, str_name);
 	}
 
 	// ...

@@ -234,85 +234,13 @@ int CObj__STD_TYPE::__Define__USER_FUNCTION(CII_DEFINE__FUNCTION *p_fnc_ctrl)
 int CObj__STD_TYPE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 {
 	CString def_name;
+	CString def_data;
 
 	CString ch_name;
 	CString obj_name;
 	CString var_name;
 
-
-	// CHANNEL LINK...
-	{
-		def_name = "CH.LIGHT.RED.ON_OFF";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_RED__ON_OFF, obj_name,var_name);
-
-		def_name = "CH.LIGHT.YELLOW.ON_OFF";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_YELLOW__ON_OFF, obj_name,var_name);
-
-		def_name = "CH.LIGHT.GREEN.ON_OFF";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_GREEN__ON_OFF, obj_name,var_name);
-
-		def_name = "CH.LIGHT.BLUE.ON_OFF";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_BLUE__ON_OFF, obj_name,var_name);
-
-		def_name = "CH.LIGHT.WHITE.ON_OFF";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_WHITE__ON_OFF, obj_name,var_name);
-
-		//
-		def_name = "CH.LIGHT.RED.BLINK";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_RED__BLINK, obj_name,var_name);
-
-		def_name = "CH.LIGHT.YELLOW.BLINK";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_YELLOW__BLINK, obj_name,var_name);
-
-		def_name = "CH.LIGHT.GREEN.BLINK";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_GREEN__BLINK, obj_name,var_name);
-
-		def_name = "CH.LIGHT.BLUE.BLINK";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_BLUE__BLINK, obj_name,var_name);
-
-		def_name = "CH.LIGHT.WHITE.BLINK";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_WHITE__BLINK, obj_name,var_name);
-
-		//
-		def_name = "CH.ALARM.BUZZER";			// Buzzer On !!
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__ALARM_BUZZER, obj_name,var_name);
-
-		def_name = "CH.ALARM.BUZZER.RESET";		// Buzzer Off !!
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__ALARM_BUZZER_RESET, obj_name,var_name);
-
-		//
-		for(int i=0; i<CFG_MELODY_MAX; i++)
-		{
-			def_name.Format("CH.MELODY%d.CTRL", i+1);
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__MELODY[i], obj_name,var_name);
-		}
-	}
+	bool check_def;
 
 	// ...
 	{
@@ -332,6 +260,206 @@ int CObj__STD_TYPE::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		xLOG_CTRL->ENABLE__TIME_LOG();
 		xLOG_CTRL->WRITE__LOG("   START   \n");
+	}
+
+	// LIGHT : ON_OFF ...
+	{
+		// RED ...
+		{
+			def_name = "CH.LIGHT.RED.ON_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_RED__ON_OFF = check_def;
+	
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_RED__ON_OFF, obj_name,var_name);
+			}
+		}
+		// YELLOW ...
+		{
+			def_name = "CH.LIGHT.YELLOW.ON_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_YELLOW__ON_OFF = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_YELLOW__ON_OFF, obj_name,var_name);
+			}
+		}
+		// GREEN ...
+		{
+			def_name = "CH.LIGHT.GREEN.ON_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_GREEN__ON_OFF = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_GREEN__ON_OFF, obj_name,var_name);
+			}
+		}
+		// BLUE ...
+		{
+			def_name = "CH.LIGHT.BLUE.ON_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_BLUE__ON_OFF = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_BLUE__ON_OFF, obj_name,var_name);
+			}
+		}
+		// WHITE ...
+		{
+			def_name = "CH.LIGHT.WHITE.ON_OFF";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_WHITE__ON_OFF = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_WHITE__ON_OFF, obj_name,var_name);
+			}
+		}
+	}
+	
+	// LIGHT : BLINK ...
+	{
+		// RED ...
+		{
+			def_name = "CH.LIGHT.RED.BLINK";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_RED__BLINK = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_RED__BLINK, obj_name,var_name);
+			}
+		}
+		// YELLOW ...
+		{
+			def_name = "CH.LIGHT.YELLOW.BLINK";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_YELLOW__BLINK = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_YELLOW__BLINK, obj_name,var_name);
+			}
+		}
+		// GREEN ...
+		{
+			def_name = "CH.LIGHT.GREEN.BLINK";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_GREEN__BLINK = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_GREEN__BLINK, obj_name,var_name);
+			}
+		}
+		// BLUE ...
+		{
+			def_name = "CH.LIGHT.BLUE.BLINK";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+		
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_BLUE__BLINK = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_BLUE__BLINK, obj_name,var_name);
+			}
+		}
+		// WHITE ...
+		{
+			def_name = "CH.LIGHT.WHITE.BLINK";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__LIGHT_WHITE__BLINK = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__LIGHT_WHITE__BLINK, obj_name,var_name);
+			}
+		}
+
+		// BUZZER.SET ...
+		{
+			def_name = "CH.ALARM.BUZZER";
+			int r_flag = p_ext_obj_create->Get__DEF_CONST_DATA_EX(def_name, ch_name, -1);
+			
+			if(r_flag < 0)
+			{
+				def_name = "CH.ALARM.BUZZER.SET";
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+			}
+
+			check_def = Check__DEF(ch_name);
+			bActive__ALARM_BUZZER_SET = check_def;
+			
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__ALARM_BUZZER_SET, obj_name,var_name);
+			}
+		}
+		// BUZZER.RESET ...
+		{
+			def_name = "CH.ALARM.BUZZER.RESET";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			check_def = Check__DEF(ch_name);
+			bActive__ALARM_BUZZER_RESET = check_def;
+
+			if(check_def)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__ALARM_BUZZER_RESET, obj_name,var_name);
+			}
+		}
+
+		// MELODY ...
+		{
+			def_name = "DATA.MELODY_SIZE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			iSIZE_MELODY = atoi(def_data);
+			if(iSIZE_MELODY > CFG_MELODY_MAX)			iSIZE_MELODY = CFG_MELODY_MAX;
+
+			for(int i=0; i<iSIZE_MELODY; i++)
+			{
+				def_name.Format("CH.MELODY%d.CTRL", i+1);
+				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__MELODY[i], obj_name,var_name);
+			}
+		}
 	}
 
 	return 1;

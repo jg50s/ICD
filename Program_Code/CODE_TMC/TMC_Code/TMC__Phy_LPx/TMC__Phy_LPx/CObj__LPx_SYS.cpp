@@ -2,6 +2,8 @@
 #include "CObj__LPx_SYS.h"
 #include "CObj__LPx_SYS__ALID.h"
 
+#include "Macro_Function.h"
+
 
 //-------------------------------------------------------------------------
 CObj__LPx_SYS::CObj__LPx_SYS()
@@ -180,6 +182,29 @@ int CObj__LPx_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__LINK_PIO_ACTIVE_UNLOAD_REQ, str_name);
 	}
 
+	// SIM ...
+	{
+		str_name = "SIM.PAUSE.ACTIVE";
+		STD__ADD_DIGITAL(str_name, "OFF ON");
+		LINK__VAR_DIGITAL_CTRL(dCH__SIM_PAUSE_ACTIVE, str_name);
+	}
+
+	// CFG : LOAD & UNLOAF ...
+	{
+		str_name = "CFG.MAX.SLOT.COUNT";
+		STD__ADD_DIGITAL(str_name, "25");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MAX_SLOT_COUNT, str_name);
+
+		//
+		str_name = "CFG.MACRO_LOAD.USE";
+		STD__ADD_DIGITAL(str_name, "YES NO");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MACRO_LOAD_USE, str_name);
+
+		str_name = "CFG.MACRO_UNLOAD.USE";
+		STD__ADD_DIGITAL(str_name, "YES NO");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_MACRO_UNLOAD_USE, str_name);
+	}
+
 	// ...
 	{
 		str_name = "OTR.IN.CFG.FA.MODE";
@@ -230,8 +255,12 @@ int CObj__LPx_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PREPLOAD_CID_MODE, str_name);
 
 		str_name = "CFG.LOAD.MAP.MODE";
-		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "ENABLE DISABLE", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LOAD_MAP_MODE, str_name);
+
+		str_name = "CFG.LOAD_ACT.AUTO_MAP.MODE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "DISABLE ENABLE", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LOAD_ACT_AUTO_MAP_MODE, str_name);
 
 		//
 		str_name = "CFG.MAPPING.SENSOR.USE";
@@ -273,6 +302,18 @@ int CObj__LPx_SYS::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.INIT.SLOT.STATE.UNKNOWN";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INIT_SLOT_STATE_UNKNOWN, str_name);
+
+		//
+		str_name = "CFG.LOAD_POS.STATE.USE";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_LOAD_POS_STATE_USE, str_name);
+	}
+
+	// CFG.INTERLOCK ...
+	{
+		str_name = "CFG.INTERLOCK.ROBOT_AND_LPx_LOAD";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "NO YES", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_INTERLOCK_ROBOT_AND_LPx_LOAD, str_name);
 	}
 
 	// CFG.CYCLE ...
@@ -575,6 +616,23 @@ int CObj__LPx_SYS::__DEFINE__ALARM(p_alarm)
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
 
+	// ...
+	{
+		alarm_id = ALID__EFEM_ROBOT__STATE_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "EFEM Robot의 상태를 확인 바랍니다 !";
+
+		alarm_msg  = "Robot이 비정상 종료된 상태입니다. \n";
+		alarm_msg += "\"HOME\" 수행 후 동작을 수행하시기 바랍니다. \n";
+		alarm_msg += "Please, check the state of EFEM-Robot ! \n";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__ABORT);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
 	return 1;
 }
 
@@ -618,6 +676,14 @@ int CObj__LPx_SYS::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__OBJ_STATE, obj_name,var_name);
 	}
 
+	// LPx.ID ...
+	{
+		def_name = "LPx.ID";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		iLPx_ID = atoi(def_data);
+	}
+
 	// OBJ : LPx ...
 	{
 		def_name = "OBJ.LPx";
@@ -652,17 +718,10 @@ int CObj__LPx_SYS::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ.RFx";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		if((obj_name.CompareNoCase(STR__NO)   == 0)
-		|| (obj_name.CompareNoCase(STR__NULL) == 0))
-		{
-			bActive__RFx_OBJ = false;
-		}
-		else
-		{
-			bActive__RFx_OBJ = true;
-		}
+		bool def_check = MACRO__Check_Def_Data(obj_name);
+		bActive__RFx_OBJ = def_check;
 
-		if(bActive__RFx_OBJ)
+		if(def_check)
 		{
 			pRFx__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
 
@@ -692,7 +751,10 @@ int CObj__LPx_SYS::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "OBJ.OHT";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
-		// ...
+		bool def_check = MACRO__Check_Def_Data(obj_name);
+		bActive__LPx_OHT = def_check;
+
+		if(def_check)
 		{
 			var_name = "REPORT_PIO.E84_RUN.STATE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__REPORT_PIO_E84_RUN_STATE, obj_name,var_name);
@@ -704,21 +766,15 @@ int CObj__LPx_SYS::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		def_name = "CH.ARM_RNE_SNS.DI";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 
-		if((ch_name.CompareNoCase(STR__NO)   == 0)
-		|| (ch_name.CompareNoCase(STR__NULL) == 0))
-		{
-			bActive__ROBOT_ARM_RNE_SNS = false;
-		}
-		else
-		{
-			bActive__ROBOT_ARM_RNE_SNS = true;
+		bool def_check = MACRO__Check_Def_Data(ch_name);
+		bActive__DI_ROBOT_ARM_RNE_SNS = def_check;
 
+		if(def_check)
+		{
 			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT_ARM_RNE_SNS, obj_name,var_name);
-		}
 
-		// ...
-		{
+			//
 			def_name = "DATA.RNE_ON";
 			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 			sDATA__RNE_ON = def_data;
@@ -733,8 +789,46 @@ int CObj__LPx_SYS::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	{
 		def_name = "CH.SLIDE_OUT.DI";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx_WAFER_SLID_OUT, obj_name,var_name);
+
+		bool def_check = MACRO__Check_Def_Data(ch_name);
+		bActive__DI_SLIDE_OUT_SNS = def_check;
+
+		if(def_check)
+		{
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__LPx_WAFER_SLID_OUT, obj_name,var_name);
+		}
+	}
+
+	// OBJ.ROBOT ...
+	{
+		def_name = "OBJ.ROBOT";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		bool def_check = MACRO__Check_Def_Data(obj_name);
+		bActive__ROBOT_OBJ_CTRL = def_check;
+		
+		if(def_check)
+		{
+			pROBOT__OBJ_CTRL = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+			// ...
+			{
+				var_name = "MON.ACTIVE.ROBOT_ACTION_BUSY";
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT__MON_ACTIVE_ROBOT_ACTION_BUSY, obj_name,var_name);
+
+				//
+				var_name.Format("MON.ACTIVE.INTERLOCK_BY_LP.%1d", iLPx_ID);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT__MON_ACTIVE_INTERLOCK_BY_LP, obj_name,var_name);
+
+				var_name.Format("MON.ACTIVE.WAIT_BY_LP.%1d", iLPx_ID);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT__MON_ACTIVE_WAIT_BY_LP, obj_name,var_name);
+
+				//
+				var_name.Format("MON.ACTIVE.ROBOT_ACTION_TO_LP.%1d", iLPx_ID);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__ROBOT__MON_ACTIVE_ACTION_TO_LP, obj_name,var_name);
+			}
+		}
 	}
 
 	// ...
@@ -742,15 +836,12 @@ int CObj__LPx_SYS::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		SCX__SEQ_INFO x_seq_info;
 
 		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
+	}
 
-		if(iActive__SIM_MODE > 0)
-		{
-
-			if(bActive__ROBOT_ARM_RNE_SNS)
-			{
-				dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(sDATA__RNE_ON);
-			}
-		}
+	if(iActive__SIM_MODE > 0)
+	{
+		if(bActive__DI_ROBOT_ARM_RNE_SNS)		dEXT_CH__ROBOT_ARM_RNE_SNS->Set__DATA(sDATA__RNE_ON);
+		if(bActive__DI_SLIDE_OUT_SNS)			diEXT_CH__LPx_WAFER_SLID_OUT->Set__DATA(STR__OFF);
 	}
 
 	return 1;
@@ -773,24 +864,27 @@ LOOP_RETRY:
 
 	if(sCH__MAP_SEQ_LOCK->Check__DATA("YES") > 0)
 	{
-		CString log_msg;
-
-		log_msg.Format("Current MAP_SEQ Lock occurred !");
-		xLOG_CTRL->WRITE__LOG(log_msg);
-
-		// ...
+		if(mode.CompareNoCase(sMODE__CHECK_DOOR_OPEN) != 0)
 		{
-			int alarm_id = ALID__MAP_SEQ_LOCK__INTERLOCK;
-			CString r_act;
+			CString log_msg;
 
-			p_alarm->Popup__ALARM(alarm_id,r_act);
+			log_msg.Format("Current MAP_SEQ Lock occurred !");
+			xLOG_CTRL->WRITE__LOG(log_msg);
 
-			if(r_act.CompareNoCase(ACT__RETRY) == 0)
+			// ...
 			{
-				goto LOOP_RETRY;
+				int alarm_id = ALID__MAP_SEQ_LOCK__INTERLOCK;
+				CString r_act;
+
+				p_alarm->Popup__ALARM(alarm_id,r_act);
+	
+				if(r_act.CompareNoCase(ACT__RETRY) == 0)
+				{
+					goto LOOP_RETRY;
+				}
 			}
+			return -1;
 		}
-		return -1;
 	}
 
 	// ACTIVE CHECK : INIT ...
@@ -840,7 +934,7 @@ LOOP_RETRY:
 	}
 
 	// ...
-	int flag = -1;
+	int flag = 1;
 
 	// ...
 	{
@@ -849,8 +943,93 @@ LOOP_RETRY:
 		dCH__LINK_PIO_ACTIVE_UNLOAD_REQ->Set__DATA(STR__OFF);
 	}
 
-	// ...
+	// LPx.INTERLOCK CHECK ...
+	if(dCH__CFG_INTERLOCK_ROBOT_AND_LPx_LOAD->Check__DATA(STR__YES) > 0)
 	{
+		bool active__robot_check = false;
+
+		if((mode.CompareNoCase(sMODE__INIT) == 0)
+		|| (mode.CompareNoCase(sMODE__HOME) == 0)
+		|| (mode.CompareNoCase(sMODE__DOOR_OPEN) == 0)
+		|| (mode.CompareNoCase(sMODE__LOAD) == 0)
+		|| (mode.CompareNoCase(sMODE__RLSUNLOAD) == 0)
+		|| (mode.CompareNoCase(sMODE__CYCLE) == 0)
+		|| (mode.CompareNoCase(sMODE__MAP) == 0)
+		|| (mode.CompareNoCase(sMODE__EXTENDPADDLE) == 0)
+		|| (mode.CompareNoCase(sMODE__PADDLEDOWN) == 0)
+		|| (mode.CompareNoCase(sMODE__PADDLEUP) == 0)
+		|| (mode.CompareNoCase(sMODE__RETRACTPADDLE) == 0)
+		|| (mode.CompareNoCase(sMODE__CLOSEDOOR) == 0)
+		|| (mode.CompareNoCase(sMODE__OPENDOOR) == 0)
+		|| (mode.CompareNoCase(sMODE__OPENDOOR_WITH_NO_UNLATCH) == 0))
+		{
+			active__robot_check = true;
+		}
+
+		if(active__robot_check)
+		{
+			dEXT_CH__ROBOT__MON_ACTIVE_INTERLOCK_BY_LP->Set__DATA(STR__ON);
+			dEXT_CH__ROBOT__MON_ACTIVE_WAIT_BY_LP->Set__DATA(STR__OFF);
+
+			// ...
+			int count__robot_check = 0;
+
+			while(1)
+			{
+				if(dEXT_CH__ROBOT__MON_ACTIVE_ROBOT_ACTION_BUSY->Check__DATA(STR__OFF) > 0)
+				{
+					break;
+				}
+
+				if(pROBOT__OBJ_CTRL->Is__OBJ_BUSY() < 0)
+				{
+					count__robot_check++;
+						
+					if(count__robot_check > 10)
+					{
+						int alm_id = ALID__EFEM_ROBOT__STATE_ERROR;
+						CString alm_msg;
+						CString r_act;
+
+						alm_msg.Format(" * %s <- %s \n",
+										dEXT_CH__ROBOT__MON_ACTIVE_ROBOT_ACTION_BUSY->Get__CHANNEL_NAME(),
+										dEXT_CH__ROBOT__MON_ACTIVE_ROBOT_ACTION_BUSY->Get__STRING());
+
+						p_alarm->Popup__ALARM_With_MESSAGE(alm_id, alm_msg, r_act);
+
+						flag = -1001;
+						break;
+					}
+				}
+
+				dEXT_CH__ROBOT__MON_ACTIVE_WAIT_BY_LP->Set__DATA(STR__ON);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					flag = -1011;
+					break;
+				}
+
+				Sleep(90);
+			}
+		}
+	}
+	else
+	{
+		dEXT_CH__ROBOT__MON_ACTIVE_INTERLOCK_BY_LP->Set__DATA(STR__OFF);
+		dEXT_CH__ROBOT__MON_ACTIVE_WAIT_BY_LP->Set__DATA(STR__OFF);
+	}
+
+	if(flag > 0)
+	{
+		if(iActive__SIM_MODE > 0)
+		{
+			while(dCH__SIM_PAUSE_ACTIVE->Check__DATA(STR__ON) > 0)
+			{
+				Sleep(90);
+			}
+		}
+
 			 IF__CTRL_MODE(sMODE__INIT)					flag = Call__INIT(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__HOME)					flag = Call__HOME(p_variable,p_alarm);
 
@@ -922,13 +1101,17 @@ LOOP_RETRY:
 		dCH__LINK_PIO_ACTIVE_RUN->Set__DATA(STR__OFF);
 		dCH__LINK_PIO_ACTIVE_LOAD_REQ->Set__DATA(STR__OFF);
 		dCH__LINK_PIO_ACTIVE_UNLOAD_REQ->Set__DATA(STR__OFF);
+
+		//
+		dEXT_CH__ROBOT__MON_ACTIVE_INTERLOCK_BY_LP->Set__DATA(STR__OFF);
+		dEXT_CH__ROBOT__MON_ACTIVE_WAIT_BY_LP->Set__DATA(STR__OFF);
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
 	{
 		CString log_msg;
 
-		log_msg.Format("Aborted ... :  [%s]", mode);
+		log_msg.Format("Aborted (%1d) ... :  [%s]", flag, mode);
 		xLOG_CTRL->WRITE__LOG(log_msg);
 
 		sCH__OBJ_MSG->Set__DATA(log_msg);

@@ -1,0 +1,6 @@
+; PMC__FNC_STEP.def : Declares the module parameters for the DLL.
+
+LIBRARY      "PMC__FNC_STEP"
+
+EXPORTS
+    ; Explicit exports can go here

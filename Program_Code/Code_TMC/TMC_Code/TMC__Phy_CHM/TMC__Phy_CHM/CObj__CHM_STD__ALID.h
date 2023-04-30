@@ -20,3 +20,11 @@
 #define  ALID__CHM_LID_NOT_CLOSED						8
 #define  ALID__ATM_HIGH_PRESSURE_LIMIT					9
 
+#define  ALID__SR_VALVE_NOT_CLOSE						11
+#define  ALID__SR_VALVE_NOT_OPEN						12
+
+#define  ALID__FR_VALVE_NOT_CLOSE						13
+#define  ALID__FR_VALVE_NOT_OPEN						14
+
+#define  ALID__BALLAST_VLV_CLOSE						15
+

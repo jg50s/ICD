@@ -19,6 +19,9 @@
 #define  STR__OPEN					"OPEN"
 #define  STR__LOAD					"LOAD"
 
+#define  STR__YES					"YES"
+#define  STR__NO					"NO"
+
 // ...
 #define  CMMD__INIT					"INIT"
 #define  CMMD__ROTATE				"ROTATE"

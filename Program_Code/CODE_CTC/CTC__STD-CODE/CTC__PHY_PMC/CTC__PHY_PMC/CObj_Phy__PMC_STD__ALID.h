@@ -21,3 +21,5 @@
 
 #define  ALID__PMC_LEAK_CHECK_TIMEOVER				35
 #define  ALID__PMC_AUTO_PM_TIMEOVER					36
+
+#define  ALID__ALARM_POST_PMC_DUMMY_BY_CTC          37

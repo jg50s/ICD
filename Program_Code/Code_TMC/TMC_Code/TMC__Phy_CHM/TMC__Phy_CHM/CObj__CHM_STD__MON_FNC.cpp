@@ -6,8 +6,7 @@
 
 //----------------------------------------------------------------------------------------------------
 void CObj__CHM_STD
-::Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable,
-				  CII_OBJECT__ALARM* p_alarm)
+::Mon__IO_MONITOR(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	SCX__TIMER_CTRL cx_timer_ctrl;
 
@@ -15,38 +14,184 @@ void CObj__CHM_STD
 	CString str__vac_sns;
 	CString var__data;
 
-	if(iSim_Flag > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
 		diEXT_CH__VAC_SENSOR->Set__DATA(sDATA__VAC_ON);
 
-		aiEXT_CH__TMC_CHM__PRESSURE_TORR->Set__DATA("0.001");
+		//
+		for(int i=0; i<iSIZE__CHM_GAUGE; i++)
+		{
+			double cur__gauge_torr  = 0.001;
+			double cur__gauge_mtorr = cur__gauge_torr * 1000.0; 
+
+			if(bActive__AI_CHM_GAUGE_TORR_X[i])			aEXT_CH__AI_CHM_GAUGE_TORR_X[i]->Set__VALUE(cur__gauge_torr);
+			if(bActive__AI_CHM_GAUGE_mTORR_X[i])		aEXT_CH__AI_CHM_GAUGE_mTORR_X[i]->Set__VALUE(cur__gauge_mtorr);
+		}
 	}
 	
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
-		
-		// PRESSURE ...
+
+
+		if(iActive__SIM_MODE > 0)
 		{
-			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Get__DATA(var__data);
-			aCH__TMC_CHM_PRESSURE_TORR->Set__DATA(var__data);
+			if(doEXT_CH__FAST_PUMP_VLV__SET->Check__DATA(STR__OPEN) > 0)
+			{
+				if(bActive__DI_FR_VLV_OPEN)			diEXT_CH__DI_FR_VLV_OPEN->Set__DATA(STR__ON);
+				if(bActive__DI_FR_VLV_CLOSE)		diEXT_CH__DI_FR_VLV_CLOSE->Set__DATA(STR__OFF);
+			}
+			else
+			{
+				if(bActive__DI_FR_VLV_OPEN)			diEXT_CH__DI_FR_VLV_OPEN->Set__DATA(STR__OFF);
+				if(bActive__DI_FR_VLV_CLOSE)		diEXT_CH__DI_FR_VLV_CLOSE->Set__DATA(STR__ON);
+			}
 
-			double cur_press_mtorr = atof(var__data) * 1000.0;
-			var__data.Format("%.1f", cur_press_mtorr);
-			aCH__TMC_CHM_PRESSURE_mTORR->Set__DATA(var__data);
-		}	
+			if(bActive__SOFT_PUMP_VLV__SET)
+			{
+				if(doEXT_CH__SOFT_PUMP_VLV__SET->Check__DATA(STR__OPEN) > 0)
+				{
+					if(bActive__DI_SR_VLV_OPEN)		diEXT_CH__DI_SR_VLV_OPEN->Set__DATA(STR__ON);
+					if(bActive__DI_SR_VLV_CLOSE)	diEXT_CH__DI_SR_VLV_CLOSE->Set__DATA(STR__OFF);
+				}
+				else
+				{
+					if(bActive__DI_SR_VLV_OPEN)		diEXT_CH__DI_SR_VLV_OPEN->Set__DATA(STR__OFF);
+					if(bActive__DI_SR_VLV_CLOSE)	diEXT_CH__DI_SR_VLV_CLOSE->Set__DATA(STR__ON);
+				}
+			}
+		}
 
-		// jglee : 2020.10.20
+		// CHM.PRESSURE ...
+		{
+			double cur__chm_torr = aiEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+			double cur__press_mtorr = cur__chm_torr * 1000.0;
+
+			for(int i=0; i<iSIZE__CHM_GAUGE; i++)
+			{
+				if(dEXT_CH__DO_CHM_ISO_VLV_X[i]->Check__DATA(STR__OPEN) < 0)
+				{
+					continue;
+				}
+
+				// ...
+				double cfg__max_mtorr   = aCH__CFG_CHAMBER_MANOMETER_MAX_PRESSURE_mTORR_X[i]->Get__VALUE();
+				double cur__gauge_mtorr = cfg__max_mtorr;
+
+				if(bActive__AI_CHM_GAUGE_mTORR_X[i])
+				{
+					cur__gauge_mtorr = aEXT_CH__AI_CHM_GAUGE_mTORR_X[i]->Get__VALUE();
+				}
+				else if(bActive__AI_CHM_GAUGE_TORR_X[i])
+				{
+					double cur__gauge_torr = aEXT_CH__AI_CHM_GAUGE_TORR_X[i]->Get__VALUE();
+					cur__gauge_mtorr = cur__gauge_torr * 1000.0;
+				}
+
+				if(cur__gauge_mtorr < cfg__max_mtorr)
+				{
+					cur__press_mtorr = cur__gauge_mtorr;
+				}
+			}
+
+			// ...
+			{
+				double cur__press_torr = cur__press_mtorr * 0.001;
+
+				var__data.Format("%.3f", cur__press_torr);
+				aCH__TMC_CHM_PRESSURE_TORR->Set__DATA(var__data);
+
+				var__data.Format("%.1f", cur__press_mtorr);
+				aCH__TMC_CHM_PRESSURE_mTORR->Set__DATA(var__data);
+			}
+
+			// ...
+			{
+				double cur__press_torr  = aCH__TMC_CHM_PRESSURE_TORR->Get__VALUE();
+				double cur__press_mtorr = aCH__TMC_CHM_PRESSURE_mTORR->Get__VALUE();
+
+					 if(cur__press_torr <  0.01)		var__data.Format("%1.2f mtorr", cur__press_mtorr);
+				else if(cur__press_torr <   0.1)		var__data.Format("%2.1f mtorr", cur__press_mtorr);
+				else if(cur__press_torr <   1.0)		var__data.Format("%3.0f mtorr", cur__press_mtorr);
+				else if(cur__press_torr <  10.0)		var__data.Format("%.3f torr", cur__press_torr);
+				else if(cur__press_torr < 100.0)		var__data.Format("%.2f torr", cur__press_torr);
+				else									var__data.Format("%.1f torr", cur__press_torr);
+
+				sCH__MON_CHM_PRESSURE_DISPLAY->Set__DATA(var__data);
+			}
+		}
+		
+		// CHM.GAUGE_ISO_VLV ...
+		{
+			bool active__interlock_pressure = false;
+
+			// ...
+			{
+				double cur__chm_press = aiEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+				double cfg__interlock_press = aCH__CFG_CHAMBER_MANOMETER_INTERLOCK_HIGH_LIMIT_PRESSURE->Get__VALUE();
+
+				if(cur__chm_press >= cfg__interlock_press)		active__interlock_pressure = true;
+			}
+
+			for(int i=0; i<iSIZE__CHM_GAUGE; i++)
+			{
+				if(active__interlock_pressure)
+				{
+					dEXT_CH__DO_CHM_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+				}
+				else
+				{
+					bool active__vlv_open = false;
+
+					if(diEXT_CH__VAC_SENSOR->Check__DATA(sDATA__VAC_ON) > 0)
+					{
+						double cfg__limit_mtorr = aCH__CFG_CHAMBER_MANOMETER_LIMIT_PRESSURE_mTORR_X[i]->Get__VALUE();
+
+						if(cfg__limit_mtorr > 0.1)
+						{
+							if(i > 0)
+							{
+								double cur__press_mtorr = 0;
+
+								if(bActive__AI_CHM_GAUGE_mTORR_X[i-1])
+								{
+									cur__press_mtorr = aEXT_CH__AI_CHM_GAUGE_mTORR_X[i-1]->Get__VALUE();
+								}
+								else if(bActive__AI_CHM_GAUGE_TORR_X[i-1])
+								{
+									double cur__press_torr = aEXT_CH__AI_CHM_GAUGE_TORR_X[i-1]->Get__VALUE();
+									cur__press_mtorr = cur__press_torr * 1000.0;
+								}
+
+								if(cur__press_mtorr < cfg__limit_mtorr)			active__vlv_open = true;
+							}
+							else
+							{
+								double cur__chm_torr  = aiEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+								double cur__chm_mtorr = cur__chm_torr * 1000.0;
+
+								if(cur__chm_mtorr < cfg__limit_mtorr)			active__vlv_open = true;
+							}
+						}
+						else
+						{
+							active__vlv_open = true;
+						}
+					}
+
+					if(active__vlv_open)		dEXT_CH__DO_CHM_ISO_VLV_X[i]->Set__DATA(STR__OPEN);
+					else						dEXT_CH__DO_CHM_ISO_VLV_X[i]->Set__DATA(STR__CLOSE);
+				}
+			}
+		}
+
 		if(bActive__ATM_SNS_Virtual_Type)
 		{
-			aiEXT_CH__TMC_CHM__PRESSURE_TORR->Get__DATA(var__data);
-			double cur_press = atof(var__data);
+			double cur__press_torr = aiEXT_CH__CHM_PRESSURE_TORR->Get__VALUE();
+			double cfg__press_atm  = aCH__CFG_FAST_VENT_PRESSURE_TORR->Get__VALUE();
 
-			aCH__CFG_FAST_VENT_PRESSURE_TORR->Get__DATA(var__data);
-			double cfg_press = atof(var__data);
-
-			if(cur_press < cfg_press)
+			if(cur__press_torr < cfg__press_atm)
 			{
 				diEXT_CH__ATM_SENSOR->Set__DATA(sDATA__ATM_OFF);
 			}
@@ -86,12 +231,14 @@ void CObj__CHM_STD
 			diEXT_CH__VAC_SENSOR->Get__DATA(str__vac_sns);
 
 			if((cur_press >= atm_range_min) 
-			&& ( (str__atm_sns.CompareNoCase(STR__ON) == 0) && (str__vac_sns.CompareNoCase(STR__OFF) == 0)) )
+			&& (str__atm_sns.CompareNoCase(sDATA__ATM_ON)  == 0) 
+			&& (str__vac_sns.CompareNoCase(sDATA__VAC_OFF) == 0))
 			{
 				dCH__TMC_CHM_PRESSURE_STATUS->Set__DATA(STR__ATM);
 			}
-			else if(((cur_press <= ref_vac_press) && (cur_press > 0)) 
-				 &&  ( (str__atm_sns.CompareNoCase(STR__OFF) == 0) && (str__vac_sns.CompareNoCase(STR__ON) == 0)) )
+			else if((cur_press <= ref_vac_press)
+				 && (str__atm_sns.CompareNoCase(sDATA__ATM_OFF) == 0) 
+				 && (str__vac_sns.CompareNoCase(sDATA__VAC_ON)  == 0))
 			{
 				dCH__TMC_CHM_PRESSURE_STATUS->Set__DATA(STR__VAC);
 			}
@@ -103,29 +250,234 @@ void CObj__CHM_STD
 
 		// ...
 		{
-			if(diEXT_CH__ATM_SENSOR->Check__DATA(sDATA__ATM_ON) > 0)
-			{
-				dCH__TMC_CMH_VAC_SNS->Set__DATA(STR__OFF);
-			}
-			else
-			{
-				dCH__TMC_CMH_VAC_SNS->Set__DATA(STR__ON);
-			}
+			if(diEXT_CH__VAC_SENSOR->Check__DATA(sDATA__VAC_ON) > 0)			dCH__TMC_CMH_VAC_SNS->Set__DATA(STR__OFF);
+			else																dCH__TMC_CMH_VAC_SNS->Set__DATA(STR__ON);
 		}
 
-		Update__PUMP_VLV_STS(p_alarm);
+		//
+		Update__PUMP_VLV_STS(p_variable, p_alarm);
 
 		Fnc__INTERLOCK(p_variable,p_alarm);
 	}	
 }
 
 void CObj__CHM_STD
-::Fnc__INTERLOCK(CII_OBJECT__VARIABLE* p_variable,
-			     CII_OBJECT__ALARM* p_alarm)
+::Mon__BALLAST_CTRL(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM *p_alarm)
+{
+	bool active__ballast_ctrl = false;
+
+	int loop_count = 0;
+	int i;
+	
+
+	while(1)
+	{
+		p_variable->Wait__SINGLE_OBJECT(0.1);
+
+		
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
+
+		if(loop_count == 1)
+		{
+			double cfg_min = aCH__CFG_TM_BALLAST_N2_PRESSURE_MIN->Get__VALUE();
+			double cfg_max = aCH__CFG_TM_BALLAST_N2_PRESSURE_MAX->Get__VALUE();
+
+			aCH__CFG_TM_BALLAST_N2_PRESSURE_mTORR->Change__MIN_MAX_DEC(cfg_min, cfg_max, 0);
+
+			if(bActive__AO_BALLAST_PRESSURE_TORR)		aoEXT_CH__AO_BALLAST_PRESSURE_TORR->Change__MIN_MAX_DEC(cfg_min, cfg_max, 0);
+			if(bActive__AI_BALLAST_PRESSURE_TORR)		aoEXT_CH__AI_BALLAST_PRESSURE_TORR->Change__MIN_MAX_DEC(cfg_min, cfg_max, 0);
+		}
+
+		// ...
+		bool active__chm_pumping = true;
+
+		// Check : Chamber Pumping ...
+		{
+			if(dCH__TMC_CHM_PRESSURE_STATUS->Check__DATA(STR__VAC) < 0)
+			{
+				active__chm_pumping = false;
+			}
+			if(sEXT_CH__MON_PUMP_RUN_STS->Check__DATA(STR__ON) < 0)
+			{
+				active__chm_pumping = false;
+			}
+			if(sCH__PUMP_VLV_OPEN_FLAG->Check__DATA(STR__YES) < 0)
+			{
+				active__chm_pumping = false;
+			}
+			if(dCH__MON_PUMPING_SEQ_ACTIVE->Check__DATA(STR__ON) > 0)
+			{
+				active__chm_pumping = false;
+			}
+
+			if(!active__chm_pumping)
+			{
+				if(Check__BALLAST_CLOSE() < 0)
+				{
+					// ...
+					{
+						int alm_id = ALID__BALLAST_VLV_CLOSE;
+						CString alm_bff;
+						CString alm_msg;
+						CString r_act;
+
+						alm_msg = "Pumping state ... \n";
+
+						if(dCH__TMC_CHM_PRESSURE_STATUS->Check__DATA(STR__VAC) < 0)
+						{
+							alm_bff.Format(" * %s <- %s \n", 
+											dCH__TMC_CHM_PRESSURE_STATUS->Get__CHANNEL_NAME(),
+											dCH__TMC_CHM_PRESSURE_STATUS->Get__STRING());
+							alm_msg += alm_bff;
+						}
+						if(sEXT_CH__MON_PUMP_RUN_STS->Check__DATA(STR__ON) < 0)
+						{
+							alm_bff.Format(" * %s <- %s \n", 
+											sEXT_CH__MON_PUMP_RUN_STS->Get__CHANNEL_NAME(),
+											sEXT_CH__MON_PUMP_RUN_STS->Get__STRING());
+							alm_msg += alm_bff;
+						}
+						if(sCH__PUMP_VLV_OPEN_FLAG->Check__DATA(STR__YES) < 0)
+						{
+							alm_bff.Format(" * %s <- %s \n", 
+											sCH__PUMP_VLV_OPEN_FLAG->Get__CHANNEL_NAME(),
+											sCH__PUMP_VLV_OPEN_FLAG->Get__STRING());
+							alm_msg += alm_bff;
+						}
+						if(dCH__MON_PUMPING_SEQ_ACTIVE->Check__DATA(STR__ON) > 0)
+						{
+							alm_bff.Format(" * %s <- %s \n", 
+											dCH__MON_PUMPING_SEQ_ACTIVE->Get__CHANNEL_NAME(),
+											dCH__MON_PUMPING_SEQ_ACTIVE->Get__STRING());
+							alm_msg += alm_bff;
+						}
+
+						p_alarm->Check__ALARM(alm_id, r_act);
+						p_alarm->Post__ALARM_With_MESSAGE(alm_id, alm_msg);
+					}
+
+					Fnc__BALLAST_CLOSE();
+				}
+			}
+		}
+
+		if(iActive__SIM_MODE > 0)
+		{
+			double cur__pressure_torr = 0.0;
+
+			if(bActive__AO_BALLAST_PRESSURE_TORR)		cur__pressure_torr = aoEXT_CH__AO_BALLAST_PRESSURE_TORR->Get__VALUE();
+			if(bActive__AI_BALLAST_PRESSURE_TORR)		aoEXT_CH__AI_BALLAST_PRESSURE_TORR->Set__VALUE(cur__pressure_torr);
+		}
+
+		if(dCH__CFG_TM_BALLAST_CONTROL->Check__DATA(STR__DISABLE) > 0)
+		{
+			if(active__ballast_ctrl)
+			{
+				active__ballast_ctrl = false;
+
+				Fnc__BALLAST_CLOSE();
+			}
+			continue;
+		}
+		else
+		{
+			active__ballast_ctrl = true;
+		
+		}
+
+		if((active__ballast_ctrl)
+		&& (active__chm_pumping))
+		{
+			bool active__ballast_interlock = false;
+
+			// Check : SV Open ...
+			{
+				int count__pm_open = 0;
+				int count__ll_open = 0;
+
+				for(i=0; i<iSIZE__PMx_SLOT_VLV; i++)
+				{
+					if(dEXT_CH__PMx_SLOT_VLV_X[i]->Check__DATA(STR__OPEN) > 0)		count__pm_open++;
+				}
+				for(i=0; i<iSIZE__LLx_SLOT_VLV; i++)
+				{
+					if(dEXT_CH__LLx_SLOT_VLV_X[i]->Check__DATA(STR__OPEN) > 0)		count__ll_open++;
+				}
+
+				if((count__pm_open > 0)
+				|| (count__ll_open > 0))
+				{
+					if(dCH__CFG_TM_BALLAST_TRANSFER_FLOW->Check__DATA(STR__YES) < 0)		active__ballast_interlock = true;
+				}
+				else
+				{
+					if(dCH__CFG_TM_BALLAST_IDLE_FLOW->Check__DATA(STR__YES) < 0)			active__ballast_interlock = true;
+				}
+			}
+
+			// Check : Wafer Transfer ...
+			if(dCH__PARA_BALLAST_CTRL_ACTIVE->Check__DATA(STR__ON) > 0)
+			{
+				if(dCH__CFG_TM_BALLAST_TRANSFER_FLOW->Check__DATA(STR__YES) < 0)			active__ballast_interlock = true;
+			}
+
+			if(active__ballast_interlock)
+			{
+				Fnc__BALLAST_CLOSE();
+			}
+			else
+			{
+				CString cfg__ctrl_mode = dCH__CFG_TM_BALLAST_MODE->Get__STRING();
+
+				if(cfg__ctrl_mode.CompareNoCase(STR__VALVE) == 0)
+				{
+					if(bActive__DO_BALLAST_VALVE_SET)			doEXT_CH__DO_BALLAST_VALVE_SET->Set__DATA(STR__OPEN);	
+				}
+				else if(cfg__ctrl_mode.CompareNoCase(STR__PRESSURE_SET) == 0)
+				{
+					double cfg__pressure_mtorr = aCH__CFG_TM_BALLAST_N2_PRESSURE_mTORR->Get__VALUE();
+
+					if(bActive__DO_BALLAST_VALVE_SET)			doEXT_CH__DO_BALLAST_VALVE_SET->Set__DATA(STR__OPEN);
+					if(bActive__AO_BALLAST_PRESSURE_TORR)		aoEXT_CH__AO_BALLAST_PRESSURE_TORR->Set__VALUE(cfg__pressure_mtorr);
+				}
+				else if(cfg__ctrl_mode.CompareNoCase(STR__PRESSURE_PID) == 0)
+				{
+
+				}
+			}
+		}
+
+		// ...
+	}
+}
+
+int  CObj__CHM_STD::Check__BALLAST_CLOSE()
+{
+	if(bActive__DO_BALLAST_VALVE_SET)
+	{
+		if(doEXT_CH__DO_BALLAST_VALVE_SET->Check__DATA(STR__CLOSE) < 0)			return -1;
+	}
+	if(bActive__AO_BALLAST_PRESSURE_TORR)
+	{
+		double cur_press = aoEXT_CH__AO_BALLAST_PRESSURE_TORR->Get__VALUE();
+		if(cur_press > 0.9)			return -2;
+	}
+
+	return 1;
+}
+void CObj__CHM_STD::Fnc__BALLAST_CLOSE()
+{
+	if(bActive__DO_BALLAST_VALVE_SET)			doEXT_CH__DO_BALLAST_VALVE_SET->Set__DATA(STR__CLOSE);
+	if(bActive__AO_BALLAST_PRESSURE_TORR)		aoEXT_CH__AO_BALLAST_PRESSURE_TORR->Set__VALUE(0.0);
+}
+
+void CObj__CHM_STD
+::Fnc__INTERLOCK(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	if(Check__VENT_ALL_VLV__CLOSE(p_alarm) < 0)
 	{			
-		if(Check__PUMP_ALL_VLV__CLOSE(p_alarm) < 0)
+		if(Check__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm) < 0)
 		{
 			Fnc__VENT_ALL_VLV__CLOSE(p_alarm);
 
@@ -144,9 +496,9 @@ void CObj__CHM_STD
 	if((sEXT_CH__MON_PUMP_COMM_STS->Check__DATA(STR__ONLINE) < 0) 
 	|| (sEXT_CH__MON_PUMP_RUN_STS->Check__DATA(STR__ON) < 0))
 	{
-		if(Check__PUMP_ALL_VLV__CLOSE(p_alarm) < 0)
+		if(Check__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm) < 0)
 		{
-			Fnc__PUMP_ALL_VLV__CLOSE(p_alarm);
+			Fnc__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm);
 
 			// ...
 			{
@@ -162,267 +514,3 @@ void CObj__CHM_STD
 	// ...
 }
 
-int CObj__CHM_STD
-::Fnc__CNTS_PG_Disable(CII_OBJECT__VARIABLE* p_variable, 
-					   CString sLogEnDis)
-{
-	double dblTemp = 0.0;
-	CString sTemp, sGet_Obj_Mode, sGet_Obj_Sts;
-
-	// 1. MFC SETZERO, 
-	aoEXT_CH__BALLAST_N2_SET->Get__DATA(sTemp);	dblTemp = atof(sTemp);
-	if(dblTemp != 0.0)	
-	{
-		aoEXT_CH__BALLAST_N2_SET->Set__DATA("0.0");
-	}
-
-	// 2. PGV Valve "Close"
-	doEXT_CH__BALLAST_VALVE_SET->Get__DATA(sTemp);
-	if(sTemp.CompareNoCase("Close") != 0)	
-	{
-		doEXT_CH__BALLAST_VALVE_SET->Set__DATA("Close");
-	}
-
-	// 3. DATALOG "DISABLE"
-	if(sLogEnDis.CompareNoCase("DATALOG_STOP") == 0)
-	{
-		m_xI_DATALOG_OBJ_CTRL->Get__OBJ_MODE(sGet_Obj_Mode);
-		m_xI_DATALOG_OBJ_CTRL->Get__OBJECT_STATUS(sGet_Obj_Sts);
-		
-		if(m_nDatalog_Flag > 0)
-		{
-			m_xI_DATALOG_OBJ_CTRL->Run__OBJECT("DISABLE");
-			m_nDatalog_Flag = -1;
-		}
-	}
-
-	return 1;
-}
-
-int CObj__CHM_STD
-::Fnc__MON__TM_Purge_PID_Ctrl(CII_OBJECT__VARIABLE* p_variable, 
-						      CII_OBJECT__ALARM *p_alarm)
-{
-	CString    szData, szData_bak;
-	CString    szData_DOOR_bak, szData_CLAMP_bak;
-
-	szData_bak			= "~";
-	szData_DOOR_bak		= "~";
-	szData_CLAMP_bak	= "~";
-
-	int nFlag = 1;
-
-
-	// PID -- Control ...
-	SCX__USER_LOG_CTRL xSPECIAL_INF_Log;
-	CString sINF_Log;
-	
-	xSPECIAL_INF_Log->CREATE__SUB_DIRECTORY("PID_LOG");
-	xSPECIAL_INF_Log->SET__PROPERTY("PID LOG", 120, 60);
-	xSPECIAL_INF_Log->WRITE__LOG("----------->> PID LOG START !! <<--------------");
-	
-	
-	// PID -- Control ...
-	#define	KP		1		// 비례항 gain
-	#define	KI		0.01	// 적분항 gain
-	#define	KD		0.01	// 미분항 gain
-
-	CString sMsg, sTemp, sGet_Obj_Mode, sGet_Obj_Sts;
-	
-	double error, Paction = 0.0, Daction = 0.0, Iaction = 0.0, lastError = 0.0, time = 0.1;
-	double dMVPcnt = 0.0;
-	double setPoint;
-	double measurement = 0.0, output = 0;
-
-	double dblMFC_Ctrl_Val = 0.0;
-	double dblMFC_Old_Val = 0.0;
-	CString szMFC_SET_VAL;
-	double dblKP = 1, dblKI = 0.01, dblKD = 0.01;
-	double dblTemp = 0.0;
-	double dblTemp_Old = 0.0;
-
-	double dblMFC_Set_Val		= 0.0;
-	double dblMFC_Set_Val_Old	= 0.0;
-
-	CString sGET_TM_OBJ_STS;
-	
-	int nPGSet_RUN     = -1;
-	int nPGSet_DISABLE = -1;
-
-
-	while(1)
-	{
-		p_variable->Wait__SINGLE_OBJECT(0.1);
-
-
-		if(dTM_BALLAST_CTRL_INIT_FLAG->Check__DATA("NONE") > 0)	
-		{
-			continue;			
-		}
-
-		// ...
-		p_variable->Get__CTRL_STATUS(sGET_TM_OBJ_STS);
-
-		if((sGET_TM_OBJ_STS.CompareNoCase("RUN")   == 0) 
-		|| (sGET_TM_OBJ_STS.CompareNoCase("ABORT") == 0))
-		{
-			// 초기화 !!
-			error     = 0.0;
-			Paction   = 0.0;
-			Iaction   = 0.0;
-			Daction   = 0.0;
-			output	  = 0.0;
-			lastError = 0.0;
-			time = 0.1;
-
-			// PG Valve, MFC Set Zero !!
-			if(nPGSet_RUN < 0)
-			{
-				Fnc__CNTS_PG_Disable(p_variable, "DATALOG_CONTINUE");
-				nPGSet_RUN = 1;
-			}
-			continue;
-		}
-						
-		if(dCFG_CH__TM_BALLAST_CONTROL->Check__DATA(STR__DISABLE) > 0)
-		{
-			// 1. Disable function
-			if(nPGSet_DISABLE < 0)
-			{
-				Fnc__CNTS_PG_Disable(p_variable, "DATALOG_STOP");
-				nPGSet_DISABLE = 1;
-			}
-			
-			// 초기화 !!
-			error     = 0.0;
-			Paction   = 0.0;
-			Iaction   = 0.0;
-			Daction   = 0.0;
-			output	  = 0.0;
-			lastError = 0.0;
-			time = 0.1;
-
-			continue;
-		}
-		else if(dCFG_CH__TM_BALLAST_MODE->Check__DATA(STR__VALVE) > 0)
-		{			
-			continue;
-		}
-
-		if(dCFG_CH__TM_BALLAST_CONTROL->Check__DATA(STR__DISABLE) > 0)
-		{
-			if(doEXT_CH__FAST_PUMP_VLV__SET->Check__DATA("Open") > 0)
-			{
-				nPGSet_RUN     = -1;
-				nPGSet_DISABLE = -1;
-
-				// 1. MFC Set !!
-				dblTemp = aCFG_CH__TM_BALLAST_N2_VALUE->Get__VALUE();
-				dblMFC_Set_Val = aoEXT_CH__BALLAST_N2_SET->Get__VALUE();
-	
-				if(dblMFC_Set_Val != dblTemp)	
-					aoEXT_CH__BALLAST_N2_SET->Set__DATA(sTemp);
-			}
-			else		
-			{
-				Fnc__CNTS_PG_Disable(p_variable, "DATALOG_CONTINUE");
-			}
-
-			if(dCFG_CH__TM_BALLAST_DATALOG_ENDIS->Check__DATA("ENABLE") > 0)
-			{
-				m_xI_DATALOG_OBJ_CTRL->Get__OBJ_MODE(sGet_Obj_Mode);
-				m_xI_DATALOG_OBJ_CTRL->Get__OBJECT_STATUS(sGet_Obj_Sts);
-				
-				if(m_nDatalog_Flag < 0)
-				{
-					m_xI_DATALOG_OBJ_CTRL->Run__OBJECT("ENABLE");
-					m_nDatalog_Flag = 1;
-				}					
-			}
-			else
-			{
-				m_xI_DATALOG_OBJ_CTRL->Get__OBJ_MODE(sGet_Obj_Mode);
-				m_xI_DATALOG_OBJ_CTRL->Get__OBJECT_STATUS(sGet_Obj_Sts);
-
-				if(m_nDatalog_Flag > 0)
-				{
-					m_xI_DATALOG_OBJ_CTRL->Run__OBJECT("DISABLE");
-					m_nDatalog_Flag = -1;
-				}
-			}
-
-			continue;
-		}
-
-		if(dCFG_CH__TM_BALLAST_DATALOG_ENDIS->Check__DATA("ENABLE") > 0)
-		{
-			m_xI_DATALOG_OBJ_CTRL->Get__OBJ_MODE(sGet_Obj_Mode);
-			m_xI_DATALOG_OBJ_CTRL->Get__OBJECT_STATUS(sGet_Obj_Sts);
-
-			if( m_nDatalog_Flag < 0 )
-			{
-				m_xI_DATALOG_OBJ_CTRL->Run__OBJECT("ENABLE");
-				m_nDatalog_Flag = 1;
-			}
-		}
-		else
-		{
-			m_xI_DATALOG_OBJ_CTRL->Get__OBJ_MODE(sGet_Obj_Mode);
-			m_xI_DATALOG_OBJ_CTRL->Get__OBJECT_STATUS(sGet_Obj_Sts);
-			
-			if( m_nDatalog_Flag > 0 )
-			{
-				m_xI_DATALOG_OBJ_CTRL->Run__OBJECT("DISABLE");
-				m_nDatalog_Flag = -1;
-			}
-		}
-			
-		// 0. Get PID Gain !!
-		aCFG_CH__TM_BALLAST_N2_P_GAIN->Get__DATA(sTemp);
-		dblKP = atof(sTemp);
-
-		aCFG_CH__TM_BALLAST_N2_I_GAIN->Get__DATA(sTemp);
-		dblKI = atof(sTemp);
-
-		aCFG_CH__TM_BALLAST_N2_D_GAIN->Get__DATA(sTemp);
-		dblKD = atof(sTemp);
-			
-		// 1.사용자가 원하는 목표값.
-		aCFG_CH__TM_BALLAST_N2_VALUE->Get__DATA(sTemp);	setPoint = atof(sTemp);
-
-		// 2.현재 측정된 pressure.
-		aiEXT_CH__TMC_CHM__PRESSURE_TORR->Get__DATA(sTemp);	measurement = atof(sTemp);	// 장비 test 땐 이걸로...
-		measurement = measurement*1000;		// mTorr 로 변환 !!
-			
-		// 3. error 편차 측정.
-		error   =  setPoint - measurement;
-		Paction =  dblKP*error;
-		Iaction = dblKI*time*error;
-		Daction  = dblKD*(error-lastError)/time;
-
-		output = Paction + Iaction + Daction;
-		lastError = error;
-
-		sTemp.Format("%f", output);
-		sTM_BALLAST_OUTPUT_RESULT->Set__DATA(sTemp);
-
-		// UPC에 Setting !!
-		{
-			nPGSet_RUN     = -1;
-			nPGSet_DISABLE = -1;
-
-			// 1. PGV Valve "Open"
-			doEXT_CH__BALLAST_VALVE_SET->Get__DATA(sTemp);
-			if(sTemp.CompareNoCase("Open") != 0)	
-				doEXT_CH__BALLAST_VALVE_SET->Set__DATA("Open");
-
-			// 2.
-			sTemp.Format("%.3f", output*0.001);		// mTorr로 Setting..
-			aoEXT_CH__BALLAST_N2_SET->Set__DATA(sTemp);
-		}
-
-		time = 0.1;
-	}
-	
-	return 1;
-}

@@ -618,6 +618,29 @@ int CObj_Phy__ROBOT_VAC
 			pch__slot_title->Set__DATA("");
 		}
 
+		//==============================================================
+		if(act_start)
+		{
+
+		}
+		else
+		{
+			if(ll_i >= 0)
+			{
+				CString skip_data = sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__STRING();
+				int skip_index = skip_data.Find(STR__YES);
+				if(skip_index >= 0)			return 11;
+			}
+			
+			if(pm_i >= 0)
+			{
+				CString skip_data = sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__STRING();
+				int skip_index = skip_data.Find(STR__YES);
+				if(skip_index >= 0)			return 12;
+			}
+		}
+		//==============================================================
+
 		pch__door_status->Set__DATA(STR__CLOSE);
 	}
 
@@ -777,6 +800,29 @@ int CObj_Phy__ROBOT_VAC
 			pch__arm_status->Set__DATA(STR__NONE);
 			pch__arm_title->Set__DATA("");
 		}
+
+		//==============================================================
+		if(act_start)
+		{
+
+		}
+		else
+		{
+			if(ll_i >= 0)
+			{
+				CString skip_data = sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_LLx_SLOT_CLOSE_SKIP->Get__STRING();
+				int skip_index = skip_data.Find(STR__YES);
+				if(skip_index >= 0)			return 11;
+			}
+
+			if(pm_i >= 0)
+			{
+				CString skip_data = sEXT_CH__OBJ_MAINT__PARA_MANUAL_MOVE_PMx_SLOT_CLOSE_SKIP->Get__STRING();
+				int skip_index = skip_data.Find(STR__YES);
+				if(skip_index >= 0)			return 12;
+			}
+		}
+		//==============================================================
 
 		pch__door_status->Set__DATA(STR__CLOSE);
 	}

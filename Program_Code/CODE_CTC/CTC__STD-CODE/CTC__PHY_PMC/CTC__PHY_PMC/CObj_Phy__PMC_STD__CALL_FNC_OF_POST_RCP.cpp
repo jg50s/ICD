@@ -18,7 +18,28 @@ int  CObj_Phy__PMC_STD
 
 	Fnc__SET_TIME();
 
-	return xI_Module_Obj->Connect__Module_Obj("CLN_READY");
+	// ...
+	int r_flag = 1;
+
+	// ...
+	bool active__marathon_test = false;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		active__marathon_test = true;
+	}
+
+	if(active__marathon_test)
+	{
+
+	}
+	else
+	{
+		r_flag = xI_Module_Obj->Connect__Module_Obj("CLN_READY");
+	}
+
+	return r_flag;
 }
 int  CObj_Phy__PMC_STD
 ::Fnc__POST_CLN_READY(CII_OBJECT__VARIABLE* p_variable)
@@ -53,7 +74,28 @@ int  CObj_Phy__PMC_STD
 
 	Fnc__SET_TIME();
 
-	return xI_Module_Obj->Connect__Module_Obj("CLN_READY");
+	// ...
+	int r_flag = 1;
+
+	// ...
+	bool active__marathon_test = false;
+
+	if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+	&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+	{
+		active__marathon_test = true;
+	}
+
+	if(active__marathon_test)
+	{
+
+	}
+	else
+	{
+		r_flag = xI_Module_Obj->Connect__Module_Obj("CLN_READY");
+	}
+
+	return r_flag;
 }
 
 int  CObj_Phy__PMC_STD
@@ -207,7 +249,7 @@ int  CObj_Phy__PMC_STD
 	x_timer_ctrl->START__COUNT_UP(99999);
 
 	// ...
-	int flag;
+	int flag = 1;
 	int retry_count = 0;
 
 	while(1)
@@ -215,8 +257,46 @@ int  CObj_Phy__PMC_STD
 		SCX__ASYNC_TIMER_CTRL x_async_timer;
 		x_async_timer->START__COUNT_UP(9999);
 
-		flag = xI_Module_Obj->Connect__Module_Obj("CLN_START");
+		// ...
+		bool active__marathon_test = false;
 
+		if((dEXT_CH__ALL_PM_MARATHON_TEST_USE->Check__DATA(STR__ENABLE) > 0)
+		&& (dEXT_CH__PM_ID_MARATHON_TEST_USE->Check__DATA(STR__YES) > 0))
+		{
+			active__marathon_test = true;
+		}
+
+		if(active__marathon_test)
+		{
+			CString ch_data;
+
+			aEXT_CH__PM_ID_MARATHON_TEST_WAIT_SEC->Get__DATA(ch_data);
+			xCH__TOTAL_PRC_TIME->Set__DATA(ch_data);
+
+			double cfg__wait_sec = atoi(ch_data);
+
+			while(1)
+			{
+				Sleep(90);
+
+				if(p_variable->Check__CTRL_ABORT() > 0)
+				{
+					flag = -1;
+					break;
+				}
+
+				if(x_async_timer->Get__CURRENT_TIME() >= cfg__wait_sec)
+				{
+					flag = 1;
+					break;
+				}
+			}
+		}
+		else
+		{
+			flag = xI_Module_Obj->Connect__Module_Obj("CLN_START");
+		}
+		
 		// ...
 		double elapse_sec = x_async_timer->Get__CURRENT_TIME();
 

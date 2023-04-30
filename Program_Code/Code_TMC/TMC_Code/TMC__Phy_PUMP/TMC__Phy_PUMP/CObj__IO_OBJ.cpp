@@ -2,6 +2,8 @@
 #include "CObj__IO_OBJ.h"
 #include "CObj__IO_OBJ__ALID.h"
 
+#include "Macro_Function.h"
+
 
 //-------------------------------------------------------------------------
 CObj__IO_OBJ::CObj__IO_OBJ()
@@ -87,6 +89,10 @@ int CObj__IO_OBJ::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.PUMP.RUN_STS";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__MON_PUMP_RUN_STS, str_name);
+
+		str_name = "MON.PUMP.STATE";
+		STD__ADD_STRING(str_name);
+		LINK__VAR_STRING_CTRL(sCH__MON_PUMP_STATE, str_name);
 	}
 
 	// ...
@@ -237,93 +243,6 @@ int CObj__IO_OBJ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString obj_name;
 	CString var_name;
 
-	// OBJ : PUMP ...
-	{
-		def_name = "OBJ__PUMP";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
-
-		pOBJ_CTRL__PUMP = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
-
-		//
-		var_name = "MON.COMM.STS";
-		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_COMM_STS, obj_name,var_name);
-	}
-
-	// IO : DI ...
-	{
-		def_name = "CH.DI_PUMP_STATE_RUNNING";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_STATE_RUNNING, obj_name,var_name);
-
-		def_name = "CH.DI_PUMP_BLOWER_RUNNING";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_BLOWER_RUNNING, obj_name,var_name);
-
-		def_name = "CH.DI_PUMP_WARNING_NORMAL";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_WARNING_NORMAL, obj_name,var_name);
-
-		def_name = "CH.DI_PUMP_ALARM_NORMAL";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_ALARM_NORMAL, obj_name,var_name);
-
-		def_name = "CH.DI_PUMP_OPERATION_READY";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_OPERATION_READY, obj_name,var_name);
-
-		//
-		def_name = "CH.DI_PUMP_ALARM_ERROR";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-		LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_ALARM_ERROR, obj_name,var_name);
-	}
-
-	// IO :LEFT_VLV ...
-	{
-		def_name = "ACTIVE.VALVE_LEFT";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		if(def_data.CompareNoCase("YES") == 0)		bActive__VLV_LEFT = TRUE;
-		else										bActive__VLV_LEFT = FALSE;
-
-		if(bActive__VLV_LEFT)
-		{
-			def_name = "CH.DI_PUMP_SLOW_VALVE_LEFT";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_SLOW_VLV_LEFT, obj_name,var_name);
-
-			def_name = "CH.DI_PUMP_FAST_VALVE_LEFT";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_FAST_VLV_LEFT, obj_name,var_name);
-		}
-	}
-	// IO :RIGHT_VLV ...
-	{
-		def_name = "ACTIVE.VALVE_RIGHT";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-		if(def_data.CompareNoCase("YES") == 0)		bActive__VLV_RIGHT = TRUE;
-		else										bActive__VLV_RIGHT = FALSE;
-
-		if(bActive__VLV_RIGHT)
-		{
-			def_name = "CH.DI_PUMP_SLOW_VALVE_RIGHT";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_SLOW_VLV_RIGHT, obj_name,var_name);
-
-			def_name = "CH.DI_PUMP_FAST_VALVE_RIGHT";
-			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
-			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
-			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__PUMP_FAST_VLV_RIGHT, obj_name,var_name);
-		}
-	}
-
 	// ...
 	{
 		CString file_name;
@@ -342,6 +261,184 @@ int CObj__IO_OBJ::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 		xLOG_CTRL->ENABLE__TIME_LOG();
 		xLOG_CTRL->WRITE__LOG("   START   \n");
+	}
+
+	// OBJ : PUMP ...
+	{
+		def_name = "OBJ__PUMP";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
+
+		pOBJ_CTRL__PUMP = p_ext_obj_create->Create__OBJECT_CTRL(obj_name);
+
+		//
+		def_name = "OBJ_MODE.PUMP_INIT";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sOBJ_MODE__PUMP_INIT = def_data;
+
+		def_name = "OBJ_MODE.PUMP_ON";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sOBJ_MODE__PUMP_ON = def_data;
+
+		def_name = "OBJ_MODE.PUMP_OFF";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		sOBJ_MODE__PUMP_OFF = def_data;
+
+		//
+		var_name = "MON.COMM.STS";
+		LINK__EXT_VAR_STRING_CTRL(sEXT_CH__MON_COMM_STS, obj_name,var_name);
+	}
+
+	// IO : DI_SENSOR ...
+	{
+		bool def_check;
+
+		// ...
+		{
+			def_name = "CH.DI_PUMP_STATE_RUNNING";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = Macro__Check_Active(def_data);
+			bActive__DI_PUMP_STATE_RUNNING = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_STATE_RUNNING, obj_name,var_name);
+			}
+		}
+		// ...
+		{
+			def_name = "CH.DI_PUMP_BLOWER_RUNNING";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = Macro__Check_Active(def_data);
+			bActive__DI_PUMP_BLOWER_RUNNING = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_BLOWER_RUNNING, obj_name,var_name);
+			}
+		}
+		// ...
+		{
+			def_name = "CH.DI_PUMP_WARNING_NORMAL";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = Macro__Check_Active(def_data);
+			bActive__DI_PUMP_WARNING_NORMAL = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_WARNING_NORMAL, obj_name,var_name);
+			}
+		}
+		// ...
+		{
+			def_name = "CH.DI_PUMP_ALARM_NORMAL";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = Macro__Check_Active(def_data);
+			bActive__DI_PUMP_ALARM_NORMAL = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_ALARM_NORMAL, obj_name,var_name);
+			}
+		}
+		// ...
+		{
+			def_name = "CH.DI_PUMP_OPERATION_READY";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = Macro__Check_Active(def_data);
+			bActive__DI_PUMP_OPERATION_READY = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_OPERATION_READY, obj_name,var_name);
+			}
+		}
+
+		// ...
+		{
+			def_name = "CH.DI_PUMP_ALARM_ERROR";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+			def_check = Macro__Check_Active(def_data);
+			bActive__DI_PUMP_ALARM_ERROR = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name, var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_ALARM_ERROR, obj_name,var_name);
+			}
+		}
+	}
+
+	// IO :DO.PUMP_LINE_VALVE ...
+	{
+		def_name = "DATA_SIZE.DO_PUMP_LIN_VALVE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+		iSIZE__DO_PUMP_LINE_VLV = atoi(def_data);
+		if(iSIZE__DO_PUMP_LINE_VLV > _CFG_SIZE__PUMP_LINE_VLV)			iSIZE__DO_PUMP_LINE_VLV = _CFG_SIZE__PUMP_LINE_VLV;
+
+		for(int i=0; i<iSIZE__DO_PUMP_LINE_VLV; i++)
+		{
+			int id = i + 1;
+
+			def_name.Format("CH.DO_PUMP_LINE_VALVE.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(doEXT_CH__DO_PUMP_LINE_VLV_X[i], obj_name,var_name);
+		}
+	}
+	// IO :DI.PUMP_CLOSE_VALVE ...
+	{
+		def_name = "DATA_SIZE.DI_PUMP_CLOSE_VALVE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+		iSIZE__DI_PUMP_CLOSE_VLV = atoi(def_data);
+		if(iSIZE__DI_PUMP_CLOSE_VLV > _CFG_SIZE__PUMP_LINE_VLV)			iSIZE__DI_PUMP_CLOSE_VLV = _CFG_SIZE__PUMP_LINE_VLV;
+
+		for(int i=0; i<iSIZE__DI_PUMP_CLOSE_VLV; i++)
+		{
+			int id = i + 1;
+
+			def_name.Format("CH.DI_PUMP_CLOSE_VALVE.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_CLOSE_VLV_X[i], obj_name,var_name);
+		}
+	}
+	// IO :DI.PUMP_OPEN_VALVE ...
+	{
+		def_name = "DATA_SIZE.DI_PUMP_OPEN_VALVE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+
+		iSIZE__DI_PUMP_OPEN_VLV = atoi(def_data);
+		if(iSIZE__DI_PUMP_OPEN_VLV > _CFG_SIZE__PUMP_LINE_VLV)			iSIZE__DI_PUMP_OPEN_VLV = _CFG_SIZE__PUMP_LINE_VLV;
+
+		for(int i=0; i<iSIZE__DI_PUMP_OPEN_VLV; i++)
+		{
+			int id = i + 1;
+
+			def_name.Format("CH.DI_PUMP_OPEN_VALVE.%1d", id);
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name,def_data);
+			p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(def_data, obj_name,var_name);
+			LINK__EXT_VAR_DIGITAL_CTRL(diEXT_CH__DI_PUMP_OPEN_VLV_X[i], obj_name,var_name);
+		}
+	}
+
+	// ...
+	{
+		SCX__SEQ_INFO x_seq_info;
+		
+		iActive__SIM_MODE = x_seq_info->Is__SIMULATION_MODE();
 	}
 	return 1;
 }
@@ -362,7 +459,7 @@ int CObj__IO_OBJ::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 	// ...
 	{
-		IF__CTRL_MODE(sMODE__INIT)			flag = Call__INIT(p_variable,p_alarm);
+		     IF__CTRL_MODE(sMODE__INIT)			flag = Call__INIT(p_variable,p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__MAINT)		flag = Call__MAINT(p_variable,p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__PUMP_ON)		flag = Call__PUMP_ON(p_variable,p_alarm);

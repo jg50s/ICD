@@ -28,6 +28,7 @@ private:
 
 	CX__VAR_STRING_CTRL  sCH__MON_PUMP_COMM_STS;
 	CX__VAR_STRING_CTRL  sCH__MON_PUMP_RUN_STS;
+	CX__VAR_STRING_CTRL  sCH__MON_PUMP_STATE;
 	//
 
 	//-------------------------------------------------------------------------

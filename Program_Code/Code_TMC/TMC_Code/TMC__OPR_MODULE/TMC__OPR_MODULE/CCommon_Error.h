@@ -3,6 +3,12 @@
 #include "Interface_Code.h"
 
 
+#define _ALID__MODULE_OBJ__ERROR					1
+#define _ALID__USER_FNC__ERROR					    2
+#define _ALID__DEF_VARIABLE__ERROR                  3
+
+
+
 class CCommon_Error__MODULE_OBJ : public CII__ERROR_FEEDBACK__MODULE_OBJ
 {
 public:

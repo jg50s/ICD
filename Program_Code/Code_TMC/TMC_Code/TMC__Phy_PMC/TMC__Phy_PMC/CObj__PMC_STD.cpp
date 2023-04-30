@@ -166,7 +166,7 @@ int CObj__PMC_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 		// PMx Process Status 
 		str_name.Format("OTR.OUT.MON.dPM%1d.PRC.STS",i+1);
-		STD__ADD_DIGITAL(str_name,"IDLE PROCESSING");
+		STD__ADD_DIGITAL(str_name,"IDLE PROCESSING ALARM");
 		LINK__VAR_DIGITAL_CTRL(dCH__PRC_STATUS[i],str_name);
 
 		// PMx Pressure Status 

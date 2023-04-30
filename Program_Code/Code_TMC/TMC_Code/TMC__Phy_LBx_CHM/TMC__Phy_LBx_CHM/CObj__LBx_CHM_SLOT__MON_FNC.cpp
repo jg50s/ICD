@@ -15,20 +15,23 @@ void CObj__LBx_CHM_SLOT
 	CString str__open_sns;
 	CString str__close_sns;
 
-	if(iSim_Flag > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		for(int i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			// SLOT VALVE ...
-			diEXT_CH__LLx__SV_OPEN_X[i]->Set__DATA(STR__OFF);
-			diEXT_CH__LLx__SV_CLOSE_X[i]->Set__DATA(STR__ON);
-
-			// DOOR VALVE ...
-			diEXT_CH__LLx__DV_OPEN_X[i]->Set__DATA(STR__OFF);
-			diEXT_CH__LLx__DV_CLOSE_X[i]->Set__DATA(STR__ON);
+			// SV ...
+			{
+				doEXT_CH__LLx__SV_OPEN_X[i]->Set__DATA(STR__OFF);
+				doEXT_CH__LLx__SV_CLOSE_X[i]->Set__DATA(STR__ON);
+			}
+			// DV ...
+			{
+				doEXT_CH__LLx__DV_OPEN_X[i]->Set__DATA(STR__OFF);
+				doEXT_CH__LLx__DV_CLOSE_X[i]->Set__DATA(STR__ON);
+			}
 		}
 
-		// LIFT_PIN VALVE ...
+		// LIFT_PIN ...
 		if(bActive__LIFT_PIN)
 		{
 			diEXT_CH__LBx__LIFT_PIN_UP->Set__DATA(STR__OFF);
@@ -36,15 +39,43 @@ void CObj__LBx_CHM_SLOT
 		}
 	}
 
+
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.01);
 
-		// PRESSURE ...
-		aiEXT_CH__LBx__PRESSURE_TORR->Get__DATA(var__data);
-		aCH__PRESSURE_TORR->Set__DATA(var__data);
 
-		// jglee : 2020.10.20
+		if(iActive__SIM_MODE > 0)
+		{
+			if(doEXT_CH__SOFT_PUMP_VLV__SET->Check__DATA(STR__CLOSE) > 0)
+			{
+				if(bActive__DI_SR_VLV_OPEN)			diEXT_CH__DI_SR_VLV_OPEN->Set__DATA(STR__OFF);
+				if(bActive__DI_SR_VLV_CLOSE)		diEXT_CH__DI_SR_VLV_CLOSE->Set__DATA(STR__ON);
+			}
+			else
+			{
+				if(bActive__DI_SR_VLV_OPEN)			diEXT_CH__DI_SR_VLV_OPEN->Set__DATA(STR__ON);
+				if(bActive__DI_SR_VLV_CLOSE)		diEXT_CH__DI_SR_VLV_CLOSE->Set__DATA(STR__OFF);
+			}
+
+			if(doEXT_CH__FAST_PUMP_VLV__SET->Check__DATA(STR__CLOSE) > 0)
+			{
+				if(bActive__DI_FR_VLV_OPEN)			diEXT_CH__DI_FR_VLV_OPEN->Set__DATA(STR__OFF);
+				if(bActive__DI_FR_VLV_CLOSE)		diEXT_CH__DI_FR_VLV_CLOSE->Set__DATA(STR__ON);
+			}
+			else
+			{
+				if(bActive__DI_FR_VLV_OPEN)			diEXT_CH__DI_FR_VLV_OPEN->Set__DATA(STR__ON);
+				if(bActive__DI_FR_VLV_CLOSE)		diEXT_CH__DI_FR_VLV_CLOSE->Set__DATA(STR__OFF);
+			}
+		}
+
+		// PRESSURE ...
+		{
+			aiEXT_CH__LBx__PRESSURE_TORR->Get__DATA(var__data);
+			aCH__PRESSURE_TORR->Set__DATA(var__data);
+		}
+
 		if(bActive__ATM_SNS_Virtual_Type)
 		{
 			aiEXT_CH__LBx__PRESSURE_TORR->Get__DATA(var__data);
@@ -63,67 +94,7 @@ void CObj__LBx_CHM_SLOT
 			}
 		}
 
-		// ...
-		{
-			double cur_press;
-			double ref_atm_press;
-			double ref_vac_press;
-			double ref_vac_upper_tole_press;
-			double tolerance_atm_press;
-
-			double atm_range_min;
-			double atm_range_max;
-
-			double ref_vac_max;
-
-			// Get Pressure Value
-			aCH__PRESSURE_TORR->Get__DATA(var__data);
-			cur_press = atof(var__data);
-
-			aCH__CFG_ATM_PRESSURE_TORR->Get__DATA(var__data);
-			ref_atm_press = atof(var__data);
-
-			// Get Atm Tolerance...
-			aCH__CFG_ATM_PRESS_STS_TOLERANCE->Get__DATA(var__data);
-			tolerance_atm_press = atof(var__data);
-
-			atm_range_min = ref_atm_press - tolerance_atm_press;
-			atm_range_max = ref_atm_press + tolerance_atm_press;
-
-			// 1. VAC
-			aCH__CFG_VAC_PRESSURE_TORR->Get__DATA(var__data);
-			ref_vac_press = atof(var__data);
-
-			// 2. VAC
-			aCH__CFG_VAC_UPPER_TOLERANCE->Get__DATA(var__data);
-			ref_vac_upper_tole_press = atof(var__data)*0.001;	// mtorr
-			ref_vac_max = ref_vac_press + ref_vac_upper_tole_press;
-
-			// 3.
-			int vac_sns = -1;
-			int atm_sns = -1;
-
-			if(diEXT_CH__LBx__ATM_SNS->Check__DATA(sDATA__ATM_ON) > 0)		atm_sns = 1;
-			if(diEXT_CH__LBx__VAC_SNS->Check__DATA(sDATA__VAC_ON) > 0)		vac_sns = 1;
-
-			if((atm_range_min <= cur_press)
-			&& (atm_sns > 0)
-			&& (vac_sns < 0))
-			{
-				dCH__PRESSURE_STATUS->Set__DATA("ATM");
-			}
-			else if((cur_press > 0)					// 0.0 이면 Gauge Offline 가능성 큼.. 
-				 && (cur_press <= ref_vac_max)
-				 && (atm_sns < 0)
-				 && (vac_sns > 0))
-			{
-				dCH__PRESSURE_STATUS->Set__DATA("VAC");
-			}
-			else
-			{
-				dCH__PRESSURE_STATUS->Set__DATA("BTW");
-			}
-		}
+		Update__PRESSURE_STS(p_variable,  p_alarm);
 
 		// ...
 		{
@@ -138,20 +109,84 @@ void CObj__LBx_CHM_SLOT
 		}
 
 		// PUMP VLV FLAG ...
-		Update__PUMP_VLV_STS(p_alarm);
+		Update__PUMP_VLV_STS(p_variable, p_alarm);
 
 		// SV STATUS ...
-		Update__SV_STS(p_variable,p_alarm);
+		Update__SV_STS(p_variable, p_alarm);
 
 		// DV STATUS ...
-		Update__DV_STS(p_variable,p_alarm);
+		Update__DV_STS(p_variable, p_alarm);
 
 		// LIFT_PIN STATUS ...
-		Update__LIFT_PIN_STS(p_variable,p_alarm);
+		Update__LIFT_PIN_STS(p_variable, p_alarm);
 
 		// INTERLOCK CHECK ...
 		Fnc__INTERLOCK(p_variable, p_alarm);
 	}	
+}
+
+void CObj__LBx_CHM_SLOT
+::Update__PRESSURE_STS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
+{
+	double cur_press;
+	double ref_atm_press;
+	double ref_vac_press;
+	double ref_vac_upper_tole_press;
+	double tolerance_atm_press;
+
+	double atm_range_min;
+	double atm_range_max;
+
+	double ref_vac_max;
+	
+	CString var__data;
+
+	// Get Pressure Value
+	aCH__PRESSURE_TORR->Get__DATA(var__data);
+	cur_press = atof(var__data);
+
+	aCH__CFG_ATM_PRESSURE_TORR->Get__DATA(var__data);
+	ref_atm_press = atof(var__data);
+
+	// Get Atm Tolerance...
+	aCH__CFG_ATM_PRESS_STS_TOLERANCE->Get__DATA(var__data);
+	tolerance_atm_press = atof(var__data);
+
+	atm_range_min = ref_atm_press - tolerance_atm_press;
+	atm_range_max = ref_atm_press + tolerance_atm_press;
+
+	// 1. VAC
+	aCH__CFG_VAC_PRESSURE_TORR->Get__DATA(var__data);
+	ref_vac_press = atof(var__data);
+
+	// 2. VAC
+	aCH__CFG_VAC_UPPER_TOLERANCE->Get__DATA(var__data);
+	ref_vac_upper_tole_press = atof(var__data)*0.001;	// mtorr
+	ref_vac_max = ref_vac_press + ref_vac_upper_tole_press;
+
+	// 3.
+	int vac_sns = -1;
+	int atm_sns = -1;
+
+	if(diEXT_CH__LBx__ATM_SNS->Check__DATA(sDATA__ATM_ON) > 0)		atm_sns = 1;
+	if(diEXT_CH__LBx__VAC_SNS->Check__DATA(sDATA__VAC_ON) > 0)		vac_sns = 1;
+
+	if((atm_range_min <= cur_press)
+	&& (atm_sns > 0)
+	&& (vac_sns < 0))
+	{
+		dCH__PRESSURE_STATUS->Set__DATA("ATM");
+	}
+	else if((cur_press <= ref_vac_max)
+		 && (atm_sns < 0)
+		 && (vac_sns > 0))
+	{
+		dCH__PRESSURE_STATUS->Set__DATA("VAC");
+	}
+	else
+	{
+		dCH__PRESSURE_STATUS->Set__DATA("BTW");
+	}
 }
 
 void CObj__LBx_CHM_SLOT
@@ -192,9 +227,9 @@ void CObj__LBx_CHM_SLOT
 
 		if(active__door_open)
 		{
-			if(Check__PUMP_ALL_VLV__CLOSE(p_alarm) < 0)
+			if(Check__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm) < 0)
 			{
-				Fnc__PUMP_ALL_VLV__CLOSE(p_alarm);
+				Fnc__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm);
 
 				// ...
 				int alarm_id = ALID__DOOR_VALVE__PUMP_INTERLOCK;
@@ -208,7 +243,7 @@ void CObj__LBx_CHM_SLOT
 
 	if(Check__VENT_ALL_VLV__CLOSE(p_alarm) < 0)
 	{			
-		if(Check__PUMP_ALL_VLV__CLOSE(p_alarm) < 0)
+		if(Check__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm) < 0)
 		{
 			if(sCH__OUTPROC_ACTIVE_FLAG->Check__DATA(STR__YES) < 0)
 			{
@@ -227,11 +262,11 @@ void CObj__LBx_CHM_SLOT
 	}		
 
 	if((sEXT_CH__MON_PUMP_COMM_STS->Check__DATA(STR__ONLINE) < 0) 
-		|| (sEXT_CH__MON_PUMP_RUN_STS->Check__DATA(STR__ON) < 0))
+	|| (sEXT_CH__MON_PUMP_RUN_STS->Check__DATA(STR__ON) < 0))
 	{
-		if(Check__PUMP_ALL_VLV__CLOSE(p_alarm) < 0)
+		if(Check__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm) < 0)
 		{
-			Fnc__PUMP_ALL_VLV__CLOSE(p_alarm);
+			Fnc__PUMP_ALL_VLV__CLOSE(p_variable, p_alarm);
 
 			// ...
 			{
@@ -258,27 +293,57 @@ void CObj__LBx_CHM_SLOT
 void CObj__LBx_CHM_SLOT
 ::Update__SV_STS(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm)
 {
-	CString str__open_sns;
-	CString str__close_sns;
+	bool active__io_off_mode = false;
+	if(dCH__CFG_IO_OFF_MODE->Check__DATA(STR__ENABLE) > 0)			active__io_off_mode = true;
 
-	for(int i=0; i<iLBx_SLOT_SIZE; i++)
+	if(iActive__SIM_MODE > 0)
 	{
-		diEXT_CH__LLx__SV_OPEN_X[i]->Get__DATA(str__open_sns);
-		diEXT_CH__LLx__SV_CLOSE_X[i]->Get__DATA(str__close_sns);
+		CString str__open_sns;
+		CString str__close_sns;
 
-		if((str__open_sns.CompareNoCase(STR__ON)   == 0)
-		&& (str__close_sns.CompareNoCase(STR__OFF) == 0))
+		for(int i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__OPEN);
+			str__open_sns  = doEXT_CH__LLx__SV_OPEN_X[i]->Get__STRING();
+			str__close_sns = doEXT_CH__LLx__SV_CLOSE_X[i]->Get__STRING();
+
+			if(active__io_off_mode)
+			{
+				if((str__open_sns.CompareNoCase(STR__OFF)  == 0)
+				&& (str__close_sns.CompareNoCase(STR__OFF) == 0))
+				{
+					continue;
+				}
+			}
+
+			diEXT_CH__LLx__SV_OPEN_X[i]->Set__DATA(str__open_sns);
+			diEXT_CH__LLx__SV_CLOSE_X[i]->Set__DATA(str__close_sns);
 		}
-		else if((str__open_sns.CompareNoCase(STR__OFF) == 0)
-			 && (str__close_sns.CompareNoCase(STR__ON) == 0))
+	}
+
+	// ...
+	{
+		CString str__open_sns;
+		CString str__close_sns;
+
+		for(int i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__CLOSE);
-		}
-		else
-		{
-			dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__UNKNOWN);
+			diEXT_CH__LLx__SV_OPEN_X[i]->Get__DATA(str__open_sns);
+			diEXT_CH__LLx__SV_CLOSE_X[i]->Get__DATA(str__close_sns);
+
+			if((str__open_sns.CompareNoCase(STR__ON)   == 0)
+			&& (str__close_sns.CompareNoCase(STR__OFF) == 0))
+			{
+				dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__OPEN);
+			}
+			else if((str__open_sns.CompareNoCase(STR__OFF) == 0)
+				 && (str__close_sns.CompareNoCase(STR__ON) == 0))
+			{
+				dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__CLOSE);
+			}
+			else
+			{
+				dCH__SLIT_VALVE_STATUS_X[i]->Set__DATA(STR__UNKNOWN);
+			}
 		}
 	}
 
@@ -291,27 +356,57 @@ void CObj__LBx_CHM_SLOT
 void CObj__LBx_CHM_SLOT
 ::Update__DV_STS(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
-	CString str__open_sns;
-	CString str__close_sns;
+	bool active__io_off_mode = false;
+	if(dCH__CFG_IO_OFF_MODE->Check__DATA(STR__ENABLE) > 0)			active__io_off_mode = true;
 
-	for(int i=0; i<iLBx_SLOT_SIZE; i++)
+	if(iActive__SIM_MODE > 0)
 	{
-		diEXT_CH__LLx__DV_OPEN_X[i]->Get__DATA(str__open_sns);
-		diEXT_CH__LLx__DV_CLOSE_X[i]->Get__DATA(str__close_sns);
+		CString str__open_sns;
+		CString str__close_sns;
 
-		if((str__open_sns.CompareNoCase(STR__ON)   == 0)
-		&& (str__close_sns.CompareNoCase(STR__OFF) == 0))
+		for(int i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__OPEN);
+			str__open_sns  = doEXT_CH__LLx__DV_OPEN_X[i]->Get__STRING();
+			str__close_sns = doEXT_CH__LLx__DV_CLOSE_X[i]->Get__STRING();
+
+			if(active__io_off_mode)
+			{
+				if((str__open_sns.CompareNoCase(STR__OFF)  == 0)
+				&& (str__close_sns.CompareNoCase(STR__OFF) == 0))
+				{
+					continue;
+				}
+			}
+
+			diEXT_CH__LLx__DV_OPEN_X[i]->Set__DATA(str__open_sns);
+			diEXT_CH__LLx__DV_CLOSE_X[i]->Set__DATA(str__close_sns);
 		}
-		else if((str__open_sns.CompareNoCase(STR__OFF) == 0)
-			 && (str__close_sns.CompareNoCase(STR__ON) == 0))
+	}
+
+	// ...
+	{
+		CString str__open_sns;
+		CString str__close_sns;
+
+		for(int i=0; i<iLBx_SLOT_SIZE; i++)
 		{
-			dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__CLOSE);
-		}
-		else
-		{
-			dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__UNKNOWN);
+			diEXT_CH__LLx__DV_OPEN_X[i]->Get__DATA(str__open_sns);
+			diEXT_CH__LLx__DV_CLOSE_X[i]->Get__DATA(str__close_sns);
+
+			if((str__open_sns.CompareNoCase(STR__ON)   == 0)
+			&& (str__close_sns.CompareNoCase(STR__OFF) == 0))
+			{
+				dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__OPEN);
+			}
+			else if((str__open_sns.CompareNoCase(STR__OFF) == 0)
+				 && (str__close_sns.CompareNoCase(STR__ON) == 0))
+			{
+				dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__CLOSE);
+			}
+			else
+			{
+				dCH__DOOR_VALVE_STATUS_X[i]->Set__DATA(STR__UNKNOWN);
+			}
 		}
 	}
 
@@ -329,7 +424,7 @@ void CObj__LBx_CHM_SLOT
 		return;
 	}
 
-	if(iSim_Flag > 0)
+	if(iActive__SIM_MODE > 0)
 	{
 		CString ch_data;
 
