@@ -3,7 +3,7 @@
 	try catch 문을 사용하면 안됩니다.
 */
 
-#DEFINE    ##PM_LIMIT               6
+#DEFINE    ##PM_LIMIT               4
 #DEFINE    ##LL_LIMIT               2
 #DEFINE    ##LL_SLOT                2
 #DEFINE    ##LP_LIMIT               3
@@ -89,16 +89,20 @@
 #OBJECT_IO_PARA     NODE.1.MACID                        2
 #OBJECT_IO_PARA     NODE.1.NAME                         CJ1W_DRM2
 #OBJECT_IO_PARA     NODE.1.IN_OFFSET                    0       
-#OBJECT_IO_PARA     NODE.1.IN_BYTE                      56
+#OBJECT_IO_PARA     NODE.1.IN_BYTE.MAX                  56
+#OBJECT_IO_PARA     NODE.1.IN_BYTE.USE                  56
 #OBJECT_IO_PARA     NODE.1.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.1.OUT_BYTE                     20
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE.MAX                 20
+#OBJECT_IO_PARA     NODE.1.OUT_BYTE.USE                 20
 
 #OBJECT_IO_PARA     NODE.2.MACID                        3
 #OBJECT_IO_PARA     NODE.2.NAME                         NA9111
 #OBJECT_IO_PARA     NODE.2.IN_OFFSET                    0
-#OBJECT_IO_PARA     NODE.2.IN_BYTE                      18
+#OBJECT_IO_PARA     NODE.2.IN_BYTE.MAX                  18
+#OBJECT_IO_PARA     NODE.2.IN_BYTE.USE                  18
 #OBJECT_IO_PARA     NODE.2.OUT_OFFSET                   0
-#OBJECT_IO_PARA     NODE.2.OUT_BYTE                     4
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE.MAX                 4
+#OBJECT_IO_PARA     NODE.2.OUT_BYTE.USE                 4
 //----------------------
 
 //----------------------
@@ -143,19 +147,16 @@
 #DEFINE_CONSTANT    CH.LIGHT.YELLOW.ON_OFF              IO+do.Signal_Tower.Yellow
 #DEFINE_CONSTANT    CH.LIGHT.GREEN.ON_OFF               IO+do.Signal_Tower.Green
 #DEFINE_CONSTANT    CH.LIGHT.BLUE.ON_OFF                IO+do.Signal_Tower.Blue
-#DEFINE_CONSTANT    CH.LIGHT.WHITE.ON_OFF               IO+do.Signal_Tower.White.On_Off
+#DEFINE_CONSTANT    CH.LIGHT.WHITE.ON_OFF               NULL
 
-#DEFINE_CONSTANT    CH.LIGHT.RED.BLINK                  IO+do.Signal_Tower.Red.Blink
-#DEFINE_CONSTANT    CH.LIGHT.YELLOW.BLINK               IO+do.Signal_Tower.Yellow.Blink
-#DEFINE_CONSTANT    CH.LIGHT.GREEN.BLINK                IO+do.Signal_Tower.Green.Blink
-#DEFINE_CONSTANT    CH.LIGHT.BLUE.BLINK                 IO+do.Signal_Tower.Blue.Blink
-#DEFINE_CONSTANT    CH.LIGHT.WHITE.BLINK                IO+do.Signal_Tower.White.Blink
+#DEFINE_CONSTANT    CH.LIGHT.RED.BLINK                  NULL
+#DEFINE_CONSTANT    CH.LIGHT.YELLOW.BLINK               NULL
+#DEFINE_CONSTANT    CH.LIGHT.GREEN.BLINK                NULL
+#DEFINE_CONSTANT    CH.LIGHT.BLUE.BLINK                 NULL
+#DEFINE_CONSTANT    CH.LIGHT.WHITE.BLINK                NULL
 
-#DEFINE_CONSTANT    CH.ALARM.BUZZER								      IO+do.Signal_Tower.Buzzer.1
+#DEFINE_CONSTANT    CH.ALARM.BUZZER.SET 					      IO+do.Signal_Tower.Buzzer.1
 #DEFINE_CONSTANT    CH.ALARM.BUZZER.RESET               IO+do.Signal_Tower.Buzzer.2
 
-#DEFINE_CONSTANT    CH.MELODY1.CTRL                     IO+do.Signal_Tower.Melody.1
-#DEFINE_CONSTANT    CH.MELODY2.CTRL                     IO+do.Signal_Tower.Melody.2
-#DEFINE_CONSTANT    CH.MELODY3.CTRL                     IO+do.Signal_Tower.Melody.3
-#DEFINE_CONSTANT    CH.MELODY4.CTRL                     IO+do.Signal_Tower.Melody.4
+#DEFINE_CONSTANT    DATA.MELODY_SIZE                    0
 

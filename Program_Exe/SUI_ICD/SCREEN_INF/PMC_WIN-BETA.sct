@@ -1,0 +1,796 @@
+/*  SCREEN INFOMATION  */
+
+#SCREEN_DIR  SCR__PMC-BETA\
+
+
+// -----------------------------------------------------------------------
+#DEFINE  DEF__FRAME_CLIENT
+	POPUP              NO
+	LOW_LEFT_X         0  
+	LOW_LEFT_Y         55
+	WIDTH              1280 
+	HEIGHT             770 
+#END
+
+#DEFINE  DEF__FRAME_CLIENT_NULL
+	POPUP              NO
+	LOW_LEFT_X         0  
+	LOW_LEFT_Y         55
+	WIDTH              0 
+	HEIGHT             0 
+#END
+
+#DEFINE  DEF__FRAME_CLIENT_HALF
+	POPUP              NO
+	LOW_LEFT_X         0  
+	LOW_LEFT_Y         55
+	WIDTH              1280
+	HEIGHT             475
+#END
+
+
+#DEFINE  DEF__FRAME_BOTTOM_SUB
+	POPUP              NO
+	LOW_LEFT_X         173 
+	LOW_LEFT_Y         825
+	WIDTH              1107 
+	HEIGHT             41
+#END
+
+#DEFINE  DEF__FRAME_BOTTOM_MAIN
+	POPUP              NO
+	LOW_LEFT_X         173 
+	LOW_LEFT_Y         866
+	WIDTH              1107 
+	HEIGHT             58
+#END
+
+
+
+// -----------------------------------------------------------------------
+// Side
+WINDOW_NAME PMC_BTM_MAIN_BAR
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_MAIN
+		
+	CTRL_CHANNEL                    SCR.BTM_MAIN
+	USER_LEVEL                      Operate
+}
+
+
+// Bottom
+WINDOW_NAME PMC_BTM_OPERATE     
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+	
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate
+	PAGE_TYPE			                  POLLING
+}
+
+WINDOW_NAME PMC_BTM_CONFIG
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate
+}
+
+WINDOW_NAME PMC_BTM_MAINT 
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate  
+}
+
+WINDOW_NAME PMC_BTM_RECIPE      
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+	
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate  
+}
+
+WINDOW_NAME PMC_BTM_DATALOG    
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+	
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate  
+}
+
+WINDOW_NAME PMC_BTM_PART
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+	
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate  
+}
+
+WINDOW_NAME PMC_BTM_UTILITY   
+{
+	#CALL_DEFINE                    DEF__FRAME_BOTTOM_SUB
+	
+	CTRL_CHANNEL                    SCR.BOTTOM
+	USER_LEVEL                      Operate  
+}
+
+
+// Client
+// Bottom => Operate
+
+
+// Bottom => Config
+WINDOW_NAME PMC_CONFIG_MODULE-SYSTEM
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint 
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.MODULE_SYSTEM.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_MODULE-PRESSURE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint 
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.MODULE_PRESSURE.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_MODULE-PUMP
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint 
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.MODULE_PUMP.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_GAS_MFC
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.GAS_MFC.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_GAS_PT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.GAS_PT.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_GAS_OTHER
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.GAS_OTHER.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_GAS_INTERLOCK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	  
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.GAS_INTERLOCK.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_APC
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		        	    DB_GUI+GUI.CONFIG.PRESSURE.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_RF_ICD
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint  
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		        	    DB_GUI+GUI.CONFIG.RF.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_HEATER_SH-STABLE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.HEATER_SH_STABLE.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_HEATER_SH-INIT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.HEATER_SH_INIT.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_HEATER_WALL-STABLE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.HEATER_WALL_STABLE.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_HEATER_WALL-INIT
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.HEATER_WALL_INIT.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_ESC_HELIUM
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.ESC_HELIUM.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_CHUCK_STEP
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.CHUCK_STEP.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_DECHUCK_STEP
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		              DB_GUI+GUI.CONFIG.DECHUCK_STEP.SAVE
+}
+
+WINDOW_NAME PMC_CONFIG_EPD
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+	
+	PAGE_TYPE			                  CONFIG 
+	STATUS_CHANNEL		        	    DB_GUI+GUI.CONFIG.EPD.SAVE
+}
+
+
+// Bottom => Maint
+WINDOW_NAME PMC_MAINT_CHAMBER-ICD
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint  
+}
+
+WINDOW_NAME PMC_MAINT_GAS_LINE-ALPHA
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT_IO_SENSOR
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT_IO_INTERLOCK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT_PART_INFO
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT_ANALOG_CAL
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT-SYSTEM_INIT_CFG
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_MAINT_AUTO_PM
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+
+// Bottom => Recipe
+WINDOW_NAME PMC_RECIPE_PROCESS-STD
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Process
+}
+
+WINDOW_NAME PMC_RECIPE_CFG
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Process
+}
+
+
+// Bottom => Datalog
+WINDOW_NAME PMC_LOG_VIEW 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME PMC_LOG_LIST 
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+
+WINDOW_NAME STANDARD_UTILITY_IO_GRAPH
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Operate
+	
+	PAGE_TYPE			                  POLLING
+}
+
+WINDOW_NAME  LOG--LEAK_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Operate
+}
+WINDOW_NAME  GAS--LEAK_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Operate
+}
+
+
+// Bottom => Part
+
+WINDOW_NAME PMC_PART-LIFT_PIN_TEST
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-LIFT_PIN_TEACH
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-MFC_DNET_01
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME PMC_PART-MFC_DNET_02
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-IO_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-IO_INFO
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-INTERLOCK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_PART-CFG_PARAMETER
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+
+// Bottom => Utility
+
+WINDOW_NAME  UTILITY__MFC_FLOW-ICD
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME  UTILITY__GAUGE_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME  UTILITY__VAT_CONDUCTANCE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME  UTILITY__RF_CONDUCTANCE
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME  UTILITY__OES_CHECK
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+
+// Bottom => Utility Cfg
+
+WINDOW_NAME  UTILITY_CFG1
+{
+	#CALL_DEFINE                    DEF__FRAME_CLIENT
+
+	CTRL_CHANNEL                    SCR.CLIENT 
+	USER_LEVEL                      Maint
+}
+
+
+// Popup Page ------------------------------------------------------------------------------
+
+WINDOW_NAME APP_POPUP_MNT_PMC
+{
+	POPUP                           YES
+	LOW_LEFT_X                      20  
+	LOW_LEFT_Y                      20 
+	WIDTH                           780
+	HEIGHT                          600 
+	
+	CTRL_CHANNEL                    GUI.PMC.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_MANUAL_PROCESS
+{
+	POPUP                           YES
+	LOW_LEFT_X                      200  
+	LOW_LEFT_Y                      20 
+	WIDTH                           367
+	HEIGHT                          500
+	
+	CTRL_CHANNEL                    GUI.PMC.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME PMC_POPUP_PUMP_MNT
+{
+	POPUP                           YES
+	LOW_LEFT_X                      110  
+	LOW_LEFT_Y                      110 
+	WIDTH                           470 
+	HEIGHT                          450
+	
+	CTRL_CHANNEL                    GUI.PMC.PUMP.POPUP
+	USER_LEVEL                      Maint  
+}
+WINDOW_NAME PMC_POPUP_TURBO_PUMP
+{
+	POPUP                           YES
+	LOW_LEFT_X                      150  
+	LOW_LEFT_Y                      110 
+	WIDTH                           470 
+	HEIGHT                          450
+	
+	CTRL_CHANNEL                    GUI.PMC.PUMP.POPUP
+	USER_LEVEL                      Maint  
+}
+
+WINDOW_NAME APP_POPUP_PMC_RF-RPS
+{
+	POPUP                           YES
+	LOW_LEFT_X                      125  
+	LOW_LEFT_Y                      25 
+	WIDTH                           475
+	HEIGHT                          540 
+	
+	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME APP_POPUP_PMC_RF-LF
+{
+	POPUP                           YES
+	LOW_LEFT_X                      175  
+	LOW_LEFT_Y                      25 
+	WIDTH                           475
+	HEIGHT                          540 
+	
+	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME APP_POPUP_PMC_RF-HF
+{
+	POPUP                           YES
+	LOW_LEFT_X                      225  
+	LOW_LEFT_Y                      25 
+	WIDTH                           475
+	HEIGHT                          540 
+	
+	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_PMC_RF-PULSE
+{
+	POPUP                           YES
+	LOW_LEFT_X                      225  
+	LOW_LEFT_Y                      25 
+	WIDTH                           475
+	HEIGHT                          540 
+	
+	CTRL_CHANNEL                    GUI.PMC.RF.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_PMC_MAT_LF
+{
+	POPUP                           YES
+	LOW_LEFT_X                      200  
+	LOW_LEFT_Y                      125 
+	WIDTH                           530
+	HEIGHT                          542 
+	
+	CTRL_CHANNEL                    GUI.PMC.MATCHER.POPUP
+	USER_LEVEL                      Maint
+}
+WINDOW_NAME APP_POPUP_PMC_MAT_HF
+{
+	POPUP                           YES
+	LOW_LEFT_X                      300  
+	LOW_LEFT_Y                      125 
+	WIDTH                           530
+	HEIGHT                          542 
+	
+	CTRL_CHANNEL                    GUI.PMC.MATCHER.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_ESC_COMDEL
+{
+	POPUP                           YES
+	LOW_LEFT_X                      250  
+	LOW_LEFT_Y                      225 
+	WIDTH                           530
+	HEIGHT                          542 
+	
+	SEQ_CTRL_CHANNEL                DB_GUI+GUI.PMC.ESC.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_APC
+{
+	POPUP                           YES
+	LOW_LEFT_X                      25  
+	LOW_LEFT_Y                      25 
+	WIDTH                           530
+	HEIGHT                          542 
+	 
+	CTRL_CHANNEL                    GUI.PMC.APC.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME  JGLEE_POPUP__JUMP_STEP
+{
+	POPUP                           TOP_MOST
+	LOW_LEFT_X                      600  
+	LOW_LEFT_Y                      25 
+	WIDTH                           367
+	HEIGHT                          500
+	
+	SEQ_CTRL_CHANNEL                FNC_PROC+WIN_CTRL.JUMP_PAGE
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_HTR_SHOWER_HEAD
+{
+	POPUP                           YES
+	LOW_LEFT_X                      125  
+	LOW_LEFT_Y                      25 
+	WIDTH                           780
+	HEIGHT                          605 
+	 
+	CTRL_CHANNEL                    GUI.PMC.TEMP.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_HTR_WALL
+{
+	POPUP                           YES
+	LOW_LEFT_X                      250  
+	LOW_LEFT_Y                      25 
+	WIDTH                           780
+	HEIGHT                          605 
+	 
+	CTRL_CHANNEL                    GUI.PMC.TEMP.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_EPD
+{
+	POPUP                           YES
+	LOW_LEFT_X                      225  
+	LOW_LEFT_Y                      25 
+	WIDTH                           530
+	HEIGHT                          542 
+	
+	SEQ_CTRL_CHANNEL               	DB_GUI+GUI.PMC.ESC.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_ESC 
+{
+	POPUP                           YES
+	LOW_LEFT_X                      125  
+	LOW_LEFT_Y                      25 
+	WIDTH                           530
+	HEIGHT                          542 
+	
+	CTRL_CHANNEL                    GUI.PMC.ESC.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_PIN_MOTOR
+{
+	POPUP                           YES
+	LOW_LEFT_X                      120  
+	LOW_LEFT_Y                      20 
+	WIDTH                           367
+	HEIGHT                          495
+	
+	CTRL_CHANNEL                    GUI.PMC.PIN.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_SHUTTER
+{
+	POPUP                           YES
+	LOW_LEFT_X                      50  
+	LOW_LEFT_Y                      20 
+	WIDTH                           367
+	HEIGHT                          495
+	
+	CTRL_CHANNEL                    GUI.PMC.PIN.POPUP
+	USER_LEVEL                      Maint
+}
+
+WINDOW_NAME APP_POPUP_CHUCK_STEP
+{
+	POPUP                           YES
+	LOW_LEFT_X                      10
+	LOW_LEFT_Y                      -50
+	WIDTH                           1262
+	HEIGHT                          611
+	
+	SEQ_CTRL_CHANNEL                DB_GUI+GUI.PMC.POPUP
+	USER_LEVEL                      Maint
+}

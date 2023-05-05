@@ -1,0 +1,57 @@
+@LINE	
+STATUS	
+GUI-100	
+-1	
+2023.05.06 00:18:04:982	
+POST	
+START	
+	
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=TMC	
+#ID=20102	
+#TIME=2023.05.06 00:17:45:696	
+#RESULT=POST	
+#TITLE=DB_CFG - Simulation mode is active !	
+#MSG=START	
+	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=TMC	
+#ID=51103	
+#TIME=2023.05.06 00:17:46:028	
+#RESULT=POST	
+#TITLE=IO - Device-Net Node Error !	
+#MSG=START	
+Node(1) - Error (12) ! 
+  * MacID <- 2 
+Node(2) - Error (12) ! 
+  * MacID <- 3 
+
+Check the device-net node.	
+#MSG=END	
+#LINE=END	
+
+#LINE=START	
+#TYPE=ALARM	
+#LEVEL=LIGHT	
+#MODULE=TMC	
+#ID=51103	
+#TIME=2023.05.06 00:18:25:129	
+#RESULT=IGNORE	
+#TITLE=IO - Device-Net Node Error !	
+#MSG=START	
+Node(1) - Error (12) ! 
+  * MacID <- 2 
+Node(2) - Error (12) ! 
+  * MacID <- 3 
+
+Check the device-net node.	
+#MSG=END	
+#LINE=END	
+

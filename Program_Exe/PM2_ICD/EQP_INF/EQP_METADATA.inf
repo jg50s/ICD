@@ -61,6 +61,9 @@
 
 #OBJECT_IO_PARA     COM_PORT                  11
 
+#DEFINE_CONSTANT    CH.DO_PULSE_MODE          IO+do.40MHz.RFG.Pulse
+#DEFINE_CONSTANT    CH.AO_LEVEL_VOLT          IO+ao.RF.Setpoint.40MHz
+
 //-------------------------------------------------
 #OBJECT_PROPERTY    Phy_IO__RF_400KHZ
 
@@ -109,10 +112,12 @@
 #DEFINE_CONSTANT	  MFC.Var_ID.7  		        17
 
 //-------------------------------------------------
+/*
 #OBJECT_PROPERTY    PHY_IO__TMP
 
 #OBJECT_IO_PARA     COM_PORT                  15
 #OBJECT_IO_PARA     DEVICE_ID									0
+*/
 
 
 //------------------------------------------------
@@ -128,7 +133,7 @@
 #OBJECT_IO_PARA     BOARD.IN_OFFSET                     0
 
 //----------------------
-#OBJECT_IO_PARA     NODE.SIZE                           9
+#OBJECT_IO_PARA     NODE.SIZE                           10
 
 #OBJECT_IO_PARA     NODE.1.MACID                        1
 #OBJECT_IO_PARA     NODE.1.NAME                         NETS-DIO2
@@ -210,6 +215,15 @@
 #OBJECT_IO_PARA     NODE.9.OUT_OFFSET                   0
 #OBJECT_IO_PARA     NODE.9.OUT_BYTE.MAX                 2
 #OBJECT_IO_PARA     NODE.9.OUT_BYTE.USE                 2
+
+#OBJECT_IO_PARA     NODE.10.MACID                       15
+#OBJECT_IO_PARA     NODE.10.NAME                        NA-9211
+#OBJECT_IO_PARA     NODE.10.IN_OFFSET                   0
+#OBJECT_IO_PARA     NODE.10.IN_BYTE.MAX                 8
+#OBJECT_IO_PARA     NODE.10.IN_BYTE.USE                 8
+#OBJECT_IO_PARA     NODE.10.OUT_OFFSET                  0
+#OBJECT_IO_PARA     NODE.10.OUT_BYTE.MAX                9
+#OBJECT_IO_PARA     NODE.10.OUT_BYTE.USE                9
 
 
 //----------------------

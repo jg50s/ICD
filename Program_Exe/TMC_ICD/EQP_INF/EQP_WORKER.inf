@@ -34,6 +34,7 @@
 #OBJECT_STD    TMC__INF_MODULE               UPPER.ATM_ROBOT          INF__UPPER_ATM_ROBOT
 #OBJECT_STD    TMC__INF_MODULE               ATM_ROBOT.STD            INF__ATM_ROBOT
 
+#OBJECT_STD    TMC__OPR_MODULE               ATM_ROBOT.USER           USER__ATM_ROBOT
 #OBJECT_STD    TMC__OPR_MODULE               ATM_ROBOT.STD            OPR__ATM_ROBOT
 
 #OBJECT_STD    TMC__Fnc_ROBOT                ATM_ROBOT.STD            FNC__ATM_ROBOT

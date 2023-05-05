@@ -3,7 +3,11 @@
 //------------------------------------------------
 #OBJECT_PROPERTY    FNC_GAS_VLV_CTRL
 
+#DEFINE_CONSTANT    OBJ__DB_INF                         DB_INF
+#DEFINE_CONSTANT    OBJ__DB_SYS                         DB_SYS
+
 #DEFINE_CONSTANT    CH__CHM_PUMPING_STATE               FNC_CHM+MON.PUMPING.STATE
+#DEFINE_CONSTANT    CH__DRY_PUMPING_STATE               PHY_DRY+MON.PUMP.POWER.SNS
 
 #DEFINE_CONSTANT    OBJ__GAS_VLV                        PHY_GAS_VLV
 
@@ -42,6 +46,8 @@
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY_GAS_VLV
+
+#DEFINE_CONSTANT    OBJ__DB_SYS							            DB_SYS
 
 #DEFINE_CONSTANT    DATA.GAS_LINE.VLV_PURGE             1
 #DEFINE_CONSTANT    CH.GAS_LINE.VLV_PURGE.1             IO+do.Purge.Vac.V2

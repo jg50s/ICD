@@ -6,7 +6,7 @@
    #DEFINE_CONSTANT     CH__INTERLOCK_HEAVY_MESSAGE        DB_SYS+MON.INTERLOCK.HEAVY.MSG.GAS_BOX 
    #DEFINE_CONSTANT     CH__INTERLOCK_LIGHT_MESSAGE        DB_SYS+MON.INTERLOCK.LIGHT.MSG.GAS_BOX 
    #DEFINE_CONSTANT     CH__AI_GAS_BOX_DIFF_PRESSURE       NULL 
-   #DEFINE_CONSTANT     CH__DI_DGF_ALL_CLOSE_ACTIVE        PHY_DGF+MON.ALL.CLOSE.ACTIVE 
+   #DEFINE_CONSTANT     CH__DI_DGF_ALL_CLOSE_ACTIVE        NULL 
    #DEFINE_CONSTANT     DATA.INTERLOCK_SIZE                9 
    #DEFINE_CONSTANT     CH__CFG_USE.1                      IO+cfg.GasBox.Door.Open 
    #DEFINE_CONSTANT     CH__DI_SENSOR.1                    IO+di.GasBox.Door.Open 
@@ -170,6 +170,9 @@
 
 #OBJECT_PROPERTY     INTERLOCK_SYS 
 
+   #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
+   #DEFINE_CONSTANT     CH__DO_VENT_FAST_VLV               IO+do.CHM.Purge.Fast.V9 
+   #DEFINE_CONSTANT     CH__DO_VENT_SOFT_VLV               IO+do.CHM.Purge.Slow.V8 
    #DEFINE_CONSTANT     CH__DO_ROUGH_FORELINE_VLV          IO+do.TMP.Foreline.Vlv 
    #DEFINE_CONSTANT     CH__DO_ROUGH_FAST_VLV              IO+do.FR.Valve 
    #DEFINE_CONSTANT     CH__DO_ROUGH_SOFT_VLV              IO+do.SR.Valve 
@@ -178,6 +181,9 @@
    #DEFINE_CONSTANT     DATA__VAC_SNS.ACTIVE_STATE         On 
    #DEFINE_CONSTANT     CH__IO_ATM_SNS                     IO+di.CHM.ATM.Sns 
    #DEFINE_CONSTANT     DATA__ATM_SNS.ACTIVE_STATE         On 
+   #DEFINE_CONSTANT     CH__DRY_PUMP_POWER_SNS             PHY_DRY+MON.PUMP.POWER.SNS 
+   #DEFINE_CONSTANT     CH__DRY_PUMP_VAC_SNS               PHY_DRY+MON.VAC.ON.SNS 
+   #DEFINE_CONSTANT     LINK_OBJ.TMP                       PHY_TMP 
 
 #OBJECT_PROPERTY     FNC_GAS_VLV_CTRL 
 
@@ -565,6 +571,7 @@
 
 #OBJECT_PROPERTY     PHY_VAC_VLV 
 
+   #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
    #DEFINE_CONSTANT     CH__DO_FR_VLV                      IO+do.FR.Valve 
    #DEFINE_CONSTANT     CH__DO_SR_VLV                      IO+do.SR.Valve 
    #DEFINE_CONSTANT     CH__DO_EXHAUST_VLV                 IO+do.TMP.Foreline.Vlv 
@@ -589,9 +596,14 @@
    #DEFINE_CONSTANT     VAR__PARA_POSITION_PERCENT         PARA.POSITION.SET 
    #DEFINE_CONSTANT     VAR__CUR_PRESSURE_VALUE            INR.OUT.sPRESSURE.VALUE 
    #DEFINE_CONSTANT     VAR__CUR_POSITION_PERCENT          INR.OUT.sPOSITION.VALUE 
+   #DEFINE_CONSTANT     CH__DI_ATM_SENSOR                  IO+di.CHM.ATM.Sns 
+   #DEFINE_CONSTANT     CH__DI_VAC_SENSOR                  IO+di.CHM.VAC.Sns 
+   #DEFINE_CONSTANT     CH__AI_CHM_PRESSURE_TORR           IO+ai.Chamber.Pressure.Value 
+   #DEFINE_CONSTANT     CH__DI_TMP_LINE_ACTIVE             PHY_TMP+MON.TMP_LINE_NOT_READY.ACTIVE 
 
 #OBJECT_PROPERTY     PHY_TMP 
 
+   #DEFINE_CONSTANT     CH__REF_MFC_TOTAL_FLOW             DB_INF+MFC.TOTAL.FLOW_SET 
    #DEFINE_CONSTANT     DATA.TMP_TYPE                      IO 
    #DEFINE_CONSTANT     LINK_TMP.DI_NORMAL_SPEED           IO+di.TMP.Normal.Speed 
    #DEFINE_CONSTANT     LINK_TMP.DI_ACCELERATION           IO+di.TMP.Acceleration 
@@ -600,8 +612,9 @@
    #DEFINE_CONSTANT     LINK_TMP.DO_START                  IO+do.TMP.Start 
    #DEFINE_CONSTANT     LINK_TMP.DO_STOP                   IO+do.TMP.Stop 
    #DEFINE_CONSTANT     LINK_TMP.DO_RESET                  IO+do.TMP.Reset 
-   #DEFINE_CONSTANT     LINK_TMP.AI_ROT_RPM                NULL 
+   #DEFINE_CONSTANT     LINK_TMP.AI_ROT_SPEED_RPM          NULL 
    #DEFINE_CONSTANT     LINK_TMP.DI_COMM_STATE             IO+di.Comm.Sts 
+   #DEFINE_CONSTANT     LINK_TMP.AI_TEMPERATURE            NULL 
    #DEFINE_CONSTANT     DATA.GV_USE                        NULL 
    #DEFINE_CONSTANT     OBJ__VAT                           PHY_VAT 
    #DEFINE_CONSTANT     LINK_IO.DI_FORELINE_VAC_SNS        PHY_DRY+MON.VAC.ON.SNS 
@@ -617,10 +630,10 @@
    #DEFINE_CONSTANT     CH__DI_PUMP_POWER_SNS              NULL 
    #DEFINE_CONSTANT     CH__DI_PUMP_VAC_SNS                NULL 
    #DEFINE_CONSTANT     CH__AI_PUMP_PRESSURE_TORR          IO+ai.Pump_Line.Pressure.Value 
+   #DEFINE_CONSTANT     CH__AI_PUMP_PRESSURE_MTORR         NULL 
 
 #OBJECT_PROPERTY     PAGE_RF_PULSE 
 
-   #FNC_MODE     INIT                               PHY_IO__RF_PULSE   INIT 
    #FNC_MODE     ON                                 PHY_IO__RF_PULSE   PARA_USER.ON 
    #FNC_MODE     OFF                                PHY_IO__RF_PULSE   PARA_USER.OFF 
 
@@ -633,13 +646,15 @@
 
    #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
    #DEFINE_CONSTANT     DATA.RF_FREQUENCY.ACTIVE           NO 
+   #DEFINE_CONSTANT     CH__DO_RF_POWER_CONNECTOR          NULL 
    #DEFINE_CONSTANT     OBJ__IO_RF                         PHY_IO__RF_RPS 
    #DEFINE_CONSTANT     LINK_MODE__INIT                    INIT 
    #DEFINE_CONSTANT     LINK_MODE__LOCAL                   LOCAL 
    #DEFINE_CONSTANT     LINK_MODE__REMOTE                  REMOTE 
-   #DEFINE_CONSTANT     LINK_MODE__SET_POWER               ON 
+   #DEFINE_CONSTANT     LINK_MODE__POWER_SET               POWER.SET 
+   #DEFINE_CONSTANT     LINK_MODE__POWER_ON                POWER.ON 
    #DEFINE_CONSTANT     LINK_MODE__OFF                     OFF 
-   #DEFINE_CONSTANT     VAR__RF_DO_POWER_CTRL              NULL 
+   #DEFINE_CONSTANT     VAR__RF_DO_POWER_CTRL              do.DIGITAL_POWER.CTRL 
    #DEFINE_CONSTANT     VAR__RF_AO_SET_POWER               ao.DIGITAL_POWER.SET 
    #DEFINE_CONSTANT     VAR__RF_AI_FORWARD_POWER           INFO.DELIVERED_POWER 
    #DEFINE_CONSTANT     VAR__RF_AI_REFLECT_POWER           INFO.REFLECTED_POWER 
@@ -656,13 +671,15 @@
 
    #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
    #DEFINE_CONSTANT     DATA.RF_FREQUENCY.ACTIVE           NO 
+   #DEFINE_CONSTANT     CH__DO_RF_POWER_CONNECTOR          NULL 
    #DEFINE_CONSTANT     OBJ__IO_RF                         PHY_IO__RF_400KHZ 
    #DEFINE_CONSTANT     LINK_MODE__INIT                    INIT 
    #DEFINE_CONSTANT     LINK_MODE__LOCAL                   INIT 
    #DEFINE_CONSTANT     LINK_MODE__REMOTE                  INIT 
-   #DEFINE_CONSTANT     LINK_MODE__SET_POWER               ON 
+   #DEFINE_CONSTANT     LINK_MODE__POWER_SET               POWER.SET 
+   #DEFINE_CONSTANT     LINK_MODE__POWER_ON                POWER.ON 
    #DEFINE_CONSTANT     LINK_MODE__OFF                     OFF 
-   #DEFINE_CONSTANT     VAR__RF_DO_POWER_CTRL              NULL 
+   #DEFINE_CONSTANT     VAR__RF_DO_POWER_CTRL              do.DIGITAL_POWER.CTRL 
    #DEFINE_CONSTANT     VAR__RF_AO_SET_POWER               ao.DIGITAL_POWER.SET 
    #DEFINE_CONSTANT     VAR__RF_AI_FORWARD_POWER           INFO.DELIVERED_POWER 
    #DEFINE_CONSTANT     VAR__RF_AI_REFLECT_POWER           INFO.REFLECTED_POWER 
@@ -679,13 +696,15 @@
 
    #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
    #DEFINE_CONSTANT     DATA.RF_FREQUENCY.ACTIVE           NO 
+   #DEFINE_CONSTANT     CH__DO_RF_POWER_CONNECTOR          NULL 
    #DEFINE_CONSTANT     OBJ__IO_RF                         PHY_IO__RF_40MHZ 
    #DEFINE_CONSTANT     LINK_MODE__INIT                    INIT 
    #DEFINE_CONSTANT     LINK_MODE__LOCAL                   INIT 
    #DEFINE_CONSTANT     LINK_MODE__REMOTE                  INIT 
-   #DEFINE_CONSTANT     LINK_MODE__SET_POWER               ON 
+   #DEFINE_CONSTANT     LINK_MODE__POWER_SET               POWER.SET 
+   #DEFINE_CONSTANT     LINK_MODE__POWER_ON                POWER.ON 
    #DEFINE_CONSTANT     LINK_MODE__OFF                     OFF 
-   #DEFINE_CONSTANT     VAR__RF_DO_POWER_CTRL              NULL 
+   #DEFINE_CONSTANT     VAR__RF_DO_POWER_CTRL              do.POWER.MODE 
    #DEFINE_CONSTANT     VAR__RF_AO_SET_POWER               ao.POWER.SET 
    #DEFINE_CONSTANT     VAR__RF_AI_FORWARD_POWER           INFO.FORWARD_POWER 
    #DEFINE_CONSTANT     VAR__RF_AI_REFLECT_POWER           INFO.REFLECT_POWER 
@@ -700,7 +719,8 @@
 
 #OBJECT_PROPERTY     PHY_ESC 
 
-   #DEFINE_CONSTANT     OBJ__DB                            DB_INF 
+   #DEFINE_CONSTANT     OBJ__DB_INF                        DB_INF 
+   #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
    #DEFINE_CONSTANT     CH__SHUTTER_STATE                  NULL 
    #DEFINE_CONSTANT     CH__SLOT_VALVE_STATE               DB_INF+SLIT.VLV.STS 
    #DEFINE_CONSTANT     CH__CONFIG_SAVE                    DB_GUI+GUI.CONFIG.ESC_HELIUM.SAVE 
@@ -803,8 +823,9 @@
    #FNC_MODE     LOW_VAC_PUMP                       FNC_CHM      LOW_VAC_PUMP 
    #FNC_MODE     HIGH_VAC_PUMP                      FNC_CHM      HIGH_VAC_PUMP 
    #FNC_MODE     VENTING                            FNC_CHM      VENTING 
-   #FNC_MODE     LEAK_CHECK                         FNC_CHM      LEAK_CHECK 
    #FNC_MODE     PURGE                              FNC_CHM      PURGE 
+   #FNC_MODE     LEAK_CHECK.CHM                     FNC_CHM      LEAK_CHECK.CHM 
+   #FNC_MODE     LEAK_CHECK.GAS                     FNC_CHM      LEAK_CHECK.GAS 
 
    #DEFINE_CONSTANT     CH.CATEGORY.LOCK                   DB_ETCHER+SYS.FNC.CATEGORY 
    #DEFINE_CONSTANT     DATA.CATEGORY.LOCK                 VAC.AREA 
@@ -838,7 +859,7 @@
    #FNC_MODE     OBJ_MODE__CLN_START                OPR_PMC      PRO_START 
    #FNC_MODE     OBJ_MODE__PRE_READY                OPR_PMC      PRO_READY 
    #FNC_MODE     OBJ_MODE__PRE_START                OPR_PMC      PRO_START 
-   #FNC_MODE     OBJ_MODE__MNT_READY                OPR_PMC      MNT_READY 
+   #FNC_MODE     OBJ_MODE__MNT_READY                OPR_PMC      PRO_READY 
    #FNC_MODE     OBJ_MODE__MNT_START                OPR_PMC      PRO_START 
    #FNC_MODE     OBJ_MODE__JOB_START_READY          OPR_PMC      JOB_START_READY 
    #FNC_MODE     OBJ_MODE__JOB_END_READY            OPR_PMC      JOB_END_READY 
@@ -855,7 +876,9 @@
    #FNC_MODE     OBJ_MODE__R3                       PHY_LIFT_PIN   DOWN 
    #FNC_MODE     OBJ_MODE__INIT                     FNC_SYSTEM   SYSTEM_INIT 
 
+   #DEFINE_CONSTANT     OBJ__OPR_PMC                       OPR_PMC 
    #DEFINE_CONSTANT     OBJ__PM_SLOT                       NULL 
+   #DEFINE_CONSTANT     OBJ__LIFT_PIN                      NULL 
    #DEFINE_CONSTANT     OBJ__SHUTTER                       NULL 
 
 #OBJECT_PROPERTY     OPR_PMC 
@@ -865,10 +888,8 @@
    #FNC_MODE     OBJ_MODE__TRANSFER_INIT            FNC_SYSTEM   TRANSFER_INIT 
    #FNC_MODE     OBJ_MODE__PUMP                     FNC_CHM      HIGH_VAC_PUMP 
    #FNC_MODE     OBJ_MODE__VENT                     FNC_CHM      VENTING 
-   #FNC_MODE     OBJ_MODE__LEAK_CHECK               FNC_CHM      LEAK_CHECK 
+   #FNC_MODE     OBJ_MODE__LEAK_CHECK               FNC_CHM      LEAK_CHECK.CHM 
    #FNC_MODE     OBJ_MODE__PURGE                    FNC_CHM      PURGE 
-   #FNC_MODE     OBJ_MODE__SLOT_OPEN                FNC_CHM      SLOT.OPEN 
-   #FNC_MODE     OBJ_MODE__SLOT_CLOSE               FNC_CHM      SLOT.CLOSE 
    #FNC_MODE     OBJ_MODE__PIN_UP                   PHY_LIFT_PIN   UP 
    #FNC_MODE     OBJ_MODE__PIN_DOWN                 PHY_LIFT_PIN   DOWN 
    #FNC_MODE     OBJ_MODE__PRO_READY                FNC_PROC     MAIN.READY 
@@ -886,8 +907,9 @@
    #DEFINE_CONSTANT     OBJ__AUTO_PM                       Mng_AUTO_PM 
    #DEFINE_CONSTANT     AUTO_PM.INIT                       AUTO_PM 
    #DEFINE_CONSTANT     OBJ__LIFT_PIN                      PHY_LIFT_PIN 
-   #DEFINE_CONSTANT     LIFT_PIN.TRANSFER_READY            TRANSFER_DOWN 
-   #DEFINE_CONSTANT     LIFT_PIN.TRANSFER_COMPLETE         TRANSFER_DOWN 
+   #DEFINE_CONSTANT     LIFT_PIN.PICK_READY                UP 
+   #DEFINE_CONSTANT     LIFT_PIN.PLACE_READY               DOWN 
+   #DEFINE_CONSTANT     LIFT_PIN.TRANSFER_COMPLETE         DOWN 
    #DEFINE_CONSTANT     LIFT_PIN.PROCESS_READY             DOWN 
    #DEFINE_CONSTANT     OBJ__SHUTTER                       NULL 
    #DEFINE_CONSTANT     OBJ__PM_SLOT                       NULL 
@@ -932,6 +954,20 @@
    #DEFINE_CONSTANT     OBJ__PMC_LOG                       FNC_PM_DATALOG 
    #DEFINE_CONSTANT     OBJ__TRANSFER                      FNC_TRANSFER 
    #DEFINE_CONSTANT     OBJ__GAS_VALVE                     FNC_GAS_VLV_CTRL 
+   #DEFINE_CONSTANT     OBJ__MFC_SIZE                      13 
+   #DEFINE_CONSTANT     OBJ__MFC1                          PHY_MFC1 
+   #DEFINE_CONSTANT     OBJ__MFC2                          PHY_MFC2 
+   #DEFINE_CONSTANT     OBJ__MFC3                          PHY_MFC3 
+   #DEFINE_CONSTANT     OBJ__MFC4                          PHY_MFC4 
+   #DEFINE_CONSTANT     OBJ__MFC5                          PHY_MFC5 
+   #DEFINE_CONSTANT     OBJ__MFC6                          PHY_MFC6 
+   #DEFINE_CONSTANT     OBJ__MFC7                          PHY_MFC7 
+   #DEFINE_CONSTANT     OBJ__MFC8                          PHY_MFC8 
+   #DEFINE_CONSTANT     OBJ__MFC9                          PHY_MFC9 
+   #DEFINE_CONSTANT     OBJ__MFC10                         PHY_MFC10 
+   #DEFINE_CONSTANT     OBJ__MFC11                         PHY_MFC11 
+   #DEFINE_CONSTANT     OBJ__MFC12                         PHY_MFC12 
+   #DEFINE_CONSTANT     OBJ__MFC13                         PHY_MFC17 
    #DEFINE_CONSTANT     OBJ__VAT                           PHY_VAT 
    #DEFINE_CONSTANT     OBJ__VAC_VALVE                     PHY_VAC_VLV 
    #DEFINE_CONSTANT     OBJ__TURBO_PUMP                    PHY_TMP 
@@ -954,6 +990,83 @@
    #DEFINE_CONSTANT     DATA__IO_RF_NAME.3                 RF.HF 
    #DEFINE_CONSTANT     CH__IO_RF_ON_STATUS.3              PHY_RF_HF+MON.IO.POWER.STATE 
    #DEFINE_CONSTANT     CH__ESC_ON_STS                     PHY_ESC+MON.ESC.VOLTAGE.STATE 
+
+#OBJECT_PROPERTY     PHY_CHM_IO 
+
+   #DEFINE_CONSTANT     OBJ__DB_INF                        DB_INF 
+   #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
+   #DEFINE_CONSTANT     CH__DI_VAC_SNS                     IO+di.CHM.VAC.Sns 
+   #DEFINE_CONSTANT     CH__DI_ATM_SNS                     IO+di.CHM.ATM.Sns 
+   #DEFINE_CONSTANT     CH__DI_SLOT_VLV_OPEN               NULL 
+   #DEFINE_CONSTANT     CH__DI_SLOT_VLV_CLOSE              IO+di.PM.Slot.Valve.Close 
+   #DEFINE_CONSTANT     CH.DO_CHM_CHECK_VLV                NULL 
+   #DEFINE_CONSTANT     DATA.PRC_GAUGE_SIZE                1 
+   #DEFINE_CONSTANT     CH.DO_PRC_GAUGE_VLV.1              IO+do.Manometer.ISO.Vlv.1_torr 
+   #DEFINE_CONSTANT     CH.AI_PRC_GAUGE_TORR.1             PHY_VAT+MON.PRESSURE.TORR 
+   #DEFINE_CONSTANT     CH.AI_PRC_GAUGE_MTORR.1            NULL 
+   #DEFINE_CONSTANT     CH__AI_CHM_GAUGE_TORR              IO+ai.Chamber.Pressure.Value 
+   #DEFINE_CONSTANT     CH__AI_FORELINE_GAUGE_TORR         IO+ai.Pump_Line.Pressure.Value 
+   #DEFINE_CONSTANT     CH__AI_FORELINE_GAUGE_MTORR        NULL 
+   #DEFINE_CONSTANT     CH__RF_TOTAL_ON_STATE              DB_INF+RF.ON.STS 
+   #DEFINE_CONSTANT     DATA.RF_SIZE                       3 
+   #DEFINE_CONSTANT     CH__RF_ON_STATE.1                  PHY_RF_RPS+MON.IO.POWER.STATE 
+   #DEFINE_CONSTANT     CH__RF_ON_STATE.2                  PHY_RF_LF+MON.IO.POWER.STATE 
+   #DEFINE_CONSTANT     CH__RF_ON_STATE.3                  PHY_RF_HF+MON.IO.POWER.STATE 
+   #DEFINE_CONSTANT     CH__MFC_TOTAL_FLOW_SET             DB_INF+MFC.TOTAL.FLOW_SET 
+   #DEFINE_CONSTANT     DATA.MFC_SIZE                      13 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.1                 PHY_MFC1+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.2                 PHY_MFC2+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.3                 PHY_MFC3+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.4                 PHY_MFC4+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.5                 PHY_MFC5+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.6                 PHY_MFC6+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.7                 PHY_MFC7+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.8                 PHY_MFC8+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.9                 PHY_MFC9+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.10                PHY_MFC10+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.11                PHY_MFC11+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.12                PHY_MFC12+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     CH__MFC_FLOW_SET.13                PHY_MFC17+MON.MFC.SET.FLOW 
+   #DEFINE_CONSTANT     DATA_SIZE.REVERSE_VALVE            0 
+
+#OBJECT_PROPERTY     PHY_LIFT_PIN 
+
+   #DEFINE_CONSTANT     CH__LIFT_PIN_STATE                 DB_INF+LIFT_PIN.STATUS 
+   #DEFINE_CONSTANT     CH__ESC_CHUCK_STATE                PHY_ESC+MON.CHUCK_STATUS 
+   #DEFINE_CONSTANT     DATA__ESC_CH_SIZE                  2 
+   #DEFINE_CONSTANT     CH__ESC_AI_VOLTAGE.1               PHY_IO__ESC+INFO_STS.VOLT.CH1 
+   #DEFINE_CONSTANT     CH__ESC_AI_VOLTAGE.2               PHY_IO__ESC+INFO_STS.VOLT.CH2 
+   #DEFINE_CONSTANT     DATA__PIN_CTRL_TYPE                IO 
+   #DEFINE_CONSTANT     CH__DO_TRANSFER_PIN_UP             IO+do.Transfer.Pin.Up 
+   #DEFINE_CONSTANT     CH__DO_TRANSFER_PIN_DOWN           IO+do.Transfer.Pin.Down 
+   #DEFINE_CONSTANT     CH__DO_MIDDLE_PIN_UP               IO+do.Middle.Pin.Up 
+   #DEFINE_CONSTANT     CH__DO_MIDDLE_PIN_DOWN             IO+do.Middle.Pin.Down 
+   #DEFINE_CONSTANT     DATA__PIN_SENSOR_CHECK_MODE        STD 
+   #DEFINE_CONSTANT     DATA__DI_PIN_SENSOR                YES 
+   #DEFINE_CONSTANT     CH__DI_PIN_UP                      IO+di.Pin.Up 
+   #DEFINE_CONSTANT     CH__DI_PIN_MIDDLE                  IO+di.Pin.Middle 
+   #DEFINE_CONSTANT     CH__DI_PIN_DOWN                    IO+di.Pin.Down 
+   #DEFINE_CONSTANT     DATA__PIN_SIZE                     0 
+
+#OBJECT_PROPERTY     PHY_MTC 
+
+   #DEFINE_CONSTANT     CH__SLOT_VALVE                     DB_INF+SLIT.VLV.STS 
+   #DEFINE_CONSTANT     CH__DI_CHM_VAC_SNS                 IO+di.CHM.VAC.Sns 
+   #DEFINE_CONSTANT     CH__DI_CHM_ATM_SNS                 IO+di.CHM.ATM.Sns 
+   #DEFINE_CONSTANT     CH__DI_MTC_VAC_SNS                 IO+di.MTC.VAC.Sns 
+   #DEFINE_CONSTANT     CH__DI_MTC_ATM_SNS                 IO+di.MTC.ATM.Sns 
+   #DEFINE_CONSTANT     CH__DI_MTC_GATE_OPEN_SNS           IO+di.MTC.Gate.Open 
+   #DEFINE_CONSTANT     CH__DI_MTC_GATE_CLOSE_SNS          IO+di.MTC.Gate.Close 
+   #DEFINE_CONSTANT     CH__DO_MTC_GATE_OPEN               IO+do.MTC.Gate.Open 
+   #DEFINE_CONSTANT     CH__DO_MTC_GATE_CLOSE              IO+do.MTC.Gate.Close 
+   #DEFINE_CONSTANT     CH__DI_SLOT_VLV_CLOSE              IO+di.PM.Slot.Valve.Close 
+   #DEFINE_CONSTANT     CH__DO_MTC_2STAGE_SLOW             IO+do.MTC.2Stage.SlowVV 
+   #DEFINE_CONSTANT     CH__DO_MTC_2STAGE_FAST             IO+do.MTC.2Stage.FastVV 
+   #DEFINE_CONSTANT     CH__DO_MTC_CHECK_VV                IO+do.MTC.Check.VV 
+   #DEFINE_CONSTANT     CH__DO_MTC_N2PURGE_SLOW            IO+do.MTC.N2Purge.SlowVV 
+   #DEFINE_CONSTANT     CH__DO_MTC_N2PURGE_FAST            IO+do.MTC.N2Purge.FastVV 
+   #DEFINE_CONSTANT     CH__SI_MTC_GAUGE_STATUS            IO+si.MTC.Gauge.Status.HEXA 
+   #DEFINE_CONSTANT     CH__SI_MTC_GAUGE_PRESSURE          IO+si.MTC.Gauge.Pressure.HEXA 
 
 #OBJECT_PROPERTY     PAGE_PROCESS 
 
@@ -1168,62 +1281,6 @@
    #DEFINE_CONSTANT     OBJ.CHM_CTRL                       FNC_CHM 
    #DEFINE_CONSTANT     OBJ.GAS_VLV                        FNC_GAS_VLV_CTRL 
    #DEFINE_CONSTANT     OBJ.DGF_CTRL                       PHY_DGF 
-
-#OBJECT_PROPERTY     PHY_CHM_IO 
-
-   #DEFINE_CONSTANT     OBJ__DB_INF                        DB_INF 
-   #DEFINE_CONSTANT     OBJ__DB_SYS                        DB_SYS 
-   #DEFINE_CONSTANT     CH__DI_VAC_SNS                     IO+di.CHM.VAC.Sns 
-   #DEFINE_CONSTANT     CH__DI_ATM_SNS                     IO+di.CHM.ATM.Sns 
-   #DEFINE_CONSTANT     CH__DI_SLOT_VLV_OPEN               NULL 
-   #DEFINE_CONSTANT     CH__DI_SLOT_VLV_CLOSE              IO+di.PM.Slot.Valve.Close 
-   #DEFINE_CONSTANT     CH.DO_CHM_CHECK_VLV                NULL 
-   #DEFINE_CONSTANT     DATA.PRC_GAUGE_SIZE                1 
-   #DEFINE_CONSTANT     CH.DO_PRC_GAUGE_VLV.1              IO+do.Manometer.ISO.Vlv.1_torr 
-   #DEFINE_CONSTANT     CH.AI_PRC_GAUGE_TORR.1             PHY_VAT+MON.PRESSURE.TORR 
-   #DEFINE_CONSTANT     CH__AI_CHM_GAUGE_TORR              IO+ai.Chamber.Pressure.Value 
-   #DEFINE_CONSTANT     CH__AI_FORELINE_GAUGE_TORR         IO+ai.Pump_Line.Pressure.Value 
-   #DEFINE_CONSTANT     CH__RF_TOTAL_ON_STATE              DB_INF+RF.ON.STS 
-   #DEFINE_CONSTANT     DATA.RF_SIZE                       3 
-   #DEFINE_CONSTANT     CH__RF_ON_STATE.1                  PHY_RF_RPS+MON.IO.POWER.STATE 
-   #DEFINE_CONSTANT     CH__RF_ON_STATE.2                  PHY_RF_LF+MON.IO.POWER.STATE 
-   #DEFINE_CONSTANT     CH__RF_ON_STATE.3                  PHY_RF_HF+MON.IO.POWER.STATE 
-
-#OBJECT_PROPERTY     PHY_LIFT_PIN 
-
-   #DEFINE_CONSTANT     CH__LIFT_PIN_STATE                 DB_INF+LIFT_PIN.STATUS 
-   #DEFINE_CONSTANT     CH__ESC_CHUCK_STATE                PHY_ESC+MON.CHUCK_STATUS 
-   #DEFINE_CONSTANT     DATA__ESC_CH_SIZE                  2 
-   #DEFINE_CONSTANT     CH__ESC_AI_VOLTAGE.1               PHY_IO__ESC+INFO_STS.VOLT.CH1 
-   #DEFINE_CONSTANT     CH__ESC_AI_VOLTAGE.2               PHY_IO__ESC+INFO_STS.VOLT.CH2 
-   #DEFINE_CONSTANT     CH__DO_TRANSFER_PIN_UP             IO+do.Transfer.Pin.Up 
-   #DEFINE_CONSTANT     CH__DO_TRANSFER_PIN_DOWN           IO+do.Transfer.Pin.Down 
-   #DEFINE_CONSTANT     CH__DO_MIDDLE_PIN_UP               IO+do.Middle.Pin.Up 
-   #DEFINE_CONSTANT     CH__DO_MIDDLE_PIN_DOWN             IO+do.Middle.Pin.Down 
-   #DEFINE_CONSTANT     DATA__DI_PIN_SENSOR                YES 
-   #DEFINE_CONSTANT     CH__DI_PIN_UP                      IO+di.Pin.Up 
-   #DEFINE_CONSTANT     CH__DI_PIN_MIDDLE                  IO+di.Pin.Middle 
-   #DEFINE_CONSTANT     CH__DI_PIN_DOWN                    IO+di.Pin.Down 
-
-#OBJECT_PROPERTY     PHY_MTC 
-
-   #DEFINE_CONSTANT     CH__SLOT_VALVE                     DB_INF+SLIT.VLV.STS 
-   #DEFINE_CONSTANT     CH__DI_CHM_VAC_SNS                 IO+di.CHM.VAC.Sns 
-   #DEFINE_CONSTANT     CH__DI_CHM_ATM_SNS                 IO+di.CHM.ATM.Sns 
-   #DEFINE_CONSTANT     CH__DI_MTC_VAC_SNS                 IO+di.MTC.VAC.Sns 
-   #DEFINE_CONSTANT     CH__DI_MTC_ATM_SNS                 IO+di.MTC.ATM.Sns 
-   #DEFINE_CONSTANT     CH__DI_MTC_GATE_OPEN_SNS           IO+di.MTC.Gate.Open 
-   #DEFINE_CONSTANT     CH__DI_MTC_GATE_CLOSE_SNS          IO+di.MTC.Gate.Close 
-   #DEFINE_CONSTANT     CH__DO_MTC_GATE_OPEN               IO+do.MTC.Gate.Open 
-   #DEFINE_CONSTANT     CH__DO_MTC_GATE_CLOSE              IO+do.MTC.Gate.Close 
-   #DEFINE_CONSTANT     CH__DI_SLOT_VLV_CLOSE              IO+di.PM.Slot.Valve.Close 
-   #DEFINE_CONSTANT     CH__DO_MTC_2STAGE_SLOW             IO+do.MTC.2Stage.SlowVV 
-   #DEFINE_CONSTANT     CH__DO_MTC_2STAGE_FAST             IO+do.MTC.2Stage.FastVV 
-   #DEFINE_CONSTANT     CH__DO_MTC_CHECK_VV                IO+do.MTC.Check.VV 
-   #DEFINE_CONSTANT     CH__DO_MTC_N2PURGE_SLOW            IO+do.MTC.N2Purge.SlowVV 
-   #DEFINE_CONSTANT     CH__DO_MTC_N2PURGE_FAST            IO+do.MTC.N2Purge.FastVV 
-   #DEFINE_CONSTANT     CH__SI_MTC_GAUGE_STATUS            IO+si.MTC.Gauge.Status.HEXA 
-   #DEFINE_CONSTANT     CH__SI_MTC_GAUGE_PRESSURE          IO+si.MTC.Gauge.Pressure.HEXA 
 
 #OBJECT_PROPERTY     PHY_IO__APC_VLV 
 

@@ -241,14 +241,16 @@ int  CLS::MODULEx##__Is_Idle(const int db_i)											\
 	return 1;																			\
 }
 
-#define MODULEx__IS_READY(CLS,MODULEx,CH_OBJ_STS,CH_CFG_USE)							\
+#define MODULEx__IS_READY(CLS,MODULEx,CH_OBJ_STS,CH_CFG_USE,CH_PRC_STS)				    \
 int  CLS::MODULEx##__Is_Ready(const int db_i)											\
 {																						\
 	CString cfg_use;																	\
 	CString obj_sts;																	\
+	CString prc_sts;																	\
 																						\
-	CH_CFG_USE[db_i]->Get__DATA(cfg_use);												\
-	CH_OBJ_STS[db_i]->Get__DATA(obj_sts);												\
+	cfg_use = CH_CFG_USE[db_i]->Get__STRING();											\
+	obj_sts = CH_OBJ_STS[db_i]->Get__STRING();											\
+	prc_sts = CH_PRC_STS[db_i]->Get__STRING();											\
 																						\
 	if(cfg_use.CompareNoCase(DEF__ENABLE) != 0)											\
 	{																					\
@@ -258,7 +260,12 @@ int  CLS::MODULEx##__Is_Ready(const int db_i)											\
 	if((obj_sts.CompareNoCase(DEF__STANDBY)  != 0)										\
 	&& (obj_sts.CompareNoCase(DEF__CTCINUSE) != 0))										\
 	{																					\
-		return -1;																		\
+		return -2;																		\
+	}																					\
+																						\
+	if(obj_sts.CompareNoCase(DEF__CTCINUSE) == 0)										\
+	{																					\
+	    if(prc_sts.CompareNoCase(STR__ALARM) == 0)		return -3;						\
 	}																					\
 																						\
 	return 1;																			\
@@ -723,6 +730,14 @@ public:
 	//
 	virtual void Get__PRC_MODULE_OF_FIRST_PATH(CStringArray& l_pmx) = 0;
 	virtual int  Get__PRC_PATH_SIZE() = 0;
+
+	//
+	virtual int  Get__STx_N2_PURGE_OF_EDIT_TYPE(const int slot_id,
+											    CStringArray& l_id,
+											    CStringArray& l_mode,
+											    CStringArray& l_slot,
+											    CStringArray& l_sec,
+											    CStringArray& l_n2_purge) = 0;
 };
 
 
@@ -2015,6 +2030,19 @@ public:
 	virtual int  Clear__USER_DEF_INFO(const CString& main_name) = 0;
 	virtual int  Clear__USER_DEF_INFO(const CString& main_name,
 									  const CString& sub_name) = 0;
+
+	// STx ...
+	virtual int  Get__STx_N2_PURGE_OF_EDIT_TYPE(CStringArray& l_id, 
+												CStringArray& l_n2_purge) = 0;
+
+	virtual int  Get__STx_N2_PURGE_OF_EDIT_TYPE(const int port_id,const int slot_id,
+												CStringArray& l_id, 
+												CStringArray& l_n2_purge) = 0;
+	virtual int  Get__STx_N2_PURGE_OF_EDIT_TYPE(const CString& material_pos,
+												CStringArray& l_id, 
+												CStringArray& l_n2_purge) = 0;
+
+	virtual int  Check__STx_N2_PURGE_OF_EDIT_TYPE(const int port_id) = 0;
 };
 
 

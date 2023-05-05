@@ -7,10 +7,13 @@
 // #TOTAL_ALARM_POPUP_BOX_ENABLE
 #MODULE_WINDOW_HIDE		     // Show (Default)
 
-// #SINGLE_LOCAL               0
+#SINGLE_LOCAL               0
 // #SINGLE_LOCAL               1
-#SINGLE_LOCAL               2
+// #SINGLE_LOCAL               2
 // #SINGLE_LOCAL               3
+// #SINGLE_REMOTE              3
+// #SINGLE_LOCAL               4
+// #SINGLE_LOCAL               6
 
 #SYSTEM_USER_LEVEL          OEM     // MAINT  
 
@@ -41,24 +44,10 @@
 #DEFINE  ##CTC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\CTC_ICD"
 #DEFINE  ##TMC_DIR_ROOT     "D:\WORK_ICD\Program_Exe\TMC_ICD"
 
-/*
 #DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_ICD"
-#DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_ICD"
-#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_ICD"
-#DEFINE  ##PM4_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM4_ICD"
-#DEFINE  ##PM5_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM5_ICD"
-#DEFINE  ##PM6_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM6_ICD"
-*/
-/*
-#DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_ALPHA"
 #DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_ALPHA"
-#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_ALPHA"
-#DEFINE  ##PM4_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM4_ALPHA"
-#DEFINE  ##PM5_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM5_ALPHA"
-#DEFINE  ##PM6_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM6_ALPHA"
-*/
-#DEFINE  ##PM1_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM1_ALPHA"
-#DEFINE  ##PM2_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM2_ICD"
+#DEFINE  ##PM3_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM3_BETA"
+#DEFINE  ##PM5_DIR_ROOT     "D:\WORK_ICD\Program_Exe\PM5_PIN_TEST"
 
 #DIR_ROOT.CTC               ##CTC_DIR_ROOT
 #DIR_ROOT.TMC               ##TMC_DIR_ROOT
@@ -68,7 +57,6 @@
 #DIR_ROOT.PM3               ##PM3_DIR_ROOT
 #DIR_ROOT.PM4               ##PM4_DIR_ROOT
 #DIR_ROOT.PM5               ##PM5_DIR_ROOT
-#DIR_ROOT.PM6               ##PM6_DIR_ROOT
 
 
 #DEFINE  ##CTC_SCR_FILE     CTC_WIN-ICD_4PM_2ARM.sct
@@ -77,12 +65,14 @@
 #DEFINE  ##TMC_SCR_FILE     TMC_WIN-ICD_4PM_2ARM.sct
 #DEFINE  ##TMC_SCR_CTRL     TMC_WIN-ICD_4PM_2ARM.ctrl
 
-#DEFINE  ##PMC_SCR_FILE     PMC_WIN-ALPHA.sct
-#DEFINE  ##PMC_SCR_CTRL     PMC_WIN-ALPHA.ctrl
-/*
-#DEFINE  ##PMC_SCR_FILE     PMC_WIN-ICD.sct
-#DEFINE  ##PMC_SCR_CTRL     PMC_WIN-ICD.ctrl
-*/
+#DEFINE  ##PMC_ICD_FILE     PMC_WIN-ICD.sct
+#DEFINE  ##PMC_ICD_CTRL     PMC_WIN-ICD.ctrl
+
+#DEFINE  ##PMC_ALPHA_FILE   PMC_WIN-ALPHA.sct
+#DEFINE  ##PMC_ALPHA_CTRL   PMC_WIN-ALPHA.ctrl
+
+#DEFINE  ##PMC_BETA_FILE    PMC_WIN-BETA.sct
+#DEFINE  ##PMC_BETA_CTRL    PMC_WIN-BETA.ctrl
 
 #DEFINE  ##NULL_SCR_FILE    WIN-NULL.sct
 #DEFINE  ##NULL_SCR_CTRL    WIN-NULL.ctrl
@@ -110,32 +100,26 @@
 #DIR_SEQ_ROOT          ##TMC_DIR_ROOT
 }
 
+/*
 // PM1
 #PM1_DATA
 {
 #SEQ_NAME              PM1
 
-/*
-#SCREEN_FILE           ##PMC_SCR_FILE
-#SCREEN_CTRL	         ##PMC_SCR_CTRL
-*/
-#SCREEN_FILE           PMC_WIN-ALPHA.sct
-#SCREEN_CTRL	         PMC_WIN-ALPHA.ctrl
+#SCREEN_FILE           ##PMC_ICD_FILE
+#SCREEN_CTRL	         ##PMC_ICD_CTRL
 
 #DIR_SEQ_ROOT          ##PM1_DIR_ROOT
 }
+*/
 
 // PM2
 #PM2_DATA
 {
 #SEQ_NAME              PM2
 
-/*
-#SCREEN_FILE           ##PMC_SCR_FILE
-#SCREEN_CTRL	         ##PMC_SCR_CTRL
-*/
-#SCREEN_FILE           PMC_WIN-ICD.sct
-#SCREEN_CTRL	         PMC_WIN-ICD.ctrl
+#SCREEN_FILE           PMC_WIN-ALPHA.sct
+#SCREEN_CTRL	         PMC_WIN-ALPHA.ctrl
 
 #DIR_SEQ_ROOT          ##PM2_DIR_ROOT
 }
@@ -146,12 +130,14 @@
 {
 #SEQ_NAME              PM3
 
-#SCREEN_FILE           ##PMC_SCR_FILE
-#SCREEN_CTRL	         ##PMC_SCR_CTRL
+#SCREEN_FILE           ##PMC_BETA_FILE
+#SCREEN_CTRL	         ##PMC_BETA_CTRL
 
 #DIR_SEQ_ROOT          ##PM3_DIR_ROOT
 }
+*/
 
+/*
 // PM4
 #PM4_DATA
 {
@@ -162,27 +148,17 @@
 
 #DIR_SEQ_ROOT          ##PM4_DIR_ROOT
 }
+*/
 
+/*
 // PM5
 #PM5_DATA
 {
 #SEQ_NAME              PM5
 
-#SCREEN_FILE           ##PMC_SCR_FILE
-#SCREEN_CTRL	         ##PMC_SCR_CTRL
+#SCREEN_FILE           ##PMC_BETA_FILE
+#SCREEN_CTRL	         ##PMC_BETA_CTRL
 
 #DIR_SEQ_ROOT          ##PM5_DIR_ROOT
 }
-
-// PM6
-#PM6_DATA
-{
-#SEQ_NAME              PM6
-
-#SCREEN_FILE           ##PMC_SCR_FILE
-#SCREEN_CTRL	         ##PMC_SCR_CTRL
-
-#DIR_SEQ_ROOT          ##PM6_DIR_ROOT
-}
 */
-

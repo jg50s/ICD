@@ -3,6 +3,7 @@
 #OBJECT_PROPERTY    PAGE__LP1
 #FNC_MODE           HOME                  OPR__LP1         HOME
 #FNC_MODE           ALARM.RESET           OPR__LP1         ALARM.RESET
+#FNC_MODE           PREPLOAD              OPR__LP1         PREPLOAD
 #FNC_MODE           CLAMP                 OPR__LP1         CLAMP
 #FNC_MODE           UNCLAMP               OPR__LP1         UNCLAMP
 #FNC_MODE           LOAD                  OPR__LP1         LOAD
@@ -14,6 +15,7 @@
 #OBJECT_PROPERTY    PAGE__LP2
 #FNC_MODE           HOME                  OPR__LP2         HOME
 #FNC_MODE           ALARM.RESET           OPR__LP2         ALARM.RESET
+#FNC_MODE           PREPLOAD              OPR__LP2         PREPLOAD
 #FNC_MODE           CLAMP                 OPR__LP2         CLAMP
 #FNC_MODE           UNCLAMP               OPR__LP2         UNCLAMP
 #FNC_MODE           LOAD                  OPR__LP2         LOAD
@@ -25,6 +27,7 @@
 #OBJECT_PROPERTY    PAGE__LP3
 #FNC_MODE           HOME                  OPR__LP3         HOME
 #FNC_MODE           ALARM.RESET           OPR__LP3         ALARM.RESET
+#FNC_MODE           PREPLOAD              OPR__LP3         PREPLOAD
 #FNC_MODE           CLAMP                 OPR__LP3         CLAMP
 #FNC_MODE           UNCLAMP               OPR__LP3         UNCLAMP
 #FNC_MODE           LOAD                  OPR__LP3         LOAD
@@ -36,6 +39,7 @@
 #OBJECT_PROPERTY    PAGE__LP4
 #FNC_MODE           HOME                  OPR__LP4         HOME
 #FNC_MODE           ALARM.RESET           OPR__LP4         ALARM.RESET
+#FNC_MODE           PREPLOAD              OPR__LP4         PREPLOAD
 #FNC_MODE           CLAMP                 OPR__LP4         CLAMP
 #FNC_MODE           UNCLAMP               OPR__LP4         UNCLAMP
 #FNC_MODE           LOAD                  OPR__LP4         LOAD
@@ -47,6 +51,7 @@
 #OBJECT_PROPERTY    PAGE__LP5
 #FNC_MODE           HOME                  OPR__LP5         HOME
 #FNC_MODE           ALARM.RESET           OPR__LP5         ALARM.RESET
+#FNC_MODE           PREPLOAD              OPR__LP5         PREPLOAD
 #FNC_MODE           CLAMP                 OPR__LP5         CLAMP
 #FNC_MODE           UNCLAMP               OPR__LP5         UNCLAMP
 #FNC_MODE           LOAD                  OPR__LP5         LOAD
@@ -140,75 +145,90 @@
 
 #DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP1+OBJ.STATUS
 
+#DEFINE_CONSTANT    LPx.ID                1
 #DEFINE_CONSTANT    OBJ.LPx          		  PHY_IO__LP1
 #DEFINE_CONSTANT    OBJ.RFx          		  PHY_RS232__RF1
 #DEFINE_CONSTANT    OBJ.OHT          		  PHY_OHT__LP1
 
-#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       IO+di.LP1.Wafer_Slide_Out
+#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       NULL
 #DEFINE_CONSTANT    CH.ARM_RNE_SNS.DI     IO+di.ATM_RB.Retract_LP1
 
 #DEFINE_CONSTANT    DATA.RNE_ON           On
 #DEFINE_CONSTANT    DATA.RNE_OFF          Off
+
+#DEFINE_CONSTANT    OBJ.ROBOT             PHY__ATM_ROBOT
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY__LP2
 
 #DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP2+OBJ.STATUS
 
+#DEFINE_CONSTANT    LPx.ID                2
 #DEFINE_CONSTANT    OBJ.LPx          		  PHY_IO__LP2
 #DEFINE_CONSTANT    OBJ.RFx          		  PHY_RS232__RF2
 #DEFINE_CONSTANT    OBJ.OHT          		  PHY_OHT__LP2
 
-#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       IO+di.LP2.Wafer_Slide_Out
+#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       NULL
 #DEFINE_CONSTANT    CH.ARM_RNE_SNS.DI     IO+di.ATM_RB.Retract_LP2
 
 #DEFINE_CONSTANT    DATA.RNE_ON           On
 #DEFINE_CONSTANT    DATA.RNE_OFF          Off
+
+#DEFINE_CONSTANT    OBJ.ROBOT             PHY__ATM_ROBOT
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY__LP3
 
 #DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP3+OBJ.STATUS
 
+#DEFINE_CONSTANT    LPx.ID                3
 #DEFINE_CONSTANT    OBJ.LPx          		  PHY_IO__LP3
 #DEFINE_CONSTANT    OBJ.RFx          		  PHY_RS232__RF3
 #DEFINE_CONSTANT    OBJ.OHT          		  PHY_OHT__LP3
 
-#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       IO+di.LP3.Wafer_Slide_Out
+#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       NULL
 #DEFINE_CONSTANT    CH.ARM_RNE_SNS.DI     IO+di.ATM_RB.Retract_LP3
 
 #DEFINE_CONSTANT    DATA.RNE_ON           On
 #DEFINE_CONSTANT    DATA.RNE_OFF          Off
+
+#DEFINE_CONSTANT    OBJ.ROBOT             PHY__ATM_ROBOT
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY__LP4
 
 #DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP4+OBJ.STATUS
 
+#DEFINE_CONSTANT    LPx.ID                4
 #DEFINE_CONSTANT    OBJ.LPx          		  PHY_IO__LP4
 #DEFINE_CONSTANT    OBJ.RFx          		  PHY_RS232__RF4
 #DEFINE_CONSTANT    OBJ.OHT          		  PHY_OHT__LP4
 
-#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       IO+di.LP4.Wafer_Slide_Out
+#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       NULL
 #DEFINE_CONSTANT    CH.ARM_RNE_SNS.DI     IO+di.ATM_RB.Retract_LP4
 
 #DEFINE_CONSTANT    DATA.RNE_ON           On
 #DEFINE_CONSTANT    DATA.RNE_OFF          Off
+
+#DEFINE_CONSTANT    OBJ.ROBOT             PHY__ATM_ROBOT
 
 //------------------------------------------------
 #OBJECT_PROPERTY    PHY__LP5
 
 #DEFINE_CONSTANT    CH__OBJ_STATE         OPR__LP5+OBJ.STATUS
 
+#DEFINE_CONSTANT    LPx.ID                5
 #DEFINE_CONSTANT    OBJ.LPx          		  PHY_IO__LP5
 #DEFINE_CONSTANT    OBJ.RFx          		  PHY_RS232__RF5
 #DEFINE_CONSTANT    OBJ.OHT          		  PHY_OHT__LP5
 
-#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       IO+di.LP5.Wafer_Slide_Out
+#DEFINE_CONSTANT		CH.SLIDE_OUT.DI       NULL
 #DEFINE_CONSTANT    CH.ARM_RNE_SNS.DI     IO+di.ATM_RB.Retract_LP5
 
 #DEFINE_CONSTANT    DATA.RNE_ON           On
 #DEFINE_CONSTANT    DATA.RNE_OFF          Off
+
+#DEFINE_CONSTANT    OBJ.ROBOT             PHY__ATM_ROBOT
 
 
 //------------------------------------------------

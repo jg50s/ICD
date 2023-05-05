@@ -183,6 +183,21 @@
 //-----------------------------------------------------------------
 ##ITEM   YES
 
+#CHANNEL           FNC_STEP+RCP.RF.LF.MODE
+#TITLE             2._Mode
+#CHANNEL_TYPE      DIGITAL
+#CH_CHANNEL_ITEM 
+#LIST              CW/Pulse
+#RANGE             
+#CH_ALG_MIN
+#CH_ALG_MAX
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
 #TITLE				  8._RF_HF
 #CATEGORY				YES
 
@@ -190,13 +205,43 @@
 ##ITEM   YES
 
 #CHANNEL           FNC_STEP+RCP.RF.HF.POWER
-#TITLE             1._Power(W)
+#TITLE             1.1_P1(W)
 #CHANNEL_TYPE      ANALOG
 #CH_CHANNEL_ITEM 
 #LIST
 #RANGE             
 #CH_ALG_MIN        PHY_RF_HF+CFG.POWER.MIN.VALUE
 #CH_ALG_MAX        PHY_RF_HF+CFG.MAX.ALLOWED.POWER
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+RCP.RF.HF.P2
+#TITLE             1.2_P2(W)
+#CHANNEL_TYPE      ANALOG
+#CH_CHANNEL_ITEM 
+#LIST
+#RANGE             
+#CH_ALG_MIN        PHY_RF_HF+CFG.POWER.MIN.VALUE
+#CH_ALG_MAX        PHY_RF_HF+CFG.MAX.ALLOWED.POWER
+#TEXTCOLOR         RGB(0,0,0)
+#BACKCOLOR         RGB(255,255,255)
+#CATEGORY 			   CHILD
+
+//-----------------------------------------------------------------
+##ITEM   YES
+
+#CHANNEL           FNC_STEP+RCP.RF.HF.MODE
+#TITLE             2._Mode
+#CHANNEL_TYPE      DIGITAL
+#CH_CHANNEL_ITEM 
+#LIST              CW/Pulse
+#RANGE             
+#CH_ALG_MIN
+#CH_ALG_MAX
 #TEXTCOLOR         RGB(0,0,0)
 #BACKCOLOR         RGB(255,255,255)
 #CATEGORY 			   CHILD
@@ -244,7 +289,7 @@
 #TITLE             3._EXEC
 #CHANNEL_TYPE      DIGITAL
 #CH_CHANNEL_ITEM 
-#LIST              Normal/Inverse
+#LIST              Normal/Inverse/Off
 #RANGE             (0,100)
 #CH_ALG_MIN
 #CH_ALG_MAX

@@ -18,6 +18,11 @@
 
 
 //------------------------------------------------
+#OBJECT_PROPERTY    USER__ATM_ROBOT
+
+#DEFINE_CONSTANT    OBJ__ROBOT        		              OPR__ATM_ROBOT
+
+//------------------------------------------------
 #OBJECT_PROPERTY    OPR__ATM_ROBOT
 
 #DEFINE_CONSTANT    OBJ__ROBOT        		              FNC__ATM_ROBOT
@@ -30,7 +35,6 @@
 #DEFINE_CONSTANT    OBJ__DB           		              DB_CFG
 
 #DEFINE_CONSTANT    OBJ__ROBOT           	              PHY__ATM_ROBOT
-#DEFINE_CONSTANT    OBJ__AL1                            PHY__AL1
 #DEFINE_CONSTANT    OBJ__VIS1                           PHY__VIS1
 
 #DEFINE_CONSTANT    DATA.LLx_SIZE		                    ##LL_LIMIT
@@ -60,6 +64,7 @@
 #DEFINE_CONSTANT    OBJ__LL1	                          PHY__LBA
 #DEFINE_CONSTANT    OBJ__LL2	                          PHY__LBB
 
+#DEFINE_CONSTANT    DATA.ALIGN_TYPE                     ALIGNER
 #DEFINE_CONSTANT    OBJ__AL1                            PHY__AL1
 
 #DEFINE_CONSTANT    LP_SIZE                             ##LP_LIMIT

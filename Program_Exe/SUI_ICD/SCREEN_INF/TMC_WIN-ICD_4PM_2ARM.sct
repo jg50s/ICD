@@ -355,8 +355,8 @@ WINDOW_NAME TMC_POPUP__EFEM_ROBOT
 	POPUP                           YES
 	LOW_LEFT_X                      410  
 	LOW_LEFT_Y                      10 
-	WIDTH                           370
-	HEIGHT                          505
+	WIDTH                           530
+	HEIGHT                          542 
 
 	CTRL_CHANNEL                    GUI.POPUP.MNT.ARB
 	USER_LEVEL                      Maint  
