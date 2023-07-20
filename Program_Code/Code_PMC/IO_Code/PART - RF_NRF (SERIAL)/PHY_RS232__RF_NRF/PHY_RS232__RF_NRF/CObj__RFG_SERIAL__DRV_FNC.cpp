@@ -53,8 +53,8 @@ int CObj__RFG_SERIAL
 		int r_len = _Recv__Command(addr_id,cmmd_id, r_data);		
 		if(r_len > 0)
 		{
-			byte data_0 = r_data[4];
-			byte data_1 = r_data[5];
+			byte data_0 = 0x0ff & r_data[4];
+			byte data_1 = 0x0ff & r_data[5];
 
 			if(active__rf_state)
 			{
@@ -63,8 +63,10 @@ int CObj__RFG_SERIAL
 			else
 			{
 				_DATA__2BYTE_UINT data_pwr;
-				data_pwr._byte[0] = data_0;
-				data_pwr._byte[1] = data_1;
+				
+				data_pwr._hexa = 0;
+				data_pwr._byte[0] = 0x0ff & data_0;
+				data_pwr._byte[1] = 0x0ff & data_1;
 
 				double pwr_value = (data_pwr._hexa / (double) iHEXA__PWR_MAX) * dVALUE__PWR_MAX;
 

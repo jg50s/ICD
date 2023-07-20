@@ -6,7 +6,9 @@
 
 // ...
 int CObj__PROC_STD
-::Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+::Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,
+				 CII_OBJECT__ALARM* p_alarm, 
+				 const bool active_dechuck)
 {
 	CString obj_msg;
 	CString log_msg;

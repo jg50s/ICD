@@ -30,6 +30,10 @@ int CObj__VAT_IO
 	}
 
 	// ...
+	int count__di_sns__atm = 0;
+	int count__di_sns__vac = 0;
+
+	// ...
 	CCommon_Utility x_utility;
 	CString ch_data;
 
@@ -440,16 +444,32 @@ int CObj__VAT_IO
 				{
 					if(dEXT_CH__DI_ATM_SENSOR->Check__DATA(STR__ON) > 0)
 					{
-						active__high_limit = true;
+						double cfg__check_sec = aCH__CFG_HIGH_LIMIT_ATM_SENSOR_CHECK_TIME->Get__VALUE();
+						int cfg__check_count = (int) (cfg__check_sec * 10.0);
 
-						err_bff.Format("ATM Sensor가 감지된 상태입니다. \n");
-						err_msg += err_bff;
+						count__di_sns__atm++;
+						if(count__di_sns__atm > cfg__check_count)
+						{
+							active__high_limit = true;
 
-						err_bff.Format(" * %s <- %s \n", 
-										dEXT_CH__DI_ATM_SENSOR->Get__CHANNEL_NAME(),
-										dEXT_CH__DI_ATM_SENSOR->Get__STRING());
-						err_msg += err_bff;
-						err_msg += "\n";
+							err_bff.Format("ATM Sensor가 감지된 상태입니다. \n");
+							err_msg += err_bff;
+
+							err_bff.Format(" * %s <- %s \n", 
+											dEXT_CH__DI_ATM_SENSOR->Get__CHANNEL_NAME(),
+											dEXT_CH__DI_ATM_SENSOR->Get__STRING());
+							err_msg += err_bff;
+
+							err_bff.Format(" * The config check-time is %.1f (sec) \n", 
+											cfg__check_sec);
+							err_msg += err_bff;
+
+							err_msg += "\n";
+						}
+					}
+					else
+					{
+						count__di_sns__atm = 0;
 					}
 				}			
 			}
@@ -460,16 +480,32 @@ int CObj__VAT_IO
 				{
 					if(dEXT_CH__DI_VAC_SENSOR->Check__DATA(STR__ON) < 0)
 					{
-						active__high_limit = true;
+						double cfg__check_sec = aCH__CFG_HIGH_LIMIT_VAC_SENSOR_CHECK_TIME->Get__VALUE();
+						int cfg__check_count = (int) (cfg__check_sec * 10.0);
 
-						err_bff.Format("VAC Sensor가 감지되지 않고 있습니다. \n");
-						err_msg += err_bff;
+						count__di_sns__vac++;
+						if(count__di_sns__vac > cfg__check_count)
+						{
+							active__high_limit = true;
 
-						err_bff.Format(" * %s <- %s \n", 
-										dEXT_CH__DI_VAC_SENSOR->Get__CHANNEL_NAME(),
-										dEXT_CH__DI_VAC_SENSOR->Get__STRING());
-						err_msg += err_bff;
-						err_msg += "\n";
+							err_bff.Format("VAC Sensor가 감지되지 않고 있습니다. \n");
+							err_msg += err_bff;
+
+							err_bff.Format(" * %s <- %s \n", 
+											dEXT_CH__DI_VAC_SENSOR->Get__CHANNEL_NAME(),
+											dEXT_CH__DI_VAC_SENSOR->Get__STRING());
+							err_msg += err_bff;
+
+							err_bff.Format(" * The config check-time is %.1f (sec) \n", 
+											cfg__check_sec);
+							err_msg += err_bff;
+
+							err_msg += "\n";
+						}
+					}
+					else
+					{
+						count__di_sns__vac = 0;
 					}
 				}
 			}

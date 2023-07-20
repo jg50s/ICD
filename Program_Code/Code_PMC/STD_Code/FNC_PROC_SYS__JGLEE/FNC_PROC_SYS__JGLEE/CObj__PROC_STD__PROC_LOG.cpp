@@ -30,7 +30,7 @@ int  CObj__PROC_STD::Fnc__PRC_LOG__ENABLE(CII_OBJECT__VARIABLE *p_variable)
 	}
 
 	// ...
-	CString para__rcp_name = sEXT_CH__RCP_NAME->Get__STRING();
+	CString para__rcp_name = sCH__CUR_RCP_FILE_NAME->Get__STRING();
 	sEXT_CH__PROC_LOG__RECIPEID->Set__DATA(para__rcp_name);
 
 	CStringArray l_para;

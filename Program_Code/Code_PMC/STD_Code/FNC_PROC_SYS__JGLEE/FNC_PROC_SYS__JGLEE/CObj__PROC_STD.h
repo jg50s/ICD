@@ -43,6 +43,9 @@ private:
 	// CFG ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_DA_OFFSET_CHECK_BEFORE_PROCESSING;
 
+	CX__VAR_STRING_CTRL  sCH__CFG_JOB_START_READY_RECIPE;
+	CX__VAR_STRING_CTRL  sCH__CFG_JOB_END_READY_RECIPE;
+
 	// CTC REPORT ...
 	CX__VAR_STRING_CTRL  sCH__PRC_TOTAL_TIME_TO_CTC;
 	CX__VAR_STRING_CTRL  sCH__PRC_CHANGE_TIME_TO_CTC;
@@ -100,6 +103,9 @@ private:
 	CX__VAR_DIGITAL_CTRL dCH__MON_WAFER_INFO_CURRENT_COUNT_RESET;
 
 	// CUR ...
+	CX__VAR_STRING_CTRL  sCH__REF_RCP_NAME;
+
+	CX__VAR_STRING_CTRL  sCH__CUR_RCP_FILE_NAME;
 	CX__VAR_STRING_CTRL  sCH__CUR_RCP_FILE_PATH;
 	CX__VAR_DIGITAL_CTRL dCH__CUR_PROCESS_TYPE;
 
@@ -243,15 +249,15 @@ private:
 	int Call__JOB_END_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm);
 
 	// ....
-	int Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
-	int _Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
-	int Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
-	int _Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable,  CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int _Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Sub__PROC_READY(CII_OBJECT__VARIABLE* p_variable,  CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int _Fnc__RCP_UPLOAD(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
 
-	int Fnc__PROC_START_EX(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
-	int Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
-	int _Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
-	int Sub__PROC_START(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);	
+	int Fnc__PROC_START_EX(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,    CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int _Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable,   CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);
+	int Sub__PROC_START(CII_OBJECT__VARIABLE* p_variable,    CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);	
 	int _Make__PROC_LOG(const int restart_count);	
 	
 	int Sub__PROC_CTRL(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck);

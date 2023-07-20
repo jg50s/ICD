@@ -7,6 +7,7 @@ int CObj__NXA_PULSE
 ::Mon__MONITOR(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm)
 {
 	CString ch_data;
+	int loop_count = 0;
 
 	dCH__MON_COMM_STS->Set__DATA(STR__ONLINE); 
 
@@ -14,6 +15,9 @@ int CObj__NXA_PULSE
 	while(1)
 	{
 		p_variable->Wait__SINGLE_OBJECT(0.1);
+
+		loop_count++;
+		if(loop_count > 10)			loop_count = 1;
 
 		// ...
 		{
@@ -25,6 +29,20 @@ int CObj__NXA_PULSE
 
 			ch_data = dCH__CFG_UNIT__uSEQ->Get__STRING();
 			dUNIT__uSEQ = atof(ch_data);
+		}
+
+		// Range Update ...
+		if(loop_count == 1)
+		{
+			double cfg_min = aCH__CFG_FREQUENCY_MIN->Get__VALUE();
+			double cfg_max = aCH__CFG_FREQUENCY_MAX->Get__VALUE();
+
+			ch_data = dCH__CFG_FREQUENCY_DEC->Get__STRING();
+			int cfg_dec = atoi(ch_data);
+
+			aCH__PARA_A_USER_FREQ->Change__MIN_MAX_DEC(cfg_min, cfg_max, cfg_dec);
+			aCH__PARA_RCP_FREQUENCY->Change__MIN_MAX_DEC(cfg_min, cfg_max, cfg_dec);
+			aCH__PARA_A_DRV_FREQ->Change__MIN_MAX_DEC(cfg_min, cfg_max, cfg_dec);
 		}
 
 		// ...

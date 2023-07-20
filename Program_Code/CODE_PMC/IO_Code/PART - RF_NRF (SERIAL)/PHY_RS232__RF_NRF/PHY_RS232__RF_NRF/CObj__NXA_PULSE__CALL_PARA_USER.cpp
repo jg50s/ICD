@@ -129,5 +129,59 @@ int CObj__NXA_PULSE
 		doCH__SET_EXEC->Set__DATA(STR__OFF);
 	}
 
+	// USER.LOG ...
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg = "USER.PARA ... \n";
+
+		// PARA.A1
+		{
+			log_bff.Format("  * %s <- %s \n",
+							aCH__PARA_A_USER_FREQ->Get__VARIABLE_NAME(),
+							aCH__PARA_A_USER_FREQ->Get__STRING());
+			log_msg += log_bff;
+
+			log_bff.Format("  * %s <- %s \n",
+							aCH__PARA_A_USER_DUTY->Get__VARIABLE_NAME(),
+							aCH__PARA_A_USER_DUTY->Get__STRING());
+			log_msg += log_bff;
+		}
+
+		// PARA.B
+		{
+			log_bff.Format("  * %s <- %s \n",
+							aCH__PARA_B_USER_ON_SHIFT_TIME->Get__VARIABLE_NAME(),
+							aCH__PARA_B_USER_ON_SHIFT_TIME->Get__STRING());
+			log_msg += log_bff;
+			
+			log_bff.Format("  * %s <- %s \n",
+							aCH__PARA_B_USER_OFF_SHIFT_TIME->Get__VARIABLE_NAME(),
+							aCH__PARA_B_USER_OFF_SHIFT_TIME->Get__STRING());
+			log_msg += log_bff;
+		}
+
+		// PARA.CLK
+		{
+			log_bff.Format("  * %s <- %s \n",
+							dCH__PARA_A_USER_CLK_CTRL->Get__VARIABLE_NAME(),
+							dCH__PARA_A_USER_CLK_CTRL->Get__STRING());
+			log_msg += log_bff;
+
+			log_bff.Format("  * %s <- %s \n",
+							dCH__PARA_B_USER_CLK_CTRL->Get__VARIABLE_NAME(),
+							dCH__PARA_B_USER_CLK_CTRL->Get__STRING());
+			log_msg += log_bff;
+
+			log_bff.Format("  * %s <- %s \n",
+							dCH__PARA_C_USER_CLK_CTRL->Get__VARIABLE_NAME(),
+							dCH__PARA_C_USER_CLK_CTRL->Get__STRING());
+			log_msg += log_bff;
+		}
+
+		Write__APP_LOG(log_msg);
+	}
+
 	return 1;
 }

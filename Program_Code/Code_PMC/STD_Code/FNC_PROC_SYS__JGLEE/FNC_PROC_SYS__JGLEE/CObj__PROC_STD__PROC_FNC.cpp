@@ -4,7 +4,9 @@
 
 // ...
 int CObj__PROC_STD
-::Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+::Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, 
+				  CII_OBJECT__ALARM* p_alarm, 
+				  const bool active_dechuck)
 {
 	if(dCH__CUR_PROCESS_TYPE->Check__DATA(STR__MANUAL) > 0)
 	{
@@ -27,7 +29,9 @@ int CObj__PROC_STD
 	return r_flag;
 }
 int CObj__PROC_STD
-::_Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+::_Fnc__PROC_READY(CII_OBJECT__VARIABLE* p_variable, 
+				   CII_OBJECT__ALARM* p_alarm, 
+				   const bool active_dechuck)
 {
 	CString log_msg;
 
@@ -67,7 +71,9 @@ int CObj__PROC_STD
 }
 
 int CObj__PROC_STD
-::Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+::Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, 
+				  CII_OBJECT__ALARM* p_alarm, 
+				  const bool active_dechuck)
 {
 	dCH__MON_EXCEPTION_ACT->Set__DATA(_ACT_CMD__START);
 	sEXT_CH__MON_STEP_EXCEPTION_ACT->Set__DATA("");
@@ -110,7 +116,9 @@ int CObj__PROC_STD
 	return r_flag;
 }
 int CObj__PROC_STD
-::_Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+::_Fnc__PROC_START(CII_OBJECT__VARIABLE* p_variable, 
+				   CII_OBJECT__ALARM* p_alarm, 
+				   const bool active_dechuck)
 {
 	int r_flag = 1;
 

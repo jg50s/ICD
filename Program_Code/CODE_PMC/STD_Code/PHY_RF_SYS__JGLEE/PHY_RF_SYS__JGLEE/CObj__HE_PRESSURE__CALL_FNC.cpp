@@ -19,7 +19,7 @@ int CObj__HE_PRESSURE
 {
 	for(int i=0; i<iZONE_SIZE; i++)
 	{
-		Fnc__PRESSURE_SET(i, 0.0, true);
+		Fnc__PRESSURE_SET(i, 0.0);
 	}
 	return 1;
 }
@@ -27,54 +27,18 @@ int CObj__HE_PRESSURE
 int CObj__HE_PRESSURE
 ::Call__PRESSURE_SET(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm)
 {
-
 	for(int i=0; i<iZONE_SIZE; i++)
 	{
 		double set_pressure = aCH__PARA_PRESSURE_SET_X[i]->Get__VALUE();
 
-		if(dCH__CFG_CTRL_MODE[i]->Check__DATA("SET") > 0)
-		{
-			Fnc__PRESSURE_SET(i, set_pressure,true);
-		}
-
-		else if(dCH__CFG_CTRL_MODE[i]->Check__DATA("RAMP") > 0)
-		{
-			double dRampTime = 0;
-			dRampTime = aCH__CFG_RAMP_TIME[i]->Get__VALUE();
-			if(dRampTime > 0)
-			{
-				double dCurrnet_Time = 0.0;
-				SCX__ASYNC_TIMER_CTRL x_timer;
-				x_timer->START__COUNT_UP(9999);
-				double dCurSetValue  = 0.0;
-				while(true)
-				{
-					//Set Value
-					dCurrnet_Time = x_timer->Get__CURRENT_TIME();
-					// Set Value 
-					if(dCurSetValue < set_pressure) dCurSetValue = set_pressure*(dCurrnet_Time/dRampTime);
-					else dCurSetValue = set_pressure;
-					
-					Fnc__PRESSURE_SET(i, dCurSetValue, false);// Set Value
-					
-					if(dCurrnet_Time >= dRampTime) break;
-					if(p_variable->Check__CTRL_ABORT() > 0) return -1;
-					Sleep(250);
-					// Timer
-				}
-				Fnc__PRESSURE_SET(i, set_pressure, true);// Set Value
-			}
-			else Fnc__PRESSURE_SET(i, set_pressure,true);
-		}
-		
+		Fnc__PRESSURE_SET(i, set_pressure);
 	}
 	return 1;
 }
 
 // ...
-
 int CObj__HE_PRESSURE
-::Fnc__PRESSURE_SET(const int zone_index,const double set_pressure, const bool Log_Flag)
+::Fnc__PRESSURE_SET(const int zone_index,const double set_pressure)
 {
 	double cfg_min, cfg_max;
 	int cfg_dec;
@@ -147,7 +111,6 @@ int CObj__HE_PRESSURE
 	}
 
 	// ...
-	if(Log_Flag == true)
 	{
 		CString log_msg;
 		CString log_bff;

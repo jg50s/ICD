@@ -16,7 +16,7 @@ union _DATA__4BYTE_UINT
 union _DATA__2BYTE_UINT
 {
 	unsigned char _byte[2];
-	unsigned short int  _hexa;
+	unsigned int  _hexa;
 };
 
 
@@ -54,3 +54,8 @@ union _DATA__2BYTE_UINT
 	
 #define  STR__Disable				"Disable"
 #define  STR__Enable				"Enable"
+
+#define  STR__NULL					"NULL"
+#define  STR__NONE					"NONE"
+#define  STR__NO					"NO"
+

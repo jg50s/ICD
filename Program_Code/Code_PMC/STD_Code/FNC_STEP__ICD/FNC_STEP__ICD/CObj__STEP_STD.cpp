@@ -40,10 +40,14 @@ int CObj__STEP_STD::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define  APP_DSP__DISABLE_ENABLE					\
-	"DISABLE ENABLE"
+"DISABLE ENABLE"
 
 #define  APP_DSP__ENABLE_DISABLE					\
-	"ENABLE DISABLE"
+"ENABLE DISABLE"
+
+
+// ...
+#define  MON_ID__MONITOR				1
 
 
 int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
@@ -172,6 +176,31 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_RCP_PART_USE_APC, var_name);
 	}
 
+	// CFG.PROCESS_END ...
+	{
+		var_name = "CFG.PROCESS_END.STATE.RFx_PULSE";	
+		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "NO.CHANGE  NORMAL  INVERSE  OFF", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PROCESS_END_STATE_RFx_PULSE, var_name);
+
+		//
+		var_name = "CFG.PROCESS_END.FREQUENCY.RFx_PULSE";	
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "hz", 0, 0, 5000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_END_FREQUENCY_RFx_PULSE, var_name);
+
+		var_name = "CFG.PROCESS_END.DUTY.RFx_PULSE";	
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "%", 0, 0, 100, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_END_DUTY_RFx_PULSE, var_name);
+
+		//
+		var_name = "CFG.PROCESS_END.ON_SHIFT.RFx_PULSE";	
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "usec", 0, -1000, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_END_ON_SHIFT_RFx_PULSE, var_name);
+
+		var_name = "CFG.PROCESS_END.OFF_SHIFT.RFx_PULSE";	
+		STD__ADD_ANALOG_WITH_X_OPTION(var_name, "usec", 0, -1000, 1000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_PROCESS_END_OFF_SHIFT_RFx_PULSE, var_name);	
+	}
+
 	// RCP ...
 	{
 		// STEP ...
@@ -270,13 +299,14 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "hz", 0, 0, 5000, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_FREQUENCY, var_name);
 
+			//
 			var_name = "RCP.RF.PULSE.DUTY";
 			STD__ADD_ANALOG_WITH_OPTION(var_name, "%", 0, 0, 100, -1, "E", "");
 			LINK__VAR_ANALOG_CTRL(aCH__RCP_RF_PULSE_DUTY, var_name);
 
 			//
 			var_name = "RCP.RF.PULSE.EXEC";
-			STD__ADD_DIGITAL_WITH_OPTION(var_name, "NORMAL  INVERSE  OFF", -1, "E", "");
+			STD__ADD_DIGITAL_WITH_OPTION(var_name, "NORMAL  INVERSE  OFF  HIGH  LOW", -1, "E", "");
 			LINK__VAR_DIGITAL_CTRL(dCH__RCP_RF_PULSE_EXEC, var_name);
 
 			//
@@ -412,6 +442,10 @@ int CObj__STEP_STD::__DEFINE__VARIABLE_STD(p_variable)
 		}
 	}
 
+	// ...
+	{
+		p_variable->Add__MONITORING_PROC(1.0,MON_ID__MONITOR);
+	}
 	return 1;
 }
 
@@ -752,6 +786,16 @@ int CObj__STEP_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			//
 			var_name = "MON.POWER.ABORT.ACTIVE";
 			LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_PULSE__MON_POWER_ABORT_ACTIVE, obj_name,var_name);
+
+			//
+			var_name = "CFG.FREQUENCY.MIN";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__CFG_FREQUENCY_MIN, obj_name,var_name);
+
+			var_name = "CFG.FREQUENCY.MAX";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__CFG_FREQUENCY_MAX, obj_name,var_name);
+
+			var_name = "CFG.FREQUENCY.DEC";
+			LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PULSE__CFG_FREQUENCY_DEC, obj_name,var_name);
 		}
 	}
 
@@ -1131,6 +1175,9 @@ int CObj__STEP_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 int CObj__STEP_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 {
-
+	if(id == MON_ID__MONITOR)
+	{
+		return Mon__MONITOR(p_variable,p_alarm);
+	}
 	return 1;
 }

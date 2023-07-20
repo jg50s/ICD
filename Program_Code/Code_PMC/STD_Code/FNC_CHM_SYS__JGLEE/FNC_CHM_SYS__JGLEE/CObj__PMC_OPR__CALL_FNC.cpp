@@ -434,11 +434,11 @@ int CObj__PMC_OPR
 
 	if(bActive__OBJ_CTRL__SHUTTER)
 	{
-		if(pOBJ_CTRL__SHUTTER->When__OBJECT() < 0)			return -11;
+		if(pOBJ_CTRL__SHUTTER->When__OBJECT() < 0)			return -111;
 	}
 	if(bActive__OBJ_CTRL__LIFT_PIN)
 	{
-		if(pOBJ_CTRL__LIFT_PIN->When__OBJECT() < 0)			return -21;
+		if(pOBJ_CTRL__LIFT_PIN->When__OBJECT() < 0)			return -211;
 	}
 
 	return Fnc__JOB_READY(p_variable, sEXT_MODE__JOB_END_READY);

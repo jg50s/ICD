@@ -482,21 +482,23 @@ int  CObj__MFC_IO
 			{
 				if(dEXT_CH__MON_INTERLOCK_HEAVY_ACTIVE_GAS_BOX->Check__DATA(STR__ON) > 0)		active__interlock_gas_box = true;
 			}
-			
+
+			// ...
+			CString cur__act_mode = sCH__ACT_MODE->Get__STRING();
+
 			if(dEXT_CH__MON_ACTIVE_PROCESS_VALVE_READY_STATE->Check__DATA(STR__ON) < 0)
 			{
-				CString cur__act_mode = sCH__ACT_MODE->Get__STRING();
-
-				if((cur__act_mode.CompareNoCase(sMODE__OPEN)  == 0)
+				if((cur__act_mode.CompareNoCase(sMODE__CLOSE) == 0)
+				|| (cur__act_mode.CompareNoCase(sMODE__OPEN)  == 0)
 				|| (cur__act_mode.CompareNoCase(sMODE__PURGE) == 0)
 				|| (cur__act_mode.CompareNoCase(sMODE__CHM_LINE_PURGE) == 0)
 				|| (cur__act_mode.CompareNoCase(sMODE__GAS_LINE_PURGE) == 0))
 				{
-					active__proc_vlv_not_ready  = false;
+					active__proc_vlv_not_ready = false;
 				}
 				else
 				{
-					active__proc_vlv_not_ready  = true;
+					active__proc_vlv_not_ready = true;
 				}
 			}
 
@@ -552,6 +554,11 @@ int  CObj__MFC_IO
 							alm_bff.Format(" * %s <- %s \n", 
 											dEXT_CH__MON_ACTIVE_PROCESS_VALVE_READY_STATE->Get__CHANNEL_NAME(),
 											dEXT_CH__MON_ACTIVE_PROCESS_VALVE_READY_STATE->Get__STRING());
+							alm_msg += alm_bff;
+
+							alm_bff.Format(" * %s <- %s \n", 
+											sCH__ACT_MODE->Get__CHANNEL_NAME(),
+											cur__act_mode);
 							alm_msg += alm_bff;
 						}
 

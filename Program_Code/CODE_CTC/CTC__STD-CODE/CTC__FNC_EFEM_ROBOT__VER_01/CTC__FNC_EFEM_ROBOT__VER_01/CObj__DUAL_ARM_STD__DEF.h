@@ -130,4 +130,4 @@
 
 //
 #define  NEXT__LOOP					throw 1
-
+#define  NEXT__LOOP_ID(ID)			throw ID

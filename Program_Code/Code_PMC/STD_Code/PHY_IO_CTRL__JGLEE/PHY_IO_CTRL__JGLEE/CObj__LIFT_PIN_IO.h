@@ -148,13 +148,17 @@ private:
 	CString sMODE__INIT;
 	int Call__INIT(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 
+	//
 	CString sMODE__UP;
+	CString sMODE__PROC_UP;
 	int Call__UP(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	CString sMODE__MIDDLE;
+	CString sMODE__PROC_MIDDLE;
 	int Call__MIDDLE(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm, const bool active__middle_up = true);
 
 	CString sMODE__DOWN;
+	CString sMODE__PROC_DOWN;
 	int Call__DOWN(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm);
 
 	//

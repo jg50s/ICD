@@ -468,7 +468,8 @@ private:
 	int  AUTO_CTRL__LBi_To_RB_With_Ready_PMC__ALL_MODE(CII_OBJECT__VARIABLE *p_variable,CII_OBJECT__ALARM *p_alarm);
 	int  _GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(CStringArray& l__sch_name,
 											  CStringArray& l__ll_name,
-											  CStringArray& l__ll_slot);
+											  CStringArray& l__ll_slot,
+											  const bool active__log_msg = false);
 	int  _CHECK__FIRST_WAFER_OF_LLx_IN__ALL_MODE(const CString& ll_name, 
 												 const CString& ll_slot);
 
@@ -783,6 +784,10 @@ private:
 							  const int maint_flag);
 
 	// ...
+	int  SCH__Check_In_Slot_Of_Ohter_LLx(const CString& para__ll_name, 
+									     const CString& para__in_slot);
+
+	// ...
 	int  SCH__Check_Material_Place(const CString& arm_type);
 	int  SCH__Check_Material_Pick(const CString& arm_type);
 
@@ -964,6 +969,7 @@ private:
 
 	int  LLx__Is_Available(const int ll_index);
 	int  LLx__Is_Idle(const int ll_index);
+	int  LLx__Is_Standby_CTCInUse(const int ll_index);
 	
 	int  LLx__Set_Standby_To_CtcInUse(const int ll_index);
 	int  LLx__Set_CtcInUse_To_Standby(const int ll_index);

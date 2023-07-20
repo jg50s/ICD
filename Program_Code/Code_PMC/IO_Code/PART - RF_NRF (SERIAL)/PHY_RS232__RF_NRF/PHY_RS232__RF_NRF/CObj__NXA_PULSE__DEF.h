@@ -28,4 +28,5 @@
 #define STR__INVERSE				"INVERSE"
 #define STR__HIGH					"HIGH"
 #define STR__LOW					"LOW"
+#define STR__OFF					"OFF"
 

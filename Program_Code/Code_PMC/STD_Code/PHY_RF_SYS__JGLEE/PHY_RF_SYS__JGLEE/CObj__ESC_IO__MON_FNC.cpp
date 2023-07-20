@@ -318,10 +318,8 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			// ESC Center ...
 			if(bActive__CENTER_USE)
 			{
-				/**
 				aoEXT_CH__ESC_Voltage_CENTER->Get__DATA(var_data);
 				aiEXT_CH__ESC_Voltage_CENTER->Set__DATA(var_data);
-				**/
 
 				//
 				double cfg__curr_limit = aCH__CFG_ESC_CENTER_CURRENT_LIMIT->Get__VALUE();
@@ -333,10 +331,8 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			// ESC Edge ...
 			if(bActive__EDGE_USE)
 			{
-				/**
 				aoEXT_CH__ESC_Voltage_EDGE->Get__DATA(var_data);
 				aiEXT_CH__ESC_Voltage_EDGE->Set__DATA(var_data);
-				**/
 
 				//
 				double cfg__curr_limit = aCH__CFG_ESC_EDGE_CURRENT_LIMIT->Get__VALUE();
@@ -345,6 +341,9 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 				var_data.Format("%.3f", sim__curr_value);
 				aiEXT_CH__ESC_Current_EDGE->Set__DATA(var_data);
 			}
+
+			if(bActive__ESC_VOLTAGE_ON)		doEXT_CH__ESC_VOLTAGE_ON->Set__DATA(STR__On);
+			doEXT_CH__ESC_All_Voltage->Set__DATA(STR__On);
 
 			// DPC Center ...
 			if(bActive__CENTER_USE)
@@ -434,10 +433,6 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 			for(i=1; i<DEF__CHUCK_CHART_SIZE; i++)
 			{
 				var_data = sCH__CFG_CHUCK_CHART_TIME[i]->Get__STRING();
-				if((dCH__CFG_ELECTROSTATIC_CHUCK_TYPE->Check__DATA("UNIPOLAR")<0) && ((i != 1)&&(i != 5))) // KMS: Just Check HV_ON & Final Flow
-				{
-					continue;
-				}
 				cfg_sec += atof(var_data);
 			}
 
@@ -491,9 +486,9 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 					{
 						double cfg__max_leak = aCH__CFG_HE_CENTER_WAFER_MAX_LEAK->Get__VALUE();
 
-						if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)//KMS : When Using RF, Do Not Checking max Leak Value
+						if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)			// KMS : When Using He Do Not Check max Leak Value
 						{
-							if(dEXT_CH__RF_ON_STAUTS->Check__DATA(STR__ON) > 0)
+							if(dEXT_CH__RF_ON_STATUS->Check__DATA(STR__ON) > 0)
 							{
 								count__error_center = 0;
 								sCH__MON_FAULT_HE_LEAK_CENTER_STATE->Set__DATA(STR__NO);
@@ -584,6 +579,15 @@ Mon__SYS_INFO(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 					if(dCH__MON_CHUCK_STATUS->Check__DATA(STR__CHUCKED) > 0)
 					{
 						double cfg__max_leak = aCH__CFG_HE_EDGE_WAFER_MAX_LEAK->Get__VALUE();
+
+						if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)
+						{
+							if(dEXT_CH__RF_ON_STATUS->Check__DATA(STR__ON) > 0)
+							{
+								count__error_edge = 0;
+								sCH__MON_FAULT_HE_LEAK_EDGE_STATE->Set__DATA(STR__NO);
+							}
+						}
 
 						if(cur__flow_leak > cfg__max_leak)
 						{
@@ -1363,11 +1367,11 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 
 					continue;
 				}
-				
-				// KMS : When Using RF Don't Check He Pressure
+
+				//
 				if(dCH__CFG_HE_DONOT_CHECK_DURING_ON_RF->Check__DATA(STR__YES) > 0)
 				{
-					if(dEXT_CH__RF_ON_STAUTS->Check__DATA(STR__ON) > 0)
+					if(dEXT_CH__RF_ON_STATUS->Check__DATA(STR__ON) > 0)
 					{
 						p_timer__check_delay->STOP_ZERO();
 						p_ch__fault->Set__DATA("");
@@ -1378,7 +1382,6 @@ Mon__HELIUM_STABLE_CHECK(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_
 					}
 				}
 				
-
 				if(Fnc__HE_ERROR_CHECK(p_alarm, he_type,CHECK_POINT__IO, -1) < 0)
 				{
 					double cur_sec = p_timer__check_delay->Get__CURRENT_TIME();

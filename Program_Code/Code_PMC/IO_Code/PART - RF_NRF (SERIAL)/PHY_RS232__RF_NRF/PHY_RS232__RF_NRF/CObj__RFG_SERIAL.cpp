@@ -37,7 +37,9 @@ int CObj__RFG_SERIAL::__DEFINE__CONTROL_MODE(obj, l_mode)
 		ADD__CTRL_VAR(sMODE__POWER_ON,  "POWER.ON");
 
 		ADD__CTRL_VAR(sMODE__TEST_DRV, "TEST.DRV");
+		ADD__CTRL_VAR(sMODE__TEST_READ_STRING, "TEST.READ_STRING");
 	}
+
 	return 1;
 }
 int CObj__RFG_SERIAL::__DEFINE__VERSION_HISTORY(version)
@@ -50,6 +52,8 @@ int CObj__RFG_SERIAL::__DEFINE__VERSION_HISTORY(version)
 
 // ...
 #define  MON_ID__MONITOR				1
+#define  MON_ID__IO_SET					2
+
 
 #define  APP_DSP__COMM_STATUS           "OFFLINE  ONLINE"
 #define  APP_DSP__OFF_ON				"OFF	  ON"
@@ -85,6 +89,10 @@ int CObj__RFG_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.SET.POWER";
 		STD__ADD_ANALOG_WITH_OPTION(str_name, "Watt", 0, 0, dVALUE__PWR_MAX, -1, "L", "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_SET_POWER, str_name);
+
+		str_name = "PARA.SET.P2";
+		STD__ADD_STRING(str_name, -1, "L", "");
+		LINK__VAR_STRING_CTRL(sCH__PARA_SET_P2, str_name);
 	}
 
 	// MON ...
@@ -92,6 +100,15 @@ int CObj__RFG_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "MON.COMM.STS";
 		STD__ADD_DIGITAL(str_name, APP_DSP__COMM_STATUS);
 		LINK__VAR_DIGITAL_CTRL(dCH__MON_COMM_STS, str_name);
+
+		//
+		str_name = "MON.SET.P2";
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
+		LINK__VAR_STRING_CTRL(sCH__MON_SET_P2, str_name);
+
+		str_name = "MON.POWER.LEVEL.PERCENT";
+		STD__ADD_STRING_WITH_OPTION(str_name, -1, "L", "");
+		LINK__VAR_STRING_CTRL(sCH__MON_POWER_LEVEL_PERCENT, str_name);
 	}
 
 	// CFG ...
@@ -178,6 +195,7 @@ int CObj__RFG_SERIAL::__DEFINE__VARIABLE_STD(p_variable)
 	// ...
 	{
 		p_variable->Add__MONITORING_PROC(1.0,MON_ID__MONITOR);
+		p_variable->Add__MONITORING_PROC(1.0,MON_ID__IO_SET);
 	}
 	return 1;
 }
@@ -221,6 +239,21 @@ int CObj__RFG_SERIAL::__DEFINE__ALARM(p_alarm)
 		l_act.RemoveAll();
 		l_act.Add(ACT__RETRY);
 		l_act.Add(ACT__ABORT);
+
+		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
+	}
+
+	// ...
+	{
+		alarm_id = ALID__STATE_ERROR;
+
+		alarm_title  = title;
+		alarm_title += "Abnormal State !";
+
+		alarm_msg = "Plase, check state.";
+
+		l_act.RemoveAll();
+		l_act.Add(ACT__CHECK);
 
 		ADD__ALARM_EX(alarm_id,alarm_title,alarm_msg,l_act);
 	}
@@ -283,6 +316,10 @@ int CObj__RFG_SERIAL::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 	CString def_name;
 	CString def_data;
 
+	CString ch_name;
+	CString obj_name;
+	CString var_name;
+
 	// ...
 	{
 		CString file_name;
@@ -320,6 +357,61 @@ int CObj__RFG_SERIAL::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 			xI__DRV_LOG_CTRL->ENABLE__TIME_LOG();
 			xI__DRV_LOG_CTRL->WRITE__LOG("   START   \n");
+		}
+	}
+
+	// LINK IO ...
+	{
+		bool def_check;
+
+		// CH.DO_PULSE_MODE
+		{
+			def_name = "CH.DO_PULSE_MODE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			if((ch_name.CompareNoCase(STR__NULL) == 0)
+			|| (ch_name.CompareNoCase(STR__NONE) == 0)
+			|| (ch_name.CompareNoCase(STR__NO)   == 0))
+			{
+				def_check = false;
+			}
+			else
+			{
+				def_check = true;
+			}
+
+			bActive__DO_PULSE_MODE = def_check;
+			
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__DO_PULSE_MODE, obj_name,var_name);
+			}
+		}
+
+		// CH.AO_LEVEL_VOLT
+		{
+			def_name = "CH.AO_LEVEL_VOLT";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
+
+			if((ch_name.CompareNoCase(STR__NULL) == 0)
+			|| (ch_name.CompareNoCase(STR__NONE) == 0)
+			|| (ch_name.CompareNoCase(STR__NO)   == 0))
+			{
+				def_check = false;
+			}
+			else
+			{
+				def_check = true;
+			}
+
+			bActive__AO_LEVEL_VOLT = def_check;
+
+			if(def_check)
+			{
+				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
+				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__AO_LEVEL_VOLT, obj_name,var_name);
+			}
 		}
 	}
 
@@ -406,7 +498,8 @@ int CObj__RFG_SERIAL::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__POWER_ON)			flag = Call__POWER_ON(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__ALARM_RESET)		flag = Call__ALARM_RESET(p_variable, p_alarm);
 
-		ELSE_IF__CTRL_MODE(sMODE__TEST_DRV)			flag =  Call__TEST_DRV(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__TEST_DRV)				flag = Call__TEST_DRV(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__TEST_READ_STRING)		flag = Call__TEST_READ_STRING(p_variable, p_alarm);
 	}
 
 	if((flag < 0)||(p_variable->Check__CTRL_ABORT() > 0))
@@ -426,10 +519,10 @@ int CObj__RFG_SERIAL::__CALL__CONTROL_MODE(mode, p_debug, p_variable, p_alarm)
 
 int CObj__RFG_SERIAL::__CALL__MONITORING(id, p_variable, p_alarm)
 {
-	if(id == MON_ID__MONITOR)
-	{
-		return Mon__MONITOR(p_variable,p_alarm);
-	}
+	
+	if(id == MON_ID__MONITOR)			return Mon__MONITOR(p_variable,p_alarm);
+	if(id == MON_ID__IO_SET)			return Mon__IO_SET(p_variable,p_alarm);
+
 	return 1;
 }
 

@@ -1,0 +1,13 @@
+#pragma once
+
+
+// ...
+#define ALID__OBJECT_MODE_UNKNOWN									1
+#define ALID__FNC_CANNOT_RUN										2
+#define ALID__PRESSURE_READ_ERROR									3
+#define ALID__WAP_CONDUCTANCE_CHECK_COMPLETE						4
+#define ALID__SIM_RANGE_ERROR										5
+
+#define ALID__WAP_CONDUCTANCE__AUTO_OFFSET_CHECK__OK				11
+#define ALID__WAP_CONDUCTANCE__AUTO_OFFSET_CHECK__ERROR				12
+

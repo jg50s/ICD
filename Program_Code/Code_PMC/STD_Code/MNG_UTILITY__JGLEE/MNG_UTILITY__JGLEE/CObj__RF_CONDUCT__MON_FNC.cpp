@@ -108,7 +108,7 @@ void CObj__RF_CONDUCT
 					sCH_PARA__NEW_POWER_LIST[i]->Get__DATA(var_data);
 					p__new_power->Set__DATA(var_data);
 
-					sCH_PARA__NEW_METER_LIST[i]->Get__DATA(var_data);
+					aCH_PARA__NEW_METER_LIST[i]->Get__DATA(var_data);
 					p__new_meter->Set__DATA(var_data);
 
 					sCH_PARA__NEW_OFFSET_LIST[i]->Get__DATA(var_data);								
@@ -153,7 +153,7 @@ void CObj__RF_CONDUCT
 					sCH_PARA__NEW_POWER_LIST[i]->Set__DATA(var_data);
 
 					p__new_meter->Get__DATA(var_data);
-					sCH_PARA__NEW_METER_LIST[i]->Set__DATA(var_data);
+					aCH_PARA__NEW_METER_LIST[i]->Set__DATA(var_data);
 
 					p__new_offset->Get__DATA(var_data);
 					sCH_PARA__NEW_OFFSET_LIST[i]->Set__DATA(var_data);
@@ -193,7 +193,7 @@ void CObj__RF_CONDUCT
 						x_value = atof(var_data);
 						if(x_value < 1)			break;
 
-						sCH_PARA__NEW_METER_LIST[i]->Get__DATA(var_data);
+						aCH_PARA__NEW_METER_LIST[i]->Get__DATA(var_data);
 						y_value = atof(var_data);
 
 						// ...
@@ -279,7 +279,7 @@ void CObj__RF_CONDUCT::Fnc__RFx_CAL(const int rf_index)
 	CII__VAR_ANALOG_CTRL* p__set_power = NULL;
 
 	CII__VAR_STRING_CTRL* p__new_power  = NULL;
-	CII__VAR_STRING_CTRL* p__new_meter  = NULL;
+	CII__VAR_ANALOG_CTRL* p__new_meter  = NULL;
 	CII__VAR_STRING_CTRL* p__new_offset = NULL;
 
 	CII__VAR_STRING_CTRL* p__rf_new_meter  = NULL;
@@ -294,7 +294,7 @@ void CObj__RF_CONDUCT::Fnc__RFx_CAL(const int rf_index)
 		p__set_power  = aCH_PARA__SET_PWR_LIST[i].Get__PTR();
 
 		p__new_power  = sCH_PARA__NEW_POWER_LIST[i].Get__PTR();
-		p__new_meter  = sCH_PARA__NEW_METER_LIST[i].Get__PTR();
+		p__new_meter  = aCH_PARA__NEW_METER_LIST[i].Get__PTR();
 		p__new_offset = sCH_PARA__NEW_OFFSET_LIST[i].Get__PTR();
 
 		p__rf_new_meter  = sEXT_CH__CAL_CFG_NEW_METER__RF_X[rf_index][i].Get__PTR();
@@ -378,7 +378,7 @@ void CObj__RF_CONDUCT::Fnc__RFx_CAL(const int rf_index)
 			x_value = atof(var_data);
 			if(x_value < 1)			break;
 
-			sCH_PARA__NEW_METER_LIST[i]->Get__DATA(var_data);
+			aCH_PARA__NEW_METER_LIST[i]->Get__DATA(var_data);
 			y_value = atof(var_data);
 
 			add_data.Format("%.3f/%.3f,", x_value,y_value);

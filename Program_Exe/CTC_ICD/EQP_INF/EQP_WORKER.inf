@@ -83,3 +83,7 @@
 */
 
 #OBJECT_FA      EQP__FA_OBJ            STD.TYPE           FA_DRV
+
+
+//==========================================================================
+#OBJECT_STD     EQP__DEBUGGER_JGLEE    DEBUGGER.CTRL      _OBJ_DEBUGER

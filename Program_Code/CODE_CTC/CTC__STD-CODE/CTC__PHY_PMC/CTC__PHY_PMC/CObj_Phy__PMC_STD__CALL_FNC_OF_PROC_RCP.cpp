@@ -493,6 +493,15 @@ LOOP_SEQ:
 			p_alarm->Check__ALARM(alarm_id,r_act);
 			p_alarm->Post__ALARM_With_MESSAGE(alarm_id,alm_msg);
 		}
+
+		// jglee : 2023.07.04
+		if(retry_count > 1)
+		{
+			xCH__OBJ_STATUS->Set__DATA(STR__MAINTMODE);
+
+			flag = -101;
+			break;
+		}
 	}
 
 	// ...

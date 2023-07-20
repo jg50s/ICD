@@ -254,6 +254,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\CObj__STEP_STD__MON_FNC.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\CObj__STEP_STD__OBJ_APC.cpp"
 					>
 				</File>
@@ -315,6 +319,78 @@
 				</File>
 				<File
 					RelativePath="..\..\CCommon_Utility\CCommon_Utility.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CObj__STEP_BETA"
+				>
+				<File
+					RelativePath=".\CObj__STEP_BETA.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__CALL_PROC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__MON_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_APC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_EPD.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_ESC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_FRC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_HTR.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_LIFT_PIN.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_MATCHER.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_MFC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_PT.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__STEP_BETA__OBJ_RF.cpp"
 					>
 				</File>
 			</Filter>

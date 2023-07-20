@@ -119,7 +119,9 @@ int CObj__PROC_STD
 
 // ...
 int CObj__PROC_STD
-::Fnc__PROC_START_EX(CII_OBJECT__VARIABLE* p_variable,CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+::Fnc__PROC_START_EX(CII_OBJECT__VARIABLE* p_variable,
+					 CII_OBJECT__ALARM* p_alarm, 
+					 const bool active_dechuck)
 {
 LOOP_RETRY:
 
@@ -153,7 +155,9 @@ LOOP_RETRY:
 		if(dCH__MON_EXCEPTION_ACT->Check__DATA(ACT__RESTART) > 0)
 		{
 			if(Fnc__PROC_READY(p_variable, p_alarm, active_dechuck) > 0)
+			{
 				goto LOOP_RETRY;
+			}
 		}
 
 		while(dCH__MON_EXCEPTION_ACT->Check__DATA(ACT__END_WITH_PLASMA_DECHUCK) > 0)

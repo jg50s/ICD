@@ -1,0 +1,8 @@
+
+//-------------------------------------------------
+#OBJECT_PROPERTY	  PHY_EPD
+
+#DEFINE_CONSTANT		SIZE.EPD_SIGNAL		            1
+#DEFINE_CONSTANT		CH.EPD_SIGNAL.1	              IO+ai.Spectrum.1
+
+

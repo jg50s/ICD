@@ -77,7 +77,39 @@ int CObj__STEP_STD::_Fnc__END()
 	}
 	// RF.PULSE ...
 	{
-		RF_PULSE_OBJ__Start_OFF();
+		CString cfg_data = dCH__CFG_PROCESS_END_STATE_RFx_PULSE->Get__STRING();
+
+		if(cfg_data.CompareNoCase(STR__NO_CHANGE) != 0)
+		{
+			if(cfg_data.CompareNoCase(STR__OFF) == 0)
+			{
+				RF_PULSE_OBJ__Start_OFF();
+			}
+			else
+			{
+				dCH__RCP_RF_PULSE_EXEC->Set__DATA(cfg_data);
+
+				// ...
+				{
+					CString ch_data;
+
+					ch_data = aCH__CFG_PROCESS_END_FREQUENCY_RFx_PULSE->Get__STRING();
+					aCH__RCP_RF_PULSE_FREQUENCY->Set__DATA(ch_data);
+
+					ch_data = aCH__CFG_PROCESS_END_DUTY_RFx_PULSE->Get__STRING();
+					aCH__RCP_RF_PULSE_DUTY->Set__DATA(ch_data);
+
+					//
+					ch_data = aCH__CFG_PROCESS_END_ON_SHIFT_RFx_PULSE->Get__STRING();
+					aCH__RCP_RF_PULSE_ON_SHIFT_TIME->Set__DATA(ch_data);
+
+					ch_data = aCH__CFG_PROCESS_END_OFF_SHIFT_RFx_PULSE->Get__STRING();
+					aCH__RCP_RF_PULSE_OFF_SHIFT_TIME->Set__DATA(ch_data);
+				}
+
+				RF_PULSE_OBJ__Start_ON();
+			}
+		}
 	}
 	// RF.LF ...
 	{

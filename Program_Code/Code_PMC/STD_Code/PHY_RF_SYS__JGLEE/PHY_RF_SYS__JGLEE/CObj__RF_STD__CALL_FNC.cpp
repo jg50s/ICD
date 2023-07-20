@@ -99,10 +99,13 @@ int CObj__RF_STD
 	}
 	*/
 
+	Fnc__SET_OFFSET_POWER(0.0);
+
 	// 2. 
 	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__OFF;
+
 		if(pOBJ_CTRL__IO_RF->Call__OBJECT(obj_mode) < 0)
 		{
 			return -11;		
@@ -111,8 +114,6 @@ int CObj__RF_STD
 	else
 	{
 		aEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
-		if(iActive__SIM_MODE > 0) dEXT_CH__INFO_DI_RF_POWER->Set__DATA(STR__OFF); //KMS
-		Sleep(250); // For Prevent Too Fast Control
 	}
 
 	if(bActive__RF_DO_POWER_CTRL)	
@@ -125,6 +126,13 @@ int CObj__RF_STD
 int CObj__RF_STD
 ::Call__QUICK_OFF(CII_OBJECT__VARIABLE *p_variable, CII_OBJECT__ALARM *p_alarm)
 {
+	if(bActive__RF_DO_POWER_CTRL)	
+	{
+		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
+	}
+
+	Fnc__SET_OFFSET_POWER(0.0);
+
 	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__OFF;
@@ -137,14 +145,8 @@ int CObj__RF_STD
 	else
 	{
 		aEXT_CH__RF_AO_SET_POWER->Set__DATA("0");
-		if(iActive__SIM_MODE > 0) dEXT_CH__INFO_DI_RF_POWER->Set__DATA(STR__OFF); //KMS
-		Sleep(250); // For Prevent Too Fast Control
 	}
 
-	if(bActive__RF_DO_POWER_CTRL)	
-	{
-		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
-	}
 	return 1;
 }
 
@@ -188,26 +190,28 @@ int CObj__RF_STD
 	// 2. RF Power SET
 	{
 		double para__set_pwr = aCH__PARA_SET_POWER->Get__VALUE();
+		double para__set_p2  = aCH__PARA_SET_P2->Get__VALUE();
+		
 		Fnc__SET_OFFSET_POWER(para__set_pwr);
 
 		str_data = sCH__PARA_RF_OFFSET_POWER->Get__STRING();
 		double set_offset = atof(str_data);
-		double set_power = 0.0;
-
-		if(para__set_pwr <= 0 ) {set_power = para__set_pwr;} // KMS : 0 Watt Case Not apply offset Power
-		else {set_power = para__set_pwr + set_offset;} 
+		
+		double set_power = para__set_pwr + set_offset; 
+		double set_p2    = para__set_p2  + set_offset; 
 		
 		if(bActive__RF_IO_OBJ)
 		{
 			aEXT_CH__RF_PARA_SET_POWER->Set__VALUE(set_power);
+
+			if(bActive__RF_POWER_LEVEL)
+			{
+				aEXT_CH__RF_PARA_SET_P2->Set__VALUE(set_p2);
+			}
 		}
 		else
 		{
-			// KMS 5W Split & 0W not adapt Offset
-			if(para__set_pwr ==  0) set_power = 0;
-			else set_power = (5*(int)(set_power/5)); //Just Using AD-TEC
-
-			str_data.Format("%.1f", set_power);
+			str_data.Format("%.1f", set_power);		
 			aEXT_CH__RF_AO_SET_POWER->Set__DATA(str_data);;
 		}
 	}
@@ -284,7 +288,6 @@ int CObj__RF_STD
 	}
 
 	// RF POWER.ON ...
-	// RF POWER.ON ...
 	if(bActive__RF_IO_OBJ)
 	{
 		CString obj_mode = sLINK__RF_MODE__POWER_ON;
@@ -294,24 +297,10 @@ int CObj__RF_STD
 			return -21;
 		}
 	}
-	else
+
+	if(bActive__RF_DO_POWER_CTRL)	
 	{
-		unsigned char check_count = 0;
-		if(bActive__RF_DO_POWER_CTRL)// KMS : IO TYPE
-		{
-			dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__ON);
-			if(iActive__SIM_MODE > 0) dEXT_CH__INFO_DI_RF_POWER->Set__DATA(STR__ON);
-			return 1;
-			while(check_count<10) // 
-			{
-				if(dEXT_CH__INFO_DI_RF_POWER ->Check__DATA(STR__ON)>0) return 1;
-				Sleep(100);
-				check_count+=1;
-			}
-			dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__OFF);
-			
-		}
-		return -21;
+		dEXT_CH__RF_DO_POWER_CTRL->Set__DATA(STR__ON);
 	}	
 	return 1;
 }
@@ -364,8 +353,8 @@ int CObj__RF_STD
 
 		if(str__apply_mode.CompareNoCase(STR__LOOKUP) == 0)	
 		{
-			double  cur__x = value__set_pwr;
-			double  cur__y = 0;
+			double  cur__x = 0;
+			double  cur__y = value__set_pwr;
 
 			double  pos__min_x;
 			double  pos__max_x;
@@ -375,39 +364,61 @@ int CObj__RF_STD
 			CString var_data;
 			int i;
 
-			for(i=0;i<CFG__ITEM_CHECK-1;i++)
+			for(i=-1; i<CFG__ITEM_CHECK-1; i++)
 			{
-				// Pos X ...
-				sCH__RF_CAL__CFG_NOW_POWER[i]->Get__DATA(var_data);
-				pos__min_x = atof(var_data);
-
-				sCH__RF_CAL__CFG_NOW_POWER[i+1]->Get__DATA(var_data);
-				pos__max_x = atof(var_data);
-
-				// Pos Y ...
-				sCH__RF_CAL__CFG_NOW_OFFSET[i]->Get__DATA(var_data);
-				pos__min_y = atof(var_data);
-
-				sCH__RF_CAL__CFG_NOW_OFFSET[i+1]->Get__DATA(var_data);
-				pos__max_y = atof(var_data);
-
-				if((cur__x >= pos__min_x)
-					&& (cur__x <= pos__max_x))	
+				if(i < 0)
 				{
-					if(pos__max_x - pos__min_x >= 1.0)
+					pos__min_x = 0.0;
+					pos__min_y = 0.0;
+				}
+				else     
+				{
+					// (n)
 					{
-						cur__y = pos__min_y + ((pos__max_y - pos__min_y) / (pos__max_x - pos__min_x)) * (cur__x - pos__min_x);
+						// Pos X ...
+						sCH__RF_CAL__CFG_NOW_POWER[i]->Get__DATA(var_data);
+						pos__min_x = atof(var_data);
+
+						// Pos Y ...
+						sCH__RF_CAL__CFG_NOW_METER[i]->Get__DATA(var_data);
+						pos__min_y = atof(var_data);
+					}
+				}
+
+				// (n + 1)
+				{
+					// Pos X ...
+					sCH__RF_CAL__CFG_NOW_POWER[i+1]->Get__DATA(var_data);
+					pos__max_x = atof(var_data);
+
+					// Pos Y ...
+					sCH__RF_CAL__CFG_NOW_METER[i+1]->Get__DATA(var_data);
+					pos__max_y = atof(var_data);
+				}
+
+				if(pos__max_x < 0.01)
+				{
+					break;
+				}
+
+				if((cur__y >= pos__min_y)
+				&& (cur__y <= pos__max_y))	
+				{
+					double dif__pos_y = pos__max_y - pos__min_y;
+					if(dif__pos_y < 0)			dif__pos_y = -dif__pos_y;
+
+					if(dif__pos_y >= 0.01)
+					{
+						cur__x = pos__min_x + ((pos__max_x - pos__min_x) / (pos__max_y - pos__min_y)) * (cur__y - pos__min_y);
 					}
 					else
 					{
-						cur__y = pos__min_y + (pos__max_y - pos__min_y) * (cur__x - pos__min_x);
+						cur__x = pos__min_x + ((pos__max_x - pos__min_x) / 0.01) * (cur__y - pos__min_y);
 					}
 
 					// Offset Setting ...
 					{
-						double value__offset = value__set_pwr * (cur__y / 100.0);
-
-						var_data.Format("%.1f", value__offset);
+						var_data.Format("%.1f", - (value__set_pwr - cur__x));
 						sCH__PARA_RF_OFFSET_POWER->Set__DATA(var_data);
 						return 1;
 					}
@@ -441,15 +452,6 @@ int CObj__RF_STD
 
 	r_flag = Call__POWER_SET(p_variable, p_alarm);
 	if(r_flag < 0)			return r_flag;
-
-	if(bActive__RF_IO_OBJ == false) Sleep(200); // Not Object IO Case Need Delay Time
-	
-	// Power ON Delay
-	{
-		double dWaitSec = aCH__PARA_WAIT_POWER_ON->Get__VALUE();
-		if(dWaitSec > 0) Sleep(dWaitSec);
-		aCH__PARA_WAIT_POWER_ON->Set__VALUE(0);
-	}
 
 	r_flag = Call__POWER_ON(p_variable, p_alarm);
 	if(r_flag < 0)			return r_flag;

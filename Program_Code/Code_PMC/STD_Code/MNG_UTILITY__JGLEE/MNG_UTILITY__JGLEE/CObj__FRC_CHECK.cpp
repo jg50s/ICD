@@ -283,6 +283,13 @@ int CObj__FRC_CHECK::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		iFRC_ID = atoi(def_data);
 
 		//
+		def_name = "DATA.PERCENT_ACTIVE";
+		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+		if(def_data.CompareNoCase("YES") == 0)		bACTIVE__DATA_PERCENT = true;
+		else										bACTIVE__DATA_PERCENT = false;
+
+		//
 		def_name = "CH.CH1_RATIO_SET";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
 		p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
@@ -407,6 +414,12 @@ int CObj__FRC_CHECK::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 		{
 			double ch1_rate = 1.0 * (i + 1);
 			double ch2_rate = 10.0 - ch1_rate;
+
+			if(bACTIVE__DATA_PERCENT)
+			{
+				ch1_rate = ch1_rate * 10.0;
+				ch2_rate = ch2_rate * 10.0;
+			}
 
 			var_data.Format("%.1f", ch1_rate);
 			sCH__CFG_CH1_RATE_X[i]->Set__DATA(var_data);

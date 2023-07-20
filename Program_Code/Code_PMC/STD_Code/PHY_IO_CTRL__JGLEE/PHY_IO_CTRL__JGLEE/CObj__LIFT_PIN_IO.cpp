@@ -30,6 +30,11 @@ int CObj__LIFT_PIN_IO::__DEFINE__CONTROL_MODE(obj,l_mode)
 		ADD__CTRL_VAR(sMODE__MIDDLE, "MIDDLE");
 
 		//
+		ADD__CTRL_VAR(sMODE__PROC_UP,     "PROC.UP");
+		ADD__CTRL_VAR(sMODE__PROC_DOWN,   "PROC.DOWN");
+		ADD__CTRL_VAR(sMODE__PROC_MIDDLE, "PROC.MIDDLE");
+
+		//
 		ADD__CTRL_VAR(sMODE__TRANSFER_UP,   "TRANSFER_UP");
 		ADD__CTRL_VAR(sMODE__TRANSFER_DOWN, "TRANSFER_DOWN");
 
@@ -634,6 +639,10 @@ int CObj__LIFT_PIN_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 		ELSE_IF__CTRL_MODE(sMODE__UP)							flag = Call__UP(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__DOWN)							flag = Call__DOWN(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__MIDDLE)						flag = Call__MIDDLE(p_variable, p_alarm);
+
+		ELSE_IF__CTRL_MODE(sMODE__PROC_UP)						flag = Call__UP(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__PROC_DOWN)					flag = Call__DOWN(p_variable, p_alarm);
+		ELSE_IF__CTRL_MODE(sMODE__PROC_MIDDLE)					flag = Call__MIDDLE(p_variable, p_alarm);
 
 		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_UP)					flag = Call__TRANSFER_UP(p_variable, p_alarm);
 		ELSE_IF__CTRL_MODE(sMODE__TRANSFER_DOWN)				flag = Call__TRANSFER_DOWN(p_variable, p_alarm);

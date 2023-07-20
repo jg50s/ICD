@@ -76,6 +76,19 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "CFG.PART.USE";
 		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES NO", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_PART_USE, str_name);
+
+		//
+		str_name = "CFG.FREQUENCY.MIN";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "Hz", 0, 0, 10000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FREQUENCY_MIN, str_name);
+		
+		str_name = "CFG.FREQUENCY.MAX";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "Hz", 0, 0, 100000, "");
+		LINK__VAR_ANALOG_CTRL(aCH__CFG_FREQUENCY_MAX, str_name);
+
+		str_name = "CFG.FREQUENCY.DEC";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "0  1  2  3", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_FREQUENCY_DEC, str_name);
 	}
 
 	// PARA.USER ...
@@ -156,7 +169,7 @@ int CObj__NXA_PULSE::__DEFINE__VARIABLE_STD(p_variable)
 
 		//
 		str_name = "PARA.RCP.EXEC";
-		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  HIGH  LOW");	
+		STD__ADD_DIGITAL(str_name, "NORMAL  INVERSE  OFF  HIGH  LOW");	
 		LINK__VAR_DIGITAL_CTRL(dCH__PARA_RCP_EXEC, str_name);
 	}
 	// PARA.DRV ...

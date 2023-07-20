@@ -8,6 +8,9 @@ int CObj__PROC_STD
 {
 	// JOB.READY ...
 	{
+		CString rcp_name = sCH__CFG_JOB_START_READY_RECIPE->Get__STRING();
+		sCH__REF_RCP_NAME->Set__DATA(rcp_name);
+
 		int r_flag = Fnc__PROC_READY(p_variable, p_alarm, false);
 		if(r_flag < 0)			return -11;
 	}
@@ -26,6 +29,9 @@ int CObj__PROC_STD
 {
 	// JOB.READY ...
 	{
+		CString rcp_name = sCH__CFG_JOB_END_READY_RECIPE->Get__STRING();
+		sCH__REF_RCP_NAME->Set__DATA(rcp_name);
+
 		int r_flag = Fnc__PROC_READY(p_variable, p_alarm, false);
 		if(r_flag < 0)			return -11;
 	}

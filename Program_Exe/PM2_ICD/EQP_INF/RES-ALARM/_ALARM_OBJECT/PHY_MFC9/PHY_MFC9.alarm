@@ -1,6 +1,0 @@
-#ID=2	2	LIGHT	PHY_MFC9 - In MFC config page, MFC's use is selected to "YES".
-#ID=1	1	LIGHT	PHY_MFC9 - MFC Flow Control Aborted !.
-#ID=3	3	LIGHT	PHY_MFC9 - MFC Flow Control Warning Range Alarm.
-#ID=4	4	LIGHT	PHY_MFC9 - MFC Flow Control Abort Range Alarm.
-#ID=5	5	LIGHT	PHY_MFC9 - During Idle, MFC Flow Control Warning Range Alarm.
-#ID=6	6	LIGHT	PHY_MFC9 - During Idle, MFC Flow Control Abort Range Alarm.

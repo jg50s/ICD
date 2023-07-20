@@ -76,6 +76,15 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 		var_name = "CFG.DA_OFFSET_CHECK_BEFORE_PROCESSING";
 		STD__ADD_DIGITAL_WITH_X_OPTION(var_name, "NO  YES", "");
 		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DA_OFFSET_CHECK_BEFORE_PROCESSING, var_name);
+
+		//
+		var_name = "CFG.JOB_START_READY.RECIPE";
+		STD__ADD_STRING_WITH_X_OPTION(var_name, "");
+		LINK__VAR_STRING_CTRL(sCH__CFG_JOB_START_READY_RECIPE, var_name);
+
+		var_name = "CFG.JOB_END_READY.RECIPE";
+		STD__ADD_STRING_WITH_X_OPTION(var_name, "");
+		LINK__VAR_STRING_CTRL(sCH__CFG_JOB_END_READY_RECIPE, var_name);
 	}
 
 	// CTC REPORT ...
@@ -245,6 +254,15 @@ int CObj__PROC_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 	// CUR ...
 	{
+		var_name = "REF.RCP.NAME";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__REF_RCP_NAME, var_name);
+
+		//
+		var_name = "CUR.RCP.FILE.NAME";
+		STD__ADD_STRING(var_name);
+		LINK__VAR_STRING_CTRL(sCH__CUR_RCP_FILE_NAME, var_name);
+
 		var_name = "CUR.RCP.FILE.PATH";
 		STD__ADD_STRING(var_name);
 		LINK__VAR_STRING_CTRL(sCH__CUR_RCP_FILE_PATH, var_name);
@@ -859,6 +877,12 @@ int CObj__PROC_STD::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 
 		xI_LOG_CTRL->WRITE__LOG(log_msg);
 		sCH__OBJ_MSG->Set__DATA(log_msg);
+	}
+
+	// ...
+	{
+		CString rcp_name = sEXT_CH__RCP_NAME->Get__STRING();
+		sCH__REF_RCP_NAME->Set__DATA(rcp_name);
 	}
 
 	if(flag > 0)

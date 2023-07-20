@@ -144,6 +144,51 @@ int  Macro__Get_Ascending_Order(CUIntArray& l__src_data,
 	l__src_info.Copy(l__check_info);
 	return 1;
 }
+int  Macro__Get_Descending_Order(CUIntArray& l__src_data, 
+								 CUIntArray& l__src_info)
+{
+	CUIntArray l__check_data;
+	CUIntArray l__check_info;
+
+	l__check_data.Copy(l__src_data);
+	l__check_info.Copy(l__src_info);
+
+	// ...
+	{
+		int max_data;
+		int max_info;
+
+		int i_limit = l__check_data.GetSize();
+
+		for(int i=0; i<i_limit; i++)
+		{
+			max_data = l__check_data[i];
+			max_info = l__check_info[i];
+
+			for(int k=i+1; k<i_limit; k++)
+			{
+				int cur_data = l__check_data[k];
+				int cur_info = l__check_info[k];
+
+				if(cur_data > max_data)
+				{
+					l__check_data[i] = cur_data;
+					l__check_info[i] = cur_info;
+
+					l__check_data[k] = max_data;
+					l__check_info[k] = max_info;
+
+					max_data = cur_data;
+					max_info = cur_info;
+				}
+			}
+		}
+	}
+
+	l__src_data.Copy(l__check_data);
+	l__src_info.Copy(l__check_info);
+	return 1;
+}
 
 // ...
 int  Macro__Analyze_Title(const CString& title,CString& str_ptn,CString& str_slot)
@@ -544,4 +589,17 @@ int  Macro__Delete_Trg_With_Src(const CStringArray& l_src_name,
 		l_trg_rcp.Copy(l_pmc_rcp);
 	}
 	return 1;
+}
+
+int  Macro__Get_Number_Except_Char(const char ch_sp, const CString& str_data)
+{
+	CString str_number = str_data;
+
+	int s_index = str_number.Find(ch_sp);
+	if(s_index >= 0)
+	{
+		str_number.Delete(0, s_index+1);		
+	}
+
+	return atoi(str_number);
 }

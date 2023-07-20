@@ -2808,3 +2808,70 @@ SCH__Get_Job_LP_List(CUIntArray& l_job_lp)
 	return 1;
 }
 
+// ...
+int CObj__DUAL_ARM_STD::  
+SCH__Check_In_Slot_Of_Ohter_LLx(const CString& para__ll_name, 
+								const CString& para__in_slot)
+{
+	CString para__sch_name;
+	para__sch_name.Format("%s-%s", para__ll_name,para__in_slot);
+
+	IDS__SCH_MATERIAL_INFO para_sch__info;
+	xSCH_MATERIAL_CTRL->Get__MATERIAL_INFO(para__sch_name, para_sch__info);
+
+	// ...
+	CStringArray l__sch_name;
+	CStringArray l__ll_name;
+	CStringArray l__ll_slot;
+
+	_GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(l__sch_name, l__ll_name,l__ll_slot);
+
+	int t_limit = l__ll_name.GetSize();
+	if(t_limit > 0)
+	{
+		CString str__ll_name = l__ll_name[0];
+		CString str__ll_slot = l__ll_slot[0];
+
+		if((para__ll_name.CompareNoCase(str__ll_name) != 0)
+		|| (para__in_slot.CompareNoCase(str__ll_slot) != 0))
+		{
+			return 1;
+		}
+	}
+
+	/*
+	for(int t = 0; t < t_limit; t++)
+	{
+		if(para__ll_name.CompareNoCase(l__ll_name[t]) == 0)
+		{
+			continue;
+		}
+
+		// ...
+		CString cur__sch_name;
+		cur__sch_name.Format("%s-%s", l__ll_name[t],l__ll_slot[t]);
+
+		IDS__SCH_MATERIAL_INFO cur_sch__info;
+		xSCH_MATERIAL_CTRL->Get__MATERIAL_INFO(cur__sch_name, cur_sch__info);
+
+		if(para_sch__info.iSRC__PTN != cur_sch__info.iSRC__PTN)
+		{
+			continue;
+		}
+
+		if(para_sch__info.iSRC__STN < cur_sch__info.iSRC__STN)
+		{
+			continue;
+		}
+
+		if(para_sch__info.sPPID.CompareNoCase(cur_sch__info.sPPID) != 0)
+		{
+			continue;
+		}
+
+		return 1;
+	}
+	*/
+
+	return -1;
+}

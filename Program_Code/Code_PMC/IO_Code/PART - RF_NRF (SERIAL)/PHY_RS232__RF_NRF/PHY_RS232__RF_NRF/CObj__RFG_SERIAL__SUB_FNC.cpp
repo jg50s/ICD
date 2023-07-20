@@ -303,7 +303,7 @@ void CObj__RFG_SERIAL
 
 	// BYTE : 1
 	{
-		ch_data.Format("%02X", data_0);
+		ch_data.Format("%02X", data_1);
 		sCH__INFO_STS_HEXA_1->Set__DATA(ch_data);
 	
 		// BIT [0]

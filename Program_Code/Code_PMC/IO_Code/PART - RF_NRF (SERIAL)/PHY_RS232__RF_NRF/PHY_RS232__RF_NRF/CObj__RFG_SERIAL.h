@@ -46,17 +46,21 @@ private:
 	//-------------------------------------------------------------------------
 	//  INTERNAL PROPERTY
 
-	// ...
+	// OBJ ...
 	CX__VAR_STRING_CTRL  sCH__OBJ_MSG;		  
 
 	// CFG : SYSTEM ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_PART_USE;
 
 	// PARA ...
-	CX__VAR_ANALOG_CTRL  aCH__PARA_SET_POWER;
+	CX__VAR_ANALOG_CTRL  aCH__PARA_SET_POWER;	
+	CX__VAR_STRING_CTRL  sCH__PARA_SET_P2;
 
 	// MON ...
 	CX__VAR_DIGITAL_CTRL dCH__MON_COMM_STS;
+
+	CX__VAR_STRING_CTRL  sCH__MON_SET_P2;
+	CX__VAR_STRING_CTRL  sCH__MON_POWER_LEVEL_PERCENT;
 
 	// CFG ...
 	CX__VAR_DIGITAL_CTRL dCH__CFG_DRV_LOG_ENABLE;
@@ -104,6 +108,16 @@ private:
 	CX__VAR_DIGITAL_CTRL doCH__ALARM_RESET;			// OFF   ON
 	//
 
+	//-------------------------------------------------------------------------
+	// LINK_IO ...
+
+	bool bActive__DO_PULSE_MODE;
+	CX__VAR_DIGITAL_CTRL dEXT_CH__DO_PULSE_MODE;
+
+	bool bActive__AO_LEVEL_VOLT;
+	CX__VAR_ANALOG_CTRL  aEXT_CH__AO_LEVEL_VOLT;
+	//
+
 
 	//-------------------------------------------------------------------------
 	CString sMODE__INIT;
@@ -119,8 +133,12 @@ private:
 	CString sMODE__ALARM_RESET;
 	int  Call__ALARM_RESET(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
+	//
 	CString sMODE__TEST_DRV;
 	int  Call__TEST_DRV(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+
+	CString sMODE__TEST_READ_STRING;
+	int  Call__TEST_READ_STRING(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	unsigned char _Set_CheckSum(unsigned char *s_cmmd, const int s_len);
@@ -133,6 +151,7 @@ private:
 	
 	// ...
 	int  Mon__MONITOR(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
+	int  Mon__IO_SET(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm);
 
 	// ...
 	void _Update__RF_State(unsigned char data_0, unsigned char data_1);

@@ -169,6 +169,10 @@ int CObj__DB_INF::__DEFINE__VARIABLE_STD(p_variable)
 			STD__ADD_STRING_WITH_X_OPTION(str_name, "");
 			LINK__VAR_STRING_CTRL(sCH__CFG_DECHUCK_RECIPE_COMMENT_X[i], str_name);
 		}
+
+		//
+		str_name = "CR.POS.STATUS";
+		STD__ADD_STRING(str_name);
 	}
 
 	//  PMC <-> CTC

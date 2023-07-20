@@ -1033,6 +1033,8 @@ int CObj__MFC_IO::__CALL__CONTROL_MODE(mode,p_debug,p_variable,p_alarm)
 	}
 	else
 	{
+		sCH__ACT_MODE->Set__DATA(mode);
+
 		if((mode.CompareNoCase(sMODE__CONTROL)   == 0)
 		|| (mode.CompareNoCase(sMODE__RAMP_CTRL) == 0)
 		|| (mode.CompareNoCase(sMODE__SET_FLOW)  == 0))

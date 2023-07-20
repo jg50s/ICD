@@ -48,7 +48,6 @@ int CObj__RF_STD::__DEFINE__VERSION_HISTORY(version)
 #define MON_ID__INTERLOCK_CHECK					2
 #define MON_ID__IDLE_ERROR_CHECK				3
 #define MON_ID__PROC_ERROR_CHECK				4
-#define MON_ID__IO_TYPE_ALARM_CHECK				5 //KMS
 
 
 int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
@@ -77,6 +76,11 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "W", 0, 0, 2500, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_SET_POWER, str_name);
 
+		str_name = "PARA.SET.P2";
+		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "W", 0, 0, 2500, "");
+		LINK__VAR_ANALOG_CTRL(aCH__PARA_SET_P2, str_name);
+
+		//
 		str_name = "PARA.HOLD.TIME";
 		STD__ADD_ANALOG_WITH_X_OPTION(str_name, "sec", 0, 0, 10000, "");
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_HOLD_TIME, str_name);
@@ -98,10 +102,6 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.RF.OFFSET.POWER";
 		STD__ADD_STRING(str_name);
 		LINK__VAR_STRING_CTRL(sCH__PARA_RF_OFFSET_POWER, str_name);
-
-		str_name = "PARA.WAIT.POWER.ON";
-		STD__ADD_ANALOG(str_name, "msec", 0, 0, 999999);
-		LINK__VAR_ANALOG_CTRL(aCH__PARA_WAIT_POWER_ON, str_name);
 	}
 	// PARA : FREQ ...
 	{
@@ -125,7 +125,6 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 		str_name = "PARA.FREQ.LEARNED.VALUE";
 		STD__ADD_ANALOG(str_name, "KHz", 0, 0, 28476);
 		LINK__VAR_ANALOG_CTRL(aCH__PARA_FREQ_LEARNED, str_name);
-
 	}
 	// PARA : RCP ...
 	{
@@ -511,8 +510,6 @@ int CObj__RF_STD::__DEFINE__VARIABLE_STD(p_variable)
 
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__IDLE_ERROR_CHECK);
 		p_variable->Add__MONITORING_PROC(1.0, MON_ID__PROC_ERROR_CHECK);
-
-		p_variable->Add__MONITORING_PROC(1.0, MON_ID__IO_TYPE_ALARM_CHECK);// KMS : For IO TYPE
 	}
 	return 1;
 }
@@ -887,12 +884,25 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 
 	// Object Link ...
 	{
-		def_name = "DATA.RF_FREQUENCY.ACTIVE";
-		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+		// ...
+		{
+			def_name = "DATA.POWER_LEVEL.ACTIVE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
 
-		if(def_data.CompareNoCase("YES") == 0)		bActive__RF_FREQ_MODE = true;
-		else										bActive__RF_FREQ_MODE = false;
+			if(def_data.CompareNoCase("YES") == 0)		bActive__RF_POWER_LEVEL = true;
+			else										bActive__RF_POWER_LEVEL = false;
+		}
 
+		// ...
+		{
+			def_name = "DATA.RF_FREQUENCY.ACTIVE";
+			p_ext_obj_create->Get__DEF_CONST_DATA(def_name, def_data);
+
+			if(def_data.CompareNoCase("YES") == 0)		bActive__RF_FREQ_MODE = true;
+			else										bActive__RF_FREQ_MODE = false;
+		}
+
+		// ...
 		def_name = "OBJ__IO_RF";
 		p_ext_obj_create->Get__DEF_CONST_DATA(def_name, obj_name);
 
@@ -907,6 +917,12 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 			{
 				var_name = "PARA.SET.POWER";
 				LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_SET_POWER, obj_name,var_name);
+
+				if(bActive__RF_POWER_LEVEL)
+				{
+					var_name = "PARA.SET.P2";
+					LINK__EXT_VAR_ANALOG_CTRL(aEXT_CH__RF_PARA_SET_P2, obj_name,var_name);
+				}
 
 				if(bActive__RF_FREQ_MODE)
 				{
@@ -1010,47 +1026,6 @@ int CObj__RF_STD::__INITIALIZE__OBJECT(p_variable,p_ext_obj_create)
 					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
 					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_DO_POWER_CTRL, obj_name,var_name);
 				}
-			}
-
-			// DO.GENERATOR_RESET // KMS
-			{
-				def_name = "CH__RF_DO_RESET_CTRL";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-
-				bool def_check = x_utility.Check__Link(ch_name);
-				bActive__RF_DO_POWER_CTRL = def_check;
-
-				if(bActive__RF_DO_POWER_CTRL)
-				{
-					p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-					LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_DO_RESET_CTRL, obj_name,var_name);
-				}
-			}
-
-			// DI,ALARM ON ... KMS
-			{
-				def_name = "CH__INFO_DI_ALARM";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__RF_ALARM, obj_name,var_name);
-				
-			}
-
-			// DI.POWER ON, KMS
-			{
-				def_name = "CH__INFO_DI_POWER";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_DIGITAL_CTRL(dEXT_CH__INFO_DI_RF_POWER, obj_name,var_name);
-	
-			}
-
-			// SI.SET_POWER ..., KMS
-			{
-				def_name = "CH__INFO_SI_RF_ALARM";
-				p_ext_obj_create->Get__DEF_CONST_DATA(def_name, ch_name);
-				p_ext_obj_create->Get__CHANNEL_To_OBJ_VAR(ch_name, obj_name,var_name);
-				LINK__EXT_VAR_STRING_CTRL(sEXT_CH__INFO_RF_ALARM, obj_name,var_name);
 			}
 
 			// AO.SET_POWER ...
@@ -1349,7 +1324,6 @@ int CObj__RF_STD::__CALL__MONITORING(id,p_variable,p_alarm)
 	
 	if(id == MON_ID__IDLE_ERROR_CHECK)			Mon__IDLE_ERROR_CHECK(p_variable, p_alarm);
 	if(id == MON_ID__PROC_ERROR_CHECK)			Mon__PROC_ERROR_CHECK(p_variable, p_alarm);
-	if(id == MON_ID__IO_TYPE_ALARM_CHECK)		Mon__IO_TYPE_ALARM_CHECK(p_variable, p_alarm);//KMS
 
 	return 1;
 }

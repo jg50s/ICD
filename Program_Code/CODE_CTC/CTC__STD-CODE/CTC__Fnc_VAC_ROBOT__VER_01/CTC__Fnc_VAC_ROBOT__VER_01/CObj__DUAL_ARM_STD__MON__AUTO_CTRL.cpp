@@ -467,7 +467,10 @@ Mon__AUTO_CTRL(CII_OBJECT__VARIABLE *p_variable,
 		}
 		catch(int err_flag)
 		{
-
+			if(err_flag == 101)
+			{
+				loop_count = 0;
+			}
 		}
 
 		/*
@@ -1676,7 +1679,7 @@ AUTO_CTRL__LBi_To_RB_With_Ready_PMC__ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 				}
 			}
 
-			// ...
+			NEXT__LOOP;
 		}
 	}
 
@@ -1741,7 +1744,8 @@ _CHECK__FIRST_WAFER_OF_LLx_IN__ALL_MODE(const CString& para__ll_name,
 int  CObj__DUAL_ARM_STD::
 _GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(CStringArray& l__sch_name,
 									 CStringArray& l__ll_name,
-									 CStringArray& l__ll_slot)
+									 CStringArray& l__ll_slot,
+									 const bool active__log_msg)
 {
 	// ...
 	{
@@ -1811,56 +1815,122 @@ _GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(CStringArray& l__sch_name,
 		}
 	}
 
-	// ..
+	if(active__log_msg)
 	{
-		// Ascending Order ...
+		CString log_msg;
+		CString log_bff;
+
+		log_msg  = "\n";
+		log_msg += "_GET__WAFER_LIST_OF_LLx_IN__ALL_MODE() - ORG ... \n";
+
+		int t_limit = l__ll_name.GetSize();
+		for(int t=0; t<t_limit; t++)
 		{
-			int k_limit = l__sch_slot_id.GetSize();
-			int k;
+			log_bff.Format("  %1d)  \n", t + 1);
+			log_msg += log_bff;
 
-			for(k=0; k<k_limit; k++)
-			{
-				int ref__slot_id = l__sch_slot_id[k];
+			log_bff.Format("    * ll_name <- %s \n", l__ll_name[t]);
+			log_msg += log_bff;
+
+			log_bff.Format("    * ll_slot <- %s \n", l__ll_slot[t]);
+			log_msg += log_bff;
+
+			log_bff.Format("    * wafer.port_id <- %1d \n", l__sch_port_id[t]);
+			log_msg += log_bff;
+
+			log_bff.Format("    * wafer.slot_id <- %1d \n", l__sch_slot_id[t]);
+			log_msg += log_bff;
+		}
+
+		xAPP_LOG_CTRL->WRITE__LOG(log_msg);
+	}
+
+	// Ascending Order ...
+	{
+		int k_limit = l__sch_slot_id.GetSize();
+		int k;
+
+		for(k=0; k<k_limit; k++)
+		{
+			int ref__slot_id = l__sch_slot_id[k];
+			
+			for(int t=k+1; t<k_limit; t++)
+			{	
+				int cur__slot_id = l__sch_slot_id[t];
 				
-				for(int t=k+1; t<k_limit; t++)
-				{	
-					int cur__slot_id = l__sch_slot_id[t];
-					
-					if(cur__slot_id >= ref__slot_id)		continue;	
-					ref__slot_id = cur__slot_id;
+				if(cur__slot_id >= ref__slot_id)		continue;	
+				ref__slot_id = cur__slot_id;
 
-					// ...
-					int cur__port_id = l__sch_port_id[t];
+				// ...
+				int cur__port_id = l__sch_port_id[t];
 
-					CString cur__sch_name = l__sch_name[t];
-					CString cur__ll_name  = l__ll_name[t];
-					CString cur__ll_slot  = l__ll_slot[t];
+				CString cur__sch_name = l__sch_name[t];
+				CString cur__ll_name  = l__ll_name[t];
+				CString cur__ll_slot  = l__ll_slot[t];
 
-					// ...
-					{
-						l__sch_port_id[t] = l__sch_port_id[k];
-						l__sch_slot_id[t] = l__sch_slot_id[k];
-						l__sch_name[t] = l__sch_name[k];
-						l__ll_name[t]  = l__ll_name[k];
-						l__ll_slot[t]  = l__ll_slot[k];
+				// ...
+				{
+					l__sch_port_id[t] = l__sch_port_id[k];
+					l__sch_slot_id[t] = l__sch_slot_id[k];
+					l__sch_name[t] = l__sch_name[k];
+					l__ll_name[t]  = l__ll_name[k];
+					l__ll_slot[t]  = l__ll_slot[k];
 
-						l__sch_port_id[k] = cur__port_id;
-						l__sch_slot_id[k] = cur__slot_id;
-						l__sch_name[k] = cur__sch_name;
-						l__ll_name[k]  = cur__ll_name;
-						l__ll_slot[k]  = cur__ll_slot;
-					}
+					l__sch_port_id[k] = cur__port_id;
+					l__sch_slot_id[k] = cur__slot_id;
+					l__sch_name[k] = cur__sch_name;
+					l__ll_name[k]  = cur__ll_name;
+					l__ll_slot[k]  = cur__ll_slot;
 				}
 			}
 		}
 
-		// ...
+		if(active__log_msg)
+		{
+			CString log_msg;
+			CString log_bff;
+
+			log_msg  = "\n";
+			log_msg += "_GET__WAFER_LIST_OF_LLx_IN__ALL_MODE() - Ascending Order ... \n";
+
+			int t_limit = l__ll_name.GetSize();
+			for(int t=0; t<t_limit; t++)
+			{
+				log_bff.Format("  %1d)  \n", t + 1);
+				log_msg += log_bff;
+
+				log_bff.Format("    * ll_name <- %s \n", l__ll_name[t]);
+				log_msg += log_bff;
+
+				log_bff.Format("    * ll_slot <- %s \n", l__ll_slot[t]);
+				log_msg += log_bff;
+
+				log_bff.Format("    * wafer.port_id <- %1d \n", l__sch_port_id[t]);
+				log_msg += log_bff;
+
+				log_bff.Format("    * wafer.slot_id <- %1d \n", l__sch_slot_id[t]);
+				log_msg += log_bff;
+			}
+
+			xAPP_LOG_CTRL->WRITE__LOG(log_msg);
+		}
+	}
+	
+	// Job Ordering ...
+	{
 		CUIntArray l__job_lp;
 		SCH__Get_Job_LP_List(l__job_lp);
 
 		if(l__job_lp.GetSize() > 1)
 		{
 			int ref__lp_id = l__job_lp[0];
+
+			// ...
+			CStringArray l_job__sch_name;
+			CStringArray l_job__ll_name;
+			CStringArray l_job__ll_slot;
+			CUIntArray   l_job__sch_port_id;
+			CUIntArray   l_job__sch_slot_id;
 
 			int k_limit = l__sch_port_id.GetSize();
 			int k;
@@ -1875,19 +1945,76 @@ _GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(CStringArray& l__sch_name,
 				CString cur__ll_name  = l__ll_name[k];
 				CString cur__ll_slot  = l__ll_slot[k];
 
+				l_job__sch_name.Add(cur__sch_name);
+				l_job__ll_name.Add(cur__ll_name);
+				l_job__ll_slot.Add(cur__ll_slot);
+				l_job__sch_port_id.Add(cur__port_id);
+				l_job__sch_slot_id.Add(cur__slot_id);
+
 				l__sch_name.RemoveAt(k);
 				l__ll_name.RemoveAt(k);
 				l__ll_slot.RemoveAt(k);
 				l__sch_port_id.RemoveAt(k);
 				l__sch_slot_id.RemoveAt(k);
 
-				l__sch_name.Add(cur__sch_name);
-				l__ll_name.Add(cur__ll_name);
-				l__ll_slot.Add(cur__ll_slot);
-				l__sch_port_id.Add(cur__port_id);
-				l__sch_slot_id.Add(cur__slot_id);
+				k_limit--;
+				k--;
+			}
+
+			if(l_job__sch_name.GetSize() > 0)
+			{
+				l__sch_name.Append(l_job__sch_name);
+				l__ll_name.Append(l_job__ll_name);
+				l__ll_slot.Append(l_job__ll_slot);
+				l__sch_port_id.Append(l_job__sch_port_id);
+				l__sch_slot_id.Append(l_job__sch_slot_id);
 			}
 		}
+	}
+
+	if(active__log_msg)
+	{
+		CString log_msg;
+		CString log_bff;
+
+		log_msg  = "\n";
+		log_msg += "_GET__WAFER_LIST_OF_LLx_IN__ALL_MODE() - Job Ordering ... \n";
+
+		int t_limit = l__ll_name.GetSize();
+		for(int t=0; t<t_limit; t++)
+		{
+			log_bff.Format("  %1d)  \n", t + 1);
+			log_msg += log_bff;
+
+			log_bff.Format("    * ll_name <- %s \n", l__ll_name[t]);
+			log_msg += log_bff;
+
+			log_bff.Format("    * ll_slot <- %s \n", l__ll_slot[t]);
+			log_msg += log_bff;
+
+			log_bff.Format("    * wafer.port_id <- %1d \n", l__sch_port_id[t]);
+			log_msg += log_bff;
+
+			log_bff.Format("    * wafer.slot_id <- %1d \n", l__sch_slot_id[t]);
+			log_msg += log_bff;
+		}
+
+		// ...
+		CUIntArray l__job_lp;
+		SCH__Get_Job_LP_List(l__job_lp);
+
+		int k_limit = l__job_lp.GetSize();
+
+		log_bff.Format("Job Size (%1d) \n", k_limit);
+		log_msg += log_bff;
+
+		for(int k=0; k<k_limit; k++)
+		{
+			log_bff.Format("  %1d)  Job_LP(%1d) \n", k + 1, l__job_lp[k]);
+			log_msg += log_bff;
+		}
+
+		xAPP_LOG_CTRL->WRITE__LOG(log_msg);
 	}
 
 	if(l__sch_name.GetSize() > 0)			return 1;
@@ -8984,17 +9111,6 @@ AUTO_CTRL__RB_LBo__1_SLOT_ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 	}
 
 	// ...
-	int out_flag = -1;
-
-	CString para_module;
-	CString para_in_slot;
-	CString para_slot;
-	int slot_id;
-
-	// ...
-	int active__sch_mode = -1;
-	int active__sch_ll = -1;
-	
 	CString check_arm = "";
 
 	if(sEXT_CH__SCH_MODE_LLx_OUT->Check__DATA(_SCH_MODE__ROUTE) > 0)
@@ -9003,17 +9119,15 @@ AUTO_CTRL__RB_LBo__1_SLOT_ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 		{
 			if(i == 0)
 			{
-				if(VAC_RB__Check_Occupied__A_Arm() < 0)
-					continue;
+				if(VAC_RB__Check_Occupied__A_Arm() < 0)			continue;
 
-				check_arm = "A";
+				check_arm = STR__A;
 			}
 			else if(i == 1)
 			{
-				if(VAC_RB__Check_Occupied__B_Arm() < 0)
-					continue;
+				if(VAC_RB__Check_Occupied__B_Arm() < 0)			continue;
 
-				check_arm = "B";
+				check_arm = STR__B;
 			}
 			else
 			{
@@ -9037,22 +9151,105 @@ AUTO_CTRL__RB_LBo__1_SLOT_ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 
 			xSCH_MATERIAL_CTRL->Get__LLx_OUT_OF_EDIT_TYPE(check_arm, l_ll_id,l_ll_mode,l_ll_slot);
 
-			if(l_ll_id.GetSize() == 1)
+			// ...
+			bool active__llx_abnormal = true;
+
+			// Check : LLx_OUT ...
 			{
-				int index_ll = 0;
-				int ll_id = atoi(l_ll_id[index_ll]);
+				int k_limit = l_ll_id.GetSize();
 
-				CString str_mode = l_ll_mode[index_ll];
-				CString str_slot = l_ll_slot[index_ll];
-
-				if(str_mode.CompareNoCase("ALL") == 0)
+				for(int k=0; k<k_limit; k++)
 				{
-					if((str_slot.CompareNoCase("11") == 0)
-					|| (str_slot.CompareNoCase("10") == 0)
-					|| (str_slot.CompareNoCase("01") == 0))
+					int ll_id = atoi(l_ll_id[k]);
+					int ll_index = ll_id - 1;
+
+					if(ll_index <  0)				continue;
+					if(ll_index >= iLLx_LIMIT)		continue;
+
+					// ...
+					if(xEXT_CH__SCH_DB_LLx_USE_FLAG[ll_index]->Check__DATA(STR__ENABLE) < 0)		continue;
+					if(xEXT_CH__LLx__IN_OUT_FLAG[ll_index]->Check__DATA(STR__OUT) < 0)				continue;
+
+					CString obj_state = xEXT_CH__LLx__OBJ_STATUS[ll_index]->Get__STRING();
+					if((obj_state.CompareNoCase(STR__CTCINUSE) != 0)
+					&& (obj_state.CompareNoCase(STR__STANDBY)  != 0))
 					{
-						active__sch_mode = 1;
-						active__sch_ll = ll_id;
+						continue;
+					}
+
+					if(LLx__Is_Available(ll_index) < 0)			continue;
+					if(LLx__Is_VAC(ll_index) < 0)				continue;
+
+					if(LLx__Check_Empty__OutSlot(ll_index) < 0)
+					{
+						if(VAC_RB__Check_Empty__Arm_Type() > 0)
+						{
+							if(LLx__Check_Occupied__InSlot(ll_index) < 0)
+							{
+								continue;
+							}
+						}
+						else
+						{
+							continue;
+						}
+					}
+
+					active__llx_abnormal = false;
+					break;
+				}
+			}
+
+			// Check : Abnormal ...
+			if(active__llx_abnormal)
+			{
+				int wfr_count = xSCH_MATERIAL_CTRL->Check__MATERIAL_LESS_THAN_MOVE_COUNT(4);
+
+				if(wfr_count < 1)
+				{
+					int k_limit = l_ll_id.GetSize();
+
+					for(int k=0; k<k_limit; k++)
+					{
+						int ll_id = atoi(l_ll_id[k]);
+						int ll_index = ll_id - 1;
+
+						if(ll_index <  0)				continue;
+						if(ll_index >= iLLx_LIMIT)		continue;
+
+						// ...
+						if(xEXT_CH__LLx__IN_OUT_FLAG[ll_index]->Check__DATA(STR__IN)  < 0)			continue;
+						if(xEXT_CH__ATM_RB__SCH_STS_TO_LLx[ll_index]->Check__DATA("") < 0)			continue;
+
+						if(LLx__Is_Available(ll_index) < 0)			continue;
+						if(LLx__Is_VAC(ll_index) < 0)				continue;
+
+						// ...
+						CString str_mode = l_ll_mode[k];
+						CString str_slot = l_ll_slot[k];
+
+						if(str_mode.CompareNoCase(STR__ALL) != 0)
+						{
+							continue;;
+						}
+
+						if((str_slot.CompareNoCase("11") == 0)
+						|| (str_slot.CompareNoCase("10") == 0)
+						|| (str_slot.CompareNoCase("01") == 0))
+						{
+							int slot_id;
+
+							if(LLx__Get_Empty__OutSlot(ll_index, slot_id) < 0)
+							{
+								continue;
+							}
+
+							if(SCH_RUN__LLx_PUMP(ll_index, log_id, "") > 0)
+							{
+								xEXT_CH__LLx__IN_OUT_FLAG[ll_index]->Set__DATA(STR__OUT);
+							}
+							NEXT__LOOP;
+						}
 					}
 				}
 			}
@@ -9063,291 +9260,321 @@ AUTO_CTRL__RB_LBo__1_SLOT_ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 		}
 	}
 
-	if(active__sch_mode > 0)
-	{
-		IDS__SCH_MATERIAL_INFO ds_info;
-		int ll_ptn = -1;
-
-		if(xSCH_MATERIAL_CTRL->Get__MATERIAL_INFO(check_arm, ds_info) > 0)
-		{
-			ll_ptn = ds_info.iSRC__PTN;
-		}
-
-		// LLx ...
-		if(active__sch_ll > 0)					
-		{
-			int ll_i = active__sch_ll - 1;
-
-			if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA("OUT") > 0)
-			{
-				if((SCH__LLx_CHECK_PRESSURE(ll_i, p_variable,p_alarm) > 0)
-				&& (LLx__Is_Available(ll_i) > 0))
-				{
-					if(LLx__Get_Occupied__InSlot_With_1_Slot_All_Mode(ll_i, slot_id) > 0)
-					{
-						para_module = Get__LLx_NAME(ll_i);
-						para_slot.Format("%1d",slot_id);
-						para_in_slot.Format("%1d",slot_id);
-
-						out_flag = 1;
-					}
-					else if(LLx__Get_Empty__InSlot_With_1_Slot_All_Mode(ll_i, slot_id) > 0)
-					{
-						para_module = Get__LLx_NAME(ll_i);
-						para_slot.Format("%1d",slot_id);
-
-						out_flag = 1;
-					}
-				}
-			}
-			else if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA("IN") > 0)
-			{
-				if(xEXT_CH__ATM_RB__SCH_STS_TO_LLx[ll_i]->Check__DATA("") < 0)
-				{
-					NEXT__LOOP;
-				}
-
-				// ....
-				{
-					bool active__ll_out = false;
-
-					if(VAC_RB__Check_Occupied__A_Arm() > 0)		
-					{
-						CString vac_arm = "A";
-						if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(vac_arm) < 0)		active__ll_out = true;
-					}
-					if(VAC_RB__Check_Occupied__B_Arm() > 0)		
-					{
-						CString vac_arm = "B";
-						if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(vac_arm) < 0)		active__ll_out = true;
-					}
-
-					if(!active__ll_out)			NEXT__LOOP;
-				}
-
-				if((LLx__Is_Available(ll_i) > 0)
-				&& (LLx__Is_ATM(ll_i) > 0))
-				{
-					if(LLx__Get_Empty__InSlot_With_1_Slot_All_Mode(ll_i, slot_id) > 0)
-					{
-						para_module = Get__LLx_NAME(ll_i);
-						para_slot.Format("%1d",slot_id);
-
-						out_flag = 1;
-
-						if(SCH_RUN__LLx_PUMP(ll_i, log_id, "") > 0)
-						{
-							xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA("OUT");
-						}
-						NEXT__LOOP;
-					}
-				}
-			}
-
-			// ...
-		}
-	}
-	else
-	{
-		int ll_limit = iLLx_LIMIT;
-		int ll_i;
-
-		for(ll_i=0; ll_i<ll_limit; ll_i++)
-		{
-			if(out_flag < 0)
-			{
-				if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA("OUT") > 0)
-				{
-					if((SCH__LLx_CHECK_PRESSURE(ll_i, p_variable,p_alarm) > 0)
-					&& (LLx__Is_Available(ll_i) > 0))
-					{
-						if(LLx__Get_Occupied__InSlot_With_1_Slot_All_Mode(ll_i, slot_id) > 0)
-						{
-							para_module = Get__LLx_NAME(ll_i);
-							para_slot.Format("%1d",slot_id);
-							para_in_slot.Format("%1d",slot_id);
-
-							out_flag = 1;
-						}
-						else if(LLx__Get_Empty__InSlot_With_1_Slot_All_Mode(ll_i, slot_id) > 0)
-						{
-							para_module = Get__LLx_NAME(ll_i);
-							para_slot.Format("%1d",slot_id);
-
-							out_flag = 1;
-						}
-					}
-				}
-			}
-		}
-
-		// ...
-	}
-
-	if(out_flag < 0)
-	{
-		NEXT__LOOP;
-	}
+	// ...
+	CString para__ll_name;
+	CString para__in_slot;
+	CString para__out_slot;
 
 	// ...
 	{
-		printf(" * CObj__DUAL_ARM_STD::AUTO_CTRL__RB_LBo__1_SLOT_ALL_MODE() ... \n");
+		CStringArray l__sch_name;
+		CStringArray l__ll_name;
+		CStringArray l__ll_slot;
 
-		printf("  * active__sch_mode <- [%1d] \n", active__sch_mode);
-		printf("  * active__sch_ll   <- [%1d] \n", active__sch_ll);
+		_GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(l__sch_name, l__ll_name,l__ll_slot);
 
-		printf("  * para_module  <- [%s] \n", para_module);
-		printf("  * para_slot    <- [%s] \n", para_slot);
-		printf("  * para_in_slot <- [%s] \n", para_in_slot);
-	}
+		int k_limit = l__sch_name.GetSize();
 
-	// ...
-	CString arm_type;
-	int i;
-
-	for(i=0; i<2; i++)
-	{
-		if(i == 0)
+		// LL_IN -> RB ...
+		if(k_limit > 0)
 		{
-			if(VAC_RB__Check_Occupied__A_Arm() < 0)	
+			for(int k=0; k < k_limit; k++)
 			{
-				continue;
-			}
+				para__in_slot  = "";
+				para__out_slot = "";
 
-			arm_type = "A";
-		}
-		else if(i == 1)
-		{
-			if(VAC_RB__Check_Occupied__B_Arm() < 0)
-			{
-				continue;
-			}
+				// ...
+				CString str__ll_name = l__ll_name[k];
+				CString str__ll_slot = l__ll_slot[k];
 
-			arm_type = "B";
+				int ll_index = Get__LLx_INDEX(str__ll_name);
+				if(ll_index < 0)		continue;;
+
+				if(xEXT_CH__LLx__IN_OUT_FLAG[ll_index]->Check__DATA(STR__OUT) < 0)
+				{
+					continue;
+				}
+
+				if(LLx__Is_Available(ll_index) < 0)		continue;
+				if(LLx__Is_VAC(ll_index) < 0)			continue;
+
+				// CHECK : LL_OUT ...
+				{
+					int ll__out_slot;
+
+					int r_flag = LLx__Get_Empty__OutSlot(ll_index, ll__out_slot);
+					if(r_flag > 0)
+					{
+						para__out_slot.Format("%1d", ll__out_slot);
+					}
+				}
+
+				// CHECK : LL_IN -> PM_IN ...
+				{
+					bool active__ready_check = false;
+
+					if(dCH__VAC_RB__CFG_PICK_WAFER_CONDITION->Check__DATA(STR__ONLY_PROCESSED) < 0)
+					{
+						if(VAC_RB__Check_Empty__Arm_Type() > 0)			active__ready_check = true;
+					}
+
+					int r_flag = _CHECK__LBi_To_RB_With_Ready_PMC__ALL_MODE(str__ll_name, str__ll_slot, active__ready_check);
+					if(r_flag > 0)
+					{
+						para__in_slot = str__ll_slot;
+					}
+				}
+
+				if((para__in_slot.GetLength()  < 1)
+				&& (para__out_slot.GetLength() < 1))
+				{
+					continue;
+				}
+
+				para__ll_name = str__ll_name;
+				break;
+			}
 		}
 		else
 		{
-			continue;
-		}
+			CStringArray l__arm_type;
+			VAC_RB__Get_Occupied__Arm_Type(l__arm_type);
 
-		if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(arm_type) > 0)
-		{
-			continue;
-		}
-
-		IDS__SCH_MATERIAL_STATUS ds_info;
-		if(xSCH_MATERIAL_CTRL->Get__MATERIAL_STATUS(arm_type,ds_info) < 0)
-		{
-			continue;
-		}
-		if(ds_info.sMATERIAL_STS.CompareNoCase("PROCESSED") != 0)
-		{
-			continue;
-		}
-
-		// ...
-		bool lbx_ex_flag = false;
-		CString sch_module;
-		CString empty_arm;
-
-		if(para_in_slot.GetLength() > 0)
-		{
-			if(VAC_RB__Get_Empty__Arm_Type_From_LBx(empty_arm) < 0)
+			int k_limit = l__arm_type.GetSize();
+			for(int k=0; k<k_limit; k++)
 			{
-				NEXT__LOOP;
-			}
+				CString arm_type = l__arm_type[k];
 
-			lbx_ex_flag = true;	
-		}
-
-		if(lbx_ex_flag == true)
-		{
-			int act_flag  = -1;
-			int move_flag = -1;
-
-			sch_module.Format("%s-%s",para_module,para_in_slot);
-
-			act_flag = SCH__PICK_MODULE(p_variable,p_alarm, log_id, lbx_ex_flag,empty_arm,para_module,para_in_slot,sch_module);
-
-			if(act_flag < 0)
-			{
-				move_flag = SCH__Check_Material_Pick(empty_arm);
-			}
-			else
-			{
-				move_flag = 1;
-			}
-
-			if(move_flag > 0)
-			{
-				xSCH_MATERIAL_CTRL->Pick__From_MODULE(sch_module,empty_arm);
-			}
-
-			// ...
-			{
-				CString log_msg;
-				CString log_bff;
-
-				log_msg = "AUTO_CTRL__RB_LBo__1_SLOT_ALL_MODE() ... \n";
-				log_bff.Format(" sch_module : [%s] \n", sch_module);
-				log_msg += log_bff;
-				log_bff.Format(" empty_arm : [%s] \n", empty_arm);
-				log_msg += log_bff;
-				log_bff.Format(" act_flag : [%1d] \n", act_flag);
-				log_msg += log_bff;
-
-				printf(" * %s\n", log_msg);
-			}
-
-			if(act_flag < 0)
-			{
-				NEXT__LOOP;
-			}
-		}
-
-		// ...
-		{
-			int act_flag  = -1;
-			int move_flag = -1;
-
-			sch_module.Format("%s-%s",para_module,para_slot);	
-
-			act_flag = SCH__PLACE_MODULE(p_variable,p_alarm, log_id, false,arm_type,para_module,para_slot,sch_module);
-
-			if(act_flag < 0)
-			{
-				move_flag = SCH__Check_Material_Place(arm_type);
-			}
-			else
-			{
-				move_flag = 1;
-			}
-			
-			if(move_flag > 0)
-			{
-				xSCH_MATERIAL_CTRL->Place__To_MODULE(arm_type,sch_module);
-			}
-
-			if(act_flag < 0)
-			{
-				NEXT__LOOP;
-			}
-		}
-
-		// ...
-		int ll_i = Get__LLx_INDEX(para_module);
-		if(ll_i >= 0)
-		{
-			if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA("IN") < 0)
-			{
-				if(SCH_RUN__LLx_VENT(ll_i, log_id, "1") > 0)
+				if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(arm_type) > 0)
 				{
-					xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA("IN");
+					continue;
+				}
+
+				if(sEXT_CH__SCH_MODE_LLx_OUT->Check__DATA(_SCH_MODE__ROUTE) > 0)
+				{
+					CStringArray l_ll_id;
+					CStringArray l_ll_mode;
+					CStringArray l_ll_slot;
+
+					xSCH_MATERIAL_CTRL->Get__LLx_OUT_OF_EDIT_TYPE(arm_type, l_ll_id,l_ll_mode,l_ll_slot);
+
+					int t_limit = l_ll_id.GetSize();
+					for(int t=0; t < t_limit; t++)
+					{
+						int ll_id = atoi(l_ll_id[t]);
+						int ll_index = ll_id - 1;
+
+						if(ll_index < 0)							continue;
+						if(ll_index >= iLLx_LIMIT)					continue;
+
+						if(xEXT_CH__LLx__IN_OUT_FLAG[ll_index]->Check__DATA(STR__OUT) < 0)
+						{
+							continue;
+						}
+
+						if(LLx__Is_Available(ll_index) < 0)			continue;
+						if(LLx__Is_VAC(ll_index) < 0)				continue;
+
+						// ...
+						int ll__out_slot;
+
+						int r_flag = LLx__Get_Empty__OutSlot(ll_index, ll__out_slot);
+						if(r_flag < 0)			continue;
+
+						para__ll_name = Get__LLx_NAME(ll_index);
+						para__out_slot.Format("%1d", ll__out_slot);
+						para__in_slot = "";
+						break;
+					}
+				}
+				else
+				{
+					for(int ll_index=0; ll_index < iLLx_LIMIT; ll_index++)
+					{
+						if(xEXT_CH__LLx__IN_OUT_FLAG[ll_index]->Check__DATA(STR__OUT) < 0)
+						{
+							continue;
+						}
+
+						if(LLx__Is_Available(ll_index) < 0)			continue;
+						if(LLx__Is_VAC(ll_index) < 0)				continue;
+
+						// ...
+						int ll__out_slot;
+
+						int r_flag = LLx__Get_Empty__OutSlot(ll_index, ll__out_slot);
+						if(r_flag < 0)			continue;
+
+						para__ll_name = Get__LLx_NAME(ll_index);
+						para__out_slot.Format("%1d", ll__out_slot);
+						para__in_slot = "";
+						break;
+					}
+				}
+
+				if(para__ll_name.GetLength() > 0)
+				{
+					break;
 				}
 			}
 		}
 
-		NEXT__LOOP;
+		if(para__ll_name == "")
+		{
+			NEXT__LOOP;
+		}
+	}
+
+	// RB -> LL_OUT & LL_IN ...
+	{
+		CStringArray l__arm_type;
+		VAC_RB__Get_Occupied__Arm_Type(l__arm_type);
+
+		int k_limit = l__arm_type.GetSize();
+		for(int k=0; k < k_limit; k++)
+		{
+			CString arm_type = l__arm_type[k];
+
+			if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(arm_type) > 0)
+			{
+				continue;
+			}
+
+			// ...
+			bool active__ll_exchange = false;
+			CString empty_arm;
+
+			if(para__in_slot.GetLength() > 0)
+			{
+				if(VAC_RB__Get_Empty__Arm_Type_From_LBx(empty_arm) > 0)
+				{
+					active__ll_exchange = true;
+
+					if(para__out_slot.GetLength() < 1)		para__out_slot = para__in_slot;
+				}
+			}
+
+			// LL_IN -> RB ...
+			if(active__ll_exchange)
+			{
+				CString sch_name;
+				sch_name.Format("%s-%s", para__ll_name, para__in_slot);	
+
+				int act_flag = SCH__PICK_MODULE(p_variable,p_alarm, log_id,  active__ll_exchange, empty_arm, para__ll_name,para__in_slot, sch_name);
+				int move_flag = 1;
+
+				if(act_flag < 0)
+				{
+					move_flag = SCH__Check_Material_Pick(empty_arm);
+				}
+
+				if(move_flag > 0)
+				{
+					xSCH_MATERIAL_CTRL->Pick__From_MODULE(sch_name, empty_arm);
+				}
+
+				if(act_flag < 0)
+				{
+					NEXT__LOOP;
+				}
+			}
+
+			// RB -> LL_OUT ...
+			{
+				CString sch_name;
+				sch_name.Format("%s-%s", para__ll_name, para__out_slot);	
+
+				int act_flag = SCH__PLACE_MODULE(p_variable,p_alarm, log_id, false, arm_type, para__ll_name,para__out_slot, sch_name);
+				int move_flag = 1;
+
+				if(act_flag < 0)
+				{
+					move_flag = SCH__Check_Material_Place(arm_type);
+				}
+
+				if(move_flag > 0)
+				{
+					xSCH_MATERIAL_CTRL->Place__To_MODULE(arm_type, sch_name);
+				}
+
+				if(act_flag < 0)
+				{
+					NEXT__LOOP;
+				}
+			}
+
+			// LLx VENT ...
+			{
+				int ll_i = Get__LLx_INDEX(para__ll_name);
+				if(ll_i >= 0)
+				{
+					int count__ll_out_empty = 0;
+					int ref_ll_i = ll_i; 
+
+					// ...
+					{
+						for(int ll_i=0; ll_i<iLLx_LIMIT; ll_i++)
+						{
+							if(ref_ll_i == ll_i)		
+							{
+								continue;
+							}
+
+							if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
+							|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
+							{
+								continue;
+							}
+
+							if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) < 0)
+							{
+								continue;
+							}
+
+							if(LLx__Is_Available(ll_i) < 0)					continue;
+							if(LLx__Is_VAC(ll_i) < 0)						continue;
+							if(LLx__Check_Empty__OutSlot(ll_i) < 0)			continue;
+
+							count__ll_out_empty++;
+						}
+					}
+
+					if(LLx__Check_Occupied__OutSlot(ll_i) > 0)
+					{	
+						bool active__ll_vent = true;
+
+						if(count__ll_out_empty > 0)
+						{
+							int ll_in_slot;
+
+							if(LLx__Get_Occupied__InSlot(ll_i, ll_in_slot) > 0)
+							{
+								CString ll_name = Get__LLx_NAME(ll_i);
+
+								if(_CHECK__LBi_To_RB_With_Ready_PMC__ALL_MODE(ll_name, ll_in_slot, true) > 0)
+								{
+									active__ll_vent = false;
+								}
+							}
+						}
+
+						if(active__ll_vent)
+						{
+							CString ll_name = Get__LLx_NAME(ll_i);
+
+							printf(" * AUTO_CTRL__RB_LBo__ALL_MODE() : %s-Venting !!! \n", ll_name);
+
+							if(SCH_RUN__LLx_VENT(ll_i, log_id, "201") > 0)
+							{
+								xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA(STR__IN);
+							}
+						}
+					}
+				}
+			}
+
+			NEXT__LOOP;
+		}
 	}
 
 	NEXT__LOOP;
@@ -9742,6 +9969,22 @@ AUTO_CTRL__RB_LBo__ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 				if(VAC_RB__Get_Empty__Arm_Type_From_LBx(empty_arm) > 0)
 				{
 					active__ll_exchange = true;
+
+					if(SCH__Check_In_Slot_Of_Ohter_LLx(para__ll_name, para__in_slot) > 0)
+					{
+						active__ll_exchange = false;
+					}
+
+					/*
+					// Check : Log ...
+					{
+						CStringArray l__sch_name;
+						CStringArray l__ll_name;
+						CStringArray l__ll_slot;
+
+						_GET__WAFER_LIST_OF_LLx_IN__ALL_MODE(l__sch_name, l__ll_name,l__ll_slot, true);
+					}
+					*/
 				}
 			}
 
@@ -9799,6 +10042,15 @@ AUTO_CTRL__RB_LBo__ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 				int ll_i = Get__LLx_INDEX(para__ll_name);
 				if(ll_i >= 0)
 				{
+					bool active__ll_vac_check = true;
+
+					// jglee : 2023.07.11
+					if(LLx__Check_Occupied__InSlot(ll_i) > 0)
+					{
+						active__ll_vac_check = false;
+					}
+
+					// ...
 					int count__ll_out_empty = 0;
 					int ref_ll_i = ll_i; 
 
@@ -9811,20 +10063,46 @@ AUTO_CTRL__RB_LBo__ALL_MODE(CII_OBJECT__VARIABLE *p_variable,
 								continue;
 							}
 
-							if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
-							|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
+							if(active__ll_vac_check)
 							{
+								if(LLx__Is_Standby_CTCInUse(ll_i) < 0)	
+								{
+									continue;
+								}
+
+								if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) < 0)
+								{
+									continue;
+								}
+
+								if(LLx__Is_VAC(ll_i) < 0)					continue;
+								if(LLx__Check_Empty__OutSlot(ll_i) < 0)		continue;
+
+								if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
+								|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
+								{
+									continue;
+								}
+							}
+							else
+							{
+								if(LLx__Is_Standby_CTCInUse(ll_i) < 0)	
+								{
+									continue;
+								}
+
+								if(LLx__Check_Empty__OutSlot(ll_i) > 0)
+								{
+									NEXT__LOOP;
+								}
+
+								if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__IN) > 0)
+								{
+									NEXT__LOOP;
+								}
+
 								continue;
 							}
-
-							if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) < 0)
-							{
-								continue;
-							}
-
-							if(LLx__Is_Available(ll_i) < 0)					continue;
-							if(LLx__Is_VAC(ll_i) < 0)						continue;
-							if(LLx__Check_Empty__OutSlot(ll_i) < 0)			continue;
 
 							count__ll_out_empty++;
 						}
@@ -10291,7 +10569,7 @@ AUTO_CTRL__LLx_Exception_In_Idle_State(CII_OBJECT__VARIABLE *p_variable, CII_OBJ
 					{
 
 					}
-					else
+					else if(xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_OUTPUT) > 0)
 					{
 						int i_count = 0;
 
@@ -10609,6 +10887,15 @@ AUTO_CTRL__LLx_Exception_Of_All_Mode(CII_OBJECT__VARIABLE *p_variable, CII_OBJEC
 
 		for(INT ll_i=0; ll_i<ll_limit; ll_i++)
 		{
+			if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
+			|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
+			{
+				NEXT__LOOP;
+			}
+		}
+
+		for(INT ll_i=0; ll_i<ll_limit; ll_i++)
+		{
 			if(LLx__Is_Available(ll_i) < 0)
 			{
 				continue;
@@ -10698,20 +10985,95 @@ AUTO_CTRL__LLx_Exception_Of_All_Mode(CII_OBJECT__VARIABLE *p_variable, CII_OBJEC
 						continue;
 					}
 
+					if(LLx__Is_Standby_CTCInUse(ll_i) < 0)
+					{
+						continue;
+					}
+
+					if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__IN) > 0)
+					{
+
+					}
+					else
+					{
+						if(LLx__Check_Empty__OutSlot(ll_i) < 0)			continue;
+					}
+		
+					count__ll_out_empty++;
+				}
+			}
+
+			if((count__ll_out_empty == 0)
+			&& (xSCH_MATERIAL_CTRL->Check__MATERIAL_TO_PROCESS() < 0))
+			{
+				int count__ll_out = 0;
+
+				for(INT ll_i=0; ll_i<iLLx_LIMIT; ll_i++)
+				{
+					if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
+					|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
+					{
+						continue;
+					}
+
+					if((xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_INPUT)  > 0)
+					|| (xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_OUTPUT) > 0))
+					{
+						continue;
+					}
+
 					if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) < 0)
 					{
 						continue;
 					}
 
-					if(LLx__Is_Available(ll_i) < 0)					continue;
-					if(LLx__Is_VAC(ll_i) < 0)						continue;
-					if(LLx__Check_Empty__OutSlot(ll_i) < 0)			continue;
-	
-					count__ll_out_empty++;
+					count__ll_out++;
+				}
+
+				if(count__ll_out < 1)
+				{
+					for(INT ll_i=0; ll_i<iLLx_LIMIT; ll_i++)
+					{
+						if(LLx__Is_Available(ll_i) < 0)
+						{
+							continue;
+						}
+
+						if((dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0)
+						|| (dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[ll_i]->Check__DATA(STR__ON) > 0))
+						{
+							continue;
+						}
+
+						if((xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_INPUT)  > 0)
+						|| (xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_OUTPUT) > 0))
+						{
+							continue;
+						}
+
+						if(xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Check__DATA(STR__OUT) > 0)
+						{
+							continue;
+						}
+
+						if(LLx__Is_ATM(ll_i) < 0)						continue;
+						if(LLx__Check_Empty__InSlot(ll_i) < 0)			continue;
+						if(LLx__Check_Empty__OutSlot(ll_i) < 0)			continue;
+
+						// ...
+						{
+							SCH_RUN__LLx_PUMP(ll_i, log_id, "101");
+
+							xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA(STR__OUT);
+						}
+
+						NEXT__LOOP;
+					}
 				}
 			}
-
-			if(count__ll_out_empty < 2)
+			
+			// jglee : 2023.07.11
+			if(count__ll_out_empty < 1)
 			{
 				int ll_limit = iLLx_LIMIT;
 
@@ -10740,7 +11102,9 @@ AUTO_CTRL__LLx_Exception_Of_All_Mode(CII_OBJECT__VARIABLE *p_variable, CII_OBJEC
 					}
 
 					if(LLx__Is_VAC(ll_i) < 0)						continue;
+
 					if(LLx__Check_Empty__OutSlot(ll_i) > 0)			continue;
+					if(LLx__Check_Occupied__OutSlot(ll_i) < 0)		continue;
 
 					// ...
 					{
@@ -10761,10 +11125,64 @@ AUTO_CTRL__LLx_Exception_Of_All_Mode(CII_OBJECT__VARIABLE *p_variable, CII_OBJEC
 
 					// ...
 					{
-						SCH_RUN__LLx_VENT(ll_i, log_id, "33");
+						CString log_msg;
+						CString log_bff;
+
+						log_msg  = "\n";
+						log_msg += "LLx Info ... \n";
+
+						int ll_limit = iLLx_LIMIT;
+						for(INT i=0; i<ll_limit; i++)
+						{
+							int id = i + 1;
+
+							log_bff.Format("LL%1d \n", id);
+							log_msg += log_bff;
+
+							log_bff.Format("  * %s <- %s \n",
+											dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[i]->Get__CHANNEL_NAME(),
+											dEXT_CH__LLx__ACTIVE_ATM_AREA_CTRL[i]->Get__STRING());
+							log_msg += log_bff;
+
+							log_bff.Format("  * %s <- %s \n",
+											dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[i]->Get__CHANNEL_NAME(),
+											dEXT_CH__LLx__ACTIVE_VAC_AREA_CTRL[i]->Get__STRING());
+							log_msg += log_bff;
+
+							log_bff.Format("  * %s <- %s \n",
+											xEXT_CH__SCH_DB_LLx_MODE_TYPE[i]->Get__CHANNEL_NAME(),
+											xEXT_CH__SCH_DB_LLx_MODE_TYPE[i]->Get__STRING());
+							log_msg += log_bff;
+
+							log_bff.Format("  * LLx__Is_Idle() <- %1d \n",
+											LLx__Is_Idle(i));
+							log_msg += log_bff;
+
+							log_bff.Format("  * %s <- %s \n",
+											xEXT_CH__LLx__IN_OUT_FLAG[i]->Get__CHANNEL_NAME(),
+											xEXT_CH__LLx__IN_OUT_FLAG[i]->Get__STRING());
+							log_msg += log_bff;
+
+							log_bff.Format("  * LLx__Is_VAC() <- %1d \n",
+											LLx__Is_VAC(i));
+							log_msg += log_bff;
+
+							log_bff.Format("  * LLx__Check_Empty__OutSlot() <- %1d \n",
+											LLx__Check_Empty__OutSlot(i));
+							log_msg += log_bff;
+						}
+
+						Fnc__LOG_CTRL(log_msg);
+					}
+
+					// ...
+					{
+						SCH_RUN__LLx_VENT(ll_i, log_id, "102");
 
 						xEXT_CH__LLx__IN_OUT_FLAG[ll_i]->Set__DATA(STR__IN);
 					}
+
+					NEXT__LOOP;
 				}
 			}
 

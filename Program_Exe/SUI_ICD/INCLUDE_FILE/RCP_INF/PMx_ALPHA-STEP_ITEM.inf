@@ -260,9 +260,9 @@
 #CHANNEL_TYPE      ANALOG
 #CH_CHANNEL_ITEM 
 #LIST
-#RANGE             (0,5000)
-#CH_ALG_MIN
-#CH_ALG_MAX
+#RANGE             
+#CH_ALG_MIN        PHY_IO__RF_PULSE+CFG.FREQUENCY.MIN
+#CH_ALG_MAX        PHY_IO__RF_PULSE+CFG.FREQUENCY.MAX
 #TEXTCOLOR         RGB(0,0,0)
 #BACKCOLOR         RGB(255,255,255)
 #CATEGORY 			   CHILD
@@ -289,7 +289,7 @@
 #TITLE             3._EXEC
 #CHANNEL_TYPE      DIGITAL
 #CH_CHANNEL_ITEM 
-#LIST              Normal/Inverse/Off
+#LIST              Normal/Inverse/Off/High/Low
 #RANGE             (0,100)
 #CH_ALG_MIN
 #CH_ALG_MAX

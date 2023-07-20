@@ -1,8 +1,0 @@
-#ID=1	1	LIGHT	PHY_MTC - Soft Venting Time-Out !
-#ID=2	2	LIGHT	PHY_MTC - Soft Pumping Time-Out !
-#ID=3	3	LIGHT	PHY_MTC - Venting Time-Out !
-#ID=4	4	LIGHT	PHY_MTC - Pumping Time-Out !
-#ID=5	5	LIGHT	PHY_MTC - Gate Open Time-Out !
-#ID=6	6	LIGHT	PHY_MTC - Gate Close Time-Out !
-#ID=8	8	LIGHT	PHY_MTC - Gate's valve is not close !
-#ID=9	9	LIGHT	PHY_MTC - MTC & Chamber pressure error !

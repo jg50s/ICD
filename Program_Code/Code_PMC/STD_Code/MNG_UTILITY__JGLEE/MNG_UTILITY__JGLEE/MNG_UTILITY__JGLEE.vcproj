@@ -462,6 +462,38 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="CObj__WAP_POS_CONDUCT"
+				>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT__ALID.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT__CALL_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT__DEF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT__MON_FNC.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CObj__WAP_POS_CONDUCT__SUB_FNC.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="헤더 파일"

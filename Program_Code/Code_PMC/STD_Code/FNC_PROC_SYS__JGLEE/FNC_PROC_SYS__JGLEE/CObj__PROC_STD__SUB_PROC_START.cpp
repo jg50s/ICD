@@ -7,7 +7,9 @@
 
 // ...
 int CObj__PROC_STD::
-Sub__PROC_START(CII_OBJECT__VARIABLE* p_variable, CII_OBJECT__ALARM* p_alarm, const bool active_dechuck)
+Sub__PROC_START(CII_OBJECT__VARIABLE* p_variable, 
+				CII_OBJECT__ALARM* p_alarm, 
+				const bool active_dechuck)
 {
 	int restart_count = 0;
 

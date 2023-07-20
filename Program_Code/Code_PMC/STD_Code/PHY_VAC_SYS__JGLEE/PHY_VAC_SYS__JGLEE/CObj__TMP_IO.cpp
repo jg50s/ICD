@@ -146,6 +146,17 @@ int CObj__TMP_IO::__DEFINE__VARIABLE_STD(p_variable)
 		LINK__VAR_DIGITAL_CTRL(dCH___MON_TMP_LINE_NOT_READY_ACTIVE, str_name);
 	}
 
+	// CFG.DI_CHECK ...
+	{
+		str_name = "CFG.DI_ALARM.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_ALARM_CHECK, str_name);
+
+		str_name = "CFG.DI_WARNING.CHECK";
+		STD__ADD_DIGITAL_WITH_X_OPTION(str_name, "YES  NO", "");
+		LINK__VAR_DIGITAL_CTRL(dCH__CFG_DI_WARNING_CHECK, str_name);
+	}
+
 	// CFG ...
 	{
 		str_name = "CFG.INTERLOCK.VAT.CLOSE";

@@ -139,7 +139,7 @@ void CObj__DUAL_ARM_STD
 				else if(active__all_mode > 0)
 				{
 					if((active__only_input  > 0)
-						|| (active__only_output > 0))
+					|| (active__only_output > 0))
 					{
 						CString err_bff;
 
@@ -170,10 +170,10 @@ void CObj__DUAL_ARM_STD
 					}
 				}
 				else if((active__only_input  > 0)
-					|| (active__only_output > 0))
+					 || (active__only_output > 0))
 				{
 					if((active__only_input  < 0)
-						|| (active__only_output < 0))
+					|| (active__only_output < 0))
 					{
 						CString err_bff;
 

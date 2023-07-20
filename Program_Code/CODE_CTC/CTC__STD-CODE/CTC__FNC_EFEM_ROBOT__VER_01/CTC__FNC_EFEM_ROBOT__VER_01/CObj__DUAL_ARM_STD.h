@@ -926,7 +926,7 @@ private:
 	int  Buffer1__Get_Occupied__Slot_To_Process(CUIntArray& l__stx_slot_id);	
 	
 	int  Buffer1__Get_Empty__Slot_To_Process(int& slot_id);
-	int  Buffer1__Get_Empty__Slot_To_Process(CUIntArray& l__slot_id);	
+	int  Buffer1__Get_Empty__Slot_To_Process(CUIntArray& l__slot_id, const bool active_slot_to_place = false);	
 
 	int  Buffer1__Check_Empty_Slot(int& slot_id);
 	int  Buffer1__Check_Empty__All_Slot();
@@ -941,7 +941,7 @@ private:
 	int  Buffer2__Get_Occupied__Slot_To_Process(CUIntArray& l__stx_slot_id);	
 
 	int  Buffer2__Get_Empty__Slot_To_Process(int& slot_id);
-	int  Buffer2__Get_Empty__Slot_To_Process(CUIntArray& l__slot_id);
+	int  Buffer2__Get_Empty__Slot_To_Process(CUIntArray& l__slot_id, const bool active_slot_to_place = false);
 
 	int  Buffer2__Check_Empty_Slot(int& slot_id);
 	int  Buffer2__Check_Empty__All_Slot();

@@ -10,6 +10,7 @@ MODULE__IS_AVAILABLE(CObj__DUAL_ARM_STD,TMC_CHM, xCH__TMC_CHM__OBJ_STATUS, xCH__
 
 MODULEx__IS_AVAILABLE_WITH_USE_INDEX(CObj__DUAL_ARM_STD, LLx, xEXT_CH__LLx__OBJ_STATUS,xEXT_CH__LLx__OBJ_CTRL,xEXT_CH__SCH_DB_LLx_USE_FLAG);
 MODULEx__IS_IDLE(CObj__DUAL_ARM_STD, LLx, xEXT_CH__LLx__OBJ_STATUS,xEXT_CH__LLx__OBJ_CTRL);
+MODULEx__IS_STANDBY_CTCINUSE(CObj__DUAL_ARM_STD, LLx, xEXT_CH__LLx__OBJ_STATUS);
 
 MODULEx__IS_AVAILABLE_EX(CObj__DUAL_ARM_STD,PMx, xCH__PMx__OBJ_STATUS, xCH__PMx__OBJ_CTRL, xEXT_CH__CFG__PMx_USE);
 MODULEx__IS_IDLE(CObj__DUAL_ARM_STD,PMx, xCH__PMx__OBJ_STATUS, xCH__PMx__OBJ_CTRL);
@@ -1139,43 +1140,39 @@ int  CObj__DUAL_ARM_STD
 		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 
+		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) > 0)
+		{
+			continue;
+		}
+
 		if(xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_index]->Check__DATA(LBx_MODE__ALL) > 0)
 		{
 			CString ch_data = xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Get__STRING();
 
-			if(ch_data.CompareNoCase(SLOT_STS__INPUT) != 0)
+			if(ch_data.CompareNoCase(SLOT_STS__INPUT) == 0)
 			{
-				if(ch_data.CompareNoCase(SLOT_STS__ALL) == 0)
-				{
-					if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
-					{
-						CString sch_name;
-						CString ll_name = Get__LLx_NAME(ll_index);
+				return 11;
+			}
 
-						sch_name.Format("%s-%1d", ll_name,i+1);
+			if(ch_data.CompareNoCase(SLOT_STS__ALL) == 0)
+			{
+				CString sch_name;
+				CString ll_name = Get__LLx_NAME(ll_index);
 
-						if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(sch_name) > 0)
-						{
-							return 1;
-						}
-					}
-					else
-					{
-						continue;
-					}
-				}
-				else
+				sch_name.Format("%s-%1d", ll_name,i+1);
+
+				if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(sch_name) > 0)
 				{
-					continue;
+					return 12;
 				}
 			}
 		}
-
-		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
+		else
 		{
-			return 1;
+			return 13;
 		}
 	}
+
 	return -1;
 }
 
@@ -1267,12 +1264,20 @@ LLx__Get_Occupied__InSlot_With_1_Slot_All_Mode(const int ll_index,int& slot_id)
 
 	for(int i=0; i<slot_max; i++)
 	{
-		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)		continue;
-		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)		continue;
+		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
+		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 
-		if(xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Check__DATA(SLOT_STS__ALL) < 0)			continue;
+		if(xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Check__DATA(SLOT_STS__ALL) < 0)
+		{
+			continue;
+		}
 
-		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
+		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) > 0)
+		{
+			continue;
+		}
+
+		// ...
 		{
 			CString sch_name;
 			CString ll_name = Get__LLx_NAME(ll_index);
@@ -1285,9 +1290,10 @@ LLx__Get_Occupied__InSlot_With_1_Slot_All_Mode(const int ll_index,int& slot_id)
 			}
 
 			slot_id = i + 1;
-			return 1;
 		}
+		return 1;
 	}
+
 	return -1;
 }
 
@@ -1431,22 +1437,27 @@ LLx__Check_Empty__OutSlot(const int ll_index)
 		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)		continue;
 		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)		continue;
 
+		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
+		{
+			continue;
+		}
+
 		if(xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_index]->Check__DATA(LBx_MODE__ALL) > 0)
 		{
 			CString ch_data = xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Get__STRING();
 
-			if((ch_data.CompareNoCase(SLOT_STS__OUTPUT) != 0)
-			&& (ch_data.CompareNoCase(SLOT_STS__ALL)    != 0))
+			if((ch_data.CompareNoCase(SLOT_STS__OUTPUT) == 0)
+			|| (ch_data.CompareNoCase(SLOT_STS__ALL)    == 0))
 			{
-				continue;
+				return 11;
 			}
 		}
-
-		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) > 0)
+		else
 		{
-			return 1;
+			return 12;
 		}
 	}
+
 	return -1;
 }
 
@@ -1471,39 +1482,39 @@ LLx__Check_Occupied__OutSlot(const int ll_index)
 		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 
+		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) > 0)
+		{
+			continue;
+		}
+
 		if(xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_index]->Check__DATA(LBx_MODE__ALL) > 0)
 		{
 			CString ch_data = xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Get__STRING();
 
-			if(ch_data.CompareNoCase(SLOT_STS__OUTPUT) != 0)
+			if(ch_data.CompareNoCase(SLOT_STS__OUTPUT) == 0)
 			{
-				if(ch_data.CompareNoCase(SLOT_STS__ALL) == 0)
-				{
-					if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
-					{
-						CString sch_name;
-						CString ll_name = Get__LLx_NAME(ll_index);
+				return 11;
+			}
 
-						sch_name.Format("%s-%1d", ll_name,i+1);
+			if(ch_data.CompareNoCase(SLOT_STS__ALL) == 0)
+			{
+				CString sch_name;
+				CString ll_name = Get__LLx_NAME(ll_index);
 
-						if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(sch_name) < 0)
-						{
-							return 1;
-						}
-					}
-				}
-				else
+				sch_name.Format("%s-%1d", ll_name,i+1);
+
+				if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(sch_name) < 0)
 				{
-					continue;
+					return 12;
 				}
 			}
 		}
-
-		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
+		else
 		{
-			return 1;
+			return 13;
 		}
 	}
+
 	return -1;
 }
 
@@ -1567,7 +1578,10 @@ LLx__Get_Empty__OutSlot_With_1_Slot_All_Mode(const int ll_index,int& slot_id)
 		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)		continue;
 		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)		continue;
 
-		if(xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Check__DATA(SLOT_STS__ALL) < 0)			continue;
+		if(xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Check__DATA(SLOT_STS__ALL) < 0)
+		{
+			continue;
+		}
 
 		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) > 0)
 		{
@@ -1590,6 +1604,7 @@ LLx__Get_Empty__OutSlot_With_1_Slot_All_Mode(const int ll_index,int& slot_id)
 			return 1;
 		}
 	}
+	
 	return -1;
 }
 
@@ -1756,37 +1771,40 @@ LLx__Get_Occupied__OutSlot(const int ll_index,int& slot_id)
 		if(dEXT_CH__SCH_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 		if(dEXT_CH__CFG_DB_LLx_SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__ENABLE) < 0)			continue;
 
+		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) > 0)
+		{
+			continue;
+		}
+
 		if(xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_index]->Check__DATA(LBx_MODE__ALL) > 0)
 		{
 			CString ch_data = xEXT_CH__SCH_DB_LLx_SLOT_MODE[ll_index][i]->Get__STRING();
 
-			if(ch_data.CompareNoCase(SLOT_STS__OUTPUT) != 0)
+			if(ch_data.CompareNoCase(SLOT_STS__OUTPUT) == 0)
 			{
-				if(ch_data.CompareNoCase(SLOT_STS__ALL) == 0)
-				{
-					CString sch_name;
-					CString ll_name = Get__LLx_NAME(ll_index);
+				return 11;
+			}
 
-					sch_name.Format("%s-%1d", ll_name,i+1);
+			if(ch_data.CompareNoCase(SLOT_STS__ALL) == 0)
+			{
+				CString sch_name;
+				CString ll_name = Get__LLx_NAME(ll_index);
 
-					if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(sch_name) > 0)
-					{
-						continue;
-					}
-				}
-				else
+				sch_name.Format("%s-%1d", ll_name,i+1);
+
+				if(xSCH_MATERIAL_CTRL->Check__NEXT_PROCESS(sch_name) < 0)
 				{
-					continue;
+					return 12;
 				}
 			}
 		}
-
-		if(xEXT_CH__LLx__SLOT_STATUS[ll_index][i]->Check__DATA(SLOT_STS__NONE) < 0)
+		else
 		{
 			slot_id = i + 1;
-			return 1;
+			return 13;
 		}
 	}
+
 	return -1;
 }
 int  CObj__DUAL_ARM_STD::

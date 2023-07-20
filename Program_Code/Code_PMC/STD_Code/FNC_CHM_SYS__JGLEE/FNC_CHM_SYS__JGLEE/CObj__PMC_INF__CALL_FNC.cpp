@@ -360,7 +360,7 @@ int CObj__PMC_INF
 {
 	DECLARE__EXT_CTRL(p_variable);
 
-	p_ext_mode_ctrl->Abort__CTRL_STS();
+	// p_ext_mode_ctrl->Abort__CTRL_STS();
 
 	return p_ext_mode_ctrl->Call__FNC_MODE(sEXT_MODE__JOB_END_READY);
 }

@@ -2105,6 +2105,24 @@ SCH__LPx_TO_LLx_OF_ROUTE_TYPE(CII_OBJECT__VARIABLE *p_variable,
 			if((xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ALL) > 0)
 			|| (xEXT_CH__SCH_DB_LLx_MODE_TYPE[ll_i]->Check__DATA(LBx_MODE__ONLY_INPUT) > 0))
 			{
+				/*
+				// ...
+				{
+					CString log_msg;
+					CString log_bff;
+
+					log_msg.Format("  * Job_Cnt <- %1d \n", job_cnt);
+
+					log_bff.Format("  * ll_i <- %1d \n", ll_i);
+					log_msg += log_bff;
+
+					log_bff.Format("  * LLx__Check_Empty__InSlot() <- %1d \n", LLx__Check_Empty__InSlot(ll_i));
+					log_msg += log_bff;
+
+					printf(log_msg);
+				}
+				*/
+
 				if(job_cnt == 1)
 				{
 					if((LLx__Check_Empty__InSlot(ll_i) > 0)
