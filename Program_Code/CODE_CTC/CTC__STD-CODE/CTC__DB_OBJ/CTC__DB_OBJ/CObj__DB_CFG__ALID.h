@@ -1,7 +1,0 @@
-#pragma once
-
-#define  ALID__SIMULATION_MODE_ACTIVE							1
-#define  ALID__SIMULATION_TMC_DUMMY_MODE_ACTIVE					2
-
-#define  ALID__SIMULATION_PMX_DUMMY_MODE_ACTIVE					11
-

@@ -1,6 +1,0 @@
-; CTC__OPR_TIMER.def : Declares the module parameters for the DLL.
-
-LIBRARY      "CTC__OPR_TIMER"
-
-EXPORTS
-    ; Explicit exports can go here

@@ -1,6 +1,0 @@
-; CTC__MNG_SYS_INFO.def : Declares the module parameters for the DLL.
-
-LIBRARY      "CTC__MNG_SYS_INFO"
-
-EXPORTS
-    ; Explicit exports can go here

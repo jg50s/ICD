@@ -1,6 +1,0 @@
-; CTC__FA_RMM.def : Declares the module parameters for the DLL.
-
-LIBRARY      "CTC__FA_RMM"
-
-EXPORTS
-    ; Explicit exports can go here

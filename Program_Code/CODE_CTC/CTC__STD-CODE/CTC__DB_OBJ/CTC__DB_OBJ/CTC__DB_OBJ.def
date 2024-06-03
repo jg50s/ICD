@@ -1,6 +1,0 @@
-; CTC__DB_OBJ.def : Declares the module parameters for the DLL.
-
-LIBRARY      "CTC__DB_OBJ"
-
-EXPORTS
-    ; Explicit exports can go here

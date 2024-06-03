@@ -1,6 +1,0 @@
-; CTC__PHY_BUFFER.def : Declares the module parameters for the DLL.
-
-LIBRARY      "CTC__PHY_BUFFER"
-
-EXPORTS
-    ; Explicit exports can go here

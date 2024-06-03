@@ -1,6 +1,0 @@
-; FA_LINK__GEM.def : Declares the module parameters for the DLL.
-
-LIBRARY      "FA_LINK__GEM"
-
-EXPORTS
-    ; Explicit exports can go here
